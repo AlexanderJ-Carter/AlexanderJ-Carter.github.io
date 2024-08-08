@@ -5,164 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alex的网页</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-
-        header {
-            background: #353535;
-            color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #0066cc 3px solid;
-        }
-
-        header a {
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
-
-        header ul {
-            padding: 0;
-            list-style: none;
-        }
-
-        header li {
-            float: left;
-            display: inline;
-            padding: 0 20px 0 20px;
-        }
-
-        header #branding {
-            float: left;
-        }
-
-        header #branding h1 {
-            margin: 0;
-        }
-
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
-
-        header .highlight,
-        header .current a {
-            color: #e8491d;
-            font-weight: bold;
-        }
-
-        header a:hover {
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        .banner {
-            background: url('banner-image.jpg') no-repeat center center/cover;
-            height: 400px;
-            color: #fff;
-            text-align: center;
-            padding: 100px 0;
-        }
-
-        .banner h1 {
-            font-size: 55px;
-            margin-bottom: 20px;
-        }
-
-        .banner p {
-            font-size: 20px;
-        }
-
-        .about {
-            padding: 50px 0;
-            background: #f4f4f4;
-        }
-
-        .about h2 {
-            font-size: 35px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .about p {
-            text-align: justify;
-            margin-bottom: 20px;
-        }
-
-        .contact {
-            background: #353535;
-            color: #fff;
-            padding: 50px 0;
-            text-align: center;
-        }
-
-        .contact h2 {
-            font-size: 35px;
-            margin-bottom: 20px;
-        }
-
-        .contact p {
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <header>
         <div class="container">
             <div id="branding">
-                <h1>Alex主页面</h1>
+                <h1>主页</h1>
             </div>
             <nav>
                 <ul>
                     <li><a href="index.html">首页</a></li>
-                    <li><a href="about.html" target="_blank">关于我们</a></li>
-                    <li><a href="#contact">联系方式</a></li>
+                    <li><a href="about.html">关于我们</a></li>
+                    <li><a href="contact.html">联系方式</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-
     <section class="banner">
-        <div class="container">
-            <h1>欢迎来到我的网站</h1>
-            <p>专业、创新、卓越</p>
-        </div>
+        <h1>欢迎来到Alex的网页</h1>
+        <p>探索精彩内容</p>
     </section>
-
-    <section class="about">
-        <div class="container">
-            <h2>关于我们</h2>
-            <p>我们致力于提供高质量的产品和服务，以满足您的需求。</p>
+    <div class="container">
+        <div class="main-content">
+            <section class="about">
+                <h2>关于我们</h2>
+                <p>这是关于我们的部分内容。</p>
+            </section>
+            <section class="contact" id="contact">
+                <h2>联系方式</h2>
+                <p>请通过以下方式联系我们。</p>
+            </section>
         </div>
-    </section>
-
-    <section class="contact">
+        <aside>
+            <h2>最新文章</h2>
+            <ul>
+                <li>文章 1</li>
+                <li>文章 2</li>
+                <li>文章 3</li>
+            </ul>
+        </aside>
+    </div>
+    <footer>
         <div class="container">
-            <h2>联系方式</h2>
-            <p>邮箱：contact@example.com</p>
-            <p>电话：123-456-7890</p>
+            <p>&copy; 2023 Alex的网页. 版权所有.</p>
+            <ul>
+                <li><a href="privacy.html">隐私政策</a></li>
+                <li><a href="terms.html">使用条款</a></li>
+            </ul>
         </div>
-    </section>
+    </footer>
 </body>
 
 </html>
-
