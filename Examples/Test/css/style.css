@@ -1,0 +1,341 @@
+/* 重置样式 */
+* {
+    margin: 0;
+    /* 移除所有元素默认的边距 */
+    padding: 0;
+    /* 移除所有元素默认的内边距 */
+    box-sizing: border-box;
+    /* 设置盒模型为border-box，包括padding和border在内的总宽度和高度 */
+}
+
+/* 变量定义 */
+:root {
+    --main-bg-color: #51ecf1;
+    /* 定义主背景颜色 */
+    --accent-color: #e8491d;
+    /* 定义强调颜色 */
+    --font-stack: 'Arial', sans-serif;
+    /* 定义字体栈 */
+    --container-width: 80%;
+    /* 定义容器宽度 */
+}
+
+/* 全局样式 */
+body {
+    font-family: var(--font-stack);
+    /* 使用定义的字体栈 */
+    line-height: 1.6;
+    /* 设置行高 */
+    color: #333;
+    /* 设置文本颜色 */
+    /* 设置背景为一个从白色到半透明的渐变，模拟磨砂效果 */
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),url('images/Background1.jpg');
+    /* 如果需要，可以添加一个背景图像 */
+    background-size: cover;
+    /* 背景图像覆盖整个容器 */
+    background-attachment: fixed;
+    /* 背景图像固定，不随页面滚动 */
+    background-repeat: no-repeat;
+    /* 不重复背景图像 */
+    background-position: center center;
+    /* 背景图像居中 */
+}
+
+
+.container {
+    width: var(--container-width);
+    /* 使用定义的容器宽度 */
+    margin: auto;
+    /* 水平居中容器 */
+    overflow: hidden;
+    /* 隐藏溢出的内容 */
+    display: flex;
+    /* 设置为flex布局 */
+    flex-wrap: wrap;
+    /* 允许子元素换行 */
+}
+
+/* 头部样式 */
+header {
+    background: var(--main-bg-color);
+    /* 使用定义的主背景颜色 */
+    color: #32293f;
+    /* 设置文本颜色为白色 */
+    font-size: larger;
+    padding-top: 5%;
+    /* 设置顶部内边距 */
+    min-height: 15%;
+    /* 设置最小高度 */
+    border-bottom: #0066cc 2% solid;
+    /* 设置底部边框 */
+}
+
+header a {
+    color: #30064e;
+    /* 设置链接文本颜色为白色 */
+    text-decoration: none;
+    /* 移除链接下划线 */
+    text-transform: uppercase;
+    /* 将文本转换为大写 */
+    font-size: 16px;
+    /* 设置字体大小 */
+}
+
+header ul {
+    padding: 0;
+    /* 移除列表的内边距 */
+    list-style: none;
+    /* 移除列表的项目符号 */
+}
+
+header li {
+    float: left;
+    /* 使列表项水平排列 */
+    display: inline;
+    /* 使列表项在同一行显示 */
+    padding: 0 20px;
+    /* 设置列表项的内边距 */
+}
+
+header #branding {
+    float: left;
+    /* 使品牌元素左浮动 */
+}
+
+header #branding h1 {
+    margin: 0;
+    /* 移除h1的默认边距 */
+}
+
+header nav {
+    float: right;
+    /* 使导航元素右浮动 */
+    margin-top: 10px;
+    /* 设置顶部外边距 */
+}
+
+header .highlight,
+header .current a {
+    color: var(--accent-color);
+    /* 使用定义的强调颜色 */
+    font-weight: bold;
+    /* 设置字体加粗 */
+}
+
+header a:hover {
+    color: #ffffff;
+    /* 鼠标悬停时设置链接文本颜色为白色 */
+    font-weight: bold;
+    /* 鼠标悬停时设置字体加粗 */
+}
+
+/* 横幅样式 */
+.banner {
+    background: url('/images/Background1.jpg') no-repeat center center/cover;
+    /* 设置背景图片 */
+    height: 80%;
+    /* 设置高度 */
+    color: #fff;
+    /* 设置文本颜色为白色 */
+    text-align: center;
+    /* 设置文本居中 */
+    padding: 100px 0;
+    /* 设置垂直内边距 */
+}
+
+.banner h1 {
+    font-size: 55px;
+    /* 设置字体大小 */
+    margin-bottom: 20px;
+    /* 设置底部外边距 */
+}
+
+.banner p {
+    font-size: 20px;
+    /* 设置字体大小 */
+}
+
+/* 主内容样式 */
+.main-content {
+    flex: 3;
+    /* 设置flex-grow属性为3 */
+    padding: 20px;
+    /* 设置内边距 */
+}
+
+.about {
+    padding: 50px 0;
+    /* 设置垂直内边距 */
+    background: #f4f4f4;
+    /* 设置背景颜色 */
+}
+
+.about h2 {
+    font-size: 35px;
+    /* 设置字体大小 */
+    text-align: center;
+    /* 设置文本居中 */
+    margin-bottom: 20px;
+    /* 设置底部外边距 */
+}
+
+.about p {
+    text-align: justify;
+    /* 设置文本两端对齐 */
+    margin-bottom: 20px;
+    /* 设置底部外边距 */
+}
+
+.contact {
+    background: var(--main-bg-color);
+    /* 使用定义的主背景颜色 */
+    color: #fff;
+    /* 设置文本颜色为白色 */
+    padding: 50px 0;
+    /* 设置垂直内边距 */
+    text-align: center;
+    /* 设置文本居中 */
+}
+
+.contact h2 {
+    font-size: 35px;
+    /* 设置字体大小 */
+        margin-bottom: 20px;
+            /* 设置底部外边距 */
+        }
+        
+        .contact p {
+            margin-bottom: 20px;
+            /* 设置底部外边距 */
+        }
+        
+        /* 隐私政策样式 */
+        .privacy-policy {
+            padding: 50px 0;
+            /* 设置垂直内边距 */
+            background: #fff;
+            /* 设置背景颜色为白色 */
+        }
+        
+        .privacy-policy h2 {
+            font-size: 35px;
+            /* 设置字体大小 */
+            text-align: center;
+            /* 设置文本居中 */
+            margin-bottom: 20px;
+            /* 设置底部外边距 */
+        }
+        
+        .privacy-policy h3 {
+            font-size: 28px;
+            /* 设置字体大小 */
+            margin-bottom: 10px;
+            /* 设置底部外边距 */
+        }
+        
+        .privacy-policy p {
+            margin-bottom: 20px;
+            /* 设置底部外边距 */
+        }
+        
+        .privacy-policy ul {
+            list-style: disc;
+            /* 设置列表的项目符号为实心圆 */
+            padding-left: 20px;
+            /* 设置列表的左边内边距 */
+            margin-bottom: 20px;
+            /* 设置底部外边距 */
+        }
+        
+        .privacy-policy ul li {
+            margin-bottom: 10px;
+            /* 设置列表项的底部外边距 */
+        }
+        
+        /* 侧边栏样式 */
+        aside {
+            flex: 1;
+            /* 设置flex-grow属性为1 */
+            background: #f4f4f4;
+            /* 设置背景颜色 */
+            padding: 20px;
+            /* 设置内边距 */
+            margin-top: 20px;
+            /* 设置顶部外边距 */
+        }
+        
+        aside h2 {
+            font-size: 25px;
+            /* 设置字体大小 */
+            margin-bottom: 20px;
+            /* 设置底部外边距 */
+        }
+        
+        aside ul {
+            list-style: none;
+            /* 移除列表的项目符号 */
+            padding: 0;
+            /* 移除列表的内边距 */
+        }
+        
+        aside ul li {
+            background: #fff;
+            /* 设置列表项背景颜色为白色 */
+            margin-bottom: 10px;
+            /* 设置列表项的底部外边距 */
+            padding: 10px;
+            /* 设置列表项的内边距 */
+            border: #ccc 1px solid;
+            /* 设置列表项的边框 */
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background: var(--main-bg-color);
+            /* 使用定义的主背景颜色 */
+            color: #fff;
+            /* 设置文本颜色为白色 */
+            text-align: center;
+            /* 设置文本居中 */
+            padding: 20px;
+            /* 设置内边距 */
+            margin-top: 20px;
+            /* 设置顶部外边距 */
+        }
+        
+        /* 响应式设计：针对屏幕宽度小于768px的设备 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                /* 设置flex布局的方向为垂直 */
+            }
+        
+            header nav ul {
+                text-align: center;
+                /* 设置导航列表文本居中 */
+            }
+        
+            header nav ul li {
+                float: none;
+                /* 移除列表项的浮动，使其垂直堆叠 */
+                display: block;
+                /* 将列表项设置为块级元素 */
+                padding: 10px;
+                /* 设置列表项的内边距 */
+            }
+        
+            .banner {
+                height: 10%;
+                /* 设置横幅的高度 */
+            }
+        
+            .banner h1 {
+                font-size: 40%;
+                /* 设置横幅标题的字体大小 */
+            }
+        
+            .banner p {
+                font-size: 18px;
+                /* 设置横幅段落的字体大小 */
+            }
+        }
