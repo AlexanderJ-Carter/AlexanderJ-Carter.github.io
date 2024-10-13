@@ -99,15 +99,7 @@
       }
     }
 
-    /* 设置背景和叠加效果 */
-    .dark-overlay {
-      background: linear-gradient(to right, #2b1055, #7597de, #ff6f61);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
+    /* 调整文字大小与字母间距 */
     .intro-heading {
       letter-spacing: 5px;
       font-weight: bold;
@@ -115,22 +107,6 @@
 
     .intro-text {
       letter-spacing: 3px;
-    }
-
-    /* 设置按钮样式 */
-    .btn {
-      background-color: #fff;
-      color: #333;
-      padding: 10px 20px;
-      border-radius: 30px;
-      text-transform: uppercase;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn:hover {
-      background-color: #ff6f61;
-      color: #fff;
     }
   </style>
 
@@ -140,8 +116,8 @@
 
   <!-- 主内容 -->
   <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
-    style="background-image: linear-gradient(to right, #1e0032, #ff6f61);">
-    <div class="overlay-content w-100 text-white" style="background: rgba(0, 0, 0, 0.6); padding: 50px 0;">
+    style="background-image: url('img/Background1.jpg');">
+    <div class="overlay-content w-100 text-white">
       <div class="container">
         <div class="row">
           <div class="col-lg-7 col-md-12 mx-auto text-center">
@@ -155,7 +131,6 @@
             <p class="fst-italic intro-text text-muted mt-4 fade-in" style="font-size: 1.2rem;">
               一起发现、分享、创造每个闪亮的瞬间。
             </p>
-            <a href="#works" class="btn btn-light mt-4">Explore Works</a>
           </div>
         </div>
       </div>
