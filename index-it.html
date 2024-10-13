@@ -4,28 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Il sito web di Alex Hwang</title>
+    <title>Il Sito Web di Alex Hwang</title>
     <meta name="description" content="Il sito personale di Alex Hwang">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index,follow">
     <meta name="author" content="Alex Hwang">
-    <meta name="keywords" content="Lavori personali, Condivisione di contenuti, Alex Hwang, Sito personale">
+    <meta name="keywords" content="Lavori Personali, Condivisione di Contenuti, Alex Hwang, Sito Personale">
     <meta name="theme-color" content="#ffffff">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
     <!-- Open Graph meta tags for better social media sharing -->
-    <meta property="og:title" content="Il sito web di Alex Hwang">
-    <meta property="og:description" content="Un sito personale per condividere lavori e creazioni.">
+    <meta property="og:title" content="Il Sito Web di Alex Hwang">
+    <meta property="og:description" content="Un sito personale che presenta lavori e condivisione di contenuti.">
     <meta property="og:image" content="img/logo.png">
     <meta property="og:url" content="https://Alex-hwang.github.io">
     <meta property="og:type" content="website">
 
     <!-- Twitter Card meta tags for better social media sharing -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Il sito web di Alex Hwang">
-    <meta name="twitter:description" content="Un sito personale per condividere lavori e creazioni.">
+    <meta name="twitter:title" content="Il Sito Web di Alex Hwang">
+    <meta name="twitter:description" content="Un sito personale che presenta lavori e condivisione di contenuti.">
     <meta name="twitter:image" content="img/logo.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -41,14 +45,95 @@
 
     <style>
         .language-switcher {
-            margin-top: 20px;
-            text-align: center;
+            text-align: left;
+            font-size: 0.9rem;
         }
 
         .language-switcher a {
-            margin: 0 10px;
+            margin: 0 5px;
             text-decoration: none;
+            color: #dfdddd;
             font-weight: bold;
+        }
+
+        .language-switcher i {
+            margin-right: 5px;
+            font-size: 1.2rem;
+        }
+
+        footer .col-md-6.text-center.text-md-end {
+            text-align: right;
+        }
+
+        footer a {
+            color: #dfdede;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+
+            .language-switcher,
+            footer .col-md-6.text-center.text-md-end {
+                text-align: center;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .intro-heading {
+            letter-spacing: 5px;
+            font-weight: bold;
+        }
+
+        .intro-text {
+            letter-spacing: 3px;
+        }
+
+        .code-block {
+            height: 200px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        pre {
+            margin: 0;
+        }
+
+        h1.intro-heading {
+            font-size: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.intro-heading {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1.intro-heading {
+                font-size: 2rem;
+                letter-spacing: 3px;
+            }
         }
     </style>
 
@@ -56,18 +141,24 @@
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
 
-    <!-- Contenuto Principale -->
+    <!-- Main Content -->
     <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
         style="background-image: url('img/Background1.jpg');">
         <div class="overlay-content w-100 text-white">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12 mx-auto">
-                        <p class="fst-italic intro-text">Oh, ciao, piacere di conoscerti!</p>
-                        <h1 class="text-uppercase intro-heading letter-spacing-2">Uno Spazio per Momenti di Vita e
-                            Creazioni Personali</h1>
-                        <p class="fst-italic intro-text mb-0">Catturare i Piccoli Momenti della Vita e Condividere
-                            Creazioni Personali</p>
+                    <div class="col-lg-7 col-md-12 mx-auto text-center">
+                        <p
+                            class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in">
+                            Benvenuto nel nostro viaggio
+                        </p>
+                        <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold fade-in"
+                            style="font-family: 'Segoe UI', sans-serif;">
+                            Esplora la creatività, costruisci il futuro
+                        </h1>
+                        <p class="fst-italic intro-text text-muted mt-4 fade-in" style="font-size: 1.2rem;">
+                            Scopri, condividi e crea ogni momento scintillante.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -76,15 +167,24 @@
 
     <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white py-2 shadow-sm" id="navbar">
         <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#intro">
+                <img src="img/logo.png" alt="Logo" style="height: 40px;">
+            </a>
+
+            <!-- Toggle button for mobile devices -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Navigation menu -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link py-lg-3 active" href="#intro">Home</a></li>
-                    <li class="nav-item"><a class="nav-link py-lg-3" href="#about">Chi Sono</a></li>
+                    <li class="nav-item"><a class="nav-link py-lg-3" href="#about">Chi Siamo</a></li>
+                    <li class="nav-item"><a class="nav-link py-lg-3" href="#services">Crea</a></li>
                     <li class="nav-item"><a class="nav-link py-lg-3" href="#portfolio">Portfolio</a></li>
                     <li class="nav-item"><a class="nav-link py-lg-3" href="#text">Testo</a></li>
                 </ul>
@@ -92,47 +192,52 @@
         </div>
     </nav>
 
-    <!-- Chi Sono -->
+    <!-- About Section -->
     <section id="about">
         <div class="container">
             <div class="row gy-4 align-items-center">
                 <div class="col-lg-6">
-                    <h2 class="underline text-uppercase">Chi Sono</h2>
-                    <p class="lead">Questa è la sezione su di me.</p>
-                    <p>Puoi aggiungere una tua introduzione personale, parlare dei tuoi interessi, background e stile di
-                        vita.</p>
+                    <h2 class="underline text-uppercase">Chi Siamo</h2>
+                    <p class="lead">Benvenuto nel nostro spazio creativo.</p>
+                    <p>
+                        Crediamo che ogni piccolo momento racchiuda bellezza e storie uniche. Qui, non solo utilizziamo
+                        la creatività per catturare questi momenti, ma li trasmettiamo anche con il cuore. Che si tratti
+                        di design visivo, creazione di contenuti o esperienza digitale, il nostro obiettivo è ispirare
+                        attraverso l'innovazione e portare ispirazione e risonanza a tutti. Non vediamo l'ora di
+                        esplorare e condividere la bellezza della vita con te.
+                    </p>
                 </div>
                 <div class="col-lg-5 mx-auto">
-                    <p><img class="img-fluid rounded-circle" src="img/AboutMe.jpg" alt="Immagine Chi Sono"></p>
+                    <p><img class="img-fluid rounded-circle" src="img/AboutMe.jpg" alt="Immagine Chi Siamo"></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Servizi -->
+    <!-- Services Section -->
     <section class="bg-gray-200" id="services">
         <div class="container">
             <div class="row services">
                 <div class="col-lg-12">
-                    <h2 class="underline text-uppercase">Servizi</h2>
+                    <h2 class="underline text-uppercase">Creazione & Espressione</h2>
                     <div class="row gy-4 gx-5">
                         <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-desktop fa-3x"></i></div>
-                            <h5>Web Design</h5>
-                            <p>Realizzazione di siti web belli che migliorano l'esperienza utente per la tua azienda o
-                                portfolio personale.</p>
+                            <div class="mb-4"><i class="fas fa-camera-retro fa-3x"></i></div>
+                            <h5>Cattura i Momenti</h5>
+                            <p>Utilizziamo le lenti per fermare ogni momento unico, trasformando la bellezza della vita
+                                in immagini eterne.</p>
                         </div>
                         <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-print fa-3x"></i></div>
-                            <h5>Stampa</h5>
-                            <p>Offriamo servizi di stampa di alta qualità per garantire che i tuoi documenti e materiali
-                                abbiano sempre un aspetto impeccabile.</p>
+                            <div class="mb-4"><i class="fas fa-pen-fancy fa-3x"></i></div>
+                            <h5>Scrivi Ispirazione</h5>
+                            <p>Intrecciamo storie e ispirazione con parole, fondendo i nostri pensieri e le emozioni in
+                                ogni creazione.</p>
                         </div>
                         <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-globe-americas fa-3x"></i></div>
-                            <h5>SEO e SEM</h5>
-                            <p>Forniamo ottimizzazione SEO e strategie SEM per migliorare il posizionamento del tuo sito
-                                sui motori di ricerca.</p>
+                            <div class="mb-4"><i class="fas fa-paint-brush fa-3x"></i></div>
+                            <h5>Espressione Creativa</h5>
+                            <p>Attraverso l'arte e il design, materializziamo la creatività, mostrando immaginazione e
+                                innovazione senza limiti.</p>
                         </div>
                     </div>
                 </div>
@@ -140,40 +245,127 @@
         </div>
     </section>
 
-    <!-- Portfolio -->
+    <!-- Portfolio Section -->
     <section id="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-8">
-                    <h2 class="underline text-uppercase">Portfolio</h2>
-                    <p>Mostra i tuoi lavori e progetti, condividi i successi del tuo percorso professionale.</p>
+                    <h2 class="underline text-uppercase">Portfolio Selezionato</h2>
+                    <p>Esplora la nostra creatività e tecnologia, e visualizza progetti di fotografia, scrittura e
+                        programmazione.</p>
                 </div>
             </div>
-            <div class="row g-4">
+
+            <!-- Photography Works -->
+            <div class="row g-4 mt-4">
+                <div class="col-md-12">
+                    <h4 class="text-uppercase mb-3">Opere Fotografiche</h4>
+                </div>
                 <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-1.jpg"
-                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-1.jpg"
-                            alt="Immagine Portfolio 1"></a></div>
-                <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-2.jpg"
                         data-gallery="gallery"><img class="img-fluid" src="img/portfolio-2.jpg"
-                            alt="Immagine Portfolio 2"></a></div>
+                            alt="Opera Fotografica 1"></a></div>
+                <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-2.jpg"
+                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-4.jpg"
+                            alt="Opera Fotografica 2"></a></div>
                 <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-3.jpg"
-                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-3.jpg"
-                            alt="Immagine Portfolio 3"></a></div>
+                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-5.jpg"
+                            alt="Opera Fotografica 3"></a></div>
+            </div>
+
+            <!-- Code Projects Carousel -->
+            <div class="row g-4 mt-5">
+                <div class="col-md-12">
+                    <h4 class="text-uppercase mb-3">Progetti di Programmazione</h4>
+                </div>
+
+                <!-- Carousel -->
+                <div id="codeCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+
+                        <!-- C++ Code Example -->
+                        <div class="carousel-item active">
+                            <div class="d-block w-100">
+                                <h5>Esempio di Ciclo in C++</h5>
+                                <p>Un semplice esempio di ciclo `for`:</p>
+                                <pre class="code-block"><code> 
+#include &lt;iostream&gt;
+
+int main() {
+    for (int i = 0; i &lt; 5; i++) {
+        std::cout &lt;&lt; "Ciao, C++!" &lt;&lt; std::endl;
+    }
+    return 0;
+}
+              </code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Python Code Example -->
+                        <div class="carousel-item">
+                            <div class="d-block w-100">
+                                <h5>Esempio di Lettura File in Python</h5>
+                                <p>Un semplice esempio di lettura di un file e stampa del suo contenuto:</p>
+                                <pre class="code-block"><code> 
+# Lettura file in Python
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)
+              </code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Java Code Example -->
+                        <div class="carousel-item">
+                            <div class="d-block w-100">
+                                <h5>Esempio Hello World in Java</h5>
+                                <p>Un semplice esempio `Hello, World!`:</p>
+                                <pre class="code-block"><code> 
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Ciao, Java!");
+    }
+}
+              </code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
-    <!-- Sezione Testo -->
+
+    <!-- Text Section -->
     <section class="bg-dark text-gray-100" id="text">
         <div class="container">
-            <h2 class="underline underline-white">Pagina Testo</h2>
+            <h2 class="underline underline-white">Il Potere delle Parole</h2>
             <div class="row">
                 <div class="col-md-6">
-                    <p>Nel mezzo del cammin di nostra vita mi ritrovai per una selva oscura, ché la diritta via era
-                        smarrita.</p>
+                    <p>
+                        Solo quando apriamo la finestra del nostro cuore possiamo vedere il tesoro dentro; solo quando
+                        apriamo la finestra del nostro cuore possiamo vedere il paesaggio limpido fuori; solo quando
+                        apriamo la finestra del nostro cuore possiamo lasciare che i fiori e le luci del mondo fluiscano
+                        dentro. E solo quando apriamo la finestra del nostro cuore possiamo uscire con fiducia e
+                        coraggio, passo dopo passo verso la luce.
+                    </p>
                 </div>
                 <div class="col-md-6">
-                    <p>Ahi quanto a dir qual era è cosa dura esta selva selvaggia e aspra e forte che nel pensier rinova
-                        la paura!</p>
+                    <p>
+                        Con la perseveranza, il solitario viaggio della vita può trasformarsi in un cielo stellato; con
+                        la perseveranza, la solitudine può essere trasformata in uno stormo di oche migranti; con la
+                        perseveranza, la gioia può fiorire in un giardino di fiori.
+                    </p>
                 </div>
             </div>
         </div>
