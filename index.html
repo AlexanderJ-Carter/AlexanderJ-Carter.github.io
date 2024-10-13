@@ -126,6 +126,32 @@
     pre {
       margin: 0;
     }
+
+    /* 默认字体设置 */
+    h1.intro-heading {
+      font-size: 3rem;
+      /* 桌面设备的大标题 */
+    }
+
+    /* 针对平板设备进行缩放 */
+    @media (max-width: 768px) {
+      h1.intro-heading {
+        font-size: 2.5rem;
+        /* 中等屏幕设备，如平板 */
+        letter-spacing: 4px;
+        /* 调整字母间距以防止换行 */
+      }
+    }
+
+    /* 针对手机设备进行缩放 */
+    @media (max-width: 576px) {
+      h1.intro-heading {
+        font-size: 2rem;
+        /* 小屏幕设备，如手机 */
+        letter-spacing: 3px;
+        /* 再次调整字母间距以适配 */
+      }
+    }
   </style>
 
 </head>
@@ -142,7 +168,7 @@
             <p class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in">
               欢迎加入我们的旅程
             </p>
-            <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold display-3 fade-in"
+            <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold fade-in"
               style="font-family: 'Segoe UI', sans-serif;">
               探索灵感 创造未来
             </h1>
@@ -173,8 +199,8 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link py-lg-3 active" href="#intro">主页</a></li>
           <li class="nav-item"><a class="nav-link py-lg-3" href="#about">关于</a></li>
-          <li class="nav-item"><a class="nav-link py-lg-3" href="#portfolio">作品</a></li>
           <li class="nav-item"><a class="nav-link py-lg-3" href="#services">创造</a></li>
+          <li class="nav-item"><a class="nav-link py-lg-3" href="#portfolio">作品</a></li>
           <li class="nav-item"><a class="nav-link py-lg-3" href="#text">文字</a></li>
         </ul>
       </div>
