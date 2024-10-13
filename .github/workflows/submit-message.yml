@@ -1,7 +1,6 @@
-name: Create Issue from Message
+name: Submit Message Action
 
 on:
-  workflow_dispatch:  # 允许手动触发
   repository_dispatch:
     types: [submit-message]  # 监听 'submit-message' 事件
 
@@ -13,7 +12,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Create Issue
+    - name: Create Issue from Message
       run: |
         curl -X POST \
         -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \

@@ -263,17 +263,14 @@
       const email = document.getElementById('email').value;
       const message = document.getElementById('message').value;
 
-      console.log('Submitting form with:', name, email, message); // 检查数据是否被正确获取
-
       fetch('https://api.github.com/repos/Alex-hwang/Alex-hwang.github.io/dispatches', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `token ${GITHUB_TOKEN}`,  // 确保 token 被正确配置
           'Accept': 'application/vnd.github.everest-preview+json'
         },
         body: JSON.stringify({
-          event_type: 'submit-message',  // 与 GitHub Actions 中定义的事件匹配
+          event_type: 'submit-message',  // GitHub Actions 的事件类型
           client_payload: {
             name: name,
             email: email,
@@ -283,23 +280,17 @@
       })
         .then(response => {
           if (response.ok) {
-            console.log('Dispatch event successfully triggered'); // 确认事件成功触发
-            return response.json();
+            alert('留言提交成功！');
+            document.getElementById('messageForm').reset();
           } else {
-            console.error('Failed to trigger dispatch event:', response.status, response.statusText); // 输出错误信息
-            throw new Error('Failed to trigger dispatch event');
+            console.error('提交失败');
           }
-        })
-        .then(data => {
-          alert('留言提交成功！');
-          document.getElementById('messageForm').reset();
         })
         .catch(error => {
           console.error('Error:', error);
           alert('留言提交失败，请稍后再试。');
         });
     });
-
   </script>
 
 </body>
