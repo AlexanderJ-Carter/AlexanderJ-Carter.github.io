@@ -1,0 +1,26 @@
+name: Save Messages
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  save-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Save message to file
+        run: |
+          echo "${{ github.event.issue.body }}" >> messages.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add messages.txt
+          git commit -m "Save message from ${{ github.event.issue.user.login }}"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
