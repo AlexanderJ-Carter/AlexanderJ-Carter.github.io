@@ -2,8 +2,8 @@ name: Create Issue from Message
 
 on:
   workflow_dispatch:
-  issues:
-    types: [opened]
+  repository_dispatch:  # 监听来自前端触发的事件
+    types: [submit-message]
 
 jobs:
   create-issue:
@@ -19,4 +19,4 @@ jobs:
         -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
         -H "Accept: application/vnd.github.v3+json" \
         https://api.github.com/repos/Alex-hwang/Alex-hwang.github.io/issues \
-        -d "{\"title\": \"留言 from ${{ github.event.issue.title }}\", \"body\": \"${{ github.event.issue.body }}\"}"
+        -d "{\"title\": \"留言 from ${{ github.event.client_payload.name }}\", \"body\": \"**姓名**: ${{ github.event.client_payload.name }}\n**邮箱**: ${{ github.event.client_payload.email }}\n**留言**: ${{ github.event.client_payload.message }}\"}"

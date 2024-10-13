@@ -257,39 +257,39 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/glightbox/js/glightbox.min.js"></script>
   <script>
-document.getElementById('messageForm').addEventListener('submit', function (event) {
-  event.preventDefault();
-  const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const message = document.getElementById('message').value;
+    document.getElementById('messageForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
 
-  fetch('https://api.github.com/repos/Alex-hwang/Alex-hwang.github.io/issues', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      name: name,
-      email: email,
-      message: message
-    })
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error('Failed to submit message');
-      }
-    })
-    .then(data => {
-      alert('留言提交成功！');
-      document.getElementById('messageForm').reset();
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('留言提交失败，请稍后再试。');
+      fetch('/submit-message', {  // 发送到你配置的服务器端或 GitHub Actions 处理的地址
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          message: message
+        })
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Failed to submit message');
+          }
+        })
+        .then(data => {
+          alert('留言提交成功！');
+          document.getElementById('messageForm').reset();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('留言提交失败，请稍后再试。');
+        });
     });
-});
 
   </script>
 
