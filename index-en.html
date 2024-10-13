@@ -16,7 +16,7 @@
 
     <!-- Open Graph meta tags for better social media sharing -->
     <meta property="og:title" content="Alex Hwang's Website">
-    <meta property="og:description" content="A personal website for sharing works and creations.">
+    <meta property="og:description" content="A personal website showcasing work and content sharing.">
     <meta property="og:image" content="img/logo.png">
     <meta property="og:url" content="https://Alex-hwang.github.io">
     <meta property="og:type" content="website">
@@ -24,8 +24,12 @@
     <!-- Twitter Card meta tags for better social media sharing -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Alex Hwang's Website">
-    <meta name="twitter:description" content="A personal website for sharing works and creations.">
+    <meta name="twitter:description" content="A personal website showcasing work and content sharing.">
     <meta name="twitter:image" content="img/logo.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -41,14 +45,95 @@
 
     <style>
         .language-switcher {
-            margin-top: 20px;
-            text-align: center;
+            text-align: left;
+            font-size: 0.9rem;
         }
 
         .language-switcher a {
-            margin: 0 10px;
+            margin: 0 5px;
             text-decoration: none;
+            color: #dfdddd;
             font-weight: bold;
+        }
+
+        .language-switcher i {
+            margin-right: 5px;
+            font-size: 1.2rem;
+        }
+
+        footer .col-md-6.text-center.text-md-end {
+            text-align: right;
+        }
+
+        footer a {
+            color: #dfdede;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+
+            .language-switcher,
+            footer .col-md-6.text-center.text-md-end {
+                text-align: center;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .intro-heading {
+            letter-spacing: 5px;
+            font-weight: bold;
+        }
+
+        .intro-text {
+            letter-spacing: 3px;
+        }
+
+        .code-block {
+            height: 200px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        pre {
+            margin: 0;
+        }
+
+        h1.intro-heading {
+            font-size: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.intro-heading {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1.intro-heading {
+                font-size: 2rem;
+                letter-spacing: 3px;
+            }
         }
     </style>
 
@@ -62,12 +147,18 @@
         <div class="overlay-content w-100 text-white">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-7 col-md-12 mx-auto">
-                        <p class="fst-italic intro-text">Oh, hello, nice to meet you!</p>
-                        <h1 class="text-uppercase intro-heading letter-spacing-2">A Space for Life Moments and Personal
-                            Creations</h1>
-                        <p class="fst-italic intro-text mb-0">Capturing Life's Little Moments and Sharing Personal
-                            Creations</p>
+                    <div class="col-lg-7 col-md-12 mx-auto text-center">
+                        <p
+                            class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in">
+                            Welcome to our journey
+                        </p>
+                        <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold fade-in"
+                            style="font-family: 'Segoe UI', sans-serif;">
+                            Explore Creativity, Build the Future
+                        </h1>
+                        <p class="fst-italic intro-text text-muted mt-4 fade-in" style="font-size: 1.2rem;">
+                            Discover, Share, and Create Every Sparkling Moment.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -76,15 +167,24 @@
 
     <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white py-2 shadow-sm" id="navbar">
         <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand" href="#intro">
+                <img src="img/logo.png" alt="Logo" style="height: 40px;">
+            </a>
+
+            <!-- Toggle button for mobile devices -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Navigation menu -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link py-lg-3 active" href="#intro">Home</a></li>
                     <li class="nav-item"><a class="nav-link py-lg-3" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link py-lg-3" href="#services">Create</a></li>
                     <li class="nav-item"><a class="nav-link py-lg-3" href="#portfolio">Portfolio</a></li>
                     <li class="nav-item"><a class="nav-link py-lg-3" href="#text">Text</a></li>
                 </ul>
@@ -97,13 +197,18 @@
         <div class="container">
             <div class="row gy-4 align-items-center">
                 <div class="col-lg-6">
-                    <h2 class="underline text-uppercase">About Me</h2>
-                    <p class="lead">This is the about me section.</p>
-                    <p>You can add a personal introduction here, talk about your interests, background, and lifestyle.
+                    <h2 class="underline text-uppercase">About Us</h2>
+                    <p class="lead">Welcome to our creative space.</p>
+                    <p>
+                        We believe that every small moment contains unique beauty and stories. Here, we not only use
+                        creativity to capture these moments but also convey them with heart. Whether it's visual design,
+                        content creation, or digital experience, our goal is to inspire through innovation and bring
+                        more inspiration and resonance to everyone. We look forward to exploring and sharing the beauty
+                        of life with you.
                     </p>
                 </div>
                 <div class="col-lg-5 mx-auto">
-                    <p><img class="img-fluid rounded-circle" src="img/AboutMe.jpg" alt="About Image"></p>
+                    <p><img class="img-fluid rounded-circle" src="img/AboutMe.jpg" alt="About Us Image"></p>
                 </div>
             </div>
         </div>
@@ -114,25 +219,25 @@
         <div class="container">
             <div class="row services">
                 <div class="col-lg-12">
-                    <h2 class="underline text-uppercase">Services</h2>
+                    <h2 class="underline text-uppercase">Creation & Expression</h2>
                     <div class="row gy-4 gx-5">
                         <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-desktop fa-3x"></i></div>
-                            <h5>Web Design</h5>
-                            <p>Creating beautiful websites that enhance user experience for your business or personal
-                                portfolio.</p>
+                            <div class="mb-4"><i class="fas fa-camera-retro fa-3x"></i></div>
+                            <h5>Capture Moments</h5>
+                            <p>We use lenses to freeze every unique moment, turning life's beauty into eternal images.
+                            </p>
                         </div>
                         <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-print fa-3x"></i></div>
-                            <h5>Print</h5>
-                            <p>Offering high-quality print services to ensure your documents and materials look their
-                                best.</p>
+                            <div class="mb-4"><i class="fas fa-pen-fancy fa-3x"></i></div>
+                            <h5>Write Inspiration</h5>
+                            <p>We weave stories and inspiration with words, blending our thoughts and emotions into
+                                every creation.</p>
                         </div>
                         <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-globe-americas fa-3x"></i></div>
-                            <h5>SEO and SEM</h5>
-                            <p>Providing SEO optimization and SEM strategies to improve your site's search engine
-                                ranking.</p>
+                            <div class="mb-4"><i class="fas fa-paint-brush fa-3x"></i></div>
+                            <h5>Creative Expression</h5>
+                            <p>Through art and design, we materialize creativity, showcasing endless imagination and
+                                innovation.</p>
                         </div>
                     </div>
                 </div>
@@ -145,20 +250,98 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-lg-8">
-                    <h2 class="underline text-uppercase">Portfolio</h2>
-                    <p>Showcase your work and projects, share the successes of your professional journey.</p>
+                    <h2 class="underline text-uppercase">Featured Portfolio</h2>
+                    <p>Explore our creativity and technology, and view selected photography, writing, and coding
+                        projects.</p>
                 </div>
             </div>
-            <div class="row g-4">
+
+            <!-- Photography Works -->
+            <div class="row g-4 mt-4">
+                <div class="col-md-12">
+                    <h4 class="text-uppercase mb-3">Photography Works</h4>
+                </div>
                 <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-1.jpg"
-                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-1.jpg"
-                            alt="Portfolio Image 1"></a></div>
-                <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-2.jpg"
                         data-gallery="gallery"><img class="img-fluid" src="img/portfolio-2.jpg"
-                            alt="Portfolio Image 2"></a></div>
+                            alt="Photography Work 1"></a></div>
+                <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-2.jpg"
+                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-4.jpg"
+                            alt="Photography Work 2"></a></div>
                 <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-3.jpg"
-                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-3.jpg"
-                            alt="Portfolio Image 3"></a></div>
+                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-5.jpg"
+                            alt="Photography Work 3"></a></div>
+            </div>
+
+            <!-- Code Projects Carousel -->
+            <div class="row g-4 mt-5">
+                <div class="col-md-12">
+                    <h4 class="text-uppercase mb-3">Code Projects</h4>
+                </div>
+
+                <!-- Carousel -->
+                <div id="codeCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+
+                        <!-- C++ Code Example -->
+                        <div class="carousel-item active">
+                            <div class="d-block w-100">
+                                <h5>C++ Simple Loop Example</h5>
+                                <p>A simple `for` loop example:</p>
+                                <pre class="code-block"><code> 
+#include &lt;iostream&gt;
+
+int main() {
+    for (int i = 0; i &lt; 5; i++) {
+        std::cout &lt;&lt; "Hello, C++!" &lt;&lt; std::endl;
+    }
+    return 0;
+}
+              </code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Python Code Example -->
+                        <div class="carousel-item">
+                            <div class="d-block w-100">
+                                <h5>Python File Read Example</h5>
+                                <p>A simple example of reading a file and printing its content:</p>
+                                <pre class="code-block"><code> 
+# Python File Reading
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)
+              </code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Java Code Example -->
+                        <div class="carousel-item">
+                            <div class="d-block w-100">
+                                <h5>Java Hello World Example</h5>
+                                <p>A simple `Hello, World!` example:</p>
+                                <pre class="code-block"><code> 
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, Java!");
+    }
+}
+              </code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -166,13 +349,22 @@
     <!-- Text Section -->
     <section class="bg-dark text-gray-100" id="text">
         <div class="container">
-            <h2 class="underline underline-white">Text Page</h2>
+            <h2 class="underline underline-white">The Power of Words</h2>
             <div class="row">
                 <div class="col-md-6">
-                    <p>Share some written content, like blog posts or personal thoughts.</p>
+                    <p>
+                        Only when we open the window of our hearts can we see the treasure within; only when we open the
+                        window of our hearts can we see the clear scenery outside; only when we open the window of our
+                        hearts can we let the flowers and lights of the world flow in. And only when we open the window
+                        of our hearts can we walk out confidently and bravely, step by step toward the light.
+                    </p>
                 </div>
                 <div class="col-md-6">
-                    <p>Showcase your insights on life, work, or your hobbies.</p>
+                    <p>
+                        With perseverance, the lonely journey of life can stretch into a sky full of stars; with
+                        perseverance, solitude can be transformed into a flock of flying geese; with perseverance, joy
+                        can bloom into a garden of flowers.
+                    </p>
                 </div>
             </div>
         </div>
