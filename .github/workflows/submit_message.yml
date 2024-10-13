@@ -2,7 +2,7 @@ name: Create Issue from Message
 
 on:
   workflow_dispatch:
-  repository_dispatch:  # 监听来自前端触发的事件
+  repository_dispatch:
     types: [submit-message]
 
 jobs:
