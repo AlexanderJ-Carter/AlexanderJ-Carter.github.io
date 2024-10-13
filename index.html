@@ -204,32 +204,6 @@
     </div>
   </section>
 
-  <!-- 留言 -->
-  <section class="bg-gray-200 py-3" id="message">
-    <div class="container">
-      <h2 class="underline text-uppercase">留言</h2>
-      <div class="row">
-        <div class="col-md-8 mx-auto">
-          <form id="messageForm">
-            <div class="mb-3">
-              <label for="name" class="form-label">姓名</label>
-              <input type="text" class="form-control" id="name" placeholder="请输入您的姓名" required>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">邮箱</label>
-              <input type="email" class="form-control" id="email" placeholder="请输入您的邮箱" required>
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">留言</label>
-              <textarea class="form-control" id="message" rows="4" placeholder="请输入您的留言" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">提交</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Footer -->
   <footer class="bg-black text-gray-100 py-3">
     <div class="container">
@@ -256,45 +230,6 @@
   <!-- JavaScript files -->
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/glightbox/js/glightbox.min.js"></script>
-  <script>
-    document.getElementById('messageForm').addEventListener('submit', function (event) {
-      event.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
-
-      // 调用 GitHub Dispatch API，带上 Token
-      fetch('https://api.github.com/repos/Alex-hwang/Alex-hwang.github.io/dispatches', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `token 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`,
-          'Accept': 'application/vnd.github.everest-preview+json'
-        },
-        body: JSON.stringify({
-          event_type: 'submit-message',  // GitHub Actions 的事件类型
-          client_payload: {
-            name: name,
-            email: email,
-            message: message
-          }
-        })
-      })
-        .then(response => {
-          if (response.ok) {
-            alert('留言提交成功！');
-            document.getElementById('messageForm').reset();
-          } else {
-            console.error('提交失败');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('留言提交失败，请稍后再试。');
-        });
-    });
-  </script>
-
 </body>
 
 </html>
