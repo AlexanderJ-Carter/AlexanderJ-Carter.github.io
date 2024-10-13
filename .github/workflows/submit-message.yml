@@ -1,9 +1,9 @@
 name: Create Issue from Message
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # 允许手动触发
   repository_dispatch:
-    types: [submit-message]
+    types: [submit-message]  # 监听 'submit-message' 事件
 
 jobs:
   create-issue:

@@ -263,34 +263,35 @@
       const email = document.getElementById('email').value;
       const message = document.getElementById('message').value;
 
-      fetch('/submit-message', {  // 发送到你配置的服务器端或 GitHub Actions 处理的地址
+      fetch('https://api.github.com/repos/Alex-hwang/Alex-hwang.github.io/dispatches', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `token ${GITHUB_TOKEN}`,  // 使用 GitHub token
+          'Accept': 'application/vnd.github.everest-preview+json'
         },
         body: JSON.stringify({
-          name: name,
-          email: email,
-          message: message
+          event_type: 'submit-message',  // 自定义事件类型
+          client_payload: {
+            name: name,
+            email: email,
+            message: message
+          }
         })
       })
         .then(response => {
           if (response.ok) {
-            return response.json();
+            alert('留言提交成功！');
+            document.getElementById('messageForm').reset();
           } else {
-            throw new Error('Failed to submit message');
+            throw new Error('留言提交失败');
           }
-        })
-        .then(data => {
-          alert('留言提交成功！');
-          document.getElementById('messageForm').reset();
         })
         .catch(error => {
           console.error('Error:', error);
           alert('留言提交失败，请稍后再试。');
         });
     });
-
   </script>
 
 </body>
