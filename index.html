@@ -82,6 +82,32 @@
         /* 在小屏幕时居中对齐 */
       }
     }
+
+    /* 渐入动画 */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1.5s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* 调整文字大小与字母间距 */
+    .intro-heading {
+      letter-spacing: 5px;
+      font-weight: bold;
+    }
+
+    .intro-text {
+      letter-spacing: 3px;
+    }
   </style>
 
 </head>
@@ -94,10 +120,17 @@
     <div class="overlay-content w-100 text-white">
       <div class="container">
         <div class="row">
-          <div class="col-lg-7 col-md-12 mx-auto">
-            <p class="fst-italic intro-text">欢迎来到我们的世界！</p>
-            <h1 class="text-uppercase intro-heading letter-spacing-2">探索生活的美好瞬间，分享创意灵感</h1>
-            <p class="fst-italic intro-text mb-0">发现生活中的点滴美好，展示独特的创意作品</p>
+          <div class="col-lg-7 col-md-12 mx-auto text-center">
+            <p class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in">
+              欢迎来到我们的世界！
+            </p>
+            <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold display-3 fade-in"
+              style="font-family: 'Segoe UI', sans-serif;">
+              探索生活的美好瞬间，分享创意灵感
+            </h1>
+            <p class="fst-italic intro-text text-muted mt-4 fade-in" style="font-size: 1.2rem;">
+              发现生活中的点滴美好，展示独特的创意作品
+            </p>
           </div>
         </div>
       </div>
