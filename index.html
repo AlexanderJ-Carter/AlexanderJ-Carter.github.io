@@ -224,11 +224,11 @@
           <h4 class="text-uppercase mb-3">摄影作品</h4>
         </div>
         <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-1.jpg" data-gallery="gallery"><img
-              class="img-fluid" src="img/portfolio-1.jpg" alt="摄影作品1"></a></div>
+              class="img-fluid" src="img/portfolio-4.jpg" alt="摄影作品1"></a></div>
         <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-2.jpg" data-gallery="gallery"><img
               class="img-fluid" src="img/portfolio-2.jpg" alt="摄影作品2"></a></div>
         <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-3.jpg" data-gallery="gallery"><img
-              class="img-fluid" src="img/portfolio-3.jpg" alt="摄影作品3"></a></div>
+              class="img-fluid" src="img/portfolio-5.jpg" alt="摄影作品3"></a></div>
       </div>
 
       <!-- 文字作品 -->
@@ -256,17 +256,20 @@
         </div>
       </div>
 
-      <!-- 代码项目 -->
+      <!-- 代码项目轮播 -->
       <div class="row g-4 mt-5">
         <div class="col-md-12">
           <h4 class="text-uppercase mb-3">代码项目</h4>
         </div>
 
-        <!-- C++ 示例 -->
-        <div class="col-md-4">
-          <h5>C++ 简单循环示例</h5>
-          <p>一个简单的 `for` 循环示例：</p>
-          <pre><code> 
+        <!-- 轮播部分 -->
+        <div id="codeCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+
+            <!-- C++ 代码示例 -->
+            <div class="carousel-item active">
+              <div class="d-block w-100">
+                <pre><code> 
 #include &lt;iostream&gt;
 
 int main() {
@@ -275,37 +278,48 @@ int main() {
     }
     return 0;
 }
-    </code></pre>
-        </div>
+              </code></pre>
+              </div>
+            </div>
 
-        <!-- Python 示例 -->
-        <div class="col-md-4">
-          <h5>Python 简单列表操作</h5>
-          <p>一个简单的列表遍历示例：</p>
-          <pre><code> 
-# Python 列表遍历
-fruits = ["apple", "banana", "cherry"]
-for fruit in fruits:
-    print(f"Enjoy your {fruit}!")
-    </code></pre>
-        </div>
+            <!-- Python 代码示例 -->
+            <div class="carousel-item">
+              <div class="d-block w-100">
+                <pre><code> 
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)
+              </code></pre>
+              </div>
+            </div>
 
-        <!-- Java 示例 -->
-        <div class="col-md-4">
-          <h5>Java 基础输出示例</h5>
-          <p>一个简单的 `Hello, World!` 示例：</p>
-          <pre><code> 
+            <!-- Java 代码示例 -->
+            <div class="carousel-item">
+              <div class="d-block w-100">
+                <pre><code> 
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello, Java!");
     }
 }
-    </code></pre>
+              </code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- 轮播控制按钮 -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
       </div>
-
+    </div>
   </section>
-
 
   <!-- 文本部分 -->
   <section class="bg-dark text-gray-100" id="text">
