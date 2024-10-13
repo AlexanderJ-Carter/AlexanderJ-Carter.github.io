@@ -263,10 +263,12 @@
       const email = document.getElementById('email').value;
       const message = document.getElementById('message').value;
 
+      // 调用 GitHub Dispatch API，带上 Token
       fetch('https://api.github.com/repos/Alex-hwang/Alex-hwang.github.io/dispatches', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `token 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`,
           'Accept': 'application/vnd.github.everest-preview+json'
         },
         body: JSON.stringify({
