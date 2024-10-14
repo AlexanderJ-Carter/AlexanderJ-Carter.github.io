@@ -157,11 +157,12 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 200px;
-      background-color: rgba(255, 255, 255, 0.8);
+      width: 150px;
+      background-color: rgba(255, 255, 255, 0.6);
+      /* 更加透明 */
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      padding: 10px;
+      border-radius: 10px;
+      padding: 8px;
       transition: transform 0.3s ease, opacity 0.3s ease;
       transform: translateX(100%);
       opacity: 0;
@@ -177,7 +178,8 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: rgba(0, 123, 255, 0.8);
+      background-color: rgba(0, 123, 255, 0.5);
+      /* 更加透明 */
       border: none;
       color: white;
       padding: 5px;
@@ -185,33 +187,40 @@
       cursor: pointer;
       z-index: 1001;
       transition: opacity 0.3s ease;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
     }
 
     .toggle-button:hover {
-      background-color: rgba(0, 86, 179, 0.8);
+      background-color: rgba(0, 86, 179, 0.5);
+    }
+
+    #music-control {
+      font-size: 0.8rem;
+      padding: 3px 5px;
+      background-color: rgba(0, 123, 255, 0.7);
+      border: none;
+      color: white;
+      border-radius: 3px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 5px;
+    }
+
+    #music-control:hover {
+      background-color: rgba(0, 86, 179, 0.7);
     }
 
     .song-title {
+      font-size: 0.7rem;
       white-space: nowrap;
       overflow: hidden;
-      box-sizing: border-box;
-    }
-
-    .song-title::after {
-      content: attr(data-title);
-      display: inline-block;
-      padding-left: 100%;
-      animation: marquee 10s linear infinite;
-    }
-
-    @keyframes marquee {
-      0% {
-        transform: translate(0, 0);
-      }
-
-      100% {
-        transform: translate(-100%, 0);
-      }
+      text-overflow: ellipsis;
+      color: #333;
     }
   </style>
 
@@ -219,13 +228,9 @@
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
 
-  <!-- 背景音乐播放器 -->
   <div class="music-player" id="music-player">
-    <audio id="background-music" loop>
-      您的浏览器不支持音频元素。
-    </audio>
     <div id="song-title" class="song-title">当前播放: </div>
-    <button id="music-control" class="btn btn-primary">暂停音乐</button>
+    <button id="music-control">暂停音乐</button>
   </div>
   <button id="toggle-music-player" class="toggle-button">🎵</button>
 
@@ -475,13 +480,14 @@ public class Main {
 
       const songs = [
         { title: '曾斌斌 - 冬忆', src: 'music/曾斌斌 - 冬忆 (Inst_).flac' },
-        { title: '久石让 - 天空の城ラピュタ', src: 'music/久石让 - 天空の城ラピュタ (天空之城).flac' },
+        { title: '久石让 - 天空の城ラピュタ', src: 'music/久石让 - 天空の城 (天空之城).flac' },
       ];
       let currentSongIndex = 0;
 
       function loadSong(index) {
         music.src = songs[index].src;
-        songTitle.setAttribute('data-title', '当前播放: ' + songs[index].title);
+        songTitle.setAttribute('data-title', songs[index].title);
+        songTitle.textContent = `当前播放: ${songs[index].title}`;
       }
 
       function playNextSong() {
@@ -498,7 +504,7 @@ public class Main {
       toggleButton.addEventListener('click', function () {
         musicPlayer.classList.toggle('open');
       });
-      
+
       controlButton.addEventListener('click', function () {
         if (music.paused) {
           music.play();
