@@ -193,10 +193,25 @@
       justify-content: center;
       align-items: center;
       font-size: 1.2rem;
+      animation: none;
     }
 
     .toggle-button:hover {
       background-color: rgba(0, 86, 179, 0.5);
+    }
+
+    .toggle-button.playing {
+      animation: rotate 2s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     .song-title {
@@ -249,7 +264,6 @@
     <button id="next-song" class="btn btn-secondary">下一首</button>
   </div>
   <button id="toggle-music-player" class="toggle-button">🎵</button>
-
 
   <!-- 主内容 -->
   <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
@@ -524,10 +538,10 @@ public class Main {
         musicPlayer.classList.toggle('open');
         if (music.paused) {
           music.play();
-          toggleButton.textContent = '⏸️';
+          toggleButton.classList.add('playing');
         } else {
           music.pause();
-          toggleButton.textContent = '🎵';
+          toggleButton.classList.remove('playing');
         }
         songTitle.classList.toggle('open');
       });
@@ -553,7 +567,7 @@ public class Main {
       // 加载初始歌曲并自动播放
       loadSong(currentSongIndex);
       music.play();
-      toggleButton.textContent = '⏸️';
+      toggleButton.classList.add('playing');
 
       // 自动折叠播放器
       let hideTimeout;
