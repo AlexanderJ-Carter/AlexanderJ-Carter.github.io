@@ -152,11 +152,67 @@
         /* 再次调整字母间距以适配 */
       }
     }
+
+    body {
+      cursor: none;
+      /* 隐藏默认光标 */
+    }
+
+    .custom-cursor {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      transition: transform 0.1s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .particle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      transition: transform 0.1s ease;
+    }
   </style>
 
 </head>
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const cursor = document.createElement('div');
+      cursor.classList.add('custom-cursor');
+      document.body.appendChild(cursor);
+
+      const particles = [];
+      for (let i = 0; i < 10; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        document.body.appendChild(particle);
+        particles.push(particle);
+      }
+
+      document.addEventListener('mousemove', function (e) {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+
+        particles.forEach((particle, index) => {
+          const angle = (index / particles.length) * Math.PI * 2;
+          const radius = 20;
+          const x = e.clientX + Math.cos(angle) * radius;
+          const y = e.clientY + Math.sin(angle) * radius;
+          particle.style.left = x + 'px';
+          particle.style.top = y + 'px';
+        });
+      });
+    });
+  </script>
 
   <!-- 主内容 -->
   <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
