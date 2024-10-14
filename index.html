@@ -658,13 +658,12 @@ public class Main {
     });
   </script>
 
-  <!-- Chatbot JavaScript with OpenWeather API -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const chatbox = document.getElementById('chatbox');
       const userInput = document.getElementById('userInput');
       const sendButton = document.getElementById('sendButton');
-      const weatherApiKey = '994bdcce1464d1723ae775c267ca76c8';
+      const weatherApiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
       const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
       sendButton.addEventListener('click', function () {
@@ -691,6 +690,7 @@ public class Main {
       }
 
       function getBotResponse(userText) {
+        // Check for weather keywords
         if (userText.includes('天气')) {
           const location = userText.replace('天气', '').trim();
           if (location) {
@@ -698,37 +698,37 @@ public class Main {
           } else {
             addMessage('机器人', '请提供您想查询天气的城市名称。');
           }
+        } else if (userText.includes('你好')) {
+          // Greeting response
+          addMessage('机器人', '你好！有什么我可以帮忙的吗？');
         } else {
-          let botResponse = '';
-          if (userText.includes('你好')) {
-            botResponse = '你好！有什么我可以帮忙的吗？';
-          } else {
-            botResponse = '对不起，我不太明白你的意思。';
-          }
-          setTimeout(() => addMessage('机器人', botResponse), 500);
+          // Fallback response
+          addMessage('机器人', '对不起，我不太明白您的意思。我可以帮助您查询天气信息。');
         }
       }
 
       function getWeather(location) {
         const url = `${weatherApiUrl}?q=${location}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
         fetch(url)
-          .then(response => response.json())
-          .then(data => {
-            if (data.cod === 200) {
-              const weatherDescription = data.weather[0].description;
-              const temperature = data.main.temp;
-              const weatherMessage = `当前${location}的天气是：${weatherDescription}，温度为 ${temperature}°C。`;
-              addMessage('机器人', weatherMessage);
-            } else {
-              addMessage('机器人', '对不起，我找不到你想查的地方的天气信息。');
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('城市未找到');
             }
+            return response.json();
+          })
+          .then(data => {
+            const weatherDescription = data.weather[0].description;
+            const temperature = data.main.temp;
+            const weatherMessage = `当前${location}的天气是：${weatherDescription}，温度为 ${temperature}°C。`;
+            addMessage('机器人', weatherMessage);
           })
           .catch(error => {
-            addMessage('机器人', '获取天气信息时出错，请稍后再试。');
+            addMessage('机器人', '对不起，我找不到您想查的地方的天气信息。请检查城市名称是否正确。');
           });
       }
     });
   </script>
+
 
 </body>
 
