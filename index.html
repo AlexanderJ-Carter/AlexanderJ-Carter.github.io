@@ -153,7 +153,7 @@
       }
     }
 
-    .music-player {
+    <style>.music-player {
       position: fixed;
       bottom: 20px;
       right: -200px;
@@ -188,6 +188,30 @@
     .toggle-button:hover {
       background-color: #0056b3;
     }
+
+    .song-title {
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .song-title::after {
+      content: attr(data-title);
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 10s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(-100%, 0);
+      }
+    }
+  </style>
   </style>
 
 </head>
@@ -197,12 +221,13 @@
   <!-- 背景音乐播放器 -->
   <div class="music-player" id="music-player">
     <audio id="background-music" loop>
-      <source src="music/music1.flac" type="audio/mpeg">
       您的浏览器不支持音频元素。
     </audio>
+    <div id="song-title" class="song-title">当前播放: </div>
     <button id="music-control" class="btn btn-primary">播放音乐</button>
   </div>
   <button id="toggle-music-player" class="toggle-button">🎵</button>
+
 
   <!-- 主内容 -->
   <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
@@ -446,6 +471,29 @@ public class Main {
       const toggleButton = document.getElementById('toggle-music-player');
       const music = document.getElementById('background-music');
       const controlButton = document.getElementById('music-control');
+      const songTitle = document.getElementById('song-title');
+
+      const songs = [
+        { title: '曾斌斌 - 冬忆', src: 'music/曾斌斌 - 冬忆 (Inst_).flac' },
+        { title: '久石让 - 天空の城ラピュタ', src: 'music/久石让 - 天空の城ラピュタ (天空之城).flac' },
+      ];
+      let currentSongIndex = 0;
+
+      function loadSong(index) {
+        music.src = songs[index].src;
+        songTitle.setAttribute('data-title', '当前播放: ' + songs[index].title);
+      }
+
+      function playNextSong() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        loadSong(currentSongIndex);
+        music.play();
+      }
+
+      // 初始状态折叠音乐播放器
+      setTimeout(() => {
+        musicPlayer.classList.remove('open');
+      }, 1000);
 
       toggleButton.addEventListener('click', function () {
         musicPlayer.classList.toggle('open');
@@ -460,9 +508,13 @@ public class Main {
           controlButton.textContent = '播放音乐';
         }
       });
+
+      music.addEventListener('ended', playNextSong);
+
+      // 加载初始歌曲
+      loadSong(currentSongIndex);
     });
   </script>
-
 </body>
 
 </html>
