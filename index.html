@@ -287,6 +287,24 @@
     .chat-toggle-button:hover {
       background-color: rgba(0, 86, 179, 0.8);
     }
+
+    #chatbox-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+    }
   </style>
 
 </head>
@@ -673,12 +691,12 @@ public class Main {
         }
       });
 
-      function addMessage(sender, text) {
-        const message = document.createElement('div');
-        message.classList.add('mb-2');
-        message.innerHTML = `<strong>${sender}:</strong> ${text}`;
-        chatbox.appendChild(message);
-        chatbox.scrollTop = chatbox.scrollHeight;
+      function addMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatbox.appendChild(messageElement);
+        chatbox.scrollTop = chatbox.scrollHeight; // 自动滚动到底部
       }
 
       function getBotResponse(userText) {
@@ -719,32 +737,34 @@ public class Main {
           });
       }
 
+      // 获取用户位置并获取天气
       function getLocationWeather() {
         if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(position => {
-            const { latitude, longitude } = position.coords;
-            const url = `${weatherApiUrl}?lat=${latitude}&lon=${longitude}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
-            fetch(url)
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error('位置未找到');
-                }
-                return response.json();
-              })
-              .then(data => {
-                const weatherDescription = data.weather[0].description;
-                const temperature = data.main.temp;
-                const weatherMessage = `您当前位置的天气是：${weatherDescription}，温度为 ${temperature}°C。`;
-                addMessage('机器人', weatherMessage);
-              })
-              .catch(error => {
-                addMessage('机器人', '对不起，我无法获取您当前位置信息的天气。');
-              });
-          }, () => {
-            addMessage('机器人', '对不起，我无法获取您的位置信息。请允许访问位置信息或者手动输入城市名称。');
-          });
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              const lat = position.coords.latitude;
+              const lon = position.coords.longitude;
+              // 使用 OpenWeatherMap 的反向地理编码 API 来获取城市名称
+              const reverseGeocodeUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
+
+              fetch(reverseGeocodeUrl)
+                .then(response => response.json())
+                .then(data => {
+                  const cityName = data.name;
+                  getWeather(cityName); // 使用获取到的城市名称来查询天气
+                })
+                .catch(error => {
+                  console.error('无法通过经纬度获取城市名称:', error);
+                  addMessage('机器人', '对不起，我找不到您当前位置的天气信息。请手动输入城市名称。');
+                });
+            },
+            function (error) {
+              console.error('位置获取失败:', error);
+              addMessage('机器人', '对不起，我无法获取您的位置信息。请允许访问位置信息或者手动输入城市名称。');
+            }
+          );
         } else {
-          addMessage('机器人', '对不起，您的浏览器不支持地理位置服务。');
+          addMessage('机器人', '您的浏览器不支持获取位置信息，请手动输入城市名称。');
         }
       }
     });
