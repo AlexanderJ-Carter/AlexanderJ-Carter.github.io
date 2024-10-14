@@ -758,6 +758,9 @@ public class Main {
       }
 
       function getBotResponse(userText) {
+        // 标准化用户输入
+        const normalizedText = userText.toLowerCase();
+
         // Check for weather keywords
         if (userText.includes('天气')) {
           const location = userText.replace('天气', '').trim();
@@ -766,12 +769,24 @@ public class Main {
           } else {
             getLocationWeather();
           }
-        } else if (userText.includes('你好')) {
+        } else if (normalizedText.includes('你好') || normalizedText.includes('hello')) {
           // Greeting response
-          addMessage('机器人', '你好！有什么我可以帮忙的吗？');
+          addMessage('雪宝', '你好！我是雪宝，有什么我可以帮忙的吗？');
+        } else if (normalizedText.includes('谢谢') || normalizedText.includes('感谢')) {
+          // Thank you response
+          addMessage('雪宝', '不用客气！很高兴能帮到你 😊');
+        } else if (normalizedText.includes('你是谁') || normalizedText.includes('你叫什么')) {
+          // About bot response
+          addMessage('雪宝', '我是雪宝，一个友好的小助手，随时准备帮助你哦！');
+        } else if (normalizedText.includes('笑话')) {
+          // Joke response
+          addMessage('雪宝', '你知道吗？鱼为什么会吹泡泡？因为它想让自己显得很“水灵”！😂');
+        } else if (normalizedText.includes('再见') || normalizedText.includes('bye')) {
+          // Goodbye response
+          addMessage('雪宝', '再见！希望很快再见到你！👋');
         } else {
           // Fallback response
-          addMessage('机器人', '对不起，我不太明白您的意思。我可以帮助您查询天气信息。');
+          addMessage('雪宝', '对不起，我不太明白您的意思。我可以帮助您查询天气信息或者讲个笑话！');
         }
       }
 
@@ -791,10 +806,10 @@ public class Main {
             const weatherDescription = data.weather[0].description;
             const temperature = data.main.temp;
             const weatherMessage = `当前${location}的天气是：${weatherDescription}，温度为 ${temperature}°C。`;
-            addMessage('机器人', weatherMessage);
+            addMessage('雪宝', weatherMessage);
           })
           .catch(error => {
-            addMessage('机器人', '对不起，我找不到您想查的地方的天气信息。请检查城市名称是否正确。');
+            addMessage('雪宝', '对不起，我找不到您想查的地方的天气信息。请检查城市名称是否正确。');
           });
       }
 
@@ -814,20 +829,21 @@ public class Main {
                 const weatherDescription = data.weather[0].description;
                 const temperature = data.main.temp;
                 const weatherMessage = `您当前位置的天气是：${weatherDescription}，温度为 ${temperature}°C。`;
-                addMessage('机器人', weatherMessage);
+                addMessage('雪宝', weatherMessage);
               })
               .catch(error => {
-                addMessage('机器人', '对不起，我无法获取您当前位置信息的天气。');
+                addMessage('雪宝', '对不起，我无法获取您当前位置信息的天气。');
               });
           }, () => {
-            addMessage('机器人', '对不起，我无法获取您的位置信息。请允许访问位置信息或者手动输入城市名称。');
+            addMessage('雪宝', '对不起，我无法获取您的位置信息。请允许访问位置信息或者手动输入城市名称。');
           });
         } else {
-          addMessage('机器人', '对不起，您的浏览器不支持地理位置服务。');
+          addMessage('雪宝', '对不起，您的浏览器不支持地理位置服务。');
         }
       }
     });
   </script>
+
 </body>
 
 </html>
