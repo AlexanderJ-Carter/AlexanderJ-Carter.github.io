@@ -153,23 +153,22 @@
       }
     }
 
-    <style>.music-player {
+    .music-player {
       position: fixed;
       bottom: 20px;
-      right: -200px;
-      /* 初始状态隐藏在右边 */
+      right: 20px;
       width: 200px;
       background-color: white;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       padding: 10px;
-      transition: right 0.3s ease;
+      transition: transform 0.3s ease;
+      transform: translateX(100%);
       z-index: 1000;
     }
 
     .music-player.open {
-      right: 20px;
-      /* 展开状态 */
+      transform: translateX(0);
     }
 
     .toggle-button {
@@ -212,7 +211,6 @@
       }
     }
   </style>
-  </style>
 
 </head>
 
@@ -227,7 +225,6 @@
     <button id="music-control" class="btn btn-primary">播放音乐</button>
   </div>
   <button id="toggle-music-player" class="toggle-button">🎵</button>
-
 
   <!-- 主内容 -->
   <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
