@@ -288,22 +288,45 @@
       background-color: rgba(0, 86, 179, 0.8);
     }
 
-    #chatbox-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #007bff;
-      border: none;
-      color: white;
+    .chatbox {
+      max-height: 400px;
+      /* 设置对话框的最大高度 */
+      overflow-y: auto;
+      /* 启用垂直滚动条 */
       padding: 10px;
-      border-radius: 50%;
-      cursor: pointer;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.5rem;
+      background-color: #f5f5f5;
+      /* 背景颜色 */
+      border-radius: 5px;
+      /* 圆角 */
+      border: 1px solid #ccc;
+      /* 边框 */
+    }
+
+    .message {
+      margin-bottom: 10px;
+      /* 消息之间的间隔 */
+      padding: 5px 10px;
+      background-color: #ffffff;
+      /* 消息背景颜色 */
+      border-radius: 5px;
+      /* 圆角 */
+    }
+
+    .message strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    #chatbox {
+      height: 300px;
+      /* 固定高度 */
+      overflow-y: auto;
+      /* 当内容超出时显示滚动条 */
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      /* 背景颜色可以自定义 */
     }
   </style>
 
@@ -668,6 +691,41 @@ public class Main {
       const weatherApiKey = 'e92adb1cc07788a547544fa7e9cfcc5e';
       const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
+      // 城市名称映射表（中文到英文）
+      const cityMapping = {
+        '北京': 'Beijing',
+        '上海': 'Shanghai',
+        '广州': 'Guangzhou',
+        '深圳': 'Shenzhen',
+        '杭州': 'Hangzhou',
+        '南京': 'Nanjing',
+        '天津': 'Tianjin',
+        '重庆': 'Chongqing',
+        '武汉': 'Wuhan',
+        '成都': 'Chengdu',
+        '西安': 'Xi\'an',
+        '长沙': 'Changsha',
+        '合肥': 'Hefei',
+        '福州': 'Fuzhou',
+        '兰州': 'Lanzhou',
+        '南昌': 'Nanchang',
+        '太原': 'Taiyuan',
+        '昆明': 'Kunming',
+        '贵阳': 'Guiyang',
+        '海口': 'Haikou',
+        '长春': 'Changchun',
+        '哈尔滨': 'Harbin',
+        '沈阳': 'Shenyang',
+        '石家庄': 'Shijiazhuang',
+        '郑州': 'Zhengzhou',
+        '济南': 'Jinan',
+        '拉萨': 'Lhasa',
+        '银川': 'Yinchuan',
+        '西宁': 'Xining',
+        '乌鲁木齐': 'Urumqi',
+        '南宁': 'Nanning'
+      };
+
       chatToggleButton.addEventListener('click', function () {
         if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
           chatContainer.style.display = 'flex';
@@ -691,12 +749,12 @@ public class Main {
         }
       });
 
-      function addMessage(sender, message) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message');
-        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
-        chatbox.appendChild(messageElement);
-        chatbox.scrollTop = chatbox.scrollHeight; // 自动滚动到底部
+      function addMessage(sender, text) {
+        const message = document.createElement('div');
+        message.classList.add('mb-2');
+        message.innerHTML = `<strong>${sender}:</strong> ${text}`;
+        chatbox.appendChild(message);
+        chatbox.scrollTop = chatbox.scrollHeight;
       }
 
       function getBotResponse(userText) {
@@ -718,7 +776,10 @@ public class Main {
       }
 
       function getWeather(location) {
-        const url = `${weatherApiUrl}?q=${location}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
+        // 检查输入的城市是否在映射表中，如果在，使用英文名称
+        const cityName = cityMapping[location] || location;
+
+        const url = `${weatherApiUrl}?q=${cityName}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
         fetch(url)
           .then(response => {
             if (!response.ok) {
@@ -737,39 +798,36 @@ public class Main {
           });
       }
 
-      // 获取用户位置并获取天气
       function getLocationWeather() {
         if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            function (position) {
-              const lat = position.coords.latitude;
-              const lon = position.coords.longitude;
-              // 使用 OpenWeatherMap 的反向地理编码 API 来获取城市名称
-              const reverseGeocodeUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
-
-              fetch(reverseGeocodeUrl)
-                .then(response => response.json())
-                .then(data => {
-                  const cityName = data.name;
-                  getWeather(cityName); // 使用获取到的城市名称来查询天气
-                })
-                .catch(error => {
-                  console.error('无法通过经纬度获取城市名称:', error);
-                  addMessage('机器人', '对不起，我找不到您当前位置的天气信息。请手动输入城市名称。');
-                });
-            },
-            function (error) {
-              console.error('位置获取失败:', error);
-              addMessage('机器人', '对不起，我无法获取您的位置信息。请允许访问位置信息或者手动输入城市名称。');
-            }
-          );
+          navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            const url = `${weatherApiUrl}?lat=${latitude}&lon=${longitude}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
+            fetch(url)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('位置未找到');
+                }
+                return response.json();
+              })
+              .then(data => {
+                const weatherDescription = data.weather[0].description;
+                const temperature = data.main.temp;
+                const weatherMessage = `您当前位置的天气是：${weatherDescription}，温度为 ${temperature}°C。`;
+                addMessage('机器人', weatherMessage);
+              })
+              .catch(error => {
+                addMessage('机器人', '对不起，我无法获取您当前位置信息的天气。');
+              });
+          }, () => {
+            addMessage('机器人', '对不起，我无法获取您的位置信息。请允许访问位置信息或者手动输入城市名称。');
+          });
         } else {
-          addMessage('机器人', '您的浏览器不支持获取位置信息，请手动输入城市名称。');
+          addMessage('机器人', '对不起，您的浏览器不支持地理位置服务。');
         }
       }
     });
   </script>
-
 </body>
 
 </html>
