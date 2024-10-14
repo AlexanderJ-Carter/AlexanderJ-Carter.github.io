@@ -158,34 +158,37 @@
       bottom: 20px;
       right: 20px;
       width: 200px;
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.8);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       padding: 10px;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
       transform: translateX(100%);
+      opacity: 0;
       z-index: 1000;
     }
 
     .music-player.open {
       transform: translateX(0);
+      opacity: 1;
     }
 
     .toggle-button {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #007bff;
+      background-color: rgba(0, 123, 255, 0.8);
       border: none;
       color: white;
-      padding: 10px;
+      padding: 5px;
       border-radius: 50%;
       cursor: pointer;
       z-index: 1001;
+      transition: opacity 0.3s ease;
     }
 
     .toggle-button:hover {
-      background-color: #0056b3;
+      background-color: rgba(0, 86, 179, 0.8);
     }
 
     .song-title {
@@ -222,7 +225,7 @@
       您的浏览器不支持音频元素。
     </audio>
     <div id="song-title" class="song-title">当前播放: </div>
-    <button id="music-control" class="btn btn-primary">播放音乐</button>
+    <button id="music-control" class="btn btn-primary">暂停音乐</button>
   </div>
   <button id="toggle-music-player" class="toggle-button">🎵</button>
 
@@ -495,7 +498,7 @@ public class Main {
       toggleButton.addEventListener('click', function () {
         musicPlayer.classList.toggle('open');
       });
-
+      
       controlButton.addEventListener('click', function () {
         if (music.paused) {
           music.play();
@@ -508,8 +511,23 @@ public class Main {
 
       music.addEventListener('ended', playNextSong);
 
-      // 加载初始歌曲
+      // 加载初始歌曲并自动播放
       loadSong(currentSongIndex);
+      music.play();
+      controlButton.textContent = '暂停音乐';
+
+      // 自动折叠播放器
+      let hideTimeout;
+      function resetHideTimeout() {
+        clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(() => {
+          musicPlayer.classList.remove('open');
+        }, 5000);
+      }
+
+      document.addEventListener('mousemove', resetHideTimeout);
+      document.addEventListener('keypress', resetHideTimeout);
+      resetHideTimeout();
     });
   </script>
 </body>
