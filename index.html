@@ -258,54 +258,34 @@
       border-radius: 10px;
       padding: 15px;
       z-index: 1000;
-      display: flex;
+      display: none;
+      /* 默认隐藏 */
       flex-direction: column;
       justify-content: space-between;
     }
 
-    /* Chatbox message area */
-    .chatbox {
-      overflow-y: auto;
-      height: 250px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
-      margin-bottom: 10px;
-    }
-
-    /* Chat input container */
-    .chat-input-container {
+    /* Chatbot toggle button styling */
+    .chat-toggle-button {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      background-color: rgba(0, 123, 255, 0.8);
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1001;
+      width: 50px;
+      height: 50px;
       display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
     }
 
-    .chat-input {
-      flex: 1;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 5px 10px;
-    }
-
-    #sendButton {
-      margin-left: 10px;
-    }
-
-    /* Message styling */
-    .mb-2 {
-      margin-bottom: 8px;
-    }
-
-    .chat-container .mb-2 strong {
-      color: #007bff;
-      /* 让机器人和用户的对话有颜色对比 */
-    }
-
-    .chat-container .chatbox {
-      overflow-y: auto;
-      max-height: 250px;
-      /* 限制聊天框高度以防止过长 */
-    }
-
-    .chat-container .chat-input-container {
-      margin-top: 10px;
+    .chat-toggle-button:hover {
+      background-color: rgba(0, 86, 179, 0.8);
     }
   </style>
 
@@ -539,6 +519,9 @@ public class Main {
   </section>
 
   <!-- Chatbot HTML -->
+  <button id="chat-toggle-button" class="chat-toggle-button">
+    🤖
+  </button>
   <div id="chat-container" class="chat-container">
     <div id="chatbox" class="chatbox"></div>
     <div class="chat-input-container">
@@ -660,11 +643,21 @@ public class Main {
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      const chatContainer = document.getElementById('chat-container');
+      const chatToggleButton = document.getElementById('chat-toggle-button');
       const chatbox = document.getElementById('chatbox');
       const userInput = document.getElementById('userInput');
       const sendButton = document.getElementById('sendButton');
-      const weatherApiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
+      const weatherApiKey = '994bdcce1464d1723ae775c267ca76c8';
       const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+
+      chatToggleButton.addEventListener('click', function () {
+        if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
+          chatContainer.style.display = 'flex';
+        } else {
+          chatContainer.style.display = 'none';
+        }
+      });
 
       sendButton.addEventListener('click', function () {
         const userText = userInput.value.trim();
@@ -728,8 +721,6 @@ public class Main {
       }
     });
   </script>
-
-
 </body>
 
 </html>
