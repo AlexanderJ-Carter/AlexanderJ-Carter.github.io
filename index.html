@@ -152,11 +152,57 @@
         /* 再次调整字母间距以适配 */
       }
     }
+
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      right: -200px;
+      /* 初始状态隐藏在右边 */
+      width: 200px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      padding: 10px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+    }
+
+    .music-player.open {
+      right: 20px;
+      /* 展开状态 */
+    }
+
+    .toggle-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .toggle-button:hover {
+      background-color: #0056b3;
+    }
   </style>
 
 </head>
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
+
+  <!-- 背景音乐播放器 -->
+  <div class="music-player" id="music-player">
+    <audio id="background-music" loop>
+      <source src="music/music1.flac" type="audio/mpeg">
+      您的浏览器不支持音频元素。
+    </audio>
+    <button id="music-control" class="btn btn-primary">播放音乐</button>
+  </div>
+  <button id="toggle-music-player" class="toggle-button">🎵</button>
 
   <!-- 主内容 -->
   <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
@@ -393,6 +439,30 @@ public class Main {
   <!-- JavaScript files -->
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/glightbox/js/glightbox.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const musicPlayer = document.getElementById('music-player');
+      const toggleButton = document.getElementById('toggle-music-player');
+      const music = document.getElementById('background-music');
+      const controlButton = document.getElementById('music-control');
+
+      toggleButton.addEventListener('click', function () {
+        musicPlayer.classList.toggle('open');
+      });
+
+      controlButton.addEventListener('click', function () {
+        if (music.paused) {
+          music.play();
+          controlButton.textContent = '暂停音乐';
+        } else {
+          music.pause();
+          controlButton.textContent = '播放音乐';
+        }
+      });
+    });
+  </script>
+
 </body>
 
 </html>
