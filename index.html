@@ -199,28 +199,32 @@
       background-color: rgba(0, 86, 179, 0.5);
     }
 
-    #music-control {
-      font-size: 0.8rem;
-      padding: 3px 5px;
-      background-color: rgba(0, 123, 255, 0.7);
-      border: none;
-      color: white;
-      border-radius: 3px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 5px;
-    }
-
-    #music-control:hover {
-      background-color: rgba(0, 86, 179, 0.7);
-    }
-
     .song-title {
       font-size: 0.7rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       color: #333;
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    .volume-control {
+      margin-top: 5px;
+      width: 100%;
+    }
+
+    #volume-slider {
+      width: 100%;
+    }
+
+    .song-progress {
+      margin-top: 5px;
+      width: 100%;
+    }
+
+    #progress-bar {
+      width: 100%;
     }
   </style>
 
@@ -230,9 +234,16 @@
 
   <div class="music-player" id="music-player">
     <div id="song-title" class="song-title">当前播放: </div>
-    <button id="music-control">暂停音乐</button>
+    <div class="volume-control">
+      <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+    </div>
+    <div class="song-progress">
+      <input type="range" id="progress-bar" min="0" max="100" step="1" value="0">
+    </div>
+    <button id="next-song" class="btn btn-secondary">下一首</button>
   </div>
   <button id="toggle-music-player" class="toggle-button">🎵</button>
+
 
   <!-- 主内容 -->
   <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
@@ -475,8 +486,10 @@ public class Main {
       const musicPlayer = document.getElementById('music-player');
       const toggleButton = document.getElementById('toggle-music-player');
       const music = document.getElementById('background-music');
-      const controlButton = document.getElementById('music-control');
       const songTitle = document.getElementById('song-title');
+      const volumeSlider = document.getElementById('volume-slider');
+      const progressBar = document.getElementById('progress-bar');
+      const nextSongButton = document.getElementById('next-song');
 
       const songs = [
         { title: '曾斌斌 - 冬忆', src: 'music/曾斌斌 - 冬忆 (Inst_).flac' },
@@ -503,16 +516,30 @@ public class Main {
 
       toggleButton.addEventListener('click', function () {
         musicPlayer.classList.toggle('open');
-      });
-
-      controlButton.addEventListener('click', function () {
         if (music.paused) {
           music.play();
-          controlButton.textContent = '暂停音乐';
+          toggleButton.textContent = '⏸️';
         } else {
           music.pause();
-          controlButton.textContent = '播放音乐';
+          toggleButton.textContent = '🎵';
         }
+        songTitle.classList.toggle('open');
+      });
+
+      nextSongButton.addEventListener('click', playNextSong);
+
+      volumeSlider.addEventListener('input', function () {
+        music.volume = volumeSlider.value;
+      });
+
+      music.addEventListener('timeupdate', function () {
+        const progress = (music.currentTime / music.duration) * 100;
+        progressBar.value = progress;
+      });
+
+      progressBar.addEventListener('input', function () {
+        const seekTime = (progressBar.value / 100) * music.duration;
+        music.currentTime = seekTime;
       });
 
       music.addEventListener('ended', playNextSong);
@@ -520,7 +547,7 @@ public class Main {
       // 加载初始歌曲并自动播放
       loadSong(currentSongIndex);
       music.play();
-      controlButton.textContent = '暂停音乐';
+      toggleButton.textContent = '⏸️';
 
       // 自动折叠播放器
       let hideTimeout;
