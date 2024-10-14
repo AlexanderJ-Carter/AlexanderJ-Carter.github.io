@@ -243,6 +243,70 @@
     #progress-bar {
       width: 100%;
     }
+
+
+    /* Chatbot container styling */
+    .chat-container {
+      position: fixed;
+      bottom: 100px;
+      /* 将位置移到音乐播放器之上 */
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      padding: 15px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Chatbox message area */
+    .chatbox {
+      overflow-y: auto;
+      height: 250px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Chat input container */
+    .chat-input-container {
+      display: flex;
+    }
+
+    .chat-input {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
+
+    #sendButton {
+      margin-left: 10px;
+    }
+
+    /* Message styling */
+    .mb-2 {
+      margin-bottom: 8px;
+    }
+
+    .chat-container .mb-2 strong {
+      color: #007bff;
+      /* 让机器人和用户的对话有颜色对比 */
+    }
+
+    .chat-container .chatbox {
+      overflow-y: auto;
+      max-height: 250px;
+      /* 限制聊天框高度以防止过长 */
+    }
+
+    .chat-container .chat-input-container {
+      margin-top: 10px;
+    }
   </style>
 
 </head>
@@ -474,6 +538,16 @@ public class Main {
     </div>
   </section>
 
+  <!-- Chatbot HTML -->
+  <div id="chat-container" class="chat-container">
+    <div id="chatbox" class="chatbox"></div>
+    <div class="chat-input-container">
+      <input type="text" id="userInput" class="chat-input" placeholder="输入您的消息...">
+      <button id="sendButton" class="btn btn-primary">发送</button>
+    </div>
+  </div>
+
+
   <!-- Footer -->
   <footer class="bg-black text-gray-100 py-3">
     <div class="container">
@@ -583,6 +657,79 @@ public class Main {
       resetHideTimeout();
     });
   </script>
+
+  <!-- Chatbot JavaScript with OpenWeather API -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const chatbox = document.getElementById('chatbox');
+      const userInput = document.getElementById('userInput');
+      const sendButton = document.getElementById('sendButton');
+      const weatherApiKey = 'YOUR_OPENWEATHERMAP_API_KEY';
+      const weatherApiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+
+      sendButton.addEventListener('click', function () {
+        const userText = userInput.value.trim();
+        if (userText !== '') {
+          addMessage('用户', userText);
+          getBotResponse(userText);
+          userInput.value = '';
+        }
+      });
+
+      userInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          sendButton.click();
+        }
+      });
+
+      function addMessage(sender, text) {
+        const message = document.createElement('div');
+        message.classList.add('mb-2');
+        message.innerHTML = `<strong>${sender}:</strong> ${text}`;
+        chatbox.appendChild(message);
+        chatbox.scrollTop = chatbox.scrollHeight;
+      }
+
+      function getBotResponse(userText) {
+        if (userText.includes('天气')) {
+          const location = userText.replace('天气', '').trim();
+          if (location) {
+            getWeather(location);
+          } else {
+            addMessage('机器人', '请提供您想查询天气的城市名称。');
+          }
+        } else {
+          let botResponse = '';
+          if (userText.includes('你好')) {
+            botResponse = '你好！有什么我可以帮忙的吗？';
+          } else {
+            botResponse = '对不起，我不太明白你的意思。';
+          }
+          setTimeout(() => addMessage('机器人', botResponse), 500);
+        }
+      }
+
+      function getWeather(location) {
+        const url = `${weatherApiUrl}?q=${location}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            if (data.cod === 200) {
+              const weatherDescription = data.weather[0].description;
+              const temperature = data.main.temp;
+              const weatherMessage = `当前${location}的天气是：${weatherDescription}，温度为 ${temperature}°C。`;
+              addMessage('机器人', weatherMessage);
+            } else {
+              addMessage('机器人', '对不起，我找不到你想查的地方的天气信息。');
+            }
+          })
+          .catch(error => {
+            addMessage('机器人', '获取天气信息时出错，请稍后再试。');
+          });
+      }
+    });
+  </script>
+
 </body>
 
 </html>
