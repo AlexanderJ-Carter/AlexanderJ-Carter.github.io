@@ -212,6 +212,7 @@
     .volume-control {
       margin-top: 5px;
       width: 100%;
+      text-align: center;
     }
 
     #volume-slider {
@@ -221,6 +222,7 @@
     .song-progress {
       margin-top: 5px;
       width: 100%;
+      text-align: center;
     }
 
     #progress-bar {
@@ -232,13 +234,17 @@
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
 
+  <audio id="background-music" loop autoplay></audio>
+
   <div class="music-player" id="music-player">
     <div id="song-title" class="song-title">当前播放: </div>
-    <div class="volume-control">
-      <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
-    </div>
     <div class="song-progress">
+      <label for="progress-bar">进度</label>
       <input type="range" id="progress-bar" min="0" max="100" step="1" value="0">
+    </div>
+    <div class="volume-control">
+      <label for="volume-slider">音量</label>
+      <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
     </div>
     <button id="next-song" class="btn btn-secondary">下一首</button>
   </div>
