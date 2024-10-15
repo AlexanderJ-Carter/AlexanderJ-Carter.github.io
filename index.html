@@ -336,7 +336,7 @@
       border-top: 1px solid #ddd;
     }
   </style>
-
+<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 </head>
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
@@ -566,8 +566,12 @@ public class Main {
     </div>
   </section>
 
-  <section class="quote-footer mt-4 text-center py-3">
-    <div id="quote-container"></div>
+  <!-- 诗句部分 -->
+  <section class="poem-section text-center py-5">
+    <div class="container">
+      <div id="poem_sentence" class="mb-3">加载中...</div>
+      <div id="poem_info"></div>
+    </div>
   </section>
 
   <!-- Chatbot HTML -->
@@ -855,28 +859,12 @@ public class Main {
     });
   </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-      fetch('https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then(data => {
-          console.log('API response:', data); // 打印 API 响应
-          // 检查数据结构是否正确
-          if (data && data.quoteText && data.quoteAuthor) {
-            document.getElementById('quote-container').innerText = `${data.quoteText} — ${data.quoteAuthor}`;
-          } else {
-            document.getElementById('quote-container').innerText = "愿你成为自己的太阳，无需凭借谁的光。";
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching quote:', error);
-          document.getElementById('quote-container').innerText = "愿你成为自己的太阳，无需凭借谁的光。";
-        });
+  <script type="text/javascript">
+    jinrishici.load(function(result) {
+      var sentence = document.querySelector("#poem_sentence");
+      var info = document.querySelector("#poem_info");
+      sentence.innerHTML = result.data.content;
+      info.innerHTML = '【' + result.data.origin.dynasty + '】' + result.data.origin.author + '《' + result.data.origin.title + '》';
     });
   </script>
 </body>
