@@ -336,6 +336,59 @@
       border-top: 1px solid #ddd;
     }
   </style>
+  <style>
+  .poem-section {
+    background-color: #f8f9fa;
+    padding: 40px 0;
+    position: relative;
+  }
+
+  .poem-section::before,
+  .poem-section::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: url('path/to/decorative-element.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.1;
+  }
+
+  .poem-section::before {
+    top: 10px;
+    left: 10px;
+  }
+
+  .poem-section::after {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .poem-section .poem-content {
+    font-family: 'Lora', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: #343a40;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .poem-section .poem-info {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #6c757d;
+    position: relative;
+    z-index: 1;
+  }
+
+  .poem-section .decorative-line {
+    width: 60px;
+    height: 4px;
+    background-color: #343a40;
+    margin: 20px auto;
+  }
+</style>
 <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
 </head>
 
@@ -566,13 +619,14 @@ public class Main {
     </div>
   </section>
 
-  <!-- 诗句部分 -->
-  <section class="poem-section text-center py-5">
-    <div class="container">
-      <div id="poem_sentence" class="mb-3">加载中...</div>
-      <div id="poem_info"></div>
-    </div>
-  </section>
+<!-- 诗句部分 -->
+<section class="poem-section text-center py-5">
+  <div class="container">
+    <div id="poem_sentence" class="poem-content mb-3">加载中...</div>
+    <div class="decorative-line"></div>
+    <div id="poem_info" class="poem-info"></div>
+  </div>
+</section>
 
   <!-- Chatbot HTML -->
   <button id="chat-toggle-button" class="chat-toggle-button">
