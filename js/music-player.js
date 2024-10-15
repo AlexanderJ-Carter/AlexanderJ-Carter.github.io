@@ -13,6 +13,14 @@ document.addEventListener("DOMContentLoaded", function () {
       title: "久石让 - 天空の城ラピュタ",
       src: "music/久石让 - 天空の城ラピュタ (天空之城).flac",
     },
+    {
+      title: "中央交响乐团 - 彩云追月",
+      src: "music/中央交响乐团 - 彩云追月.ogg",
+    },
+    {
+      title: "海佳 - 雨的印记",
+      src: "music/海佳 - 雨的印记.ogg",
+    },
   ];
   let currentSongIndex = 0;
 
