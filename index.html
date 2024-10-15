@@ -856,29 +856,29 @@ public class Main {
   </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    fetch('https://api.quotable.io/random')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('API response:', data); // 打印 API 响应
-        // 检查数据结构是否正确
-        if (data && data.content && data.author) {
-          document.getElementById('quote-container').innerText = `${data.content} — ${data.author}`;
-        } else {
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('https://api.quotable.io/random')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('API response:', data); // 打印 API 响应
+          // 检查数据结构是否正确
+          if (data && data.content && data.author) {
+            document.getElementById('quote-container').innerText = `${data.content} — ${data.author}`;
+          } else {
+            document.getElementById('quote-container').innerText = "愿你成为自己的太阳，无需凭借谁的光。";
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching quote:', error);
           document.getElementById('quote-container').innerText = "愿你成为自己的太阳，无需凭借谁的光。";
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching quote:', error);
-        document.getElementById('quote-container').innerText = "愿你成为自己的太阳，无需凭借谁的光。";
-      });
-  });
-</script>
+        });
+    });
+  </script>
 </body>
 
 </html>
