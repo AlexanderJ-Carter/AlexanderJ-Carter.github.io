@@ -934,7 +934,7 @@ public class Main {
   function updateBackgroundImage() {
     const keywords = ["nature", "sky", "mountains", "forest", "flowers"];
     const keyword = keywords[Math.floor(Math.random() * keywords.length)];
-    fetch(`https://api.unsplash.com/photos/random?query=${keyword}&client_id=EdmgsPIwdA-ys_S2lRWjkqQJgNwDJSUSPLgWMPJPJ11g`)
+    fetch(`https://api.unsplash.com/photos/random?query=${keyword}&client_id=EdmgsPIwdA-ys_S2lRWjkqQJgNwDJSUSPLgWMJPJ1lg`)
       .then(response => response.json())
       .then(data => {
         if (data && data.urls && data.urls.regular) {
