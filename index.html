@@ -954,14 +954,7 @@ public class Main {
   function updateBackgroundImage() {
     const keywords = ["nature", "sky", "mountains", "forest", "flowers"];
     const keyword = keywords[Math.floor(Math.random() * keywords.length)];
-    fetch(`https://source.unsplash.com/1600x900/?${keyword}`)
-      .then(response => {
-        document.querySelectorAll(".poem-section").forEach(section => {
-          section.style.backgroundImage = `url(${response.url})`;
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching background image:', error);
+    fetch(`https://loremflickr.com/1600/900/$1'Error fetching background image:', error);
       });
   }
 
