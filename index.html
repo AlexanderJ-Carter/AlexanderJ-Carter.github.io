@@ -951,12 +951,23 @@ public class Main {
   getTodayInHistory();
 
   // 每小时更换背景图片
-  function updateBackgroundImage() {
-    const keywords = ["nature", "sky", "mountains", "forest", "flowers"];
-    const keyword = keywords[Math.floor(Math.random() * keywords.length)];
-    fetch(`https://loremflickr.com/1600/900/$1'Error fetching background image:', error);
-      });
-  }
+function updateBackgroundImage() {
+  const keywords = ["nature", "sky", "mountains", "forest", "flowers"];
+  const keyword = keywords[Math.floor(Math.random() * keywords.length)];
+  
+  fetch(`https://api.unsplash.com/photos/random?query=${keyword}&client_id=EdmgsPIwdA-ys_S2lRWjkqQJgNwDJSUSPLgWMPJPJ1lg`)
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.urls && data.urls.regular) {
+        document.querySelectorAll(".poem-section").forEach(section => {
+          section.style.backgroundImage = `url(${data.urls.regular})`;
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching background image:', error);
+    });
+}
 
   // 初始化背景图片，并每小时更换一次
   updateBackgroundImage();
