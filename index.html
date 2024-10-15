@@ -857,7 +857,7 @@ public class Main {
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-      fetch('https://api.quotable.io/random')
+      fetch('https://type.fit/api/quotes')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -866,9 +866,10 @@ public class Main {
         })
         .then(data => {
           console.log('API response:', data); // 打印 API 响应
-          // 检查数据结构是否正确
-          if (data && data.content && data.author) {
-            document.getElementById('quote-container').innerText = `${data.content} — ${data.author}`;
+          // 随机选择一个名言
+          const randomQuote = data[Math.floor(Math.random() * data.length)];
+          if (randomQuote && randomQuote.text && randomQuote.author) {
+            document.getElementById('quote-container').innerText = `${randomQuote.text} — ${randomQuote.author}`;
           } else {
             document.getElementById('quote-container').innerText = "愿你成为自己的太阳，无需凭借谁的光。";
           }
