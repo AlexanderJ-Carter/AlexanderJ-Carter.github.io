@@ -384,6 +384,7 @@
 
   .poem-section {
     position: relative;
+    background-size: cover;
     border-radius: 10px;
   }
 
@@ -625,7 +626,7 @@ public class Main {
   </section>
 
 <!-- 诗句部分优化 -->
-<section class="poem-section text-center py-4" style="background: linear-gradient(45deg, #ececec, #f2f2f2);">
+<section class="poem-section text-center py-4">
   <div class="container">
     <div id="poem_sentence" class="poem-content mb-2" style="font-size: 20px;">若清风转轻吹...</div>
     <div class="decorative-line"></div>
@@ -935,12 +936,12 @@ public class Main {
   });
 
   function getTodayInHistory() {
-    fetch('https://history.muffinlabs.com/date')
+    fetch('https://api.oick.cn/lishi/api.php')
       .then(response => response.json())
       .then(data => {
-        if (data && data.data && data.data.Events) {
-          const randomEvent = data.data.Events[Math.floor(Math.random() * data.data.Events.length)];
-          document.querySelector("#history-today").innerHTML = `在 ${randomEvent.year} 年，${randomEvent.text}`;
+        if (data && data.result) {
+          const randomEvent = data.result[Math.floor(Math.random() * data.result.length)];
+          document.querySelector("#history-today").innerHTML = `在 ${randomEvent.date}，${randomEvent.title}`;
         }
       })
       .catch(error => console.error('Error fetching historical event:', error));
@@ -953,14 +954,11 @@ public class Main {
   function updateBackgroundImage() {
     const keywords = ["nature", "sky", "mountains", "forest", "flowers"];
     const keyword = keywords[Math.floor(Math.random() * keywords.length)];
-    fetch(`https://api.unsplash.com/photos/random?query=${keyword}&client_id=EdmgsPIwdA-ys_S2lRWjkqQJgNwDJSUSPLgWMPJPJ11g`)
-      .then(response => response.json())
-      .then(data => {
-        if (data && data.urls && data.urls.regular) {
-          document.querySelectorAll(".poem-section").forEach(section => {
-            section.style.backgroundImage = `url(${data.urls.regular})`;
-          });
-        }
+    fetch(`https://source.unsplash.com/1600x900/?${keyword}`)
+      .then(response => {
+        document.querySelectorAll(".poem-section").forEach(section => {
+          section.style.backgroundImage = `url(${response.url})`;
+        });
       })
       .catch(error => {
         console.error('Error fetching background image:', error);
