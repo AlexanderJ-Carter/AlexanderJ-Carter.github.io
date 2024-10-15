@@ -1,1 +1,344 @@
-/* your styles go here */
+.language-switcher {
+  text-align: left;
+  /* 左对齐 */
+  font-size: 0.9rem;
+}
+
+.language-switcher a {
+  margin: 0 5px;
+  text-decoration: none;
+  color: #dfdddd;
+  font-weight: bold;
+}
+
+.language-switcher i {
+  margin-right: 5px;
+  font-size: 1.2rem;
+}
+
+footer .col-md-6.text-center.text-md-end {
+  text-align: right;
+  /* 页脚右对齐 */
+}
+
+footer a {
+  color: #dfdede;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .language-switcher,
+  footer .col-md-6.text-center.text-md-end {
+    text-align: center;
+    /* 在小屏幕时居中对齐 */
+  }
+}
+
+/* 渐入动画 */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* 调整文字大小与字母间距 */
+.intro-heading {
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+.intro-text {
+  letter-spacing: 3px;
+}
+
+.code-block {
+  height: 200px;
+  /* 固定高度 */
+  overflow-y: auto;
+  /* 如果内容超过高度，显示滚动条 */
+  background-color: #f8f9fa;
+  /* 背景色 */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+pre {
+  margin: 0;
+}
+
+/* 默认字体设置 */
+h1.intro-heading {
+  font-size: 3rem;
+  /* 桌面设备的大标题 */
+}
+
+/* 针对平板设备进行缩放 */
+@media (max-width: 768px) {
+  h1.intro-heading {
+    font-size: 2.5rem;
+    /* 中等屏幕设备，如平板 */
+    letter-spacing: 4px;
+    /* 调整字母间距以防止换行 */
+  }
+}
+
+/* 针对手机设备进行缩放 */
+@media (max-width: 576px) {
+  h1.intro-heading {
+    font-size: 2rem;
+    /* 小屏幕设备，如手机 */
+    letter-spacing: 3px;
+    /* 再次调整字母间距以适配 */
+  }
+}
+
+.music-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 150px;
+  background-color: rgba(255, 255, 255, 0.6);
+  /* 更加透明 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 8px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateX(100%);
+  opacity: 0;
+  z-index: 1000;
+}
+
+.music-player.open {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.toggle-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(0, 123, 255, 0.5);
+  /* 更加透明 */
+  border: none;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1001;
+  transition: opacity 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  animation: none;
+}
+
+.toggle-button:hover {
+  background-color: rgba(0, 86, 179, 0.5);
+}
+
+.toggle-button.playing {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.song-title {
+  font-size: 0.7rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #333;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.volume-control {
+  margin-top: 5px;
+  width: 100%;
+  text-align: center;
+}
+
+#volume-slider {
+  width: 100%;
+}
+
+.song-progress {
+  margin-top: 5px;
+  width: 100%;
+  text-align: center;
+}
+
+#progress-bar {
+  width: 100%;
+}
+
+/* Chatbot container styling */
+.chat-container {
+  position: fixed;
+  bottom: 100px;
+  /* 将位置移到音乐播放器之上 */
+  right: 20px;
+  width: 300px;
+  max-height: 400px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  z-index: 1000;
+  display: none;
+  /* 默认隐藏 */
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Chatbot toggle button styling */
+.chat-toggle-button {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background-color: rgba(0, 123, 255, 0.8);
+  border: none;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1001;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.chat-toggle-button:hover {
+  background-color: rgba(0, 86, 179, 0.8);
+}
+
+.chatbox {
+  max-height: 400px;
+  /* 设置对话框的最大高度 */
+  overflow-y: auto;
+  /* 启用垂直滚动条 */
+  padding: 10px;
+  background-color: #f5f5f5;
+  /* 背景颜色 */
+  border-radius: 5px;
+  /* 圆角 */
+  border: 1px solid #ccc;
+  /* 边框 */
+}
+
+.message {
+  margin-bottom: 10px;
+  /* 消息之间的间隔 */
+  padding: 5px 10px;
+  background-color: #ffffff;
+  /* 消息背景颜色 */
+  border-radius: 5px;
+  /* 圆角 */
+}
+
+.message strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#chatbox {
+  height: 300px;
+  /* 固定高度 */
+  overflow-y: auto;
+  /* 当内容超出时显示滚动条 */
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  /* 背景颜色可以自定义 */
+}
+
+.quote-footer {
+  background: #f8f9fa;
+  color: #333;
+  font-style: italic;
+  border-top: 1px solid #ddd;
+}
+</style > <style > .poem-section {
+  background-color: #f8f9fa;
+  padding: 40px 0;
+  position: relative;
+}
+
+.poem-section::before,
+.poem-section::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  opacity: 0.1;
+}
+
+.poem-section::before {
+  top: 10px;
+  left: 10px;
+}
+
+.poem-section::after {
+  bottom: 10px;
+  right: 10px;
+}
+
+.poem-section .poem-content {
+  font-family: "Lora", serif;
+  font-size: 24px;
+  font-style: italic;
+  color: #343a40;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.poem-section .poem-info {
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  color: #6c757d;
+  position: relative;
+  z-index: 1;
+}
+
+.poem-section {
+  position: relative;
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.poem-section .decorative-line {
+  width: 40px;
+  height: 3px;
+  background-color: #888;
+  margin: 15px auto;
+}
