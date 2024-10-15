@@ -857,7 +857,7 @@ public class Main {
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-      fetch('https://type.fit/api/quotes')
+      fetch('https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -866,10 +866,9 @@ public class Main {
         })
         .then(data => {
           console.log('API response:', data); // 打印 API 响应
-          // 随机选择一个名言
-          const randomQuote = data[Math.floor(Math.random() * data.length)];
-          if (randomQuote && randomQuote.text && randomQuote.author) {
-            document.getElementById('quote-container').innerText = `${randomQuote.text} — ${randomQuote.author}`;
+          // 检查数据结构是否正确
+          if (data && data.quoteText && data.quoteAuthor) {
+            document.getElementById('quote-container').innerText = `${data.quoteText} — ${data.quoteAuthor}`;
           } else {
             document.getElementById('quote-container').innerText = "愿你成为自己的太阳，无需凭借谁的光。";
           }
