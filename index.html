@@ -634,6 +634,14 @@ public class Main {
   </div>
 </section>
 
+<!-- 历史上的今天部分 -->
+<section class="history-section text-center py-4 poem-section">
+  <div class="container">
+    <div id="history-today" class="poem-content mb-2" style="font-size: 18px; color: #333;">历史上的今天：</div>
+    <button onclick="getTodayInHistory()">获取历史事件</button>
+  </div>
+</section>
+
   <!-- Chatbot HTML -->
   <button id="chat-toggle-button" class="chat-toggle-button">
     🤖
@@ -919,7 +927,7 @@ public class Main {
     });
   </script>
 
-<script type="text/javascript">
+<script>
   jinrishici.load(function(result) {
     var sentence = document.querySelector("#poem_sentence");
     var info = document.querySelector("#poem_info");
@@ -928,15 +936,32 @@ public class Main {
     info.innerHTML = `【${result.data.origin.dynasty}】${result.data.origin.author}《${result.data.origin.title}》`;
   });
 
+  function getTodayInHistory() {
+    fetch('https://history.muffinlabs.com/date')
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.data && data.data.Events) {
+          const randomEvent = data.data.Events[Math.floor(Math.random() * data.data.Events.length)];
+          document.querySelector("#history-today").innerHTML = `在 ${randomEvent.year} 年，${randomEvent.text}`;
+        }
+      })
+      .catch(error => console.error('Error fetching historical event:', error));
+  }
+
+  // 初始化获取历史事件
+  getTodayInHistory();
+
   // 每小时更换背景图片
   function updateBackgroundImage() {
     const keywords = ["nature", "sky", "mountains", "forest", "flowers"];
     const keyword = keywords[Math.floor(Math.random() * keywords.length)];
-    fetch(`https://api.unsplash.com/photos/random?query=${keyword}&client_id=EdmgsPIwdA-ys_S2lRWjkqQJgNwDJSUSPLgWMJPJ1lg`)
+    fetch(`https://api.unsplash.com/photos/random?query=${keyword}&client_id=EdmgsPIwdA-ys_S2lRWjkqQJgNwDJSUSPLgWMPJPJ11g`)
       .then(response => response.json())
       .then(data => {
         if (data && data.urls && data.urls.regular) {
-          document.querySelector(".poem-section").style.backgroundImage = `url(${data.urls.regular})`;
+          document.querySelectorAll(".poem-section").forEach(section => {
+            section.style.backgroundImage = `url(${data.urls.regular})`;
+          });
         }
       })
       .catch(error => {
