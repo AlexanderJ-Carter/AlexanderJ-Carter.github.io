@@ -328,6 +328,13 @@
       background-color: #f9f9f9;
       /* 背景颜色可以自定义 */
     }
+
+    .quote-footer {
+      background: #f8f9fa;
+      color: #333;
+      font-style: italic;
+      border-top: 1px solid #ddd;
+    }
   </style>
 
 </head>
@@ -557,6 +564,10 @@ public class Main {
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="quote-footer mt-4 text-center py-3">
+    <div id="quote-container"></div>
   </section>
 
   <!-- Chatbot HTML -->
@@ -844,6 +855,18 @@ public class Main {
     });
   </script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('https://api.quotable.io/random')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('quote-container').innerText = `${data.content} — ${data.author}`;
+        })
+        .catch(error => {
+          document.getElementById('quote-container').innerText = "无法获取名言，请稍后再试。";
+        });
+    });
+  </script>
 </body>
 
 </html>
