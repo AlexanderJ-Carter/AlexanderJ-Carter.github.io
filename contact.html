@@ -4,71 +4,87 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>与我们联系 - 风雪归人的网页</title>
-    <meta name="description" content="与我们联系页面">
+    <title>联系我们 - 风雪归人的网页</title>
+    <meta name="description" content="联系我们">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="css/style.default.css">
     <link rel="stylesheet" href="css/custom.css">
-
     <style>
-        .text-primary {
+        .contact-info {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-icons a {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: #333;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-icons a:hover {
             color: #007bff;
-        }
-
-        .list-unstyled li {
-            font-size: 1.2rem;
-        }
-
-        .text-center img {
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-        }
-
-        .text-center img:hover {
-            transform: scale(1.1);
         }
     </style>
 </head>
 
 <body>
-    <header class="container my-4">
+    <header class="container my-4 text-center">
         <a href="index.html" class="btn btn-primary">返回主页</a>
     </header>
 
     <main class="container my-5">
-        <!-- 标题部分 -->
-        <h1 class="text-center mb-4">与我们联系</h1>
+        <h1 class="text-center mb-4">联系我们</h1>
+        <p class="text-center">如果您对我们的内容或服务有任何疑问或建议，请通过以下方式与我们联系：</p>
 
-        <p class="text-center">如果您有任何问题或意见，欢迎通过以下方式与我们联系：</p>
-
-        <!-- 联系方式 -->
-        <ul class="list-unstyled text-center mb-4">
-            <li class="mb-2">电子邮件：<a href="mailto:2253940186@qq.com" class="text-primary">2253940186@qq.com</a></li>
-        </ul>
-
-        <!-- 添加社交媒体链接 -->
         <div class="text-center">
-            <a href="https://github.com/yourprofile" target="_blank">
-                <img src="img/github-icon.png" alt="GitHub" style="width: 40px; margin-right: 10px;">
-            </a>
-            <a href="tencent://message/?uin=2253940186&Site=&Menu=yes" target="_blank">
-                <img src="img/qq-icon.png" alt="QQ" style="width: 40px; margin-right: 10px;">
-            </a>
-            <a href="https://weixin.qq.com" target="_blank">
-                <img src="img/wechat-icon.png" alt="WeChat" style="width: 40px;">
-            </a>
+            <h2 class="mb-3">联系方式</h2>
+            <p><i class="fas fa-envelope"></i> <a href="mailto:2253940186@qq.com">2253940186@qq.com</a></p>
+            <div class="contact-icons">
+                <!-- 点击微信图标显示号码 -->
+                <a id="wechat-icon" onclick="showContactInfo('微信', '15300372910')">
+                    <i class="fab fa-weixin"></i>
+                </a>
+
+                <!-- 点击QQ图标显示号码 -->
+                <a id="qq-icon" onclick="showContactInfo('QQ', '2253940186')">
+                    <i class="fab fa-qq"></i>
+                </a>
+
+                <!-- GitHub 点击直接跳转 -->
+                <a href="https://github.com/Alex-hwang" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+            <!-- 用于显示弹出的联系方式 -->
+            <div id="contact-info" class="mt-3"></div>
         </div>
     </main>
 
     <footer class="bg-black text-gray-100 py-3">
         <div class="container">
-            <div class="row gy-2">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 Alex Fengxueguiren Website</p>
+                </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <p class="fst-italic mb-0">&copy; 2024 Alex Fengxueguiren Website</p>
+                    <a href="privacy.html" class="text-gray-100">隐私政策</a> |
+                    <a href="terms.html" class="text-gray-100">使用条款</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- JavaScript 用于显示隐藏的联系方式 -->
+    <script>
+        function showContactInfo(type, info) {
+            const contactDiv = document.getElementById('contact-info');
+            contactDiv.innerHTML = `<p>${type}: ${info}</p>`;
+        }
+    </script>
 
     <!-- JavaScript files -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
