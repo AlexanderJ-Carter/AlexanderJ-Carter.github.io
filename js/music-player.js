@@ -8,17 +8,17 @@ document.addEventListener("DOMContentLoaded", function () {
   const nextSongButton = document.getElementById("next-song");
 
   const songs = [
-    { title: "曾斌斌 - 冬忆", src: "music/冬忆.flac" },
+    { title: "冬忆", src: "music/冬忆.flac" },
     {
-      title: "久石让 - 天空の城ラピュタ",
+      title: "天空の城",
       src: "music/天空之城.flac",
     },
     {
-      title: "中央交响乐团 - 彩云追月",
+      title: "彩云追月",
       src: "music/彩云追月.ogg",
     },
     {
-      title: "海佳 - 雨的印记",
+      title: "雨的印记",
       src: "music/雨的印记.ogg",
     },
   ];
