@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const sendButton = document.getElementById("sendButton");
   const weatherApiKey = "e92adb1cc07788a547544fa7e9cfcc5e";
   const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
+  let isFirstOpen = true; // 检测是否首次打开对话框
 
   // 城市名称映射表（中文到英文）
   const cityMapping = {
@@ -40,21 +41,44 @@ document.addEventListener("DOMContentLoaded", function () {
     西宁: "Xining",
     乌鲁木齐: "Urumqi",
     南宁: "Nanning",
+    珠海: "Zhuhai",
+    佛山: "Foshan",
+    东莞: "Dongguan",
+    苏州: "Suzhou",
+    无锡: "Wuxi",
+    常州: "Changzhou",
+    宁波: "Ningbo",
+    温州: "Wenzhou",
+    大连: "Dalian",
+    青岛: "Qingdao",
+    烟台: "Yantai",
+    惠州: "Huizhou",
+    汕头: "Shantou",
+    南通: "Nantong",
+    镇江: "Zhenjiang",
+    徐州: "Xuzhou",
+    洛阳: "Luoyang",
+    保定: "Baoding",
+    开封: "Kaifeng",
   };
 
-  // 显示初始的问候语和提示语
-  addMessage("雪宝", "你好！我是雪宝，很高兴见到你！");
-  addMessage(
-    "雪宝",
-    "你可以问我当前城市的天气，例如输入 '北京天气'，或者让我讲个笑话试试！"
-  );
-
+  // 当点击聊天按钮时显示聊天框并初始化问候语
   chatToggleButton.addEventListener("click", function () {
     if (
       chatContainer.style.display === "none" ||
       chatContainer.style.display === ""
     ) {
       chatContainer.style.display = "flex";
+
+      // 首次打开时显示问候语和提示
+      if (isFirstOpen) {
+        addMessage("雪宝", "你好！我是雪宝，很高兴见到你！");
+        addMessage(
+          "雪宝",
+          "你可以问我当前城市的天气，例如输入 '北京天气'，或者让我讲个笑话试试！"
+        );
+        isFirstOpen = false; // 设置为false，避免下次再次显示
+      }
     } else {
       chatContainer.style.display = "none";
     }
@@ -84,10 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function getBotResponse(userText) {
-    // 标准化用户输入
     const normalizedText = userText.toLowerCase();
 
-    // Check for weather keywords
+    // 检查天气相关关键词
     if (userText.includes("天气")) {
       const location = userText.replace("天气", "").trim();
       if (location) {
@@ -99,22 +122,18 @@ document.addEventListener("DOMContentLoaded", function () {
       normalizedText.includes("你好") ||
       normalizedText.includes("hello")
     ) {
-      // Greeting response
       addMessage("雪宝", "你好！我是雪宝，有什么我可以帮忙的吗？");
     } else if (
       normalizedText.includes("谢谢") ||
       normalizedText.includes("感谢")
     ) {
-      // Thank you response
       addMessage("雪宝", "不用客气！很高兴能帮到你 😊");
     } else if (
       normalizedText.includes("你是谁") ||
       normalizedText.includes("你叫什么")
     ) {
-      // About bot response
       addMessage("雪宝", "我是雪宝，一个友好的小助手，随时准备帮助你哦！");
     } else if (normalizedText.includes("笑话")) {
-      // Joke response
       addMessage(
         "雪宝",
         "你知道吗？鱼为什么会吹泡泡？因为它想让自己显得很“水灵”！😂"
@@ -123,10 +142,8 @@ document.addEventListener("DOMContentLoaded", function () {
       normalizedText.includes("再见") ||
       normalizedText.includes("bye")
     ) {
-      // Goodbye response
       addMessage("雪宝", "再见！希望很快再见到你！👋");
     } else {
-      // Fallback response
       addMessage(
         "雪宝",
         "对不起，我不太明白您的意思。我可以帮助您查询天气信息或者讲个笑话！"
@@ -135,7 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function getWeather(location) {
-    // 检查输入的城市是否在映射表中，如果在，使用英文名称
     const cityName = cityMapping[location] || location;
 
     const url = `${weatherApiUrl}?q=${cityName}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
