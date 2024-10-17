@@ -361,3 +361,38 @@ h1.intro-heading {
   background-color: #888;
   margin: 15px auto;
 }
+
+/* 基本导航栏样式 */
+.navbar-light {
+  background-color: #ffffff;
+}
+
+.navbar-nav .nav-link {
+  color: #333;
+  transition: color 0.3s;
+}
+
+/* 当导航栏处于黑暗模式时 */
+body.dark-mode .navbar-light {
+  background-color: #333;
+}
+
+body.dark-mode .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+/* 黑暗模式下的按钮 */
+body.dark-mode .btn {
+  background-color: #555;
+  color: #fff;
+}
+
+/* 响应式优化 */
+@media (max-width: 992px) {
+  .navbar-nav {
+    text-align: center;
+  }
+  .nav-item {
+    margin-bottom: 10px;
+  }
+}
