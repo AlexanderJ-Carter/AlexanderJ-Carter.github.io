@@ -166,6 +166,7 @@ h1.intro-heading {
   }
 }
 
+/* 修改 .song-title 样式 */
 .song-title {
   font-size: 0.7rem;
   white-space: nowrap;
@@ -174,6 +175,24 @@ h1.intro-heading {
   color: #333;
   margin-top: 5px;
   text-align: center;
+  max-width: 130px; /* 设置最大宽度，确保标题在容器内 */
+  display: block; /* 确保在设置宽度时元素行为正确 */
+}
+
+/* 悬停时显示完整标题 */
+.song-title:hover {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: initial;
+  max-width: none; /* 悬停时取消宽度限制 */
+  background-color: rgba(255, 255, 255, 0.8); /* 可选，悬停时让背景稍微更明显 */
+  border-radius: 5px; /* 可选，增加圆角 */
+  padding: 5px; /* 可选，增加内边距以便于阅读 */
+  position: absolute; /* 让标题悬浮在播放器外 */
+  top: -20px; /* 根据需要调整位置，确保标题在播放器之上 */
+  left: 50%; /* 居中显示 */
+  transform: translateX(-50%);
+  z-index: 1002; /* 使其在其他元素之上 */
 }
 
 .volume-control {
