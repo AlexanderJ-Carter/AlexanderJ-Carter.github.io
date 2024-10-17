@@ -42,6 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
     南宁: "Nanning",
   };
 
+  // 显示初始的问候语和提示语
+  addMessage("雪宝", "你好！我是雪宝，很高兴见到你！");
+  addMessage(
+    "雪宝",
+    "你可以问我当前城市的天气，例如输入 '北京天气'，或者让我讲个笑话试试！"
+  );
+
   chatToggleButton.addEventListener("click", function () {
     if (
       chatContainer.style.display === "none" ||
