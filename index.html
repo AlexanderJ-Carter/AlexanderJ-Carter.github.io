@@ -45,6 +45,18 @@
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
 
+  <!-- 弹窗内容 -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <h2>新年快乐！</h2>
+      <p>祝您在新的一年里身体健康，万事如意！</p>
+      <div class="button-container">
+        <button id="closeBtn" class="close-btn">收下祝福</button>
+        <button id="dontShowBtn" class="dont-show-btn">感谢，不再显示</button>
+      </div>
+    </div>
+  </div>
+
   <audio id="background-music" loop autoplay></audio>
 
   <div class="music-player" id="music-player">
@@ -299,25 +311,39 @@ public class Main {
       <button id="acceptCookie" class="btn btn-primary btn-sm ms-2">接受</button>
     </p>
   </div>
-
-  <!-- Footer -->
-  <footer class="bg-black text-gray-100 py-3">
+  <!-- 优化页脚结构 -->
+  <footer class="site-footer">
     <div class="container">
-      <div class="row gy-2">
-        <div class="col-md-6 text-center text-md-start">
+      <div class="row">
+        <!-- 语言切换 -->
+        <div class="col-md-4">
           <div class="language-switcher">
             <i class="fas fa-globe-americas"></i>
-            <a href="index.html">中文(中国)</a> |
-            <a href="index-en.html">English</a> |
+            <a href="index.html" class="active">中文(中国)</a>
+            <a href="index-en.html">English</a>
             <a href="index-it.html">Italiano</a>
           </div>
         </div>
-        <div class="col-md-6 text-center text-md-end">
-          <p class="mb-0">© Alex Hwang 2024</p>
-          <a href="privacy.html">隐私</a> |
-          <a href="terms.html">使用条款</a> |
-          <a href="contact.html">与我们联系</a> |
-          <a href="ads.html">广告</a>
+
+        <!-- 新年祝福 -->
+        <div class="col-md-4 text-center">
+          <div class="new-year-message">
+            <span class="festive-icon">🎊</span>
+            <span class="greeting">祝您新年快乐，万事如意！</span>
+            <span class="festive-icon">🎊</span>
+          </div>
+        </div>
+
+        <div class="col-md-4 text-end">
+          <div class="footer-content">
+            <nav class="footer-links d-inline">
+              <a href="privacy.html">隐私</a> |
+              <a href="terms.html">使用条款</a> |
+              <a href="contact.html">与我联系</a> |
+              <a href="ads.html">广告</a>
+            </nav>
+            <span class="copyright ms-2">© Alex Hwang 2024</span>
+          </div>
         </div>
       </div>
     </div>
@@ -326,12 +352,12 @@ public class Main {
   <!-- JavaScript files -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/glightbox.min.js"></script>
   <script src="js/music-player.js"></script>
   <script src="js/chatbot.js"></script>
   <script src="js/poem.js"></script>
   <script src="js/cookie-consent.js"></script>
+  <script src="js/newyear.js"></script>
 </body>
 
 </html>
