@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Contact us - Alex' Website</title>
+    <meta name="description" content="Contact us">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.default.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        .contact-container {
+            width: 100%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* 修改为2列 */
+            gap: 2rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            /* 控制最大宽度 */
+        }
+
+        .contact-item {
+            padding: 2.5rem;
+            /* 增加内边距 */
+            margin: 0 auto;
+            width: 100%;
+            max-width: 350px;
+            /* 控制每个卡片最大宽度 */
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                /* 移动端变为单列 */
+            }
+
+            .contact-item {
+                padding: 1.5rem;
+            }
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-title {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .copy-btn {
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(145deg, #007bff, #0056b3);
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+        }
+
+        .success-animation {
+            animation: success-pulse 0.5s ease;
+        }
+
+        @keyframes success-pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        footer {
+            background: linear-gradient(to right, #2c3e50, #3498db);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: auto;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: #007bff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 2rem 1rem;
+            }
+
+            .back-btn {
+                top: 1rem;
+                left: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index-en.html" class="back-btn">
+        <i class="fas fa-arrow-left me-2"></i>Back to Home
+    </a>
+
+    <main>
+        <div class="contact-container">
+            <h1 class="text-center mb-4">Contact Me</h1>
+            <p class="text-center lead">Choose your preferred way to get in touch</p>
+
+            <div class="contact-grid">
+                <div class="contact-item" onclick="copyContact('WeChat', '15300372910')">
+                    <i class="fab fa-weixin contact-icon" style="color: #07C160;"></i>
+                    <h3 class="contact-title">WeChat</h3>
+                    <p class="contact-info">Click to copy WeChat ID</p>
+                </div>
+
+                <div class="contact-item" onclick="copyContact('QQ', '2253940186')">
+                    <i class="fab fa-qq contact-icon" style="color: #12B7F5;"></i>
+                    <h3 class="contact-title">QQ</h3>
+                    <p class="contact-info">Click to copy QQ number</p>
+                </div>
+
+                <div class="contact-item">
+                    <a href="https://github.com/Alex-hwang" target="_blank"
+                        style="text-decoration: none; color: inherit;">
+                        <i class="fab fa-github contact-icon"></i>
+                        <h3 class="contact-title">GitHub</h3>
+                        <p class="contact-info">Visit my GitHub profile</p>
+                    </a>
+                </div>
+
+                <div class="contact-item">
+                    <a href="mailto:2253940186@qq.com" style="text-decoration: none; color: inherit;">
+                        <i class="fas fa-envelope contact-icon" style="color: #d44638;"></i>
+                        <h3 class="contact-title">Email</h3>
+                        <p class="contact-info">2253940186@qq.com</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 Alex Fengxueguiren Website</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="privacy.html" class="text-light me-3">Privacy Policy</a>
+                    <a href="terms.html" class="text-light">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function copyContact(type, info) {
+            navigator.clipboard.writeText(info).then(() => {
+                const toast = document.createElement('div');
+                toast.style.position = 'fixed';
+                toast.style.bottom = '20px';
+                toast.style.left = '50%';
+                toast.style.transform = 'translateX(-50%)';
+                toast.style.background = 'rgba(0,0,0,0.8)';
+                toast.style.color = 'white';
+                toast.style.padding = '1rem 2rem';
+                toast.style.borderRadius = '25px';
+                toast.style.zIndex = '1000';
+                toast.textContent = `${type} ID copied to clipboard!`;
+
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => document.body.removeChild(toast), 500);
+                }, 3000);
+            }).catch(err => {
+                console.error('Copy failed:', err);
+                alert('Copy failed, please copy manually');
+            });
+        }
+    </script>
+</body>
+
+</html>
