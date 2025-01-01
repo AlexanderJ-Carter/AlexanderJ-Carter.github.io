@@ -7,55 +7,224 @@
     <title>使用条款 - 风雪归人的网页</title>
     <meta name="description" content="使用条款">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/style.default.css">
     <link rel="stylesheet" href="css/custom.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .terms-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .nav-section {
+            position: sticky;
+            top: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-link {
+            color: #666;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #007bff;
+            background: #f8f9fa;
+            transform: translateX(5px);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: #007bff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-link {
+            color: #007bff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .nav-section {
+                position: relative;
+                margin-bottom: 2rem;
+            }
+
+            .back-btn {
+                position: absolute;
+                top: 1rem;
+                left: 1rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header class="container my-4 text-center">
-        <a href="index.html" class="btn btn-primary">返回主页</a>
-    </header>
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left me-2"></i>返回主页
+    </a>
 
-    <main class="container my-5">
-        <h1 class="text-center mb-4">使用条款</h1>
-        <p>欢迎使用风雪归人的网页。通过访问和使用本网站，您同意遵守以下使用条款。如果您不同意这些条款，请勿使用本网站。</p>
+    <div class="terms-container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="nav-section">
+                    <h5 class="mb-3">目录</h5>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="#content">1. 网站内容</a>
+                        <a class="nav-link" href="#behavior">2. 用户行为</a>
+                        <a class="nav-link" href="#links">3. 第三方链接</a>
+                        <a class="nav-link" href="#disclaimer">4. 免责声明</a>
+                        <a class="nav-link" href="#changes">5. 条款变更</a>
+                        <a class="nav-link" href="#contact">6. 联系方式</a>
+                    </nav>
+                </div>
+            </div>
 
-        <h2>1. 网站内容</h2>
-        <p>本网站的所有内容，包括但不限于文字、图像、视频和音频，均受版权保护。未经授权，您不得复制、分发或修改本网站的任何内容。</p>
+            <div class="col-lg-9">
+                <h1 class="text-center mb-4">使用条款</h1>
+                <p class="lead mb-5">欢迎使用风雪归人的网页。通过访问和使用本网站，您同意遵守以下使用条款。如果您不同意这些条款，请勿使用本网站。</p>
 
-        <h2>2. 用户行为</h2>
-        <p>您同意不以任何非法或侵犯他人权利的方式使用本网站。您不得通过本网站发布不实、冒犯、诽谤或侵犯他人隐私的内容。</p>
+                <div id="content" class="section-card">
+                    <h2>1. 网站内容</h2>
+                    <p>本网站的所有内容，包括但不限于：</p>
+                    <ul>
+                        <li>文字、图像、视频和音频</li>
+                        <li>网站设计和布局</li>
+                        <li>商标和标识</li>
+                    </ul>
+                    <p>均受版权保护。未经授权，您不得复制、分发或修改本网站的任何内容。</p>
+                </div>
 
-        <h2>3. 链接到第三方网站</h2>
-        <p>本网站可能包含指向第三方网站的链接。我们不对这些网站的内容或隐私政策承担责任，您在使用这些网站时应自行承担风险。</p>
+                <div id="behavior" class="section-card">
+                    <h2>2. 用户行为</h2>
+                    <p>使用本网站时，您必须：</p>
+                    <ul>
+                        <li>遵守所有适用的法律法规</li>
+                        <li>尊重他人的权利和隐私</li>
+                        <li>不发布虚假、欺诈或误导性信息</li>
+                        <li>不进行任何可能损害网站运营的行为</li>
+                    </ul>
+                </div>
 
-        <h2>4. 免责声明</h2>
-        <p>本网站的信息仅供参考，我们不对其准确性、完整性或及时性做出保证。我们不对因使用本网站或无法使用本网站而产生的任何损失或损害承担责任。</p>
+                <div id="links" class="section-card">
+                    <h2>3. 第三方链接</h2>
+                    <p>关于第三方网站链接：</p>
+                    <ul>
+                        <li>本网站可能包含指向其他网站的链接</li>
+                        <li>我们不对这些网站的内容负责</li>
+                        <li>访问这些网站时需自行承担风险</li>
+                    </ul>
+                </div>
 
-        <h2>5. 条款变更</h2>
-        <p>我们保留随时修改本使用条款的权利。建议您定期查看本页面以了解最新的条款更新。</p>
+                <div id="disclaimer" class="section-card">
+                    <h2>4. 免责声明</h2>
+                    <p>本网站提供的信息：</p>
+                    <ul>
+                        <li>仅供参考使用</li>
+                        <li>不保证完全准确或及时更新</li>
+                        <li>不承担因使用这些信息造成的任何损失</li>
+                    </ul>
+                </div>
 
-        <h2>6. 联系我们</h2>
-        <p>如果您对我们的使用条款有任何疑问或疑虑，请通过以下电子邮件联系我们：<a href="mailto:2253940186@qq.com">2253940186@qq.com</a></p>
-    </main>
+                <div id="changes" class="section-card">
+                    <h2>5. 条款变更</h2>
+                    <p>关于条款更新：</p>
+                    <ul>
+                        <li>我们保留随时修改条款的权利</li>
+                        <li>重大变更会在网站公告</li>
+                        <li>建议定期查看本页面了解更新</li>
+                    </ul>
+                </div>
 
-    <footer class="bg-black text-gray-100 py-3">
+                <div id="contact" class="section-card">
+                    <h2>6. 联系我们</h2>
+                    <p>如有任何问题或建议，请通过以下方式联系我们：</p>
+                    <p><i class="fas fa-envelope me-2"></i>邮箱：<a href="mailto:2253940186@qq.com"
+                            class="contact-link">2253940186@qq.com</a></p>
+                    <p><i class="fas fa-clock me-2"></i>回复时间：工作日24小时内</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start">
                     <p class="mb-0">&copy; 2024 Alex Fengxueguiren Website</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <a href="privacy.html" class="text-gray-100">隐私政策</a> |
-                    <a href="ads.html" class="text-gray-100">广告政策</a>
+                    <a href="privacy.html" class="text-light me-3">隐私政策</a>
+                    <a href="ads.html" class="text-light">广告政策</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript files -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/glightbox/js/glightbox.min.js"></script>
+    <script>
+        // 滚动高亮当前段落
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section-card');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    navLinks[index].classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
