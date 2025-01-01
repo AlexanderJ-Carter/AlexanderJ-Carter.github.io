@@ -8,6 +8,43 @@ document.addEventListener("DOMContentLoaded", function () {
   const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
   let isFirstOpen = true; // 检测是否首次打开对话框
 
+  // 对话内容库
+    const dialogues = {
+        greetings: [
+            "你好！我是雪宝，很高兴见到你！😊",
+            "嗨！今天有什么我可以帮你的吗？✨",
+            "你好啊！要不要聊聊天？🌟",
+            "欢迎找我聊天！让我猜猜你想问什么？🤔"
+        ],
+        jokes: [
+            "程序员最讨厌什么？讨厌别人不按照他的方式过马路！😄",
+            "为什么程序员总是分不清万圣节和圣诞节？因为 Oct 31 = Dec 25！😂",
+            "你知道吗？鱼为什么会吹泡泡？因为它想让自己显得很"水灵"！😆",
+            "为什么程序员喜欢黑咖啡？因为他们喜欢没有类（class）的生活！🤣",
+            "一个冰箱对另一个冰箱说："你为什么在发抖？" 另一个回答："因为我冰箱了！"😅"
+        ],
+        thanks: [
+            "不用客气！能帮到你我很开心 😊",
+            "这是我应该做的！随时找我聊天哦 💫",
+            "应该的！有什么需要随时告诉我 🌟"
+        ],
+        farewells: [
+            "再见！记得常来找我聊天哦！👋",
+            "下次见！祝您有愉快的一天！😊",
+            "期待下次为您服务！再见！✨"
+        ],
+        unknown: [
+            "抱歉，我可能没太明白。要不要试试以下功能：\n1. 查询天气\n2. 讲笑话\n3. 聊天",
+            "这个问题有点难倒我了。不如我们聊点别的？",
+            "让我想想...要不我给你讲个笑话？"
+        ],
+        weatherIntro: [
+            "让我看看天气情况...",
+            "正在查询天气信息...",
+            "稍等片刻，马上告诉您..."
+        ]
+  };
+  
   // 城市名称映射表（中文到英文）
   const cityMapping = {
     北京: "Beijing",
@@ -60,8 +97,92 @@ document.addEventListener("DOMContentLoaded", function () {
     洛阳: "Luoyang",
     保定: "Baoding",
     开封: "Kaifeng",
+    纽约: "New York",
+    伦敦: "London",
+    巴黎: "Paris",
+    东京: "Tokyo",
+    首尔: "Seoul",
+    新加坡: "Singapore",
+    悉尼: "Sydney",
+    迪拜: "Dubai",
+    莫斯科: "Moscow",
+    罗马: "Rome",
+    柏林: "Berlin",
+    马德里: "Madrid",
+    阿姆斯特丹: "Amsterdam",
+    多伦多: "Toronto",
+    温哥华: "Vancouver",
+    旧金山: "San Francisco",
+    洛杉矶: "Los Angeles",
   };
 
+// 随机选择响应
+    function getRandomResponse(array) {
+        return array[Math.floor(Math.random() * array.length)];
+    }
+
+    // 显示功能提示
+    function showHelp() {
+        const helpMessage = `
+            我可以为您提供以下服务：
+            🌤️ 查询天气 - 例如："北京天气"、"东京天气"
+            😄 讲笑话 - 输入"讲个笑话"
+            🕒 查看时间 - 输入"几点了"
+            💭 日常聊天 - 和我打个招呼吧！
+        `;
+        addMessage("雪宝", helpMessage);
+    }
+
+    // 显示当前时间
+    function showCurrentTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('zh-CN', {
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        addMessage("雪宝", `现在是 ${timeString} 🕒`);
+    }
+
+    // 获取天气信息
+    function getWeather(location) {
+        const cityName = cityMapping[location] || location;
+        addMessage("雪宝", getRandomResponse(dialogues.weatherIntro));
+
+        const url = `${weatherApiUrl}?q=${cityName}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
+        fetch(url)
+            .then(response => {
+                if (!response.ok) throw new Error("城市未找到");
+                return response.json();
+            })
+            .then(data => {
+                const weatherInfo = `
+                    📍 ${location}的天气信息：
+                    🌡️ 温度：${data.main.temp}°C
+                    💭 天气：${data.weather[0].description}
+                    💧 湿度：${data.main.humidity}%
+                    🌪️ 风速：${data.wind.speed} m/s
+                    🌡️ 体感温度：${data.main.feels_like}°C
+                `;
+                addMessage("雪宝", weatherInfo);
+
+                // 根据温度给出建议
+                const temp = data.main.temp;
+                setTimeout(() => {
+                    if (temp <= 10) {
+                        addMessage("雪宝", "温度较低，要注意保暖哦！🧥");
+                    } else if (temp >= 30) {
+                        addMessage("雪宝", "温度较高，记得防晒降温！☂️");
+                    } else {
+                        addMessage("雪宝", "温度适宜，是个舒适的天气呢！🌟");
+                    }
+                }, 500);
+            })
+            .catch(error => {
+                addMessage("雪宝", "抱歉，没有找到该城市的天气信息。要不换个城市试试？");
+            });
+  }
+  
   // 当点击聊天按钮时显示聊天框并初始化问候语
   chatToggleButton.addEventListener("click", function () {
     if (
@@ -107,48 +228,37 @@ document.addEventListener("DOMContentLoaded", function () {
     chatbox.scrollTop = chatbox.scrollHeight;
   }
 
+  // 保留这个更完整的版本，删除后面的重复定义
   function getBotResponse(userText) {
-    const normalizedText = userText.toLowerCase();
+      const normalizedText = userText.toLowerCase();
 
-    // 检查天气相关关键词
-    if (userText.includes("天气")) {
-      const location = userText.replace("天气", "").trim();
-      if (location) {
-        getWeather(location);
-      } else {
-        getLocationWeather();
+      if (userText.includes("天气")) {
+          const location = userText.replace("天气", "").trim();
+          if (location) {
+              getWeather(location);
+          } else {
+              getLocationWeather();
+          }
+          return;
       }
-    } else if (
-      normalizedText.includes("你好") ||
-      normalizedText.includes("hello")
-    ) {
-      addMessage("雪宝", "你好！我是雪宝，有什么我可以帮忙的吗？");
-    } else if (
-      normalizedText.includes("谢谢") ||
-      normalizedText.includes("感谢")
-    ) {
-      addMessage("雪宝", "不用客气！很高兴能帮到你 😊");
-    } else if (
-      normalizedText.includes("你是谁") ||
-      normalizedText.includes("你叫什么")
-    ) {
-      addMessage("雪宝", "我是雪宝，一个友好的小助手，随时准备帮助你哦！");
-    } else if (normalizedText.includes("笑话")) {
-      addMessage(
-        "雪宝",
-        "你知道吗？鱼为什么会吹泡泡？因为它想让自己显得很“水灵”！😂"
-      );
-    } else if (
-      normalizedText.includes("再见") ||
-      normalizedText.includes("bye")
-    ) {
-      addMessage("雪宝", "再见！希望很快再见到你！👋");
-    } else {
-      addMessage(
-        "雪宝",
-        "对不起，我不太明白您的意思。我可以帮助您查询天气信息或者讲个笑话！"
-      );
-    }
+
+      if (normalizedText.match(/你好|hello|hi|嗨/)) {
+          addMessage("雪宝", getRandomResponse(dialogues.greetings));
+      } else if (normalizedText.includes("笑话")) {
+          addMessage("雪宝", getRandomResponse(dialogues.jokes));
+      } else if (normalizedText.match(/谢谢|感谢/)) {
+          addMessage("雪宝", getRandomResponse(dialogues.thanks));
+      } else if (normalizedText.match(/再见|拜拜|bye/)) {
+          addMessage("雪宝", getRandomResponse(dialogues.farewells));
+      } else if (normalizedText.match(/帮助|help|怎么用/)) {
+          showHelp();
+      } else if (normalizedText.match(/几点|时间/)) {
+          showCurrentTime();
+      } else if (normalizedText.match(/你是谁|你叫什么/)) {
+          addMessage("雪宝", "我是雪宝，一个AI助手！我可以帮你查天气、讲笑话，或者陪你聊天！😊");
+      } else {
+          addMessage("雪宝", getRandomResponse(dialogues.unknown));
+      }
   }
 
   function getWeather(location) {
