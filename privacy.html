@@ -7,58 +7,227 @@
     <title>隐私政策 - 风雪归人的网页</title>
     <meta name="description" content="隐私政策">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/style.default.css">
     <link rel="stylesheet" href="css/custom.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .privacy-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-section {
+            position: sticky;
+            top: 20px;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-link {
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #007bff;
+            transform: translateX(5px);
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: #007bff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .highlight-text {
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .nav-section {
+                position: relative;
+                margin-bottom: 2rem;
+            }
+
+            .back-btn {
+                position: absolute;
+                top: 1rem;
+                left: 1rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header class="container my-4 text-center">
-        <a href="index.html" class="btn btn-primary">返回主页</a>
-    </header>
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left me-2"></i>返回主页
+    </a>
 
-    <main class="container my-5">
-        <h1 class="text-center mb-4">隐私政策</h1>
-        <p>欢迎来到风雪归人的网页。我们非常重视您的隐私，并确保您的个人信息受到保护。本隐私政策将解释我们如何收集、使用和保护您的信息。</p>
+    <div class="privacy-container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="nav-section">
+                    <h5 class="mb-3">目录</h5>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="#collection">1. 信息收集</a>
+                        <a class="nav-link" href="#usage">2. 信息使用</a>
+                        <a class="nav-link" href="#cookies">3. Cookie 使用</a>
+                        <a class="nav-link" href="#third-party">4. 第三方服务</a>
+                        <a class="nav-link" href="#security">5. 数据安全</a>
+                        <a class="nav-link" href="#changes">6. 政策变更</a>
+                        <a class="nav-link" href="#contact">7. 联系我们</a>
+                    </nav>
+                </div>
+            </div>
 
-        <h2>1. 信息的收集</h2>
-        <p>当您访问我们的网站时，我们可能会收集某些信息，例如您的 IP 地址、浏览器类型、访问时间和访问的页面。对于注册用户，我们还可能收集姓名、电子邮件地址等信息。</p>
+            <div class="col-lg-9">
+                <h1 class="text-center mb-4">隐私政策</h1>
+                <p class="lead">欢迎访问风雪归人的网页。保护您的隐私是我们的首要任务，本政策详细说明了我们如何处理您的个人信息。</p>
 
-        <h2>2. 信息的使用</h2>
-        <p>我们使用您的信息来改进用户体验，并确保我们的网站功能能够正常工作。我们还可能使用这些信息与您进行沟通，提供与您兴趣相关的内容或服务。</p>
+                <div id="collection" class="section-card">
+                    <h2>1. 信息收集</h2>
+                    <p>我们收集的信息类型包括：</p>
+                    <ul>
+                        <li>基本访问信息（IP地址、浏览器类型）</li>
+                        <li>设备信息（操作系统、屏幕分辨率）</li>
+                        <li>用户行为数据（访问时间、浏览页面）</li>
+                        <li>可选的个人信息（姓名、邮箱地址）</li>
+                    </ul>
+                </div>
 
-        <h2>3. Cookie 使用</h2>
-        <p>我们使用 Cookie 来优化您的浏览体验，提供个性化的内容并记住您的偏好。您可以通过浏览器设置禁用 Cookie，但这可能影响某些功能的使用。</p>
+                <div id="usage" class="section-card">
+                    <h2>2. 信息使用</h2>
+                    <p>收集的信息将用于：</p>
+                    <ul>
+                        <li>优化网站性能和用户体验</li>
+                        <li>提供个性化的内容和服务</li>
+                        <li>进行网站使用统计分析</li>
+                        <li>必要时与您联系或提供支持</li>
+                    </ul>
+                </div>
 
-        <h2>4. 第三方服务</h2>
-        <p>我们可能与第三方服务提供商合作，例如广告商或分析服务，这些第三方可能会收集您的信息以提供定制化的广告或分析您的网站使用情况。</p>
+                <div id="cookies" class="section-card">
+                    <h2>3. Cookie 使用</h2>
+                    <p>我们使用 Cookie 来：</p>
+                    <ul>
+                        <li>记住您的偏好设置</li>
+                        <li>提供个性化的浏览体验</li>
+                        <li>分析网站流量和使用情况</li>
+                    </ul>
+                </div>
 
-        <h2>5. 数据安全</h2>
-        <p>我们采取合理的措施来保护您的个人信息免受未经授权的访问、使用或披露。然而，互联网传输并非完全安全，因此我们无法保证信息的绝对安全性。</p>
+                <div id="third-party" class="section-card">
+                    <h2>4. 第三方服务</h2>
+                    <p>我们可能使用的第三方服务包括：</p>
+                    <ul>
+                        <li>Google Analytics（访问统计）</li>
+                        <li>广告服务提供商</li>
+                        <li>社交媒体插件</li>
+                    </ul>
+                </div>
 
-        <h2>6. 隐私政策的变更</h2>
-        <p>我们可能会不时更新本隐私政策，以反映我们信息处理实践的变化。建议您定期查看本页面以了解最新的政策更新。</p>
+                <div id="security" class="section-card">
+                    <h2>5. 数据安全</h2>
+                    <p>我们采取的安全措施包括：</p>
+                    <ul>
+                        <li>数据加密传输</li>
+                        <li>定期安全审查</li>
+                        <li>访问控制措施</li>
+                        <li>员工安全培训</li>
+                    </ul>
+                </div>
 
-        <h2>7. 联系我们</h2>
-        <p>如果您对我们的隐私政策有任何疑问或疑虑，请通过以下电子邮件联系我们：<a href="mailto:2253940186@qq.com">2253940186@qq.com</a></p>
-    </main>
+                <div id="changes" class="section-card">
+                    <h2>6. 隐私政策的变更</h2>
+                    <p>我们保留随时更新本隐私政策的权利。重大变更时，我们会：</p>
+                    <ul>
+                        <li>在网站显著位置发布通知</li>
+                        <li>通过邮件通知注册用户</li>
+                        <li>更新政策的生效日期</li>
+                    </ul>
+                </div>
 
-    <footer class="bg-black text-gray-100 py-3">
+                <div id="contact" class="section-card">
+                    <h2>7. 联系我们</h2>
+                    <p>如有任何问题或建议，请通过以下方式联系我们：</p>
+                    <p><i class="fas fa-envelope me-2"></i>邮箱：<a href="mailto:2253940186@qq.com"
+                            class="highlight-text">2253940186@qq.com</a></p>
+                    <p><i class="fas fa-clock me-2"></i>响应时间：工作日24小时内</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start">
                     <p class="mb-0">&copy; 2024 Alex Fengxueguiren Website</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <a href="terms.html" class="text-gray-100">使用条款</a> |
-                    <a href="ads.html" class="text-gray-100">广告政策</a>
+                    <a href="terms.html" class="text-light me-3">使用条款</a>
+                    <a href="ads.html" class="text-light">广告政策</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript files -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/glightbox/js/glightbox.min.js"></script>
+    <script>
+        // 滚动高亮当前段落
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section-card');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    navLinks[index].classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
