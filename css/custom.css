@@ -517,4 +517,71 @@ body.dark-mode .btn {
   margin-top: 20px;
 }
 
+.new-year-message {
+  color: #ff4d4d;
+  padding: 10px 0;
+}
 
+.festive-icon {
+  font-size: 1.2em;
+  margin: 0 8px;
+  animation: bounce 1s ease infinite;
+}
+
+.greeting {
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff0000, #ff6b6b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.site-footer {
+  padding: 0.8rem 0;
+  line-height: 1.2;
+  font-size: 0.85rem;
+}
+
+.site-footer .row {
+  align-items: center; /* 垂直居中对齐 */
+}
+
+.new-year-message {
+  color: #ff4d4d;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.festive-icon {
+  font-size: 1em;
+  margin: 0 4px;
+  animation: bounce 1s ease infinite;
+}
+
+.greeting {
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff0000, #ff6b6b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.language-switcher,
+.footer-content,
+.new-year-message {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
