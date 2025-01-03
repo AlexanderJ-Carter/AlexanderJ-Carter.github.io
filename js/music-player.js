@@ -87,5 +87,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("mousemove", resetHideTimeout);
   document.addEventListener("keypress", resetHideTimeout);
+  // 点击播放器外部区域时关闭
+  document.addEventListener("click", function (e) {
+    if (!musicPlayer.contains(e.target) && e.target !== toggleButton) {
+      musicPlayer.classList.remove("open");
+    }
+  });
   resetHideTimeout();
 });

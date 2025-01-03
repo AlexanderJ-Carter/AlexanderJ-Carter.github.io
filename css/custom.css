@@ -146,21 +146,63 @@ h1.intro-heading {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 150px;
-  background-color: rgba(255, 255, 255, 0.6);
-  /* 更加透明 */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 8px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  transform: translateX(100%);
-  opacity: 0;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transform: translateX(calc(100% + 20px));
+  transition: all 0.3s ease;
   z-index: 1000;
+  display: none; /* 初始隐藏 */
 }
 
 .music-player.open {
   transform: translateX(0);
-  opacity: 1;
+  display: block;
+}
+
+.player-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.song-title {
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.progress-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  margin: 0;
+}
+
+.time-info {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.time-separator {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.controls-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .toggle-button {
