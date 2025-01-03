@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
     jokes: [
       "程序员最讨厌什么？讨厌别人不按照他的方式过马路！😄",
       "为什么程序员总是分不清万圣节和圣诞节？因为 Oct 31 = Dec 25！😂",
-      "鱼为什么会吹泡泡？因为它想让自己显得很‘水灵’！😆",
+      "你知道吗？鱼为什么会吹泡泡？因为它想让自己显得很‘水灵’！😆",
       "为什么程序员喜欢黑咖啡？因为他们喜欢没有类（class）的生活！🤣",
-      "冰箱对另一个冰箱说：‘你为什么在发抖？’ 答：‘因为我冰箱了！’😅",
+      "一个冰箱对另一个冰箱说：‘你为什么在发抖？’ 另一个回答：‘因为我冰箱了！’😅",
     ],
     thanks: [
       "不用客气！能帮到你我很开心 😊",
@@ -42,12 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
       "让我看看天气情况...",
       "正在查询天气信息...",
       "稍等片刻，马上告诉您...",
-    ],
-    weatherTips: [
-      "天气冷了，多喝热水哦！☕",
-      "温度适宜，是个适合出门的好天气！🏞️",
-      "今天有点热，记得多喝水降温！💧",
-      "外面风大，小心帽子被吹跑！🎩",
     ],
   };
 
@@ -120,17 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
     温哥华: "Vancouver",
     旧金山: "San Francisco",
     洛杉矶: "Los Angeles",
-    曼谷: "Bangkok",
-    吉隆坡: "Kuala Lumpur",
-    新德里: "New Delhi",
-    雅加达: "Jakarta",
-    开普敦: "Cape Town",
-    内罗毕: "Nairobi",
-    墨西哥城: "Mexico City",
-    布宜诺斯艾利斯: "Buenos Aires",
-    圣保罗: "São Paulo",
-    利马: "Lima",
-    伊斯坦布尔: "Istanbul",
   };
 
   // 随机选择响应
@@ -141,12 +124,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // 显示功能提示
   function showHelp() {
     const helpMessage = `
-      我可以为您提供以下服务：
-      🌤️ 查询天气 - 例如："北京天气"、"东京天气"
-      😄 讲笑话 - 输入"讲个笑话"
-      🕒 查看时间 - 输入"几点了"
-      💭 日常聊天 - 和我打个招呼吧！
-    `;
+            我可以为您提供以下服务：
+            🌤️ 查询天气 - 例如："北京天气"、"东京天气"
+            😄 讲笑话 - 输入"讲个笑话"
+            🕒 查看时间 - 输入"几点了"
+            💭 日常聊天 - 和我打个招呼吧！
+        `;
     addMessage("雪宝", helpMessage);
   }
 
@@ -161,21 +144,94 @@ document.addEventListener("DOMContentLoaded", function () {
     addMessage("雪宝", `现在是 ${timeString} 🕒`);
   }
 
-  // 页面导航功能
-  function showNavigation() {
-    const pages = [
-      { name: "主页", url: "index.html" },
-      { name: "联系我们", url: "contact.html" },
-      { name: "隐私政策", url: "privacy.html" },
-      { name: "条款", url: "terms.html" },
-    ];
-    const navMessage = pages
-      .map((page) => `🔗 <a href="${page.url}">${page.name}</a>`)
-      .join("<br>");
-    addMessage("雪宝", `以下是可访问的页面：<br>${navMessage}`);
+  // 获取天气信息
+  function getWeather(location) {
+    const cityName = cityMapping[location] || location;
+    addMessage("雪宝", getRandomResponse(dialogues.weatherIntro));
+
+    const url = `${weatherApiUrl}?q=${cityName}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) throw new Error("城市未找到");
+        return response.json();
+      })
+      .then((data) => {
+        const weatherInfo = `
+                    📍 ${location}的天气信息：
+                    🌡️ 温度：${data.main.temp}°C
+                    💭 天气：${data.weather[0].description}
+                    💧 湿度：${data.main.humidity}%
+                    🌪️ 风速：${data.wind.speed} m/s
+                    🌡️ 体感温度：${data.main.feels_like}°C
+                `;
+        addMessage("雪宝", weatherInfo);
+
+        // 根据温度给出建议
+        const temp = data.main.temp;
+        setTimeout(() => {
+          if (temp <= 10) {
+            addMessage("雪宝", "温度较低，要注意保暖哦！🧥");
+          } else if (temp >= 30) {
+            addMessage("雪宝", "温度较高，记得防晒降温！☂️");
+          } else {
+            addMessage("雪宝", "温度适宜，是个舒适的天气呢！🌟");
+          }
+        }, 500);
+      })
+      .catch((error) => {
+        addMessage(
+          "雪宝",
+          "抱歉，没有找到该城市的天气信息。要不换个城市试试？"
+        );
+      });
   }
 
-  // 修改后的 getBotResponse 添加导航逻辑
+  // 当点击聊天按钮时显示聊天框并初始化问候语
+  chatToggleButton.addEventListener("click", function () {
+    if (
+      chatContainer.style.display === "none" ||
+      chatContainer.style.display === ""
+    ) {
+      chatContainer.style.display = "flex";
+
+      // 首次打开时显示问候语和提示
+      if (isFirstOpen) {
+        addMessage("雪宝", "你好！我是雪宝，很高兴见到你！");
+        addMessage(
+          "雪宝",
+          "你可以问我当前城市的天气，例如输入 '北京天气'，或者让我讲个笑话试试！"
+        );
+        isFirstOpen = false; // 设置为false，避免下次再次显示
+      }
+    } else {
+      chatContainer.style.display = "none";
+    }
+  });
+
+  sendButton.addEventListener("click", function () {
+    const userText = userInput.value.trim();
+    if (userText !== "") {
+      addMessage("用户", userText);
+      getBotResponse(userText);
+      userInput.value = "";
+    }
+  });
+
+  userInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      sendButton.click();
+    }
+  });
+
+  function addMessage(sender, text) {
+    const message = document.createElement("div");
+    message.classList.add("mb-2");
+    message.innerHTML = `<strong>${sender}:</strong> ${text}`;
+    chatbox.appendChild(message);
+    chatbox.scrollTop = chatbox.scrollHeight;
+  }
+
+  // 保留这个更完整的版本，删除后面的重复定义
   function getBotResponse(userText) {
     const normalizedText = userText.toLowerCase();
 
@@ -206,35 +262,34 @@ document.addEventListener("DOMContentLoaded", function () {
         "雪宝",
         "我是雪宝，一个AI助手！我可以帮你查天气、讲笑话，或者陪你聊天！😊"
       );
-    } else if (normalizedText.includes("页面")) {
-      showNavigation();
     } else {
       addMessage("雪宝", getRandomResponse(dialogues.unknown));
     }
   }
 
-  // 其他功能逻辑保持不变
-  sendButton.addEventListener("click", function () {
-    const userText = userInput.value.trim();
-    if (userText !== "") {
-      addMessage("用户", userText);
-      getBotResponse(userText);
-      userInput.value = "";
-    }
-  });
+  function getWeather(location) {
+    const cityName = cityMapping[location] || location;
 
-  userInput.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-      sendButton.click();
-    }
-  });
-
-  function addMessage(sender, text) {
-    const message = document.createElement("div");
-    message.classList.add("mb-2");
-    message.innerHTML = `<strong>${sender}:</strong> ${text}`;
-    chatbox.appendChild(message);
-    chatbox.scrollTop = chatbox.scrollHeight;
+    const url = `${weatherApiUrl}?q=${cityName}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("城市未找到");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const weatherDescription = data.weather[0].description;
+        const temperature = data.main.temp;
+        const weatherMessage = `当前${location}的天气是：${weatherDescription}，温度为 ${temperature}°C。`;
+        addMessage("雪宝", weatherMessage);
+      })
+      .catch((error) => {
+        addMessage(
+          "雪宝",
+          "对不起，我找不到您想查的地方的天气信息。请检查城市名称是否正确。"
+        );
+      });
   }
 
   function getLocationWeather() {
