@@ -29,6 +29,8 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
 
   <!-- Google fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -191,76 +193,145 @@
               class="img-fluid" src="img/portfolio-5.jpg" alt="摄影作品3"></a></div>
       </div>
 
-      <!-- 代码项目轮播 -->
+      <!-- 替换原有的代码轮播部分 -->
       <div class="row g-4 mt-5">
         <div class="col-md-12">
-          <h4 class="text-uppercase mb-3">代码项目</h4>
+          <h4 class="text-uppercase mb-3">代码案例</h4>
         </div>
 
-        <!-- 轮播部分 -->
-        <div id="codeCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
+        <div class="col-md-12">
+          <div id="codeCarousel" class="carousel slide code-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="2"></button>
+              <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="3"></button>
+            </div>
 
-            <!-- C++ 代码示例 -->
-            <div class="carousel-item active">
-              <div class="d-block w-100">
-                <h5>C++ 简单循环示例</h5>
-                <p>一个简单的 `for` 循环示例：</p>
-                <pre class="code-block"><code> 
+            <div class="carousel-inner">
+              <!-- C++ 代码示例 -->
+              <div class="carousel-item active">
+                <div class="code-container">
+                  <div class="code-header">
+                    <h5>C++ 算法示例</h5>
+                    <span class="language-badge">C++</span>
+                  </div>
+                  <pre class="code-block"><code class="language-cpp">
 #include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+void bubbleSort(std::vector&lt;int&gt;& arr) {
+    for(int i = 0; i < arr.size() - 1; i++) {
+        for(int j = 0; j < arr.size() - i - 1; j++) {
+            if(arr[j] > arr[j + 1]) {
+                std::swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
 
 int main() {
-    for (int i = 0; i &lt; 5; i++) {
-        std::cout &lt;&lt; "Hello, C++!" &lt;&lt; std::endl;
-    }
+    std::vector&lt;int&gt; numbers = {64, 34, 25, 12, 22, 11, 90};
+    bubbleSort(numbers);
     return 0;
-}
-              </code></pre>
+}</code></pre>
+                </div>
               </div>
-            </div>
 
-            <!-- Python 代码示例 -->
-            <div class="carousel-item">
-              <div class="d-block w-100">
-                <h5>Python 文件读取示例</h5>
-                <p>读取文件内容并输出到控制台的简单示例：</p>
-                <pre class="code-block"><code> 
-# Python 文件读取
-with open("example.txt", "r") as file:
-    content = file.read()
-    print(content)
-              </code></pre>
+              <!-- Python 代码示例 -->
+              <div class="carousel-item">
+                <div class="code-container">
+                  <div class="code-header">
+                    <h5>Python Web 爬虫示例</h5>
+                    <span class="language-badge">Python</span>
+                  </div>
+                  <pre class="code-block"><code class="language-python">
+import requests
+from bs4 import BeautifulSoup
+
+def scrape_website(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        titles = soup.find_all('h1')
+        return [title.text for title in titles]
+    return []
+
+# 使用示例
+url = 'https://example.com'
+titles = scrape_website(url)
+print(titles)</code></pre>
+                </div>
               </div>
-            </div>
 
-            <!-- Java 代码示例 -->
-            <div class="carousel-item">
-              <div class="d-block w-100">
-                <h5>Java 基础输出示例</h5>
-                <p>一个简单的 `Hello, World!` 示例：</p>
-                <pre class="code-block"><code> 
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello, Java!");
+              <!-- JavaScript 代码示例 -->
+              <div class="carousel-item">
+                <div class="code-container">
+                  <div class="code-header">
+                    <h5>JavaScript 动画示例</h5>
+                    <span class="language-badge">JavaScript</span>
+                  </div>
+                  <pre class="code-block"><code class="language-javascript">
+function animate(element, property, target, duration) {
+    const start = parseFloat(getComputedStyle(element)[property]);
+    const change = target - start;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        element.style[property] = start + change * progress + 'px';
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
     }
-}
-              </code></pre>
+
+    requestAnimationFrame(update);
+}</code></pre>
+                </div>
+              </div>
+
+              <!-- Java 代码示例 -->
+              <div class="carousel-item">
+                <div class="code-container">
+                  <div class="code-header">
+                    <h5>Java 设计模式示例</h5>
+                    <span class="language-badge">Java</span>
+                  </div>
+                  <pre class="code-block"><code class="language-java">
+public class Singleton {
+    private static Singleton instance;
+    private Singleton() {}
+
+    public static synchronized Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+
+    public void showMessage() {
+        System.out.println("Hello from Singleton!");
+    }
+}</code></pre>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- 轮播控制按钮 -->
-          <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+            <!-- 轮播控制按钮 -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
   </section>
 
   <!-- 文本部分 -->
@@ -358,6 +429,7 @@ public class Main {
   <script src="js/poem.js"></script>
   <script src="js/cookie-consent.js"></script>
   <script src="js/newyear.js"></script>
+  <script src="js/code.js"></script>
 </body>
 
 </html>
