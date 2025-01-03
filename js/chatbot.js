@@ -8,8 +8,133 @@ document.addEventListener("DOMContentLoaded", function () {
   const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
   let isFirstOpen = true; // 检测是否首次打开对话框
 
+  let isDragging = false;
+  let currentX;
+  let currentY;
+  let initialX;
+  let initialY;
+  let xOffset = 0;
+  let yOffset = 0;
+
+  // 从localStorage加载上次保存的位置
+  const savedPosition = localStorage.getItem("chatbotPosition");
+  if (savedPosition) {
+    const pos = JSON.parse(savedPosition);
+    xOffset = pos.x;
+    yOffset = pos.y;
+    setTranslate(xOffset, yOffset, chatToggleButton);
+  }
+
+  // 添加拖拽事件监听器
+  chatToggleButton.addEventListener("mousedown", dragStart);
+  chatToggleButton.addEventListener("touchstart", dragStart, {
+    passive: false,
+  });
+  document.addEventListener("mousemove", drag);
+  document.addEventListener("touchmove", drag, { passive: false });
+  document.addEventListener("mouseup", dragEnd);
+  document.addEventListener("touchend", dragEnd);
+
+  function dragStart(e) {
+    if (e.type === "touchstart") {
+      initialX = e.touches[0].clientX - xOffset;
+      initialY = e.touches[0].clientY - yOffset;
+    } else {
+      initialX = e.clientX - xOffset;
+      initialY = e.clientY - yOffset;
+    }
+    if (e.target === chatToggleButton) {
+      isDragging = true;
+    }
+  }
+
+  function drag(e) {
+    if (isDragging) {
+      e.preventDefault();
+      if (e.type === "touchmove") {
+        currentX = e.touches[0].clientX - initialX;
+        currentY = e.touches[0].clientY - initialY;
+      } else {
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+      }
+      xOffset = currentX;
+      yOffset = currentY;
+      setTranslate(currentX, currentY, chatToggleButton);
+    }
+  }
+
+  function dragEnd(e) {
+    initialX = currentX;
+    initialY = currentY;
+    isDragging = false;
+
+    // 保存位置到localStorage
+    localStorage.setItem(
+      "chatbotPosition",
+      JSON.stringify({
+        x: xOffset,
+        y: yOffset,
+      })
+    );
+  }
+
+  function setTranslate(xPos, yPos, el) {
+    const maxX = window.innerWidth - el.offsetWidth;
+    const maxY = window.innerHeight - el.offsetHeight;
+
+    xPos = Math.min(Math.max(0, xPos), maxX);
+    yPos = Math.min(Math.max(0, yPos), maxY);
+
+    el.style.transform = `translate(${xPos}px, ${yPos}px)`;
+  }
+  // 添加导航映射表
+  const navigationMap = {
+    // 中文导航
+    主页: "#intro",
+    关于: "#about",
+    创造: "#services",
+    作品: "#portfolio",
+    文字: "#text",
+    隐私: "privacy.html",
+    使用条款: "terms.html",
+    联系: "contact.html",
+    广告: "ads.html",
+
+    // 英文导航
+    home: "#intro",
+    about: "#about",
+    create: "#services",
+    portfolio: "#portfolio",
+    text: "#text",
+    privacy: "privacy.html",
+    terms: "terms.html",
+    contact: "contact.html",
+    ads: "ads.html",
+  };
+
   // 对话内容库
   const dialogues = {
+    navigation: [
+      "好的，让我带您去看看~",
+      "马上为您导航过去！",
+      "那就一起去看看吧~",
+    ],
+
+    navHelp: [
+      `我可以帮您导航到以下页面：
+    📍 主页 - 回到首页
+    📍 关于 - 了解我们
+    📍 创造 - 查看创作内容
+    📍 作品 - 浏览作品集
+    📍 文字 - 阅读文章
+    📍 联系 - 联系方式
+    📍 隐私 - 隐私政策
+    📍 广告 - 广告服务
+    
+    您可以输入"去xx"或"打开xx"来访问对应页面`,
+    ],
+
     greetings: [
       "你好！我是雪宝，很高兴见到你！😊",
       "嗨！今天有什么我可以帮你的吗？✨",
@@ -42,6 +167,15 @@ document.addEventListener("DOMContentLoaded", function () {
       "让我看看天气情况...",
       "正在查询天气信息...",
       "稍等片刻，马上告诉您...",
+    ],
+    pageNotFound: [
+      "抱歉，我找不到这个页面呢~ 要不要看看其他内容？",
+      "这个页面好像走丢了，让我带您去别的地方看看吧！",
+    ],
+    confirmNav: ["好的，让我们出发吧！", "这就带您过去~", "马上就到啦！"],
+    searchHelp: [
+      "您可以这样搜索：\n✨ 直接输入关键词\n🔍 '搜索xxx'\n📖 '查找xxx'",
+      "需要帮您找什么吗？告诉我关键词就好~",
     ],
   };
 
@@ -121,15 +255,16 @@ document.addEventListener("DOMContentLoaded", function () {
     return array[Math.floor(Math.random() * array.length)];
   }
 
-  // 显示功能提示
   function showHelp() {
     const helpMessage = `
-            我可以为您提供以下服务：
-            🌤️ 查询天气 - 例如："北京天气"、"东京天气"
-            😄 讲笑话 - 输入"讲个笑话"
-            🕒 查看时间 - 输入"几点了"
-            💭 日常聊天 - 和我打个招呼吧！
-        `;
+        我可以为您提供以下服务：
+        🌤️ 查询天气 - 例如："北京天气"、"东京天气"
+        😄 讲笑话 - 输入"讲个笑话"
+        🕒 查看时间 - 输入"几点了"
+        🧭 页面导航 - 输入"去主页"、"打开关于"
+        💭 日常聊天 - 和我打个招呼吧！
+        ❓ 导航帮助 - 输入"怎么走"查看所有页面
+    `;
     addMessage("雪宝", helpMessage);
   }
 
@@ -225,15 +360,50 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function addMessage(sender, text) {
     const message = document.createElement("div");
-    message.classList.add("mb-2");
-    message.innerHTML = `<strong>${sender}:</strong> ${text}`;
+    message.classList.add("message");
+
+    if (sender === "用户") {
+      message.classList.add("user-message");
+      message.innerHTML = text;
+    } else {
+      message.classList.add("bot-message");
+      message.innerHTML = text;
+    }
+
     chatbox.appendChild(message);
-    chatbox.scrollTop = chatbox.scrollHeight;
+    // 平滑滚动到底部
+    chatbox.scrollTo({
+      top: chatbox.scrollHeight,
+      behavior: "smooth",
+    });
   }
 
-  // 保留这个更完整的版本，删除后面的重复定义
   function getBotResponse(userText) {
     const normalizedText = userText.toLowerCase();
+
+    // 处理导航请求
+    if (normalizedText.match(/去|打开|导航到|看看/)) {
+      for (const [key, value] of Object.entries(navigationMap)) {
+        if (normalizedText.includes(key)) {
+          if (value.startsWith("#")) {
+            document
+              .querySelector(value)
+              .scrollIntoView({ behavior: "smooth" });
+            addMessage("雪宝", getRandomResponse(dialogues.navigation));
+          } else {
+            addMessage("雪宝", `好的，马上为您跳转到${key}页面~`);
+            setTimeout(() => (window.location.href = value), 1000);
+          }
+          return;
+        }
+      }
+    }
+
+    // 导航帮助
+    if (normalizedText.match(/怎么走|去哪|导航帮助|指引/)) {
+      addMessage("雪宝", dialogues.navHelp[0]);
+      return;
+    }
 
     if (userText.includes("天气")) {
       const location = userText.replace("天气", "").trim();
@@ -326,4 +496,21 @@ document.addEventListener("DOMContentLoaded", function () {
       addMessage("雪宝", "对不起，您的浏览器不支持地理位置服务。");
     }
   }
+
+  // 点击外部关闭对话框
+  document.addEventListener("click", function (e) {
+    // 如果点击的不是对话框内部元素且不是切换按钮
+    if (
+      !chatContainer.contains(e.target) &&
+      e.target !== chatToggleButton &&
+      chatContainer.style.display === "flex"
+    ) {
+      chatContainer.style.display = "none";
+    }
+  });
+
+  // 阻止对话框内部点击事件冒泡
+  chatContainer.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
 });
