@@ -8,53 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
   let isFirstOpen = true; // 检测是否首次打开对话框
 
-  // 拖拽相关变量
-  let isDragging = false;
-  let currentX;
-  let currentY;
-  let initialX;
-  let initialY;
-  let xOffset = 0;
-  let yOffset = 0;
-
-  // 添加拖拽事件监听器
-  chatToggleButton.addEventListener("mousedown", dragStart);
-  document.addEventListener("mousemove", drag);
-  document.addEventListener("mouseup", dragEnd);
-
-  function dragStart(e) {
-    initialX = e.clientX - xOffset;
-    initialY = e.clientY - yOffset;
-    if (e.target === chatToggleButton) {
-      isDragging = true;
-    }
-  }
-
-  function drag(e) {
-    if (isDragging) {
-      e.preventDefault();
-      currentX = e.clientX - initialX;
-      currentY = e.clientY - initialY;
-      xOffset = currentX;
-      yOffset = currentY;
-      setTranslate(currentX, currentY, chatToggleButton);
-    }
-  }
-
-  function dragEnd(e) {
-    initialX = currentX;
-    initialY = currentY;
-    isDragging = false;
-  }
-
-  function setTranslate(xPos, yPos, el) {
-    const maxX = window.innerWidth - el.offsetWidth;
-    const maxY = window.innerHeight - el.offsetHeight;
-    xPos = Math.min(Math.max(0, xPos), maxX);
-    yPos = Math.min(Math.max(0, yPos), maxY);
-    el.style.transform = `translate(${xPos}px, ${yPos}px)`;
-  }
-
   // 对话内容库
   const dialogues = {
     greetings: [
@@ -276,55 +229,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 添加打字机效果和声音提示
   function addMessage(sender, text) {
     const message = document.createElement("div");
-    message.classList.add("message");
-
-    if (sender === "用户") {
-      message.classList.add("user-message");
-      message.innerHTML = text;
-      playMessageSound("send");
-    } else {
-      message.classList.add("bot-message");
-      message.style.opacity = "0";
-      typeWriter(message, text, () => {
-        playMessageSound("receive");
-      });
-    }
-
+    message.classList.add("mb-2");
+    message.innerHTML = `<strong>${sender}:</strong> ${text}`;
     chatbox.appendChild(message);
-    requestAnimationFrame(() => {
-      message.style.transition = "opacity 0.3s ease";
-      message.style.opacity = "1";
-    });
-
     chatbox.scrollTop = chatbox.scrollHeight;
-  }
-
-  // 添加打字机效果函数
-  function typeWriter(element, text, callback, speed = 30) {
-    let i = 0;
-    element.innerHTML = "";
-
-    function typing() {
-      if (i < text.length) {
-        element.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typing, speed);
-      } else if (callback) {
-        callback();
-      }
-    }
-    typing();
-  }
-
-  // 添加消息提示音效
-  function playMessageSound(type) {
-    const audio = new Audio();
-    audio.volume = 0.3;
-    audio.src = type === "send" ? "sounds/send.mp3" : "sounds/receive.mp3";
-    audio.play().catch(() => {});
   }
 
   function getLocationWeather() {

@@ -252,126 +252,71 @@ h1.intro-heading {
   width: 100%;
 }
 
-/* 聊天机器人按钮样式 */
+/* Chatbot container styling */
+.chat-container {
+  position: fixed;
+  bottom: 100px;
+  /* 将位置移到音乐播放器之上 */
+  right: 20px;
+  width: 300px;
+  max-height: 400px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  z-index: 1000;
+  display: none;
+  /* 默认隐藏 */
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Chatbot toggle button styling */
 .chat-toggle-button {
   position: fixed;
   bottom: 100px;
   right: 20px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #00b4db, #0083b0);
+  background-color: rgba(0, 123, 255, 0.8);
   border: none;
   color: white;
-  font-size: 1.8rem;
-  cursor: move; /* 指示可拖动 */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
   z-index: 1001;
+  width: 50px;
+  height: 50px;
   display: flex;
-  align-items: center;
   justify-content: center;
-  user-select: none;
+  align-items: center;
+  font-size: 1.5rem;
 }
 
 .chat-toggle-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 86, 179, 0.8);
 }
 
-/* 聊天容器样式 */
-.chat-container {
-  position: fixed;
-  bottom: 100px;
-  right: 20px;
-  width: 350px;
-  height: 500px;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  z-index: 1000;
-}
-
-/* 聊天框头部 */
-.chat-header {
-  background: linear-gradient(135deg, #00b4db, #0083b0);
-  color: white;
-  padding: 15px 20px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* 聊天内容区域 */
 .chatbox {
-  flex: 1;
-  padding: 20px;
+  max-height: 400px;
+  /* 设置对话框的最大高度 */
   overflow-y: auto;
-  background: #f5f7f9;
+  /* 启用垂直滚动条 */
+  padding: 10px;
+  background-color: #f5f5f5;
+  /* 背景颜色 */
+  border-radius: 5px;
+  /* 圆角 */
+  border: 1px solid #ccc;
+  /* 边框 */
 }
 
-/* 消息气泡样式 */
 .message {
-  margin-bottom: 15px;
-  max-width: 80%;
-  clear: both;
-}
-
-.user-message {
-  float: right;
-  background: #0083b0;
-  color: white;
-  border-radius: 18px 18px 0 18px;
-  padding: 10px 15px;
-}
-
-.bot-message {
-  float: left;
-  background: white;
-  color: #333;
-  border-radius: 18px 18px 18px 0;
-  padding: 10px 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-/* 输入区域样式 */
-.chat-input-container {
-  padding: 15px;
-  background: white;
-  border-top: 1px solid #eee;
-  display: flex;
-  gap: 10px;
-}
-
-.chat-input {
-  flex: 1;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  padding: 8px 15px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.chat-input:focus {
-  border-color: #0083b0;
-}
-
-#sendButton {
-  background: #0083b0;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 20px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-#sendButton:hover {
-  background: #006d94;
+  margin-bottom: 10px;
+  /* 消息之间的间隔 */
+  padding: 5px 10px;
+  background-color: #ffffff;
+  /* 消息背景颜色 */
+  border-radius: 5px;
+  /* 圆角 */
 }
 
 .message strong {
