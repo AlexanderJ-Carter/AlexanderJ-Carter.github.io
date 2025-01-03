@@ -293,15 +293,19 @@ public class Main {
     </div>
   </section>
 
-  <!-- Chatbot HTML -->
-  <button id="chat-toggle-button" class="chat-toggle-button">
+  <!-- 更新聊天机器人HTML结构 -->
+  <button id="chat-toggle-button" class="chat-toggle-button" title="点击开始聊天">
     🤖
   </button>
   <div id="chat-container" class="chat-container">
+    <div class="chat-header">
+      <span>智能助手 雪宝</span>
+      <button class="close-chat">×</button>
+    </div>
     <div id="chatbox" class="chatbox"></div>
     <div class="chat-input-container">
       <input type="text" id="userInput" class="chat-input" placeholder="输入您的消息...">
-      <button id="sendButton" class="btn btn-primary">发送</button>
+      <button id="sendButton">发送</button>
     </div>
   </div>
 
