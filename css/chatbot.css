@@ -1,0 +1,257 @@
+/* 聊天机器人基础样式 */
+.chat-container {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 320px;
+  height: 450px;
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  transition: all 0.3s ease, opacity 0.3s ease;
+  opacity: 0.95;
+}
+
+.chat-container:hover {
+  opacity: 1;
+}
+
+.chat-container.collapsed {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.chatbox {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #f5f7f9;
+}
+
+.message {
+  max-width: 80%;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 15px;
+  clear: both;
+}
+
+.bot-message {
+  float: left;
+  background: white;
+  color: #333;
+  border-radius: 15px 15px 15px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.user-message {
+  float: right;
+  background: #007bff;
+  color: white;
+  border-radius: 15px 15px 0 15px;
+}
+
+.chat-input-container {
+  padding: 12px;
+  background: white;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 8px 15px;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.chat-input:focus {
+  border-color: #007bff;
+}
+
+#sendButton {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#sendButton:hover {
+  background: #0056b3;
+}
+
+.chat-toggle-button {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: move;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: none;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  transform: translateX(70%); /* 默认状态收起 */
+  transition: all 0.3s ease, opacity 0.3s ease;
+}
+
+.chat-toggle-button:hover {
+  opacity: 1;
+  transform: translateX(0) scale(1.1);
+}
+
+/* 聊天框滚动条美化 */
+.chatbox::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatbox::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chatbox::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.chatbox::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    width: 90%;
+    max-width: 320px;
+    height: 60vh;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 70px;
+    border-radius: 12px;
+  }
+
+  .chatbox {
+    max-height: calc(60vh - 110px);
+    padding: 12px;
+  }
+
+  .chat-input-container {
+    padding: 10px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .chat-input {
+    height: 40px;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    width: calc(100% - 70px);
+  }
+
+  #sendButton {
+    padding: 8px 15px;
+    min-width: 60px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 14px;
+  }
+
+  .chat-toggle-button {
+    width: 42px;
+    height: 42px;
+    bottom: 15px;
+    right: 15px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+
+  .message {
+    max-width: 88%;
+    font-size: 15px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chat-container {
+    width: 94%;
+    height: 65vh;
+    bottom: 60px;
+  }
+
+  .chatbox {
+    max-height: calc(65vh - 100px);
+  }
+}
+
+@media (max-height: 600px) {
+  .chat-container {
+    height: 70vh;
+  }
+
+  .chatbox {
+    max-height: calc(70vh - 100px);
+  }
+}
+
+/* 键盘弹出时的样式 */
+@media (max-height: 400px) {
+  .chat-container {
+    height: 85vh;
+    bottom: 10px;
+  }
+
+  .chatbox {
+    max-height: calc(85vh - 90px);
+  }
+
+  .chat-toggle-button {
+    display: none;
+  }
+}
+
+/* 小屏幕设备优化 */
+@media (max-width: 480px) {
+  .chat-container {
+    width: 95%;
+    height: 45vh;
+    bottom: 70px;
+  }
+
+  .chatbox {
+    max-height: calc(45vh - 100px);
+    padding: 10px;
+  }
+}
+
+/* 竖屏模式优化 */
+@media (max-height: 600px) {
+  .chat-container {
+    height: 60vh;
+    bottom: 70px;
+  }
+}

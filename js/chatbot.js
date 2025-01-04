@@ -8,86 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
   let isFirstOpen = true; // 检测是否首次打开对话框
 
-  let isDragging = false;
-  let currentX;
-  let currentY;
-  let initialX;
-  let initialY;
-  let xOffset = 0;
-  let yOffset = 0;
+  // 为聊天按钮添加初始样式
+  chatToggleButton.style.position = "fixed";
+  chatToggleButton.style.transform = "translate(0, 0)";
 
-  // 从localStorage加载上次保存的位置
-  const savedPosition = localStorage.getItem("chatbotPosition");
-  if (savedPosition) {
-    const pos = JSON.parse(savedPosition);
-    xOffset = pos.x;
-    yOffset = pos.y;
-    setTranslate(xOffset, yOffset, chatToggleButton);
-  }
-
-  // 添加拖拽事件监听器
-  chatToggleButton.addEventListener("mousedown", dragStart);
-  chatToggleButton.addEventListener("touchstart", dragStart, {
-    passive: false,
-  });
-  document.addEventListener("mousemove", drag);
-  document.addEventListener("touchmove", drag, { passive: false });
-  document.addEventListener("mouseup", dragEnd);
-  document.addEventListener("touchend", dragEnd);
-
-  function dragStart(e) {
-    if (e.type === "touchstart") {
-      initialX = e.touches[0].clientX - xOffset;
-      initialY = e.touches[0].clientY - yOffset;
-    } else {
-      initialX = e.clientX - xOffset;
-      initialY = e.clientY - yOffset;
-    }
-    if (e.target === chatToggleButton) {
-      isDragging = true;
-    }
-  }
-
-  function drag(e) {
-    if (isDragging) {
-      e.preventDefault();
-      if (e.type === "touchmove") {
-        currentX = e.touches[0].clientX - initialX;
-        currentY = e.touches[0].clientY - initialY;
-      } else {
-        currentX = e.clientX - initialX;
-        currentY = e.clientY - initialY;
-      }
-      xOffset = currentX;
-      yOffset = currentY;
-      setTranslate(currentX, currentY, chatToggleButton);
-    }
-  }
-
-  function dragEnd(e) {
-    initialX = currentX;
-    initialY = currentY;
-    isDragging = false;
-
-    // 保存位置到localStorage
-    localStorage.setItem(
-      "chatbotPosition",
-      JSON.stringify({
-        x: xOffset,
-        y: yOffset,
-      })
-    );
-  }
-
-  function setTranslate(xPos, yPos, el) {
-    const maxX = window.innerWidth - el.offsetWidth;
-    const maxY = window.innerHeight - el.offsetHeight;
-
-    xPos = Math.min(Math.max(0, xPos), maxX);
-    yPos = Math.min(Math.max(0, yPos), maxY);
-
-    el.style.transform = `translate(${xPos}px, ${yPos}px)`;
-  }
   // 添加导航映射表
   const navigationMap = {
     // 中文导航
@@ -435,31 +359,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       addMessage("雪宝", getRandomResponse(dialogues.unknown));
     }
-  }
-
-  function getWeather(location) {
-    const cityName = cityMapping[location] || location;
-
-    const url = `${weatherApiUrl}?q=${cityName}&appid=${weatherApiKey}&units=metric&lang=zh_cn`;
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("城市未找到");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const weatherDescription = data.weather[0].description;
-        const temperature = data.main.temp;
-        const weatherMessage = `当前${location}的天气是：${weatherDescription}，温度为 ${temperature}°C。`;
-        addMessage("雪宝", weatherMessage);
-      })
-      .catch((error) => {
-        addMessage(
-          "雪宝",
-          "对不起，我找不到您想查的地方的天气信息。请检查城市名称是否正确。"
-        );
-      });
   }
 
   function getLocationWeather() {
