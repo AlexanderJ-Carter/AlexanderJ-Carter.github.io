@@ -146,69 +146,6 @@ h1.intro-heading {
   width: 100%;
 }
 
-.quote-footer {
-  background: #f8f9fa;
-  color: #333;
-  font-style: italic;
-  border-top: 1px solid #ddd;
-}
-</style > <style > .poem-section {
-  background-color: #f8f9fa;
-  padding: 40px 0;
-  position: relative;
-}
-
-.poem-section::before,
-.poem-section::after {
-  content: "";
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background-size: contain;
-  opacity: 0.1;
-}
-
-.poem-section::before {
-  top: 10px;
-  left: 10px;
-}
-
-.poem-section::after {
-  bottom: 10px;
-  right: 10px;
-}
-
-.poem-section .poem-content {
-  font-family: "Lora", serif;
-  font-size: 24px;
-  font-style: italic;
-  color: #343a40;
-  margin-bottom: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.poem-section .poem-info {
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  color: #6c757d;
-  position: relative;
-  z-index: 1;
-}
-
-.poem-section {
-  position: relative;
-  background-size: cover;
-  border-radius: 10px;
-}
-
-.poem-section .decorative-line {
-  width: 40px;
-  height: 3px;
-  background-color: #888;
-  margin: 15px auto;
-}
-
 /* 基本导航栏样式 */
 .navbar-light {
   background-color: #ffffff;

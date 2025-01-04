@@ -47,6 +47,11 @@
   <link rel="stylesheet" href="css/cookie.css">
   <link rel="stylesheet" href="css/newyear.css">
   <link rel="stylesheet" href="css/music.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/display.css">
+  <link rel="stylesheet" href="css/poem.css">
+  <link rel="stylesheet" href="css/footer.css">
 </head>
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
@@ -134,71 +139,134 @@
     </div>
   </section>
 
-  <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white py-2 shadow-sm" id="navbar">
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top py-2" id="navbar" aria-label="主导航">
     <div class="container">
-      <!-- Logo部分 -->
-      <a class="navbar-brand" href="#intro">
-        <img src="img/logo.png" alt="Logo" style="height: 40px;">
+      <a class="navbar-brand" href="#intro" aria-label="返回顶部">
+        <img src="img/logo.png" alt="网站Logo" class="nav-logo" width="40" height="40">
       </a>
 
-      <!-- 折叠按钮（用于移动设备） -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="切换导航菜单">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- 导航菜单 -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link py-lg-3 active" href="#intro">主页</a></li>
-          <li class="nav-item"><a class="nav-link py-lg-3" href="#about">关于</a></li>
-          <li class="nav-item"><a class="nav-link py-lg-3" href="#services">创造</a></li>
-          <li class="nav-item"><a class="nav-link py-lg-3" href="#portfolio">作品</a></li>
-          <li class="nav-item"><a class="nav-link py-lg-3" href="#text">文字</a></li>
+        <ul class="navbar-nav ms-auto" role="menubar">
+          <li class="nav-item" role="none">
+            <a class="nav-link active" href="#intro" role="menuitem" aria-current="page">主页</a>
+          </li>
+          <li class="nav-item" role="none">
+            <a class="nav-link" href="#about" role="menuitem">关于</a>
+          </li>
+          <li class="nav-item" role="none">
+            <a class="nav-link" href="#services" role="menuitem">创造</a>
+          </li>
+          <li class="nav-item" role="none">
+            <a class="nav-link" href="#portfolio" role="menuitem">作品</a>
+          </li>
+          <li class="nav-item" role="none">
+            <a class="nav-link" href="#text" role="menuitem">文字</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- 关于我们 -->
-  <section id="about">
+  <section id="about" class="about-section py-5">
     <div class="container">
       <div class="row gy-4 align-items-center">
-        <div class="col-lg-6">
-          <h2 class="underline text-uppercase">关于我们</h2>
-          <p class="lead">欢迎来到我们的创意天地。</p>
-          <p>
-            我们相信，每个细小的瞬间都蕴藏着独特的美和故事。在这里，我们不仅用创意去捕捉这些瞬间，更用心去传递它们。无论是视觉设计、内容创作，还是数字体验，我们的目标是通过创新激发灵感，带给每个人更多的启发与共鸣。期待与你一起探索和分享生活中的美好时刻。
-          </p>
+        <div class="col-lg-6 fade-in-left">
+          <div class="about-content">
+            <h2 class="section-title mb-4">关于我们</h2>
+            <div class="subtitle-line"></div>
+            <p class="lead text-primary mb-4">用创意定格每个精彩瞬间</p>
+            <div class="about-text">
+              <p class="mb-4">
+                在这个充满无限可能的世界里，我们致力于捕捉生活中的每一个独特时刻。通过镜头、设计与文字，我们将平凡化为非凡，让创意点亮生活。
+              </p>
+              <div class="features-grid">
+                <div class="feature-item">
+                  <i class="fas fa-camera-retro"></i>
+                  <span>视觉创作</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-pen-fancy"></i>
+                  <span>内容策划</span>
+                </div>
+                <div class="feature-item">
+                  <i class="fas fa-code"></i>
+                  <span>数字体验</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-5 mx-auto">
-          <p><img class="img-fluid rounded-circle" src="img/AboutMe.jpg" alt="关于我们的图片"></p>
+        <div class="col-lg-5 ms-auto fade-in-right">
+          <div class="about-image">
+            <img class="img-fluid rounded-3 shadow" src="img/AboutMe.jpg" alt="关于我们的图片">
+            <div class="image-overlay"></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 我们的能力 -->
-  <section class="bg-gray-200" id="services">
+  <section id="services" class="services-section py-5">
     <div class="container">
-      <div class="row services">
-        <div class="col-lg-12">
-          <h2 class="underline text-uppercase">创造与表达</h2>
-          <div class="row gy-4 gx-5">
-            <div class="col-md-4">
-              <div class="mb-4"><i class="fas fa-camera-retro fa-3x"></i></div>
-              <h5>捕捉瞬间</h5>
-              <p>我们用镜头定格每一个独特的时刻，将生活的美好凝聚成永恒的影像。</p>
+      <div class="text-center mb-5">
+        <h2 class="section-title">创造与表达</h2>
+        <div class="subtitle-line mx-auto"></div>
+        <p class="lead text-muted">探索无限可能，释放创意潜能</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="service-card">
+            <div class="card-icon">
+              <i class="fas fa-camera-retro"></i>
             </div>
-            <div class="col-md-4">
-              <div class="mb-4"><i class="fas fa-pen-fancy fa-3x"></i></div>
-              <h5>书写灵感</h5>
-              <p>用文字编织故事和灵感，我们将思想与情感融入每一篇创作中。</p>
+            <div class="card-content">
+              <h3>视觉探索</h3>
+              <p>通过专业的摄影技术，我们捕捉生活中稍纵即逝的精彩瞬间，将平凡化为永恒。</p>
+              <ul class="service-features">
+                <li><i class="fas fa-check"></i> 人像摄影</li>
+                <li><i class="fas fa-check"></i> 风景记录</li>
+                <li><i class="fas fa-check"></i> 创意拍摄</li>
+              </ul>
             </div>
-            <div class="col-md-4">
-              <div class="mb-4"><i class="fas fa-paint-brush fa-3x"></i></div>
-              <h5>创意表达</h5>
-              <p>通过艺术和设计，我们将创意具象化，展现无尽的想象力与创新。</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="service-card">
+            <div class="card-icon">
+              <i class="fas fa-pen-fancy"></i>
+            </div>
+            <div class="card-content">
+              <h3>文字创作</h3>
+              <p>用优美的文字讲述动人的故事，让每一篇作品都承载着独特的情感与思考。</p>
+              <ul class="service-features">
+                <li><i class="fas fa-check"></i> 随笔散文</li>
+                <li><i class="fas fa-check"></i> 诗歌创作</li>
+                <li><i class="fas fa-check"></i> 内容策划</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="service-card">
+            <div class="card-icon">
+              <i class="fas fa-paint-brush"></i>
+            </div>
+            <div class="card-content">
+              <h3>创意设计</h3>
+              <p>将灵感转化为视觉作品，用独特的设计语言诠释不同的创意理念。</p>
+              <ul class="service-features">
+                <li><i class="fas fa-check"></i> 平面设计</li>
+                <li><i class="fas fa-check"></i> UI设计</li>
+                <li><i class="fas fa-check"></i> 插画创作</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -206,78 +274,107 @@
     </div>
   </section>
 
-  <!-- 作品集 -->
-  <section id="portfolio">
+  <section id="portfolio" class="portfolio-section py-5">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12 col-lg-8">
-          <h2 class="underline text-uppercase">精选作品集</h2>
-          <p>探索我们的创意与技术，查看精选的摄影、文字和代码项目。</p>
-        </div>
+      <!-- 标题部分 -->
+      <div class="text-center mb-5">
+        <h2 class="section-title">精选作品集</h2>
+        <div class="subtitle-line mx-auto"></div>
+        <p class="lead text-muted">探索创意边界，分享独特视角</p>
       </div>
 
-      <!-- 摄影作品 -->
+      <!-- 作品分类标签 -->
+      <div class="portfolio-filter mb-4">
+        <button class="filter-btn active" data-filter="all" type="button">全部</button>
+        <button class="filter-btn" data-filter="photo" type="button">摄影</button>
+        <button class="filter-btn" data-filter="design" type="button">设计</button>
+        <button class="filter-btn" data-filter="code" type="button">代码</button>
+      </div>
+
       <div class="portfolio-grid">
-        <div class="portfolio-item">
+        <!-- 摄影作品 -->
+        <div class="portfolio-item" data-category="photo">
           <div class="portfolio-card">
-            <img src="img/portfolio-2.jpg" alt="摄影作品1" class="portfolio-image">
+            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000" alt="城市风光" class="portfolio-image">
             <div class="portfolio-overlay">
-              <a href="img/portfolio-1.jpg" class="portfolio-link" data-gallery="gallery">
-                <i class="fas fa-search-plus"></i>
-              </a>
+              <h5>城市印象</h5>
+              <p>城市建筑摄影</p>
+              <div class="portfolio-icons">
+                <a href="https://images.unsplash.com/photo-1449824913935-59a10b8d2000" class="portfolio-link"
+                  data-gallery="gallery">
+                  <i class="fas fa-search-plus"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="portfolio-item">
+        <!-- 设计作品 -->
+        <div class="portfolio-item" data-category="design">
           <div class="portfolio-card">
-            <img src="img/portfolio-4.jpg" alt="摄影作品2" class="portfolio-image">
+            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5" alt="品牌设计" class="portfolio-image">
             <div class="portfolio-overlay">
-              <a href="img/portfolio-2.jpg" class="portfolio-link" data-gallery="gallery">
-                <i class="fas fa-search-plus"></i>
-              </a>
+              <h5>品牌形象</h5>
+              <p>品牌视觉设计</p>
+              <div class="portfolio-icons">
+                <a href="https://images.unsplash.com/photo-1561070791-2526d30994b5" class="portfolio-link"
+                  data-gallery="gallery">
+                  <i class="fas fa-search-plus"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="portfolio-item">
+        <!-- UI设计 -->
+        <div class="portfolio-item" data-category="design">
           <div class="portfolio-card">
-            <img src="img/portfolio-5.jpg" alt="摄影作品3" class="portfolio-image">
+            <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" alt="UI设计" class="portfolio-image">
             <div class="portfolio-overlay">
-              <a href="img/portfolio-3.jpg" class="portfolio-link" data-gallery="gallery">
-                <i class="fas fa-search-plus"></i>
-              </a>
+              <h5>应用界面</h5>
+              <p>移动端UI设计</p>
+              <div class="portfolio-icons">
+                <a href="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" class="portfolio-link"
+                  data-gallery="gallery">
+                  <i class="fas fa-search-plus"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="portfolio-item">
+        <!-- 代码项目 -->
+        <div class="portfolio-item" data-category="code">
           <div class="portfolio-card">
-            <img src="img/portfolio-5.jpg" alt="摄影作品3" class="portfolio-image">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" alt="代码项目" class="portfolio-image">
             <div class="portfolio-overlay">
-              <a href="img/portfolio-3.jpg" class="portfolio-link" data-gallery="gallery">
-                <i class="fas fa-search-plus"></i>
-              </a>
+              <h5>Web应用</h5>
+              <p>前端开发项目</p>
+              <div class="portfolio-icons">
+                <a href="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" class="portfolio-link"
+                  data-gallery="gallery">
+                  <i class="fas fa-search-plus"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 替换原有的代码轮播部分 -->
-      <div class="row g-4 mt-5">
-        <div class="col-md-12">
-          <h4 class="text-uppercase mb-3">代码案例</h4>
-        </div>
+      <!-- 代码展示轮播 -->
+      <div class="code-showcase mt-5">
+        <h3 class="text-center mb-4">代码案例展示</h3>
+        <div id="codeCarousel" class="carousel slide code-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+          <!-- 轮播指示器 -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+              aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          </div>
 
-        <div class="col-md-12">
-          <div id="codeCarousel" class="carousel slide code-carousel" data-bs-ride="carousel" data-bs-interval="5000">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="0" class="active"></button>
-              <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="1"></button>
-              <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="2"></button>
-              <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="3"></button>
-            </div>
-
+          <div class="carousel-inner">
             <div class="carousel-inner">
               <!-- C++ 代码示例 -->
               <div class="carousel-item active">
@@ -287,24 +384,24 @@
                     <span class="language-badge">C++</span>
                   </div>
                   <pre class="code-block"><code class="language-cpp">
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-
-void bubbleSort(std::vector&lt;int&gt;& arr) {
-    for(int i = 0; i < arr.size() - 1; i++) {
-        for(int j = 0; j < arr.size() - i - 1; j++) {
-            if(arr[j] > arr[j + 1]) {
-                std::swap(arr[j], arr[j + 1]);
+            #include &lt;iostream&gt;
+            #include &lt;vector&gt;
+            
+            void bubbleSort(std::vector&lt;int&gt;& arr) {
+                for(int i = 0; i < arr.size() - 1; i++) {
+                    for(int j = 0; j < arr.size() - i - 1; j++) {
+                        if(arr[j] > arr[j + 1]) {
+                            std::swap(arr[j], arr[j + 1]);
+                        }
+                    }
+                }
             }
-        }
-    }
-}
-
-int main() {
-    std::vector&lt;int&gt; numbers = {64, 34, 25, 12, 22, 11, 90};
-    bubbleSort(numbers);
-    return 0;
-}</code></pre>
+            
+            int main() {
+                std::vector&lt;int&gt; numbers = {64, 34, 25, 12, 22, 11, 90};
+                bubbleSort(numbers);
+                return 0;
+            }</code></pre>
                 </div>
               </div>
 
@@ -316,21 +413,21 @@ int main() {
                     <span class="language-badge">Python</span>
                   </div>
                   <pre class="code-block"><code class="language-python">
-import requests
-from bs4 import BeautifulSoup
-
-def scrape_website(url):
-    response = requests.get(url)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.text, 'html.parser')
-        titles = soup.find_all('h1')
-        return [title.text for title in titles]
-    return []
-
-# 使用示例
-url = 'https://example.com'
-titles = scrape_website(url)
-print(titles)</code></pre>
+            import requests
+            from bs4 import BeautifulSoup
+            
+            def scrape_website(url):
+                response = requests.get(url)
+                if response.status_code == 200:
+                    soup = BeautifulSoup(response.text, 'html.parser')
+                    titles = soup.find_all('h1')
+                    return [title.text for title in titles]
+                return []
+            
+            # 使用示例
+            url = 'https://example.com'
+            titles = scrape_website(url)
+            print(titles)</code></pre>
                 </div>
               </div>
 
@@ -342,24 +439,24 @@ print(titles)</code></pre>
                     <span class="language-badge">JavaScript</span>
                   </div>
                   <pre class="code-block"><code class="language-javascript">
-function animate(element, property, target, duration) {
-    const start = parseFloat(getComputedStyle(element)[property]);
-    const change = target - start;
-    const startTime = performance.now();
-
-    function update(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-
-        element.style[property] = start + change * progress + 'px';
-
-        if (progress < 1) {
-            requestAnimationFrame(update);
-        }
-    }
-
-    requestAnimationFrame(update);
-}</code></pre>
+            function animate(element, property, target, duration) {
+                const start = parseFloat(getComputedStyle(element)[property]);
+                const change = target - start;
+                const startTime = performance.now();
+            
+                function update(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+            
+                    element.style[property] = start + change * progress + 'px';
+            
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    }
+                }
+            
+                requestAnimationFrame(update);
+            }</code></pre>
                 </div>
               </div>
 
@@ -371,65 +468,113 @@ function animate(element, property, target, duration) {
                     <span class="language-badge">Java</span>
                   </div>
                   <pre class="code-block"><code class="language-java">
-public class Singleton {
-    private static Singleton instance;
-    private Singleton() {}
-
-    public static synchronized Singleton getInstance() {
-        if (instance == null) {
-            instance = new Singleton();
-        }
-        return instance;
-    }
-
-    public void showMessage() {
-        System.out.println("Hello from Singleton!");
-    }
-}</code></pre>
+            public class Singleton {
+                private static Singleton instance;
+                private Singleton() {}
+            
+                public static synchronized Singleton getInstance() {
+                    if (instance == null) {
+                        instance = new Singleton();
+                    }
+                    return instance;
+                }
+            
+                public void showMessage() {
+                    System.out.println("Hello from Singleton!");
+                }
+            }</code></pre>
                 </div>
               </div>
             </div>
-
-            <!-- 轮播控制按钮 -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
           </div>
-        </div>
-      </div>
-  </section>
 
-  <!-- 文本部分 -->
-  <section class="bg-dark text-gray-100" id="text">
-    <div class="container">
-      <h2 class="underline underline-white">文字的力量</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <p>
-            只有我们愿意打开心内的窗，才会看见心灵的宝藏；只有我们愿意打开心内的窗，才会看见门外清明的风景；只有我们愿意打开心内的窗，人间的繁花满树与灯火辉煌才会一片一片飘进窗来；只有我们愿意打开心内的窗，我们才能坦然勇敢走出门去，一步一步走向光明的所在。
-          </p>
-        </div>
-        <div class="col-md-6">
-          <p>
-            我们的成长要摆脱低俗事物的纷扰，用传统文化来滋养。有句话叫柔日读史，刚日读经。是说意志懈怠时读史以明志：谋臣策士，家国三寸簧舌里；金戈铁马，江山万里血泪中。读史书，能养浩然正气。也是指骄躁狂暴时读经以养性：老庄之道，清净无为是非空；菩提之心，灵台空明尘埃无。读经书，能塑静俭德性。我国浩瀚的书海之中，蕴含着无尽的宝藏，它们是我们成长真正的养分。
-          </p>
+          <!-- 轮播控制按钮 -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 诗句和历史上的今天部分合并 -->
-  <section class="poem-section text-center py-4">
+  <section id="text" class="text-section py-5">
     <div class="container">
-      <div id="poem_sentence" class="poem-content mb-2" style="font-size: 20px;">若清风转轻吹...</div>
-      <div class="decorative-line"></div>
-      <div id="poem_info" class="poem-info" style="font-size: 16px; color: #555;"></div>
-      <div id="history-today" class="poem-content mb-2" style="font-size: 18px; color: #333; margin-top: 20px;">忆往昔：
+      <div class="text-center mb-5">
+        <h2 class="section-title">文字的力量</h2>
+        <div class="subtitle-line mx-auto"></div>
+        <p class="lead text-muted">以文字之笔，绘心灵之景</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="text-card">
+            <div class="card-icon">
+              <i class="fas fa-book-reader"></i>
+            </div>
+            <h3 class="card-title">心灵之窗</h3>
+            <div class="card-content">
+              <p class="text-content">
+                生命如一本正在书写的书籍，每一页都承载着不同的故事。打开心灵之窗，我们得以看见内心深处的宝藏；敞开胸怀，便能感受外界的绚丽风景。让心灵的窗户永远向阳，迎接每一缕温暖的阳光，拥抱每一刻美好的瞬间。
+              </p>
+              <div class="text-quote">
+                <i class="fas fa-quote-left"></i>
+                <p>心若向阳，春暖花开</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="text-card">
+            <div class="card-icon">
+              <i class="fas fa-feather-alt"></i>
+            </div>
+            <h3 class="card-title">文化传承</h3>
+            <div class="card-content">
+              <p class="text-content">
+                在浩瀚的中华文化长河中，每一滴水珠都闪耀着智慧的光芒。读史可以明志，让我们在先贤的足迹中汲取力量；读经可以养性，使我们在古圣先贤的智慧中获得启迪。这些永恒的文化瑰宝，是照亮我们前行道路的明灯。
+              </p>
+              <div class="text-quote">
+                <i class="fas fa-quote-left"></i>
+                <p>以古鉴今，开创未来</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="poem-history-section">
+    <div class="container">
+      <div class="poem-history-wrapper">
+        <!-- 诗词部分 -->
+        <div class="poem-container">
+          <div class="section-icon">
+            <i class="fas fa-feather-alt"></i>
+          </div>
+          <div id="poem_sentence" class="poem-content">若清风转轻吹...</div>
+          <div class="decorative-line">
+            <span></span>
+            <i class="fas fa-circle"></i>
+            <span></span>
+          </div>
+          <div id="poem_info" class="poem-info"></div>
+        </div>
+
+        <!-- 历史上的今天 -->
+        <div class="history-container">
+          <div class="section-icon">
+            <i class="fas fa-history"></i>
+          </div>
+          <h3 class="history-title">历史上的今天</h3>
+          <div id="history-today" class="history-content"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -469,38 +614,81 @@ public class Singleton {
     </div>
   </div>
 
-  <!-- 优化页脚结构 -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="row">
-        <!-- 语言切换 -->
-        <div class="col-md-4">
-          <div class="language-switcher">
-            <i class="fas fa-globe-americas"></i>
-            <a href="index.html" class="active">中文(中国)</a>
-            <a href="index-en.html">English</a>
-            <a href="index-it.html">Italiano</a>
+    <div class="footer-top">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-info">
+              <h3>Alex Hwang</h3>
+              <p class="footer-description">
+                探索创意，分享生活，记录每一个精彩瞬间
+              </p>
+              <div class="social-links">
+                <div class="social-share share-weibo" onclick="shareToSocial('weibo')" title="分享到微博">
+                  <i class="fab fa-weibo"></i>
+                </div>
+                <div class="social-share share-qq" onclick="shareToSocial('qq')" title="分享到QQ">
+                  <i class="fab fa-qq"></i>
+                </div>
+                <div class="social-share share-wechat" onclick="shareToSocial('wechat')" title="分享到微信">
+                  <i class="fab fa-weixin"></i>
+                </div>
+                <div class="social-share share-github" onclick="shareToSocial('github')" title="在GitHub上关注">
+                  <i class="fab fa-github"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-links">
+              <h4>快速导航</h4>
+              <ul>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#services">创造空间</a></li>
+                <li><a href="#portfolio">作品展示</a></li>
+                <li><a href="#text">文字世界</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-12">
+            <div class="footer-newsletter">
+              <h4>语言 / Language</h4>
+              <div class="language-switcher">
+                <i class="fas fa-globe-americas"></i>
+                <div class="lang-links">
+                  <a href="index.html" class="active">中文(中国)</a>
+                  <a href="index-en.html">English</a>
+                  <a href="index-it.html">Italiano</a>
+                </div>
+              </div>
+              <div class="new-year-message mt-4">
+                <span class="festive-icon">✨</span>
+                <span class="greeting">祝您新年快乐，万事如意！</span>
+                <span class="festive-icon">✨</span>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- 新年祝福 -->
-        <div class="col-md-4 text-center">
-          <div class="new-year-message">
-            <span class="festive-icon">🎊</span>
-            <span class="greeting">祝您新年快乐，万事如意！</span>
-            <span class="festive-icon">🎊</span>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="copyright">
+              © <span id="currentYear">2024</span> Alex Hwang. All Rights Reserved
+            </div>
           </div>
-        </div>
-
-        <div class="col-md-4 text-end">
-          <div class="footer-content">
-            <nav class="footer-links d-inline">
-              <a href="privacy.html">隐私</a> |
-              <a href="terms.html">使用条款</a> |
-              <a href="contact.html">与我联系</a> |
-              <a href="ads.html">广告</a>
+          <div class="col-md-6">
+            <nav class="footer-legal">
+              <a href="privacy.html">隐私政策</a>
+              <a href="terms.html">使用条款</a>
+              <a href="contact.html">联系我们</a>
             </nav>
-            <span class="copyright ms-2">© Alex Hwang 2024</span>
           </div>
         </div>
       </div>
@@ -510,6 +698,7 @@ public class Singleton {
   <!-- JavaScript files -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <script src="js/glightbox.min.js"></script>
   <script src="js/music-player.js"></script>
   <script src="js/chatbot.js"></script>
@@ -517,6 +706,9 @@ public class Singleton {
   <script src="js/cookie-consent.js"></script>
   <script src="js/newyear.js"></script>
   <script src="js/show.js"></script>
+  <script src="js/display.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/share.js"></script>
 </body>
 
 </html>

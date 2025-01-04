@@ -1,0 +1,151 @@
+.poem-history-section {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.poem-history-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  transition: opacity 1s ease;
+}
+
+.poem-history-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.poem-container,
+.history-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 35px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.poem-container:hover,
+.history-container:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.section-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, #007bff, #00d2ff);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -65px auto 25px;
+  color: white;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.poem-content {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 25px;
+  line-height: 1.8;
+  font-family: "Ma Shan Zheng", cursive;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.decorative-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.decorative-line span {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #007bff, transparent);
+  flex: 1;
+  margin: 0 20px;
+}
+
+.decorative-line i {
+  color: #007bff;
+  font-size: 0.6rem;
+  transform: rotate(45deg);
+}
+
+.poem-info {
+  color: #666;
+  font-size: 1.1rem;
+  font-style: italic;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.history-title {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.history-content {
+  color: #555;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  opacity: 0;
+}
+
+.history-date {
+  font-weight: 600;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.history-event {
+  color: #444;
+}
+
+@media (min-width: 992px) {
+  .poem-history-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
