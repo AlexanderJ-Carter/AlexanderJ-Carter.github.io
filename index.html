@@ -660,80 +660,59 @@
   </div>
 
   <footer class="site-footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row g-4">
-          <div class="col-lg-4 col-md-6">
-            <div class="footer-info">
-              <h3>Alex Hwang</h3>
-              <p class="footer-description">
-                探索创意，分享生活，记录每一个精彩瞬间
-              </p>
-              <div class="social-links">
-                <div class="social-share share-weibo" onclick="shareToSocial('weibo')" title="分享到微博">
-                  <i class="fab fa-weibo"></i>
-                </div>
-                <div class="social-share share-qq" onclick="shareToSocial('qq')" title="分享到QQ">
-                  <i class="fab fa-qq"></i>
-                </div>
-                <div class="social-share share-wechat" onclick="shareToSocial('wechat')" title="分享到微信">
-                  <i class="fab fa-weixin"></i>
-                </div>
-                <div class="social-share share-github" onclick="shareToSocial('github')" title="在GitHub上关注">
-                  <i class="fab fa-github"></i>
-                </div>
-              </div>
-            </div>
+    <div class="container">
+      <div class="row">
+        <!-- 左侧：快速导航 -->
+        <div class="col-lg-3">
+          <div class="footer-links">
+            <h4>快速导航</h4>
+            <ul>
+              <li><a href="#about">关于我们</a></li>
+              <li><a href="#services">创造空间</a></li>
+              <li><a href="#portfolio">作品展示</a></li>
+              <li><a href="#text">文字世界</a></li>
+            </ul>
           </div>
+        </div>
 
-          <div class="col-lg-4 col-md-6">
-            <div class="footer-links">
-              <h4>快速导航</h4>
-              <ul>
-                <li><a href="#about">关于我们</a></li>
-                <li><a href="#services">创造空间</a></li>
-                <li><a href="#portfolio">作品展示</a></li>
-                <li><a href="#text">文字世界</a></li>
-              </ul>
+        <!-- 中间：新年祝福 -->
+        <div class="col-lg-6">
+          <div class="footer-center">
+            <div class="new-year-message">
+              <span class="festive-icon">✨</span>
+              <span class="greeting">祝您新年快乐，万事如意！</span>
+              <span class="festive-icon">✨</span>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-12">
-            <div class="footer-newsletter">
-              <h4>语言 / Language</h4>
-              <div class="language-switcher">
-                <i class="fas fa-globe-americas"></i>
-                <div class="lang-links">
-                  <a href="index.html" class="active">中文(中国)</a>
-                  <a href="index-en.html">English</a>
-                  <a href="index-it.html">Italiano</a>
-                </div>
-              </div>
-              <div class="new-year-message mt-4">
-                <span class="festive-icon">✨</span>
-                <span class="greeting">祝您新年快乐，万事如意！</span>
-                <span class="festive-icon">✨</span>
-              </div>
+            <div class="social-links">
+              <div class="social-share share-weibo"><i class="fab fa-weibo"></i></div>
+              <div class="social-share share-wechat"><i class="fab fa-weixin"></i></div>
+              <div class="social-share share-github"><i class="fab fa-github"></i></div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <div class="copyright">
-              © <span id="currentYear">2024</span> Alex Hwang. All Rights Reserved
+        <!-- 右侧：语言切换和版权信息 -->
+        <div class="col-lg-3">
+          <div class="footer-right">
+            <div class="language-switcher">
+              <i class="fas fa-globe"></i>
+              <div class="lang-links">
+                <a href="index.html" class="active">中文</a>
+                <a href="index-en.html">EN</a>
+                <a href="index-it.html">IT</a>
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <nav class="footer-legal">
-              <a href="privacy.html">隐私政策</a>
-              <a href="terms.html">使用条款</a>
-              <a href="contact.html">联系我们</a>
-            </nav>
+            <div class="footer-info mt-4">
+              <div class="copyright">
+                © 2024 Alex Hwang. All Rights Reserved
+              </div>
+              <div class="footer-legal">
+                <a href="privacy.html">隐私政策</a>
+                <a href="terms.html">使用条款</a>
+                <a href="ads.html">广告政策</a>
+                <a href="contact.html">联系我们</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

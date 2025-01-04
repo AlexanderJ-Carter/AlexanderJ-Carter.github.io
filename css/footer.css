@@ -1,96 +1,129 @@
+/* 语言选择器样式优化 */
+.footer-newsletter h4 {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1rem;
+  font-weight: normal;
+}
+
 .language-switcher {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 15px;
-  padding: 8px 15px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 30px;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .language-switcher:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
   transform: translateY(-2px);
 }
 
 .language-switcher i {
-  color: #ffcc00;
-  font-size: 1.1rem;
-  animation: rotate 8s linear infinite;
+  color: #ffd700;
+  font-size: 0.9rem;
+  padding: 6px;
+  border-radius: 50%;
+  background: rgba(255, 215, 0, 0.1);
+  margin-right: 8px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.lang-links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 .language-switcher a {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 15px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
   transition: all 0.3s ease;
   position: relative;
-  font-size: 0.9rem;
+}
+
+/* 移除下划线效果 */
+.language-switcher a::after {
+  display: none;
 }
 
 .language-switcher a:hover {
-  color: #ffcc00;
-  transform: scale(1.05);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .language-switcher a.active {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffcc00;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffd700;
+  font-weight: 500;
 }
 
-.language-switcher a.active::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 2px;
-  background: #ffcc00;
-  border-radius: 2px;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: translateY(-2px);
   }
 }
 
 @media (max-width: 768px) {
   .language-switcher {
-    justify-content: center;
-    padding: 6px 12px;
-    gap: 10px;
+    padding: 4px 8px;
+  }
+
+  .language-switcher i {
+    font-size: 0.8rem;
+    padding: 4px;
   }
 
   .language-switcher a {
     font-size: 0.8rem;
-    padding: 4px 8px;
+    padding: 3px 8px;
   }
 }
+
 .site-footer {
-  background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
-  color: #fff;
+  background: linear-gradient(
+    145deg,
+    rgba(26, 26, 26, 0.8),
+    rgba(45, 45, 45, 0.8)
+  );
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
+  color: #fff;
+  padding: 2rem 0;
 }
 
-/* 新年装饰效果 */
+.footer-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .new-year-message {
   background: rgba(255, 55, 55, 0.1);
-  padding: 20px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 88, 88, 0.2);
+  padding: 15px 25px;
   border-radius: 15px;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  animation: glow 2s ease-in-out infinite;
-  border: 1px solid rgba(255, 88, 88, 0.2);
+  width: 100%;
+  max-width: 400px;
 }
 
 .new-year-message::before {
@@ -110,6 +143,23 @@
   animation: bounce 2s ease infinite;
 }
 
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.footer-info {
+  text-align: right;
+}
+
+.footer-legal {
+  margin-top: 1rem;
+  display: flex;
+  gap: 15px;
+  font-size: 0.85rem;
+}
+
 /* 社交媒体分享按钮 */
 .social-links {
   display: flex;
@@ -117,11 +167,15 @@
   flex-wrap: wrap;
 }
 
+/* 社交分享按钮增强 */
 .social-share {
   position: relative;
   width: 45px;
   height: 45px;
   background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -149,7 +203,8 @@
 
 .social-share:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .social-share:hover::before {
@@ -227,7 +282,176 @@
 }
 
 /* 平台特定颜色 */
-.share-weibo:hover::before { background: linear-gradient(45deg, #ff8140, #ff5440); }
-.share-qq:hover::before { background: linear-gradient(45deg, #12b7f5, #1677ff); }
-.share-wechat:hover::before { background: linear-gradient(45deg, #07c160, #11c267); }
-.share-github:hover::before { background: linear-gradient(45deg, #333, #24292e); }
+.share-weibo:hover::before {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 129, 64, 0.9),
+    rgba(255, 84, 64, 0.9)
+  );
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.share-qq:hover::before {
+  background: linear-gradient(
+    45deg,
+    rgba(18, 183, 245, 0.9),
+    rgba(22, 119, 255, 0.9)
+  );
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.share-wechat:hover::before {
+  background: linear-gradient(
+    45deg,
+    rgba(7, 193, 96, 0.9),
+    rgba(17, 194, 103, 0.9)
+  );
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.share-github:hover::before {
+  background: linear-gradient(
+    45deg,
+    rgba(51, 51, 51, 0.9),
+    rgba(36, 41, 46, 0.9)
+  );
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+/* 页脚快速导航样式优化 */
+.footer-links h4 {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.1rem;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.footer-links li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.7rem;
+  display: inline-block;
+  padding: 0.3rem 0;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+/* 页脚栏目间距调整 */
+.footer-info,
+.footer-links,
+.footer-newsletter {
+  padding: 0 15px;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .footer-links {
+    text-align: center;
+  }
+
+  .footer-links li {
+    padding-left: 0;
+  }
+
+  .footer-links li::before {
+    display: none;
+  }
+}
+
+/* 版权信息和法律链接 */
+.copyright {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.footer-legal {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.footer-legal a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+  color: #ffffff;
+}
+
+/* 动画效果 */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+  .footer-top {
+    padding: 2rem 0 1rem;
+  }
+
+  .footer-links,
+  .footer-legal {
+    text-align: center;
+    justify-content: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
+
+  .copyright {
+    margin-bottom: 1rem;
+  }
+}
