@@ -1,11 +1,29 @@
-#navbar {
-  background: rgba(255, 255, 255, 0.95);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+:root {
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --primary: #007bff;
+  --primary-hover: #0056b3;
+  --gradient: linear-gradient(90deg, #007bff, #00d2ff);
 }
 
+/* 导航栏基础样式 */
+.navbar {
+  position: fixed;
+  width: 100%;
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--nav-shadow);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.navbar.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo样式 */
 .nav-logo {
   height: 40px;
   transition: transform 0.3s ease;
@@ -15,6 +33,7 @@
   transform: scale(1.05);
 }
 
+/* 导航链接样式 */
 .navbar-nav {
   gap: 10px;
 }
@@ -34,7 +53,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, #007bff, #00d2ff);
+  background: var(--gradient);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.3s ease;
@@ -47,9 +66,57 @@
 }
 
 .nav-link.active {
-  color: #007bff !important;
+  color: var(--primary) !important;
 }
 
+/* 进度条 */
+.scroll-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: var(--gradient);
+  transition: width 0.3s ease;
+}
+
+/* 修改返回顶部按钮样式 */
+.back-to-top {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  cursor: pointer;
+  box-shadow: var(--nav-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-to-top:hover {
+  background: var(--primary-hover);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.back-to-top.show {
+  opacity: 1;
+}
+
+/* 调整图标大小 */
+.back-to-top i {
+  font-size: 1.2rem;
+}
+
+/* 响应式调整 */
 @media (max-width: 991.98px) {
   .navbar-nav {
     padding: 1rem 0;
@@ -62,10 +129,4 @@
   .nav-link::after {
     display: none;
   }
-}
-
-/* 滚动时导航栏效果 */
-.navbar.scrolled {
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }

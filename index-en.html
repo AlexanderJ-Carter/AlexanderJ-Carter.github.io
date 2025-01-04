@@ -1,37 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Alex Hwang's Website</title>
-    <meta name="description" content="Alex Hwang's personal website">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index,follow">
+
+    <!-- 基本信息 -->
+    <title>Alex Hwang's Website</title>
+    <meta name="description" content="Personal website showcasing creative works and sharing content">
     <meta name="author" content="Alex Hwang">
-    <meta name="keywords" content="Personal Work, Content Sharing, Alex Hwang, Personal Website">
+    <meta name="keywords" content="personal portfolio, content sharing, Alex Hwang, personal website">
+    <link rel="canonical" href="https://alex-hwang.github.io/">
+    <meta name="robots" content="index,follow">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+    <!-- 移动端优化 -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alex Hwang",
+      "url": "https://alex-hwang.github.io",
+      "image": "img/logo.png",
+      "sameAs": [
+        "https://github.com/Alex-hwang"
+      ],
+      "description": "Explore creativity, share life, capture every amazing moment"
+    }
+  </script>
+
+    <!-- PWA和图标 -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="theme-color" content="#ffffff">
+    <meta name="color-scheme" content="light">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
-    <!-- Open Graph meta tags for better social media sharing -->
+    <!-- 社交分享配置 -->
     <meta property="og:title" content="Alex Hwang's Website">
-    <meta property="og:description" content="A personal website showcasing work and content sharing.">
+    <meta property="og:description" content="Personal website showcasing creative works and sharing content">
     <meta property="og:image" content="img/logo.png">
     <meta property="og:url" content="https://Alex-hwang.github.io">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
 
-    <!-- Twitter Card meta tags for better social media sharing -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Alex Hwang's Website">
-    <meta name="twitter:description" content="A personal website showcasing work and content sharing.">
-    <meta name="twitter:image" content="img/logo.png">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- 第三方样式库 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    <!-- 代码高亮 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
 
-    <!-- Google fonts -->
+    <!-- 字体 -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&display=swap"
@@ -39,110 +76,256 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/glightbox.min.css">
+    <!-- 样式 -->
     <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/display.css">
     <link rel="stylesheet" href="css/custom.css">
 
+    <link rel="stylesheet" href="css/glightbox.min.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="css/cookie.css">
+    <link rel="stylesheet" href="css/newyear.css">
+    <link rel="stylesheet" href="css/music.css">
+    <link rel="stylesheet" href="css/poem.css">
+
+    <!-- 脚本 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" defer></script>
+    <script src="js/error-handler.js"></script>
+
+    <!-- 添加资源预加载 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" as="image" href="img/AboutMe.jpg">
 </head>
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
 
+    <!-- 新年祝福 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-gift modal-icon"></i>
+                <h2>Happy New Year!</h2>
+            </div>
+            <div class="modal-body">
+                <p>In the new year, we wish you:</p>
+                <div class="wish-list">
+                    <div class="wish-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Good Health</span>
+                    </div>
+                    <div class="wish-item">
+                        <i class="fas fa-star"></i>
+                        <span>Best of Luck</span>
+                    </div>
+                    <div class="wish-item">
+                        <i class="fas fa-smile"></i>
+                        <span>Joy and Happiness</span>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button id="closeBtn" class="close-btn" type="button">
+                    <i class="fas fa-envelope-open-text"></i>
+                    Accept Wishes
+                </button>
+                <button id="dontShowBtn" class="dont-show-btn" type="button">
+                    <i class="fas fa-calendar-day"></i>
+                    Don't Show Today
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="background-music" loop></audio>
+
+    <div class="music-player" id="music-player">
+        <div class="player-content">
+            <div id="song-title" class="song-title">Now Playing: </div>
+            <div class="song-progress">
+                <label for="progress-bar" class="visually-hidden">Song Progress</label>
+                <input type="range" id="progress-bar" min="0" max="100" step="1" value="0" title="Song Progress">
+            </div>
+            <div class="controls">
+                <button id="next-song" class="control-btn" type="button" title="Next Song">
+                    <i class="fas fa-forward"></i>
+                </button>
+                <div class="volume-control">
+                    <i class="fas fa-volume-down"></i>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.3"
+                        title="Volume Control">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="toggle-music-player" class="toggle-button" type="button">🎵</button>
+
     <!-- Main Content -->
-    <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
-        style="background-image: url('img/Background.jpg');">
+    <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro">
         <div class="overlay-content w-100 text-white">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-7 col-md-12 mx-auto text-center">
-                        <p
-                            class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in">
-                            Welcome to our journey
+                        <p class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in"
+                            style="font-family: 'Montserrat', sans-serif;"></p>
+                        Join Us On This Journey
                         </p>
-                        <h1 class="text-uppercase intro-heading letter-spacing-2">
-                            Explore Creativity, Build the Future
+                        <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold fade-in"
+                            style="font-family: 'Lora', serif;">
+                            Explore Dreams, Create Tomorrow
                         </h1>
-                        <p class="fst-italic intro-text text-muted mt-4 fade-in" style="font-size: 1.2rem;">
-                            Discover, Share, and Create Every Sparkling Moment.
+                        <p class="fst-italic intro-text text-muted mt-4 fade-in"
+                            style="font-family: 'Roboto', sans-serif; font-size: 1.2rem;">
+                            Let's discover, share and create every brilliant moment together.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white py-2 shadow-sm" id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top py-2" id="navbar" aria-label="Main Navigation">
+        <div class="scroll-progress"></div>
         <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand" href="#intro">
-                <img src="img/logo.png" alt="Logo" style="height: 40px;">
+            <a class="navbar-brand" href="#intro" aria-label="Back to Top">
+                <img src="img/logo.png" alt="Website Logo" class="nav-logo" width="40" height="40">
             </a>
 
-            <!-- Toggle button for mobile devices -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+                aria-label="Toggle navigation menu">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Navigation menu -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link py-lg-3 active" href="#intro">Home</a></li>
-                    <li class="nav-item"><a class="nav-link py-lg-3" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link py-lg-3" href="#services">Create</a></li>
-                    <li class="nav-item"><a class="nav-link py-lg-3" href="#portfolio">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link py-lg-3" href="#text">Text</a></li>
+                <ul class="navbar-nav ms-auto" role="menubar">
+                    <li class="nav-item" role="none">
+                        <a class="nav-link active" href="#intro" role="menuitem" aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="#about" role="menuitem">About</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="#services" role="menuitem">Create</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="#portfolio" role="menuitem">Works</a>
+                    </li>
+                    <li class="nav-item" role="none">
+                        <a class="nav-link" href="#text" role="menuitem">Text</a>
+                    </li>
                 </ul>
             </div>
         </div>
+        <button class="back-to-top" aria-label="Back to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
     </nav>
 
-    <!-- About Section -->
-    <section id="about">
+    <section id="about" class="about-section py-5">
         <div class="container">
             <div class="row gy-4 align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="underline text-uppercase">About Us</h2>
-                    <p class="lead">Welcome to our creative space.</p>
-                    <p>
-                        We believe that every small moment contains unique beauty and stories. Here, we not only use
-                        creativity to capture these moments but also convey them with heart. Whether it's visual design,
-                        content creation, or digital experience, our goal is to inspire through innovation and bring
-                        more inspiration and resonance to everyone. We look forward to exploring and sharing the beauty
-                        of life with you.
-                    </p>
-                </div>
-                <div class="col-lg-5 mx-auto">
-                    <p><img class="img-fluid rounded-circle" src="img/AboutMe.jpg" alt="About Us Image"></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="bg-gray-200" id="services">
-        <div class="container">
-            <div class="row services">
-                <div class="col-lg-12">
-                    <h2 class="underline text-uppercase">Creation & Expression</h2>
-                    <div class="row gy-4 gx-5">
-                        <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-camera-retro fa-3x"></i></div>
-                            <h5>Capture Moments</h5>
-                            <p>We use lenses to freeze every unique moment, turning life's beauty into eternal images.
+                <div class="col-lg-6 fade-in-left">
+                    <div class="about-content">
+                        <h2 class="section-title mb-4">About Us</h2>
+                        <div class="subtitle-line"></div>
+                        <p class="lead text-primary mb-4">Capturing Moments, Creating Stories</p>
+                        <div class="about-text">
+                            <p class="mb-4">
+                                In this world of endless possibilities, we are dedicated to capturing life's unique
+                                moments. Through photography, design, and words, we transform the ordinary into the
+                                extraordinary, illuminating life with creativity.
                             </p>
+                            <div class="features-grid">
+                                <div class="feature-item">
+                                    <i class="fas fa-camera-retro"></i>
+                                    <span>Visual Arts</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-pen-fancy"></i>
+                                    <span>Content Creation</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-code"></i>
+                                    <span>Digital Experience</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-pen-fancy fa-3x"></i></div>
-                            <h5>Write Inspiration</h5>
-                            <p>We weave stories and inspiration with words, blending our thoughts and emotions into
-                                every creation.</p>
+                    </div>
+                </div>
+                <div class="col-lg-5 ms-auto fade-in-right">
+                    <div class="about-image">
+                        <img class="img-fluid rounded-3 shadow" src="img/AboutMe.jpg" alt="About Us Image">
+                        <div class="image-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title" style="font-family: 'Montserrat', sans-serif;">Creation & Expression</h2>
+                <div class="subtitle-line mx-auto"></div>
+                <p class="lead text-muted" style="font-family: 'Roboto', sans-serif;">Explore Infinite Possibilities,
+                    Unleash Creative Potential</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <i class="fas fa-camera-retro"></i>
                         </div>
-                        <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-paint-brush fa-3x"></i></div>
-                            <h5>Creative Expression</h5>
-                            <p>Through art and design, we materialize creativity, showcasing endless imagination and
-                                innovation.</p>
+                        <div class="card-content">
+                            <h3 style="font-family: 'Lora', serif;">Visual Exploration</h3>
+                            <p style="font-family: 'Roboto', sans-serif;">Through professional photography, we capture
+                                fleeting moments of life, transforming the ordinary into the eternal.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Portrait Photography</li>
+                                <li><i class="fas fa-check"></i> Landscape Documentation</li>
+                                <li><i class="fas fa-check"></i> Creative Shooting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 style="font-family: 'Lora', serif;">Written Expression</h3>
+                            <p style="font-family: 'Roboto', sans-serif;">Telling compelling stories through elegant
+                                words, each piece carries unique emotions and thoughts.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Essays & Articles</li>
+                                <li><i class="fas fa-check"></i> Poetry Creation</li>
+                                <li><i class="fas fa-check"></i> Content Planning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3 style="font-family: 'Lora', serif;">Creative Design</h3>
+                            <p style="font-family: 'Roboto', sans-serif;">Transform inspiration into visual works,
+                                interpreting different creative concepts through unique design language.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check"></i> Graphic Design</li>
+                                <li><i class="fas fa-check"></i> UI Design</li>
+                                <li><i class="fas fa-check"></i> Illustration</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -150,92 +333,230 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio">
+    <section id="portfolio" class="portfolio-section py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-lg-8">
-                    <h2 class="underline text-uppercase">Featured Portfolio</h2>
-                    <p>Explore our creativity and technology, and view selected photography, writing, and coding
-                        projects.</p>
+            <!-- Title Section -->
+            <div class="text-center mb-5">
+                <h2 class="section-title" style="font-family: 'Montserrat', sans-serif;">Featured Works</h2>
+                <div class="subtitle-line mx-auto"></div>
+                <p class="lead text-muted" style="font-family: 'Roboto', sans-serif;">Exploring Creative Boundaries,
+                    Sharing Unique Perspectives</p>
+            </div>
+
+            <!-- Portfolio Filters -->
+            <div class="portfolio-filter mb-4">
+                <button class="filter-btn active" data-filter="all" type="button">All</button>
+                <button class="filter-btn" data-filter="photo" type="button">Photography</button>
+                <button class="filter-btn" data-filter="design" type="button">Design</button>
+                <button class="filter-btn" data-filter="code" type="button">Code</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Photography Work -->
+                <div class="portfolio-item" data-category="photo">
+                    <div class="portfolio-card">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000" alt="Urban Photography"
+                            class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5 style="font-family: 'Lora', serif;">Urban Impressions</h5>
+                            <p style="font-family: 'Roboto', sans-serif;">Architectural Photography</p>
+                            <div class="portfolio-icons">
+                                <a href="https://images.unsplash.com/photo-1449824913935-59a10b8d2000"
+                                    class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Work -->
+                <div class="portfolio-item" data-category="design">
+                    <div class="portfolio-card">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5" alt="Brand Design"
+                            class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5 style="font-family: 'Lora', serif;">Brand Identity</h5>
+                            <p style="font-family: 'Roboto', sans-serif;">Visual Branding</p>
+                            <div class="portfolio-icons">
+                                <a href="https://images.unsplash.com/photo-1561070791-2526d30994b5"
+                                    class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UI Design -->
+                <div class="portfolio-item" data-category="design">
+                    <div class="portfolio-card">
+                        <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" alt="UI Design"
+                            class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5 style="font-family: 'Lora', serif;">Interface Design</h5>
+                            <p style="font-family: 'Roboto', sans-serif;">Mobile UI/UX</p>
+                            <div class="portfolio-icons">
+                                <a href="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e"
+                                    class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Projects -->
+                <div class="portfolio-item" data-category="code">
+                    <div class="portfolio-card">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" alt="Coding Project"
+                            class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5 style="font-family: 'Lora', serif;">Web Applications</h5>
+                            <p style="font-family: 'Roboto', sans-serif;">Frontend Development</p>
+                            <div class="portfolio-icons">
+                                <a href="https://images.unsplash.com/photo-1461749280684-dccba630e2f6"
+                                    class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Photography Works -->
-            <div class="row g-4 mt-4">
-                <div class="col-md-12">
-                    <h4 class="text-uppercase mb-3">Photography Works</h4>
-                </div>
-                <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-1.jpg"
-                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-2.jpg"
-                            alt="Photography Work 1"></a></div>
-                <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-2.jpg"
-                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-4.jpg"
-                            alt="Photography Work 2"></a></div>
-                <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-3.jpg"
-                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-5.jpg"
-                            alt="Photography Work 3"></a></div>
-            </div>
+            <!-- 代码展示轮播 -->
+            <div class="code-showcase mt-5">
+                <h3 class="text-center mb-4">Code Projects</h3>
+                <div id="codeCarousel" class="carousel slide code-carousel" data-bs-ride="carousel"
+                    data-bs-interval="5000">
+                    <!-- 轮播指示器 -->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="3"
+                            aria-label="Slide 4"></button>
+                    </div>
 
-            <!-- Code Projects Carousel -->
-            <div class="row g-4 mt-5">
-                <div class="col-md-12">
-                    <h4 class="text-uppercase mb-3">Code Projects</h4>
-                </div>
-
-                <!-- Carousel -->
-                <div id="codeCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-
-                        <!-- C++ Code Example -->
-                        <div class="carousel-item active">
-                            <div class="d-block w-100">
-                                <h5>C++ Simple Loop Example</h5>
-                                <p>A simple `for` loop example:</p>
-                                <pre class="code-block"><code> 
-#include &lt;iostream&gt;
-
-int main() {
-    for (int i = 0; i &lt; 5; i++) {
-        std::cout &lt;&lt; "Hello, C++!" &lt;&lt; std::endl;
-    }
-    return 0;
-}
-              </code></pre>
+                        <div class="carousel-inner">
+                            <!-- C++ example -->
+                            <div class="carousel-item active">
+                                <div class="code-container">
+                                    <div class="code-header">
+                                        <h5>C++ algorithm</h5>
+                                        <span class="language-badge">C++</span>
+                                    </div>
+                                    <pre class="code-block"><code class="language-cpp">
+                #include &lt;iostream&gt;
+                #include &lt;vector&gt;
+                
+                void bubbleSort(std::vector&lt;int&gt;& arr) {
+                    for(int i = 0; i < arr.size() - 1; i++) {
+                        for(int j = 0; j < arr.size() - i - 1; j++) {
+                            if(arr[j] > arr[j + 1]) {
+                                std::swap(arr[j], arr[j + 1]);
+                            }
+                        }
+                    }
+                }
+                
+                int main() {
+                    std::vector&lt;int&gt; numbers = {64, 34, 25, 12, 22, 11, 90};
+                    bubbleSort(numbers);
+                    return 0;
+                }</code></pre>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Python Code Example -->
-                        <div class="carousel-item">
-                            <div class="d-block w-100">
-                                <h5>Python File Read Example</h5>
-                                <p>A simple example of reading a file and printing its content:</p>
-                                <pre class="code-block"><code> 
-# Python File Reading
-with open("example.txt", "r") as file:
-    content = file.read()
-    print(content)
-              </code></pre>
+                            <!-- Python example -->
+                            <div class="carousel-item">
+                                <div class="code-container">
+                                    <div class="code-header">
+                                        <h5>Python Web robot</h5>
+                                        <span class="language-badge">Python</span>
+                                    </div>
+                                    <pre class="code-block"><code class="language-python">
+                import requests
+                from bs4 import BeautifulSoup
+                
+                def scrape_website(url):
+                    response = requests.get(url)
+                    if response.status_code == 200:
+                        soup = BeautifulSoup(response.text, 'html.parser')
+                        titles = soup.find_all('h1')
+                        return [title.text for title in titles]
+                    return []
+                
+                # 使用示例
+                url = 'https://example.com'
+                titles = scrape_website(url)
+                print(titles)</code></pre>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Java Code Example -->
-                        <div class="carousel-item">
-                            <div class="d-block w-100">
-                                <h5>Java Hello World Example</h5>
-                                <p>A simple `Hello, World!` example:</p>
-                                <pre class="code-block"><code> 
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello, Java!");
-    }
-}
-              </code></pre>
+                            <!-- JavaScript 代码示例 -->
+                            <div class="carousel-item">
+                                <div class="code-container">
+                                    <div class="code-header">
+                                        <h5>JavaScript example</h5>
+                                        <span class="language-badge">JavaScript</span>
+                                    </div>
+                                    <pre class="code-block"><code class="language-javascript">
+                function animate(element, property, target, duration) {
+                    const start = parseFloat(getComputedStyle(element)[property]);
+                    const change = target - start;
+                    const startTime = performance.now();
+                
+                    function update(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                
+                        element.style[property] = start + change * progress + 'px';
+                
+                        if (progress < 1) {
+                            requestAnimationFrame(update);
+                        }
+                    }
+                
+                    requestAnimationFrame(update);
+                }</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Java 代码示例 -->
+                            <div class="carousel-item">
+                                <div class="code-container">
+                                    <div class="code-header">
+                                        <h5>Java example</h5>
+                                        <span class="language-badge">Java</span>
+                                    </div>
+                                    <pre class="code-block"><code class="language-java">
+                public class Singleton {
+                    private static Singleton instance;
+                    private Singleton() {}
+                
+                    public static synchronized Singleton getInstance() {
+                        if (instance == null) {
+                            instance = new Singleton();
+                        }
+                        return instance;
+                    }
+                
+                    public void showMessage() {
+                        System.out.println("Hello from Singleton!");
+                    }
+                }</code></pre>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Carousel Controls -->
+                    <!-- 轮播控制按钮 -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -251,62 +572,174 @@ public class Main {
         </div>
     </section>
 
-    <!-- Text Section -->
-    <section class="bg-dark text-gray-100" id="text">
+    <section id="text" class="text-section py-5">
         <div class="container">
-            <h2 class="underline underline-white">The Power of Words</h2>
-            <div class="row">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Power of Words</h2>
+                <div class="subtitle-line mx-auto"></div>
+                <p class="lead text-muted">Painting the Landscape of the Mind with Words</p>
+            </div>
+
+            <div class="row g-4">
                 <div class="col-md-6">
-                    <p>
-                        Only when we open the window of our hearts can we see the treasure within; only when we open the
-                        window of our hearts can we see the clear scenery outside; only when we open the window of our
-                        hearts can we let the flowers and lights of the world flow in. And only when we open the window
-                        of our hearts can we walk out confidently and bravely, step by step toward the light.
-                    </p>
+                    <div class="text-card">
+                        <div class="card-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3 class="card-title">Window to the Soul</h3>
+                        <div class="card-content">
+                            <p class="text-content">
+                                Life is like a book being written, each page carrying a different story. Opening the window to our soul allows us to see the treasures within; opening our hearts enables us to experience the splendor of the world outside. Let the windows of our soul always face the sun, welcoming every ray of warm light, embracing every beautiful moment.
+                            </p>
+                            <div class="text-quote">
+                                <i class="fas fa-quote-left"></i>
+                                <p>When the heart faces the sun, spring blooms</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="col-md-6">
-                    <p>
-                        With perseverance, the lonely journey of life can stretch into a sky full of stars; with
-                        perseverance, solitude can be transformed into a flock of flying geese; with perseverance, joy
-                        can bloom into a garden of flowers.
-                    </p>
+                    <div class="text-card">
+                        <div class="card-icon">
+                            <i class="fas fa-feather-alt"></i>
+                        </div>
+                        <h3 class="card-title">Cultural Heritage</h3>
+                        <div class="card-content">
+                            <p class="text-content">
+                                In the vast river of cultural history, each droplet sparkles with the light of wisdom. Reading history strengthens our resolve, allowing us to draw strength from the footsteps of our ancestors; studying classics nurtures our character, enabling us to gain insights from ancient wisdom. These eternal cultural treasures are the guiding lights illuminating our path forward.
+                            </p>
+                            <div class="text-quote">
+                                <i class="fas fa-quote-left"></i>
+                                <p>Learn from the past, create the future</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-black text-gray-100 py-3">
-        <div class="container">
-            <div class="row gy-2">
-                <div class="col-md-6 text-center text-md-start">
-                    <div class="language-switcher">
-                        <i class="fas fa-globe-americas"></i>
-                        <a href="index.html">中文(中国)</a> |
-                        <a href="index-en.html">English</a> |
-                        <a href="index-it.html">Italiano</a>
+    <!-- Cookie 同意弹窗 -->
+    <div id="cookieConsent" class="cookie-consent-container">
+        <div class="cookie-content">
+            <div class="cookie-icon">
+                <i class="fas fa-cookie-bite"></i>
+            </div>
+            <div class="cookie-message">
+                <h6>Cookie Notice</h6>
+                <p>We use cookies to provide a better browsing experience. By continuing to use this site, you agree to our cookie policy.
+                    <a href="privacy.html" class="cookie-link">Learn more</a>
+                </p>
+            </div>
+            <div class="cookie-buttons">
+                <button id="acceptCookie" class="btn btn-primary btn-sm" type="button">
+                    <i class="fas fa-check"></i> Accept
+                </button>
+                <button id="rejectCookie" class="btn btn-outline-secondary btn-sm" type="button">
+                    Essential Cookies Only
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info">
+                            <h3>Alex Hwang</h3>
+                            <p class="footer-description">
+                                Explore creativity, share life, capture every brilliant moment
+                            </p>
+                            <div class="social-links">
+                                <div class="social-share share-weibo" onclick="shareToSocial('weibo')" title="Share on Weibo">
+                                    <i class="fab fa-weibo"></i>
+                                </div>
+                                <div class="social-share share-qq" onclick="shareToSocial('qq')" title="Share on QQ">
+                                    <i class="fab fa-qq"></i>
+                                </div>
+                                <div class="social-share share-wechat" onclick="shareToSocial('wechat')" title="Share on Wechat">
+                                    <i class="fab fa-weixin"></i>
+                                </div>
+                                <div class="social-share share-github" onclick="shareToSocial('github')"
+                                    title="Follow on Github">
+                                    <i class="fab fa-github"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-links">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="#about">About Us</a></li>
+                                <li><a href="#services">Creation Space</a></li>
+                                <li><a href="#portfolio">Portfolio</a></li>
+                                <li><a href="#text">Text World</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12">
+                        <div class="footer-newsletter">
+                            <h4>语言 / Language</h4>
+                            <div class="language-switcher">
+                                <i class="fas fa-globe-americas"></i>
+                                <div class="lang-links">
+                                    <a href="index.html" class="active">中文(中国)</a>
+                                    <a href="index-en.html">English</a>
+                                    <a href="index-it.html">Italiano</a>
+                                </div>
+                            </div>
+                            <div class="new-year-message mt-4">
+                                <span class="festive-icon">✨</span>
+                                <span class="greeting">Happy New Year and Best Wishes!</span>
+                                <span class="festive-icon">✨</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">© Alex Hwang 2024</p>
-                    <a href="privacy.html">Privacy</a> |
-                    <a href="terms.html">Terms of Use</a> |
-                    <a href="contact-en.html">Contact Us</a> |
-                    <a href="ads.html">Advertising</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="copyright">
+                            © <span id="currentYear">2024</span> Alex Hwang. All Rights Reserved
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <nav class="footer-legal">
+                            <a href="privacy.html">Privacy Policy</a>
+                            <a href="terms.html">Terms of Use</a>
+                            <a href="contact-en.html">Contact Us</a>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
+
     <!-- JavaScript files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <script src="js/glightbox.min.js"></script>
     <script src="js/music-player.js"></script>
     <script src="js/chatbot.js"></script>
     <script src="js/poem.js"></script>
-
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/newyear.js"></script>
+    <script src="js/show.js"></script>
+    <script src="js/display.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/share.js"></script>
 </body>
 
 </html>

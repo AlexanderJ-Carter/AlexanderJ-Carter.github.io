@@ -352,3 +352,11 @@ body.dark-mode .btn {
     gap: 15px;
   }
 }
+
+.intro-heading {
+  font-family: "Segoe UI", sans-serif;
+}
+
+.intro {
+  background-image: url("../img/Background.jpg");
+}

@@ -4,35 +4,67 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>风雪归人的网页</title>
-  <meta name="description" content="风雪归人的网页">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index,follow">
+
+  <!-- 基本信息 -->
+  <title>风雪归人的网页</title>
+  <meta name="description" content="展示个人作品和内容分享的个人网页">
   <meta name="author" content="Alex Hwang">
   <meta name="keywords" content="个人作品, 内容分享, Alex Hwang, 个人网页">
+  <link rel="canonical" href="https://alex-hwang.github.io/">
+  <meta name="robots" content="index,follow">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+  <!-- 移动端优化 -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- 结构化数据 -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alex Hwang",
+      "url": "https://alex-hwang.github.io",
+      "image": "img/logo.png",
+      "sameAs": [
+        "https://github.com/Alex-hwang"
+      ],
+      "description": "探索创意，分享生活，记录精彩瞬间"
+    }
+  </script>
+
+  <!-- PWA和图标 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
-  <!-- Open Graph meta tags for better social media sharing -->
+  <!-- 社交分享配置 -->
   <meta property="og:title" content="风雪归人的网页">
   <meta property="og:description" content="展示个人作品和内容分享的个人网页。">
   <meta property="og:image" content="img/logo.png">
   <meta property="og:url" content="https://Alex-hwang.github.io">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
 
-  <!-- Twitter Card meta tags for better social media sharing -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="风雪归人的网页">
-  <meta name="twitter:description" content="展示个人作品和内容分享的个人网页。">
-  <meta name="twitter:image" content="img/logo.png">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- 第三方样式库 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-  <!-- Google fonts -->
+  <!-- 代码高亮 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap"
+    rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link
     href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&display=swap"
@@ -40,18 +72,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/glightbox.min.css">
+  <!-- 样式 -->
   <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/display.css">
   <link rel="stylesheet" href="css/custom.css">
+
+  <link rel="stylesheet" href="css/glightbox.min.css">
   <link rel="stylesheet" href="css/chatbot.css">
   <link rel="stylesheet" href="css/cookie.css">
   <link rel="stylesheet" href="css/newyear.css">
   <link rel="stylesheet" href="css/music.css">
-  <link rel="stylesheet" href="css/navigation.css">
-  <link rel="stylesheet" href="css/about.css">
-  <link rel="stylesheet" href="css/display.css">
   <link rel="stylesheet" href="css/poem.css">
-  <link rel="stylesheet" href="css/footer.css">
+
+  <!-- 脚本 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" defer></script>
+  <script src="js/error-handler.js"></script>
+
+  <!-- 添加资源预加载 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preload" as="image" href="img/AboutMe.jpg">
 </head>
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
@@ -117,8 +160,7 @@
   <button id="toggle-music-player" class="toggle-button" type="button">🎵</button>
 
   <!-- 主内容 -->
-  <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
-    style="background-image: url('img/Background.jpg');">
+  <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro">
     <div class="overlay-content w-100 text-white">
       <div class="container">
         <div class="row">
@@ -126,8 +168,7 @@
             <p class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in">
               欢迎加入我们的旅程
             </p>
-            <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold fade-in"
-              style="font-family: 'Segoe UI', sans-serif;">
+            <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold fade-in">
               探索灵感 创造未来
             </h1>
             <p class="fst-italic intro-text text-muted mt-4 fade-in" style="font-size: 1.2rem;">
@@ -140,6 +181,7 @@
   </section>
 
   <nav class="navbar navbar-expand-lg navbar-light sticky-top py-2" id="navbar" aria-label="主导航">
+    <div class="scroll-progress"></div>
     <div class="container">
       <a class="navbar-brand" href="#intro" aria-label="返回顶部">
         <img src="img/logo.png" alt="网站Logo" class="nav-logo" width="40" height="40">
@@ -170,6 +212,9 @@
         </ul>
       </div>
     </div>
+    <button class="back-to-top" aria-label="返回顶部">
+      <i class="fas fa-arrow-up"></i>
+    </button>
   </nav>
 
   <section id="about" class="about-section py-5">
@@ -694,6 +739,7 @@
       </div>
     </div>
   </footer>
+
 
   <!-- JavaScript files -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
