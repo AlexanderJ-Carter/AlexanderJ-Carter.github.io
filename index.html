@@ -180,11 +180,13 @@
     </div>
   </section>
 
+  <!-- 优化后的导航栏 -->
   <nav class="navbar navbar-expand-lg navbar-light sticky-top py-2" id="navbar" aria-label="主导航">
     <div class="scroll-progress"></div>
-    <div class="container">
+    <div class="container position-relative">
       <a class="navbar-brand" href="#intro" aria-label="返回顶部">
         <img src="img/logo.png" alt="网站Logo" class="nav-logo" width="40" height="40">
+        <span class="brand-text">Alexander James Carter</span>
       </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -192,29 +194,59 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
+      <button class="back-to-top" aria-label="返回顶部">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto" role="menubar">
           <li class="nav-item" role="none">
-            <a class="nav-link active" href="#intro" role="menuitem" aria-current="page">主页</a>
+            <a class="nav-link active" href="#intro" role="menuitem" aria-current="page">
+              <i class="fas fa-home nav-icon"></i> 主页
+            </a>
           </li>
           <li class="nav-item" role="none">
-            <a class="nav-link" href="#about" role="menuitem">关于</a>
+            <a class="nav-link" href="#about" role="menuitem">
+              <i class="fas fa-user nav-icon"></i> 关于
+            </a>
           </li>
           <li class="nav-item" role="none">
-            <a class="nav-link" href="#services" role="menuitem">创造</a>
+            <a class="nav-link" href="#services" role="menuitem">
+              <i class="fas fa-paint-brush nav-icon"></i> 创造
+            </a>
           </li>
           <li class="nav-item" role="none">
-            <a class="nav-link" href="#portfolio" role="menuitem">作品</a>
+            <a class="nav-link" href="#portfolio" role="menuitem">
+              <i class="fas fa-image nav-icon"></i> 作品
+            </a>
           </li>
           <li class="nav-item" role="none">
-            <a class="nav-link" href="#text" role="menuitem">文字</a>
+            <a class="nav-link" href="#text" role="menuitem">
+              <i class="fas fa-feather nav-icon"></i> 文字
+            </a>
+          </li>
+
+          <li class="nav-item nav-divider"></li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle language-selector" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-globe nav-icon"></i> 语言
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item active" href="index.html"><i class="fas fa-check me-2"></i> 中文</a></li>
+              <li><a class="dropdown-item" href="index-en.html">English</a></li>
+              <li><a class="dropdown-item" href="index-it.html">Italiano</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="切换主题">
+              <i class="fas fa-moon"></i>
+            </button>
           </li>
         </ul>
       </div>
     </div>
-    <button class="back-to-top" aria-label="返回顶部">
-      <i class="fas fa-arrow-up"></i>
-    </button>
   </nav>
 
   <section id="about" class="about-section py-5">
@@ -378,57 +410,57 @@
             <div class="portfolio-overlay">
               <h5>应用界面</h5>
               <p>移动端UI设计</p>
-              <div class="portfolio-icons">
-                <a href="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" class="portfolio-link"
-                  data-gallery="gallery">
-                  <i class="fas fa-search-plus"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 代码项目 -->
-        <div class="portfolio-item" data-category="code">
-          <div class="portfolio-card">
-            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" alt="代码项目" class="portfolio-image">
-            <div class="portfolio-overlay">
-              <h5>Web应用</h5>
-              <p>前端开发项目</p>
-              <div class="portfolio-icons">
-                <a href="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" class="portfolio-link"
-                  data-gallery="gallery">
-                  <i class="fas fa-search-plus"></i>
-                </a>
-              </div>
+              <div class="portfolio-icons"></div>
+              <a href="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" class="portfolio-link"
+                data-gallery="gallery">
+                <i class="fas fa-search-plus"></i>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 代码展示轮播 -->
-      <div class="code-showcase mt-5">
-        <h3 class="text-center mb-4">代码案例展示</h3>
-        <div id="codeCarousel" class="carousel slide code-carousel" data-bs-ride="carousel" data-bs-interval="5000">
-          <!-- 轮播指示器 -->
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-              aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      <!-- 代码项目 -->
+      <div class="portfolio-item" data-category="code">
+        <div class="portfolio-card">
+          <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" alt="代码项目" class="portfolio-image">
+          <div class="portfolio-overlay">
+            <h5>Web应用</h5>
+            <p>前端开发项目</p>
+            <div class="portfolio-icons">
+              <a href="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" class="portfolio-link"
+                data-gallery="gallery">
+                <i class="fas fa-search-plus"></i>
+              </a>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- 代码展示轮播 -->
+    <div class="code-showcase mt-5">
+      <h3 class="text-center mb-4">代码案例展示</h3>
+      <div id="codeCarousel" class="carousel slide code-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+        <!-- 轮播指示器 -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+            aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div>
+
+        <div class="carousel-inner">
           <div class="carousel-inner">
-            <div class="carousel-inner">
-              <!-- C++ 代码示例 -->
-              <div class="carousel-item active">
-                <div class="code-container">
-                  <div class="code-header">
-                    <h5>C++ 算法示例</h5>
-                    <span class="language-badge">C++</span>
-                  </div>
-                  <pre class="code-block"><code class="language-cpp">
+            <!-- C++ 代码示例 -->
+            <div class="carousel-item active">
+              <div class="code-container">
+                <div class="code-header">
+                  <h5>C++ 算法示例</h5>
+                  <span class="language-badge">C++</span>
+                </div>
+                <pre class="code-block"><code class="language-cpp">
             #include &lt;iostream&gt;
             #include &lt;vector&gt;
             
@@ -447,17 +479,17 @@
                 bubbleSort(numbers);
                 return 0;
             }</code></pre>
-                </div>
               </div>
+            </div>
 
-              <!-- Python 代码示例 -->
-              <div class="carousel-item">
-                <div class="code-container">
-                  <div class="code-header">
-                    <h5>Python Web 爬虫示例</h5>
-                    <span class="language-badge">Python</span>
-                  </div>
-                  <pre class="code-block"><code class="language-python">
+            <!-- Python 代码示例 -->
+            <div class="carousel-item">
+              <div class="code-container">
+                <div class="code-header">
+                  <h5>Python Web 爬虫示例</h5>
+                  <span class="language-badge">Python</span>
+                </div>
+                <pre class="code-block"><code class="language-python">
             import requests
             from bs4 import BeautifulSoup
             
@@ -473,17 +505,17 @@
             url = 'https://example.com'
             titles = scrape_website(url)
             print(titles)</code></pre>
-                </div>
               </div>
+            </div>
 
-              <!-- JavaScript 代码示例 -->
-              <div class="carousel-item">
-                <div class="code-container">
-                  <div class="code-header">
-                    <h5>JavaScript 动画示例</h5>
-                    <span class="language-badge">JavaScript</span>
-                  </div>
-                  <pre class="code-block"><code class="language-javascript">
+            <!-- JavaScript 代码示例 -->
+            <div class="carousel-item">
+              <div class="code-container">
+                <div class="code-header">
+                  <h5>JavaScript 动画示例</h5>
+                  <span class="language-badge">JavaScript</span>
+                </div>
+                <pre class="code-block"><code class="language-javascript">
             function animate(element, property, target, duration) {
                 const start = parseFloat(getComputedStyle(element)[property]);
                 const change = target - start;
@@ -502,17 +534,17 @@
             
                 requestAnimationFrame(update);
             }</code></pre>
-                </div>
               </div>
+            </div>
 
-              <!-- Java 代码示例 -->
-              <div class="carousel-item">
-                <div class="code-container">
-                  <div class="code-header">
-                    <h5>Java 设计模式示例</h5>
-                    <span class="language-badge">Java</span>
-                  </div>
-                  <pre class="code-block"><code class="language-java">
+            <!-- Java 代码示例 -->
+            <div class="carousel-item">
+              <div class="code-container">
+                <div class="code-header">
+                  <h5>Java 设计模式示例</h5>
+                  <span class="language-badge">Java</span>
+                </div>
+                <pre class="code-block"><code class="language-java">
             public class Singleton {
                 private static Singleton instance;
                 private Singleton() {}
@@ -528,22 +560,22 @@
                     System.out.println("Hello from Singleton!");
                 }
             }</code></pre>
-                </div>
               </div>
             </div>
           </div>
-
-          <!-- 轮播控制按钮 -->
-          <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
         </div>
+
+        <!-- 轮播控制按钮 -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
+    </div>
     </div>
   </section>
 
