@@ -5,30 +5,33 @@ const dontShowButton = document.getElementById("dontShowBtn");
 
 // 当页面加载时检查是否显示弹窗
 window.onload = function () {
-  const today = new Date().toLocaleDateString();
+  const today = new Date();
+  const currentMonth = today.getMonth() + 1; // 月份从0开始，所以加1
+  const todayString = today.toLocaleDateString();
   const lastShown = localStorage.getItem("lastNewYearGreeting");
 
-  if (lastShown !== today) {
-    modal.style.display = "block";
+  // 只在1月份（新年期间）显示新年祝福
+  if (currentMonth === 1 && lastShown !== todayString) {
+    showModal();
   }
 };
 
 // 关闭按钮点击事件
 closeButton.onclick = function () {
-  modal.style.display = "none";
+  hideModal();
 };
 
 // 今日不再提醒按钮点击事件
 dontShowButton.onclick = function () {
   const today = new Date().toLocaleDateString();
   localStorage.setItem("lastNewYearGreeting", today);
-  modal.style.display = "none";
+  hideModal();
 };
 
 // 点击弹窗外部关闭
 window.onclick = function (event) {
   if (event.target == modal) {
-    modal.style.display = "none";
+    hideModal();
   }
 };
 
@@ -43,5 +46,6 @@ function hideModal() {
   setTimeout(() => {
     modal.style.display = "none";
     modal.classList.remove("fade-out");
+    modal.classList.remove("fade-in");
   }, 300);
 }
