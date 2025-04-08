@@ -12,178 +12,94 @@ document.addEventListener("DOMContentLoaded", function () {
   chatToggleButton.style.position = "fixed";
   chatToggleButton.style.transform = "translate(0, 0)";
 
+  // 添加导航映射表
   const navigationMap = {
-    // 主要导航
-    main: {
-      主页: {
-        path: "#intro",
-        desc: "返回网站首页",
-        icon: "🏠",
-      },
-      关于: {
-        path: "#about",
-        desc: "了解我们的故事",
-        icon: "👥",
-      },
-      创造: {
-        path: "#services",
-        desc: "探索创意世界",
-        icon: "🎨",
-      },
-      作品: {
-        path: "#portfolio",
-        desc: "查看精选作品",
-        icon: "🖼️",
-      },
-      文字: {
-        path: "#text",
-        desc: "阅读分享文章",
-        icon: "📝",
-      },
-    },
+    // 中文导航
+    主页: "#intro",
+    关于: "#about",
+    创造: "#services",
+    作品: "#portfolio",
+    文字: "#text",
+    隐私: "privacy.html",
+    使用条款: "terms.html",
+    联系: "contact.html",
+    广告: "ads.html",
 
-    // 功能页面
-    features: {
-      音乐: {
-        path: "#music-player",
-        desc: "打开音乐播放器",
-        icon: "🎵",
-      },
-      热点: {
-        path: "news.html",
-        desc: "查看今日热点",
-        icon: "🔥",
-      },
-    },
-
-    // 其他页面
-    others: {
-      隐私: {
-        path: "privacy.html",
-        desc: "隐私政策说明",
-        icon: "🔒",
-      },
-      联系: {
-        path: "contact.html",
-        desc: "联系我们",
-        icon: "📞",
-      },
-      帮助: {
-        path: "help.html",
-        desc: "使用帮助",
-        icon: "❓",
-      },
-    },
+    // 英文导航
+    home: "#intro",
+    about: "#about",
+    create: "#services",
+    portfolio: "#portfolio",
+    text: "#text",
+    privacy: "privacy.html",
+    terms: "terms.html",
+    contact: "contact.html",
+    ads: "ads.html",
   };
 
   // 对话内容库
   const dialogues = {
-    // 导航相关对话
     navigation: [
-      "好的，马上带您过去！✨",
-      "这就为您导航，请稍等~🚀",
-      "好的，让我们一起去看看吧！🌟",
-      "正在前往目标页面...💫",
+      "好的，让我带您去看看~",
+      "马上为您导航过去！",
+      "那就一起去看看吧~",
     ],
 
-    // 导航帮助信息
     navHelp: [
       `我可以帮您导航到以下页面：
-      🏠 主页 - 返回首页
-      � 关于 - 了解我们故事
-      🎨 创造 - 探索创意世界
-      �️ 作品 - 欣赏精选集
-      � 文字 - 阅读分享
-      � 联系 - 联系我们`,
+    📍 主页 - 回到首页
+    📍 关于 - 了解我们
+    📍 创造 - 查看创作内容
+    📍 作品 - 浏览作品集
+    📍 文字 - 阅读文章
+    📍 联系 - 联系方式
+    📍 隐私 - 隐私政策
+    📍 广告 - 广告服务
+    
+    您可以输入"去xx"或"打开xx"来访问对应页面`,
     ],
 
-    // 问候语系统
-    greetings: {
-      morning: [
-        "早安！新的一天充满希望！☀️",
-        "早上好！要开始美好的一天了~🌅",
-        "早安，今天也要元气满满哦！🌞",
-      ],
-      afternoon: [
-        "下午好！要来杯咖啡吗？☕",
-        "午后时光总是特别惬意呢~🍃",
-        "下午好！需要来点音乐放松一下吗？🎵",
-      ],
-      evening: [
-        "晚上好！今天过得怎么样？�",
-        "晚安！该休息啦~✨",
-        "晚上好！让我陪你聊聊天吧！🌟",
-      ],
-    },
-
-    // 音乐控制对话
-    music: {
-      play: [
-        "好的，为您播放音乐~🎵",
-        "音乐已开启，享受美妙旋律吧！🎶",
-        "来听点音乐放松一下~🎼",
-      ],
-      pause: [
-        "已暂停播放了哦！⏸️",
-        "好的，音乐已停止~🎵",
-        "需要的时候随时都可以继续播放！🎶",
-      ],
-      next: [
-        "正在切换下一首...⏭️",
-        "换个歌听听吧！🎵",
-        "马上为您播放下一首！�",
-      ],
-      prev: [
-        "返回上一首歌曲~⏮️",
-        "好的，回到前一首！🎵",
-        "马上切换到上一首！🎶",
-      ],
-    },
-
-    // 帮助信息
-    help: [
-      `我能为您提供以下服务：
-      🎵 音乐控制 - 播放/暂停/切歌
-      🧭 网站导航 - 带您游览各个页面
-      💡 功能介绍 - 了解网站特色
-      💭 日常聊天 - 陪您聊聊天
-      ❓ 解答疑问 - 回答您的问题`,
+    greetings: [
+      "你好！我是雪宝，很高兴见到你！😊",
+      "嗨！今天有什么我可以帮你的吗？✨",
+      "你好啊！要不要聊聊天？🌟",
+      "欢迎找我聊天！让我猜猜你想问什么？🤔",
     ],
-
-    // 常见问题回复
-    faq: {
-      contact: [
-        "您可以通过页面底部的联系方式找到我们！📧",
-        "要不要我带您去联系页面看看？📞",
-        "您可以发送邮件或通过社交媒体联系我们！💌",
-      ],
-      about: [
-        "我们是一个充满创意的团队！🎨",
-        "让我告诉您更多关于我们的故事~📖",
-        "要去关于页面详细了解一下吗？🔍",
-      ],
-    },
-
-    // 情感回应
-    emotions: {
-      happy: [
-        "太好了！我也为您感到开心！😊",
-        "您的快乐就是我的快乐！🌟",
-        "真是个好消息呢！🎉",
-      ],
-      encourage: [
-        "没关系，事情总会变好的！💪",
-        "加油！我相信您一定可以的！✨",
-        "要保持积极乐观的心态哦！🌈",
-      ],
-    },
-
-    // 未理解时的回复
+    jokes: [
+      "程序员最讨厌什么？讨厌别人不按照他的方式过马路！😄",
+      "为什么程序员总是分不清万圣节和圣诞节？因为 Oct 31 = Dec 25！😂",
+      "你知道吗？鱼为什么会吹泡泡？因为它想让自己显得很‘水灵’！😆",
+      "为什么程序员喜欢黑咖啡？因为他们喜欢没有类（class）的生活！🤣",
+      "一个冰箱对另一个冰箱说：‘你为什么在发抖？’ 另一个回答：‘因为我冰箱了！’😅",
+    ],
+    thanks: [
+      "不用客气！能帮到你我很开心 😊",
+      "这是我应该做的！随时找我聊天哦 💫",
+      "应该的！有什么需要随时告诉我 🌟",
+    ],
+    farewells: [
+      "再见！记得常来找我聊天哦！👋",
+      "下次见！祝您有愉快的一天！😊",
+      "期待下次为您服务！再见！✨",
+    ],
     unknown: [
-      "抱歉，我可能没有理解您的意思...🤔",
-      "这个问题有点难到我了，换个话题聊聊？💭",
-      "要不我们聊点别的？或者我可以帮您导航！🧭",
-      "让我想想...需要我介绍一下我能做什么吗？💡",
+      "抱歉，我可能没太明白。要不要试试以下功能：\n1. 查询天气\n2. 讲笑话\n3. 聊天",
+      "这个问题有点难倒我了。不如我们聊点别的？",
+      "让我想想...要不我给你讲个笑话？",
+    ],
+    weatherIntro: [
+      "让我看看天气情况...",
+      "正在查询天气信息...",
+      "稍等片刻，马上告诉您...",
+    ],
+    pageNotFound: [
+      "抱歉，我找不到这个页面呢~ 要不要看看其他内容？",
+      "这个页面好像走丢了，让我带您去别的地方看看吧！",
+    ],
+    confirmNav: ["好的，让我们出发吧！", "这就带您过去~", "马上就到啦！"],
+    searchHelp: [
+      "您可以这样搜索：\n✨ 直接输入关键词\n🔍 '搜索xxx'\n📖 '查找xxx'",
+      "需要帮您找什么吗？告诉我关键词就好~",
     ],
   };
 
@@ -258,187 +174,6 @@ document.addEventListener("DOMContentLoaded", function () {
     洛杉矶: "Los Angeles",
   };
 
-  // 笑话库
-  const jokes = [
-    "为什么程序员总是分不清Halloween和Christmas？因为Oct 31 == Dec 25 😄",
-    "一个程序员走进酒吧，说：‘Hello World!’，另一个程序员回答：‘404 - 问候语未找到！’ 🍺",
-    "为什么程序员不喜欢讲笑话？因为怕别人听不懂他们的递归梗😆",
-    "如何让程序员疯狂？把他的代码里的分号全部删掉！😱",
-    "程序员最讨厌去咖啡店，因为店里全是Java☕",
-  ];
-
-  // 天气描述映射
-  const weatherDescriptions = {
-    Clear: "晴朗",
-    Clouds: "多云",
-    Rain: "下雨",
-    Snow: "下雪",
-    Drizzle: "毛毛雨",
-    Thunderstorm: "雷暴",
-    Mist: "薄雾",
-    Smoke: "烟雾",
-    Haze: "霾",
-    Dust: "灰尘",
-    Fog: "雾",
-    Sand: "沙尘",
-    Ash: "火山灰",
-    Squall: "暴风",
-    Tornado: "龙卷风",
-  };
-
-  // 情感关键词映射
-  const emotionKeywords = {
-    positive: ["开心", "快乐", "高兴", "棒", "好", "赞", "喜欢", "爱"],
-    negative: ["伤心", "难过", "失望", "不好", "讨厌", "烦", "累"],
-    neutral: ["一般", "还行", "凑合", "普通"],
-  };
-
-  const userPreferences = {
-    lastInteraction: null,
-    conversationHistory: [],
-    userSettings: {
-      autoHide: true,
-      notifications: true,
-    },
-    save() {
-      localStorage.setItem("chatbot_preferences", JSON.stringify(this));
-    },
-    load() {
-      const saved = localStorage.getItem("chatbot_preferences");
-      if (saved) {
-        Object.assign(this, JSON.parse(saved));
-      }
-    },
-  };
-
-  function addToHistory(userInput, botResponse) {
-    userPreferences.conversationHistory.push({
-      time: new Date().toISOString(),
-      user: userInput,
-      bot: botResponse,
-    });
-    if (userPreferences.conversationHistory.length > 10) {
-      userPreferences.conversationHistory.shift();
-    }
-    userPreferences.save();
-  }
-
-  // 时间相关问候
-  function getTimeBasedGreeting() {
-    const hour = new Date().getHours();
-    if (hour < 6) return "夜深了，要注意休息哦！🌙";
-    if (hour < 11) return "早上好！开启元气满满的一天吧！🌅";
-    if (hour < 14) return "中午好！要记得吃午饭哦！🍚";
-    if (hour < 18) return "下午好！要来杯下午茶吗？☕";
-    if (hour < 22) return "晚上好！今天过得怎么样？🌙";
-    return "夜深了，早点休息对身体好哦！😴";
-  }
-
-  // 根据温度给出建议
-  function getTemperatureAdvice(temp) {
-    if (temp <= 0) return "天气很冷，要穿得暖暖的哦！❄️";
-    if (temp <= 10) return "温度偏低，记得多穿点衣服！🧥";
-    if (temp <= 20) return "天气舒适，很适合出门活动！🌤️";
-    if (temp <= 28) return "温度宜人，是个好天气！🌞";
-    if (temp <= 35) return "天气有点热，记得防晒降温！☂️";
-    return "温度很高，尽量避免外出，多补充水分！🌡️";
-  }
-
-  // 检测并回应情感
-  function detectEmotion(text) {
-    for (const [emotion, keywords] of Object.entries(emotionKeywords)) {
-      for (const keyword of keywords) {
-        if (text.includes(keyword)) {
-          return emotion;
-        }
-      }
-    }
-    return "neutral";
-  }
-
-  // 生成建议回复
-  function generateSuggestions(context) {
-    const suggestions = [];
-    if (context.includes("天气")) {
-      suggestions.push("要我帮你查查其他城市的天气吗？");
-      suggestions.push("需要具体的穿衣建议吗？");
-    }
-    if (context.includes("音乐")) {
-      suggestions.push("要不要听点轻音乐放松一下？");
-      suggestions.push("我可以帮你切换下一首歌！");
-    }
-    if (context.includes("工作") || context.includes("累")) {
-      suggestions.push("要不要休息一下，听听音乐？");
-      suggestions.push("我来给你讲个笑话吧！");
-    }
-    return suggestions;
-  }
-
-  // 导出功能
-  module.exports = {
-    jokes,
-    weatherDescriptions,
-    emotionKeywords,
-    getTimeBasedGreeting,
-    getTemperatureAdvice,
-    detectEmotion,
-    generateSuggestions,
-  };
-
-  // UI交互相关函数
-  function addSuggestionButtons(suggestions) {
-    const buttonContainer = document.createElement("div");
-    buttonContainer.className = "suggestion-buttons";
-
-    suggestions.forEach((text) => {
-      const button = document.createElement("button");
-      button.className = "suggestion-btn";
-      button.textContent = text;
-      button.onclick = () => handleSuggestion(text);
-      buttonContainer.appendChild(button);
-    });
-
-    return buttonContainer;
-  }
-
-  function handleSuggestion(text) {
-    document.getElementById("userInput").value = text;
-    document.getElementById("sendButton").click();
-  }
-
-  function handleError(error, type = "general") {
-    console.error(`聊天机器人错误 [${type}]:`, error);
-    const errorMessages = {
-      weather: "抱歉，获取天气信息失败了，请稍后再试～",
-      network: "网络连接似乎出现问题，请检查后重试～",
-      general: "抱歉，我遇到了一点小问题，让我们换个话题吧～",
-    };
-    addMessage("雪宝", errorMessages[type] || errorMessages.general);
-  }
-
-  function showTypingIndicator() {
-    const indicator = document.createElement("div");
-    indicator.className = "typing-indicator";
-    indicator.innerHTML = "<span></span><span></span><span></span>";
-    return indicator;
-  }
-
-  function animateResponse(element, text, speed = 50) {
-    let index = 0;
-    element.textContent = "";
-
-    return new Promise((resolve) => {
-      const interval = setInterval(() => {
-        if (index < text.length) {
-          element.textContent += text[index];
-          index++;
-        } else {
-          clearInterval(interval);
-          resolve();
-        }
-      }, speed);
-    });
-  }
   // 随机选择响应
   function getRandomResponse(array) {
     return array[Math.floor(Math.random() * array.length)];
@@ -568,39 +303,62 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function getBotResponse(userText) {
-    try {
-      const normalizedText = userText.toLowerCase();
-      const userEmotion = detectEmotion(normalizedText);
-      const context = analyzeContext(normalizedText);
+    const normalizedText = userText.toLowerCase();
 
-      // 根据上下文和情感选择合适的回复
-      let response;
-      if (context.isNavigation) {
-        response = handleNavigation(context.target);
-      } else if (context.isWeather) {
-        response = handleWeatherQuery(context.location);
-      } else if (context.isEmotional) {
-        response = handleEmotionalResponse(userEmotion);
-      } else {
-        response = getGeneralResponse(normalizedText);
+    // 处理导航请求
+    if (normalizedText.match(/去|打开|导航到|看看/)) {
+      for (const [key, value] of Object.entries(navigationMap)) {
+        if (normalizedText.includes(key)) {
+          if (value.startsWith("#")) {
+            document
+              .querySelector(value)
+              .scrollIntoView({ behavior: "smooth" });
+            addMessage("雪宝", getRandomResponse(dialogues.navigation));
+          } else {
+            addMessage("雪宝", `好的，马上为您跳转到${key}页面~`);
+            setTimeout(() => (window.location.href = value), 1000);
+          }
+          return;
+        }
       }
-
-      addToHistory(userText, response);
-      return response;
-    } catch (error) {
-      handleError(error);
-      return null;
     }
-  }
 
-  function analyzeContext(text) {
-    return {
-      isNavigation: /去|打开|导航|看看/.test(text),
-      isWeather: text.includes("天气"),
-      isEmotional: detectEmotion(text) !== "neutral",
-      target: extractNavigationTarget(text),
-      location: extractLocation(text),
-    };
+    // 导航帮助
+    if (normalizedText.match(/怎么走|去哪|导航帮助|指引/)) {
+      addMessage("雪宝", dialogues.navHelp[0]);
+      return;
+    }
+
+    if (userText.includes("天气")) {
+      const location = userText.replace("天气", "").trim();
+      if (location) {
+        getWeather(location);
+      } else {
+        getLocationWeather();
+      }
+      return;
+    }
+
+    if (normalizedText.match(/你好|hello|hi|嗨/)) {
+      addMessage("雪宝", getRandomResponse(dialogues.greetings));
+    } else if (normalizedText.includes("笑话")) {
+      addMessage("雪宝", getRandomResponse(dialogues.jokes));
+    } else if (normalizedText.match(/谢谢|感谢/)) {
+      addMessage("雪宝", getRandomResponse(dialogues.thanks));
+    } else if (normalizedText.match(/再见|拜拜|bye/)) {
+      addMessage("雪宝", getRandomResponse(dialogues.farewells));
+    } else if (normalizedText.match(/帮助|help|怎么用/)) {
+      showHelp();
+    } else if (normalizedText.match(/几点|时间/)) {
+      showCurrentTime();
+    } else if (normalizedText.match(/你是谁|你叫什么/)) {
+      addMessage(
+        "雪宝",
+        "我是雪宝，一个AI助手！我可以帮你查天气、讲笑话，或者陪你聊天！😊"
+      );
+    } else {
+      addMessage("雪宝", getRandomResponse(dialogues.unknown));
+    }
   }
 
   function getLocationWeather() {
@@ -637,65 +395,6 @@ document.addEventListener("DOMContentLoaded", function () {
       addMessage("雪宝", "对不起，您的浏览器不支持地理位置服务。");
     }
   }
-
-  // 2. 添加缺失的函数实现
-  function handleNavigation(target) {
-    for (const category in navigationMap) {
-      for (const [name, details] of Object.entries(navigationMap[category])) {
-        if (target.includes(name)) {
-          document
-            .querySelector(details.path)
-            ?.scrollIntoView({ behavior: "smooth" });
-          return `${details.icon} 正在带您去${name}~`;
-        }
-      }
-    }
-    return "抱歉，我没找到您想去的页面。";
-  }
-
-  function handleWeatherQuery(location) {
-    if (!location) {
-      return getLocationWeather();
-    }
-    return getWeather(location);
-  }
-
-  function handleEmotionalResponse(emotion) {
-    switch (emotion) {
-      case "positive":
-        return getRandomResponse(dialogues.emotions.happy);
-      case "negative":
-        return getRandomResponse(dialogues.emotions.encourage);
-      default:
-        return getRandomResponse(dialogues.unknown);
-    }
-  }
-
-  function extractNavigationTarget(text) {
-    const targets = Object.keys(navigationMap.main)
-      .concat(Object.keys(navigationMap.features))
-      .concat(Object.keys(navigationMap.others));
-    return targets.find((target) => text.includes(target)) || "";
-  }
-
-  function extractLocation(text) {
-    return Object.keys(cityMapping).find((city) => text.includes(city)) || "";
-  }
-
-  // 4. 添加自动隐藏功能
-  let hideTimeout;
-  function resetAutoHide() {
-    clearTimeout(hideTimeout);
-    if (chatContainer.style.display === "flex") {
-      hideTimeout = setTimeout(() => {
-        chatContainer.style.display = "none";
-      }, 300000); // 5分钟后自动隐藏
-    }
-  }
-
-  // 5. 在事件监听器中添加自动隐藏重置
-  chatContainer.addEventListener("mousemove", resetAutoHide);
-  userInput.addEventListener("input", resetAutoHide);
 
   // 点击外部关闭对话框
   document.addEventListener("click", function (e) {

@@ -1,264 +1,132 @@
+:root {
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --primary: #007bff;
+  --primary-hover: #0056b3;
+  --gradient: linear-gradient(90deg, #007bff, #00d2ff);
+}
+
+/* 导航栏基础样式 */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1030;
-  background-color: rgba(255, 255, 255, 0.95);
+  width: 100%;
+  background: var(--nav-bg);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 0;
+  box-shadow: var(--nav-shadow);
   transition: all 0.3s ease;
+  z-index: 1000;
 }
 
 .navbar.scrolled {
-  background-color: #ffffff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Logo样式 */
 .nav-logo {
-  width: 40px;
   height: 40px;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.3s ease;
 }
 
 .nav-logo:hover {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.05);
 }
 
+/* 导航链接样式 */
 .navbar-nav {
-  margin-left: auto;
-  align-items: center;
+  gap: 10px;
 }
 
-.navbar-nav .nav-link {
+.nav-link {
   position: relative;
-  padding: 0.8rem 1.2rem;
-  color: #333;
+  padding: 0.5rem 1rem !important;
+  color: #333 !important;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover {
-  color: #007bff;
-}
-
-.navbar-nav .nav-link::after {
+.nav-link::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 2px;
-  background: #007bff;
+  background: var(--gradient);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover::after,
-.navbar-nav .nav-link.active::after {
+.nav-link:hover::after,
+.nav-link.active::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-.navbar-nav .nav-link i {
-  margin-right: 6px;
-  font-size: 0.9em;
-  transition: transform 0.3s ease;
+.nav-link.active {
+  color: var(--primary) !important;
 }
 
-.navbar-nav .nav-link:hover i {
-  transform: translateY(-2px);
-}
-
-.dropdown-toggle {
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.dropdown-toggle:hover {
-  background: rgba(0, 123, 255, 0.1);
-  transform: scale(1.05);
-}
-
-.dropdown-menu {
-  border-radius: 8px;
-  border: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  animation: dropdownFadeIn 0.3s ease;
-}
-
-.dropdown-item {
-  padding: 0.5rem 1.5rem;
-  transition: all 0.2s ease;
-}
-
-.dropdown-item:hover {
-  background: rgba(0, 123, 255, 0.1);
-  color: #007bff;
-}
-
-.dropdown-item.active {
-  background: #007bff;
-  color: white;
-}
-
+/* 进度条 */
 .scroll-progress {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0;
-  height: 2px;
-  background: #007bff;
+  height: 3px;
+  background: var(--gradient);
   transition: width 0.3s ease;
 }
 
-@keyframes dropdownFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* 修改返回顶部按钮样式 */
+.back-to-top {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  cursor: pointer;
+  box-shadow: var(--nav-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 991.98px) {
-  .navbar-collapse {
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-top: 0.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
+.back-to-top:hover {
+  background: var(--primary-hover);
+  transform: translateY(-50%) scale(1.1);
+}
 
+.back-to-top.show {
+  opacity: 1;
+}
+
+/* 调整图标大小 */
+.back-to-top i {
+  font-size: 1.2rem;
+}
+
+/* 响应式调整 */
+@media (max-width: 991.98px) {
   .navbar-nav {
-    margin: 0;
+    padding: 1rem 0;
   }
 
   .nav-link {
-    padding: 0.5rem 1rem !important;
-    margin: 0.2rem 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar {
-    padding: 0.3rem 0;
+    padding: 0.5rem 0 !important;
   }
 
-  .nav-logo {
-    width: 35px;
-    height: 35px;
-  }
-}
-
-/* 语言切换部分的样式 */
-.lang-switcher {
-  margin-left: 1rem;
-  position: relative;
-}
-
-.lang-toggle {
-  display: flex;
-  align-items: center;
-  padding: 0.6rem 1rem;
-  background: transparent;
-  border: 1px solid rgba(0, 123, 255, 0.2);
-  border-radius: 20px;
-  color: #333;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.lang-toggle:hover {
-  background: rgba(0, 123, 255, 0.08);
-  border-color: rgba(0, 123, 255, 0.4);
-  transform: translateY(-1px);
-}
-
-.lang-toggle i {
-  margin-right: 8px;
-  font-size: 1rem;
-  color: #007bff;
-}
-
-.lang-toggle .current-lang {
-  font-weight: 500;
-}
-
-.lang-menu {
-  min-width: 160px;
-  padding: 0.5rem 0;
-  margin-top: 0.5rem;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-  transform-origin: top;
-  animation: dropdownFadeIn 0.25s ease;
-}
-
-.lang-item {
-  display: flex;
-  align-items: center;
-  padding: 0.7rem 1.2rem;
-  color: #333;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.lang-item:hover {
-  background: rgba(0, 123, 255, 0.08);
-  color: #007bff;
-}
-
-.lang-item.active {
-  background: rgba(0, 123, 255, 0.1);
-  color: #007bff;
-  font-weight: 500;
-}
-
-.lang-flag {
-  width: 22px;
-  height: 16px;
-  margin-right: 10px;
-  border-radius: 2px;
-  object-fit: cover;
-}
-
-@keyframes dropdownFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 移动端适配 */
-@media (max-width: 991.98px) {
-  .lang-switcher {
-    margin: 1rem 0 0;
-    width: 100%;
-  }
-
-  .lang-toggle {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .lang-menu {
-    position: static;
-    width: 100%;
-    margin-top: 0.5rem;
-    box-shadow: none;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+  .nav-link::after {
+    display: none;
   }
 }

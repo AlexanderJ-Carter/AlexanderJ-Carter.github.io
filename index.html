@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- 基本信息 -->
@@ -39,8 +39,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="theme-color" content="#ffffff">
-  <meta name="msapplication-navbutton-color" content="#ffffff">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#ffffff">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
@@ -138,46 +136,28 @@
     </div>
   </div>
 
-  <audio id="background-music" loop preload="metadata">
-    <source src="" type="audio/mpeg">
-    您的浏览器不支持音频播放
-  </audio>
+  <audio id="background-music" loop></audio>
 
-  <div class="music-player" id="music-player" aria-label="音乐播放器">
+  <div class="music-player" id="music-player">
     <div class="player-content">
-      <div id="song-title" class="song-title" aria-live="polite"></div>
-
+      <div id="song-title" class="song-title">当前播放: </div>
       <div class="song-progress">
-        <input type="range" id="progress-bar" class="progress-bar" min="0" max="100" value="0" aria-label="播放进度">
-        <div class="time-display" aria-live="polite">
-          <time id="current-time">0:00</time> / <time id="duration">0:00</time>
-        </div>
+        <label for="progress-bar" class="visually-hidden">Song Progress</label>
+        <input type="range" id="progress-bar" min="0" max="100" step="1" value="0" title="Song Progress">
       </div>
-
-      <div class="controls" role="group" aria-label="播放控制">
-        <button id="prev-song" class="control-btn" type="button" aria-label="上一首">
-          <i class="fas fa-backward" aria-hidden="true"></i>
+      <div class="controls">
+        <button id="next-song" class="control-btn" type="button" title="下一曲">
+          <i class="fas fa-forward"></i>
         </button>
-
-        <button id="random-button" class="control-btn" type="button" aria-label="随机播放">
-          <i class="fas fa-random" aria-hidden="true"></i>
-        </button>
-
-        <button id="next-song" class="control-btn" type="button" aria-label="下一首">
-          <i class="fas fa-forward" aria-hidden="true"></i>
-        </button>
-
         <div class="volume-control">
-          <i class="fas fa-volume-down" aria-hidden="true"></i>
-          <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.3" aria-label="音量控制">
+          <i class="fas fa-volume-down"></i>
+          <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.3" title="音量控制">
         </div>
       </div>
     </div>
   </div>
 
-  <button id="toggle-music-player" class="toggle-button" type="button" aria-label="切换音乐播放器">
-    <span aria-hidden="true">🎵</span>
-  </button>
+  <button id="toggle-music-player" class="toggle-button" type="button">🎵</button>
 
   <!-- 主内容 -->
   <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro">
@@ -200,80 +180,41 @@
     </div>
   </section>
 
-  <!-- 修改导航栏部分 -->
   <nav class="navbar navbar-expand-lg navbar-light sticky-top py-2" id="navbar" aria-label="主导航">
     <div class="scroll-progress"></div>
     <div class="container">
-      <!-- Logo -->
       <a class="navbar-brand" href="#intro" aria-label="返回顶部">
         <img src="img/logo.png" alt="网站Logo" class="nav-logo" width="40" height="40">
       </a>
 
-      <!-- 移动端菜单按钮 -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="切换导航菜单">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- 导航菜单 -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto" role="menubar">
+        <ul class="navbar-nav ms-auto" role="menubar">
           <li class="nav-item" role="none">
-            <a class="nav-link active" href="#intro" role="menuitem" aria-current="page">
-              <i class="fas fa-home"></i> 主页
-            </a>
+            <a class="nav-link active" href="#intro" role="menuitem" aria-current="page">主页</a>
           </li>
           <li class="nav-item" role="none">
-            <a class="nav-link" href="#about" role="menuitem">
-              <i class="fas fa-user"></i> 关于
-            </a>
+            <a class="nav-link" href="#about" role="menuitem">关于</a>
           </li>
           <li class="nav-item" role="none">
-            <a class="nav-link" href="#services" role="menuitem">
-              <i class="fas fa-magic"></i> 创造
-            </a>
+            <a class="nav-link" href="#services" role="menuitem">创造</a>
           </li>
           <li class="nav-item" role="none">
-            <a class="nav-link" href="#portfolio" role="menuitem">
-              <i class="fas fa-images"></i> 作品
-            </a>
+            <a class="nav-link" href="#portfolio" role="menuitem">作品</a>
           </li>
           <li class="nav-item" role="none">
-            <a class="nav-link" href="#text" role="menuitem">
-              <i class="fas fa-pen"></i> 文字
-            </a>
+            <a class="nav-link" href="#text" role="menuitem">文字</a>
           </li>
         </ul>
-
-        <!-- 修改语言切换部分 -->
-        <div class="lang-switcher">
-          <button class="lang-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-globe"></i>
-            <span class="current-lang">简体中文</span>
-          </button>
-          <ul class="dropdown-menu lang-menu">
-            <li>
-              <a class="lang-item active" href="index.html">
-                <img src="https://flagcdn.com/24x18/cn.png" alt="中文" class="lang-flag">
-                简体中文
-              </a>
-            </li>
-            <li>
-              <a class="lang-item" href="index-en.html">
-                <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="lang-flag">
-                English
-              </a>
-            </li>
-            <li>
-              <a class="lang-item" href="index-it.html">
-                <img src="https://flagcdn.com/24x18/it.png" alt="Italiano" class="lang-flag">
-                Italiano
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
+    <button class="back-to-top" aria-label="返回顶部">
+      <i class="fas fa-arrow-up"></i>
+    </button>
   </nav>
 
   <section id="about" class="about-section py-5">
