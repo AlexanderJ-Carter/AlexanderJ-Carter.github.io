@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="css/glightbox.min.css">
     <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/footer.css">
 
 </head>
 
@@ -277,23 +278,61 @@ public class Main {
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black text-gray-100 py-3">
+    <footer class="site-footer">
         <div class="container">
-            <div class="row gy-2">
-                <div class="col-md-6 text-center text-md-start">
-                    <div class="language-switcher">
-                        <i class="fas fa-globe-americas"></i>
-                        <a href="index.html">中文(中国)</a> |
-                        <a href="index-en.html">English</a> |
-                        <a href="index-it.html">Italiano</a>
+            <div class="row">
+                <!-- 左侧：快速导航 -->
+                <div class="col-lg-3">
+                    <div class="footer-links">
+                        <h4>Collegamenti Rapidi</h4>
+                        <ul>
+                            <li><a href="#about">Chi Siamo</a></li>
+                            <li><a href="#services">Crea</a></li>
+                            <li><a href="#portfolio">Portfolio</a></li>
+                            <li><a href="#text">Testo</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">© Alex Hwang 2024</p>
-                    <a href="privacy.html">Privacy</a> |
-                    <a href="terms.html">Termini di utilizzo</a> |
-                    <a href="contact-it.html">Contattaci</a> |
-                    <a href="ads.html">Pubblicità</a>
+
+                <!-- 中间：新年祝福 -->
+                <div class="col-lg-6">
+                    <div class="footer-center">
+                        <div class="new-year-message">
+                            <span class="festive-icon">✨</span>
+                            <span class="greeting">Felice Anno Nuovo e Tanti Auguri!</span>
+                            <span class="festive-icon">✨</span>
+                        </div>
+                        <div class="social-links">
+                            <div class="social-share share-weibo"><i class="fab fa-weibo"></i></div>
+                            <div class="social-share share-wechat"><i class="fab fa-weixin"></i></div>
+                            <div class="social-share share-github"><i class="fab fa-github"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧：语言切换和版权信息 -->
+                <div class="col-lg-3">
+                    <div class="footer-right">
+                        <div class="language-switcher">
+                            <i class="fas fa-globe"></i>
+                            <div class="lang-links">
+                                <a href="index.html">中文</a>
+                                <a href="index-en.html">EN</a>
+                                <a href="index-it.html" class="active">IT</a>
+                            </div>
+                        </div>
+                        <div class="footer-info mt-4">
+                            <div class="copyright">
+                                © 2024 Alex Hwang. Tutti i diritti riservati
+                            </div>
+                            <div class="footer-legal">
+                                <a href="privacy.html">Privacy</a>
+                                <a href="terms.html">Termini di utilizzo</a>
+                                <a href="ads.html">Pubblicità</a>
+                                <a href="contact-it.html">Contattaci</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
