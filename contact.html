@@ -216,8 +216,7 @@
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <a href="privacy.html" class="text-light me-3">隐私政策</a>
-                    <a href="terms.html" class="text-light me-3">使用条款</a>
-                    <a href="ads.html" class="text-light">广告政策</a>
+                    <a href="terms.html" class="text-light">使用条款</a>
                 </div>
             </div>
         </div>
@@ -225,63 +224,32 @@
 
     <script>
         function copyContact(type, info) {
-            // 使用更兼容的方法复制到剪贴板
-            function fallbackCopyTextToClipboard(text) {
-                const textArea = document.createElement("textarea");
-                textArea.value = text;
-                textArea.style.position = "fixed";  // 避免页面滚动
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-
-                let successful = false;
-                try {
-                    successful = document.execCommand('copy');
-                } catch (err) {
-                    console.error('Fallback: 复制失败', err);
-                }
-
-                document.body.removeChild(textArea);
-                return successful;
-            }
-
-            // 尝试使用现代API，失败则使用回退方法
-            if (!navigator.clipboard) {
-                const success = fallbackCopyTextToClipboard(info);
-                showToast(success ? `${type}号已复制到剪贴板！` : '复制失败，请手动复制');
-                return;
-            }
-
             navigator.clipboard.writeText(info).then(() => {
-                showToast(`${type}号已复制到剪贴板！`);
+                // 创建一个临时提示元素
+                const toast = document.createElement('div');
+                toast.style.position = 'fixed';
+                toast.style.bottom = '20px';
+                toast.style.left = '50%';
+                toast.style.transform = 'translateX(-50%)';
+                toast.style.background = 'rgba(0,0,0,0.8)';
+                toast.style.color = 'white';
+                toast.style.padding = '1rem 2rem';
+                toast.style.borderRadius = '25px';
+                toast.style.zIndex = '1000';
+                toast.textContent = `${type}号已复制到剪贴板！`;
+
+                document.body.appendChild(toast);
+
+                // 3秒后移除提示
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => document.body.removeChild(toast), 500);
+                }, 3000);
             }).catch(err => {
                 console.error('复制失败:', err);
-                showToast('复制失败，请手动复制');
+                alert('复制失败，请手动复制');
             });
-        }
-
-        function showToast(message) {
-            // 创建一个临时提示元素
-            const toast = document.createElement('div');
-            toast.style.position = 'fixed';
-            toast.style.bottom = '20px';
-            toast.style.left = '50%';
-            toast.style.transform = 'translateX(-50%)';
-            toast.style.background = 'rgba(0,0,0,0.8)';
-            toast.style.color = 'white';
-            toast.style.padding = '1rem 2rem';
-            toast.style.borderRadius = '25px';
-            toast.style.zIndex = '1000';
-            toast.textContent = message;
-
-            document.body.appendChild(toast);
-
-            // 3秒后移除提示
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transition = 'opacity 0.5s ease';
-                setTimeout(() => document.body.removeChild(toast), 500);
-            }, 3000);
         }
     </script>
 
