@@ -4,186 +4,92 @@ document.addEventListener("DOMContentLoaded", function () {
   const chatbox = document.getElementById("chatbox");
   const userInput = document.getElementById("userInput");
   const sendButton = document.getElementById("sendButton");
+  let isFirstOpen = true; // 检测是否首次打开对话框
+
   const weatherApiKey = "e92adb1cc07788a547544fa7e9cfcc5e";
   const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
-  let isFirstOpen = true; // 检测是否首次打开对话框
 
   // 为聊天按钮添加初始样式
   chatToggleButton.style.position = "fixed";
   chatToggleButton.style.transform = "translate(0, 0)";
 
   const navigationMap = {
-    // 主要导航
-    main: {
-      主页: {
-        path: "#intro",
-        desc: "返回网站首页",
-        icon: "🏠",
-      },
-      关于: {
-        path: "#about",
-        desc: "了解我们的故事",
-        icon: "👥",
-      },
-      创造: {
-        path: "#services",
-        desc: "探索创意世界",
-        icon: "🎨",
-      },
-      作品: {
-        path: "#portfolio",
-        desc: "查看精选作品",
-        icon: "🖼️",
-      },
-      文字: {
-        path: "#text",
-        desc: "阅读分享文章",
-        icon: "📝",
-      },
+    主页: {
+      path: "#intro",
+      desc: "返回网站首页",
+      icon: "🏠",
     },
-
-    // 功能页面
-    features: {
-      音乐: {
-        path: "#music-player",
-        desc: "打开音乐播放器",
-        icon: "🎵",
-      },
-      热点: {
-        path: "news.html",
-        desc: "查看今日热点",
-        icon: "🔥",
-      },
+    关于: {
+      path: "#about",
+      desc: "了解我们的故事",
+      icon: "👥",
     },
-
-    // 其他页面
-    others: {
-      隐私: {
-        path: "privacy.html",
-        desc: "隐私政策说明",
-        icon: "🔒",
-      },
-      联系: {
-        path: "contact.html",
-        desc: "联系我们",
-        icon: "📞",
-      },
-      帮助: {
-        path: "help.html",
-        desc: "使用帮助",
-        icon: "❓",
-      },
+    创造: {
+      path: "#services",
+      desc: "探索创意世界",
+      icon: "🎨",
+    },
+    作品: {
+      path: "#portfolio",
+      desc: "查看精选作品",
+      icon: "🖼️",
+    },
+    文字: {
+      path: "#text",
+      desc: "阅读分享文章",
+      icon: "📝",
+    },
+    联系: {
+      path: "contact.html",
+      desc: "联系我们",
+      icon: "📞",
     },
   };
 
-  // 对话内容库
+  function getNavigationTarget(text) {
+    const target = Object.keys(navigationMap).find((key) => text.includes(key));
+    return target ? navigationMap[target] : null;
+  }
+
   const dialogues = {
-    // 导航相关对话
+    // 导航对话
     navigation: [
       "好的，马上带您过去！✨",
       "这就为您导航，请稍等~🚀",
-      "好的，让我们一起去看看吧！🌟",
       "正在前往目标页面...💫",
     ],
 
-    // 导航帮助信息
+    // 导航帮助
     navHelp: [
       `我可以帮您导航到以下页面：
       🏠 主页 - 返回首页
-      � 关于 - 了解我们故事
+      👥 关于 - 了解我们故事
       🎨 创造 - 探索创意世界
-      �️ 作品 - 欣赏精选集
-      � 文字 - 阅读分享
-      � 联系 - 联系我们`,
+      🖼️ 作品 - 欣赏精选集
+      📝 文字 - 阅读分享
+      📞 联系 - 联系我们`,
     ],
 
-    // 问候语系统
-    greetings: {
-      morning: [
-        "早安！新的一天充满希望！☀️",
-        "早上好！要开始美好的一天了~🌅",
-        "早安，今天也要元气满满哦！🌞",
-      ],
-      afternoon: [
-        "下午好！要来杯咖啡吗？☕",
-        "午后时光总是特别惬意呢~🍃",
-        "下午好！需要来点音乐放松一下吗？🎵",
-      ],
-      evening: [
-        "晚上好！今天过得怎么样？�",
-        "晚安！该休息啦~✨",
-        "晚上好！让我陪你聊聊天吧！🌟",
-      ],
-    },
-
-    // 音乐控制对话
-    music: {
-      play: [
-        "好的，为您播放音乐~🎵",
-        "音乐已开启，享受美妙旋律吧！🎶",
-        "来听点音乐放松一下~🎼",
-      ],
-      pause: [
-        "已暂停播放了哦！⏸️",
-        "好的，音乐已停止~🎵",
-        "需要的时候随时都可以继续播放！🎶",
-      ],
-      next: [
-        "正在切换下一首...⏭️",
-        "换个歌听听吧！🎵",
-        "马上为您播放下一首！�",
-      ],
-      prev: [
-        "返回上一首歌曲~⏮️",
-        "好的，回到前一首！🎵",
-        "马上切换到上一首！🎶",
-      ],
-    },
+    // 基础问候
+    greetings: [
+      "你好！很高兴见到你！👋",
+      "有什么可以帮您的吗？💫",
+      "需要我带您参观网站吗？🌟",
+    ],
 
     // 帮助信息
     help: [
       `我能为您提供以下服务：
-      🎵 音乐控制 - 播放/暂停/切歌
       🧭 网站导航 - 带您游览各个页面
       💡 功能介绍 - 了解网站特色
-      💭 日常聊天 - 陪您聊聊天
-      ❓ 解答疑问 - 回答您的问题`,
+      💭 日常聊天 - 陪您聊聊天`,
     ],
 
-    // 常见问题回复
-    faq: {
-      contact: [
-        "您可以通过页面底部的联系方式找到我们！📧",
-        "要不要我带您去联系页面看看？📞",
-        "您可以发送邮件或通过社交媒体联系我们！💌",
-      ],
-      about: [
-        "我们是一个充满创意的团队！🎨",
-        "让我告诉您更多关于我们的故事~📖",
-        "要去关于页面详细了解一下吗？🔍",
-      ],
-    },
-
-    // 情感回应
-    emotions: {
-      happy: [
-        "太好了！我也为您感到开心！😊",
-        "您的快乐就是我的快乐！🌟",
-        "真是个好消息呢！🎉",
-      ],
-      encourage: [
-        "没关系，事情总会变好的！💪",
-        "加油！我相信您一定可以的！✨",
-        "要保持积极乐观的心态哦！🌈",
-      ],
-    },
-
-    // 未理解时的回复
+    // 未识别回复
     unknown: [
-      "抱歉，我可能没有理解您的意思...🤔",
-      "这个问题有点难到我了，换个话题聊聊？💭",
-      "要不我们聊点别的？或者我可以帮您导航！🧭",
-      "让我想想...需要我介绍一下我能做什么吗？💡",
+      "抱歉，我没有理解您的意思...🤔",
+      "要不换个话题？或者我可以帮您导航！🧭",
+      "需要我介绍一下我能做什么吗？💡",
     ],
   };
 

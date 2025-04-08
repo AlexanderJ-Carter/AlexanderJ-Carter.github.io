@@ -5,217 +5,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>哎呀，页面走丢了！- 404</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>页面未找到 - 风雪归人的网页</title>
+    <meta name="description" content="404 - 页面未找到">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.default.css">
+    <link rel="stylesheet" href="css/custom.css">
     <style>
         body {
-            background-color: #f8f9fa;
-            color: #333;
-            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            justify-content: center;
             text-align: center;
-            overflow: hidden;
+            padding: 2rem;
         }
 
         .error-container {
             max-width: 600px;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 3rem 2rem;
+            margin: 2rem;
         }
 
-        h1 {
-            font-size: 8rem;
-            font-family: 'Pacifico', cursive;
+        .error-icon {
+            font-size: 5rem;
+            color: #007bff;
+            margin-bottom: 1.5rem;
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             color: #333;
-            margin-bottom: 20px;
-            animation: floating 3s ease-in-out infinite;
         }
 
-        .error-message {
-            font-size: 1.5rem;
+        .error-text {
             color: #666;
-            margin-bottom: 30px;
+            margin-bottom: 2rem;
         }
 
-        .error-subtitle {
-            font-size: 1.2rem;
-            color: #888;
-            margin-bottom: 20px;
-        }
-
-        .btn-home {
+        .home-button {
             display: inline-block;
-            margin-top: 30px;
-            padding: 12px 35px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, #007bff, #00d2ff);
+            color: white;
+            border-radius: 30px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
-        }
-
-        .btn-home:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
-            color: #fff;
-        }
-
-        .error-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('img/Background.jpg');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.1;
-            z-index: -1;
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        .floating-elements {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .floating-element {
-            position: absolute;
-            animation: float 6s infinite;
-            opacity: 0.6;
-        }
-
-        @keyframes floating {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 0.1;
-            }
-
-            50% {
-                opacity: 0.15;
-            }
-
-            100% {
-                opacity: 0.1;
-            }
-        }
-
-        @keyframes float {
-            0% {
-                transform: translate(0, 0);
-            }
-
-            50% {
-                transform: translate(15px, -15px);
-            }
-
-            100% {
-                transform: translate(0, 0);
-            }
-        }
-
-        .game-container {
-            margin-top: 30px;
-            display: none;
-        }
-
-        .game-button {
-            padding: 10px 20px;
-            margin: 0 10px;
-            background-color: #6c757d;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            font-weight: 500;
             transition: all 0.3s ease;
         }
 
-        .game-button:hover {
-            background-color: #5a6268;
-            transform: scale(1.05);
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
         }
     </style>
 </head>
 
 <body>
-    <div class="floating-elements">
-        <span class="floating-element" style="top:20%; left:20%;">404</span>
-        <span class="floating-element" style="top:30%; right:25%;">?</span>
-        <span class="floating-element" style="bottom:30%; left:30%;">!</span>
-    </div>
-
     <div class="error-container">
-        <h1>404</h1>
-        <p class="error-message">咦？页面怎么不见了？</p>
-        <p class="error-subtitle">要不要玩个小游戏解解闷？</p>
-        <div class="game-container" id="gameContainer">
-            <p id="gameText">猜一猜数字（1-100）</p>
-            <input type="number" id="guessInput" min="1" max="100">
-            <button class="game-button" onclick="checkGuess()">猜！</button>
+        <div class="error-icon">
+            <i class="fas fa-compass"></i>
         </div>
-        <button class="btn-home" id="playButton" onclick="toggleGame()">来玩个游戏</button>
-        <a href="index.html" class="btn-home">返回首页</a>
+        <h1 class="error-title">迷路了？</h1>
+        <p class="error-text">很抱歉，您访问的页面不存在或已被移动到其他位置。</p>
+        <a href="index.html" class="home-button">
+            <i class="fas fa-home me-2"></i>返回首页
+        </a>
     </div>
-
-    <div class="error-background"></div>
 
     <script>
-        let gameStarted = false;
-        let targetNumber = Math.floor(Math.random() * 100) + 1;
-        let attempts = 0;
+        // 简单的动画效果
+        document.addEventListener('DOMContentLoaded', function () {
+            const errorIcon = document.querySelector('.error-icon');
 
-        function toggleGame() {
-            const gameContainer = document.getElementById('gameContainer');
-            const playButton = document.getElementById('playButton');
-
-            if (!gameStarted) {
-                gameContainer.style.display = 'block';
-                playButton.style.display = 'none';
-                gameStarted = true;
-            }
-        }
-
-        function checkGuess() {
-            const input = document.getElementById('guessInput');
-            const guess = parseInt(input.value);
-            const gameText = document.getElementById('gameText');
-            attempts++;
-
-            if (guess === targetNumber) {
-                gameText.textContent = `太棒了！你用了${attempts}次就猜对了！`;
-                document.getElementById('guessInput').disabled = true;
-            } else if (guess < targetNumber) {
-                gameText.textContent = '猜小了，再试试！';
-            } else {
-                gameText.textContent = '猜大了，再试试！';
-            }
-        }
+            // 添加旋转动画
+            setInterval(() => {
+                errorIcon.style.transform = 'rotate(20deg)';
+                setTimeout(() => {
+                    errorIcon.style.transform = 'rotate(-20deg)';
+                    setTimeout(() => {
+                        errorIcon.style.transform = 'rotate(0)';
+                    }, 500);
+                }, 500);
+            }, 3000);
+        });
     </script>
 </body>
 

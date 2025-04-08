@@ -68,23 +68,41 @@ document.addEventListener("DOMContentLoaded", function () {
   // 检测网络状态并选择播放列表
   async function checkNetworkAndInitialize() {
     try {
+      // 显示加载状态
+      if (songTitle) {
+        songTitle.innerHTML = `<div class="song-info-wrapper">
+          <span class="now-playing">加载中...</span>
+          <span class="song-artist">正在准备音乐</span>
+        </div>`;
+      }
+
       const connection =
         navigator.connection ||
         navigator.mozConnection ||
         navigator.webkitConnection;
-      const response = await fetch("https://www.bensound.com", {
+
+      // 设置超时
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error("请求超时")), 5000);
+      });
+
+      const fetchPromise = fetch("https://www.bensound.com", {
         method: "HEAD",
       });
+
+      // 使用Promise.race实现超时控制
+      const response = await Promise.race([fetchPromise, timeoutPromise]);
 
       if (response.ok && (!connection || connection.downlink > 1)) {
         songs = [...localSongs, ...onlineSongs];
         updatePlaylist();
       }
     } catch (error) {
-      console.log("仅使用本地音乐");
+      console.log("仅使用本地音乐，原因:", error.message);
+    } finally {
+      loadSong(currentSongIndex);
+      updatePlayerDisplay();
     }
-    loadSong(currentSongIndex);
-    updatePlayerDisplay();
   }
 
   // 更新播放列表显示
@@ -193,9 +211,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   music.addEventListener("ended", playNext);
-  music.addEventListener("error", () => {
-    console.log("加载失败，切换下一首");
-    playNext();
+  music.addEventListener("error", (e) => {
+    console.log(
+      `加载失败: ${e.target.error ? e.target.error.message : "未知错误"}`
+    );
+
+    // 尝试最多3次切换歌曲
+    if (!window.retryCount) window.retryCount = 0;
+
+    if (window.retryCount < 3) {
+      window.retryCount++;
+      playNext();
+    } else {
+      window.retryCount = 0;
+      songTitle.innerHTML = `<div class="song-info-wrapper">
+        <span class="now-playing">音乐加载失败</span>
+        <span class="song-artist">请检查网络连接后重试</span>
+      </div>`;
+    }
   });
 
   // 自动隐藏控制

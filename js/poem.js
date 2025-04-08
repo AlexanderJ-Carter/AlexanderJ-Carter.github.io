@@ -2,23 +2,56 @@ jinrishici.load(function (result) {
   var sentence = document.querySelector("#poem_sentence");
   var info = document.querySelector("#poem_info");
 
-  sentence.innerHTML = result.data.content;
-  info.innerHTML = `【${result.data.origin.dynasty}】${result.data.origin.author}《${result.data.origin.title}》`;
+  if (sentence && info) {
+    sentence.innerHTML = result.data.content;
+    info.innerHTML = `【${result.data.origin.dynasty}】${result.data.origin.author}《${result.data.origin.title}》`;
+  }
 });
 
+// 优化历史上的今天API调用
 function getTodayInHistory() {
+  // 检查是否有缓存的历史数据
+  const cachedData = sessionStorage.getItem("historyToday");
+  const cachedTime = sessionStorage.getItem("historyTodayTime");
+
+  // 如果有缓存且不超过1小时，直接使用缓存
+  if (cachedData && cachedTime && Date.now() - parseInt(cachedTime) < 3600000) {
+    displayHistoryEvent(JSON.parse(cachedData));
+    return;
+  }
+
   fetch("https://api.oick.cn/lishi/api.php")
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("网络响应不正常");
+      }
+      return response.json();
+    })
     .then((data) => {
       if (data && data.result) {
-        const randomEvent =
-          data.result[Math.floor(Math.random() * data.result.length)];
-        document.querySelector(
-          "#history-today"
-        ).innerHTML = `在 ${randomEvent.date}，${randomEvent.title}`;
+        // 缓存数据
+        sessionStorage.setItem("historyToday", JSON.stringify(data));
+        sessionStorage.setItem("historyTodayTime", Date.now().toString());
+        displayHistoryEvent(data);
       }
     })
-    .catch((error) => console.error("Error fetching historical event:", error));
+    .catch((error) => {
+      console.error("获取历史事件出错:", error);
+      const historyElement = document.querySelector("#history-today");
+      if (historyElement) {
+        historyElement.innerHTML = "历史事件加载失败，请稍后再试...";
+      }
+    });
+}
+
+// 显示历史事件
+function displayHistoryEvent(data) {
+  const historyElement = document.querySelector("#history-today");
+  if (historyElement && data.result) {
+    const randomEvent =
+      data.result[Math.floor(Math.random() * data.result.length)];
+    historyElement.innerHTML = `在 ${randomEvent.date}，${randomEvent.title}`;
+  }
 }
 
 // 初始化获取历史事件

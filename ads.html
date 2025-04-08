@@ -25,6 +25,31 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
 
+        /* 响应式改进 */
+        @media (max-width: 768px) {
+            .ads-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .price-card.popular {
+                transform: scale(1);
+                border: 2px solid #007bff;
+            }
+        }
+
+        /* 性能优化 - 使用transform而不是多重属性 */
+        .price-card:hover {
+            transform: translateY(-10px);
+            transition: transform 0.3s ease;
+        }
+
+        /* 可访问性改进 */
+        .contact-button:focus {
+            outline: 2px solid #0056b3;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+        }
+
         .price-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

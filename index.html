@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- 基本信息 -->
@@ -35,7 +34,7 @@
   </script>
 
   <!-- PWA和图标 -->
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.webmanifest">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="theme-color" content="#ffffff">
@@ -47,7 +46,7 @@
 
   <!-- 社交分享配置 -->
   <meta property="og:title" content="风雪归人的网页">
-  <meta property="og:description" content="展示个人作品和内容分享的个人网页。">
+  <meta property="og:description" content="展示个人作品和内容分享的网页。">
   <meta property="og:image" content="img/logo.png">
   <meta property="og:url" content="https://Alex-hwang.github.io">
   <meta property="og:type" content="website">
@@ -65,734 +64,769 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
 
   <!-- 字体 -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap"
-    rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap&display=swap&display=swap"
     rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
-
+  ts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap&display=swap&display=swap"
+  rel="stylesheet">
   <!-- 样式 -->
   <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+  <link rel="stylesheet" href="css/custom.css">t.css" id="theme-stylesheet">
+  <link rel="stylesheet" href="css/custom.css">
+  <!-- 组合CSS文件，减少HTTP请求 -->
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/components.css">
+  <!-- 预加载关键资源 -->
+  <link rel="preload" as="image" href="img/AboutMe.jpg">
+  <link rel="preload" as="image" href="img/logo.png">g">
+  <link rel="preload" as="script" href="js/bootstrap.bundle.min.js">
+  <link rel="preload" as="script" href="js/bootstrap.bundle.min.js">
   <link rel="stylesheet" href="css/navigation.css">
-  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/about.css">css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/display.css">
-  <link rel="stylesheet" href="css/custom.css">
-
+  <link rel="stylesheet" href="css/display.css">
   <link rel="stylesheet" href="css/glightbox.min.css">
-  <link rel="stylesheet" href="css/chatbot.css">
-  <link rel="stylesheet" href="css/cookie.css">
+  <link rel="stylesheet" href="css/chatbot.css">.css">
+  <link rel="stylesheet" href="css/cookie.css">>
   <link rel="stylesheet" href="css/newyear.css">
-  <link rel="stylesheet" href="css/music.css">
+  <link rel="stylesheet" href="css/music.css">">
+  <link rel="stylesheet" href="css/poem.css">>
   <link rel="stylesheet" href="css/poem.css">
-
   <!-- 脚本 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" defer></script>
+  <script src="js/error-handler.js"></script>jax/libs/highlight.js/11.7.0/highlight.min.js" defer></script>
   <script src="js/error-handler.js"></script>
-
   <!-- 添加资源预加载 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="preload" as="image" href="img/AboutMe.jpg">
+  <link rel="preload" as="image" href="img/AboutMe.jpg">com">
+</head> rel="preload" as="image" href="img/AboutMe.jpg">
 </head>
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
 
-  <!-- 新年祝福 -->
-  <div id="myModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <i class="fas fa-gift modal-icon"></i>
-        <h2>新年快乐！</h2>
-      </div>
-      <div class="modal-body">
-        <p>祝您在新的一年里:</p>
-        <div class="wish-list">
-          <div class="wish-item">
-            <i class="fas fa-heart"></i>
-            <span>身体健康</span>
-          </div>
-          <div class="wish-item">
-            <i class="fas fa-star"></i>
-            <span>万事如意</span>
-          </div>
-          <div class="wish-item">
-            <i class="fas fa-smile"></i>
-            <span>阖家欢乐</span>
-          </div>
-        </div>
-      </div>
-      <div class="button-container">
-        <button id="closeBtn" class="close-btn" type="button">
-          <i class="fas fa-envelope-open-text"></i>
-          收下祝福
-        </button>
-        <button id="dontShowBtn" class="dont-show-btn" type="button">
-          <i class="fas fa-calendar-day"></i>
-          今日不再提醒
-        </button>
-      </div>
+  <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
+    <!-- 新年祝福 -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">l">
+        <div class="modal-header">
+          <i class="fas fa-gift modal-icon"></i>
+          <h2>新年快乐！</h2>fa-gift modal-icon"></i>
+        </div>新年快乐！</h2>
+        <div class="modal-body">
+          <p>祝您在新的一年里:</p>body">
+          <div class="wish-list">
+            <div class="wish-item">
+              <i class="fas fa-heart"></i>
+              <span>身体健康</span>heart"></i>
+            </div>n>身体健康</span>
+            <div class="wish-item">
+              <i class="fas fa-star"></i>
+              <span>万事如意</span>star"></i>
+            </div>n>万事如意</span>
+            <div class="wish-item">
+              <i class="fas fa-smile"></i>
+              <span>阖家欢乐</span>smile"></i>
+            </div>n>阖家欢乐</span>
+          </div>v>
+        </div>v>
+        <div class="button-container">
+          <button id="closeBtn" class="close-btn" type="button">
+            <i class="fas fa-envelope-open-text"></i>e="button">
+            收下祝福lass="fas fa-envelope-open-text"></i>
+          </button>
+          <button id="dontShowBtn" class="dont-show-btn" type="button">
+            <i class="fas fa-calendar-day"></i>show-btn" type="button">
+            今日不再提醒ss="fas fa-calendar-day"></i>
+          </button>
+        </div>tton>
+      </div>v>
+    </div>v>
     </div>
-  </div>
-
-  <audio id="background-music" loop preload="metadata">
-    <source src="" type="audio/mpeg">
-    您的浏览器不支持音频播放
-  </audio>
-
-  <div class="music-player" id="music-player" aria-label="音乐播放器">
-    <div class="player-content">
-      <div id="song-title" class="song-title" aria-live="polite"></div>
-
-      <div class="song-progress">
+    <audio id="background-music" loop preload="metadata">
+      <source src="" type="audio/mpeg">reload="metadata">
+      您的浏览器不支持音频播放"" type="audio/mpeg">
+    </audio>支持音频播放
+    </audio>
+    <div class="music-player" id="music-player" aria-label="音乐播放器">
+      <div class="player-content">music-player" aria-label="音乐播放器">
+        <div id="song-title" class="song-title" aria-live="polite"></div>
+        <div id="song-title" class="song-title" aria-live="polite"></div>
+        <div class="song-progress"></div>
         <input type="range" id="progress-bar" class="progress-bar" min="0" max="100" value="0" aria-label="播放进度">
-        <div class="time-display" aria-live="polite">
+        <div class="time-display" aria-live="polite">progress-bar" min="0" max="100" value="0" aria-label="播放进度">
           <time id="current-time">0:00</time> / <time id="duration">0:00</time>
-        </div>
-      </div>
-
-      <div class="controls" role="group" aria-label="播放控制">
-        <button id="prev-song" class="control-btn" type="button" aria-label="上一首">
-          <i class="fas fa-backward" aria-hidden="true"></i>
-        </button>
-
-        <button id="random-button" class="control-btn" type="button" aria-label="随机播放">
-          <i class="fas fa-random" aria-hidden="true"></i>
-        </button>
-
-        <button id="next-song" class="control-btn" type="button" aria-label="下一首">
-          <i class="fas fa-forward" aria-hidden="true"></i>
-        </button>
-
-        <div class="volume-control">
-          <i class="fas fa-volume-down" aria-hidden="true"></i>
-          <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.3" aria-label="音量控制">
-        </div>
-      </div>
+        </div>e id="current-time">0:00</time> / <time id="duration">0:00</time>
+      </div>v>
     </div>
-  </div>
-
-  <button id="toggle-music-player" class="toggle-button" type="button" aria-label="切换音乐播放器">
-    <span aria-hidden="true">🎵</span>
-  </button>
-
-  <!-- 主内容 -->
-  <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro">
-    <div class="overlay-content w-100 text-white">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-7 col-md-12 mx-auto text-center">
-            <p class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in">
-              欢迎加入我们的旅程
-            </p>
-            <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold fade-in">
-              探索灵感 创造未来
-            </h1>
-            <p class="fst-italic intro-text text-muted mt-4 fade-in" style="font-size: 1.2rem;">
-              一起发现、分享、创造每个闪亮的瞬间。
-            </p>
-          </div>
-        </div>
-      </div>
+    <div class="controls" role="group" aria-label="播放控制"></div>
+    <button id="prev-song" class="control-btn" type="button" aria-label="上一首">
+      <i class="fas fa-backward" aria-hidden="true"></i>ton" aria-label="上一首">
+    </button>s="fas fa-backward" aria-hidden="true"></i>
+    </button>
+    <button id="random-button" class="control-btn" type="button" aria-label="随机播放">
+      <i class="fas fa-random" aria-hidden="true"></i>e="button" aria-label="随机播放">
+    </button>s="fas fa-random" aria-hidden="true"></i>
+    </button>
+    <button id="next-song" class="control-btn" type="button" aria-label="下一首"></button>
+    <i class="fas fa-forward" aria-hidden="true"></i>tton" aria-label="下一首">
+    </button>s="fas fa-forward" aria-hidden="true"></i>
+    </button>
+    <div class="volume-control"></div>
+    <i class="fas fa-volume-down" aria-hidden="true"></i>
+    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.3" aria-label="音量控制">
+    </div>ut type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.3" aria-label="音量控制">
+    </div>v>
+    </div>v>
+    </div>v>
     </div>
-  </section>
-
-  <!-- 修改导航栏部分 -->
-  <nav class="navbar navbar-expand-lg navbar-light sticky-top py-2" id="navbar" aria-label="主导航">
-    <div class="scroll-progress"></div>
-    <div class="container">
-      <!-- Logo -->
+    <button id="toggle-music-player" class="toggle-button" type="button" aria-label="切换音乐播放器"></button>
+    <span aria-hidden="true">🎵</span>ss="toggle-button" type="button" aria-label="切换音乐播放器">
+    </button>ria-hidden="true">🎵</span>
+    </button>
+    <!-- 主内容 -->
+    <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro">
+      <div class="overlay-content w-100 text-white">ixed bg-center d-flex align-items-center" id="intro">
+        <div class="container">nt w-100 text-white">
+          <div class="row">er">
+            <div class="col-lg-7 col-md-12 mx-auto text-center">
+              <p class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in">
+                欢迎加入我们的旅程st-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in">
+              </p>加入我们的旅程
+              <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold fade-in">
+                探索灵感 创造未来text-uppercase intro-heading letter-spacing-5 fw-bold fade-in">
+              </h1>感 创造未来
+              <p class="fst-italic intro-text text-muted mt-4 fade-in" style="font-size: 1.2rem;">
+                一起发现、分享、创造每个闪亮的瞬间。 intro-text text-muted mt-4 fade-in" style="font-size: 1.2rem;">
+              </p>发现、分享、创造每个闪亮的瞬间。
+            </div>
+          </div>v>
+        </div>v>
+      </div>v>
+    </section>
+    </section>
+    <!-- 修改导航栏部分 -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top py-2" id="navbar" aria-label="主导航">
+      <div class="scroll-progress"></div>avbar-light sticky-top py-2" id="navbar" aria-label="主导航">
+      <div class="container">ress"></div>
+      <!-- Logo -->tainer">
       <a class="navbar-brand" href="#intro" aria-label="返回顶部">
         <img src="img/logo.png" alt="网站Logo" class="nav-logo" width="40" height="40">
+      </a>mg src="img/logo.png" alt="网站Logo" class="nav-logo" width="40" height="40">
       </a>
-
       <!-- 移动端菜单按钮 -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="切换导航菜单">
-        <span class="navbar-toggler-icon"></span>
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="切换导航菜单">et="#navbarSupportedContent"
+        <span class="navbar-toggler-icon"></span>ia-expanded="false" aria-label="切换导航菜单">
+      </button>lass="navbar-toggler-icon"></span>
       </button>
-
       <!-- 导航菜单 -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto" role="menubar">
-          <li class="nav-item" role="none">
+        <ul class="navbar-nav me-auto" role="menubar">SupportedContent">
+          <li class="nav-item" role="none">="menubar">
             <a class="nav-link active" href="#intro" role="menuitem" aria-current="page">
-              <i class="fas fa-home"></i> 主页
-            </a>
-          </li>
+              <i class="fas fa-home"></i> 主页"#intro" role="menuitem" aria-current="page">
+            </a> class="fas fa-home"></i> 主页
+          </li>>
           <li class="nav-item" role="none">
             <a class="nav-link" href="#about" role="menuitem">
-              <i class="fas fa-user"></i> 关于
-            </a>
-          </li>
+              <i class="fas fa-user"></i> 关于" role="menuitem">
+            </a> class="fas fa-user"></i> 关于
+          </li>>
           <li class="nav-item" role="none">
             <a class="nav-link" href="#services" role="menuitem">
-              <i class="fas fa-magic"></i> 创造
-            </a>
-          </li>
+              <i class="fas fa-magic"></i> 创造es" role="menuitem">
+            </a> class="fas fa-magic"></i> 创造
+          </li>>
           <li class="nav-item" role="none">
             <a class="nav-link" href="#portfolio" role="menuitem">
-              <i class="fas fa-images"></i> 作品
-            </a>
-          </li>
+              <i class="fas fa-images"></i> 作品io" role="menuitem">
+            </a> class="fas fa-images"></i> 作品
+          </li>>
           <li class="nav-item" role="none">
-            <a class="nav-link" href="#text" role="menuitem">
-              <i class="fas fa-pen"></i> 文字
-            </a>
-          </li>
+            <a class="nav-link" href="#text" role="menuitem"></a>
+            <i class="fas fa-pen"></i> 文字" role="menuitem"></a>
+            </a>lass="fas fa-pen"></i> 文字
+          </li>>
+        </ul>i>
         </ul>
-
         <!-- 修改语言切换部分 -->
         <div class="lang-switcher">
           <button class="lang-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-globe"></i>
+            <i class="fas fa-globe"></i>pe="button" data-bs-toggle="dropdown" aria-expanded="false">
             <span class="current-lang">简体中文</span>
-          </button>
+          </button>lass="current-lang">简体中文</span>
           <ul class="dropdown-menu lang-menu">
-            <li>
+            <li>ass="dropdown-menu lang-menu">
               <a class="lang-item active" href="index.html">
                 <img src="https://flagcdn.com/24x18/cn.png" alt="中文" class="lang-flag">
-                简体中文
-              </a>
-            </li>
-            <li>
+                简体中文 src="https://flagcdn.com/24x18/cn.png" alt="中文" class="lang-flag">
+              </a>中文
+            </li>>
+            <li>>
               <a class="lang-item" href="index-en.html">
                 <img src="https://flagcdn.com/24x18/gb.png" alt="English" class="lang-flag">
-                English
-              </a>
-            </li>
-            <li>
+                Englishc="https://flagcdn.com/24x18/gb.png" alt="English" class="lang-flag">
+              </a>glish
+            </li>>
+            <li>>
               <a class="lang-item" href="index-it.html">
                 <img src="https://flagcdn.com/24x18/it.png" alt="Italiano" class="lang-flag">
-                Italiano
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <section id="about" class="about-section py-5">
-    <div class="container">
+                Italiano="https://flagcdn.com/24x18/it.png" alt="Italiano" class="lang-flag">
+              </a>aliano
+            </li>>
+          </ul>i>
+        </div>>
+      </div>v>
+      </div>v>
+    </nav>v>
+    </nav>
+    <section id="about" class="about-section py-5"></section>
+    <div class="container">="about-section py-5">
       <div class="row gy-4 align-items-center">
-        <div class="col-lg-6 fade-in-left">
-          <div class="about-content">
+        <div class="col-lg-6 fade-in-left">er">
+          <div class="about-content">left">
             <h2 class="section-title mb-4">关于我们</h2>
-            <div class="subtitle-line"></div>
+            <div class="subtitle-line"></div>我们</h2>
             <p class="lead text-primary mb-4">用创意定格每个精彩瞬间</p>
-            <div class="about-text">
-              <p class="mb-4">
+            <div class="about-text">ary mb-4">用创意定格每个精彩瞬间</p>
+              <p class="mb-4">text">
                 在这个充满无限可能的世界里，我们致力于捕捉生活中的每一个独特时刻。通过镜头、设计与文字，我们将平凡化为非凡，让创意点亮生活。
-              </p>
+              </p>个充满无限可能的世界里，我们致力于捕捉生活中的每一个独特时刻。通过镜头、设计与文字，我们将平凡化为非凡，让创意点亮生活。
               <div class="features-grid">
                 <div class="feature-item">
                   <i class="fas fa-camera-retro"></i>
-                  <span>视觉创作</span>
-                </div>
+                  <span>视觉创作</span>camera-retro"></i>
+                </div>n>视觉创作</span>
                 <div class="feature-item">
                   <i class="fas fa-pen-fancy"></i>
-                  <span>内容策划</span>
-                </div>
+                  <span>内容策划</span>pen-fancy"></i>
+                </div>n>内容策划</span>
                 <div class="feature-item">
                   <i class="fas fa-code"></i>
-                  <span>数字体验</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                  <span>数字体验</span>code"></i>
+                </div>n>数字体验</span>
+              </div>v>
+            </div>v>
+          </div>v>
+        </div>v>
         <div class="col-lg-5 ms-auto fade-in-right">
-          <div class="about-image">
+          <div class="about-image">o fade-in-right">
             <img class="img-fluid rounded-3 shadow" src="img/AboutMe.jpg" alt="关于我们的图片">
-            <div class="image-overlay"></div>
-          </div>
+            <div class="image-overlay"></div>hadow" src="img/AboutMe.jpg" alt="关于我们的图片">
+          </div> class="image-overlay">
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="services" class="services-section py-5">
-    <div class="container">
+      </div>v>
+    </div>v>
+    </div>v>
+    </section>
+    </section>
+    <section id="services" class="services-section py-5"></section>
+    <div class="container">ass="services-section py-5">
       <div class="text-center mb-5">
         <h2 class="section-title">创造与表达</h2>
         <div class="subtitle-line mx-auto"></div>
         <p class="lead text-muted">探索无限可能，释放创意潜能</p>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="service-card">
-            <div class="card-icon">
-              <i class="fas fa-camera-retro"></i>
-            </div>
-            <div class="card-content">
-              <h3>视觉探索</h3>
-              <p>通过专业的摄影技术，我们捕捉生活中稍纵即逝的精彩瞬间，将平凡化为永恒。</p>
-              <ul class="service-features">
-                <li><i class="fas fa-check"></i> 人像摄影</li>
-                <li><i class="fas fa-check"></i> 风景记录</li>
-                <li><i class="fas fa-check"></i> 创意拍摄</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="service-card">
-            <div class="card-icon">
-              <i class="fas fa-pen-fancy"></i>
-            </div>
-            <div class="card-content">
-              <h3>文字创作</h3>
-              <p>用优美的文字讲述动人的故事，让每一篇作品都承载着独特的情感与思考。</p>
-              <ul class="service-features">
-                <li><i class="fas fa-check"></i> 随笔散文</li>
-                <li><i class="fas fa-check"></i> 诗歌创作</li>
-                <li><i class="fas fa-check"></i> 内容策划</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="service-card">
-            <div class="card-icon">
-              <i class="fas fa-paint-brush"></i>
-            </div>
-            <div class="card-content">
-              <h3>创意设计</h3>
-              <p>将灵感转化为视觉作品，用独特的设计语言诠释不同的创意理念。</p>
-              <ul class="service-features">
-                <li><i class="fas fa-check"></i> 平面设计</li>
-                <li><i class="fas fa-check"></i> UI设计</li>
-                <li><i class="fas fa-check"></i> 插画创作</li>
-              </ul>
+      </div>lass="lead text-muted">探索无限可能，释放创意潜能</p>
+    </div>
+    <div class="row g-4"></div>
+    <div class="col-md-4">
+      <div class="service-card">
+        <div class="card-icon">>
+          <i class="fas fa-camera-retro"></i>
+        </div>lass="fas fa-camera-retro"></i>
+        <div class="card-content">
+          <h3>视觉探索</h3>d-content">
+          <p>通过专业的摄影技术，我们捕捉生活中稍纵即逝的精彩瞬间，将平凡化为永恒。</p>
+          <ul class="service-features">，将平凡化为永恒。</p>
+            <li><i class="fas fa-check"></i> 人像摄影</li>
+            <li><i class="fas fa-check"></i> 风景记录</li>
+            <li><i class="fas fa-check"></i> 创意拍摄</li>
+          </ul>><i class="fas fa-check"></i> 创意拍摄</li>
+        </div>>
+      </div>v>
+    </div>v>
+    </div>
+    <div class="col-md-4">
+      <div class="service-card">
+        <div class="card-icon">>
+          <i class="fas fa-pen-fancy"></i>
+        </div>lass="fas fa-pen-fancy"></i>
+        <div class="card-content">
+          <h3>文字创作</h3>d-content">
+          <p>用优美的文字讲述动人的故事，让每一篇作品都承载着独特的情感与思考。</p>
+          <ul class="service-features">的情感与思考。</p>
+            <li><i class="fas fa-check"></i> 随笔散文</li>
+            <li><i class="fas fa-check"></i> 诗歌创作</li>
+            <li><i class="fas fa-check"></i> 内容策划</li>
+          </ul>><i class="fas fa-check"></i> 内容策划</li>
+        </div>>
+      </div>v>
+    </div>v>
+    </div>
+    <div class="col-md-4">
+      <div class="service-card">
+        <div class="card-icon">>
+          <i class="fas fa-paint-brush"></i>
+        </div>lass="fas fa-paint-brush"></i>
+        <div class="card-content">
+          <h3>创意设计</h3>d-content">
+          <p>将灵感转化为视觉作品，用独特的设计语言诠释不同的创意理念。</p>
+          <ul class="service-features">理念。</p>
+            <li><i class="fas fa-check"></i> 平面设计</li>
+            <li><i class="fas fa-check"></i> UI设计</li>
+            <li><i class="fas fa-check"></i> 插画创作</li>
+          </ul>><i class="fas fa-check"></i> 插画创作</li>
+        </div>>
+      </div>v>
+    </div>v>
+    </div>v>
+    </div>v>
+    </section>
+    </section>
+    <section id="portfolio" class="portfolio-section py-5"></section>
+    <div class="container">lass="portfolio-section py-5">
+      <!-- 标题部分 -->tainer">
+      <div class="text-center mb-5"></div>
+      <h2 class="section-title">精选作品集</h2>
+      <div class="subtitle-line mx-auto"></div>
+      <p class="lead text-muted">探索创意边界，分享独特视角</p>
+    </div>ss="lead text-muted">探索创意边界，分享独特视角</p>
+    </div>
+    <!-- 作品分类标签 -->
+    <div class="portfolio-filter mb-4">
+      <button class="filter-btn active" data-filter="all" type="button">全部</button>
+      <button class="filter-btn" data-filter="photo" type="button">摄影</button>on>
+      <button class="filter-btn" data-filter="design" type="button">设计</button>
+      <button class="filter-btn" data-filter="code" type="button">代码</button>
+    </div>n class="filter-btn" data-filter="code" type="button">代码</button>
+    </div>
+    <div class="portfolio-grid">
+      <!-- 摄影作品 -->olio-grid">
+      <div class="portfolio-item" data-category="photo">
+        <div class="portfolio-card">-category="photo">
+          <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000" alt="城市风光" class="portfolio-image">
+          <div class="portfolio-overlay">.com/photo-1449824913935-59a10b8d2000" alt="城市风光" class="portfolio-image">
+            <h5>城市印象</h5>olio-overlay">
+            <p>城市建筑摄影</p>
+            <div class="portfolio-icons">
+              <a href="https://images.unsplash.com/photo-1449824913935-59a10b8d2000" class="portfolio-link"
+                data-gallery="gallery">plash.com/photo-1449824913935-59a10b8d2000" class="portfolio-link"
+                <i class="fas fa-search-plus"></i>
+              </a>lass="fas fa-search-plus"></i>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <section id="portfolio" class="portfolio-section py-5">
-    <div class="container">
-      <!-- 标题部分 -->
-      <div class="text-center mb-5">
-        <h2 class="section-title">精选作品集</h2>
-        <div class="subtitle-line mx-auto"></div>
-        <p class="lead text-muted">探索创意边界，分享独特视角</p>
-      </div>
-
-      <!-- 作品分类标签 -->
-      <div class="portfolio-filter mb-4">
-        <button class="filter-btn active" data-filter="all" type="button">全部</button>
-        <button class="filter-btn" data-filter="photo" type="button">摄影</button>
-        <button class="filter-btn" data-filter="design" type="button">设计</button>
-        <button class="filter-btn" data-filter="code" type="button">代码</button>
-      </div>
-
-      <div class="portfolio-grid">
-        <!-- 摄影作品 -->
-        <div class="portfolio-item" data-category="photo">
-          <div class="portfolio-card">
-            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000" alt="城市风光" class="portfolio-image">
-            <div class="portfolio-overlay">
-              <h5>城市印象</h5>
-              <p>城市建筑摄影</p>
-              <div class="portfolio-icons">
-                <a href="https://images.unsplash.com/photo-1449824913935-59a10b8d2000" class="portfolio-link"
-                  data-gallery="gallery">
-                  <i class="fas fa-search-plus"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 设计作品 -->
-        <div class="portfolio-item" data-category="design">
-          <div class="portfolio-card">
-            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5" alt="品牌设计" class="portfolio-image">
-            <div class="portfolio-overlay">
-              <h5>品牌形象</h5>
-              <p>品牌视觉设计</p>
-              <div class="portfolio-icons">
-                <a href="https://images.unsplash.com/photo-1561070791-2526d30994b5" class="portfolio-link"
-                  data-gallery="gallery">
-                  <i class="fas fa-search-plus"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- UI设计 -->
-        <div class="portfolio-item" data-category="design">
-          <div class="portfolio-card">
-            <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" alt="UI设计" class="portfolio-image">
-            <div class="portfolio-overlay">
-              <h5>应用界面</h5>
-              <p>移动端UI设计</p>
-              <div class="portfolio-icons">
-                <a href="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" class="portfolio-link"
-                  data-gallery="gallery">
-                  <i class="fas fa-search-plus"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 代码项目 -->
-        <div class="portfolio-item" data-category="code">
-          <div class="portfolio-card">
-            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" alt="代码项目" class="portfolio-image">
-            <div class="portfolio-overlay">
-              <h5>Web应用</h5>
-              <p>前端开发项目</p>
-              <div class="portfolio-icons">
-                <a href="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" class="portfolio-link"
-                  data-gallery="gallery">
-                  <i class="fas fa-search-plus"></i>
-                </a>
-              </div>
-            </div>
+    <!-- 设计作品 -->
+    <div class="portfolio-item" data-category="design">
+      <div class="portfolio-card">-category="design">
+        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5" alt="品牌设计" class="portfolio-image">
+        <div class="portfolio-overlay">.com/photo-1561070791-2526d30994b5" alt="品牌设计" class="portfolio-image">
+          <h5>品牌形象</h5>olio-overlay">
+          <p>品牌视觉设计</p>
+          <div class="portfolio-icons">
+            <a href="https://images.unsplash.com/photo-1561070791-2526d30994b5" class="portfolio-link"
+              data-gallery="gallery">plash.com/photo-1561070791-2526d30994b5" class="portfolio-link"
+              <i class="fas fa-search-plus"></i>
+            </a>lass="fas fa-search-plus"></i>
           </div>
         </div>
       </div>
-
-      <!-- 代码展示轮播 -->
-      <div class="code-showcase mt-5">
-        <h3 class="text-center mb-4">代码案例展示</h3>
-        <div id="codeCarousel" class="carousel slide code-carousel" data-bs-ride="carousel" data-bs-interval="5000">
-          <!-- 轮播指示器 -->
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-              aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    </div>
+    <!-- UI设计 -->
+    <div class="portfolio-item" data-category="design">
+      <div class="portfolio-card">-category="design">
+        <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" alt="UI设计" class="portfolio-image">
+        <div class="portfolio-overlay">.com/photo-1581291518633-83b4ebd1d83e" alt="UI设计" class="portfolio-image">
+          <h5>应用界面</h5>olio-overlay">
+          <p>移动端UI设计</p>
+          <div class="portfolio-icons">
+            <a href="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" class="portfolio-link"
+              data-gallery="gallery">plash.com/photo-1581291518633-83b4ebd1d83e" class="portfolio-link"
+              <i class="fas fa-search-plus"></i>
+            </a>lass="fas fa-search-plus"></i>
           </div>
-
-          <div class="carousel-inner">
-            <div class="carousel-inner">
-              <!-- C++ 代码示例 -->
-              <div class="carousel-item active">
-                <div class="code-container">
-                  <div class="code-header">
-                    <h5>C++ 算法示例</h5>
-                    <span class="language-badge">C++</span>
-                  </div>
-                  <pre class="code-block"><code class="language-cpp">
-            #include &lt;iostream&gt;
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- 代码项目 -->
+    <div class="portfolio-item" data-category="code">
+      <div class="portfolio-card">-category="code">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" alt="代码项目" class="portfolio-image">
+        <div class="portfolio-overlay">.com/photo-1461749280684-dccba630e2f6" alt="代码项目" class="portfolio-image">
+          <h5>Web应用</h5>lio-overlay">
+          <p>前端开发项目</p>
+          <div class="portfolio-icons">
+            <a href="https://images.unsplash.com/photo-1461749280684-dccba630e2f6" class="portfolio-link"
+              data-gallery="gallery">plash.com/photo-1461749280684-dccba630e2f6" class="portfolio-link"
+              <i class="fas fa-search-plus"></i>
+            </a>lass="fas fa-search-plus"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    <!-- 代码展示轮播 -->
+    <div class="code-showcase mt-5">
+      <h3 class="text-center mb-4">代码案例展示</h3>
+      <div id="codeCarousel" class="carousel slide code-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+        <!-- 轮播指示器 -->sel" class="carousel slide code-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+            aria-label="Slide 1"></button>et="#codeCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+          <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#codeCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div>n type="button" data-bs-target="#codeCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-inner">
+          <!-- C++ 代码示例 -->inner">
+          <div class="carousel-item active">
+            <div class="code-container">">
+              <div class="code-header">
+                <h5>C++ 算法示例</h5>er">
+                <span class="language-badge">C++</span>
+              </div>class="language-badge">C++</span>
+              <pre class="code-block"><code class="language-cpp">
+            #include &lt;iostream&gt;k"><code class="language-cpp">
+            #include &lt;vector&gt;t;
             #include &lt;vector&gt;
-            
             void bubbleSort(std::vector&lt;int&gt;& arr) {
-                for(int i = 0; i < arr.size() - 1; i++) {
+                for(int i = 0; i < arr.size() - 1; i++) {{
                     for(int j = 0; j < arr.size() - i - 1; j++) {
-                        if(arr[j] > arr[j + 1]) {
+                        if(arr[j] > arr[j + 1]) { - i - 1; j++) {
                             std::swap(arr[j], arr[j + 1]);
-                        }
-                    }
-                }
+                        }   std::swap(arr[j], arr[j + 1]);
+                    }   }
+                }   }
+            }   }
             }
-            
             int main() {
                 std::vector&lt;int&gt; numbers = {64, 34, 25, 12, 22, 11, 90};
-                bubbleSort(numbers);
-                return 0;
+                bubbleSort(numbers);t; numbers = {64, 34, 25, 12, 22, 11, 90};
+                return 0;t(numbers);
             }</code></pre>
-                </div>
-              </div>
-
-              <!-- Python 代码示例 -->
-              <div class="carousel-item">
-                <div class="code-container">
-                  <div class="code-header">
-                    <h5>Python Web 爬虫示例</h5>
-                    <span class="language-badge">Python</span>
-                  </div>
-                  <pre class="code-block"><code class="language-python">
-            import requests
+            </div>pre>
+          </div>
+        </div>
+        <!-- Python 代码示例 -->
+        <div class="carousel-item">
+          <div class="code-container">
+            <div class="code-header">
+              <h5>Python Web 爬虫示例</h5>
+              <span class="language-badge">Python</span>
+            </div>class="language-badge">Python</span>
+            <pre class="code-block"><code class="language-python">
+            import requests"code-block"><code class="language-python">
             from bs4 import BeautifulSoup
-            
+            from bs4 import BeautifulSoup
             def scrape_website(url):
                 response = requests.get(url)
                 if response.status_code == 200:
                     soup = BeautifulSoup(response.text, 'html.parser')
-                    titles = soup.find_all('h1')
+                    titles = soup.find_all('h1')e.text, 'html.parser')
                     return [title.text for title in titles]
+                return []n [title.text for title in titles]
                 return []
-            
             # 使用示例
             url = 'https://example.com'
             titles = scrape_website(url)
-            print(titles)</code></pre>
-                </div>
-              </div>
-
-              <!-- JavaScript 代码示例 -->
-              <div class="carousel-item">
-                <div class="code-container">
-                  <div class="code-header">
-                    <h5>JavaScript 动画示例</h5>
-                    <span class="language-badge">JavaScript</span>
-                  </div>
-                  <pre class="code-block"><code class="language-javascript">
-            function animate(element, property, target, duration) {
+            print(titles)</code></pre>l)
+          </div>es)</code></pre>
+        </div>
+      </div>
+      <!-- JavaScript 代码示例 -->
+      <div class="carousel-item">
+        <div class="code-container">
+          <div class="code-header">
+            <h5>JavaScript 动画示例</h5>
+            <span class="language-badge">JavaScript</span>
+          </div>class="language-badge">JavaScript</span>
+          <pre class="code-block"><code class="language-javascript">
+            function animate(element, property, target, duration) {cript">
                 const start = parseFloat(getComputedStyle(element)[property]);
-                const change = target - start;
+                const change = target - start;mputedStyle(element)[property]);
                 const startTime = performance.now();
-            
+                const startTime = performance.now();
                 function update(currentTime) {
                     const elapsed = currentTime - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-            
+                    const progress = Math.min(elapsed / duration, 1);
                     element.style[property] = start + change * progress + 'px';
-            
+                    element.style[property] = start + change * progress + 'px';
                     if (progress < 1) {
                         requestAnimationFrame(update);
-                    }
+                    }   requestAnimationFrame(update);
+                }   }
                 }
-            
                 requestAnimationFrame(update);
-            }</code></pre>
-                </div>
-              </div>
-
-              <!-- Java 代码示例 -->
-              <div class="carousel-item">
-                <div class="code-container">
-                  <div class="code-header">
-                    <h5>Java 设计模式示例</h5>
-                    <span class="language-badge">Java</span>
-                  </div>
-                  <pre class="code-block"><code class="language-java">
-            public class Singleton {
-                private static Singleton instance;
-                private Singleton() {}
-            
-                public static synchronized Singleton getInstance() {
-                    if (instance == null) {
-                        instance = new Singleton();
-                    }
-                    return instance;
-                }
-            
-                public void showMessage() {
-                    System.out.println("Hello from Singleton!");
-                }
-            }</code></pre>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 轮播控制按钮 -->
-          <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
+            }</code></pre>mationFrame(update);
+        </div>pre>
       </div>
     </div>
-  </section>
-
-  <section id="text" class="text-section py-5">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="section-title">文字的力量</h2>
-        <div class="subtitle-line mx-auto"></div>
-        <p class="lead text-muted">以文字之笔，绘心灵之景</p>
+    <!-- Java 代码示例 -->
+    <div class="carousel-item">
+      <div class="code-container">
+        <div class="code-header">
+          <h5>Java 设计模式示例</h5>>
+          <span class="language-badge">Java</span>
+        </div>class="language-badge">Java</span>
+        <pre class="code-block"><code class="language-java">
+            public class Singleton {ck"><code class="language-java">
+                private static Singleton instance;
+                private Singleton() {}on instance;
+                private Singleton() {}
+                public static synchronized Singleton getInstance() {
+                    if (instance == null) {Singleton getInstance() {
+                        instance = new Singleton();
+                    }   instance = new Singleton();
+                    return instance;
+                }   return instance;
+                }
+                public void showMessage() {
+                    System.out.println("Hello from Singleton!");
+                }   System.out.println("Hello from Singleton!");
+            }</code></pre>
+      </div>pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!-- 轮播控制按钮 -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>deCarousel" data-bs-slide="prev">
+      <span class="visually-hidden">Previous</span>idden="true"></span>
+    </button>ss="visually-hidden">Previous</span>
+    <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>deCarousel" data-bs-slide="next">
+      <span class="visually-hidden">Next</span>ia-hidden="true"></span>
+    </button>ss="visually-hidden">Next</span>
+    </div>on>
+    </div>
+    </div>
+    </section>
+    </section>
+    <section id="text" class="text-section py-5">
+      <div class="container">"text-section py-5">
+        <div class="text-center mb-5">
+          <h2 class="section-title">文字的力量</h2>
+          <div class="subtitle-line mx-auto"></div>
+          <p class="lead text-muted">以文字之笔，绘心灵之景</p>
+        </div>lass="lead text-muted">以文字之笔，绘心灵之景</p>
       </div>
-
       <div class="row g-4">
         <div class="col-md-6">
           <div class="text-card">
             <div class="card-icon">
               <i class="fas fa-book-reader"></i>
-            </div>
+            </div>lass="fas fa-book-reader"></i>
             <h3 class="card-title">心灵之窗</h3>
-            <div class="card-content">
+            <div class="card-content">窗</h3>
               <p class="text-content">
                 生命如一本正在书写的书籍，每一页都承载着不同的故事。打开心灵之窗，我们得以看见内心深处的宝藏；敞开胸怀，便能感受外界的绚丽风景。让心灵的窗户永远向阳，迎接每一缕温暖的阳光，拥抱每一刻美好的瞬间。
-              </p>
+              </p>如一本正在书写的书籍，每一页都承载着不同的故事。打开心灵之窗，我们得以看见内心深处的宝藏；敞开胸怀，便能感受外界的绚丽风景。让心灵的窗户永远向阳，迎接每一缕温暖的阳光，拥抱每一刻美好的瞬间。
               <div class="text-quote">
                 <i class="fas fa-quote-left"></i>
-                <p>心若向阳，春暖花开</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="text-card">
-            <div class="card-icon">
-              <i class="fas fa-feather-alt"></i>
-            </div>
-            <h3 class="card-title">文化传承</h3>
-            <div class="card-content">
-              <p class="text-content">
-                在浩瀚的中华文化长河中，每一滴水珠都闪耀着智慧的光芒。读史可以明志，让我们在先贤的足迹中汲取力量；读经可以养性，使我们在古圣先贤的智慧中获得启迪。这些永恒的文化瑰宝，是照亮我们前行道路的明灯。
-              </p>
-              <div class="text-quote">
-                <i class="fas fa-quote-left"></i>
-                <p>以古鉴今，开创未来</p>
-              </div>
-            </div>
-          </div>
-        </div>
+                <p>心若向阳，春暖花开</p>-quote-left"></i>
+              </div>若向阳，春暖花开</p>
+            </div>v>
+          </div>v>
+        </div>v>
       </div>
-    </div>
-  </section>
-
-  <section class="poem-history-section">
-    <div class="container">
+      <div class="col-md-6">
+        <div class="text-card">
+          <div class="card-icon">
+            <i class="fas fa-feather-alt"></i>
+          </div>lass="fas fa-feather-alt"></i>
+          <h3 class="card-title">文化传承</h3>
+          <div class="card-content">承</h3>
+            <p class="text-content">
+              在浩瀚的中华文化长河中，每一滴水珠都闪耀着智慧的光芒。读史可以明志，让我们在先贤的足迹中汲取力量；读经可以养性，使我们在古圣先贤的智慧中获得启迪。这些永恒的文化瑰宝，是照亮我们前行道路的明灯。
+            </p>瀚的中华文化长河中，每一滴水珠都闪耀着智慧的光芒。读史可以明志，让我们在先贤的足迹中汲取力量；读经可以养性，使我们在古圣先贤的智慧中获得启迪。这些永恒的文化瑰宝，是照亮我们前行道路的明灯。
+            <div class="text-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>以古鉴今，开创未来</p>-quote-left"></i>
+            </div>古鉴今，开创未来</p>
+          </div>v>
+        </div>v>
+      </div>v>
+      </div>v>
+      </div>v>
+    </section>
+    </section>
+    <section class="poem-history-section"></section>
+    <div class="container">ory-section">
       <div class="poem-history-wrapper">
-        <!-- 诗词部分 -->
+        <!-- 诗词部分 -->m-history-wrapper">
         <div class="poem-container">
           <div class="section-icon">
             <i class="fas fa-feather-alt"></i>
-          </div>
+          </div>lass="fas fa-feather-alt"></i>
           <div id="poem_sentence" class="poem-content">若清风转轻吹...</div>
-          <div class="decorative-line">
-            <span></span>
-            <i class="fas fa-circle"></i>
-            <span></span>
-          </div>
-          <div id="poem_info" class="poem-info"></div>
-        </div>
-
-        <!-- 历史上的今天 -->
-        <div class="history-container">
-          <div class="section-icon">
-            <i class="fas fa-history"></i>
-          </div>
-          <h3 class="history-title">历史上的今天</h3>
-          <div id="history-today" class="history-content"></div>
-        </div>
-      </div>
+          <div class="decorative-line">="poem-content">若清风转轻吹...</div>
+          <span></span>orative-line">
+          <i class="fas fa-circle"></i>
+          <span></span> fa-circle"></i>
+        </div>n></span>
+        <div id="poem_info" class="poem-info"></div>
+      </div> id="poem_info" class="poem-info">
     </div>
-  </section>
-
-  <!-- Chatbot HTML -->
-  <button id="chat-toggle-button" class="chat-toggle-button" type="button">
-    🤖
-  </button>
-  <div id="chat-container" class="chat-container">
-    <div id="chatbox" class="chatbox"></div>
-    <div class="chat-input-container">
+    </div>
+    <!-- 历史上的今天 -->
+    <div class="history-container">
+      <div class="section-icon">r">
+        <i class="fas fa-history"></i>
+      </div>lass="fas fa-history"></i>
+      <h3 class="history-title">历史上的今天</h3>
+      <div id="history-today" class="history-content"></div>
+    </div> id="history-today" class="history-content"></div>
+    </div>v>
+    </div>v>
+    </section>
+    </section>
+    <!-- Chatbot HTML -->
+    <button id="chat-toggle-button" class="chat-toggle-button" type="button">
+      🤖ton id="chat-toggle-button" class="chat-toggle-button" type="button">
+    </button>
+    <div id="chat-container" class="chat-container">
+      <div id="chatbox" class="chatbox"></div>iner">
+      <div class="chat-input-container"></div>
       <input type="text" id="userInput" class="chat-input" placeholder="输入您的消息...">
-      <button id="sendButton" class="btn btn-primary" type="button">发送</button>
+      <button id="sendButton" class="btn btn-primary" type="button">发送</button>">
+    </div>n id="sendButton" class="btn btn-primary" type="button">发送</button>
     </div>
-  </div>
-
-  <!-- Cookie 同意弹窗 -->
-  <div id="cookieConsent" class="cookie-consent-container">
-    <div class="cookie-content">
-      <div class="cookie-icon">
-        <i class="fas fa-cookie-bite"></i>
-      </div>
-      <div class="cookie-message">
-        <h6>Cookie 使用提示</h6>
-        <p>我们使用 Cookie 来提供更好的浏览体验。继续使用本站即表示您同意我们的 Cookie 政策。
-          <a href="privacy.html" class="cookie-link">了解更多</a>
-        </p>
-      </div>
-      <div class="cookie-buttons">
-        <button id="acceptCookie" class="btn btn-primary btn-sm" type="button">
-          <i class="fas fa-check"></i> 接受
-        </button>
-        <button id="rejectCookie" class="btn btn-outline-secondary btn-sm" type="button">
-          仅必要Cookie
-        </button>
-      </div>
     </div>
-  </div>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="row">
-        <!-- 左侧：快速导航 -->
-        <div class="col-lg-3">
-          <div class="footer-links">
-            <h4>快速导航</h4>
-            <ul>
-              <li><a href="#about">关于我们</a></li>
-              <li><a href="#services">创造空间</a></li>
-              <li><a href="#portfolio">作品展示</a></li>
-              <li><a href="#text">文字世界</a></li>
-            </ul>
-          </div>
+    <!-- Cookie 同意弹窗 -->
+    <div id="cookieConsent" class="cookie-consent-container">
+      <div class="cookie-content">"cookie-consent-container">
+        <div class="cookie-icon">>
+          <i class="fas fa-cookie-bite"></i>
+        </div>lass="fas fa-cookie-bite"></i>
+        <div class="cookie-message">
+          <h6>Cookie 使用提示</h6>sage">
+          <p>我们使用 Cookie 来提供更好的浏览体验。继续使用本站即表示您同意我们的 Cookie 政策。
+            <a href="privacy.html" class="cookie-link">了解更多</a>
+          </p> href="privacy.html" class="cookie-link">了解更多</a>
         </div>
-
+        <div class="cookie-buttons">
+          <button id="acceptCookie" class="btn btn-primary btn-sm" type="button">
+            <i class="fas fa-check"></i> 接受btn btn-primary btn-sm" type="button">
+          </button>s="fas fa-check"></i> 接受
+          <button id="rejectCookie" class="btn btn-outline-secondary btn-sm" type="button">
+            仅必要Cookie"rejectCookie" class="btn btn-outline-secondary btn-sm" type="button">
+          </button>ie
+        </div>tton>
+      </div>v>
+    </div>v>
+    </div>
+    <footer class="site-footer">
+      <div class="container">r">
+        <div class="row">er">
+          <!-- 左侧：快速导航 -->
+          <div class="col-lg-3">
+            <div class="footer-links">
+              <h4>快速导航</h4>ter-links">
+              <ul>快速导航</h4>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#services">创造空间</a></li>
+                <li><a href="#portfolio">作品展示</a></li>
+                <li><a href="#text">文字世界</a></li>
+                </li>
+              </ul>><a href="#text">文字世界</a></li>
+            </div>>
+          </div>v>
+        </div>
         <!-- 中间：新年祝福 -->
         <div class="col-lg-6">
           <div class="footer-center">
             <div class="new-year-message">
               <span class="festive-icon">✨</span>
               <span class="greeting">祝您新年快乐，万事如意！</span>
-              <span class="festive-icon">✨</span>
-            </div>
+              <span class="festive-icon">✨</span></span>
+            </div>n class="festive-icon">✨</span>
             <div class="social-links">
               <div class="social-share share-weibo"><i class="fab fa-weibo"></i></div>
               <div class="social-share share-wechat"><i class="fab fa-weixin"></i></div>
               <div class="social-share share-github"><i class="fab fa-github"></i></div>
-            </div>
+            </div> class="social-share share-github"><i class="fab fa-github"></i>
           </div>
-        </div>
-
-        <!-- 右侧：语言切换和版权信息 -->
-        <div class="col-lg-3">
-          <div class="footer-right">
-            <div class="language-switcher">
-              <i class="fas fa-globe"></i>
-              <div class="lang-links">
-                <a href="index.html" class="active">中文</a>
-                <a href="index-en.html">EN</a>
-                <a href="index-it.html">IT</a>
-              </div>
-            </div>
-            <div class="footer-info mt-4">
-              <div class="copyright">
-                © 2024 Alex Hwang. All Rights Reserved
-              </div>
-              <div class="footer-legal">
-                <a href="privacy.html">隐私政策</a>
-                <a href="terms.html">使用条款</a>
-                <a href="ads.html">广告政策</a>
-                <a href="contact.html">联系我们</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        </div>v>
+      </div>v>
       </div>
-    </div>
-  </footer>
+      <!-- 右侧：语言切换和版权信息 -->
+      <div class="col-lg-3">
+        <div class="footer-right">
+          <div class="language-switcher">
+            <i class="fas fa-globe"></i>>
+            <div class="lang-links"></i>
+              <a href="index.html" class="active">中文</a>
+              <a href="index-en.html">EN</a>tive">中文</a>
+              <a href="index-it.html">IT</a>
+            </div>ref="index-it.html">IT</a>
+          </div>v>
+          <div class="footer-info mt-4">
+            <div class="copyright">t-4">
+              © 2024 Alex Hwang. All Rights Reserved
+            </div>24 Alex Hwang. All Rights Reserved
+            <div class="footer-legal">
+              <a href="privacy.html">隐私政策</a>
+              <a href="terms.html">使用条款</a>a>
+              <a href="ads.html">广告政策</a>a>
+              <a href="contact.html">联系我们</a>
+            </div>ref="contact.html">联系我们</a>
+          </div>v>
+        </div>v>
+      </div>v>
+      </div>v>
+      </div>v>
+    </footer>
+    </footer>
+
+    <!-- JavaScript files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>in.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>></script>
+    <script src="js/glightbox.min.js"></script>rcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="js/music-player.js"></script>>
+    <script src="js/chatbot.js"></script>ript>
+    <script src="js/poem.js"></script>pt>
+    <script src="js/cookie-consent.js"></script>
+    <script src="js/newyear.js"></script>script>
+    <script src="js/show.js"></script>pt>
+    <script src="js/display.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/share.js"></script>ript>
+    <script src="js/language-switcher.js"></script>pt src="js/share.js"></script>
+  </body>
+  <!-- 注册Service Worker支持离线访问 -->
 
 
-  <!-- JavaScript files -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-  <script src="js/glightbox.min.js"></script>
-  <script src="js/music-player.js"></script>
-  <script src="js/chatbot.js"></script>
-  <script src="js/poem.js"></script>
-  <script src="js/cookie-consent.js"></script>
-  <script src="js/newyear.js"></script>
-  <script src="js/show.js"></script>
-  <script src="js/display.js"></script>
-  <script src="js/navigation.js"></script>
-  <script src="js/share.js"></script>
-</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </html>
+</body>
+</script> } }); }); console.log('Service Worker 注册失败:', error); .catch(error => { }) console.log('Service Worker 注册成功:',
+registration.scope); .then(registration => { navigator.serviceWorker.register('/service-worker.js')
+window.addEventListener('load', () => { if ('serviceWorker' in navigator) {
+<script></html >
