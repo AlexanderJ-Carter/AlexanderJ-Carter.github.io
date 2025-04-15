@@ -1,160 +1,59 @@
+// 导航栏功能增强
 document.addEventListener("DOMContentLoaded", function () {
-  // 滚动效果变量
-  const navbar = document.getElementById("navbar");
+  // 导航元素
+  const navbar = document.querySelector(".navbar");
+  const progressBar = document.querySelector(".scroll-progress");
+  const backToTopBtn = document.querySelector(".back-to-top");
+  const languageDropdown = document.querySelector(".language-dropdown");
   const navLinks = document.querySelectorAll(".nav-link");
-  const scrollProgress = document.querySelector(".scroll-progress");
-  const backToTop = document.querySelector(".back-to-top");
-  const themeToggleBtn = document.getElementById("theme-toggle");
 
-  // 检查当前主题
-  const currentTheme = localStorage.getItem("theme");
-  if (currentTheme === "dark") {
-    document.body.classList.add("dark-mode");
-    themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
-  } else {
-    themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
-  }
-
-  // 处理滚动事件
+  // 滚动处理
   window.addEventListener("scroll", function () {
-    // 更新导航栏样式
+    // 导航栏背景透明度变化
     if (window.scrollY > 100) {
       navbar.classList.add("scrolled");
-      backToTop.classList.add("show");
     } else {
       navbar.classList.remove("scrolled");
-      backToTop.classList.remove("show");
     }
 
-    // 更新滚动进度条
-    const scrollPercentage =
-      (window.scrollY / (document.body.scrollHeight - window.innerHeight)) *
-      100;
-    scrollProgress.style.width = scrollPercentage + "%";
+    // 显示/隐藏返回顶部按钮
+    if (window.scrollY > 500) {
+      backToTopBtn.classList.add("show");
+    } else {
+      backToTopBtn.classList.remove("show");
+    }
 
-    // 更新当前活动的导航项
+    // 更新进度条
+    if (progressBar) {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      progressBar.style.width = scrolled + "%";
+    }
+
+    // 根据滚动位置突出显示当前导航项
     updateActiveNavItem();
   });
 
-  // 返回顶部按钮
-  backToTop.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
-
-  // 主题切换
-  themeToggleBtn.addEventListener("click", function () {
-    document.body.classList.toggle("dark-mode");
-
-    if (document.body.classList.contains("dark-mode")) {
-      localStorage.setItem("theme", "dark");
-      this.innerHTML = '<i class="fas fa-sun"></i>';
-    } else {
-      localStorage.setItem("theme", "light");
-      this.innerHTML = '<i class="fas fa-moon"></i>';
-    }
-  });
-
-  // 平滑滚动到各部分
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      // 获取目标部分
-      const targetId = this.getAttribute("href");
-      if (targetId.startsWith("#")) {
-        const targetSection = document.querySelector(targetId);
-
-        if (targetSection) {
-          // 计算滚动位置
-          const navbarHeight = navbar.offsetHeight;
-          const targetPosition = targetSection.offsetTop - navbarHeight;
-
-          // 滚动到目标位置
-          window.scrollTo({
-            top: targetPosition,
-            behavior: "smooth",
-          });
-
-          // 如果在移动设备上，关闭导航菜单
-          if (window.innerWidth < 992) {
-            const navbarCollapse = document.querySelector(".navbar-collapse");
-            if (navbarCollapse.classList.contains("show")) {
-              const bsCollapse = new bootstrap.Collapse(navbarCollapse);
-              bsCollapse.hide();
-            }
-          }
-        }
-      }
-    });
-  });
-
-  // 更新当前活动的导航项
-  function updateActiveNavItem() {
-    // 获取所有部分
-    const sections = document.querySelectorAll("section");
-    const navbarHeight = navbar.offsetHeight;
-
-    // 确定当前滚动位置的部分
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop - navbarHeight - 50;
-      const sectionBottom = sectionTop + section.offsetHeight;
-      const scrollPosition = window.scrollY;
-
-      // 如果当前滚动位置在这一部分内
-      if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-        const currentId = section.getAttribute("id");
-
-        // 移除所有活动类
-        navLinks.forEach((link) => {
-          link.classList.remove("active");
-        });
-
-        // 添加活动类到当前导航项
-        const activeLink = document.querySelector(
-          `.nav-link[href="#${currentId}"]`
-        );
-        if (activeLink) {
-          activeLink.classList.add("active");
-        }
-      }
-    });
-  }
-
-  // 页面加载时更新当前活动的导航项
-  updateActiveNavItem();
-
-  // 添加导航顶部动画效果
-  const navbarBrand = document.querySelector(".navbar-brand");
-  navbarBrand.addEventListener("click", function (e) {
-    if (window.scrollY > 0) {
-      e.preventDefault();
+  // 返回顶部按钮点击事件
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener("click", function () {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
       });
-    }
-  });
-
-  // 语言选择器的动画效果
-  const languageDropdown = document.getElementById("navbarDropdown");
-  if (languageDropdown) {
-    languageDropdown.addEventListener("mouseenter", function () {
-      const dropdownMenu = this.nextElementSibling;
-      if (dropdownMenu && window.innerWidth >= 992) {
-        dropdownMenu.classList.add("show");
-      }
     });
+  }
 
+  // 语言切换下拉菜单处理
+  if (languageDropdown) {
     const navItem = languageDropdown.closest(".nav-item");
     navItem.addEventListener("mouseleave", function () {
-      const dropdownMenu = this.querySelector(".dropdown-menu");
-      if (dropdownMenu && window.innerWidth >= 992) {
-        dropdownMenu.classList.remove("show");
-      }
+      const dropdown = this.querySelector(".dropdown-menu");
+      dropdown.classList.remove("show");
     });
   }
 
@@ -168,4 +67,68 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+
+  // 平滑滚动到锚点
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      if (this.getAttribute("href") !== "#") {
+        e.preventDefault();
+        const targetId = this.getAttribute("href");
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          const navbarHeight = navbar.offsetHeight;
+          const targetPosition =
+            targetElement.getBoundingClientRect().top +
+            window.pageYOffset -
+            navbarHeight;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth",
+          });
+
+          // 更新URL但不进行滚动
+          history.pushState(null, null, targetId);
+        }
+      }
+    });
+  });
+
+  // 更新当前活动导航项
+  function updateActiveNavItem() {
+    const scrollPosition = window.scrollY;
+
+    document.querySelectorAll("section[id]").forEach((section) => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute("id");
+
+      if (
+        scrollPosition >= sectionTop &&
+        scrollPosition < sectionTop + sectionHeight
+      ) {
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === "#" + sectionId) {
+            link.classList.add("active");
+          }
+        });
+      }
+    });
+  }
+
+  // 初始化激活当前导航项
+  updateActiveNavItem();
+
+  // 导出导航功能
+  window.navigationUtils = {
+    updateActiveNavItem,
+    scrollToTop: function () {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    },
+  };
 });

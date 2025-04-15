@@ -287,6 +287,13 @@ window.shareToWechat = function (title, url) {
   return createShareModal(title, url);
 };
 
+// 导出社交分享方法
+window.shareUtils = {
+  shareToSocial,
+  generateWechatQR,
+  createShareModal,
+};
+
 // 监听点击分享按钮的事件
 document.addEventListener("DOMContentLoaded", function () {
   const shareButtons = document.querySelectorAll(".share-wechat");
