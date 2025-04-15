@@ -79,7 +79,7 @@ function generateWechatQR(url) {
   }
 }
 
-// 添加相关样式
+// 创建一个样式元素
 const style = document.createElement("style");
 style.textContent = `
   .qr-modal {
@@ -148,6 +148,151 @@ style.textContent = `
     color: #ff4444;
     margin: 20px 0;
   }
+  
+  /* 添加通用动画效果 */
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .slide-up {
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.5s forwards;
+  }
+  
+  @keyframes slideUp {
+    from { 
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to { 
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 `;
 
+// 将样式添加到文档头部
 document.head.appendChild(style);
+
+// 分享功能
+function createShareModal(title, url) {
+  // 创建模态框
+  const modal = document.createElement("div");
+  modal.className = "qr-modal fade-in";
+
+  // 创建容器
+  const container = document.createElement("div");
+  container.className = "qr-container slide-up";
+
+  // 创建头部
+  const header = document.createElement("div");
+  header.className = "qr-header";
+
+  const modalTitle = document.createElement("h3");
+  modalTitle.textContent = title || "分享到微信";
+  modalTitle.style.margin = "0";
+
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "close-btn";
+  closeBtn.innerHTML = "&times;";
+  closeBtn.onclick = () => document.body.removeChild(modal);
+
+  header.appendChild(modalTitle);
+  header.appendChild(closeBtn);
+
+  // 创建内容
+  const content = document.createElement("div");
+  content.className = "qr-content";
+
+  // 添加加载动画
+  const spinner = document.createElement("div");
+  spinner.className = "loading-spinner";
+  content.appendChild(spinner);
+
+  // 提示文字
+  const tip = document.createElement("p");
+  tip.className = "qr-tip";
+  tip.textContent = "使用微信扫描二维码分享";
+  content.appendChild(tip);
+
+  // 组装模态框
+  container.appendChild(header);
+  container.appendChild(content);
+  modal.appendChild(container);
+
+  // 添加到body
+  document.body.appendChild(modal);
+
+  // 加载二维码库
+  if (!window.QRCode) {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js";
+    script.onload = () => generateQRCode(content, spinner, url);
+    script.onerror = () => showError(content, spinner);
+    document.head.appendChild(script);
+  } else {
+    generateQRCode(content, spinner, url);
+  }
+
+  return modal;
+}
+
+// 生成二维码
+function generateQRCode(container, spinner, url) {
+  // 移除加载动画
+  if (spinner) {
+    container.removeChild(spinner);
+  }
+
+  // 创建二维码容器
+  const qrContainer = document.createElement("div");
+  qrContainer.id = "qrcode";
+  container.insertBefore(qrContainer, container.firstChild);
+
+  // 当前页面URL
+  const shareUrl = url || window.location.href;
+
+  // 生成二维码
+  new QRCode(qrContainer, {
+    text: shareUrl,
+    width: 200,
+    height: 200,
+    colorDark: "#000",
+    colorLight: "#fff",
+    correctLevel: QRCode.CorrectLevel.H,
+  });
+}
+
+// 显示错误
+function showError(container, spinner) {
+  if (spinner) {
+    container.removeChild(spinner);
+  }
+
+  const errorMsg = document.createElement("p");
+  errorMsg.className = "error-message";
+  errorMsg.textContent = "加载二维码失败，请刷新页面重试";
+  container.insertBefore(errorMsg, container.firstChild);
+}
+
+// 导出分享功能
+window.shareToWechat = function (title, url) {
+  return createShareModal(title, url);
+};
+
+// 监听点击分享按钮的事件
+document.addEventListener("DOMContentLoaded", function () {
+  const shareButtons = document.querySelectorAll(".share-wechat");
+  shareButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      shareToWechat();
+    });
+  });
+});
