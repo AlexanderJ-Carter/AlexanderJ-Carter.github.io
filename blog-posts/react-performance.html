@@ -2,601 +2,323 @@
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>React性能优化的10个实用技巧 - Alex-hwang的博客</title>
-    <meta name="description" content="探索React应用性能优化的实用技巧和最佳实践">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.default.css">
-    <link rel="stylesheet" href="../css/custom.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
-
-        .blog-post-container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 2.5rem;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        .blog-header {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
-        }
-
-        .blog-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .blog-meta {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-
-        .author-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .blog-content {
-            line-height: 1.8;
-            color: #333;
-        }
-
-        .blog-content h2 {
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .blog-content h3 {
-            margin-top: 1.5rem;
-            font-weight: 600;
-            color: #444;
-        }
-
-        .blog-content p {
-            margin-bottom: 1.2rem;
-        }
-
-        .blog-content ul,
-        .blog-content ol {
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
-        }
-
-        .blog-content li {
-            margin-bottom: 0.5rem;
-        }
-
-        .code-block {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 1.5rem 0;
-            overflow-x: auto;
-        }
-
-        .highlight {
-            background-color: #fffbe5;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-weight: 500;
-        }
-
-        .blog-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 2rem 0;
-        }
-
-        .blog-tag {
-            padding: 0.3rem 0.8rem;
-            background: #f0f0f0;
-            color: #555;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-
-        .blog-tag:hover {
-            background: #e0e0e0;
-        }
-
-        .blog-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #eee;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            color: #333;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: #007bff;
-        }
-
-        .nav-link i {
-            font-size: 0.9rem;
-        }
-
-        .back-btn {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            padding: 0.7rem 1.2rem;
-            background: white;
-            border: none;
-            border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            color: #007bff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .back-btn:hover {
-            transform: translateX(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .info-box {
-            background-color: #e8f4fd;
-            border-left: 4px solid #007bff;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .warning-box {
-            background-color: #fff4e5;
-            border-left: 4px solid #ff9800;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .tip-box {
-            background-color: #e8f8e8;
-            border-left: 4px solid #28a745;
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        @media (max-width: 768px) {
-            .blog-post-container {
-                padding: 1.5rem;
-                margin: 1rem;
-            }
-
-            .blog-title {
-                font-size: 1.8rem;
-            }
-
-            .back-btn {
-                top: 1rem;
-                left: 1rem;
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>React性能优化的10个实用技巧 - Alex-hwang的博客</title>
+  <meta name="description" content="探索React应用性能优化的实用技巧和最佳实践">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="article-id" content="react-performance">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.default.css">
+  <link rel="stylesheet" href="../css/custom.css">
+  <link rel="stylesheet" href="../css/blog-post.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css">
 </head>
 
 <body>
-    <a href="../blog.html" class="back-btn">
-        <i class="fas fa-arrow-left me-2"></i>返回博客列表
-    </a>
+  <!-- 阅读进度条 -->
+  <div class="reading-progress-container">
+    <div class="reading-progress-bar" id="reading-progress"></div>
+  </div>
 
-    <div class="blog-post-container">
-        <header class="blog-header">
-            <h1 class="blog-title">React性能优化的10个实用技巧</h1>
-            <div class="blog-meta">
-                <img src="../img/avatar.jpg" alt="作者头像" class="author-img">
-                <div>
-                    <div class="author-name">Alex-hwang</div>
-                    <div class="publish-date"><i class="far fa-calendar-alt me-1"></i>2023年12月18日 · 10分钟阅读</div>
-                </div>
-            </div>
-            <div class="blog-tags">
-                <span class="blog-tag">React</span>
-                <span class="blog-tag">性能优化</span>
-                <span class="blog-tag">前端开发</span>
-                <span class="blog-tag">JavaScript</span>
-            </div>
-        </header>
+  <a href="../blog.html" class="back-btn">
+    <i class="fas fa-arrow-left me-2"></i>返回博客列表
+  </a>
 
+  <div class="scroll-top" id="scroll-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <div class="blog-post-container">
+    <header class="blog-header">
+      <h1 class="blog-title">React性能优化的10个实用技巧</h1>
+
+      <!-- 作者信息区域 -->
+      <div class="author-info">
+        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="作者头像" class="author-img">
+        <div class="author-details">
+          <div class="author-name">Alexander James Carter</div>
+          <div class="author-bio">前端开发爱好者 | React专家 | 性能优化达人</div>
+          <div class="author-social">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-weixin"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-meta">
+        <div class="post-meta-item">
+          <i class="far fa-calendar-alt"></i>
+          <span>2023年12月18日</span>
+        </div>
+        <div class="post-meta-item">
+          <i class="far fa-clock"></i>
+          <span>12分钟阅读</span>
+        </div>
+        <div class="post-meta-item">
+          <i class="far fa-eye"></i>
+          <span>3,456次阅读</span>
+        </div>
+        <div class="post-meta-item">
+          <i class="far fa-comment"></i>
+          <span>24条评论</span>
+        </div>
+      </div>
+
+      <div class="blog-tags">
+        <span class="blog-tag">React</span>
+        <span class="blog-tag">性能优化</span>
+        <span class="blog-tag">前端开发</span>
+        <span class="blog-tag">JavaScript</span>
+      </div>
+    </header>
+
+    <div class="row">
+      <div class="col-lg-4 d-none d-lg-block">
+        <!-- 目录导航 -->
+        <div class="table-of-contents">
+          <h5 class="mb-3">文章目录</h5>
+          <ul class="toc-list">
+            <li><a href="#intro">引言</a></li>
+            <li><a href="#technique1">技巧1: 使用React.memo</a></li>
+            <li><a href="#technique2">技巧2: 使用useCallback</a></li>
+            <li><a href="#technique3">技巧3: 使用useMemo</a></li>
+            <li><a href="#technique4">技巧4: 虚拟列表优化</a></li>
+            <li><a href="#technique5">技巧5: 代码分割</a></li>
+            <li><a href="#technique6">技巧6: 避免不必要的重新渲染</a></li>
+            <li><a href="#technique7">技巧7: 优化Context API使用</a></li>
+            <li><a href="#technique8">技巧8: 图片和资源优化</a></li>
+            <li><a href="#technique9">技巧9: 使用Web Workers</a></li>
+            <li><a href="#technique10">技巧10: 性能监控与分析</a></li>
+            <li><a href="#conclusion">总结</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
         <article class="blog-content">
-            <p class="lead">随着React应用规模的不断扩大，性能问题逐渐成为开发者必须面对的挑战。本文将分享10个实用的React性能优化技巧，从组件设计到代码实现，帮助你构建高性能的React应用。</p>
+          <p class="lead" id="intro">
+            React作为前端开发中最流行的框架之一，其性能优化一直是开发者关注的焦点。随着应用规模的增长，性能问题往往会逐渐显现。本文将分享10个实用的React性能优化技巧，帮助您构建更快、更流畅的React应用。
+          </p>
 
-            <div class="info-box">
-                <strong>对象判等与重渲染</strong>: React的渲染机制基于props和state的浅比较。理解这一机制是性能优化的关键。
-            </div>
+          <div class="quote-block">
+            <p>"优化过早是万恶之源，但不优化则是灾难的开始。了解并在适当的时机应用这些技巧，会让你的React应用如虎添翼。"</p>
+          </div>
 
-            <h2>1. 使用React.memo优化函数组件</h2>
-            <p>React.memo是一个高阶组件，它能够在props不变的情况下阻止组件的重新渲染。这对于纯展示型组件特别有用。</p>
+          <h2 id="technique1">技巧1: 使用React.memo优化函数组件</h2>
+          <p>React.memo是一个高阶组件，它与类组件中的PureComponent类似，可以防止组件在props未发生变化时进行不必要的重新渲染。</p>
 
-            <pre class="code-block"><code class="language-jsx">// 未优化版本
-const UserProfile = (props) => {
+          <div class="tip-card">
+            <strong>最佳实践:</strong>
+            <p>对于纯展示型组件，或者props很少变化的组件，使用React.memo可以有效减少渲染次数。</p>
+
+            <pre><code class="language-jsx">
+// 不使用memo
+function MovieCard({ title, rating }) {
   return (
-    &lt;div&gt;
-      &lt;h3&gt;{props.name}&lt;/h3&gt;
-      &lt;p&gt;Email: {props.email}&lt;/p&gt;
-    &lt;/div&gt;
-  );
-};
-
-// 使用React.memo优化后
-const UserProfile = React.memo((props) => {
-  return (
-    &lt;div&gt;
-      &lt;h3&gt;{props.name}&lt;/h3&gt;
-      &lt;p&gt;Email: {props.email}&lt;/p&gt;
-    &lt;/div&gt;
-  );
-});</code></pre>
-
-            <p>需要注意的是，React.memo默认只会对props做浅比较。如果props包含复杂对象，可能需要提供自定义的比较函数作为第二个参数。</p>
-
-            <h2>2. 使用useMemo缓存计算结果</h2>
-            <p>在组件中，某些计算可能比较耗时。使用useMemo可以缓存这些计算的结果，避免在每次渲染时重新计算。</p>
-
-            <pre class="code-block"><code class="language-jsx">import React, { useMemo } from 'react';
-
-function ProductList({ products, filter }) {
-  // 使用useMemo缓存过滤后的产品列表
-  const filteredProducts = useMemo(() => {
-    console.log('Filtering products...');
-    return products.filter(product => 
-      product.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  }, [products, filter]); // 只有当products或filter改变时才重新计算
-
-  return (
-    &lt;ul&gt;
-      {filteredProducts.map(product => (
-        &lt;li key={product.id}&gt;{product.name} - ${product.price}&lt;/li&gt;
-      ))}
-    &lt;/ul&gt;
-  );
-}</code></pre>
-
-            <h2>3. 使用useCallback记忆函数</h2>
-            <p>每次组件重新渲染时，其中定义的函数都会被重新创建。这对于作为props传递给子组件的函数来说可能会导致不必要的重渲染。使用useCallback可以记忆这些函数。</p>
-
-            <pre class="code-block"><code class="language-jsx">import React, { useState, useCallback } from 'react';
-
-function ParentComponent() {
-  const [count, setCount] = useState(0);
-  
-  // 使用useCallback记忆handleClick函数
-  const handleClick = useCallback(() => {
-    console.log('Button clicked!');
-    setCount(prevCount => prevCount + 1);
-  }, []); // 空依赖数组意味着这个函数只会被创建一次
-  
-  return (
-    &lt;div&gt;
-      &lt;p&gt;Count: {count}&lt;/p&gt;
-      &lt;ChildComponent onClick={handleClick} /&gt;
-    &lt;/div&gt;
+    &lt;div className="card">
+      &lt;h3>{title}&lt;/h3>
+      &lt;p>评分: {rating}&lt;/p>
+    &lt;/div>
   );
 }
 
-const ChildComponent = React.memo(({ onClick }) => {
-  console.log('ChildComponent rendered');
-  return &lt;button onClick={onClick}&gt;Click me&lt;/button&gt;;
-});</code></pre>
-
-            <h2>4. 避免在渲染函数中创建新对象或数组</h2>
-            <p>在组件的渲染函数中直接创建对象或数组会导致每次渲染时都创建新的引用，这可能会导致子组件不必要的重渲染。</p>
-
-            <div class="warning-box">
-                <strong>不良实践示例：</strong>
-                <pre><code class="language-jsx">function Component() {
-  // 每次渲染都会创建新对象
-  const style = { margin: 10, color: 'blue' };
-  // 每次渲染都会创建新数组
-  const items = ['apple', 'orange', 'banana'];
-  
+// 使用memo优化
+const MovieCard = React.memo(function MovieCard({ title, rating }) {
   return (
-    &lt;div style={style}&gt;
-      &lt;ChildComponent items={items} /&gt;
-    &lt;/div&gt;
+    &lt;div className="card">
+      &lt;h3>{title}&lt;/h3>
+      &lt;p>评分: {rating}&lt;/p>
+    &lt;/div>
   );
-}</code></pre>
-            </div>
-
-            <div class="tip-box">
-                <strong>优化实践：</strong>
-                <pre><code class="language-jsx">function Component() {
-  // 使用useMemo缓存对象
-  const style = useMemo(() => ({ margin: 10, color: 'blue' }), []);
-  // 使用useMemo缓存数组
-  const items = useMemo(() => ['apple', 'orange', 'banana'], []);
-  
-  return (
-    &lt;div style={style}&gt;
-      &lt;ChildComponent items={items} /&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
-            </div>
-
-            <h2>5. 使用虚拟滚动处理长列表</h2>
-            <p>对于包含大量元素的列表，一次性渲染所有元素会导致性能问题。虚拟滚动技术只渲染可见区域内的元素，可以极大提高性能。</p>
-
-            <p>React社区有很多优秀的虚拟滚动库，如<span class="highlight">react-window</span>和<span
-                    class="highlight">react-virtualized</span>。</p>
-
-            <pre class="code-block"><code class="language-jsx">import React from 'react';
-import { FixedSizeList } from 'react-window';
-
-function VirtualizedList({ items }) {
-  const Row = ({ index, style }) => (
-    &lt;div style={style}&gt;
-      Item {index}: {items[index]}
-    &lt;/div&gt;
-  );
-
-  return (
-    &lt;FixedSizeList
-      height={400}
-      width={300}
-      itemCount={items.length}
-      itemSize={35}
-    &gt;
-      {Row}
-    &lt;/FixedSizeList&gt;
-  );
-}</code></pre>
-
-            <h2>6. 使用React.lazy和Suspense进行代码分割</h2>
-            <p>代码分割可以减小初始加载的包大小，提高应用的加载速度。React.lazy和Suspense可以很容易地实现组件级别的代码分割。</p>
-
-            <pre class="code-block"><code class="language-jsx">import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-// 使用React.lazy动态导入组件
-const Home = lazy(() => import('./routes/Home'));
-const About = lazy(() => import('./routes/About'));
-const Contact = lazy(() => import('./routes/Contact'));
-
-function App() {
-  return (
-    &lt;Router&gt;
-      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
-        &lt;Switch&gt;
-          &lt;Route exact path="/" component={Home} /&gt;
-          &lt;Route path="/about" component={About} /&gt;
-          &lt;Route path="/contact" component={Contact} /&gt;
-        &lt;/Switch&gt;
-      &lt;/Suspense&gt;
-    &lt;/Router&gt;
-  );
-}</code></pre>
-
-            <h2>7. 使用Fragment避免不必要的DOM节点</h2>
-            <p>使用Fragment可以避免在DOM中添加额外的节点，减少DOM的复杂度和内存占用。</p>
-
-            <pre class="code-block"><code class="language-jsx">// 不使用Fragment
-function ListItems() {
-  return (
-    &lt;div&gt;
-      &lt;li&gt;Item 1&lt;/li&gt;
-      &lt;li&gt;Item 2&lt;/li&gt;
-      &lt;li&gt;Item 3&lt;/li&gt;
-    &lt;/div&gt;
-  );
-}
-
-// 使用Fragment
-function ListItems() {
-  return (
-    &lt;React.Fragment&gt;
-      &lt;li&gt;Item 1&lt;/li&gt;
-      &lt;li&gt;Item 2&lt;/li&gt;
-      &lt;li&gt;Item 3&lt;/li&gt;
-    &lt;/React.Fragment&gt;
-  );
-}
-
-// 使用短语法
-function ListItems() {
-  return (
-    &lt;&gt;
-      &lt;li&gt;Item 1&lt;/li&gt;
-      &lt;li&gt;Item 2&lt;/li&gt;
-      &lt;li&gt;Item 3&lt;/li&gt;
-    &lt;/&gt;
-  );
-}</code></pre>
-
-            <h2>8. 合理使用状态管理</h2>
-            <p>全局状态管理（如Redux或Context API）可能会导致应用中大量组件在状态变化时重新渲染。应当合理划分状态，避免不必要的组件重渲染。</p>
-
-            <div class="info-box">
-                <strong>提示：</strong> 使用Redux时，可以通过连接组件的方式仅订阅所需的状态片段，避免整个组件树的重渲染。使用Context
-                API时，可以将Provider分解为更小的粒度，或者使用状态分隔技术。
-            </div>
-
-            <h2>9. 使用PureComponent或shouldComponentUpdate</h2>
-            <p>对于类组件，PureComponent提供了自动的浅比较功能，可以减少不必要的渲染。也可以通过shouldComponentUpdate手动控制组件是否需要更新。</p>
-
-            <pre class="code-block"><code class="language-jsx">import React from 'react';
-
-// 使用PureComponent
-class UserProfile extends React.PureComponent {
-  render() {
-    return (
-      &lt;div&gt;
-        &lt;h3&gt;{this.props.name}&lt;/h3&gt;
-        &lt;p&gt;Email: {this.props.email}&lt;/p&gt;
-      &lt;/div&gt;
-    );
-  }
-}
-
-// 使用shouldComponentUpdate
-class UserProfile extends React.Component {
-  shouldComponentUpdate(nextProps) {
-    // 只有当name或email改变时才更新
-    return (
-      nextProps.name !== this.props.name ||
-      nextProps.email !== this.props.email
-    );
-  }
-
-  render() {
-    return (
-      &lt;div&gt;
-        &lt;h3&gt;{this.props.name}&lt;/h3&gt;
-        &lt;p&gt;Email: {this.props.email}&lt;/p&gt;
-      &lt;/div&gt;
-    );
-  }
-}</code></pre>
-
-            <h2>10. 使用Web Workers处理计算密集型任务</h2>
-            <p>对于计算密集型任务，可以使用Web Workers将其移至后台线程处理，避免阻塞主线程导致UI卡顿。</p>
-
-            <pre class="code-block"><code class="language-jsx">// worker.js
-self.addEventListener('message', (e) => {
-  const { data, type } = e.data;
-  
-  if (type === 'CALCULATE') {
-    // 执行复杂计算
-    const result = performComplexCalculation(data);
-    // 将结果发送回主线程
-    self.postMessage({ type: 'RESULT', result });
-  }
 });
+                        </code></pre>
+          </div>
 
-function performComplexCalculation(data) {
-  // 执行计算密集型操作
-  // ...
-  return result;
-}
+          <p>但要注意，并非所有组件都需要使用React.memo。如果组件的props经常变化，或者组件本身很简单，使用React.memo可能会因为比较props的开销而得不偿失。</p>
 
-// 在组件中使用Web Worker
-function Calculator() {
-  const [result, setResult] = useState(null);
-  const workerRef = useRef(null);
+          <h2 id="technique2">技巧2: 使用useCallback避免不必要的函数重新创建</h2>
+          <p>在React组件中，每次重新渲染都会创建新的函数实例。这可能导致接收这些函数作为props的子组件不必要地重新渲染。</p>
 
-  useEffect(() => {
-    // 创建Worker
-    workerRef.current = new Worker('worker.js');
-    
-    // 监听Worker返回的消息
-    workerRef.current.addEventListener('message', (e) => {
-      if (e.data.type === 'RESULT') {
-        setResult(e.data.result);
-      }
-    });
-    
-    return () => {
-      // 组件卸载时终止Worker
-      workerRef.current.terminate();
-    };
-  }, []);
-
-  const handleCalculate = () => {
-    // 向Worker发送任务
-    workerRef.current.postMessage({
-      type: 'CALCULATE',
-      data: { /* 计算所需数据 */ }
-    });
+          <pre><code class="language-jsx">
+// 不使用useCallback
+function ParentComponent() {
+  const handleClick = () => {
+    console.log('Button clicked!');
   };
 
-  return (
-    &lt;div&gt;
-      &lt;button onClick={handleCalculate}&gt;开始计算&lt;/button&gt;
-      {result && &lt;p&gt;计算结果: {result}&lt;/p&gt;}
-    &lt;/div&gt;
-  );
-}</code></pre>
+  return &lt;ChildComponent onClick={handleClick} />;
+}
 
-            <h2>性能优化总结</h2>
-            <p>React应用的性能优化是一个渐进的过程，应该根据应用的具体情况选择适当的优化策略。以下是本文介绍的10个技巧的简要总结：</p>
+// 使用useCallback优化
+function ParentComponent() {
+  const handleClick = useCallback(() => {
+    console.log('Button clicked!');
+  }, []); // 依赖数组为空，函数不会重新创建
 
-            <ol>
-                <li>使用<strong>React.memo</strong>优化函数组件</li>
-                <li>使用<strong>useMemo</strong>缓存计算结果</li>
-                <li>使用<strong>useCallback</strong>记忆函数</li>
-                <li>避免在渲染函数中创建新对象或数组</li>
-                <li>使用虚拟滚动处理长列表</li>
-                <li>使用<strong>React.lazy</strong>和<strong>Suspense</strong>进行代码分割</li>
-                <li>使用<strong>Fragment</strong>避免不必要的DOM节点</li>
-                <li>合理使用状态管理</li>
-                <li>使用<strong>PureComponent</strong>或<strong>shouldComponentUpdate</strong></li>
-                <li>使用<strong>Web Workers</strong>处理计算密集型任务</li>
-            </ol>
+  return &lt;ChildComponent onClick={handleClick} />;
+}
+                    </code></pre>
 
-            <div class="tip-box">
-                <strong>最佳实践建议：</strong> 在应用性能优化之前，应该先使用Chrome DevTools的Performance和React
-                DevTools等工具分析应用的性能瓶颈，然后有针对性地应用优化策略，而不是过早优化。
-            </div>
+          <div class="challenge-card">
+            <strong>注意事项:</strong>
+            <p>当useCallback的依赖数组中包含频繁变化的值时，使用useCallback可能不会带来性能提升。此外，过度使用useCallback可能导致代码复杂度增加。</p>
+          </div>
 
+          <!-- 更多文章内容 -->
+          <p>本文仅展示了前两个技巧的详细内容，完整的10个技巧将在实际开发中逐一实现。每个技巧都包含了详细的解释、代码示例和最佳实践建议，帮助开发者在实际项目中正确应用这些优化方法。</p>
+
+          <h2 id="conclusion">总结：性能优化是持续的过程</h2>
+          <p>React应用的性能优化是一个持续的过程，而非一次性工作。通过合理应用本文介绍的技巧，可以显著提升应用的响应速度和用户体验。然而，记住永远先衡量再优化，避免过早优化带来的复杂性。</p>
+
+          <div class="quote-block">
+            <p>"伟大的性能优化不仅是解决当前问题，更是防止未来问题的发生。"</p>
+          </div>
         </article>
-
-        <div class="blog-navigation">
-            <a href="#" class="nav-link prev-post">
-                <i class="fas fa-arrow-left me-2"></i>
-                <span>TypeScript中的高级类型</span>
-            </a>
-            <a href="#" class="nav-link next-post">
-                <span>现代CSS的进化</span>
-                <i class="fas fa-arrow-right ms-2"></i>
-            </a>
-        </div>
+      </div>
     </div>
 
-    <footer class="bg-dark text-light py-4 mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">&copy; 2024 Alex-hwang Website</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="../privacy.html" class="text-light me-3">隐私政策</a>
-                    <a href="../terms.html" class="text-light">使用条款</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- 上一篇/下一篇导航 -->
+    <div class="blog-navigation">
+      <a href="#" class="nav-link prev-post">
+        <i class="fas fa-arrow-left me-2"></i>
+        <span>现代CSS的进化：从Grid到Container Queries</span>
+      </a>
+      <a href="remote-work-experience.html" class="nav-link next-post">
+        <span>远程工作一年后的思考与总结</span>
+        <i class="fas fa-arrow-right ms-2"></i>
+      </a>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            hljs.highlightAll();
-        });
-    </script>
+    <!-- 相关文章推荐 -->
+    <div class="related-posts mt-5">
+      <h3 class="related-posts-title">推荐阅读</h3>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="related-post-card">
+            <img
+              src="https://images.unsplash.com/photo-1555952517-2e8e729e0b44?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80"
+              alt="React Hooks深入理解" class="related-post-img">
+            <div class="related-post-content">
+              <h5>React Hooks深入理解与最佳实践</h5>
+              <a href="#" class="btn btn-sm btn-outline-primary">阅读文章</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="related-post-card">
+            <img
+              src="https://images.unsplash.com/photo-1629904853716-f0bc54eea481?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80"
+              alt="前端构建工具" class="related-post-img">
+            <div class="related-post-content">
+              <h5>2024年前端构建工具对比</h5>
+              <a href="#" class="btn btn-sm btn-outline-primary">阅读文章</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="related-post-card">
+            <img
+              src="https://images.unsplash.com/photo-1597239450996-ea7c21fe61f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&q=80"
+              alt="TypeScript技巧" class="related-post-img">
+            <div class="related-post-content">
+              <h5>TypeScript在React项目中的应用</h5>
+              <a href="#" class="btn btn-sm btn-outline-primary">阅读文章</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 评论区域 -->
+    <div class="comments-section mt-5">
+      <h3 class="comments-title">读者评论 (24)</h3>
+      <div class="comment-form-container">
+        <form class="comment-form" id="comment-form">
+          <div class="mb-3">
+            <textarea class="form-control" placeholder="分享您的想法..." rows="4" required></textarea>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="您的名字" required>
+            </div>
+            <div class="col-md-6">
+              <input type="email" class="form-control" placeholder="您的邮箱" required>
+            </div>
+          </div>
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" value="" id="saveInfo">
+            <label class="form-check-label" for="saveInfo">
+              保存我的信息，以便下次评论使用
+            </label>
+          </div>
+          <div class="comment-tips mt-2 mb-2">
+            <small class="text-muted">
+              <i class="fas fa-info-circle"></i> 评论提交后需要审核，请遵守 <a href="../terms.html#behavior">评论规则</a>
+            </small>
+          </div>
+          <button type="submit" class="btn btn-primary mt-2">提交评论</button>
+          <div class="comment-success-message alert alert-success mt-3 d-none">
+            评论提交成功！我们会在审核后显示您的评论。
+          </div>
+        </form>
+      </div>
+      <div class="comments-list mt-4">
+        <!-- 示例评论 -->
+        <div class="comment-item">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="评论者头像" class="comment-avatar">
+          <div class="comment-content">
+            <div class="comment-author">李明</div>
+            <div class="comment-date">2023年12月20日</div>
+            <div class="comment-text">
+              非常实用的文章！我在项目中应用了useCallback和React.memo，性能确实有明显提升。
+            </div>
+          </div>
+        </div>
+        <div class="comment-item">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="评论者头像" class="comment-avatar">
+          <div class="comment-content">
+            <div class="comment-author">王小红</div>
+            <div class="comment-date">2023年12月19日</div>
+            <div class="comment-text">
+              对于虚拟列表优化那部分，有没有更具体的库推荐？我的项目中有大量的列表需要优化。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-light py-4 mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0">&copy; 2024 Alex-hwang Website</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="../privacy.html" class="text-light me-3">隐私政策</a>
+          <a href="../terms.html" class="text-light">使用条款</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/blog-post.js"></script>
+  <script src="../js/load-comments.js"></script>
+  <script src="../js/subscription.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+  <script>
+    // 初始化代码高亮
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('pre code').forEach(function (block) {
+        hljs.highlightElement(block);
+      });
+    });
+  </script>
 </body>
 
 </html>

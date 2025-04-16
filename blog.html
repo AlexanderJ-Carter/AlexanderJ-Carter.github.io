@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.default.css">
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/blog.css">
     <style>
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -21,462 +22,254 @@
             max-width: 1200px;
             margin: 2rem auto;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        .blog-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .blog-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .blog-description {
-            color: #6c757d;
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .categories {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 2rem 0;
-        }
-
-        .category-btn {
-            padding: 0.5rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            background: white;
-            color: #495057;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background: linear-gradient(to right, #007bff, #00d2ff);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
-        }
-
-        .blog-posts {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .post-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .post-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .post-content {
-            padding: 1.5rem;
-        }
-
-        .post-meta {
-            display: flex;
-            justify-content: space-between;
-            color: #6c757d;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .post-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .post-text {
-            color: #495057;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .post-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .post-tag {
-            font-size: 0.8rem;
-            padding: 0.25rem 0.75rem;
-            background: #f8f9fa;
-            border-radius: 15px;
-            color: #6c757d;
-        }
-
-        .read-more {
-            display: inline-flex;
-            align-items: center;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .read-more i {
-            margin-left: 0.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .read-more:hover {
-            color: #0056b3;
-        }
-
-        .read-more:hover i {
-            transform: translateX(3px);
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 3rem;
-        }
-
-        .page-item {
-            margin: 0 0.25rem;
-        }
-
-        .page-link {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            border: none;
-            color: #495057;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .page-link:hover,
-        .page-item.active .page-link {
-            background: linear-gradient(to right, #007bff, #00d2ff);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
-        }
-
-        .search-container {
-            max-width: 500px;
-            margin: 0 auto 2rem;
-        }
-
-        .search-form {
-            display: flex;
-            position: relative;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 0.75rem 1rem 0.75rem 3rem;
-            border: none;
-            border-radius: 25px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            box-shadow: 0 5px 20px rgba(0, 123, 255, 0.1);
-            outline: none;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6c757d;
-        }
-
-        .featured-post {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/AboutMe.jpg');
-            background-size: cover;
-            background-position: center;
-            border-radius: 15px;
-            color: white;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .featured-content {
-            max-width: 600px;
-        }
-
-        .featured-tag {
-            display: inline-block;
-            background: #ff6b6b;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .featured-title {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .featured-text {
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-        }
-
-        .featured-btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: white;
-            color: #333;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .featured-btn:hover {
-            background: rgba(255, 255, 255, 0.9);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .back-btn {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            padding: 0.8rem 1.5rem;
-            background: white;
-            border: none;
-            border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            color: #007bff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .back-btn:hover {
-            transform: translateX(-5px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        @media (max-width: 992px) {
-            .blog-posts {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .blog-container {
-                padding: 1.5rem;
-                margin: 1rem;
-            }
-
-            .blog-title {
-                font-size: 2rem;
-            }
-
-            .featured-post {
-                padding: 2rem;
-            }
-
-            .featured-title {
-                font-size: 1.75rem;
-            }
-
-            .back-btn {
-                top: 1rem;
-                left: 1rem;
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .blog-posts {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
 
 <body>
-    <a href="index.html" class="back-btn">
-        <i class="fas fa-arrow-left me-2"></i>返回主页
-    </a>
+    <!-- 页面顶部导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/logo.png" alt="Logo" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="blog.html">博客</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">关于我</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">联系</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- 博客页面主体 -->
     <div class="blog-container">
-        <div class="blog-header">
-            <h1 class="blog-title">我的博客</h1>
-            <p class="blog-description">分享技术心得、设计灵感和生活感悟</p>
+        <!-- 页面标题和介绍 -->
+        <div class="blog-header text-center mb-5">
+            <h1 class="display-4 fw-bold">我的博客</h1>
+            <p class="lead text-muted">分享我在技术、设计和个人发展方面的见解与经验</p>
+            <div class="header-underline mx-auto"></div>
         </div>
 
-        <div class="search-container">
-            <form class="search-form">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="搜索文章...">
-            </form>
-        </div>
-
-        <div class="featured-post">
-            <div class="featured-content">
-                <span class="featured-tag">精选文章</span>
-                <h2 class="featured-title">React性能优化的10个实用技巧</h2>
-                <p class="featured-text">本文分享10个实用的React性能优化技巧，从组件拆分、状态管理到渲染控制，助你打造高性能React应用。从React.memo到Web
-                    Workers，全方位提升你的React应用性能。</p>
-                <blockquote class="featured-quote">
-                    <p>"优化React应用性能的第一步是理解其渲染机制。组件的重新渲染取决于props和state的变化，因此控制这些变化就是性能优化的关键。"</p>
-                </blockquote>
-                <a href="blog-posts/react-performance.html" class="featured-btn">阅读全文</a>
-            </div>
-        </div>
-
-        <div class="categories">
-            <button class="category-btn active">全部</button>
-            <button class="category-btn">前端开发</button>
-            <button class="category-btn">设计灵感</button>
-            <button class="category-btn">技术教程</button>
-            <button class="category-btn">生活随笔</button>
-            <button class="category-btn">读书笔记</button>
-        </div>
-
-        <div class="blog-posts">
-            <!-- 文章1：React性能优化 -->
-            <div class="post-card">
-                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97" alt="前端开发" class="post-image">
-                <div class="post-content">
-                    <div class="post-meta">
-                        <span><i class="far fa-calendar me-1"></i>2023年12月18日</span>
-                        <span><i class="far fa-comment me-1"></i>24条评论</span>
+        <!-- 搜索和筛选区域 -->
+        <div class="blog-filter-container mb-4">
+            <div class="row g-3 align-items-center">
+                <div class="col-lg-5">
+                    <div class="search-container">
+                        <input type="text" class="form-control search-input" placeholder="搜索文章..." id="blog-search">
+                        <button class="search-button" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
-                    <h3 class="post-title">React性能优化的10个实用技巧</h3>
-                    <p class="post-text">React应用在规模扩大后常常会遇到性能问题，本文分享10个实用的React性能优化技巧，从组件拆分、状态管理到渲染控制，助你打造高性能React应用。
-                    </p>
-                    <blockquote class="post-excerpt">
-                        <p>"优化React应用性能的第一步是理解其渲染机制。组件的重新渲染取决于props和state的变化，因此控制这些变化就是性能优化的关键。"</p>
-                    </blockquote>
-                    <div class="post-tags">
-                        <span class="post-tag">React</span>
-                        <span class="post-tag">性能优化</span>
-                        <span class="post-tag">前端开发</span>
-                    </div>
-                    <a href="blog-posts/react-performance.html" class="read-more">
-                        阅读全文 <i class="fas fa-arrow-right"></i>
-                    </a>
                 </div>
-            </div>
-
-            <!-- 文章2：UI设计趋势 -->
-            <div class="post-card">
-                <img src="https://images.unsplash.com/photo-1558655146-d09347e92766" alt="设计灵感" class="post-image">
-                <div class="post-content">
-                    <div class="post-meta">
-                        <span><i class="far fa-calendar me-1"></i>2023年11月25日</span>
-                        <span><i class="far fa-comment me-1"></i>16条评论</span>
+                <div class="col-lg-5">
+                    <div class="filter-tags">
+                        <span class="filter-label">筛选标签:</span>
+                        <div class="filter-pills">
+                            <span class="filter-pill active" data-tag="all">全部</span>
+                            <span class="filter-pill" data-tag="前端开发">前端开发</span>
+                            <span class="filter-pill" data-tag="React">React</span>
+                            <span class="filter-pill" data-tag="UI设计">UI设计</span>
+                            <span class="filter-pill" data-tag="生产力">生产力</span>
+                        </div>
                     </div>
-                    <h3 class="post-title">2024年UI设计趋势前瞻</h3>
-                    <p class="post-text">随着技术的发展和用户期望的变化，UI设计也在不断演变。本文探讨了2024年可能引领潮流的UI设计趋势，包括新拟态设计、微交互、深色模式等多个方向。</p>
-                    <blockquote class="post-excerpt">
-                        <p>"设计的本质是解决问题，而不仅仅是追求美观。好的UI设计应当既符合审美标准，又能提供卓越的用户体验。"</p>
-                    </blockquote>
-                    <div class="post-tags">
-                        <span class="post-tag">UI设计</span>
-                        <span class="post-tag">设计趋势</span>
-                        <span class="post-tag">用户体验</span>
-                    </div>
-                    <a href="blog-posts/design-trends-2024.html" class="read-more">
-                        阅读全文 <i class="fas fa-arrow-right"></i>
-                    </a>
                 </div>
-            </div>
-
-            <!-- 文章3：远程工作 -->
-            <div class="post-card">
-                <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d" alt="生活随笔" class="post-image">
-                <div class="post-content">
-                    <div class="post-meta">
-                        <span><i class="far fa-calendar me-1"></i>2023年9月3日</span>
-                        <span><i class="far fa-comment me-1"></i>18条评论</span>
-                    </div>
-                    <h3 class="post-title">远程工作一年后的思考与总结</h3>
-                    <p class="post-text">经历了一年的远程工作，从最初的新鲜感到适应再到得心应手，这中间有许多经验与教训。分享我的远程工作心得，以及提高效率和保持工作生活平衡的实用方法。</p>
-                    <blockquote class="post-excerpt">
-                        <p>"远程工作最大的挑战不是技术问题，而是自律与边界感。学会在家中划分工作与生活的界限，是远程办公成功的关键。"</p>
-                    </blockquote>
-                    <div class="post-tags">
-                        <span class="post-tag">远程工作</span>
-                        <span class="post-tag">工作方式</span>
-                        <span class="post-tag">生活感悟</span>
-                    </div>
-                    <a href="blog-posts/remote-work-experience.html" class="read-more">
-                        阅读全文 <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- 文章4：原子习惯 -->
-            <div class="post-card">
-                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765" alt="读书笔记" class="post-image">
-                <div class="post-content">
-                    <div class="post-meta">
-                        <span><i class="far fa-calendar me-1"></i>2023年8月17日</span>
-                        <span><i class="far fa-comment me-1"></i>10条评论</span>
-                    </div>
-                    <h3 class="post-title">《原子习惯》读书笔记与实践</h3>
-                    <p class="post-text">詹姆斯·克利尔的《原子习惯》是一本关于如何养成良好习惯的实用指南。本文分享我的读书笔记，以及如何将书中的方法应用到编程学习和日常生活中的实践经验。</p>
-                    <blockquote class="post-excerpt">
-                        <p>"我们日复一日做出的选择，塑造了我们的身份认同。习惯不仅关乎行为的改变，更是关乎个人认同的重构。"</p>
-                    </blockquote>
-                    <div class="post-tags">
-                        <span class="post-tag">读书笔记</span>
-                        <span class="post-tag">习惯养成</span>
-                        <span class="post-tag">自我提升</span>
-                    </div>
-                    <a href="404.html" class="read-more">
-                        阅读全文 <i class="fas fa-arrow-right"></i>
-                    </a>
+                <div class="col-lg-2">
+                    <select class="form-select" id="sort-select">
+                        <option value="newest">最新发布</option>
+                        <option value="oldest">最早发布</option>
+                        <option value="popular">最受欢迎</option>
+                    </select>
                 </div>
             </div>
         </div>
 
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+        <!-- 文章列表 -->
+        <div class="row g-4" id="blog-posts-container">
+            <!-- 文章卡片 1 -->
+            <div class="col-md-6 col-lg-4" data-tags="React 前端开发 性能优化">
+                <div class="blog-card">
+                    <div class="blog-card-img-container">
+                        <img src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2" alt="React性能优化"
+                            class="blog-card-img">
+                        <div class="blog-card-date">
+                            <span class="day">18</span>
+                            <span class="month">十二月</span>
+                        </div>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user me-1"></i>Alex-hwang</span>
+                            <span><i class="far fa-comment me-1"></i>24条评论</span>
+                        </div>
+                        <h3 class="blog-card-title">React性能优化的10个实用技巧</h3>
+                        <p class="blog-card-text">探索React应用性能优化的实用技巧和最佳实践，帮助你构建更快、更高效的React应用程序。</p>
+                        <div class="blog-card-tags">
+                            <span class="blog-tag">React</span>
+                            <span class="blog-tag">性能优化</span>
+                            <span class="blog-tag">前端开发</span>
+                        </div>
+                        <a href="blog-posts/react-performance.html" class="blog-card-link">
+                            阅读全文 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文章卡片 2 -->
+            <div class="col-md-6 col-lg-4" data-tags="UI设计 设计趋势 用户体验">
+                <div class="blog-card">
+                    <div class="blog-card-img-container">
+                        <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" alt="UI设计趋势"
+                            class="blog-card-img">
+                        <div class="blog-card-date">
+                            <span class="day">10</span>
+                            <span class="month">一月</span>
+                        </div>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user me-1"></i>Alex-hwang</span>
+                            <span><i class="far fa-comment me-1"></i>16条评论</span>
+                        </div>
+                        <h3 class="blog-card-title">2024年UI设计趋势前瞻</h3>
+                        <p class="blog-card-text">随着技术的发展和用户期望的变化，UI设计也在不断演变。本文探讨了2024年可能引领潮流的UI设计趋势。</p>
+                        <div class="blog-card-tags">
+                            <span class="blog-tag">UI设计</span>
+                            <span class="blog-tag">设计趋势</span>
+                            <span class="blog-tag">用户体验</span>
+                        </div>
+                        <a href="blog-posts/design-trends-2024.html" class="blog-card-link">
+                            阅读全文 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文章卡片 3 -->
+            <div class="col-md-6 col-lg-4" data-tags="远程工作 生产力 工作方式">
+                <div class="blog-card">
+                    <div class="blog-card-img-container">
+                        <img src="https://images.unsplash.com/photo-1542435503-956c469947f6" alt="远程工作经验"
+                            class="blog-card-img">
+                        <div class="blog-card-date">
+                            <span class="day">05</span>
+                            <span class="month">一月</span>
+                        </div>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user me-1"></i>Alex-hwang</span>
+                            <span><i class="far fa-comment me-1"></i>19条评论</span>
+                        </div>
+                        <h3 class="blog-card-title">远程工作一年后的思考与总结</h3>
+                        <p class="blog-card-text">分享一年远程工作的经验、挑战和实用技巧，帮助你更高效地适应远程工作环境并提升工作效率。</p>
+                        <div class="blog-card-tags">
+                            <span class="blog-tag">远程工作</span>
+                            <span class="blog-tag">生产力</span>
+                            <span class="blog-tag">工作方式</span>
+                        </div>
+                        <a href="blog-posts/remote-work-experience.html" class="blog-card-link">
+                            阅读全文 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文章卡片 4 -->
+            <div class="col-md-6 col-lg-4" data-tags="读书笔记 生产力 个人发展">
+                <div class="blog-card">
+                    <div class="blog-card-img-container">
+                        <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e" alt="原子习惯"
+                            class="blog-card-img">
+                        <div class="blog-card-date">
+                            <span class="day">28</span>
+                            <span class="month">十二月</span>
+                        </div>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user me-1"></i>Alex-hwang</span>
+                            <span><i class="far fa-comment me-1"></i>32条评论</span>
+                        </div>
+                        <h3 class="blog-card-title">《原子习惯》读书笔记与实践方法</h3>
+                        <p class="blog-card-text">对James Clear的畅销书《原子习惯》的核心理念进行解析，并分享如何将这些理念应用到日常生活中。</p>
+                        <div class="blog-card-tags">
+                            <span class="blog-tag">读书笔记</span>
+                            <span class="blog-tag">生产力</span>
+                            <span class="blog-tag">个人发展</span>
+                        </div>
+                        <a href="404.html" class="blog-card-link">
+                            阅读全文 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 文章卡片 5 - 新增文章 -->
+            <div class="col-md-6 col-lg-4" data-tags="CSS 前端开发 Web设计">
+                <div class="blog-card">
+                    <div class="blog-card-img-container">
+                        <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2" alt="现代CSS技术"
+                            class="blog-card-img">
+                        <div class="blog-card-date">
+                            <span class="day">15</span>
+                            <span class="month">一月</span>
+                        </div>
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-meta">
+                            <span><i class="far fa-user me-1"></i>Alex-hwang</span>
+                            <span><i class="far fa-comment me-1"></i>12条评论</span>
+                        </div>
+                        <h3 class="blog-card-title">现代CSS的进化：从Grid到Container Queries</h3>
+                        <p class="blog-card-text">探索现代CSS的新特性和技术，了解如何利用这些工具创建更灵活、更强大的Web布局。</p>
+                        <div class="blog-card-tags">
+                            <span class="blog-tag">CSS</span>
+                            <span class="blog-tag">Web设计</span>
+                            <span class="blog-tag">前端开发</span>
+                        </div>
+                        <a href="404.html" class="blog-card-link">
+                            阅读全文 <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 可以继续添加更多文章卡片 -->
+        </div>
+
+        <!-- 无搜索结果提示 -->
+        <div id="no-results" class="text-center py-5 d-none">
+            <div class="no-results-icon mb-3">
+                <i class="fas fa-search fa-3x text-muted"></i>
+            </div>
+            <h3>未找到匹配的文章</h3>
+            <p class="text-muted">尝试使用不同的关键词或清除筛选条件</p>
+            <button id="clear-filters" class="btn btn-outline-primary mt-2">
+                <i class="fas fa-times me-2"></i>清除筛选
+            </button>
+        </div>
+
+        <!-- 分页控件 -->
+        <nav aria-label="博客分页" class="mt-5">
+            <ul class="pagination pagination-lg justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="上一页">
                         <i class="fas fa-chevron-left"></i>
                     </a>
                 </li>
@@ -484,88 +277,68 @@
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                    <a class="page-link" href="#" aria-label="下一页">
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </li>
             </ul>
         </nav>
+
+        <!-- 订阅区域 -->
+        <div class="subscribe-section mt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="subscribe-card">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <h3>订阅我的博客更新</h3>
+                                <p>第一时间获取最新文章和独家内容</p>
+                            </div>
+                            <div class="col-md-5">
+                                <form class="subscription-form">
+                                    <div class="input-group">
+                                        <input type="email" class="form-control" placeholder="输入您的邮箱" required>
+                                        <button class="btn btn-primary" type="submit">订阅</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- 页脚 -->
     <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">&copy; 2024 Alex-hwang Website</p>
+                <!-- 页脚内容保持不变 -->
+                <div class="col-md-6">
+                    <div class="footer-copyright">
+                        © 2024 Alex-hwang. All Rights Reserved
+                    </div>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <a href="privacy.html" class="text-light me-3">隐私政策</a>
-                    <a href="terms.html" class="text-light">使用条款</a>
+                    <div class="footer-legal">
+                        <a href="privacy.html">隐私政策</a>
+                        <a href="terms.html">使用条款</a>
+                        <a href="ads.html">广告政策</a>
+                        <a href="contact.html">联系我们</a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- 回到顶部按钮 -->
+    <button id="back-to-top" title="回到顶部" aria-label="回到顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript 文件 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/show.js"></script>
-    <script>
-        // 博客分类过滤功能
-        document.addEventListener('DOMContentLoaded', function () {
-            const categoryBtns = document.querySelectorAll('.category-btn');
-
-            categoryBtns.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    // 移除所有按钮的active类
-                    categoryBtns.forEach(b => b.classList.remove('active'));
-                    // 为当前按钮添加active类
-                    this.classList.add('active');
-
-                    // 这里可以添加实际的文章过滤逻辑
-                    // 目前只是UI切换，实际项目中可以根据分类动态加载或过滤文章
-                });
-            });
-        });
-    </script>
-
-    <style>
-        /* 添加新的样式 */
-        .post-excerpt {
-            font-style: italic;
-            color: #666;
-            border-left: 3px solid #007bff;
-            padding-left: 1rem;
-            margin: 1rem 0;
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.95rem;
-        }
-
-        .featured-quote {
-            margin-top: 1rem;
-            font-style: italic;
-            color: rgba(255, 255, 255, 0.9);
-            border-left: 3px solid #fff;
-            padding-left: 1rem;
-        }
-
-        .post-card {
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .post-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .post-title {
-            transition: color 0.3s ease;
-        }
-
-        .post-card:hover .post-title {
-            color: #007bff;
-        }
-    </style>
+    <script src="js/blog.js"></script>
 </body>
 
 </html>
