@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>联系我们 - Alex-hwang的网页</title>
+    <title>联系我们 - Alexander James Carter的网页</title>
     <meta name="description" content="联系我们">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -34,6 +34,7 @@
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             padding: 3rem 2rem;
         }
@@ -152,6 +153,11 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
+        .contact-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
         @media (max-width: 768px) {
             .contact-container {
                 padding: 2rem 1rem;
@@ -184,13 +190,13 @@
 
                 <div class="contact-item" onclick="copyContact('QQ', '2253940186')">
                     <i class="fab fa-qq contact-icon" style="color: #12B7F5;"></i>
-                    <h3 class="contact-title">QQ</h3>
-                    <p class="contact-info">点击复制QQ号</p>
-                </div>
+                    <a href="https://github.com/alexanderj-carter" target="_blank" rel="noopener"
+                        class="contact-link">
+                        <i class="fab fa-github contact-icon"></i>
 
                 <div class="contact-item">
-                    <a href="https://github.com/alexanderj-carter" target="_blank"
-                        style="text-decoration: none; color: inherit;">
+                    <a href="https://github.com/alexanderj-carter" target="_blank" rel="noopener"
+                        class="contact-link">
                         <i class="fab fa-github contact-icon"></i>
                         <h3 class="contact-title">GitHub</h3>
                         <p class="contact-info">访问我的GitHub主页</p>
@@ -212,7 +218,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">&copy; 2025 Alex-hwang Website</p>
+                    <p class="mb-0">&copy; 2025 Alexander James Carter Website</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <a href="privacy.html" class="text-light me-3">隐私政策</a>
