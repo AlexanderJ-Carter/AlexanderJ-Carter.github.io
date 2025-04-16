@@ -145,14 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         break;
 
-      case "popular":
-        // 按评论数量排序
-        visiblePosts.sort((a, b) => {
-          const commentsA = getCommentsCount(a);
-          const commentsB = getCommentsCount(b);
-          return commentsB - commentsA;
-        });
-        break;
+      // 移除按评论数量排序的功能
     }
 
     // 重新排列DOM元素
@@ -199,76 +192,15 @@ document.addEventListener("DOMContentLoaded", function () {
     return months[monthText] || 0;
   }
 
-  // 获取评论数量
-  function getCommentsCount(post) {
-    const commentsText = post.querySelector(
-      ".blog-card-meta span:nth-child(2)"
-    ).textContent;
-    return parseInt(commentsText.match(/\d+/)[0]);
-  }
-
   // 博客卡片悬停效果增强
   document.querySelectorAll(".blog-card").forEach((card) => {
     card.addEventListener("mouseenter", function () {
       this.classList.add("hovered");
     });
-
     card.addEventListener("mouseleave", function () {
       this.classList.remove("hovered");
     });
   });
-
-  // 添加订阅表单处理
-  const subscriptionForm = document.querySelector(".subscription-form");
-  if (subscriptionForm) {
-    subscriptionForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const emailInput = this.querySelector('input[type="email"]');
-      const email = emailInput.value.trim();
-
-      if (email) {
-        // 禁用提交按钮，防止重复提交
-        const submitButton = this.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
-        submitButton.innerHTML = "处理中...";
-
-        // 构建表单数据
-        const formData = new FormData();
-        formData.append("issue[title]", `订阅请求: ${email}`);
-        formData.append(
-          "issue[body]",
-          `
-**邮箱**: ${email}
-**日期**: ${new Date().toLocaleString("zh-CN")}
-**来源**: ${window.location.href}
-        `
-        );
-        formData.append("issue[labels][]", "subscription");
-
-        // 发送到GitHub表单处理
-        fetch("https://github.com/AlexanderJ-Carter/blog-comments/issues/new", {
-          method: "POST",
-          body: formData,
-        })
-          .then(() => {
-            alert("感谢您的订阅！我们会定期发送最新内容到您的邮箱。");
-            emailInput.value = "";
-          })
-          .catch((error) => {
-            console.error("订阅时出错:", error);
-            alert(
-              "订阅失败，请稍后再试。或直接前往 GitHub 提交 Issue: https://github.com/AlexanderJ-Carter/blog-comments/issues/new"
-            );
-          })
-          .finally(() => {
-            // 恢复提交按钮状态
-            submitButton.disabled = false;
-            submitButton.innerHTML = "订阅";
-          });
-      }
-    });
-  }
 
   // 初始排序
   sortBlogPosts();
