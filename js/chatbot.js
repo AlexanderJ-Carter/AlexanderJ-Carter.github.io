@@ -24,6 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
     使用条款: "terms.html",
     联系: "contact.html",
     广告: "ads.html",
+    简介: "profile.html",
+    博客: "blog.html",
+    // 新增博客文章导航
+    "React性能优化": "blog-posts/react-performance.html",
+    "UI设计趋势": "blog-posts/design-trends-2024.html",
+    "远程工作": "blog-posts/remote-work-experience.html",
+    "原子习惯": "blog-posts/atomic-habits-notes.html",
 
     // 英文导航
     home: "#intro",
@@ -35,6 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
     terms: "terms.html",
     contact: "contact.html",
     ads: "ads.html",
+    profile: "profile.html",
+    blog: "blog.html",
+    // 新增英文博客文章导航
+    "react performance": "blog-posts/react-performance.html",
+    "ui design trends": "blog-posts/design-trends-2024.html",
+    "remote work": "blog-posts/remote-work-experience.html",
+    "atomic habits": "blog-posts/atomic-habits-notes.html",
   };
 
   // 对话内容库
@@ -55,6 +69,14 @@ document.addEventListener("DOMContentLoaded", function () {
     📍 联系 - 联系方式
     📍 隐私 - 隐私政策
     📍 广告 - 广告服务
+    📍 简介 - 个人简介
+    📍 博客 - 博客文章
+    
+    博客文章:
+    📝 React性能优化 - React优化技巧
+    📝 UI设计趋势 - 2024设计前瞻
+    📝 远程工作 - 远程工作经验
+    📝 原子习惯 - 读书笔记
     
     您可以输入"去xx"或"打开xx"来访问对应页面`,
     ],

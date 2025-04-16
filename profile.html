@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>个人简介 - Alexander Jame Carter的网页</title>
+    <meta name="description" content="个人简介、经历与技能展示">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.default.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .profile-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .profile-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            color: #007bff;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: #007bff;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, #007bff, #00d2ff);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: #e9ecef;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.4rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #007bff;
+            border: 3px solid white;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-company {
+            font-style: italic;
+            color: #495057;
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-level {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(to right, #007bff, #00d2ff);
+        }
+
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .interest-tag {
+            padding: 0.5rem 1rem;
+            background: #f8f9fa;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #495057;
+            transition: all 0.3s ease;
+        }
+
+        .interest-tag:hover {
+            background: #007bff;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            color: #007bff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .profile-avatar {
+                width: 120px;
+                height: 120px;
+            }
+
+            .profile-name {
+                font-size: 2rem;
+            }
+
+            .back-btn {
+                top: 1rem;
+                left: 1rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left me-2"></i>返回主页
+    </a>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="img/AboutMe.jpg" alt="个人头像" class="profile-avatar">
+            <h1 class="profile-name">Alexander James Carter</h1>
+            <p class="profile-title">前端开发爱好者 | 设计爱好者</p>
+            <div class="d-flex gap-2 mb-3">
+                <span class="badge bg-primary">20岁</span>
+                <span class="badge bg-secondary">北京</span>
+                <span class="badge bg-info text-dark">男生</span>
+            </div>
+            <p class="profile-bio px-md-5">
+                热爱创意与技术的结合，擅长将设计理念转化为高质量的实现。
+                喜欢探索新技术，乐于分享，期待能与志同道合的朋友一起成长。
+            </p>
+            <div class="profile-social">
+                <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-weixin"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-qq"></i></a>
+                <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- 左侧列 -->
+            <div class="col-lg-7 pe-lg-5">
+                <!-- 工作经历 -->
+                <div class="mb-5">
+                    <h2 class="section-title">工作经历</h2>
+                    <div class="timeline">
+                        <!-- 暂无工作经历 -->
+                        <p>目前专注于学业，尚未开始正式工作经历。</p>
+                    </div>
+                </div>
+
+                <!-- 教育经历 -->
+                <div class="mb-5">
+                    <h2 class="section-title">教育经历</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-date">2020年9月 - 至今</div>
+                            <h4 class="timeline-title">电子信息科学与技术 学士学位</h4>
+                            <div class="timeline-company">清华大学</div>
+                            <p>目前就读于清华大学电子信息科学与技术专业。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧列 -->
+            <div class="col-lg-5">
+                <!-- 技能 -->
+                <div class="mb-5">
+                    <h2 class="section-title">专业技能</h2>
+                    <div class="skills-container">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-react"></i></div>
+                            <h5 class="skill-name">React</h5>
+                            <div class="skill-level">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-vuejs"></i></div>
+                            <h5 class="skill-name">Vue.js</h5>
+                            <div class="skill-level">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-js"></i></div>
+                            <h5 class="skill-name">JavaScript</h5>
+                            <div class="skill-level">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                            <h5 class="skill-name">Node.js</h5>
+                            <div class="skill-level">
+                                <div class="skill-progress" style="width: 80%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                            <h5 class="skill-name">HTML5/CSS3</h5>
+                            <div class="skill-level">
+                                <div class="skill-progress" style="width: 98%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <h5 class="skill-name">响应式设计</h5>
+                            <div class="skill-level">
+                                <div class="skill-progress" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 兴趣爱好 -->
+                <div class="mb-5">
+                    <h2 class="section-title">兴趣爱好</h2>
+                    <div class="interests">
+                        <span class="interest-tag"><i class="fas fa-camera me-2"></i>摄影</span>
+                        <span class="interest-tag"><i class="fas fa-book me-2"></i>阅读</span>
+                        <span class="interest-tag"><i class="fas fa-pen-fancy me-2"></i>创意写作</span>
+                        <span class="interest-tag"><i class="fas fa-code me-2"></i>开源贡献</span>
+                    </div>
+                </div>
+
+                <!-- 语言能力 -->
+                <div class="mb-5">
+                    <h2 class="section-title">语言能力</h2>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>汉语 (母语)</span>
+                            <span>精通</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>英语</span>
+                            <span>流利</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>意大利语</span>
+                            <span>基础</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="30"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下载简历按钮 -->
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-primary btn-lg">
+                <i class="fas fa-download me-2"></i>下载完整简历
+            </a>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2024 Alex-hwang Website</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="privacy.html" class="text-light me-3">隐私政策</a>
+                    <a href="terms.html" class="text-light">使用条款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/show.js"></script>
+</body>
+
+</html>
