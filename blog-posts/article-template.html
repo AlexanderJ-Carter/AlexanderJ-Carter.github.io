@@ -156,18 +156,23 @@
         <div class="comments-section mt-5">
             <h3 class="comments-title">读者评论 (0)</h3>
             <div class="comment-form-container">
-                <form class="comment-form" id="comment-form">
+                <form class="comment-form" id="comment-form" action="https://formspree.io/f/xrbpvejb" method="POST">
                     <div class="mb-3">
-                        <textarea class="form-control" placeholder="分享您的想法..." rows="4" required></textarea>
+                        <textarea class="form-control" placeholder="分享您的想法..." rows="4" required
+                            name="message"></textarea>
                     </div>
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="您的名字" required>
+                            <input type="text" class="form-control" placeholder="您的名字" required name="name">
                         </div>
                         <div class="col-md-6">
-                            <input type="email" class="form-control" placeholder="您的邮箱" required>
+                            <input type="email" class="form-control" placeholder="您的邮箱" required name="email">
                         </div>
                     </div>
+                    <!-- 添加文章ID隐藏字段 -->
+                    <input type="hidden" name="articleId" value="">
+                    <!-- 添加重定向URL -->
+                    <input type="hidden" name="_next" value="">
                     <div class="form-check mt-3">
                         <input class="form-check-input" type="checkbox" value="" id="saveInfo">
                         <label class="form-check-label" for="saveInfo">
@@ -180,9 +185,6 @@
                         </small>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">提交评论</button>
-                    <div class="comment-success-message alert alert-success mt-3 d-none">
-                        评论提交成功！我们会在审核后显示您的评论。
-                    </div>
                 </form>
             </div>
             <div class="comments-list mt-4">
@@ -194,7 +196,6 @@
             </div>
         </div>
     </div>
-
     <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">
             <div class="row">
@@ -208,7 +209,6 @@
             </div>
         </div>
     </footer>
-
     <!-- 脚本 -->
     <script src="../js/jquery.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
