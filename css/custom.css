@@ -182,7 +182,7 @@ body.dark-mode .btn {
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
   margin: 20px auto;
   max-width: 1200px;
@@ -195,6 +195,7 @@ body.dark-mode .btn {
   overflow: hidden;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   aspect-ratio: 3/2;
+  height: 100%;
 }
 
 .portfolio-image {
@@ -230,6 +231,11 @@ body.dark-mode .btn {
   margin-bottom: 10px;
 }
 
+.portfolio-item {
+  height: 100%;
+  display: flex;
+}
+
 @media (max-width: 768px) {
   .portfolio-grid {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -243,4 +249,171 @@ body.dark-mode .btn {
 
 .intro {
   background-image: url("../img/Background.jpg");
+}
+
+/* 文字部分样式增强 */
+.text-card {
+  background: rgba(30, 30, 50, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+.text-card .card-title {
+  color: #42a5f5;
+  font-weight: 600;
+}
+
+.text-content {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  line-height: 1.8;
+}
+
+.text-quote {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  border-left: 4px solid #42a5f5;
+}
+
+.text-quote p {
+  color: white;
+  font-weight: 500;
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.text-quote i {
+  color: var(--bs-primary);
+  font-size: 1.2rem;
+}
+
+/* 确保所有按钮文本在深色背景上可见 */
+.btn-outline-primary {
+  border-color: var(--bs-primary);
+  color: var(--bs-primary);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--bs-primary);
+  color: #ffffff;
+}
+
+.text-card .btn-outline-primary {
+  color: white;
+  border-color: #42a5f5;
+  background: rgba(66, 165, 245, 0.2);
+}
+
+.text-card .btn-outline-primary:hover {
+  background-color: #42a5f5;
+  color: white;
+}
+
+/* 博客CTA卡片 */
+.blog-cta {
+  background: rgba(30, 30, 50, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.blog-cta h4 {
+  color: #42a5f5;
+}
+
+.blog-cta p {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+}
+
+/* 文字的力量部分样式 */
+.text-section {
+  position: relative;
+  background: linear-gradient(
+      rgba(240, 245, 255, 0.9),
+      rgba(230, 240, 250, 0.9)
+    ),
+    url("../img/Background.jpg") center/cover no-repeat fixed;
+  padding: 4rem 0;
+}
+
+.text-section .section-title,
+.text-section .lead {
+  color: #333;
+}
+
+.text-section .subtitle-line {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.text-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.text-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.text-card .card-icon {
+  font-size: 2.5rem;
+  color: #42a5f5;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.text-card .card-title {
+  color: #42a5f5;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.text-content {
+  color: white;
+  font-weight: 400;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  line-height: 1.8;
+}
+
+.text-quote {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  border-left: 4px solid #42a5f5;
+}
+
+.text-quote p {
+  color: white;
+  font-weight: 500;
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.text-quote i {
+  color: #42a5f5;
+  font-size: 1.2rem;
+}
+
+.blog-cta {
+  background: rgba(20, 30, 50, 0.75);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+}
+
+.blog-cta h4 {
+  color: #42a5f5;
+}
+
+.blog-cta p {
+  color: white;
 }

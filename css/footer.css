@@ -221,13 +221,14 @@
   font-size: 0.85rem;
 }
 
-/* 社交媒体分享按钮 */
+/* 社交媒体分享按钮 - 修改为水平布局 */
 .social-links {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 1.5rem;
   justify-content: center;
+  flex-direction: row; /* 确保水平排列 */
 }
 
 /* 社交分享按钮增强 */
@@ -427,16 +428,13 @@
 .footer-links ul {
   list-style: none;
   padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 0.5rem;
+  margin: 0 0 1rem 0;
 }
 
 .footer-links li {
   position: relative;
   padding-left: 20px;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.75rem;
   transition: all 0.25s ease;
 }
 
@@ -459,16 +457,21 @@
 }
 
 .footer-links a {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  transition: all 0.25s ease;
+  transition: all 0.3s ease;
   font-size: 0.9rem;
   display: inline-block;
+  position: relative;
 }
 
 .footer-links a:hover {
   color: #ffffff;
   transform: translateX(3px);
+}
+
+.footer-links .row {
+  margin-top: 1.25rem;
 }
 
 /* 页脚栏目间距调整 */
@@ -701,4 +704,75 @@
   .copyright {
     margin-bottom: 0.7rem;
   }
+}
+
+/* 社交媒体分享按钮 */
+.social-links {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.social-share {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.social-share:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* 联系信息样式 */
+.contact-info {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.contact-info h4 {
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  justify-content: center;
+}
+
+.contact-item i {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: var(--primary-color);
 }

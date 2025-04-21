@@ -1,8 +1,12 @@
 .poem-history-section {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 60px 0;
   position: relative;
+  background: linear-gradient(rgba(30, 30, 60, 0.9), rgba(30, 30, 60, 0.9)),
+    url("../img/Background.jpg") center/cover no-repeat fixed;
+  padding: 4rem 0;
   overflow: hidden;
+  color: #fff;
+  margin-top: 40px;
+  margin-bottom: 0;
 }
 
 .poem-history-section::before {
@@ -14,8 +18,9 @@
   bottom: 0;
   background-size: cover;
   background-position: center;
-  opacity: 0.1;
+  opacity: 0.15;
   transition: opacity 1s ease;
+  z-index: 0;
 }
 
 .poem-history-wrapper {
@@ -30,96 +35,129 @@
 
 .poem-container,
 .history-container {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 35px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 3rem 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   text-align: center;
   position: relative;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  min-height: 350px;
+  color: #f8f9fa;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .poem-container:hover,
 .history-container:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .section-icon {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(45deg, #007bff, #00d2ff);
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: -65px auto 25px;
+  margin-bottom: 1.5rem;
   color: white;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  z-index: 1;
+  padding-top: 0.5rem;
+  text-align: center;
 }
 
-.poem-content {
+.section-icon i {
+  font-size: 2.2rem;
+  color: white;
+}
+
+.poem-container h3,
+.history-container h3 {
   font-size: 1.8rem;
-  color: #333;
-  margin-bottom: 25px;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  text-align: center;
+}
+
+.poem-content,
+.history-content {
+  width: 100%;
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
   line-height: 1.8;
-  font-family: "Ma Shan Zheng", cursive;
+  color: #fff;
   opacity: 0;
-  transform: translateY(20px);
+  transition: all 0.8s ease;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .decorative-line {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 25px 0;
+  width: 70%;
+  margin: 1.5rem auto;
 }
 
 .decorative-line span {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #007bff, transparent);
-  flex: 1;
-  margin: 0 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  flex-grow: 1;
 }
 
 .decorative-line i {
-  color: #007bff;
   font-size: 0.6rem;
-  transform: rotate(45deg);
+  padding: 0 15px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-.poem-info {
-  color: #666;
-  font-size: 1.1rem;
+.poem-info,
+.history-date,
+.history-event {
+  width: 100%;
+  text-align: center;
   font-style: italic;
-  opacity: 0;
-  transform: translateY(20px);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .history-title {
   color: #333;
   font-size: 1.5rem;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   font-weight: 600;
-}
-
-.history-content {
-  color: #555;
-  font-size: 1.2rem;
-  line-height: 1.8;
-  opacity: 0;
+  font-family: "Playfair Display", serif;
 }
 
 .history-date {
   font-weight: 600;
-  color: #007bff;
-  margin-bottom: 10px;
+  color: #3498db;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
 }
 
 .history-event {
-  color: #444;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  line-height: 1.6;
 }
 
 @media (min-width: 992px) {
@@ -148,4 +186,39 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .poem-container,
+  .history-container {
+    padding: 2rem 1rem;
+    min-height: auto;
+    margin-bottom: 30px;
+  }
+
+  .poem-content {
+    font-size: 1.2rem;
+  }
+
+  .section-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.2rem;
+    margin: -40px auto 15px;
+  }
+
+  .section-icon i {
+    font-size: 1.8rem;
+  }
+}
+
+/* 增加玻璃效果 */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 }
