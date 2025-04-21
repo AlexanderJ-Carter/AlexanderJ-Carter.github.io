@@ -52,13 +52,13 @@ document.addEventListener("DOMContentLoaded", function () {
         en: "Add WeChat Contact",
         it: "Aggiungi Contatto WeChat"
       },
-      image: "img/qr/wechat-qr.jpg",
+      image: "img/QR/wechat-qr.jpg",
       desc: {
         zh: "扫描二维码或复制微信号添加好友",
         en: "Scan QR code or copy WeChat ID to add contact",
         it: "Scansiona il codice QR o copia l'ID WeChat per aggiungere contatto"
       },
-      id: "15300372910",
+      id: "18699092910",
     },
     qq: {
       title: {
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         en: "Add QQ Contact",
         it: "Aggiungi Contatto QQ"
       },
-      image: "img/qr/qq-qr.jpg",
+      image: "img/QR/qq-qr.jpg",
       desc: {
         zh: "扫描二维码或复制QQ号添加好友",
         en: "Scan QR code or copy QQ number to add contact",
