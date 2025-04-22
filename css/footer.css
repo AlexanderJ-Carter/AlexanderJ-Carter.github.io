@@ -93,23 +93,24 @@
   }
 }
 
+/* 改进页脚版权区域布局和质感 */
 .site-footer {
   background: linear-gradient(
     145deg,
-    rgba(28, 28, 35, 0.9),
-    rgba(37, 37, 45, 0.92),
-    rgba(28, 28, 36, 0.94)
+    rgba(22, 22, 30, 0.95),
+    rgba(32, 32, 42, 0.97),
+    rgba(24, 24, 34, 0.98)
   );
   position: relative;
   overflow: hidden;
   color: #fff;
   padding: 3.5rem 0 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
-/* 页脚装饰元素 */
+/* 页脚装饰元素增强 */
 .site-footer::before {
   content: "";
   position: absolute;
@@ -118,7 +119,7 @@
   right: 0;
   bottom: 0;
   background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjMjIyIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
-  opacity: 0.03;
+  opacity: 0.05;
   z-index: 0;
   pointer-events: none;
 }
@@ -500,6 +501,83 @@
 
   .footer-links li::before {
     display: none;
+  }
+}
+
+/* 改进页脚底部区域 */
+.footer-bottom {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 版权信息样式优化 */
+.footer-copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.footer-copyright p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+
+/* 页脚法律链接优化 */
+.footer-legal {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.footer-legal a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  position: relative;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  padding: 0.3rem 0;
+}
+
+.footer-legal a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: width 0.3s ease;
+}
+
+.footer-legal a:hover {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.footer-legal a:hover::after {
+  width: 100%;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer-copyright {
+    align-items: center;
+  }
+
+  .footer-legal {
+    justify-content: center;
   }
 }
 

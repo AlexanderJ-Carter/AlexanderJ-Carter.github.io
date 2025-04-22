@@ -333,6 +333,16 @@ window.addEventListener("load", function () {
     });
   });
 
+  // 添加页脚淡入效果
+  const footerElements = document.querySelectorAll(
+    ".site-footer .footer-content > div"
+  );
+  footerElements.forEach((element, index) => {
+    setTimeout(() => {
+      element.classList.add("footer-fade-in");
+    }, 300 + index * 150);
+  });
+
   // 鼠标移动时对卡片添加光影效果
   const cards = document.querySelectorAll(".glass-card");
   cards.forEach((card) => {
