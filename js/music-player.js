@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 设置专辑封面
     if (songThumbnail) {
       // 默认封面
-      const defaultCover = "img/music-cover-default.jpg";
+      const defaultCover = "img/music-cover-default.png";
 
       // 检查歌曲是否有封面，如果有则使用，否则使用默认封面
       const coverUrl = songs[index].cover || defaultCover;
