@@ -624,14 +624,17 @@
   </section>
 
   <!-- Chatbot HTML -->
-  <button id="chat-toggle-button" class="chat-toggle-button glass-effect" type="button">
-    🤖
+  <button id="chat-toggle-button" class="chat-toggle-button" type="button" aria-label="打开聊天助手">
+    <i class="fas fa-robot"></i>
   </button>
-  <div id="chat-container" class="chat-container glass-container">
+  <div id="chat-container" class="chat-container">
+    <!-- 头部会通过JS动态添加 -->
     <div id="chatbox" class="chatbox"></div>
     <div class="chat-input-container">
-      <input type="text" id="userInput" class="chat-input" placeholder="输入您的消息...">
-      <button id="sendButton" class="btn btn-primary rounded-pill" type="button">发送</button>
+      <input type="text" id="userInput" class="chat-input" placeholder="输入您的消息..." aria-label="输入消息">
+      <button id="sendButton" class="btn btn-primary rounded-pill" type="button">
+        <i class="fas fa-paper-plane"></i>
+      </button>
     </div>
   </div>
 

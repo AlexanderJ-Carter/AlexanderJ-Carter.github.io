@@ -34,17 +34,17 @@ function generateWechatQR(url) {
 
   // 创建模态框
   const modal = document.createElement("div");
-  modal.className = "qr-modal";
+  modal.className = "qr-modal fade-in";
   modal.innerHTML = `
-    <div class="qr-container">
+    <div class="qr-container slide-up">
       <div class="qr-header">
-        <h4>微信扫码分享</h4>
+        <h4><i class="fab fa-weixin me-2"></i>微信扫码分享</h4>
         <button class="close-btn" aria-label="关闭">×</button>
       </div>
       <div class="qr-content">
         <div class="loading-spinner"></div>
         <div id="wechat-qrcode"></div>
-        <p class="qr-tip">请打开微信"扫一扫"</p>
+        <p class="qr-tip">请打开微信"扫一扫"，扫描上方二维码</p>
       </div>
     </div>
   `;
@@ -53,9 +53,16 @@ function generateWechatQR(url) {
 
   // 添加关闭事件
   const closeBtn = modal.querySelector(".close-btn");
-  closeBtn.onclick = () => modal.remove();
+  closeBtn.onclick = () => {
+    modal.classList.add("fade-out");
+    setTimeout(() => modal.remove(), 300);
+  };
+
   modal.onclick = (e) => {
-    if (e.target === modal) modal.remove();
+    if (e.target === modal) {
+      modal.classList.add("fade-out");
+      setTimeout(() => modal.remove(), 300);
+    }
   };
 
   // 生成二维码
@@ -77,6 +84,17 @@ function generateWechatQR(url) {
       <p class="error-message">二维码生成失败，请稍后重试</p>
     `;
   }
+
+  // 添加ESC键关闭支持
+  const handleKeyDown = (e) => {
+    if (e.key === "Escape") {
+      modal.classList.add("fade-out");
+      setTimeout(() => modal.remove(), 300);
+      document.removeEventListener("keydown", handleKeyDown);
+    }
+  };
+
+  document.addEventListener("keydown", handleKeyDown);
 }
 
 // 创建一个样式元素
