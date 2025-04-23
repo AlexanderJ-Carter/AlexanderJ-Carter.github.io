@@ -1,90 +1,90 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Contattami - Sito Web Personale di Alexander James Carter</title>
-    <meta name="description" content="Contattami tramite vari metodi, inclusi WeChat, QQ, GitHub ed email">
+    <title>Contact Me - Alexander James Carter's Personal Website</title>
+    <meta name="description"
+        content="Get in touch with me through various methods including WeChat, QQ, GitHub and email">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.default.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="../css/style.default.css">
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/contact.css">
 </head>
 
 <body>
-    <a href="index-it.html" class="back-btn" aria-label="Torna alla Home">
-        <i class="fas fa-arrow-left me-2" aria-hidden="true"></i>Torna alla Home
+    <a href="index-en.html" class="back-btn" aria-label="Return to Home">
+        <i class="fas fa-arrow-left me-2" aria-hidden="true"></i>Back to Home
     </a>
 
     <main>
         <div class="contact-container">
             <div class="contact-header">
-                <h1>Contattami</h1>
-                <p>Scegli il metodo che preferisci per comunicare con me. Che si tratti di domande, collaborazioni o
-                    condivisione di idee, attendo il tuo messaggio</p>
+                <h1>Contact Me</h1>
+                <p>Choose your preferred way to reach out. Whether you have questions, collaboration ideas, or just want
+                    to share thoughts, I look forward to hearing from you</p>
             </div>
 
             <div class="contact-grid">
-                <!-- WeChat -->
+                <!-- WeChat contact -->
                 <div class="contact-item" onclick="openQrModal('wechat')" tabindex="0" role="button"
-                    aria-label="Contatto WeChat">
+                    aria-label="WeChat contact">
                     <i class="fab fa-weixin contact-icon weixin-icon" aria-hidden="true"></i>
                     <h3 class="contact-title">WeChat</h3>
-                    <p class="contact-info">Scansiona il codice QR o copia l'ID WeChat</p>
-                    <button class="contact-btn">Visualizza QR Code</button>
+                    <p class="contact-info">Scan QR code or copy WeChat ID</p>
+                    <button class="contact-btn">View QR Code</button>
                 </div>
 
-                <!-- QQ -->
+                <!-- QQ contact -->
                 <div class="contact-item" onclick="openQrModal('qq')" tabindex="0" role="button"
-                    aria-label="Contatto QQ">
+                    aria-label="QQ contact">
                     <i class="fab fa-qq contact-icon qq-icon" aria-hidden="true"></i>
                     <h3 class="contact-title">QQ</h3>
-                    <p class="contact-info">Scansiona il codice QR o copia l'ID QQ</p>
-                    <button class="contact-btn">Visualizza QR Code</button>
+                    <p class="contact-info">Scan QR code or copy QQ number</p>
+                    <button class="contact-btn">View QR Code</button>
                 </div>
 
-                <!-- GitHub -->
+                <!-- GitHub contact -->
                 <div class="contact-item" tabindex="0" role="button">
                     <a href="https://github.com/alexanderj-carter" target="_blank" rel="noopener" class="contact-link"
-                        aria-label="Visita la pagina GitHub">
+                        aria-label="Visit GitHub profile">
                         <i class="fab fa-github contact-icon github-icon" aria-hidden="true"></i>
                         <h3 class="contact-title">GitHub</h3>
-                        <p class="contact-info">Visualizza i miei progetti open source</p>
-                        <button class="contact-btn">Visita Profilo</button>
+                        <p class="contact-info">Check out my open source projects</p>
+                        <button class="contact-btn">Visit Profile</button>
                     </a>
                 </div>
 
-                <!-- Email -->
+                <!-- Email contact -->
                 <div class="contact-item" tabindex="0" role="button">
-                    <a href="mailto:2253940186@qq.com" class="contact-link" aria-label="Invia email">
+                    <a href="mailto:2253940186@qq.com" class="contact-link" aria-label="Send email">
                         <i class="fas fa-envelope contact-icon email-icon" aria-hidden="true"></i>
                         <h3 class="contact-title">Email</h3>
                         <p class="contact-info">2253940186@qq.com</p>
-                        <button class="contact-btn">Invia Email</button>
+                        <button class="contact-btn">Send Email</button>
                     </a>
                 </div>
             </div>
 
             <div class="language-options text-center mt-5">
-                <p>Altre lingue:</p>
-                <a href="contact.html" class="btn btn-outline-primary me-2">中文</a>
-                <a href="contact-en.html" class="btn btn-outline-primary">English</a>
+                <p>Other languages:</p>
+                <a href="../contact.html" class="btn btn-outline-primary me-2">中文</a>
+                <a href="../it/contact-it.html" class="btn btn-outline-primary">Italiano</a>
             </div>
         </div>
     </main>
 
-    <!-- QR Code Modal -->
+    <!-- QR code modal -->
     <div id="qr-modal" class="qr-modal" aria-modal="true" role="dialog">
         <div class="qr-modal-content">
             <span class="qr-close" onclick="closeQrModal()" tabindex="0" role="button"
-                aria-label="Chiudi finestra">&times;</span>
-            <h3 id="qr-title" class="qr-title">Scansiona il Codice QR</h3>
-            <img id="qr-image" src="" alt="Codice QR" class="qr-image">
-            <p id="qr-desc" class="qr-desc">Scansiona il codice QR sopra per aggiungere contatto</p>
-            <button id="copy-btn" class="copy-btn" onclick="copyContact()">Copia ID</button>
+                aria-label="Close modal">&times;</span>
+            <h3 id="qr-title" class="qr-title">Scan QR Code</h3>
+            <img id="qr-image" src="" alt="QR Code" class="qr-image">
+            <p id="qr-desc" class="qr-desc">Scan the QR code above to add as contact</p>
+            <button id="copy-btn" class="copy-btn" onclick="copyContact()">Copy ID</button>
         </div>
     </div>
 
@@ -94,14 +94,14 @@
                 <div class="col-md-6 text-center text-md-start">
                     <div class="footer-copyright">
                         <p class="mb-0">&copy; 2023-2025 Alexander James Carter</p>
-                        <p class="small">Ultimo aggiornamento: <span class="update-date">20 Aprile 2025</span></p>
+                        <p class="small">Last updated: <span class="update-date">April 20, 2025</span></p>
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <div class="footer-links">
-                        <a href="terms-it.html" class="me-3">Termini di Utilizzo</a>
-                        <a href="privacy-it.html" class="me-3">Informativa Privacy</a>
-                        <a href="contact-it.html">Contatti</a>
+                        <a href="terms-en.html" class="me-3">Terms of Use</a>
+                        <a href="privacy-en.html" class="me-3">Privacy Policy</a>
+                        <a href="contact-en.html">Contact Us</a>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/contact.js"></script>
+    <script src="../js/contact.js"></script>
 </body>
 
 </html>
