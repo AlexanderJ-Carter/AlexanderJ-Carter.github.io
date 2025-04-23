@@ -80,6 +80,11 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     document.body.appendChild(feedbackDiv);
 
+    // 添加暗黑模式支持
+    if (document.body.classList.contains("dark-mode")) {
+      feedbackDiv.classList.add("dark-mode");
+    }
+
     // 2秒后自动移除
     setTimeout(() => {
       feedbackDiv.classList.add("fade-out");

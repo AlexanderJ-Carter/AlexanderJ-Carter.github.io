@@ -382,6 +382,7 @@ window.addEventListener("load", function () {
   enhanceInteractionHints();
   fixParticleContainers();
   handleMediaQueries();
+  setupDarkModeDetection(); // 新增自动检测系统暗黑模式偏好
 
   // 移除页面加载器
   const pageLoader = document.querySelector(".page-loader");
@@ -397,29 +398,114 @@ window.addEventListener("load", function () {
 const themeToggle = document.getElementById("theme-toggle");
 if (themeToggle) {
   themeToggle.addEventListener("click", function () {
-    document.body.classList.toggle("dark-mode");
-
-    // 切换图标
-    const themeIcon = this.querySelector("i");
-    if (document.body.classList.contains("dark-mode")) {
-      themeIcon.classList.remove("fa-moon");
-      themeIcon.classList.add("fa-sun");
-      localStorage.setItem("theme", "dark");
-    } else {
-      themeIcon.classList.remove("fa-sun");
-      themeIcon.classList.add("fa-moon");
-      localStorage.setItem("theme", "light");
-    }
+    toggleDarkMode();
   });
 
   // 检查用户之前的主题偏好
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
-    document.body.classList.add("dark-mode");
-    const themeIcon = themeToggle.querySelector("i");
-    themeIcon.classList.remove("fa-moon");
-    themeIcon.classList.add("fa-sun");
+    applyDarkMode();
+  } else if (savedTheme === "light") {
+    applyLightMode();
+  } else {
+    // 如果没有保存过偏好，则检查系统偏好
+    checkSystemThemePreference();
   }
+}
+
+// 新增：检测系统暗黑模式偏好
+function setupDarkModeDetection() {
+  // 检查系统偏好
+  checkSystemThemePreference();
+
+  // 监听系统偏好变化
+  if (window.matchMedia) {
+    const darkModeMediaQuery = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    );
+    if (darkModeMediaQuery.addEventListener) {
+      darkModeMediaQuery.addEventListener("change", (e) => {
+        // 仅当用户没有手动设置偏好时，才跟随系统变化
+        if (!localStorage.getItem("theme")) {
+          if (e.matches) {
+            applyDarkMode(false); // false表示不保存到localStorage
+          } else {
+            applyLightMode(false);
+          }
+        }
+      });
+    }
+  }
+}
+
+// 检查系统主题偏好
+function checkSystemThemePreference() {
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches &&
+    !localStorage.getItem("theme")
+  ) {
+    applyDarkMode(false);
+  }
+}
+
+// 切换暗黑模式
+function toggleDarkMode() {
+  if (document.body.classList.contains("dark-mode")) {
+    applyLightMode();
+  } else {
+    applyDarkMode();
+  }
+}
+
+// 应用暗黑模式
+function applyDarkMode(savePreference = true) {
+  document.body.classList.add("dark-mode");
+
+  // 切换图标
+  if (themeToggle) {
+    const themeIcon = themeToggle.querySelector("i");
+    if (themeIcon) {
+      themeIcon.classList.remove("fa-moon");
+      themeIcon.classList.add("fa-sun");
+    }
+  }
+
+  if (savePreference) {
+    localStorage.setItem("theme", "dark");
+  }
+
+  // 触发自定义事件，通知其他组件主题已改变
+  document.dispatchEvent(
+    new CustomEvent("themeChanged", {
+      detail: { theme: "dark" },
+    })
+  );
+}
+
+// 应用亮色模式
+function applyLightMode(savePreference = true) {
+  document.body.classList.remove("dark-mode");
+
+  // 切换图标
+  if (themeToggle) {
+    const themeIcon = themeToggle.querySelector("i");
+    if (themeIcon) {
+      themeIcon.classList.remove("fa-sun");
+      themeIcon.classList.add("fa-moon");
+    }
+  }
+
+  if (savePreference) {
+    localStorage.setItem("theme", "light");
+  }
+
+  // 触发自定义事件，通知其他组件主题已改变
+  document.dispatchEvent(
+    new CustomEvent("themeChanged", {
+      detail: { theme: "light" },
+    })
+  );
 }
 
 // 检测视窗可见性变化
