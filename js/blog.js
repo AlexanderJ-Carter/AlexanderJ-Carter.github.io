@@ -183,7 +183,8 @@ document.addEventListener("DOMContentLoaded", function () {
       五月: 4,
       六月: 5,
       七月: 6,
-      八月: 8,
+      八月: 7,
+      九月: 8,
       十月: 9,
       十一月: 10,
       十二月: 11,
@@ -195,14 +196,45 @@ document.addEventListener("DOMContentLoaded", function () {
   // 博客卡片悬停效果增强
   document.querySelectorAll(".blog-card").forEach((card) => {
     card.addEventListener("mouseenter", function () {
-      this.classList.add("hovered");
+      this.style.transform = "translateY(-10px)";
+      this.style.boxShadow = "0 15px 30px rgba(0, 0, 0, 0.15)";
+
+      // 让图片有轻微放大效果
+      const cardImg = this.querySelector(".blog-card-img");
+      if (cardImg) {
+        cardImg.style.transform = "scale(1.05)";
+        cardImg.style.transition = "transform 0.5s ease";
+      }
+
+      // 让阅读全文链接有轻微右移效果
+      const readMoreLink = this.querySelector(".blog-card-link i");
+      if (readMoreLink) {
+        readMoreLink.style.transform = "translateX(5px)";
+        readMoreLink.style.transition = "transform 0.3s ease";
+      }
     });
+
     card.addEventListener("mouseleave", function () {
-      this.classList.remove("hovered");
+      this.style.transform = "";
+      this.style.boxShadow = "";
+
+      // 恢复图片大小
+      const cardImg = this.querySelector(".blog-card-img");
+      if (cardImg) {
+        cardImg.style.transform = "";
+      }
+
+      // 恢复阅读全文链接位置
+      const readMoreLink = this.querySelector(".blog-card-link i");
+      if (readMoreLink) {
+        readMoreLink.style.transform = "";
+      }
     });
   });
+});
 
-  // 初始排序
+// 初始化页面时执行排序
+document.addEventListener("DOMContentLoaded", function () {
   sortBlogPosts();
 });
 
