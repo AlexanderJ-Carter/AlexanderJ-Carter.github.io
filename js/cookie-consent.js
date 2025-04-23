@@ -26,7 +26,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // 如果还未设置偏好，显示Cookie弹窗
   if (!checkCookieConsent() && cookieConsent) {
     try {
-      cookieConsent.style.display = "block";
+      setTimeout(() => {
+        cookieConsent.style.display = "block";
+        // 添加一个简短的延迟后添加show类，以触发过渡动画
+        setTimeout(() => {
+          cookieConsent.classList.add("show");
+        }, 50);
+      }, 1500); // 延迟1.5秒显示，给页面加载时间
     } catch (e) {
       console.error("显示Cookie同意弹窗时出错:", e);
     }
@@ -38,7 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
       try {
         localStorage.setItem("cookieConsent", "true");
         if (cookieConsent) {
-          cookieConsent.style.display = "none";
+          cookieConsent.classList.remove("show");
+          setTimeout(() => {
+            cookieConsent.style.display = "none";
+          }, 500); // 等待过渡动画完成
+
           // 显示接受成功的简短提示
           showConsentFeedback("已接受所有Cookie", "success");
         }
@@ -55,7 +65,11 @@ document.addEventListener("DOMContentLoaded", function () {
       try {
         localStorage.setItem("cookieConsent", "essential");
         if (cookieConsent) {
-          cookieConsent.style.display = "none";
+          cookieConsent.classList.remove("show");
+          setTimeout(() => {
+            cookieConsent.style.display = "none";
+          }, 500); // 等待过渡动画完成
+
           // 显示接受基本Cookie的提示
           showConsentFeedback("仅启用必要Cookie", "info");
         }
@@ -85,7 +99,12 @@ document.addEventListener("DOMContentLoaded", function () {
       feedbackDiv.classList.add("dark-mode");
     }
 
-    // 2秒后自动移除
+    // 动画效果：淡入
+    setTimeout(() => {
+      feedbackDiv.classList.add("show");
+    }, 10);
+
+    // 2.5秒后自动移除
     setTimeout(() => {
       feedbackDiv.classList.add("fade-out");
       setTimeout(() => {
@@ -93,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
           document.body.removeChild(feedbackDiv);
         }
       }, 500);
-    }, 2000);
+    }, 2500);
   }
 
   // 启用所有Cookie功能
@@ -147,6 +166,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 初始化时检查语言设置
   setupLanguageText();
+
+  // 检查主题状态并设置对应的样式
+  if (document.body.classList.contains("dark-mode") && cookieConsent) {
+    cookieConsent.classList.add("dark-mode");
+  }
 });
 
 // 添加暗黑模式支持 - 如果网站启用了深色模式，Cookie弹窗也应该相应变化
@@ -171,5 +195,11 @@ window.cookieConsentUtils = {
   },
   getConsentStatus: function () {
     return localStorage.getItem("cookieConsent") || "unknown";
+  },
+  resetConsent: function () {
+    localStorage.removeItem("cookieConsent");
+    console.log("已重置Cookie同意状态");
+    // 刷新页面以显示Cookie同意弹窗
+    window.location.reload();
   },
 };
