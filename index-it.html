@@ -2,368 +2,404 @@
 <html lang="it">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Il Sito Web di Alexander James Carter</title>
-    <meta name="description" content="Il sito personale di Alexander James Carter">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index,follow">
-    <meta name="author" content="Alexander James Carter">
-    <meta name="keywords" content="Lavori Personali, Condivisione di Contenuti, Alexander James Carter, Sito Personale">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Open Graph meta tags for better social media sharing -->
-    <meta property="og:title" content="Il Sito Web di Alexander James Carter">
-    <meta property="og:description" content="Un sito personale che presenta lavori e condivisione di contenuti.">
-    <meta property="og:image" content="img/logo.png">
-    <meta property="og:url" content="https://alexanderj-carter.github.io">
-    <meta property="og:type" content="website">
+  <!-- 基本信息 -->
+  <title>Il Sito Web di Alexander James Carter</title>
+  <meta name="description" content="Un sito personale che presenta lavori e condivisione di contenuti">
+  <meta name="author" content="Alexander James Carter">
+  <meta name="keywords" content="Lavori Personali, Condivisione di Contenuti, Alexander James Carter, Sito Personale">
+  <link rel="canonical" href="https://alexander.xin/">
+  <meta name="robots" content="index,follow">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
-    <!-- Twitter Card meta tags for better social media sharing -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Il Sito Web di Alexander James Carter">
-    <meta name="twitter:description" content="Un sito personale che presenta lavori e condivisione di contenuti.">
-    <meta name="twitter:image" content="img/logo.png">
+  <!-- 移动端优化 -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- 结构化数据 -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alexander James Carter",
+      "url": "https://alexander.xin",
+      "image": "img/logo.png",
+      "sameAs": [
+        "https://github.com/AlexanderJ-Carter"
+      ],
+      "description": "Esplora la creatività, condividi la vita, registra momenti meravigliosi"
+    }
+  </script>
 
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+  <!-- PWA和图标 -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 
-    <link rel="stylesheet" href="css/glightbox.min.css">
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/footer.css">
+  <!-- 社交分享配置 -->
+  <meta property="og:title" content="Il Sito Web di Alexander James Carter">
+  <meta property="og:description" content="Un sito personale che presenta lavori e condivisione di contenuti.">
+  <meta property="og:image" content="img/logo.png">
+  <meta property="og:url" content="https://alexanderj-carter.github.io">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
 
-    <!-- 添加错误处理和分享脚本 -->
-    <script src="js/error-handler.js"></script>
-    <script src="js/share.js"></script>
+  <!-- 第三方样式库 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+  <!-- 字体 -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/about.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/display.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/enhanced.css">
+  <link rel="stylesheet" href="css/glightbox.min.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+  <link rel="stylesheet" href="css/cookie.css">
+  <link rel="stylesheet" href="css/newyear.css">
+  <link rel="stylesheet" href="css/music.css">
+  <link rel="stylesheet" href="css/poem.css">
+
+  <!-- 脚本 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js" defer></script>
+  <script src="js/error-handler.js"></script>
+  <script src="js/share.js"></script>
+
+  <!-- 添加资源预加载 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preload" as="image" href="img/AboutMe.jpg">
+  <link rel="preload" as="image" href="img/Background.jpg">
 </head>
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
 
-    <!-- Main Content -->
-    <section class="intro dark-overlay bg-cover bg-fixed bg-center d-flex align-items-center" id="intro"
-        style="background-image: url('img/Background.jpg');">
-        <div class="overlay-content w-100 text-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-md-12 mx-auto text-center">
-                        <p
-                            class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 fade-in">
-                            Scoprire la Creatività, Abbracciare l'Ispirazione
-                        </p>
-                        <h1 class="text-uppercase intro-heading letter-spacing-5 fw-bold fade-in"
-                            style="font-family: 'Segoe UI', sans-serif;">
-                            Esplora Possibilità Infinite, Crea un Futuro Straordinario
-                        </h1>
-                        <p class="fst-italic intro-text text-muted mt-4 fade-in" style="font-size: 1.2rem;">
-                            Dove ogni scintilla d'ispirazione prende vita, ogni idea creativa risuona.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- 在<body>开始后添加页面加载指示器 -->
+  <div class="page-loader">
+    <div class="loader-content">
+      <div class="spinner"></div>
+      <p>Caricamento in corso...</p>
+    </div>
+  </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-white py-2 shadow-sm" id="navbar">
-        <div class="container">
-            <!-- Logo -->
-            <a class="navbar-brand" href="#intro">
-                <img src="img/logo.png" alt="Logo" style="height: 40px;">
+  <!-- 新年祝福 -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <i class="fas fa-gift modal-icon"></i>
+        <h2>Felice Anno Nuovo!</h2>
+      </div>
+      <div class="modal-body">
+        <p>Ti auguriamo nel nuovo anno:</p>
+        <div class="wish-list">
+          <div class="wish-item">
+            <i class="fas fa-heart"></i>
+            <span>Buona salute</span>
+          </div>
+          <div class="wish-item">
+            <i class="fas fa-star"></i>
+            <span>Ogni fortuna</span>
+          </div>
+          <div class="wish-item">
+            <i class="fas fa-smile"></i>
+            <span>Felicità in famiglia</span>
+          </div>
+        </div>
+      </div>
+      <div class="button-container">
+        <button id="closeBtn" class="close-btn" type="button">
+          <i class="fas fa-envelope-open-text"></i>
+          Accetta gli auguri
+        </button>
+        <button id="dontShowBtn" class="dont-show-btn" type="button">
+          <i class="fas fa-calendar-day"></i>
+          Non mostrare oggi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="background-music" loop></audio>
+
+  <div class="music-player" id="music-player">
+    <div class="player-content">
+      <div class="song-thumbnail" id="song-thumbnail"></div>
+      <div id="song-title" class="song-title">In riproduzione: </div>
+      <div class="song-progress">
+        <input type="range" id="progress-bar" min="0" max="100" step="1" value="0" title="Progresso">
+        <div class="time-display">
+          <span id="current-time">0:00</span>
+          <span>/</span>
+          <span id="duration">0:00</span>
+        </div>
+      </div>
+      <div class="music-visualizer-container">
+        <canvas id="music-visualizer"></canvas>
+      </div>
+      <div class="controls">
+        <button id="prev-song" class="control-btn" type="button" title="Precedente">
+          <i class="fas fa-step-backward"></i>
+        </button>
+        <button id="shuffle-song" class="control-btn" type="button" title="Casuale">
+          <i class="fas fa-random"></i>
+        </button>
+        <button id="next-song" class="control-btn" type="button" title="Successivo">
+          <i class="fas fa-step-forward"></i>
+        </button>
+        <button id="repeat-song" class="control-btn" type="button" title="Ripeti">
+          <i class="fas fa-redo"></i>
+        </button>
+      </div>
+      <div class="volume-control">
+        <i class="fas fa-volume-down"></i>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.3" title="Volume">
+      </div>
+    </div>
+  </div>
+
+  <button id="toggle-music-player" class="toggle-button" type="button">🎵</button>
+
+  <!-- 主内容 -->
+  <section class="intro parallax-hero dark-overlay bg-cover d-flex align-items-center" id="intro">
+    <div class="hero-particles"></div>
+    <div class="overlay-content w-100 text-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 col-md-12 mx-auto text-center">
+            <p
+              class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 animate__animated animate__fadeIn animate__delay-1s">
+              Scoprire la Creatività, Abbracciare l'Ispirazione
+            </p>
+            <h1
+              class="text-uppercase intro-heading letter-spacing-5 fw-bold animate__animated animate__fadeInUp animate__delay-1s">
+              Esplora Possibilità Infinite <span class="gradient-text">Crea un Futuro Straordinario</span>
+            </h1>
+            <p class="fst-italic intro-text text-light mt-4 animate__animated animate__fadeIn animate__delay-2s"
+              style="font-size: 1.2rem;">
+              Dove ogni scintilla d'ispirazione prende vita, ogni idea creativa risuona.
+            </p>
+            <div class="mt-5 animate__animated animate__fadeInUp animate__delay-2s">
+              <a href="#about" class="btn btn-outline-light btn-lg rounded-pill hero-btn">
+                Esplora di più <i class="fas fa-arrow-down ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 优化后的导航栏 -->
+  <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar" aria-label="Navigazione principale">
+    <div class="scroll-progress"></div>
+    <div class="container position-relative">
+      <a class="navbar-brand" href="#intro" aria-label="Torna in cima">
+        <img src="img/logo.png" alt="Logo del sito" class="nav-logo" width="40" height="40">
+        <span class="brand-text">Alexander James Carter</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Attiva/disattiva navigazione">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <button class="back-to-top" aria-label="Torna in cima">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#intro" aria-current="page">
+              <i class="fas fa-home nav-icon"></i> Home
             </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">
+              <i class="fas fa-user nav-icon"></i> Chi Siamo
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">
+              <i class="fas fa-paint-brush nav-icon"></i> Crea
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#portfolio">
+              <i class="fas fa-image nav-icon"></i> Portfolio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#text">
+              <i class="fas fa-feather nav-icon"></i> Testo
+            </a>
+          </li>
 
-            <!-- Toggle button for mobile devices -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+          <li class="nav-item nav-divider"></li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle language-selector" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-globe nav-icon"></i> Lingua
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end glass-dropdown" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="index.html">中文</a></li>
+              <li><a class="dropdown-item" href="index-en.html">English</a></li>
+              <li><a class="dropdown-item active" href="index-it.html"><i class="fas fa-check me-2"></i> Italiano</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Cambia tema">
+              <i class="fas fa-moon"></i>
             </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-            <!-- Navigation menu -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link py-lg-3 active" href="#intro">Home</a></li>
-                    <li class="nav-item"><a class="nav-link py-lg-3" href="#about">Chi Siamo</a></li>
-                    <li class="nav-item"><a class="nav-link py-lg-3" href="#services">Crea</a></li>
-                    <li class="nav-item"><a class="nav-link py-lg-3" href="#portfolio">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link py-lg-3" href="#text">Testo</a></li>
-                </ul>
+  <section id="about" class="about-section py-5">
+    <div class="container">
+      <div class="row gy-4 align-items-center">
+        <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+          <div class="about-content">
+            <h2 class="section-title mb-4">Chi Siamo</h2>
+            <div class="subtitle-line"></div>
+            <p class="lead gradient-text mb-4">Catturare i Momenti della Vita Attraverso Prospettive Uniche</p>
+            <div class="about-text">
+              <p class="mb-4">
+                Crediamo che ogni piccolo momento racchiuda una bellezza e una storia unica. Qui non solo
+                utilizziamo la creatività per catturare questi istanti, ma li trasmettiamo con passione e cuore.
+                Che si tratti di design visivo, creazione di contenuti o esperienze digitali, il nostro
+                obiettivo è ispirare attraverso l'innovazione.
+              </p>
+              <div class="features-grid">
+                <div class="feature-item card-3d">
+                  <i class="fas fa-camera-retro"></i>
+                  <span>Arte Visiva</span>
+                </div>
+                <div class="feature-item card-3d">
+                  <i class="fas fa-pen-fancy"></i>
+                  <span>Scrittura</span>
+                </div>
+                <div class="feature-item card-3d">
+                  <i class="fas fa-code"></i>
+                  <span>Esperienza Digitale</span>
+                </div>
+              </div>
+              <div class="mt-4">
+                <a href="profile.html" class="btn btn-primary rounded-pill">Vedi Profilo <i
+                    class="fas fa-arrow-right ms-2"></i></a>
+              </div>
             </div>
+          </div>
         </div>
-    </nav>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="row gy-4 align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="underline text-uppercase">Chi Siamo</h2>
-                    <p class="lead">Catturare i Momenti della Vita Attraverso Prospettive Uniche</p>
-                    <p>
-                        Crediamo che ogni piccolo momento racchiuda una bellezza e una storia unica. Qui non solo
-                        utilizziamo la creatività per catturare questi istanti, ma li trasmettiamo con passione e cuore.
-                        Che si tratti di design visivo, creazione di contenuti o esperienze digitali, il nostro
-                        obiettivo è ispirare attraverso l'innovazione e condividere la meraviglia della vita quotidiana
-                        trasformata in straordinaria.
-                    </p>
-                </div>
-                <div class="col-lg-5 mx-auto">
-                    <p><img class="img-fluid rounded-circle" src="img/AboutMe.jpg" alt="Immagine Chi Siamo"></p>
-                </div>
-            </div>
+        <div class="col-lg-5 ms-auto" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+          <div class="about-image">
+            <img class="img-fluid rounded-lg shadow-lg" src="img/AboutMe.jpg" alt="Immagine Chi Siamo">
+            <div class="image-frame"></div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Services Section -->
-    <section class="bg-gray-200" id="services">
-        <div class="container">
-            <div class="row services">
-                <div class="col-lg-12">
-                    <h2 class="underline text-uppercase">Creazione & Espressione</h2>
-                    <div class="row gy-4 gx-5">
-                        <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-camera-retro fa-3x"></i></div>
-                            <h5>Cattura i Momenti</h5>
-                            <p>Attraverso le nostre lenti, trasformiamo istanti fugaci in ricordi eterni, catturando
-                                l'essenza di ogni momento con prospettiva artistica e tecnica professionale, rendendo
-                                straordinaria la bellezza quotidiana.</p>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-pen-fancy fa-3x"></i></div>
-                            <h5>Scrivi Ispirazione</h5>
-                            <p>Le parole hanno il potere di attraversare il tempo e lo spazio. Creiamo narrazioni che
-                                toccano il cuore, intrecciando storie ed emozioni con profondità e sensibilità, dando
-                                voce ai pensieri più profondi.</p>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="mb-4"><i class="fas fa-paint-brush fa-3x"></i></div>
-                            <h5>Espressione Creativa</h5>
-                            <p>Unendo arte e tecnologia, diamo forma alle idee attraverso il design, creando esperienze
-                                visive uniche che comunicano concetti complessi con eleganza, permettendo ad ogni opera
-                                di raccontare la sua storia distintiva.</p>
-                        </div>
-                    </div>
-                </div>
+  <section id="services" class="services-section py-5">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="section-title">Creazione & Espressione</h2>
+        <div class="subtitle-line mx-auto"></div>
+        <p class="lead text-muted">Oltrepassare i confini, liberare la creatività infinita</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card glass-card">
+            <div class="card-icon pulse-animation">
+              <i class="fas fa-camera-retro"></i>
             </div>
+            <div class="card-content">
+              <h3>Esplorazione Visiva</h3>
+              <p>Attraverso le nostre lenti, trasformiamo istanti fugaci in ricordi eterni, catturando
+                l'essenza di ogni momento con prospettiva artistica e tecnica professionale.</p>
+              <ul class="service-features">
+                <li><i class="fas fa-check-circle"></i> Ritratti</li>
+                <li><i class="fas fa-check-circle"></i> Paesaggi</li>
+                <li><i class="fas fa-check-circle"></i> Fotografia Creativa</li>
+              </ul>
+            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Portfolio Section -->
-    <section id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-lg-8">
-                    <h2 class="underline text-uppercase">Portfolio Selezionato</h2>
-                    <p>Attraversare i Confini Artistici, Presentare l'Eccellenza Creativa in Fotografia, Scrittura e
-                        Programmazione.</p>
-                </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card glass-card">
+            <div class="card-icon pulse-animation">
+              <i class="fas fa-pen-fancy"></i>
             </div>
-
-            <!-- Photography Works -->
-            <div class="row g-4 mt-4">
-                <div class="col-md-12">
-                    <h4 class="text-uppercase mb-3">Opere Fotografiche</h4>
-                </div>
-                <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-1.jpg"
-                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-2.jpg"
-                            alt="Opera Fotografica 1"></a></div>
-                <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-2.jpg"
-                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-4.jpg"
-                            alt="Opera Fotografica 2"></a></div>
-                <div class="col-md-4"><a class="glightbox d-block" href="img/portfolio-3.jpg"
-                        data-gallery="gallery"><img class="img-fluid" src="img/portfolio-5.jpg"
-                            alt="Opera Fotografica 3"></a></div>
+            <div class="card-content">
+              <h3>Scrittura Creativa</h3>
+              <p>Le parole hanno il potere di attraversare il tempo e lo spazio. Creiamo narrazioni che
+                toccano il cuore, intrecciando storie ed emozioni con profondità e sensibilità.</p>
+              <ul class="service-features">
+                <li><i class="fas fa-check-circle"></i> Saggi</li>
+                <li><i class="fas fa-check-circle"></i> Poesia</li>
+                <li><i class="fas fa-check-circle"></i> Pianificazione Contenuti</li>
+              </ul>
             </div>
-
-            <!-- Code Projects Carousel -->
-            <div class="row g-4 mt-5">
-                <div class="col-md-12">
-                    <h4 class="text-uppercase mb-3">Progetti di Programmazione</h4>
-                </div>
-
-                <!-- Carousel -->
-                <div id="codeCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-
-                        <!-- C++ Code Example -->
-                        <div class="carousel-item active">
-                            <div class="d-block w-100">
-                                <h5>Esempio di Ciclo in C++</h5>
-                                <p>Un semplice esempio di ciclo `for`:</p>
-                                <pre class="code-block"><code> 
-#include &lt;iostream&gt;
-
-int main() {
-    for (int i = 0; i &lt; 5; i++) {
-        std::cout &lt;&lt; "Ciao, C++!" &lt;&lt; std::endl;
-    }
-    return 0;
-}
-              </code></pre>
-                            </div>
-                        </div>
-
-                        <!-- Python Code Example -->
-                        <div class="carousel-item">
-                            <div class="d-block w-100">
-                                <h5>Esempio di Lettura File in Python</h5>
-                                <p>Un semplice esempio di lettura di un file e stampa del suo contenuto:</p>
-                                <pre class="code-block"><code> 
-# Lettura file in Python
-with open("example.txt", "r") as file:
-    content = file.read()
-    print(content)
-              </code></pre>
-                            </div>
-                        </div>
-
-                        <!-- Java Code Example -->
-                        <div class="carousel-item">
-                            <div class="d-block w-100">
-                                <h5>Esempio Hello World in Java</h5>
-                                <p>Un semplice esempio `Hello, World!`:</p>
-                                <pre class="code-block"><code> 
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Ciao, Java!");
-    }
-}
-              </code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Carousel Controls -->
-                    <button class="carousel-control-prev" type="button" data-bs-target="#codeCarousel"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#codeCarousel"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Text Section -->
-    <section class="bg-dark text-gray-100" id="text">
-        <div class="container">
-            <h2 class="underline underline-white">Il Potere delle Parole</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <p>
-                        Aprendo la finestra dell'anima, scopriamo tesori nascosti dentro di noi. Ogni pagina della vita
-                        è come una poesia in divenire, un racconto unico che si svela gradualmente. Quando ci apriamo al
-                        mondo con sincerità, i paesaggi più splendidi si mostrano ai nostri occhi. Che il nostro cuore
-                        sia sempre rivolto verso il sole, accogliendo ogni raggio di calore e vivendo pienamente ogni
-                        momento di bellezza che la vita ci offre.
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <p>
-                        Nel grande fiume della storia culturale, ogni goccia brilla con la luce della saggezza. La
-                        lettura della storia rafforza il nostro spirito, permettendoci di attingere forza dalle orme dei
-                        nostri antenati; lo studio dei classici nutre il nostro carattere, consentendoci di ottenere
-                        intuizioni dalla saggezza antica. Questi brillanti tesori culturali sono le luci eterne che
-                        illuminano il nostro cammino verso il futuro.
-                    </p>
-                </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-card glass-card">
+            <div class="card-icon pulse-animation">
+              <i class="fas fa-paint-brush"></i>
             </div>
+            <div class="card-content">
+              <h3>Design Creativo</h3>
+              <p>Unendo arte e tecnologia, diamo forma alle idee attraverso il design, creando esperienze
+                visive uniche che comunicano concetti complessi con eleganza.</p>
+              <ul class="service-features">
+                <li><i class="fas fa-check-circle"></i> Design Grafico</li>
+                <li><i class="fas fa-check-circle"></i> UI Design</li>
+                <li><i class="fas fa-check-circle"></i> Illustrazioni</li>
+              </ul>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container footer-content">
-            <div class="row justify-content-center">
-                <!-- Left: Quick Links -->
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 text-center text-md-start">
-                    <div class="footer-links">
-                        <h4>Collegamenti Rapidi</h4>
-                        <ul>
-                            <li><a href="#about">Chi Siamo</a></li>
-                            <li><a href="#services">Crea</a></li>
-                            <li><a href="#portfolio">Portfolio</a></li>
-                            <li><a href="#text">Testo</a></li>
-                        </ul>
-                    </div>
-                </div>
+  <section id="portfolio" class="portfolio-section py-5">
+    <div class="container">
+      <!-- 标题部分 -->
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h2 class="section-title">Portfolio Selezionato</h2>
+        <div class="subtitle-line mx-auto"></div>
+        <p class="lead text-muted">Attraversare i Confini Artistici, Presentare l'Eccellenza Creativa</p>
+      </div>
 
-                <!-- Middle: New Year Wishes -->
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    <div class="footer-center">
-                        <div class="new-year-message">
-                            <span class="festive-icon">✨</span>
-                            <span class="greeting">Che il Nuovo Anno ti porti infinita creatività, ispirazione, calore e
-                                felicità!</span>
-                            <span class="festive-icon">✨</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Language Switcher and Social Share -->
-                <div class="col-lg-4 col-md-12 text-center">
-                    <div class="footer-right">
-                        <div class="language-switcher mb-3">
-                            <i class="fas fa-globe"></i>
-                            <div class="lang-links">
-                                <a href="index.html">中文</a>
-                                <a href="index-en.html">EN</a>
-                                <a href="index-it.html" class="active">IT</a>
-                            </div>
-                        </div>
-                        <div class="social-links">
-                            <div class="social-share share-weibo" title="Condividi su Weibo"><i
-                                    class="fab fa-weibo"></i></div>
-                            <div class="social-share share-wechat" title="Condividi su WeChat"><i
-                                    class="fab fa-weixin"></i></div>
-                            <div class="social-share share-github" title="Visita GitHub"><i class="fab fa-github"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row footer-bottom">
-                <div class="col-md-6 text-center text-md-start">
-                    <div class="copyright">
-                        © 2025 Alexander James Carter. Tutti i diritti riservati
-                    </div>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <div class="footer-legal">
-                        <a href="privacy.html">Informativa sulla Privacy</a>
-                        <a href="terms.html">Termini di Utilizzo</a>
-                        <a href="ads.html">Pubblicità</a>
-                        <a href="contact-it.html">Contattaci</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- JavaScript files -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/glightbox.min.js"></script>
-    <script src="js/music-player.js"></script>
-    <script src="js/chatbot.js"></script>
-    <script src="js/poem.js"></script>
-
-</body>
-
-</html>
+      <!-- 作品分类标签 -->
