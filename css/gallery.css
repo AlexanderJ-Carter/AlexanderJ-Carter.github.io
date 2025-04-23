@@ -1,0 +1,200 @@
+/* 画廊页面样式 */
+.page-title {
+  height: 40vh;
+  min-height: 300px;
+  background-image: url(../img/Background.jpg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.page-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.page-title h1 {
+  font-size: 3rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.page-title p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* 画廊过滤器 */
+.gallery-filter {
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 4px 8px;
+  border-radius: 20px;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-color);
+  opacity: 0.1;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+  border-radius: 20px;
+}
+
+.filter-btn:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.filter-btn.active {
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 画廊网格 */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.gallery-item {
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+
+.gallery-card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.gallery-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gallery-card:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-info {
+  text-align: center;
+  color: white;
+  padding: 1rem;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease 0.1s;
+}
+
+.gallery-card:hover .gallery-info {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.gallery-info h5 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.gallery-info p {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.btn-view {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.btn-view:hover {
+  background: white;
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+/* 响应式调整 */
+@media (max-width: 767px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  .gallery-card img {
+    height: 200px;
+  }
+
+  .page-title h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
