@@ -8,14 +8,18 @@
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "img/icon-192x192.png",
+      "src": "img/logo.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "img/icon-512x512.png",
+      "src": "img/logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "scope": "/",
+  "orientation": "portrait",
+  "lang": "zh-CN",
+  "prefer_related_applications": false
 }
