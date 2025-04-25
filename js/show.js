@@ -24,13 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 页面过渡效果
 function initPageTransitions() {
-  document.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.add("page-enter");
-  });
-
-  // 处理页面链接点击
   document.addEventListener("click", (e) => {
     const link = e.target.closest("a");
+    const targetUrl = link ? link.getAttribute("href") : null;
+
     if (
       link &&
       link.hostname === window.location.hostname &&
@@ -38,12 +35,10 @@ function initPageTransitions() {
       !e.metaKey
     ) {
       e.preventDefault();
-      const targetUrl = link.href;
 
-      // 应用页面退出动画
-      document.body.classList.add("page-exit");
+      // 添加页面过渡效果
+      document.body.classList.add("page-transition-out");
 
-      // 等待动画完成后跳转
       setTimeout(() => {
         window.location.href = targetUrl;
       }, 400);
@@ -55,19 +50,58 @@ function initPageTransitions() {
 function initLazyLoading() {
   if ("IntersectionObserver" in window) {
     const lazyImages = document.querySelectorAll("img[data-src]");
-    const imageObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          img.removeAttribute("data-src");
-          imageObserver.unobserve(img);
+    const imageObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
 
-          // 添加淡入效果
-          img.classList.add("fade-in");
-        }
-      });
-    });
+            // 创建一个临时占位符
+            const placeholder = document.createElement("div");
+            placeholder.className = "image-placeholder";
+            img.parentNode.insertBefore(placeholder, img);
+
+            // 加载实际图片
+            const actualSrc = img.dataset.src;
+            const tempImage = new Image();
+
+            tempImage.onload = function () {
+              img.src = actualSrc;
+              img.removeAttribute("data-src");
+
+              // 添加淡入效果
+              img.classList.add("fade-in");
+
+              // 移除占位符
+              setTimeout(() => {
+                if (placeholder.parentNode) {
+                  placeholder.parentNode.removeChild(placeholder);
+                }
+              }, 500);
+
+              imageObserver.unobserve(img);
+            };
+
+            tempImage.onerror = function () {
+              // 加载失败时显示一个默认图片
+              img.src = "img/image-placeholder.jpg";
+              img.removeAttribute("data-src");
+
+              if (placeholder.parentNode) {
+                placeholder.parentNode.removeChild(placeholder);
+              }
+
+              imageObserver.unobserve(img);
+            };
+
+            tempImage.src = actualSrc;
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px 200px 0px", // 提前200px加载
+      }
+    );
 
     lazyImages.forEach((img) => imageObserver.observe(img));
   } else {
@@ -75,10 +109,49 @@ function initLazyLoading() {
     const lazyImages = document.querySelectorAll("img[data-src]");
     lazyImages.forEach((img) => {
       img.src = img.dataset.src;
-      img.removeAttribute("data-src");
+      img.classList.add("fade-in");
     });
   }
 }
+
+// 添加样式
+const style = document.createElement("style");
+style.textContent = `
+  .fade-in {
+    animation: fadeIn 0.8s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  .page-transition-out {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.4s ease;
+  }
+  
+  .image-placeholder {
+    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+  }
+  
+  @keyframes shimmer {
+    to {
+      background-position-x: -200%;
+    }
+  }
+`;
+
+document.head.appendChild(style);
 
 // 初始化滚动动画
 function initScrollAnimations() {
