@@ -1,903 +1,903 @@
 /* 语言选择器样式优化 */
 .footer-newsletter h4 {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 1rem;
-  font-weight: normal;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+    font-weight: normal;
 }
 
 .language-switcher {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 14px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  margin-bottom: 1rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
 }
 
 .language-switcher:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
 }
 
 .language-switcher i {
-  color: #ffd700;
-  font-size: 1rem;
-  padding: 6px;
-  border-radius: 50%;
-  background: rgba(255, 215, 0, 0.1);
-  margin-right: 10px;
-  animation: float 3s ease-in-out infinite;
+    color: #ffd700;
+    font-size: 1rem;
+    padding: 6px;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.1);
+    margin-right: 10px;
+    animation: float 3s ease-in-out infinite;
 }
 
 .lang-links {
-  display: flex;
-  gap: 4px;
-  align-items: center;
+    display: flex;
+    gap: 4px;
+    align-items: center;
 }
 
 .language-switcher a {
-  color: rgba(255, 255, 255, 0.85);
-  text-decoration: none;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-  position: relative;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 /* 移除下划线效果 */
 .language-switcher a::after {
-  display: none;
+    display: none;
 }
 
 .language-switcher a:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .language-switcher a.active {
-  background: rgba(255, 255, 255, 0.15);
-  color: #ffd700;
-  font-weight: 500;
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffd700;
+    font-weight: 500;
 }
 
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2px);
+    }
 }
 
 @media (max-width: 768px) {
-  .language-switcher {
-    padding: 4px 8px;
-  }
+    .language-switcher {
+        padding: 4px 8px;
+    }
 
-  .language-switcher i {
-    font-size: 0.8rem;
-    padding: 4px;
-  }
+    .language-switcher i {
+        font-size: 0.8rem;
+        padding: 4px;
+    }
 
-  .language-switcher a {
-    font-size: 0.8rem;
-    padding: 3px 8px;
-  }
+    .language-switcher a {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+    }
 }
 
 /* 改进页脚版权区域布局和质感 */
 .site-footer {
-  background: linear-gradient(
-    145deg,
-    rgba(22, 22, 30, 0.95),
-    rgba(32, 32, 42, 0.97),
-    rgba(24, 24, 34, 0.98)
-  );
-  position: relative;
-  overflow: hidden;
-  color: #fff;
-  padding: 3.5rem 0 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+    background: linear-gradient(
+            145deg,
+            rgba(22, 22, 30, 0.95),
+            rgba(32, 32, 42, 0.97),
+            rgba(24, 24, 34, 0.98)
+    );
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    padding: 3.5rem 0 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
 
 /* 页脚装饰元素增强 */
 .site-footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjMjIyIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
-  opacity: 0.05;
-  z-index: 0;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjMjIyIj48L3JlY3Q+CjxwYXRoIGQ9Ik0wIDVMNSAwWk02IDRMNCA2Wk0tMSAxTDEgLTFaIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMSI+PC9wYXRoPgo8L3N2Zz4=");
+    opacity: 0.05;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .site-footer::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    transparent 100%
-  );
-  z-index: 1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 100%
+    );
+    z-index: 1;
 }
 
 .footer-content {
-  position: relative;
-  z-index: 2;
+    position: relative;
+    z-index: 2;
 }
 
 .footer-center {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
 }
 
 .new-year-message {
-  background: linear-gradient(
-    145deg,
-    rgba(67, 24, 24, 0.15),
-    rgba(116, 32, 32, 0.12)
-  );
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 88, 88, 0.15);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
+    background: linear-gradient(
+            145deg,
+            rgba(67, 24, 24, 0.15),
+            rgba(116, 32, 32, 0.12)
+    );
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 88, 88, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
     inset 0 1px rgba(255, 255, 255, 0.1);
-  padding: 20px 25px;
-  border-radius: 16px;
-  text-align: left;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
+    padding: 20px 25px;
+    border-radius: 16px;
+    text-align: left;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
 }
 
 .new-year-message::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 215, 0, 0.03) 0%,
-    rgba(255, 0, 0, 0.01) 40%,
-    transparent 70%
-  );
-  animation: rotate 20s linear infinite;
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+            ellipse at center,
+            rgba(255, 215, 0, 0.03) 0%,
+            rgba(255, 0, 0, 0.01) 40%,
+            transparent 70%
+    );
+    animation: rotate 20s linear infinite;
 }
 
 .greeting {
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  letter-spacing: 0.3px;
-  line-height: 1.6;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.3px;
+    line-height: 1.6;
 }
 
 .festive-icon {
-  font-size: 1.5rem;
-  margin: 0 10px;
-  animation: bounce 2s ease infinite;
-  color: #ffcc00;
-  text-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
+    font-size: 1.5rem;
+    margin: 0 10px;
+    animation: bounce 2s ease infinite;
+    color: #ffcc00;
+    text-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
 }
 
 .footer-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
 }
 
 .footer-info {
-  text-align: right;
+    text-align: right;
 }
 
 .footer-legal {
-  margin-top: 1rem;
-  display: flex;
-  gap: 15px;
-  font-size: 0.85rem;
+    margin-top: 1rem;
+    display: flex;
+    gap: 15px;
+    font-size: 0.85rem;
 }
 
 /* 社交媒体分享按钮 - 修改为水平布局 */
 .social-links {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
-  justify-content: center;
-  flex-direction: row; /* 确保水平排列 */
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    justify-content: center;
+    flex-direction: row; /* 确保水平排列 */
 }
 
 /* 社交分享按钮增强 */
 .social-share {
-  position: relative;
-  width: 38px;
-  height: 38px;
-  background: rgba(255, 255, 255, 0.08);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    position: relative;
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .social-share i {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.85);
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .social-share::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    45deg,
-    rgba(0, 123, 255, 0.7),
-    rgba(0, 210, 255, 0.7)
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+            45deg,
+            rgba(0, 123, 255, 0.7),
+            rgba(0, 210, 255, 0.7)
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
 }
 
 .social-share:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
 .social-share:hover::before {
-  opacity: 1;
+    opacity: 1;
 }
 
 .social-share:hover i {
-  transform: scale(1.2);
-  color: #ffffff;
+    transform: scale(1.2);
+    color: #ffffff;
 }
 
 /* 动画效果 */
 @keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 @keyframes glow {
-  0%,
-  100% {
-    box-shadow: 0 0 10px rgba(255, 88, 88, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(255, 88, 88, 0.5);
-  }
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(255, 88, 88, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(255, 88, 88, 0.5);
+    }
 }
 
 @keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* 媒体查询优化 */
 @media (max-width: 768px) {
-  .social-share {
-    width: 40px;
-    height: 40px;
-  }
+    .social-share {
+        width: 40px;
+        height: 40px;
+    }
 
-  .festive-icon {
-    font-size: 1.2rem;
-  }
+    .festive-icon {
+        font-size: 1.2rem;
+    }
 }
 
 .footer-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .social-links {
-  display: flex;
-  gap: 15px;
-  margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .social-share {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  cursor: pointer;
-  transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 /* 平台特定颜色 */
 .share-weibo:hover::before {
-  background: linear-gradient(
-    45deg,
-    rgba(255, 129, 64, 0.9),
-    rgba(255, 84, 64, 0.9)
-  );
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+    background: linear-gradient(
+            45deg,
+            rgba(255, 129, 64, 0.9),
+            rgba(255, 84, 64, 0.9)
+    );
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
 }
 
 .share-qq:hover::before {
-  background: linear-gradient(
-    45deg,
-    rgba(18, 183, 245, 0.9),
-    rgba(22, 119, 255, 0.9)
-  );
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+    background: linear-gradient(
+            45deg,
+            rgba(18, 183, 245, 0.9),
+            rgba(22, 119, 255, 0.9)
+    );
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
 }
 
 .share-wechat:hover::before {
-  background: linear-gradient(
-    45deg,
-    rgba(7, 193, 96, 0.9),
-    rgba(17, 194, 103, 0.9)
-  );
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+    background: linear-gradient(
+            45deg,
+            rgba(7, 193, 96, 0.9),
+            rgba(17, 194, 103, 0.9)
+    );
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
 }
 
 .share-github:hover::before {
-  background: linear-gradient(
-    45deg,
-    rgba(51, 51, 51, 0.9),
-    rgba(36, 41, 46, 0.9)
-  );
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+    background: linear-gradient(
+            45deg,
+            rgba(51, 51, 51, 0.9),
+            rgba(36, 41, 46, 0.9)
+    );
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
 }
 
 /* 页脚快速导航样式优化 */
 .footer-links {
-  position: relative;
-  padding-left: 0;
+    position: relative;
+    padding-left: 0;
 }
 
 .footer-links h4 {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.95);
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  position: relative;
-  display: inline-block;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
 }
 
 .footer-links h4::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 35px;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 123, 255, 0.8),
-    rgba(0, 123, 255, 0.3)
-  );
-  border-radius: 2px;
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 35px;
+    height: 3px;
+    background: linear-gradient(
+            90deg,
+            rgba(0, 123, 255, 0.8),
+            rgba(0, 123, 255, 0.3)
+    );
+    border-radius: 2px;
 }
 
 .footer-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1rem 0;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
 }
 
 .footer-links li {
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 0.75rem;
-  transition: all 0.25s ease;
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 0.75rem;
+    transition: all 0.25s ease;
 }
 
 .footer-links li::before {
-  content: "\f105"; /* FontAwesome箭头图标 */
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  color: rgba(0, 123, 255, 0.6);
-  font-size: 0.8rem;
-  transition: all 0.25s ease;
+    content: "\f105"; /* FontAwesome箭头图标 */
+    font-family: "Font Awesome 5 Free", sans-serif;
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(0, 123, 255, 0.6);
+    font-size: 0.8rem;
+    transition: all 0.25s ease;
 }
 
 .footer-links li:hover::before {
-  color: rgba(0, 123, 255, 1);
-  left: 5px;
+    color: rgba(0, 123, 255, 1);
+    left: 5px;
 }
 
 .footer-links a {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  display: inline-block;
-  position: relative;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    display: inline-block;
+    position: relative;
 }
 
 .footer-links a:hover {
-  color: #ffffff;
-  transform: translateX(3px);
+    color: #ffffff;
+    transform: translateX(3px);
 }
 
 .footer-links .row {
-  margin-top: 1.25rem;
+    margin-top: 1.25rem;
 }
 
 /* 页脚栏目间距调整 */
 .footer-info,
 .footer-links,
 .footer-newsletter {
-  padding: 0 15px;
+    padding: 0 15px;
 }
 
 /* 响应式优化 */
 @media (max-width: 768px) {
-  .footer-links {
-    text-align: center;
-    padding-left: 0;
-    margin-bottom: 2rem;
-  }
+    .footer-links {
+        text-align: center;
+        padding-left: 0;
+        margin-bottom: 2rem;
+    }
 
-  .footer-links h4::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
+    .footer-links h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
-  .footer-links li {
-    padding-left: 0;
-  }
+    .footer-links li {
+        padding-left: 0;
+    }
 
-  .footer-links li::before {
-    display: none;
-  }
+    .footer-links li::before {
+        display: none;
+    }
 }
 
 /* 改进页脚底部区域 */
 .footer-bottom {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* 版权信息样式优化 */
 .footer-copyright {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 .footer-copyright p {
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 0.25rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.3px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
 }
 
 /* 页脚法律链接优化 */
 .footer-legal {
-  display: flex;
-  gap: 1.2rem;
-  align-items: center;
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
 }
 
 .footer-legal a {
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-  position: relative;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  padding: 0.3rem 0;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    position: relative;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    padding: 0.3rem 0;
 }
 
 .footer-legal a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.9);
-  transition: width 0.3s ease;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: width 0.3s ease;
 }
 
 .footer-legal a:hover {
-  color: rgba(255, 255, 255, 0.95);
+    color: rgba(255, 255, 255, 0.95);
 }
 
 .footer-legal a:hover::after {
-  width: 100%;
+    width: 100%;
 }
 
 /* 响应式优化 */
 @media (max-width: 768px) {
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
 
-  .footer-copyright {
-    align-items: center;
-  }
+    .footer-copyright {
+        align-items: center;
+    }
 
-  .footer-legal {
-    justify-content: center;
-  }
+    .footer-legal {
+        justify-content: center;
+    }
 }
 
 /* 版权信息和法律链接 */
 .footer-bottom {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .copyright {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
 }
 
 .footer-legal {
-  display: flex;
-  justify-content: flex-end;
-  gap: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
 }
 
 .footer-legal a {
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  font-size: 0.85rem;
-  transition: color 0.3s ease, transform 0.2s ease;
-  position: relative;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+    position: relative;
 }
 
 .footer-legal a::before {
-  content: "";
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.8);
-  transition: width 0.3s ease;
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: width 0.3s ease;
 }
 
 .footer-legal a:hover {
-  color: #ffffff;
-  transform: translateY(-1px);
+    color: #ffffff;
+    transform: translateY(-1px);
 }
 
 .footer-legal a:hover::before {
-  width: 100%;
+    width: 100%;
 }
 
 /* 动画效果 */
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-2px);
+    }
 }
 
 @keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
 }
 
 /* 响应式适配 */
 @media (max-width: 768px) {
-  .footer-top {
-    padding: 2rem 0 1rem;
-  }
+    .footer-top {
+        padding: 2rem 0 1rem;
+    }
 
-  .footer-links,
-  .footer-legal {
-    text-align: center;
-    justify-content: center;
-  }
+    .footer-links,
+    .footer-legal {
+        text-align: center;
+        justify-content: center;
+    }
 
-  .social-links {
-    justify-content: center;
-  }
+    .social-links {
+        justify-content: center;
+    }
 
-  .footer-bottom {
-    text-align: center;
-  }
+    .footer-bottom {
+        text-align: center;
+    }
 
-  .copyright {
-    margin-bottom: 1rem;
-  }
+    .copyright {
+        margin-bottom: 1rem;
+    }
 
-  .site-footer {
-    padding: 2.5rem 0 1.5rem;
-  }
+    .site-footer {
+        padding: 2.5rem 0 1.5rem;
+    }
 
-  .footer-right {
-    align-items: center;
-  }
+    .footer-right {
+        align-items: center;
+    }
 
-  .footer-legal {
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px 24px;
-    margin-top: 1rem;
-  }
+    .footer-legal {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+        margin-top: 1rem;
+    }
 
-  .copyright {
-    text-align: center;
-    margin-bottom: 0.5rem;
-  }
+    .copyright {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
 
-  .footer-bottom {
-    margin-top: 1.5rem;
-  }
+    .footer-bottom {
+        margin-top: 1.5rem;
+    }
 }
 
 @media (max-width: 991px) {
-  .site-footer {
-    padding: 2.5rem 0 1.5rem;
-  }
+    .site-footer {
+        padding: 2.5rem 0 1.5rem;
+    }
 
-  .footer-links,
-  .footer-center,
-  .footer-right {
-    margin-bottom: 2rem;
-  }
+    .footer-links,
+    .footer-center,
+    .footer-right {
+        margin-bottom: 2rem;
+    }
 
-  .new-year-message {
-    max-width: 90%;
-  }
+    .new-year-message {
+        max-width: 90%;
+    }
 
-  .greeting {
-    font-size: 0.85rem;
-  }
+    .greeting {
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 768px) {
-  .footer-legal {
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px 16px;
-    margin-top: 1rem;
-  }
+    .footer-legal {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px 16px;
+        margin-top: 1rem;
+    }
 
-  .footer-legal a {
-    font-size: 0.8rem;
-  }
+    .footer-legal a {
+        font-size: 0.8rem;
+    }
 
-  .copyright {
-    text-align: center;
-    margin-bottom: 0.5rem;
-    font-size: 0.8rem;
-  }
+    .copyright {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        font-size: 0.8rem;
+    }
 
-  .footer-bottom {
-    margin-top: 1.5rem;
-  }
+    .footer-bottom {
+        margin-top: 1.5rem;
+    }
 }
 
 @media (max-width: 991px) {
-  .site-footer {
-    padding: 2.5rem 0 1.5rem;
-  }
+    .site-footer {
+        padding: 2.5rem 0 1.5rem;
+    }
 
-  .footer-links,
-  .footer-center,
-  .footer-right {
-    margin-bottom: 2rem;
-  }
+    .footer-links,
+    .footer-center,
+    .footer-right {
+        margin-bottom: 2rem;
+    }
 
-  .footer-right {
-    align-items: flex-start;
-  }
+    .footer-right {
+        align-items: flex-start;
+    }
 
-  .footer-links ul {
-    grid-template-columns: repeat(2, 1fr);
-  }
+    .footer-links ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
-  .greeting {
-    font-size: 0.9rem;
-  }
+    .greeting {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 768px) {
-  .footer-links li {
-    padding-left: 15px;
-  }
+    .footer-links li {
+        padding-left: 15px;
+    }
 
-  .footer-bottom {
-    margin-top: 1.5rem;
-  }
+    .footer-bottom {
+        margin-top: 1.5rem;
+    }
 
-  .footer-legal {
-    flex-wrap: wrap;
-    gap: 10px 15px;
-    margin-top: 1rem;
-  }
+    .footer-legal {
+        flex-wrap: wrap;
+        gap: 10px 15px;
+        margin-top: 1rem;
+    }
 
-  .copyright {
-    margin-bottom: 0.7rem;
-  }
+    .copyright {
+        margin-bottom: 0.7rem;
+    }
 }
 
 /* 社交媒体分享按钮 */
 .social-links {
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
 }
 
 .social-share {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .social-share:hover {
-  transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* 联系信息样式 */
 .contact-info {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .contact-info h4 {
-  margin-bottom: 1rem;
-  color: #fff;
-  font-weight: 600;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-weight: 600;
 }
 
 .contact-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 1rem;
-  color: rgba(255, 255, 255, 0.8);
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    justify-content: center;
 }
 
 .contact-item i {
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  color: var(--primary-color);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--primary-color);
 }
 
 /* 改善页脚底部区域布局，确保水平对齐 */
 .footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-copyright {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.95rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
 }
 
 .footer-legal {
-  display: flex;
-  gap: 1.2rem;
-  margin: 0;
+    display: flex;
+    gap: 1.2rem;
+    margin: 0;
 }
 
 .footer-legal a {
-  color: rgba(255, 255, 255, 0.7);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
 }
 
 .footer-legal a:hover {
-  color: #ffffff;
-  text-decoration: none;
+    color: #ffffff;
+    text-decoration: none;
 }
 
 /* 媒体查询优化 */
 @media (max-width: 767px) {
-  .footer-bottom {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
 
-  .footer-legal {
-    justify-content: center;
-  }
+    .footer-legal {
+        justify-content: center;
+    }
 }

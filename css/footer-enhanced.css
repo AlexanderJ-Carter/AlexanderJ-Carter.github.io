@@ -1,358 +1,358 @@
 /* 简洁高效的页脚样式 */
 body .site-footer {
-  position: relative;
-  background: linear-gradient(
-    135deg,
-    rgba(248, 250, 252, 0.97) 0%,
-    rgba(240, 242, 245, 0.95) 100%
-  );
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: #485563;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  padding: 28px 0 15px;
-  overflow: hidden;
-  z-index: 10;
-  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.03);
-  font-size: 0.95rem;
+    position: relative;
+    background: linear-gradient(
+            135deg,
+            rgba(248, 250, 252, 0.97) 0%,
+            rgba(240, 242, 245, 0.95) 100%
+    );
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #485563;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 28px 0 15px;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.03);
+    font-size: 0.95rem;
 }
 
 /* 页脚背景效果 */
 body .site-footer .footer-particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(
-      circle at 10% 20%,
-      rgba(100, 181, 246, 0.08) 0%,
-      transparent 7%
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(
+            circle at 10% 20%,
+            rgba(100, 181, 246, 0.08) 0%,
+            transparent 7%
     ),
     radial-gradient(
-      circle at 80% 30%,
-      rgba(66, 165, 245, 0.06) 0%,
-      transparent 10%
+            circle at 80% 30%,
+            rgba(66, 165, 245, 0.06) 0%,
+            transparent 10%
     ),
     radial-gradient(
-      circle at 40% 70%,
-      rgba(33, 150, 243, 0.05) 0%,
-      transparent 12%
+            circle at 40% 70%,
+            rgba(33, 150, 243, 0.05) 0%,
+            transparent 12%
     ),
     radial-gradient(
-      circle at 90% 85%,
-      rgba(30, 136, 229, 0.07) 0%,
-      transparent 9%
+            circle at 90% 85%,
+            rgba(30, 136, 229, 0.07) 0%,
+            transparent 9%
     );
-  opacity: 0.8;
-  z-index: 1;
+    opacity: 0.8;
+    z-index: 1;
 }
 
 body .site-footer .footer-content {
-  position: relative;
-  z-index: 5;
+    position: relative;
+    z-index: 5;
 }
 
 /* 页脚主要内容区域 */
 body .site-footer .footer-main {
-  padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 /* 品牌区域 */
 body .site-footer .footer-brand {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 body .site-footer .footer-logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #2c3e50;
-  font-weight: 600;
-  margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 8px;
 }
 
 body .site-footer .footer-logo-link img {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 body .site-footer .footer-slogan {
-  color: #7f8c8d;
-  font-size: 0.9rem;
-  margin-bottom: 0;
-  padding-left: 2px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    padding-left: 2px;
 }
 
 /* 简洁导航 */
 body .site-footer .footer-mini-nav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 body .site-footer .footer-mini-nav a {
-  color: #5d6d7e;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  position: relative;
-  font-weight: 500;
-  padding: 4px 6px;
-  border-radius: 4px;
+    color: #5d6d7e;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+    font-weight: 500;
+    padding: 4px 6px;
+    border-radius: 4px;
 }
 
 body .site-footer .footer-mini-nav a.active {
-  color: #1976d2;
-  background-color: rgba(33, 150, 243, 0.08);
+    color: #1976d2;
+    background-color: rgba(33, 150, 243, 0.08);
 }
 
 body .site-footer .footer-mini-nav a:hover {
-  color: #2196f3;
-  background-color: rgba(33, 150, 243, 0.05);
+    color: #2196f3;
+    background-color: rgba(33, 150, 243, 0.05);
 }
 
 /* 右侧连接区域 */
 body .site-footer .footer-connect {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 /* 语言切换栏 */
 body .site-footer .language-bar {
-  margin-bottom: 10px;
-  font-size: 0.9rem;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
 body .site-footer .language-bar a {
-  color: #5d6d7e;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  padding: 0 2px;
+    color: #5d6d7e;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding: 0 2px;
 }
 
 body .site-footer .language-bar a.active {
-  color: #1976d2;
-  font-weight: 500;
+    color: #1976d2;
+    font-weight: 500;
 }
 
 body .site-footer .language-bar a:hover:not(.active) {
-  color: #2196f3;
+    color: #2196f3;
 }
 
 body .site-footer .lang-divider {
-  color: #ccc;
-  margin: 0 3px;
+    color: #ccc;
+    margin: 0 3px;
 }
 
 /* 社交图标 */
 body .site-footer .social-icons {
-  display: flex;
-  gap: 12px;
+    display: flex;
+    gap: 12px;
 }
 
 body .site-footer .social-icon {
-  width: 34px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(33, 150, 243, 0.1);
-  color: #5d6d7e;
-  font-size: 1rem;
-  transition: all 0.25s ease;
-  text-decoration: none;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(33, 150, 243, 0.1);
+    color: #5d6d7e;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    text-decoration: none;
 }
 
 body .site-footer .social-icon i {
-  transition: transform 0.25s ease;
-  color: #5d6d7e;
+    transition: transform 0.25s ease;
+    color: #5d6d7e;
 }
 
 body .site-footer .social-icon:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 body .site-footer .social-icon:hover i {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 body .site-footer .social-icon.weibo:hover {
-  background-color: rgba(230, 22, 45, 0.1);
-  border-color: rgba(230, 22, 45, 0.2);
+    background-color: rgba(230, 22, 45, 0.1);
+    border-color: rgba(230, 22, 45, 0.2);
 }
 
 body .site-footer .social-icon.weibo:hover i {
-  color: #e6162d;
+    color: #e6162d;
 }
 
 body .site-footer .social-icon.wechat:hover {
-  background-color: rgba(7, 193, 96, 0.1);
-  border-color: rgba(7, 193, 96, 0.2);
+    background-color: rgba(7, 193, 96, 0.1);
+    border-color: rgba(7, 193, 96, 0.2);
 }
 
 body .site-footer .social-icon.wechat:hover i {
-  color: #07c160;
+    color: #07c160;
 }
 
 body .site-footer .social-icon.github:hover {
-  background-color: rgba(36, 41, 46, 0.1);
-  border-color: rgba(36, 41, 46, 0.2);
+    background-color: rgba(36, 41, 46, 0.1);
+    border-color: rgba(36, 41, 46, 0.2);
 }
 
 body .site-footer .social-icon.github:hover i {
-  color: #24292e;
+    color: #24292e;
 }
 
 /* 页脚底部 */
 body .site-footer .footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 15px;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  font-size: 0.85rem;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    font-size: 0.85rem;
+    flex-wrap: wrap;
 }
 
 body .site-footer .copyright {
-  color: #94a3b8;
+    color: #94a3b8;
 }
 
 body .site-footer .footer-links {
-  display: flex;
-  gap: 20px;
+    display: flex;
+    gap: 20px;
 }
 
 body .site-footer .footer-links a {
-  color: #94a3b8;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  position: relative;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
 }
 
 body .site-footer .footer-links a:hover {
-  color: #2196f3;
+    color: #2196f3;
 }
 
 body .site-footer .footer-links a::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 1px;
-  bottom: -1px;
-  left: 0;
-  background-color: #2196f3;
-  transition: width 0.2s ease;
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -1px;
+    left: 0;
+    background-color: #2196f3;
+    transition: width 0.2s ease;
 }
 
 body .site-footer .footer-links a:hover::after {
-  width: 100%;
+    width: 100%;
 }
 
 /* 响应式调整 */
-@media (max-width: 991.98px) {
-  body .site-footer .footer-connect {
-    align-items: center;
-    margin-top: 10px;
-  }
+@media (max-width: 992px) {
+    body .site-footer .footer-connect {
+        align-items: center;
+        margin-top: 10px;
+    }
 }
 
-@media (max-width: 767.98px) {
-  body .site-footer {
-    padding: 25px 0 15px;
-    text-align: center;
-  }
+@media (max-width: 768px) {
+    body .site-footer {
+        padding: 25px 0 15px;
+        text-align: center;
+    }
 
-  body .site-footer .footer-brand {
-    align-items: center;
-  }
+    body .site-footer .footer-brand {
+        align-items: center;
+    }
 
-  body .site-footer .footer-bottom {
-    flex-direction: column;
-    gap: 10px;
-  }
+    body .site-footer .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-  body .site-footer .footer-links {
-    justify-content: center;
-  }
+    body .site-footer .footer-links {
+        justify-content: center;
+    }
 }
 
 /* 暗色模式适配 */
 [data-bs-theme="dark"] .site-footer {
-  background: linear-gradient(
-    135deg,
-    rgba(30, 41, 59, 0.97) 0%,
-    rgba(17, 24, 39, 0.95) 100%
-  );
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: #e0e0e0;
+    background: linear-gradient(
+            135deg,
+            rgba(30, 41, 59, 0.97) 0%,
+            rgba(17, 24, 39, 0.95) 100%
+    );
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #e0e0e0;
 }
 
 [data-bs-theme="dark"] .site-footer .footer-logo-link {
-  color: #f1f5f9;
+    color: #f1f5f9;
 }
 
 [data-bs-theme="dark"] .site-footer .footer-slogan {
-  color: #94a3b8;
+    color: #94a3b8;
 }
 
 [data-bs-theme="dark"] .site-footer .footer-mini-nav a {
-  color: #cbd5e1;
+    color: #cbd5e1;
 }
 
 [data-bs-theme="dark"] .site-footer .footer-mini-nav a:hover {
-  background-color: rgba(96, 165, 250, 0.1);
+    background-color: rgba(96, 165, 250, 0.1);
 }
 
 [data-bs-theme="dark"] .site-footer .footer-mini-nav a.active {
-  color: #60a5fa;
-  background-color: rgba(96, 165, 250, 0.15);
+    color: #60a5fa;
+    background-color: rgba(96, 165, 250, 0.15);
 }
 
 [data-bs-theme="dark"] .site-footer .language-bar a {
-  color: #cbd5e1;
+    color: #cbd5e1;
 }
 
 [data-bs-theme="dark"] .site-footer .language-bar a.active {
-  color: #60a5fa;
+    color: #60a5fa;
 }
 
 [data-bs-theme="dark"] .site-footer .language-bar a:hover:not(.active) {
-  color: #93c5fd;
+    color: #93c5fd;
 }
 
 [data-bs-theme="dark"] .site-footer .lang-divider {
-  color: #475569;
+    color: #475569;
 }
 
 [data-bs-theme="dark"] .site-footer .social-icon {
-  background: rgba(30, 41, 59, 0.6);
-  border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 [data-bs-theme="dark"] .site-footer .social-icon i {
-  color: #cbd5e1;
+    color: #cbd5e1;
 }
 
 [data-bs-theme="dark"] .site-footer .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 [data-bs-theme="dark"] .site-footer .copyright,
 [data-bs-theme="dark"] .site-footer .footer-links a {
-  color: #64748b;
+    color: #64748b;
 }
 
 [data-bs-theme="dark"] .site-footer .footer-links a:hover {
-  color: #60a5fa;
+    color: #60a5fa;
 }
 
 [data-bs-theme="dark"] .site-footer .footer-links a::after {
-  background-color: #60a5fa;
+    background-color: #60a5fa;
 }

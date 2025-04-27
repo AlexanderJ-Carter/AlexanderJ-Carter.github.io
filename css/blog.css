@@ -2,480 +2,479 @@
 
 /* 全局样式 */
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2c3e50;
-  --accent-color: #e74c3c;
-  --light-gray: #f8f9fa;
-  --medium-gray: #e9ecef;
-  --dark-gray: #6c757d;
-  --border-radius: 10px;
-  --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  --transition-speed: 0.3s;
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --light-gray: #f8f9fa;
+    --medium-gray: #e9ecef;
+    --dark-gray: #6c757d;
+    --border-radius: 10px;
+    --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    --transition-speed: 0.3s;
 }
 
 /* 页面主体内容 */
 .blog-container {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  margin-top: 80px;
-  padding: 2.5rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-top: 80px;
+    padding: 2.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 /* 页面标题样式 */
 .blog-header {
-  padding-bottom: 2rem;
+    padding-bottom: 2rem;
 }
 
 .blog-header h1 {
-  color: var(--secondary-color);
-  margin-bottom: 1rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
 }
 
 .header-underline {
-  width: 100px;
-  height: 4px;
-  background: linear-gradient(90deg, #4a6cf7, #7e33e0);
-  margin-top: 1.5rem;
-  border-radius: 2px;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #4a6cf7, #7e33e0);
+    margin-top: 1.5rem;
+    border-radius: 2px;
 }
 
 /* 搜索和筛选样式 */
 .blog-filter-container {
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 12px;
-  padding: 1.25rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .search-container {
-  position: relative;
+    position: relative;
 }
 
 .search-input {
-  padding-right: 40px;
-  border-radius: 8px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
 }
 
 .search-input:focus {
-  box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.15);
-  border-color: #4a6cf7;
+    box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.15);
+    border-color: #4a6cf7;
 }
 
 .search-button {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #4a6cf7;
-  font-size: 1rem;
-  cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #4a6cf7;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .filter-label {
-  font-weight: 500;
-  color: #333;
-  margin-right: 10px;
+    font-weight: 500;
+    color: #333;
+    margin-right: 10px;
 }
 
 .filter-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .filter-pill {
-  padding: 6px 12px;
-  border-radius: 20px;
-  background-color: #f0f2f5;
-  font-size: 0.85rem;
-  color: #555;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background-color: #f0f2f5;
+    font-size: 0.85rem;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .filter-pill:hover {
-  background-color: #e1e5eb;
+    background-color: #e1e5eb;
 }
 
 .filter-pill.active {
-  background-color: #4a6cf7;
-  color: white;
+    background-color: #4a6cf7;
+    color: white;
 }
 
 /* 博客文章卡片样式 */
 .blog-card {
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: white;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .blog-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
 .blog-card-img-container {
-  position: relative;
-  overflow: hidden;
-  height: 220px;
+    position: relative;
+    overflow: hidden;
+    height: 220px;
 }
 
 .blog-card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
 .blog-card:hover .blog-card-img {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .blog-card-date {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(90deg, #4a6cf7, #7e33e0);
-  color: white;
-  padding: 8px 15px;
-  border-top-right-radius: 15px;
-  text-align: center;
-  line-height: 1.1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, #4a6cf7, #7e33e0);
+    color: white;
+    padding: 8px 15px;
+    border-top-right-radius: 15px;
+    text-align: center;
+    line-height: 1.1;
 }
 
 .blog-card-date .day {
-  font-size: 1.2rem;
-  font-weight: bold;
-  display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
 }
 
 .blog-card-date .month {
-  font-size: 0.8rem;
-  text-transform: uppercase;
+    font-size: 0.8rem;
+    text-transform: uppercase;
 }
 
 .blog-card-content {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .blog-card-meta {
-  display: flex;
-  gap: 15px;
-  color: #666;
-  font-size: 0.85rem;
-  margin-bottom: 1rem;
+    display: flex;
+    gap: 15px;
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
 }
 
 .blog-card-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  line-height: 1.3;
-  color: #222;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+    color: #222;
 }
 
 .blog-card-text {
-  color: #555;
-  margin-bottom: 1.25rem;
-  line-height: 1.5;
-  flex-grow: 1;
+    color: #555;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+    flex-grow: 1;
 }
 
 .blog-card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
 }
 
 .blog-tag {
-  padding: 4px 10px;
-  background-color: #f0f2f5;
-  border-radius: 15px;
-  font-size: 0.75rem;
-  color: #555;
+    padding: 4px 10px;
+    background-color: #f0f2f5;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    color: #555;
 }
 
 .blog-card-link {
-  align-self: flex-start;
-  color: #4a6cf7;
-  font-weight: 600;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.2s ease;
-  margin-top: auto;
+    align-self: flex-start;
+    color: #4a6cf7;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+    margin-top: auto;
 }
 
 .blog-card-link:hover {
-  color: #7e33e0;
+    color: #7e33e0;
 }
 
 .blog-card-link i {
-  transition: transform 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 .blog-card-link:hover i {
-  transform: translateX(3px);
+    transform: translateX(3px);
 }
 
 /* 分页样式 */
 .pagination {
-  margin-top: 3rem;
+    margin-top: 3rem;
 }
 
 .pagination .page-link {
-  margin: 0 5px;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--secondary-color);
-  border: 1px solid var(--medium-gray);
-  transition: all var(--transition-speed) ease;
+    margin: 0 5px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-color);
+    border: 1px solid var(--medium-gray);
+    transition: all var(--transition-speed) ease;
 }
 
 .pagination .page-item.active .page-link {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 .pagination .page-link:hover:not(.active) {
-  background-color: var(--light-gray);
-  color: var(--primary-color);
+    background-color: var(--light-gray);
+    color: var(--primary-color);
 }
 
 /* 订阅区域样式 */
 .subscribe-section {
-  margin: 4rem 0 2rem;
+    margin: 4rem 0 2rem;
 }
 
 .subscribe-card {
-  background: linear-gradient(135deg, #4a6cf7 0%, #7e33e0 100%);
-  border-radius: 16px;
-  color: white;
-  padding: 2.5rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, #4a6cf7 0%, #7e33e0 100%);
+    border-radius: 16px;
+    color: white;
+    padding: 2.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .subscribe-card h3 {
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
 }
 
 .subscribe-card p {
-  opacity: 0.85;
+    opacity: 0.85;
 }
 
 .subscription-form {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 .subscription-form .input-group {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 30px;
-  overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    overflow: hidden;
 }
 
 .subscription-form input {
-  border: none;
-  padding: 10px 20px;
+    border: none;
+    padding: 10px 20px;
 }
 
 .subscription-form .form-control {
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.95rem;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
 }
 
 .subscription-form .btn {
-  background-color: #222;
-  border-color: #222;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
+    background-color: #222;
+    border-color: #222;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
 }
 
 .subscription-form .btn:hover {
-  background-color: #000;
+    background-color: #000;
 }
 
 /* 无结果提示样式 */
 #no-results {
-  padding: 3rem 1rem;
+    padding: 3rem 1rem;
 }
 
 .no-results-icon {
-  color: #ccc;
+    color: #ccc;
 }
 
 #clear-filters {
-  padding: 0.5rem 1.25rem;
-  border-radius: 30px;
+    padding: 0.5rem 1.25rem;
+    border-radius: 30px;
 }
 
 /* 回到顶部按钮 */
 #back-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background-color: #4a6cf7;
-  color: white;
-  border: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
-  z-index: 999;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #4a6cf7;
+    color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 999;
 }
 
 #back-to-top.visible {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 #back-to-top:hover {
-  background-color: #333;
-  transform: translateY(-5px);
+    background-color: #333;
+    transform: translateY(-5px);
 }
 
 /* 响应式调整 */
 @media (max-width: 1200px) {
-  .blog-container {
-    max-width: 95%;
-  }
+    .blog-container {
+        max-width: 95%;
+    }
 }
 
 @media (max-width: 992px) {
-  .blog-card-img-container {
-    height: 200px;
-  }
+    .blog-card-img-container {
+        height: 200px;
+    }
 
-  .filter-tags {
-    margin-top: 10px;
-  }
+    .filter-tags {
+        margin-top: 10px;
+    }
 
-  .subscribe-card {
-    text-align: center;
-  }
+    .subscribe-card {
+        text-align: center;
+    }
 
-  .subscription-form {
-    margin-top: 1.5rem;
-  }
+    .subscription-form {
+        margin-top: 1.5rem;
+    }
 }
 
 @media (max-width: 768px) {
-  .blog-container {
-    margin-top: 70px;
-    padding: 1.5rem;
-    border-radius: 15px;
-  }
+    .blog-container {
+        margin-top: 70px;
+        padding: 1.5rem;
+        border-radius: 15px;
+    }
 
-  .blog-header {
-    padding-bottom: 1.5rem;
-  }
+    .blog-header {
+        padding-bottom: 1.5rem;
+    }
 
-  .blog-header h1 {
-    font-size: 2rem;
-  }
+    .blog-header h1 {
+        font-size: 2rem;
+    }
 
-  .header-underline {
-    width: 80px;
-    height: 3px;
-  }
+    .header-underline {
+        width: 80px;
+        height: 3px;
+    }
 
-  .blog-filter-container {
-    padding: 1rem;
-  }
+    .blog-filter-container {
+        padding: 1rem;
+    }
 
-  .filter-pills {
-    margin-top: 0.5rem;
-    flex-wrap: nowrap;
-  }
+    .filter-pills {
+        margin-top: 0.5rem;
+        flex-wrap: nowrap;
+    }
 
-  .filter-tags {
-    overflow-x: auto;
-    padding-bottom: 5px;
-    margin-top: 0.5rem;
-  }
+    .filter-tags {
+        overflow-x: auto;
+        padding-bottom: 5px;
+        margin-top: 0.5rem;
+    }
 
-  .blog-card-img {
-    height: 180px;
-  }
+    .blog-card-img {
+        height: 180px;
+    }
 
-  .pagination .page-link {
-    width: 35px;
-    height: 35px;
-    font-size: 0.9rem;
-  }
+    .pagination .page-link {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
 
-  #back-to-top {
-    width: 40px;
-    height: 40px;
-    bottom: 20px;
-    right: 20px;
-  }
+    #back-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        right: 20px;
+    }
 
-  .blog-card-title {
-    font-size: 1.2rem;
-  }
+    .blog-card-title {
+        font-size: 1.2rem;
+    }
 
-  .subscribe-card {
-    padding: 1.5rem;
-  }
+    .subscribe-card {
+        padding: 1.5rem;
+    }
 }
 
 @media (max-width: 576px) {
-  .blog-container {
-    padding: 1rem;
-    margin-top: 60px;
-  }
+    .blog-container {
+        padding: 1rem;
+        margin-top: 60px;
+    }
 
-  .blog-card-meta {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
+    .blog-card-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
 
-  .blog-card-img-container {
-    height: 180px;
-  }
+    .blog-card-img-container {
+        height: 180px;
+    }
 
-  .blog-card-content {
-    padding: 1.25rem;
-  }
+    .blog-card-content {
+        padding: 1.25rem;
+    }
 
-  .blog-card-date {
-    padding: 5px 12px;
-  }
+    .blog-card-date {
+        padding: 5px 12px;
+    }
 
-  .subscribe-card {
-    padding: 1.5rem;
-  }
+    .subscribe-card {
+        padding: 1.5rem;
+    }
 }
