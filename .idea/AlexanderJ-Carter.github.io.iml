@@ -17,5 +17,6 @@
     <orderEntry type="library" name="particles.js" level="application" />
     <orderEntry type="library" name="jinrishici" level="application" />
     <orderEntry type="library" name="qrcodejs" level="application" />
+    <orderEntry type="library" name="chart.js" level="application" />
   </component>
 </module>
