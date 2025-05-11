@@ -55,26 +55,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
     <!-- 字体 -->
     <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <!-- 样式 -->
     <link rel="stylesheet" href="../css/style.default.css" id="theme-stylesheet">
     <link rel="stylesheet" href="../css/navigation.css">
     <link rel="stylesheet" href="../css/about.css">
     <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/footer-enhanced.css">
     <link rel="stylesheet" href="../css/display.css">
     <link rel="stylesheet" href="../css/custom.css">
     <link rel="stylesheet" href="../css/enhanced.css">
@@ -99,685 +100,696 @@
 
 <body class="scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="0" tabindex="0">
 
-<!-- 在<body>开始后添加页面加载指示器 -->
-<div class="page-loader">
-    <div class="loader-content">
-        <div class="spinner"></div>
-        <p>Caricamento in corso...</p>
-    </div>
-</div>
-
-<!-- 新年祝福 -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <i class="fas fa-gift modal-icon"></i>
-            <h2>Felice Anno Nuovo!</h2>
+    <!-- 在<body>开始后添加页面加载指示器 -->
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Caricamento in corso...</p>
         </div>
-        <div class="modal-body">
-            <p>Ti auguriamo nel nuovo anno:</p>
-            <div class="wish-list">
-                <div class="wish-item">
-                    <i class="fas fa-heart"></i>
-                    <span>Buona salute</span>
-                </div>
-                <div class="wish-item">
-                    <i class="fas fa-star"></i>
-                    <span>Ogni fortuna</span>
-                </div>
-                <div class="wish-item">
-                    <i class="fas fa-smile"></i>
-                    <span>Felicità in famiglia</span>
+    </div>
+
+    <!-- 新年祝福 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-gift modal-icon"></i>
+                <h2>Felice Anno Nuovo!</h2>
+            </div>
+            <div class="modal-body">
+                <p>Ti auguriamo nel nuovo anno:</p>
+                <div class="wish-list">
+                    <div class="wish-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Buona salute</span>
+                    </div>
+                    <div class="wish-item">
+                        <i class="fas fa-star"></i>
+                        <span>Ogni fortuna</span>
+                    </div>
+                    <div class="wish-item">
+                        <i class="fas fa-smile"></i>
+                        <span>Felicità in famiglia</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="button-container">
-            <button id="closeBtn" class="close-btn" type="button">
-                <i class="fas fa-envelope-open-text"></i>
-                Accetta gli auguri
-            </button>
-            <button id="dontShowBtn" class="dont-show-btn" type="button">
-                <i class="fas fa-calendar-day"></i>
-                Non mostrare oggi
-            </button>
-        </div>
-    </div>
-</div>
-
-<audio id="background-music" loop></audio>
-
-<div class="music-player" id="music-player">
-    <div class="player-content">
-        <div class="song-thumbnail" id="song-thumbnail"></div>
-        <div id="song-title" class="song-title">In riproduzione:</div>
-        <div class="song-progress">
-            <input type="range" id="progress-bar" min="0" max="100" step="1" value="0" title="Progresso">
-            <div class="time-display">
-                <span id="current-time">0:00</span>
-                <span>/</span>
-                <span id="duration">0:00</span>
+            <div class="button-container">
+                <button id="closeBtn" class="close-btn" type="button">
+                    <i class="fas fa-envelope-open-text"></i>
+                    Accetta gli auguri
+                </button>
+                <button id="dontShowBtn" class="dont-show-btn" type="button">
+                    <i class="fas fa-calendar-day"></i>
+                    Non mostrare oggi
+                </button>
             </div>
         </div>
-        <div class="music-visualizer-container">
-            <canvas id="music-visualizer"></canvas>
-        </div>
-        <div class="controls">
-            <button id="prev-song" class="control-btn" type="button" title="Precedente">
-                <i class="fas fa-step-backward"></i>
-            </button>
-            <button id="shuffle-song" class="control-btn" type="button" title="Casuale">
-                <i class="fas fa-random"></i>
-            </button>
-            <button id="next-song" class="control-btn" type="button" title="Successivo">
-                <i class="fas fa-step-forward"></i>
-            </button>
-            <button id="repeat-song" class="control-btn" type="button" title="Ripeti">
-                <i class="fas fa-redo"></i>
-            </button>
-        </div>
-        <div class="volume-control">
-            <i class="fas fa-volume-down"></i>
-            <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.3" title="Volume">
+    </div>
+
+    <audio id="background-music" loop></audio>
+
+    <div class="music-player" id="music-player">
+        <div class="player-content">
+            <div class="song-thumbnail" id="song-thumbnail"></div>
+            <div id="song-title" class="song-title">In riproduzione:</div>
+            <div class="song-progress">
+                <input type="range" id="progress-bar" min="0" max="100" step="1" value="0" title="Progresso">
+                <div class="time-display">
+                    <span id="current-time">0:00</span>
+                    <span>/</span>
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+            <div class="music-visualizer-container">
+                <canvas id="music-visualizer"></canvas>
+            </div>
+            <div class="controls">
+                <button id="prev-song" class="control-btn" type="button" title="Precedente">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button id="shuffle-song" class="control-btn" type="button" title="Casuale">
+                    <i class="fas fa-random"></i>
+                </button>
+                <button id="next-song" class="control-btn" type="button" title="Successivo">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <button id="repeat-song" class="control-btn" type="button" title="Ripeti">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+            <div class="volume-control">
+                <i class="fas fa-volume-down"></i>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.3" title="Volume">
+            </div>
         </div>
     </div>
-</div>
 
-<button id="toggle-music-player" class="toggle-button" type="button">🎵</button>
+    <button id="toggle-music-player" class="toggle-button" type="button">🎵</button>
 
-<!-- 主内容 -->
-<section class="intro parallax-hero dark-overlay bg-cover d-flex align-items-center" id="intro">
-    <div class="hero-particles"></div>
-    <div class="overlay-content w-100 text-white">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-12 mx-auto text-center">
-                    <p
+    <!-- 主内容 -->
+    <section class="intro parallax-hero dark-overlay bg-cover d-flex align-items-center" id="intro">
+        <div class="hero-particles"></div>
+        <div class="overlay-content w-100 text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 mx-auto text-center">
+                        <p
                             class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 animate__animated animate__fadeIn animate__delay-1s">
-                        Scoprire la Creatività, Abbracciare l'Ispirazione
-                    </p>
-                    <h1
+                            Scoprire la Creatività, Abbracciare l'Ispirazione
+                        </p>
+                        <h1
                             class="text-uppercase intro-heading letter-spacing-5 fw-bold animate__animated animate__fadeInUp animate__delay-1s">
-                        Esplora Possibilità Infinite <span class="gradient-text">Crea un Futuro Straordinario</span>
-                    </h1>
-                    <p class="fst-italic intro-text text-light mt-4 animate__animated animate__fadeIn animate__delay-2s"
-                       style="font-size: 1.2rem;">
-                        Dove ogni scintilla d'ispirazione prende vita, ogni idea creativa risuona.
-                    </p>
-                    <div class="mt-5 animate__animated animate__fadeInUp animate__delay-2s">
-                        <a href="#about" class="btn btn-outline-light btn-lg rounded-pill hero-btn">
-                            Esplora di più <i class="fas fa-arrow-down ms-2"></i>
+                            Esplora Possibilità Infinite <span class="gradient-text">Crea un Futuro Straordinario</span>
+                        </h1>
+                        <p class="fst-italic intro-text text-light mt-4 animate__animated animate__fadeIn animate__delay-2s"
+                            style="font-size: 1.2rem;">
+                            Dove ogni scintilla d'ispirazione prende vita, ogni idea creativa risuona.
+                        </p>
+                        <div class="mt-5 animate__animated animate__fadeInUp animate__delay-2s">
+                            <a href="#about" class="btn btn-outline-light btn-lg rounded-pill hero-btn">
+                                Esplora di più <i class="fas fa-arrow-down ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 优化后的导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar" aria-label="Navigazione principale">
+        <div class="scroll-progress"></div>
+        <div class="container position-relative">
+            <a class="navbar-brand" href="#intro" aria-label="Torna in cima">
+                <img src="../img/logo.png" alt="Logo del sito" class="nav-logo" width="40" height="39">
+                <span class="brand-text">Alexander James Carter</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Attiva/disattiva navigazione">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <button class="back-to-top" aria-label="Torna in cima">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#intro" aria-current="page">
+                            <i class="fas fa-home nav-icon"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">
+                            <i class="fas fa-user nav-icon"></i> Chi Siamo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">
+                            <i class="fas fa-paint-brush nav-icon"></i> Crea
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">
+                            <i class="fas fa-image nav-icon"></i> Portfolio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#text">
+                            <i class="fas fa-feather nav-icon"></i> Testo
+                        </a>
+                    </li>
+
+                    <li class="nav-item nav-divider"></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle language-selector" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-globe nav-icon"></i> Lingua
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end glass-dropdown" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="../index.html">中文</a></li>
+                            <li><a class="dropdown-item" href="../en/index-en.html">English</a></li>
+                            <li><a class="dropdown-item active" href="index-it.html"><i class="fas fa-check me-2"></i>
+                                    Italiano</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Cambia tema">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about" class="about-section py-5">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="about-content">
+                        <h2 class="section-title mb-4">Chi Siamo</h2>
+                        <div class="subtitle-line"></div>
+                        <p class="lead gradient-text mb-4">Catturare i Momenti della Vita Attraverso Prospettive Uniche
+                        </p>
+                        <div class="about-text">
+                            <p class="mb-4">
+                                Crediamo che ogni piccolo momento racchiuda una bellezza e una storia unica. Qui non
+                                solo
+                                utilizziamo la creatività per catturare questi istanti, ma li trasmettiamo con passione
+                                e
+                                cuore.
+                                Che si tratti di design visivo, creazione di contenuti o esperienze digitali, il nostro
+                                obiettivo è ispirare attraverso l'innovazione.
+                            </p>
+                            <div class="features-grid">
+                                <div class="feature-item card-3d">
+                                    <i class="fas fa-camera-retro"></i>
+                                    <span>Arte Visiva</span>
+                                </div>
+                                <div class="feature-item card-3d">
+                                    <i class="fas fa-pen-fancy"></i>
+                                    <span>Scrittura</span>
+                                </div>
+                                <div class="feature-item card-3d">
+                                    <i class="fas fa-code"></i>
+                                    <span>Esperienza Digitale</span>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <a href="../profile.html" class="btn btn-primary rounded-pill">Vedi Profilo <i
+                                        class="fas fa-arrow-right ms-2"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 ms-auto" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="about-image">
+                        <img class="img-fluid rounded-lg shadow-lg" src="../img/AboutMe.jpg" alt="Immagine Chi Siamo">
+                        <div class="image-frame"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Creazione & Espressione</h2>
+                <div class="subtitle-line mx-auto"></div>
+                <p class="lead text-muted">Oltrepassare i confini, liberare la creatività infinita</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card glass-card">
+                        <div class="card-icon pulse-animation">
+                            <i class="fas fa-camera-retro"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Esplorazione Visiva</h3>
+                            <p>Attraverso le nostre lenti, trasformiamo istanti fugaci in ricordi eterni, catturando
+                                l'essenza di ogni momento con prospettiva artistica e tecnica professionale.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check-circle"></i> Ritratti</li>
+                                <li><i class="fas fa-check-circle"></i> Paesaggi</li>
+                                <li><i class="fas fa-check-circle"></i> Fotografia Creativa</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card glass-card">
+                        <div class="card-icon pulse-animation">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Scrittura Creativa</h3>
+                            <p>Le parole hanno il potere di attraversare il tempo e lo spazio. Creiamo narrazioni che
+                                toccano il cuore, intrecciando storie ed emozioni con profondità e sensibilità.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check-circle"></i> Saggi</li>
+                                <li><i class="fas fa-check-circle"></i> Poesia</li>
+                                <li><i class="fas fa-check-circle"></i> Pianificazione Contenuti</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card glass-card">
+                        <div class="card-icon pulse-animation">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Design Creativo</h3>
+                            <p>Unendo arte e tecnologia, diamo forma alle idee attraverso il design, creando esperienze
+                                visive uniche che comunicano concetti complessi con eleganza.</p>
+                            <ul class="service-features">
+                                <li><i class="fas fa-check-circle"></i> Design Grafico</li>
+                                <li><i class="fas fa-check-circle"></i> UI Design</li>
+                                <li><i class="fas fa-check-circle"></i> Illustrazioni</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio-section py-5">
+        <div class="container">
+            <!-- 标题部分 -->
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Portfolio Selezionato</h2>
+                <div class="subtitle-line mx-auto"></div>
+                <p class="lead text-muted">Attraversare i Confini Artistici, Presentare l'Eccellenza Creativa</p>
+            </div>
+
+            <!-- 作品分类标签 -->
+            <div class="portfolio-filter mb-4" data-aos="fade-up" data-aos-delay="100">
+                <button class="filter-btn active" data-filter="all" type="button">Tutti</button>
+                <button class="filter-btn" data-filter="photo" type="button">Paesaggi</button>
+                <button class="filter-btn" data-filter="flower" type="button">Fiori</button>
+                <button class="filter-btn" data-filter="food" type="button">Cibo</button>
+                <button class="filter-btn" data-filter="design" type="button">Campus</button>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- 风景作品 -->
+                <div class="portfolio-item" data-category="photo" data-aos="fade-up" data-aos-delay="150">
+                    <div class="portfolio-card glass-effect">
+                        <img src="../img/Photo1.jpg" alt="Fotografia di Paesaggio" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5>Paesaggio Naturale</h5>
+                            <p>Fotografia di Paesaggio</p>
+                            <div class="portfolio-icons">
+                                <a href="../img/Photo1.jpg" class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="photo" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card glass-effect">
+                        <img src="../img/Photo2.jpg" alt="Fotografia di Paesaggio" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5>Paesaggio Naturale</h5>
+                            <p>Fotografia di Paesaggio</p>
+                            <div class="portfolio-icons">
+                                <a href="../img/Photo2.jpg" class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 花卉作品 -->
+                <div class="portfolio-item" data-category="flower" data-aos="fade-up" data-aos-delay="250">
+                    <div class="portfolio-card glass-effect">
+                        <img src="../img/Flower1.jpg" alt="Fotografia Floreale" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5>Linguaggio dei Fiori</h5>
+                            <p>Fotografia Floreale</p>
+                            <div class="portfolio-icons">
+                                <a href="../img/Flower1.jpg" class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="flower" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-card glass-effect">
+                        <img src="../img/Flower2.jpg" alt="Fotografia Floreale" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5>Ombra dei Fiori</h5>
+                            <p>Fotografia Floreale</p>
+                            <div class="portfolio-icons">
+                                <a href="../img/Flower2.jpg" class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 美食作品 -->
+                <div class="portfolio-item" data-category="food" data-aos="fade-up" data-aos-delay="350">
+                    <div class="portfolio-card glass-effect">
+                        <img src="../img/Food1.jpg" alt="Fotografia di Cibo" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5>Festa dei Sapori</h5>
+                            <p>Fotografia di Cibo</p>
+                            <div class="portfolio-icons">
+                                <a href="../img/Food1.jpg" class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="food" data-aos="fade-up" data-aos-delay="400">
+                    <div class="portfolio-card glass-effect">
+                        <img src="../img/Food2.jpg" alt="Fotografia di Cibo" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5>Viaggio del Gusto</h5>
+                            <p>Fotografia di Cibo</p>
+                            <div class="portfolio-icons">
+                                <a href="../img/Food2.jpg" class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 剩余作品 -->
+                <div class="portfolio-item" data-category="photo" data-aos="fade-up" data-aos-delay="450">
+                    <div class="portfolio-card glass-effect">
+                        <img src="../img/Photo3.jpg" alt="Fotografia di Paesaggio" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5>Bellezza del Paesaggio</h5>
+                            <p>Fotografia di Paesaggio</p>
+                            <div class="portfolio-icons">
+                                <a href="../img/Photo3.jpg" class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="food" data-aos="fade-up" data-aos-delay="500">
+                    <div class="portfolio-card glass-effect">
+                        <img src="../img/Food3.jpg" alt="Fotografia di Cibo" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5>Esplorazione del Gusto</h5>
+                            <p>Fotografia di Cibo</p>
+                            <div class="portfolio-icons">
+                                <a href="../img/Food3.jpg" class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 摄影作品 -->
+                <div class="portfolio-item" data-category="design" data-aos="fade-up" data-aos-delay="550">
+                    <div class="portfolio-card glass-effect">
+                        <img src="../img/University.jpg" alt="Fotografia del Campus" class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h5>Paesaggio del Campus</h5>
+                            <p>Fotografia del Campus</p>
+                            <div class="portfolio-icons">
+                                <a href="../img/University.jpg" class="portfolio-link" data-gallery="gallery">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 作品集链接 -->
+            <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="600">
+                <a href="../gallery.html" class="btn btn-primary btn-lg rounded-pill">
+                    <i class="fas fa-images me-2"></i> Visualizza Galleria Completa
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="text" class="text-section py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Il Potere delle Parole</h2>
+                <div class="subtitle-line mx-auto"></div>
+                <p class="lead text-muted">Dipingere con l'inchiostro dell'anima, esprimere sentimenti con le parole</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
+                    <div class="text-card glass-card">
+                        <div class="card-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3 class="card-title">Finestra dell'Anima</h3>
+                        <div class="card-content">
+                            <p class="text-content">
+                                La vita è come un poema in corso di scrittura, ogni pagina porta una storia unica.
+                                Quando
+                                apriamo la finestra della nostra anima, possiamo vedere i tesori nascosti nel profondo;
+                                quando apriamo il nostro cuore, tutta la splendida bellezza del mondo si svela davanti a
+                                noi. Possa la finestra del nostro cuore essere sempre rivolta verso il sole,
+                                abbracciando
+                                ogni raggio di calore e sentendo ogni momento di gioia.
+                            </p>
+                            <div class="text-quote">
+                                <i class="fas fa-quote-left"></i>
+                                <p>Quando il cuore è rivolto al sole, la vita fiorisce</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+                    <div class="text-card glass-card">
+                        <div class="card-icon">
+                            <i class="fas fa-feather-alt"></i>
+                        </div>
+                        <h3 class="card-title">Eredità Culturale</h3>
+                        <div class="card-content">
+                            <p class="text-content">
+                                Nel vasto fiume della cultura, ogni goccia d'acqua brilla con la luce della saggezza. La
+                                storia ci aiuta a comprendere i nostri obiettivi, permettendoci di trarre forza dalle
+                                orme
+                                di chi ci ha preceduto; i classici nutrono la nostra natura, illuminandoci con la
+                                saggezza
+                                degli antichi saggi. Questi brillanti tesori culturali sono le eterne luci che
+                                illuminano il
+                                nostro cammino verso il futuro.
+                            </p>
+                            <div class="text-quote">
+                                <i class="fas fa-quote-left"></i>
+                                <p>Ereditare l'antica melodia, iniziare un nuovo capitolo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center mt-5" data-aos="fade-up" data-aos-delay="250">
+                    <div class="blog-cta glass-card p-4">
+                        <h4 class="mb-3">Scopri Altri Articoli Interessanti</h4>
+                        <p class="mb-4">Esplora i nostri articoli su vari argomenti, dalla tecnologia alle riflessioni
+                            sulla
+                            vita, e molto altro da scoprire</p>
+                        <a href="../blog.html" class="btn btn-primary btn-lg rounded-pill shadow-lg pulse-btn">
+                            <i class="fas fa-blog me-2"></i>Visita il Mio Blog
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- 优化后的导航栏 -->
-<nav class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar" aria-label="Navigazione principale">
-    <div class="scroll-progress"></div>
-    <div class="container position-relative">
-        <a class="navbar-brand" href="#intro" aria-label="Torna in cima">
-            <img src="../img/logo.png" alt="Logo del sito" class="nav-logo" width="40" height="39">
-            <span class="brand-text">Alexander James Carter</span>
-        </a>
+    <!-- 诗词和历史上的今天部分 - 重新设计为页脚上方的独立区域 -->
+    <section class="poem-history-section py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title text-white">Ispirazione Quotidiana</h2>
+                <div class="subtitle-line mx-auto bg-light"></div>
+                <p class="lead text-light">L'intreccio di poesia e storia, infonde cultura nella vita</p>
+            </div>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Attiva/disattiva navigazione">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <div class="row g-4">
+                <!-- 诗词部分 -->
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="poem-container glass-card h-100">
+                        <div class="section-icon">
+                            <i class="fas fa-feather-alt"></i>
+                        </div>
+                        <h3 class="text-center mb-4">Poesia del Giorno</h3>
+                        <div id="poem_sentence" class="poem-content text-center">Caricamento poesia...</div>
+                        <div class="decorative-line my-4">
+                            <span></span>
+                            <i class="fas fa-circle"></i>
+                            <span></span>
+                        </div>
+                        <div id="poem_info" class="poem-info text-center"></div>
+                    </div>
+                </div>
 
-        <button class="back-to-top" aria-label="Torna in cima">
-            <i class="fas fa-arrow-up"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#intro" aria-current="page">
-                        <i class="fas fa-home nav-icon"></i> Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#about">
-                        <i class="fas fa-user nav-icon"></i> Chi Siamo
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#services">
-                        <i class="fas fa-paint-brush nav-icon"></i> Crea
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#portfolio">
-                        <i class="fas fa-image nav-icon"></i> Portfolio
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#text">
-                        <i class="fas fa-feather nav-icon"></i> Testo
-                    </a>
-                </li>
-
-                <li class="nav-item nav-divider"></li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle language-selector" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-globe nav-icon"></i> Lingua
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end glass-dropdown" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="../index.html">中文</a></li>
-                        <li><a class="dropdown-item" href="../en/index-en.html">English</a></li>
-                        <li><a class="dropdown-item active" href="index-it.html"><i class="fas fa-check me-2"></i>
-                            Italiano</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Cambia tema">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </li>
-            </ul>
+                <!-- 历史上的今天 -->
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="history-container glass-card h-100">
+                        <div class="section-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3 class="text-center mb-4">Oggi nella Storia</h3>
+                        <div id="history-today" class="history-content text-center">
+                            <div class="history-date">Caricamento...</div>
+                            <div class="history-event">Recupero eventi storici...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
+    </section>
 
-<section id="about" class="about-section py-5">
-    <div class="container">
-        <div class="row gy-4 align-items-center">
-            <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
-                <div class="about-content">
-                    <h2 class="section-title mb-4">Chi Siamo</h2>
-                    <div class="subtitle-line"></div>
-                    <p class="lead gradient-text mb-4">Catturare i Momenti della Vita Attraverso Prospettive Uniche
-                    </p>
-                    <div class="about-text">
-                        <p class="mb-4">
-                            Crediamo che ogni piccolo momento racchiuda una bellezza e una storia unica. Qui non
-                            solo
-                            utilizziamo la creatività per catturare questi istanti, ma li trasmettiamo con passione
-                            e
-                            cuore.
-                            Che si tratti di design visivo, creazione di contenuti o esperienze digitali, il nostro
-                            obiettivo è ispirare attraverso l'innovazione.
-                        </p>
-                        <div class="features-grid">
-                            <div class="feature-item card-3d">
-                                <i class="fas fa-camera-retro"></i>
-                                <span>Arte Visiva</span>
-                            </div>
-                            <div class="feature-item card-3d">
-                                <i class="fas fa-pen-fancy"></i>
-                                <span>Scrittura</span>
-                            </div>
-                            <div class="feature-item card-3d">
-                                <i class="fas fa-code"></i>
-                                <span>Esperienza Digitale</span>
+    <!-- Chatbot HTML 这里缺失了但应该添加 -->
+
+    <!-- 重新设计的更紧凑页脚 - 意大利语版 -->
+    <footer class="site-footer">
+        <div class="footer-particles"></div>
+        <div class="container footer-content">
+            <!-- 主区域采用三列紧凑布局 -->
+            <div class="row footer-main">
+                <!-- Logo与品牌区域 - 增强内容 -->
+                <div class="col-lg-4 col-md-6 mb-3 mb-lg-0">
+                    <a href="#" class="footer-logo-link">
+                        <img src="../img/logo.png" alt="Logo" width="30" height="30">
+                        <span>Alexander James Carter</span>
+                    </a>
+                    <p class="footer-slogan">Esplora la creatività, condividi la vita, cattura momenti</p>
+
+                    <!-- 将语言选择器整合到品牌区域 -->
+                    <div class="brand-extras">
+                        <div class="language-compact">
+                            <span class="lang-label">Seleziona lingua:</span>
+                            <div class="language-pills">
+                                <a href="../index.html" class="lang-pill" title="切换到中文">
+                                    <span>🇨🇳</span>
+                                </a>
+                                <a href="../en/index-en.html" class="lang-pill" title="Switch to English">
+                                    <span>🇬🇧</span>
+                                </a>
+                                <a href="index-it.html" class="lang-pill active" title="Passa all'italiano">
+                                    <span>🇮🇹</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="mt-4">
-                            <a href="../profile.html" class="btn btn-primary rounded-pill">Vedi Profilo <i
-                                    class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+
+                <!-- 内容导航 -->
+                <div class="col-lg-4 col-md-6 mb-3 mb-lg-0">
+                    <div class="footer-nav-group">
+                        <h6 class="footer-title">Navigazione Contenuti</h6>
+                        <div class="footer-links">
+                            <a href="blog-it.html">Articoli del Blog</a>
+                            <a href="gallery-it.html">Galleria Portfolio</a>
+                            <a href="profile-it.html">Profilo Personale</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 服务链接 -->
+                <div class="col-lg-4 col-md-6 mb-3 mb-lg-0">
+                    <div class="footer-nav-group">
+                        <h6 class="footer-title">Servizi Utili</h6>
+                        <div class="footer-links">
+                            <a href="contact-it.html">Contattaci</a>
+                            <a href="currency-it.html">Convertitore di Valuta</a>
+                            <a href="ads-it.html">Pubblicità</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 ms-auto" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-                <div class="about-image">
-                    <img class="img-fluid rounded-lg shadow-lg" src="../img/AboutMe.jpg" alt="Immagine Chi Siamo">
-                    <div class="image-frame"></div>
+
+            <!-- 页脚底部 - 添加社交图标 -->
+            <div class="footer-bottom">
+                <div class="left-section">
+                    <div class="copyright">© 2025 Alexander James Carter</div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="services" class="services-section py-5">
-    <div class="container">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="section-title">Creazione & Espressione</h2>
-            <div class="subtitle-line mx-auto"></div>
-            <p class="lead text-muted">Oltrepassare i confini, liberare la creatività infinita</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="service-card glass-card">
-                    <div class="card-icon pulse-animation">
-                        <i class="fas fa-camera-retro"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Esplorazione Visiva</h3>
-                        <p>Attraverso le nostre lenti, trasformiamo istanti fugaci in ricordi eterni, catturando
-                            l'essenza di ogni momento con prospettiva artistica e tecnica professionale.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check-circle"></i> Ritratti</li>
-                            <li><i class="fas fa-check-circle"></i> Paesaggi</li>
-                            <li><i class="fas fa-check-circle"></i> Fotografia Creativa</li>
-                        </ul>
+                <div class="center-section">
+                    <div class="policy-links">
+                        <a href="privacy-it.html">Politica sulla Privacy</a>
+                        <a href="terms-it.html">Termini di Utilizzo</a>
+                        <a href="ads-it.html">Politica Pubblicitaria</a>
+                        <a href="contact-it.html">Contattaci</a>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-card glass-card">
-                    <div class="card-icon pulse-animation">
-                        <i class="fas fa-pen-fancy"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Scrittura Creativa</h3>
-                        <p>Le parole hanno il potere di attraversare il tempo e lo spazio. Creiamo narrazioni che
-                            toccano il cuore, intrecciando storie ed emozioni con profondità e sensibilità.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check-circle"></i> Saggi</li>
-                            <li><i class="fas fa-check-circle"></i> Poesia</li>
-                            <li><i class="fas fa-check-circle"></i> Pianificazione Contenuti</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="service-card glass-card">
-                    <div class="card-icon pulse-animation">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Design Creativo</h3>
-                        <p>Unendo arte e tecnologia, diamo forma alle idee attraverso il design, creando esperienze
-                            visive uniche che comunicano concetti complessi con eleganza.</p>
-                        <ul class="service-features">
-                            <li><i class="fas fa-check-circle"></i> Design Grafico</li>
-                            <li><i class="fas fa-check-circle"></i> UI Design</li>
-                            <li><i class="fas fa-check-circle"></i> Illustrazioni</li>
-                        </ul>
+                <div class="right-section">
+                    <div class="social-icons">
+                        <a href="#" class="social-icon weibo" title="Weibo"><i class="fab fa-weibo"></i></a>
+                        <a href="#" class="social-icon wechat" title="WeChat"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-icon github" title="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </footer>
 
-<section id="portfolio" class="portfolio-section py-5">
-    <div class="container">
-        <!-- 标题部分 -->
-        <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="section-title">Portfolio Selezionato</h2>
-            <div class="subtitle-line mx-auto"></div>
-            <p class="lead text-muted">Attraversare i Confini Artistici, Presentare l'Eccellenza Creativa</p>
-        </div>
-
-        <!-- 作品分类标签 -->
-        <div class="portfolio-filter mb-4" data-aos="fade-up" data-aos-delay="100">
-            <button class="filter-btn active" data-filter="all" type="button">Tutti</button>
-            <button class="filter-btn" data-filter="photo" type="button">Paesaggi</button>
-            <button class="filter-btn" data-filter="flower" type="button">Fiori</button>
-            <button class="filter-btn" data-filter="food" type="button">Cibo</button>
-            <button class="filter-btn" data-filter="design" type="button">Campus</button>
-        </div>
-
-        <div class="portfolio-grid">
-            <!-- 风景作品 -->
-            <div class="portfolio-item" data-category="photo" data-aos="fade-up" data-aos-delay="150">
-                <div class="portfolio-card glass-effect">
-                    <img src="../img/Photo1.jpg" alt="Fotografia di Paesaggio" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h5>Paesaggio Naturale</h5>
-                        <p>Fotografia di Paesaggio</p>
-                        <div class="portfolio-icons">
-                            <a href="../img/Photo1.jpg" class="portfolio-link" data-gallery="gallery">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="portfolio-item" data-category="photo" data-aos="fade-up" data-aos-delay="200">
-                <div class="portfolio-card glass-effect">
-                    <img src="../img/Photo2.jpg" alt="Fotografia di Paesaggio" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h5>Paesaggio Naturale</h5>
-                        <p>Fotografia di Paesaggio</p>
-                        <div class="portfolio-icons">
-                            <a href="../img/Photo2.jpg" class="portfolio-link" data-gallery="gallery">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 花卉作品 -->
-            <div class="portfolio-item" data-category="flower" data-aos="fade-up" data-aos-delay="250">
-                <div class="portfolio-card glass-effect">
-                    <img src="../img/Flower1.jpg" alt="Fotografia Floreale" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h5>Linguaggio dei Fiori</h5>
-                        <p>Fotografia Floreale</p>
-                        <div class="portfolio-icons">
-                            <a href="../img/Flower1.jpg" class="portfolio-link" data-gallery="gallery">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="portfolio-item" data-category="flower" data-aos="fade-up" data-aos-delay="300">
-                <div class="portfolio-card glass-effect">
-                    <img src="../img/Flower2.jpg" alt="Fotografia Floreale" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h5>Ombra dei Fiori</h5>
-                        <p>Fotografia Floreale</p>
-                        <div class="portfolio-icons">
-                            <a href="../img/Flower2.jpg" class="portfolio-link" data-gallery="gallery">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 美食作品 -->
-            <div class="portfolio-item" data-category="food" data-aos="fade-up" data-aos-delay="350">
-                <div class="portfolio-card glass-effect">
-                    <img src="../img/Food1.jpg" alt="Fotografia di Cibo" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h5>Festa dei Sapori</h5>
-                        <p>Fotografia di Cibo</p>
-                        <div class="portfolio-icons">
-                            <a href="../img/Food1.jpg" class="portfolio-link" data-gallery="gallery">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="portfolio-item" data-category="food" data-aos="fade-up" data-aos-delay="400">
-                <div class="portfolio-card glass-effect">
-                    <img src="../img/Food2.jpg" alt="Fotografia di Cibo" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h5>Viaggio del Gusto</h5>
-                        <p>Fotografia di Cibo</p>
-                        <div class="portfolio-icons">
-                            <a href="../img/Food2.jpg" class="portfolio-link" data-gallery="gallery">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 剩余作品 -->
-            <div class="portfolio-item" data-category="photo" data-aos="fade-up" data-aos-delay="450">
-                <div class="portfolio-card glass-effect">
-                    <img src="../img/Photo3.jpg" alt="Fotografia di Paesaggio" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h5>Bellezza del Paesaggio</h5>
-                        <p>Fotografia di Paesaggio</p>
-                        <div class="portfolio-icons">
-                            <a href="../img/Photo3.jpg" class="portfolio-link" data-gallery="gallery">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="portfolio-item" data-category="food" data-aos="fade-up" data-aos-delay="500">
-                <div class="portfolio-card glass-effect">
-                    <img src="../img/Food3.jpg" alt="Fotografia di Cibo" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h5>Esplorazione del Gusto</h5>
-                        <p>Fotografia di Cibo</p>
-                        <div class="portfolio-icons">
-                            <a href="../img/Food3.jpg" class="portfolio-link" data-gallery="gallery">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 摄影作品 -->
-            <div class="portfolio-item" data-category="design" data-aos="fade-up" data-aos-delay="550">
-                <div class="portfolio-card glass-effect">
-                    <img src="../img/University.jpg" alt="Fotografia del Campus" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <h5>Paesaggio del Campus</h5>
-                        <p>Fotografia del Campus</p>
-                        <div class="portfolio-icons">
-                            <a href="../img/University.jpg" class="portfolio-link" data-gallery="gallery">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 作品集链接 -->
-        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="600">
-            <a href="../gallery.html" class="btn btn-primary btn-lg rounded-pill">
-                <i class="fas fa-images me-2"></i> Visualizza Galleria Completa
-            </a>
-        </div>
-    </div>
-</section>
-
-<section id="text" class="text-section py-5">
-    <div class="container">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="section-title">Il Potere delle Parole</h2>
-            <div class="subtitle-line mx-auto"></div>
-            <p class="lead text-muted">Dipingere con l'inchiostro dell'anima, esprimere sentimenti con le parole</p>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
-                <div class="text-card glass-card">
-                    <div class="card-icon">
-                        <i class="fas fa-book-reader"></i>
-                    </div>
-                    <h3 class="card-title">Finestra dell'Anima</h3>
-                    <div class="card-content">
-                        <p class="text-content">
-                            La vita è come un poema in corso di scrittura, ogni pagina porta una storia unica.
-                            Quando
-                            apriamo la finestra della nostra anima, possiamo vedere i tesori nascosti nel profondo;
-                            quando apriamo il nostro cuore, tutta la splendida bellezza del mondo si svela davanti a
-                            noi. Possa la finestra del nostro cuore essere sempre rivolta verso il sole,
-                            abbracciando
-                            ogni raggio di calore e sentendo ogni momento di gioia.
-                        </p>
-                        <div class="text-quote">
-                            <i class="fas fa-quote-left"></i>
-                            <p>Quando il cuore è rivolto al sole, la vita fiorisce</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
-                <div class="text-card glass-card">
-                    <div class="card-icon">
-                        <i class="fas fa-feather-alt"></i>
-                    </div>
-                    <h3 class="card-title">Eredità Culturale</h3>
-                    <div class="card-content">
-                        <p class="text-content">
-                            Nel vasto fiume della cultura, ogni goccia d'acqua brilla con la luce della saggezza. La
-                            storia ci aiuta a comprendere i nostri obiettivi, permettendoci di trarre forza dalle
-                            orme
-                            di chi ci ha preceduto; i classici nutrono la nostra natura, illuminandoci con la
-                            saggezza
-                            degli antichi saggi. Questi brillanti tesori culturali sono le eterne luci che
-                            illuminano il
-                            nostro cammino verso il futuro.
-                        </p>
-                        <div class="text-quote">
-                            <i class="fas fa-quote-left"></i>
-                            <p>Ereditare l'antica melodia, iniziare un nuovo capitolo</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 text-center mt-5" data-aos="fade-up" data-aos-delay="250">
-                <div class="blog-cta glass-card p-4">
-                    <h4 class="mb-3">Scopri Altri Articoli Interessanti</h4>
-                    <p class="mb-4">Esplora i nostri articoli su vari argomenti, dalla tecnologia alle riflessioni
-                        sulla
-                        vita, e molto altro da scoprire</p>
-                    <a href="../blog.html" class="btn btn-primary btn-lg rounded-pill shadow-lg pulse-btn">
-                        <i class="fas fa-blog me-2"></i>Visita il Mio Blog
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 诗词和历史上的今天部分 - 重新设计为页脚上方的独立区域 -->
-<section class="poem-history-section py-5">
-    <div class="container">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="section-title text-white">Ispirazione Quotidiana</h2>
-            <div class="subtitle-line mx-auto bg-light"></div>
-            <p class="lead text-light">L'intreccio di poesia e storia, infonde cultura nella vita</p>
-        </div>
-
-        <div class="row g-4">
-            <!-- 诗词部分 -->
-            <div class="col-lg-6" data-aos="fade-right">
-                <div class="poem-container glass-card h-100">
-                    <div class="section-icon">
-                        <i class="fas fa-feather-alt"></i>
-                    </div>
-                    <h3 class="text-center mb-4">Poesia del Giorno</h3>
-                    <div id="poem_sentence" class="poem-content text-center">Caricamento poesia...</div>
-                    <div class="decorative-line my-4">
-                        <span></span>
-                        <i class="fas fa-circle"></i>
-                        <span></span>
-                    </div>
-                    <div id="poem_info" class="poem-info text-center"></div>
-                </div>
-            </div>
-
-            <!-- 历史上的今天 -->
-            <div class="col-lg-6" data-aos="fade-left">
-                <div class="history-container glass-card h-100">
-                    <div class="section-icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <h3 class="text-center mb-4">Oggi nella Storia</h3>
-                    <div id="history-today" class="history-content text-center">
-                        <div class="history-date">Caricamento...</div>
-                        <div class="history-event">Recupero eventi storici...</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer class="site-footer">
-    <div class="footer-particles"></div>
-    <div class="container footer-content">
-        <div class="row justify-content-center">
-            <!-- 左侧：快速导航 -->
-            <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
-                <div class="footer-links">
-                    <h4>快速导航</h4>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <ul>
-                                <li><a href="#about" class="hover-underline">关于我们</a></li>
-                                <li><a href="#services" class="hover-underline">创造空间</a></li>
-                                <li><a href="#portfolio" class="hover-underline">作品展示</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul>
-                                <li><a href="#text" class="hover-underline">文字世界</a></li>
-                                <li><a href="profile-it.html" class="hover-underline">个人简介</a></li>
-                                <li><a href="blog-it.html" class="hover-underline">博客文章</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-4">
-                            <ul>
-                                <li><a href="../currency.html" class="hover-underline">货币转换</a></li>
-                                <!-- 这里可以方便添加更多导航链接 -->
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 右侧：语言切换和社交分享 -->
-            <div class="col-lg-6 col-md-12 text-center">
-                <div class="footer-right">
-                    <div class="language-switcher mb-3 glass-effect">
-                        <i class="fas fa-globe"></i>
-                        <div class="lang-links">
-                            <a href="../index.html" class="active">中文</a>
-                            <a href="../en/index-en.html">EN</a>
-                            <a href="index-it.html">IT</a>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <div class="social-share share-weibo glass-icon" title="分享到微博"><i class="fab fa-weibo"></i>
-                        </div>
-                        <div class="social-share share-wechat glass-icon" title="分享到微信"><i
-                                class="fab fa-weixin"></i></div>
-                        <div class="social-share share-github glass-icon" title="访问GitHub"><i
-                                class="fab fa-github"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row footer-bottom">
-            <div class="col-md-6 text-center text-md-start">
-                <div class="copyright">
-                    © 2025 Alexander James Carter. All Rights Reserved
-                </div>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <div class="footer-legal">
-                    <a href="privacy-it.html" class="hover-underline">隐私政策</a>
-                    <a href="terms-it.html" class="hover-underline">使用条款</a>
-                    <a href="ads-it.html" class="hover-underline">广告政策</a>
-                    <a href="contact-it.html" class="hover-underline">联系我们</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- JavaScript files -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-<script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-<script src="../js/glightbox.min.js"></script>
-<script src="../js/music-player.js"></script>
-<script src="../js/chatbot.js"></script>
-<script src="../js/poem.js"></script>
-<script src="../js/cookie-consent.js"></script>
-<script src="../js/newyear.js"></script>
-<script src="../js/show.js"></script>
-<script src="../js/display.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/share.js"></script>
-<script src="../js/enhanced.js"></script>
+    <!-- JavaScript files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="../js/glightbox.min.js"></script>
+    <script src="../js/music-player.js"></script>
+    <script src="../js/chatbot.js"></script>
+    <script src="../js/poem.js"></script>
+    <script src="../js/cookie-consent.js"></script>
+    <script src="../js/newyear.js"></script>
+    <script src="../js/show.js"></script>
+    <script src="../js/display.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/share.js"></script>
+    <script src="../js/enhanced.js"></script>
 </body>
 
 </html>
