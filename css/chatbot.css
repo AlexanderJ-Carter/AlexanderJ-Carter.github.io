@@ -16,6 +16,21 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* 为不支持backdrop-filter的浏览器添加备用样式 */
+@supports not (
+    (backdrop-filter: blur(10px);) or (-webkit-backdrop-filter: blur(10px);)
+) {
+    .chat-container {
+        background: rgba(255, 255, 255, 0.98);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .chat-container {
+            background: rgba(30, 30, 30, 0.98);
+        }
+    }
+}
+
 /* 添加显示和最小化的动画效果 */
 .chat-showing {
     animation: scaleIn 0.3s forwards;

@@ -150,14 +150,6 @@ h1 {
     z-index: 5;
 }
 
-.brick {
-    position: absolute;
-    width: 50px;
-    height: 20px;
-    border-radius: 5px;
-    z-index: 3;
-}
-
 .game-score {
     position: absolute;
     top: 10px;
@@ -285,11 +277,6 @@ h1 {
 
     .paddle {
         width: 70px;
-    }
-
-    .brick {
-        width: 40px;
-        height: 15px;
     }
 
     .btn-home,

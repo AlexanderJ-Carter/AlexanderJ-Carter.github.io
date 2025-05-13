@@ -7,9 +7,9 @@
     --gallery-gradient: linear-gradient(135deg, #c9a77c 0%, #e2d1b2 100%);
     --transition-slow: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     --transition-medium: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    --font-heading: "Playfair Display", serif;
-    --font-body: "Montserrat", sans-serif;
-    --font-serif: "Cormorant Garamond", serif;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+    --font-serif: 'Cormorant Garamond', serif;
     --gallery-neumorphism-light: rgba(255, 255, 255, 0.8);
     --gallery-neumorphism-shadow1: rgba(255, 255, 255, 0.9);
     --gallery-neumorphism-shadow2: rgba(209, 217, 230, 0.8);
@@ -21,7 +21,11 @@
             #cc2366 75%,
             #bc1888 100%
     );
-    --gallery-modern-gradient: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+    --gallery-modern-gradient: linear-gradient(
+            120deg,
+            #84fab0 0%,
+            #8fd3f4 100%
+    );
     --gallery-artistic-overlay: linear-gradient(
             to bottom,
             rgba(32, 6, 49, 0.6),
@@ -36,21 +40,6 @@
 }
 
 /* 画廊Hero区域 */
-.gallery-intro {
-    position: relative;
-    padding: 6rem 0;
-    text-align: center;
-}
-
-.gallery-intro::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 2rem;
-    width: 1px;
-    height: 60px;
-    background-color: var(--gallery-accent);
-}
 
 .gallery-intro h2 {
     font-family: var(--font-heading), sans-serif;
@@ -61,7 +50,7 @@
 }
 
 .gallery-intro h2::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: -10px;
     left: 50%;
@@ -87,7 +76,7 @@
 }
 
 .page-title.parallax-hero::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -99,7 +88,7 @@
 }
 
 .page-title.parallax-hero::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -179,14 +168,28 @@
     -12px -12px 20px var(--gallery-neumorphism-shadow1);
 }
 
-/* 确保卡片内容为正方形 */
+/* 确保卡片内容为正方形 - 添加aspect-ratio备用解决方案 */
 .gallery-card {
     border-radius: 12px;
     overflow: hidden;
     position: relative;
-    aspect-ratio: 1/1 !important; /* 强制设置为正方形 */
+    aspect-ratio: 1/1 !important; /* 支持aspect-ratio的现代浏览器 */
     background: #fff;
     flex-grow: 1;
+}
+
+/* 为不支持aspect-ratio的浏览器添加备用方案 */
+@supports not (aspect-ratio: 1 / 1) {
+    .gallery-card {
+        height: 0;
+        padding-bottom: 100%; /* 创建正方形 */
+    }
+
+    .gallery-card img {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 }
 
 /* 确保图片正确填充卡片容器 */
@@ -203,35 +206,15 @@
 }
 
 /* 确保masonry布局中的图片也使用相同的样式 */
-.masonry-layout {
-    column-count: 4; /* 增加列数，使图片显示为小块 */
-    column-gap: 20px;
-    padding: 15px;
-}
-
-.masonry-item {
-    break-inside: avoid;
-    margin-bottom: 20px;
-}
 
 /* 响应式调整 */
 @media (max-width: 992px) {
-    .masonry-layout {
-        column-count: 3;
-        column-gap: 15px;
-    }
-
     .gallery-grid {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     }
 }
 
 @media (max-width: 768px) {
-    .masonry-layout {
-        column-count: 2;
-        column-gap: 15px;
-    }
-
     .gallery-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 15px;
@@ -239,11 +222,6 @@
 }
 
 @media (max-width: 576px) {
-    .masonry-layout {
-        column-count: 2;
-        column-gap: 10px;
-    }
-
     .gallery-grid {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 12px;
@@ -285,12 +263,6 @@
     }
 }
 
-body.dark-mode {
-    --gallery-neumorphism-light: rgba(40, 40, 50, 0.8);
-    --gallery-neumorphism-shadow1: rgba(50, 50, 60, 0.5);
-    --gallery-neumorphism-shadow2: rgba(15, 15, 20, 0.8);
-}
-
 body.dark-mode .gallery-card {
     background: #2a2a35;
 }
@@ -300,67 +272,8 @@ body.dark-mode .filter-btn {
 }
 
 /* 添加"点赞"和"收藏"按钮效果 */
-.gallery-actions {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    display: flex;
-    gap: 10px;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    z-index: 10;
-}
-
-.gallery-item:hover .gallery-actions {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.action-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #333;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-}
-
-.action-btn:hover {
-    transform: scale(1.1);
-}
-
-.action-btn.liked {
-    color: #e74c3c;
-}
-
-.action-btn.saved {
-    color: #f39c12;
-}
-
-body.dark-mode .action-btn {
-    background: rgba(40, 40, 50, 0.85);
-    color: #ddd;
-}
 
 /* 图片加载状态 */
-.gallery-card.loading::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-    z-index: 1;
-}
 
 @keyframes loading {
     0% {
@@ -369,24 +282,4 @@ body.dark-mode .action-btn {
     100% {
         background-position: -200% 0;
     }
-}
-
-.gallery-notification {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-.gallery-notification.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
 }

@@ -233,11 +233,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// 初始化页面时执行排序
-document.addEventListener("DOMContentLoaded", function () {
-    sortBlogPosts();
-});
-
 // 模拟加载动画
 window.addEventListener("load", function () {
     document.body.classList.add("page-loaded");

@@ -397,11 +397,6 @@ body {
     background: linear-gradient(90deg, #4a6cf7, rgba(74, 108, 247, 0.2));
 }
 
-.footer-tagline {
-    color: rgba(255, 255, 255, 0.7);
-    font-style: italic;
-}
-
 .footer-social a {
     display: inline-flex;
     align-items: center;
@@ -449,20 +444,8 @@ body {
     margin-bottom: 0.75rem;
 }
 
-.compliance-badges .badge {
-    padding: 0.5rem 0.75rem;
-    font-weight: 400;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-}
-
 .compliance-badges .badge i {
     color: #28a745;
-}
-
-.compliance-badges .badge:hover {
-    background: rgba(255, 255, 255, 0.2);
-    cursor: default;
 }
 
 .footer-bottom {
@@ -482,11 +465,6 @@ body {
 .footer-copyright p {
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 0.25rem;
-}
-
-.update-date {
-    color: #4a6cf7;
-    font-weight: 500;
 }
 
 .footer-links a {

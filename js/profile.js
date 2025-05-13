@@ -189,7 +189,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 确保所有外部链接都有rel="noopener"
     document.querySelectorAll('a[target="_blank"]').forEach((link) => {
         if (!link.rel || !link.rel.includes("noopener")) {
             link.rel = link.rel ? link.rel + " noopener" : "noopener";

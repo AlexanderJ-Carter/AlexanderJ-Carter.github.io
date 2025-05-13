@@ -20,17 +20,6 @@
     z-index: 1000;
 }
 
-.navbar.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    padding: 0.5rem 0;
-}
-
-.navbar.dark-mode {
-    background: rgba(33, 37, 41, 0.95);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
 /* Logo 和品牌名称 */
 .navbar-brand {
     display: flex;
@@ -95,7 +84,7 @@
 }
 
 .nav-link::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -119,7 +108,7 @@
 .navbar-nav .nav-link.active {
     background: rgba(0, 123, 255, 0.08);
     transform: translateY(-2px);
-    color: var(--primary) !important;
+    color: var(--primary, #007bff) !important;
 }
 
 .navbar-nav .nav-link:hover .nav-icon {
@@ -305,18 +294,6 @@
     color: #f8f9fa;
 }
 
-.dark-mode .theme-toggle-btn i.fa-moon {
-    display: none;
-}
-
-.dark-mode .theme-toggle-btn i.fa-sun {
-    display: inline;
-}
-
-.theme-toggle-btn i.fa-sun {
-    display: none;
-}
-
 /* 下拉菜单样式 */
 .dropdown-menu {
     border: none;
@@ -405,10 +382,6 @@
 
 .dark-mode .nav-link {
     color: #f8f9fa;
-}
-
-.dark-mode .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .dark-mode .dropdown-menu {

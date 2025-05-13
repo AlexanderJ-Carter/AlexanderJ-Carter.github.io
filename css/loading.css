@@ -18,11 +18,6 @@ body.dark-mode .page-loader {
     color: #e0e0e0;
 }
 
-.page-loader.loaded {
-    opacity: 0;
-    visibility: hidden;
-}
-
 .loader-content {
     text-align: center;
 }
@@ -48,23 +43,6 @@ body.dark-mode .page-loader {
     position: relative;
 }
 
-.img-placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-    background-size: 200% 100%;
-    animation: 1.5s shine linear infinite;
-    z-index: 1;
-    transition: opacity 0.3s ease;
-}
-
-body.dark-mode .img-placeholder {
-    background: linear-gradient(110deg, #2a2a2a 8%, #3a3a3a 18%, #2a2a2a 33%);
-}
-
 @keyframes shine {
     to {
         background-position-x: -200%;
@@ -72,38 +50,8 @@ body.dark-mode .img-placeholder {
 }
 
 /* 骨架屏样式 */
-.skeleton {
-    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-    background-size: 200% 100%;
-    animation: 1.5s shine linear infinite;
-    border-radius: 5px;
-    height: 1em;
-    margin-bottom: 0.5em;
-}
-
-.skeleton-title {
-    width: 70%;
-    height: 1.5em;
-}
-
-.skeleton-text {
-    width: 100%;
-}
-
-.skeleton-btn {
-    width: 120px;
-    height: 2em;
-    border-radius: 2em;
-}
-
-body.dark-mode .skeleton {
-    background: linear-gradient(110deg, #2a2a2a 8%, #3a3a3a 18%, #2a2a2a 33%);
-}
 
 /* 内容渐入动画 */
-.content-fade-in {
-    animation: contentFadeIn 0.8s ease forwards;
-}
 
 @keyframes contentFadeIn {
     from {
@@ -117,9 +65,6 @@ body.dark-mode .skeleton {
 }
 
 /* 交互提示动画 */
-.pulse-hint {
-    animation: pulseHint 2s infinite;
-}
 
 @keyframes pulseHint {
     0% {

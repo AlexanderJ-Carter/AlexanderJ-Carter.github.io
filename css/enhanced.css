@@ -100,26 +100,6 @@ p {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
-.glass-icon {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.glass-icon:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
 /* 3D效果与悬浮元素 */
 .card-3d {
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -219,11 +199,6 @@ p {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.navbar-scrolled {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
 .nav-link {
     position: relative;
     font-weight: 500;
@@ -307,19 +282,6 @@ p {
 .highlight-card {
     border-top: 4px solid var(--primary-color);
     transform: translateY(-10px);
-}
-
-.card-tag {
-    position: absolute;
-    top: -10px;
-    right: 20px;
-    background: var(--gradient-primary);
-    color: white;
-    padding: 0.3rem 1rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .card-icon {
@@ -532,32 +494,6 @@ p {
     display: inline-block;
 }
 
-.hover-underline {
-    position: relative;
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.7);
-    transition: color 0.3s ease;
-}
-
-.hover-underline::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 1px;
-    bottom: -2px;
-    left: 0;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
-}
-
-.hover-underline:hover {
-    color: white;
-}
-
-.hover-underline:hover::after {
-    width: 100%;
-}
-
 .footer-bottom {
     margin-top: 3rem;
     padding-top: 1.5rem;
@@ -577,46 +513,10 @@ p {
     color: rgba(255, 255, 255, 0.7);
 }
 
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-}
-
 /* 诗歌与历史部分增强 */
-.parallax-section {
-    background-image: url("../img/Background.jpg");
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding: 5rem 0;
-    position: relative;
-}
-
-.parallax-section::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 0;
-}
-
-.poem-history-wrapper {
-    position: relative;
-    z-index: 1;
-    padding: 2.5rem;
-}
 
 .poem-content,
 .poem-info {
-    color: white;
-}
-
-.history-title {
     color: white;
 }
 
@@ -765,9 +665,6 @@ p {
         padding: 1.5rem;
     }
 
-    .poem-history-wrapper {
-        padding: 1.5rem;
-    }
 }
 
 /* 解决图片加载和显示问题 */
@@ -788,21 +685,7 @@ img[data-src] {
     transition: opacity 0.3s ease;
 }
 
-img.loaded {
-    opacity: 1;
-}
-
 /* 图片加载占位符 */
-.img-placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-    background-size: 200% 100%;
-    animation: 1.5s shine linear infinite;
-}
 
 @keyframes shine {
     to {
@@ -842,31 +725,8 @@ p {
 }
 
 /* 页面加载进度条样式 */
-.page-load-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: var(--gradient-primary);
-    z-index: 9999;
-    transition: width 0.3s ease;
-}
-
-.page-load-progress.complete {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
 
 /* 优化波纹效果 */
-.ripple-effect {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transform: scale(0);
-    animation: ripple 0.6s linear;
-    pointer-events: none;
-}
 
 @keyframes ripple {
     to {
@@ -903,10 +763,6 @@ p {
 }
 
 /* 暗黑模式样式优化 */
-body.dark-mode {
-    background: #121212;
-    color: #e0e0e0;
-}
 
 /* 导航栏暗黑模式 */
 body.dark-mode .navbar-glass {
@@ -914,10 +770,6 @@ body.dark-mode .navbar-glass {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--dark-border);
-}
-
-body.dark-mode .navbar-scrolled {
-    background: rgba(18, 18, 18, 0.95);
 }
 
 body.dark-mode .nav-link {
@@ -935,18 +787,6 @@ body.dark-mode .navbar-brand .brand-text {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-
-body.dark-mode .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-body.dark-mode .theme-toggle-btn {
-    color: var(--dark-text-secondary);
-}
-
-body.dark-mode .theme-toggle-btn:hover {
-    background: var(--dark-highlight);
 }
 
 /* 卡片暗黑模式 */
@@ -978,10 +818,6 @@ body.dark-mode p {
     color: var(--dark-text-secondary);
 }
 
-body.dark-mode .text-muted {
-    color: rgba(255, 255, 255, 0.55) !important;
-}
-
 /* 按钮暗黑模式 */
 body.dark-mode .btn-outline-primary {
     color: #6d8fff;
@@ -997,11 +833,6 @@ body.dark-mode .btn-outline-primary:hover {
 body.dark-mode .btn-primary {
     background: linear-gradient(135deg, #4a6cf7, #7e33e0);
     border-color: transparent;
-}
-
-body.dark-mode .btn-outline-light {
-    color: #e0e0e0;
-    border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* 服务卡片暗黑模式 */
@@ -1080,60 +911,18 @@ body.dark-mode .footer-legal a {
     color: var(--dark-text-secondary);
 }
 
-body.dark-mode .hover-underline {
-    color: var(--dark-text-secondary);
-}
-
-body.dark-mode .hover-underline:hover {
-    color: #ffffff;
-}
-
 /* 下拉菜单暗黑模式 */
 body.dark-mode .dropdown-menu {
     background: rgba(30, 30, 30, 0.95);
     border-color: var(--dark-border);
 }
 
-body.dark-mode .dropdown-item {
-    color: var(--dark-text-secondary);
-}
-
-body.dark-mode .dropdown-item:hover,
-body.dark-mode .dropdown-item.active {
-    background: rgba(74, 108, 247, 0.2);
-    color: #ffffff;
-}
-
 /* 加载指示器暗黑模式 */
-body.dark-mode .page-loader {
-    background: rgba(18, 18, 18, 0.98);
-    color: var(--dark-text-primary);
-}
 
 /* 聊天组件暗黑模式 */
 body.dark-mode .chat-container {
     background: var(--dark-card-bg);
     border-color: var(--dark-border);
-}
-
-body.dark-mode .chatbox {
-    background: var(--dark-bg-secondary);
-}
-
-body.dark-mode .bot-message {
-    background: var(--dark-bg-tertiary);
-    color: var(--dark-text-primary);
-}
-
-body.dark-mode .chat-input-container {
-    background: var(--dark-bg-secondary);
-    border-top-color: var(--dark-border);
-}
-
-body.dark-mode .chat-input {
-    background: var(--dark-bg);
-    border-color: var(--dark-border);
-    color: var(--dark-text-primary);
 }
 
 /* Cookie同意弹窗暗黑模式 */
@@ -1162,36 +951,14 @@ body.dark-mode .modal h2 {
     color: #ff6b6b;
 }
 
-body.dark-mode .wish-item {
-    background: rgba(255, 107, 107, 0.1);
-    color: var(--dark-text-secondary);
-}
-
-body.dark-mode .dont-show-btn {
-    background: var(--dark-bg-tertiary);
-    color: var(--dark-text-secondary);
-}
-
 /* 粒子效果和背景暗黑模式 */
-body.dark-mode .poem-history-section {
-    background: linear-gradient(135deg, #0a0a14 0%, #0c1022 50%, #0a1a33 100%);
-}
 
 /* 改善整体对比度 */
-body.dark-mode {
-    --bs-primary: #4a6cf7;
-    --bs-primary-rgb: 74, 108, 247;
-}
 
 /* 音乐播放器暗黑模式 */
 body.dark-mode .music-player {
     background: var(--dark-card-bg);
     border-color: var(--dark-border);
-}
-
-body.dark-mode .song-title,
-body.dark-mode .time-display {
-    color: var(--dark-text-primary);
 }
 
 body.dark-mode .control-btn {
@@ -1249,11 +1016,6 @@ body.dark-mode .text-content {
 }
 
 /* 诗词和历史今天卡片 */
-body.dark-mode .poem-container,
-body.dark-mode .history-container {
-    background: var(--dark-card-bg);
-    border-color: var(--dark-border);
-}
 
 body.dark-mode .poem-content,
 body.dark-mode .history-content,
@@ -1300,10 +1062,6 @@ body.dark-mode .nav-link.active .nav-icon {
 }
 
 /* 博客CTA暗黑模式样式 */
-body.dark-mode .blog-cta {
-    background: rgba(30, 30, 30, 0.7);
-    border-color: var(--dark-border);
-}
 
 body.dark-mode .blog-cta h4 {
     color: #4a6cf7;
@@ -1372,9 +1130,6 @@ body.dark-mode .blog-cta p {
         padding: 1.5rem;
     }
 
-    .poem-history-wrapper {
-        padding: 1.5rem;
-    }
 }
 
 /* 解决图片加载和显示问题 */
@@ -1395,21 +1150,7 @@ img[data-src] {
     transition: opacity 0.3s ease;
 }
 
-img.loaded {
-    opacity: 1;
-}
-
 /* 图片加载占位符 */
-.img-placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
-    background-size: 200% 100%;
-    animation: 1.5s shine linear infinite;
-}
 
 @keyframes shine {
     to {
@@ -1449,31 +1190,8 @@ p {
 }
 
 /* 页面加载进度条样式 */
-.page-load-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 3px;
-    background: var(--gradient-primary);
-    z-index: 9999;
-    transition: width 0.3s ease;
-}
-
-.page-load-progress.complete {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
 
 /* 优化波纹效果 */
-.ripple-effect {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transform: scale(0);
-    animation: ripple 0.6s linear;
-    pointer-events: none;
-}
 
 @keyframes ripple {
     to {
@@ -1510,19 +1228,8 @@ p {
 }
 
 /* 暗黑模式样式优化 - 增强版 */
-body.dark-mode {
-    background: #121212;
-    color: #e0e0e0;
-}
 
 /* 基本区域背景色调整 */
-body.dark-mode #about,
-body.dark-mode #services,
-body.dark-mode #portfolio,
-body.dark-mode #text,
-body.dark-mode .section-padding {
-    background-color: #121212;
-}
 
 /* 关于部分暗黑模式强化 */
 body.dark-mode .about-section {
@@ -1549,9 +1256,6 @@ body.dark-mode .image-frame {
 }
 
 /* 服务部分暗黑模式增强 */
-body.dark-mode .services-section {
-    background-color: #121212;
-}
 
 body.dark-mode .service-card {
     background: rgba(30, 30, 30, 0.5);
@@ -1574,9 +1278,6 @@ body.dark-mode .service-card p {
 }
 
 /* 作品集部分暗黑模式增强 */
-body.dark-mode .portfolio-section {
-    background-color: #121212;
-}
 
 body.dark-mode .portfolio-card {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -1632,23 +1333,8 @@ body.dark-mode .text-quote p {
 }
 
 /* 博客CTA暗黑模式增强 */
-body.dark-mode .blog-cta {
-    background: rgba(25, 25, 35, 0.7);
-    border: 1px solid rgba(74, 108, 247, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
 
 /* 改进诗词与历史今天部分 */
-body.dark-mode .poem-history-section {
-    background: linear-gradient(135deg, #0a0a14 0%, #0c1022 50%, #0a1a33 100%);
-}
-
-body.dark-mode .poem-container,
-body.dark-mode .history-container {
-    background: rgba(18, 18, 18, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-}
 
 body.dark-mode .section-icon {
     color: #4a6cf7;
@@ -1685,25 +1371,13 @@ body.dark-mode .btn-outline-primary {
     color: #4a6cf7;
 }
 
-body.dark-mode .btn-outline-light {
-    border-color: rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.8);
-}
-
 /* 导航分隔线 */
-body.dark-mode .nav-divider {
-    background: rgba(255, 255, 255, 0.1);
-}
 
 /* 深色模式下缓解眼睛疲劳 - 降低对比度 */
 body.dark-mode p,
 body.dark-mode .lead:not(.gradient-text) {
     color: rgba(255, 255, 255, 0.7);
     font-weight: 400;
-}
-
-body.dark-mode .text-muted {
-    color: rgba(255, 255, 255, 0.5) !important;
 }
 
 /* 增强卡片暗黑模式效果 */

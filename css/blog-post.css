@@ -13,6 +13,22 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
+/* 添加备用样式来处理不支持backdrop-filter的浏览器 */
+.back-btn {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    padding: 0.7rem 1.2rem;
+    background: white;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    color: #007bff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
 .blog-header {
     margin-bottom: 2rem;
     border-bottom: 1px solid #eee;

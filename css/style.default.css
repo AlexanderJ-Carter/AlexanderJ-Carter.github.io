@@ -1063,19 +1063,19 @@ progress {
     color: var(--bs-table-hover-color);
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 576px) {
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1200px) {
 }
 
-@media (max-width: 1399.98px) {
+@media (max-width: 1400px) {
 }
 
 .form-control {
@@ -3147,18 +3147,6 @@ textarea.form-control {
     padding: 1rem;
 }
 
-.modal-footer {
-    display: flex;
-    flex-wrap: wrap;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0.75rem;
-    border-top: 1px solid #dee2e6;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
 .modal-footer > * {
     margin: 0.25rem;
 }
@@ -3187,11 +3175,7 @@ textarea.form-control {
     overflow-y: auto;
 }
 
-.modal-fullscreen .modal-footer {
-    border-radius: 0;
-}
-
-@media (max-width: 575.98px) {
+@media (max-width: 576px) {
 
     .modal-fullscreen-sm-down .modal-content {
         height: 100%;
@@ -3207,12 +3191,9 @@ textarea.form-control {
         overflow-y: auto;
     }
 
-    .modal-fullscreen-sm-down .modal-footer {
-        border-radius: 0;
-    }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
 
     .modal-fullscreen-md-down .modal-content {
         height: 100%;
@@ -3228,12 +3209,9 @@ textarea.form-control {
         overflow-y: auto;
     }
 
-    .modal-fullscreen-md-down .modal-footer {
-        border-radius: 0;
-    }
 }
 
-@media (max-width: 991.98px) {
+@media (max-width: 992px) {
 
     .modal-fullscreen-lg-down .modal-content {
         height: 100%;
@@ -3249,12 +3227,9 @@ textarea.form-control {
         overflow-y: auto;
     }
 
-    .modal-fullscreen-lg-down .modal-footer {
-        border-radius: 0;
-    }
 }
 
-@media (max-width: 1199.98px) {
+@media (max-width: 1200px) {
 
     .modal-fullscreen-xl-down .modal-content {
         height: 100%;
@@ -3270,12 +3245,9 @@ textarea.form-control {
         overflow-y: auto;
     }
 
-    .modal-fullscreen-xl-down .modal-footer {
-        border-radius: 0;
-    }
 }
 
-@media (max-width: 1399.98px) {
+@media (max-width: 1400px) {
 
     .modal-fullscreen-xxl-down .modal-content {
         height: 100%;
@@ -3291,9 +3263,6 @@ textarea.form-control {
         overflow-y: auto;
     }
 
-    .modal-fullscreen-xxl-down .modal-footer {
-        border-radius: 0;
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3406,25 +3375,6 @@ textarea.form-control {
     margin-top: -0.5rem;
     margin-right: -0.5rem;
     margin-bottom: -0.5rem;
-}
-
-.placeholder {
-    display: inline-block;
-    min-height: 1em;
-    vertical-align: middle;
-    cursor: wait;
-    background-color: currentColor;
-    opacity: 0.5;
-}
-
-.placeholder.btn::before {
-    display: inline-block;
-    content: "";
-}
-
-.placeholder-glow .placeholder {
-    -webkit-animation: placeholder-glow 2s ease-in-out infinite;
-    animation: placeholder-glow 2s ease-in-out infinite;
 }
 
 @-webkit-keyframes placeholder-glow {
@@ -3622,10 +3572,6 @@ textarea.form-control {
     bottom: 0 !important;
 }
 
-.bottom-100 {
-    bottom: 100% !important;
-}
-
 .start-0 {
     left: 0 !important;
 }
@@ -3638,16 +3584,8 @@ textarea.form-control {
     border: 1px solid #dee2e6 !important;
 }
 
-.border-0 {
-    border: 0 !important;
-}
-
 .border-top {
     border-top: 1px solid #dee2e6 !important;
-}
-
-.border-top-0 {
-    border-top: 0 !important;
 }
 
 .border-bottom {
@@ -3702,16 +3640,8 @@ textarea.form-control {
     justify-content: space-between !important;
 }
 
-.align-items-end {
-    align-items: flex-end !important;
-}
-
 .align-items-center {
     align-items: center !important;
-}
-
-.align-content-end {
-    align-content: flex-end !important;
 }
 
 .align-content-center {
@@ -4439,7 +4369,7 @@ section {
     padding: 8.5rem 0;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 576px) {
     section {
         padding: 4rem 0;
     }
@@ -4497,21 +4427,6 @@ NAVBAR
     color: white;
 }
 
-/*
-* ===================================================
-*    Custom Orion Icons
-* ===================================================
-*/
-
-/*
-* ===================================================
-*    Custom Bootstrapious Utils
-* ===================================================
-*/
-/*
-   Text utils
-   ------------------------
-*/
 .text-uppercase {
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -4566,10 +4481,6 @@ NAVBAR
 */
 .opacity-1 {
     opacity: 0.1;
-}
-
-.opacity-2 {
-    opacity: 0.2;
 }
 
 /*

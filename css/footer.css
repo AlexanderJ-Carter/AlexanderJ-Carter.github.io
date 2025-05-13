@@ -6,25 +6,6 @@
     font-weight: normal;
 }
 
-.language-switcher {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 14px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    margin-bottom: 1rem;
-}
-
-.language-switcher:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-2px);
-}
-
 .language-switcher i {
     color: #ffd700;
     font-size: 1rem;
@@ -78,9 +59,6 @@
 }
 
 @media (max-width: 768px) {
-    .language-switcher {
-        padding: 4px 8px;
-    }
 
     .language-switcher i {
         font-size: 0.8rem;
@@ -152,58 +130,6 @@
     gap: 1.5rem;
 }
 
-.new-year-message {
-    background: linear-gradient(
-            145deg,
-            rgba(67, 24, 24, 0.15),
-            rgba(116, 32, 32, 0.12)
-    );
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 88, 88, 0.15);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
-    inset 0 1px rgba(255, 255, 255, 0.1);
-    padding: 20px 25px;
-    border-radius: 16px;
-    text-align: left;
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-}
-
-.new-year-message::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-            ellipse at center,
-            rgba(255, 215, 0, 0.03) 0%,
-            rgba(255, 0, 0, 0.01) 40%,
-            transparent 70%
-    );
-    animation: rotate 20s linear infinite;
-}
-
-.greeting {
-    font-size: 1rem;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    letter-spacing: 0.3px;
-    line-height: 1.6;
-}
-
-.festive-icon {
-    font-size: 1.5rem;
-    margin: 0 10px;
-    animation: bounce 2s ease infinite;
-    color: #ffcc00;
-    text-shadow: 0 0 15px rgba(255, 204, 0, 0.4);
-}
-
 .footer-right {
     display: flex;
     flex-direction: column;
@@ -215,41 +141,9 @@
     text-align: right;
 }
 
-.footer-legal {
-    margin-top: 1rem;
-    display: flex;
-    gap: 15px;
-    font-size: 0.85rem;
-}
-
 /* 社交媒体分享按钮 - 修改为水平布局 */
-.social-links {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-    justify-content: center;
-    flex-direction: row; /* 确保水平排列 */
-}
 
 /* 社交分享按钮增强 */
-.social-share {
-    position: relative;
-    width: 38px;
-    height: 38px;
-    background: rgba(255, 255, 255, 0.08);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
 
 .social-share i {
     font-size: 1.1rem;
@@ -257,31 +151,6 @@
     transition: all 0.3s ease;
     position: relative;
     z-index: 2;
-}
-
-.social-share::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-            45deg,
-            rgba(0, 123, 255, 0.7),
-            rgba(0, 210, 255, 0.7)
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-}
-
-.social-share:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.15);
-}
-
-.social-share:hover::before {
-    opacity: 1;
 }
 
 .social-share:hover i {
@@ -321,14 +190,7 @@
 
 /* 媒体查询优化 */
 @media (max-width: 768px) {
-    .social-share {
-        width: 40px;
-        height: 40px;
-    }
 
-    .festive-icon {
-        font-size: 1.2rem;
-    }
 }
 
 .footer-info {
@@ -337,64 +199,7 @@
     align-items: flex-start;
 }
 
-.social-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.social-share {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
 /* 平台特定颜色 */
-.share-weibo:hover::before {
-    background: linear-gradient(
-            45deg,
-            rgba(255, 129, 64, 0.9),
-            rgba(255, 84, 64, 0.9)
-    );
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-}
-
-.share-qq:hover::before {
-    background: linear-gradient(
-            45deg,
-            rgba(18, 183, 245, 0.9),
-            rgba(22, 119, 255, 0.9)
-    );
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-}
-
-.share-wechat:hover::before {
-    background: linear-gradient(
-            45deg,
-            rgba(7, 193, 96, 0.9),
-            rgba(17, 194, 103, 0.9)
-    );
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-}
-
-.share-github:hover::before {
-    background: linear-gradient(
-            45deg,
-            rgba(51, 51, 51, 0.9),
-            rgba(36, 41, 46, 0.9)
-    );
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-}
 
 /* 页脚快速导航样式优化 */
 .footer-links {
@@ -476,11 +281,6 @@
 }
 
 /* 页脚栏目间距调整 */
-.footer-info,
-.footer-links,
-.footer-newsletter {
-    padding: 0 15px;
-}
 
 /* 响应式优化 */
 @media (max-width: 768px) {
@@ -530,11 +330,6 @@
 }
 
 /* 页脚法律链接优化 */
-.footer-legal {
-    display: flex;
-    gap: 1.2rem;
-    align-items: center;
-}
 
 .footer-legal a {
     color: rgba(255, 255, 255, 0.7);
@@ -576,9 +371,6 @@
         align-items: center;
     }
 
-    .footer-legal {
-        justify-content: center;
-    }
 }
 
 /* 版权信息和法律链接 */
@@ -591,12 +383,6 @@
 .copyright {
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.85rem;
-}
-
-.footer-legal {
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
 }
 
 .footer-legal a {
@@ -654,16 +440,6 @@
         padding: 2rem 0 1rem;
     }
 
-    .footer-links,
-    .footer-legal {
-        text-align: center;
-        justify-content: center;
-    }
-
-    .social-links {
-        justify-content: center;
-    }
-
     .footer-bottom {
         text-align: center;
     }
@@ -678,13 +454,6 @@
 
     .footer-right {
         align-items: center;
-    }
-
-    .footer-legal {
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px 24px;
-        margin-top: 1rem;
     }
 
     .copyright {
@@ -708,13 +477,6 @@
         margin-bottom: 2rem;
     }
 
-    .new-year-message {
-        max-width: 90%;
-    }
-
-    .greeting {
-        font-size: 0.85rem;
-    }
 }
 
 @media (max-width: 768px) {
@@ -726,49 +488,12 @@
         margin-top: 1.5rem;
     }
 
-    .footer-legal {
-        flex-wrap: wrap;
-        gap: 10px 15px;
-        margin-top: 1rem;
-    }
-
     .copyright {
         margin-bottom: 0.7rem;
     }
 }
 
 /* 社交媒体分享按钮 */
-.social-links {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-}
-
-.social-share {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.social-share:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
 
 /* 联系信息样式 */
 .contact-info {
@@ -824,12 +549,6 @@
     font-size: 0.95rem;
 }
 
-.footer-legal {
-    display: flex;
-    gap: 1.2rem;
-    margin: 0;
-}
-
 .footer-legal a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
@@ -850,9 +569,6 @@
         text-align: center;
     }
 
-    .footer-legal {
-        justify-content: center;
-    }
 }
 
 /* 浅色调页脚样式 */
@@ -961,48 +677,8 @@
 }
 
 /* 新拟态页脚的按钮样式 */
-.footer-neumorphic .btn-neumorphic {
-    padding: 8px 16px;
-    background: #f0f4f8;
-    border: none;
-    border-radius: 12px;
-    color: #4a6cf7;
-    font-weight: 500;
-    box-shadow: 5px 5px 10px rgba(200, 210, 220, 0.5),
-    -5px -5px 10px rgba(255, 255, 255, 0.8);
-    transition: all 0.3s ease;
-}
-
-.footer-neumorphic .btn-neumorphic:hover {
-    box-shadow: 3px 3px 6px rgba(200, 210, 220, 0.5),
-    -3px -3px 6px rgba(255, 255, 255, 0.8),
-    inset 2px 2px 5px rgba(200, 210, 220, 0.5),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.8);
-}
 
 /* 社交媒体图标新拟态样式 */
-.footer-neumorphic .social-neumorphic {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #f0f4f8;
-    margin: 0 8px;
-    color: #4a6cf7;
-    box-shadow: 5px 5px 10px rgba(200, 210, 220, 0.5),
-    -5px -5px 10px rgba(255, 255, 255, 0.8);
-    transition: all 0.3s ease;
-}
-
-.footer-neumorphic .social-neumorphic:hover {
-    transform: translateY(-3px);
-    box-shadow: 3px 3px 6px rgba(200, 210, 220, 0.5),
-    -3px -3px 6px rgba(255, 255, 255, 0.8),
-    inset 1px 1px 3px rgba(200, 210, 220, 0.2),
-    inset -1px -1px 3px rgba(255, 255, 255, 0.7);
-}
 
 /* 版权信息新拟态样式 */
 .footer-neumorphic .copyright-container {

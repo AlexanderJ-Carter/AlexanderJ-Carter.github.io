@@ -24,17 +24,6 @@
     letter-spacing: 3px;
 }
 
-.code-block {
-    height: 200px;
-    /* 固定高度 */
-    overflow-y: auto;
-    /* 如果内容超过高度，显示滚动条 */
-    background-color: #f8f9fa;
-    /* 背景色 */
-    padding: 10px;
-    border-radius: 5px;
-}
-
 pre {
     margin: 0;
 }
@@ -116,12 +105,6 @@ body.dark-mode .btn {
 }
 
 /* 代码轮播样式 */
-.code-carousel {
-    background: #f8f9fa;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
 .code-container {
     padding: 20px;
@@ -138,23 +121,6 @@ body.dark-mode .btn {
     color: #fff;
 }
 
-.language-badge {
-    background: #61dafb;
-    color: #282c34;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-.code-block {
-    margin: 0;
-    padding: 15px;
-    background: #1e1e1e;
-    border-radius: 6px;
-    overflow-x: auto;
-}
-
 .code-block code {
     color: #d4d4d4;
     font-family: "Consolas", "Monaco", monospace;
@@ -162,16 +128,6 @@ body.dark-mode .btn {
 }
 
 /* 代码高亮样式 */
-.carousel-control-prev,
-.carousel-control-next {
-    width: 5%;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-}
-
-.carousel-indicators {
-    bottom: -40px;
-}
 
 .carousel-indicators button {
     background-color: #282c34;
