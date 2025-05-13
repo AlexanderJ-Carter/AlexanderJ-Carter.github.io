@@ -266,17 +266,6 @@
 }
 
 /* 订阅区域样式 */
-.subscribe-section {
-    margin: 4rem 0 2rem;
-}
-
-.subscribe-card {
-    background: linear-gradient(135deg, #4a6cf7 0%, #7e33e0 100%);
-    border-radius: 16px;
-    color: white;
-    padding: 2.5rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
 
 .subscribe-card h3 {
     font-weight: 700;
@@ -287,25 +276,9 @@
     opacity: 0.85;
 }
 
-.subscription-form {
-    margin-top: 1rem;
-}
-
-.subscription-form .input-group {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 30px;
-    overflow: hidden;
-}
-
 .subscription-form input {
     border: none;
     padding: 10px 20px;
-}
-
-.subscription-form .form-control {
-    border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.95rem;
 }
 
 .subscription-form .btn {
@@ -381,13 +354,6 @@
         margin-top: 10px;
     }
 
-    .subscribe-card {
-        text-align: center;
-    }
-
-    .subscription-form {
-        margin-top: 1.5rem;
-    }
 }
 
 @media (max-width: 768px) {
@@ -446,9 +412,6 @@
         font-size: 1.2rem;
     }
 
-    .subscribe-card {
-        padding: 1.5rem;
-    }
 }
 
 @media (max-width: 576px) {
@@ -474,7 +437,4 @@
         padding: 5px 12px;
     }
 
-    .subscribe-card {
-        padding: 1.5rem;
-    }
 }

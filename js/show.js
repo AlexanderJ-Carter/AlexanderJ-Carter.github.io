@@ -296,13 +296,3 @@ function initPortfolioFilters() {
     }
 }
 
-// 导出所有功能
-window.showUtils = {
-    initPageTransitions,
-    initLazyLoading,
-    initScrollAnimations,
-    initCodeCarousel,
-    preloadAssets,
-    initProgressBar,
-    initPortfolioFilters,
-};

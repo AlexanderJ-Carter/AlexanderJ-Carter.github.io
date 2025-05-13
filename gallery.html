@@ -3,39 +3,39 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- 基本信息 -->
     <title>作品画廊 - Alexander James Carter</title>
-    <meta name="description" content="Alexander James Carter的作品画廊，展示风景、花卉和美食摄影作品">
-    <meta name="author" content="Alexander James Carter">
-    <meta name="keywords" content="摄影作品, 画廊, 风景摄影, 花卉摄影, 美食摄影, Alexander James Carter">
-    <link rel="canonical" href="https://alexander.xin/gallery.html">
+    <meta content="Alexander James Carter的作品画廊，展示风景、花卉和美食摄影作品" name="description">
+    <meta content="Alexander James Carter" name="author">
+    <meta content="摄影作品, 画廊, 风景摄影, 花卉摄影, 美食摄影, Alexander James Carter" name="keywords">
+    <link href="https://alexander.xin/gallery.html" rel="canonical">
 
     <!-- PWA和图标 -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link href="manifest.json" rel="manifest">
+    <link href="img/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- 第三方样式库 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- 字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
           rel="stylesheet">
 
     <!-- 样式 -->
-    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
-    <link rel="stylesheet" href="css/navigation.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/enhanced.css">
-    <link rel="stylesheet" href="css/glightbox.min.css">
-    <link rel="stylesheet" href="css/gallery.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/footer-enhanced.css">
+    <link href="css/style.default.css" id="theme-stylesheet" rel="stylesheet">
+    <link href="css/navigation.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
+    <link href="css/enhanced.css" rel="stylesheet">
+    <link href="css/glightbox.min.css" rel="stylesheet">
+    <link href="css/gallery.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/footer-enhanced.css" rel="stylesheet">
 </head>
 
 <body>
@@ -48,21 +48,21 @@
 </div>
 
 <!-- 导航栏 -->
-<nav class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar" aria-label="主导航">
+<nav aria-label="主导航" class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar">
     <div class="scroll-progress"></div>
     <div class="container position-relative">
-        <a class="navbar-brand" href="index.html" aria-label="返回首页">
-            <img src="img/logo.png" alt="网站Logo" class="nav-logo" width="40" height="39">
+        <a aria-label="返回首页" class="navbar-brand" href="index.html">
+            <img alt="网站Logo" class="nav-logo" height="39" src="img/logo.png" width="40">
             <span class="brand-text">Alexander James Carter</span>
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="切换导航菜单">
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="切换导航菜单"
+                class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
+                type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <button class="back-to-top" aria-label="返回顶部">
+        <button aria-label="返回顶部" class="back-to-top">
             <i class="fas fa-arrow-up"></i>
         </button>
 
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="gallery.html" aria-current="page">
+                    <a aria-current="page" class="nav-link active" href="gallery.html">
                         <i class="fas fa-images nav-icon"></i> 画廊
                     </a>
                 </li>
@@ -92,11 +92,11 @@
                 <li class="nav-item nav-divider"></li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle language-selector" href="#" id="navbarDropdown" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle language-selector" data-bs-toggle="dropdown" href="#"
+                       id="navbarDropdown" role="button">
                         <i class="fas fa-globe nav-icon"></i> 语言
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end glass-dropdown" aria-labelledby="navbarDropdown">
+                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
                         <li><a class="dropdown-item active" href="gallery.html"><i class="fas fa-check me-2"></i>
                             中文</a></li>
                         <li><a class="dropdown-item" href="en/gallery-en.html">English</a></li>
@@ -104,7 +104,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <button class="theme-toggle-btn" id="theme-toggle" aria-label="切换主题">
+                    <button aria-label="切换主题" class="theme-toggle-btn" id="theme-toggle">
                         <i class="fas fa-moon"></i>
                     </button>
                 </li>
@@ -165,14 +165,14 @@
         <!-- 画廊网格 -->
         <div class="gallery-grid">
             <!-- 风景摄影 -->
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/Photo1.jpg" alt="风景摄影" class="img-fluid">
+                    <img alt="风景摄影" class="img-fluid" src="img/Photo1.jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>自然风光</h5>
                             <p>风景摄影系列</p>
-                            <a href="img/Photo1.jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/Photo1.jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -180,14 +180,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/Photo2.jpg" alt="风景摄影" class="img-fluid">
+                    <img alt="风景摄影" class="img-fluid" src="img/Photo2.jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>山水之间</h5>
                             <p>风景摄影系列</p>
-                            <a href="img/Photo2.jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/Photo2.jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -195,14 +195,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/Photo3.jpg" alt="风景摄影" class="img-fluid">
+                    <img alt="风景摄影" class="img-fluid" src="img/Photo3.jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>城市风光</h5>
                             <p>风景摄影系列</p>
-                            <a href="img/Photo3.jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/Photo3.jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -210,14 +210,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/Photo4.jpg" alt="风景摄影" class="img-fluid">
+                    <img alt="风景摄影" class="img-fluid" src="img/Photo4.jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>自然之美</h5>
                             <p>风景摄影系列</p>
-                            <a href="img/Photo4.jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/Photo4.jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -226,14 +226,14 @@
             </div>
 
             <!-- 花卉摄影 -->
-            <div class="gallery-item" data-category="flower" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="flower">
                 <div class="gallery-card">
-                    <img src="img/Flower1.jpg" alt="花卉摄影" class="img-fluid">
+                    <img alt="花卉摄影" class="img-fluid" src="img/Flower1.jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>花之语</h5>
                             <p>花卉摄影系列</p>
-                            <a href="img/Flower1.jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/Flower1.jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -241,14 +241,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="flower" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="flower">
                 <div class="gallery-card">
-                    <img src="img/Flower2.jpg" alt="花卉摄影" class="img-fluid">
+                    <img alt="花卉摄影" class="img-fluid" src="img/Flower2.jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>花之影</h5>
                             <p>花卉摄影系列</p>
-                            <a href="img/Flower2.jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/Flower2.jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -257,14 +257,14 @@
             </div>
 
             <!-- 美食摄影 -->
-            <div class="gallery-item" data-category="food" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="food">
                 <div class="gallery-card">
-                    <img src="img/Food1.jpg" alt="美食摄影" class="img-fluid">
+                    <img alt="美食摄影" class="img-fluid" src="img/Food1.jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>味觉盛宴</h5>
                             <p>美食摄影系列</p>
-                            <a href="img/Food1.jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/Food1.jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -272,14 +272,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="food" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="food">
                 <div class="gallery-card">
-                    <img src="img/Food2.jpg" alt="美食摄影" class="img-fluid">
+                    <img alt="美食摄影" class="img-fluid" src="img/Food2.jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>味蕾之旅</h5>
                             <p>美食摄影系列</p>
-                            <a href="img/Food2.jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/Food2.jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -287,14 +287,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="food" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="food">
                 <div class="gallery-card">
-                    <img src="img/Food3.jpg" alt="美食摄影" class="img-fluid">
+                    <img alt="美食摄影" class="img-fluid" src="img/Food3.jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>美味探索</h5>
                             <p>美食摄影系列</p>
-                            <a href="img/Food3.jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/Food3.jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -303,14 +303,14 @@
             </div>
 
             <!-- 校园风光 -->
-            <div class="gallery-item" data-category="design" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="design">
                 <div class="gallery-card">
-                    <img src="img/University.jpg" alt="校园风光" class="img-fluid">
+                    <img alt="校园风光" class="img-fluid" src="img/University.jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>校园风光</h5>
                             <p>校园风光摄影</p>
-                            <a href="img/University.jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/University.jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -319,14 +319,14 @@
             </div>
 
             <!-- 新增WebPhoto系列 -->
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (1).jpg" alt="网络摄影作品1" class="img-fluid">
+                    <img alt="网络摄影作品1" class="img-fluid" src="img/WebPhoto (1).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 I</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (1).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (1).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -334,14 +334,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (2).jpg" alt="网络摄影作品2" class="img-fluid">
+                    <img alt="网络摄影作品2" class="img-fluid" src="img/WebPhoto (2).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 II</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (2).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (2).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -349,14 +349,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (3).jpg" alt="网络摄影作品3" class="img-fluid">
+                    <img alt="网络摄影作品3" class="img-fluid" src="img/WebPhoto (3).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 III</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (3).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (3).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -364,14 +364,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (4).jpg" alt="网络摄影作品4" class="img-fluid">
+                    <img alt="网络摄影作品4" class="img-fluid" src="img/WebPhoto (4).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 IV</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (4).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (4).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -379,14 +379,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (5).jpg" alt="网络摄影作品5" class="img-fluid">
+                    <img alt="网络摄影作品5" class="img-fluid" src="img/WebPhoto (5).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 V</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (5).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (5).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -394,14 +394,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (6).jpg" alt="网络摄影作品6" class="img-fluid">
+                    <img alt="网络摄影作品6" class="img-fluid" src="img/WebPhoto (6).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 VI</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (6).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (6).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -409,14 +409,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (7).jpg" alt="网络摄影作品7" class="img-fluid">
+                    <img alt="网络摄影作品7" class="img-fluid" src="img/WebPhoto (7).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 VII</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (7).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (7).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -424,14 +424,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (8).jpg" alt="网络摄影作品8" class="img-fluid">
+                    <img alt="网络摄影作品8" class="img-fluid" src="img/WebPhoto (8).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 VIII</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (8).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (8).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -439,14 +439,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (9).jpg" alt="网络摄影作品9" class="img-fluid">
+                    <img alt="网络摄影作品9" class="img-fluid" src="img/WebPhoto (9).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 IX</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (9).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (9).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -454,14 +454,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (10).jpg" alt="网络摄影作品10" class="img-fluid">
+                    <img alt="网络摄影作品10" class="img-fluid" src="img/WebPhoto (10).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 X</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (10).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (10).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -469,14 +469,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (11).jpg" alt="网络摄影作品11" class="img-fluid">
+                    <img alt="网络摄影作品11" class="img-fluid" src="img/WebPhoto (11).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 XI</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (11).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (11).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -484,14 +484,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (12).jpg" alt="网络摄影作品12" class="img-fluid">
+                    <img alt="网络摄影作品12" class="img-fluid" src="img/WebPhoto (12).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 XII</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (12).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (12).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -499,14 +499,14 @@
                 </div>
             </div>
 
-            <div class="gallery-item" data-category="photo" data-aos="fade-up">
+            <div class="gallery-item" data-aos="fade-up" data-category="photo">
                 <div class="gallery-card">
-                    <img src="img/WebPhoto (13).jpg" alt="网络摄影作品13" class="img-fluid">
+                    <img alt="网络摄影作品13" class="img-fluid" src="img/WebPhoto (13).jpg">
                     <div class="gallery-overlay">
                         <div class="gallery-info">
                             <h5>风景印象 XIII</h5>
                             <p>网络摄影系列</p>
-                            <a href="img/WebPhoto (13).jpg" class="btn-view" data-gallery="gallery-all">
+                            <a class="btn-view" data-gallery="gallery-all" href="img/WebPhoto (13).jpg">
                                 <i class="fas fa-search-plus"></i>
                             </a>
                         </div>
@@ -526,8 +526,8 @@
             <!-- 左侧：网站信息和简介 -->
             <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                 <div class="footer-brand">
-                    <a href="index.html" class="footer-logo-link">
-                        <img src="img/logo.png" alt="网站Logo" width="40" height="39">
+                    <a class="footer-logo-link" href="index.html">
+                        <img alt="网站Logo" height="39" src="img/logo.png" width="40">
                         <span>Alexander J. Carter</span>
                     </a>
                     <p class="footer-slogan">捕捉生活中的艺术，分享独特的视角</p>
@@ -538,7 +538,7 @@
             <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                 <div class="footer-mini-nav">
                     <a href="index.html">主页</a>
-                    <a href="gallery.html" class="active">画廊</a>
+                    <a class="active" href="gallery.html">画廊</a>
                     <a href="blog.html">博客</a>
                     <a href="profile.html">关于</a>
                 </div>
@@ -549,23 +549,23 @@
                 <div class="footer-connect">
                     <!-- 语言切换栏 -->
                     <div class="language-bar">
-                        <a href="gallery.html" class="active">中文</a>
+                        <a class="active" href="gallery.html">中文</a>
                         <span class="lang-divider">|</span>
                         <a href="en/gallery-en.html">English</a>
                         <span class="lang-divider">|</span>
-                        <a href="it/gallery-it.html">Italiano</a>
+                        <a href="it/gallery-it.html" lang="it">Italiano</a>
                     </div>
 
                     <!-- 社交图标 -->
                     <div class="social-icons">
-                        <a href="javascript:void(0)" title="分享到微博" class="social-icon weibo">
+                        <a class="social-icon weibo" href="javascript:void(0)" title="分享到微博">
                             <i class="fab fa-weibo"></i>
                         </a>
-                        <a href="javascript:void(0)" title="分享到微信" class="social-icon wechat">
+                        <a class="social-icon wechat" href="javascript:void(0)" title="分享到微信">
                             <i class="fab fa-weixin"></i>
                         </a>
-                        <a href="https://github.com/AlexanderJ-Carter" target="_blank" title="GitHub"
-                           class="social-icon github">
+                        <a class="social-icon github" href="https://github.com/AlexanderJ-Carter" rel="noopener" target="_blank"
+                           title="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
                     </div>

@@ -70,10 +70,6 @@
     animation: fadeInLeft 1s ease-out;
 }
 
-.fade-in-right {
-    animation: fadeInRight 1s ease-out;
-}
-
 @keyframes fadeInLeft {
     from {
         opacity: 0;

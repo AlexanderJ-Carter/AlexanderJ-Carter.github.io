@@ -4,23 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>个人简介 - Alexander James Carter的网页</title>
-    <meta name="description" content="个人简介、经历与技能展示">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta content="个人简介、经历与技能展示" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.default.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/profile.css">
+    <link href="css/style.default.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
 </head>
 
 <body>
-<a href="index.html" class="back-btn" title="返回网站主页" rel="noopener">
-    <i class="fas fa-arrow-left me-2" aria-hidden="true"></i>返回主页
+<a class="back-btn" href="index.html" rel="noopener" title="返回网站主页">
+    <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>返回主页
 </a>
 
 <div class="profile-container">
     <div class="profile-header">
-        <img src="img/AboutMe.jpg" alt="个人头像" class="profile-avatar">
+        <img alt="个人头像" class="profile-avatar" src="img/AboutMe.jpg">
         <h1 class="profile-name">Alexander James Carter</h1>
         <p class="profile-title">代码爱好者 | 设计爱好者</p>
         <div class="d-flex justify-content-center gap-2 mb-3">
@@ -35,23 +35,23 @@
             喜欢探索新技术，乐于分享，期待能与志同道合的朋友一起成长。
         </p>
         <div class="profile-social">
-            <a href="https://github.com/AlexanderJ-Carter" class="social-icon" title="访问我的GitHub主页"
-               aria-label="GitHub" target="_blank" rel="noopener">
-                <i class="fab fa-github" aria-hidden="true"></i>
+            <a aria-label="GitHub" class="social-icon" href="https://github.com/AlexanderJ-Carter"
+               rel="noopener" target="_blank" title="访问我的GitHub主页">
+                <i aria-hidden="true" class="fab fa-github"></i>
                 <span class="visually-hidden">GitHub</span>
             </a>
-            <a href="#" class="social-icon" title="添加我的微信" aria-label="微信"
-               onclick="showQRCode('wechat'); return false;">
-                <i class="fab fa-weixin" aria-hidden="true"></i>
+            <a aria-label="微信" class="social-icon" href="#" onclick="showQRCode('wechat'); return false;"
+               title="添加我的微信">
+                <i aria-hidden="true" class="fab fa-weixin"></i>
                 <span class="visually-hidden">微信</span>
             </a>
-            <a href="#" class="social-icon" title="添加我的QQ" aria-label="QQ"
-               onclick="showQRCode('qq'); return false;">
-                <i class="fab fa-qq" aria-hidden="true"></i>
+            <a aria-label="QQ" class="social-icon" href="#" onclick="showQRCode('qq'); return false;"
+               title="添加我的QQ">
+                <i aria-hidden="true" class="fab fa-qq"></i>
                 <span class="visually-hidden">QQ</span>
             </a>
-            <a href="mailto:2253940186@qq.com" class="social-icon" title="发送邮件给我" aria-label="邮箱">
-                <i class="fas fa-envelope" aria-hidden="true"></i>
+            <a aria-label="邮箱" class="social-icon" href="mailto:2253940186@qq.com" title="发送邮件给我">
+                <i aria-hidden="true" class="fas fa-envelope"></i>
                 <span class="visually-hidden">邮箱</span>
             </a>
         </div>
@@ -174,8 +174,8 @@
                         <span class="language-level native">母语</span>
                     </div>
                     <div class="progress" style="height: 6px;">
-                        <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
-                             aria-valuemin="0" aria-valuemax="100"></div>
+                        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar"
+                             role="progressbar" style="width: 100%"></div>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -184,8 +184,8 @@
                         <span class="language-level advanced">流利</span>
                     </div>
                     <div class="progress" style="height: 6px;">
-                        <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="90"
-                             aria-valuemin="0" aria-valuemax="100"></div>
+                        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" class="progress-bar"
+                             role="progressbar" style="width: 70%"></div>
                     </div>
                 </div>
                 <div>
@@ -194,8 +194,8 @@
                         <span class="language-level elementary">初学</span>
                     </div>
                     <div class="progress" style="height: 6px;">
-                        <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="30"
-                             aria-valuemin="0" aria-valuemax="100"></div>
+                        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" class="progress-bar"
+                             role="progressbar" style="width: 30%"></div>
                     </div>
                 </div>
             </div>
@@ -204,28 +204,28 @@
 
     <!-- 下载简历按钮 -->
     <div class="text-center mt-4">
-        <a href="img/AboutMe.jpg" class="btn btn-primary btn-lg" title="下载我的完整简历" download>
-            <i class="fas fa-download me-2" aria-hidden="true"></i>下载完整简历
+        <a class="btn btn-primary btn-lg" download href="img/AboutMe.jpg" title="下载我的完整简历">
+            <i aria-hidden="true" class="fas fa-download me-2"></i>下载完整简历
         </a>
     </div>
 </div>
 
 <!-- 微信二维码弹窗 -->
-<div id="wechatModal" class="qr-modal">
+<div class="qr-modal" id="wechatModal">
     <div class="qr-modal-content">
         <span class="qr-close" onclick="closeQRCode('wechat')">&times;</span>
         <div class="qr-container">
-            <img src="img/QR/wechat-qr.jpg" alt="微信二维码" class="qr-img">
+            <img alt="微信二维码" class="qr-img" src="img/QR/wechat-qr.jpg">
         </div>
     </div>
 </div>
 
 <!-- QQ二维码弹窗 -->
-<div id="qqModal" class="qr-modal">
+<div class="qr-modal" id="qqModal">
     <div class="qr-modal-content">
         <span class="qr-close" onclick="closeQRCode('qq')">&times;</span>
         <div class="qr-container">
-            <img src="img/QR/qq-qr.jpg" alt="QQ二维码" class="qr-img">
+            <img alt="QQ二维码" class="qr-img" src="img/QR/qq-qr.jpg">
         </div>
     </div>
 </div>
@@ -237,8 +237,8 @@
                 <p class="mb-0">&copy; 2025 Alexander James Carter Website</p>
             </div>
             <div class="col-md-6 text-center text-md-end">
-                <a href="privacy.html" class="me-3" title="阅读隐私政策" rel="noopener">隐私政策</a>
-                <a href="terms.html" title="阅读使用条款" rel="noopener">使用条款</a>
+                <a class="me-3" href="privacy.html" rel="noopener" title="阅读隐私政策">隐私政策</a>
+                <a href="terms.html" rel="noopener" title="阅读使用条款">使用条款</a>
             </div>
         </div>
     </div>

@@ -96,10 +96,10 @@
 /* 改进页脚版权区域布局和质感 */
 .site-footer {
     background: linear-gradient(
-        145deg,
-        rgba(22, 22, 30, 0.95),
-        rgba(32, 32, 42, 0.97),
-        rgba(24, 24, 34, 0.98)
+            145deg,
+            rgba(22, 22, 30, 0.95),
+            rgba(32, 32, 42, 0.97),
+            rgba(24, 24, 34, 0.98)
     );
     position: relative;
     overflow: hidden;
@@ -132,10 +132,10 @@
     right: 0;
     height: 1px;
     background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(255, 255, 255, 0.1) 50%,
-        transparent 100%
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 100%
     );
     z-index: 1;
 }
@@ -154,14 +154,14 @@
 
 .new-year-message {
     background: linear-gradient(
-        145deg,
-        rgba(67, 24, 24, 0.15),
-        rgba(116, 32, 32, 0.12)
+            145deg,
+            rgba(67, 24, 24, 0.15),
+            rgba(116, 32, 32, 0.12)
     );
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 88, 88, 0.15);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1),
-        inset 0 1px rgba(255, 255, 255, 0.1);
+    inset 0 1px rgba(255, 255, 255, 0.1);
     padding: 20px 25px;
     border-radius: 16px;
     text-align: left;
@@ -179,10 +179,10 @@
     width: 200%;
     height: 200%;
     background: radial-gradient(
-        ellipse at center,
-        rgba(255, 215, 0, 0.03) 0%,
-        rgba(255, 0, 0, 0.01) 40%,
-        transparent 70%
+            ellipse at center,
+            rgba(255, 215, 0, 0.03) 0%,
+            rgba(255, 0, 0, 0.01) 40%,
+            transparent 70%
     );
     animation: rotate 20s linear infinite;
 }
@@ -265,9 +265,9 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(
-        45deg,
-        rgba(0, 123, 255, 0.7),
-        rgba(0, 210, 255, 0.7)
+            45deg,
+            rgba(0, 123, 255, 0.7),
+            rgba(0, 210, 255, 0.7)
     );
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -358,9 +358,9 @@
 /* 平台特定颜色 */
 .share-weibo:hover::before {
     background: linear-gradient(
-        45deg,
-        rgba(255, 129, 64, 0.9),
-        rgba(255, 84, 64, 0.9)
+            45deg,
+            rgba(255, 129, 64, 0.9),
+            rgba(255, 84, 64, 0.9)
     );
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
@@ -368,9 +368,9 @@
 
 .share-qq:hover::before {
     background: linear-gradient(
-        45deg,
-        rgba(18, 183, 245, 0.9),
-        rgba(22, 119, 255, 0.9)
+            45deg,
+            rgba(18, 183, 245, 0.9),
+            rgba(22, 119, 255, 0.9)
     );
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
@@ -378,9 +378,9 @@
 
 .share-wechat:hover::before {
     background: linear-gradient(
-        45deg,
-        rgba(7, 193, 96, 0.9),
-        rgba(17, 194, 103, 0.9)
+            45deg,
+            rgba(7, 193, 96, 0.9),
+            rgba(17, 194, 103, 0.9)
     );
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
@@ -388,9 +388,9 @@
 
 .share-github:hover::before {
     background: linear-gradient(
-        45deg,
-        rgba(51, 51, 51, 0.9),
-        rgba(36, 41, 46, 0.9)
+            45deg,
+            rgba(51, 51, 51, 0.9),
+            rgba(36, 41, 46, 0.9)
     );
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
@@ -419,9 +419,9 @@
     width: 35px;
     height: 3px;
     background: linear-gradient(
-        90deg,
-        rgba(0, 123, 255, 0.8),
-        rgba(0, 123, 255, 0.3)
+            90deg,
+            rgba(0, 123, 255, 0.8),
+            rgba(0, 123, 255, 0.3)
     );
     border-radius: 2px;
 }
@@ -858,9 +858,9 @@
 /* 浅色调页脚样式 */
 .footer-light {
     background: linear-gradient(
-        135deg,
-        rgba(248, 250, 252, 0.97) 0%,
-        rgba(240, 242, 245, 0.95) 100%
+            135deg,
+            rgba(248, 250, 252, 0.97) 0%,
+            rgba(240, 242, 245, 0.95) 100%
     );
     color: #485563;
     border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -924,8 +924,8 @@
     background: #f0f4f8;
     border-radius: 20px 20px 0 0;
     box-shadow: 8px -8px 16px rgba(255, 255, 255, 0.8),
-        -8px -8px 16px rgba(255, 255, 255, 0.8),
-        inset 0 -1px 1px rgba(200, 210, 220, 0.5);
+    -8px -8px 16px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 1px rgba(200, 210, 220, 0.5);
     border: none;
     position: relative;
     overflow: hidden;
@@ -957,7 +957,7 @@
     color: #3451b2;
     background: #e8ecf2;
     box-shadow: 3px 3px 6px rgba(200, 210, 220, 0.5),
-        -3px -3px 6px rgba(255, 255, 255, 0.8);
+    -3px -3px 6px rgba(255, 255, 255, 0.8);
 }
 
 /* 新拟态页脚的按钮样式 */
@@ -969,15 +969,15 @@
     color: #4a6cf7;
     font-weight: 500;
     box-shadow: 5px 5px 10px rgba(200, 210, 220, 0.5),
-        -5px -5px 10px rgba(255, 255, 255, 0.8);
+    -5px -5px 10px rgba(255, 255, 255, 0.8);
     transition: all 0.3s ease;
 }
 
 .footer-neumorphic .btn-neumorphic:hover {
     box-shadow: 3px 3px 6px rgba(200, 210, 220, 0.5),
-        -3px -3px 6px rgba(255, 255, 255, 0.8),
-        inset 2px 2px 5px rgba(200, 210, 220, 0.5),
-        inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+    -3px -3px 6px rgba(255, 255, 255, 0.8),
+    inset 2px 2px 5px rgba(200, 210, 220, 0.5),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.8);
 }
 
 /* 社交媒体图标新拟态样式 */
@@ -992,16 +992,16 @@
     margin: 0 8px;
     color: #4a6cf7;
     box-shadow: 5px 5px 10px rgba(200, 210, 220, 0.5),
-        -5px -5px 10px rgba(255, 255, 255, 0.8);
+    -5px -5px 10px rgba(255, 255, 255, 0.8);
     transition: all 0.3s ease;
 }
 
 .footer-neumorphic .social-neumorphic:hover {
     transform: translateY(-3px);
     box-shadow: 3px 3px 6px rgba(200, 210, 220, 0.5),
-        -3px -3px 6px rgba(255, 255, 255, 0.8),
-        inset 1px 1px 3px rgba(200, 210, 220, 0.2),
-        inset -1px -1px 3px rgba(255, 255, 255, 0.7);
+    -3px -3px 6px rgba(255, 255, 255, 0.8),
+    inset 1px 1px 3px rgba(200, 210, 220, 0.2),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.7);
 }
 
 /* 版权信息新拟态样式 */
@@ -1010,7 +1010,7 @@
     padding: 15px;
     background: #f0f4f8;
     box-shadow: inset 3px 3px 6px rgba(200, 210, 220, 0.5),
-        inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+    inset -3px -3px 6px rgba(255, 255, 255, 0.8);
 }
 
 /* 深色模式适配 */
@@ -1018,8 +1018,8 @@
     .footer-neumorphic {
         background: #2d3748;
         box-shadow: 8px -8px 16px rgba(26, 32, 44, 0.5),
-            -8px -8px 16px rgba(45, 55, 72, 0.3),
-            inset 0 -1px 1px rgba(45, 55, 72, 0.5);
+        -8px -8px 16px rgba(45, 55, 72, 0.3),
+        inset 0 -1px 1px rgba(45, 55, 72, 0.5);
         color: #e2e8f0;
     }
 
@@ -1035,7 +1035,7 @@
         color: #90cdf4;
         background: #31405c;
         box-shadow: 3px 3px 6px rgba(26, 32, 44, 0.5),
-            -3px -3px 6px rgba(45, 55, 72, 0.3);
+        -3px -3px 6px rgba(45, 55, 72, 0.3);
     }
 }
 

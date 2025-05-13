@@ -137,7 +137,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.removeEventListener("keydown", handleKeyDown);
     };
 
-    // 点击弹窗外部关闭
     qrModal.addEventListener("click", function (e) {
         if (e.target === qrModal) {
             closeQrModal();

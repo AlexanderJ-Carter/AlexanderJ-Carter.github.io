@@ -362,38 +362,6 @@ body {
 }
 
 /* 相关文章推荐 */
-.related-posts {
-    margin-top: 3rem;
-}
-
-.related-posts-title {
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    color: #2c3e50;
-}
-
-.related-post-card {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-}
-
-.related-post-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-.related-post-img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-}
-
-.related-post-content {
-    padding: 1.2rem;
-}
 
 .related-post-content h5 {
     margin-bottom: 1rem;

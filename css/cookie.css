@@ -17,10 +17,6 @@
 }
 
 /* 为暗黑模式添加样式 */
-.cookie-consent-container.dark-mode {
-    background-color: rgba(33, 37, 41, 0.95);
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
-}
 
 .cookie-content {
     max-width: 1200px;
@@ -106,41 +102,6 @@
 }
 
 /* 用户反馈提示样式 */
-.cookie-feedback {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 12px 20px;
-    background: white;
-    border-left: 4px solid #28a745;
-    border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 1100;
-    display: flex;
-    align-items: center;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.cookie-feedback.info {
-    border-left-color: #17a2b8;
-}
-
-.cookie-feedback.dark-mode {
-    background: #343a40;
-    color: #fff;
-}
-
-.cookie-feedback.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.cookie-feedback.fade-out {
-    opacity: 0;
-    transform: translateY(20px);
-}
 
 .feedback-content {
     display: flex;
@@ -183,13 +144,6 @@
         justify-content: center;
         width: 100%;
         margin-top: 10px;
-    }
-
-    .cookie-feedback {
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
-        text-align: center;
     }
 
     .feedback-content {

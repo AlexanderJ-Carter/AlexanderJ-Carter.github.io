@@ -3,15 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <title>博客 - AlexanderJ-Carter的网页</title>
-    <meta name="description" content="个人博客和技术文章分享">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta content="个人博客和技术文章分享" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.default.css">
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/blog.css">
+    <link href="css/style.default.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/blog.css" rel="stylesheet">
     <style>
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -31,10 +31,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html">
-            <img src="img/logo.png" alt="Logo" height="39">
+            <img alt="Logo" height="39" src="img/logo.png">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -70,10 +70,11 @@
         <div class="row g-3 align-items-center">
             <div class="col-lg-5">
                 <div class="search-container">
-                    <label for="blog-search"></label><input type="text" class="form-control search-input" placeholder="搜索文章..." id="blog-search">
-                    <button class="search-button" type="button" title="搜索">
+                    <label for="blog-search"></label><input class="form-control search-input" id="blog-search"
+                                                            placeholder="搜索文章..." type="text">
+                    <button class="search-button" title="搜索" type="button">
                         <i class="fas fa-search"></i>
-                        </button>
+                    </button>
                 </div>
             </div>
             <div class="col-lg-5">
@@ -89,7 +90,7 @@
                 </div>
             </div>
             <div class="col-lg-2">
-                <select class="form-select" id="sort-select" aria-label="排序方式">
+                <select aria-label="排序方式" class="form-select" id="sort-select">
                     <option value="newest">最新发布</option>
                     <option value="oldest">最早发布</option>
                     <option value="popular">最受欢迎</option>
@@ -104,8 +105,8 @@
         <div class="col-md-6 col-lg-4" data-tags="React 前端开发 性能优化">
             <div class="blog-card">
                 <div class="blog-card-img-container">
-                    <img src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2" alt="React性能优化"
-                         class="blog-card-img">
+                    <img alt="React性能优化" class="blog-card-img"
+                         src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2">
                     <div class="blog-card-date">
                         <span class="day">18</span>
                         <span class="month">十二月</span>
@@ -123,7 +124,7 @@
                         <span class="blog-tag">性能优化</span>
                         <span class="blog-tag">前端开发</span>
                     </div>
-                    <a href="blog-posts/react-performance.html" class="blog-card-link">
+                    <a class="blog-card-link" href="blog-posts/react-performance.html">
                         阅读全文 <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -134,8 +135,8 @@
         <div class="col-md-6 col-lg-4" data-tags="UI设计 设计趋势 用户体验">
             <div class="blog-card">
                 <div class="blog-card-img-container">
-                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e" alt="UI设计趋势"
-                         class="blog-card-img">
+                    <img alt="UI设计趋势" class="blog-card-img"
+                         src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e">
                     <div class="blog-card-date">
                         <span class="day">10</span>
                         <span class="month">一月</span>
@@ -153,7 +154,7 @@
                         <span class="blog-tag">设计趋势</span>
                         <span class="blog-tag">用户体验</span>
                     </div>
-                    <a href="blog-posts/design-trends-2024.html" class="blog-card-link">
+                    <a class="blog-card-link" href="blog-posts/design-trends-2024.html">
                         阅读全文 <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -164,8 +165,8 @@
         <div class="col-md-6 col-lg-4" data-tags="远程工作 生产力 工作方式">
             <div class="blog-card">
                 <div class="blog-card-img-container">
-                    <img src="https://images.unsplash.com/photo-1542435503-956c469947f6" alt="远程工作经验"
-                         class="blog-card-img">
+                    <img alt="远程工作经验" class="blog-card-img"
+                         src="https://images.unsplash.com/photo-1542435503-956c469947f6">
                     <div class="blog-card-date">
                         <span class="day">05</span>
                         <span class="month">一月</span>
@@ -183,7 +184,7 @@
                         <span class="blog-tag">生产力</span>
                         <span class="blog-tag">工作方式</span>
                     </div>
-                    <a href="blog-posts/remote-work-experience.html" class="blog-card-link">
+                    <a class="blog-card-link" href="blog-posts/remote-work-experience.html">
                         阅读全文 <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -194,8 +195,8 @@
         <div class="col-md-6 col-lg-4" data-tags="读书笔记 生产力 个人发展">
             <div class="blog-card">
                 <div class="blog-card-img-container">
-                    <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e" alt="原子习惯"
-                         class="blog-card-img">
+                    <img alt="原子习惯" class="blog-card-img"
+                         src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e">
                     <div class="blog-card-date">
                         <span class="day">28</span>
                         <span class="month">十二月</span>
@@ -213,7 +214,7 @@
                         <span class="blog-tag">生产力</span>
                         <span class="blog-tag">个人发展</span>
                     </div>
-                    <a href="404.html" class="blog-card-link">
+                    <a class="blog-card-link" href="404.html">
                         阅读全文 <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -224,8 +225,8 @@
         <div class="col-md-6 col-lg-4" data-tags="CSS 前端开发 Web设计">
             <div class="blog-card">
                 <div class="blog-card-img-container">
-                    <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2" alt="现代CSS技术"
-                         class="blog-card-img">
+                    <img alt="现代CSS技术" class="blog-card-img"
+                         src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2">
                     <div class="blog-card-date">
                         <span class="day">15</span>
                         <span class="month">一月</span>
@@ -243,7 +244,7 @@
                         <span class="blog-tag">Web设计</span>
                         <span class="blog-tag">前端开发</span>
                     </div>
-                    <a href="404.html" class="blog-card-link">
+                    <a class="blog-card-link" href="404.html">
                         阅读全文 <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -252,13 +253,13 @@
     </div>
 
     <!-- 无搜索结果提示 -->
-    <div id="no-results" class="text-center py-5 d-none">
+    <div class="text-center py-5 d-none" id="no-results">
         <div class="no-results-icon mb-3">
             <i class="fas fa-search fa-3x text-muted"></i>
         </div>
         <h3>未找到匹配的文章</h3>
         <p class="text-muted">尝试使用不同的关键词或清除筛选条件</p>
-        <button id="clear-filters" class="btn btn-outline-primary mt-2">
+        <button class="btn btn-outline-primary mt-2" id="clear-filters">
             <i class="fas fa-times me-2"></i>清除筛选
         </button>
     </div>
@@ -267,7 +268,7 @@
     <nav aria-label="博客分页" class="mt-5">
         <ul class="pagination pagination-lg justify-content-center">
             <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="上一页">
+                <a aria-label="上一页" class="page-link" href="#">
                     <i class="fas fa-chevron-left"></i>
                 </a>
             </li>
@@ -275,7 +276,7 @@
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="下一页">
+                <a aria-label="下一页" class="page-link" href="#">
                     <i class="fas fa-chevron-right"></i>
                 </a>
             </li>
@@ -291,16 +292,16 @@
                 <p class="mb-0">&copy; 2025 Alexander James Carter Website</p>
             </div>
             <div class="col-md-6 text-center text-md-end">
-                <a href="privacy.html" class="me-3" title="阅读隐私政策" rel="noopener">隐私政策</a>
-                <a href="terms.html" class="me-3" title="阅读使用条款" rel="noopener">使用条款</a>
-                <a href="contact.html" title="联系我们" rel="noopener">联系我们</a>
+                <a class="me-3" href="privacy.html" rel="noopener" title="阅读隐私政策">隐私政策</a>
+                <a class="me-3" href="terms.html" rel="noopener" title="阅读使用条款">使用条款</a>
+                <a href="contact.html" rel="noopener" title="联系我们">联系我们</a>
             </div>
         </div>
     </div>
 </footer>
 
 <!-- 回到顶部按钮 -->
-<button id="back-to-top" title="回到顶部" aria-label="回到顶部">
+<button aria-label="回到顶部" id="back-to-top" title="回到顶部">
     <i class="fas fa-arrow-up"></i>
 </button>
 

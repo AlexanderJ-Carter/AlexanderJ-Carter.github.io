@@ -889,7 +889,6 @@ p {
     right: 0;
     bottom: 0;
     background: radial-gradient(
-            circle at var(--x-pos, center) var(--y-pos, center),
             rgba(255, 255, 255, 0.2) 0%,
             rgba(255, 255, 255, 0) 80%
     );
@@ -1288,7 +1287,6 @@ body.dark-mode ::-webkit-scrollbar-thumb:hover {
 /* 增强暗黑模式内的光影效果 */
 body.dark-mode .glass-card::before {
     background: radial-gradient(
-            circle at var(--x-pos, center) var(--y-pos, center),
             rgba(255, 255, 255, 0.1) 0%,
             rgba(255, 255, 255, 0) 70%
     );
@@ -1498,7 +1496,6 @@ p {
     right: 0;
     bottom: 0;
     background: radial-gradient(
-            circle at var(--x-pos, center) var(--y-pos, center),
             rgba(255, 255, 255, 0.2) 0%,
             rgba(255, 255, 255, 0) 80%
     );

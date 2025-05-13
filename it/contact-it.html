@@ -3,20 +3,20 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <title>Contattami - Sito Web Personale di Alexander James Carter</title>
-    <meta name="description" content="Contattami tramite vari metodi, inclusi WeChat, QQ, GitHub ed email">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta content="Contattami tramite vari metodi, inclusi WeChat, QQ, GitHub ed email" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.default.css">
-    <link rel="stylesheet" href="../css/custom.css">
-    <link rel="stylesheet" href="../css/contact.css">
+    <link href="../css/style.default.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../css/contact.css" rel="stylesheet">
 </head>
 
 <body>
-<a href="index-it.html" class="back-btn" aria-label="Torna alla Home">
-    <i class="fas fa-arrow-left me-2" aria-hidden="true"></i>Torna alla Home
+<a aria-label="Torna alla Home" class="back-btn" href="index-it.html">
+    <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>Torna alla Home
 </a>
 
 <main>
@@ -29,28 +29,28 @@
 
         <div class="contact-grid">
             <!-- WeChat -->
-            <div class="contact-item" onclick="openQrModal('wechat')" tabindex="0" role="button"
-                 aria-label="Contatto WeChat">
-                <i class="fab fa-weixin contact-icon weixin-icon" aria-hidden="true"></i>
+            <div aria-label="Contatto WeChat" class="contact-item" onclick="openQrModal('wechat')" role="button"
+                 tabindex="0">
+                <i aria-hidden="true" class="fab fa-weixin contact-icon weixin-icon"></i>
                 <h3 class="contact-title">WeChat</h3>
                 <p class="contact-info">Scansiona il codice QR o copia l'ID WeChat</p>
                 <button class="contact-btn">Visualizza QR Code</button>
             </div>
 
             <!-- QQ -->
-            <div class="contact-item" onclick="openQrModal('qq')" tabindex="0" role="button"
-                 aria-label="Contatto QQ">
-                <i class="fab fa-qq contact-icon qq-icon" aria-hidden="true"></i>
+            <div aria-label="Contatto QQ" class="contact-item" onclick="openQrModal('qq')" role="button"
+                 tabindex="0">
+                <i aria-hidden="true" class="fab fa-qq contact-icon qq-icon"></i>
                 <h3 class="contact-title">QQ</h3>
                 <p class="contact-info">Scansiona il codice QR o copia l'ID QQ</p>
                 <button class="contact-btn">Visualizza QR Code</button>
             </div>
 
             <!-- GitHub -->
-            <div class="contact-item" tabindex="0" role="button">
-                <a href="https://github.com/alexanderj-carter" target="_blank" rel="noopener" class="contact-link"
-                   aria-label="Visita la pagina GitHub">
-                    <i class="fab fa-github contact-icon github-icon" aria-hidden="true"></i>
+            <div class="contact-item" role="button" tabindex="0">
+                <a aria-label="Visita la pagina GitHub" class="contact-link" href="https://github.com/alexanderj-carter" rel="noopener"
+                   target="_blank">
+                    <i aria-hidden="true" class="fab fa-github contact-icon github-icon"></i>
                     <h3 class="contact-title">GitHub</h3>
                     <p class="contact-info">Visualizza i miei progetti open source</p>
                     <button class="contact-btn">Visita Profilo</button>
@@ -58,9 +58,9 @@
             </div>
 
             <!-- Email -->
-            <div class="contact-item" tabindex="0" role="button">
-                <a href="mailto:2253940186@qq.com" class="contact-link" aria-label="Invia email">
-                    <i class="fas fa-envelope contact-icon email-icon" aria-hidden="true"></i>
+            <div class="contact-item" role="button" tabindex="0">
+                <a aria-label="Invia email" class="contact-link" href="mailto:2253940186@qq.com">
+                    <i aria-hidden="true" class="fas fa-envelope contact-icon email-icon"></i>
                     <h3 class="contact-title">Email</h3>
                     <p class="contact-info">2253940186@qq.com</p>
                     <button class="contact-btn">Invia Email</button>
@@ -70,21 +70,21 @@
 
         <div class="language-options text-center mt-5">
             <p>Altre lingue:</p>
-            <a href="../contact.html" class="btn btn-outline-primary me-2">中文</a>
-            <a href="../en/contact-en.html" class="btn btn-outline-primary">English</a>
+            <a class="btn btn-outline-primary me-2" href="../contact.html">中文</a>
+            <a class="btn btn-outline-primary" href="../en/contact-en.html">English</a>
         </div>
     </div>
 </main>
 
 <!-- QR Code Modal -->
-<div id="qr-modal" class="qr-modal" aria-modal="true" role="dialog">
+<div aria-modal="true" class="qr-modal" id="qr-modal" role="dialog">
     <div class="qr-modal-content">
-            <span class="qr-close" onclick="closeQrModal()" tabindex="0" role="button"
-                  aria-label="Chiudi finestra">&times;</span>
-        <h3 id="qr-title" class="qr-title">Scansiona il Codice QR</h3>
-        <img id="qr-image" src="" alt="Codice QR" class="qr-image">
-        <p id="qr-desc" class="qr-desc">Scansiona il codice QR sopra per aggiungere contatto</p>
-        <button id="copy-btn" class="copy-btn" onclick="copyContact()">Copia ID</button>
+            <span aria-label="Chiudi finestra" class="qr-close" onclick="closeQrModal()" role="button"
+                  tabindex="0">&times;</span>
+        <h3 class="qr-title" id="qr-title">Scansiona il Codice QR</h3>
+        <img alt="Codice QR" class="qr-image" id="qr-image" src="">
+        <p class="qr-desc" id="qr-desc">Scansiona il codice QR sopra per aggiungere contatto</p>
+        <button class="copy-btn" id="copy-btn" onclick="copyContact()">Copia ID</button>
     </div>
 </div>
 
@@ -99,8 +99,8 @@
             </div>
             <div class="col-md-6 text-center text-md-end">
                 <div class="footer-links">
-                    <a href="terms-it.html" class="me-3">Termini di Utilizzo</a>
-                    <a href="privacy-it.html" class="me-3">Informativa Privacy</a>
+                    <a class="me-3" href="terms-it.html">Termini di Utilizzo</a>
+                    <a class="me-3" href="privacy-it.html">Informativa Privacy</a>
                     <a href="contact-it.html">Contatti</a>
                 </div>
             </div>

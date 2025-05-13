@@ -179,7 +179,7 @@ function initSmoothScroll() {
                 });
 
                 // 如果在小屏幕上且导航菜单是展开的，点击后关闭导航菜单
-                const navbarToggler = document.querySelector(".navbar-toggler");
+                document.querySelector(".navbar-toggler");
                 const navbarCollapse = document.querySelector(".navbar-collapse");
                 if (
                     window.innerWidth < 992 &&
@@ -239,7 +239,7 @@ function initPortfolioFilter() {
 
 // 灯箱效果
 function initLightbox() {
-    const lightbox = GLightbox({
+    GLightbox({
         selector: ".portfolio-link",
         touchNavigation: true,
         loop: true,
@@ -278,25 +278,6 @@ function initParallaxEffect() {
             section.style.backgroundPositionY = `${scrollPosition * speed}px`;
         });
     });
-}
-
-// 预加载图片函数
-function preloadImages(sources, callback) {
-    let counter = 0;
-
-    function onLoad() {
-        counter++;
-        if (counter >= sources.length && callback) {
-            callback();
-        }
-    }
-
-    for (let i = 0; i < sources.length; i++) {
-        const img = new Image();
-        img.onload = onLoad;
-        img.onerror = onLoad;
-        img.src = sources[i];
-    }
 }
 
 // 页面加载优化
@@ -518,24 +499,6 @@ document.addEventListener("visibilitychange", function () {
     }
 });
 
-// 添加打字机效果
-function typeWriter(element, text, speed = 50, callback) {
-    let i = 0;
-    element.textContent = "";
-
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        } else if (callback) {
-            callback();
-        }
-    }
-
-    type();
-}
-
 // 添加页面加载进度条
 (function () {
     // 创建进度条元素
@@ -579,7 +542,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const images = document.querySelectorAll("img[data-src]");
 
     if ("IntersectionObserver" in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
+        const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
