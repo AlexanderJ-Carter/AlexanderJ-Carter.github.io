@@ -1,35 +1,24 @@
 /**
  * 验证功能相关脚本
  * 用于处理Cloudflare Turnstile人机验证
+ * 每次访问受保护页面都需要验证
  */
 
-// 设置验证通过标记
+// 设置一次性验证标记，仅对当前会话有效
 function setVerified(key) {
-    // 使用localStorage存储验证状态
-    // 设置两小时的有效期
-    const expirationTime = Date.now() + 2 * 60 * 60 * 1000; // 2小时
-    const data = {
-        verified: true,
-        expiration: expirationTime,
-    };
-    localStorage.setItem(key, JSON.stringify(data));
+    // 使用sessionStorage确保浏览器关闭后验证失效
+    // 并且每个页面使用不同的验证标记
+    sessionStorage.setItem(key, 'true');
     return true;
 }
 
 // 检查是否已经验证通过
 function isVerified(key) {
     try {
-        const data = JSON.parse(localStorage.getItem(key));
-        if (!data) return false;
-
-        // 检查验证状态和过期时间
-        if (data.verified && data.expiration > Date.now()) {
-            return true;
-        } else {
-            // 如果已过期，清除过期的验证状态
-            localStorage.removeItem(key);
-            return false;
-        }
+        // 获取验证状态并立即删除，确保每次都需要验证
+        const verified = sessionStorage.getItem(key) === 'true';
+        sessionStorage.removeItem(key); // 立即删除验证状态
+        return verified;
     } catch (e) {
         console.error('验证状态检查失败:', e);
         return false;
@@ -38,11 +27,10 @@ function isVerified(key) {
 
 // 清除验证状态
 function clearVerification(key) {
-    localStorage.removeItem(key);
+    sessionStorage.removeItem(key);
 }
 
-// 提交验证token到服务器的函数
-// 注意：这需要服务器端支持，这里仅作为示例
+// 提交验证token到服务器的函数 (示例)
 function verifyTokenWithServer(token, callback) {
     // 实际应用中，应该发送到自己的后端进行验证
     const xhr = new XMLHttpRequest();

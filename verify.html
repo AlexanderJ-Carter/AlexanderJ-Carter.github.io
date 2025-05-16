@@ -146,6 +146,10 @@
             <button class="continue-btn" id="continue-btn">
                 <i class="fas fa-check-circle me-2"></i>继续访问
             </button>
+            <p class="auto-redirect-text" id="auto-redirect-text"
+                style="display: none; margin-top: 15px; color: #6c757d;">
+                <i class="fas fa-clock me-1"></i><span id="countdown">5</span>秒后自动跳转...
+            </p>
         </div>
     </div>
 
@@ -154,20 +158,42 @@
         const urlParams = new URLSearchParams(window.location.search);
         const redirectPage = urlParams.get('redirect') || 'index.html';
 
+        // 自动跳转倒计时函数
+        function startAutoRedirect(seconds) {
+            const countdownEl = document.getElementById('countdown');
+            const autoRedirectText = document.getElementById('auto-redirect-text');
+            let remainingSeconds = seconds;
+
+            // 显示倒计时文本
+            autoRedirectText.style.display = 'block';
+            countdownEl.textContent = remainingSeconds;
+
+            // 开始倒计时
+            const countdownInterval = setInterval(() => {
+                remainingSeconds--;
+                countdownEl.textContent = remainingSeconds;
+
+                if (remainingSeconds <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = redirectPage;
+                }
+            }, 1000);
+
+            // 保存倒计时间隔器ID，以便在需要时清除
+            window.countdownIntervalId = countdownInterval;
+        }
+
         // 当Turnstile验证成功时的回调函数
         function onTurnstileSuccess(token) {
             // 显示加载指示器
             document.getElementById('loading-indicator').style.display = 'block';
-
-            // 这里可以添加向服务器验证token的代码
-            // 为简化起见，我们直接设置本地验证标记
 
             // 模拟验证过程
             setTimeout(function () {
                 // 隐藏加载指示器
                 document.getElementById('loading-indicator').style.display = 'none';
 
-                // 根据重定向页面设置相应的验证标记
+                // 设置一次性验证标记
                 if (redirectPage.includes('profile')) {
                     setVerified('profile_verified');
                 } else if (redirectPage.includes('contact')) {
@@ -180,19 +206,17 @@
 
                 // 设置继续按钮点击事件
                 continueBtn.addEventListener('click', function () {
+                    // 如果有正在进行的倒计时，清除它
+                    if (window.countdownIntervalId) {
+                        clearInterval(window.countdownIntervalId);
+                    }
                     window.location.href = redirectPage;
                 });
+
+                // 开始5秒自动跳转倒计时
+                startAutoRedirect(5);
             }, 1500);
         }
-
-        // 检查是否已经验证过
-        window.addEventListener('DOMContentLoaded', function () {
-            if ((redirectPage.includes('profile') && isVerified('profile_verified')) ||
-                (redirectPage.includes('contact') && isVerified('contact_verified'))) {
-                // 如果已经验证过，直接跳转
-                window.location.href = redirectPage;
-            }
-        });
     </script>
 </body>
 
