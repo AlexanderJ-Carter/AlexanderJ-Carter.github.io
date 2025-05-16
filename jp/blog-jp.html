@@ -1,74 +1,76 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <title>博客 - AlexanderJ-Carter的网页</title>
-    <meta content="个人博客和技术文章分享" name="description">
+    <title>ブログ - AlexanderJ-Carterのウェブサイト</title>
+    <meta content="個人ブログと技術記事の共有" name="description">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.default.css" rel="stylesheet">
-    <link href="css/navigation.css" rel="stylesheet">
-    <link href="css/footer.css" rel="stylesheet">
-    <link href="css/enhanced.css" rel="stylesheet">
-    <link href="css/footer-enhanced.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/blog.css" rel="stylesheet">
-    <!-- 添加字体 -->
+    <link href="../css/style.default.css" rel="stylesheet">
+    <link href="../css/navigation.css" rel="stylesheet">
+    <link href="../css/footer.css" rel="stylesheet">
+    <link href="../css/enhanced.css" rel="stylesheet">
+    <link href="../css/footer-enhanced.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../css/blog.css" rel="stylesheet">
+    <!-- フォント追加 -->
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
-    <!-- 在<body>开始后添加页面加载指示器 -->
+    <!-- ページローディングインジケーター -->
     <div class="page-loader">
         <div class="loader-content">
             <div class="spinner"></div>
-            <p>正在加载精彩内容...</p>
+            <p>素晴らしいコンテンツを読み込んでいます...</p>
         </div>
     </div>
 
-    <!-- 导航栏 -->
-    <nav aria-label="主导航" class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar">
+    <!-- ナビゲーションバー -->
+    <nav aria-label="メインナビゲーション" class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar">
         <div class="scroll-progress"></div>
         <div class="container position-relative">
-            <a aria-label="返回首页" class="navbar-brand" href="index.html">
-                <img alt="网站Logo" class="nav-logo" height="39" src="img/logo.png" width="40">
+            <a aria-label="ホームに戻る" class="navbar-brand" href="index-jp.html">
+                <img alt="ウェブサイトロゴ" class="nav-logo" height="39" src="../img/logo.png" width="40">
                 <span class="brand-text">Alexander James Carter</span>
             </a>
 
-            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="切换导航菜单"
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="ナビゲーションメニューの切り替え"
                 class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <button aria-label="返回顶部" class="back-to-top">
+            <button aria-label="トップに戻る" class="back-to-top">
                 <i class="fas fa-arrow-up"></i>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
-                            <i class="fas fa-home nav-icon"></i> 主页
+                        <a class="nav-link" href="index-jp.html">
+                            <i class="fas fa-home nav-icon"></i> ホーム
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="gallery.html">
-                            <i class="fas fa-images nav-icon"></i> 画廊
+                        <a class="nav-link" href="gallery-jp.html">
+                            <i class="fas fa-images nav-icon"></i> ギャラリー
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a aria-current="page" class="nav-link active" href="blog.html">
-                            <i class="fas fa-feather nav-icon"></i> 博客
+                        <a aria-current="page" class="nav-link active" href="blog-jp.html">
+                            <i class="fas fa-feather nav-icon"></i> ブログ
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.html">
-                            <i class="fas fa-user nav-icon"></i> 关于
+                        <a class="nav-link" href="profile-jp.html">
+                            <i class="fas fa-user nav-icon"></i> プロフィール
                         </a>
                     </li>
 
@@ -77,18 +79,18 @@
                     <li class="nav-item dropdown">
                         <a aria-expanded="false" class="nav-link dropdown-toggle language-selector"
                             data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button">
-                            <i class="fas fa-globe nav-icon"></i> 语言
+                            <i class="fas fa-globe nav-icon"></i> 言語
                         </a>
                         <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
-                            <li><a class="dropdown-item active" href="blog.html"><i class="fas fa-check me-2"></i>
-                                    中文</a></li>
-                            <li><a class="dropdown-item" href="en/blog-en.html">English</a></li>
-                            <li><a class="dropdown-item" href="it/blog-it.html">Italiano</a></li>
-                            <li><a class="dropdown-item" href="jp/blog-jp.html">日本語</a></li>
+                            <li><a class="dropdown-item" href="../blog.html">中文</a></li>
+                            <li><a class="dropdown-item" href="../en/blog-en.html">English</a></li>
+                            <li><a class="dropdown-item" href="../it/blog-it.html">Italiano</a></li>
+                            <li><a class="dropdown-item active" href="blog-jp.html"><i class="fas fa-check me-2"></i>
+                                    日本語</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <button aria-label="切换主题" class="theme-toggle-btn" id="theme-toggle">
+                        <button aria-label="テーマの切り替え" class="theme-toggle-btn" id="theme-toggle">
                             <i class="fas fa-moon"></i>
                         </button>
                     </li>
@@ -97,16 +99,16 @@
         </div>
     </nav>
 
-    <!-- 博客页面标题 - 添加平行视差效果 -->
+    <!-- ブログページタイトル - パラレルスタイル効果追加 -->
     <section class="blog-hero parallax-hero dark-overlay bg-cover d-flex align-items-center">
         <div class="overlay-content w-100 text-white">
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h1 class="fw-bold animate__animated animate__fadeInUp">博客世界</h1>
+                        <h1 class="fw-bold animate__animated animate__fadeInUp">ブログの世界</h1>
                         <div class="section-divider"></div>
                         <p class="animate__animated animate__fadeIn animate__delay-1s lead">
-                            分享我在技术、设计和个人发展方面的见解与经验
+                            技術、デザイン、個人的な成長についての洞察と経験を共有
                         </p>
                     </div>
                 </div>
@@ -114,10 +116,10 @@
         </div>
     </section>
 
-    <!-- 博客页面主体 - 改进布局 -->
+    <!-- ブログページメインコンテンツ - レイアウト改善 -->
     <div class="blog-main-container py-5">
         <div class="container">
-            <!-- 搜索和筛选区域 - 重新设计 -->
+            <!-- 検索とフィルタリングエリア - 再設計 -->
             <div class="blog-filter-section mb-5" data-aos="fade-up">
                 <div class="card filter-card">
                     <div class="card-body">
@@ -125,30 +127,30 @@
                             <div class="col-lg-5 col-md-6">
                                 <div class="search-container">
                                     <label class="form-label" for="blog-search"><i
-                                            class="fas fa-search me-2"></i>搜索文章</label>
+                                            class="fas fa-search me-2"></i>記事を検索</label>
                                     <input class="form-control search-input shadow-sm" id="blog-search"
-                                        placeholder="输入关键词..." type="text">
+                                        placeholder="キーワードを入力..." type="text">
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-6">
-                                <label class="form-label"><i class="fas fa-tags me-2"></i>筛选标签</label>
+                                <label class="form-label"><i class="fas fa-tags me-2"></i>タグでフィルタリング</label>
                                 <div class="filter-tags">
                                     <div class="filter-pills">
-                                        <span class="filter-pill active" data-tag="all">全部</span>
-                                        <span class="filter-pill" data-tag="前端开发">前端开发</span>
+                                        <span class="filter-pill active" data-tag="all">すべて</span>
+                                        <span class="filter-pill" data-tag="フロントエンド開発">フロントエンド開発</span>
                                         <span class="filter-pill" data-tag="React">React</span>
-                                        <span class="filter-pill" data-tag="UI设计">UI设计</span>
-                                        <span class="filter-pill" data-tag="生产力">生产力</span>
+                                        <span class="filter-pill" data-tag="UIデザイン">UIデザイン</span>
+                                        <span class="filter-pill" data-tag="生産性">生産性</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-12">
                                 <label class="form-label" for="sort-select"><i
-                                        class="fas fa-sort-amount-down me-2"></i>排序</label>
-                                <select aria-label="排序方式" class="form-select shadow-sm" id="sort-select">
-                                    <option value="newest">最新发布</option>
-                                    <option value="oldest">最早发布</option>
-                                    <option value="popular">最受欢迎</option>
+                                        class="fas fa-sort-amount-down me-2"></i>並び替え</label>
+                                <select aria-label="並び替え方法" class="form-select shadow-sm" id="sort-select">
+                                    <option value="newest">最新順</option>
+                                    <option value="oldest">古い順</option>
+                                    <option value="popular">人気順</option>
                                 </select>
                             </div>
                         </div>
@@ -157,193 +159,196 @@
             </div>
 
             <div class="row">
-                <!-- 博客文章列表 - 左侧 -->
+                <!-- ブログ記事リスト - 左サイド -->
                 <div class="col-lg-8">
-                    <!-- 文章计数 -->
+                    <!-- 記事数 -->
                     <div class="articles-count mb-4" data-aos="fade-up">
-                        <h5><i class="fas fa-newspaper me-2"></i>共 <span id="article-count">5</span> 篇文章</h5>
+                        <h5><i class="fas fa-newspaper me-2"></i>全 <span id="article-count">5</span> 記事</h5>
                     </div>
 
-                    <!-- 文章列表 -->
+                    <!-- 記事リスト -->
                     <div class="row g-4" id="blog-posts-container">
-                        <!-- 文章卡片 1 -->
-                        <div class="col-md-6" data-aos="fade-up" data-tags="React 前端开发 性能优化">
+                        <!-- 記事カード 1 -->
+                        <div class="col-md-6" data-aos="fade-up" data-tags="React フロントエンド開発 パフォーマンス最適化">
                             <div class="blog-card">
                                 <div class="blog-card-img-container">
                                     <span class="blog-category">React</span>
-                                    <img alt="React性能优化" class="blog-card-img"
+                                    <img alt="Reactパフォーマンス最適化" class="blog-card-img"
                                         src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2">
                                     <div class="blog-card-date">
                                         <span class="day">18</span>
-                                        <span class="month">十二月</span>
+                                        <span class="month">12月</span>
                                     </div>
                                 </div>
                                 <div class="blog-card-content">
                                     <div class="blog-card-meta">
                                         <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
-                                        <span><i class="far fa-eye me-1"></i>1.5K 阅读</span>
+                                        <span><i class="far fa-eye me-1"></i>1.5K 閲覧</span>
                                     </div>
-                                    <h3 class="blog-card-title">React性能优化的10个实用技巧</h3>
+                                    <h3 class="blog-card-title">Reactパフォーマンス最適化の10の実用的なテクニック</h3>
                                     <p class="blog-card-text">
-                                        探索React应用性能优化的实用技巧和最佳实践，帮助你构建更快、更高效的React应用程序。</p>
+                                        Reactアプリケーションのパフォーマンス最適化に関する実用的なヒントとベストプラクティスを探り、より高速で効率的なReactアプリケーションを構築するのに役立ちます。
+                                    </p>
                                     <div class="blog-card-tags">
                                         <span class="blog-tag">React</span>
-                                        <span class="blog-tag">性能优化</span>
-                                        <span class="blog-tag">前端开发</span>
+                                        <span class="blog-tag">パフォーマンス最適化</span>
+                                        <span class="blog-tag">フロントエンド開発</span>
                                     </div>
-                                    <a class="blog-card-link" href="blog-posts/react-performance.html">
-                                        阅读全文 <i class="fas fa-arrow-right"></i>
+                                    <a class="blog-card-link" href="../blog-posts/react-performance.html">
+                                        続きを読む <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 文章卡片 2 -->
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100" data-tags="UI设计 设计趋势 用户体验">
+                        <!-- 記事カード 2 -->
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100"
+                            data-tags="UIデザイン デザイントレンド ユーザー体験">
                             <div class="blog-card">
                                 <div class="blog-card-img-container">
-                                    <span class="blog-category">设计</span>
-                                    <img alt="UI设计趋势" class="blog-card-img"
+                                    <span class="blog-category">デザイン</span>
+                                    <img alt="UIデザイントレンド" class="blog-card-img"
                                         src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e">
                                     <div class="blog-card-date">
                                         <span class="day">10</span>
-                                        <span class="month">一月</span>
+                                        <span class="month">1月</span>
                                     </div>
                                 </div>
                                 <div class="blog-card-content">
                                     <div class="blog-card-meta">
                                         <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
-                                        <span><i class="far fa-eye me-1"></i>1.2K 阅读</span>
+                                        <span><i class="far fa-eye me-1"></i>1.2K 閲覧</span>
                                     </div>
-                                    <h3 class="blog-card-title">2024年UI设计趋势前瞻</h3>
+                                    <h3 class="blog-card-title">2024年UIデザイントレンド展望</h3>
                                     <p class="blog-card-text">
-                                        随着技术的发展和用户期望的变化，UI设计也在不断演变。本文探讨了2024年可能引领潮流的UI设计趋势。</p>
+                                        技術の発展とユーザーの期待の変化に伴い、UIデザインも進化し続けています。この記事では、2024年にトレンドをリードする可能性のあるUIデザインの傾向について考察します。
+                                    </p>
                                     <div class="blog-card-tags">
-                                        <span class="blog-tag">UI设计</span>
-                                        <span class="blog-tag">设计趋势</span>
-                                        <span class="blog-tag">用户体验</span>
+                                        <span class="blog-tag">UIデザイン</span>
+                                        <span class="blog-tag">デザイントレンド</span>
+                                        <span class="blog-tag">ユーザー体験</span>
                                     </div>
-                                    <a class="blog-card-link" href="blog-posts/design-trends-2024.html">
-                                        阅读全文 <i class="fas fa-arrow-right"></i>
+                                    <a class="blog-card-link" href="../blog-posts/design-trends-2024.html">
+                                        続きを読む <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 文章卡片 3 -->
-                        <div class="col-md-6" data-aos="fade-up" data-tags="远程工作 生产力 工作方式">
+                        <!-- 記事カード 3 -->
+                        <div class="col-md-6" data-aos="fade-up" data-tags="リモートワーク 生産性 働き方">
                             <div class="blog-card">
                                 <div class="blog-card-img-container">
-                                    <span class="blog-category">生产力</span>
-                                    <img alt="远程工作经验" class="blog-card-img"
+                                    <span class="blog-category">生産性</span>
+                                    <img alt="リモートワーク経験" class="blog-card-img"
                                         src="https://images.unsplash.com/photo-1542435503-956c469947f6">
                                     <div class="blog-card-date">
                                         <span class="day">05</span>
-                                        <span class="month">一月</span>
+                                        <span class="month">1月</span>
                                     </div>
                                 </div>
                                 <div class="blog-card-content">
                                     <div class="blog-card-meta">
                                         <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
-                                        <span><i class="far fa-eye me-1"></i>980 阅读</span>
+                                        <span><i class="far fa-eye me-1"></i>980 閲覧</span>
                                     </div>
-                                    <h3 class="blog-card-title">远程工作一年后的思考与总结</h3>
+                                    <h3 class="blog-card-title">1年間のリモートワーク後の考察とまとめ</h3>
                                     <p class="blog-card-text">
-                                        分享一年远程工作的经验、挑战和实用技巧，帮助你更高效地适应远程工作环境并提升工作效率。</p>
+                                        1年間のリモートワークの経験、課題、実用的なヒントを共有し、より効率的にリモートワーク環境に適応し、生産性を向上させるのに役立ちます。</p>
                                     <div class="blog-card-tags">
-                                        <span class="blog-tag">远程工作</span>
-                                        <span class="blog-tag">生产力</span>
-                                        <span class="blog-tag">工作方式</span>
+                                        <span class="blog-tag">リモートワーク</span>
+                                        <span class="blog-tag">生産性</span>
+                                        <span class="blog-tag">働き方</span>
                                     </div>
-                                    <a class="blog-card-link" href="blog-posts/remote-work-experience.html">
-                                        阅读全文 <i class="fas fa-arrow-right"></i>
+                                    <a class="blog-card-link" href="../blog-posts/remote-work-experience.html">
+                                        続きを読む <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 文章卡片 4 -->
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100" data-tags="读书笔记 生产力 个人发展">
+                        <!-- 記事カード 4 -->
+                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100" data-tags="読書ノート 生産性 自己啓発">
                             <div class="blog-card">
                                 <div class="blog-card-img-container">
-                                    <span class="blog-category">阅读</span>
-                                    <img alt="原子习惯" class="blog-card-img"
+                                    <span class="blog-category">読書</span>
+                                    <img alt="アトミック・ハビット" class="blog-card-img"
                                         src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e">
                                     <div class="blog-card-date">
                                         <span class="day">28</span>
-                                        <span class="month">十二月</span>
+                                        <span class="month">12月</span>
                                     </div>
                                 </div>
                                 <div class="blog-card-content">
                                     <div class="blog-card-meta">
                                         <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
-                                        <span><i class="far fa-eye me-1"></i>850 阅读</span>
+                                        <span><i class="far fa-eye me-1"></i>850 閲覧</span>
                                     </div>
-                                    <h3 class="blog-card-title">《原子习惯》读书笔记与实践方法</h3>
-                                    <p class="blog-card-text">对James
-                                        Clear的畅销书《原子习惯》的核心理念进行解析，并分享如何将这些理念应用到日常生活中。</p>
+                                    <h3 class="blog-card-title">『アトミック・ハビット』読書ノートと実践方法</h3>
+                                    <p class="blog-card-text">James
+                                        Clearのベストセラー『アトミック・ハビット』の核心的な概念を分析し、これらの概念を日常生活に適用する方法を共有します。</p>
                                     <div class="blog-card-tags">
-                                        <span class="blog-tag">读书笔记</span>
-                                        <span class="blog-tag">生产力</span>
-                                        <span class="blog-tag">个人发展</span>
+                                        <span class="blog-tag">読書ノート</span>
+                                        <span class="blog-tag">生産性</span>
+                                        <span class="blog-tag">自己啓発</span>
                                     </div>
-                                    <a class="blog-card-link" href="404.html">
-                                        阅读全文 <i class="fas fa-arrow-right"></i>
+                                    <a class="blog-card-link" href="../404.html">
+                                        続きを読む <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 文章卡片 5 - 新增文章 -->
-                        <div class="col-md-6" data-aos="fade-up" data-tags="CSS 前端开发 Web设计">
+                        <!-- 記事カード 5 - 新規追加 -->
+                        <div class="col-md-6" data-aos="fade-up" data-tags="CSS フロントエンド開発 Webデザイン">
                             <div class="blog-card">
                                 <div class="blog-card-img-container">
                                     <span class="blog-category">CSS</span>
-                                    <img alt="现代CSS技术" class="blog-card-img"
+                                    <img alt="モダンCSS技術" class="blog-card-img"
                                         src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2">
                                     <div class="blog-card-date">
                                         <span class="day">15</span>
-                                        <span class="month">一月</span>
+                                        <span class="month">1月</span>
                                     </div>
                                 </div>
                                 <div class="blog-card-content">
                                     <div class="blog-card-meta">
                                         <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
-                                        <span><i class="far fa-eye me-1"></i>750 阅读</span>
+                                        <span><i class="far fa-eye me-1"></i>750 閲覧</span>
                                     </div>
-                                    <h3 class="blog-card-title">现代CSS的进化：从Grid到Container Queries</h3>
+                                    <h3 class="blog-card-title">現代CSSの進化：GridからContainer Queriesまで</h3>
                                     <p class="blog-card-text">
-                                        探索现代CSS的新特性和技术，了解如何利用这些工具创建更灵活、更强大的Web布局。</p>
+                                        現代CSSの新機能と技術を探求し、より柔軟で強力なWebレイアウトを作成するためにこれらのツールを活用する方法を学びます。</p>
                                     <div class="blog-card-tags">
                                         <span class="blog-tag">CSS</span>
-                                        <span class="blog-tag">Web设计</span>
-                                        <span class="blog-tag">前端开发</span>
+                                        <span class="blog-tag">Webデザイン</span>
+                                        <span class="blog-tag">フロントエンド開発</span>
                                     </div>
-                                    <a class="blog-card-link" href="404.html">
-                                        阅读全文 <i class="fas fa-arrow-right"></i>
+                                    <a class="blog-card-link" href="../404.html">
+                                        続きを読む <i class="fas fa-arrow-right"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 无搜索结果提示 -->
+                    <!-- 検索結果なしの提示 -->
                     <div class="text-center py-5 d-none" id="no-results">
                         <div class="no-results-icon mb-3">
                             <i class="fas fa-search fa-3x text-muted"></i>
                         </div>
-                        <h3>未找到匹配的文章</h3>
-                        <p class="text-muted">尝试使用不同的关键词或清除筛选条件</p>
+                        <h3>一致する記事が見つかりませんでした</h3>
+                        <p class="text-muted">別のキーワードを試すか、フィルタリング条件をクリアしてください</p>
                         <button class="btn btn-outline-primary mt-2" id="clear-filters">
-                            <i class="fas fa-times me-2"></i>清除筛选
+                            <i class="fas fa-times me-2"></i>フィルタをクリア
                         </button>
                     </div>
 
-                    <!-- 分页控件 -->
-                    <nav aria-label="博客分页" class="mt-5" data-aos="fade-up">
+                    <!-- ページネーション -->
+                    <nav aria-label="ブログページネーション" class="mt-5" data-aos="fade-up">
                         <ul class="pagination pagination-lg justify-content-center">
                             <li class="page-item disabled">
-                                <a aria-label="上一页" class="page-link" href="#">
+                                <a aria-label="前へ" class="page-link" href="#">
                                     <i class="fas fa-chevron-left"></i>
                                 </a>
                             </li>
@@ -351,7 +356,7 @@
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item">
-                                <a aria-label="下一页" class="page-link" href="#">
+                                <a aria-label="次へ" class="page-link" href="#">
                                     <i class="fas fa-chevron-right"></i>
                                 </a>
                             </li>
@@ -359,19 +364,19 @@
                     </nav>
                 </div>
 
-                <!-- 博客侧边栏 - 新增 -->
+                <!-- ブログサイドバー - 新規追加 -->
                 <div class="col-lg-4">
                     <div class="blog-sidebar">
-                        <!-- 作者简介 -->
+                        <!-- 著者紹介 -->
                         <div class="sidebar-widget about-author-widget" data-aos="fade-up">
                             <div class="widget-title">
-                                <h4><i class="fas fa-user-circle"></i> 关于作者</h4>
+                                <h4><i class="fas fa-user-circle"></i> 著者について</h4>
                             </div>
                             <div class="author-bio">
-                                <img alt="Alexander J. Carter" class="author-avatar" src="img/AboutMe.jpg">
+                                <img alt="Alexander J. Carter" class="author-avatar" src="../img/AboutMe.jpg">
                                 <h5>Alexander J. Carter</h5>
                                 <p class="author-description">
-                                    前端开发工程师，UI设计爱好者，摄影发烧友。热爱探索新技术和分享经验。</p>
+                                    フロントエンド開発者、UIデザイン愛好家、写真愛好家。新しい技術の探求と経験の共有を愛しています。</p>
                                 <div class="author-social">
                                     <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
                                     <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -380,10 +385,10 @@
                             </div>
                         </div>
 
-                        <!-- 添加访问统计小部件 -->
+                        <!-- アクセス統計ウィジェット追加 -->
                         <div class="sidebar-widget stats-widget" data-aos="fade-up">
                             <div class="widget-title">
-                                <h4><i class="fas fa-chart-line"></i> 访问统计</h4>
+                                <h4><i class="fas fa-chart-line"></i> アクセス統計</h4>
                             </div>
                             <div class="stats-content">
                                 <div class="stat-item">
@@ -392,7 +397,7 @@
                                     </div>
                                     <div class="stat-details">
                                         <h3>36,754</h3>
-                                        <p>总访问量</p>
+                                        <p>総閲覧数</p>
                                     </div>
                                 </div>
                                 <div class="stat-item">
@@ -401,7 +406,7 @@
                                     </div>
                                     <div class="stat-details">
                                         <h3>3</h3>
-                                        <p>博客文章</p>
+                                        <p>ブログ記事</p>
                                     </div>
                                 </div>
                                 <div class="stat-item">
@@ -410,7 +415,7 @@
                                     </div>
                                     <div class="stat-details">
                                         <h3>1,234</h3>
-                                        <p>读者数量</p>
+                                        <p>読者数</p>
                                     </div>
                                 </div>
                             </div>
@@ -421,53 +426,53 @@
         </div>
     </div>
 
-    <!-- 页脚 -->
+    <!-- フッター -->
     <footer class="site-footer">
         <div class="footer-particles"></div>
         <div class="container footer-content">
-            <!-- 主要页脚内容 -->
+            <!-- メインフッターコンテンツ -->
             <div class="row align-items-center footer-main">
-                <!-- 左侧：网站信息和简介 -->
+                <!-- 左：ウェブサイト情報と紹介 -->
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                     <div class="footer-brand">
-                        <a class="footer-logo-link" href="index.html">
-                            <img alt="网站Logo" height="39" src="img/logo.png" width="40">
+                        <a class="footer-logo-link" href="index-jp.html">
+                            <img alt="ウェブサイトロゴ" height="39" src="../img/logo.png" width="40">
                             <span>Alexander J. Carter</span>
                         </a>
-                        <p class="footer-slogan">捕捉生活中的艺术，分享独特的视角</p>
+                        <p class="footer-slogan">生活の中の芸術を捉え、ユニークな視点を共有する</p>
                     </div>
                 </div>
 
-                <!-- 中间：精简的导航链接 -->
+                <!-- 中央：効率的なナビゲーションリンク -->
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                     <div class="footer-mini-nav">
-                        <a href="index.html">主页</a>
-                        <a href="gallery.html">画廊</a>
-                        <a class="active" href="blog.html">博客</a>
-                        <a href="profile.html">关于</a>
+                        <a href="index-jp.html">ホーム</a>
+                        <a href="gallery-jp.html">ギャラリー</a>
+                        <a class="active" href="blog-jp.html">ブログ</a>
+                        <a href="profile-jp.html">プロフィール</a>
                     </div>
                 </div>
 
-                <!-- 右侧：语言切换和社交链接 -->
+                <!-- 右：言語切り替えとソーシャルリンク -->
                 <div class="col-lg-4 col-md-12">
                     <div class="footer-connect">
-                        <!-- 语言切换栏 -->
+                        <!-- 言語切替バー -->
                         <div class="language-bar">
-                            <a class="active" href="blog.html">中文</a>
+                            <a href="../blog.html">中文</a>
                             <span class="lang-divider">|</span>
-                            <a href="en/blog-en.html">English</a>
+                            <a href="../en/blog-en.html">English</a>
                             <span class="lang-divider">|</span>
-                            <a href="it/blog-it.html" lang="it">Italiano</a>
+                            <a href="../it/blog-it.html">Italiano</a>
                             <span class="lang-divider">|</span>
-                            <a href="jp/blog-jp.html" lang="ja">日本語</a>
+                            <a class="active" href="blog-jp.html">日本語</a>
                         </div>
 
-                        <!-- 社交图标 -->
+                        <!-- ソーシャルアイコン -->
                         <div class="social-icons">
-                            <a class="social-icon weibo" href="javascript:void(0)" title="分享到微博">
+                            <a class="social-icon weibo" href="javascript:void(0)" title="Weiboでシェア">
                                 <i class="fab fa-weibo"></i>
                             </a>
-                            <a class="social-icon wechat" href="javascript:void(0)" title="分享到微信">
+                            <a class="social-icon wechat" href="javascript:void(0)" title="WeChatでシェア">
                                 <i class="fab fa-weixin"></i>
                             </a>
                             <a class="social-icon github" href="https://github.com/AlexanderJ-Carter" rel="noopener"
@@ -479,31 +484,26 @@
                 </div>
             </div>
 
-            <!-- 页脚底部 -->
+            <!-- フッターボトム -->
             <div class="footer-bottom">
                 <div class="copyright">
                     © 2025 Alexander James Carter. All Rights Reserved
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <a class="me-3" href="privacy.html" rel="noopener" title="阅读隐私政策">隐私政策</a>
-                    <a class="me-3" href="terms.html" rel="noopener" title="阅读使用条款">使用条款</a>
-                    <a href="contact.html" rel="noopener" title="联系我们">联系我们</a>
+                    <a class="me-3" href="privacy-jp.html" rel="noopener" title="プライバシーポリシーを読む">プライバシーポリシー</a>
+                    <a class="me-3" href="terms-jp.html" rel="noopener" title="利用規約を読む">利用規約</a>
+                    <a href="contact-jp.html" rel="noopener" title="お問い合わせ">お問い合わせ</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- 回到顶部按钮已由导航栏中的按钮替代，移除原有按钮 -->
-
-    <!-- JavaScript 文件 -->/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>t>
-    <script src="js/navigation.js"></script>ipt>
-    <script src="js/enhanced.js"></script> src="js/blog.js"></script>
-    <script src="js/blog.js"></script>
+    <!-- JavaScriptファイル -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/enhanced.js"></script>
+    <script src="../js/blog.js"></script>
 </body>
-</body>
-
-
-</html>
 
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Profilo Personale - Sito Web di Alexander James Carter</title>
-    <meta content="Profilo personale, esperienze e competenze" name="description">
+    <meta content="Profilo personale, esperienza e vetrina delle competenze" name="description">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,21 +17,21 @@
 
 <body>
     <script>
-        // Verifica i permessi di accesso
+        // Verifica delle autorizzazioni di accesso
         document.addEventListener('DOMContentLoaded', function () {
             if (!isVerified('profile_it_verified')) {
-                // Utilizza contatore di reindirizzamento per prevenire cicli infiniti
+                // Usa il contatore di reindirizzamento per prevenire loop infiniti
                 if (checkRedirectAttempts('profile', 'it')) {
                     // Reindirizzamento forzato alla pagina di verifica
                     window.location.replace('../verify.html?redirect=it/profile-it.html');
                 }
             } else {
-                // Verifica riuscita, azzera contatore
+                // Verifica riuscita, reset del contatore
                 resetRedirectCounter('profile', 'it');
             }
         });
 
-        // Intercetta pulsante indietro
+        // Intercetta il pulsante indietro
         window.addEventListener('pageshow', function (event) {
             if (event.persisted || (performance.getEntriesByType && performance.getEntriesByType("navigation")[0].type === 'back_forward')) {
                 // Se la pagina viene caricata dalla cache, ricontrolla lo stato di verifica
@@ -43,21 +43,21 @@
             }
         });
     </script>
-    <a class="back-btn" href="index-it.html" rel="noopener" title="Torna alla pagina principale">
-        <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>Torna alla Homepage
+    <a class="back-btn" href="index-it.html" rel="noopener" title="Torna alla homepage del sito">
+        <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>Torna alla Home
     </a>
 
     <div class="profile-container">
         <div class="profile-header">
-            <img alt="Avatar Profilo" class="profile-avatar" src="../img/AboutMe.jpg">
+            <img alt="Avatar del Profilo" class="profile-avatar" src="../img/AboutMe.jpg">
             <h1 class="profile-name">Alexander James Carter</h1>
             <p class="profile-title">Appassionato di Codice | Amante del Design</p>
             <div class="d-flex justify-content-center gap-2 mb-3">
                 <span class="badge bg-primary">20 anni</span>
                 <span class="badge bg-secondary">Pechino</span>
-                <span class="badge bg-info text-dark">Maschio</span>
+                <span class="badge bg-info text-dark">Maschile</span>
                 <span class="badge bg-success">Studente</span>
-                <span class="badge bg-warning text-dark">Entusiasta di informatica</span>
+                <span class="badge bg-warning text-dark">Appassionato di Computer</span>
             </div>
             <p class="profile-bio px-md-5">
                 Appassionato della combinazione di creatività e tecnologia, abile nel trasformare i concetti di design
@@ -185,7 +185,7 @@
                             <ul>
                                 <li>Sviluppo e manutenzione del sito web del club universitario</li>
                                 <li>Collaborazione con i membri del team su vari progetti tecnologici</li>
-                                <li>Organizzazione di workshop per studenti sullo sviluppo web</li>
+                                <li>Organizzazione di workshop sullo sviluppo web per gli studenti</li>
                             </ul>
                         </div>
                     </div>
@@ -196,8 +196,8 @@
                             <h4>Stagista di Design</h4>
                             <p>Studio Creativo XYZ</p>
                             <ul>
-                                <li>Assistenza nel design UI/UX per applicazioni mobili</li>
-                                <li>Creazione di asset visivi per campagne di marketing digitale</li>
+                                <li>Assistenza nel design UI/UX per applicazioni mobile</li>
+                                <li>Creazione di risorse visive per campagne di marketing digitale</li>
                                 <li>Partecipazione a workshop di design thinking</li>
                             </ul>
                         </div>
@@ -247,13 +247,13 @@
         </div>
     </div>
 
-    <!-- QR Code Modals -->
+    <!-- Modal QR Code -->
     <div class="qr-modal" id="wechatModal">
         <div class="qr-modal-content">
             <span class="qr-close" onclick="closeQRCode('wechat')">&times;</span>
             <h3>WeChat</h3>
             <div class="qr-img-container">
-                <img alt="WeChat QR Code" class="qr-img" src="../img/qr-wechat.png">
+                <img alt="Codice QR WeChat" class="qr-img" src="../img/qr-wechat.png">
             </div>
             <p>Scansiona con l'app WeChat per connetterti</p>
         </div>
@@ -264,13 +264,13 @@
             <span class="qr-close" onclick="closeQRCode('linkedin')">&times;</span>
             <h3>LinkedIn</h3>
             <div class="qr-img-container">
-                <img alt="LinkedIn QR Code" class="qr-img" src="../img/qr-linkedin.png">
+                <img alt="Codice QR LinkedIn" class="qr-img" src="../img/qr-linkedin.png">
             </div>
             <p>Scansiona per vedere il profilo LinkedIn</p>
         </div>
     </div>
 
-    <!-- Opzioni lingua -->
+    <!-- Opzioni di lingua -->
     <div class="language-options">
         <a href="../profile.html" title="中文">🇨🇳</a>
         <a href="../en/profile-en.html" title="English">🇬🇧</a>
