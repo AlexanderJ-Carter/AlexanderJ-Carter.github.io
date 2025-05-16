@@ -1,78 +1,99 @@
 /**
- * 验证功能相关脚本
- * 用于处理Cloudflare Turnstile人机验证
- * 严格确保每次访问受保护页面都需要验证
+ * 验证相关功能的脚本
+ * 用于管理需要验证的页面访问权限
  */
 
-// 设置一次性验证标记，仅对当前会话有效且即刻过期
-function setVerified(key) {
-    // 使用sessionStorage确保浏览器关闭后验证失效
-    // 并且每个页面使用不同的验证标记
-    sessionStorage.setItem(key, 'true');
-
-    // 设置一个极短的过期时间戳，确保验证状态很快就会失效
-    // 这确保了几乎每次页面重新加载都需要验证
-    const expirationTime = Date.now() + 5000; // 只有5秒的有效期
-    sessionStorage.setItem(key + '_expiration', expirationTime.toString());
-
-    return true;
-}
-
-// 检查是否已经验证通过
+// 检查是否已经通过验证
 function isVerified(key) {
     try {
-        // 首先检查是否存在验证状态
-        const verified = sessionStorage.getItem(key) === 'true';
-        if (!verified) return false;
-
-        // 检查是否过期
-        const expirationTime = parseInt(
-            sessionStorage.getItem(key + '_expiration') || '0'
-        );
-        const now = Date.now();
-
-        // 如果验证已过期，立即清除并返回false
-        if (now > expirationTime) {
-            clearVerification(key);
-            return false;
-        }
-
-        // 即使验证有效，也立即清除它以确保下次访问必须重新验证
-        // 这是双重保险
-        clearVerification(key);
-
-        return true;
+        return sessionStorage.getItem(key) === 'true';
     } catch (e) {
         console.error('验证状态检查失败:', e);
         return false;
     }
 }
 
-// 清除验证状态
-function clearVerification(key) {
-    sessionStorage.removeItem(key);
-    sessionStorage.removeItem(key + '_expiration');
+// 标记为已验证
+function markAsVerified(key) {
+    try {
+        sessionStorage.setItem(key, 'true');
+        return true;
+    } catch (e) {
+        console.error('标记验证状态失败:', e);
+        return false;
+    }
 }
 
-// 提交验证token到服务器的函数 (示例)
-function verifyTokenWithServer(token, callback) {
-    // 实际应用中，应该发送到自己的后端进行验证
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/verify-turnstile', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                try {
-                    const response = JSON.parse(xhr.responseText);
-                    callback(response.success, response.message);
-                } catch (e) {
-                    callback(false, '验证响应解析失败');
-                }
-            } else {
-                callback(false, '验证请求失败');
-            }
-        }
-    };
-    xhr.send(JSON.stringify({ token: token }));
+// 清除验证状态
+function clearVerification(key) {
+    try {
+        sessionStorage.removeItem(key);
+        return true;
+    } catch (e) {
+        console.error('清除验证状态失败:', e);
+        return false;
+    }
 }
+
+// 当 Turnstile 验证成功时的回调
+function onTurnstileSuccess(token) {
+    // 显示加载指示器
+    document.getElementById('loading-indicator').style.display = 'block';
+
+    // 获取重定向目标页面
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectPage = urlParams.get('redirect') || 'index.html';
+
+    // 根据重定向目标设置对应的验证标记
+    let verificationKey = 'general_verified';
+
+    if (redirectPage.includes('profile.html')) {
+        verificationKey = 'profile_verified';
+    } else if (redirectPage.includes('en/profile-en.html')) {
+        verificationKey = 'profile_en_verified';
+    } else if (redirectPage.includes('it/profile-it.html')) {
+        verificationKey = 'profile_it_verified';
+    } else if (redirectPage.includes('jp/profile-jp.html')) {
+        verificationKey = 'profile_jp_verified';
+    } else if (redirectPage.includes('contact.html')) {
+        verificationKey = 'contact_verified';
+    } else if (redirectPage.includes('en/contact-en.html')) {
+        verificationKey = 'contact_en_verified';
+    } else if (redirectPage.includes('it/contact-it.html')) {
+        verificationKey = 'contact_it_verified';
+    } else if (redirectPage.includes('jp/contact-jp.html')) {
+        verificationKey = 'contact_jp_verified';
+    }
+
+    // 延迟一点时间，模拟验证过程
+    setTimeout(() => {
+        // 标记为已验证
+        markAsVerified(verificationKey);
+
+        // 隐藏加载指示器
+        document.getElementById('loading-indicator').style.display = 'none';
+
+        // 显示继续按钮
+        const continueBtn = document.getElementById('continue-btn');
+        continueBtn.style.display = 'block';
+
+        // 添加点击事件处理程序
+        continueBtn.onclick = function () {
+            window.location.href = redirectPage;
+        };
+
+        // 启动自动跳转
+        startAutoRedirect(5);
+    }, 1500);
+}
+
+// 当页面加载时初始化
+document.addEventListener('DOMContentLoaded', function () {
+    // 如果是验证页面，添加页面特定的行为
+    if (window.location.pathname.includes('verify.html')) {
+        const continueBtn = document.getElementById('continue-btn');
+        if (continueBtn) {
+            continueBtn.style.display = 'none';
+        }
+    }
+});

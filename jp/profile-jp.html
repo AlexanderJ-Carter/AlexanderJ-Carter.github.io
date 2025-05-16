@@ -1,61 +1,59 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
-    <title>Profilo Personale - Sito Web di Alexander James Carter</title>
-    <meta content="Profilo personale, esperienze e competenze" name="description">
+    <title>個人プロフィール - Alexander James Carterのウェブサイト</title>
+    <meta content="個人プロフィール、経験とスキルの紹介" name="description">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/style.default.css" rel="stylesheet">
     <link href="../css/custom.css" rel="stylesheet">
     <link href="../css/profile.css" rel="stylesheet">
-    <!-- Script di verifica -->
+    <!-- 検証スクリプト -->
     <script src="../js/verification.js"></script>
 </head>
 
 <body>
     <script>
-        // Verifica rigorosa dei permessi di accesso durante il caricamento della pagina
+        // ページ読み込み時にアクセス権限を厳格に検証
         document.addEventListener('DOMContentLoaded', function () {
-            if (!isVerified('profile_it_verified')) {
-                // Reindirizzamento forzato alla pagina di verifica
-                window.location.replace('../verify.html?redirect=it/profile-it.html');
+            if (!isVerified('profile_jp_verified')) {
+                // 検証ページに強制リダイレクト
+                window.location.replace('../verify.html?redirect=jp/profile-jp.html');
             }
         });
 
-        // Intercetta pulsante indietro
+        // 戻るボタンを捕捉
         window.addEventListener('pageshow', function (event) {
             if (event.persisted || performance.getEntriesByType("navigation")[0].type === 'back_forward') {
-                // Se la pagina viene caricata dalla cache, ricontrolla lo stato di verifica
-                if (!isVerified('profile_it_verified')) {
-                    window.location.replace('../verify.html?redirect=it/profile-it.html');
+                // キャッシュからページが読み込まれた場合、検証状態を再確認
+                if (!isVerified('profile_jp_verified')) {
+                    window.location.replace('../verify.html?redirect=jp/profile-jp.html');
                 }
             }
         });
     </script>
-    <a class="back-btn" href="index-it.html" rel="noopener" title="Torna alla pagina principale">
-        <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>Torna alla Homepage
+    <a class="back-btn" href="index-jp.html" rel="noopener" title="ウェブサイトのホームページに戻る">
+        <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>ホームに戻る
     </a>
 
     <div class="profile-container">
         <div class="profile-header">
-            <img alt="Avatar Profilo" class="profile-avatar" src="../img/AboutMe.jpg">
+            <img alt="プロフィールアバター" class="profile-avatar" src="../img/AboutMe.jpg">
             <h1 class="profile-name">Alexander James Carter</h1>
-            <p class="profile-title">Appassionato di Codice | Amante del Design</p>
+            <p class="profile-title">コード愛好家 | デザイン愛好家</p>
             <div class="d-flex justify-content-center gap-2 mb-3">
-                <span class="badge bg-primary">20 anni</span>
-                <span class="badge bg-secondary">Pechino</span>
-                <span class="badge bg-info text-dark">Maschio</span>
-                <span class="badge bg-success">Studente</span>
-                <span class="badge bg-warning text-dark">Entusiasta di informatica</span>
+                <span class="badge bg-primary">20歳</span>
+                <span class="badge bg-secondary">北京</span>
+                <span class="badge bg-info text-dark">男性</span>
+                <span class="badge bg-success">学生</span>
+                <span class="badge bg-warning text-dark">コンピュータ愛好家</span>
             </div>
             <p class="profile-bio px-md-5">
-                Appassionato della combinazione di creatività e tecnologia, abile nel trasformare i concetti di design
-                in implementazioni di alta qualità.
-                Mi piace esplorare nuove tecnologie, condividere conoscenze e crescere insieme ad amici che condividono
-                idee simili.
+                創造性と技術の組み合わせに情熱を持ち、デザインコンセプトを高品質の実装に変換するスキルを持っています。
+                新しい技術を探求し、知識の共有を楽しみ、同じ志を持つ友人と共に成長することを楽しみにしています。
             </p>
             <div class="profile-social">
                 <a aria-label="GitHub" class="social-icon" href="https://github.com/AlexanderJ-Carter" rel="noopener"
@@ -76,20 +74,18 @@
 
         <div class="profile-content">
             <div class="profile-section">
-                <h2 class="section-title">Chi Sono</h2>
+                <h2 class="section-title">自己紹介</h2>
                 <div class="section-content">
-                    <p>Ciao, sono Alexander! Uno studente con la passione per la tecnologia e la creatività. Attualmente
-                        sto studiando all'università, concentrandomi su informatica e principi di design.</p>
-                    <p>Credo nel potere della tecnologia di trasformare le idee in realtà, e sono costantemente alla
-                        ricerca di nuovi modi per combinare competenze tecniche con pensiero creativo.</p>
+                    <p>こんにちは、アレクサンダーです！技術と創造性に情熱を持つ学生です。現在、コンピュータサイエンスとデザインの原則に焦点を当てて大学で勉強しています。</p>
+                    <p>アイデアを現実に変える技術の力を信じており、技術的なスキルと創造的思考を組み合わせる新しい方法を常に探求しています。</p>
                 </div>
             </div>
 
             <div class="profile-section">
-                <h2 class="section-title">Competenze</h2>
+                <h2 class="section-title">スキル</h2>
                 <div class="skills-container">
                     <div class="skill-category">
-                        <h3>Competenze Tecniche</h3>
+                        <h3>技術スキル</h3>
                         <div class="skill-group">
                             <div class="skill-item">
                                 <div class="skill-info">
@@ -131,11 +127,11 @@
                     </div>
 
                     <div class="skill-category">
-                        <h3>Competenze di Design</h3>
+                        <h3>デザインスキル</h3>
                         <div class="skill-group">
                             <div class="skill-item">
                                 <div class="skill-info">
-                                    <span class="skill-name">UI/UX Design</span>
+                                    <span class="skill-name">UI/UXデザイン</span>
                                     <span class="skill-percentage">85%</span>
                                 </div>
                                 <div class="skill-progress">
@@ -166,31 +162,31 @@
             </div>
 
             <div class="profile-section">
-                <h2 class="section-title">Esperienza</h2>
+                <h2 class="section-title">経験</h2>
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <div class="timeline-date">2023 - Presente</div>
+                        <div class="timeline-date">2023年 - 現在</div>
                         <div class="timeline-content">
-                            <h4>Sviluppatore Studente</h4>
-                            <p>Club Tecnologico Universitario</p>
+                            <h4>学生開発者</h4>
+                            <p>大学テッククラブ</p>
                             <ul>
-                                <li>Sviluppo e manutenzione del sito web del club universitario</li>
-                                <li>Collaborazione con i membri del team su vari progetti tecnologici</li>
-                                <li>Organizzazione di workshop per studenti sullo sviluppo web</li>
+                                <li>大学クラブのウェブサイトの開発とメンテナンス</li>
+                                <li>様々な技術プロジェクトでのチームメンバーとの協力</li>
+                                <li>学生向けのウェブ開発ワークショップの開催</li>
                             </ul>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <div class="timeline-date">2022 - 2023</div>
+                        <div class="timeline-date">2022年 - 2023年</div>
                         <div class="timeline-content">
-                            <h4>Stagista di Design</h4>
-                            <p>Studio Creativo XYZ</p>
+                            <h4>デザインインターン</h4>
+                            <p>クリエイティブスタジオXYZ</p>
                             <ul>
-                                <li>Assistenza nel design UI/UX per applicazioni mobili</li>
-                                <li>Creazione di asset visivi per campagne di marketing digitale</li>
-                                <li>Partecipazione a workshop di design thinking</li>
+                                <li>モバイルアプリケーションのUI/UXデザインの支援</li>
+                                <li>デジタルマーケティングキャンペーン用のビジュアル資産の作成</li>
+                                <li>デザイン思考ワークショップへの参加</li>
                             </ul>
                         </div>
                     </div>
@@ -198,56 +194,56 @@
             </div>
 
             <div class="profile-section">
-                <h2 class="section-title">Formazione</h2>
+                <h2 class="section-title">教育</h2>
                 <div class="education-item">
-                    <div class="education-year">2021 - Presente</div>
-                    <h4 class="education-degree">Laurea in Informatica</h4>
-                    <p class="education-school">Università di Tecnologia, Pechino</p>
-                    <p class="education-details">Focus su Sviluppo Web, Design UI/UX e Intelligenza Artificiale</p>
+                    <div class="education-year">2021年 - 現在</div>
+                    <h4 class="education-degree">コンピュータサイエンス学士</h4>
+                    <p class="education-school">北京技術大学</p>
+                    <p class="education-details">ウェブ開発、UI/UXデザイン、人工知能に焦点を当てています</p>
                 </div>
             </div>
 
             <div class="profile-section">
-                <h2 class="section-title">Interessi</h2>
+                <h2 class="section-title">興味</h2>
                 <div class="interests-container">
                     <div class="interest-item">
                         <i class="fas fa-laptop-code"></i>
-                        <span>Programmazione</span>
+                        <span>コーディング</span>
                     </div>
                     <div class="interest-item">
                         <i class="fas fa-paint-brush"></i>
-                        <span>Arte Digitale</span>
+                        <span>デジタルアート</span>
                     </div>
                     <div class="interest-item">
                         <i class="fas fa-book"></i>
-                        <span>Lettura</span>
+                        <span>読書</span>
                     </div>
                     <div class="interest-item">
                         <i class="fas fa-hiking"></i>
-                        <span>Escursionismo</span>
+                        <span>ハイキング</span>
                     </div>
                     <div class="interest-item">
                         <i class="fas fa-camera"></i>
-                        <span>Fotografia</span>
+                        <span>写真撮影</span>
                     </div>
                     <div class="interest-item">
                         <i class="fas fa-gamepad"></i>
-                        <span>Videogiochi</span>
+                        <span>ゲーム</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- QR Code Modals -->
+    <!-- QRコードモーダル -->
     <div class="qr-modal" id="wechatModal">
         <div class="qr-modal-content">
             <span class="qr-close" onclick="closeQRCode('wechat')">&times;</span>
             <h3>WeChat</h3>
             <div class="qr-img-container">
-                <img alt="WeChat QR Code" class="qr-img" src="../img/qr-wechat.png">
+                <img alt="WeChat QRコード" class="qr-img" src="../img/qr-wechat.png">
             </div>
-            <p>Scansiona con l'app WeChat per connetterti</p>
+            <p>WeChatアプリでスキャンして接続してください</p>
         </div>
     </div>
 
@@ -256,18 +252,18 @@
             <span class="qr-close" onclick="closeQRCode('linkedin')">&times;</span>
             <h3>LinkedIn</h3>
             <div class="qr-img-container">
-                <img alt="LinkedIn QR Code" class="qr-img" src="../img/qr-linkedin.png">
+                <img alt="LinkedIn QRコード" class="qr-img" src="../img/qr-linkedin.png">
             </div>
-            <p>Scansiona per vedere il profilo LinkedIn</p>
+            <p>スキャンしてLinkedInプロフィールを表示</p>
         </div>
     </div>
 
-    <!-- Opzioni lingua -->
+    <!-- 言語オプション -->
     <div class="language-options">
         <a href="../profile.html" title="中文">🇨🇳</a>
         <a href="../en/profile-en.html" title="English">🇬🇧</a>
-        <a class="active" href="profile-it.html" title="Italiano">🇮🇹</a>
-        <a href="../jp/profile-jp.html" title="日本語">🇯🇵</a>
+        <a href="../it/profile-it.html" title="Italiano">🇮🇹</a>
+        <a class="active" href="profile-jp.html" title="日本語">🇯🇵</a>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
