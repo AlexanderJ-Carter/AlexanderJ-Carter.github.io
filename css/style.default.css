@@ -1138,26 +1138,6 @@ progress {
     opacity: 1;
 }
 
-.form-control::-webkit-file-upload-button {
-    padding: 0.375rem 0.75rem;
-    margin: -0.375rem -0.75rem;
-    -webkit-margin-end: 0.75rem;
-    margin-inline-end: 0.75rem;
-    color: #343a40;
-    background-color: #eeeeee;
-    pointer-events: none;
-    border-color: inherit;
-    border-style: solid;
-    border-width: 0;
-    border-inline-end-width: 1px;
-    border-radius: 0;
-    -webkit-transition: color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
 .form-control::file-selector-button {
     padding: 0.375rem 0.75rem;
     margin: -0.375rem -0.75rem;
@@ -3516,10 +3496,6 @@ textarea.form-control {
     overflow: hidden !important;
 }
 
-.d-block {
-    display: block !important;
-}
-
 .d-grid {
     display: grid !important;
 }
@@ -3764,26 +3740,6 @@ textarea.form-control {
 
 .p-5 {
     padding: 3rem !important;
-}
-
-.px-0 {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-}
-
-.px-1 {
-    padding-right: 0.25rem !important;
-    padding-left: 0.25rem !important;
-}
-
-.px-2 {
-    padding-right: 0.5rem !important;
-    padding-left: 0.5rem !important;
-}
-
-.px-5 {
-    padding-right: 3rem !important;
-    padding-left: 3rem !important;
 }
 
 .py-0 {
@@ -4272,10 +4228,6 @@ textarea.form-control {
         padding-right: 3rem !important;
     }
 
-    .text-lg-start {
-        text-align: left !important;
-    }
-
     .text-lg-end {
         text-align: right !important;
     }
@@ -4670,10 +4622,6 @@ a.text-hover-dark:hover {
      Other
     ------------------------
 */
-
-.shadow-0 {
-    box-shadow: none !important;
-}
 
 .bg-cover {
     background-size: cover !important;

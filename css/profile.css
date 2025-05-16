@@ -563,10 +563,6 @@ body {
     color: #53b1a8; /* Verilog青绿色 */
 }
 
-.skill-icon i.fa-database {
-    color: #4db6ac; /* SQL绿色 */
-}
-
 /* 专业技能的进度条颜色自定义 */
 .skill-item:nth-child(1) .skill-progress {
     background: linear-gradient(90deg, #5c6bc0, #3949ab);

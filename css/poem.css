@@ -23,16 +23,6 @@
     z-index: 0;
 }
 
-.poem-history-wrapper {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    position: relative;
-    z-index: 1;
-}
-
 .poem-container,
 .history-container {
     background: rgba(255, 255, 255, 0.1);
@@ -139,14 +129,6 @@
     color: rgba(255, 255, 255, 0.8);
 }
 
-.history-title {
-    color: #333;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    font-weight: 600;
-    font-family: "Playfair Display", serif;
-}
-
 .history-date {
     font-weight: 600;
     color: #3498db;
@@ -161,9 +143,6 @@
 }
 
 @media (min-width: 992px) {
-    .poem-history-wrapper {
-        grid-template-columns: 1fr 1fr;
-    }
 }
 
 @keyframes fadeUp {

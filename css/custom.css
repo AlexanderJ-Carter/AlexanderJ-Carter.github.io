@@ -59,9 +59,6 @@ h1.intro-heading {
 }
 
 /* 基本导航栏样式 */
-.navbar-light {
-    background-color: #ffffff;
-}
 
 .navbar-nav .nav-link {
     color: #333;
@@ -69,9 +66,6 @@ h1.intro-heading {
 }
 
 /* 当导航栏处于黑暗模式时 */
-body.dark-mode .navbar-light {
-    background-color: #333;
-}
 
 body.dark-mode .navbar-nav .nav-link {
     color: #ffffff;

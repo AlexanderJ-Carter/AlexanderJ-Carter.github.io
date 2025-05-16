@@ -14,25 +14,46 @@
     z-index: 1000;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.3);
+    right: 20px;
+    bottom: 80px;
 }
 
-/* 为不支持backdrop-filter的浏览器添加备用样式 */
+/* 修复backdrop-filter支持检测语法 */
 @supports not (
-    (backdrop-filter: blur(10px);) or (-webkit-backdrop-filter: blur(10px);)
-) {
-    .chat-container {
-        background: rgba(255, 255, 255, 0.98);
-    }
+    (backdrop-filter: blur(10px)
 
-    @media (prefers-color-scheme: dark) {
-        .chat-container {
-            background: rgba(30, 30, 30, 0.98);
-        }
+;
+)
+or
+
+(
+-webkit-backdrop-filter:
+
+blur
+(
+10
+px
+
+)
+;
+)
+)
+{
+.chat-container {
+    background: rgba(255, 255, 255, 0.98);
+}
+
+@media (prefers-color-scheme: dark) {
+    .chat-container {
+        background: rgba(30, 30, 30, 0.98);
     }
+}
+
 }
 
 /* 添加显示和最小化的动画效果 */
 .chat-showing {
+    display: flex !important;
     animation: scaleIn 0.3s forwards;
 }
 
@@ -75,6 +96,7 @@
     opacity: 0.8;
     cursor: grabbing;
     user-select: none;
+    -webkit-user-select: none;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
     transition: none; /* 拖动时禁用过渡效果以提高响应性 */
 }
@@ -370,6 +392,7 @@
         height: 60vh;
         position: fixed;
         bottom: 70px;
+        right: 5%;
         border-radius: 12px;
     }
 
@@ -435,36 +458,17 @@
         cursor: move;
         -webkit-user-select: none;
         user-select: none;
+        touch-action: none;
     }
 }
 
-@media (max-width: 480px) {
-    .chat-container {
-        width: 94%;
-        height: 65vh;
-        bottom: 60px;
-    }
-
-    .chatbox {
-        max-height: calc(65vh - 100px);
-    }
-}
-
-@media (max-height: 600px) {
-    .chat-container {
-        height: 70vh;
-    }
-
-    .chatbox {
-        max-height: calc(70vh - 100px);
-    }
-}
-
-/* 键盘弹出时的样式 */
-@media (max-height: 400px) {
+/* 修复键盘弹出时的样式 */
+@media (max-height: 400px) and (orientation: landscape) {
     .chat-container {
         height: 85vh;
         bottom: 10px;
+        width: 50%;
+        right: 10px;
     }
 
     .chatbox {
@@ -505,6 +509,12 @@
         border-color: rgba(255, 255, 255, 0.1);
     }
 
+    .chat-status-bar {
+        background: #2a2a2a;
+        border-bottom-color: #444;
+        color: #ccc;
+    }
+
     .chatbox {
         background: #2a2a2a;
     }
@@ -532,6 +542,10 @@
     .chat-input:focus {
         border-color: #007bff;
     }
+
+    .chat-input::placeholder {
+        color: #999;
+    }
 }
 
 /* 滑入/滑出动画 */
@@ -546,6 +560,29 @@
     }
 }
 
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
 .chat-container.slide-in {
+    display: flex;
     animation: slideIn 0.3s forwards;
+}
+
+.chat-container.slide-out {
+    animation: slideOut 0.3s forwards;
+}
+
+/* 消息显示时的清除浮动 */
+.chatbox::after {
+    content: '';
+    display: table;
+    clear: both;
 }
