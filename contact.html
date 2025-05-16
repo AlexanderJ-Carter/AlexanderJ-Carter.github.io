@@ -3,103 +3,114 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>联系我 - Alexander James Carter的个人网站</title>
-    <meta content="通过多种方式与我取得联系，包括微信、QQ、GitHub和电子邮件" name="description">
+    <title>联系方式 - Alexander James Carter的网页</title>
+    <meta content="联系方式与社交媒体信息" name="description">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.default.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/contact.css" rel="stylesheet">
+    <!-- 添加验证脚本 -->
+    <script src="js/verification.js"></script>
 </head>
 
 <body>
-<a aria-label="返回主页" class="back-btn" href="index.html">
-    <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>返回主页
-</a>
+    <script>
+        // 在页面加载时验证访问权限
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!isVerified('contact_verified')) {
+                // 如果未验证，重定向到验证页面
+                window.location.href = 'verify.html?redirect=contact.html';
+            }
+        });
+    </script>
+    <a aria-label="返回主页" class="back-btn" href="index.html">
+        <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>返回主页
+    </a>
 
-<main>
-    <div class="contact-container">
-        <div class="contact-header">
-            <h1>与我联系</h1>
-            <p>选择您喜欢的方式与我交流，无论是询问、合作还是分享想法，我都期待您的消息</p>
+    <main>
+        <div class="contact-container">
+            <div class="contact-header">
+                <h1>与我联系</h1>
+                <p>选择您喜欢的方式与我交流，无论是询问、合作还是分享想法，我都期待您的消息</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- 微信联系方式 -->
+                <div aria-label="微信联系方式" class="contact-item" onclick="openQrModal('wechat')" role="button"
+                    tabindex="0">
+                    <i aria-hidden="true" class="fab fa-weixin contact-icon weixin-icon"></i>
+                    <h3 class="contact-title">微信</h3>
+                    <p class="contact-info">扫码或复制微信号添加好友</p>
+                    <button class="contact-btn">查看二维码</button>
+                </div>
+
+                <!-- QQ联系方式 -->
+                <div aria-label="QQ联系方式" class="contact-item" onclick="openQrModal('qq')" role="button" tabindex="0">
+                    <i aria-hidden="true" class="fab fa-qq contact-icon qq-icon"></i>
+                    <h3 class="contact-title">QQ</h3>
+                    <p class="contact-info">扫码或复制QQ号添加好友</p>
+                    <button class="contact-btn">查看二维码</button>
+                </div>
+
+                <!-- GitHub联系方式 -->
+                <div class="contact-item" role="button" tabindex="0">
+                    <a aria-label="访问GitHub主页" class="contact-link" href="https://github.com/alexanderj-carter"
+                        rel="noopener" target="_blank">
+                        <i aria-hidden="true" class="fab fa-github contact-icon github-icon"></i>
+                        <h3 class="contact-title">GitHub</h3>
+                        <p class="contact-info">查看我的开源项目与代码</p>
+                        <button class="contact-btn">访问主页</button>
+                    </a>
+                </div>
+
+                <!-- 邮件联系方式 -->
+                <div class="contact-item" role="button" tabindex="0">
+                    <a aria-label="发送邮件" class="contact-link" href="mailto:2253940186@qq.com">
+                        <i aria-hidden="true" class="fas fa-envelope contact-icon email-icon"></i>
+                        <h3 class="contact-title">邮件</h3>
+                        <p class="contact-info">2253940186@qq.com</p>
+                        <button class="contact-btn">发送邮件</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="language-options text-center mt-5">
+                <p>其他语言版本:</p>
+                <a class="btn btn-outline-primary me-2" href="en/contact-en.html">English</a>
+                <a class="btn btn-outline-primary" href="it/contact-it.html">Italiano</a>
+            </div>
         </div>
+    </main>
 
-        <div class="contact-grid">
-            <!-- 微信联系方式 -->
-            <div aria-label="微信联系方式" class="contact-item" onclick="openQrModal('wechat')" role="button"
-                 tabindex="0">
-                <i aria-hidden="true" class="fab fa-weixin contact-icon weixin-icon"></i>
-                <h3 class="contact-title">微信</h3>
-                <p class="contact-info">扫码或复制微信号添加好友</p>
-                <button class="contact-btn">查看二维码</button>
-            </div>
-
-            <!-- QQ联系方式 -->
-            <div aria-label="QQ联系方式" class="contact-item" onclick="openQrModal('qq')" role="button" tabindex="0">
-                <i aria-hidden="true" class="fab fa-qq contact-icon qq-icon"></i>
-                <h3 class="contact-title">QQ</h3>
-                <p class="contact-info">扫码或复制QQ号添加好友</p>
-                <button class="contact-btn">查看二维码</button>
-            </div>
-
-            <!-- GitHub联系方式 -->
-            <div class="contact-item" role="button" tabindex="0">
-                <a aria-label="访问GitHub主页" class="contact-link" href="https://github.com/alexanderj-carter"
-                   rel="noopener" target="_blank">
-                    <i aria-hidden="true" class="fab fa-github contact-icon github-icon"></i>
-                    <h3 class="contact-title">GitHub</h3>
-                    <p class="contact-info">查看我的开源项目与代码</p>
-                    <button class="contact-btn">访问主页</button>
-                </a>
-            </div>
-
-            <!-- 邮件联系方式 -->
-            <div class="contact-item" role="button" tabindex="0">
-                <a aria-label="发送邮件" class="contact-link" href="mailto:2253940186@qq.com">
-                    <i aria-hidden="true" class="fas fa-envelope contact-icon email-icon"></i>
-                    <h3 class="contact-title">邮件</h3>
-                    <p class="contact-info">2253940186@qq.com</p>
-                    <button class="contact-btn">发送邮件</button>
-                </a>
-            </div>
-        </div>
-
-        <div class="language-options text-center mt-5">
-            <p>其他语言版本:</p>
-            <a class="btn btn-outline-primary me-2" href="en/contact-en.html">English</a>
-            <a class="btn btn-outline-primary" href="it/contact-it.html">Italiano</a>
-        </div>
-    </div>
-</main>
-
-<!-- 二维码弹窗 -->
-<div aria-modal="true" class="qr-modal" id="qr-modal" role="dialog">
-    <div class="qr-modal-content">
-        <span aria-label="关闭弹窗" class="qr-close" onclick="closeQrModal()" role="button" tabindex="0">&times;</span>
-        <h3 class="qr-title" id="qr-title">扫描二维码</h3>
-        <img alt="二维码" class="qr-image" id="qr-image" src="">
-        <p class="qr-desc" id="qr-desc">扫描上方二维码添加好友</p>
-        <button class="copy-btn" id="copy-btn" onclick="copyContact()">复制账号</button>
-    </div>
-</div>
-
-<footer class="footer-light py-4 mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start">
-                <p class="mb-0">&copy; 2025 Alexander James Carter Website</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <a class="me-3" href="privacy.html">隐私政策</a>
-                <a href="terms.html">使用条款</a>
-            </div>
+    <!-- 二维码弹窗 -->
+    <div aria-modal="true" class="qr-modal" id="qr-modal" role="dialog">
+        <div class="qr-modal-content">
+            <span aria-label="关闭弹窗" class="qr-close" onclick="closeQrModal()" role="button" tabindex="0">&times;</span>
+            <h3 class="qr-title" id="qr-title">扫描二维码</h3>
+            <img alt="二维码" class="qr-image" id="qr-image" src="">
+            <p class="qr-desc" id="qr-desc">扫描上方二维码添加好友</p>
+            <button class="copy-btn" id="copy-btn" onclick="copyContact()">复制账号</button>
         </div>
     </div>
-</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/contact.js"></script>
+    <footer class="footer-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 Alexander James Carter Website</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a class="me-3" href="privacy.html">隐私政策</a>
+                    <a href="terms.html">使用条款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/contact.js"></script>
 </body>
 
 </html>
