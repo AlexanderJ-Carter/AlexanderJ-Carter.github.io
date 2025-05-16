@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- 验证脚本 -->
+    <script src="../js/verification.js"></script>
 </head>
+
 <body>
+<script>
+    // 在页面加载时严格验证访问权限
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!isVerified('profile_en_verified')) {
+            // 强制重定向到验证页面
+            window.location.replace('../verify.html?redirect=en/profile-en.html');
+        }
+    });
+    
+    // 拦截后退按钮
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+            // 如果是从缓存加载的页面，重新检查验证状态
+            if (!isVerified('profile_en_verified')) {
+                window.location.replace('../verify.html?redirect=en/profile-en.html');
+            }
+        }
+    });
+</script>
 
 </body>
 </html>
