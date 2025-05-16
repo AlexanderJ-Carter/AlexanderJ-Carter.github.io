@@ -17,11 +17,21 @@
 
 <body>
     <script>
-        // 在页面加载时验证访问权限
+        // 在页面加载时严格验证访问权限
         document.addEventListener('DOMContentLoaded', function () {
             if (!isVerified('contact_verified')) {
-                // 如果未验证，重定向到验证页面
-                window.location.href = 'verify.html?redirect=contact.html';
+                // 强制重定向到验证页面
+                window.location.replace('verify.html?redirect=contact.html');
+            }
+        });
+
+        // 拦截后退按钮
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || performance.getEntriesByType("navigation")[0].type === 'back_forward') {
+                // 如果是从缓存加载的页面，重新检查验证状态
+                if (!isVerified('contact_verified')) {
+                    window.location.replace('verify.html?redirect=contact.html');
+                }
             }
         });
     </script>
@@ -67,10 +77,10 @@
 
                 <!-- 邮件联系方式 -->
                 <div class="contact-item" role="button" tabindex="0">
-                    <a aria-label="发送邮件" class="contact-link" href="mailto:2253940186@qq.com">
+                    <a aria-label="发送邮件" class="contact-link" href="mailto:contact-us@alexander.xin">
                         <i aria-hidden="true" class="fas fa-envelope contact-icon email-icon"></i>
                         <h3 class="contact-title">邮件</h3>
-                        <p class="contact-info">2253940186@qq.com</p>
+                        <p class="contact-info">contact-us@alexander.xin</p>
                         <button class="contact-btn">发送邮件</button>
                     </a>
                 </div>

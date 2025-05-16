@@ -10,111 +10,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.default.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+    <!-- 验证页面专用样式 -->
+    <link href="css/verify.css" rel="stylesheet">
     <!-- Cloudflare Turnstile 脚本 -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <!-- 验证脚本 -->
     <script src="js/verification.js"></script>
-    <style>
-        .verification-container {
-            max-width: 600px;
-            margin: 100px auto;
-            padding: 30px;
-            border-radius: 15px;
-            background-color: #ffffff;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .verification-title {
-            margin-bottom: 30px;
-            color: #333;
-        }
-
-        .verification-text {
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .verification-widget {
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-        }
-
-        .verification-controls {
-            margin-top: 30px;
-        }
-
-        .back-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            padding: 10px 15px;
-            background-color: #fff;
-            color: #333;
-            border-radius: 30px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .back-btn:hover {
-            transform: translateX(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        .continue-btn {
-            display: none;
-            /* 默认隐藏 */
-            background: linear-gradient(45deg, #007bff, #00c6ff);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-            cursor: pointer;
-        }
-
-        .continue-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
-        }
-
-        .error-message {
-            color: #dc3545;
-            margin-top: 15px;
-            display: none;
-        }
-
-        .loading-indicator {
-            display: none;
-            margin: 20px auto;
-        }
-
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 2s linear infinite;
-            margin: 0 auto;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -124,9 +25,9 @@
 
     <div class="verification-container">
         <h2 class="verification-title">
-            <i class="fas fa-shield-alt me-2"></i>人机验证
+            <i class="fas fa-shield-alt"></i>人机验证
         </h2>
-        <p class="verification-text">为确保网站安全并提供更好的浏览体验，请完成下方的人机验证，验证完成后将自动跳转至您请求的页面。</p>
+        <p class="verification-text">为确保网站安全并提供更好的浏览体验，请完成下方的验证，验证完成后即可访问您请求的页面。</p>
 
         <div class="verification-widget">
             <!-- Cloudflare Turnstile 验证组件 -->
@@ -139,85 +40,25 @@
         </div>
 
         <div class="error-message" id="error-message">
-            验证失败，请重试
+            <i class="fas fa-exclamation-circle me-2"></i>验证失败，请重试
         </div>
 
         <div class="verification-controls">
             <button class="continue-btn" id="continue-btn">
                 <i class="fas fa-check-circle me-2"></i>继续访问
             </button>
-            <p class="auto-redirect-text" id="auto-redirect-text"
-                style="display: none; margin-top: 15px; color: #6c757d;">
-                <i class="fas fa-clock me-1"></i><span id="countdown">5</span>秒后自动跳转...
-            </p>
+            <div class="auto-redirect-text" id="auto-redirect-text" style="display: none;">
+                <i class="fas fa-clock"></i>将在<span id="countdown">5</span>秒后自动跳转
+            </div>
+        </div>
+
+        <div class="security-info">
+            <i class="fas fa-lock"></i>该验证由 Cloudflare Turnstile 提供安全保障
         </div>
     </div>
 
-    <script>
-        // 获取URL中的重定向参数
-        const urlParams = new URLSearchParams(window.location.search);
-        const redirectPage = urlParams.get('redirect') || 'index.html';
-
-        // 自动跳转倒计时函数
-        function startAutoRedirect(seconds) {
-            const countdownEl = document.getElementById('countdown');
-            const autoRedirectText = document.getElementById('auto-redirect-text');
-            let remainingSeconds = seconds;
-
-            // 显示倒计时文本
-            autoRedirectText.style.display = 'block';
-            countdownEl.textContent = remainingSeconds;
-
-            // 开始倒计时
-            const countdownInterval = setInterval(() => {
-                remainingSeconds--;
-                countdownEl.textContent = remainingSeconds;
-
-                if (remainingSeconds <= 0) {
-                    clearInterval(countdownInterval);
-                    window.location.href = redirectPage;
-                }
-            }, 1000);
-
-            // 保存倒计时间隔器ID，以便在需要时清除
-            window.countdownIntervalId = countdownInterval;
-        }
-
-        // 当Turnstile验证成功时的回调函数
-        function onTurnstileSuccess(token) {
-            // 显示加载指示器
-            document.getElementById('loading-indicator').style.display = 'block';
-
-            // 模拟验证过程
-            setTimeout(function () {
-                // 隐藏加载指示器
-                document.getElementById('loading-indicator').style.display = 'none';
-
-                // 设置一次性验证标记
-                if (redirectPage.includes('profile')) {
-                    setVerified('profile_verified');
-                } else if (redirectPage.includes('contact')) {
-                    setVerified('contact_verified');
-                }
-
-                // 显示继续按钮
-                const continueBtn = document.getElementById('continue-btn');
-                continueBtn.style.display = 'inline-block';
-
-                // 设置继续按钮点击事件
-                continueBtn.addEventListener('click', function () {
-                    // 如果有正在进行的倒计时，清除它
-                    if (window.countdownIntervalId) {
-                        clearInterval(window.countdownIntervalId);
-                    }
-                    window.location.href = redirectPage;
-                });
-
-                // 开始5秒自动跳转倒计时
-                startAutoRedirect(5);
-            }, 1500);
-        }
-    </script>
+    <!-- 页面专用脚本 -->
+    <script src="js/verify.js"></script>
 </body>
 
 </html>
