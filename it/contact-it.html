@@ -17,128 +17,128 @@
 </head>
 
 <body>
-    <script>
-        // Verifica i permessi di accesso
-        document.addEventListener('DOMContentLoaded', function () {
+<script>
+    // Verifica i permessi di accesso
+    document.addEventListener('DOMContentLoaded', function () {
+        if (!isVerified('contact_it_verified')) {
+            // Utilizza contatore di reindirizzamento per prevenire cicli infiniti
+            if (checkRedirectAttempts('contact', 'it')) {
+                // Reindirizzamento forzato alla pagina di verifica
+                window.location.replace('../verify.html?redirect=it/contact-it.html');
+            }
+        } else {
+            // Verifica riuscita, azzera contatore
+            resetRedirectCounter('contact', 'it');
+        }
+    });
+
+    // Intercetta pulsante indietro
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted || (performance.getEntriesByType && performance.getEntriesByType("navigation")[0].type === 'back_forward')) {
+            // Se la pagina viene caricata dalla cache, ricontrolla lo stato di verifica
             if (!isVerified('contact_it_verified')) {
-                // Utilizza contatore di reindirizzamento per prevenire cicli infiniti
                 if (checkRedirectAttempts('contact', 'it')) {
-                    // Reindirizzamento forzato alla pagina di verifica
                     window.location.replace('../verify.html?redirect=it/contact-it.html');
                 }
-            } else {
-                // Verifica riuscita, azzera contatore
-                resetRedirectCounter('contact', 'it');
             }
-        });
+        }
+    });
+</script>
+<a aria-label="Torna alla Home" class="back-btn" href="index-it.html">
+    <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>Torna alla Home
+</a>
 
-        // Intercetta pulsante indietro
-        window.addEventListener('pageshow', function (event) {
-            if (event.persisted || (performance.getEntriesByType && performance.getEntriesByType("navigation")[0].type === 'back_forward')) {
-                // Se la pagina viene caricata dalla cache, ricontrolla lo stato di verifica
-                if (!isVerified('contact_it_verified')) {
-                    if (checkRedirectAttempts('contact', 'it')) {
-                        window.location.replace('../verify.html?redirect=it/contact-it.html');
-                    }
-                }
-            }
-        });
-    </script>
-    <a aria-label="Torna alla Home" class="back-btn" href="index-it.html">
-        <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>Torna alla Home
-    </a>
+<main>
+    <div class="contact-container">
+        <div class="contact-header">
+            <h1>Contattami</h1>
+            <p>Scegli il metodo che preferisci per comunicare con me. Che si tratti di domande, collaborazioni o
+                condivisione di idee, attendo il tuo messaggio</p>
+        </div>
 
-    <main>
-        <div class="contact-container">
-            <div class="contact-header">
-                <h1>Contattami</h1>
-                <p>Scegli il metodo che preferisci per comunicare con me. Che si tratti di domande, collaborazioni o
-                    condivisione di idee, attendo il tuo messaggio</p>
+        <div class="contact-grid">
+            <!-- WeChat -->
+            <div aria-label="Contatto WeChat" class="contact-item" onclick="openQrModal('wechat')" role="button"
+                 tabindex="0">
+                <i aria-hidden="true" class="fab fa-weixin contact-icon weixin-icon"></i>
+                <h3 class="contact-title">WeChat</h3>
+                <p class="contact-info">Scansiona il codice QR o copia l'ID WeChat</p>
+                <button class="contact-btn">Visualizza QR Code</button>
             </div>
 
-            <div class="contact-grid">
-                <!-- WeChat -->
-                <div aria-label="Contatto WeChat" class="contact-item" onclick="openQrModal('wechat')" role="button"
-                    tabindex="0">
-                    <i aria-hidden="true" class="fab fa-weixin contact-icon weixin-icon"></i>
-                    <h3 class="contact-title">WeChat</h3>
-                    <p class="contact-info">Scansiona il codice QR o copia l'ID WeChat</p>
-                    <button class="contact-btn">Visualizza QR Code</button>
-                </div>
-
-                <!-- QQ -->
-                <div aria-label="Contatto QQ" class="contact-item" onclick="openQrModal('qq')" role="button"
-                    tabindex="0">
-                    <i aria-hidden="true" class="fab fa-qq contact-icon qq-icon"></i>
-                    <h3 class="contact-title">QQ</h3>
-                    <p class="contact-info">Scansiona il codice QR o copia l'ID QQ</p>
-                    <button class="contact-btn">Visualizza QR Code</button>
-                </div>
-
-                <!-- GitHub -->
-                <div class="contact-item" role="button" tabindex="0">
-                    <a aria-label="Visita la pagina GitHub" class="contact-link"
-                        href="https://github.com/alexanderj-carter" rel="noopener" target="_blank">
-                        <i aria-hidden="true" class="fab fa-github contact-icon github-icon"></i>
-                        <h3 class="contact-title">GitHub</h3>
-                        <p class="contact-info">Visualizza i miei progetti open source</p>
-                        <button class="contact-btn">Visita Profilo</button>
-                    </a>
-                </div>
-
-                <!-- Email -->
-                <div class="contact-item" role="button" tabindex="0">
-                    <a aria-label="Invia email" class="contact-link" href="mailto:contact-us@alexander.xin">
-                        <i aria-hidden="true" class="fas fa-envelope contact-icon email-icon"></i>
-                        <h3 class="contact-title">Email</h3>
-                        <p class="contact-info">contact-us@alexander.xin</p>
-                        <button class="contact-btn">Invia Email</button>
-                    </a>
-                </div>
+            <!-- QQ -->
+            <div aria-label="Contatto QQ" class="contact-item" onclick="openQrModal('qq')" role="button"
+                 tabindex="0">
+                <i aria-hidden="true" class="fab fa-qq contact-icon qq-icon"></i>
+                <h3 class="contact-title">QQ</h3>
+                <p class="contact-info">Scansiona il codice QR o copia l'ID QQ</p>
+                <button class="contact-btn">Visualizza QR Code</button>
             </div>
 
-            <div class="language-options text-center mt-5">
-                <p>Altre lingue:</p>
-                <a class="btn btn-outline-primary me-2" href="../contact.html">中文</a>
-                <a class="btn btn-outline-primary" href="../en/contact-en.html">English</a>
+            <!-- GitHub -->
+            <div class="contact-item" role="button" tabindex="0">
+                <a aria-label="Visita la pagina GitHub" class="contact-link"
+                   href="https://github.com/alexanderj-carter" rel="noopener" target="_blank">
+                    <i aria-hidden="true" class="fab fa-github contact-icon github-icon"></i>
+                    <h3 class="contact-title">GitHub</h3>
+                    <p class="contact-info">Visualizza i miei progetti open source</p>
+                    <button class="contact-btn">Visita Profilo</button>
+                </a>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-item" role="button" tabindex="0">
+                <a aria-label="Invia email" class="contact-link" href="mailto:contact-us@alexander.xin">
+                    <i aria-hidden="true" class="fas fa-envelope contact-icon email-icon"></i>
+                    <h3 class="contact-title">Email</h3>
+                    <p class="contact-info">contact-us@alexander.xin</p>
+                    <button class="contact-btn">Invia Email</button>
+                </a>
             </div>
         </div>
-    </main>
 
-    <!-- QR Code Modal -->
-    <div aria-modal="true" class="qr-modal" id="qr-modal" role="dialog">
-        <div class="qr-modal-content">
-            <span aria-label="Chiudi finestra" class="qr-close" onclick="closeQrModal()" role="button"
-                tabindex="0">&times;</span>
-            <h3 class="qr-title" id="qr-title">Scansiona il Codice QR</h3>
-            <img alt="Codice QR" class="qr-image" id="qr-image" src="">
-            <p class="qr-desc" id="qr-desc">Scansiona il codice QR sopra per aggiungere contatto</p>
-            <button class="copy-btn" id="copy-btn" onclick="copyContact()">Copia ID</button>
+        <div class="language-options text-center mt-5">
+            <p>Altre lingue:</p>
+            <a class="btn btn-outline-primary me-2" href="../contact.html">中文</a>
+            <a class="btn btn-outline-primary" href="../en/contact-en.html">English</a>
         </div>
     </div>
+</main>
 
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start">
-                    <div class="footer-copyright">
-                        <p class="mb-0">&copy; 2023-2025 Alexander James Carter</p>
-                        <p class="small">Ultimo aggiornamento: <span class="update-date">20 Aprile 2025</span></p>
-                    </div>
+<!-- QR Code Modal -->
+<div aria-modal="true" class="qr-modal" id="qr-modal" role="dialog">
+    <div class="qr-modal-content">
+            <span aria-label="Chiudi finestra" class="qr-close" onclick="closeQrModal()" role="button"
+                  tabindex="0">&times;</span>
+        <h3 class="qr-title" id="qr-title">Scansiona il Codice QR</h3>
+        <img alt="Codice QR" class="qr-image" id="qr-image" src="">
+        <p class="qr-desc" id="qr-desc">Scansiona il codice QR sopra per aggiungere contatto</p>
+        <button class="copy-btn" id="copy-btn" onclick="copyContact()">Copia ID</button>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <div class="footer-copyright">
+                    <p class="mb-0">&copy; 2023-2025 Alexander James Carter</p>
+                    <p class="small">Ultimo aggiornamento: <span class="update-date">20 Aprile 2025</span></p>
                 </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <div class="footer-links">
-                        <a class="me-3" href="terms-it.html">Termini di Utilizzo</a>
-                        <a class="me-3" href="privacy-it.html">Informativa Privacy</a>
-                        <a href="contact-it.html">Contatti</a>
-                    </div>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <div class="footer-links">
+                    <a class="me-3" href="terms-it.html">Termini di Utilizzo</a>
+                    <a class="me-3" href="privacy-it.html">Informativa Privacy</a>
+                    <a href="contact-it.html">Contatti</a>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/contact.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/contact.js"></script>
 </body>
 
 </html>

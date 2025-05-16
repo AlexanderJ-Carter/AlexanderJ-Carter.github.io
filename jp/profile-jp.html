@@ -16,266 +16,268 @@
 </head>
 
 <body>
-    <script>
-        // アクセス権限を確認
-        document.addEventListener('DOMContentLoaded', function () {
+<script>
+    // アクセス権限を確認
+    document.addEventListener('DOMContentLoaded', function () {
+        if (!isVerified('profile_jp_verified')) {
+            // 無限ループを防ぐためにリダイレクトカウンターを使用
+            if (checkRedirectAttempts('profile', 'jp')) {
+                // 検証ページに強制リダイレクト
+                window.location.replace('../verify.html?redirect=jp/profile-jp.html');
+            }
+        } else {
+            // 検証成功、カウンターをリセット
+            resetRedirectCounter('profile', 'jp');
+        }
+    });
+
+    // 戻るボタンを捕捉
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted || (performance.getEntriesByType && performance.getEntriesByType("navigation")[0].type === 'back_forward')) {
+            // キャッシュからページが読み込まれた場合、検証状態を再確認
             if (!isVerified('profile_jp_verified')) {
-                // 無限ループを防ぐためにリダイレクトカウンターを使用
                 if (checkRedirectAttempts('profile', 'jp')) {
-                    // 検証ページに強制リダイレクト
                     window.location.replace('../verify.html?redirect=jp/profile-jp.html');
                 }
-            } else {
-                // 検証成功、カウンターをリセット
-                resetRedirectCounter('profile', 'jp');
             }
-        });
+        }
+    });
+</script>
+<a class="back-btn" href="index-jp.html" rel="noopener" title="ウェブサイトのホームページに戻る">
+    <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>ホームに戻る
+</a>
 
-        // 戻るボタンを捕捉
-        window.addEventListener('pageshow', function (event) {
-            if (event.persisted || (performance.getEntriesByType && performance.getEntriesByType("navigation")[0].type === 'back_forward')) {
-                // キャッシュからページが読み込まれた場合、検証状態を再確認
-                if (!isVerified('profile_jp_verified')) {
-                    if (checkRedirectAttempts('profile', 'jp')) {
-                        window.location.replace('../verify.html?redirect=jp/profile-jp.html');
-                    }
-                }
-            }
-        });
-    </script>
-    <a class="back-btn" href="index-jp.html" rel="noopener" title="ウェブサイトのホームページに戻る">
-        <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>ホームに戻る
-    </a>
+<div class="profile-container">
+    <div class="profile-header">
+        <img alt="プロフィールアバター" class="profile-avatar" src="../img/AboutMe.jpg">
+        <h1 class="profile-name">Alexander James Carter</h1>
+        <p class="profile-title">コード愛好家 | デザイン愛好家</p>
+        <div class="d-flex justify-content-center gap-2 mb-3">
+            <span class="badge bg-primary">20歳</span>
+            <span class="badge bg-secondary">北京</span>
+            <span class="badge bg-info text-dark">男性</span>
+            <span class="badge bg-success">学生</span>
+            <span class="badge bg-warning text-dark">コンピュータ愛好家</span>
+        </div>
+        <p class="profile-bio px-md-5">
+            創造性と技術の組み合わせに情熱を持ち、デザインコンセプトを高品質の実装に変換するスキルを持っています。
+            新しい技術を探求し、知識の共有を楽しみ、同じ志を持つ友人と共に成長することを楽しみにしています。
+        </p>
+        <div class="profile-social">
+            <a aria-label="GitHub" class="social-icon" href="https://github.com/AlexanderJ-Carter" rel="noopener"
+               target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a aria-label="LinkedIn" class="social-icon" href="#" onclick="showQRCode('linkedin')">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a aria-label="WeChat" class="social-icon" href="#" onclick="showQRCode('wechat')">
+                <i class="fab fa-weixin"></i>
+            </a>
+            <a aria-label="Email" class="social-icon" href="mailto:contact-us@alexander.xin">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
 
-    <div class="profile-container">
-        <div class="profile-header">
-            <img alt="プロフィールアバター" class="profile-avatar" src="../img/AboutMe.jpg">
-            <h1 class="profile-name">Alexander James Carter</h1>
-            <p class="profile-title">コード愛好家 | デザイン愛好家</p>
-            <div class="d-flex justify-content-center gap-2 mb-3">
-                <span class="badge bg-primary">20歳</span>
-                <span class="badge bg-secondary">北京</span>
-                <span class="badge bg-info text-dark">男性</span>
-                <span class="badge bg-success">学生</span>
-                <span class="badge bg-warning text-dark">コンピュータ愛好家</span>
-            </div>
-            <p class="profile-bio px-md-5">
-                創造性と技術の組み合わせに情熱を持ち、デザインコンセプトを高品質の実装に変換するスキルを持っています。
-                新しい技術を探求し、知識の共有を楽しみ、同じ志を持つ友人と共に成長することを楽しみにしています。
-            </p>
-            <div class="profile-social">
-                <a aria-label="GitHub" class="social-icon" href="https://github.com/AlexanderJ-Carter" rel="noopener"
-                    target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a aria-label="LinkedIn" class="social-icon" href="#" onclick="showQRCode('linkedin')">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a aria-label="WeChat" class="social-icon" href="#" onclick="showQRCode('wechat')">
-                    <i class="fab fa-weixin"></i>
-                </a>
-                <a aria-label="Email" class="social-icon" href="mailto:contact-us@alexander.xin">
-                    <i class="fas fa-envelope"></i>
-                </a>
+    <div class="profile-content">
+        <div class="profile-section">
+            <h2 class="section-title">自己紹介</h2>
+            <div class="section-content">
+                <p>
+                    こんにちは、アレクサンダーです！技術と創造性に情熱を持つ学生です。現在、コンピュータサイエンスとデザインの原則に焦点を当てて大学で勉強しています。</p>
+                <p>
+                    アイデアを現実に変える技術の力を信じており、技術的なスキルと創造的思考を組み合わせる新しい方法を常に探求しています。</p>
             </div>
         </div>
 
-        <div class="profile-content">
-            <div class="profile-section">
-                <h2 class="section-title">自己紹介</h2>
-                <div class="section-content">
-                    <p>こんにちは、アレクサンダーです！技術と創造性に情熱を持つ学生です。現在、コンピュータサイエンスとデザインの原則に焦点を当てて大学で勉強しています。</p>
-                    <p>アイデアを現実に変える技術の力を信じており、技術的なスキルと創造的思考を組み合わせる新しい方法を常に探求しています。</p>
-                </div>
-            </div>
-
-            <div class="profile-section">
-                <h2 class="section-title">スキル</h2>
-                <div class="skills-container">
-                    <div class="skill-category">
-                        <h3>技術スキル</h3>
-                        <div class="skill-group">
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span class="skill-name">HTML/CSS</span>
-                                    <span class="skill-percentage">90%</span>
-                                </div>
-                                <div class="skill-progress">
-                                    <div class="skill-progress-bar" style="width: 90%"></div>
-                                </div>
+        <div class="profile-section">
+            <h2 class="section-title">スキル</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>技術スキル</h3>
+                    <div class="skill-group">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">HTML/CSS</span>
+                                <span class="skill-percentage">90%</span>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span class="skill-name">JavaScript</span>
-                                    <span class="skill-percentage">85%</span>
-                                </div>
-                                <div class="skill-progress">
-                                    <div class="skill-progress-bar" style="width: 85%"></div>
-                                </div>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="width: 90%"></div>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span class="skill-name">Python</span>
-                                    <span class="skill-percentage">80%</span>
-                                </div>
-                                <div class="skill-progress">
-                                    <div class="skill-progress-bar" style="width: 80%"></div>
-                                </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percentage">85%</span>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span class="skill-name">React</span>
-                                    <span class="skill-percentage">75%</span>
-                                </div>
-                                <div class="skill-progress">
-                                    <div class="skill-progress-bar" style="width: 75%"></div>
-                                </div>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Python</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">React</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="width: 75%"></div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="skill-category">
-                        <h3>デザインスキル</h3>
-                        <div class="skill-group">
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span class="skill-name">UI/UXデザイン</span>
-                                    <span class="skill-percentage">85%</span>
-                                </div>
-                                <div class="skill-progress">
-                                    <div class="skill-progress-bar" style="width: 85%"></div>
-                                </div>
+                <div class="skill-category">
+                    <h3>デザインスキル</h3>
+                    <div class="skill-group">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">UI/UXデザイン</span>
+                                <span class="skill-percentage">85%</span>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span class="skill-name">Photoshop</span>
-                                    <span class="skill-percentage">80%</span>
-                                </div>
-                                <div class="skill-progress">
-                                    <div class="skill-progress-bar" style="width: 80%"></div>
-                                </div>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="width: 85%"></div>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <span class="skill-name">Figma</span>
-                                    <span class="skill-percentage">90%</span>
-                                </div>
-                                <div class="skill-progress">
-                                    <div class="skill-progress-bar" style="width: 90%"></div>
-                                </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Photoshop</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Figma</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-progress-bar" style="width: 90%"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="profile-section">
-                <h2 class="section-title">経験</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2023年 - 現在</div>
-                        <div class="timeline-content">
-                            <h4>学生開発者</h4>
-                            <p>大学テッククラブ</p>
-                            <ul>
-                                <li>大学クラブのウェブサイトの開発とメンテナンス</li>
-                                <li>様々な技術プロジェクトでのチームメンバーとの協力</li>
-                                <li>学生向けのウェブ開発ワークショップの開催</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2022年 - 2023年</div>
-                        <div class="timeline-content">
-                            <h4>デザインインターン</h4>
-                            <p>クリエイティブスタジオXYZ</p>
-                            <ul>
-                                <li>モバイルアプリケーションのUI/UXデザインの支援</li>
-                                <li>デジタルマーケティングキャンペーン用のビジュアル資産の作成</li>
-                                <li>デザイン思考ワークショップへの参加</li>
-                            </ul>
-                        </div>
+        <div class="profile-section">
+            <h2 class="section-title">経験</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2023年 - 現在</div>
+                    <div class="timeline-content">
+                        <h4>学生開発者</h4>
+                        <p>大学テッククラブ</p>
+                        <ul>
+                            <li>大学クラブのウェブサイトの開発とメンテナンス</li>
+                            <li>様々な技術プロジェクトでのチームメンバーとの協力</li>
+                            <li>学生向けのウェブ開発ワークショップの開催</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-
-            <div class="profile-section">
-                <h2 class="section-title">教育</h2>
-                <div class="education-item">
-                    <div class="education-year">2021年 - 現在</div>
-                    <h4 class="education-degree">コンピュータサイエンス学士</h4>
-                    <p class="education-school">北京技術大学</p>
-                    <p class="education-details">ウェブ開発、UI/UXデザイン、人工知能に焦点を当てています</p>
-                </div>
-            </div>
-
-            <div class="profile-section">
-                <h2 class="section-title">興味</h2>
-                <div class="interests-container">
-                    <div class="interest-item">
-                        <i class="fas fa-laptop-code"></i>
-                        <span>コーディング</span>
-                    </div>
-                    <div class="interest-item">
-                        <i class="fas fa-paint-brush"></i>
-                        <span>デジタルアート</span>
-                    </div>
-                    <div class="interest-item">
-                        <i class="fas fa-book"></i>
-                        <span>読書</span>
-                    </div>
-                    <div class="interest-item">
-                        <i class="fas fa-hiking"></i>
-                        <span>ハイキング</span>
-                    </div>
-                    <div class="interest-item">
-                        <i class="fas fa-camera"></i>
-                        <span>写真撮影</span>
-                    </div>
-                    <div class="interest-item">
-                        <i class="fas fa-gamepad"></i>
-                        <span>ゲーム</span>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2022年 - 2023年</div>
+                    <div class="timeline-content">
+                        <h4>デザインインターン</h4>
+                        <p>クリエイティブスタジオXYZ</p>
+                        <ul>
+                            <li>モバイルアプリケーションのUI/UXデザインの支援</li>
+                            <li>デジタルマーケティングキャンペーン用のビジュアル資産の作成</li>
+                            <li>デザイン思考ワークショップへの参加</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- QRコードモーダル -->
-    <div class="qr-modal" id="wechatModal">
-        <div class="qr-modal-content">
-            <span class="qr-close" onclick="closeQRCode('wechat')">&times;</span>
-            <h3>WeChat</h3>
-            <div class="qr-img-container">
-                <img alt="WeChat QRコード" class="qr-img" src="../img/qr-wechat.png">
+        <div class="profile-section">
+            <h2 class="section-title">教育</h2>
+            <div class="education-item">
+                <div class="education-year">2021年 - 現在</div>
+                <h4 class="education-degree">コンピュータサイエンス学士</h4>
+                <p class="education-school">北京技術大学</p>
+                <p class="education-details">ウェブ開発、UI/UXデザイン、人工知能に焦点を当てています</p>
             </div>
-            <p>WeChatアプリでスキャンして接続してください</p>
+        </div>
+
+        <div class="profile-section">
+            <h2 class="section-title">興味</h2>
+            <div class="interests-container">
+                <div class="interest-item">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>コーディング</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>デジタルアート</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-book"></i>
+                    <span>読書</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-hiking"></i>
+                    <span>ハイキング</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-camera"></i>
+                    <span>写真撮影</span>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-gamepad"></i>
+                    <span>ゲーム</span>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-    <div class="qr-modal" id="linkedinModal">
-        <div class="qr-modal-content">
-            <span class="qr-close" onclick="closeQRCode('linkedin')">&times;</span>
-            <h3>LinkedIn</h3>
-            <div class="qr-img-container">
-                <img alt="LinkedIn QRコード" class="qr-img" src="../img/qr-linkedin.png">
-            </div>
-            <p>スキャンしてLinkedInプロフィールを表示</p>
+<!-- QRコードモーダル -->
+<div class="qr-modal" id="wechatModal">
+    <div class="qr-modal-content">
+        <span class="qr-close" onclick="closeQRCode('wechat')">&times;</span>
+        <h3>WeChat</h3>
+        <div class="qr-img-container">
+            <img alt="WeChat QRコード" class="qr-img" src="../img/qr-wechat.png">
         </div>
+        <p>WeChatアプリでスキャンして接続してください</p>
     </div>
+</div>
 
-    <!-- 言語オプション -->
-    <div class="language-options">
-        <a href="../profile.html" title="中文">🇨🇳</a>
-        <a href="../en/profile-en.html" title="English">🇬🇧</a>
-        <a href="../it/profile-it.html" title="Italiano">🇮🇹</a>
-        <a class="active" href="profile-jp.html" title="日本語">🇯🇵</a>
+<div class="qr-modal" id="linkedinModal">
+    <div class="qr-modal-content">
+        <span class="qr-close" onclick="closeQRCode('linkedin')">&times;</span>
+        <h3>LinkedIn</h3>
+        <div class="qr-img-container">
+            <img alt="LinkedIn QRコード" class="qr-img" src="../img/qr-linkedin.png">
+        </div>
+        <p>スキャンしてLinkedInプロフィールを表示</p>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/profile.js"></script>
+<!-- 言語オプション -->
+<div class="language-options">
+    <a href="../profile.html" title="中文">🇨🇳</a>
+    <a href="../en/profile-en.html" title="English">🇬🇧</a>
+    <a href="../it/profile-it.html" title="Italiano">🇮🇹</a>
+    <a class="active" href="profile-jp.html" title="日本語">🇯🇵</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/profile.js"></script>
 </body>
 
 </html>
