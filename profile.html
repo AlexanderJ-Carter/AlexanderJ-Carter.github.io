@@ -17,20 +17,28 @@
 
 <body>
     <script>
-        // 在页面加载时严格验证访问权限
+        // 验证访问权限
         document.addEventListener('DOMContentLoaded', function () {
             if (!isVerified('profile_verified')) {
-                // 强制重定向到验证页面
-                window.location.replace('verify.html?redirect=profile.html');
+                // 使用重定向计数器防止无限循环
+                if (checkRedirectAttempts('profile', 'cn')) {
+                    // 强制重定向到验证页面
+                    window.location.replace('verify.html?redirect=profile.html');
+                }
+            } else {
+                // 验证成功，重置计数器
+                resetRedirectCounter('profile', 'cn');
             }
         });
 
         // 拦截后退按钮
         window.addEventListener('pageshow', function (event) {
-            if (event.persisted || performance.getEntriesByType("navigation")[0].type === 'back_forward') {
-                // 如果是从缓存加载的页面，重新检查验证状态
+            if (event.persisted || (performance.getEntriesByType && performance.getEntriesByType("navigation")[0].type === 'back_forward')) {
+                // 如果页面从缓存加载，重新检查验证状态
                 if (!isVerified('profile_verified')) {
-                    window.location.replace('verify.html?redirect=profile.html');
+                    if (checkRedirectAttempts('profile', 'cn')) {
+                        window.location.replace('verify.html?redirect=profile.html');
+                    }
                 }
             }
         });

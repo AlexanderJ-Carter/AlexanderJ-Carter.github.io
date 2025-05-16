@@ -17,20 +17,28 @@
 
 <body>
     <script>
-        // Strictly verify access permissions when page loads
+        // Verify access permissions
         document.addEventListener('DOMContentLoaded', function () {
             if (!isVerified('profile_en_verified')) {
-                // Force redirect to verification page
-                window.location.replace('../verify.html?redirect=en/profile-en.html');
+                // Use redirect counter to prevent infinite loops
+                if (checkRedirectAttempts('profile', 'en')) {
+                    // Force redirect to verification page
+                    window.location.replace('../verify.html?redirect=en/profile-en.html');
+                }
+            } else {
+                // Verification successful, reset counter
+                resetRedirectCounter('profile', 'en');
             }
         });
 
         // Intercept back button
         window.addEventListener('pageshow', function (event) {
-            if (event.persisted || performance.getEntriesByType("navigation")[0].type === 'back_forward') {
+            if (event.persisted || (performance.getEntriesByType && performance.getEntriesByType("navigation")[0].type === 'back_forward')) {
                 // If page is loaded from cache, recheck verification status
                 if (!isVerified('profile_en_verified')) {
-                    window.location.replace('../verify.html?redirect=en/profile-en.html');
+                    if (checkRedirectAttempts('profile', 'en')) {
+                        window.location.replace('../verify.html?redirect=en/profile-en.html');
+                    }
                 }
             }
         });

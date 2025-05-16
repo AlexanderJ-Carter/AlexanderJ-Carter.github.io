@@ -5,7 +5,19 @@
 
 // 在页面加载时确保清除任何潜在的验证状态
 document.addEventListener('DOMContentLoaded', function () {
-    // 清除所有可能的验证状态，确保每次访问都需要验证
+    // 获取URL中的重定向参数
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectPage = urlParams.get('redirect') || 'index.html';
+
+    // 检查是否已经为当前目标页面验证过
+    const verificationKey = getVerificationKeyForPage(redirectPage);
+    if (isVerified(verificationKey)) {
+        console.log(`${redirectPage} 已经通过验证，直接跳转`);
+        window.location.href = redirectPage;
+        return;
+    }
+
+    // 如果没有验证过，才清除
     clearAllVerifications();
 
     // 根据目标页面语言调整验证页面文字
@@ -16,19 +28,62 @@ document.addEventListener('DOMContentLoaded', function () {
 const urlParams = new URLSearchParams(window.location.search);
 const redirectPage = urlParams.get('redirect') || 'index.html';
 
+// 获取页面对应的验证键
+function getVerificationKeyForPage(page) {
+    if (page.includes('profile.html')) {
+        return 'profile_verified';
+    } else if (page.includes('en/profile-en.html')) {
+        return 'profile_en_verified';
+    } else if (page.includes('it/profile-it.html')) {
+        return 'profile_it_verified';
+    } else if (page.includes('jp/profile-jp.html')) {
+        return 'profile_jp_verified';
+    } else if (page.includes('contact.html')) {
+        return 'contact_verified';
+    } else if (page.includes('en/contact-en.html')) {
+        return 'contact_en_verified';
+    } else if (page.includes('it/contact-it.html')) {
+        return 'contact_it_verified';
+    } else if (page.includes('jp/contact-jp.html')) {
+        return 'contact_jp_verified';
+    }
+    return 'general_verified';
+}
+
 // 清除所有可能的验证状态
 function clearAllVerifications() {
+    // 防止清除当前需要的验证状态
+    const currentKey = getVerificationKeyForPage(redirectPage);
+    if (isVerified(currentKey)) {
+        console.log(`保留当前验证状态: ${currentKey}`);
+        return;
+    }
+
+    console.log('清除所有验证状态');
+
     // 中文版
-    clearVerification('profile_verified');
-    clearVerification('contact_verified');
+    if (currentKey !== 'profile_verified')
+        clearVerification('profile_verified');
+    if (currentKey !== 'contact_verified')
+        clearVerification('contact_verified');
 
     // 英文版
-    clearVerification('profile_en_verified');
-    clearVerification('contact_en_verified');
+    if (currentKey !== 'profile_en_verified')
+        clearVerification('profile_en_verified');
+    if (currentKey !== 'contact_en_verified')
+        clearVerification('contact_en_verified');
 
     // 意大利文版
-    clearVerification('profile_it_verified');
-    clearVerification('contact_it_verified');
+    if (currentKey !== 'profile_it_verified')
+        clearVerification('profile_it_verified');
+    if (currentKey !== 'contact_it_verified')
+        clearVerification('contact_it_verified');
+
+    // 日文版
+    if (currentKey !== 'profile_jp_verified')
+        clearVerification('profile_jp_verified');
+    if (currentKey !== 'contact_jp_verified')
+        clearVerification('contact_jp_verified');
 }
 
 // 根据目标页面语言调整验证页面文字
@@ -114,6 +169,15 @@ function startAutoRedirect(seconds) {
 
         if (remainingSeconds <= 0) {
             clearInterval(countdownInterval);
+
+            // 确保在跳转前设置验证标记
+            const verificationKey = getVerificationKeyForPage(redirectPage);
+            markAsVerified(verificationKey);
+
+            // 添加防循环标记
+            sessionStorage.setItem('just_verified', 'true');
+            setTimeout(() => sessionStorage.removeItem('just_verified'), 5000); // 5秒后移除
+
             window.location.href = redirectPage;
         }
     }, 1000);
@@ -127,46 +191,29 @@ function onTurnstileSuccess(token) {
     // 显示加载指示器
     document.getElementById('loading-indicator').style.display = 'block';
 
-    // 验证过程 - 这里我们直接设置验证成功
-    setTimeout(function () {
+    // 获取验证键
+    const verificationKey = getVerificationKeyForPage(redirectPage);
+
+    // 模拟后端验证过程
+    setTimeout(() => {
+        // 标记为已验证
+        markAsVerified(verificationKey);
+
         // 隐藏加载指示器
         document.getElementById('loading-indicator').style.display = 'none';
 
-        // 根据重定向页面设置相应的验证标记
-        if (redirectPage.includes('profile')) {
-            // 根据语言版本设置不同的验证标记
-            if (redirectPage.includes('/en/')) {
-                setVerified('profile_en_verified');
-            } else if (redirectPage.includes('/it/')) {
-                setVerified('profile_it_verified');
-            } else {
-                setVerified('profile_verified');
-            }
-        } else if (redirectPage.includes('contact')) {
-            // 根据语言版本设置不同的验证标记
-            if (redirectPage.includes('/en/')) {
-                setVerified('contact_en_verified');
-            } else if (redirectPage.includes('/it/')) {
-                setVerified('contact_it_verified');
-            } else {
-                setVerified('contact_verified');
-            }
-        }
-
         // 显示继续按钮
         const continueBtn = document.getElementById('continue-btn');
-        continueBtn.style.display = 'inline-block';
+        continueBtn.style.display = 'block';
 
-        // 设置继续按钮点击事件
-        continueBtn.addEventListener('click', function () {
-            // 如果有正在进行的倒计时，清除它
-            if (window.countdownIntervalId) {
-                clearInterval(window.countdownIntervalId);
-            }
+        // 添加点击事件
+        continueBtn.onclick = function () {
+            // 添加防循环标记
+            sessionStorage.setItem('just_verified', 'true');
             window.location.href = redirectPage;
-        });
+        };
 
-        // 开始自动跳转倒计时
+        // 启动自动跳转
         startAutoRedirect(5);
     }, 1500);
 }

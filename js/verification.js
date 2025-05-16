@@ -6,7 +6,10 @@
 // 检查是否已经通过验证
 function isVerified(key) {
     try {
-        return sessionStorage.getItem(key) === 'true';
+        // 使用sessionStorage代替localStorage，这样关闭浏览器后会清除验证
+        const status = sessionStorage.getItem(key);
+        console.log(`Checking verification for ${key}: ${status}`);
+        return status === 'true';
     } catch (e) {
         console.error('验证状态检查失败:', e);
         return false;
@@ -16,6 +19,7 @@ function isVerified(key) {
 // 标记为已验证
 function markAsVerified(key) {
     try {
+        console.log(`Marking ${key} as verified`);
         sessionStorage.setItem(key, 'true');
         return true;
     } catch (e) {
@@ -27,12 +31,42 @@ function markAsVerified(key) {
 // 清除验证状态
 function clearVerification(key) {
     try {
+        console.log(`Clearing verification for ${key}`);
         sessionStorage.removeItem(key);
         return true;
     } catch (e) {
         console.error('清除验证状态失败:', e);
         return false;
     }
+}
+
+// 防止无限重定向
+function checkRedirectAttempts(pageType, lang) {
+    const key = `${pageType}_${lang}_redirect_attempts`;
+    let attempts = parseInt(sessionStorage.getItem(key) || '0');
+    const MAX_ATTEMPTS = 2;
+
+    if (attempts >= MAX_ATTEMPTS) {
+        console.warn(
+            `最大重定向次数已达到(${attempts}/${MAX_ATTEMPTS})，跳过验证`
+        );
+        // 重置计数器
+        sessionStorage.setItem(key, '0');
+        return false; // 不再重定向
+    }
+
+    // 增加计数器
+    attempts++;
+    sessionStorage.setItem(key, attempts.toString());
+    console.log(`重定向尝试 ${attempts}/${MAX_ATTEMPTS}`);
+    return true; // 可以重定向
+}
+
+// 重置重定向计数器
+function resetRedirectCounter(pageType, lang) {
+    const key = `${pageType}_${lang}_redirect_attempts`;
+    sessionStorage.setItem(key, '0');
+    console.log(`重置重定向计数器: ${key}`);
 }
 
 // 当 Turnstile 验证成功时的回调
@@ -79,12 +113,46 @@ function onTurnstileSuccess(token) {
 
         // 添加点击事件处理程序
         continueBtn.onclick = function () {
+            // 重置相关重定向计数器
+            if (redirectPage.includes('profile')) {
+                const lang = redirectPage.includes('-en')
+                    ? 'en'
+                    : redirectPage.includes('-it')
+                    ? 'it'
+                    : redirectPage.includes('-jp')
+                    ? 'jp'
+                    : 'cn';
+                resetRedirectCounter('profile', lang);
+            } else if (redirectPage.includes('contact')) {
+                const lang = redirectPage.includes('-en')
+                    ? 'en'
+                    : redirectPage.includes('-it')
+                    ? 'it'
+                    : redirectPage.includes('-jp')
+                    ? 'jp'
+                    : 'cn';
+                resetRedirectCounter('contact', lang);
+            }
+
             window.location.href = redirectPage;
         };
 
         // 启动自动跳转
         startAutoRedirect(5);
     }, 1500);
+}
+
+// 用于解决重定向循环的问题
+function preventRedirectLoop() {
+    const currentLocation = window.location.pathname;
+    const referrer = document.referrer;
+
+    // 如果是从验证页面返回的，添加一个标记防止重复验证
+    if (referrer && referrer.includes('verify.html')) {
+        const tempKey = 'temp_verified_' + Date.now();
+        sessionStorage.setItem(tempKey, 'true');
+        setTimeout(() => sessionStorage.removeItem(tempKey), 5000); // 5秒后移除临时标记
+    }
 }
 
 // 当页面加载时初始化
@@ -95,5 +163,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (continueBtn) {
             continueBtn.style.display = 'none';
         }
+    } else {
+        // 非验证页面执行防循环逻辑
+        preventRedirectLoop();
     }
 });
