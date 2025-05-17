@@ -30,7 +30,7 @@ const redirectPage = urlParams.get('redirect') || 'index.html';
 
 // 获取页面对应的验证键
 function getVerificationKeyForPage(page) {
-    if (page.includes('profile.html')) {
+    if (page.includes('zh-CN/profile.html') || page.includes('profile.html')) {
         return 'profile_verified';
     } else if (page.includes('en/profile-en.html')) {
         return 'profile_en_verified';
@@ -38,7 +38,10 @@ function getVerificationKeyForPage(page) {
         return 'profile_it_verified';
     } else if (page.includes('jp/profile-jp.html')) {
         return 'profile_jp_verified';
-    } else if (page.includes('contact.html')) {
+    } else if (
+        page.includes('zh-CN/contact.html') ||
+        page.includes('contact.html')
+    ) {
         return 'contact_verified';
     } else if (page.includes('en/contact-en.html')) {
         return 'contact_en_verified';

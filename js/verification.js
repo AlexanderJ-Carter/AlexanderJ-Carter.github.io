@@ -69,6 +69,31 @@ function resetRedirectCounter(pageType, lang) {
     console.log(`重置重定向计数器: ${key}`);
 }
 
+// 获取页面对应的验证标记
+function getVerificationKeyForPage(page) {
+    if (page.includes('zh-CN/profile.html') || page.includes('profile.html')) {
+        return 'profile_verified';
+    } else if (page.includes('en/profile-en.html')) {
+        return 'profile_en_verified';
+    } else if (page.includes('it/profile-it.html')) {
+        return 'profile_it_verified';
+    } else if (page.includes('jp/profile-jp.html')) {
+        return 'profile_jp_verified';
+    } else if (
+        page.includes('zh-CN/contact.html') ||
+        page.includes('contact.html')
+    ) {
+        return 'contact_verified';
+    } else if (page.includes('en/contact-en.html')) {
+        return 'contact_en_verified';
+    } else if (page.includes('it/contact-it.html')) {
+        return 'contact_it_verified';
+    } else if (page.includes('jp/contact-jp.html')) {
+        return 'contact_jp_verified';
+    }
+    return 'general_verified';
+}
+
 // 当 Turnstile 验证成功时的回调
 function onTurnstileSuccess(token) {
     // 显示加载指示器
@@ -81,7 +106,10 @@ function onTurnstileSuccess(token) {
     // 根据重定向目标设置对应的验证标记
     let verificationKey = 'general_verified';
 
-    if (redirectPage.includes('profile.html')) {
+    if (
+        redirectPage.includes('profile.html') ||
+        redirectPage.includes('zh-CN/profile.html')
+    ) {
         verificationKey = 'profile_verified';
     } else if (redirectPage.includes('en/profile-en.html')) {
         verificationKey = 'profile_en_verified';
@@ -89,7 +117,10 @@ function onTurnstileSuccess(token) {
         verificationKey = 'profile_it_verified';
     } else if (redirectPage.includes('jp/profile-jp.html')) {
         verificationKey = 'profile_jp_verified';
-    } else if (redirectPage.includes('contact.html')) {
+    } else if (
+        redirectPage.includes('contact.html') ||
+        redirectPage.includes('zh-CN/contact.html')
+    ) {
         verificationKey = 'contact_verified';
     } else if (redirectPage.includes('en/contact-en.html')) {
         verificationKey = 'contact_en_verified';
@@ -118,19 +149,19 @@ function onTurnstileSuccess(token) {
                 const lang = redirectPage.includes('-en')
                     ? 'en'
                     : redirectPage.includes('-it')
-                        ? 'it'
-                        : redirectPage.includes('-jp')
-                            ? 'jp'
-                            : 'cn';
+                    ? 'it'
+                    : redirectPage.includes('-jp')
+                    ? 'jp'
+                    : 'cn';
                 resetRedirectCounter('profile', lang);
             } else if (redirectPage.includes('contact')) {
                 const lang = redirectPage.includes('-en')
                     ? 'en'
                     : redirectPage.includes('-it')
-                        ? 'it'
-                        : redirectPage.includes('-jp')
-                            ? 'jp'
-                            : 'cn';
+                    ? 'it'
+                    : redirectPage.includes('-jp')
+                    ? 'jp'
+                    : 'cn';
                 resetRedirectCounter('contact', lang);
             }
 

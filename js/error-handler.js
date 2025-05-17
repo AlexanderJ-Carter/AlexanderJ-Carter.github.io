@@ -54,7 +54,7 @@ function handle404() {
     } else {
         // 默认中文或未能识别的语言环境
         console.log('默认跳转到中文404页面');
-        window.location.href = `../zh-CN/404.html`;
+        window.location.href = `../404.html`;
     }
 }
 
