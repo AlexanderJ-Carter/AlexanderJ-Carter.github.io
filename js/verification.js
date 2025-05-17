@@ -149,19 +149,19 @@ function onTurnstileSuccess(token) {
                 const lang = redirectPage.includes('-en')
                     ? 'en'
                     : redirectPage.includes('-it')
-                    ? 'it'
-                    : redirectPage.includes('-jp')
-                    ? 'jp'
-                    : 'cn';
+                        ? 'it'
+                        : redirectPage.includes('-jp')
+                            ? 'jp'
+                            : 'cn';
                 resetRedirectCounter('profile', lang);
             } else if (redirectPage.includes('contact')) {
                 const lang = redirectPage.includes('-en')
                     ? 'en'
                     : redirectPage.includes('-it')
-                    ? 'it'
-                    : redirectPage.includes('-jp')
-                    ? 'jp'
-                    : 'cn';
+                        ? 'it'
+                        : redirectPage.includes('-jp')
+                            ? 'jp'
+                            : 'cn';
                 resetRedirectCounter('contact', lang);
             }
 
