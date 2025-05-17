@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (cookieTitle.textContent === "Cookie 使用提示") {
                 cookieTitle.textContent = "Cookie Notice";
                 cookieText.innerHTML =
-                    'We use cookies to provide a better browsing experience. By continuing to use this site, you agree to our cookie policy. <a href="../privacy.html" class="cookie-link">Learn more</a>';
+                    'We use cookies to provide a better browsing experience. By continuing to use this site, you agree to our cookie policy. <a href="../zh-CN/privacy.html" class="cookie-link">Learn more</a>';
                 acceptBtn.innerHTML = '<i class="fas fa-check"></i> Accept';
                 rejectBtn.textContent = "Essential Cookies Only";
             }

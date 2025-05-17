@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <title>Opera d'Arte Mancante - 404</title>
+    <script>
+        // Rilevamento della lingua per le pagine 404 su GitHub Pages
+        (function () {
+            // Ignora il reindirizzamento se siamo già sulla pagina 404 corretta
+            if (window.location.pathname.endsWith('/404-it.html')) {
+                return;
+            }
+
+            // Ottieni il percorso corrente
+            var path = window.location.pathname.toLowerCase();
+            var redirectUrl = '';
+            var shouldRedirect = false;
+
+            // Controlla se siamo in un contesto non italiano
+            if (!(path.match(/\/it\//i) || path.match(/\/it-.*\.html$/i) || path.match(/\/.*-it\.html$/i))) {
+                if (path.match(/\/en\//i) || path.match(/\/en-.*\.html$/i) || path.match(/\/.*-en\.html$/i)) {
+                    redirectUrl = '/en/404-en.html';
+                    shouldRedirect = true;
+                } else if (path.match(/\/jp\//i) || path.match(/\/jp-.*\.html$/i) || path.match(/\/.*-jp\.html$/i)) {
+                    redirectUrl = '/jp/404-jp.html';
+                    shouldRedirect = true;
+                } else {
+                    // Per percorsi non riconosciuti, usa il cinese come predefinito
+                    redirectUrl = '/404.html';
+                    shouldRedirect = true;
+                }
+            }
+
+            // Reindirizza se necessario
+            if (shouldRedirect && redirectUrl) {
+                // Gestisci il potenziale percorso del progetto GitHub Pages
+                var projectPath = '';
+                var hostParts = window.location.hostname.split('.');
+                if (hostParts[0] !== 'localhost' &&
+                    !(hostParts[1] === 'github' && hostParts[2] === 'io') &&
+                    window.location.pathname.split('/')[1]) {
+                    projectPath = '/' + window.location.pathname.split('/')[1];
+                }
+
+                window.location.replace(projectPath + redirectUrl);
+            }
+        })();
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap"
+            rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Cormorant Garamond', serif;
+            color: #46433A;
+            background-color: #F5F2EB;
+            overflow-x: hidden;
+        }
+
+        .museum-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><rect width="100%" height="100%" fill="%23F5F2EB"/><path d="M0 20 L40 20" stroke="%23CDC9C0" stroke-width="0.5"/><path d="M20 0 L20 40" stroke="%23CDC9C0" stroke-width="0.5"/></svg>');
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .error-container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .frame {
+            position: relative;
+            width: 350px;
+            height: 450px;
+            background-color: #D9D0C1;
+            border: 20px solid #8E7F65;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .frame::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 30px;
+            background-color: #8E7F65;
+            clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+        }
+
+        .frame::after {
+            content: '';
+            position: absolute;
+            width: calc(100% - 20px);
+            height: calc(100% - 20px);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            top: 10px;
+            left: 10px;
+        }
+
+        .missing-artwork {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: #6B5B45;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            margin: 0;
+            color: #3C392F;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-message {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #6B5B45;
+            margin-bottom: 1rem;
+        }
+
+        .error-subtitle {
+            color: #7A7267;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .btn-home {
+            background-color: #8E7F65;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 0;
+            font-family: 'Playfair Display', serif;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn-home:hover {
+            background-color: #6B5B45;
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        .museum-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bench {
+            position: absolute;
+            bottom: 7%;
+            left: 15%;
+            width: 120px;
+            height: 40px;
+            background-color: #8E7F65;
+            border-radius: 5px;
+        }
+
+        .bench::before,
+        .bench::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 30px;
+            background-color: #6B5B45;
+            bottom: -30px;
+        }
+
+        .bench::before {
+            left: 20px;
+        }
+
+        .bench::after {
+            right: 20px;
+        }
+
+        .artwork {
+            position: absolute;
+            border: 10px solid #8E7F65;
+            background-color: #D9D0C1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .artwork-1 {
+            width: 100px;
+            height: 140px;
+            top: 15%;
+            right: 10%;
+            transform: rotate(2deg);
+        }
+
+        .artwork-2 {
+            width: 120px;
+            height: 90px;
+            bottom: 30%;
+            left: 8%;
+            transform: rotate(-3deg);
+        }
+
+        .artwork-text {
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            color: #6B5B45;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        .artwork-text-1 {
+            top: 25%;
+            right: 15%;
+            transform: rotate(2deg);
+        }
+
+        .artwork-text-2 {
+            bottom: 35%;
+            left: 12%;
+            transform: rotate(-3deg);
+        }
+
+        /* Puzzle Game */
+        .puzzle-container {
+            width: 250px;
+            height: 250px;
+            position: relative;
+            margin: 1rem auto;
+            display: none;
+            border: 10px solid #8E7F65;
+            background-color: #D9D0C1;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .puzzle-piece {
+            position: absolute;
+            width: 78px;
+            height: 78px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            background-color: #BFB6A5;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23D9D0C1'/%3E%3Cpath d='M0,0 L100,100 M100,0 L0,100' stroke='%238E7F65' stroke-width='1'/%3E%3C/svg%3E");
+            border: 1px solid #8E7F65;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            color: #6B5B45;
+            font-weight: bold;
+        }
+
+        .puzzle-piece:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .empty-space {
+            background: #D9D0C1;
+            border: 1px dashed #8E7F65;
+        }
+
+        .game-instructions {
+            color: #7A7267;
+            font-size: 1rem;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        .victory-message {
+            display: none;
+            margin-top: 1rem;
+            color: #6B5B45;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .frame {
+                width: 280px;
+                height: 350px;
+            }
+
+            h1 {
+                font-size: 4rem;
+            }
+
+            .error-message {
+                font-size: 1.6rem;
+            }
+
+            .bench,
+            .artwork-1,
+            .artwork-2,
+            .artwork-text-1,
+            .artwork-text-2 {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .frame {
+                width: 250px;
+                height: 300px;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            .error-message {
+                font-size: 1.4rem;
+            }
+
+            .error-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="museum-background"></div>
+<div class="museum-elements">
+    <div class="bench"></div>
+    <div class="artwork artwork-1"></div>
+    <div class="artwork artwork-2"></div>
+    <div class="artwork-text artwork-text-1">Natura Morta</div>
+    <div class="artwork-text artwork-text-2">Paesaggio</div>
+</div>
+
+<div class="error-container">
+    <div class="frame">
+        <p class="missing-artwork">Opera d'Arte Mancante</p>
+        <h1>404</h1>
+        <p class="error-subtitle">Questo capolavoro non è attualmente esposto nella nostra galleria.</p>
+    </div>
+
+    <p class="error-message">Pagina Non Trovata</p>
+    <p class="error-subtitle">La pagina che stai cercando potrebbe essere stata rimossa, rinominata o
+        momentaneamente non disponibile. Mentre aspetti, perché non ricomponi questo piccolo puzzle?</p>
+
+    <div class="puzzle-container" id="puzzleContainer"></div>
+    <p class="game-instructions" id="gameInstructions">Clicca sulle tessere accanto allo spazio vuoto per spostarle
+    </p>
+    <p class="victory-message" id="victoryMessage">Bravissimo! Hai ricomposto il puzzle!</p>
+
+    <button class="btn-home" id="playButton"><i class="fas fa-puzzle-piece me-2"></i>Gioca al Puzzle</button>
+    <a class="btn-home" href="index-it.html"><i class="fas fa-home me-2"></i>Torna alla Home</a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const playButton = document.getElementById('playButton');
+        const puzzleContainer = document.getElementById('puzzleContainer');
+        const gameInstructions = document.getElementById('gameInstructions');
+        const victoryMessage = document.getElementById('victoryMessage');
+
+        const GRID_SIZE = 3;
+        const TOTAL_TILES = GRID_SIZE * GRID_SIZE;
+        let tiles = [];
+        let emptyTileIndex = TOTAL_TILES - 1;
+        let gameStarted = false;
+
+        function startGame() {
+            playButton.style.display = 'none';
+            puzzleContainer.style.display = 'block';
+            gameInstructions.style.display = 'block';
+            victoryMessage.style.display = 'none';
+            gameStarted = true;
+
+            // Clear existing tiles
+            puzzleContainer.innerHTML = '';
+
+            // Initialize tiles
+            tiles = Array.from({length: TOTAL_TILES}, (_, i) => i);
+
+            // Shuffle tiles (ensuring puzzle is solvable)
+            do {
+                shuffleTiles();
+            } while (!isSolvable());
+
+            // Render tiles
+            renderTiles();
+        }
+
+        function shuffleTiles() {
+            for (let i = tiles.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+
+                if (tiles[i] === TOTAL_TILES - 1) emptyTileIndex = i;
+                if (tiles[j] === TOTAL_TILES - 1) emptyTileIndex = j;
+            }
+        }
+
+        function isSolvable() {
+            // Count inversions
+            let inversions = 0;
+            for (let i = 0; i < tiles.length; i++) {
+                if (tiles[i] === TOTAL_TILES - 1) continue; // Skip empty tile
+
+                for (let j = i + 1; j < tiles.length; j++) {
+                    if (tiles[j] === TOTAL_TILES - 1) continue; // Skip empty tile
+
+                    if (tiles[i] > tiles[j]) {
+                        inversions++;
+                    }
+                }
+            }
+
+            // For 3x3 puzzle, if number of inversions is even, the puzzle is solvable
+            return inversions % 2 === 0;
+        }
+
+        function renderTiles() {
+            puzzleContainer.innerHTML = '';
+
+            for (let i = 0; i < tiles.length; i++) {
+                const row = Math.floor(i / GRID_SIZE);
+                const col = i % GRID_SIZE;
+
+                const tileValue = tiles[i];
+                const tileElement = document.createElement('div');
+
+                if (tileValue === TOTAL_TILES - 1) {
+                    tileElement.className = 'puzzle-piece empty-space';
+                } else {
+                    tileElement.className = 'puzzle-piece';
+                    tileElement.textContent = tileValue + 1;
+
+                    tileElement.addEventListener('click', () => {
+                        if (isAdjacent(i, emptyTileIndex)) {
+                            moveTile(i);
+                        }
+                    });
+                }
+
+                tileElement.style.top = `${row * (100 / GRID_SIZE)}%`;
+                tileElement.style.left = `${col * (100 / GRID_SIZE)}%`;
+                tileElement.style.width = `${(100 / GRID_SIZE) - 2}%`;
+                tileElement.style.height = `${(100 / GRID_SIZE) - 2}%`;
+
+                puzzleContainer.appendChild(tileElement);
+            }
+        }
+
+        function isAdjacent(tileIndex, emptyIndex) {
+            const tileRow = Math.floor(tileIndex / GRID_SIZE);
+            const tileCol = tileIndex % GRID_SIZE;
+            const emptyRow = Math.floor(emptyIndex / GRID_SIZE);
+            const emptyCol = emptyIndex % GRID_SIZE;
+
+            return (
+                (Math.abs(tileRow - emptyRow) === 1 && tileCol === emptyCol) ||
+                (Math.abs(tileCol - emptyCol) === 1 && tileRow === emptyRow)
+            );
+        }
+
+        function moveTile(tileIndex) {
+            [tiles[tileIndex], tiles[emptyTileIndex]] = [tiles[emptyTileIndex], tiles[tileIndex]];
+            emptyTileIndex = tileIndex;
+
+            renderTiles();
+
+            if (checkWin()) {
+                victoryMessage.style.display = 'block';
+                setTimeout(() => {
+                    startGame();
+                }, 3000);
+            }
+        }
+
+        function checkWin() {
+            for (let i = 0; i < tiles.length - 1; i++) {
+                if (tiles[i] !== i) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        playButton.addEventListener('click', startGame);
+    });
+</script>
+
+<script>
+    // Assicurarsi che questa pagina sia mostrata nel contesto linguistico corretto
+    document.addEventListener('DOMContentLoaded', function () {
+        const currentPath = window.location.pathname.toLowerCase();
+        let shouldRedirect = false;
+        let redirectUrl = '';
+
+        // Se siamo in un contesto non italiano ma stiamo visualizzando la pagina 404 italiana
+        if (currentPath.includes('/zh-CN/') ||
+            (!currentPath.includes('/it/') && !currentPath.includes('-it.html') &&
+                !currentPath.includes('/en/') && !currentPath.includes('-en.html') &&
+                !currentPath.includes('/jp/') && !currentPath.includes('-jp.html'))) {
+            shouldRedirect = true;
+            redirectUrl = '/404.html'; // Cinese predefinito
+        } else if (currentPath.includes('/en/') || currentPath.match(/\/(.*-en)\.html$/)) {
+            shouldRedirect = true;
+            redirectUrl = '/en/404-en.html';
+        } else if (currentPath.includes('/jp/') || currentPath.match(/\/(.*-jp)\.html$/)) {
+            shouldRedirect = true;
+            redirectUrl = '/jp/404-jp.html';
+        }
+
+        if (shouldRedirect && redirectUrl) {
+            window.location.href = redirectUrl;
+        }
+    });
+</script>
+</body>
+
+</html>

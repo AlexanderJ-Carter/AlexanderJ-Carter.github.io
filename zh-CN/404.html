@@ -6,11 +6,46 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <title>哎呀，页面走丢了！- 404</title>
+    <script>
+        // GitHub Pages 404页面语言检测和重定向
+        (function () {
+            // 获取当前路径
+            var path = window.location.pathname.toLowerCase();
+            var redirectUrl = '';
+            var shouldRedirect = false;
+
+            // 根据路径检测语言
+            if (path.match(/\/en\//i) || path.match(/\/en-.*\.html$/i) || path.match(/\/.*-en\.html$/i)) {
+                redirectUrl = '/en/404-en.html';
+                shouldRedirect = true;
+            } else if (path.match(/\/it\//i) || path.match(/\/it-.*\.html$/i) || path.match(/\/.*-it\.html$/i)) {
+                redirectUrl = '/it/404-it.html';
+                shouldRedirect = true;
+            } else if (path.match(/\/jp\//i) || path.match(/\/jp-.*\.html$/i) || path.match(/\/.*-jp\.html$/i)) {
+                redirectUrl = '/jp/404-jp.html';
+                shouldRedirect = true;
+            }
+
+            // 如果检测到特定语言，重定向到相应404页面
+            if (shouldRedirect && redirectUrl) {
+                // 处理GitHub Pages可能的项目子路径
+                var projectPath = '';
+                var hostParts = window.location.hostname.split('.');
+                if (hostParts[0] !== 'localhost' &&
+                    !(hostParts[1] === 'github' && hostParts[2] === 'io') &&
+                    window.location.pathname.split('/')[1]) {
+                    projectPath = '/' + window.location.pathname.split('/')[1];
+                }
+
+                window.location.replace(projectPath + redirectUrl);
+            }
+        })();
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="css/error.css" rel="stylesheet">
+    <link href="../css/error.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,12 +71,12 @@
         <p class="touch-instructions"><i class="fas fa-hand-pointer me-1"></i>在触摸设备上：左右滑动控制挡板</p>
     </div>
     <button class="btn-home" id="playButton"><i class="fas fa-gamepad me-2"></i>来玩个游戏</button>
-    <a class="btn-home" href="index.html"><i class="fas fa-home me-2"></i>返回首页</a>
+    <a class="btn-home" href="../index.html"><i class="fas fa-home me-2"></i>返回首页</a>
 </div>
 
 <div class="error-background"></div>
 
-<script src="js/error-game.js"></script>
+<script src="../js/error-game.js"></script>
 </body>
 
 </html>

@@ -98,9 +98,13 @@ function adjustLanguageBasedOnRedirect() {
     const autoRedirectText = document.getElementById('auto-redirect-text');
     const countdownText = document.getElementById('countdown-text');
     const securityInfo = document.querySelector('.security-info');
+    const backButton = document.querySelector('.back-btn');
+
+    // 获取更准确的语言标识
+    const redirectLanguage = detectLanguageFromRedirect(redirectPage);
 
     // 根据重定向目标调整语言
-    if (redirectPage.includes('/en/')) {
+    if (redirectLanguage === 'en') {
         // 英文界面
         if (titleElement) titleElement.textContent = 'Human Verification';
         if (textElement)
@@ -122,9 +126,10 @@ function adjustLanguageBasedOnRedirect() {
             securityInfo.innerHTML =
                 '<i class="fas fa-lock"></i>This verification is provided by Cloudflare Turnstile';
 
-        document.querySelector('.back-btn').innerHTML =
-            '<i class="fas fa-arrow-left me-2"></i>Back to Home';
-    } else if (redirectPage.includes('/it/')) {
+        if (backButton)
+            backButton.innerHTML =
+                '<i class="fas fa-arrow-left me-2"></i>Back to Home';
+    } else if (redirectLanguage === 'it') {
         // 意大利文界面
         if (titleElement) titleElement.textContent = 'Verifica Umana';
         if (textElement)
@@ -147,9 +152,48 @@ function adjustLanguageBasedOnRedirect() {
             securityInfo.innerHTML =
                 '<i class="fas fa-lock"></i>Questa verifica è fornita da Cloudflare Turnstile';
 
-        document.querySelector('.back-btn').innerHTML =
-            '<i class="fas fa-arrow-left me-2"></i>Torna alla Home';
+        if (backButton)
+            backButton.innerHTML =
+                '<i class="fas fa-arrow-left me-2"></i>Torna alla Home';
+    } else if (redirectLanguage === 'jp') {
+        // 日文界面
+        if (titleElement) titleElement.textContent = '人間の確認';
+        if (textElement)
+            textElement.textContent =
+                'ウェブサイトのセキュリティを確保し、より良いブラウジング体験を提供するために、以下の確認を完了してください。';
+        if (continueBtn)
+            continueBtn.innerHTML =
+                '<i class="fas fa-check-circle me-2"></i>続ける';
+        if (loadingText) loadingText.textContent = '確認中、お待ちください...';
+        if (autoRedirectText) {
+            const countdownSpan = autoRedirectText.querySelector('#countdown');
+            autoRedirectText.innerHTML =
+                '<i class="fas fa-clock"></i><span id="countdown">5</span>秒後にリダイレクトします';
+            if (countdownSpan)
+                autoRedirectText.querySelector('#countdown').textContent =
+                    countdownSpan.textContent;
+        }
+        if (securityInfo)
+            securityInfo.innerHTML =
+                '<i class="fas fa-lock"></i>この確認はCloudflare Turnstileによって提供されています';
+
+        if (backButton)
+            backButton.innerHTML =
+                '<i class="fas fa-arrow-left me-2"></i>ホームに戻る';
     }
+}
+
+// 从重定向URL检测语言
+function detectLanguageFromRedirect(url) {
+    if (!url) return 'zh-CN';
+
+    url = url.toLowerCase();
+
+    if (url.includes('/en/') || url.includes('-en.')) return 'en';
+    if (url.includes('/it/') || url.includes('-it.')) return 'it';
+    if (url.includes('/jp/') || url.includes('-jp.')) return 'jp';
+
+    return 'zh-CN';
 }
 
 // 自动跳转倒计时函数
