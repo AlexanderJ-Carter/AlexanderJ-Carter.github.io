@@ -212,10 +212,10 @@ function setupEnhancedConverter() {
                     document.documentElement.lang === 'ja'
                         ? 'JPY'
                         : document.documentElement.lang === 'it'
-                        ? 'EUR'
-                        : document.documentElement.lang === 'zh-cn'
-                        ? 'CNY'
-                        : 'USD';
+                            ? 'EUR'
+                            : document.documentElement.lang === 'zh-cn'
+                                ? 'CNY'
+                                : 'USD';
                 rates[baseCurrency] = 1;
 
                 const fromRate = rates[fromCurrency];
@@ -236,7 +236,7 @@ function setupEnhancedConverter() {
                         ${amount.toLocaleString()} ${fromCurrency} = 
                         <span style="color: var(--primary-color);">${toCurrencySymbol}${result.toLocaleString(
                     undefined,
-                    { maximumFractionDigits: 2 }
+                    {maximumFractionDigits: 2}
                 )} ${toCurrency}</span>
                     </p>
                     <small>${getLocalizedString('exchangerateSource')}</small>`;
@@ -363,8 +363,8 @@ async function getExchangeRates(baseCurrency) {
             html += `<thead><tr>
                         <th>${getLocalizedString('currency')}</th>
                         <th style="text-align:right">${getLocalizedString(
-                            'rate'
-                        )}</th>
+                'rate'
+            )}</th>
                      </tr></thead><tbody>`;
 
             currenciesToShow.forEach((currency) => {
@@ -441,11 +441,11 @@ async function getCryptoPrices(currency) {
         html += `<thead><tr>
                     <th>${getLocalizedString('cryptocurrency')}</th>
                     <th style="text-align:right">${getLocalizedString(
-                        'price'
-                    )} (${currency})</th>
+            'price'
+        )} (${currency})</th>
                     <th style="text-align:right">${getLocalizedString(
-                        '24hChange'
-                    )}</th>
+            '24hChange'
+        )}</th>
                  </tr></thead><tbody>`;
 
         const cryptos = [
@@ -461,7 +461,7 @@ async function getCryptoPrices(currency) {
                 name: 'Ethereum',
                 code: 'ETH',
             },
-            { id: 'ripple', icon: 'fas fa-coins', name: 'Ripple', code: 'XRP' },
+            {id: 'ripple', icon: 'fas fa-coins', name: 'Ripple', code: 'XRP'},
             {
                 id: 'litecoin',
                 icon: 'fas fa-coins',
@@ -492,10 +492,10 @@ async function getCryptoPrices(currency) {
                     </td>
                     <td class="currency-rate">${currencySymbol}${data[
                     crypto.id
-                ][currLower].toLocaleString()}</td>
+                    ][currLower].toLocaleString()}</td>
                     <td class="currency-rate ${
-                        isPositive ? 'positive' : 'negative'
-                    }">
+                    isPositive ? 'positive' : 'negative'
+                }">
                         ${icon} ${
                     data[crypto.id][changeSuffix]
                         ? data[crypto.id][changeSuffix].toFixed(2) + '%'
@@ -615,8 +615,8 @@ async function getMetalPrices() {
             <div class="metal-price">
                 <div class="metal-info">
                     <div class="metal-icon ${
-                        metal.bg
-                    }"><i class="fas fa-coins"></i></div>
+                metal.bg
+            }"><i class="fas fa-coins"></i></div>
                     <div>
                         <div class="metal-name">${metalNameByLang} <span class="metal-symbol">${
                 metal.symbol
@@ -625,12 +625,12 @@ async function getMetalPrices() {
                 </div>
                 <div class="metal-price-value">
                     $${metal.price.toLocaleString(undefined, {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                    })}
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+            })}
                     <span class="${
-                        isPositive ? 'positive' : 'negative'
-                    }" style="font-size: 0.8em; margin-left: 5px;">
+                isPositive ? 'positive' : 'negative'
+            }" style="font-size: 0.8em; margin-left: 5px;">
                         ${icon} ${Math.abs(metal.change).toFixed(2)}%
                     </span>
                 </div>
@@ -691,7 +691,7 @@ async function getStockMarketData() {
                 if (
                     !window.stockData[stock.symbol] ||
                     Date.now() - window.stockData[stock.symbol].timestamp >
-                        60 * 60 * 1000
+                    60 * 60 * 1000
                 ) {
                     // 1小时缓存
 
@@ -716,7 +716,7 @@ async function getStockMarketData() {
                             ),
                             changePercent: data['Global Quote'][
                                 '10. change percent'
-                            ].replace('%', ''),
+                                ].replace('%', ''),
                             timestamp: Date.now(),
                         };
                         dataLoaded = true;
@@ -741,15 +741,15 @@ async function getStockMarketData() {
                             <span class="currency-code">${stock.symbol}</span>
                         </td>
                         <td class="currency-rate">${stockInfo.price.toLocaleString(
-                            undefined,
-                            {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2,
-                            }
-                        )}</td>
+                        undefined,
+                        {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                        }
+                    )}</td>
                         <td class="currency-rate ${
-                            isPositive ? 'positive' : 'negative'
-                        }">
+                        isPositive ? 'positive' : 'negative'
+                    }">
                             ${icon} ${Math.abs(
                         parseFloat(stockInfo.changePercent)
                     ).toFixed(2)}%
@@ -795,31 +795,31 @@ function getMainIndicesByLanguage() {
     switch (lang) {
         case 'ja':
             return [
-                { symbol: 'N225.T', name: '日経平均株価（日経225）' },
-                { symbol: '7203.T', name: 'トヨタ自動車' },
-                { symbol: '9984.T', name: 'ソフトバンクグループ' },
-                { symbol: '6758.T', name: 'ソニーグループ' },
+                {symbol: 'N225.T', name: '日経平均株価（日経225）'},
+                {symbol: '7203.T', name: 'トヨタ自動車'},
+                {symbol: '9984.T', name: 'ソフトバンクグループ'},
+                {symbol: '6758.T', name: 'ソニーグループ'},
             ];
         case 'it':
             return [
-                { symbol: 'FTSEMIB.MI', name: 'FTSE MIB' },
-                { symbol: 'ENI.MI', name: 'Eni S.p.A.' },
-                { symbol: 'ISP.MI', name: 'Intesa Sanpaolo' },
-                { symbol: 'ENEL.MI', name: 'Enel S.p.A.' },
+                {symbol: 'FTSEMIB.MI', name: 'FTSE MIB'},
+                {symbol: 'ENI.MI', name: 'Eni S.p.A.'},
+                {symbol: 'ISP.MI', name: 'Intesa Sanpaolo'},
+                {symbol: 'ENEL.MI', name: 'Enel S.p.A.'},
             ];
         case 'zh-cn':
             return [
-                { symbol: '000001.SS', name: '上证指数' },
-                { symbol: '399001.SZ', name: '深证成指' },
-                { symbol: '600519.SS', name: '贵州茅台' },
-                { symbol: '601318.SS', name: '中国平安' },
+                {symbol: '000001.SS', name: '上证指数'},
+                {symbol: '399001.SZ', name: '深证成指'},
+                {symbol: '600519.SS', name: '贵州茅台'},
+                {symbol: '601318.SS', name: '中国平安'},
             ];
         default: // 英文和其他语言
             return [
-                { symbol: 'SPY', name: 'S&P 500 ETF' },
-                { symbol: 'QQQ', name: 'NASDAQ 100 ETF' },
-                { symbol: 'DIA', name: 'Dow Jones ETF' },
-                { symbol: 'IWM', name: 'Russell 2000 ETF' },
+                {symbol: 'SPY', name: 'S&P 500 ETF'},
+                {symbol: 'QQQ', name: 'NASDAQ 100 ETF'},
+                {symbol: 'DIA', name: 'Dow Jones ETF'},
+                {symbol: 'IWM', name: 'Russell 2000 ETF'},
             ];
     }
 }
@@ -881,12 +881,12 @@ async function getCommodityData() {
                     <span class="currency-code">WTI</span>
                 </td>
                 <td class="currency-rate">$${currentPrice.toLocaleString(
-                    undefined,
-                    { minimumFractionDigits: 2, maximumFractionDigits: 2 }
-                )}</td>
+                undefined,
+                {minimumFractionDigits: 2, maximumFractionDigits: 2}
+            )}</td>
                 <td class="currency-rate ${
-                    isPositive ? 'positive' : 'negative'
-                }">
+                isPositive ? 'positive' : 'negative'
+            }">
                     ${icon} ${Math.abs(changePercent).toFixed(2)}%
                 </td>
             </tr>`;
@@ -1148,10 +1148,10 @@ function initializeDashboard() {
         document.documentElement.lang === 'ja'
             ? 'JPY'
             : document.documentElement.lang === 'it'
-            ? 'EUR'
-            : document.documentElement.lang === 'zh-cn'
-            ? 'CNY'
-            : 'USD';
+                ? 'EUR'
+                : document.documentElement.lang === 'zh-cn'
+                    ? 'CNY'
+                    : 'USD';
 
     // 获取基本金融数据
     getExchangeRates(baseCurrency);

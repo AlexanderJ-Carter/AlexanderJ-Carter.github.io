@@ -19,46 +19,46 @@
 </head>
 
 <body>
-    <a class="back-btn" href="index.html">
-        <i class="fas fa-arrow-left me-2"></i>返回主页
-    </a>
+<a class="back-btn" href="index.html">
+    <i class="fas fa-arrow-left me-2"></i>返回主页
+</a>
 
-    <div class="verification-container">
-        <h2 class="verification-title">
-            <i class="fas fa-shield-alt"></i><span>人机验证</span>
-        </h2>
-        <p class="verification-text">为确保网站安全并提供更好的浏览体验，请完成下方的验证，验证完成后即可访问您请求的页面。</p>
+<div class="verification-container">
+    <h2 class="verification-title">
+        <i class="fas fa-shield-alt"></i><span>人机验证</span>
+    </h2>
+    <p class="verification-text">为确保网站安全并提供更好的浏览体验，请完成下方的验证，验证完成后即可访问您请求的页面。</p>
 
-        <div class="verification-widget">
-            <!-- Cloudflare Turnstile 验证组件 -->
-            <div class="cf-turnstile" data-callback="onTurnstileSuccess" data-sitekey="0x4AAAAAABdh_m4Oroh5Egsy"></div>
-        </div>
+    <div class="verification-widget">
+        <!-- Cloudflare Turnstile 验证组件 -->
+        <div class="cf-turnstile" data-callback="onTurnstileSuccess" data-sitekey="0x4AAAAAABdh_m4Oroh5Egsy"></div>
+    </div>
 
-        <div class="loading-indicator" id="loading-indicator">
-            <div class="loader"></div>
-            <p>正在验证中，请稍候...</p>
-        </div>
+    <div class="loading-indicator" id="loading-indicator">
+        <div class="loader"></div>
+        <p>正在验证中，请稍候...</p>
+    </div>
 
-        <div class="error-message" id="error-message">
-            <i class="fas fa-exclamation-circle me-2"></i>验证失败，请重试
-        </div>
+    <div class="error-message" id="error-message">
+        <i class="fas fa-exclamation-circle me-2"></i>验证失败，请重试
+    </div>
 
-        <div class="verification-controls">
-            <button class="continue-btn" id="continue-btn">
-                <i class="fas fa-check-circle me-2"></i>继续访问
-            </button>
-            <div class="auto-redirect-text" id="auto-redirect-text" style="display: none;">
-                <i class="fas fa-clock"></i>将在<span id="countdown">5</span>秒后自动跳转
-            </div>
-        </div>
-
-        <div class="security-info">
-            <i class="fas fa-lock"></i>该验证由 Cloudflare Turnstile 提供安全保障
+    <div class="verification-controls">
+        <button class="continue-btn" id="continue-btn">
+            <i class="fas fa-check-circle me-2"></i>继续访问
+        </button>
+        <div class="auto-redirect-text" id="auto-redirect-text" style="display: none;">
+            <i class="fas fa-clock"></i>将在<span id="countdown">5</span>秒后自动跳转
         </div>
     </div>
 
-    <!-- 页面专用脚本 -->
-    <script src="js/verify.js"></script>
+    <div class="security-info">
+        <i class="fas fa-lock"></i>该验证由 Cloudflare Turnstile 提供安全保障
+    </div>
+</div>
+
+<!-- 页面专用脚本 -->
+<script src="js/verify.js"></script>
 </body>
 
 </html>

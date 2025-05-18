@@ -3,81 +3,81 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Financial Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/financial-dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../css/financial-dashboard.css" rel="stylesheet">
 </head>
 
 <body class="theme-en">
-    <header>
-        <h1><i class="fas fa-chart-line"></i> Financial Dashboard</h1>
-        <p>Check the latest exchange rates and cryptocurrency prices</p>
-    </header>
+<header>
+    <h1><i class="fas fa-chart-line"></i> Financial Dashboard</h1>
+    <p>Check the latest exchange rates and cryptocurrency prices</p>
+</header>
 
-    <div class="dashboard">
-        <!-- Exchange rates at the top -->
-        <div class="card wide-card">
-            <h2><i class="fas fa-dollar-sign"></i> Exchange Rates (USD base)</h2>
-            <div id="exchange-rates">Loading data...</div>
-        </div>
-
-        <!-- Stock market section -->
-        <div class="card wide-card">
-            <h2><i class="fas fa-chart-line"></i> Stock Market</h2>
-            <div id="stock-market">Loading data...</div>
-        </div>
-
-        <!-- Economic Indicators section -->
-        <div class="card medium-card">
-            <h2><i class="fas fa-chart-bar"></i> Economic Indicators</h2>
-            <div id="economic-indicators">Loading data...</div>
-        </div>
-
-        <!-- Commodity Prices section -->
-        <div class="card medium-card">
-            <h2><i class="fas fa-oil-can"></i> Commodity Prices</h2>
-            <div id="commodity-prices">Loading data...</div>
-        </div>
-
-        <!-- Cryptocurrency prices -->
-        <div class="card medium-card">
-            <h2><i class="fab fa-bitcoin"></i> Cryptocurrency Prices</h2>
-            <div id="crypto-prices">Loading data...</div>
-        </div>
-
-        <!-- Precious metals -->
-        <div class="card medium-card">
-            <h2><i class="fas fa-coins"></i> Precious Metals (USD)</h2>
-            <div id="metal-prices">Loading data...</div>
-        </div>
-
-        <!-- Currency converter at the bottom -->
-        <div class="card full-card">
-            <h2><i class="fas fa-exchange-alt"></i> Currency Converter</h2>
-            <div class="converter">
-                <input type="number" id="amount" placeholder="Amount" value="1000">
-                <select id="from-currency">
-                    <option value="USD" selected>US Dollar (USD)</option>
-                    <option value="EUR">Euro (EUR)</option>
-                    <option value="GBP">British Pound (GBP)</option>
-                    <option value="JPY">Japanese Yen (JPY)</option>
-                    <option value="CNY">Chinese Yuan (CNY)</option>
-                </select>
-                <select id="to-currency">
-                    <option value="USD">US Dollar (USD)</option>
-                    <option value="EUR" selected>Euro (EUR)</option>
-                    <option value="GBP">British Pound (GBP)</option>
-                    <option value="JPY">Japanese Yen (JPY)</option>
-                    <option value="CNY">Chinese Yuan (CNY)</option>
-                </select>
-                <button id="convert-btn"><i class="fas fa-calculator"></i> Convert</button>
-                <div id="conversion-result" class="conversion-result" style="display:none;"></div>
-            </div>
-        </div>
+<div class="dashboard">
+    <!-- Exchange rates at the top -->
+    <div class="card wide-card">
+        <h2><i class="fas fa-dollar-sign"></i> Exchange Rates (USD base)</h2>
+        <div id="exchange-rates">Loading data...</div>
     </div>
 
-    <script src="../js/financial-dashboard.js"></script>
+    <!-- Stock market section -->
+    <div class="card wide-card">
+        <h2><i class="fas fa-chart-line"></i> Stock Market</h2>
+        <div id="stock-market">Loading data...</div>
+    </div>
+
+    <!-- Economic Indicators section -->
+    <div class="card medium-card">
+        <h2><i class="fas fa-chart-bar"></i> Economic Indicators</h2>
+        <div id="economic-indicators">Loading data...</div>
+    </div>
+
+    <!-- Commodity Prices section -->
+    <div class="card medium-card">
+        <h2><i class="fas fa-oil-can"></i> Commodity Prices</h2>
+        <div id="commodity-prices">Loading data...</div>
+    </div>
+
+    <!-- Cryptocurrency prices -->
+    <div class="card medium-card">
+        <h2><i class="fab fa-bitcoin"></i> Cryptocurrency Prices</h2>
+        <div id="crypto-prices">Loading data...</div>
+    </div>
+
+    <!-- Precious metals -->
+    <div class="card medium-card">
+        <h2><i class="fas fa-coins"></i> Precious Metals (USD)</h2>
+        <div id="metal-prices">Loading data...</div>
+    </div>
+
+    <!-- Currency converter at the bottom -->
+    <div class="card full-card">
+        <h2><i class="fas fa-exchange-alt"></i> Currency Converter</h2>
+        <div class="converter">
+            <input id="amount" placeholder="Amount" type="number" value="1000">
+            <select id="from-currency">
+                <option selected value="USD">US Dollar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+                <option value="GBP">British Pound (GBP)</option>
+                <option value="JPY">Japanese Yen (JPY)</option>
+                <option value="CNY">Chinese Yuan (CNY)</option>
+            </select>
+            <select id="to-currency">
+                <option value="USD">US Dollar (USD)</option>
+                <option selected value="EUR">Euro (EUR)</option>
+                <option value="GBP">British Pound (GBP)</option>
+                <option value="JPY">Japanese Yen (JPY)</option>
+                <option value="CNY">Chinese Yuan (CNY)</option>
+            </select>
+            <button id="convert-btn"><i class="fas fa-calculator"></i> Convert</button>
+            <div class="conversion-result" id="conversion-result" style="display:none;"></div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/financial-dashboard.js"></script>
 </body>
 
 </html>
