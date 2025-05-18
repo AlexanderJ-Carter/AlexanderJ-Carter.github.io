@@ -139,10 +139,9 @@
         h1 {
             font-family: 'Playfair Display', serif;
             font-size: 5rem;
-            margin: 0;
             color: #3C392F;
             line-height: 1;
-            margin-bottom: 0.5rem;
+            margin: 0 0 0.5rem;
         }
 
         .error-message {
@@ -271,33 +270,6 @@
             border: 10px solid #8E7F65;
             background-color: #D9D0C1;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .puzzle-piece {
-            position: absolute;
-            width: 78px;
-            height: 78px;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            background-color: #BFB6A5;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23D9D0C1'/%3E%3Cpath d='M0,0 L100,100 M100,0 L0,100' stroke='%238E7F65' stroke-width='1'/%3E%3C/svg%3E");
-            border: 1px solid #8E7F65;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Playfair Display', serif;
-            color: #6B5B45;
-            font-weight: bold;
-        }
-
-        .puzzle-piece:hover {
-            transform: scale(1.05);
-            z-index: 10;
-        }
-
-        .empty-space {
-            background: #D9D0C1;
-            border: 1px dashed #8E7F65;
         }
 
         .game-instructions {

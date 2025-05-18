@@ -14,35 +14,37 @@ let gameContainer, ball, paddle, gameScore, gameMessage;
 let playButton, gameControls;
 
 // 初始化事件监听器
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
     // 获取DOM元素引用
-    gameContainer = document.getElementById("gameContainer");
-    ball = document.getElementById("ball");
-    paddle = document.getElementById("paddle");
-    gameScore = document.getElementById("gameScore");
-    gameMessage = document.getElementById("gameMessage");
-    playButton = document.getElementById("playButton");
-    gameControls = document.getElementById("gameControls");
+    gameContainer = document.getElementById('gameContainer');
+    ball = document.getElementById('ball');
+    paddle = document.getElementById('paddle');
+    gameScore = document.getElementById('gameScore');
+    gameMessage = document.getElementById('gameMessage');
+    playButton = document.getElementById('playButton');
+    gameControls = document.getElementById('gameControls');
 
     // 检测是否为触摸设备
     isTouchDevice =
-        "ontouchstart" in window ||
+        'ontouchstart' in window ||
         navigator.maxTouchPoints > 0 ||
         navigator.msMaxTouchPoints > 0;
 
     // 为开始游戏按钮添加点击事件
-    playButton.addEventListener("click", startGame);
+    playButton.addEventListener('click', startGame);
 
     // 为重新开始按钮添加点击事件
-    document.getElementById("restartButton").addEventListener("click", resetGame);
+    document
+        .getElementById('restartButton')
+        .addEventListener('click', resetGame);
 
     // 添加游戏说明文本，根据设备类型显示不同内容
-    const gameInstructions = document.querySelector(".game-instructions");
+    const gameInstructions = document.querySelector('.game-instructions');
     if (gameInstructions) {
         if (isTouchDevice) {
-            gameInstructions.textContent = "触摸屏幕左右滑动控制挡板";
+            gameInstructions.textContent = '触摸屏幕左右滑动控制挡板';
         } else {
-            gameInstructions.textContent = "使用左右方向键或鼠标移动挡板";
+            gameInstructions.textContent = '使用左右方向键或鼠标移动挡板';
         }
     }
 });
@@ -51,9 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
 function startGame() {
     if (gameStarted) return;
 
-    gameContainer.style.display = "block";
-    gameControls.style.display = "block";
-    playButton.style.display = "none";
+    gameContainer.style.display = 'block';
+    gameControls.style.display = 'block';
+    playButton.style.display = 'none';
 
     // 设置游戏区域尺寸
     gameWidth = gameContainer.offsetWidth;
@@ -73,16 +75,16 @@ function startGame() {
     createBricks();
 
     // 添加事件监听器
-    document.addEventListener("keydown", keyDownHandler);
-    document.addEventListener("keyup", keyUpHandler);
-    gameContainer.addEventListener("mousemove", mouseMoveHandler);
+    document.addEventListener('keydown', keyDownHandler);
+    document.addEventListener('keyup', keyUpHandler);
+    gameContainer.addEventListener('mousemove', mouseMoveHandler);
 
     // 添加触摸事件支持
     if (isTouchDevice) {
-        gameContainer.addEventListener("touchmove", touchMoveHandler, {
+        gameContainer.addEventListener('touchmove', touchMoveHandler, {
             passive: false,
         });
-        gameContainer.addEventListener("touchstart", touchStartHandler, {
+        gameContainer.addEventListener('touchstart', touchStartHandler, {
             passive: false,
         });
     }
@@ -114,7 +116,7 @@ function createBricks() {
     const brickRows = 3;
     const brickColumns = 5;
 
-    const colors = ["#FF6B6B", "#4ECDC4", "#FFD166", "#4D96FF", "#9D65C9"];
+    const colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#4D96FF', '#9D65C9'];
 
     for (let r = 0; r < brickRows; r++) {
         for (let c = 0; c < brickColumns; c++) {
@@ -122,12 +124,12 @@ function createBricks() {
             const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
 
             // 创建砖块元素
-            const brick = document.createElement("div");
-            brick.className = "brick";
-            brick.style.left = brickX + "px";
-            brick.style.top = brickY + "px";
-            brick.style.width = brickWidth + "px";
-            brick.style.height = brickHeight + "px";
+            const brick = document.createElement('div');
+            brick.className = 'brick';
+            brick.style.left = brickX + 'px';
+            brick.style.top = brickY + 'px';
+            brick.style.width = brickWidth + 'px';
+            brick.style.height = brickHeight + 'px';
             brick.style.backgroundColor = colors[c % colors.length];
             gameContainer.appendChild(brick);
 
@@ -148,19 +150,19 @@ let rightPressed = false;
 let leftPressed = false;
 
 function keyDownHandler(e) {
-    if (e.key === "Right" || e.key === "ArrowRight") {
+    if (e.key === 'Right' || e.key === 'ArrowRight') {
         rightPressed = true;
         e.preventDefault(); // 防止页面滚动
-    } else if (e.key === "Left" || e.key === "ArrowLeft") {
+    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
         leftPressed = true;
         e.preventDefault(); // 防止页面滚动
     }
 }
 
 function keyUpHandler(e) {
-    if (e.key === "Right" || e.key === "ArrowRight") {
+    if (e.key === 'Right' || e.key === 'ArrowRight') {
         rightPressed = false;
-    } else if (e.key === "Left" || e.key === "ArrowLeft") {
+    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
         leftPressed = false;
     }
 }
@@ -280,14 +282,14 @@ function checkCollision() {
                 }
 
                 brick.visible = false;
-                brick.element.style.display = "none";
+                brick.element.style.display = 'none';
                 score += 10;
                 updateScore();
 
                 // 检查是否所有砖块都被消除
                 const remainingBricks = bricks.filter((b) => b.visible).length;
                 if (remainingBricks === 0) {
-                    showMessage("恭喜，你赢了！");
+                    showMessage('恭喜，你赢了！');
                     gameActive = false;
                 }
 
@@ -301,18 +303,18 @@ function checkCollision() {
 // 游戏结束函数
 function gameOver() {
     gameActive = false;
-    showMessage("游戏结束");
+    showMessage('游戏结束');
 }
 
 // 显示消息函数
 function showMessage(text) {
     gameMessage.textContent = text;
-    gameMessage.style.display = "block";
+    gameMessage.style.display = 'block';
 }
 
 // 隐藏消息函数
 function hideMessage() {
-    gameMessage.style.display = "none";
+    gameMessage.style.display = 'none';
 }
 
 // 重置游戏函数
@@ -370,9 +372,9 @@ function gameLoop() {
     checkCollision();
 
     // 渲染游戏元素
-    ball.style.left = ballX + "px";
-    ball.style.top = ballY + "px";
-    paddle.style.left = paddleX + "px";
+    ball.style.left = ballX + 'px';
+    ball.style.top = ballY + 'px';
+    paddle.style.left = paddleX + 'px';
 
     // 继续游戏循环
     if (gameActive) {
@@ -381,7 +383,7 @@ function gameLoop() {
 }
 
 // 处理窗口大小变化
-window.addEventListener("resize", function () {
+window.addEventListener('resize', function () {
     if (gameStarted) {
         // 保存当前游戏状态
         const wasActive = gameActive;
