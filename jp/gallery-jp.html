@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="google-adsense-account" content="ca-pub-2583424294154083">
+
 
     <!-- 基本情報 -->
     <title>ギャラリー - Alexander James Carter</title>
@@ -26,10 +26,10 @@
 
     <!-- フォント -->
     <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
-          rel="stylesheet">
+        rel="stylesheet">
 
     <!-- スタイル -->
     <link href="../css/style.default.css" id="theme-stylesheet" rel="stylesheet">
@@ -43,461 +43,460 @@
 </head>
 
 <body>
-<!-- ページローディングインジケーター -->
-<div class="page-loader">
-    <div class="loader-content">
-        <div class="spinner"></div>
-        <p>素晴らしいコンテンツを読み込んでいます...</p>
+    <!-- ページローディングインジケーター -->
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>素晴らしいコンテンツを読み込んでいます...</p>
+        </div>
     </div>
-</div>
 
-<!-- ナビゲーションバー -->
-<nav aria-label="メインナビゲーション" class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar">
-    <div class="scroll-progress"></div>
-    <div class="container position-relative">
-        <a aria-label="ホームに戻る" class="navbar-brand" href="index-jp.html">
-            <img alt="ウェブサイトのロゴ" class="nav-logo" height="39" src="../img/logo.png" width="40">
-            <span class="brand-text">Alexander James Carter</span>
-        </a>
+    <!-- ナビゲーションバー -->
+    <nav aria-label="メインナビゲーション" class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar">
+        <div class="scroll-progress"></div>
+        <div class="container position-relative">
+            <a aria-label="ホームに戻る" class="navbar-brand" href="index-jp.html">
+                <img alt="ウェブサイトのロゴ" class="nav-logo" height="39" src="../img/logo.png" width="40">
+                <span class="brand-text">Alexander James Carter</span>
+            </a>
 
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="ナビゲーションの切り替え"
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="ナビゲーションの切り替え"
                 class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <button aria-label="トップに戻る" class="back-to-top">
-            <i class="fas fa-arrow-up"></i>
-        </button>
+            <button aria-label="トップに戻る" class="back-to-top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index-jp.html">
-                        <i class="fas fa-home nav-icon"></i> ホーム
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a aria-current="page" class="nav-link active" href="gallery-jp.html">
-                        <i class="fas fa-images nav-icon"></i> ギャラリー
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="blog-jp.html">
-                        <i class="fas fa-feather nav-icon"></i> ブログ
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile-jp.html">
-                        <i class="fas fa-user nav-icon"></i> プロフィール
-                    </a>
-                </li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index-jp.html">
+                            <i class="fas fa-home nav-icon"></i> ホーム
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a aria-current="page" class="nav-link active" href="gallery-jp.html">
+                            <i class="fas fa-images nav-icon"></i> ギャラリー
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog-jp.html">
+                            <i class="fas fa-feather nav-icon"></i> ブログ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile-jp.html">
+                            <i class="fas fa-user nav-icon"></i> プロフィール
+                        </a>
+                    </li>
 
-                <li class="nav-item nav-divider"></li>
+                    <li class="nav-item nav-divider"></li>
 
-                <li class="nav-item dropdown">
-                    <a aria-expanded="false" class="nav-link dropdown-toggle language-selector"
-                       data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button">
-                        <i class="fas fa-globe nav-icon"></i> 言語
-                    </a>
-                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
-                        <li><a class="dropdown-item" href="../zh-CN/gallery.html">中文</a></li>
-                        <li><a class="dropdown-item" href="../en/gallery-en.html">English</a></li>
-                        <li><a class="dropdown-item" href="../it/gallery-it.html">Italiano</a></li>
-                        <li><a class="dropdown-item active" href="gallery-jp.html"><i class="fas fa-check me-2"></i>
-                            日本語</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <button aria-label="テーマの切り替え" class="theme-toggle-btn" id="theme-toggle">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </li>
-            </ul>
+                    <li class="nav-item dropdown">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle language-selector"
+                            data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+                            <i class="fas fa-globe nav-icon"></i> 言語
+                        </a>
+                        <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
+                            <li><a class="dropdown-item" href="../zh-CN/gallery.html">中文</a></li>
+                            <li><a class="dropdown-item" href="../en/gallery-en.html">English</a></li>
+                            <li><a class="dropdown-item" href="../it/gallery-it.html">Italiano</a></li>
+                            <li><a class="dropdown-item active" href="gallery-jp.html"><i class="fas fa-check me-2"></i>
+                                    日本語</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button aria-label="テーマの切り替え" class="theme-toggle-btn" id="theme-toggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<!-- ページタイトル -->
-<section class="page-title parallax-hero dark-overlay bg-cover d-flex align-items-center">
-    <div class="overlay-content w-100 text-white">
+    <!-- ページタイトル -->
+    <section class="page-title parallax-hero dark-overlay bg-cover d-flex align-items-center">
+        <div class="overlay-content w-100 text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="fw-bold animate__animated animate__fadeInUp">芸術的な視点</h1>
+                        <div class="section-divider">
+                        </div>
+                        <p class="animate__animated animate__fadeIn animate__delay-1s">
+                            記憶に残る価値のある瞬間を丁寧に捉え、ユニークな視覚的饗宴を提供します
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ギャラリーメインコンテンツ -->
+    <section class="gallery-section py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h1 class="fw-bold animate__animated animate__fadeInUp">芸術的な視点</h1>
-                    <div class="section-divider">
+            <!-- 紹介文 -->
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <div class="intro-content">
+                        <!-- 装飾サークル -->
+                        <div class="circle-decoration circle-1"></div>
+                        <div class="circle-decoration circle-2"></div>
+
+                        <h2 class="fw-bold mb-3">私の写真の世界</h2>
+                        <p class="lead text-muted">
+                            レンズを通して、人生の中の一過性の美しさを捉えようとしています。雄大な自然の風景、花のデリケートなポーズ、食べ物の誘惑的な瞬間など、
+                            各フレームはユニークなストーリーを語ります。
+                        </p>
+                        <div class="section-divider"></div>
                     </div>
-                    <p class="animate__animated animate__fadeIn animate__delay-1s">
-                        記憶に残る価値のある瞬間を丁寧に捉え、ユニークな視覚的饗宴を提供します
-                    </p>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
 
-<!-- ギャラリーメインコンテンツ -->
-<section class="gallery-section py-5">
-    <div class="container">
-        <!-- 紹介文 -->
-        <div class="row mb-5">
-            <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
-                <div class="intro-content">
-                    <!-- 装飾サークル -->
-                    <div class="circle-decoration circle-1"></div>
-                    <div class="circle-decoration circle-2"></div>
-
-                    <h2 class="fw-bold mb-3">私の写真の世界</h2>
-                    <p class="lead text-muted">
-                        レンズを通して、人生の中の一過性の美しさを捉えようとしています。雄大な自然の風景、花のデリケートなポーズ、食べ物の誘惑的な瞬間など、
-                        各フレームはユニークなストーリーを語ります。
-                    </p>
-                    <div class="section-divider"></div>
+            <!-- カテゴリーフィルター -->
+            <div class="gallery-filter mb-5 text-center" data-aos="fade-up">
+                <div class="buttons-container">
+                    <button class="filter-btn active" data-filter="all" type="button">すべての作品</button>
+                    <button class="filter-btn" data-filter="photo" type="button">風景</button>
+                    <button class="filter-btn" data-filter="flower" type="button">花</button>
+                    <button class="filter-btn" data-filter="food" type="button">料理</button>
+                    <button class="filter-btn" data-filter="design" type="button">キャンパス</button>
                 </div>
             </div>
-        </div>
 
-        <!-- カテゴリーフィルター -->
-        <div class="gallery-filter mb-5 text-center" data-aos="fade-up">
-            <div class="buttons-container">
-                <button class="filter-btn active" data-filter="all" type="button">すべての作品</button>
-                <button class="filter-btn" data-filter="photo" type="button">風景</button>
-                <button class="filter-btn" data-filter="flower" type="button">花</button>
-                <button class="filter-btn" data-filter="food" type="button">料理</button>
-                <button class="filter-btn" data-filter="design" type="button">キャンパス</button>
-            </div>
-        </div>
-
-        <!-- ギャラリーグリッド -->
-        <div class="gallery-grid">
-            <!-- 風景写真 -->
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="風景写真" class="img-fluid" src="../img/Photo1.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>自然の風景</h5>
-                            <p>風景写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Photo1.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+            <!-- ギャラリーグリッド -->
+            <div class="gallery-grid">
+                <!-- 風景写真 -->
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="風景写真" class="img-fluid" src="../img/Photo1.jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>自然の風景</h5>
+                                <p>風景写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Photo1.jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="風景写真" class="img-fluid" src="../img/Photo2.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>山と水</h5>
-                            <p>風景写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Photo2.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="風景写真" class="img-fluid" src="../img/Photo2.jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>山と水</h5>
+                                <p>風景写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Photo2.jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="風景写真" class="img-fluid" src="../img/Photo3.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>都市風景</h5>
-                            <p>風景写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Photo3.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="風景写真" class="img-fluid" src="../img/Photo3.jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>都市風景</h5>
+                                <p>風景写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Photo3.jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="風景写真" class="img-fluid" src="../img/Photo4.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>自然の美しさ</h5>
-                            <p>風景写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Photo4.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="風景写真" class="img-fluid" src="../img/Photo4.jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>自然の美しさ</h5>
+                                <p>風景写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Photo4.jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 花の写真 -->
-            <div class="gallery-item" data-aos="fade-up" data-category="flower">
-                <div class="gallery-card">
-                    <img alt="花の写真" class="img-fluid" src="../img/Flower1.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>花の言葉</h5>
-                            <p>花写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Flower1.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <!-- 花の写真 -->
+                <div class="gallery-item" data-aos="fade-up" data-category="flower">
+                    <div class="gallery-card">
+                        <img alt="花の写真" class="img-fluid" src="../img/Flower1.jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>花の言葉</h5>
+                                <p>花写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Flower1.jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="gallery-item" data-aos="fade-up" data-category="flower">
-                <div class="gallery-card">
-                    <img alt="花の写真" class="img-fluid" src="../img/Flower2.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>花の影</h5>
-                            <p>花写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Flower2.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <div class="gallery-item" data-aos="fade-up" data-category="flower">
+                    <div class="gallery-card">
+                        <img alt="花の写真" class="img-fluid" src="../img/Flower2.jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>花の影</h5>
+                                <p>花写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Flower2.jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 料理写真 -->
-            <div class="gallery-item" data-aos="fade-up" data-category="food">
-                <div class="gallery-card">
-                    <img alt="料理写真" class="img-fluid" src="../img/Food1.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>料理の饗宴</h5>
-                            <p>料理写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Food1.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <!-- 料理写真 -->
+                <div class="gallery-item" data-aos="fade-up" data-category="food">
+                    <div class="gallery-card">
+                        <img alt="料理写真" class="img-fluid" src="../img/Food1.jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>料理の饗宴</h5>
+                                <p>料理写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Food1.jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="gallery-item" data-aos="fade-up" data-category="food">
-                <div class="gallery-card">
-                    <img alt="料理写真" class="img-fluid" src="../img/Food2.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>味の旅</h5>
-                            <p>料理写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Food2.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <div class="gallery-item" data-aos="fade-up" data-category="food">
+                    <div class="gallery-card">
+                        <img alt="料理写真" class="img-fluid" src="../img/Food2.jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>味の旅</h5>
+                                <p>料理写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Food2.jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="gallery-item" data-aos="fade-up" data-category="food">
-                <div class="gallery-card">
-                    <img alt="料理写真" class="img-fluid" src="../img/Food3.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>料理の探究</h5>
-                            <p>料理写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Food3.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <div class="gallery-item" data-aos="fade-up" data-category="food">
+                    <div class="gallery-card">
+                        <img alt="料理写真" class="img-fluid" src="../img/Food3.jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>料理の探究</h5>
+                                <p>料理写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Food3.jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- キャンパスの風景 -->
-            <div class="gallery-item" data-aos="fade-up" data-category="design">
-                <div class="gallery-card">
-                    <img alt="キャンパスの風景" class="img-fluid" src="../img/University.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>キャンパスの風景</h5>
-                            <p>キャンパス写真</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/University.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <!-- キャンパスの風景 -->
+                <div class="gallery-item" data-aos="fade-up" data-category="design">
+                    <div class="gallery-card">
+                        <img alt="キャンパスの風景" class="img-fluid" src="../img/University.jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>キャンパスの風景</h5>
+                                <p>キャンパス写真</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/University.jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- ウェブ写真シリーズ -->
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="ウェブ写真 1" class="img-fluid" src="../img/WebPhoto (1).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>風景の印象 I</h5>
-                            <p>ウェブ写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (1).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <!-- ウェブ写真シリーズ -->
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="ウェブ写真 1" class="img-fluid" src="../img/WebPhoto (1).jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>風景の印象 I</h5>
+                                <p>ウェブ写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (1).jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="ウェブ写真 2" class="img-fluid" src="../img/WebPhoto (2).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>風景の印象 II</h5>
-                            <p>ウェブ写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (2).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="ウェブ写真 2" class="img-fluid" src="../img/WebPhoto (2).jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>風景の印象 II</h5>
+                                <p>ウェブ写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (2).jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 追加のウェブ写真シリーズ（3～13）も同様のパターンで続く -->
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="ウェブ写真 3" class="img-fluid" src="../img/WebPhoto (3).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>風景の印象 III</h5>
-                            <p>ウェブ写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (3).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <!-- 追加のウェブ写真シリーズ（3～13）も同様のパターンで続く -->
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="ウェブ写真 3" class="img-fluid" src="../img/WebPhoto (3).jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>風景の印象 III</h5>
+                                <p>ウェブ写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (3).jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="ウェブ写真 4" class="img-fluid" src="../img/WebPhoto (4).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>風景の印象 IV</h5>
-                            <p>ウェブ写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (4).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="ウェブ写真 4" class="img-fluid" src="../img/WebPhoto (4).jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>風景の印象 IV</h5>
+                                <p>ウェブ写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (4).jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="ウェブ写真 5" class="img-fluid" src="../img/WebPhoto (5).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>風景の印象 V</h5>
-                            <p>ウェブ写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (5).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="ウェブ写真 5" class="img-fluid" src="../img/WebPhoto (5).jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>風景の印象 V</h5>
+                                <p>ウェブ写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (5).jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="ウェブ写真 6" class="img-fluid" src="../img/WebPhoto (6).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>風景の印象 VI</h5>
-                            <p>ウェブ写真シリーズ</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (6).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="ウェブ写真 6" class="img-fluid" src="../img/WebPhoto (6).jpg">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>風景の印象 VI</h5>
+                                <p>ウェブ写真シリーズ</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (6).jpg">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- フッター -->
-<footer class="site-footer">
-    <div class="footer-particles"></div>
-    <div class="container footer-content">
-        <!-- メインフッターコンテンツ -->
-        <div class="row align-items-center footer-main">
-            <!-- 左：ウェブサイト情報と紹介 -->
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <div class="footer-brand">
-                    <a class="footer-logo-link" href="index-jp.html">
-                        <img alt="ウェブサイトロゴ" height="39" src="../img/logo.png" width="40">
-                        <span>Alexander J. Carter</span>
-                    </a>
-                    <p class="footer-slogan">生活の中の芸術を捉え、ユニークな視点を共有する</p>
-                </div>
-            </div>
-
-            <!-- 中央：効率的なナビゲーションリンク -->
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <div class="footer-mini-nav">
-                    <a href="index-jp.html">ホーム</a>
-                    <a class="active" href="gallery-jp.html">ギャラリー</a>
-                    <a href="blog-jp.html">ブログ</a>
-                    <a href="profile-jp.html">プロフィール</a>
-                </div>
-            </div>
-
-            <!-- 右：言語切り替えとソーシャルリンク -->
-            <div class="col-lg-4 col-md-12">
-                <div class="footer-connect">
-                    <!-- 言語切替 -->
-                    <div class="language-bar">
-                        <a href="../zh-CN/gallery.html">中文</a>
-                        <span class="lang-divider">|</span>
-                        <a href="../en/gallery-en.html">English</a>
-                        <span class="lang-divider">|</span>
-                        <a href="../it/gallery-it.html">Italiano</a>
-                        <span class="lang-divider">|</span>
-                        <a class="active" href="gallery-jp.html">日本語</a>
-                    </div>
-
-                    <!-- ソーシャルアイコン -->
-                    <div class="social-icons">
-                        <a class="social-icon weibo" href="javascript:void(0)" title="Weiboでシェア">
-                            <i class="fab fa-weibo"></i>
+    <!-- フッター -->
+    <footer class="site-footer">
+        <div class="footer-particles"></div>
+        <div class="container footer-content">
+            <!-- メインフッターコンテンツ -->
+            <div class="row align-items-center footer-main">
+                <!-- 左：ウェブサイト情報と紹介 -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-brand">
+                        <a class="footer-logo-link" href="index-jp.html">
+                            <img alt="ウェブサイトロゴ" height="39" src="../img/logo.png" width="40">
+                            <span>Alexander J. Carter</span>
                         </a>
-                        <a class="social-icon wechat" href="javascript:void(0)" title="WeChatでシェア">
-                            <i class="fab fa-weixin"></i>
-                        </a>
-                        <a class="social-icon github" href="https://github.com/AlexanderJ-Carter" rel="noopener"
-                           target="_blank" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
+                        <p class="footer-slogan">生活の中の芸術を捉え、ユニークな視点を共有する</p>
+                    </div>
+                </div>
+
+                <!-- 中央：効率的なナビゲーションリンク -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-mini-nav">
+                        <a href="index-jp.html">ホーム</a>
+                        <a class="active" href="gallery-jp.html">ギャラリー</a>
+                        <a href="blog-jp.html">ブログ</a>
+                        <a href="profile-jp.html">プロフィール</a>
+                    </div>
+                </div>
+
+                <!-- 右：言語切り替えとソーシャルリンク -->
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer-connect">
+                        <!-- 言語切替 -->
+                        <div class="language-bar">
+                            <a href="../zh-CN/gallery.html">中文</a>
+                            <span class="lang-divider">|</span>
+                            <a href="../en/gallery-en.html">English</a>
+                            <span class="lang-divider">|</span>
+                            <a href="../it/gallery-it.html">Italiano</a>
+                            <span class="lang-divider">|</span>
+                            <a class="active" href="gallery-jp.html">日本語</a>
+                        </div>
+
+                        <!-- ソーシャルアイコン -->
+                        <div class="social-icons">
+                            <a class="social-icon weibo" href="javascript:void(0)" title="Weiboでシェア">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a class="social-icon wechat" href="javascript:void(0)" title="WeChatでシェア">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                            <a class="social-icon github" href="https://github.com/AlexanderJ-Carter" rel="noopener"
+                                target="_blank" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- フッターボトム -->
-        <div class="footer-bottom">
-            <div class="copyright">
-                © 2025 Alexander James Carter. All Rights Reserved
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <a class="me-3" href="privacy-jp.html" rel="noopener"
-                   title="プライバシーポリシーを読む">プライバシーポリシー</a>
-                <a class="me-3" href="terms-jp.html" rel="noopener" title="利用規約を読む">利用規約</a>
-                <a href="contact-jp.html" rel="noopener" title="お問い合わせ">お問い合わせ</a>
+            <!-- フッターボトム -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2025 Alexander James Carter. All Rights Reserved
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a class="me-3" href="privacy-jp.html" rel="noopener" title="プライバシーポリシーを読む">プライバシーポリシー</a>
+                    <a class="me-3" href="terms-jp.html" rel="noopener" title="利用規約を読む">利用規約</a>
+                    <a href="contact-jp.html" rel="noopener" title="お問い合わせ">お問い合わせ</a>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<!-- JavaScript ファイル -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="../js/glightbox.min.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/enhanced.js"></script>
-<script src="../js/gallery.js"></script>
+    <!-- JavaScript ファイル -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/glightbox.min.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/enhanced.js"></script>
+    <script src="../js/gallery.js"></script>
 </body>
 
 </html>

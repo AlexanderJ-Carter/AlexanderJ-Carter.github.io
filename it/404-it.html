@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta name="google-adsense-account" content="ca-pub-2583424294154083">
+
     <title>Opera d'Arte Mancante - 404</title>
     <script>
         // Rilevamento della lingua per le pagine 404 su GitHub Pages
@@ -52,8 +52,8 @@
     </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         body,
@@ -334,197 +334,197 @@
 </head>
 
 <body>
-<div class="museum-background"></div>
-<div class="museum-elements">
-    <div class="bench"></div>
-    <div class="artwork artwork-1"></div>
-    <div class="artwork artwork-2"></div>
-    <div class="artwork-text artwork-text-1">Natura Morta</div>
-    <div class="artwork-text artwork-text-2">Paesaggio</div>
-</div>
-
-<div class="error-container">
-    <div class="frame">
-        <p class="missing-artwork">Opera d'Arte Mancante</p>
-        <h1>404</h1>
-        <p class="error-subtitle">Questo capolavoro non è attualmente esposto nella nostra galleria.</p>
+    <div class="museum-background"></div>
+    <div class="museum-elements">
+        <div class="bench"></div>
+        <div class="artwork artwork-1"></div>
+        <div class="artwork artwork-2"></div>
+        <div class="artwork-text artwork-text-1">Natura Morta</div>
+        <div class="artwork-text artwork-text-2">Paesaggio</div>
     </div>
 
-    <p class="error-message">Pagina Non Trovata</p>
-    <p class="error-subtitle">La pagina che stai cercando potrebbe essere stata rimossa, rinominata o
-        momentaneamente non disponibile. Mentre aspetti, perché non ricomponi questo piccolo puzzle?</p>
+    <div class="error-container">
+        <div class="frame">
+            <p class="missing-artwork">Opera d'Arte Mancante</p>
+            <h1>404</h1>
+            <p class="error-subtitle">Questo capolavoro non è attualmente esposto nella nostra galleria.</p>
+        </div>
 
-    <div class="puzzle-container" id="puzzleContainer"></div>
-    <p class="game-instructions" id="gameInstructions">Clicca sulle tessere accanto allo spazio vuoto per spostarle
-    </p>
-    <p class="victory-message" id="victoryMessage">Bravissimo! Hai ricomposto il puzzle!</p>
+        <p class="error-message">Pagina Non Trovata</p>
+        <p class="error-subtitle">La pagina che stai cercando potrebbe essere stata rimossa, rinominata o
+            momentaneamente non disponibile. Mentre aspetti, perché non ricomponi questo piccolo puzzle?</p>
 
-    <button class="btn-home" id="playButton"><i class="fas fa-puzzle-piece me-2"></i>Gioca al Puzzle</button>
-    <a class="btn-home" href="index-it.html"><i class="fas fa-home me-2"></i>Torna alla Home</a>
-</div>
+        <div class="puzzle-container" id="puzzleContainer"></div>
+        <p class="game-instructions" id="gameInstructions">Clicca sulle tessere accanto allo spazio vuoto per spostarle
+        </p>
+        <p class="victory-message" id="victoryMessage">Bravissimo! Hai ricomposto il puzzle!</p>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const playButton = document.getElementById('playButton');
-        const puzzleContainer = document.getElementById('puzzleContainer');
-        const gameInstructions = document.getElementById('gameInstructions');
-        const victoryMessage = document.getElementById('victoryMessage');
+        <button class="btn-home" id="playButton"><i class="fas fa-puzzle-piece me-2"></i>Gioca al Puzzle</button>
+        <a class="btn-home" href="index-it.html"><i class="fas fa-home me-2"></i>Torna alla Home</a>
+    </div>
 
-        const GRID_SIZE = 3;
-        const TOTAL_TILES = GRID_SIZE * GRID_SIZE;
-        let tiles = [];
-        let emptyTileIndex = TOTAL_TILES - 1;
-        let gameStarted = false;
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const playButton = document.getElementById('playButton');
+            const puzzleContainer = document.getElementById('puzzleContainer');
+            const gameInstructions = document.getElementById('gameInstructions');
+            const victoryMessage = document.getElementById('victoryMessage');
 
-        function startGame() {
-            playButton.style.display = 'none';
-            puzzleContainer.style.display = 'block';
-            gameInstructions.style.display = 'block';
-            victoryMessage.style.display = 'none';
-            gameStarted = true;
+            const GRID_SIZE = 3;
+            const TOTAL_TILES = GRID_SIZE * GRID_SIZE;
+            let tiles = [];
+            let emptyTileIndex = TOTAL_TILES - 1;
+            let gameStarted = false;
 
-            // Clear existing tiles
-            puzzleContainer.innerHTML = '';
+            function startGame() {
+                playButton.style.display = 'none';
+                puzzleContainer.style.display = 'block';
+                gameInstructions.style.display = 'block';
+                victoryMessage.style.display = 'none';
+                gameStarted = true;
 
-            // Initialize tiles
-            tiles = Array.from({length: TOTAL_TILES}, (_, i) => i);
+                // Clear existing tiles
+                puzzleContainer.innerHTML = '';
 
-            // Shuffle tiles (ensuring puzzle is solvable)
-            do {
-                shuffleTiles();
-            } while (!isSolvable());
+                // Initialize tiles
+                tiles = Array.from({ length: TOTAL_TILES }, (_, i) => i);
 
-            // Render tiles
-            renderTiles();
-        }
+                // Shuffle tiles (ensuring puzzle is solvable)
+                do {
+                    shuffleTiles();
+                } while (!isSolvable());
 
-        function shuffleTiles() {
-            for (let i = tiles.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
-
-                if (tiles[i] === TOTAL_TILES - 1) emptyTileIndex = i;
-                if (tiles[j] === TOTAL_TILES - 1) emptyTileIndex = j;
+                // Render tiles
+                renderTiles();
             }
-        }
 
-        function isSolvable() {
-            // Count inversions
-            let inversions = 0;
-            for (let i = 0; i < tiles.length; i++) {
-                if (tiles[i] === TOTAL_TILES - 1) continue; // Skip empty tile
+            function shuffleTiles() {
+                for (let i = tiles.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
 
-                for (let j = i + 1; j < tiles.length; j++) {
-                    if (tiles[j] === TOTAL_TILES - 1) continue; // Skip empty tile
+                    if (tiles[i] === TOTAL_TILES - 1) emptyTileIndex = i;
+                    if (tiles[j] === TOTAL_TILES - 1) emptyTileIndex = j;
+                }
+            }
 
-                    if (tiles[i] > tiles[j]) {
-                        inversions++;
+            function isSolvable() {
+                // Count inversions
+                let inversions = 0;
+                for (let i = 0; i < tiles.length; i++) {
+                    if (tiles[i] === TOTAL_TILES - 1) continue; // Skip empty tile
+
+                    for (let j = i + 1; j < tiles.length; j++) {
+                        if (tiles[j] === TOTAL_TILES - 1) continue; // Skip empty tile
+
+                        if (tiles[i] > tiles[j]) {
+                            inversions++;
+                        }
                     }
                 }
+
+                // For 3x3 puzzle, if number of inversions is even, the puzzle is solvable
+                return inversions % 2 === 0;
             }
 
-            // For 3x3 puzzle, if number of inversions is even, the puzzle is solvable
-            return inversions % 2 === 0;
-        }
+            function renderTiles() {
+                puzzleContainer.innerHTML = '';
 
-        function renderTiles() {
-            puzzleContainer.innerHTML = '';
+                for (let i = 0; i < tiles.length; i++) {
+                    const row = Math.floor(i / GRID_SIZE);
+                    const col = i % GRID_SIZE;
 
-            for (let i = 0; i < tiles.length; i++) {
-                const row = Math.floor(i / GRID_SIZE);
-                const col = i % GRID_SIZE;
+                    const tileValue = tiles[i];
+                    const tileElement = document.createElement('div');
 
-                const tileValue = tiles[i];
-                const tileElement = document.createElement('div');
+                    if (tileValue === TOTAL_TILES - 1) {
+                        tileElement.className = 'puzzle-piece empty-space';
+                    } else {
+                        tileElement.className = 'puzzle-piece';
+                        tileElement.textContent = tileValue + 1;
 
-                if (tileValue === TOTAL_TILES - 1) {
-                    tileElement.className = 'puzzle-piece empty-space';
-                } else {
-                    tileElement.className = 'puzzle-piece';
-                    tileElement.textContent = tileValue + 1;
+                        tileElement.addEventListener('click', () => {
+                            if (isAdjacent(i, emptyTileIndex)) {
+                                moveTile(i);
+                            }
+                        });
+                    }
 
-                    tileElement.addEventListener('click', () => {
-                        if (isAdjacent(i, emptyTileIndex)) {
-                            moveTile(i);
-                        }
-                    });
-                }
+                    tileElement.style.top = `${row * (100 / GRID_SIZE)}%`;
+                    tileElement.style.left = `${col * (100 / GRID_SIZE)}%`;
+                    tileElement.style.width = `${(100 / GRID_SIZE) - 2}%`;
+                    tileElement.style.height = `${(100 / GRID_SIZE) - 2}%`;
 
-                tileElement.style.top = `${row * (100 / GRID_SIZE)}%`;
-                tileElement.style.left = `${col * (100 / GRID_SIZE)}%`;
-                tileElement.style.width = `${(100 / GRID_SIZE) - 2}%`;
-                tileElement.style.height = `${(100 / GRID_SIZE) - 2}%`;
-
-                puzzleContainer.appendChild(tileElement);
-            }
-        }
-
-        function isAdjacent(tileIndex, emptyIndex) {
-            const tileRow = Math.floor(tileIndex / GRID_SIZE);
-            const tileCol = tileIndex % GRID_SIZE;
-            const emptyRow = Math.floor(emptyIndex / GRID_SIZE);
-            const emptyCol = emptyIndex % GRID_SIZE;
-
-            return (
-                (Math.abs(tileRow - emptyRow) === 1 && tileCol === emptyCol) ||
-                (Math.abs(tileCol - emptyCol) === 1 && tileRow === emptyRow)
-            );
-        }
-
-        function moveTile(tileIndex) {
-            [tiles[tileIndex], tiles[emptyTileIndex]] = [tiles[emptyTileIndex], tiles[tileIndex]];
-            emptyTileIndex = tileIndex;
-
-            renderTiles();
-
-            if (checkWin()) {
-                victoryMessage.style.display = 'block';
-                setTimeout(() => {
-                    startGame();
-                }, 3000);
-            }
-        }
-
-        function checkWin() {
-            for (let i = 0; i < tiles.length - 1; i++) {
-                if (tiles[i] !== i) {
-                    return false;
+                    puzzleContainer.appendChild(tileElement);
                 }
             }
-            return true;
-        }
 
-        playButton.addEventListener('click', startGame);
-    });
-</script>
+            function isAdjacent(tileIndex, emptyIndex) {
+                const tileRow = Math.floor(tileIndex / GRID_SIZE);
+                const tileCol = tileIndex % GRID_SIZE;
+                const emptyRow = Math.floor(emptyIndex / GRID_SIZE);
+                const emptyCol = emptyIndex % GRID_SIZE;
 
-<script>
-    // Assicurarsi che questa pagina sia mostrata nel contesto linguistico corretto
-    document.addEventListener('DOMContentLoaded', function () {
-        const currentPath = window.location.pathname.toLowerCase();
-        let shouldRedirect = false;
-        let redirectUrl = '';
+                return (
+                    (Math.abs(tileRow - emptyRow) === 1 && tileCol === emptyCol) ||
+                    (Math.abs(tileCol - emptyCol) === 1 && tileRow === emptyRow)
+                );
+            }
 
-        // Se siamo in un contesto non italiano ma stiamo visualizzando la pagina 404 italiana
-        if (currentPath.includes('/zh-CN/') ||
-            (!currentPath.includes('/it/') && !currentPath.includes('-it.html') &&
-                !currentPath.includes('/en/') && !currentPath.includes('-en.html') &&
-                !currentPath.includes('/jp/') && !currentPath.includes('-jp.html'))) {
-            shouldRedirect = true;
-            redirectUrl = '/404.html'; // Cinese predefinito
-        } else if (currentPath.includes('/en/') || currentPath.match(/\/(.*-en)\.html$/)) {
-            shouldRedirect = true;
-            redirectUrl = '/en/404-en.html';
-        } else if (currentPath.includes('/jp/') || currentPath.match(/\/(.*-jp)\.html$/)) {
-            shouldRedirect = true;
-            redirectUrl = '/jp/404-jp.html';
-        }
+            function moveTile(tileIndex) {
+                [tiles[tileIndex], tiles[emptyTileIndex]] = [tiles[emptyTileIndex], tiles[tileIndex]];
+                emptyTileIndex = tileIndex;
 
-        if (shouldRedirect && redirectUrl) {
-            window.location.href = redirectUrl;
-        }
-    });
-</script>
+                renderTiles();
+
+                if (checkWin()) {
+                    victoryMessage.style.display = 'block';
+                    setTimeout(() => {
+                        startGame();
+                    }, 3000);
+                }
+            }
+
+            function checkWin() {
+                for (let i = 0; i < tiles.length - 1; i++) {
+                    if (tiles[i] !== i) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            playButton.addEventListener('click', startGame);
+        });
+    </script>
+
+    <script>
+        // Assicurarsi che questa pagina sia mostrata nel contesto linguistico corretto
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentPath = window.location.pathname.toLowerCase();
+            let shouldRedirect = false;
+            let redirectUrl = '';
+
+            // Se siamo in un contesto non italiano ma stiamo visualizzando la pagina 404 italiana
+            if (currentPath.includes('/zh-CN/') ||
+                (!currentPath.includes('/it/') && !currentPath.includes('-it.html') &&
+                    !currentPath.includes('/en/') && !currentPath.includes('-en.html') &&
+                    !currentPath.includes('/jp/') && !currentPath.includes('-jp.html'))) {
+                shouldRedirect = true;
+                redirectUrl = '/404.html'; // Cinese predefinito
+            } else if (currentPath.includes('/en/') || currentPath.match(/\/(.*-en)\.html$/)) {
+                shouldRedirect = true;
+                redirectUrl = '/en/404-en.html';
+            } else if (currentPath.includes('/jp/') || currentPath.match(/\/(.*-jp)\.html$/)) {
+                shouldRedirect = true;
+                redirectUrl = '/jp/404-jp.html';
+            }
+
+            if (shouldRedirect && redirectUrl) {
+                window.location.href = redirectUrl;
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -4,81 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="google-adsense-account" content="ca-pub-2583424294154083">
+
     <title>Dashboard Finanziario</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="../css/financial-dashboard.css" rel="stylesheet">
 </head>
 
 <body class="theme-it">
-<header>
-    <h1><i class="fas fa-chart-line"></i> Dashboard Finanziario</h1>
-    <p>Controlla i tassi di cambio e i prezzi delle criptovalute in tempo reale</p>
-</header>
+    <header>
+        <h1><i class="fas fa-chart-line"></i> Dashboard Finanziario</h1>
+        <p>Controlla i tassi di cambio e i prezzi delle criptovalute in tempo reale</p>
+    </header>
 
-<div class="dashboard">
-    <!-- Tassi di cambio - in alto -->
-    <div class="card wide-card">
-        <h2><i class="fas fa-euro-sign"></i> Tassi di Cambio (Base EUR)</h2>
-        <div id="exchange-rates">Caricamento dati...</div>
-    </div>
+    <div class="dashboard">
+        <!-- Tassi di cambio - in alto -->
+        <div class="card wide-card">
+            <h2><i class="fas fa-euro-sign"></i> Tassi di Cambio (Base EUR)</h2>
+            <div id="exchange-rates">Caricamento dati...</div>
+        </div>
 
-    <!-- Mercato azionario -->
-    <div class="card wide-card">
-        <h2><i class="fas fa-chart-line"></i> Mercato Azionario</h2>
-        <div id="stock-market">Caricamento dati...</div>
-    </div>
+        <!-- Mercato azionario -->
+        <div class="card wide-card">
+            <h2><i class="fas fa-chart-line"></i> Mercato Azionario</h2>
+            <div id="stock-market">Caricamento dati...</div>
+        </div>
 
-    <!-- Indicatori Economici - nuovo -->
-    <div class="card medium-card">
-        <h2><i class="fas fa-chart-bar"></i> Indicatori Economici</h2>
-        <div id="economic-indicators">Caricamento dati...</div>
-    </div>
+        <!-- Indicatori Economici - nuovo -->
+        <div class="card medium-card">
+            <h2><i class="fas fa-chart-bar"></i> Indicatori Economici</h2>
+            <div id="economic-indicators">Caricamento dati...</div>
+        </div>
 
-    <!-- Prezzi delle Materie Prime - nuovo -->
-    <div class="card medium-card">
-        <h2><i class="fas fa-oil-can"></i> Materie Prime</h2>
-        <div id="commodity-prices">Caricamento dati...</div>
-    </div>
+        <!-- Prezzi delle Materie Prime - nuovo -->
+        <div class="card medium-card">
+            <h2><i class="fas fa-oil-can"></i> Materie Prime</h2>
+            <div id="commodity-prices">Caricamento dati...</div>
+        </div>
 
-    <!-- Criptovalute -->
-    <div class="card medium-card">
-        <h2><i class="fab fa-bitcoin"></i> Criptovalute</h2>
-        <div id="crypto-prices">Caricamento dati...</div>
-    </div>
+        <!-- Criptovalute -->
+        <div class="card medium-card">
+            <h2><i class="fab fa-bitcoin"></i> Criptovalute</h2>
+            <div id="crypto-prices">Caricamento dati...</div>
+        </div>
 
-    <!-- Metalli preziosi -->
-    <div class="card medium-card">
-        <h2><i class="fas fa-coins"></i> Metalli Preziosi (USD)</h2>
-        <div id="metal-prices">Caricamento dati...</div>
-    </div>
+        <!-- Metalli preziosi -->
+        <div class="card medium-card">
+            <h2><i class="fas fa-coins"></i> Metalli Preziosi (USD)</h2>
+            <div id="metal-prices">Caricamento dati...</div>
+        </div>
 
-    <!-- Convertitore di valuta in basso -->
-    <div class="card full-card">
-        <h2><i class="fas fa-exchange-alt"></i> Convertitore di Valuta</h2>
-        <div class="converter">
-            <input id="amount" placeholder="Importo" type="number" value="1000">
-            <select id="from-currency">
-                <option selected value="EUR">Euro (EUR)</option>
-                <option value="USD">Dollaro USA (USD)</option>
-                <option value="GBP">Sterlina (GBP)</option>
-                <option value="JPY">Yen Giapponese (JPY)</option>
-                <option value="CHF">Franco Svizzero (CHF)</option>
-            </select>
-            <select id="to-currency">
-                <option value="EUR">Euro (EUR)</option>
-                <option selected value="USD">Dollaro USA (USD)</option>
-                <option value="GBP">Sterlina (GBP)</option>
-                <option value="JPY">Yen Giapponese (JPY)</option>
-                <option value="CHF">Franco Svizzero (CHF)</option>
-            </select>
-            <button id="convert-btn"><i class="fas fa-calculator"></i> Converti</button>
-            <div class="conversion-result" id="conversion-result" style="display:none;"></div>
+        <!-- Convertitore di valuta in basso -->
+        <div class="card full-card">
+            <h2><i class="fas fa-exchange-alt"></i> Convertitore di Valuta</h2>
+            <div class="converter">
+                <input id="amount" placeholder="Importo" type="number" value="1000">
+                <select id="from-currency">
+                    <option selected value="EUR">Euro (EUR)</option>
+                    <option value="USD">Dollaro USA (USD)</option>
+                    <option value="GBP">Sterlina (GBP)</option>
+                    <option value="JPY">Yen Giapponese (JPY)</option>
+                    <option value="CHF">Franco Svizzero (CHF)</option>
+                </select>
+                <select id="to-currency">
+                    <option value="EUR">Euro (EUR)</option>
+                    <option selected value="USD">Dollaro USA (USD)</option>
+                    <option value="GBP">Sterlina (GBP)</option>
+                    <option value="JPY">Yen Giapponese (JPY)</option>
+                    <option value="CHF">Franco Svizzero (CHF)</option>
+                </select>
+                <button id="convert-btn"><i class="fas fa-calculator"></i> Converti</button>
+                <div class="conversion-result" id="conversion-result" style="display:none;"></div>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="../js/financial-dashboard.js"></script>
+    <script src="../js/financial-dashboard.js"></script>
 </body>
 
 </html>
