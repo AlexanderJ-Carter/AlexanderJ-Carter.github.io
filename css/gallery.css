@@ -14,28 +14,28 @@
     --gallery-neumorphism-shadow1: rgba(255, 255, 255, 0.9);
     --gallery-neumorphism-shadow2: rgba(209, 217, 230, 0.8);
     --gallery-insta-gradient: linear-gradient(
-        45deg,
-        #f09433 0%,
-        #e6683c 25%,
-        #dc2743 50%,
-        #cc2366 75%,
-        #bc1888 100%
+            45deg,
+            #f09433 0%,
+            #e6683c 25%,
+            #dc2743 50%,
+            #cc2366 75%,
+            #bc1888 100%
     );
     --gallery-modern-gradient: linear-gradient(
-        120deg,
-        #84fab0 0%,
-        #8fd3f4 100%
+            120deg,
+            #84fab0 0%,
+            #8fd3f4 100%
     );
     --gallery-artistic-overlay: linear-gradient(
-        to bottom,
-        rgba(32, 6, 49, 0.6),
-        rgba(60, 12, 82, 0.4)
+            to bottom,
+            rgba(32, 6, 49, 0.6),
+            rgba(60, 12, 82, 0.4)
     );
     --gallery-artistic-bg: linear-gradient(
-        135deg,
-        #6b46c1 0%,
-        #9f7aea 50%,
-        #6b46c1 100%
+            135deg,
+            #6b46c1 0%,
+            #9f7aea 50%,
+            #6b46c1 100%
     );
 }
 
@@ -95,9 +95,9 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(
-        135deg,
-        rgba(108, 17, 168, 0.6) 0%,
-        rgba(184, 97, 246, 0.4) 100%
+            135deg,
+            rgba(108, 17, 168, 0.6) 0%,
+            rgba(184, 97, 246, 0.4) 100%
     );
     mix-blend-mode: multiply;
     z-index: 2;
@@ -151,7 +151,7 @@
     position: relative;
     border-radius: 16px;
     box-shadow: 8px 8px 16px var(--gallery-neumorphism-shadow2),
-        -8px -8px 16px var(--gallery-neumorphism-shadow1);
+    -8px -8px 16px var(--gallery-neumorphism-shadow1);
     background: var(--gallery-neumorphism-light);
     padding: 10px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -165,7 +165,7 @@
 .gallery-item:hover {
     transform: translateY(-8px);
     box-shadow: 12px 12px 20px var(--gallery-neumorphism-shadow2),
-        -12px -12px 20px var(--gallery-neumorphism-shadow1);
+    -12px -12px 20px var(--gallery-neumorphism-shadow1);
 }
 
 /* 确保卡片内容为正方形 - 添加aspect-ratio备用解决方案 */

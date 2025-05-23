@@ -19,443 +19,442 @@
     <link href="../css/blog.css" rel="stylesheet">
     <!-- Aggiunta di font -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+            rel="stylesheet">
 </head>
 
 <body>
-    <!-- Indicatore di caricamento della pagina all'inizio di <body> -->
-    <div class="page-loader">
-        <div class="loader-content">
-            <div class="spinner"></div>
-            <p>Caricamento contenuti...</p>
-        </div>
+<!-- Indicatore di caricamento della pagina all'inizio di <body> -->
+<div class="page-loader">
+    <div class="loader-content">
+        <div class="spinner"></div>
+        <p>Caricamento contenuti...</p>
     </div>
+</div>
 
-    <!-- Barra di navigazione -->
-    <nav aria-label="Navigazione principale" class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar">
-        <div class="scroll-progress"></div>
-        <div class="container position-relative">
-            <a aria-label="Torna alla homepage" class="navbar-brand" href="../index.html">
-                <img alt="Logo del sito" class="nav-logo" height="39" src="../img/logo.png" width="40">
-                <span class="brand-text">Alexander James Carter</span>
-            </a>
+<!-- Barra di navigazione -->
+<nav aria-label="Navigazione principale" class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar">
+    <div class="scroll-progress"></div>
+    <div class="container position-relative">
+        <a aria-label="Torna alla homepage" class="navbar-brand" href="../index.html">
+            <img alt="Logo del sito" class="nav-logo" height="39" src="../img/logo.png" width="40">
+            <span class="brand-text">Alexander James Carter</span>
+        </a>
 
-            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Attiva menu di navigazione"
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Attiva menu di navigazione"
                 class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <button aria-label="Torna in alto" class="back-to-top">
-                <i class="fas fa-arrow-up"></i>
-            </button>
+        <button aria-label="Torna in alto" class="back-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html">
-                            <i class="fas fa-home nav-icon"></i> Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="gallery-it.html">
-                            <i class="fas fa-images nav-icon"></i> Galleria
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a aria-current="page" class="nav-link active" href="blog-it.html">
-                            <i class="fas fa-feather nav-icon"></i> Blog
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile-it.html">
-                            <i class="fas fa-user nav-icon"></i> Chi Sono
-                        </a>
-                    </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">
+                        <i class="fas fa-home nav-icon"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="gallery-it.html">
+                        <i class="fas fa-images nav-icon"></i> Galleria
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a aria-current="page" class="nav-link active" href="blog-it.html">
+                        <i class="fas fa-feather nav-icon"></i> Blog
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile-it.html">
+                        <i class="fas fa-user nav-icon"></i> Chi Sono
+                    </a>
+                </li>
 
-                    <li class="nav-item nav-divider"></li>
+                <li class="nav-item nav-divider"></li>
 
-                    <li class="nav-item dropdown">
-                        <a aria-expanded="false" class="nav-link dropdown-toggle language-selector"
-                            data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button">
-                            <i class="fas fa-globe nav-icon"></i> Lingua
-                        </a>
-                        <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
-                            <li><a class="dropdown-item" href="../zh-CN/blog.html">中文</a></li>
-                            <li><a class="dropdown-item" href="../en/blog-en.html">English</a></li>
-                            <li><a class="dropdown-item active" href="blog-it.html"><i class="fas fa-check me-2"></i>
-                                    Italiano</a></li>
-                            <li><a class="dropdown-item" href="../jp/blog-jp.html">日本語</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <button aria-label="Cambia tema" class="theme-toggle-btn" id="theme-toggle">
-                            <i class="fas fa-moon"></i>
-                        </button>
-                    </li>
-                </ul>
-            </div>
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle language-selector"
+                       data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+                        <i class="fas fa-globe nav-icon"></i> Lingua
+                    </a>
+                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
+                        <li><a class="dropdown-item" href="../zh-CN/blog.html">中文</a></li>
+                        <li><a class="dropdown-item" href="../en/blog-en.html">English</a></li>
+                        <li><a class="dropdown-item active" href="blog-it.html"><i class="fas fa-check me-2"></i>
+                            Italiano</a></li>
+                        <li><a class="dropdown-item" href="../jp/blog-jp.html">日本語</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <button aria-label="Cambia tema" class="theme-toggle-btn" id="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <!-- Titolo della pagina blog - con effetto parallasse -->
-    <section class="blog-hero parallax-hero dark-overlay bg-cover d-flex align-items-center"
-        style="background-image: url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3');">
-        <div class="overlay-content w-100 text-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h1 class="fw-bold animate__animated animate__fadeInUp">Il Mondo del Blog</h1>
-                        <div class="section-divider"></div>
-                        <p class="animate__animated animate__fadeIn animate__delay-1s lead">
-                            Condivisione di approfondimenti ed esperienze in tecnologia, design e sviluppo personale
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contenuto principale del blog - layout migliorato -->
-    <div class="blog-main-container py-5">
+<!-- Titolo della pagina blog - con effetto parallasse -->
+<section class="blog-hero parallax-hero dark-overlay bg-cover d-flex align-items-center"
+         style="background-image: url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3');">
+    <div class="overlay-content w-100 text-white">
         <div class="container">
-            <!-- Sezione di ricerca e filtro - ridisegnata -->
-            <div class="blog-filter-section mb-5" data-aos="fade-up">
-                <div class="card filter-card">
-                    <div class="card-body">
-                        <div class="row g-3 align-items-center">
-                            <div class="col-lg-5 col-md-6">
-                                <div class="search-container">
-                                    <label class="form-label" for="blog-search"><i class="fas fa-search me-2"></i>Cerca
-                                        Articoli</label>
-                                    <input class="form-control search-input shadow-sm" id="blog-search"
-                                        placeholder="Inserisci parole chiave..." type="text">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="fw-bold animate__animated animate__fadeInUp">Il Mondo del Blog</h1>
+                    <div class="section-divider"></div>
+                    <p class="animate__animated animate__fadeIn animate__delay-1s lead">
+                        Condivisione di approfondimenti ed esperienze in tecnologia, design e sviluppo personale
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contenuto principale del blog - layout migliorato -->
+<div class="blog-main-container py-5">
+    <div class="container">
+        <!-- Sezione di ricerca e filtro - ridisegnata -->
+        <div class="blog-filter-section mb-5" data-aos="fade-up">
+            <div class="card filter-card">
+                <div class="card-body">
+                    <div class="row g-3 align-items-center">
+                        <div class="col-lg-5 col-md-6">
+                            <div class="search-container">
+                                <label class="form-label" for="blog-search"><i class="fas fa-search me-2"></i>Cerca
+                                    Articoli</label>
+                                <input class="form-control search-input shadow-sm" id="blog-search"
+                                       placeholder="Inserisci parole chiave..." type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6">
+                            <label class="form-label"><i class="fas fa-tags me-2"></i>Filtra per Tag</label>
+                            <div class="filter-tags">
+                                <div class="filter-pills">
+                                    <span class="filter-pill active" data-tag="all">Tutti</span>
+                                    <span class="filter-pill" data-tag="frontend">Frontend</span>
+                                    <span class="filter-pill" data-tag="React">React</span>
+                                    <span class="filter-pill" data-tag="UI Design">UI Design</span>
+                                    <span class="filter-pill" data-tag="Produttività">Produttività</span>
                                 </div>
                             </div>
-                            <div class="col-lg-5 col-md-6">
-                                <label class="form-label"><i class="fas fa-tags me-2"></i>Filtra per Tag</label>
-                                <div class="filter-tags">
-                                    <div class="filter-pills">
-                                        <span class="filter-pill active" data-tag="all">Tutti</span>
-                                        <span class="filter-pill" data-tag="frontend">Frontend</span>
-                                        <span class="filter-pill" data-tag="React">React</span>
-                                        <span class="filter-pill" data-tag="UI Design">UI Design</span>
-                                        <span class="filter-pill" data-tag="Produttività">Produttività</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-md-12">
-                                <label class="form-label" for="sort-select"><i
-                                        class="fas fa-sort-amount-down me-2"></i>Ordina</label>
-                                <select aria-label="Ordina per" class="form-select shadow-sm" id="sort-select">
-                                    <option value="newest">Più recenti</option>
-                                    <option value="oldest">Meno recenti</option>
-                                    <option value="popular">Più popolari</option>
-                                </select>
-                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12">
+                            <label class="form-label" for="sort-select"><i
+                                    class="fas fa-sort-amount-down me-2"></i>Ordina</label>
+                            <select aria-label="Ordina per" class="form-select shadow-sm" id="sort-select">
+                                <option value="newest">Più recenti</option>
+                                <option value="oldest">Meno recenti</option>
+                                <option value="popular">Più popolari</option>
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <!-- Lista articoli del blog - lato sinistro -->
-                <div class="col-lg-8">
-                    <!-- Conteggio articoli -->
-                    <div class="articles-count mb-4" data-aos="fade-up">
-                        <h5><i class="fas fa-newspaper me-2"></i>Totale: <span id="article-count">5</span> articoli</h5>
-                    </div>
-
-                    <!-- Lista articoli - Layout a stile rivista italiana -->
-                    <div class="row g-4" id="blog-posts-container">
-                        <!-- Articolo 1 -->
-                        <div class="col-md-12" data-aos="fade-up" data-tags="React frontend performance">
-                            <div class="blog-card italian-style">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <div class="blog-card-img-container h-100">
-                                            <span class="blog-category">React</span>
-                                            <img alt="Ottimizzazione delle prestazioni React"
-                                                class="blog-card-img h-100 w-100 object-cover"
-                                                src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="blog-card-content p-4">
-                                            <div class="blog-card-date mb-2">
-                                                <span class="day">18</span>
-                                                <span class="month">Dicembre</span>
-                                                <span class="year">2023</span>
-                                            </div>
-                                            <h3 class="blog-card-title">10 Consigli Pratici per l'Ottimizzazione delle
-                                                Prestazioni React</h3>
-                                            <div class="blog-card-meta my-2">
-                                                <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
-                                                <span><i class="far fa-eye me-1"></i>1.5K visualizzazioni</span>
-                                                <span><i class="far fa-clock me-1"></i>10 min di lettura</span>
-                                            </div>
-                                            <p class="blog-card-text">
-                                                Esplora suggerimenti pratici e best practice per ottimizzare le
-                                                applicazioni React e costruire web app più veloci ed efficienti. Questo
-                                                articolo copre tecniche essenziali come la memoizzazione, il code
-                                                splitting e l'ottimizzazione dei rendering.</p>
-                                            <div class="blog-card-tags">
-                                                <span class="blog-tag">React</span>
-                                                <span class="blog-tag">Performance</span>
-                                                <span class="blog-tag">Frontend</span>
-                                            </div>
-                                            <a class="blog-card-link mt-3" href="../blog-posts/react-performance.html">
-                                                Leggi Tutto <i class="fas fa-arrow-right"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Articolo 2 -->
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100"
-                            data-tags="UI Design Design Trends UX">
-                            <div class="blog-card">
-                                <div class="blog-card-img-container">
-                                    <span class="blog-category">Design</span>
-                                    <img alt="Tendenze UI Design" class="blog-card-img"
-                                        src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e">
-                                    <div class="blog-card-date">
-                                        <span class="day">10</span>
-                                        <span class="month">Gen</span>
-                                    </div>
-                                </div>
-                                <div class="blog-card-content">
-                                    <div class="blog-card-meta">
-                                        <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
-                                        <span><i class="far fa-eye me-1"></i>1.2K visualizzazioni</span>
-                                    </div>
-                                    <h3 class="blog-card-title">Tendenze UI Design da Tenere d'Occhio nel 2024</h3>
-                                    <p class="blog-card-text">
-                                        Con l'evoluzione della tecnologia e il cambiamento delle aspettative degli
-                                        utenti, anche il design UI continua a evolversi. Questo articolo esplora le
-                                        tendenze del design UI destinate a dominare nel 2024.</p>
-                                    <div class="blog-card-tags">
-                                        <span class="blog-tag">UI Design</span>
-                                        <span class="blog-tag">Tendenze Design</span>
-                                        <span class="blog-tag">UX</span>
-                                    </div>
-                                    <a class="blog-card-link" href="../blog-posts/design-trends-2024.html">
-                                        Leggi Tutto <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Articolo 3 -->
-                        <div class="col-md-6" data-aos="fade-up"
-                            data-tags="Lavoro Remoto Produttività Metodi di Lavoro">
-                            <div class="blog-card">
-                                <div class="blog-card-img-container">
-                                    <span class="blog-category">Produttività</span>
-                                    <img alt="Esperienza di Lavoro Remoto" class="blog-card-img"
-                                        src="https://images.unsplash.com/photo-1542435503-956c469947f6">
-                                    <div class="blog-card-date">
-                                        <span class="day">05</span>
-                                        <span class="month">Gen</span>
-                                    </div>
-                                </div>
-                                <div class="blog-card-content">
-                                    <div class="blog-card-meta">
-                                        <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
-                                        <span><i class="far fa-eye me-1"></i>980 visualizzazioni</span>
-                                    </div>
-                                    <h3 class="blog-card-title">Riflessioni Dopo un Anno di Lavoro Remoto</h3>
-                                    <p class="blog-card-text">
-                                        Condividere esperienze, sfide e suggerimenti pratici da un anno di lavoro remoto
-                                        per aiutarti ad adattarti più efficacemente e aumentare la produttività.</p>
-                                    <div class="blog-card-tags">
-                                        <span class="blog-tag">Lavoro Remoto</span>
-                                        <span class="blog-tag">Produttività</span>
-                                        <span class="blog-tag">Metodi di Lavoro</span>
-                                    </div>
-                                    <a class="blog-card-link" href="../blog-posts/remote-work-experience.html">
-                                        Leggi Tutto <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Articolo 4 -->
-                        <div class="col-md-6" data-aos="fade-up" data-aos-delay="100"
-                            data-tags="Note sui Libri Produttività Sviluppo Personale">
-                            <div class="blog-card">
-                                <div class="blog-card-img-container">
-                                    <span class="blog-category">Lettura</span>
-                                    <img alt="Atomic Habits" class="blog-card-img"
-                                        src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e">
-                                    <div class="blog-card-date">
-                                        <span class="day">28</span>
-                                        <span class="month">Dic</span>
-                                    </div>
-                                </div>
-                                <div class="blog-card-content">
-                                    <div class="blog-card-meta">
-                                        <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
-                                        <span><i class="far fa-eye me-1"></i>850 visualizzazioni</span>
-                                    </div>
-                                    <h3 class="blog-card-title">Note e Metodi Pratici da "Atomic Habits"</h3>
-                                    <p class="blog-card-text">Analisi dei concetti fondamentali del bestseller "Atomic
-                                        Habits" di James Clear e condivisione di come applicare questi principi nella
-                                        vita quotidiana.</p>
-                                    <div class="blog-card-tags">
-                                        <span class="blog-tag">Note sui Libri</span>
-                                        <span class="blog-tag">Produttività</span>
-                                        <span class="blog-tag">Sviluppo Personale</span>
-                                    </div>
-                                    <a class="blog-card-link" href="../404.html">
-                                        Leggi Tutto <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Articolo 5 - Speciale Italia -->
-                        <div class="col-md-6" data-aos="fade-up" data-tags="Design Italiano Arte Cultura">
-                            <div class="blog-card">
-                                <div class="blog-card-img-container">
-                                    <span class="blog-category special-category">Made in Italy</span>
-                                    <img alt="Design Italiano" class="blog-card-img"
-                                        src="https://images.unsplash.com/photo-1529260830199-42c24126f198">
-                                    <div class="blog-card-date">
-                                        <span class="day">20</span>
-                                        <span class="month">Gen</span>
-                                    </div>
-                                </div>
-                                <div class="blog-card-content">
-                                    <div class="blog-card-meta">
-                                        <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
-                                        <span><i class="far fa-eye me-1"></i>1.1K visualizzazioni</span>
-                                    </div>
-                                    <h3 class="blog-card-title">L'Influenza del Design Italiano nel Web Moderno</h3>
-                                    <p class="blog-card-text">
-                                        Un'esplorazione di come i principi classici del design italiano hanno
-                                        influenzato l'estetica e la funzionalità del web design contemporaneo.</p>
-                                    <div class="blog-card-tags">
-                                        <span class="blog-tag">Design Italiano</span>
-                                        <span class="blog-tag">Web Design</span>
-                                        <span class="blog-tag">Arte</span>
-                                    </div>
-                                    <a class="blog-card-link" href="../404.html">
-                                        Leggi Tutto <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Messaggio nessun risultato di ricerca -->
-                    <div class="text-center py-5 d-none" id="no-results">
-                        <div class="no-results-icon mb-3">
-                            <i class="fas fa-search fa-3x text-muted"></i>
-                        </div>
-                        <h3>Nessun Articolo Trovato</h3>
-                        <p class="text-muted">Prova con parole chiave diverse o cancella i filtri</p>
-                        <button class="btn btn-outline-primary mt-2" id="clear-filters">
-                            <i class="fas fa-times me-2"></i>Cancella Filtri
-                        </button>
-                    </div>
-
-                    <!-- Controlli di paginazione -->
-                    <nav aria-label="Paginazione blog" class="mt-5" data-aos="fade-up">
-                        <ul class="pagination pagination-lg justify-content-center">
-                            <li class="page-item disabled">
-                                <a aria-label="Pagina precedente" class="page-link" href="#">
-                                    <i class="fas fa-chevron-left"></i>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a aria-label="Pagina successiva" class="page-link" href="#">
-                                    <i class="fas fa-chevron-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+        <div class="row">
+            <!-- Lista articoli del blog - lato sinistro -->
+            <div class="col-lg-8">
+                <!-- Conteggio articoli -->
+                <div class="articles-count mb-4" data-aos="fade-up">
+                    <h5><i class="fas fa-newspaper me-2"></i>Totale: <span id="article-count">5</span> articoli</h5>
                 </div>
 
-                <!-- Barra laterale del blog - stile italiano -->
-                <div class="col-lg-4">
-                    <div class="blog-sidebar italian-sidebar">
-                        <!-- Profilo dell'autore -->
-                        <div class="sidebar-widget about-author-widget" data-aos="fade-up">
-                            <div class="widget-title">
-                                <h4><i class="fas fa-user-circle"></i> Sull'Autore</h4>
-                            </div>
-                            <div class="author-bio">
-                                <img alt="Alexander J. Carter" class="author-avatar" src="../img/AboutMe.jpg">
-                                <h5>Alexander J. Carter</h5>
-                                <p class="author-description">
-                                    Sviluppatore Frontend, appassionato di UI Design e di fotografia. Innamorato
-                                    dell'esplorazione di nuove tecnologie e della condivisione di esperienze.</p>
-                                <div class="author-social">
-                                    <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <!-- Lista articoli - Layout a stile rivista italiana -->
+                <div class="row g-4" id="blog-posts-container">
+                    <!-- Articolo 1 -->
+                    <div class="col-md-12" data-aos="fade-up" data-tags="React frontend performance">
+                        <div class="blog-card italian-style">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <div class="blog-card-img-container h-100">
+                                        <span class="blog-category">React</span>
+                                        <img alt="Ottimizzazione delle prestazioni React"
+                                             class="blog-card-img h-100 w-100 object-cover"
+                                             src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="blog-card-content p-4">
+                                        <div class="blog-card-date mb-2">
+                                            <span class="day">18</span>
+                                            <span class="month">Dicembre</span>
+                                            <span class="year">2023</span>
+                                        </div>
+                                        <h3 class="blog-card-title">10 Consigli Pratici per l'Ottimizzazione delle
+                                            Prestazioni React</h3>
+                                        <div class="blog-card-meta my-2">
+                                            <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
+                                            <span><i class="far fa-eye me-1"></i>1.5K visualizzazioni</span>
+                                            <span><i class="far fa-clock me-1"></i>10 min di lettura</span>
+                                        </div>
+                                        <p class="blog-card-text">
+                                            Esplora suggerimenti pratici e best practice per ottimizzare le
+                                            applicazioni React e costruire web app più veloci ed efficienti. Questo
+                                            articolo copre tecniche essenziali come la memoizzazione, il code
+                                            splitting e l'ottimizzazione dei rendering.</p>
+                                        <div class="blog-card-tags">
+                                            <span class="blog-tag">React</span>
+                                            <span class="blog-tag">Performance</span>
+                                            <span class="blog-tag">Frontend</span>
+                                        </div>
+                                        <a class="blog-card-link mt-3" href="../blog-posts/react-performance.html">
+                                            Leggi Tutto <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Sezione "Espresso Break" - innovazione per la versione italiana -->
-                        <div class="sidebar-widget espresso-widget" data-aos="fade-up">
-                            <div class="widget-title">
-                                <h4><i class="fas fa-coffee"></i> Espresso Break</h4>
-                            </div>
-                            <div class="espresso-content">
-                                <p class="quote">"Il design è dove la scienza e l'arte raggiungono l'equilibrio."</p>
-                                <p class="quote-author">— Bruno Munari</p>
-
-                                <div class="quick-reads mt-4">
-                                    <h6>Letture Veloci:</h6>
-                                    <ul class="quick-read-list">
-                                        <li><a href="#">5 minuti sul minimalismo nel web design</a></li>
-                                        <li><a href="#">Come trovare ispirazione dalla moda italiana</a></li>
-                                        <li><a href="#">Principi di Leonardo applicati al design moderno</a></li>
-                                    </ul>
+                    <!-- Articolo 2 -->
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100"
+                         data-tags="UI Design Design Trends UX">
+                        <div class="blog-card">
+                            <div class="blog-card-img-container">
+                                <span class="blog-category">Design</span>
+                                <img alt="Tendenze UI Design" class="blog-card-img"
+                                     src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e">
+                                <div class="blog-card-date">
+                                    <span class="day">10</span>
+                                    <span class="month">Gen</span>
                                 </div>
+                            </div>
+                            <div class="blog-card-content">
+                                <div class="blog-card-meta">
+                                    <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
+                                    <span><i class="far fa-eye me-1"></i>1.2K visualizzazioni</span>
+                                </div>
+                                <h3 class="blog-card-title">Tendenze UI Design da Tenere d'Occhio nel 2024</h3>
+                                <p class="blog-card-text">
+                                    Con l'evoluzione della tecnologia e il cambiamento delle aspettative degli
+                                    utenti, anche il design UI continua a evolversi. Questo articolo esplora le
+                                    tendenze del design UI destinate a dominare nel 2024.</p>
+                                <div class="blog-card-tags">
+                                    <span class="blog-tag">UI Design</span>
+                                    <span class="blog-tag">Tendenze Design</span>
+                                    <span class="blog-tag">UX</span>
+                                </div>
+                                <a class="blog-card-link" href="../blog-posts/design-trends-2024.html">
+                                    Leggi Tutto <i class="fas fa-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Widget statistiche visite -->
-                        <div class="sidebar-widget stats-widget" data-aos="fade-up">
-                            <div class="widget-title">
-                                <h4><i class="fas fa-chart-line"></i> Statistiche Visite</h4>
+                    <!-- Articolo 3 -->
+                    <div class="col-md-6" data-aos="fade-up"
+                         data-tags="Lavoro Remoto Produttività Metodi di Lavoro">
+                        <div class="blog-card">
+                            <div class="blog-card-img-container">
+                                <span class="blog-category">Produttività</span>
+                                <img alt="Esperienza di Lavoro Remoto" class="blog-card-img"
+                                     src="https://images.unsplash.com/photo-1542435503-956c469947f6">
+                                <div class="blog-card-date">
+                                    <span class="day">05</span>
+                                    <span class="month">Gen</span>
+                                </div>
                             </div>
-                            <div class="stats-content">
-                                <div class="stat-item">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-eye"></i>
-                                    </div>
-                                    <div class="stat-details">
-                                        <h3>36,754</h3>
-                                        <p>Visualizzazioni Totali</p>
-                                    </div>
+                            <div class="blog-card-content">
+                                <div class="blog-card-meta">
+                                    <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
+                                    <span><i class="far fa-eye me-1"></i>980 visualizzazioni</span>
                                 </div>
-                                <div class="stat-item">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-file-alt"></i>
-                                    </div>
-                                    <div class="stat-details">
-                                        <h3>5</h3>
-                                        <p>Articoli Blog</p>
-                                    </div>
+                                <h3 class="blog-card-title">Riflessioni Dopo un Anno di Lavoro Remoto</h3>
+                                <p class="blog-card-text">
+                                    Condividere esperienze, sfide e suggerimenti pratici da un anno di lavoro remoto
+                                    per aiutarti ad adattarti più efficacemente e aumentare la produttività.</p>
+                                <div class="blog-card-tags">
+                                    <span class="blog-tag">Lavoro Remoto</span>
+                                    <span class="blog-tag">Produttività</span>
+                                    <span class="blog-tag">Metodi di Lavoro</span>
                                 </div>
-                                <div class="stat-item">
-                                    <div class="stat-icon">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                    <div class="stat-details">
-                                        <h3>1,234</h3>
-                                        <p>Lettori</p>
-                                    </div>
+                                <a class="blog-card-link" href="../blog-posts/remote-work-experience.html">
+                                    Leggi Tutto <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Articolo 4 -->
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100"
+                         data-tags="Note sui Libri Produttività Sviluppo Personale">
+                        <div class="blog-card">
+                            <div class="blog-card-img-container">
+                                <span class="blog-category">Lettura</span>
+                                <img alt="Atomic Habits" class="blog-card-img"
+                                     src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e">
+                                <div class="blog-card-date">
+                                    <span class="day">28</span>
+                                    <span class="month">Dic</span>
+                                </div>
+                            </div>
+                            <div class="blog-card-content">
+                                <div class="blog-card-meta">
+                                    <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
+                                    <span><i class="far fa-eye me-1"></i>850 visualizzazioni</span>
+                                </div>
+                                <h3 class="blog-card-title">Note e Metodi Pratici da "Atomic Habits"</h3>
+                                <p class="blog-card-text">Analisi dei concetti fondamentali del bestseller "Atomic
+                                    Habits" di James Clear e condivisione di come applicare questi principi nella
+                                    vita quotidiana.</p>
+                                <div class="blog-card-tags">
+                                    <span class="blog-tag">Note sui Libri</span>
+                                    <span class="blog-tag">Produttività</span>
+                                    <span class="blog-tag">Sviluppo Personale</span>
+                                </div>
+                                <a class="blog-card-link" href="../404.html">
+                                    Leggi Tutto <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Articolo 5 - Speciale Italia -->
+                    <div class="col-md-6" data-aos="fade-up" data-tags="Design Italiano Arte Cultura">
+                        <div class="blog-card">
+                            <div class="blog-card-img-container">
+                                <span class="blog-category special-category">Made in Italy</span>
+                                <img alt="Design Italiano" class="blog-card-img"
+                                     src="https://images.unsplash.com/photo-1529260830199-42c24126f198">
+                                <div class="blog-card-date">
+                                    <span class="day">20</span>
+                                    <span class="month">Gen</span>
+                                </div>
+                            </div>
+                            <div class="blog-card-content">
+                                <div class="blog-card-meta">
+                                    <span><i class="far fa-user me-1"></i>AlexanderJ-Carter</span>
+                                    <span><i class="far fa-eye me-1"></i>1.1K visualizzazioni</span>
+                                </div>
+                                <h3 class="blog-card-title">L'Influenza del Design Italiano nel Web Moderno</h3>
+                                <p class="blog-card-text">
+                                    Un'esplorazione di come i principi classici del design italiano hanno
+                                    influenzato l'estetica e la funzionalità del web design contemporaneo.</p>
+                                <div class="blog-card-tags">
+                                    <span class="blog-tag">Design Italiano</span>
+                                    <span class="blog-tag">Web Design</span>
+                                    <span class="blog-tag">Arte</span>
+                                </div>
+                                <a class="blog-card-link" href="../404.html">
+                                    Leggi Tutto <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messaggio nessun risultato di ricerca -->
+                <div class="text-center py-5 d-none" id="no-results">
+                    <div class="no-results-icon mb-3">
+                        <i class="fas fa-search fa-3x text-muted"></i>
+                    </div>
+                    <h3>Nessun Articolo Trovato</h3>
+                    <p class="text-muted">Prova con parole chiave diverse o cancella i filtri</p>
+                    <button class="btn btn-outline-primary mt-2" id="clear-filters">
+                        <i class="fas fa-times me-2"></i>Cancella Filtri
+                    </button>
+                </div>
+
+                <!-- Controlli di paginazione -->
+                <nav aria-label="Paginazione blog" class="mt-5" data-aos="fade-up">
+                    <ul class="pagination pagination-lg justify-content-center">
+                        <li class="page-item disabled">
+                            <a aria-label="Pagina precedente" class="page-link" href="#">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a aria-label="Pagina successiva" class="page-link" href="#">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Barra laterale del blog - stile italiano -->
+            <div class="col-lg-4">
+                <div class="blog-sidebar italian-sidebar">
+                    <!-- Profilo dell'autore -->
+                    <div class="sidebar-widget about-author-widget" data-aos="fade-up">
+                        <div class="widget-title">
+                            <h4><i class="fas fa-user-circle"></i> Sull'Autore</h4>
+                        </div>
+                        <div class="author-bio">
+                            <img alt="Alexander J. Carter" class="author-avatar" src="../img/AboutMe.jpg">
+                            <h5>Alexander J. Carter</h5>
+                            <p class="author-description">
+                                Sviluppatore Frontend, appassionato di UI Design e di fotografia. Innamorato
+                                dell'esplorazione di nuove tecnologie e della condivisione di esperienze.</p>
+                            <div class="author-social">
+                                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sezione "Espresso Break" - innovazione per la versione italiana -->
+                    <div class="sidebar-widget espresso-widget" data-aos="fade-up">
+                        <div class="widget-title">
+                            <h4><i class="fas fa-coffee"></i> Espresso Break</h4>
+                        </div>
+                        <div class="espresso-content">
+                            <p class="quote">"Il design è dove la scienza e l'arte raggiungono l'equilibrio."</p>
+                            <p class="quote-author">— Bruno Munari</p>
+
+                            <div class="quick-reads mt-4">
+                                <h6>Letture Veloci:</h6>
+                                <ul class="quick-read-list">
+                                    <li><a href="#">5 minuti sul minimalismo nel web design</a></li>
+                                    <li><a href="#">Come trovare ispirazione dalla moda italiana</a></li>
+                                    <li><a href="#">Principi di Leonardo applicati al design moderno</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Widget statistiche visite -->
+                    <div class="sidebar-widget stats-widget" data-aos="fade-up">
+                        <div class="widget-title">
+                            <h4><i class="fas fa-chart-line"></i> Statistiche Visite</h4>
+                        </div>
+                        <div class="stats-content">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <div class="stat-details">
+                                    <h3>36,754</h3>
+                                    <p>Visualizzazioni Totali</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="stat-details">
+                                    <h3>5</h3>
+                                    <p>Articoli Blog</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-details">
+                                    <h3>1,234</h3>
+                                    <p>Lettori</p>
                                 </div>
                             </div>
                         </div>
@@ -464,85 +463,86 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-particles"></div>
-        <div class="container footer-content">
-            <!-- Contenuto principale del footer -->
-            <div class="row align-items-center footer-main">
-                <!-- Sinistra: Informazioni sul sito e breve intro -->
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    <div class="footer-brand">
-                        <a class="footer-logo-link" href="../index.html">
-                            <img alt="Logo del sito" height="39" src="../img/logo.png" width="40">
-                            <span>Alexander J. Carter</span>
-                        </a>
-                        <p class="footer-slogan">Catturare l'arte nella vita, condividere prospettive uniche</p>
-                    </div>
-                </div>
-
-                <!-- Centro: Link di navigazione semplificati -->
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                    <div class="footer-mini-nav">
-                        <a href="../index.html">Home</a>
-                        <a href="gallery-it.html">Galleria</a>
-                        <a class="active" href="blog-it.html">Blog</a>
-                        <a href="profile-it.html">Chi Sono</a>
-                    </div>
-                </div>
-
-                <!-- Destra: Cambio lingua e link social -->
-                <div class="col-lg-4 col-md-12">
-                    <div class="footer-connect">
-                        <!-- Barra cambio lingua -->
-                        <div class="language-bar">
-                            <a href="../zh-CN/blog.html">中文</a>
-                            <span class="lang-divider">|</span>
-                            <a href="../en/blog-en.html">English</a>
-                            <span class="lang-divider">|</span>
-                            <a class="active" href="blog-it.html" lang="it">Italiano</a>
-                            <span class="lang-divider">|</span>
-                            <a href="../jp/blog-jp.html" lang="ja">日本語</a>
-                        </div>
-
-                        <!-- Icone social -->
-                        <div class="social-icons">
-                            <a class="social-icon twitter" href="javascript:void(0)" title="Condividi su Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a class="social-icon facebook" href="javascript:void(0)" title="Condividi su Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a class="social-icon github" href="https://github.com/AlexanderJ-Carter" rel="noopener"
-                                target="_blank" title="GitHub">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-particles"></div>
+    <div class="container footer-content">
+        <!-- Contenuto principale del footer -->
+        <div class="row align-items-center footer-main">
+            <!-- Sinistra: Informazioni sul sito e breve intro -->
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <div class="footer-brand">
+                    <a class="footer-logo-link" href="../index.html">
+                        <img alt="Logo del sito" height="39" src="../img/logo.png" width="40">
+                        <span>Alexander J. Carter</span>
+                    </a>
+                    <p class="footer-slogan">Catturare l'arte nella vita, condividere prospettive uniche</p>
                 </div>
             </div>
 
-            <!-- Parte inferiore del footer -->
-            <div class="footer-bottom">
-                <div class="copyright">
-                    © 2025 Alexander James Carter. Tutti i diritti riservati
+            <!-- Centro: Link di navigazione semplificati -->
+            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                <div class="footer-mini-nav">
+                    <a href="../index.html">Home</a>
+                    <a href="gallery-it.html">Galleria</a>
+                    <a class="active" href="blog-it.html">Blog</a>
+                    <a href="profile-it.html">Chi Sono</a>
                 </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a class="me-3" href="privacy.html" rel="noopener" title="Leggi Privacy Policy">Privacy Policy</a>
-                    <a class="me-3" href="terms.html" rel="noopener" title="Leggi Termini di Utilizzo">Termini di
-                        Utilizzo</a>
-                    <a href="contact.html" rel="noopener" title="Contattaci">Contattaci</a>
+            </div>
+
+            <!-- Destra: Cambio lingua e link social -->
+            <div class="col-lg-4 col-md-12">
+                <div class="footer-connect">
+                    <!-- Barra cambio lingua -->
+                    <div class="language-bar">
+                        <a href="../zh-CN/blog.html">中文</a>
+                        <span class="lang-divider">|</span>
+                        <a href="../en/blog-en.html">English</a>
+                        <span class="lang-divider">|</span>
+                        <a class="active" href="blog-it.html" lang="it">Italiano</a>
+                        <span class="lang-divider">|</span>
+                        <a href="../jp/blog-jp.html" lang="ja">日本語</a>
+                    </div>
+
+                    <!-- Icone social -->
+                    <div class="social-icons">
+                        <a class="social-icon twitter" href="javascript:void(0)" title="Condividi su Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="social-icon facebook" href="javascript:void(0)" title="Condividi su Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="social-icon github" href="https://github.com/AlexanderJ-Carter" rel="noopener"
+                           target="_blank" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
 
-    <!-- JavaScript files -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/navigation.js"></script>
-    <script src="../js/enhanced.js"></script>
-    <script src="../js/blog.js"></script>
+        <!-- Parte inferiore del footer -->
+        <div class="footer-bottom">
+            <div class="copyright">
+                © 2025 Alexander James Carter. Tutti i diritti riservati
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <a class="me-3" href="privacy.html" rel="noopener" title="Leggi Privacy Policy">Privacy Policy</a>
+                <a class="me-3" href="terms.html" rel="noopener" title="Leggi Termini di Utilizzo">Termini di
+                    Utilizzo</a>
+                <a href="contact.html" rel="noopener" title="Contattaci">Contattaci</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/enhanced.js"></script>
+<script src="../js/blog.js"></script>
 </body>
 
 </html>
