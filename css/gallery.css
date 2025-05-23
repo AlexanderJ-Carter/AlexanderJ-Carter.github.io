@@ -284,12 +284,16 @@ body.dark-mode .filter-btn {
     }
 }
 
-/* 评论区域样式 */
+/* 评论区域样式 - 修复版本 */
 .comments-section {
     position: relative;
     background-color: var(--light-bg, #f8f9fa);
     padding: 3rem 0;
     margin-top: 2rem;
+}
+
+.dark-mode .comments-section {
+    background-color: var(--dark-bg, #1a1d23);
 }
 
 .comments-card {
@@ -298,6 +302,7 @@ body.dark-mode .filter-btn {
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
     overflow: hidden;
     transition: all 0.3s ease;
+    background-color: #ffffff;
 }
 
 .dark-mode .comments-card {
@@ -308,23 +313,27 @@ body.dark-mode .filter-btn {
 .giscus-container {
     position: relative;
     min-height: 200px;
+    width: 100%;
 }
 
-/* 加载动画 */
-@keyframes pulse {
-    0% {
-        opacity: 0.6;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.6;
-    }
+/* 加载状态样式 */
+.comments-loading {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.02);
+    border: 1px dashed rgba(0, 0, 0, 0.1);
 }
 
-.comments-section .spinner-border {
-    animation: spinner-border 1.2s linear infinite, pulse 2s infinite;
+.dark-mode .comments-loading {
+    background-color: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 确保 Giscus iframe 正确显示 */
+.giscus-frame {
+    border: 0;
+    width: 100%;
+    display: block;
+    margin: 0;
 }
 
 /* 响应式调整 */
@@ -335,5 +344,16 @@ body.dark-mode .filter-btn {
 
     .comments-card {
         border-radius: 10px;
+        margin: 0 15px;
     }
+
+    .comments-loading .spinner-border {
+        width: 1.5rem !important;
+        height: 1.5rem !important;
+    }
+}
+
+/* 暗黑模式下的 Giscus 主题适配 */
+.dark-mode .giscus {
+    color-scheme: dark;
 }

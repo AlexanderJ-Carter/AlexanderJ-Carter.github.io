@@ -22,21 +22,21 @@ function initCommentContainer() {
     if (commentContainer) {
         console.log('找到评论容器!');
 
-        // 添加加载状态样式
-        commentContainer.style.position = 'relative';
-        commentContainer.style.minHeight = '200px';
-        commentContainer.style.transition = 'all 0.3s ease';
-
-        // 显示加载提示
-        const loadingMsg = document.createElement('div');
-        loadingMsg.className = 'text-center p-4';
-        loadingMsg.innerHTML = `
-            <div class="spinner-border text-primary mb-2" role="status">
-                <span class="visually-hidden">加载中...</span>
-            </div>
-            <p class="text-muted">评论区域正在加载，请稍候...</p>
-        `;
-        commentContainer.appendChild(loadingMsg);
+        // 清除现有内容，避免重复显示
+        if (!commentContainer.querySelector('.giscus')) {
+            // 只有在没有 giscus 组件时才显示加载提示
+            const loadingMsg = document.createElement('div');
+            loadingMsg.className = 'text-center p-4 comments-loading';
+            loadingMsg.innerHTML = `
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="spinner-border text-primary me-3" role="status" style="width: 2rem; height: 2rem;">
+                        <span class="visually-hidden">加载中...</span>
+                    </div>
+                    <span class="text-muted fs-6">评论区域正在加载，请稍候...</span>
+                </div>
+            `;
+            commentContainer.appendChild(loadingMsg);
+        }
     } else {
         console.error(
             '找不到评论容器! 请检查HTML中是否有id为"comments-container"的元素。'
@@ -55,14 +55,11 @@ function setupGiscusMessageListener() {
             const giscusData = e.data.giscus;
             console.log('收到Giscus消息:', giscusData);
 
-            // 消息类型处理
-            switch (giscusData.error) {
-                case true:
-                    handleGiscusError(giscusData);
-                    break;
-                default:
-                    handleGiscusSuccess(giscusData);
-                    break;
+            // 根据消息类型处理
+            if (giscusData.error) {
+                handleGiscusError(giscusData);
+            } else {
+                handleGiscusSuccess(giscusData);
             }
         }
     });
@@ -75,10 +72,10 @@ function handleGiscusSuccess(data) {
     console.log('Giscus加载成功');
     const commentContainer = document.getElementById('comments-container');
     if (commentContainer) {
-        // 清除初始加载提示
-        commentContainer
-            .querySelectorAll('.text-center.p-4')
-            .forEach((el) => el.remove());
+        // 移除加载提示
+        const loadingElements =
+            commentContainer.querySelectorAll('.comments-loading');
+        loadingElements.forEach((el) => el.remove());
     }
 }
 
@@ -89,21 +86,38 @@ function handleGiscusError(data) {
     console.error('Giscus加载失败:', data.message || '未知错误');
     const commentContainer = document.getElementById('comments-container');
     if (commentContainer) {
+        // 清除所有内容
+        commentContainer.innerHTML = '';
+
         // 显示错误提示
-        commentContainer.innerHTML = `
-            <div class="alert alert-danger text-center" role="alert">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                评论系统加载失败。请检查您的网络连接或稍后再试。
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'alert alert-warning text-center';
+        errorMsg.innerHTML = `
+            <div class="d-flex justify-content-center align-items-center">
+                <i class="fas fa-exclamation-triangle me-2 text-warning"></i>
+                <span>评论系统暂时无法加载，请稍后再试。</span>
             </div>
         `;
+        commentContainer.appendChild(errorMsg);
     }
 }
+
+// 监听 Giscus iframe 加载完成
+setTimeout(() => {
+    const giscusFrame = document.querySelector('.giscus-frame');
+    if (giscusFrame) {
+        console.log('Giscus iframe 已加载');
+        handleGiscusSuccess({});
+    }
+}, 3000); // 3秒后检查是否已加载
 
 // 导出可能在其他地方需要使用的函数
 window.CommentsManager = {
     initCommentContainer,
     reloadComments: function () {
         const iframe = document.querySelector('.giscus-frame');
-        if (iframe) iframe.src = iframe.src;
+        if (iframe) {
+            iframe.src = iframe.src;
+        }
     },
 };
