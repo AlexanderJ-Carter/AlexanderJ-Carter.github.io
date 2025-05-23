@@ -519,6 +519,29 @@
         </div>
     </section>
 
+    <!-- 添加Giscus评论区域 -->
+    <section class="comments-section py-5 bg-light">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <h2 class="fw-bold mb-3">留下您的评论</h2>
+                    <p class="text-muted">分享您对这些作品的看法或提出任何问题，我们很高兴听到您的声音！</p>
+                    <div class="section-divider"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 mx-auto" data-aos="fade-up">
+                    <div class="card comments-card">
+                        <div class="card-body">
+                            <!-- Giscus评论容器 -->
+                            <div class="giscus-container" id="comments-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 页脚 - 重新设计，更简洁高效 -->
     <footer class="site-footer">
         <div class="footer-particles"></div>
@@ -598,6 +621,48 @@
     <script src="../js/navigation.js"></script>
     <script src="../js/enhanced.js"></script>
     <script src="../js/gallery.js"></script>
+
+    <!-- Giscus评论脚本 - 添加调试支持 -->
+    <script src="https://giscus.app/client.js" data-repo="AlexanderJ-Carter/AlexanderJ-Carter.github.io"
+        data-repo-id="R_kgDOMg3v8A" data-category="Announcements" data-category-id="DIC_kwDOMg3v8M4CqfQU"
+        data-mapping="pathname" <!-- 由url改为pathname可能解决路径问题 -->
+            data - strict="0"
+            data - reactions - enabled="1"
+            data - emit - metadata="1"   <!-- 启用元数据以便调试 -->
+            data - input - position="bottom"
+            data - theme="preferred_color_scheme"
+            data - lang="zh-CN"
+            crossorigin = "anonymous"
+            async >
+        </script>
+
+    <!-- 添加评论调试脚本 -->
+    <script>
+            // 监听Giscus框架加载
+            window.addEventListener('message', function (e) {
+                if (e.origin !== 'https://giscus.app') return;
+
+                // 输出调试信息到控制台
+                if (e.data && e.data.giscus) {
+                    console.log('Giscus事件:', e.data.giscus);
+                }
+            });
+
+        // DOM加载完成后检查Giscus容器
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                const container = document.getElementById('comments-container');
+                if (container) {
+                    console.log('Giscus容器状态:', {
+                        visible: !!container.offsetParent,
+                        height: container.offsetHeight,
+                        width: container.offsetWidth,
+                        childElements: container.children.length
+                    });
+                }
+            }, 2000); // 给Giscus加载留出时间
+        });
+    </script>
 </body>
 
 </html>
