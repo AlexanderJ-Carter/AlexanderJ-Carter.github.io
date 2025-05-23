@@ -284,23 +284,12 @@ body.dark-mode .filter-btn {
     }
 }
 
-/* Giscus评论区样式 */
+/* 评论区域样式 */
 .comments-section {
     position: relative;
-    overflow: hidden;
-}
-
-.comments-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../img/patterns/pattern-light.svg');
-    background-size: 200px;
-    opacity: 0.1;
-    pointer-events: none;
+    background-color: var(--light-bg, #f8f9fa);
+    padding: 3rem 0;
+    margin-top: 2rem;
 }
 
 .comments-card {
@@ -308,7 +297,6 @@ body.dark-mode .filter-btn {
     border: none;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
     overflow: hidden;
-    background-color: var(--card-bg, #ffffff);
     transition: all 0.3s ease;
 }
 
@@ -317,38 +305,34 @@ body.dark-mode .filter-btn {
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* 改进Giscus评论容器样式 */
 .giscus-container {
-    min-height: 150px;
     position: relative;
-    width: 100%;
+    min-height: 200px;
 }
 
-/* 添加加载指示器，确保用户知道评论区正在加载 */
-.giscus-container::before {
-    content: '评论区域正在加载中...';
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    font-style: italic;
-    color: #666;
-    background-color: transparent;
+/* 加载动画 */
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
 }
 
-/* 确保giscus框架可见 */
-.giscus-frame {
-    border: none;
-    width: 100%;
-    min-height: 150px;
+.comments-section .spinner-border {
+    animation: spinner-border 1.2s linear infinite, pulse 2s infinite;
 }
 
 /* 响应式调整 */
 @media (max-width: 768px) {
+    .comments-section {
+        padding: 2rem 0;
+    }
+
     .comments-card {
         border-radius: 10px;
     }

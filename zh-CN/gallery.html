@@ -533,8 +533,18 @@
                 <div class="col-lg-10 mx-auto" data-aos="fade-up">
                     <div class="card comments-card">
                         <div class="card-body">
-                            <!-- Giscus评论容器 -->
-                            <div class="giscus-container" id="comments-container"></div>
+                            <!-- Giscus评论容器 - 将脚本直接放在这里 -->
+                            <div class="giscus-container" id="comments-container">
+                                <!-- Giscus评论脚本 - 直接嵌入到容器中 -->
+                                <script src="https://giscus.app/client.js"
+                                    data-repo="AlexanderJ-Carter/AlexanderJ-Carter.github.io"
+                                    data-repo-id="R_kgDOMg3v8A" data-category="Announcements"
+                                    data-category-id="DIC_kwDOMg3v8M4CqfQU" data-mapping="pathname" data-strict="0"
+                                    data-reactions-enabled="1" data-emit-metadata="1" data-input-position="bottom"
+                                    data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy"
+                                    crossorigin="anonymous" async>
+                                    </script>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -622,47 +632,8 @@
     <script src="../js/enhanced.js"></script>
     <script src="../js/gallery.js"></script>
 
-    <!-- Giscus评论脚本 - 添加调试支持 -->
-    <script src="https://giscus.app/client.js" data-repo="AlexanderJ-Carter/AlexanderJ-Carter.github.io"
-        data-repo-id="R_kgDOMg3v8A" data-category="Announcements" data-category-id="DIC_kwDOMg3v8M4CqfQU"
-        data-mapping="pathname" <!-- 由url改为pathname可能解决路径问题 -->
-            data - strict="0"
-            data - reactions - enabled="1"
-            data - emit - metadata="1"   <!-- 启用元数据以便调试 -->
-            data - input - position="bottom"
-            data - theme="preferred_color_scheme"
-            data - lang="zh-CN"
-            crossorigin = "anonymous"
-            async >
-        </script>
-
-    <!-- 添加评论调试脚本 -->
-    <script>
-            // 监听Giscus框架加载
-            window.addEventListener('message', function (e) {
-                if (e.origin !== 'https://giscus.app') return;
-
-                // 输出调试信息到控制台
-                if (e.data && e.data.giscus) {
-                    console.log('Giscus事件:', e.data.giscus);
-                }
-            });
-
-        // DOM加载完成后检查Giscus容器
-        document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
-                const container = document.getElementById('comments-container');
-                if (container) {
-                    console.log('Giscus容器状态:', {
-                        visible: !!container.offsetParent,
-                        height: container.offsetHeight,
-                        width: container.offsetWidth,
-                        childElements: container.children.length
-                    });
-                }
-            }, 2000); // 给Giscus加载留出时间
-        });
-    </script>
+    <!-- 引入单独的评论处理脚本 -->
+    <script src="../js/comments.js"></script>
 </body>
 
 </html>

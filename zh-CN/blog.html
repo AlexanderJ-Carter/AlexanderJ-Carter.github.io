@@ -422,6 +422,39 @@
         </div>
     </div>
 
+    <!-- 添加Giscus评论区域 -->
+    <section class="comments-section py-5 bg-light">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <h2 class="fw-bold mb-3">留下您的评论</h2>
+                    <p class="text-muted">分享您对博客内容的看法或提出任何问题，我们很高兴听到您的声音！</p>
+                    <div class="section-divider"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 mx-auto" data-aos="fade-up">
+                    <div class="card comments-card">
+                        <div class="card-body">
+                            <!-- Giscus评论容器 - 将脚本直接放在这里 -->
+                            <div class="giscus-container" id="comments-container">
+                                <!-- Giscus评论脚本 - 直接嵌入到容器中 -->
+                                <script src="https://giscus.app/client.js"
+                                    data-repo="AlexanderJ-Carter/AlexanderJ-Carter.github.io"
+                                    data-repo-id="R_kgDOMg3v8A" data-category="Announcements"
+                                    data-category-id="DIC_kwDOMg3v8M4CqfQU" data-mapping="pathname" data-strict="0"
+                                    data-reactions-enabled="1" data-emit-metadata="1" data-input-position="bottom"
+                                    data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy"
+                                    crossorigin="anonymous" async>
+                                    </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 页脚 -->
     <footer class="site-footer">
         <div class="footer-particles"></div>
@@ -501,6 +534,9 @@
     <script src="../js/navigation.js"></script>
     <script src="../js/enhanced.js"></script>
     <script src="../js/blog.js"></script>
+
+    <!-- 引入单独的评论处理脚本 -->
+    <script src="../js/comments.js"></script>
 </body>
 
 </html>
