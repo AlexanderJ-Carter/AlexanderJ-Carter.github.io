@@ -2,6 +2,16 @@
 <html lang="zh-CN">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KR20QK92R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6KR20QK92R');
+    </script>
+
     <meta charset="UTF-8">
     <title>联系方式 - Alexander James Carter的网页</title>
     <meta content="联系方式与社交媒体信息" name="description">
@@ -16,120 +26,120 @@
 </head>
 
 <body>
-<script>
-    // 验证访问权限
-    document.addEventListener('DOMContentLoaded', function () {
-        if (!isVerified('contact_verified')) {
-            // 使用重定向计数器防止无限循环
-            if (checkRedirectAttempts('contact', 'cn')) {
-                // 强制重定向到验证页面
-                window.location.replace('../verify.html?redirect=zh-CN/contact.html');
-            }
-        } else {
-            // 验证成功，重置计数器
-            resetRedirectCounter('contact', 'cn');
-        }
-    });
-
-    // 拦截后退按钮
-    window.addEventListener('pageshow', function (event) {
-        if (event.persisted || (performance.getEntriesByType && performance.getEntriesByType("navigation")[0].type === 'back_forward')) {
-            // 如果页面从缓存加载，重新检查验证状态
+    <script>
+        // 验证访问权限
+        document.addEventListener('DOMContentLoaded', function () {
             if (!isVerified('contact_verified')) {
+                // 使用重定向计数器防止无限循环
                 if (checkRedirectAttempts('contact', 'cn')) {
+                    // 强制重定向到验证页面
                     window.location.replace('../verify.html?redirect=zh-CN/contact.html');
                 }
+            } else {
+                // 验证成功，重置计数器
+                resetRedirectCounter('contact', 'cn');
             }
-        }
-    });
-</script>
-<a aria-label="返回主页" class="back-btn" href="../index.html">
-    <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>返回主页
-</a>
+        });
 
-<main>
-    <div class="contact-container">
-        <div class="contact-header">
-            <h1>与我联系</h1>
-            <p>选择您喜欢的方式与我交流，无论是询问、合作还是分享想法，我都期待您的消息</p>
+        // 拦截后退按钮
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || (performance.getEntriesByType && performance.getEntriesByType("navigation")[0].type === 'back_forward')) {
+                // 如果页面从缓存加载，重新检查验证状态
+                if (!isVerified('contact_verified')) {
+                    if (checkRedirectAttempts('contact', 'cn')) {
+                        window.location.replace('../verify.html?redirect=zh-CN/contact.html');
+                    }
+                }
+            }
+        });
+    </script>
+    <a aria-label="返回主页" class="back-btn" href="../index.html">
+        <i aria-hidden="true" class="fas fa-arrow-left me-2"></i>返回主页
+    </a>
+
+    <main>
+        <div class="contact-container">
+            <div class="contact-header">
+                <h1>与我联系</h1>
+                <p>选择您喜欢的方式与我交流，无论是询问、合作还是分享想法，我都期待您的消息</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- 微信联系方式 -->
+                <div aria-label="微信联系方式" class="contact-item" onclick="openQrModal('wechat')" role="button"
+                    tabindex="0">
+                    <i aria-hidden="true" class="fab fa-weixin contact-icon weixin-icon"></i>
+                    <h3 class="contact-title">微信</h3>
+                    <p class="contact-info">扫码或复制微信号添加好友</p>
+                    <button class="contact-btn">查看二维码</button>
+                </div>
+
+                <!-- QQ联系方式 -->
+                <div aria-label="QQ联系方式" class="contact-item" onclick="openQrModal('qq')" role="button" tabindex="0">
+                    <i aria-hidden="true" class="fab fa-qq contact-icon qq-icon"></i>
+                    <h3 class="contact-title">QQ</h3>
+                    <p class="contact-info">扫码或复制QQ号添加好友</p>
+                    <button class="contact-btn">查看二维码</button>
+                </div>
+
+                <!-- GitHub联系方式 -->
+                <div class="contact-item" role="button" tabindex="0">
+                    <a aria-label="访问GitHub主页" class="contact-link" href="https://github.com/alexanderj-carter"
+                        rel="noopener" target="_blank">
+                        <i aria-hidden="true" class="fab fa-github contact-icon github-icon"></i>
+                        <h3 class="contact-title">GitHub</h3>
+                        <p class="contact-info">查看我的开源项目与代码</p>
+                        <button class="contact-btn">访问主页</button>
+                    </a>
+                </div>
+
+                <!-- 邮件联系方式 -->
+                <div class="contact-item" role="button" tabindex="0">
+                    <a aria-label="发送邮件" class="contact-link" href="mailto:contact-us@alexander.xin">
+                        <i aria-hidden="true" class="fas fa-envelope contact-icon email-icon"></i>
+                        <h3 class="contact-title">邮件</h3>
+                        <p class="contact-info">contact-us@alexander.xin</p>
+                        <button class="contact-btn">发送邮件</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="language-options text-center mt-5">
+                <p>其他语言版本:</p>
+                <a class="btn btn-outline-primary me-2" href="../en/contact-en.html">English</a>
+                <a class="btn btn-outline-primary me-2" href="../it/contact-it.html">Italiano</a>
+                <a class="btn btn-outline-primary" href="../jp/contact-jp.html">日本語</a>
+            </div>
         </div>
+    </main>
 
-        <div class="contact-grid">
-            <!-- 微信联系方式 -->
-            <div aria-label="微信联系方式" class="contact-item" onclick="openQrModal('wechat')" role="button"
-                 tabindex="0">
-                <i aria-hidden="true" class="fab fa-weixin contact-icon weixin-icon"></i>
-                <h3 class="contact-title">微信</h3>
-                <p class="contact-info">扫码或复制微信号添加好友</p>
-                <button class="contact-btn">查看二维码</button>
-            </div>
-
-            <!-- QQ联系方式 -->
-            <div aria-label="QQ联系方式" class="contact-item" onclick="openQrModal('qq')" role="button" tabindex="0">
-                <i aria-hidden="true" class="fab fa-qq contact-icon qq-icon"></i>
-                <h3 class="contact-title">QQ</h3>
-                <p class="contact-info">扫码或复制QQ号添加好友</p>
-                <button class="contact-btn">查看二维码</button>
-            </div>
-
-            <!-- GitHub联系方式 -->
-            <div class="contact-item" role="button" tabindex="0">
-                <a aria-label="访问GitHub主页" class="contact-link" href="https://github.com/alexanderj-carter"
-                   rel="noopener" target="_blank">
-                    <i aria-hidden="true" class="fab fa-github contact-icon github-icon"></i>
-                    <h3 class="contact-title">GitHub</h3>
-                    <p class="contact-info">查看我的开源项目与代码</p>
-                    <button class="contact-btn">访问主页</button>
-                </a>
-            </div>
-
-            <!-- 邮件联系方式 -->
-            <div class="contact-item" role="button" tabindex="0">
-                <a aria-label="发送邮件" class="contact-link" href="mailto:contact-us@alexander.xin">
-                    <i aria-hidden="true" class="fas fa-envelope contact-icon email-icon"></i>
-                    <h3 class="contact-title">邮件</h3>
-                    <p class="contact-info">contact-us@alexander.xin</p>
-                    <button class="contact-btn">发送邮件</button>
-                </a>
-            </div>
-        </div>
-
-        <div class="language-options text-center mt-5">
-            <p>其他语言版本:</p>
-            <a class="btn btn-outline-primary me-2" href="../en/contact-en.html">English</a>
-            <a class="btn btn-outline-primary me-2" href="../it/contact-it.html">Italiano</a>
-            <a class="btn btn-outline-primary" href="../jp/contact-jp.html">日本語</a>
-        </div>
-    </div>
-</main>
-
-<!-- 二维码弹窗 -->
-<div aria-modal="true" class="qr-modal" id="qr-modal" role="dialog">
-    <div class="qr-modal-content">
-        <span aria-label="关闭弹窗" class="qr-close" onclick="closeQrModal()" role="button" tabindex="0">&times;</span>
-        <h3 class="qr-title" id="qr-title">扫描二维码</h3>
-        <img alt="二维码" class="qr-image" id="qr-image" src="">
-        <p class="qr-desc" id="qr-desc">扫描上方二维码添加好友</p>
-        <button class="copy-btn" id="copy-btn" onclick="copyContact()">复制账号</button>
-    </div>
-</div>
-
-<footer class="footer-light py-4 mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start">
-                <p class="mb-0">&copy; 2025 Alexander James Carter Website</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <a class="me-3" href="privacy.html">隐私政策</a>
-                <a href="terms.html">使用条款</a>
-            </div>
+    <!-- 二维码弹窗 -->
+    <div aria-modal="true" class="qr-modal" id="qr-modal" role="dialog">
+        <div class="qr-modal-content">
+            <span aria-label="关闭弹窗" class="qr-close" onclick="closeQrModal()" role="button" tabindex="0">&times;</span>
+            <h3 class="qr-title" id="qr-title">扫描二维码</h3>
+            <img alt="二维码" class="qr-image" id="qr-image" src="">
+            <p class="qr-desc" id="qr-desc">扫描上方二维码添加好友</p>
+            <button class="copy-btn" id="copy-btn" onclick="copyContact()">复制账号</button>
         </div>
     </div>
-</footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../js/contact.js"></script>
+    <footer class="footer-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 Alexander James Carter Website</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a class="me-3" href="privacy.html">隐私政策</a>
+                    <a href="terms.html">使用条款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/contact.js"></script>
 </body>
 
 </html>
