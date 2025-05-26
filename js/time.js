@@ -319,7 +319,7 @@ function setupEventListeners() {
     });
 }
 
-// API数据生成函数（与HTML中的函数一致）
+// API数据生成函数（增强版）
 function generateTimeData() {
     const now = new Date();
     const timezones = {};
@@ -334,6 +334,15 @@ function generateTimeData() {
             time: timezoneTime.toISOString(),
             offset: timezone.offset,
             displayName: timezone.displayName,
+            formatted_time: timezoneTime.toLocaleString(timezone.format, {
+                hour12: false,
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            }),
         };
     });
 
@@ -343,16 +352,102 @@ function generateTimeData() {
         utc: now.toUTCString(),
         local: now.toString(),
         timezone_offset: now.getTimezoneOffset(),
+        formatted_local: now.toLocaleString('zh-CN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        }),
         timezones: timezones,
-        server_time: now.toISOString(),
-        generated_at: new Date().toISOString(),
+        server_info: {
+            generated_at: now.toISOString(),
+            source: 'alexander.xin Time Service',
+            version: '2.0',
+            api_endpoints: {
+                json: 'time.alexander.xin?format=json',
+                text: 'time.alexander.xin?text=1',
+                api: 'time.alexander.xin?api=1',
+            },
+        },
     };
 }
 
-// 导出供外部使用
+// 生成文本响应
+function generateTextResponse() {
+    const now = new Date();
+
+    const textResponse = `当前时间服务 - alexander.xin
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+本地时间: ${now.toLocaleString('zh-CN')}
+时间戳: ${Math.floor(now.getTime() / 1000)}
+ISO格式: ${now.toISOString()}
+UTC时间: ${now.toUTCString()}
+
+世界主要时区:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🌍 UTC时间:      ${new Date(
+        now.getTime() + now.getTimezoneOffset() * 60000
+    ).toLocaleString('en-US')}
+🇨🇳 北京时间:     ${new Date(
+        now.getTime() + 8 * 3600000 + now.getTimezoneOffset() * 60000
+    ).toLocaleString('zh-CN')}
+🇯🇵 东京时间:     ${new Date(
+        now.getTime() + 9 * 3600000 + now.getTimezoneOffset() * 60000
+    ).toLocaleString('ja-JP')}
+🇺🇸 纽约时间:     ${new Date(
+        now.getTime() - 5 * 3600000 + now.getTimezoneOffset() * 60000
+    ).toLocaleString('en-US')}
+🇺🇸 洛杉矶时间:   ${new Date(
+        now.getTime() - 8 * 3600000 + now.getTimezoneOffset() * 60000
+    ).toLocaleString('en-US')}
+🇬🇧 伦敦时间:     ${new Date(
+        now.getTime() + now.getTimezoneOffset() * 60000
+    ).toLocaleString('en-GB')}
+🇫🇷 巴黎时间:     ${new Date(
+        now.getTime() + 1 * 3600000 + now.getTimezoneOffset() * 60000
+    ).toLocaleString('fr-FR')}
+🇦🇺 悉尼时间:     ${new Date(
+        now.getTime() + 11 * 3600000 + now.getTimezoneOffset() * 60000
+    ).toLocaleString('en-AU')}
+
+API使用方法:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+curl "time.alexander.xin?format=json"  # JSON格式
+curl "time.alexander.xin?text=1"       # 文本格式
+curl "time.alexander.xin?api=1"        # API格式
+
+PowerShell 用户:
+Invoke-WebRequest "time.alexander.xin?format=json"
+
+服务信息:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+生成时间: ${now.toISOString()}
+服务来源: alexander.xin Time Service
+版本: 2.0
+更新频率: 实时`;
+
+    return textResponse;
+}
+
+// 导出供外部使用（增强版）
 window.TimeService = {
     generateTimeData,
+    generateTextResponse,
     copyToClipboard,
     updateCurrentTime,
     TIMEZONES,
+    // 新增工具函数
+    getCurrentTimestamp: () => Math.floor(Date.now() / 1000),
+    formatTime: (date, format = 'zh-CN') => date.toLocaleString(format),
+    getTimezoneTime: (offsetHours) => {
+        const now = new Date();
+        return new Date(
+            now.getTime() +
+                offsetHours * 3600000 +
+                now.getTimezoneOffset() * 60000
+        );
+    },
 };

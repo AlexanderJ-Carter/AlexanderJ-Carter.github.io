@@ -25,50 +25,38 @@
 
 <body>
     <script>
-        // API检测和响应
-        document.addEventListener('DOMContentLoaded', function () {
-            // 检查是否为API调用（通过URL参数或User-Agent判断）
-            const urlParams = new URLSearchParams(window.location.search);
-            const userAgent = navigator.userAgent.toLowerCase();
+        // 检查URL参数来判断是否需要API响应
+        const urlParams = new URLSearchParams(window.location.search);
+        const isJsonRequest = urlParams.has('format') && urlParams.get('format') === 'json';
+        const isApiRequest = urlParams.has('api');
+        const isTextRequest = urlParams.has('text');
 
-            const isApiCall = urlParams.has('format') ||
-                urlParams.has('api') ||
-                userAgent.includes('curl') ||
-                userAgent.includes('wget') ||
-                userAgent.includes('postman');
-
-            if (isApiCall && (urlParams.get('format') === 'json' || urlParams.has('api'))) {
-                // 返回JSON格式的时间数据
-                const timeData = generateTimeData();
-                document.body.innerHTML = '<pre style="font-family: monospace; padding: 20px; background: #f8f9fa; margin: 0; white-space: pre-wrap;">' + JSON.stringify(timeData, null, 2) + '</pre>';
-                document.head.innerHTML = '<meta charset="UTF-8"><title>Time API Response</title>';
-                return;
-            }
-        });
-
-        function generateTimeData() {
-            const now = new Date();
-            return {
-                timestamp: Math.floor(now.getTime() / 1000),
-                iso_8601: now.toISOString(),
-                utc: now.toUTCString(),
-                local: now.toString(),
-                timezone_offset: now.getTimezoneOffset(),
-                timezones: {
-                    'UTC': new Date(now.getTime() + (now.getTimezoneOffset() * 60000)).toISOString(),
-                    'Beijing': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (8 * 3600000)).toISOString(),
-                    'Tokyo': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (9 * 3600000)).toISOString(),
-                    'New_York': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) - (5 * 3600000)).toISOString(),
-                    'Los_Angeles': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) - (8 * 3600000)).toISOString(),
-                    'London': new Date(now.getTime() + (now.getTimezoneOffset() * 60000)).toISOString(),
-                    'Paris': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (1 * 3600000)).toISOString(),
-                    'Sydney': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (11 * 3600000)).toISOString()
-                },
-                server_info: {
-                    generated_at: now.toISOString(),
-                    source: 'alexander.xin Time Service'
+        if (isJsonRequest || isApiRequest) {
+            // 等待time.js加载完成后再调用函数
+            document.addEventListener('DOMContentLoaded', function () {
+                if (window.TimeService && window.TimeService.generateTimeData) {
+                    const timeData = window.TimeService.generateTimeData();
+                    document.body.innerHTML = '<pre style="font-family: monospace; padding: 20px; background: #f8f9fa; margin: 0; white-space: pre-wrap; color: #333;">' + JSON.stringify(timeData, null, 2) + '</pre>';
+                    document.head.innerHTML = '<meta charset="UTF-8"><title>Time API Response</title>';
+                } else {
+                    document.body.innerHTML = '<pre style="font-family: monospace; padding: 20px; background: #f8f9fa; margin: 0; white-space: pre-wrap; color: #333;">{"error": "Time service not available"}</pre>';
                 }
-            };
+            });
+            return;
+        }
+
+        if (isTextRequest) {
+            // 等待time.js加载完成后再调用函数
+            document.addEventListener('DOMContentLoaded', function () {
+                if (window.TimeService && window.TimeService.generateTextResponse) {
+                    const textResponse = window.TimeService.generateTextResponse();
+                    document.body.innerHTML = '<pre style="font-family: monospace; padding: 20px; background: #f8f9fa; margin: 0; white-space: pre-wrap; color: #333; line-height: 1.6;">' + textResponse + '</pre>';
+                    document.head.innerHTML = '<meta charset="UTF-8"><title>Time Service</title>';
+                } else {
+                    document.body.innerHTML = '<pre style="font-family: monospace; padding: 20px; background: #f8f9fa; margin: 0; white-space: pre-wrap; color: #333;">Time service not available</pre>';
+                }
+            });
+            return;
         }
     </script>
 
@@ -87,16 +75,32 @@
             <h3><i class="fas fa-code me-2"></i>API 使用方法</h3>
             <div class="api-examples">
                 <div class="code-block">
-                    <span class="code-title">命令行调用：</span>
-                    <code>curl time.alexander.xin</code>
-                    <button class="copy-btn" onclick="copyToClipboard('curl time.alexander.xin')">
+                    <span class="code-title">JSON格式：</span>
+                    <code>curl "time.alexander.xin?format=json"</code>
+                    <button class="copy-btn"
+                        onclick="copyToClipboard('curl &quot;time.alexander.xin?format=json&quot;')">
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
                 <div class="code-block">
-                    <span class="code-title">JSON格式：</span>
-                    <code>curl time.alexander.xin?format=json</code>
-                    <button class="copy-btn" onclick="copyToClipboard('curl time.alexander.xin?format=json')">
+                    <span class="code-title">文本格式：</span>
+                    <code>curl "time.alexander.xin?text=1"</code>
+                    <button class="copy-btn" onclick="copyToClipboard('curl &quot;time.alexander.xin?text=1&quot;')">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <div class="code-block">
+                    <span class="code-title">API调用：</span>
+                    <code>curl "time.alexander.xin?api=1"</code>
+                    <button class="copy-btn" onclick="copyToClipboard('curl &quot;time.alexander.xin?api=1&quot;')">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <div class="code-block">
+                    <span class="code-title">PowerShell：</span>
+                    <code>Invoke-WebRequest "time.alexander.xin?format=json"</code>
+                    <button class="copy-btn"
+                        onclick="copyToClipboard('Invoke-WebRequest &quot;time.alexander.xin?format=json&quot;')">
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
