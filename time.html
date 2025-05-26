@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KR20QK92R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-6KR20QK92R');
+    </script>
+
+    <meta charset="UTF-8">
+    <title>标准时间服务 - Alexander James Carter的个人网站</title>
+    <meta content="提供准确的标准时间和全球主要时区时间信息，支持API调用" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.default.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/time.css" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+        // API检测和响应
+        document.addEventListener('DOMContentLoaded', function () {
+            // 检查是否为API调用（通过URL参数或User-Agent判断）
+            const urlParams = new URLSearchParams(window.location.search);
+            const userAgent = navigator.userAgent.toLowerCase();
+
+            const isApiCall = urlParams.has('format') ||
+                urlParams.has('api') ||
+                userAgent.includes('curl') ||
+                userAgent.includes('wget') ||
+                userAgent.includes('postman');
+
+            if (isApiCall && (urlParams.get('format') === 'json' || urlParams.has('api'))) {
+                // 返回JSON格式的时间数据
+                const timeData = generateTimeData();
+                document.body.innerHTML = '<pre style="font-family: monospace; padding: 20px; background: #f8f9fa; margin: 0; white-space: pre-wrap;">' + JSON.stringify(timeData, null, 2) + '</pre>';
+                document.head.innerHTML = '<meta charset="UTF-8"><title>Time API Response</title>';
+                return;
+            }
+        });
+
+        function generateTimeData() {
+            const now = new Date();
+            return {
+                timestamp: Math.floor(now.getTime() / 1000),
+                iso_8601: now.toISOString(),
+                utc: now.toUTCString(),
+                local: now.toString(),
+                timezone_offset: now.getTimezoneOffset(),
+                timezones: {
+                    'UTC': new Date(now.getTime() + (now.getTimezoneOffset() * 60000)).toISOString(),
+                    'Beijing': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (8 * 3600000)).toISOString(),
+                    'Tokyo': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (9 * 3600000)).toISOString(),
+                    'New_York': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) - (5 * 3600000)).toISOString(),
+                    'Los_Angeles': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) - (8 * 3600000)).toISOString(),
+                    'London': new Date(now.getTime() + (now.getTimezoneOffset() * 60000)).toISOString(),
+                    'Paris': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (1 * 3600000)).toISOString(),
+                    'Sydney': new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (11 * 3600000)).toISOString()
+                },
+                server_info: {
+                    generated_at: now.toISOString(),
+                    source: 'alexander.xin Time Service'
+                }
+            };
+        }
+    </script>
+
+    <a class="back-btn" href="index.html">
+        <i class="fas fa-arrow-left me-2"></i>返回主页
+    </a>
+
+    <div class="time-container">
+        <div class="time-header">
+            <h1>标准时间服务</h1>
+            <p>提供准确的时间信息和全球主要时区显示</p>
+        </div>
+
+        <!-- API使用说明 -->
+        <div class="api-info mb-5">
+            <h3><i class="fas fa-code me-2"></i>API 使用方法</h3>
+            <div class="api-examples">
+                <div class="code-block">
+                    <span class="code-title">命令行调用：</span>
+                    <code>curl time.alexander.xin</code>
+                    <button class="copy-btn" onclick="copyToClipboard('curl time.alexander.xin')">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                <div class="code-block">
+                    <span class="code-title">JSON格式：</span>
+                    <code>curl time.alexander.xin?format=json</code>
+                    <button class="copy-btn" onclick="copyToClipboard('curl time.alexander.xin?format=json')">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 当前时间显示 -->
+        <div class="current-time-section mb-5">
+            <h2>当前时间</h2>
+            <div class="time-display">
+                <div class="main-time" id="mainTime">--:--:--</div>
+                <div class="time-info">
+                    <div class="time-detail">
+                        <span class="label">日期：</span>
+                        <span id="currentDate">载入中...</span>
+                    </div>
+                    <div class="time-detail">
+                        <span class="label">时间戳：</span>
+                        <span id="timestamp">载入中...</span>
+                    </div>
+                    <div class="time-detail">
+                        <span class="label">ISO 8601：</span>
+                        <span id="isoTime">载入中...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 世界时区 -->
+        <div class="timezone-section">
+            <h2>世界主要时区</h2>
+            <div class="timezone-grid" id="timezoneGrid">
+                <!-- 时区将通过JavaScript动态生成 -->
+            </div>
+        </div>
+
+        <!-- 时间同步状态 -->
+        <div class="sync-status mt-4">
+            <span class="sync-indicator" id="syncIndicator">
+                <i class="fas fa-sync-alt"></i> 同步中...
+            </span>
+            <span class="last-update">最后更新: <span id="lastUpdate">--</span></span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/time.js"></script>
+</body>
+
+</html>
