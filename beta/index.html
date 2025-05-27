@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta 测试区域 - 访问验证</title>
+    <link rel="stylesheet" href="beta-auth.css">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- 登录界面 -->
+    <div id="auth-container" class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h2>🔐 Beta 测试区域</h2>
+                <p>请输入访问密码以继续</p>
+            </div>
+              <form id="auth-form" class="auth-form">
+                <div class="question-section">
+                    <label for="security-question" class="question-label">安全问题</label>
+                    <p id="security-question" class="security-question">加载中...</p>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">您的答案</label>
+                    <input type="text" id="password" name="password" placeholder="请输入答案" required>
+                </div>
+                
+                <button type="button" id="refresh-question" class="refresh-btn">
+                    🔄 换一个问题
+                </button>
+                
+                <button type="submit" class="auth-btn">
+                    <span class="btn-text">验证访问</span>
+                    <span class="btn-loading" style="display: none;">验证中...</span>
+                </button>
+                
+                <div id="error-message" class="error-message" style="display: none;"></div>
+                
+                <div class="hint-section">
+                    <p class="hint-text">💡 提示：您也可以尝试以下方式</p>
+                    <ul class="hint-list">
+                        <li>数学题：2025 × 2 - 1000 = ?</li>
+                        <li>时间密码：beta+月+日+时 (如: beta52722)</li>
+                        <li>或者使用预设密码</li>
+                    </ul>
+                </div>
+            </form>
+            
+            <div class="auth-footer">
+                <p>需要访问权限？请联系管理员</p>
+                <a href="../index.html" class="back-link">← 返回首页</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Beta内容区域 (初始隐藏) -->
+    <div id="beta-content" class="beta-content" style="display: none;">
+        <nav class="beta-nav">
+            <div class="nav-brand">
+                <h1>🧪 Beta 测试区域</h1>
+            </div>
+            <div class="nav-actions">
+                <button id="logout-btn" class="logout-btn">退出登录</button>
+            </div>
+        </nav>
+
+        <main class="beta-main">
+            <div class="welcome-section">
+                <h2>欢迎来到 Beta 测试区域！</h2>
+                <p>恭喜您成功通过身份验证。这里是新功能的测试环境。</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🚀 新功能 A</h3>
+                    <p>这是一个正在开发中的新功能，目前仅对Beta用户开放。</p>
+                    <button class="feature-btn">测试功能 A</button>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🔧 实验性功能 B</h3>
+                    <p>这个功能还在实验阶段，可能会有一些问题，感谢您的测试。</p>
+                    <button class="feature-btn">测试功能 B</button>
+                </div>
+
+                <div class="feature-card">
+                    <h3>📊 数据分析工具</h3>
+                    <p>全新的数据可视化和分析工具，帮助您更好地理解数据。</p>
+                    <button class="feature-btn">打开分析工具</button>
+                </div>
+
+                <div class="feature-card">
+                    <h3>💬 反馈系统</h3>
+                    <p>发现问题或有建议？请使用这个反馈系统告诉我们。</p>
+                    <button class="feature-btn">提交反馈</button>
+                </div>
+            </div>
+
+            <div class="beta-info">
+                <h3>Beta 测试说明</h3>
+                <ul>
+                    <li>Beta 功能可能不稳定，请谨慎使用</li>
+                    <li>您的反馈对我们非常重要</li>
+                    <li>请勿在生产环境中使用Beta功能</li>
+                    <li>感谢您参与Beta测试！</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script src="beta-auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta 密钥生成器</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .generator-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        h2 { color: #333; text-align: center; margin-bottom: 30px; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #333; font-weight: 500; }
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 2px solid #e1e5e9; 
+            border-radius: 8px; 
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #d4edda;
+            border-radius: 8px;
+            display: none;
+        }
+        .link {
+            word-break: break-all;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="generator-card">
+        <h2>🔑 Beta 访问密钥生成器</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            为授权用户生成专属访问链接
+        </p>
+        
+        <div class="input-group">
+            <label for="username">用户名</label>
+            <input type="text" id="username" placeholder="输入用户名">
+        </div>
+        
+        <div class="input-group">
+            <label for="access-level">访问级别</label>
+            <select id="access-level">
+                <option value="basic">基础访问</option>
+                <option value="advanced">高级访问</option>
+                <option value="admin">管理员访问</option>
+            </select>
+        </div>
+        
+        <div class="input-group">
+            <label for="expires">有效期</label>
+            <select id="expires">
+                <option value="24">24小时</option>
+                <option value="168">7天</option>
+                <option value="720">30天</option>
+                <option value="0">永久</option>
+            </select>
+        </div>
+        
+        <button onclick="generateKey()">生成访问链接</button>
+        
+        <div id="result" class="result">
+            <strong>生成成功！</strong>
+            <div class="link" id="generated-link"></div>
+            <p style="margin-top: 10px; font-size: 14px; color: #666;">
+                请将此链接发送给授权用户，他们可以通过此链接直接访问Beta区域。
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function generateKey() {
+            const username = document.getElementById('username').value;
+            const accessLevel = document.getElementById('access-level').value;
+            const expires = document.getElementById('expires').value;
+            
+            if (!username) {
+                alert('请输入用户名');
+                return;
+            }
+            
+            // 生成基于时间和用户信息的密钥
+            const timestamp = Date.now();
+            const expireTime = expires === '0' ? 0 : timestamp + (parseInt(expires) * 60 * 60 * 1000);
+            
+            const keyData = {
+                user: username,
+                level: accessLevel,
+                created: timestamp,
+                expires: expireTime
+            };
+            
+            // 简单的编码（实际使用中可以用更复杂的加密）
+            const encodedKey = btoa(JSON.stringify(keyData));
+            
+            // 生成访问链接
+            const baseUrl = window.location.href.replace('/key-generator.html', '/index.html');
+            const accessLink = `${baseUrl}?key=${encodedKey}`;
+            
+            document.getElementById('generated-link').textContent = accessLink;
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

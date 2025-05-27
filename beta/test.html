@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta 系统测试</title>
+    <link rel="stylesheet" href="beta-auth.css">
+    <style>
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .test-result {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .test-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .test-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .test-info {
+            background: #e7f3ff;
+            color: #0066cc;
+            border: 1px solid #b3d9ff;
+        }
+        .btn-test {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn-test:hover {
+            background: #5a6fd8;
+        }
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Beta 系统测试</h1>
+        
+        <div class="test-section">
+            <h3>🔌 API 连接测试</h3>
+            <button class="btn-test" onclick="testAPIConnection()">测试 API 连接</button>
+            <div id="api-result" class="test-result test-info" style="display:none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>👤 用户注册测试</h3>
+            <button class="btn-test" onclick="testUserRegistration()">测试用户注册</button>
+            <div id="register-result" class="test-result test-info" style="display:none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>🔑 用户登录测试</h3>
+            <button class="btn-test" onclick="testUserLogin()">测试用户登录</button>
+            <div id="login-result" class="test-result test-info" style="display:none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>✅ 令牌验证测试</h3>
+            <button class="btn-test" onclick="testTokenVerification()">测试令牌验证</button>
+            <div id="verify-result" class="test-result test-info" style="display:none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>📊 系统状态</h3>
+            <button class="btn-test" onclick="runAllTests()">运行全部测试</button>
+            <div id="overall-result" class="test-result test-info" style="display:none;"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>🔧 配置信息</h3>
+            <p><strong>API 地址:</strong> <span id="api-url"></span></p>
+            <p><strong>本地存储:</strong> <span id="storage-status"></span></p>
+            <p><strong>浏览器支持:</strong> <span id="browser-support"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // 获取当前 API 配置
+        const API_BASE = 'https://beta-auth.alexanderj-carter.workers.dev/api';
+        
+        // 显示配置信息
+        document.getElementById('api-url').textContent = API_BASE;
+        document.getElementById('storage-status').textContent = localStorage ? '✅ 支持' : '❌ 不支持';
+        document.getElementById('browser-support').textContent = 
+            (window.fetch && window.crypto && window.crypto.subtle) ? '✅ 支持' : '❌ 不支持';
+
+        // 测试 API 连接
+        async function testAPIConnection() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '🔄 测试中...';
+            resultDiv.className = 'test-result test-info';
+
+            try {
+                const response = await fetch(`${API_BASE}/verify`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ token: 'test-token' })
+                });
+
+                if (response.status === 401 || response.status === 400) {
+                    resultDiv.textContent = '✅ API 连接成功！服务器正常响应';
+                    resultDiv.className = 'test-result test-success';
+                } else {
+                    resultDiv.textContent = `⚠️ API 响应异常，状态码: ${response.status}`;
+                    resultDiv.className = 'test-result test-error';
+                }
+            } catch (error) {
+                resultDiv.textContent = `❌ API 连接失败: ${error.message}`;
+                resultDiv.className = 'test-result test-error';
+            }
+        }
+
+        // 测试用户注册
+        async function testUserRegistration() {
+            const resultDiv = document.getElementById('register-result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '🔄 测试中...';
+            resultDiv.className = 'test-result test-info';
+
+            const testUser = {
+                username: 'test_' + Date.now(),
+                password: 'TestPassword123!',
+                inviteCode: 'beta2025'
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testUser)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    resultDiv.textContent = `✅ 用户注册成功！用户名: ${testUser.username}`;
+                    resultDiv.className = 'test-result test-success';
+                    
+                    // 保存测试用户信息供登录测试使用
+                    sessionStorage.setItem('testUser', JSON.stringify(testUser));
+                } else {
+                    resultDiv.textContent = `❌ 注册失败: ${data.error}`;
+                    resultDiv.className = 'test-result test-error';
+                }
+            } catch (error) {
+                resultDiv.textContent = `❌ 注册请求失败: ${error.message}`;
+                resultDiv.className = 'test-result test-error';
+            }
+        }
+
+        // 测试用户登录
+        async function testUserLogin() {
+            const resultDiv = document.getElementById('login-result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '🔄 测试中...';
+            resultDiv.className = 'test-result test-info';
+
+            const testUser = JSON.parse(sessionStorage.getItem('testUser') || '{}');
+            
+            if (!testUser.username) {
+                resultDiv.textContent = '⚠️ 请先运行用户注册测试';
+                resultDiv.className = 'test-result test-error';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: testUser.username,
+                        password: testUser.password
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.token) {
+                    resultDiv.textContent = `✅ 用户登录成功！获得 JWT 令牌`;
+                    resultDiv.className = 'test-result test-success';
+                    
+                    // 保存令牌供验证测试使用
+                    sessionStorage.setItem('testToken', data.token);
+                } else {
+                    resultDiv.textContent = `❌ 登录失败: ${data.error}`;
+                    resultDiv.className = 'test-result test-error';
+                }
+            } catch (error) {
+                resultDiv.textContent = `❌ 登录请求失败: ${error.message}`;
+                resultDiv.className = 'test-result test-error';
+            }
+        }
+
+        // 测试令牌验证
+        async function testTokenVerification() {
+            const resultDiv = document.getElementById('verify-result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '🔄 测试中...';
+            resultDiv.className = 'test-result test-info';
+
+            const testToken = sessionStorage.getItem('testToken');
+            
+            if (!testToken) {
+                resultDiv.textContent = '⚠️ 请先运行用户登录测试';
+                resultDiv.className = 'test-result test-error';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/verify`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ token: testToken })
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.user) {
+                    resultDiv.textContent = `✅ 令牌验证成功！用户: ${data.user.username}`;
+                    resultDiv.className = 'test-result test-success';
+                } else {
+                    resultDiv.textContent = `❌ 令牌验证失败: ${data.error}`;
+                    resultDiv.className = 'test-result test-error';
+                }
+            } catch (error) {
+                resultDiv.textContent = `❌ 验证请求失败: ${error.message}`;
+                resultDiv.className = 'test-result test-error';
+            }
+        }
+
+        // 运行全部测试
+        async function runAllTests() {
+            const resultDiv = document.getElementById('overall-result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '🔄 运行全部测试...';
+            resultDiv.className = 'test-result test-info';
+
+            const tests = [
+                testAPIConnection,
+                testUserRegistration,
+                testUserLogin,
+                testTokenVerification
+            ];
+
+            for (let i = 0; i < tests.length; i++) {
+                await tests[i]();
+                await new Promise(resolve => setTimeout(resolve, 1000)); // 等待1秒
+            }
+
+            resultDiv.textContent = '✅ 全部测试完成！请检查各项测试结果';
+            resultDiv.className = 'test-result test-success';
+        }
+    </script>
+</body>
+</html>
