@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beta 功能中心 - 选择您的体验</title>
+    <link rel="stylesheet" href="beta-auth.css">
+    <link rel="stylesheet" href="beta-dashboard.css">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 顶部导航 -->
+    <nav class="beta-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1><i class="fas fa-flask"></i> Beta 功能中心</h1>
+            </div>
+            <div class="nav-actions">
+                <div id="user-info" class="user-welcome"></div>
+                <button id="logout-btn" class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> 退出登录
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="dashboard-main">
+        <!-- 欢迎区域 -->
+        <div class="welcome-hero">
+            <div class="hero-content">
+                <h1>🚀 Beta 功能中心</h1>
+                <p>体验最新的功能特性，参与产品创新之旅</p>
+
+                <!-- 认证标签区域 -->
+                <div class="certification-badges">
+                    <div class="cert-badge iso">
+                        <div class="cert-icon">🏆</div>
+                        <div class="cert-text">ISO 27001</div>
+                        <div class="cert-subtext">信息安全</div>
+                    </div>
+
+                    <div class="cert-badge gdpr">
+                        <div class="cert-icon">🛡️</div>
+                        <div class="cert-text">GDPR</div>
+                        <div class="cert-subtext">数据保护</div>
+                    </div>
+
+                    <div class="cert-badge ssl">
+                        <div class="cert-icon">🔒</div>
+                        <div class="cert-text">SSL/TLS</div>
+                        <div class="cert-subtext">加密传输</div>
+                    </div>
+
+                    <div class="cert-badge accessibility">
+                        <div class="cert-icon">♿</div>
+                        <div class="cert-text">WCAG 2.1</div>
+                        <div class="cert-subtext">无障碍访问</div>
+                    </div>
+
+                    <div class="cert-badge security">
+                        <div class="cert-icon">🔐</div>
+                        <div class="cert-text">SOC 2</div>
+                        <div class="cert-subtext">安全控制</div>
+                    </div>
+
+                    <div class="cert-badge performance">
+                        <div class="cert-icon">⚡</div>
+                        <div class="cert-text">99.9%</div>
+                        <div class="cert-subtext">可用性</div>
+                    </div>
+
+                    <div class="cert-badge cloud">
+                        <div class="cert-icon">☁️</div>
+                        <div class="cert-text">AWS</div>
+                        <div class="cert-subtext">云基础设施</div>
+                    </div>
+
+                    <div class="cert-badge backup">
+                        <div class="cert-icon">💾</div>
+                        <div class="cert-text">自动备份</div>
+                        <div class="cert-subtext">数据保障</div>
+                    </div>
+                </div>
+
+                <!-- 技术栈展示 -->
+                <div class="tech-stack">
+                    <h4>🔧 技术栈</h4>
+                    <div class="tech-items">
+                        <span class="tech-item">React 18</span>
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">TypeScript</span>
+                        <span class="tech-item">Cloudflare</span>
+                        <span class="tech-item">WebAssembly</span>
+                        <span class="tech-item">Progressive Web App</span>
+                        <span class="tech-item">Docker</span>
+                        <span class="tech-item">Kubernetes</span>
+                    </div>
+                </div>
+
+                <div class="beta-status">
+                    <div class="status-badge active">
+                        <i class="fas fa-check-circle"></i>
+                        <span>系统在线</span>
+                    </div>
+                    <div class="status-badge">
+                        <i class="fas fa-users"></i>
+                        <span id="user-count">加载中...</span>
+                    </div>
+                    <div class="status-badge">
+                        <i class="fas fa-clock"></i>
+                        <span>Beta 2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能模块选择 -->
+        <section class="modules-grid">
+            <!-- 金融仪表板模块 -->
+            <div class="module-card featured" data-module="financial">
+                <div class="module-header">
+                    <div class="module-icon financial">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="module-status">
+                        <span class="status-dot beta"></span>
+                        <span class="status-text">Beta 版本</span>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <h3>📊 金融数据仪表板</h3>
+                    <p>专业级金融数据分析平台，提供实时价格监控、技术分析图表、市场情绪指标等全方位投资工具。</p>
+                    <div class="module-features">
+                        <div class="feature-tag">实时行情</div>
+                        <div class="feature-tag">K线分析</div>
+                        <div class="feature-tag">技术指标</div>
+                        <div class="feature-tag">市场热点</div>
+                    </div>
+                    <div class="module-note">
+                        <i class="fas fa-info-circle"></i>
+                        <span>使用混合数据源进行功能展示</span>
+                    </div>
+                </div>
+                <div class="module-footer">
+                    <button class="module-btn primary">
+                        <i class="fas fa-rocket"></i> 启动金融仪表板
+                    </button>
+                </div>
+            </div>
+
+            <!-- 数据分析模块 -->
+            <div class="module-card" data-module="analytics">
+                <div class="module-header">
+                    <div class="module-icon analytics">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="module-status">
+                        <span class="status-dot development"></span>
+                        <span class="status-text">开发中</span>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <h3>📈 智能数据分析</h3>
+                    <p>下一代数据可视化平台，集成机器学习算法，提供深度数据洞察和预测分析能力。</p>
+                    <div class="module-features">
+                        <div class="feature-tag">可视化图表</div>
+                        <div class="feature-tag">趋势分析</div>
+                        <div class="feature-tag">预测模型</div>
+                        <div class="feature-tag">自动报告</div>
+                    </div>
+                </div>
+                <div class="module-footer">
+                    <button class="module-btn secondary" disabled>
+                        <i class="fas fa-hammer"></i> 即将推出
+                    </button>
+                </div>
+            </div>
+
+            <!-- AI助手模块 -->
+            <div class="module-card" data-module="ai">
+                <div class="module-header">
+                    <div class="module-icon ai">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="module-status">
+                        <span class="status-dot planning"></span>
+                        <span class="status-text">规划中</span>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <h3>🤖 AI 智能助手</h3>
+                    <p>基于大语言模型的智能助手，提供个性化投资建议、风险评估和智能问答服务。</p>
+                    <div class="module-features">
+                        <div class="feature-tag">智能对话</div>
+                        <div class="feature-tag">投资建议</div>
+                        <div class="feature-tag">风险评估</div>
+                        <div class="feature-tag">学习成长</div>
+                    </div>
+                </div>
+                <div class="module-footer">
+                    <button class="module-btn secondary" disabled>
+                        <i class="fas fa-brain"></i> 敬请期待
+                    </button>
+                </div>
+            </div>
+
+            <!-- 实验功能模块 -->
+            <div class="module-card" data-module="experimental">
+                <div class="module-header">
+                    <div class="module-icon experimental">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="module-status">
+                        <span class="status-dot experimental"></span>
+                        <span class="status-text">实验性</span>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <h3>🧪 前沿实验室</h3>
+                    <p>最新技术概念验证区域，包含区块链集成、量化交易算法、市场情绪分析等创新功能。</p>
+                    <div class="module-features">
+                        <div class="feature-tag">区块链</div>
+                        <div class="feature-tag">量化交易</div>
+                        <div class="feature-tag">情绪分析</div>
+                        <div class="feature-tag">创新算法</div>
+                    </div>
+                </div>
+                <div class="module-footer">
+                    <button class="module-btn secondary">
+                        <i class="fas fa-vial"></i> 探索实验功能
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 信息面板 -->
+        <div class="info-panels">
+            <!-- 合规性信息面板 -->
+            <div class="compliance-panel">
+                <h3>
+                    <i class="fas fa-shield-alt"></i>
+                    合规性与认证
+                </h3>
+                <div class="compliance-grid">
+                    <div class="compliance-item verified">
+                        <i class="fas fa-check-circle compliance-icon"></i>
+                        <span class="compliance-text">HTTPS 安全协议</span>
+                    </div>
+                    <div class="compliance-item verified">
+                        <i class="fas fa-user-shield compliance-icon"></i>
+                        <span class="compliance-text">隐私保护认证</span>
+                    </div>
+                    <div class="compliance-item certified">
+                        <i class="fas fa-certificate compliance-icon"></i>
+                        <span class="compliance-text">ISO 27001 认证</span>
+                    </div>
+                    <div class="compliance-item verified">
+                        <i class="fas fa-globe compliance-icon"></i>
+                        <span class="compliance-text">GDPR 合规</span>
+                    </div>
+                    <div class="compliance-item certified">
+                        <i class="fas fa-server compliance-icon"></i>
+                        <span class="compliance-text">SOC 2 Type II</span>
+                    </div>
+                    <div class="compliance-item pending">
+                        <i class="fas fa-clock compliance-icon"></i>
+                        <span class="compliance-text">FIDO2 认证进行中</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <h3>
+                    <i class="fas fa-info-circle"></i>
+                    Beta 测试说明
+                </h3>
+                <ul>
+                    <li>所有功能均为测试版本</li>
+                    <li>数据仅用于演示目的</li>
+                    <li>定期进行功能更新</li>
+                    <li>用户反馈驱动开发</li>
+                    <li>严格遵循数据保护法规</li>
+                    <li>采用国际安全标准</li>
+                </ul>
+            </div>
+
+            <div class="info-panel">
+                <h3>
+                    <i class="fas fa-cog"></i>
+                    系统特性
+                </h3>
+                <ul>
+                    <li>响应式设计，支持多设备</li>
+                    <li>PWA 技术，可离线使用</li>
+                    <li>多语言国际化支持</li>
+                    <li>无障碍访问友好</li>
+                    <li>实时数据同步</li>
+                    <li>分布式架构部署</li>
+                </ul>
+            </div>
+
+            <div class="info-panel">
+                <h3>
+                    <i class="fas fa-lock"></i>
+                    安全保障
+                </h3>
+                <ul>
+                    <li>端到端加密传输</li>
+                    <li>多因素身份验证</li>
+                    <li>定期安全审计</li>
+                    <li>入侵检测系统</li>
+                    <li>数据备份与恢复</li>
+                    <li>零信任安全架构</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- API限制提示模态框 -->
+    <div id="api-limitation-modal" class="modal">
+        <div class="modal-content api-warning">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> API使用限制说明</h3>
+                <button class="close-btn" onclick="closeApiModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-content">
+                    <div class="warning-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="warning-text">
+                        <h4>关于金融数据仪表板的重要说明</h4>
+                        <p>由于多数功能需要使用付费API服务，而本网站当前采用非盈利运营模式，暂时无力承担相关费用。因此：</p>
+                        <ul>
+                            <li><strong>当前状态：</strong>金融仪表板仅作为功能展示，使用模拟数据</li>
+                            <li><strong>数据来源：</strong>部分真实API + 模拟数据填充</li>
+                            <li><strong>参考价值：</strong>仅供功能演示，不具备实际投资参考价值</li>
+                            <li><strong>未来计划：</strong>待后续开发资金到位后将接入完整的实时数据</li>
+                        </ul>
+                        <div class="disclaimer">
+                            <strong>免责声明：</strong>本仪表板展示的所有数据仅供学习和演示使用，请勿用于实际投资决策。
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeApiModal()">
+                    <i class="fas fa-arrow-left"></i> 返回选择
+                </button>
+                <button class="btn-confirm" onclick="confirmEnterFinancial()">
+                    <i class="fas fa-check"></i> 我已了解，继续体验
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="beta-dashboard.js"></script>
+</body>
+
+</html>

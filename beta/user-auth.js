@@ -1,12 +1,13 @@
 // Beta用户认证系统 - 前端
 class BetaUserAuth {
-    constructor() {        // Cloudflare Worker API端点
+    constructor() {
+        // Cloudflare Worker API端点
         // 请在部署Worker后替换为您的实际API地址
         this.apiBase = 'https://auth.haoyu6huang.workers.dev/api';
-        
+
         this.init();
     }
-    
+
     init() {
         // 检查是否已登录
         if (this.isAuthenticated()) {
@@ -14,98 +15,104 @@ class BetaUserAuth {
         } else {
             this.showAuthForm();
         }
-        
+
         this.bindEvents();
     }
-    
+
     bindEvents() {
         // 注册表单
         const registerForm = document.getElementById('register-form');
         if (registerForm) {
-            registerForm.addEventListener('submit', (e) => this.handleRegister(e));
+            registerForm.addEventListener('submit', (e) =>
+                this.handleRegister(e)
+            );
         }
-        
+
         // 登录表单
         const loginForm = document.getElementById('login-form');
         if (loginForm) {
             loginForm.addEventListener('submit', (e) => this.handleLogin(e));
         }
-        
+
         // 切换表单
         const switchToLogin = document.getElementById('switch-to-login');
         const switchToRegister = document.getElementById('switch-to-register');
-        
+
         if (switchToLogin) {
-            switchToLogin.addEventListener('click', () => this.switchForm('login'));
+            switchToLogin.addEventListener('click', () =>
+                this.switchForm('login')
+            );
         }
-        
+
         if (switchToRegister) {
-            switchToRegister.addEventListener('click', () => this.switchForm('register'));
+            switchToRegister.addEventListener('click', () =>
+                this.switchForm('register')
+            );
         }
-        
+
         // 退出登录
         const logoutBtn = document.getElementById('logout-btn');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', () => this.logout());
         }
-        
+
         // 功能按钮
-        document.querySelectorAll('.feature-btn').forEach(btn => {
+        document.querySelectorAll('.feature-btn').forEach((btn) => {
             btn.addEventListener('click', (e) => this.handleFeatureClick(e));
         });
     }
-    
+
     async handleRegister(e) {
         e.preventDefault();
-        
+
         const form = e.target;
         const formData = new FormData(form);
         const submitBtn = form.querySelector('.auth-btn');
-        
+
         const userData = {
             username: formData.get('username'),
             password: formData.get('password'),
             email: formData.get('email'),
-            inviteCode: formData.get('inviteCode')
+            inviteCode: formData.get('inviteCode'),
         };
-        
+
         // 验证输入
         if (!userData.username || !userData.password) {
             this.showMessage('请填写用户名和密码', 'error');
             return;
         }
-        
+
         if (userData.username.length < 3) {
             this.showMessage('用户名至少需要3个字符', 'error');
             return;
         }
-        
+
         if (userData.password.length < 6) {
             this.showMessage('密码至少需要6个字符', 'error');
             return;
         }
-        
+
         // 显示加载状态
         this.setButtonLoading(submitBtn, true);
-        
+
         try {
             const response = await fetch(`${this.apiBase}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(userData)
+                body: JSON.stringify(userData),
             });
-            
+
             const result = await response.json();
-            
+
             if (result.success) {
                 // 保存令牌
                 localStorage.setItem('beta_token', result.token);
                 localStorage.setItem('beta_user', JSON.stringify(result.user));
-                
+
                 this.showMessage('注册成功！正在跳转...', 'success');
-                
+
                 setTimeout(() => {
                     this.showBetaContent();
                 }, 1500);
@@ -119,43 +126,43 @@ class BetaUserAuth {
             this.setButtonLoading(submitBtn, false);
         }
     }
-    
+
     async handleLogin(e) {
         e.preventDefault();
-        
+
         const form = e.target;
         const formData = new FormData(form);
         const submitBtn = form.querySelector('.auth-btn');
-        
+
         const userData = {
             username: formData.get('username'),
-            password: formData.get('password')
+            password: formData.get('password'),
         };
-        
+
         if (!userData.username || !userData.password) {
             this.showMessage('请填写用户名和密码', 'error');
             return;
         }
-        
+
         this.setButtonLoading(submitBtn, true);
-        
+
         try {
             const response = await fetch(`${this.apiBase}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(userData)
+                body: JSON.stringify(userData),
             });
-            
+
             const result = await response.json();
-            
+
             if (result.success) {
                 localStorage.setItem('beta_token', result.token);
                 localStorage.setItem('beta_user', JSON.stringify(result.user));
-                
+
                 this.showMessage('登录成功！正在跳转...', 'success');
-                
+
                 setTimeout(() => {
                     this.showBetaContent();
                 }, 1500);
@@ -169,20 +176,20 @@ class BetaUserAuth {
             this.setButtonLoading(submitBtn, false);
         }
     }
-    
+
     async verifyToken() {
         const token = localStorage.getItem('beta_token');
         if (!token) return false;
-        
+
         try {
             const response = await fetch(`${this.apiBase}/verify`, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+                    Authorization: `Bearer ${token}`,
+                },
             });
-            
+
             const result = await response.json();
-            
+
             if (result.success) {
                 localStorage.setItem('beta_user', JSON.stringify(result.user));
                 return true;
@@ -196,13 +203,13 @@ class BetaUserAuth {
             return false;
         }
     }
-    
+
     isAuthenticated() {
         const token = localStorage.getItem('beta_token');
         const user = localStorage.getItem('beta_user');
-        
+
         if (!token || !user) return false;
-        
+
         try {
             // 简单的令牌过期检查
             const payload = JSON.parse(atob(token.split('.')[1]));
@@ -216,11 +223,11 @@ class BetaUserAuth {
             return false;
         }
     }
-    
+
     switchForm(formType) {
         const registerContainer = document.getElementById('register-container');
         const loginContainer = document.getElementById('login-container');
-        
+
         if (formType === 'login') {
             registerContainer.style.display = 'none';
             loginContainer.style.display = 'block';
@@ -228,25 +235,22 @@ class BetaUserAuth {
             loginContainer.style.display = 'none';
             registerContainer.style.display = 'block';
         }
-        
+
         this.clearMessage();
     }
-    
+
     showAuthForm() {
         document.getElementById('auth-container').style.display = 'block';
         document.getElementById('beta-content').style.display = 'none';
-        document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        document.body.style.background =
+            'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
     }
-    
+
     showBetaContent() {
-        document.getElementById('auth-container').style.display = 'none';
-        document.getElementById('beta-content').style.display = 'block';
-        document.body.style.background = '#f8f9fa';
-        
-        // 显示用户信息
-        this.updateUserInfo();
+        // 跳转到Beta功能选择页面，而不是直接进入金融仪表板
+        window.location.href = 'beta-dashboard.html';
     }
-    
+
     updateUserInfo() {
         const userStr = localStorage.getItem('beta_user');
         if (userStr) {
@@ -257,24 +261,24 @@ class BetaUserAuth {
             }
         }
     }
-    
+
     logout() {
         this.clearAuth();
         location.reload();
     }
-    
+
     clearAuth() {
         localStorage.removeItem('beta_token');
         localStorage.removeItem('beta_user');
     }
-    
+
     showMessage(message, type = 'info') {
         const messageEl = document.getElementById('auth-message');
         if (messageEl) {
             messageEl.textContent = message;
             messageEl.className = `auth-message ${type}`;
             messageEl.style.display = 'block';
-            
+
             // 自动隐藏成功消息
             if (type === 'success') {
                 setTimeout(() => {
@@ -283,14 +287,14 @@ class BetaUserAuth {
             }
         }
     }
-    
+
     clearMessage() {
         const messageEl = document.getElementById('auth-message');
         if (messageEl) {
             messageEl.style.display = 'none';
         }
     }
-    
+
     setButtonLoading(button, loading) {
         if (loading) {
             button.disabled = true;
@@ -298,38 +302,39 @@ class BetaUserAuth {
             button.textContent = '处理中...';
         } else {
             button.disabled = false;
-            button.textContent = button.dataset.originalText || button.textContent;
+            button.textContent =
+                button.dataset.originalText || button.textContent;
         }
     }
-    
+
     handleFeatureClick(e) {
         const button = e.target;
         const featureName = button.textContent;
-        
+
         // 模拟功能交互
         const originalText = button.textContent;
         button.textContent = '执行中...';
         button.disabled = true;
-        
+
         setTimeout(() => {
             button.textContent = originalText;
             button.disabled = false;
-            
+
             // 显示功能演示
             this.showFeatureDemo(featureName);
         }, 1500);
     }
-    
+
     showFeatureDemo(featureName) {
         const messages = {
             '测试功能 A': '✅ 功能 A 测试完成！',
             '测试功能 B': '🔧 功能 B 正在实验中！',
-            '打开分析工具': '📊 数据分析工具已启动！',
-            '提交反馈': '💬 反馈系统已打开！'
+            打开分析工具: '📊 数据分析工具已启动！',
+            提交反馈: '💬 反馈系统已打开！',
         };
-        
+
         const message = messages[featureName] || '功能演示完成！';
-        
+
         // 创建临时提示
         const toast = document.createElement('div');
         toast.style.cssText = `
@@ -345,10 +350,10 @@ class BetaUserAuth {
             font-size: 14px;
             max-width: 300px;
         `;
-        
+
         toast.textContent = message;
         document.body.appendChild(toast);
-        
+
         // 自动移除提示
         setTimeout(() => {
             document.body.removeChild(toast);
