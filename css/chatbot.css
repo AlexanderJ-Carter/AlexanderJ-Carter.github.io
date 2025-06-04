@@ -1,3 +1,7 @@
+:root {
+    --chat-primary: #007bff;
+}
+
 /* 聊天机器人基础样式 */
 .chat-container {
     position: fixed;
@@ -88,7 +92,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 15px;
-    background: #007bff;
+    background: var(--chat-primary);
     color: white;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -192,7 +196,7 @@
 
 .user-message {
     float: right;
-    background: #007bff;
+    background: var(--chat-primary);
     color: white;
     border-radius: 15px 15px 0 15px;
 }
@@ -260,12 +264,12 @@
 }
 
 .chat-input:focus {
-    border-color: #007bff;
+    border-color: var(--chat-primary);
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
 #sendButton {
-    background: #007bff;
+    background: var(--chat-primary);
     color: white;
     border: none;
     border-radius: 20px;
@@ -287,7 +291,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #007bff, #00c6ff);
+    background: linear-gradient(135deg, var(--chat-primary), #00c6ff);
     border: none;
     color: white;
     font-size: 1.2rem;
@@ -522,7 +526,7 @@
     }
 
     .chat-input:focus {
-        border-color: #007bff;
+        border-color: var(--chat-primary);
     }
 
     .chat-input::placeholder {
