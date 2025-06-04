@@ -271,15 +271,15 @@ document.addEventListener("DOMContentLoaded", function () {
         创造: '#services',
         作品: '#portfolio',
         文字: '#text',
-        隐私: 'privacy.html',
-        使用条款: 'terms.html',
-        联系: 'contact.html',
-        广告: 'ads.html',
-        简介: 'profile.html',
+        隐私: 'zh-CN/privacy.html',
+        使用条款: 'zh-CN/terms.html',
+        联系: 'zh-CN/contact.html',
+        广告: 'zh-CN/ads.html',
+        简介: 'zh-CN/profile.html',
         博客: 'https://blog.alexander.xin', // 新增博客文章导航
-        地图: "map.html",
-        站点地图: "map.html",
-        网站地图: "map.html",
+        地图: "/map.html",
+        站点地图: "/map.html",
+        网站地图: "/map.html",
 
         // 英文导航
         home: '#intro',
@@ -287,15 +287,15 @@ document.addEventListener("DOMContentLoaded", function () {
         create: '#services',
         portfolio: '#portfolio',
         text: '#text',
-        privacy: 'privacy.html',
-        terms: 'terms.html',
-        contact: 'contact.html',
-        ads: 'ads.html',
-        profile: 'profile.html',
+        privacy: 'en/privacy-en.html',
+        terms: 'en/terms-en.html',
+        contact: 'en/contact-en.html',
+        ads: 'en/ads-en.html',
+        profile: 'en/profile-en.html',
         blog: 'https://blog.alexander.xin', // 新增英文博客文章导航
-        map: "map.html",
-        "site map": "map.html",
-        "page map": "map.html",
+        map: "/map.html",
+        "site map": "/map.html",
+        "page map": "/map.html",
     };
 
     // 对话内容库 - 增强版
