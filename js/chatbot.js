@@ -277,10 +277,9 @@ document.addEventListener("DOMContentLoaded", function () {
         广告: 'ads.html',
         简介: 'profile.html',
         博客: 'https://blog.alexander.xin', // 新增博客文章导航
-        React性能优化: 'blog-posts/react-performance.html',
-        UI设计趋势: 'blog-posts/design-trends-2024.html',
-        远程工作: 'blog-posts/remote-work-experience.html',
-        原子习惯: 'blog-posts/atomic-habits-notes.html',
+        地图: "map.html",
+        站点地图: "map.html",
+        网站地图: "map.html",
 
         // 英文导航
         home: '#intro',
@@ -294,10 +293,9 @@ document.addEventListener("DOMContentLoaded", function () {
         ads: 'ads.html',
         profile: 'profile.html',
         blog: 'https://blog.alexander.xin', // 新增英文博客文章导航
-        'react performance': 'blog-posts/react-performance.html',
-        'ui design trends': 'blog-posts/design-trends-2024.html',
-        'remote work': 'blog-posts/remote-work-experience.html',
-        'atomic habits': 'blog-posts/atomic-habits-notes.html',
+        map: "map.html",
+        "site map": "map.html",
+        "page map": "map.html",
     };
 
     // 对话内容库 - 增强版
@@ -315,13 +313,9 @@ document.addEventListener("DOMContentLoaded", function () {
     📍 广告 - 广告服务
     📍 简介 - 个人简介
     📍 博客 - 博客文章
-    
-    博客文章:
-    📝 React性能优化 - React优化技巧
-    📝 UI设计趋势 - 2024设计前瞻
-    📝 远程工作 - 远程工作经验
-    📝 原子习惯 - 读书笔记
-    
+
+    📍 地图 - 网站地图
+
     您可以输入"去xx"或"打开xx"来访问对应页面`,],
 
         greetings: ["你好！我是雪宝，很高兴为您服务！😊", "嗨！今天有什么我可以帮你的吗？✨", "你好啊！我是你的AI助手雪宝，有什么可以帮到你？🌟", "欢迎找我聊天！我可以查询天气、讲笑话，或者帮你导航网站。🤖",],
@@ -333,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function () {
         pageNotFound: ["抱歉，我找不到这个页面呢~ 要不要看看其他内容？", "这个页面好像走丢了，让我带您去别的地方看看吧！",],
         confirmNav: ["好的，让我们出发吧！", "这就带您过去~", "马上就到啦！"],
         searchHelp: ["您可以这样搜索：\n✨ 直接输入关键词\n🔍 '搜索xxx'\n📖 '查找xxx'", "需要帮您找什么吗？告诉我关键词就好~",],
-        tips: ["小贴士：你可以问我'北京天气'来获取天气信息！", "小贴士：输入'讲个笑话'，我会讲一个有趣的笑话！", "小贴士：输入'几点了'可以查看当前时间！", "小贴士：输入'去主页'或类似导航指令可以快速导航网站！", "小贴士：尝试问我'你是谁'来了解我吧！", "小贴士：如果你需要帮助，随时输入'帮助'！",],
+        tips: ["小贴士：你可以问我'北京天气'来获取天气信息！", "小贴士：输入'讲个笑话'，我会讲一个有趣的笑话！", "小贴士：输入'几点了'可以查看当前时间！", "小贴士：输入'去主页'或类似导航指令可以快速导航网站！", "小贴士：尝试问我'你是谁'来了解我吧！", "小贴士：如果你需要帮助，随时输入'帮助'！", "小贴士：输入'地图'可查看网站地图！"],
         funFacts: ["你知道吗？人的大脑每天产生约70,000个想法！", "有趣的是，蜜蜂实际上可以识别人脸！", "你知道吗？笑容会使用17块面部肌肉，而皱眉会使用43块！", "有趣的事实：打喷嚏时你的心脏会短暂停止一瞬间！", "地球上的水与地球形成时的水是相同的，我们喝的可能是恐龙喝过的水！",],
     };
 
