@@ -179,7 +179,7 @@ function preventRedirectLoop() {
     const referrer = document.referrer;
 
     // 如果是从验证页面返回的，添加一个标记防止重复验证
-    if (referrer && referrer.includes('verify.html')) {
+    if (referrer && referrer.includes('verification.html')) {
         const tempKey = 'temp_verified_' + Date.now();
         sessionStorage.setItem(tempKey, 'true');
         setTimeout(() => sessionStorage.removeItem(tempKey), 5000); // 5秒后移除临时标记
@@ -189,7 +189,7 @@ function preventRedirectLoop() {
 // 当页面加载时初始化
 document.addEventListener('DOMContentLoaded', function () {
     // 如果是验证页面，添加页面特定的行为
-    if (window.location.pathname.includes('verify.html')) {
+    if (window.location.pathname.includes('verification.html')) {
         const continueBtn = document.getElementById('continue-btn');
         if (continueBtn) {
             continueBtn.style.display = 'none';

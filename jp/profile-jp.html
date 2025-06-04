@@ -12,7 +12,7 @@
     <link href="../css/custom.css" rel="stylesheet">
     <link href="../css/profile.css" rel="stylesheet">
     <!-- 検証スクリプト -->
-    <script src="../js/verification.js"></script>
+    <script src="../js/verification-utils.js"></script>
 </head>
 
 <body>
@@ -23,7 +23,7 @@
             // 無限ループを防ぐためにリダイレクトカウンターを使用
             if (checkRedirectAttempts('profile', 'jp')) {
                 // 検証ページに強制リダイレクト
-                window.location.replace('../verify.html?redirect=jp/profile-jp.html');
+                window.location.replace('../verification.html?redirect=jp/profile-jp.html');
             }
         } else {
             // 検証成功、カウンターをリセット
@@ -37,7 +37,7 @@
             // キャッシュからページが読み込まれた場合、検証状態を再確認
             if (!isVerified('profile_jp_verified')) {
                 if (checkRedirectAttempts('profile', 'jp')) {
-                    window.location.replace('../verify.html?redirect=jp/profile-jp.html');
+                    window.location.replace('../verification.html?redirect=jp/profile-jp.html');
                 }
             }
         }

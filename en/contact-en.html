@@ -13,7 +13,7 @@
     <link href="../css/custom.css" rel="stylesheet">
     <link href="../css/contact.css" rel="stylesheet">
     <!-- 验证脚本 -->
-    <script src="../js/verification.js"></script>
+    <script src="../js/verification-utils.js"></script>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
             // Use redirect counter to prevent infinite loops
             if (checkRedirectAttempts('contact', 'en')) {
                 // Force redirect to verification page
-                window.location.replace('../verify.html?redirect=en/contact-en.html');
+                window.location.replace('../verification.html?redirect=en/contact-en.html');
             }
         } else {
             // Verification successful, reset counter
@@ -38,7 +38,7 @@
             // If page is loaded from cache, recheck verification status
             if (!isVerified('contact_en_verified')) {
                 if (checkRedirectAttempts('contact', 'en')) {
-                    window.location.replace('../verify.html?redirect=en/contact-en.html');
+                    window.location.replace('../verification.html?redirect=en/contact-en.html');
                 }
             }
         }

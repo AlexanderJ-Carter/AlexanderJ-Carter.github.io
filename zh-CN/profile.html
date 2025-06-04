@@ -13,7 +13,7 @@
     <link href="../css/custom.css" rel="stylesheet">
     <link href="../css/profile.css" rel="stylesheet">
     <!-- 添加验证脚本 -->
-    <script src="../js/verification.js"></script>
+    <script src="../js/verification-utils.js"></script>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
             // 使用重定向计数器防止无限循环
             if (checkRedirectAttempts('profile', 'cn')) {
                 // 强制重定向到验证页面
-                window.location.replace('../verify.html?redirect=zh-CN/profile.html');
+                window.location.replace('../verification.html?redirect=zh-CN/profile.html');
             }
         } else {
             // 验证成功，重置计数器
@@ -38,7 +38,7 @@
             // 如果页面从缓存加载，重新检查验证状态
             if (!isVerified('profile_verified')) {
                 if (checkRedirectAttempts('profile', 'cn')) {
-                    window.location.replace('../verify.html?redirect=zh-CN/profile.html');
+                    window.location.replace('../verification.html?redirect=zh-CN/profile.html');
                 }
             }
         }

@@ -12,7 +12,7 @@
     <link href="../css/custom.css" rel="stylesheet">
     <link href="../css/profile.css" rel="stylesheet">
     <!-- Script di verifica -->
-    <script src="../js/verification.js"></script>
+    <script src="../js/verification-utils.js"></script>
 </head>
 
 <body>
@@ -23,7 +23,7 @@
             // Usa il contatore di reindirizzamento per prevenire loop infiniti
             if (checkRedirectAttempts('profile', 'it')) {
                 // Reindirizzamento forzato alla pagina di verifica
-                window.location.replace('../verify.html?redirect=it/profile-it.html');
+                window.location.replace('../verification.html?redirect=it/profile-it.html');
             }
         } else {
             // Verifica riuscita, reset del contatore
@@ -37,7 +37,7 @@
             // Se la pagina viene caricata dalla cache, ricontrolla lo stato di verifica
             if (!isVerified('profile_it_verified')) {
                 if (checkRedirectAttempts('profile', 'it')) {
-                    window.location.replace('../verify.html?redirect=it/profile-it.html');
+                    window.location.replace('../verification.html?redirect=it/profile-it.html');
                 }
             }
         }

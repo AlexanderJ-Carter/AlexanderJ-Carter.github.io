@@ -13,7 +13,7 @@
     <link href="../css/custom.css" rel="stylesheet">
     <link href="../css/contact.css" rel="stylesheet">
     <!-- 验证脚本 -->
-    <script src="../js/verification.js"></script>
+    <script src="../js/verification-utils.js"></script>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
             // Utilizza contatore di reindirizzamento per prevenire cicli infiniti
             if (checkRedirectAttempts('contact', 'it')) {
                 // Reindirizzamento forzato alla pagina di verifica
-                window.location.replace('../verify.html?redirect=it/contact-it.html');
+                window.location.replace('../verification.html?redirect=it/contact-it.html');
             }
         } else {
             // Verifica riuscita, azzera contatore
@@ -38,7 +38,7 @@
             // Se la pagina viene caricata dalla cache, ricontrolla lo stato di verifica
             if (!isVerified('contact_it_verified')) {
                 if (checkRedirectAttempts('contact', 'it')) {
-                    window.location.replace('../verify.html?redirect=it/contact-it.html');
+                    window.location.replace('../verification.html?redirect=it/contact-it.html');
                 }
             }
         }
