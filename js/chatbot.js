@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const weatherApiUrl = "https://api.openweathermap.org/data/2.5/weather";
     let isFirstOpen = true; // 检测是否首次打开对话框
     let isDragging = false; // 拖动状态
-    let isMinimized = true; // 初始状态为最小化
+    const minimizedStored = localStorage.getItem('chatMinimized');
+    let isMinimized = minimizedStored === null ? true : minimizedStored === 'true';
     let startX, startY, startLeft, startTop;
     let isClosing = false; // 跟踪是否正在关闭
     let closeTimeout; // 存储关闭延迟的timeout
@@ -49,6 +50,52 @@ document.addEventListener("DOMContentLoaded", function () {
     statusBar.innerHTML = `<span id="chat-status">随时为您服务</span>`;
     chatContainer.insertBefore(statusBar, chatContainer.firstChild.nextSibling);
 
+    function updateStatus(text, delay = 0) {
+        const status = document.getElementById("chat-status");
+        status.textContent = text;
+        if (delay) {
+            setTimeout(() => (status.textContent = "随时为您服务"), delay);
+        }
+    }
+
+    function showChat(initial = false) {
+        if (!restorePosition()) {
+            const viewportHeight = window.innerHeight;
+            chatContainer.style.top = (viewportHeight / 2 - 225) + "px";
+            chatContainer.style.right = "20px";
+        }
+        chatContainer.style.display = "flex";
+        chatContainer.classList.add("chat-showing");
+        setTimeout(() => chatContainer.classList.remove("chat-showing"), 300);
+        chatToggleButton.style.display = "none";
+        isMinimized = false;
+        localStorage.setItem('chatMinimized', 'false');
+        if (initial && isFirstOpen) {
+            const greeting = getRandomResponse(dialogues.greetings);
+            addMessage("雪宝", greeting);
+            setTimeout(() => {
+                addMessage("雪宝", "我可以帮你查询天气、讲笑话、导航网站，还有更多功能等你探索！试试输入'帮助'了解更多。");
+            }, 1000);
+            isFirstOpen = false;
+        }
+        userInput.focus();
+    }
+
+    function hideChat() {
+        chatContainer.classList.add("chat-minimizing");
+        setTimeout(() => {
+            chatContainer.style.display = "none";
+            chatContainer.classList.remove("chat-minimizing");
+            chatToggleButton.style.display = "flex";
+            localStorage.setItem('chatMinimized', 'true');
+        }, 300);
+        isMinimized = true;
+    }
+
+    if (!isMinimized) {
+        showChat(true);
+    }
+
     // 设置拖动功能
     headerDiv.addEventListener("mousedown", startDrag);
     document.addEventListener("mousemove", drag);
@@ -60,24 +107,16 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("touchend", stopDrag);
 
     // 添加固定功能
-    let isPinned = false;
-    document.getElementById("pin-chat").addEventListener("click", function () {
+    let isPinned = localStorage.getItem('chatPinned') === 'true';
+    const pinBtn = document.getElementById('pin-chat');
+    pinBtn.classList.toggle('active', isPinned);
+    pinBtn.title = isPinned ? '取消固定' : '固定聊天窗口';
+    pinBtn.addEventListener('click', function () {
         isPinned = !isPinned;
-        this.classList.toggle("active");
-
-        if (isPinned) {
-            document.getElementById("chat-status").textContent = "窗口已固定";
-            setTimeout(() => {
-                document.getElementById("chat-status").textContent = "随时为您服务";
-            }, 2000);
-            this.title = "取消固定";
-        } else {
-            document.getElementById("chat-status").textContent = "窗口已取消固定";
-            setTimeout(() => {
-                document.getElementById("chat-status").textContent = "随时为您服务";
-            }, 2000);
-            this.title = "固定聊天窗口";
-        }
+        pinBtn.classList.toggle('active', isPinned);
+        pinBtn.title = isPinned ? '取消固定' : '固定聊天窗口';
+        updateStatus(isPinned ? '窗口已固定' : '窗口已取消固定', 2000);
+        localStorage.setItem('chatPinned', String(isPinned));
     });
 
     // 拖动开始函数
@@ -105,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
         chatContainer.classList.add("dragging");
 
         // 提示用户正在拖动
-        document.getElementById("chat-status").textContent = "拖动窗口中...";
+        updateStatus("拖动窗口中...");
     }
 
     // 拖动函数
@@ -161,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
         chatContainer.classList.remove("dragging");
 
         // 恢复状态栏文本
-        document.getElementById("chat-status").textContent = "随时为您服务";
+        updateStatus("随时为您服务");
 
         // 保存位置到localStorage
         savePosition();
@@ -198,12 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 最小化按钮，添加动画效果
     document.getElementById("minimize-chat").addEventListener("click", function () {
-        chatContainer.classList.add("chat-minimizing");
-        setTimeout(() => {
-            chatContainer.style.display = "none";
-            chatContainer.classList.remove("chat-minimizing");
-            chatToggleButton.style.display = "flex";
-        }, 300);
+        hideChat();
     });
 
     // 关闭按钮，添加确认机制
@@ -211,20 +245,19 @@ document.addEventListener("DOMContentLoaded", function () {
         if (isClosing) {
             // 已经点击过一次，确认关闭
             clearTimeout(closeTimeout);
-            chatContainer.style.display = "none";
-            chatToggleButton.style.display = "flex";
+            hideChat();
             isClosing = false;
             document.getElementById("close-chat").innerHTML = '<i class="fas fa-times"></i>';
         } else {
             // 第一次点击，显示确认信息
             isClosing = true;
-            document.getElementById("chat-status").textContent = "再次点击关闭窗口";
+            updateStatus("再次点击关闭窗口");
             document.getElementById("close-chat").innerHTML = '<i class="fas fa-check"></i>';
 
             // 5秒后重置
             closeTimeout = setTimeout(() => {
                 isClosing = false;
-                document.getElementById("chat-status").textContent = "随时为您服务";
+                updateStatus("随时为您服务");
                 document.getElementById("close-chat").innerHTML = '<i class="fas fa-times"></i>';
             }, 5000);
         }
@@ -501,45 +534,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // 当点击聊天按钮时显示聊天框并初始化问候语
     chatToggleButton.addEventListener("click", function () {
         if (chatContainer.style.display === "none" || chatContainer.style.display === "") {
-            // 显示在右侧中间或恢复上次位置
-            if (!restorePosition()) {
-                const viewportHeight = window.innerHeight;
-                chatContainer.style.top = (viewportHeight / 2 - 225) + "px"; // 窗口高度/2 - 聊天窗口高度/2
-                chatContainer.style.right = "20px";
-            }
-
-            chatContainer.style.display = "flex";
-            chatContainer.classList.add("chat-showing");
-            setTimeout(() => {
-                chatContainer.classList.remove("chat-showing");
-            }, 300);
-
-            chatToggleButton.style.display = "none";
-            isMinimized = false;
-
-            // 首次打开时显示问候语和提示
-            if (isFirstOpen) {
-                const greeting = getRandomResponse(dialogues.greetings);
-                addMessage("雪宝", greeting);
-
-                // 稍等片刻后显示功能介绍
-                setTimeout(() => {
-                    addMessage("雪宝", "我可以帮你查询天气、讲笑话、导航网站，还有更多功能等你探索！试试输入'帮助'了解更多。");
-                }, 1000);
-
-                isFirstOpen = false;
-            }
-
-            // 把焦点设置到输入框
-            userInput.focus();
+            showChat(true);
         } else {
-            chatContainer.classList.add("chat-minimizing");
-            setTimeout(() => {
-                chatContainer.style.display = "none";
-                chatContainer.classList.remove("chat-minimizing");
-                chatToggleButton.style.display = "flex";
-            }, 300);
-            isMinimized = true;
+            hideChat();
         }
     });
 
@@ -747,22 +744,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (outsideClickCount === 1) {
                 // 第一次点击外部，显示提示
-                document.getElementById("chat-status").textContent = "再次点击外部将关闭窗口";
-
-                // 3秒后重置计数
+                updateStatus("再次点击外部将关闭窗口", 3000);
                 setTimeout(() => {
                     outsideClickCount = 0;
-                    document.getElementById("chat-status").textContent = "随时为您服务";
                 }, 3000);
             } else if (outsideClickCount >= 2) {
                 // 第二次点击外部，关闭窗口
-                chatContainer.classList.add("chat-minimizing");
-                setTimeout(() => {
-                    chatContainer.style.display = "none";
-                    chatContainer.classList.remove("chat-minimizing");
-                    chatToggleButton.style.display = "flex";
-                    outsideClickCount = 0;
-                }, 300);
+                hideChat();
+                outsideClickCount = 0;
             }
         }
     });
