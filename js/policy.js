@@ -1,5 +1,5 @@
 /**
- * 隐私政策页面脚本
+ * 隐私政策和使用条款页面脚本
  */
 
 document.addEventListener("DOMContentLoaded", function () {
