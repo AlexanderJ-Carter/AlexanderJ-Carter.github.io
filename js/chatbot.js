@@ -463,13 +463,13 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((data) => {
                 try {
                     // 使用可选链和空值合并操作符增强数据获取的健壮性
-                    const temp = data?.main?.temp ?? "未知";
-                    const weather = data?.weather?.[0]?.description ?? "未知";
-                    const humidity = data?.main?.humidity ?? "未知";
-                    const windSpeed = data?.wind?.speed ?? "未知";
-                    const feelsLike = data?.main?.feels_like ?? "未知";
-                    const cityName = data?.name ?? location;
-                    const country = data?.sys?.country ?? "";
+                    const temp = data && data.main && typeof data.main.temp !== 'undefined' ? data.main.temp : "未知";
+                    const weather = data && data.weather && data.weather[0] && data.weather[0].description ? data.weather[0].description : "未知";
+                    const humidity = data && data.main && typeof data.main.humidity !== 'undefined' ? data.main.humidity : "未知";
+                    const windSpeed = data && data.wind && typeof data.wind.speed !== 'undefined' ? data.wind.speed : "未知";
+                    const feelsLike = data && data.main && typeof data.main.feels_like !== 'undefined' ? data.main.feels_like : "未知";
+                    const cityName = data && data.name ? data.name : location;
+                    const country = data && data.sys && data.sys.country ? data.sys.country : "";
 
                     const weatherInfo = `
                     📍 ${cityName}${country ? `, ${country}` : ''}的天气信息：
@@ -673,12 +673,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     .then((data) => {
                         try {
                             // 增强数据获取的健壮性
-                            const weatherDescription = data?.weather?.[0]?.description ?? "未知";
-                            const temperature = data?.main?.temp ?? "未知";
-                            const cityName = data?.name ?? "当前位置";
-                            const humidity = data?.main?.humidity ?? "未知";
-                            const windSpeed = data?.wind?.speed ?? "未知";
-                            const feelsLike = data?.main?.feels_like ?? "未知";
+                            const weatherDescription = data && data.weather && data.weather[0] && data.weather[0].description ? data.weather[0].description : "未知";
+                            const temperature = data && data.main && typeof data.main.temp !== 'undefined' ? data.main.temp : "未知";
+                            const cityName = data && data.name ? data.name : "当前位置";
+                            const humidity = data && data.main && typeof data.main.humidity !== 'undefined' ? data.main.humidity : "未知";
+                            const windSpeed = data && data.wind && typeof data.wind.speed !== 'undefined' ? data.wind.speed : "未知";
+                            const feelsLike = data && data.main && typeof data.main.feels_like !== 'undefined' ? data.main.feels_like : "未知";
 
                             // 提供更详细的天气信息
                             const weatherInfo = `
