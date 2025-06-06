@@ -329,7 +329,8 @@ body .site-footer .social-icon.github:hover {
 body .site-footer .footer-bottom {
     display: flex;
     justify-content: space-between;
-    align-items: center;    flex-wrap: wrap;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 8px;
     font-size: 0.85rem;
 }
