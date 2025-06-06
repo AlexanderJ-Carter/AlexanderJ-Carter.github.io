@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KR20QK92R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6KR20QK92R');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ca-pub-2583424294154083" name="google-adsense-account">
+
+    <!-- 基本信息 -->
+    <title>网站地图 - Alexander James Carter</title>
+    <meta content="完整的网站结构导航和页面地图，快速找到您需要的功能和内容" name="description">
+    <meta content="Alexander James Carter" name="author">
+    <meta content="网站地图, 页面导航, 网站结构, Alexander James Carter, 网站导览" name="keywords">
+    <meta content="CC BY-NC-SA 4.0" name="license">
+    <link href="https://alexander.xin/map.html" rel="canonical">
+    <meta content="index,follow" name="robots">
+
+    <!-- 移动端优化 -->
+    <meta content="telephone=no" name="format-detection">
+    <meta content="yes" name="mobile-web-app-capable">
+
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SiteNavigationElement",
+            "name": "网站地图",
+            "url": "https://alexander.xin/map.html",
+            "description": "完整的网站结构导航和页面地图"
+        }
+    </script>
+
+    <!-- PWA和图标 -->
+    <link href="manifest.json" rel="manifest">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="default" name="apple-mobile-web-app-status-bar-style">
+    <meta content="#ffffff" name="theme-color">
+    <meta content="light" name="color-scheme">
+    <link href="img/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- 社交分享配置 -->
+    <meta content="网站地图 - Alexander James Carter" property="og:title">
+    <meta content="完整的网站结构导航和页面地图，快速找到您需要的功能和内容" property="og:description">
+    <meta content="img/logo.png" property="og:image">
+    <meta content="https://alexander.xin/map.html" property="og:url">
+    <meta content="website" property="og:type">
+    <meta content="zh_CN" property="og:locale">
+
+    <!-- 第三方样式库 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- 字体 -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- 样式 -->
+    <link href="css/style.default.css" id="theme-stylesheet" rel="stylesheet">
+    <link href="css/navigation.css" rel="stylesheet">
+    <link href="css/about.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
+    <link href="css/footer-enhanced.css" rel="stylesheet">
+    <link href="css/display.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/enhanced.css" rel="stylesheet">
+    <link href="css/chatbot.css" rel="stylesheet">
+
+    <style>
+        /* 网站地图专用样式 */
+        .sitemap-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sitemap-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .sitemap-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .sitemap-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sitemap-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #667eea;
+            font-size: 1.3rem;
+        }
+
+        .page-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .page-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-item:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .page-item i {
+            font-size: 1.2rem;
+            min-width: 20px;
+        }
+
+        .page-info {
+            flex: 1;
+        }
+
+        .page-name {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .page-desc {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .external-link::after {
+            content: ' ↗';
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .section-intro {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .breadcrumb-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .breadcrumb {
+            background: none;
+            margin: 0;
+        }
+
+        .breadcrumb-item a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .sitemap-hero {
+                padding: 80px 0 60px;
+            }
+
+            .page-list {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 英雄区域 -->
+    <section class="sitemap-hero">
+        <div class="container sitemap-content">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">
+                        <i class="fas fa-map-marked-alt me-3"></i>网站地图
+                    </h1>
+                    <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">
+                        探索完整的网站结构，快速找到您需要的功能和内容
+                    </p>
+                    <div class="animate__animated animate__fadeInUp animate__delay-2s">
+                        <a class="btn btn-outline-light btn-lg rounded-pill me-3" href="zh-CN/gallery.html">
+                            <i class="fas fa-compass me-2"></i>开始探索
+                        </a>
+                        <a class="btn btn-light btn-lg rounded-pill" href="index.html">
+                            <i class="fas fa-home me-2"></i>返回首页
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计信息 -->
+    <div class="container my-5">
+        <div class="stats-section" data-aos="fade-up">
+            <h3 class="mb-3">网站概览</h3>
+            <p>一个功能丰富、内容多样的多语言个人网站</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">功能页面</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">语言版本</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">实用工具</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">创意可能</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="container my-5">
+        <!-- 主页面 -->
+        <div class="sitemap-section" id="main-pages" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-home"></i>主页面
+            </h2>
+            <div class="section-intro">
+                网站的核心页面，展示主要内容和功能
+            </div>
+            <div class="page-list">
+                <a href="index.html" class="page-item">
+                    <i class="fas fa-home"></i>
+                    <div class="page-info">
+                        <div class="page-name">网站首页</div>
+                        <div class="page-desc">探索创意，分享生活的起点</div>
+                    </div>
+                </a>
+                <a href="index.html#about" class="page-item">
+                    <i class="fas fa-user"></i>
+                    <div class="page-info">
+                        <div class="page-name">关于我们</div>
+                        <div class="page-desc">了解我们的故事和理念</div>
+                    </div>
+                </a>
+                <a href="index.html#services" class="page-item">
+                    <i class="fas fa-paint-brush"></i>
+                    <div class="page-info">
+                        <div class="page-name">创造与表达</div>
+                        <div class="page-desc">查看创作服务和设计理念</div>
+                    </div>
+                </a>
+                <a href="index.html#portfolio" class="page-item">
+                    <i class="fas fa-image"></i>
+                    <div class="page-info">
+                        <div class="page-name">精选作品</div>
+                        <div class="page-desc">浏览精心挑选的作品集</div>
+                    </div>
+                </a>
+                <a href="index.html#text" class="page-item">
+                    <i class="fas fa-feather"></i>
+                    <div class="page-info">
+                        <div class="page-name">文字内容</div>
+                        <div class="page-desc">阅读精彩的文章和思考</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 多语言版本 -->
+        <div class="sitemap-section" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-globe"></i>多语言版本
+            </h2>
+            <div class="section-intro">
+                体验不同语言的完整界面，无障碍访问全球内容
+            </div>
+            <div class="page-list">
+                <a href="index.html" class="page-item">
+                    <i class="fas fa-flag"></i>
+                    <div class="page-info">
+                        <div class="page-name">中文版</div>
+                        <div class="page-desc">简体中文完整界面</div>
+                    </div>
+                </a>
+                <a href="en/index-en.html" class="page-item">
+                    <i class="fas fa-flag"></i>
+                    <div class="page-info">
+                        <div class="page-name">English</div>
+                        <div class="page-desc">Complete English interface experience</div>
+                    </div>
+                </a>
+                <a href="it/index-it.html" class="page-item">
+                    <i class="fas fa-flag"></i>
+                    <div class="page-info">
+                        <div class="page-name">Italiano</div>
+                        <div class="page-desc">Interfaccia italiana completa</div>
+                    </div>
+                </a>
+                <a href="jp/index-jp.html" class="page-item">
+                    <i class="fas fa-flag"></i>
+                    <div class="page-info">
+                        <div class="page-name">日本語</div>
+                        <div class="page-desc">完全な日本語インターフェース</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 功能页面 -->
+        <div class="sitemap-section" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-tools"></i>功能页面
+            </h2>
+            <div class="section-intro">
+                实用的功能工具和内容展示页面，提升您的浏览体验
+            </div>
+            <div class="page-list">
+                <a href="zh-CN/gallery.html" class="page-item">
+                    <i class="fas fa-images"></i>
+                    <div class="page-info">
+                        <div class="page-name">作品画廊</div>
+                        <div class="page-desc">完整的摄影作品展示空间</div>
+                    </div>
+                </a>
+                <a href="zh-CN/profile.html" class="page-item">
+                    <i class="fas fa-id-card"></i>
+                    <div class="page-info">
+                        <div class="page-name">个人简介</div>
+                        <div class="page-desc">详细的个人信息和经历</div>
+                    </div>
+                </a>
+                <a href="zh-CN/contact.html" class="page-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="page-info">
+                        <div class="page-name">联系我们</div>
+                        <div class="page-desc">获取联系方式和发送消息</div>
+                    </div>
+                </a>
+                <a href="zh-CN/calendar.html" class="page-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="page-info">
+                        <div class="page-name">智能日历</div>
+                        <div class="page-desc">功能丰富的日历工具</div>
+                    </div>
+                </a>
+                <a href="zh-CN/currency.html" class="page-item">
+                    <i class="fas fa-exchange-alt"></i>
+                    <div class="page-info">
+                        <div class="page-name">货币转换</div>
+                        <div class="page-desc">实时汇率转换工具</div>
+                    </div>
+                </a>
+                <a href="time.html" class="page-item">
+                    <i class="fas fa-clock"></i>
+                    <div class="page-info">
+                        <div class="page-name">标准时间</div>
+                        <div class="page-desc">世界时间显示工具</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 政策页面 -->
+        <div class="sitemap-section" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-shield-alt"></i>政策页面
+            </h2>
+            <div class="section-intro">
+                了解网站的使用条款、隐私保护和版权信息
+            </div>
+            <div class="page-list">
+                <a href="zh-CN/privacy.html" class="page-item">
+                    <i class="fas fa-user-shield"></i>
+                    <div class="page-info">
+                        <div class="page-name">隐私政策</div>
+                        <div class="page-desc">数据保护和隐私说明</div>
+                    </div>
+                </a>
+                <a href="zh-CN/terms.html" class="page-item">
+                    <i class="fas fa-file-contract"></i>
+                    <div class="page-info">
+                        <div class="page-name">使用条款</div>
+                        <div class="page-desc">网站使用规则和协议</div>
+                    </div>
+                </a>
+                <a href="zh-CN/ads.html" class="page-item">
+                    <i class="fas fa-ad"></i>
+                    <div class="page-info">
+                        <div class="page-name">广告服务</div>
+                        <div class="page-desc">广告相关政策和信息</div>
+                    </div>
+                </a>
+                <a href="zh-CN/license.html" class="page-item">
+                    <i class="fas fa-certificate"></i>
+                    <div class="page-info">
+                        <div class="page-name">许可证信息</div>
+                        <div class="page-desc">版权许可和使用说明</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 外部链接 -->
+        <div class="sitemap-section" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-external-link-alt"></i>外部链接
+            </h2>
+            <div class="section-intro">
+                连接更广阔的内容世界，探索更多精彩
+            </div>
+            <div class="page-list">
+                <a href="https://blog.alexander.xin" class="page-item external-link" target="_blank" rel="noopener">
+                    <i class="fas fa-blog"></i>
+                    <div class="page-info">
+                        <div class="page-name">个人博客</div>
+                        <div class="page-desc">最新文章分享和思考记录</div>
+                    </div>
+                </a>
+                <a href="https://github.com/AlexanderJ-Carter" class="page-item external-link" target="_blank"
+                    rel="noopener">
+                    <i class="fab fa-github"></i>
+                    <div class="page-info">
+                        <div class="page-name">GitHub</div>
+                        <div class="page-desc">开源项目和代码仓库展示</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 测试功能 -->
+        <div class="sitemap-section" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-flask"></i>测试功能
+            </h2>
+            <div class="section-intro">
+                体验最新的功能特性和实验性工具（可能不稳定）
+            </div>
+            <div class="page-list">
+                <a href="beta/beta-dashboard.html" class="page-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <div class="page-info">
+                        <div class="page-name">Beta中心</div>
+                        <div class="page-desc">体验最新的功能特性</div>
+                    </div>
+                </a>
+                <a href="beta/financial-dashboard.html" class="page-item">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="page-info">
+                        <div class="page-name">财务面板</div>
+                        <div class="page-desc">数据管理和分析工具</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 导航提示 -->
+        <div class="sitemap-section" data-aos="fade-up">
+            <h2 class="section-title">
+                <i class="fas fa-lightbulb"></i>导航提示
+            </h2>
+            <div class="section-intro">
+                使用我们的智能助手，让浏览更加便捷
+            </div>
+            <div class="alert alert-info d-flex align-items-center">
+                <i class="fas fa-robot me-3 fa-2x"></i>
+                <div>
+                    <h5 class="alert-heading">雪宝智能助手</h5>
+                    <p class="mb-0">点击右侧的聊天按钮，与我们的智能助手对话！您可以说<strong>"去画廊"</strong>、<strong>"打开日历"</strong>等来快速导航到任何页面。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot HTML -->
+    <button aria-label="打开聊天助手" class="chat-toggle-button" id="chat-toggle-button" type="button">
+        <i class="fas fa-robot"></i>
+    </button>
+    <div class="chat-container" id="chat-container">
+        <!-- 头部会通过JS动态添加 -->
+        <div class="chatbox" id="chatbox"></div>
+        <div class="chat-input-container">
+            <input aria-label="输入消息" class="chat-input" id="userInput" placeholder="输入您的消息..." type="text">
+            <button class="btn btn-primary rounded-pill" id="sendButton" title="发送消息" type="button">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div> <!-- 页脚 -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="text-center py-3">
+                <div class="copyright">© 2025 Alexander James Carter</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/enhanced.js"></script>
+
+    <script>
+        // 初始化AOS动画
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // 页脚语言选择器功能
+        document.getElementById('footer-language-select').addEventListener('change', function () {
+            window.location.href = this.value;
+        });
+
+        // 主题切换功能
+        document.getElementById('theme-toggle').addEventListener('click', function () {
+            document.body.classList.toggle('dark-theme');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('dark-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // 平滑滚动到指定区域
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
