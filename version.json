@@ -1,0 +1,83 @@
+{
+  "version": "2.1.0",
+  "name": "Alexander James Carter's Personal Website",
+  "description": "展示个人作品和内容分享的个人网页",
+  "author": "Alexander James Carter",
+  "homepage": "https://alexander.xin",
+  "license": "CC BY-NC-SA 4.0",
+  "release": {
+    "version": "2.1.0",
+    "codename": "License & Documentation Enhancement",
+    "date": "2025-06-06",
+    "type": "major",
+    "status": "stable"
+  },
+  "features": {
+    "highlights": [
+      "🛡️ Creative Commons 许可证系统",
+      "🌍 多语言许可证页面",
+      "📚 完善的文档系统",
+      "🔧 代码优化与清理"
+    ],
+    "technical": {
+      "pwa": true,
+      "multilingual": true,
+      "responsive": true,
+      "dark_mode": true,
+      "music_player": true,
+      "chatbot": true,
+      "gallery": true,
+      "license_system": true
+    }
+  },
+  "languages": ["zh-CN", "en", "it", "ja"],
+  "compatibility": {
+    "browsers": {
+      "chrome": ">=88",
+      "firefox": ">=85", 
+      "safari": ">=14",
+      "edge": ">=88"
+    },
+    "devices": ["desktop", "tablet", "mobile"]
+  },
+  "dependencies": {
+    "bootstrap": "5.3.0",
+    "font-awesome": "6.0.0",
+    "aos": "2.3.1",
+    "glightbox": "3.2.0"
+  },
+  "changelog": {
+    "2.1.0": {
+      "date": "2025-06-06",
+      "title": "License & Documentation Enhancement",
+      "type": "major",
+      "breaking_changes": false,
+      "changes": {
+        "added": [
+          "Creative Commons BY-NC-SA 4.0 许可证系统",
+          "多语言许可证页面 (中文/英文/意大利语/日语)",
+          "详细的版权使用指南和FAQ",
+          "版本控制和更新日志系统",
+          "COPYRIGHT-TEMPLATE.md 模板文件"
+        ],
+        "fixed": [
+          "修复 index.html 中重复的 share.js 引用",
+          "优化页脚许可证信息显示",
+          "清理不必要的文件和代码"
+        ],
+        "improved": [
+          "README.md 文档结构优化",
+          "许可证页面交互体验",
+          "版权信息的标准化展示"
+        ]
+      }
+    }
+  },
+  "meta": {
+    "repository": "https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io",
+    "deployment": "GitHub Pages",
+    "cdn": ["jsDelivr", "CDNJS"],
+    "analytics": "Google Analytics 4",
+    "last_updated": "2025-06-06T00:00:00Z"
+  }
+}

@@ -329,14 +329,42 @@ body .site-footer .social-icon.github:hover {
 body .site-footer .footer-bottom {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    align-items: center;    flex-wrap: wrap;
     gap: 8px;
     font-size: 0.85rem;
 }
 
 body .site-footer .copyright {
     color: #94a3b8;
+}
+
+body .site-footer .license-info {
+    margin-top: 4px;
+}
+
+body .site-footer .license-info a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.8rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body .site-footer .license-info a:hover {
+    color: #0ea5e9;
+    background: rgba(14, 165, 233, 0.05);
+    border-color: rgba(14, 165, 233, 0.1);
+    transform: translateY(-1px);
+}
+
+body .site-footer .license-info a i {
+    font-size: 0.9rem;
 }
 
 body .site-footer .footer-links {

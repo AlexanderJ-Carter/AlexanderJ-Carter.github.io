@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License - Alexander James Carter</title>
+    <meta name="description" content="View our Creative Commons license information and understand your rights and obligations when using our content.">
+    <meta name="license" content="CC BY-NC-SA 4.0">
+    
+    <!-- Style Files -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../css/style.default.css" rel="stylesheet">
+    
+    <style>
+        .license-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        
+        .license-hero {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .license-badge img {
+            width: 88px;
+            height: 31px;
+            margin-bottom: 1rem;
+        }
+        
+        .license-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .permission-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: rgba(248, 249, 250, 0.8);
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        
+        .permission-item.allowed { border-left-color: #28a745; }
+        .permission-item.forbidden { border-left-color: #dc3545; }
+        .permission-item.required { border-left-color: #ffc107; }
+        
+        .permission-icon {
+            margin-right: 1rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .allowed .permission-icon { color: #28a745; }
+        .forbidden .permission-icon { color: #dc3545; }
+        .required .permission-icon { color: #ffc107; }
+        
+        .copyright-notice {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            margin: 1.5rem 0;
+        }
+        
+        .copy-btn {
+            float: right;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-question {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .faq-answer {
+            margin-top: 1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .btn-outline-light:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: white;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <a href="../index-en.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+    
+    <div class="license-container">
+        <!-- License Hero Section -->
+        <div class="license-hero">
+            <div class="license-badge">
+                <img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0 License">
+            </div>
+            <h1 class="mb-3">Creative Commons License</h1>
+            <p class="lead mb-0">This work is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</p>
+        </div>
+        
+        <!-- Standard Copyright Notice -->
+        <div class="license-section">
+            <h2><i class="fas fa-copyright me-2"></i>Standard Copyright Notice</h2>
+            <p>Use this standard format when referencing or sharing content from this website:</p>
+            
+            <div class="copyright-notice">
+                <button class="btn btn-outline-primary btn-sm copy-btn" onclick="copyToClipboard('copyright-text')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <div id="copyright-text">© 2024 Alexander James Carter. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>. To view a copy of this license, visit <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">https://creativecommons.org/licenses/by-nc-sa/4.0/</a> or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.</div>
+            </div>
+        </div>
+        
+        <!-- Permissions -->
+        <div class="license-section">
+            <h2><i class="fas fa-balance-scale me-2"></i>Your Rights and Obligations</h2>
+            
+            <h4 class="text-success mb-3">✓ You are free to:</h4>
+            <div class="permission-item allowed">
+                <div class="permission-icon">
+                    <i class="fas fa-share"></i>
+                </div>
+                <div>
+                    <strong>Share</strong> — Copy and redistribute the material in any medium or format
+                </div>
+            </div>
+            
+            <div class="permission-item allowed">
+                <div class="permission-icon">
+                    <i class="fas fa-edit"></i>
+                </div>
+                <div>
+                    <strong>Adapt</strong> — Remix, transform, and build upon the material
+                </div>
+            </div>
+            
+            <div class="permission-item allowed">
+                <div class="permission-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <strong>Learn</strong> — Use for educational purposes and personal study
+                </div>
+            </div>
+            
+            <h4 class="text-warning mb-3 mt-4">⚠️ Under the following conditions:</h4>
+            <div class="permission-item required">
+                <div class="permission-icon">
+                    <i class="fas fa-user-tag"></i>
+                </div>
+                <div>
+                    <strong>Attribution</strong> — You must give appropriate credit, provide a link to the license, and indicate if changes were made
+                </div>
+            </div>
+            
+            <div class="permission-item required">
+                <div class="permission-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <div>
+                    <strong>ShareAlike</strong> — If you remix, transform, or build upon the material, you must distribute your contributions under the same license
+                </div>
+            </div>
+            
+            <h4 class="text-danger mb-3 mt-4">✗ Restrictions:</h4>
+            <div class="permission-item forbidden">
+                <div class="permission-icon">
+                    <i class="fas fa-ban"></i>
+                </div>
+                <div>
+                    <strong>NonCommercial</strong> — You may not use the material for commercial purposes without explicit permission
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="license-section">
+            <h2><i class="fas fa-question-circle me-2"></i>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What constitutes commercial use?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    Commercial use includes any activity primarily intended for or directed toward commercial advantage or monetary compensation. This includes using the content in products you sell, in advertising, or in services you charge for.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Can I use this content for my blog or YouTube channel?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    If your blog or channel is non-commercial (no ads, no paid content), then yes, with proper attribution. If it's monetized, you'll need to contact us for commercial licensing.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How should I provide attribution?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    Include the author name (Alexander James Carter), the source URL, and the license information. Use the standard copyright notice provided above for the complete format.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Can I modify the content?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    Yes, you can adapt and modify the content, but you must clearly indicate what changes were made and distribute your modified version under the same license (ShareAlike requirement).
+                </div>
+            </div>
+        </div>
+        
+        <!-- Commercial Licensing -->
+        <div class="contact-section">
+            <h2><i class="fas fa-handshake me-2"></i>Need Commercial License?</h2>
+            <p class="mb-4">If you want to use our content for commercial purposes, we offer flexible commercial licensing options.</p>
+            <a href="../contact-en.html" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-envelope me-2"></i>Contact Us for Commercial Licensing
+            </a>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.innerText || element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                // 显示成功提示
+                const button = event.target.closest('.copy-btn');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                button.classList.remove('btn-outline-primary');
+                button.classList.add('btn-success');
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.classList.remove('btn-success');
+                    button.classList.add('btn-outline-primary');
+                }, 2000);
+            }).catch(err => {
+                console.error('Copy failed: ', err);
+                // 回退方案
+                const range = document.createRange();
+                range.selectNode(element);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+            });
+        }
+        
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('.fas');
+            
+            if (answer.style.display === 'none' || answer.style.display === '') {
+                answer.style.display = 'block';
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                answer.style.display = 'none';
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+    </script>
+</body>
+</html>
