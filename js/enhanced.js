@@ -1,8 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
     // 初始化AOS动画库
     AOS.init({
         duration: 800,
-        easing: "ease-in-out",
+        easing: 'ease-in-out',
         once: true,
         mirror: false,
     });
@@ -26,22 +26,23 @@ document.addEventListener("DOMContentLoaded", function () {
     initLightbox();
 
     // 3D视差效果
-    initParallaxEffect();
+    initParallaxEffect();    // 初始化页面加载器移除逻辑（不创建新的加载器，使用HTML中现有的）
+    initPageLoaderRemoval();
 
-    // 添加页面加载器
-    addPageLoader();
+    // 初始化页脚功能
+    initFooter();
 });
 
 // 初始化3D倾斜效果
 function initVanillaTilt() {
     if (window.innerWidth > 768) {
-        const cardElements = document.querySelectorAll(".card-3d, .glass-card");
-        if (cardElements.length > 0 && typeof VanillaTilt !== "undefined") {
+        const cardElements = document.querySelectorAll('.card-3d, .glass-card');
+        if (cardElements.length > 0 && typeof VanillaTilt !== 'undefined') {
             VanillaTilt.init(cardElements, {
                 max: 5,
                 speed: 300,
                 glare: true,
-                "max-glare": 0.1,
+                'max-glare': 0.1,
             });
         }
     }
@@ -49,37 +50,40 @@ function initVanillaTilt() {
 
 // 初始化粒子效果
 function initParticles() {
-    if (typeof particlesJS !== "undefined") {
+    if (typeof particlesJS !== 'undefined') {
         // 为英雄区域添加粒子
-        if (document.querySelector(".hero-particles")) {
-            particlesJS("hero-particles", {
+        if (document.querySelector('.hero-particles')) {
+            particlesJS('hero-particles', {
                 particles: {
-                    number: {value: 80, density: {enable: true, value_area: 800}},
-                    color: {value: "#ffffff"},
-                    shape: {type: "circle"},
-                    opacity: {value: 0.5, random: true},
-                    size: {value: 3, random: true},
+                    number: {
+                        value: 80,
+                        density: { enable: true, value_area: 800 },
+                    },
+                    color: { value: '#ffffff' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
                     line_linked: {
                         enable: true,
                         distance: 150,
-                        color: "#ffffff",
+                        color: '#ffffff',
                         opacity: 0.4,
                         width: 1,
                     },
                     move: {
                         enable: true,
                         speed: 2,
-                        direction: "none",
+                        direction: 'none',
                         random: true,
                         straight: false,
-                        out_mode: "out",
+                        out_mode: 'out',
                     },
                 },
                 interactivity: {
-                    detect_on: "canvas",
+                    detect_on: 'canvas',
                     events: {
-                        onhover: {enable: true, mode: "grab"},
-                        onclick: {enable: true, mode: "push"},
+                        onhover: { enable: true, mode: 'grab' },
+                        onclick: { enable: true, mode: 'push' },
                         resize: true,
                     },
                 },
@@ -88,35 +92,38 @@ function initParticles() {
         }
 
         // 为页脚添加粒子
-        if (document.querySelector(".footer-particles")) {
-            particlesJS("footer-particles", {
+        if (document.querySelector('.footer-particles')) {
+            particlesJS('footer-particles', {
                 particles: {
-                    number: {value: 50, density: {enable: true, value_area: 800}},
-                    color: {value: "#ffffff"},
-                    shape: {type: "circle"},
-                    opacity: {value: 0.2, random: false},
-                    size: {value: 2, random: true},
+                    number: {
+                        value: 50,
+                        density: { enable: true, value_area: 800 },
+                    },
+                    color: { value: '#ffffff' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.2, random: false },
+                    size: { value: 2, random: true },
                     line_linked: {
                         enable: true,
                         distance: 150,
-                        color: "#ffffff",
+                        color: '#ffffff',
                         opacity: 0.1,
                         width: 1,
                     },
                     move: {
                         enable: true,
                         speed: 1,
-                        direction: "none",
+                        direction: 'none',
                         random: true,
                         straight: false,
-                        out_mode: "out",
+                        out_mode: 'out',
                     },
                 },
                 interactivity: {
-                    detect_on: "canvas",
+                    detect_on: 'canvas',
                     events: {
-                        onhover: {enable: true, mode: "bubble"},
-                        onclick: {enable: true, mode: "repulse"},
+                        onhover: { enable: true, mode: 'bubble' },
+                        onclick: { enable: true, mode: 'repulse' },
                         resize: true,
                     },
                 },
@@ -128,27 +135,28 @@ function initParticles() {
 
 // 导航栏滚动效果
 function initNavbarScroll() {
-    const navbar = document.querySelector(".navbar");
-    const scrollProgress = document.querySelector(".scroll-progress");
+    const navbar = document.querySelector('.navbar');
+    const scrollProgress = document.querySelector('.scroll-progress');
 
     if (navbar) {
-        window.addEventListener("scroll", function () {
+        window.addEventListener('scroll', function () {
             // 导航栏背景变化
             if (window.scrollY > 100) {
-                navbar.classList.add("navbar-scrolled");
+                navbar.classList.add('navbar-scrolled');
             } else {
-                navbar.classList.remove("navbar-scrolled");
+                navbar.classList.remove('navbar-scrolled');
             }
 
             // 滚动进度条
             if (scrollProgress) {
                 const winScroll =
-                    document.body.scrollTop || document.documentElement.scrollTop;
+                    document.body.scrollTop ||
+                    document.documentElement.scrollTop;
                 const height =
                     document.documentElement.scrollHeight -
                     document.documentElement.clientHeight;
                 const scrolled = (winScroll / height) * 100;
-                scrollProgress.style.width = scrolled + "%";
+                scrollProgress.style.width = scrolled + '%';
             }
         });
     }
@@ -159,15 +167,16 @@ function initSmoothScroll() {
     const scrollLinks = document.querySelectorAll('a[href^="#"]');
 
     scrollLinks.forEach((link) => {
-        link.addEventListener("click", function (e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
 
-            const targetId = this.getAttribute("href");
-            if (targetId === "#") return;
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
 
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
-                const navbarHeight = document.querySelector(".navbar").offsetHeight;
+                const navbarHeight =
+                    document.querySelector('.navbar').offsetHeight;
                 const targetPosition =
                     targetElement.getBoundingClientRect().top +
                     window.pageYOffset -
@@ -175,15 +184,16 @@ function initSmoothScroll() {
 
                 window.scrollTo({
                     top: targetPosition,
-                    behavior: "smooth",
+                    behavior: 'smooth',
                 });
 
                 // 如果在小屏幕上且导航菜单是展开的，点击后关闭导航菜单
-                document.querySelector(".navbar-toggler");
-                const navbarCollapse = document.querySelector(".navbar-collapse");
+                document.querySelector('.navbar-toggler');
+                const navbarCollapse =
+                    document.querySelector('.navbar-collapse');
                 if (
                     window.innerWidth < 992 &&
-                    navbarCollapse.classList.contains("show")
+                    navbarCollapse.classList.contains('show')
                 ) {
                     const bsCollapse = new bootstrap.Collapse(navbarCollapse);
                     bsCollapse.hide();
@@ -195,39 +205,43 @@ function initSmoothScroll() {
 
 // 作品集筛选功能
 function initPortfolioFilter() {
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const portfolioItems = document.querySelectorAll(".portfolio-item");
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
 
     if (filterButtons.length > 0 && portfolioItems.length > 0) {
         filterButtons.forEach((button) => {
-            button.addEventListener("click", function () {
+            button.addEventListener('click', function () {
                 // 移除所有按钮的active类
-                filterButtons.forEach((btn) => btn.classList.remove("active"));
+                filterButtons.forEach((btn) => btn.classList.remove('active'));
                 // 给当前按钮添加active类
-                this.classList.add("active");
+                this.classList.add('active');
 
-                const filterValue = this.getAttribute("data-filter");
+                const filterValue = this.getAttribute('data-filter');
 
                 // 筛选项目
                 portfolioItems.forEach((item) => {
-                    if (filterValue === "all") {
-                        item.style.display = "block";
+                    if (filterValue === 'all') {
+                        item.style.display = 'block';
                         setTimeout(() => {
-                            item.style.opacity = "1";
-                            item.style.transform = "scale(1)";
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
                         }, 100);
                     } else {
-                        if (item.getAttribute("data-category").includes(filterValue)) {
-                            item.style.display = "block";
+                        if (
+                            item
+                                .getAttribute('data-category')
+                                .includes(filterValue)
+                        ) {
+                            item.style.display = 'block';
                             setTimeout(() => {
-                                item.style.opacity = "1";
-                                item.style.transform = "scale(1)";
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
                             }, 100);
                         } else {
-                            item.style.opacity = "0";
-                            item.style.transform = "scale(0.8)";
+                            item.style.opacity = '0';
+                            item.style.transform = 'scale(0.8)';
                             setTimeout(() => {
-                                item.style.display = "none";
+                                item.style.display = 'none';
                             }, 300);
                         }
                     }
@@ -240,7 +254,7 @@ function initPortfolioFilter() {
 // 灯箱效果
 function initLightbox() {
     GLightbox({
-        selector: ".portfolio-link",
+        selector: '.portfolio-link',
         touchNavigation: true,
         loop: true,
         autoplayVideos: true,
@@ -249,9 +263,9 @@ function initLightbox() {
 
 // 3D视差效果
 function initParallaxEffect() {
-    document.addEventListener("mousemove", (e) => {
+    document.addEventListener('mousemove', (e) => {
         const parallaxElements = document.querySelectorAll(
-            ".parallax-hero, .about-image, .feature-item, .service-card"
+            '.parallax-hero, .about-image, .feature-item, .service-card'
         );
 
         if (window.innerWidth > 992) {
@@ -269,9 +283,9 @@ function initParallaxEffect() {
     });
 
     // 滚动视差效果
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
         const scrollPosition = window.pageYOffset;
-        const parallaxSections = document.querySelectorAll(".parallax-section");
+        const parallaxSections = document.querySelectorAll('.parallax-section');
 
         parallaxSections.forEach((section) => {
             const speed = 0.5;
@@ -281,26 +295,26 @@ function initParallaxEffect() {
 }
 
 // 页面加载优化
-window.addEventListener("load", function () {
-    document.body.classList.add("loaded");
+window.addEventListener('load', function () {
+    document.body.classList.add('loaded');
 
     // 延迟加载不重要的资源
     setTimeout(() => {
-        const lazyScripts = document.querySelectorAll("script[data-src]");
+        const lazyScripts = document.querySelectorAll('script[data-src]');
         lazyScripts.forEach((script) => {
-            script.src = script.getAttribute("data-src");
+            script.src = script.getAttribute('data-src');
         });
     }, 2000);
 
     // 添加按钮点击波纹效果
-    const buttons = document.querySelectorAll(".btn");
+    const buttons = document.querySelectorAll('.btn');
     buttons.forEach((button) => {
-        button.addEventListener("click", function (e) {
+        button.addEventListener('click', function (e) {
             const x = e.clientX - e.target.getBoundingClientRect().left;
             const y = e.clientY - e.target.getBoundingClientRect().top;
 
-            const ripple = document.createElement("span");
-            ripple.classList.add("ripple-effect");
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple-effect');
             ripple.style.left = `${x}px`;
             ripple.style.top = `${y}px`;
 
@@ -314,44 +328,43 @@ window.addEventListener("load", function () {
 
     // 添加页脚淡入效果
     const footerElements = document.querySelectorAll(
-        ".site-footer .footer-content > div"
+        '.site-footer .footer-content > div'
     );
     footerElements.forEach((element, index) => {
         setTimeout(() => {
-            element.classList.add("footer-fade-in");
+            element.classList.add('footer-fade-in');
         }, 300 + index * 150);
     });
 
     // 鼠标移动时对卡片添加光影效果
-    const cards = document.querySelectorAll(".glass-card");
+    const cards = document.querySelectorAll('.glass-card');
     cards.forEach((card) => {
-        card.addEventListener("mousemove", function (e) {
+        card.addEventListener('mousemove', function (e) {
             const rect = this.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            this.style.setProperty("--x-pos", `${x}px`);
-            this.style.setProperty("--y-pos", `${y}px`);
+            this.style.setProperty('--x-pos', `${x}px`);
+            this.style.setProperty('--y-pos', `${y}px`);
         });
     });
 
     // 滚动到顶部按钮
-    const backToTopBtn = document.querySelector(".back-to-top");
+    const backToTopBtn = document.querySelector('.back-to-top');
     if (backToTopBtn) {
-        backToTopBtn.addEventListener("click", function () {
+        backToTopBtn.addEventListener('click', function () {
             window.scrollTo({
                 top: 0,
-                behavior: "smooth",
+                behavior: 'smooth',
             });
         });
 
-        window.addEventListener("scroll", function () {
+        window.addEventListener('scroll', function () {
             if (window.scrollY > 300) {
-                backToTopBtn.classList.add("visible");
+                backToTopBtn.classList.add('visible');
             } else {
-                backToTopBtn.classList.remove("visible");
-            }
-        });
+                backToTopBtn.classList.remove('visible');
+            }        });
     }
 
     // 运行新增的增强功能
@@ -363,28 +376,104 @@ window.addEventListener("load", function () {
     handleMediaQueries();
     setupDarkModeDetection(); // 新增自动检测系统暗黑模式偏好
 
-    // 移除页面加载器
-    const pageLoader = document.querySelector(".page-loader");
-    if (pageLoader) {
-        pageLoader.classList.add("loaded");
-        setTimeout(() => {
-            pageLoader.remove();
-        }, 500);
-    }
+    // 优化页面加载器移除逻辑
+    initPageLoaderRemoval();
 });
 
+// 优化页面加载器移除函数
+function initPageLoaderRemoval() {
+    const pageLoader = document.querySelector('.page-loader');
+    if (!pageLoader) {
+        console.log('未找到页面加载器元素');
+        return;
+    }
+
+    let removeAttempted = false;
+    
+    // 移除页面加载器的函数
+    function removePageLoader() {
+        if (removeAttempted) {
+            console.log('页面加载器移除已尝试过，跳过');
+            return;
+        }
+        removeAttempted = true;
+        
+        console.log('开始移除页面加载器...');
+        pageLoader.classList.add('loaded');
+        
+        setTimeout(() => {
+            if (pageLoader.parentNode) {
+                pageLoader.remove();
+                console.log('页面加载器已成功移除');
+            }
+        }, 500);
+    }
+
+    // 检查所有必要资源是否加载完成
+    function checkResourcesLoaded() {
+        const aosLoaded = typeof AOS !== 'undefined';
+        const bootstrapLoaded = typeof bootstrap !== 'undefined';
+        const glightboxLoaded = typeof GLightbox !== 'undefined';
+        const documentReady = document.readyState === 'complete';
+        
+        console.log('资源加载状态检查:', {
+            AOS: aosLoaded,
+            Bootstrap: bootstrapLoaded,
+            GLightbox: glightboxLoaded,
+            DocumentReady: documentReady
+        });
+        
+        return aosLoaded && bootstrapLoaded && documentReady;
+    }
+    
+    // 延迟检查，确保所有脚本都已执行
+    function delayedCheck() {
+        setTimeout(() => {
+            if (checkResourcesLoaded()) {
+                console.log('所有资源加载完成，移除加载器');
+                removePageLoader();
+            } else {
+                console.log('等待资源加载...');
+                // 如果资源还未完全加载，再等待一段时间
+                setTimeout(() => {
+                    if (!removeAttempted) {
+                        console.log('延迟检查：强制移除页面加载器');
+                        removePageLoader();
+                    }
+                }, 2000);
+            }
+        }, 1500); // 给脚本足够时间初始化
+    }
+    
+    // 如果页面已经加载完成，立即开始检查
+    if (document.readyState === 'complete') {
+        delayedCheck();
+    } else {
+        // 等待页面加载完成
+        window.addEventListener('load', delayedCheck);
+    }
+    
+    // 最终超时保护（5秒后强制移除）
+    setTimeout(() => {
+        if (!removeAttempted) {
+            console.log('超时保护（5秒）：强制移除页面加载器');
+            removePageLoader();
+        }
+    }, 5000);
+}
+
 // 暗黑模式切换
-const themeToggle = document.getElementById("theme-toggle");
+const themeToggle = document.getElementById('theme-toggle');
 if (themeToggle) {
-    themeToggle.addEventListener("click", function () {
+    themeToggle.addEventListener('click', function () {
         toggleDarkMode();
     });
 
     // 检查用户之前的主题偏好
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
         applyDarkMode();
-    } else if (savedTheme === "light") {
+    } else if (savedTheme === 'light') {
         applyLightMode();
     } else {
         // 如果没有保存过偏好，则检查系统偏好
@@ -400,12 +489,12 @@ function setupDarkModeDetection() {
     // 监听系统偏好变化
     if (window.matchMedia) {
         const darkModeMediaQuery = window.matchMedia(
-            "(prefers-color-scheme: dark)"
+            '(prefers-color-scheme: dark)'
         );
         if (darkModeMediaQuery.addEventListener) {
-            darkModeMediaQuery.addEventListener("change", (e) => {
+            darkModeMediaQuery.addEventListener('change', (e) => {
                 // 仅当用户没有手动设置偏好时，才跟随系统变化
-                if (!localStorage.getItem("theme")) {
+                if (!localStorage.getItem('theme')) {
                     if (e.matches) {
                         applyDarkMode(false); // false表示不保存到localStorage
                     } else {
@@ -421,8 +510,8 @@ function setupDarkModeDetection() {
 function checkSystemThemePreference() {
     if (
         window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches &&
-        !localStorage.getItem("theme")
+        window.matchMedia('(prefers-color-scheme: dark)').matches &&
+        !localStorage.getItem('theme')
     ) {
         applyDarkMode(false);
     }
@@ -430,7 +519,7 @@ function checkSystemThemePreference() {
 
 // 切换暗黑模式
 function toggleDarkMode() {
-    if (document.body.classList.contains("dark-mode")) {
+    if (document.body.classList.contains('dark-mode')) {
         applyLightMode();
     } else {
         applyDarkMode();
@@ -439,58 +528,58 @@ function toggleDarkMode() {
 
 // 应用暗黑模式
 function applyDarkMode(savePreference = true) {
-    document.body.classList.add("dark-mode");
+    document.body.classList.add('dark-mode');
 
     // 切换图标
     if (themeToggle) {
-        const themeIcon = themeToggle.querySelector("i");
+        const themeIcon = themeToggle.querySelector('i');
         if (themeIcon) {
-            themeIcon.classList.remove("fa-moon");
-            themeIcon.classList.add("fa-sun");
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
         }
     }
 
     if (savePreference) {
-        localStorage.setItem("theme", "dark");
+        localStorage.setItem('theme', 'dark');
     }
 
     // 触发自定义事件，通知其他组件主题已改变
     document.dispatchEvent(
-        new CustomEvent("themeChanged", {
-            detail: {theme: "dark"},
+        new CustomEvent('themeChanged', {
+            detail: { theme: 'dark' },
         })
     );
 }
 
 // 应用亮色模式
 function applyLightMode(savePreference = true) {
-    document.body.classList.remove("dark-mode");
+    document.body.classList.remove('dark-mode');
 
     // 切换图标
     if (themeToggle) {
-        const themeIcon = themeToggle.querySelector("i");
+        const themeIcon = themeToggle.querySelector('i');
         if (themeIcon) {
-            themeIcon.classList.remove("fa-sun");
-            themeIcon.classList.add("fa-moon");
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
         }
     }
 
     if (savePreference) {
-        localStorage.setItem("theme", "light");
+        localStorage.setItem('theme', 'light');
     }
 
     // 触发自定义事件，通知其他组件主题已改变
     document.dispatchEvent(
-        new CustomEvent("themeChanged", {
-            detail: {theme: "light"},
+        new CustomEvent('themeChanged', {
+            detail: { theme: 'light' },
         })
     );
 }
 
 // 检测视窗可见性变化
-document.addEventListener("visibilitychange", function () {
+document.addEventListener('visibilitychange', function () {
     const title = document.title;
-    const siteName = "Alexander James Carter";
+    const siteName = 'Alexander James Carter';
 
     if (document.hidden) {
         document.title = `👋 欢迎回来 | ${siteName}`;
@@ -502,12 +591,12 @@ document.addEventListener("visibilitychange", function () {
 // 添加页面加载进度条
 (function () {
     // 创建进度条元素
-    const progressBar = document.createElement("div");
-    progressBar.classList.add("page-load-progress");
+    const progressBar = document.createElement('div');
+    progressBar.classList.add('page-load-progress');
     document.body.appendChild(progressBar);
 
     // 获取资源总数
-    const resourceCount = performance.getEntriesByType("resource").length;
+    const resourceCount = performance.getEntriesByType('resource').length;
     let loadedCount = 0;
 
     // 更新进度条
@@ -518,7 +607,7 @@ document.addEventListener("visibilitychange", function () {
 
         if (progress >= 100) {
             setTimeout(() => {
-                progressBar.classList.add("complete");
+                progressBar.classList.add('complete');
                 setTimeout(() => {
                     progressBar.remove();
                 }, 500);
@@ -527,27 +616,27 @@ document.addEventListener("visibilitychange", function () {
     }
 
     // 监听资源加载
-    window.addEventListener("load", () => {
+    window.addEventListener('load', () => {
         updateProgress();
     });
 
     // 给每个资源添加加载事件
-    performance.getEntriesByType("resource").forEach(() => {
+    performance.getEntriesByType('resource').forEach(() => {
         updateProgress();
     });
 })();
 
 // 优化图片加载
-document.addEventListener("DOMContentLoaded", function () {
-    const images = document.querySelectorAll("img[data-src]");
+document.addEventListener('DOMContentLoaded', function () {
+    const images = document.querySelectorAll('img[data-src]');
 
-    if ("IntersectionObserver" in window) {
+    if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.src = img.getAttribute("data-src");
-                    img.removeAttribute("data-src");
+                    img.src = img.getAttribute('data-src');
+                    img.removeAttribute('data-src');
                     imageObserver.unobserve(img);
                 }
             });
@@ -559,8 +648,8 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         // 降级处理，直接加载所有图片
         images.forEach((img) => {
-            img.src = img.getAttribute("data-src");
-            img.removeAttribute("data-src");
+            img.src = img.getAttribute('data-src');
+            img.removeAttribute('data-src');
         });
     }
 });
@@ -568,16 +657,16 @@ document.addEventListener("DOMContentLoaded", function () {
 // 添加交互提示
 function addInteractionHints() {
     // 向可滚动区域添加提示
-    const scrollableElements = document.querySelectorAll(".scrollable");
+    const scrollableElements = document.querySelectorAll('.scrollable');
     scrollableElements.forEach((el) => {
-        const hint = document.createElement("div");
-        hint.classList.add("scroll-hint");
+        const hint = document.createElement('div');
+        hint.classList.add('scroll-hint');
         hint.innerHTML = '<i class="fas fa-chevron-down"></i>';
         el.appendChild(hint);
 
-        el.addEventListener("scroll", () => {
+        el.addEventListener('scroll', () => {
             if (el.scrollTop > 20) {
-                hint.classList.add("hidden");
+                hint.classList.add('hidden');
             }
         });
     });
@@ -588,26 +677,26 @@ addInteractionHints();
 
 // 修复图片加载问题
 function enhanceImageLoading() {
-    const images = document.querySelectorAll("img:not([data-src])");
+    const images = document.querySelectorAll('img:not([data-src])');
 
     images.forEach((img) => {
         // 为每个图片添加加载错误处理
         img.onerror = function () {
             this.onerror = null;
-            this.src = "img/placeholder.jpg"; // 替换为默认图片
-            this.classList.add("img-error");
+            this.src = 'img/placeholder.jpg'; // 替换为默认图片
+            this.classList.add('img-error');
             console.log(`Image failed to load: ${this.src}`);
         };
 
         // 为图片添加加载完成事件
         img.onload = function () {
-            this.classList.add("loaded");
+            this.classList.add('loaded');
 
             // 移除可能的占位符
             const parent = this.parentNode;
-            const placeholder = parent.querySelector(".img-placeholder");
+            const placeholder = parent.querySelector('.img-placeholder');
             if (placeholder) {
-                placeholder.style.opacity = "0";
+                placeholder.style.opacity = '0';
                 setTimeout(() => {
                     placeholder.remove();
                 }, 300);
@@ -621,7 +710,7 @@ function enhanceImageLoading() {
     });
 
     // 处理延迟加载的图片
-    const lazyImages = document.querySelectorAll("img[data-src]");
+    const lazyImages = document.querySelectorAll('img[data-src]');
     const imageObserver = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
@@ -630,30 +719,33 @@ function enhanceImageLoading() {
 
                     // 添加占位符
                     const parent = img.parentNode;
-                    if (!parent.querySelector(".img-placeholder")) {
-                        const placeholder = document.createElement("div");
-                        placeholder.className = "img-placeholder";
+                    if (!parent.querySelector('.img-placeholder')) {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'img-placeholder';
                         parent.prepend(placeholder);
                     }
 
                     // 设置加载错误处理
                     img.onerror = function () {
                         this.onerror = null;
-                        this.src = "img/placeholder.jpg";
-                        this.classList.add("img-error");
+                        this.src = 'img/placeholder.jpg';
+                        this.classList.add('img-error');
                         console.log(
-                            `Lazy image failed to load: ${this.getAttribute("data-src")}`
+                            `Lazy image failed to load: ${this.getAttribute(
+                                'data-src'
+                            )}`
                         );
                     };
 
                     // 设置加载完成处理
                     img.onload = function () {
-                        this.classList.add("loaded");
+                        this.classList.add('loaded');
 
                         // 移除占位符
-                        const placeholder = parent.querySelector(".img-placeholder");
+                        const placeholder =
+                            parent.querySelector('.img-placeholder');
                         if (placeholder) {
-                            placeholder.style.opacity = "0";
+                            placeholder.style.opacity = '0';
                             setTimeout(() => {
                                 placeholder.remove();
                             }, 300);
@@ -661,8 +753,8 @@ function enhanceImageLoading() {
                     };
 
                     // 开始加载图片
-                    img.src = img.getAttribute("data-src");
-                    img.removeAttribute("data-src");
+                    img.src = img.getAttribute('data-src');
+                    img.removeAttribute('data-src');
 
                     // 停止观察这个元素
                     imageObserver.unobserve(img);
@@ -670,7 +762,7 @@ function enhanceImageLoading() {
             });
         },
         {
-            rootMargin: "50px 0px",
+            rootMargin: '50px 0px',
             threshold: 0.1,
         }
     );
@@ -684,13 +776,13 @@ function enhanceImageLoading() {
 function fixTextOverlap() {
     const checkTextOverflow = () => {
         const textContainers = document.querySelectorAll(
-            ".text-content, .card-title, h1, h2, h3, p"
+            '.text-content, .card-title, h1, h2, h3, p'
         );
 
         textContainers.forEach((container) => {
             // 检查文本是否溢出
             if (container.scrollHeight > container.clientHeight) {
-                container.classList.add("text-overflow");
+                container.classList.add('text-overflow');
 
                 // 调整字体大小
                 const currentSize = parseFloat(
@@ -705,12 +797,12 @@ function fixTextOverlap() {
     setTimeout(checkTextOverflow, 500);
 
     // 窗口大小改变时重新检查
-    window.addEventListener("resize", checkTextOverflow);
+    window.addEventListener('resize', checkTextOverflow);
 }
 
 // 修复导航栏问题
 function enhanceNavigation() {
-    const navLinks = document.querySelectorAll(".nav-link");
+    const navLinks = document.querySelectorAll('.nav-link');
 
     // 初始激活当前导航链接
     function updateActiveNav() {
@@ -719,8 +811,8 @@ function enhanceNavigation() {
         // 获取所有锚点对应的区域
         const sections = Array.from(navLinks)
             .map((link) => {
-                const href = link.getAttribute("href");
-                if (href && href.startsWith("#") && href !== "#") {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#') && href !== '#') {
                     const section = document.querySelector(href);
                     if (section) {
                         return {
@@ -751,41 +843,49 @@ function enhanceNavigation() {
 
         // 如果没有找到匹配的区域，检查是否在页面顶部
         if (!currentSection && scrollPosition < 100) {
-            currentSection = sections.find((s) => s.id === "#intro");
+            currentSection = sections.find((s) => s.id === '#intro');
         }
 
         // 更新激活状态
-        navLinks.forEach((link) => link.classList.remove("active"));
+        navLinks.forEach((link) => link.classList.remove('active'));
         if (currentSection) {
-            currentSection.link.classList.add("active");
+            currentSection.link.classList.add('active');
         }
     }
 
     // 页面加载时和滚动时更新导航激活状态
     updateActiveNav();
-    window.addEventListener("scroll", updateActiveNav);
+    window.addEventListener('scroll', updateActiveNav);
 
     // 平滑滚动效果增强
     navLinks.forEach((link) => {
-        link.addEventListener("click", function (e) {
-            const href = this.getAttribute("href");
-            if (href && href.startsWith("#") && href !== "#") {
+        link.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#') && href !== '#') {
                 e.preventDefault();
 
                 const targetSection = document.querySelector(href);
                 if (targetSection) {
-                    const headerHeight = document.querySelector(".navbar").offsetHeight;
-                    const targetPosition = targetSection.offsetTop - headerHeight;
+                    const headerHeight =
+                        document.querySelector('.navbar').offsetHeight;
+                    const targetPosition =
+                        targetSection.offsetTop - headerHeight;
 
                     window.scrollTo({
                         top: targetPosition,
-                        behavior: "smooth",
+                        behavior: 'smooth',
                     });
 
                     // 在移动设备上关闭菜单
-                    const navbarCollapse = document.querySelector(".navbar-collapse");
-                    if (navbarCollapse && navbarCollapse.classList.contains("show")) {
-                        const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                    const navbarCollapse =
+                        document.querySelector('.navbar-collapse');
+                    if (
+                        navbarCollapse &&
+                        navbarCollapse.classList.contains('show')
+                    ) {
+                        const bsCollapse = new bootstrap.Collapse(
+                            navbarCollapse
+                        );
                         bsCollapse.hide();
                     }
                 }
@@ -797,19 +897,19 @@ function enhanceNavigation() {
 // 增强交互提示
 function enhanceInteractionHints() {
     // 创建一个向下滚动提示
-    const introSection = document.getElementById("intro");
+    const introSection = document.getElementById('intro');
     if (introSection) {
-        const scrollHint = document.createElement("div");
-        scrollHint.className = "scroll-hint";
+        const scrollHint = document.createElement('div');
+        scrollHint.className = 'scroll-hint';
         scrollHint.innerHTML = '<i class="fas fa-chevron-down"></i>';
         introSection.appendChild(scrollHint);
 
         // 滚动时隐藏提示
-        window.addEventListener("scroll", () => {
+        window.addEventListener('scroll', () => {
             if (window.scrollY > 100) {
-                scrollHint.classList.add("hidden");
+                scrollHint.classList.add('hidden');
             } else {
-                scrollHint.classList.remove("hidden");
+                scrollHint.classList.remove('hidden');
             }
         });
     }
@@ -823,32 +923,33 @@ function fixParticleContainers() {
             const parentElement = container.parentElement;
             if (parentElement) {
                 // 确保父元素有相对定位
-                const position = window.getComputedStyle(parentElement).position;
-                if (position !== "relative" && position !== "absolute") {
-                    parentElement.style.position = "relative";
+                const position =
+                    window.getComputedStyle(parentElement).position;
+                if (position !== 'relative' && position !== 'absolute') {
+                    parentElement.style.position = 'relative';
                 }
             }
         }
     };
 
-    fixContainer(".hero-particles");
-    fixContainer(".footer-particles");
+    fixContainer('.hero-particles');
+    fixContainer('.footer-particles');
 }
 
 // 媒体查询更新
 function handleMediaQueries() {
     const updateForScreenSize = () => {
         const width = window.innerWidth;
-        const elements = document.querySelectorAll("[data-aos]");
+        const elements = document.querySelectorAll('[data-aos]');
 
         // 在小屏幕上禁用AOS动画
         if (width < 768) {
             elements.forEach((el) => {
-                el.setAttribute("data-aos-disabled", "true");
+                el.setAttribute('data-aos-disabled', 'true');
             });
         } else {
             elements.forEach((el) => {
-                el.removeAttribute("data-aos-disabled");
+                el.removeAttribute('data-aos-disabled');
             });
         }
     };
@@ -857,18 +958,78 @@ function handleMediaQueries() {
     updateForScreenSize();
 
     // 窗口大小改变时更新
-    window.addEventListener("resize", updateForScreenSize);
+    window.addEventListener('resize', updateForScreenSize);
 }
 
 // 添加页面加载器
-function addPageLoader() {
-    const loader = document.createElement("div");
-    loader.className = "page-loader";
-    loader.innerHTML = `
-    <div class="loader-content">
-      <div class="spinner"></div>
-      <p>正在加载精彩内容...</p>
-    </div>
-  `;
-    document.body.prepend(loader);
+// 页脚功能增强
+function initFooter() {
+    // 添加页脚动画
+    addFooterAnimations();
+
+    // 语言选择器功能
+    initLanguageSelector();
 }
+
+// 添加页脚动画效果
+function addFooterAnimations() {
+    const footer = document.querySelector('.site-footer');
+    if (!footer) return;
+
+    // 页脚出现动画
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+    };
+    const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('footer-visible');
+            }
+        });
+    }, observerOptions);
+    footerObserver.observe(footer);
+
+    // 认证徽章悬浮效果增强
+    const certBadges = document.querySelectorAll('.cert-badge');
+    certBadges.forEach((badge) => {
+        badge.addEventListener('mouseenter', function () {
+            this.style.transform = 'translateY(-2px) scale(1.05)';
+        });
+
+        badge.addEventListener('mouseleave', function () {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+}
+
+// 语言选择器功能
+function initLanguageSelector() {
+    const langOptions = document.querySelectorAll('.lang-option');
+
+    langOptions.forEach((option) => {
+        option.addEventListener('click', function (e) {
+            // 添加点击动画
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+
+        // 添加键盘导航支持
+        option.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    });
+}
+
+// 添加到DOMContentLoaded事件中
+document.addEventListener('DOMContentLoaded', function () {
+    // ...existing code...
+
+    // 初始化页脚功能
+    initFooter();
+});

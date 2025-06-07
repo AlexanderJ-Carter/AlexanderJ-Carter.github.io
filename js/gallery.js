@@ -1,7 +1,24 @@
 // 画廊页面功能脚本
 
 document.addEventListener("DOMContentLoaded", function () {
+    // Gallery页面专用的页面加载器处理
+    let galleryInitComplete = false;
+    
+    function ensurePageLoaderRemoval() {
+        const pageLoader = document.querySelector('.page-loader');
+        if (pageLoader && galleryInitComplete) {
+            console.log('Gallery: 所有组件初始化完成，移除页面加载器');
+            pageLoader.classList.add('loaded');
+            setTimeout(() => {
+                if (pageLoader.parentNode) {
+                    pageLoader.remove();
+                }
+            }, 500);
+        }
+    }
+
     // 初始化AOS动画库（如果存在）
+    let aosReady = false;
     if (typeof AOS !== "undefined") {
         AOS.init({
             duration: 800,
@@ -10,9 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
             offset: 100,
             delay: 50,
         });
+        aosReady = true;
+        console.log('Gallery: AOS初始化完成');
     }
 
     // 初始化GLightbox（如果存在）
+    let glightboxReady = false;
     if (typeof GLightbox !== "undefined") {
         GLightbox({
             selector: ".btn-view, .view-btn",
@@ -22,6 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
             openEffect: "zoom",
             closeEffect: "fade",
         });
+        glightboxReady = true;
+        console.log('Gallery: GLightbox初始化完成');
     }
 
     // 修复所有图片项结构，确保一致性
@@ -31,10 +53,17 @@ document.addEventListener("DOMContentLoaded", function () {
     enforceSquareImages();
 
     // 设置过滤器
-    setupFilters();
-
-    // 设置交互效果
+    setupFilters();    // 设置交互效果
     setupInteractions();
+
+    // 标记Gallery初始化完成
+    galleryInitComplete = true;
+    console.log('Gallery: 所有初始化完成');
+    
+    // 延迟一点时间确保所有动画和效果准备就绪，然后移除页面加载器
+    setTimeout(() => {
+        ensurePageLoaderRemoval();
+    }, 500);
 
     /**
      * 修复画廊项目结构，确保所有项目结构一致

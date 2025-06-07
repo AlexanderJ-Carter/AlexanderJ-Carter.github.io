@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无障碍功能 - Alexander James Carter</title>
+    <meta name="description" content="了解我们网站的无障碍功能，包括WCAG 2.1合规性、键盘导航、屏幕阅读器支持等">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="../css/style.default.css" rel="stylesheet">
+    <link href="../css/navigation.css" rel="stylesheet">
+    <link href="../css/footer-enhanced.css" rel="stylesheet">
+    
+    <style>
+        .accessibility-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .accessibility-test {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+        
+        .test-result {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+            border-left: 4px solid #28a745;
+        }
+        
+        .wcag-compliance {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../img/logo.png" alt="Logo" width="32" height="32">
+                Alexander James Carter
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="accessibility.html">无障碍</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="accessibility-hero">
+        <div class="container">
+            <h1 class="display-4 mb-4">
+                <i class="fas fa-universal-access me-3"></i>
+                网站无障碍功能
+            </h1>
+            <p class="lead">我们致力于为所有用户提供无障碍的网页体验，符合WCAG 2.1 AA标准</p>
+        </div>
+    </section>
+
+    <!-- 无障碍功能介绍 -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2>我们的无障碍承诺</h2>
+                    <p class="text-muted">我们相信互联网应该对每个人都可访问，无论其能力如何。我们的网站遵循最佳实践，确保所有用户都能获得优质的浏览体验。</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                        <h4>键盘导航</h4>
+                        <p>完全支持键盘导航，所有交互元素都可以通过Tab键访问，并提供清晰的焦点指示器。</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Tab键导航</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Enter/Space激活</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Esc键关闭弹窗</li>
+                            <li><i class="fas fa-check text-success me-2"></i>箭头键菜单导航</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4>视觉可访问性</h4>
+                        <p>高对比度设计，支持屏幕阅读器，为视觉障碍用户提供良好的体验。</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>高对比度色彩方案</li>
+                            <li><i class="fas fa-check text-success me-2"></i>清晰的字体大小</li>
+                            <li><i class="fas fa-check text-success me-2"></i>有意义的alt文本</li>
+                            <li><i class="fas fa-check text-success me-2"></i>屏幕阅读器兼容</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4>响应式设计</h4>
+                        <p>完全响应式设计，在所有设备和屏幕尺寸上都能提供一致的体验。</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>移动设备优化</li>
+                            <li><i class="fas fa-check text-success me-2"></i>触摸友好界面</li>
+                            <li><i class="fas fa-check text-success me-2"></i>缩放支持(最高400%)</li>
+                            <li><i class="fas fa-check text-success me-2"></i>横竖屏适配</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4>语义化HTML</h4>
+                        <p>使用语义化HTML结构，确保内容对辅助技术具有良好的可理解性。</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>正确的标题层次</li>
+                            <li><i class="fas fa-check text-success me-2"></i>语义化标签使用</li>
+                            <li><i class="fas fa-check text-success me-2"></i>ARIA标签支持</li>
+                            <li><i class="fas fa-check text-success me-2"></i>表单标签关联</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4>深色模式</h4>
+                        <p>支持深色/浅色主题切换，减轻眼部疲劳，适应用户偏好。</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>系统主题检测</li>
+                            <li><i class="fas fa-check text-success me-2"></i>手动主题切换</li>
+                            <li><i class="fas fa-check text-success me-2"></i>偏好设置保存</li>
+                            <li><i class="fas fa-check text-success me-2"></i>平滑过渡动画</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4>动画控制</h4>
+                        <p>尊重用户的动画偏好设置，支持减少动效模式。</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>prefers-reduced-motion支持</li>
+                            <li><i class="fas fa-check text-success me-2"></i>可选择的动画效果</li>
+                            <li><i class="fas fa-check text-success me-2"></i>无闪烁内容</li>
+                            <li><i class="fas fa-check text-success me-2"></i>合理的动画时长</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- WCAG合规性 -->
+    <section id="wcag-compliance" class="wcag-compliance">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-4">
+                        <i class="fas fa-check-circle me-3"></i>
+                        WCAG 2.1 AA 合规性
+                    </h2>
+                    <p class="lead mb-4">我们的网站严格遵循Web内容无障碍指南(WCAG) 2.1的AA级标准</p>
+                    <div class="row text-start">
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-eye me-2"></i>可感知性</h5>
+                            <ul>
+                                <li>为非文本内容提供替代文本</li>
+                                <li>为多媒体提供字幕或替代方案</li>
+                                <li>确保足够的颜色对比度</li>
+                                <li>支持内容缩放至200%</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-hand-pointer me-2"></i>可操作性</h5>
+                            <ul>
+                                <li>所有功能可通过键盘访问</li>
+                                <li>用户可以控制时间限制</li>
+                                <li>不会引起癫痫发作的内容</li>
+                                <li>帮助用户导航和查找内容</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 测试工具推荐 -->
+    <section class="accessibility-test">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-center mb-5">推荐的无障碍测试工具</h2>
+                    
+                    <div class="test-result">
+                        <h5><i class="fas fa-wave-square me-2"></i>WAVE Web Accessibility Evaluator</h5>
+                        <p>由WebAIM提供的免费在线工具，可以检测网页的无障碍问题。</p>
+                        <a href="https://wave.webaim.org/" target="_blank" rel="noopener" class="btn btn-outline-primary">
+                            测试本站 <i class="fas fa-external-link-alt ms-1"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="test-result">
+                        <h5><i class="fab fa-google me-2"></i>Google Lighthouse</h5>
+                        <p>Google开发的开源工具，包含无障碍性审计功能。</p>
+                        <a href="https://developers.google.com/web/tools/lighthouse" target="_blank" rel="noopener" class="btn btn-outline-primary">
+                            了解更多 <i class="fas fa-external-link-alt ms-1"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="test-result">
+                        <h5><i class="fas fa-mobile-alt me-2"></i>Mobile-Friendly Test</h5>
+                        <p>Google的移动设备友好性测试工具。</p>
+                        <a href="https://search.google.com/test/mobile-friendly" target="_blank" rel="noopener" class="btn btn-outline-primary">
+                            测试移动友好性 <i class="fas fa-external-link-alt ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 反馈建议 -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-4">需要帮助或有建议？</h2>
+                    <p class="text-muted mb-4">如果您在使用我们的网站时遇到任何无障碍问题，或者有改进建议，请随时联系我们。</p>
+                    <a href="contact.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>联系我们
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
