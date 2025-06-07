@@ -63,13 +63,15 @@ function startGame() {
 
     // 初始化挡板
     paddleWidth = paddle.offsetWidth;
-    paddleX = (gameWidth - paddleWidth) / 2;
-
-    // 初始化球
+    paddleX = (gameWidth - paddleWidth) / 2; // 初始化球
     ballX = gameWidth / 2;
     ballY = gameHeight / 2;
     ballSpeedX = 2;
     ballSpeedY = -2;
+
+    // 设置球的初始位置
+    ball.style.left = ballX - 7.5 + 'px';
+    ball.style.top = ballY - 7.5 + 'px';
 
     // 创建砖块
     createBricks();
@@ -217,12 +219,17 @@ function updateScore() {
 
 // 碰撞检测函数
 function checkCollision() {
+    const ballRadius = 7.5;
+
     // 球与墙壁碰撞
-    if (ballX + ballSpeedX > gameWidth - 8 || ballX + ballSpeedX < 8) {
+    if (
+        ballX + ballSpeedX > gameWidth - ballRadius ||
+        ballX + ballSpeedX < ballRadius
+    ) {
         ballSpeedX = -ballSpeedX;
     }
 
-    if (ballY + ballSpeedY < 8) {
+    if (ballY + ballSpeedY < ballRadius) {
         ballSpeedY = -ballSpeedY;
     }
 
@@ -242,29 +249,28 @@ function checkCollision() {
             if (score > 50) {
                 ballSpeedY -= 0.1;
             }
-        } else if (ballY > gameHeight - 15) {
+        } else if (ballY > gameHeight - ballRadius) {
             // 球落地，游戏结束
             gameOver();
         }
-    }
-
-    // 球与砖块碰撞
+    } // 球与砖块碰撞
     for (let i = 0; i < bricks.length; i++) {
         const brick = bricks[i];
 
         if (brick.visible) {
             // 改进的碰撞检测，处理从四个方向碰撞的情况
             if (
-                ballX > brick.x - 8 &&
-                ballX < brick.x + brick.width + 8 &&
-                ballY > brick.y - 8 &&
-                ballY < brick.y + brick.height + 8
+                ballX > brick.x - ballRadius &&
+                ballX < brick.x + brick.width + ballRadius &&
+                ballY > brick.y - ballRadius &&
+                ballY < brick.y + brick.height + ballRadius
             ) {
                 // 确定从哪个方向碰撞
-                const overlapLeft = ballX - (brick.x - 8);
-                const overlapRight = brick.x + brick.width + 8 - ballX;
-                const overlapTop = ballY - (brick.y - 8);
-                const overlapBottom = brick.y + brick.height + 8 - ballY;
+                const overlapLeft = ballX - (brick.x - ballRadius);
+                const overlapRight = brick.x + brick.width + ballRadius - ballX;
+                const overlapTop = ballY - (brick.y - ballRadius);
+                const overlapBottom =
+                    brick.y + brick.height + ballRadius - ballY;
 
                 // 找出最小重叠方向
                 const minOverlap = Math.min(
@@ -361,19 +367,26 @@ function gameLoop() {
     ballX += ballSpeedX;
     ballY += ballSpeedY;
 
-    // 更新挡板位置
+    // 更新挡板位置（键盘控制）
     if (rightPressed && paddleX < gameWidth - paddleWidth) {
         paddleX += 7;
     } else if (leftPressed && paddleX > 0) {
         paddleX -= 7;
     }
 
+    // 确保挡板不会超出边界
+    if (paddleX < 0) {
+        paddleX = 0;
+    } else if (paddleX > gameWidth - paddleWidth) {
+        paddleX = gameWidth - paddleWidth;
+    }
+
     // 检查碰撞
     checkCollision();
 
     // 渲染游戏元素
-    ball.style.left = ballX + 'px';
-    ball.style.top = ballY + 'px';
+    ball.style.left = ballX - 7.5 + 'px'; // 球的半径是7.5px
+    ball.style.top = ballY - 7.5 + 'px';
     paddle.style.left = paddleX + 'px';
 
     // 继续游戏循环

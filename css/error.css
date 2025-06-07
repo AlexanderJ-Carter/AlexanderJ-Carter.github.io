@@ -4,7 +4,7 @@ html {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: #333;
     background: #f8f9fa;
 }
@@ -28,12 +28,13 @@ h1 {
     margin: 0;
     background: linear-gradient(45deg, #ff5e62, #ff9966);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: bounce 2s ease infinite;
     font-weight: bold;
     color: #ff5e62;
     line-height: 1;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-shadow: 3px 3px 0 rgba(255, 94, 98, 0.3);
 }
 
@@ -41,14 +42,14 @@ h1 {
     margin: 1rem 0;
     font-size: 2rem;
     color: #333;
-    font-family: "Pacifico", cursive;
+    font-family: 'Pacifico', cursive;
 }
 
 .error-subtitle {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     color: #666;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .btn-home {
@@ -84,9 +85,9 @@ h1 {
     width: 100%;
     height: 100%;
     background: radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.8) 0%,
-            rgba(248, 249, 250, 0.8) 100%
+        circle,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(248, 249, 250, 0.8) 100%
     );
     z-index: 1;
 }
@@ -110,6 +111,21 @@ h1 {
     font-weight: bold;
 }
 
+.floating-element-1 {
+    top: 20%;
+    left: 20%;
+}
+
+.floating-element-2 {
+    top: 30%;
+    right: 25%;
+}
+
+.floating-element-3 {
+    bottom: 30%;
+    left: 30%;
+}
+
 /* 游戏元素样式 */
 .game-container {
     width: 300px;
@@ -122,6 +138,7 @@ h1 {
     margin: 1.5rem auto;
     border: 1px solid #ddd;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    -webkit-user-select: none;
     user-select: none;
     touch-action: none; /* 防止触摸设备上的默认行为 */
 }
@@ -148,6 +165,14 @@ h1 {
     background-color: #ff5e62;
     transform: translate(-50%, -50%);
     z-index: 5;
+}
+
+.brick {
+    position: absolute;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s ease;
+    z-index: 3;
 }
 
 .game-score {
@@ -177,6 +202,7 @@ h1 {
 .game-controls {
     margin-top: 1rem;
     text-align: center;
+    display: none;
 }
 
 .game-button {
