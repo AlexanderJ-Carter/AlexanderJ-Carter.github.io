@@ -245,8 +245,11 @@ body {
 }
 
 .module-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 30px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .module-card.featured {
@@ -1007,161 +1010,1212 @@ body {
     }
 }
 
-/* 响应式设计优化 - 合并所有媒体查询 */
-@media (max-width: 1024px) {
-    .modules-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 25px;
+/* Toast通知动画 */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
     }
-
-    .hero-content h1 {
-        font-size: 2.8rem;
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
-@media (max-width: 768px) {
-    .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-        text-align: left;
-        padding: 0 15px;
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
     }
-
-    .nav-brand h1 {
-        font-size: 1.3rem;
+    to {
+        opacity: 0;
+        transform: translateX(100%);
     }
+}
 
-    #user-info {
-        font-size: 0.8rem;
-        padding: 6px 12px;
+/* 有趣的额外样式和动画 */
+
+/* 悬停发光效果 */
+.module-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 30px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
     }
-
-    .logout-btn {
-        padding: 8px 15px;
-        font-size: 0.8rem;
+    50% {
+        transform: scale(1.05);
     }
-
-    .dashboard-main {
-        padding: 120px 15px 40px;
-        min-height: calc(100vh - 120px);
+    100% {
+        transform: scale(1);
     }
+}
 
-    .welcome-hero {
-        padding: 40px 25px;
-        margin-bottom: 60px;
+.status-dot.active {
+    animation: pulse 2s infinite;
+}
+
+/* 彩虹边框动画 */
+@keyframes rainbow-border {
+    0% {
+        border-color: #ff0000;
     }
-
-    .hero-content h1 {
-        font-size: 2.2rem;
+    16.66% {
+        border-color: #ff8000;
     }
-
-    .hero-content p {
-        font-size: 1.1rem;
+    33.33% {
+        border-color: #ffff00;
     }
-
-    .modules-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    50% {
+        border-color: #00ff00;
     }
-
-    .info-panels {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    66.66% {
+        border-color: #0080ff;
     }
-
-    .modal-content.api-warning {
-        width: 95%;
-        margin: 10px;
+    83.33% {
+        border-color: #8000ff;
     }
-
-    .warning-content {
-        flex-direction: column;
-        text-align: center;
+    100% {
+        border-color: #ff0000;
     }
+}
 
-    .modal-footer {
-        flex-direction: column;
-        gap: 15px;
+.module-card.featured::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(
+        45deg,
+        #ff0000,
+        #ff8000,
+        #ffff00,
+        #00ff00,
+        #0080ff,
+        #8000ff,
+        #ff0000
+    );
+    border-radius: inherit;
+    z-index: -1;
+    animation: rainbow-border 3s linear infinite;
+    opacity: 0.7;
+}
+
+/* 打字机效果 */
+@keyframes typing {
+    from {
+        width: 0;
     }
-
-    .btn-cancel,
-    .btn-confirm {
+    to {
         width: 100%;
-        justify-content: center;
     }
 }
 
+@keyframes blink-caret {
+    from,
+    to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #4ecdc4;
+    }
+}
+
+.typing-effect {
+    overflow: hidden;
+    border-right: 3px solid #4ecdc4;
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+/* 悬浮动画 */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.cert-badge {
+    animation: float 3s ease-in-out infinite;
+    animation-delay: calc(var(--delay, 0) * 0.5s);
+}
+
+.cert-badge:nth-child(1) {
+    --delay: 0;
+}
+.cert-badge:nth-child(2) {
+    --delay: 1;
+}
+.cert-badge:nth-child(3) {
+    --delay: 2;
+}
+.cert-badge:nth-child(4) {
+    --delay: 3;
+}
+.cert-badge:nth-child(5) {
+    --delay: 4;
+}
+.cert-badge:nth-child(6) {
+    --delay: 5;
+}
+.cert-badge:nth-child(7) {
+    --delay: 6;
+}
+.cert-badge:nth-child(8) {
+    --delay: 7;
+}
+
+/* 旋转动画 */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.module-icon i {
+    transition: transform 0.3s ease;
+}
+
+.module-card:hover .module-icon i {
+    transform: rotate(360deg);
+}
+
+/* 波浪效果 */
+@keyframes wave {
+    0% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(14deg);
+    }
+    20% {
+        transform: rotate(-8deg);
+    }
+    30% {
+        transform: rotate(14deg);
+    }
+    40% {
+        transform: rotate(-4deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+    60% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.fun-counter:active {
+    animation: wave 0.5s ease-in-out;
+}
+
+/* 闪烁效果 */
+@keyframes blink {
+    0%,
+    50% {
+        opacity: 1;
+    }
+    51%,
+    100% {
+        opacity: 0.3;
+    }
+}
+
+.status-dot.experimental {
+    animation: blink 1s infinite;
+}
+
+/* 渐变文字效果 */
+.gradient-text {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease infinite;
+}
+
+/* 3D变换效果 */
+.card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.card-3d:hover {
+    transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+}
+
+/* 霓虹灯效果 */
+.neon-text {
+    color: #fff;
+    text-shadow: 0 0 5px #4ecdc4, 0 0 10px #4ecdc4, 0 0 15px #4ecdc4,
+        0 0 20px #4ecdc4;
+    animation: neon-flicker 1.5s infinite alternate;
+}
+
+@keyframes neon-flicker {
+    0%,
+    18%,
+    22%,
+    25%,
+    53%,
+    57%,
+    100% {
+        text-shadow: 0 0 5px #4ecdc4, 0 0 10px #4ecdc4, 0 0 15px #4ecdc4,
+            0 0 20px #4ecdc4;
+    }
+    20%,
+    24%,
+    55% {
+        text-shadow: none;
+    }
+}
+
+/* 扫描线效果 */
+@keyframes scanline {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+.scanline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4ecdc4, transparent);
+    animation: scanline 3s linear infinite;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* 数字雨效果 */
+@keyframes matrix-rain {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+.matrix-char {
+    position: absolute;
+    color: #4ecdc4;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    animation: matrix-rain linear infinite;
+    pointer-events: none;
+}
+
+/* 虚拟宠物系统样式 */
+.virtual-pet {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    max-width: 300px;
+    animation: petFloat 3s ease-in-out infinite;
+}
+
+@keyframes petFloat {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.pet-container {
+    text-align: center;
+}
+
+.pet-sprite {
+    font-size: 60px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: petBreathe 2s ease-in-out infinite;
+}
+
+@keyframes petBreathe {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.pet-sprite:hover {
+    transform: scale(1.2) rotate(15deg);
+}
+
+.pet-status {
+    color: #333;
+}
+
+.status-bar {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.status-bar span {
+    min-width: 60px;
+    text-align: left;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin: 0 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4ecdc4, #44a08d);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.pet-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.pet-btn {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.pet-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 成就系统样式 */
+.achievements-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    z-index: 1001;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.achievements-content h3 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.achievement-item {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.achievement-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.achievement-item.unlocked {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    animation: achievementGlow 2s ease-in-out infinite;
+}
+
+@keyframes achievementGlow {
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(78, 205, 196, 0.8);
+    }
+}
+
+.achievement-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.achievement-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.achievement-desc {
+    font-size: 0.8em;
+    opacity: 0.9;
+}
+
+.achievement-progress {
+    text-align: center;
+    color: #333;
+}
+
+/* 天气模拟器样式 */
+.weather-simulator {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    max-width: 350px;
+}
+
+.weather-content h3 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.current-weather {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.weather-icon {
+    font-size: 60px;
+    margin-right: 20px;
+    animation: weatherFloat 3s ease-in-out infinite;
+}
+
+@keyframes weatherFloat {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.weather-info {
+    flex: 1;
+}
+
+.temperature {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.weather-desc {
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.location {
+    color: #999;
+    font-size: 0.9em;
+}
+
+.weather-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.weather-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 80px;
+}
+
+.weather-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.weather-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 代码雨效果样式 */
+#matrix-rain {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* 音乐播放器样式 */
+.music-player {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    max-width: 280px;
+}
+
+.player-content h3 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.player-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.music-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.music-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.track-info {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.track-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.track-artist {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+}
+
+#volume-slider {
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;
+    background: #333;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+#volume-slider:hover {
+    opacity: 1;
+}
+
+#volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+}
+
+#volume-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #667eea;
+    cursor: pointer;
+}
+
+/* 天气效果动画 */
+@keyframes rainFall {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+@keyframes snowFall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes lightning {
+    0%,
+    90%,
+    100% {
+        background: rgba(255, 255, 255, 0);
+    }
+    5%,
+    85% {
+        background: rgba(255, 255, 255, 0.8);
+    }
+}
+
+/* 恐怖效果动画 */
+@keyframes spookyFloat {
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.7;
+    }
+    25% {
+        transform: translateY(-20px) rotate(5deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(0px) rotate(-5deg);
+        opacity: 0.8;
+    }
+    75% {
+        transform: translateY(-10px) rotate(3deg);
+        opacity: 0.9;
+    }
+}
+
+/* 代码雨字符样式 */
+.matrix-char {
+    position: fixed;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    pointer-events: none;
+    z-index: 100;
+    animation: matrixFall linear infinite;
+}
+
+@keyframes matrixFall {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* 成就解锁动画 */
+@keyframes achievementPop {
+    0% {
+        transform: scale(0) rotate(-10deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(5deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* 宠物心情指示器 */
+.pet-mood-happy {
+    animation: happyBounce 1s ease-in-out infinite;
+}
+
+.pet-mood-sad {
+    animation: sadFloat 2s ease-in-out infinite;
+    filter: grayscale(50%);
+}
+
+@keyframes happyBounce {
+    0%,
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.1);
+    }
+}
+
+@keyframes sadFloat {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+}
+
+/* 音乐播放器动画 */
+.music-playing {
+    animation: musicPulse 1s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* 天气图标动画 */
+.weather-icon.sunny {
+    animation: sunRotate 10s linear infinite;
+}
+
+.weather-icon.rainy {
+    animation: rainBounce 1s ease-in-out infinite;
+}
+
+.weather-icon.stormy {
+    animation: stormShake 0.5s ease-in-out infinite;
+}
+
+@keyframes sunRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rainBounce {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes stormShake {
+    0%,
+    100% {
+        transform: translateX(0px);
+    }
+    25% {
+        transform: translateX(-2px);
+    }
+    75% {
+        transform: translateX(2px);
+    }
+}
+
+/* 系统状态指示器 */
+.status-critical {
+    background: #ff4444 !important;
+    animation: criticalBlink 1s ease-in-out infinite;
+}
+
+.status-warning {
+    background: #ffaa00 !important;
+    animation: warningPulse 2s ease-in-out infinite;
+}
+
+.status-good {
+    background: #44ff44 !important;
+}
+
+@keyframes criticalBlink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes warningPulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* 交互反馈动画 */
+.button-click {
+    animation: buttonClick 0.2s ease-out;
+}
+
+@keyframes buttonClick {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* 加载动画 */
+.loading-dots::after {
+    content: '';
+    animation: loadingDots 1.5s steps(4, end) infinite;
+}
+
+@keyframes loadingDots {
+    0% {
+        content: '';
+    }
+    25% {
+        content: '.';
+    }
+    50% {
+        content: '..';
+    }
+    75% {
+        content: '...';
+    }
+    100% {
+        content: '';
+    }
+}
+
+/* 主题切换动画 */
+.theme-transition {
+    transition: all 0.5s ease-in-out;
+}
+
+/* 响应式优化 */
 @media (max-width: 480px) {
-    .nav-container {
-        padding: 0 15px;
+    .virtual-pet,
+    .weather-simulator,
+    .music-player {
+        transform: scale(0.9);
     }
 
-    .nav-brand h1 {
-        font-size: 1.1rem;
+    .achievements-panel {
+        padding: 15px;
+        max-height: 70vh;
     }
 
-    .nav-actions {
-        gap: 10px;
+    .pet-actions {
+        flex-direction: column;
+        gap: 5px;
     }
 
-    #user-info {
-        display: none; /* 在小屏幕上隐藏用户信息 */
-    }
-
-    .hero-content h1 {
-        font-size: 1.8rem;
-    }
-
-    .module-header,
-    .module-content,
-    .module-footer {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .info-panel {
-        padding: 25px;
-    }
-
-    .dashboard-main {
-        padding: 140px 10px 40px;
+    .weather-controls {
+        flex-direction: column;
+        gap: 5px;
     }
 }
 
-/* 确保滚动平滑 */
-html {
-    scroll-behavior: smooth;
-}
-
-/* 触摸设备优化 */
-@media (hover: none) and (pointer: coarse) {
-    .module-card:hover {
-        transform: none;
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    .virtual-pet,
+    .weather-simulator,
+    .music-player,
+    .achievements-panel {
+        border: 2px solid #000;
     }
 
-    .module-card:active {
-        transform: translateY(-8px) scale(1.02);
-    }
-
-    .status-badge:hover {
-        transform: none;
-    }
-
-    .info-panel:hover {
-        transform: none;
+    .pet-btn,
+    .weather-btn,
+    .music-btn {
+        border: 1px solid #000;
     }
 }
 
-/* 确保在移动端可以正常滚动 */
-@media (max-width: 768px) {
-    body {
-        -webkit-overflow-scrolling: touch; /* iOS 平滑滚动 */
-        overflow-y: scroll;
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
+}
 
-    .dashboard-main {
-        overflow: visible;
+/* AI聊天机器人样式 */
+.ai-chatbot {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 350px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chatbot-header {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbot-header h3 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.chatbot-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bot-message,
+.user-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 80%;
+}
+
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+.bot-message .message-avatar {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+.user-message .message-avatar {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+}
+
+.message-content {
+    background: #f5f5f5;
+    padding: 10px 15px;
+    border-radius: 15px;
+    color: #333;
+    line-height: 1.4;
+    animation: messageSlideIn 0.3s ease;
+}
+
+.user-message .message-content {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chatbot-input {
+    padding: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    font-size: 0.9em;
+}
+
+.chatbot-input input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.send-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: transform 0.2s ease;
+}
+
+.send-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* 思考动画样式 */
+.thinking-dots {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 0;
+}
+
+.thinking-dots .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #667eea;
+    animation: thinkingPulse 1.4s ease-in-out infinite both;
+}
+
+.thinking-dots .dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+.thinking-dots .dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+.thinking-dots .dot:nth-child(3) {
+    animation-delay: 0s;
+}
+
+@keyframes thinkingPulse {
+    0%,
+    80%,
+    100% {
+        transform: scale(0.6);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
     }
 }

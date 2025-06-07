@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 隐藏小游戏 - Beta特别版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .game-container {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            color: white;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .game-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .game-tile {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .game-tile:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .game-tile.matched {
+            background: rgba(76, 175, 80, 0.5);
+            border-color: #4CAF50;
+            animation: matchPulse 0.5s ease;
+        }
+
+        .game-tile.flipped {
+            background: rgba(33, 150, 243, 0.5);
+            border-color: #2196F3;
+            animation: flip 0.3s ease;
+        }
+
+        @keyframes matchPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes flip {
+            0% {
+                transform: rotateY(0deg);
+            }
+
+            50% {
+                transform: rotateY(90deg);
+            }
+
+            100% {
+                transform: rotateY(0deg);
+            }
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn.secondary {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+        }
+
+        .win-message {
+            display: none;
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.3);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            70% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            animation: firework 1s ease-out forwards;
+        }
+
+        @keyframes firework {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h1 class="game-title">🧠 记忆翻牌游戏</h1>
+        <p>找到所有匹配的表情对！考验你的记忆力时间到了！</p>
+
+        <div class="game-stats">
+            <div>🕐 时间: <span id="timer">00:00</span></div>
+            <div>🔄 翻牌: <span id="moves">0</span></div>
+            <div>⭐ 分数: <span id="score">0</span></div>
+        </div>
+
+        <div class="game-board" id="gameBoard"></div>
+
+        <div class="win-message" id="winMessage">
+            <h2>🎉 恭喜通关！</h2>
+            <p>你的记忆力真棒！</p>
+            <p>用时: <span id="finalTime"></span> | 翻牌: <span id="finalMoves"></span></p>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button class="btn" onclick="startNewGame()">🎮 新游戏</button>
+            <button class="btn secondary" onclick="window.location.href='beta-dashboard.html'">🏠 返回主页</button>
+        </div>
+    </div>
+
+    <script>
+        class MemoryGame {
+            constructor() {
+                this.board = [];
+                this.flippedCards = [];
+                this.matchedPairs = 0;
+                this.moves = 0;
+                this.startTime = null;
+                this.timer = null;
+                this.score = 0;
+
+                // 表情符号数组
+                this.emojis = ['🎯', '🎨', '🎪', '🎭', '🎪', '🎯', '🎨', '🎭',
+                    '🚀', '⭐', '🌟', '💎', '🚀', '⭐', '🌟', '💎'];
+
+                this.shuffleArray(this.emojis);
+                this.createBoard();
+                this.startTimer();
+            }
+
+            shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            createBoard() {
+                const boardElement = document.getElementById('gameBoard');
+                boardElement.innerHTML = '';
+
+                this.emojis.forEach((emoji, index) => {
+                    const tile = document.createElement('div');
+                    tile.className = 'game-tile';
+                    tile.dataset.index = index;
+                    tile.dataset.emoji = emoji;
+                    tile.innerHTML = '❓';
+                    tile.addEventListener('click', () => this.flipCard(tile));
+                    boardElement.appendChild(tile);
+                });
+            }
+
+            flipCard(tile) {
+                if (tile.classList.contains('flipped') ||
+                    tile.classList.contains('matched') ||
+                    this.flippedCards.length >= 2) {
+                    return;
+                }
+
+                tile.classList.add('flipped');
+                tile.innerHTML = tile.dataset.emoji;
+                this.flippedCards.push(tile);
+
+                if (this.flippedCards.length === 2) {
+                    this.moves++;
+                    this.updateStats();
+                    setTimeout(() => this.checkMatch(), 500);
+                }
+            }
+
+            checkMatch() {
+                const [card1, card2] = this.flippedCards;
+
+                if (card1.dataset.emoji === card2.dataset.emoji) {
+                    card1.classList.add('matched');
+                    card2.classList.add('matched');
+                    this.matchedPairs++;
+                    this.score += 100;
+                    this.createFirework(card1);
+                    this.createFirework(card2);
+
+                    if (this.matchedPairs === 8) {
+                        this.gameWon();
+                    }
+                } else {
+                    setTimeout(() => {
+                        card1.classList.remove('flipped');
+                        card2.classList.remove('flipped');
+                        card1.innerHTML = '❓';
+                        card2.innerHTML = '❓';
+                    }, 300);
+                }
+
+                this.flippedCards = [];
+                this.updateStats();
+            }
+
+            createFirework(element) {
+                const rect = element.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                for (let i = 0; i < 8; i++) {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    firework.style.left = centerX + 'px';
+                    firework.style.top = centerY + 'px';
+                    firework.style.backgroundColor = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4'][Math.floor(Math.random() * 4)];
+                    document.body.appendChild(firework);
+
+                    setTimeout(() => firework.remove(), 1000);
+                }
+            }
+
+            startTimer() {
+                this.startTime = Date.now();
+                this.timer = setInterval(() => {
+                    const elapsed = Date.now() - this.startTime;
+                    const minutes = Math.floor(elapsed / 60000);
+                    const seconds = Math.floor((elapsed % 60000) / 1000);
+                    document.getElementById('timer').textContent =
+                        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+
+            updateStats() {
+                document.getElementById('moves').textContent = this.moves;
+                document.getElementById('score').textContent = this.score;
+            }
+
+            gameWon() {
+                clearInterval(this.timer);
+                const winMessage = document.getElementById('winMessage');
+                document.getElementById('finalTime').textContent = document.getElementById('timer').textContent;
+                document.getElementById('finalMoves').textContent = this.moves;
+                winMessage.style.display = 'block';
+
+                // 庆祝烟花
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        const firework = document.createElement('div');
+                        firework.className = 'firework';
+                        firework.style.left = Math.random() * window.innerWidth + 'px';
+                        firework.style.top = Math.random() * window.innerHeight + 'px';
+                        firework.style.backgroundColor = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#f39c12'][Math.floor(Math.random() * 5)];
+                        document.body.appendChild(firework);
+
+                        setTimeout(() => firework.remove(), 1000);
+                    }, i * 100);
+                }
+
+                // 保存最佳成绩
+                const bestTime = localStorage.getItem('memoryGameBestTime');
+                const currentTime = Date.now() - this.startTime;
+                if (!bestTime || currentTime < parseInt(bestTime)) {
+                    localStorage.setItem('memoryGameBestTime', currentTime.toString());
+                    localStorage.setItem('memoryGameBestMoves', this.moves.toString());
+                }
+            }
+        }
+
+        let game;
+
+        function startNewGame() {
+            game = new MemoryGame();
+            document.getElementById('winMessage').style.display = 'none';
+        }
+
+        // 页面加载时开始游戏
+        document.addEventListener('DOMContentLoaded', () => {
+            startNewGame();
+
+            // 显示最佳成绩
+            const bestTime = localStorage.getItem('memoryGameBestTime');
+            const bestMoves = localStorage.getItem('memoryGameBestMoves');
+            if (bestTime && bestMoves) {
+                const minutes = Math.floor(bestTime / 60000);
+                const seconds = Math.floor((bestTime % 60000) / 1000);
+                const timeStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                console.log(`🏆 最佳成绩: ${timeStr} (${bestMoves}步)`);
+            }
+        });
+
+        // 键盘控制
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' || e.key === 'R') {
+                startNewGame();
+            }
+        });
+    </script>
+</body>
+
+</html>
