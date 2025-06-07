@@ -11,16 +11,76 @@ document.addEventListener('DOMContentLoaded', function () {
     let isMinimized = true; // 初始状态为最小化
     let startX, startY, startLeft, startTop;
     let isClosing = false; // 跟踪是否正在关闭
-    let closeTimeout; // 存储关闭延迟的timeout
+    let closeTimeout; // 存储关闭延迟的timeout    // 初始化聊天机器人位置 - 响应式定位
+    function initChatButtonPosition() {
+        chatToggleButton.style.position = 'fixed';
+        chatToggleButton.style.zIndex = '1000';
+        chatToggleButton.innerHTML = `<i class="fas fa-robot"></i><span class="button-tooltip">聊天助手</span>`;
+        chatToggleButton.classList.add('pulse-animation');
 
-    // 初始化聊天机器人位置 - 固定在右侧中间
-    chatToggleButton.style.position = 'fixed';
-    chatToggleButton.style.right = '20px';
-    chatToggleButton.style.top = '50%'; // 页面中间位置
-    chatToggleButton.style.transform = 'translateY(-50%)'; // 垂直居中
-    chatToggleButton.style.zIndex = '1000';
-    chatToggleButton.innerHTML = `<i class="fas fa-robot"></i><span class="button-tooltip">聊天助手</span>`;
-    chatToggleButton.classList.add('pulse-animation');
+        // 根据屏幕尺寸设置位置
+        updateChatButtonPosition();
+    }
+    // 更新聊天按钮位置
+    function updateChatButtonPosition() {
+        const isMobile = window.innerWidth <= 768;
+
+        if (isMobile) {
+            // 移动端：固定在右下角，使用安全距离
+            const safeRight = Math.min(15, window.innerWidth * 0.04);
+            const safeBottom = Math.min(15, window.innerHeight * 0.04);
+
+            chatToggleButton.style.right = safeRight + 'px';
+            chatToggleButton.style.bottom = safeBottom + 'px';
+            chatToggleButton.style.top = 'auto';
+            chatToggleButton.style.left = 'auto';
+            chatToggleButton.style.transform = 'none';
+            chatToggleButton.style.position = 'fixed';
+            chatToggleButton.style.zIndex = '1001';
+
+            // 确保按钮尺寸适合小屏幕
+            if (window.innerWidth <= 360) {
+                chatToggleButton.style.width = '38px';
+                chatToggleButton.style.height = '38px';
+                chatToggleButton.style.fontSize = '0.9rem';
+            } else {
+                chatToggleButton.style.width = '45px';
+                chatToggleButton.style.height = '45px';
+                chatToggleButton.style.fontSize = '1.2rem';
+            }
+        } else {
+            // 桌面端：固定在右侧中间
+            chatToggleButton.style.right = '20px';
+            chatToggleButton.style.top = '50%';
+            chatToggleButton.style.bottom = 'auto';
+            chatToggleButton.style.left = 'auto';
+            chatToggleButton.style.transform = 'translateY(-50%)';
+            chatToggleButton.style.position = 'fixed';
+            chatToggleButton.style.zIndex = '1000';
+            chatToggleButton.style.width = '50px';
+            chatToggleButton.style.height = '50px';
+            chatToggleButton.style.fontSize = '1.3rem';
+        }
+
+        // 执行移动端保护
+        ensureMobileViewport();
+    }
+
+    // 初始化位置
+    initChatButtonPosition();
+    // 监听窗口大小变化和方向变化
+    window.addEventListener('resize', function () {
+        updateChatButtonPosition();
+        ensureMobileViewport();
+    });
+
+    // 监听方向变化
+    window.addEventListener('orientationchange', function () {
+        setTimeout(function () {
+            updateChatButtonPosition();
+            ensureMobileViewport();
+        }, 100);
+    });
 
     // 添加聊天框标题栏
     const headerDiv = document.createElement('div');
@@ -109,9 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 提示用户正在拖动
         document.getElementById('chat-status').textContent = '拖动窗口中...';
-    }
-
-    // 拖动函数
+    } // 拖动函数
     function drag(e) {
         if (!isDragging) return;
 
@@ -129,49 +187,59 @@ document.addEventListener('DOMContentLoaded', function () {
         const deltaX = currentX - startX;
         const deltaY = currentY - startY;
 
-        // 设置新位置，确保不超出屏幕
+        // 获取当前视口尺寸和容器尺寸
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        const containerWidth = chatContainer.offsetWidth;
+        const containerHeight = chatContainer.offsetHeight;
+
+        // 移动端特殊处理 - 添加安全边距
+        const isMobile = viewportWidth <= 768;
+        const safeMargin = isMobile ? 10 : 0;
+
+        // 设置新位置，确保不超出屏幕（考虑安全边距）
         const newLeft = Math.max(
-            0,
+            safeMargin,
             Math.min(
-                window.innerWidth - chatContainer.offsetWidth,
+                viewportWidth - containerWidth - safeMargin,
                 startLeft + deltaX
             )
         );
         const newTop = Math.max(
-            0,
+            safeMargin,
             Math.min(
-                window.innerHeight - chatContainer.offsetHeight,
+                viewportHeight - containerHeight - safeMargin,
                 startTop + deltaY
             )
         );
 
         // 应用磁性吸附效果 - 靠近边缘时自动吸附
-        const snapDistance = 20; // 吸附距离（像素）
+        const snapDistance = isMobile ? 15 : 20; // 移动端减小吸附距离
 
-        if (newLeft < snapDistance) {
+        if (newLeft < snapDistance + safeMargin) {
             // 左边缘
-            chatContainer.style.left = '0px';
+            chatContainer.style.left = safeMargin + 'px';
         } else if (
             newLeft >
-            window.innerWidth - chatContainer.offsetWidth - snapDistance
+            viewportWidth - containerWidth - snapDistance - safeMargin
         ) {
             // 右边缘
             chatContainer.style.left =
-                window.innerWidth - chatContainer.offsetWidth + 'px';
+                viewportWidth - containerWidth - safeMargin + 'px';
         } else {
             chatContainer.style.left = newLeft + 'px';
         }
 
-        if (newTop < snapDistance) {
+        if (newTop < snapDistance + safeMargin) {
             // 上边缘
-            chatContainer.style.top = '0px';
+            chatContainer.style.top = safeMargin + 'px';
         } else if (
             newTop >
-            window.innerHeight - chatContainer.offsetHeight - snapDistance
+            viewportHeight - containerHeight - snapDistance - safeMargin
         ) {
             // 下边缘
             chatContainer.style.top =
-                window.innerHeight - chatContainer.offsetHeight + 'px';
+                viewportHeight - containerHeight - safeMargin + 'px';
         } else {
             chatContainer.style.top = newTop + 'px';
         }
@@ -1101,4 +1169,37 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+
+    // 移动端视口保护函数
+    function ensureMobileViewport() {
+        if (window.innerWidth <= 768) {
+            // 防止水平滚动
+            document.body.style.overflowX = 'hidden';
+            document.documentElement.style.overflowX = 'hidden';
+
+            // 确保聊天容器在安全区域内
+            if (chatContainer) {
+                const containerRect = chatContainer.getBoundingClientRect();
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                // 如果容器超出视口，重新定位
+                if (containerRect.right > viewportWidth) {
+                    chatContainer.style.right = '2.5vw';
+                    chatContainer.style.left = 'auto';
+                }
+
+                if (containerRect.bottom > viewportHeight) {
+                    chatContainer.style.bottom = '70px';
+                    chatContainer.style.top = 'auto';
+                }
+            }
+        }
+    }
+
+    // 页面加载完成后执行初始保护
+    setTimeout(function () {
+        ensureMobileViewport();
+        updateChatButtonPosition();
+    }, 100);
 });
