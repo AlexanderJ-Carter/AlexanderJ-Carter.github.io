@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initLightbox();
 
     // 3D视差效果
-    initParallaxEffect();    // 初始化页面加载器移除逻辑（不创建新的加载器，使用HTML中现有的）
+    initParallaxEffect(); // 初始化页面加载器移除逻辑（不创建新的加载器，使用HTML中现有的）
     initPageLoaderRemoval();
 
     // 初始化页脚功能
@@ -364,7 +364,8 @@ window.addEventListener('load', function () {
                 backToTopBtn.classList.add('visible');
             } else {
                 backToTopBtn.classList.remove('visible');
-            }        });
+            }
+        });
     }
 
     // 运行新增的增强功能
@@ -389,7 +390,7 @@ function initPageLoaderRemoval() {
     }
 
     let removeAttempted = false;
-    
+
     // 移除页面加载器的函数
     function removePageLoader() {
         if (removeAttempted) {
@@ -397,10 +398,10 @@ function initPageLoaderRemoval() {
             return;
         }
         removeAttempted = true;
-        
+
         console.log('开始移除页面加载器...');
         pageLoader.classList.add('loaded');
-        
+
         setTimeout(() => {
             if (pageLoader.parentNode) {
                 pageLoader.remove();
@@ -415,17 +416,17 @@ function initPageLoaderRemoval() {
         const bootstrapLoaded = typeof bootstrap !== 'undefined';
         const glightboxLoaded = typeof GLightbox !== 'undefined';
         const documentReady = document.readyState === 'complete';
-        
+
         console.log('资源加载状态检查:', {
             AOS: aosLoaded,
             Bootstrap: bootstrapLoaded,
             GLightbox: glightboxLoaded,
-            DocumentReady: documentReady
+            DocumentReady: documentReady,
         });
-        
+
         return aosLoaded && bootstrapLoaded && documentReady;
     }
-    
+
     // 延迟检查，确保所有脚本都已执行
     function delayedCheck() {
         setTimeout(() => {
@@ -444,7 +445,7 @@ function initPageLoaderRemoval() {
             }
         }, 1500); // 给脚本足够时间初始化
     }
-    
+
     // 如果页面已经加载完成，立即开始检查
     if (document.readyState === 'complete') {
         delayedCheck();
@@ -452,7 +453,7 @@ function initPageLoaderRemoval() {
         // 等待页面加载完成
         window.addEventListener('load', delayedCheck);
     }
-    
+
     // 最终超时保护（5秒后强制移除）
     setTimeout(() => {
         if (!removeAttempted) {
