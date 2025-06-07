@@ -1,19 +1,21 @@
 {
-    "version": "2.1.0",
+    "version": "2.1.1",
     "name": "Alexander James Carter's Personal Website",
     "description": "展示个人作品和内容分享的个人网页",
     "author": "Alexander James Carter",
     "homepage": "https://alexander.xin",
     "license": "CC BY-NC-SA 4.0",
     "release": {
-        "version": "2.1.0",
-        "codename": "License & Documentation Enhancement",
-        "date": "2025-06-06",
-        "type": "major",
+        "version": "2.1.1",
+        "codename": "Gallery & Footer Enhancement",
+        "date": "2025-06-07",
+        "type": "patch",
         "status": "stable"
     },
     "features": {
         "highlights": [
+            "🖼️ 优化画廊页面体验",
+            "🦶 增强页脚功能与样式",
             "🛡️ Creative Commons 许可证系统",
             "🌍 多语言许可证页面",
             "📚 完善的文档系统",
