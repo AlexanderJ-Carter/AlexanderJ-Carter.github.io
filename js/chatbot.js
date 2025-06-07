@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 根据屏幕尺寸设置位置
         updateChatButtonPosition();
+
+        // 初始化拖动功能
+        initButtonDrag();
+
+        // 初始化自动透明功能
+        initAutoTransparency();
     }
     // 更新聊天按钮位置
     function updateChatButtonPosition() {
@@ -794,54 +800,7 @@ document.addEventListener('DOMContentLoaded', function () {
         chatbox.appendChild(thinking);
         chatbox.scrollTo({ top: chatbox.scrollHeight, behavior: 'smooth' });
         return thinking;
-    }
-
-    // 当点击聊天按钮时显示聊天框并初始化问候语
-    chatToggleButton.addEventListener('click', function () {
-        if (
-            chatContainer.style.display === 'none' ||
-            chatContainer.style.display === ''
-        ) {
-            // 显示在右侧中间或恢复上次位置
-            if (!restorePosition()) {
-                const viewportHeight = window.innerHeight;
-                chatContainer.style.top = viewportHeight / 2 - 225 + 'px'; // 窗口高度/2 - 聊天窗口高度/2
-                chatContainer.style.right = '20px';
-            }
-
-            chatContainer.style.display = 'flex';
-            chatContainer.classList.add('chat-showing');
-            setTimeout(() => {
-                chatContainer.classList.remove('chat-showing');
-            }, 300);
-
-            chatToggleButton.style.display = 'none';
-            isMinimized = false; // 首次打开时显示问候语和简化提示
-            if (isFirstOpen) {
-                const greeting = getRandomResponse(dialogues.greetings);
-                addMessage('雪宝', greeting); // 稍等片刻后显示简化的功能介绍
-                setTimeout(() => {
-                    addMessage(
-                        '雪宝',
-                        "我可以帮您：🌤️ 查天气 🗺️ 看网站地图 🧭 导航页面 😄 聊天解闷！输入'帮助'了解详细功能～"
-                    );
-                }, 1000);
-
-                isFirstOpen = false;
-            }
-
-            // 把焦点设置到输入框
-            userInput.focus();
-        } else {
-            chatContainer.classList.add('chat-minimizing');
-            setTimeout(() => {
-                chatContainer.style.display = 'none';
-                chatContainer.classList.remove('chat-minimizing');
-                chatToggleButton.style.display = 'flex';
-            }, 300);
-            isMinimized = true;
-        }
-    });
+    } // 原有的聊天按钮点击事件已移至 initButtonDrag 函数中处理
 
     sendButton.addEventListener('click', function () {
         const userText = userInput.value.trim();
@@ -1195,11 +1154,250 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
-    }
-
-    // 页面加载完成后执行初始保护
+    } // 页面加载完成后执行初始保护
     setTimeout(function () {
         ensureMobileViewport();
         updateChatButtonPosition();
-    }, 100);
+    }, 100); // 初始化按钮拖动功能
+    function initButtonDrag() {
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let buttonStartX = 0;
+        let buttonStartY = 0;
+        let dragDistance = 0;
+
+        // 鼠标事件
+        chatToggleButton.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', endDrag);
+
+        // 触摸事件（移动端）
+        chatToggleButton.addEventListener('touchstart', startDragTouch, {
+            passive: false,
+        });
+        document.addEventListener('touchmove', dragTouch, { passive: false });
+        document.addEventListener('touchend', endDragTouch);
+
+        // 阻止原有的点击事件，改为自定义处理
+        chatToggleButton.addEventListener('click', handleClick);
+
+        function startDrag(e) {
+            isDragging = true;
+            dragDistance = 0;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+
+            const rect = chatToggleButton.getBoundingClientRect();
+            buttonStartX = rect.left;
+            buttonStartY = rect.top;
+
+            chatToggleButton.style.cursor = 'grabbing';
+        }
+
+        function startDragTouch(e) {
+            const touch = e.touches[0];
+            isDragging = true;
+            dragDistance = 0;
+            dragStartX = touch.clientX;
+            dragStartY = touch.clientY;
+
+            const rect = chatToggleButton.getBoundingClientRect();
+            buttonStartX = rect.left;
+            buttonStartY = rect.top;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+
+            const deltaX = e.clientX - dragStartX;
+            const deltaY = e.clientY - dragStartY;
+            dragDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+            // 当拖动距离大于5px时才开始拖动和添加样式
+            if (dragDistance > 5) {
+                e.preventDefault();
+                chatToggleButton.classList.add('dragging');
+                updateButtonPosition(
+                    buttonStartX + deltaX,
+                    buttonStartY + deltaY
+                );
+            }
+        }
+
+        function dragTouch(e) {
+            if (!isDragging) return;
+
+            const touch = e.touches[0];
+            const deltaX = touch.clientX - dragStartX;
+            const deltaY = touch.clientY - dragStartY;
+            dragDistance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+            // 当拖动距离大于5px时才开始拖动
+            if (dragDistance > 5) {
+                e.preventDefault();
+                chatToggleButton.classList.add('dragging');
+                updateButtonPosition(
+                    buttonStartX + deltaX,
+                    buttonStartY + deltaY
+                );
+            }
+        }
+
+        function endDrag() {
+            if (!isDragging) return;
+            isDragging = false;
+            chatToggleButton.classList.remove('dragging');
+            chatToggleButton.style.cursor = 'move';
+
+            // 如果拖动距离大于5px，则吸附到边缘，否则当作点击处理
+            if (dragDistance > 5) {
+                snapToEdge();
+            }
+        }
+
+        function endDragTouch() {
+            if (!isDragging) return;
+            isDragging = false;
+            chatToggleButton.classList.remove('dragging');
+
+            // 如果拖动距离大于5px，则吸附到边缘
+            if (dragDistance > 5) {
+                snapToEdge();
+            }
+        }
+
+        function handleClick(e) {
+            // 如果是拖动操作（距离大于5px），阻止点击事件
+            if (dragDistance > 5) {
+                e.preventDefault();
+                e.stopPropagation();
+                return;
+            }
+
+            // 小于5px的移动视为点击，执行原有的聊天框切换逻辑
+            toggleChatContainer();
+        }
+
+        function updateButtonPosition(x, y) {
+            const buttonSize = 50;
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            // 限制在视口内
+            x = Math.max(0, Math.min(x, viewportWidth - buttonSize));
+            y = Math.max(0, Math.min(y, viewportHeight - buttonSize));
+
+            chatToggleButton.style.left = x + 'px';
+            chatToggleButton.style.top = y + 'px';
+            chatToggleButton.style.right = 'auto';
+            chatToggleButton.style.bottom = 'auto';
+            chatToggleButton.style.transform = 'none';
+        }
+
+        function snapToEdge() {
+            const rect = chatToggleButton.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+            const centerX = rect.left + rect.width / 2;
+
+            // 吸附到左边或右边
+            if (centerX < viewportWidth / 2) {
+                // 吸附到左边
+                chatToggleButton.style.left = '20px';
+                chatToggleButton.style.right = 'auto';
+            } else {
+                // 吸附到右边
+                chatToggleButton.style.right = '20px';
+                chatToggleButton.style.left = 'auto';
+            }
+        }
+
+        // 聊天框切换函数
+        function toggleChatContainer() {
+            if (
+                chatContainer.style.display === 'none' ||
+                chatContainer.style.display === ''
+            ) {
+                // 显示聊天框
+                if (!restorePosition()) {
+                    const viewportHeight = window.innerHeight;
+                    chatContainer.style.top = viewportHeight / 2 - 225 + 'px';
+                    chatContainer.style.right = '20px';
+                }
+
+                chatContainer.style.display = 'flex';
+                chatContainer.classList.add('chat-showing');
+                setTimeout(() => {
+                    chatContainer.classList.remove('chat-showing');
+                }, 300);
+
+                chatToggleButton.style.display = 'none';
+                isMinimized = false;
+
+                if (isFirstOpen) {
+                    const greeting = getRandomResponse(dialogues.greetings);
+                    addMessage('雪宝', greeting);
+                    setTimeout(() => {
+                        addMessage(
+                            '雪宝',
+                            "我可以帮您：🌤️ 查天气 🗺️ 看网站地图 🧭 导航页面 😄 聊天解闷！输入'帮助'了解详细功能～"
+                        );
+                    }, 1000);
+                    isFirstOpen = false;
+                }
+
+                userInput.focus();
+            } else {
+                // 隐藏聊天框
+                chatContainer.classList.add('chat-minimizing');
+                setTimeout(() => {
+                    chatContainer.style.display = 'none';
+                    chatContainer.classList.remove('chat-minimizing');
+                    chatToggleButton.style.display = 'flex';
+                }, 300);
+                isMinimized = true;
+            }
+        }
+    }
+
+    // 初始化自动透明功能
+    function initAutoTransparency() {
+        let inactiveTimer;
+        let isHovering = false;
+
+        // 设置非活跃状态
+        function setInactive() {
+            if (!isHovering && !isDragging) {
+                chatToggleButton.classList.add('auto-transparent');
+            }
+        }
+
+        // 设置活跃状态
+        function setActive() {
+            chatToggleButton.classList.remove('auto-transparent', 'inactive');
+            clearTimeout(inactiveTimer);
+
+            // 3秒后自动变透明
+            inactiveTimer = setTimeout(setInactive, 3000);
+        }
+
+        // 鼠标悬停事件
+        chatToggleButton.addEventListener('mouseenter', function () {
+            isHovering = true;
+            setActive();
+        });
+
+        chatToggleButton.addEventListener('mouseleave', function () {
+            isHovering = false;
+            inactiveTimer = setTimeout(setInactive, 1000);
+        });
+
+        // 页面活动检测
+        document.addEventListener('mousemove', setActive);
+        document.addEventListener('scroll', setActive);
+        document.addEventListener('click', setActive);
+
+        // 初始启动透明化
+        setActive();
+    }
 });
