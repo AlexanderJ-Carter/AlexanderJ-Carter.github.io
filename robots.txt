@@ -1,3 +1,31 @@
+# Robots.txt for Alexander James Carter's Personal Website
+# https://alexander.xin
+# Last updated: 2025-06-09
+
+# Allow all search engines to index the site
 User-agent: *
 Allow: /
+
+# Disallow access to backup and temporary files
+Disallow: /Backup/
+Disallow: *.bak
+Disallow: *.tmp
+
+# Disallow access to development and beta areas (optional)
+Disallow: /beta/login.html
+Disallow: /beta/beta-auth.css
+
+# Allow specific files that are important
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /manifest.json
+Allow: /favicon.ico
+
+# Crawl-delay for polite crawling (optional)
+Crawl-delay: 1
+
+# Sitemap location
 Sitemap: https://alexander.xin/sitemap.xml
+
+# Additional sitemaps (if any)
+# Sitemap: https://blog.alexander.xin/sitemap.xml

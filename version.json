@@ -1,25 +1,25 @@
 {
-    "version": "2.1.1",
+    "version": "2.1.2",
     "name": "Alexander James Carter's Personal Website",
     "description": "展示个人作品和内容分享的个人网页",
     "author": "Alexander James Carter",
     "homepage": "https://alexander.xin",
     "license": "CC BY-NC-SA 4.0",
     "release": {
-        "version": "2.1.1",
-        "codename": "Gallery & Footer Enhancement",
-        "date": "2025-06-07",
+        "version": "2.1.2",
+        "codename": "Documentation & Configuration Optimization",
+        "date": "2025-06-09",
         "type": "patch",
         "status": "stable"
     },
     "features": {
         "highlights": [
-            "🖼️ 优化画廊页面体验",
-            "🦶 增强页脚功能与样式",
-            "🛡️ Creative Commons 许可证系统",
-            "🌍 多语言许可证页面",
-            "📚 完善的文档系统",
-            "🔧 代码优化与清理"
+            "📚 文档系统全面优化升级",
+            "🗺️ 网站地图完整性提升",
+            "🤖 搜索引擎优化配置增强",
+            "🌍 多语言支持配置完善",
+            "🔧 版本控制系统同步更新",
+            "🛡️ Creative Commons 许可证系统"
         ],
         "technical": {
             "pwa": true,
@@ -29,7 +29,8 @@
             "music_player": true,
             "chatbot": true,
             "gallery": true,
-            "license_system": true
+            "license_system": true,
+            "seo_optimized": true
         }
     },
     "languages": ["zh-CN", "en", "it", "ja"],
@@ -49,6 +50,52 @@
         "glightbox": "3.2.0"
     },
     "changelog": {
+        "2.1.2": {
+            "date": "2025-06-09",
+            "title": "Documentation & Configuration Optimization",
+            "type": "patch",
+            "breaking_changes": false,
+            "changes": {
+                "added": [
+                    "增强版 sitemap.xml 包含所有多语言页面",
+                    "优化版 robots.txt 配置和搜索引擎规则",
+                    "完善的文档版本同步管理",
+                    "多语言页面 hreflang 标签支持",
+                    "日语支持的 sitemap 配置"
+                ],
+                "improved": [
+                    "README.md 版本信息同步更新",
+                    "网站地图结构和优先级优化",
+                    "搜索引擎爬虫友好性提升",
+                    "多语言 URL 结构标准化",
+                    "文档格式和内容一致性"
+                ],
+                "updated": [
+                    "版本号统一更新至 2.1.2",
+                    "最后更新时间同步至 2025-06-09",
+                    "所有配置文件时间戳更新",
+                    "sitemap 条目完整性检查"
+                ]
+            }
+        },
+        "2.1.1": {
+            "date": "2025-06-07",
+            "title": "Gallery & Footer Enhancement",
+            "type": "patch",
+            "breaking_changes": false,
+            "changes": {
+                "improved": [
+                    "画廊页面显示问题优化",
+                    "页脚功能与样式增强",
+                    "整体页面性能提升"
+                ],
+                "fixed": [
+                    "画廊页面交互体验问题",
+                    "页脚在不同屏幕尺寸下的适配",
+                    "移动端显示效果优化"
+                ]
+            }
+        },
         "2.1.0": {
             "date": "2025-06-06",
             "title": "License & Documentation Enhancement",
@@ -80,6 +127,8 @@
         "deployment": "GitHub Pages",
         "cdn": ["jsDelivr", "CDNJS"],
         "analytics": "Google Analytics 4",
-        "last_updated": "2025-06-06T00:00:00Z"
+        "last_updated": "2025-06-09T00:00:00Z",
+        "next_version": "2.2.0",
+        "maintenance_status": "active"
     }
 }

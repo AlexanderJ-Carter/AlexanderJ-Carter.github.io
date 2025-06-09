@@ -1,7 +1,7 @@
 # Alexander James Carter's Personal Website 🌐
 
-[![Current Version](https://img.shields.io/badge/Version-v2.1.0-blue.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/releases)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2025.06.06-green.svg)](https://alexander.xin)
+[![Current Version](https://img.shields.io/badge/Version-v2.1.2-blue.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/releases)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2025.06.09-green.svg)](https://alexander.xin)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Active-green)](https://alexander.xin)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
@@ -43,46 +43,48 @@
 
 ## 🚀 版本信息
 
-### 🎯 当前版本: v2.1.0
+### 🎯 当前版本: v2.1.2
 
-![Release Date](https://img.shields.io/badge/Release%20Date-2025.06.06-brightgreen)
+![Release Date](https://img.shields.io/badge/Release%20Date-2025.06.09-brightgreen)
 ![Build Status](https://img.shields.io/badge/Build-Stable-success)
 ![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue)
 
-#### "License & Documentation Enhancement"
+#### "文档与配置优化"
 
-📅 发布时间: 2025年6月6日 | 🏷️ 版本类型: 重大更新 | 📦 状态: 稳定版
+📅 发布时间: 2025年6月9日 | 🏷️ 版本类型: 维护更新 | 📦 状态: 稳定版
 
 ### ✨ 主要更新内容
 
-#### 🛡️ 许可证系统
+#### 📚 文档系统优化
 
-- **Creative Commons BY-NC-SA 4.0** 许可证全面实施
-- **多语言许可证页面** - 支持中文、英文、意大利语、日语
-- **标准版权模板** 与详细使用指南
-- **交互式FAQ** 解答常见版权问题
-- **一键复制功能** 便捷获取版权信息
+- **README.md** 全面更新与重构
+- **网站地图** sitemap.xml 内容同步更新
+- **robots.txt** 搜索引擎规则优化
+- **version.json** 版本信息同步维护
+- **CHANGELOG.md** 更新历史记录完善
 
-#### 📚 文档优化
+#### 🔧 配置文件更新
 
-- **README.md** 重构与优化
-- **COPYRIGHT-TEMPLATE.md** 版权模板文件
-- **版本控制系统** 规范化管理
+- 版本号统一更新至 v2.1.2
+- 最后更新时间同步至 2025年6月9日
+- 网站地图添加新页面和更新时间
+- 搜索引擎优化配置调整
 
-#### 🔧 技术改进
+#### 🌐 多语言支持完善
 
-- 修复 `index.html` 中重复的 `share.js` 引用
-- 优化页脚许可证信息显示位置  
-- 清理冗余文件和代码
+- 添加日语支持的相关配置
+- 优化国际化 URL 结构
+- 改进多语言 sitemap 配置
+- 增强 hreflang 标签支持
 
 ### 📊 版本数据
 
-|     项目     | 数量  | 说明                       |
-| :----------: | :---: | :------------------------- |
-|  🌍 支持语言  | **4** | 中文、英文、意大利语、日语 |
-| 📄 许可证页面 | **4** | 每种语言独立页面           |
-|  🔧 修复问题  | **3** | 代码优化与清理             |
-|  ✨ 新增功能  | **5** | 许可证系统相关             |
+|    项目    | 数量  | 说明                       |
+| :--------: | :---: | :------------------------- |
+| 🌍 支持语言 | **4** | 中文、英文、意大利语、日语 |
+| 📄 文档文件 | **6** | README、sitemap、robots等  |
+| 🔧 配置更新 | **5** | 版本同步与优化             |
+| ✨ 功能增强 | **3** | SEO优化与多语言完善        |
 
 ### 🎯 下一版本预览
 
@@ -90,8 +92,8 @@
 
 - 📝 在线博客编辑器
 - 🔍 高级搜索功能  
-- 📊 用户体验优化
-- 🚀 性能进一步提升
+- 📊 用户体验分析仪表板
+- 🚀 性能监控与优化工具
 
 ## 📁 项目结构
 
@@ -326,4 +328,4 @@ PWA 应用配置文件，定义应用名称、图标、主题色等。
 
 ⭐ 如果这个项目对你有帮助，请考虑给它一个星标！
 
-**当前版本: v2.1.0** | **最后更新: 2025年6月6日**
+**当前版本: v2.1.2** | **最后更新: 2025年6月9日**
