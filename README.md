@@ -1,7 +1,34 @@
 # Alexander James Carter's Personal Website 🌐
 
-[![Current Version](https://img.shields.io/badge/Version-v2.1.2-blue.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/releases)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2025.06.09-green.svg)](https://alexander.xin)
+## 🆕 最新更新
+
+### 🎯 当前版本: v2.2.0 - "安全与文档增强版"
+
+📅 **发布时间**: 2025年7月22日 | 🏷️ **版本类型**: 功能更新 | 📦 **状态**: 稳定版
+
+#### 新增功能特性
+
+**🔒 安全框架完善**
+- 新增完整的安全漏洞披露政策 (`security-policy.html`)
+- 建立安全研究者致谢机制 (`security-acknowledgments.html`)
+- 配置PGP加密通信支持 (`pgp-key.asc`)
+- 部署标准化的 `security.txt` 文件
+
+**📚 文档与版权管理**
+- 创建标准化版权模板 (`COPYRIGHT-TEMPLATE.md`)
+- 建立完整的文档管理体系
+- 优化项目结构和文件组织
+
+**🏗️ 项目结构重组**
+- 新增 `security/` 目录统一管理安全相关文件
+- 新增 `docs/` 目录集中存放文档文件
+- 新增 `config/` 目录管理配置文件
+- 优化文件分类和路径结构
+
+---
+
+[![Current Version](https://img.shields.io/badge/Version-v2.2.0-blue.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/releases)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2025.07.22-green.svg)](https://alexander.xin)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Active-green)](https://alexander.xin)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
@@ -32,6 +59,13 @@
 - **SEO 优化** - 完整的 meta 标签、结构化数据、网站地图
 - **Google Analytics** - 集成流量分析
 
+### 🔒 安全与隐私增强
+
+- **安全漏洞披露机制** - 建立完整的安全报告和致谢体系
+- **PGP加密通信** - 支持安全研究者加密报告敏感漏洞
+- **标准化安全政策** - 符合RFC 9116标准的security.txt配置
+- **版权声明模板** - 统一的文档版权管理
+
 ### 🎵 交互功能
 
 - **音乐播放器** - 内置音频播放功能
@@ -43,57 +77,56 @@
 
 ## 🚀 版本信息
 
-### 🎯 当前版本: v2.1.2
+### 🎯 当前版本: v2.2.0
 
-![Release Date](https://img.shields.io/badge/Release%20Date-2025.06.09-brightgreen)
+![Release Date](https://img.shields.io/badge/Release%20Date-2025.07.22-brightgreen)
 ![Build Status](https://img.shields.io/badge/Build-Stable-success)
 ![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue)
 
-#### "文档与配置优化"
+#### "安全与文档增强版"
 
-📅 发布时间: 2025年6月9日 | 🏷️ 版本类型: 维护更新 | 📦 状态: 稳定版
+📅 发布时间: 2025年7月22日 | 🏷️ 版本类型: 功能更新 | 📦 状态: 稳定版
 
-### ✨ 主要更新内容
+### ✨ 本版本更新内容
 
-#### 📚 文档系统优化
+#### � 安全框架建设
 
-- **README.md** 全面更新与重构
-- **网站地图** sitemap.xml 内容同步更新
-- **robots.txt** 搜索引擎规则优化
-- **version.json** 版本信息同步维护
-- **CHANGELOG.md** 更新历史记录完善
+- **安全政策页面** 建立完整的漏洞披露政策和处理流程
+- **安全致谢机制** 创建研究者致谢页面，鼓励负责任披露
+- **PGP加密支持** 配置公钥文件，支持敏感信息加密传输
+- **Security.txt** 部署符合RFC 9116标准的安全配置文件
 
-#### 🔧 配置文件更新
+#### � 文档体系优化
 
-- 版本号统一更新至 v2.1.2
-- 最后更新时间同步至 2025年6月9日
-- 网站地图添加新页面和更新时间
-- 搜索引擎优化配置调整
+- **版权模板** 创建标准化版权声明模板
+- **文档分类** 建立docs目录统一管理项目文档
+- **README更新** 全面更新项目介绍和使用说明
+- **项目结构** 重新组织文件目录，提升维护效率
 
-#### 🌐 多语言支持完善
+#### �️ 架构重构
 
-- 添加日语支持的相关配置
-- 优化国际化 URL 结构
-- 改进多语言 sitemap 配置
-- 增强 hreflang 标签支持
+- **目录规划** 新增security、docs、config专用目录
+- **路径优化** 更新所有相关文件的引用路径
+- **CSS模块化** 新增security.css专用样式文件
+- **配置集中** 将manifest.json等配置文件统一管理
 
 ### 📊 版本数据
 
 |    项目    | 数量  | 说明                       |
 | :--------: | :---: | :------------------------- |
 | 🌍 支持语言 | **4** | 中文、英文、意大利语、日语 |
-| 📄 文档文件 | **6** | README、sitemap、robots等  |
-| 🔧 配置更新 | **5** | 版本同步与优化             |
-| ✨ 功能增强 | **3** | SEO优化与多语言完善        |
+| � 安全文件 | **4** | 安全政策、致谢、PGP密钥等  |
+| � 新增目录 | **3** | security、docs、config     |
+| ✨ 功能增强 | **6** | 安全框架与文档体系建设     |
 
 ### 🎯 下一版本预览
 
-**v2.2.0 - 内容创作工具** (预计 2025年7月)
+**v2.3.0 - 用户体验升级** (预计 2025年9月)
 
-- 📝 在线博客编辑器
-- 🔍 高级搜索功能  
+- 🎨 全新UI/UX设计升级
 - 📊 用户体验分析仪表板
 - 🚀 性能监控与优化工具
+- 🔍 高级搜索与内容发现
 
 ## 📁 项目结构
 
@@ -103,30 +136,45 @@ AlexanderJ-Carter.github.io/
 ├── 📄 404.html               # 404 错误页面
 ├── 📄 time.html              # 时间页面
 ├── 📄 verify.html            # 验证页面
-├── 📄 manifest.json          # PWA 清单文件
 ├── 📄 sitemap.xml            # 网站地图
 ├── 📄 robots.txt             # 搜索引擎爬虫规则
 ├── 📄 ads.txt                # 广告验证文件
 ├── 📄 CNAME                  # 自定义域名配置
 │
+├── 📁 .well-known/           # RFC标准配置目录
+│   └── security.txt          # 安全策略配置文件
+│
+├── 📁 security/              # 安全相关文件 🆕
+│   ├── security-policy.html  # 安全漏洞披露政策
+│   ├── security-acknowledgments.html # 安全研究者致谢页面
+│   └── pgp-key.asc          # PGP公钥文件
+│
+├── 📁 docs/                  # 项目文档 🆕
+│   ├── CHANGELOG.md         # 版本更新日志
+│   └── PGP-GUIDE.md         # PGP密钥使用指南
+│
+├── 📁 config/                # 配置文件 🆕
+│   ├── manifest.json        # PWA 清单文件
+│   └── version.json         # 版本信息配置
+│
 ├── 📁 css/                   # 样式文件
 │   ├── style.default.css     # 主要样式
+│   ├── security.css         # 安全页面样式 🆕
+│   ├── privacy.css          # 隐私政策样式
 │   ├── chatbot.css          # 聊天机器人样式
 │   ├── music.css            # 音乐播放器样式
 │   ├── gallery.css          # 图片画廊样式
 │   ├── calendar.css         # 日历样式
-│   ├── financial-dashboard.css # 财务仪表板样式
 │   └── ...                  # 其他模块样式
 │
 ├── 📁 js/                    # JavaScript 文件
 │   ├── enhanced.js          # 增强功能
+│   ├── verification.js      # 访问验证功能
 │   ├── chatbot.js           # 聊天机器人逻辑
 │   ├── music-player.js      # 音乐播放器
 │   ├── gallery.js           # 图片画廊功能
 │   ├── calendar.js          # 日历功能
-│   ├── financial-dashboard.js # 财务仪表板
 │   ├── navigation.js        # 导航功能
-│   ├── share.js             # 分享功能
 │   └── ...                  # 其他功能模块
 │
 ├── 📁 img/                   # 图片资源
@@ -144,7 +192,10 @@ AlexanderJ-Carter.github.io/
 │   └── ...                  # 其他英文页面
 │
 ├── 📁 zh-CN/                 # 中文版本
-│   └── ...                  # 中文页面
+│   ├── contact.html         # 中文联系页面
+│   ├── privacy.html         # 隐私政策页面
+│   ├── terms.html           # 使用条款页面
+│   └── ...                  # 其他中文页面
 │
 ├── 📁 it/                    # 意大利语版本
 │   └── ...                  # 意大利语页面
@@ -152,13 +203,10 @@ AlexanderJ-Carter.github.io/
 ├── 📁 jp/                    # 日语版本
 │   └── ...                  # 日语页面
 │
-├── 📁 beta/                  # 测试功能
-│   ├── financial-dashboard.html # 财务仪表板
-│   ├── login.html           # 登录页面
-│   └── ...                  # 其他测试功能
-│
-└── 📁 Backup/                # 备份文件
-    └── backup_20250529_v1.0.0/
+└── 📁 beta/                  # 测试功能
+    ├── financial-dashboard.html # 财务仪表板
+    ├── login.html           # 登录页面
+    └── ...                  # 其他测试功能
 ```
 
 ## 🛠️ 技术栈
@@ -273,10 +321,12 @@ PWA 应用配置文件，定义应用名称、图标、主题色等。
 
 ## 🔒 隐私和安全
 
-- 🔐 HTTPS 强制加密
-- 🍪 Cookie 使用说明
-- 📝 隐私政策页面
-- 🛡️ 内容安全策略 (CSP)
+- 🔐 **HTTPS强制加密** - 全站SSL/TLS加密保护
+- 🍪 **Cookie使用说明** - 透明的数据收集政策  
+- 📝 **隐私政策页面** - 详细的隐私保护说明
+- 🛡️ **安全漏洞披露** - 完整的安全报告机制
+- 🔑 **PGP加密通信** - 支持敏感信息加密传输
+- 📋 **Security.txt** - 符合RFC 9116标准的安全配置
 
 ## 📈 分析和监控
 
@@ -328,4 +378,12 @@ PWA 应用配置文件，定义应用名称、图标、主题色等。
 
 ⭐ 如果这个项目对你有帮助，请考虑给它一个星标！
 
-**当前版本: v2.1.2** | **最后更新: 2025年6月9日**
+**当前版本: v2.2.0** | **最后更新: 2025年7月22日**
+
+## 📄 重要安全与版权文档
+
+- [`docs/COPYRIGHT-TEMPLATE.md`](docs/COPYRIGHT-TEMPLATE.md) - 版权声明模板，适用于所有项目文档
+- [`security/security-acknowledgments.html`](security/security-acknowledgments.html) - 安全研究者致谢页面，公开感谢贡献者  
+- [`security/security-policy.html`](security/security-policy.html) - 安全漏洞披露政策，指导安全报告流程
+- [`security/pgp-key.asc`](security/pgp-key.asc) - PGP公钥文件，支持加密安全沟通
+- [`.well-known/security.txt`](.well-known/security.txt) - RFC 9116标准安全配置文件

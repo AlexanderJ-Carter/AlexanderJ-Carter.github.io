@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>安全致谢 - Alexander James Carter的网页</title>
+    <meta content="感谢为网站安全做出贡献的安全研究者" name="description">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KR20QK92R"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-6KR20QK92R');
+    </script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.default.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../css/privacy.css" rel="stylesheet">
+    <link href="../css/security.css" rel="stylesheet">
+</head>
+
+<body>
+    <a class="back-btn" href="../index.html">
+        <i class="fas fa-arrow-left me-2"></i>返回主页
+    </a>
+
+    <div class="privacy-container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="nav-section">
+                    <h5 class="mb-3">安全目录</h5>
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="#overview">1. 致谢说明</a>
+                        <a class="nav-link" href="#reports">2. 安全报告</a>
+                        <a class="nav-link" href="#contact">3. 报告漏洞</a>
+                        <a class="nav-link" href="#policy">4. 安全政策</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="policy-header">
+                    <h1 class="text-center mb-4">安全致谢</h1>
+                    <p class="lead">感谢以下安全研究者负责任地报告安全漏洞，帮助我们改善网站安全性</p>
+                    <p class="policy-date">最后更新日期：2025年7月22日</p>
+                </div>
+
+                <!-- 致谢说明 -->
+                <div class="section-card" id="overview">
+                    <h2><i class="fas fa-shield-alt me-2"></i>致谢说明</h2>
+                    <p>我们深深感谢所有关注网站安全的研究者。通过负责任的漏洞披露，您帮助我们：</p>
+                    <ul>
+                        <li>提升网站整体安全水平</li>
+                        <li>保护用户数据和隐私</li>
+                        <li>建立更好的安全防护机制</li>
+                        <li>完善安全响应流程</li>
+                    </ul>
+                    <div class="info-note">
+                        <i class="fas fa-heart text-danger"></i>
+                        <p>每一个安全报告都是对我们网站安全的宝贵贡献！</p>
+                    </div>
+                </div>
+
+                <!-- 安全报告列表 -->
+                <div class="section-card" id="reports">
+                    <h2><i class="fas fa-list me-2"></i>安全报告</h2>
+
+                    <!-- 当前没有报告的状态 -->
+                    <div class="alert alert-info text-center">
+                        <i class="fas fa-shield-check fa-3x mb-3 text-success"></i>
+                        <h4>暂无安全报告</h4>
+                        <p class="mb-0">目前还没有收到安全漏洞报告。我们感谢所有关注网站安全的研究者。</p>
+                    </div>
+
+                    <!-- 未来报告的示例格式（注释掉） -->
+                    <!--
+                    <div class="acknowledgment-item">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h5 class="researcher-name text-success">张三 (zhang@example.com)</h5>
+                                <p class="vulnerability-type mb-1">跨站脚本攻击 (XSS) - 中等严重性</p>
+                                <small class="text-muted">报告日期：2025年3月15日 | 修复日期：2025年3月18日</small>
+                            </div>
+                            <span class="badge bg-warning">已修复</span>
+                        </div>
+                    </div>
+                    -->
+                </div>
+
+                <!-- 报告漏洞 -->
+                <div class="section-card" id="contact">
+                    <h2><i class="fas fa-envelope me-2"></i>发现安全问题？</h2>
+                    <p>如果您发现了安全漏洞，请通过以下方式负责任地报告：</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="contact-method">
+                                <h5><i class="fas fa-envelope text-primary me-2"></i>邮件报告</h5>
+                                <p>发送详细报告到：</p>
+                                <a href="mailto:2253940186@qq.com" class="btn btn-primary">
+                                    <i class="fas fa-envelope me-2"></i>2253940186@qq.com
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="contact-method">
+                                <h5><i class="fas fa-lock text-success me-2"></i>加密通信</h5>
+                                <p>敏感信息请使用PGP加密：</p>
+                                <a href="/security/pgp-key.asc" class="btn btn-success" target="_blank">
+                                    <i class="fas fa-key me-2"></i>下载PGP公钥
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-note mt-3">
+                        <i class="fas fa-clock"></i>
+                        <p>我们承诺在收到报告后24小时内回复，并在合理时间内修复问题。</p>
+                    </div>
+                </div>
+
+                <!-- 安全政策链接 -->
+                <div class="section-card" id="policy">
+                    <h2><i class="fas fa-file-alt me-2"></i>相关政策</h2>
+                    <p>了解更多安全相关信息：</p>
+                    <div class="d-flex gap-3">
+                        <a href="security-policy.html" class="btn btn-outline-primary">
+                            <i class="fas fa-shield-alt me-2"></i>安全政策
+                        </a>
+                        <a href="../.well-known/security.txt" class="btn btn-outline-secondary">
+                            <i class="fas fa-file-code me-2"></i>Security.txt
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

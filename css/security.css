@@ -1,0 +1,113 @@
+/* 安全页面专用样式 - 继承隐私政策样式 */
+
+/* 处理流程步骤 - 使用卡片样式 */
+.process-step {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid transparent;
+}
+
+.process-step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #007bff;
+}
+
+.step-number {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* 联系信息框 - 匹配隐私政策的info-note样式 */
+.contact-info {
+    background: #f8f9fa;
+    border-left: 4px solid #17a2b8;
+    padding: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0;
+}
+
+/* 联系方式框 - 使用section-card样式 */
+.contact-method {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid transparent;
+    height: 100%;
+}
+
+.contact-method:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #007bff;
+}
+
+.contact-method h5 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.contact-method .btn {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+/* 致谢项目 - 使用info-note样式 */
+.acknowledgment-item {
+    background: #f8f9fa;
+    border-left: 4px solid #28a745;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.researcher-name {
+    font-weight: 600;
+    color: #28a745;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.vulnerability-type {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .process-step {
+        padding: 1rem;
+    }
+
+    .contact-method {
+        margin-bottom: 1rem;
+    }
+
+    .contact-method .btn {
+        font-size: 0.9rem;
+    }
+}

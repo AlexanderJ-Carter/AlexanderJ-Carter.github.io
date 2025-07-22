@@ -1,25 +1,25 @@
 {
-    "version": "2.1.2",
+    "version": "2.2.0",
     "name": "Alexander James Carter's Personal Website",
     "description": "展示个人作品和内容分享的个人网页",
     "author": "Alexander James Carter",
     "homepage": "https://alexander.xin",
     "license": "CC BY-NC-SA 4.0",
     "release": {
-        "version": "2.1.2",
-        "codename": "Documentation & Configuration Optimization",
-        "date": "2025-06-09",
-        "type": "patch",
+        "version": "2.2.0",
+        "codename": "Security & Documentation Enhancement",
+        "date": "2025-07-22",
+        "type": "minor",
         "status": "stable"
     },
     "features": {
         "highlights": [
-            "📚 文档系统全面优化升级",
-            "🗺️ 网站地图完整性提升",
-            "🤖 搜索引擎优化配置增强",
-            "🌍 多语言支持配置完善",
-            "🔧 版本控制系统同步更新",
-            "🛡️ Creative Commons 许可证系统"
+            "� 完整安全漏洞披露政策框架",
+            "🏆 安全研究者致谢机制建设",
+            "� PGP加密通信支持配置",
+            "📋 RFC 9116标准安全配置文件",
+            "📚 标准化版权声明模板",
+            "�️ 项目文件结构重组优化"
         ],
         "technical": {
             "pwa": true,
