@@ -22,7 +22,7 @@
     <meta content="Personal website showcasing creative works and sharing content" name="description">
     <meta content="Alexander James Carter" name="author">
     <meta content="personal portfolio, content sharing, Alexander James Carter, personal website" name="keywords">
-    <link href="https://alexander.xin/" rel="canonical">
+    <link href="https://alexander.xin/en/" rel="canonical">
     <meta content="index,follow" name="robots">
     <link href="../sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
 
@@ -46,21 +46,30 @@
     </script>
 
     <!-- PWA和图标 -->
-    <link href="../manifest.json" rel="manifest">
+    <link href="../config/manifest.json" rel="manifest">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="default" name="apple-mobile-web-app-status-bar-style">
     <meta content="#ffffff" name="theme-color">
-    <meta content="light" name="color-scheme">
+    <meta content="light dark" name="color-scheme">
     <link href="../img/favicon.ico" rel="icon" type="image/x-icon">
     <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- 社交分享配置 -->
     <meta content="Alexander James Carter's Website" property="og:title">
     <meta content="Personal website showcasing creative works and sharing content" property="og:description">
-    <meta content="../img/logo.png" property="og:image">
-    <meta content="https://alexanderj-carter.github.io" property="og:url">
+    <meta content="https://alexander.xin/img/logo.png" property="og:image">
+    <meta content="https://alexander.xin/en/" property="og:url">
     <meta content="website" property="og:type">
     <meta content="en_US" property="og:locale">
+    <meta content="zh_CN" property="og:locale:alternate">
+    <meta content="it_IT" property="og:locale:alternate">
+    <meta content="ja_JP" property="og:locale:alternate">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Alexander James Carter's Website">
+    <meta name="twitter:description" content="Personal website showcasing creative works and sharing content">
+    <meta name="twitter:image" content="https://alexander.xin/img/logo.png">
+    <meta name="twitter:url" content="https://alexander.xin/en/">
 
     <!-- 第三方样式库 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -104,9 +113,17 @@
 
     <!-- 添加资源预加载 -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
     <link href="https://cdnjs.cloudflare.com" rel="preconnect">
     <link as="image" href="../img/AboutMe.jpg" rel="preload">
     <link as="image" href="../img/Background.jpg" rel="preload">
+
+    <!-- Alternate languages -->
+    <link rel="alternate" hreflang="zh" href="https://alexander.xin/zh-CN/">
+    <link rel="alternate" hreflang="en" href="https://alexander.xin/en/">
+    <link rel="alternate" hreflang="it" href="https://alexander.xin/it/">
+    <link rel="alternate" hreflang="ja" href="https://alexander.xin/jp/">
+    <link rel="alternate" hreflang="x-default" href="https://alexander.xin/">
 </head>
 
 <body class="scrollspy-example" data-bs-offset="0" data-bs-spy="scroll" data-bs-target="#navbar" tabindex="0">
@@ -212,8 +229,8 @@
                             Explore Infinite Possibilities <span class="gradient-text">Craft Extraordinary
                                 Futures</span>
                         </h1>
-                        <p class="fst-italic intro-text text-light mt-4 animate__animated animate__fadeIn animate__delay-2s"
-                            style="font-size: 1.2rem;">
+                        <p
+                            class="fst-italic intro-text text-light mt-4 animate__animated animate__fadeIn animate__delay-2s fs-5">
                             Here, every spark of inspiration comes alive, every creative idea resonates.
                         </p>
                         <div class="mt-5 animate__animated animate__fadeInUp animate__delay-2s">
@@ -281,12 +298,12 @@
                             <i class="fas fa-globe nav-icon"></i> Language
                         </a>
                         <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
-                            <li><a class="dropdown-item" href="../index.html">中文</a></li>
-                            <li><a class="dropdown-item active" href="index-en.html"><i class="fas fa-check me-2"></i>
+                            <li><a class="dropdown-item" href="../zh-CN/">中文</a></li>
+                            <li><a class="dropdown-item active" href="./"><i class="fas fa-check me-2"></i>
                                     English</a>
                             </li>
-                            <li><a class="dropdown-item" href="../it/index-it.html">Italiano</a></li>
-                            <li><a class="dropdown-item" href="../jp/index-jp.html">日本語</a></li>
+                            <li><a class="dropdown-item" href="../it/">Italiano</a></li>
+                            <li><a class="dropdown-item" href="../jp/">日本語</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -441,12 +458,14 @@
                 <!-- 风景作品 -->
                 <div class="portfolio-item" data-aos="fade-up" data-aos-delay="150" data-category="photo">
                     <div class="portfolio-card glass-effect">
-                        <img alt="Landscape Photography" class="portfolio-image" src="../img/Photo1.jpg">
+                        <img alt="Landscape Photography" class="portfolio-image" src="../img/Photo1.jpg" loading="lazy"
+                            decoding="async">
                         <div class="portfolio-overlay">
                             <h5>Natural Scenery</h5>
                             <p>Landscape Photography</p>
                             <div class="portfolio-icons">
-                                <a class="portfolio-link" data-gallery="gallery" href="../img/Photo1.jpg">
+                                <a class="portfolio-link" data-gallery="gallery" href="../img/Photo1.jpg"
+                                    title="View larger - Photo1" aria-label="View larger - Photo1">
                                     <i class="fas fa-search-plus"></i>
                                 </a>
                             </div>
@@ -456,12 +475,14 @@
 
                 <div class="portfolio-item" data-aos="fade-up" data-aos-delay="200" data-category="photo">
                     <div class="portfolio-card glass-effect">
-                        <img alt="Landscape Photography" class="portfolio-image" src="../img/Photo2.jpg">
+                        <img alt="Landscape Photography" class="portfolio-image" src="../img/Photo2.jpg" loading="lazy"
+                            decoding="async">
                         <div class="portfolio-overlay">
                             <h5>Natural Scenery</h5>
                             <p>Landscape Photography</p>
                             <div class="portfolio-icons">
-                                <a class="portfolio-link" data-gallery="gallery" href="../img/Photo2.jpg">
+                                <a class="portfolio-link" data-gallery="gallery" href="../img/Photo2.jpg"
+                                    title="View larger - Photo2" aria-label="View larger - Photo2">
                                     <i class="fas fa-search-plus"></i>
                                 </a>
                             </div>
@@ -472,12 +493,14 @@
                 <!-- 花卉作品 -->
                 <div class="portfolio-item" data-aos="fade-up" data-aos-delay="250" data-category="flower">
                     <div class="portfolio-card glass-effect">
-                        <img alt="Floral Photography" class="portfolio-image" src="../img/Flower1.jpg">
+                        <img alt="Floral Photography" class="portfolio-image" src="../img/Flower1.jpg" loading="lazy"
+                            decoding="async">
                         <div class="portfolio-overlay">
                             <h5>Language of Flowers</h5>
                             <p>Floral Photography</p>
                             <div class="portfolio-icons">
-                                <a class="portfolio-link" data-gallery="gallery" href="../img/Flower1.jpg">
+                                <a class="portfolio-link" data-gallery="gallery" href="../img/Flower1.jpg"
+                                    title="View larger - Flower1" aria-label="View larger - Flower1">
                                     <i class="fas fa-search-plus"></i>
                                 </a>
                             </div>
@@ -487,12 +510,14 @@
 
                 <div class="portfolio-item" data-aos="fade-up" data-aos-delay="300" data-category="flower">
                     <div class="portfolio-card glass-effect">
-                        <img alt="Floral Photography" class="portfolio-image" src="../img/Flower2.jpg">
+                        <img alt="Floral Photography" class="portfolio-image" src="../img/Flower2.jpg" loading="lazy"
+                            decoding="async">
                         <div class="portfolio-overlay">
                             <h5>Floral Shadows</h5>
                             <p>Floral Photography</p>
                             <div class="portfolio-icons">
-                                <a class="portfolio-link" data-gallery="gallery" href="../img/Flower2.jpg">
+                                <a class="portfolio-link" data-gallery="gallery" href="../img/Flower2.jpg"
+                                    title="View larger - Flower2" aria-label="View larger - Flower2">
                                     <i class="fas fa-search-plus"></i>
                                 </a>
                             </div>
@@ -503,12 +528,14 @@
                 <!-- 美食作品 -->
                 <div class="portfolio-item" data-aos="fade-up" data-aos-delay="350" data-category="food">
                     <div class="portfolio-card glass-effect">
-                        <img alt="Food Photography" class="portfolio-image" src="../img/Food1.jpg">
+                        <img alt="Food Photography" class="portfolio-image" src="../img/Food1.jpg" loading="lazy"
+                            decoding="async">
                         <div class="portfolio-overlay">
                             <h5>Culinary Feast</h5>
                             <p>Food Photography</p>
                             <div class="portfolio-icons">
-                                <a class="portfolio-link" data-gallery="gallery" href="../img/Food1.jpg">
+                                <a class="portfolio-link" data-gallery="gallery" href="../img/Food1.jpg"
+                                    title="View larger - Food1" aria-label="View larger - Food1">
                                     <i class="fas fa-search-plus"></i>
                                 </a>
                             </div>
@@ -518,12 +545,14 @@
 
                 <div class="portfolio-item" data-aos="fade-up" data-aos-delay="400" data-category="food">
                     <div class="portfolio-card glass-effect">
-                        <img alt="Food Photography" class="portfolio-image" src="../img/Food2.jpg">
+                        <img alt="Food Photography" class="portfolio-image" src="../img/Food2.jpg" loading="lazy"
+                            decoding="async">
                         <div class="portfolio-overlay">
                             <h5>Taste Journey</h5>
                             <p>Food Photography</p>
                             <div class="portfolio-icons">
-                                <a class="portfolio-link" data-gallery="gallery" href="../img/Food2.jpg">
+                                <a class="portfolio-link" data-gallery="gallery" href="../img/Food2.jpg"
+                                    title="View larger - Food2" aria-label="View larger - Food2">
                                     <i class="fas fa-search-plus"></i>
                                 </a>
                             </div>
@@ -534,12 +563,14 @@
                 <!-- 剩余作品 -->
                 <div class="portfolio-item" data-aos="fade-up" data-aos-delay="450" data-category="photo">
                     <div class="portfolio-card glass-effect">
-                        <img alt="Landscape Photography" class="portfolio-image" src="../img/Photo3.jpg">
+                        <img alt="Landscape Photography" class="portfolio-image" src="../img/Photo3.jpg" loading="lazy"
+                            decoding="async">
                         <div class="portfolio-overlay">
                             <h5>Beauty of Scenery</h5>
                             <p>Landscape Photography</p>
                             <div class="portfolio-icons">
-                                <a class="portfolio-link" data-gallery="gallery" href="../img/Photo3.jpg">
+                                <a class="portfolio-link" data-gallery="gallery" href="../img/Photo3.jpg"
+                                    title="View larger - Photo3" aria-label="View larger - Photo3">
                                     <i class="fas fa-search-plus"></i>
                                 </a>
                             </div>
@@ -549,12 +580,14 @@
 
                 <div class="portfolio-item" data-aos="fade-up" data-aos-delay="500" data-category="food">
                     <div class="portfolio-card glass-effect">
-                        <img alt="Food Photography" class="portfolio-image" src="../img/Food3.jpg">
+                        <img alt="Food Photography" class="portfolio-image" src="../img/Food3.jpg" loading="lazy"
+                            decoding="async">
                         <div class="portfolio-overlay">
                             <h5>Culinary Exploration</h5>
                             <p>Food Photography</p>
                             <div class="portfolio-icons">
-                                <a class="portfolio-link" data-gallery="gallery" href="../img/Food3.jpg">
+                                <a class="portfolio-link" data-gallery="gallery" href="../img/Food3.jpg"
+                                    title="View larger - Food3" aria-label="View larger - Food3">
                                     <i class="fas fa-search-plus"></i>
                                 </a>
                             </div>
@@ -565,12 +598,14 @@
                 <!-- 摄影作品 -->
                 <div class="portfolio-item" data-aos="fade-up" data-aos-delay="550" data-category="design">
                     <div class="portfolio-card glass-effect">
-                        <img alt="Photography Work" class="portfolio-image" src="../img/University.jpg">
+                        <img alt="Photography Work" class="portfolio-image" src="../img/University.jpg" loading="lazy"
+                            decoding="async">
                         <div class="portfolio-overlay">
                             <h5>Campus View</h5>
                             <p>Campus Photography</p>
                             <div class="portfolio-icons">
-                                <a class="portfolio-link" data-gallery="gallery" href="../img/University.jpg">
+                                <a class="portfolio-link" data-gallery="gallery" href="../img/University.jpg"
+                                    title="View larger - University" aria-label="View larger - University">
                                     <i class="fas fa-search-plus"></i>
                                 </a>
                             </div>
@@ -716,7 +751,8 @@
         <div class="chat-input-container">
             <input aria-label="Type message" class="chat-input" id="userInput" placeholder="Type your message..."
                 type="text">
-            <button class="btn btn-primary rounded-pill" id="sendButton" type="button">
+            <button class="btn btn-primary rounded-pill" id="sendButton" type="button" title="Send message"
+                aria-label="Send message">
                 <i class="fas fa-paper-plane"></i>
             </button>
         </div>
@@ -741,16 +777,16 @@
                         <div class="language-compact">
                             <span class="lang-label">Select language:</span>
                             <div class="language-pills">
-                                <a class="lang-pill" href="../index.html" title="切换到中文">
+                                <a class="lang-pill" href="../zh-CN/" title="切换到中文">
                                     <span>🇨🇳</span>
                                 </a>
-                                <a class="lang-pill active" href="index-en.html" title="Switch to English">
+                                <a class="lang-pill active" href="./" title="Switch to English">
                                     <span>🇬🇧</span>
                                 </a>
-                                <a class="lang-pill" href="../it/index-it.html" title="Passa all'italiano">
+                                <a class="lang-pill" href="../it/" title="Passa all'italiano">
                                     <span>🇮🇹</span>
                                 </a>
-                                <a class="lang-pill" href="../jp/index-jp.html" title="日本語に切り替える">
+                                <a class="lang-pill" href="../jp/" title="日本語に切り替える">
                                     <span>🇯🇵</span>
                                 </a>
                             </div>
@@ -823,6 +859,7 @@
     <script src="../js/navigation.js"></script>
     <script src="../js/share.js"></script>
     <script src="../js/enhanced.js"></script>
+    <script src="../js/perf.js"></script>
 </body>
 
 </html>

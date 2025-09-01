@@ -18,7 +18,8 @@ Disallow: /beta/beta-auth.css
 # Allow specific files that are important
 Allow: /sitemap.xml
 Allow: /robots.txt
-Allow: /manifest.json
+Allow: /config/manifest.json
+Allow: /.well-known/security.txt
 Allow: /favicon.ico
 
 # Crawl-delay for polite crawling (optional)

@@ -10,15 +10,15 @@
     <!-- Basic Information -->
     <title>Gallery - Alexander James Carter</title>
     <meta content="Alexander James Carter's gallery showcasing landscape, floral, and food photography"
-          name="description">
+        name="description">
     <meta content="Alexander James Carter" name="author">
     <meta
-            content="photography, gallery, landscape photography, floral photography, food photography, Alexander James Carter"
-            name="keywords">
+        content="photography, gallery, landscape photography, floral photography, food photography, Alexander James Carter"
+        name="keywords">
     <link href="https://alexander.xin/en/gallery-en.html" rel="canonical">
 
     <!-- PWA and Icons -->
-    <link href="../manifest.json" rel="manifest">
+    <link href="../config/manifest.json" rel="manifest">
     <link href="../img/favicon.ico" rel="icon" type="image/x-icon">
     <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -29,8 +29,8 @@
 
     <!-- Fonts -->
     <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
 
     <!-- Styles -->
     <link href="../css/style.default.css" id="theme-stylesheet" rel="stylesheet">
@@ -44,570 +44,616 @@
 </head>
 
 <body>
-<!-- Page loading indicator -->
-<div class="page-loader">
-    <div class="loader-content">
-        <div class="spinner"></div>
-        <p>Loading amazing content...</p>
+    <!-- Page loading indicator -->
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Loading amazing content...</p>
+        </div>
     </div>
-</div>
 
-<!-- Navigation bar -->
-<nav aria-label="Main Navigation" class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar">
-    <div class="scroll-progress"></div>
-    <div class="container position-relative">
-        <a aria-label="Back to Home" class="navbar-brand" href="index-en.html">
-            <img alt="Website Logo" class="nav-logo" height="39" src="../img/logo.png" width="40">
-            <span class="brand-text">Alexander James Carter</span>
-        </a>
+    <!-- Navigation bar -->
+    <nav aria-label="Main Navigation" class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar">
+        <div class="scroll-progress"></div>
+        <div class="container position-relative">
+            <a aria-label="Back to Home" class="navbar-brand" href="index-en.html">
+                <img alt="Website Logo" class="nav-logo" height="39" src="../img/logo.png" width="40">
+                <span class="brand-text">Alexander James Carter</span>
+            </a>
 
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation menu"
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation menu"
                 class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <button aria-label="Back to Top" class="back-to-top">
-            <i class="fas fa-arrow-up"></i>
-        </button>
+            <button aria-label="Back to Top" class="back-to-top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="index-en.html">
-                        <i class="fas fa-home nav-icon"></i> Home
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a aria-current="page" class="nav-link active" href="gallery-en.html">
-                        <i class="fas fa-images nav-icon"></i> Gallery
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="blog-en.html">
-                        <i class="fas fa-feather nav-icon"></i> Blog
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile-en.html">
-                        <i class="fas fa-user nav-icon"></i> About
-                    </a>
-                </li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index-en.html">
+                            <i class="fas fa-home nav-icon"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a aria-current="page" class="nav-link active" href="gallery-en.html">
+                            <i class="fas fa-images nav-icon"></i> Gallery
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog-en.html">
+                            <i class="fas fa-feather nav-icon"></i> Blog
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile-en.html">
+                            <i class="fas fa-user nav-icon"></i> About
+                        </a>
+                    </li>
 
-                <li class="nav-item nav-divider"></li>
+                    <li class="nav-item nav-divider"></li>
 
-                <li class="nav-item dropdown">
-                    <a aria-expanded="false" class="nav-link dropdown-toggle language-selector"
-                       data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button">
-                        <i class="fas fa-globe nav-icon"></i> Language
-                    </a>
-                    <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
-                        <li><a class="dropdown-item" href="../zh-CN/gallery.html">中文</a></li>
-                        <li><a class="dropdown-item active" href="gallery-en.html"><i class="fas fa-check me-2"></i>
-                            English</a></li>
-                        <li><a class="dropdown-item" href="../it/gallery-it.html">Italiano</a></li>
-                        <li><a class="dropdown-item" href="../jp/gallery-jp.html">日本語</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <button aria-label="Toggle Theme" class="theme-toggle-btn" id="theme-toggle">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </li>
-            </ul>
+                    <li class="nav-item dropdown">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle language-selector"
+                            data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+                            <i class="fas fa-globe nav-icon"></i> Language
+                        </a>
+                        <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
+                            <li><a class="dropdown-item" href="../zh-CN/gallery.html">中文</a></li>
+                            <li><a class="dropdown-item active" href="gallery-en.html"><i class="fas fa-check me-2"></i>
+                                    English</a></li>
+                            <li><a class="dropdown-item" href="../it/gallery-it.html">Italiano</a></li>
+                            <li><a class="dropdown-item" href="../jp/gallery-jp.html">日本語</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button aria-label="Toggle Theme" class="theme-toggle-btn" id="theme-toggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<!-- Page title -->
-<section class="page-title parallax-hero dark-overlay bg-cover d-flex align-items-center">
-    <div class="overlay-content w-100 text-white">
+    <!-- Page title -->
+    <section class="page-title parallax-hero dark-overlay bg-cover d-flex align-items-center">
+        <div class="overlay-content w-100 text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="fw-bold animate__animated animate__fadeInUp">Artistic Perspective</h1>
+                        <div class="section-divider">
+                        </div>
+                        <p class="animate__animated animate__fadeIn animate__delay-1s">
+                            Carefully capturing every moment worth remembering, presenting a unique visual feast
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery main content -->
+    <section class="gallery-section py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h1 class="fw-bold animate__animated animate__fadeInUp">Artistic Perspective</h1>
-                    <div class="section-divider">
+            <!-- Introduction -->
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <div class="intro-content">
+                        <!-- Decorative circles -->
+                        <div class="circle-decoration circle-1"></div>
+                        <div class="circle-decoration circle-2"></div>
+
+                        <h2 class="fw-bold mb-3">My Photography World</h2>
+                        <p class="lead text-muted">
+                            Through the lens, I try to capture the fleeting beauty in life, whether it's the magnificent
+                            natural landscapes, the delicate postures of flowers, or tempting food moments, each frame
+                            tells
+                            a unique story.
+                        </p>
+                        <div class="section-divider"></div>
                     </div>
-                    <p class="animate__animated animate__fadeIn animate__delay-1s">
-                        Carefully capturing every moment worth remembering, presenting a unique visual feast
-                    </p>
+                </div>
+            </div>
+
+            <!-- Category filter -->
+            <div class="gallery-filter mb-5 text-center" data-aos="fade-up">
+                <div class="buttons-container">
+                    <button class="filter-btn active" data-filter="all" type="button">All Works</button>
+                    <button class="filter-btn" data-filter="photo" type="button">Landscape</button>
+                    <button class="filter-btn" data-filter="flower" type="button">Flora</button>
+                    <button class="filter-btn" data-filter="food" type="button">Cuisine</button>
+                    <button class="filter-btn" data-filter="design" type="button">Campus</button>
+                </div>
+            </div>
+
+            <!-- Gallery grid -->
+            <div class="gallery-grid">
+                <!-- Landscape Photography -->
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Landscape Photography" class="img-fluid" src="../img/Photo1.jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Natural Scenery</h5>
+                                <p>Landscape Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Photo1.jpg"
+                                    title="View larger - Photo1" aria-label="View larger - Photo1">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Landscape Photography" class="img-fluid" src="../img/Photo2.jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Mountains & Water</h5>
+                                <p>Landscape Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Photo2.jpg"
+                                    title="View larger - Photo2" aria-label="View larger - Photo2">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Landscape Photography" class="img-fluid" src="../img/Photo3.jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Urban Landscape</h5>
+                                <p>Landscape Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Photo3.jpg"
+                                    title="View larger - Photo3" aria-label="View larger - Photo3">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Landscape Photography" class="img-fluid" src="../img/Photo4.jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Beauty of Nature</h5>
+                                <p>Landscape Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Photo4.jpg"
+                                    title="View larger - Photo4" aria-label="View larger - Photo4">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floral Photography -->
+                <div class="gallery-item" data-aos="fade-up" data-category="flower">
+                    <div class="gallery-card">
+                        <img alt="Floral Photography" class="img-fluid" src="../img/Flower1.jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Language of Flowers</h5>
+                                <p>Floral Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Flower1.jpg"
+                                    title="View larger - Flower1" aria-label="View larger - Flower1">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="flower">
+                    <div class="gallery-card">
+                        <img alt="Floral Photography" class="img-fluid" src="../img/Flower2.jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Floral Shadows</h5>
+                                <p>Floral Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Flower2.jpg"
+                                    title="View larger - Flower2" aria-label="View larger - Flower2">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Food Photography -->
+                <div class="gallery-item" data-aos="fade-up" data-category="food">
+                    <div class="gallery-card">
+                        <img alt="Food Photography" class="img-fluid" src="../img/Food1.jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Culinary Feast</h5>
+                                <p>Food Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Food1.jpg"
+                                    title="View larger - Food1" aria-label="View larger - Food1">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="food">
+                    <div class="gallery-card">
+                        <img alt="Food Photography" class="img-fluid" src="../img/Food2.jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Taste Journey</h5>
+                                <p>Food Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Food2.jpg"
+                                    title="View larger - Food2" aria-label="View larger - Food2">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="food">
+                    <div class="gallery-card">
+                        <img alt="Food Photography" class="img-fluid" src="../img/Food3.jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Culinary Exploration</h5>
+                                <p>Food Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/Food3.jpg"
+                                    title="View larger - Food3" aria-label="View larger - Food3">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campus Scenes -->
+                <div class="gallery-item" data-aos="fade-up" data-category="design">
+                    <div class="gallery-card">
+                        <img alt="Campus Scenes" class="img-fluid" src="../img/University.jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Campus View</h5>
+                                <p>Campus Photography</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/University.jpg"
+                                    title="View larger - University" aria-label="View larger - University">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Photo Series -->
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 1" class="img-fluid" src="../img/WebPhoto (1).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression I</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (1).jpg"
+                                    title="View larger - WebPhoto (1)" aria-label="View larger - WebPhoto (1)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional gallery items (WebPhoto series 2-13) follow the same pattern... -->
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 2" class="img-fluid" src="../img/WebPhoto (2).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression II</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (2).jpg"
+                                    title="View larger - WebPhoto (2)" aria-label="View larger - WebPhoto (2)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Continue with WebPhoto series 3-13... -->
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 3" class="img-fluid" src="../img/WebPhoto (3).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression III</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (3).jpg"
+                                    title="View larger - WebPhoto (3)" aria-label="View larger - WebPhoto (3)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More WebPhoto series items would follow the same pattern -->
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 4" class="img-fluid" src="../img/WebPhoto (4).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression IV</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (4).jpg"
+                                    title="View larger - WebPhoto (4)" aria-label="View larger - WebPhoto (4)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 5" class="img-fluid" src="../img/WebPhoto (5).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression V</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (5).jpg"
+                                    title="View larger - WebPhoto (5)" aria-label="View larger - WebPhoto (5)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 6" class="img-fluid" src="../img/WebPhoto (6).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression VI</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (6).jpg"
+                                    title="View larger - WebPhoto (6)" aria-label="View larger - WebPhoto (6)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 7" class="img-fluid" src="../img/WebPhoto (7).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression VII</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (7).jpg"
+                                    title="View larger - WebPhoto (7)" aria-label="View larger - WebPhoto (7)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 8" class="img-fluid" src="../img/WebPhoto (8).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression VIII</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (8).jpg"
+                                    title="View larger - WebPhoto (8)" aria-label="View larger - WebPhoto (8)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 9" class="img-fluid" src="../img/WebPhoto (9).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression IX</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (9).jpg"
+                                    title="View larger - WebPhoto (9)" aria-label="View larger - WebPhoto (9)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 10" class="img-fluid" src="../img/WebPhoto (10).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression X</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (10).jpg"
+                                    title="View larger - WebPhoto (10)" aria-label="View larger - WebPhoto (10)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 11" class="img-fluid" src="../img/WebPhoto (11).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression XI</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (11).jpg"
+                                    title="View larger - WebPhoto (11)" aria-label="View larger - WebPhoto (11)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 12" class="img-fluid" src="../img/WebPhoto (12).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression XII</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (12).jpg"
+                                    title="View larger - WebPhoto (12)" aria-label="View larger - WebPhoto (12)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-aos="fade-up" data-category="photo">
+                    <div class="gallery-card">
+                        <img alt="Web Photography 13" class="img-fluid" src="../img/WebPhoto (13).jpg" loading="lazy"
+                            decoding="async">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h5>Landscape Impression XIII</h5>
+                                <p>Web Photography Series</p>
+                                <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (13).jpg"
+                                    title="View larger - WebPhoto (13)" aria-label="View larger - WebPhoto (13)">
+                                    <i class="fas fa-search-plus"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Gallery main content -->
-<section class="gallery-section py-5">
-    <div class="container">
-        <!-- Introduction -->
-        <div class="row mb-5">
-            <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
-                <div class="intro-content">
-                    <!-- Decorative circles -->
-                    <div class="circle-decoration circle-1"></div>
-                    <div class="circle-decoration circle-2"></div>
-
-                    <h2 class="fw-bold mb-3">My Photography World</h2>
-                    <p class="lead text-muted">
-                        Through the lens, I try to capture the fleeting beauty in life, whether it's the magnificent
-                        natural landscapes, the delicate postures of flowers, or tempting food moments, each frame
-                        tells
-                        a unique story.
-                    </p>
-                    <div class="section-divider"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Category filter -->
-        <div class="gallery-filter mb-5 text-center" data-aos="fade-up">
-            <div class="buttons-container">
-                <button class="filter-btn active" data-filter="all" type="button">All Works</button>
-                <button class="filter-btn" data-filter="photo" type="button">Landscape</button>
-                <button class="filter-btn" data-filter="flower" type="button">Flora</button>
-                <button class="filter-btn" data-filter="food" type="button">Cuisine</button>
-                <button class="filter-btn" data-filter="design" type="button">Campus</button>
-            </div>
-        </div>
-
-        <!-- Gallery grid -->
-        <div class="gallery-grid">
-            <!-- Landscape Photography -->
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Landscape Photography" class="img-fluid" src="../img/Photo1.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Natural Scenery</h5>
-                            <p>Landscape Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Photo1.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Landscape Photography" class="img-fluid" src="../img/Photo2.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Mountains & Water</h5>
-                            <p>Landscape Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Photo2.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Landscape Photography" class="img-fluid" src="../img/Photo3.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Urban Landscape</h5>
-                            <p>Landscape Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Photo3.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Landscape Photography" class="img-fluid" src="../img/Photo4.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Beauty of Nature</h5>
-                            <p>Landscape Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Photo4.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Floral Photography -->
-            <div class="gallery-item" data-aos="fade-up" data-category="flower">
-                <div class="gallery-card">
-                    <img alt="Floral Photography" class="img-fluid" src="../img/Flower1.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Language of Flowers</h5>
-                            <p>Floral Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Flower1.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="flower">
-                <div class="gallery-card">
-                    <img alt="Floral Photography" class="img-fluid" src="../img/Flower2.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Floral Shadows</h5>
-                            <p>Floral Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Flower2.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Food Photography -->
-            <div class="gallery-item" data-aos="fade-up" data-category="food">
-                <div class="gallery-card">
-                    <img alt="Food Photography" class="img-fluid" src="../img/Food1.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Culinary Feast</h5>
-                            <p>Food Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Food1.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="food">
-                <div class="gallery-card">
-                    <img alt="Food Photography" class="img-fluid" src="../img/Food2.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Taste Journey</h5>
-                            <p>Food Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Food2.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="food">
-                <div class="gallery-card">
-                    <img alt="Food Photography" class="img-fluid" src="../img/Food3.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Culinary Exploration</h5>
-                            <p>Food Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/Food3.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Campus Scenes -->
-            <div class="gallery-item" data-aos="fade-up" data-category="design">
-                <div class="gallery-card">
-                    <img alt="Campus Scenes" class="img-fluid" src="../img/University.jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Campus View</h5>
-                            <p>Campus Photography</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/University.jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Web Photo Series -->
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 1" class="img-fluid" src="../img/WebPhoto (1).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression I</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (1).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional gallery items (WebPhoto series 2-13) follow the same pattern... -->
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 2" class="img-fluid" src="../img/WebPhoto (2).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression II</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (2).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Continue with WebPhoto series 3-13... -->
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 3" class="img-fluid" src="../img/WebPhoto (3).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression III</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (3).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- More WebPhoto series items would follow the same pattern -->
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 4" class="img-fluid" src="../img/WebPhoto (4).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression IV</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (4).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 5" class="img-fluid" src="../img/WebPhoto (5).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression V</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (5).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 6" class="img-fluid" src="../img/WebPhoto (6).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression VI</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (6).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 7" class="img-fluid" src="../img/WebPhoto (7).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression VII</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (7).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 8" class="img-fluid" src="../img/WebPhoto (8).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression VIII</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (8).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 9" class="img-fluid" src="../img/WebPhoto (9).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression IX</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (9).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 10" class="img-fluid" src="../img/WebPhoto (10).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression X</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (10).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 11" class="img-fluid" src="../img/WebPhoto (11).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression XI</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (11).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 12" class="img-fluid" src="../img/WebPhoto (12).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression XII</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (12).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item" data-aos="fade-up" data-category="photo">
-                <div class="gallery-card">
-                    <img alt="Web Photography 13" class="img-fluid" src="../img/WebPhoto (13).jpg">
-                    <div class="gallery-overlay">
-                        <div class="gallery-info">
-                            <h5>Landscape Impression XIII</h5>
-                            <p>Web Photography Series</p>
-                            <a class="btn-view" data-gallery="gallery-all" href="../img/WebPhoto (13).jpg">
-                                <i class="fas fa-search-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer class="site-footer">
-    <div class="footer-particles"></div>
-    <div class="container footer-content">
-        <!-- Main footer content -->
-        <div class="row align-items-center footer-main">
-            <!-- Left: Website info and introduction -->
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <div class="footer-brand">
-                    <a class="footer-logo-link" href="index-en.html">
-                        <img alt="Website Logo" height="39" src="../img/logo.png" width="40">
-                        <span>Alexander J. Carter</span>
-                    </a>
-                    <p class="footer-slogan">Capturing art in life, sharing unique perspectives</p>
-                </div>
-            </div>
-
-            <!-- Middle: Streamlined navigation links -->
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <div class="footer-mini-nav">
-                    <a href="index-en.html">Home</a>
-                    <a class="active" href="gallery-en.html">Gallery</a>
-                    <a href="blog-en.html">Blog</a>
-                    <a href="profile-en.html">About</a>
-                </div>
-            </div>
-
-            <!-- Right: Language switching and social links -->
-            <div class="col-lg-4 col-md-12">
-                <div class="footer-connect">
-                    <!-- Language switcher -->
-                    <div class="language-bar">
-                        <a href="../zh-CN/gallery.html">中文</a>
-                        <span class="lang-divider">|</span>
-                        <a class="active" href="gallery-en.html">English</a>
-                        <span class="lang-divider">|</span>
-                        <a href="../it/gallery-it.html">Italiano</a>
-                        <span class="lang-divider">|</span>
-                        <a href="../jp/gallery-jp.html">日本語</a>
-                    </div>
-
-                    <!-- Social icons -->
-                    <div class="social-icons">
-                        <a class="social-icon weibo" href="javascript:void(0)" title="Share to Weibo">
-                            <i class="fab fa-weibo"></i>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-particles"></div>
+        <div class="container footer-content">
+            <!-- Main footer content -->
+            <div class="row align-items-center footer-main">
+                <!-- Left: Website info and introduction -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-brand">
+                        <a class="footer-logo-link" href="index-en.html">
+                            <img alt="Website Logo" height="39" src="../img/logo.png" width="40">
+                            <span>Alexander J. Carter</span>
                         </a>
-                        <a class="social-icon wechat" href="javascript:void(0)" title="Share to WeChat">
-                            <i class="fab fa-weixin"></i>
-                        </a>
-                        <a class="social-icon github" href="https://github.com/AlexanderJ-Carter" target="_blank"
-                           title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
+                        <p class="footer-slogan">Capturing art in life, sharing unique perspectives</p>
+                    </div>
+                </div>
+
+                <!-- Middle: Streamlined navigation links -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <div class="footer-mini-nav">
+                        <a href="index-en.html">Home</a>
+                        <a class="active" href="gallery-en.html">Gallery</a>
+                        <a href="blog-en.html">Blog</a>
+                        <a href="profile-en.html">About</a>
+                    </div>
+                </div>
+
+                <!-- Right: Language switching and social links -->
+                <div class="col-lg-4 col-md-12">
+                    <div class="footer-connect">
+                        <!-- Language switcher -->
+                        <div class="language-bar">
+                            <a href="../zh-CN/gallery.html">中文</a>
+                            <span class="lang-divider">|</span>
+                            <a class="active" href="gallery-en.html">English</a>
+                            <span class="lang-divider">|</span>
+                            <a href="../it/gallery-it.html">Italiano</a>
+                            <span class="lang-divider">|</span>
+                            <a href="../jp/gallery-jp.html">日本語</a>
+                        </div>
+
+                        <!-- Social icons -->
+                        <div class="social-icons">
+                            <a class="social-icon weibo" href="javascript:void(0)" title="Share to Weibo">
+                                <i class="fab fa-weibo"></i>
+                            </a>
+                            <a class="social-icon wechat" href="javascript:void(0)" title="Share to WeChat">
+                                <i class="fab fa-weixin"></i>
+                            </a>
+                            <a class="social-icon github" href="https://github.com/AlexanderJ-Carter" target="_blank"
+                                rel="noopener" title="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Footer bottom -->
-        <div class="footer-bottom">
-            <div class="copyright">
-                © 2025 Alexander James Carter. All Rights Reserved
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <a class="me-3" href="privacy-en.html" rel="noopener" title="Read Privacy Policy">Privacy Policy</a>
-                <a class="me-3" href="terms-en.html" rel="noopener" title="Read Terms of Service">Terms of
-                    Service</a>
-                <a href="contact-en.html" rel="noopener" title="Contact Us">Contact Us</a>
+            <!-- Footer bottom -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2025 Alexander James Carter. All Rights Reserved
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a class="me-3" href="privacy-en.html" rel="noopener" title="Read Privacy Policy">Privacy Policy</a>
+                    <a class="me-3" href="terms-en.html" rel="noopener" title="Read Terms of Service">Terms of
+                        Service</a>
+                    <a href="contact-en.html" rel="noopener" title="Contact Us">Contact Us</a>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<!-- JavaScript files -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="../js/glightbox.min.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/enhanced.js"></script>
-<script src="../js/gallery.js"></script>
+    <!-- JavaScript files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/glightbox.min.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/enhanced.js"></script>
+    <script src="../js/gallery.js"></script>
 </body>
 
 </html>

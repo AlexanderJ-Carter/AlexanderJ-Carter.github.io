@@ -42,21 +42,26 @@
     </script>
 
     <!-- PWA和图标 -->
-    <link href="manifest.json" rel="manifest">
+    <link href="config/manifest.json" rel="manifest">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="default" name="apple-mobile-web-app-status-bar-style">
     <meta content="#ffffff" name="theme-color">
-    <meta content="light" name="color-scheme">
+    <meta content="light dark" name="color-scheme">
     <link href="img/favicon.ico" rel="icon" type="image/x-icon">
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- 社交分享配置 -->
     <meta content="网站地图 - Alexander James Carter" property="og:title">
     <meta content="完整的网站结构导航和页面地图，快速找到您需要的功能和内容" property="og:description">
-    <meta content="img/logo.png" property="og:image">
+    <meta content="https://alexander.xin/img/logo.png" property="og:image">
     <meta content="https://alexander.xin/map.html" property="og:url">
     <meta content="website" property="og:type">
     <meta content="zh_CN" property="og:locale">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="网站地图 - Alexander James Carter">
+    <meta name="twitter:description" content="完整的网站结构导航和页面地图，快速找到您需要的功能和内容">
+    <meta name="twitter:image" content="https://alexander.xin/img/logo.png">
 
     <!-- 第三方样式库 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -65,6 +70,8 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- 字体 -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
         rel="stylesheet">
@@ -82,24 +89,65 @@
     <link href="css/chatbot.css" rel="stylesheet">
 
     <style>
+        :root {
+            --bg: #0e1116;
+            --bg-grad-1: #1b2430;
+            --bg-grad-2: #111827;
+            --brand-1: #667eea;
+            --brand-2: #764ba2;
+            --accent: #8be9fd;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --ring: rgba(102, 126, 234, 0.45);
+            --shadow-hi: rgba(0, 0, 0, 0.25);
+            --shadow-lo: rgba(255, 255, 255, 0.65);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0a0c10;
+                --bg-grad-1: #0f172a;
+                --bg-grad-2: #111827;
+                --card-bg: #0f141b;
+                --text: #e5e7eb;
+                --muted: #9ca3af;
+                --shadow-hi: rgba(0, 0, 0, 0.6);
+                --shadow-lo: rgba(255, 255, 255, 0.06);
+            }
+        }
+
         /* 网站地图专用样式 */
         .sitemap-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 120px 0 80px;
+            background: radial-gradient(1200px 600px at 10% -10%, var(--brand-1) 0%, transparent 60%),
+                radial-gradient(1000px 500px at 110% 20%, var(--brand-2) 0%, transparent 60%),
+                linear-gradient(135deg, var(--bg-grad-1), var(--bg-grad-2));
+            color: #fff;
+            padding: 120px 0 90px;
             position: relative;
             overflow: hidden;
+            isolation: isolate;
         }
 
         .sitemap-hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.09)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        .sitemap-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(500px 200px at 20% 15%, rgba(255, 255, 255, 0.15), transparent 60%),
+                radial-gradient(600px 260px at 80% 25%, rgba(255, 255, 255, 0.12), transparent 60%);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            opacity: 0.9;
+            z-index: 0;
         }
 
         .sitemap-content {
@@ -107,26 +155,32 @@
             z-index: 2;
         }
 
+        /* 新拟态卡片风格 */
         .sitemap-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 28px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow:
+                10px 14px 24px var(--shadow-hi),
+                -10px -10px 24px var(--shadow-lo);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            position: relative;
         }
 
         .sitemap-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow:
+                12px 18px 28px var(--shadow-hi),
+                -12px -12px 28px var(--shadow-lo);
         }
 
         .section-title {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #333;
+            color: var(--text);
             margin-bottom: 20px;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid var(--brand-1);
             padding-bottom: 10px;
             display: flex;
             align-items: center;
@@ -146,28 +200,32 @@
         }
 
         .page-item {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 10px;
-            padding: 20px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 18px 18px;
             text-decoration: none;
-            color: #333;
-            transition: all 0.3s ease;
+            color: var(--text);
+            transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
             display: flex;
             align-items: center;
             gap: 12px;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
         }
 
         .page-item:hover {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.16), rgba(118, 75, 162, 0.16));
+            color: #fff;
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 8px 26px rgba(102, 126, 234, 0.35);
         }
 
         .page-item i {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             min-width: 20px;
+            color: var(--brand-1);
         }
 
         .page-info {
@@ -191,17 +249,18 @@
         }
 
         .section-intro {
-            color: #666;
+            color: var(--muted);
             font-style: italic;
             margin-bottom: 15px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            border-radius: 0 8px 8px 0;
+            padding: 14px 16px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+            border-left: 4px solid var(--brand-1);
+            border-radius: 10px;
         }
 
         .breadcrumb-container {
             background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             padding: 15px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -241,6 +300,7 @@
             background: rgba(255, 255, 255, 0.2);
             border-radius: 10px;
             padding: 20px;
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
         }
 
@@ -268,6 +328,28 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* 亮面扫光效果 */
+        .page-item::after {
+            content: '';
+            position: absolute;
+            top: -120%;
+            left: -30%;
+            width: 30%;
+            height: 300%;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0));
+            transform: rotate(15deg);
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .page-item:hover::after {
+            transform: translateX(220%) rotate(15deg);
+            opacity: 1;
+        }
+
+        /* 过滤条（已移除） */
     </style>
 </head>
 
@@ -285,10 +367,11 @@
                         探索完整的网站结构，快速找到您需要的功能和内容
                     </p>
                     <div class="animate__animated animate__fadeInUp animate__delay-2s">
-                        <a class="btn btn-outline-light btn-lg rounded-pill me-3" href="zh-CN/gallery.html">
+                        <a class="btn btn-outline-light btn-lg rounded-pill me-3" href="zh-CN/gallery.html"
+                            title="开始探索画廊" aria-label="开始探索画廊">
                             <i class="fas fa-compass me-2"></i>开始探索
                         </a>
-                        <a class="btn btn-light btn-lg rounded-pill" href="index.html">
+                        <a class="btn btn-light btn-lg rounded-pill" href="index.html" title="返回首页" aria-label="返回首页">
                             <i class="fas fa-home me-2"></i>返回首页
                         </a>
                     </div>
@@ -296,6 +379,8 @@
             </div>
         </div>
     </section>
+
+    <!-- 过滤/搜索条（应用户要求已移除） -->
 
     <!-- 统计信息 -->
     <div class="container my-5">
@@ -603,6 +688,7 @@
     <!-- JavaScript files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script defer src="js/perf.js"></script>
     <script src="js/chatbot.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/enhanced.js"></script>
@@ -614,23 +700,29 @@
             once: true
         });
 
-        // 页脚语言选择器功能
-        document.getElementById('footer-language-select').addEventListener('change', function () {
-            window.location.href = this.value;
-        });
+        // 页脚语言选择器功能（存在性校验）
+        const footerLang = document.getElementById('footer-language-select');
+        if (footerLang) {
+            footerLang.addEventListener('change', function () {
+                window.location.href = this.value;
+            });
+        }
 
-        // 主题切换功能
-        document.getElementById('theme-toggle').addEventListener('click', function () {
-            document.body.classList.toggle('dark-theme');
-            const icon = this.querySelector('i');
-            if (document.body.classList.contains('dark-theme')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-        });
+        // 主题切换功能（存在性校验）
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function () {
+                document.body.classList.toggle('dark-theme');
+                const icon = this.querySelector('i');
+                if (document.body.classList.contains('dark-theme')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+            });
+        }
 
         // 平滑滚动到指定区域
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -645,6 +737,8 @@
                 }
             });
         });
+
+        // 站点地图搜索/过滤（应用户要求已移除）
     </script>
 </body>
 

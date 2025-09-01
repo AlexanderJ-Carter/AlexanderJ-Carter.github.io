@@ -26,51 +26,37 @@
     <script src="js/time.js"></script>
 
     <script>
-    // IIFE to handle API/text requests immediately
-    (function() {
-        const params = new URLSearchParams(window.location.search);
-        const isJson = params.has('format') && params.get('format') === 'json';
-        const isApi = params.has('api');
-        const isText = params.has('text');
+        // IIFE to handle API/text requests immediately. Note: On static hosting, JavaScript isn't executed by curl.
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const isJson = params.has('format') && params.get('format') === 'json';
+            const isApi = params.has('api');
+            const isText = params.has('text');
 
-        if (isJson || isApi) {
-            if (window.TimeService && typeof window.TimeService.generateTimeData === 'function') {
-                const data = window.TimeService.generateTimeData();
-                document.open();
-                document.write('<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>Time API Response</title><meta http-equiv="Content-Type" content="application/json; charset=utf-8"></head><body>');
-                document.write('<pre style="white-space: pre-wrap; word-wrap: break-word; font-family: monospace;">' + JSON.stringify(data, null, 2) + '</pre>');
-                document.write('</body></html>');
-                document.close();
-                window.apiResponseSent = true; // Flag that API response was handled
-            } else {
-                // Fallback if TimeService or its method is not available
-                document.open();
-                document.write('<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>Error</title><meta http-equiv="Content-Type" content="application/json; charset=utf-8"></head><body>');
-                document.write('<pre style="white-space: pre-wrap; word-wrap: break-word; font-family: monospace;">' + JSON.stringify({error: "Time service (generateTimeData) not available."}, null, 2) + '</pre>');
-                document.write('</body></html>');
-                document.close();
-                window.apiResponseSent = true; // Still flag as handled
+            function writePlain(content) {
+                // Emit plain body without HTML wrapper for better copyability in browsers
+                try { document.open(); } catch (e) { }
+                document.write(content);
+                try { document.close(); } catch (e) { }
+                window.apiResponseSent = true;
             }
-        } else if (isText) {
-            if (window.TimeService && typeof window.TimeService.generateTextResponse === 'function') {
-                const textData = window.TimeService.generateTextResponse();
-                document.open();
-                document.write('<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>Time API Response</title><meta http-equiv="Content-Type" content="text/plain; charset=utf-8"></head><body>');
-                document.write('<pre style="white-space: pre-wrap; word-wrap: break-word; font-family: monospace;">' + textData + '</pre>');
-                document.write('</body></html>');
-                document.close();
-                window.apiResponseSent = true; // Flag that API response was handled
-            } else {
-                // Fallback if TimeService or its method is not available
-                document.open();
-                document.write('<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>Error</title><meta http-equiv="Content-Type" content="text/plain; charset=utf-8"></head><body>');
-                document.write('<pre style="white-space: pre-wrap; word-wrap: break-word; font-family: monospace;">Error: Time service (generateTextResponse) not available.</pre>');
-                document.write('</body></html>');
-                document.close();
-                window.apiResponseSent = true; // Still flag as handled
+
+            if (isJson || isApi) {
+                if (window.TimeService && typeof window.TimeService.generateTimeData === 'function') {
+                    const data = window.TimeService.generateTimeData();
+                    writePlain(JSON.stringify(data, null, 2));
+                } else {
+                    writePlain(JSON.stringify({ error: 'Time service (generateTimeData) not available.' }, null, 2));
+                }
+            } else if (isText) {
+                if (window.TimeService && typeof window.TimeService.generateTextResponse === 'function') {
+                    const textData = window.TimeService.generateTextResponse();
+                    writePlain(String(textData));
+                } else {
+                    writePlain('Error: Time service (generateTextResponse) not available.');
+                }
             }
-        }
-    })();
+        })();
     </script>
 </head>
 
@@ -110,22 +96,24 @@
                 <div class="code-block">
                     <span class="code-title">文本格式：</span>
                     <code>curl "time.alexander.xin?text=1"</code>
-                    <button class="copy-btn" aria-label="Copy command" onclick="copyToClipboard('curl &quot;time.alexander.xin?text=1&quot;')">
+                    <button class="copy-btn" aria-label="Copy command"
+                        onclick="copyToClipboard('curl &quot;time.alexander.xin?text=1&quot;')">
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
                 <div class="code-block">
                     <span class="code-title">API调用：</span>
                     <code>curl "time.alexander.xin?api=1"</code>
-                    <button class="copy-btn" aria-label="Copy command" onclick="copyToClipboard('curl &quot;time.alexander.xin?api=1&quot;')">
+                    <button class="copy-btn" aria-label="Copy command"
+                        onclick="copyToClipboard('curl &quot;time.alexander.xin?api=1&quot;')">
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
                 <div class="code-block">
                     <span class="code-title">PowerShell：</span>
-                    <code>Invoke-WebRequest "time.alexander.xin?format=json"</code>
+                    <code>curl.exe "time.alexander.xin?format=json"</code>
                     <button class="copy-btn" aria-label="Copy command"
-                        onclick="copyToClipboard('Invoke-WebRequest &quot;time.alexander.xin?format=json&quot;')">
+                        onclick="copyToClipboard('curl.exe &quot;time.alexander.xin?format=json&quot;')">
                         <i class="fas fa-copy"></i>
                     </button>
                 </div>
