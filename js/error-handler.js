@@ -122,6 +122,13 @@ function getBasePath() {
 
 // 监听AJAX请求错误 - Github Pages优化版本
 document.addEventListener('DOMContentLoaded', function () {
+    // 语言页面标记，支持所有语言目录
+    var langPageMatch = window.location.pathname.match(/^\/(zh-CN|en|it|jp|fr|de|es|ru)\/(index\.html)?$/);
+    if (langPageMatch) {
+        window.isLanguagePage = true;
+        console.log('检测到语言页面:', langPageMatch[1]);
+    }
+
     // 拦截XMLHttpRequest
     const originalXHROpen = XMLHttpRequest.prototype.open;
     XMLHttpRequest.prototype.open = function () {
@@ -177,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     !target.getAttribute('download');
 
                 // 排除语言子目录页面和重要页面的预检查
-                const isLanguageOrImportantPage = target.href.match(/\/(zh-CN|en|it|jp)\//) ||
+                const isLanguageOrImportantPage = target.href.match(/\/(zh-CN|en|it|jp|fr|de|es|ru)\//) ||
                                                  target.href.endsWith('/') ||
                                                  target.href.includes('index.html') ||
                                                  target.href.includes('404.html');
@@ -238,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentPath = window.location.pathname;
         
         // 排除正常的语言目录页面
-        const isValidLanguagePage = currentPath.match(/^\/(zh-CN|en|it|jp)\/(index\.html)?$/);
+        const isValidLanguagePage = currentPath.match(/^\/(zh-CN|en|it|jp|fr|de|es|ru)\/(index\.html)?$/);
         const isRootPage = currentPath === '/' || currentPath === '/index.html';
         
         // 只有在确实是404页面时才触发
@@ -272,6 +279,10 @@ function detectLanguageFromUrl(url) {
     if (url.includes('/en/') || url.includes('-en.')) return 'en';
     if (url.includes('/it/') || url.includes('-it.')) return 'it';
     if (url.includes('/jp/') || url.includes('-jp.')) return 'jp';
+    if (url.includes('/fr/') || url.includes('-fr.')) return 'fr';
+    if (url.includes('/de/') || url.includes('-de.')) return 'de';
+    if (url.includes('/es/') || url.includes('-es.')) return 'es';
+    if (url.includes('/ru/') || url.includes('-ru.')) return 'ru';
 
     // 检查HTML lang属性
     const htmlElement = document.documentElement;
@@ -280,6 +291,10 @@ function detectLanguageFromUrl(url) {
         if (pageLang.startsWith('en')) return 'en';
         if (pageLang.startsWith('it')) return 'it';
         if (pageLang.startsWith('ja') || pageLang.startsWith('jp')) return 'jp';
+        if (pageLang.startsWith('fr')) return 'fr';
+        if (pageLang.startsWith('de')) return 'de';
+        if (pageLang.startsWith('es')) return 'es';
+        if (pageLang.startsWith('ru')) return 'ru';
     }
 
     return 'zh-CN';
