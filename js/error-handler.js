@@ -1,4 +1,22 @@
+// 语言页面错误处理豁免检查
+(function checkLanguagePageExemption() {
+    const currentPath = window.location.pathname;
+    const isLanguagePage = currentPath.match(/^\/(zh-CN|en|it|jp)\/(index\.html)?$/);
+    
+    if (isLanguagePage) {
+        // 为语言页面设置标记，避免误触发错误处理
+        window.isLanguagePage = true;
+        console.log('检测到语言子目录页面，已禁用部分错误处理逻辑');
+    }
+})();
+
 window.addEventListener('error', function (e) {
+    // 语言页面跳过某些错误处理
+    if (window.isLanguagePage && (e.message.includes('404') || e.status === 404)) {
+        console.log('语言页面404错误已忽略');
+        return;
+    }
+    
     console.error('页面错误:', e.message);
     // 记录错误日志
     logError(e);
@@ -158,7 +176,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     !target.href.startsWith('#') &&
                     !target.getAttribute('download');
 
-                if (isInternalLink && !target.hasAttribute('data-noerror')) {
+                // 排除语言子目录页面和重要页面的预检查
+                const isLanguageOrImportantPage = target.href.match(/\/(zh-CN|en|it|jp)\//) ||
+                                                 target.href.endsWith('/') ||
+                                                 target.href.includes('index.html') ||
+                                                 target.href.includes('404.html');
+
+                if (isInternalLink && !target.hasAttribute('data-noerror') && !isLanguageOrImportantPage) {
                     // 为内部链接添加错误处理
                     const originalHref = target.href;
 
@@ -202,13 +226,28 @@ document.addEventListener('DOMContentLoaded', function () {
     // 添加对直接404响应的检测
     // GitHub Pages会直接返回自定义404页面而不是HTTP状态码
     function checkIfGithubPages404() {
+        // 如果是语言页面，跳过404检测
+        if (window.isLanguagePage) {
+            console.log('语言页面跳过404检测');
+            return;
+        }
+        
         // 在GitHub Pages上，通常会在不存在的URL上加载404.html的内容
         // 检查当前页面是否是404页面的特征
-        if (
-            document.title.includes('404') ||
-            document.title.toLowerCase().includes('not found') ||
-            (document.body.innerText && document.body.innerText.includes('404'))
-        ) {
+        
+        const currentPath = window.location.pathname;
+        
+        // 排除正常的语言目录页面
+        const isValidLanguagePage = currentPath.match(/^\/(zh-CN|en|it|jp)\/(index\.html)?$/);
+        const isRootPage = currentPath === '/' || currentPath === '/index.html';
+        
+        // 只有在确实是404页面时才触发
+        const isActual404Page = (currentPath.includes('404.html') || 
+                               currentPath.includes('404-')) &&
+                               (document.title.includes('404') || 
+                                document.title.toLowerCase().includes('not found'));
+        
+        if (isActual404Page && !isValidLanguagePage && !isRootPage) {
             // 检测到可能是GitHub Pages的404响应
             console.log('检测到GitHub Pages 404页面');
             setTimeout(() => {
