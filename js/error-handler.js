@@ -11,9 +11,13 @@
 })();
 
 window.addEventListener('error', function (e) {
-    // 语言页面跳过某些错误处理
-    if (window.isLanguagePage && (e.message.includes('404') || e.status === 404)) {
-        console.log('语言页面404错误已忽略');
+    // 语言页面和首页跳过错误处理
+    const currentPath = window.location.pathname;
+    if (window.isLanguagePage || 
+        currentPath === '/' || 
+        currentPath === '/index.html' ||
+        currentPath.match(/^\/(zh-CN|en|it|jp|fr|de|es|ru)\/(index\.html)?$/)) {
+        console.log('跳过错误处理 - 这是正常页面');
         return;
     }
     
@@ -31,6 +35,15 @@ window.addEventListener('unhandledrejection', function (e) {
 function logError(error) {
     // 这里可以添加错误上报逻辑
     console.log('错误已记录:', error);
+
+    // 如果是语言页面或首页，跳过404处理
+    if (window.isLanguagePage || 
+        window.location.pathname === '/' || 
+        window.location.pathname === '/index.html' ||
+        window.location.pathname.match(/^\/(zh-CN|en|it|jp|fr|de|es|ru)\/(index\.html)?$/)) {
+        console.log('跳过页面404处理 - 这是正常页面');
+        return;
+    }
 
     if (
         error &&
@@ -133,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const originalXHROpen = XMLHttpRequest.prototype.open;
     XMLHttpRequest.prototype.open = function () {
         this.addEventListener('load', function () {
-            if (this.status === 404) {
+            if (this.status === 404 && !window.isLanguagePage) {
                 console.error('AJAX请求404错误');
                 logError({status: 404, message: 'AJAX请求资源未找到'});
             }
@@ -148,11 +161,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         fetchPromise
             .catch((error) => {
-                console.error('Fetch请求错误:', error);
-                logError(error);
+                if (!window.isLanguagePage) {
+                    console.error('Fetch请求错误:', error);
+                    logError(error);
+                }
             })
             .then((response) => {
-                if (response && response.status === 404) {
+                if (response && response.status === 404 && !window.isLanguagePage) {
                     console.error('Fetch请求404错误');
                     logError({status: 404, message: 'Fetch请求资源未找到'});
                 }
@@ -233,20 +248,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // 添加对直接404响应的检测
     // GitHub Pages会直接返回自定义404页面而不是HTTP状态码
     function checkIfGithubPages404() {
-        // 如果是语言页面，跳过404检测
-        if (window.isLanguagePage) {
-            console.log('语言页面跳过404检测');
+        // 如果是语言页面或首页，完全跳过404检测
+        const currentPath = window.location.pathname;
+        if (window.isLanguagePage || 
+            currentPath === '/' || 
+            currentPath === '/index.html' ||
+            currentPath.match(/^\/(zh-CN|en|it|jp|fr|de|es|ru)\/(index\.html)?$/)) {
+            console.log('跳过404检测 - 这是正常页面');
             return;
         }
-        
-        // 在GitHub Pages上，通常会在不存在的URL上加载404.html的内容
-        // 检查当前页面是否是404页面的特征
-        
-        const currentPath = window.location.pathname;
-        
-        // 排除正常的语言目录页面
-        const isValidLanguagePage = currentPath.match(/^\/(zh-CN|en|it|jp|fr|de|es|ru)\/(index\.html)?$/);
-        const isRootPage = currentPath === '/' || currentPath === '/index.html';
         
         // 只有在确实是404页面时才触发
         const isActual404Page = (currentPath.includes('404.html') || 
@@ -254,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                (document.title.includes('404') || 
                                 document.title.toLowerCase().includes('not found'));
         
-        if (isActual404Page && !isValidLanguagePage && !isRootPage) {
+        if (isActual404Page) {
             // 检测到可能是GitHub Pages的404响应
             console.log('检测到GitHub Pages 404页面');
             setTimeout(() => {
