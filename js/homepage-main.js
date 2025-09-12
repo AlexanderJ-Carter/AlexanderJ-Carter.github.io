@@ -3,20 +3,23 @@
  * 主页交互脚本
  */
 
-// 自动语言跳转脚本
+// 自动语言跳转脚本 - 临时禁用
 (function initLanguageRedirect() {
     // 仅在根目录页面执行
     var isRoot =
         location.pathname === '/' || location.pathname === '/index.html';
     if (!isRoot) return;
 
+    // 临时禁用自动语言跳转，防止跳转问题
+    console.log('自动语言跳转已临时禁用');
+    
     // 延迟加载语言跳转脚本，给用户时间看到页面
-    setTimeout(function () {
-        var script = document.createElement('script');
-        script.src = '/js/lang-redirect.js';
-        script.defer = true;
-        document.head.appendChild(script);
-    }, 3000); // 3秒后再执行自动跳转
+    // setTimeout(function () {
+    //     var script = document.createElement('script');
+    //     script.src = '/js/lang-redirect.js';
+    //     script.defer = true;
+    //     document.head.appendChild(script);
+    // }, 3000); // 3秒后再执行自动跳转
 })();
 
 // 导航栏滚动效果
