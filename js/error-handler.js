@@ -1,23 +1,27 @@
 // 语言页面错误处理豁免检查
 (function checkLanguagePageExemption() {
     const currentPath = window.location.pathname;
-    const isLanguagePage = currentPath.match(/^\/(zh-CN|en|it|jp)\/(index\.html)?$/);
+    const isLanguagePage = currentPath.match(/^\/(zh-CN|en|it|jp|fr|de|es|ru)\/(index\.html)?$/);
+    const isRootPage = currentPath === '/' || currentPath === '/index.html';
     
-    if (isLanguagePage) {
-        // 为语言页面设置标记，避免误触发错误处理
+    if (isLanguagePage || isRootPage) {
+        // 为语言页面和首页设置标记，完全禁用错误处理
         window.isLanguagePage = true;
-        console.log('检测到语言子目录页面，已禁用部分错误处理逻辑');
+        window.disableErrorHandling = true;
+        console.log('检测到首页或语言页面，已完全禁用错误处理逻辑');
+        
+        // 重写handle404函数，防止任何跳转
+        window.handle404 = function() {
+            console.log('404处理已被禁用 - 这是正常页面');
+            return;
+        };
     }
 })();
 
 window.addEventListener('error', function (e) {
-    // 语言页面和首页跳过错误处理
-    const currentPath = window.location.pathname;
-    if (window.isLanguagePage || 
-        currentPath === '/' || 
-        currentPath === '/index.html' ||
-        currentPath.match(/^\/(zh-CN|en|it|jp|fr|de|es|ru)\/(index\.html)?$/)) {
-        console.log('跳过错误处理 - 这是正常页面');
+    // 如果是首页或语言页面，完全跳过错误处理
+    if (window.disableErrorHandling || window.isLanguagePage) {
+        console.log('错误处理已禁用 - 这是正常页面');
         return;
     }
     
@@ -27,23 +31,26 @@ window.addEventListener('error', function (e) {
 });
 
 window.addEventListener('unhandledrejection', function (e) {
+    // 如果是首页或语言页面，完全跳过错误处理
+    if (window.disableErrorHandling || window.isLanguagePage) {
+        console.log('Promise错误处理已禁用 - 这是正常页面');
+        return;
+    }
+    
     console.error('未处理的Promise拒绝:', e.reason);
     // 记录错误日志
     logError(e.reason);
 });
 
 function logError(error) {
-    // 这里可以添加错误上报逻辑
-    console.log('错误已记录:', error);
-
-    // 如果是语言页面或首页，跳过404处理
-    if (window.isLanguagePage || 
-        window.location.pathname === '/' || 
-        window.location.pathname === '/index.html' ||
-        window.location.pathname.match(/^\/(zh-CN|en|it|jp|fr|de|es|ru)\/(index\.html)?$/)) {
-        console.log('跳过页面404处理 - 这是正常页面');
+    // 如果是首页或语言页面，完全跳过错误处理
+    if (window.disableErrorHandling || window.isLanguagePage) {
+        console.log('logError已禁用 - 这是正常页面');
         return;
     }
+    
+    // 这里可以添加错误上报逻辑
+    console.log('错误已记录:', error);
 
     if (
         error &&
@@ -55,6 +62,12 @@ function logError(error) {
 }
 
 function handle404() {
+    // 如果是首页或语言页面，完全禁止跳转
+    if (window.disableErrorHandling || window.isLanguagePage) {
+        console.log('404跳转已禁用 - 这是正常页面');
+        return;
+    }
+    
     console.log('检测到404错误，正在跳转到404页面...');
 
     // 获取当前URL基础路径，处理GitHub Pages可能的子目录问题
@@ -248,13 +261,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // 添加对直接404响应的检测
     // GitHub Pages会直接返回自定义404页面而不是HTTP状态码
     function checkIfGithubPages404() {
-        // 如果是语言页面或首页，完全跳过404检测
+        // 如果是首页或语言页面，完全跳过404检测
+        if (window.disableErrorHandling || window.isLanguagePage) {
+            console.log('404检测已禁用 - 这是正常页面');
+            return;
+        }
+        
         const currentPath = window.location.pathname;
-        if (window.isLanguagePage || 
-            currentPath === '/' || 
+        
+        // 再次检查是否是正常页面
+        if (currentPath === '/' || 
             currentPath === '/index.html' ||
             currentPath.match(/^\/(zh-CN|en|it|jp|fr|de|es|ru)\/(index\.html)?$/)) {
-            console.log('跳过404检测 - 这是正常页面');
+            console.log('跳过404检测 - 这是正常页面路径');
             return;
         }
         
@@ -273,11 +292,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // 执行检测
-    checkIfGithubPages404();
+    // 执行检测 - 只在非语言页面执行
+    if (!window.disableErrorHandling && !window.isLanguagePage) {
+        checkIfGithubPages404();
+    }
 
-    // 对于GitHub Pages，同样监听DOMContentLoaded以检查404
-    window.addEventListener('DOMContentLoaded', checkIfGithubPages404);
+    // 对于GitHub Pages，同样监听DOMContentLoaded以检查404 - 只在非语言页面执行
+    if (!window.disableErrorHandling && !window.isLanguagePage) {
+        window.addEventListener('DOMContentLoaded', checkIfGithubPages404);
+    }
 });
 
 // 添加更多语言检测辅助函数
