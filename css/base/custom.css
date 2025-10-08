@@ -199,7 +199,7 @@ body.dark-mode .btn {
 }
 
 .intro {
-    background-image: url("../img/Background.jpg");
+    background-image: url("../../img/Background.jpg");
 }
 
 /* 文字部分样式增强 */
@@ -285,7 +285,7 @@ body.dark-mode .btn {
             rgba(240, 245, 255, 0.9),
             rgba(230, 240, 250, 0.9)
     ),
-    url("../img/Background.jpg") center/cover no-repeat fixed;
+    url("../../img/Background.jpg") center/cover no-repeat fixed;
     padding: 4rem 0;
 }
 

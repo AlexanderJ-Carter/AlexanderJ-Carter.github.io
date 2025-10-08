@@ -18,23 +18,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const songs = [
         {
             title: "冬忆",
-            src: "music/冬忆.flac",
-            cover: "img/covers/winter-memory.jpg",
+            src: "../music/冬忆.flac",
+            cover: "../img/music-cover-default.png",
         },
         {
             title: "天空の城",
-            src: "music/天空之城.flac",
-            cover: "img/covers/castle-in-sky.jpg",
+            src: "../music/天空之城.flac",
+            cover: "../img/music-cover-default.png",
         },
         {
             title: "彩云追月",
-            src: "music/彩云追月.ogg",
-            cover: "img/covers/colorful-clouds.jpg",
+            src: "../music/彩云追月.ogg",
+            cover: "../img/music-cover-default.png",
         },
         {
             title: "雨的印记",
-            src: "music/雨的印记.ogg",
-            cover: "img/covers/rain-mark.jpg",
+            src: "../music/雨的印记.ogg",
+            cover: "../img/music-cover-default.png",
         },
     ];
 
