@@ -1,0 +1,1150 @@
+/* 现代简约页脚设计 - 优化版 */
+body .site-footer {
+    position: relative;
+    background: linear-gradient(
+        135deg,
+        rgba(248, 250, 252, 0.98) 0%,
+        rgba(241, 245, 249, 0.96) 100%
+    );
+    color: #334155;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+    padding: 50px 0 0;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.08);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* 页脚背景粒子效果 */
+body .site-footer .footer-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(
+            circle at 15% 25%,
+            rgba(59, 130, 246, 0.06) 0%,
+            transparent 8%
+        ),
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(99, 102, 241, 0.05) 0%,
+            transparent 10%
+        ),
+        radial-gradient(
+            circle at 35% 80%,
+            rgba(139, 92, 246, 0.04) 0%,
+            transparent 12%
+        ),
+        radial-gradient(
+            circle at 70% 70%,
+            rgba(168, 85, 247, 0.05) 0%,
+            transparent 9%
+        );
+    opacity: 0.7;
+    z-index: 1;
+    animation: particleFloat 20s ease-in-out infinite;
+}
+
+@keyframes particleFloat {
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-10px) rotate(1deg);
+    }
+    66% {
+        transform: translateY(5px) rotate(-1deg);
+    }
+}
+
+body .site-footer .container {
+    position: relative;
+    z-index: 5;
+}
+
+/* 主要内容区域 */
+body .site-footer .footer-main {
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    margin-bottom: 30px;
+}
+
+/* 品牌标识区域 */
+body .site-footer .footer-brand-section {
+    padding-right: 20px;
+}
+
+body .site-footer .footer-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+body .site-footer .footer-logo-link img {
+    margin-right: 12px;
+    border-radius: 6px;
+}
+
+body .site-footer .footer-logo-link:hover {
+    color: #3b82f6;
+    transform: translateY(-2px);
+}
+
+body .site-footer .footer-slogan {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    letter-spacing: 0.2px;
+    line-height: 1.5;
+}
+
+/* 页脚认证标识 */
+body .site-footer .footer-certifications {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+body .site-footer .footer-certifications .cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 20px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+body .site-footer .footer-certifications .cert-badge:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: #3b82f6;
+    color: #3b82f6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+}
+
+body .site-footer .footer-certifications .cert-badge i {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+body .site-footer .footer-certifications .cert-badge.license i {
+    color: #ff6b35;
+}
+
+body .site-footer .footer-certifications .cert-badge.ssl i {
+    color: #4caf50;
+}
+
+body .site-footer .footer-certifications .cert-badge.responsive i {
+    color: #2196f3;
+}
+
+body .site-footer .footer-certifications .cert-badge.accessibility i {
+    color: #9c27b0;
+}
+
+body .site-footer .footer-certifications .cert-badge.wcag i {
+    color: #00796b;
+}
+
+/* 导航区域 */
+body .site-footer .footer-nav-section {
+    height: 100%;
+}
+
+body .site-footer .footer-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+}
+
+body .site-footer .footer-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 2px;
+}
+
+body .site-footer .footer-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+body .site-footer .footer-nav-list li {
+    margin-bottom: 12px;
+}
+
+/* 语言选择器样式 */
+body .site-footer .language-compact {
+    margin-top: 15px;
+}
+
+body .site-footer .lang-label {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 8px;
+    display: block;
+}
+
+body .site-footer .language-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+body .site-footer .lang-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+body .site-footer .lang-pill:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: #3b82f6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+}
+
+body .site-footer .lang-pill.active {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+}
+
+body .site-footer .lang-pill span {
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* 页脚导航组样式 */
+body .site-footer .footer-nav-group {
+    height: 100%;
+}
+
+body .site-footer .footer-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+}
+
+body .site-footer .footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 2px;
+}
+
+body .site-footer .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+body .site-footer .footer-links a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 4px 0;
+}
+
+body .site-footer .footer-links a:hover {
+    color: #3b82f6;
+    transform: translateX(4px);
+}
+
+body .site-footer .footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    transition: width 0.3s ease;
+}
+
+body .site-footer .footer-links a:hover::after {
+    width: 100%;
+}
+
+/* 页脚底部样式 */
+body .site-footer .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+body .site-footer .footer-bottom .left-section,
+body .site-footer .footer-bottom .center-section,
+body .site-footer .footer-bottom .right-section {
+    flex: 1;
+}
+
+body .site-footer .footer-bottom .center-section {
+    text-align: center;
+}
+
+body .site-footer .footer-bottom .right-section {
+    text-align: right;
+}
+
+body .site-footer .copyright {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+body .site-footer .policy-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+body .site-footer .policy-links a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+}
+
+body .site-footer .policy-links a:hover {
+    color: #3b82f6;
+}
+
+body .site-footer .social-icons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+body .site-footer .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    color: #64748b;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+body .site-footer .social-icon:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+body .site-footer .social-icon.weibo:hover {
+    color: #ff6b35;
+    border-color: #ff6b35;
+}
+
+body .site-footer .social-icon.wechat:hover {
+    color: #4caf50;
+    border-color: #4caf50;
+}
+
+body .site-footer .social-icon.github:hover {
+    color: #333;
+    border-color: #333;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    body .site-footer .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    body .site-footer .footer-bottom .center-section,
+    body .site-footer .footer-bottom .right-section {
+        text-align: center;
+    }
+    
+    body .site-footer .policy-links {
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    body .site-footer .social-icons {
+        justify-content: center;
+    }
+}
+}
+
+body .site-footer .footer-nav-list a {
+    color: #64748b;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 0;
+    font-size: 0.9rem;
+}
+
+body .site-footer .footer-nav-list a::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: #3b82f6;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+body .site-footer .footer-nav-list a:hover {
+    color: #3b82f6;
+    transform: translateX(8px);
+}
+
+body .site-footer .footer-nav-list a:hover::before {
+    opacity: 1;
+}
+
+body .site-footer .footer-nav-group {
+    flex: 1;
+}
+
+body .site-footer .footer-nav-links a {
+    color: #607d8b;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+    display: inline-block;
+    padding-left: 2px;
+}
+
+body .site-footer .footer-nav-links a:before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #2196f3;
+    transition: width 0.25s ease;
+}
+
+body .site-footer .footer-nav-links a:hover {
+    color: #2196f3;
+    transform: translateX(3px);
+}
+
+body .site-footer .footer-nav-links a:hover:before {
+    width: 100%;
+}
+
+/* 简洁导航 */
+body .site-footer .footer-mini-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+body .site-footer .footer-mini-nav a {
+    color: #5d6d7e;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+    font-weight: 500;
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
+body .site-footer .footer-mini-nav a.active {
+    color: #1976d2;
+    background-color: rgba(33, 150, 243, 0.08);
+}
+
+body .site-footer .footer-mini-nav a:hover {
+    color: #2196f3;
+    background-color: rgba(33, 150, 243, 0.05);
+}
+
+/* 语言和社交区域 */
+body .site-footer .footer-extras-section {
+    padding-left: 20px;
+}
+
+/* 语言选择器 */
+body .site-footer .language-selector {
+    margin-bottom: 30px;
+}
+
+body .site-footer .language-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+body .site-footer .lang-option {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.6);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 8px;
+    text-decoration: none;
+    color: #64748b;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+body .site-footer .lang-option .flag {
+    font-size: 1rem;
+    margin-right: 6px;
+}
+
+body .site-footer .lang-option .lang-text {
+    font-weight: 500;
+}
+
+body .site-footer .lang-option:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+}
+
+body .site-footer .lang-option.active {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+body .site-footer .lang-option.active .flag {
+    animation: flagWave 2s ease-in-out infinite;
+}
+
+/* 社交媒体区域已移除 - 样式保留以备后用 */
+
+@keyframes flagWave {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(5deg);
+    }
+    75% {
+        transform: rotate(-5deg);
+    }
+}
+
+/* 页脚底部 - 完全一体化设计 */
+body .site-footer .footer-bottom {
+    padding: 25px 0 30px;
+    background: transparent; /* 完全透明，与主页脚无缝融合 */
+    border-top: 1px solid rgba(148, 163, 184, 0.08); /* 极淡的视觉分割 */
+    margin-top: 25px;
+    position: relative;
+}
+
+/* 添加微妙的渐变覆盖层增强视觉层次 */
+body .site-footer .footer-bottom::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(248, 250, 252, 0.02) 0%,
+        rgba(241, 245, 249, 0.05) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+body .site-footer .footer-bottom-content {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    z-index: 2; /* 确保内容在渐变层之上 */
+}
+
+body .site-footer .copyright-section {
+    grid-column: 2;
+    text-align: center;
+    justify-self: center;
+}
+
+body .site-footer .footer-links-section {
+    grid-column: 3;
+    justify-self: end;
+    display: flex;
+    gap: 20px;
+}
+
+body .site-footer .copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.85;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    position: relative;
+    z-index: 2;
+}
+
+/* 页脚链接样式优化 */
+body .site-footer .footer-links-section a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+body .site-footer .footer-links-section a:hover {
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.08);
+    transform: translateY(-1px);
+}
+
+body .site-footer .license-badge a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 20px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+body .site-footer .license-badge a:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+    transform: scale(1.05);
+}
+
+body .site-footer .footer-links-section {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+body .site-footer .footer-links-section a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 4px 0;
+}
+
+body .site-footer .footer-links-section a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #3b82f6;
+    transition: width 0.3s ease;
+}
+
+body .site-footer .footer-links-section a:hover {
+    color: #3b82f6;
+}
+
+body .site-footer .footer-links-section a:hover::after {
+    width: 100%;
+}
+
+body .site-footer .footer-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+body .site-footer .status-indicator {
+    color: #10b981;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* 页脚动画效果 */
+body .site-footer {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body .site-footer.footer-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 页脚元素进入动画 */
+body .site-footer.footer-visible .footer-brand-section {
+    animation: slideInLeft 0.8s ease-out 0.2s both;
+}
+
+body .site-footer.footer-visible .footer-nav-section {
+    animation: slideInUp 0.8s ease-out 0.4s both;
+}
+
+body .site-footer.footer-visible .footer-contact-section {
+    animation: slideInRight 0.8s ease-out 0.6s both;
+}
+
+body .site-footer.footer-visible .footer-bottom {
+    animation: slideInUp 0.8s ease-out 0.8s both;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 减少动画在移动设备上的影响 */
+@media (prefers-reduced-motion: reduce) {
+    body .site-footer,
+    body .site-footer * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    body .site-footer .footer-contact-section {
+        padding-left: 0;
+        margin-top: 30px;
+    }
+
+    body .site-footer .footer-brand-section {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    body .site-footer {
+        padding: 40px 0 0;
+    }
+
+    body .site-footer .footer-main {
+        padding-bottom: 30px;
+        margin-bottom: 20px;
+    }
+
+    body .site-footer .footer-nav-section {
+        margin-bottom: 25px;
+    }
+    body .site-footer .footer-certifications {
+        justify-content: center;
+        margin-top: 15px;
+        gap: 8px;
+    }
+
+    body .site-footer .footer-certifications .cert-badge {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
+
+    body .site-footer .footer-certifications .cert-badge i {
+        font-size: 0.85rem;
+    }
+
+    body .site-footer .language-options {
+        grid-template-columns: 1fr;
+    }
+    body .site-footer .footer-bottom-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 15px;
+    }
+
+    body .site-footer .copyright-section {
+        grid-column: 1;
+        order: 1;
+    }
+
+    body .site-footer .footer-links-section {
+        grid-column: 1;
+        justify-self: center;
+        order: 2;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* 移动设备一体化设计优化 */
+    body .site-footer .footer-bottom {
+        padding: 20px 0 25px;
+        margin-top: 20px;
+    }
+
+    body .site-footer .footer-bottom::before {
+        opacity: 0.7; /* 移动设备上稍微减淡渐变 */
+    }
+    body .site-footer .footer-meta {
+        align-items: center;
+    }
+}
+
+@media (max-width: 576px) {
+    body .site-footer .footer-links-section {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    body .site-footer .footer-links-section a {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+
+    /* 小屏幕设备页脚底部进一步优化 */
+    body .site-footer .footer-bottom {
+        padding: 15px 0 20px;
+    }
+
+    body .site-footer .copyright {
+        font-size: 0.85rem;
+    }
+}
+
+/* 深色模式适配 */
+[data-bs-theme='dark'] body .site-footer {
+    background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.98) 0%,
+        rgba(30, 41, 59, 0.96) 100%
+    ) !important;
+    color: #cbd5e1 !important;
+    border-top: 1px solid rgba(71, 85, 105, 0.3) !important;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-particles {
+    background-image: radial-gradient(
+            circle at 15% 25%,
+            rgba(99, 102, 241, 0.08) 0%,
+            transparent 8%
+        ),
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(139, 92, 246, 0.07) 0%,
+            transparent 10%
+        ),
+        radial-gradient(
+            circle at 35% 80%,
+            rgba(168, 85, 247, 0.06) 0%,
+            transparent 12%
+        ),
+        radial-gradient(
+            circle at 70% 70%,
+            rgba(59, 130, 246, 0.07) 0%,
+            transparent 9%
+        );
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-bottom {
+    background: transparent !important; /* 深色模式下也保持一体化 */
+    border-top: 1px solid rgba(71, 85, 105, 0.2) !important;
+}
+
+/* 更强的选择器确保深色模式生效 */
+html[data-bs-theme='dark'] body .site-footer .footer-bottom {
+    background: transparent !important;
+    border-top: 1px solid rgba(71, 85, 105, 0.2) !important;
+}
+
+/* 针对可能的Bootstrap覆盖 */
+body[data-bs-theme='dark'] .site-footer .footer-bottom,
+.dark-theme .site-footer .footer-bottom {
+    background: transparent !important;
+    border-top: 1px solid rgba(71, 85, 105, 0.2) !important;
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-logo-link {
+    color: #f1f5f9;
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-logo-link:hover {
+    color: #a855f7;
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-section-title {
+    color: #f1f5f9;
+    border-bottom: 2px solid rgba(99, 102, 241, 0.3);
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-slogan {
+    color: #94a3b8;
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-nav-list a {
+    color: #94a3b8 !important;
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-nav-list a:hover {
+    color: #a855f7 !important;
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-certifications .cert-badge {
+    background: rgba(30, 41, 59, 0.6) !important;
+    border: 1px solid rgba(71, 85, 105, 0.3) !important;
+    color: #cbd5e1 !important;
+}
+
+[data-bs-theme='dark']
+    body
+    .site-footer
+    .footer-certifications
+    .cert-badge:hover {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border-color: #a855f7 !important;
+    color: #a855f7 !important;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2) !important;
+}
+
+[data-bs-theme='dark'] body .site-footer .lang-option {
+    background: rgba(30, 41, 59, 0.5) !important;
+    border: 1px solid rgba(71, 85, 105, 0.3) !important;
+    color: #cbd5e1 !important;
+}
+
+[data-bs-theme='dark'] body .site-footer .lang-option:hover,
+[data-bs-theme='dark'] body .site-footer .lang-option.active {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border-color: #a855f7 !important;
+    color: #a855f7 !important;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2) !important;
+}
+
+[data-bs-theme='dark'] body .site-footer .copyright {
+    color: #94a3b8 !important;
+}
+
+/* 更强的选择器确保深色模式生效 */
+html[data-bs-theme='dark'] body .site-footer .copyright,
+body[data-bs-theme='dark'] .site-footer .copyright {
+    color: #94a3b8 !important;
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-links-section a {
+    color: #94a3b8 !important;
+}
+
+/* 更强的选择器确保深色模式生效 */
+html[data-bs-theme='dark'] body .site-footer .footer-links-section a,
+body[data-bs-theme='dark'] .site-footer .footer-links-section a {
+    color: #94a3b8 !important;
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-links-section a:hover {
+    color: #a855f7 !important;
+}
+
+/* 更强的选择器确保深色模式生效 */
+html[data-bs-theme='dark'] body .site-footer .footer-links-section a:hover,
+body[data-bs-theme='dark'] .site-footer .footer-links-section a:hover {
+    color: #a855f7 !important;
+}
+
+[data-bs-theme='dark'] body .site-footer .footer-links-section a::after {
+    background: #a855f7 !important;
+}
+
+/* 更强的选择器确保深色模式生效 */
+html[data-bs-theme='dark'] body .site-footer .footer-links-section a::after,
+body[data-bs-theme='dark'] .site-footer .footer-links-section a::after {
+    background: #a855f7 !important;
+}
+
+/* 底部认证区域样式已移至品牌区域 */
+
+/* 删除所有旧的重复样式 */
+
+/* === 最高优先级深色模式样式 - 放在文件末尾确保覆盖 === */
+
+/* === 深色模式一体化设计 === */
+
+/* 深色模式页脚底部 - 完全一体化 */
+[data-bs-theme='dark'] .site-footer .footer-bottom,
+[data-bs-theme='dark'] body .site-footer .footer-bottom,
+html[data-bs-theme='dark'] .site-footer .footer-bottom,
+html[data-bs-theme='dark'] body .site-footer .footer-bottom,
+body[data-bs-theme='dark'] .site-footer .footer-bottom,
+body.dark-mode .site-footer .footer-bottom {
+    background: transparent !important;
+    border-top: 1px solid rgba(71, 85, 105, 0.15) !important;
+    color: #cbd5e1 !important;
+}
+
+/* 深色模式渐变覆盖层 */
+[data-bs-theme='dark'] .site-footer .footer-bottom::before,
+[data-bs-theme='dark'] body .site-footer .footer-bottom::before,
+html[data-bs-theme='dark'] .site-footer .footer-bottom::before,
+html[data-bs-theme='dark'] body .site-footer .footer-bottom::before,
+body[data-bs-theme='dark'] .site-footer .footer-bottom::before,
+body.dark-mode .site-footer .footer-bottom::before {
+    background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.02) 0%,
+        rgba(30, 41, 59, 0.05) 100%
+    ) !important;
+}
+
+/* 深色模式版权信息 */
+[data-bs-theme='dark'] .site-footer .copyright,
+[data-bs-theme='dark'] body .site-footer .copyright,
+html[data-bs-theme='dark'] .site-footer .copyright,
+html[data-bs-theme='dark'] body .site-footer .copyright,
+body[data-bs-theme='dark'] .site-footer .copyright,
+body.dark-mode .site-footer .copyright {
+    color: #94a3b8 !important;
+    opacity: 0.9 !important;
+}
+
+/* 深色模式页脚链接 */
+[data-bs-theme='dark'] .site-footer .footer-links-section a,
+[data-bs-theme='dark'] body .site-footer .footer-links-section a,
+html[data-bs-theme='dark'] .site-footer .footer-links-section a,
+html[data-bs-theme='dark'] body .site-footer .footer-links-section a,
+body[data-bs-theme='dark'] .site-footer .footer-links-section a,
+body.dark-mode .site-footer .footer-links-section a {
+    color: #94a3b8 !important;
+}
+
+[data-bs-theme='dark'] .site-footer .footer-links-section a:hover,
+[data-bs-theme='dark'] body .site-footer .footer-links-section a:hover,
+html[data-bs-theme='dark'] .site-footer .footer-links-section a:hover,
+html[data-bs-theme='dark'] body .site-footer .footer-links-section a:hover,
+body[data-bs-theme='dark'] .site-footer .footer-links-section a:hover,
+body.dark-mode .site-footer .footer-links-section a:hover {
+    color: #a855f7 !important;
+    background: rgba(168, 85, 247, 0.1) !important;
+}
+
+/* 针对可能的Bootstrap或其他框架覆盖 */
+.dark-theme .site-footer .footer-bottom,
+.dark .site-footer .footer-bottom {
+    background: transparent !important;
+    border-top: 1px solid rgba(71, 85, 105, 0.2) !important;
+    color: #cbd5e1 !important;
+}

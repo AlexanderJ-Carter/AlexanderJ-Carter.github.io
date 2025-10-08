@@ -1,0 +1,521 @@
+:root {
+    --text-color: #1f2937;
+    --background-color: #f5f7fa;
+    --card-color: #ffffff;
+    --border-color: #e5e7eb;
+    --positive-color: #10b981;
+    --negative-color: #ef4444;
+}
+
+/* 日语版本颜色 */
+.theme-jp {
+    --primary-color: #2563eb;
+    --secondary-color: #3b82f6;
+    --accent-color: #1e40af;
+    --background-color: #f0f9ff;
+}
+
+/* 意大利语版本颜色 */
+.theme-it {
+    --primary-color: #0e7490;
+    --secondary-color: #0891b2;
+    --accent-color: #155e75;
+    --background-color: #ecfeff;
+}
+
+/* 英语版本颜色 */
+.theme-en {
+    --primary-color: #166534;
+    --secondary-color: #16a34a;
+    --accent-color: #14532d;
+    --background-color: #f0fdf4;
+}
+
+/* 中文版本颜色 */
+.theme-cn {
+    --primary-color: #e50012;
+    --secondary-color: #ffcc00;
+    --accent-color: #8b0000;
+    --text-color: #333;
+    --border-color: #e0e0e0;
+    --background-color: #f5f5f5;
+    --card-color: #ffffff;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(
+            135deg,
+            var(--primary-color),
+            var(--secondary-color)
+    );
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+header p {
+    margin: 10px 0 0;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* 优化布局和响应式设计 */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: var(--card-color);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+/* 不同大小的卡片 */
+.wide-card {
+    grid-column: span 12;
+}
+
+.medium-card {
+    grid-column: span 6;
+}
+
+.narrow-card {
+    grid-column: span 6;
+}
+
+.full-card {
+    grid-column: span 12;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+table th {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.converter {
+    display: flex;
+    flex-direction: column;
+}
+
+.converter input,
+.converter select {
+    margin: 12px 0;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.converter input:focus,
+.converter select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.converter button {
+    margin: 12px 0;
+    padding: 15px;
+    border-radius: 8px;
+    background: linear-gradient(
+            to right,
+            var(--primary-color),
+            var(--secondary-color)
+    );
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.converter button:hover {
+    background: linear-gradient(
+            to right,
+            var(--secondary-color),
+            var(--primary-color)
+    );
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.converter button:active {
+    transform: translateY(0);
+}
+
+/* 贵金属图标背景 */
+.gold-bg {
+    background: linear-gradient(145deg, #ffd700, #ffbf00);
+}
+
+.silver-bg {
+    background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
+}
+
+.platinum-bg {
+    background: linear-gradient(145deg, #e5e4e2, #cccbc9);
+}
+
+.palladium-bg {
+    background: linear-gradient(145deg, #ccd0d4, #a9aeaf);
+}
+
+/* 加载指示器 */
+.loading-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: var(--primary-color);
+}
+
+.loading-indicator i {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* 错误消息样式 */
+.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-left: 4px solid rgba(239, 68, 68, 0.7);
+    color: #b91c1c;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.error i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* 经济信息消息 */
+.economic-message {
+    background-color: rgba(59, 130, 246, 0.1);
+    border-left: 4px solid rgba(59, 130, 246, 0.7);
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.economic-message p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* 正负变化颜色 */
+.positive {
+    color: #22c55e;
+}
+
+.negative {
+    color: #ef4444;
+}
+
+.conversion-result {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+small {
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+/* 贵金属卡片样式优化 */
+.metals-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.metal-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+}
+
+.metal-price:last-child {
+    border-bottom: none;
+}
+
+.metal-info {
+    display: flex;
+    align-items: center;
+}
+
+.metal-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: white;
+    font-size: 0.9em;
+}
+
+.gold-bg {
+    background: linear-gradient(145deg, #ffd700, #ffbf00);
+}
+
+.silver-bg {
+    background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
+}
+
+.platinum-bg {
+    background: linear-gradient(145deg, #e5e4e2, #cccbc9);
+}
+
+.palladium-bg {
+    background: linear-gradient(145deg, #ccd0d4, #a9aeaf);
+}
+
+/* 汇率表格样式优化 */
+.exchange-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.exchange-table th {
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 12px 8px;
+    border-bottom: 2px solid var(--border-color);
+    text-align: left;
+}
+
+.exchange-table td {
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.exchange-table tr:last-child td {
+    border-bottom: none;
+}
+
+.exchange-table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.currency-name {
+    font-weight: 500;
+}
+
+.currency-code {
+    color: #6b7280;
+    font-size: 0.85em;
+    margin-left: 5px;
+}
+
+.currency-rate {
+    font-weight: 600;
+    text-align: right;
+}
+
+/* 自适应网格布局 */
+@media (min-width: 1000px) {
+    .dashboard {
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    .regular-card {
+        grid-column: span 4;
+    }
+
+    .wide-card {
+        grid-column: span 6;
+    }
+
+    .full-card {
+        grid-column: span 12;
+    }
+}
+
+/* 新闻部分样式 */
+.news-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.news-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.news-source {
+    font-size: 0.85em;
+    color: #6b7280;
+}
+
+.news-time {
+    font-size: 0.8em;
+    color: #6b7280;
+}
+
+.news-link {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--primary-color);
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
+.news-link:hover {
+    text-decoration: underline;
+}
+
+/* 经济指标样式 */
+.economic-indicators-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.economic-indicator {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.economic-indicator:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.indicator-header {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+}
+
+.indicator-header i {
+    margin-right: 5px;
+}
+
+.indicator-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.indicator-date {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+    .medium-card,
+    .narrow-card {
+        grid-column: span 6;
+    }
+}
+
+@media (max-width: 992px) {
+    .medium-card,
+    .narrow-card {
+        grid-column: span 12;
+    }
+
+    .economic-indicators-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .economic-indicators-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+}

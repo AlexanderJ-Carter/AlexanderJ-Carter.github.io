@@ -18,23 +18,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const songs = [
         {
             title: "冬忆",
-            src: "music/冬忆.flac",
-            cover: "img/covers/winter-memory.jpg",
+            src: "/music/冬忆.flac",
+            cover: "/img/Photo1.jpg",
         },
         {
             title: "天空の城",
-            src: "music/天空之城.flac",
-            cover: "img/covers/castle-in-sky.jpg",
+            src: "/music/天空之城.flac",
+            cover: "/img/Photo2.jpg",
         },
         {
             title: "彩云追月",
-            src: "music/彩云追月.ogg",
-            cover: "img/covers/colorful-clouds.jpg",
+            src: "/music/彩云追月.ogg",
+            cover: "/img/Photo3.jpg",
         },
         {
             title: "雨的印记",
-            src: "music/雨的印记.ogg",
-            cover: "img/covers/rain-mark.jpg",
+            src: "/music/雨的印记.ogg",
+            cover: "/img/Photo4.jpg",
         },
     ];
 
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // 设置专辑封面
         if (songThumbnail) {
             // 默认封面
-            const defaultCover = "img/music-cover-default.png";
+            const defaultCover = "/img/music-cover-default.png";
 
             // 检查歌曲是否有封面，如果有则使用，否则使用默认封面
             const coverUrl = songs[index].cover || defaultCover;

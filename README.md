@@ -157,15 +157,14 @@ AlexanderJ-Carter.github.io/
 │   ├── manifest.json        # PWA 清单文件
 │   └── version.json         # 版本信息配置
 │
-├── 📁 css/                   # 样式文件
-│   ├── style.default.css     # 主要样式
-│   ├── security.css         # 安全页面样式 🆕
-│   ├── privacy.css          # 隐私政策样式
-│   ├── chatbot.css          # 聊天机器人样式
-│   ├── music.css            # 音乐播放器样式
-│   ├── gallery.css          # 图片画廊样式
-│   ├── calendar.css         # 日历样式
-│   └── ...                  # 其他模块样式
+├── 📁 css/                   # 样式文件（按用途分组）
+│   ├── 📁 base/              # 全站基础样式（style.default.css、custom.css 等）
+│   ├── 📁 components/        # 复用组件样式（导航、页脚、聊天机器人等）
+│   ├── 📁 pages/             # 单页/专题样式（about、privacy、calendar 等）
+│   ├── 📁 themes/            # 节日或主题样式（newyear、poem）
+│   └── 📁 vendor/            # 第三方依赖样式（glightbox 等）
+│
+├── 📁 css-legacy-backup/     # 样式重构前的完整备份（可通过 scripts/restore-legacy-css.sh 回滚）
 │
 ├── 📁 js/                    # JavaScript 文件
 │   ├── enhanced.js          # 增强功能
