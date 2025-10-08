@@ -1,0 +1,435 @@
+:root {
+    --nav-bg: rgba(255, 255, 255, 0.95);
+    --nav-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --primary: #007bff;
+    --primary-hover: #0056b3;
+    --gradient: linear-gradient(90deg, #007bff, #00d2ff);
+}
+
+/* 导航栏基础样式 */
+.navbar {
+    position: fixed;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 0;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+/* Logo 和品牌名称 */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-logo {
+    height: 40px;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+}
+
+.navbar-brand:hover .nav-logo {
+    transform: scale(1.1);
+}
+
+.brand-text {
+    font-weight: 600;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #3498db, #8e44ad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: none;
+}
+
+@media (min-width: 576px) {
+    .brand-text {
+        display: inline;
+    }
+}
+
+/* 导航链接样式 */
+.navbar-nav {
+    gap: 10px;
+}
+
+.navbar-nav .nav-item {
+    position: relative;
+    margin: 0 0.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.75rem 0.9rem !important;
+    color: #333 !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.nav-icon {
+    margin-right: 0.4rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0; /* 将高度改为0来去除下划线 */
+    background: var(--gradient);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+    opacity: 0;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(0); /* 不再显示下划线 */
+    opacity: 0;
+}
+
+/* 修改高亮方式：使用背景色而非下划线 */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    background: rgba(0, 123, 255, 0.08);
+    transform: translateY(-2px);
+    color: var(--primary, #007bff) !important;
+}
+
+.navbar-nav .nav-link:hover .nav-icon {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.navbar-nav .nav-link.active {
+    color: #fff;
+    background: linear-gradient(135deg, #3498db, #a063b9);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.navbar-nav .nav-link.active .nav-icon {
+    opacity: 1;
+}
+
+/* 添加导航分隔符 */
+.nav-divider {
+    width: 1px;
+    background: rgba(0, 0, 0, 0.1);
+    height: 24px;
+    margin: auto 10px;
+    align-self: center;
+}
+
+/* 语言选择器样式 */
+.language-selector {
+    color: #666;
+    background-color: rgba(0, 123, 255, 0.05);
+    border-radius: 20px;
+    padding: 0.6rem 1rem !important;
+    margin-left: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.language-selector:hover {
+    background-color: rgba(0, 123, 255, 0.15);
+    color: #007bff;
+}
+
+.language-selector .nav-icon {
+    color: #007bff;
+}
+
+/* 进度条 */
+.scroll-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(to right, #3498db, #8e44ad);
+    transition: width 0.3s ease;
+    z-index: 1000;
+}
+
+/* 修改返回顶部按钮样式 */
+.back-to-top {
+    position: absolute;
+    right: -60px; /* 放置在容器外右侧 */
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    color: #007bff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 99;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: #007bff;
+    color: white;
+    transform: translateY(-50%) translateX(-3px); /* 修改为向左移动效果 */
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+/* 为移动设备调整返回顶部按钮 */
+@media (max-width: 992px) {
+    .back-to-top {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+        right: -50px; /* 在移动设备上调整位置 */
+    }
+}
+
+@media (max-width: 576px) {
+    .back-to-top {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+        right: -40px; /* 在小屏设备上进一步调整 */
+    }
+}
+
+/* 调整图标大小 */
+.back-to-top i {
+    font-size: 1.2rem;
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+    .navbar-nav {
+        padding: 1rem 0;
+    }
+
+    .nav-link {
+        padding: 1rem !important;
+        margin-bottom: 0.3rem;
+    }
+
+    .nav-link::after {
+        display: none;
+    }
+
+    .nav-icon {
+        margin-right: 0.7rem;
+        font-size: 1rem;
+    }
+
+    .theme-toggle-btn {
+        margin: 0.5rem 0;
+    }
+
+    .nav-divider {
+        width: 100%;
+        height: 1px;
+        margin: 10px 0;
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    .language-selector {
+        margin-left: 0;
+        margin-top: 10px;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+/* 主题切换按钮 */
+.theme-toggle-btn {
+    background: transparent;
+    border: none;
+    color: #555;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    transition: all 0.3s ease;
+    margin: 0; /* 移除左边距 */
+    position: relative;
+    top: 0; /* 微调按钮垂直位置 */
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(0, 123, 255, 0.1);
+    transform: rotate(30deg);
+}
+
+.dark-mode .theme-toggle-btn {
+    color: #f8f9fa;
+}
+
+/* 下拉菜单样式 */
+.dropdown-menu {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    min-width: 12rem;
+    animation: dropdownFade 0.3s ease forwards;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.show > .dropdown-menu {
+    animation: dropdownFade 0.3s ease forwards;
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    color: #555;
+    position: relative;
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 123, 255, 0.08);
+    color: #007bff;
+    padding-left: 1.5rem;
+}
+
+.dropdown-item.active {
+    background: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.navbar-toggler:hover {
+    background: rgba(0, 123, 255, 0.08);
+}
+
+/* 移动端优化 */
+@media (max-width: 992px) {
+    .navbar-collapse {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        margin-top: 1rem;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .dark-mode .navbar-collapse {
+        background: #343a40;
+    }
+}
+
+/* 暗黑模式导航适配 */
+.dark-mode .navbar {
+    background: rgba(33, 37, 41, 0.95);
+}
+
+.dark-mode .nav-link {
+    color: #f8f9fa;
+}
+
+.dark-mode .dropdown-menu {
+    background: #343a40;
+    border-color: #495057;
+}
+
+.dark-mode .dropdown-item {
+    color: #f8f9fa;
+}
+
+.dark-mode .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .dropdown-item.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .nav-divider {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.dark-mode .language-selector {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .language-selector:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.dark-mode .language-selector .nav-icon {
+    color: #6db4fe;
+}
+
+.dark-mode .back-to-top {
+    background: #343a40;
+    color: #6db4fe;
+}
+
+.dark-mode .back-to-top:hover {
+    background: #3498db;
+    color: #fff;
+}

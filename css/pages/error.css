@@ -1,0 +1,328 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    background: #f8f9fa;
+}
+
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+h1 {
+    font-size: 8rem;
+    margin: 0;
+    background: linear-gradient(45deg, #ff5e62, #ff9966);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: bounce 2s ease infinite;
+    font-weight: bold;
+    color: #ff5e62;
+    line-height: 1;
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 3px 3px 0 rgba(255, 94, 98, 0.3);
+}
+
+.error-message {
+    margin: 1rem 0;
+    font-size: 2rem;
+    color: #333;
+    font-family: 'Pacifico', cursive;
+}
+
+.error-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #666;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.btn-home {
+    color: white;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #ff5e62 0%, #ff9966 100%);
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 1rem;
+    box-shadow: 0 3px 10px rgba(255, 94, 98, 0.3);
+}
+
+.btn-home:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 94, 98, 0.5);
+}
+
+.btn-home:active {
+    box-shadow: 0 3px 10px rgba(0, 123, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+.error-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(248, 249, 250, 0.8) 100%
+    );
+    z-index: 1;
+}
+
+/* 浮动元素 */
+.floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.floating-element {
+    position: absolute;
+    font-size: 6rem;
+    color: rgba(200, 200, 200, 0.2);
+    animation: float 10s ease-in-out infinite;
+    font-weight: bold;
+}
+
+.floating-element-1 {
+    top: 20%;
+    left: 20%;
+}
+
+.floating-element-2 {
+    top: 30%;
+    right: 25%;
+}
+
+.floating-element-3 {
+    bottom: 30%;
+    left: 30%;
+}
+
+/* 游戏元素样式 */
+.game-container {
+    width: 300px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    display: none;
+    height: 250px;
+    background-color: #f8f9fa;
+    margin: 1.5rem auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: none; /* 防止触摸设备上的默认行为 */
+}
+
+.paddle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 15px;
+    background-color: #333;
+    bottom: 10px;
+    border-radius: 15px;
+    z-index: 4;
+}
+
+.ball {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: #ff5e62;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.brick {
+    position: absolute;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s ease;
+    z-index: 3;
+}
+
+.game-score {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.game-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ff5e62;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    display: none;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.game-controls {
+    margin-top: 1rem;
+    text-align: center;
+    display: none;
+}
+
+.game-button {
+    padding: 0.5rem 1rem;
+    background: #ff5e62;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.game-button:hover {
+    background: #ff4248;
+    transform: translateY(-2px);
+}
+
+.game-instructions {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+}
+
+/* 动画 */
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(5px, 5px) rotate(5deg);
+    }
+    50% {
+        transform: translate(0, 10px) rotate(0deg);
+    }
+    75% {
+        transform: translate(-5px, 5px) rotate(-5deg);
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 6rem;
+    }
+
+    .error-message {
+        font-size: 1.75rem;
+    }
+
+    .error-subtitle {
+        font-size: 1rem;
+    }
+
+    .floating-element {
+        font-size: 4rem;
+    }
+
+    .game-container {
+        width: 280px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        width: 260px;
+        height: 200px;
+    }
+
+    h1 {
+        font-size: 5rem;
+    }
+
+    .error-message {
+        font-size: 1.5rem;
+    }
+
+    .error-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .floating-element {
+        font-size: 3.5rem;
+    }
+
+    .paddle {
+        width: 70px;
+    }
+
+    .btn-home,
+    .game-button {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* 触摸设备提示 */
+.touch-instructions {
+    display: none;
+    margin-top: 0.5rem;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+@media (max-width: 1024px) {
+    .touch-instructions {
+        display: block;
+    }
+}
