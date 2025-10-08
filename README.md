@@ -96,11 +96,19 @@
 - **PGP加密支持** 配置公钥文件，支持敏感信息加密传输
 - **Security.txt** 部署符合RFC 9116标准的安全配置文件
 
+#### 🎨 资源优化与整合
+
+- **CSS整合** 移除冗余的footer.css，统一使用footer-enhanced.css（支持亮/暗主题）
+- **路径修复** 修正css/base/custom.css中背景图片路径（../img/ → ../../img/）
+- **音乐播放器** 修正音乐文件和封面图片的相对路径，统一使用默认封面
+- **样式统一** 确保所有语言版本（中英意日）使用一致的CSS导入顺序
+- **清理备份** 移除不必要的.backup文件，保持代码库整洁
+
 #### � 文档体系优化
 
 - **版权模板** 创建标准化版权声明模板
 - **文档分类** 建立docs目录统一管理项目文档
-- **README更新** 全面更新项目介绍和使用说明
+- **README更新** 全面更新项目介绍和使用说明，包含CSS/JS结构文档
 - **项目结构** 重新组织文件目录，提升维护效率
 
 #### �️ 架构重构
@@ -158,9 +166,13 @@ AlexanderJ-Carter.github.io/
 │   └── version.json         # 版本信息配置
 │
 ├── 📁 css/                   # 样式文件（按用途分组）
-│   ├── 📁 base/              # 全站基础样式（style.default.css、custom.css 等）
-│   ├── 📁 components/        # 复用组件样式（导航、页脚、聊天机器人等）
-│   ├── 📁 pages/             # 单页/专题样式（about、privacy、calendar 等）
+│   ├── 📁 base/              # 全站基础样式（style.default.css、custom.css、enhanced.css）
+│   ├── 📁 components/        # 复用组件样式（导航、页脚增强版、聊天机器人、音乐等）
+│   │   ├── footer-enhanced.css  # 统一页脚样式（支持亮/暗主题，已整合footer.css功能）
+│   │   ├── navigation.css       # 导航栏样式
+│   │   ├── music.css            # 音乐播放器样式
+│   │   └── ...                  # 其他组件样式
+│   ├── 📁 pages/             # 单页/专题样式（about、privacy、calendar、gallery 等）
 │   ├── 📁 themes/            # 节日或主题样式（newyear、poem）
 │   └── 📁 vendor/            # 第三方依赖样式（glightbox 等）
 │
