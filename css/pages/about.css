@@ -1,0 +1,267 @@
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #00d2ff;
+    --success-color: #28a745;
+    --light-bg: #f8f9fa;
+    --white: #fff;
+    --dark-text: #333;
+    --gray-text: #666;
+    --grid-gap: 1.5rem;
+    --border-radius: 10px;
+    --card-radius: 15px;
+    --box-shadow-sm: 0 3px 10px rgba(0, 0, 0, 0.1);
+    --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+    --gradient-primary: linear-gradient(
+            90deg,
+            var(--primary-color),
+            var(--secondary-color)
+    );
+    --gradient-overlay: linear-gradient(
+            45deg,
+            rgba(0, 123, 255, 0.2),
+            rgba(0, 210, 255, 0.2)
+    );
+}
+
+/* 关于部分样式 */
+.about-section {
+    background: linear-gradient(
+            to right,
+            var(--light-bg) 50%,
+            var(--white) 50%
+    );
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.subtitle-line {
+    width: 50px;
+    height: 3px;
+    background: var(--gradient-primary);
+    margin-bottom: 2rem;
+}
+
+.about-content {
+    padding-right: 2rem;
+}
+
+/* 特性网格布局 */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 2rem;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 1rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow-sm);
+    transition: transform var(--transition-speed) ease;
+    margin-right: var(--grid-gap);
+    margin-bottom: var(--grid-gap);
+}
+
+.features-grid > *:nth-child(3n) {
+    margin-right: 0;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-item i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* 关于图片样式 */
+.about-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--card-radius);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: var(--gradient-overlay);
+    pointer-events: none;
+}
+
+/* 动画效果 */
+.fade-in-left {
+    animation: fadeInLeft 1s ease-out;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 服务部分样式 */
+.services-section {
+    background: linear-gradient(135deg, var(--light-bg) 0%, #e9ecef 100%);
+}
+
+.service-card {
+    background: var(--white);
+    border-radius: var(--card-radius);
+    padding: 2rem;
+    height: 100%;
+    transition: transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+    box-shadow: var(--box-shadow-sm);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--box-shadow-lg);
+}
+
+.card-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(
+            45deg,
+            var(--primary-color),
+            var(--secondary-color)
+    );
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.card-icon i {
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--dark-text);
+}
+
+.service-features {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.service-features li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    color: var(--gray-text);
+}
+
+.service-features li i {
+    color: var(--success-color);
+    font-size: 0.9rem;
+    margin-right: 0.5rem; /* 替代 gap 以确保 IE11 兼容性 */
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .about-section {
+        background: var(--light-bg);
+    }
+
+    .about-content {
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .subtitle-line {
+        margin: 0 auto 2rem;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features-grid > *:nth-child(3n) {
+        margin-right: var(--grid-gap);
+    }
+
+    .features-grid > *:nth-child(2n) {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-card {
+        padding: 1.5rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .features-grid > * {
+        margin-right: 0 !important;
+    }
+}
+
+/* 支持暗模式 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light-bg: #222;
+        --white: #333;
+        --dark-text: #eee;
+        --gray-text: #bbb;
+        --box-shadow-sm: 0 3px 10px rgba(0, 0, 0, 0.2);
+        --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.3);
+        --gradient-primary: linear-gradient(90deg, #0095ff, #00e5ff);
+    }
+}
+
+/* 支持打印样式 */
+@media print {
+    .about-section,
+    .services-section {
+        background: none;
+        color: black;
+    }
+
+    .feature-item,
+    .service-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+    .image-overlay {
+        display: none;
+    }
+}
