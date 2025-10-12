@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -22,8 +22,8 @@
     <link href="css/base/custom.css" rel="stylesheet">
     <link href="css/pages/time.css" rel="stylesheet">
 
-    <!-- Moved js/time.js here to ensure TimeService is available for the script below -->
-    <script src="js/time.js"></script>
+    <!-- Moved ../../../js/pages/time.js here to ensure TimeService is available for the script below -->
+    <script src="../../../js/pages/time.js"></script>
 
     <script>
         // IIFE to handle API/text requests immediately. Note: On static hosting, JavaScript isn't executed by curl.
@@ -66,7 +66,7 @@
         // has been moved to the <head> to allow immediate response for clients like curl.
         // If 'window.apiResponseSent' is true, it means the page content was already
         // replaced by the script in <head>, and no further action is needed here for API calls.
-        // For normal page loads (not API calls), js/time.js (now loaded in <head>)
+        // For normal page loads (not API calls), ../../../js/pages/time.js (now loaded in <head>)
         // is responsible for initializing the interactive page elements,
         // likely using its own DOMContentLoaded listeners or other initialization mechanisms.
     </script>
@@ -159,8 +159,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="js/time.js"></script>  This line is removed as it's moved to <head> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/../../../js/vendor/bootstrap.bundle.min.js"></script>
+    <!-- <script src="../../../js/pages/time.js"></script>  This line is removed as it's moved to <head> -->
 </body>
 
 </html>
