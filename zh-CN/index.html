@@ -212,32 +212,69 @@
 
     <button class="toggle-button" id="toggle-music-player" type="button">🎵</button>
 
-    <!-- 主内容 -->
+    <!-- 主内容 - 现代化Hero区域 -->
     <section class="intro parallax-hero dark-overlay bg-cover d-flex align-items-center" id="intro">
         <div class="hero-particles"></div>
-        <div class="overlay-content w-100 text-white">
+        <div class="hero-gradient-overlay"></div>
+        <div class="overlay-content w-100 text-white position-relative">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-md-12 mx-auto text-center">
-                        <p
-                            class="fst-italic intro-text display-6 text-uppercase text-light letter-spacing-3 mb-3 animate__animated animate__fadeIn animate__delay-1s">
-                            遇见创意 感受灵感
-                        </p>
-                        <h1
-                            class="text-uppercase intro-heading letter-spacing-5 fw-bold animate__animated animate__fadeInUp animate__delay-1s">
-                            探索无限可能 <span class="gradient-text">创造非凡未来</span>
+                <div class="row align-items-center">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <!-- 欢迎标签 -->
+                        <div class="hero-badge animate__animated animate__fadeInDown" data-aos="fade-down">
+                            <i class="fas fa-sparkles me-2"></i>
+                            欢迎来到创意世界
+                        </div>
+                        
+                        <!-- 主标题 -->
+                        <h1 class="hero-title mb-4 animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="100">
+                            探索<span class="gradient-text-vibrant">无限可能</span><br>
+                            创造<span class="gradient-text-vibrant">非凡未来</span>
                         </h1>
-                        <p
-                            class="fst-italic intro-text text-light mt-4 animate__animated animate__fadeIn animate__delay-2s fs-5">
-                            在这里，每一个灵感都有生命，每一种创意都有回响。
+                        
+                        <!-- 副标题 -->
+                        <p class="hero-subtitle mb-5 animate__animated animate__fadeIn" data-aos="fade-up" data-aos-delay="200">
+                            在这里，每一个灵感都有生命，每一种创意都有回响<br>
+                            用独特视角定格生活，以创新思维拥抱未来
                         </p>
-                        <div class="mt-5 animate__animated animate__fadeInUp animate__delay-2s">
-                            <a class="btn btn-outline-light btn-lg rounded-pill hero-btn" href="#about">
-                                探索更多 <i class="fas fa-arrow-down ms-2"></i>
+                        
+                        <!-- CTA按钮组 -->
+                        <div class="hero-cta-group animate__animated animate__fadeInUp" data-aos="fade-up" data-aos-delay="300">
+                            <a class="btn btn-hero-primary btn-lg" href="#about">
+                                <i class="fas fa-rocket me-2"></i>开始探索
                             </a>
+                            <a class="btn btn-hero-secondary btn-lg" href="gallery.html">
+                                <i class="fas fa-images me-2"></i>查看作品
+                            </a>
+                        </div>
+                        
+                        <!-- 统计数据 -->
+                        <div class="hero-stats mt-5" data-aos="fade-up" data-aos-delay="400">
+                            <div class="stat-item">
+                                <div class="stat-number">1000+</div>
+                                <div class="stat-label">作品创作</div>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <div class="stat-number">5+</div>
+                                <div class="stat-label">创作领域</div>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-item">
+                                <div class="stat-number">100%</div>
+                                <div class="stat-label">用心创造</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <!-- 滚动提示 -->
+            <div class="scroll-indicator animate__animated animate__fadeInUp animate__delay-3s">
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+                <p class="scroll-text">向下滚动探索更多</p>
             </div>
         </div>
     </section>
@@ -261,47 +298,63 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a aria-current="page" class="nav-link active" href="#intro">
-                            <i class="fas fa-home nav-icon"></i> 主页
-                        </a>
-                    </li>
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
                         <a class="nav-link" href="#about">
-                            <i class="fas fa-user nav-icon"></i> 关于
+                            <i class="fas fa-user nav-icon"></i> 
+                            <span class="nav-text">关于</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#services">
-                            <i class="fas fa-paint-brush nav-icon"></i> 创造
+                        <a class="nav-link" href="gallery.html">
+                            <i class="fas fa-images nav-icon"></i> 
+                            <span class="nav-text">画廊</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#portfolio">
-                            <i class="fas fa-image nav-icon"></i> 作品
+                        <a class="nav-link external-link" href="https://blog.alexander.xin" target="_blank" rel="noopener">
+                            <i class="fas fa-blog nav-icon"></i> 
+                            <span class="nav-text">博客</span>
+                            <i class="fas fa-external-link-alt external-icon"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#text">
-                            <i class="fas fa-feather nav-icon"></i> 文字
+                    
+                    <li class="nav-item dropdown">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" 
+                            data-bs-toggle="dropdown" href="#" role="button">
+                            <i class="fas fa-tools nav-icon"></i> 
+                            <span class="nav-text">工具</span>
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-end glass-dropdown">
+                            <li><a class="dropdown-item" href="calendar.html">
+                                <i class="fas fa-calendar-alt me-2"></i>智能日历</a></li>
+                            <li><a class="dropdown-item" href="currency.html">
+                                <i class="fas fa-exchange-alt me-2"></i>货币转换</a></li>
+                            <li><a class="dropdown-item" href="../time.html">
+                                <i class="fas fa-clock me-2"></i>世界时钟</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="contact.html">
+                                <i class="fas fa-envelope me-2"></i>联系我们</a></li>
+                        </ul>
                     </li>
 
                     <li class="nav-item nav-divider"></li>
 
                     <li class="nav-item dropdown">
-                        <a aria-expanded="false" class="nav-link dropdown-toggle language-selector"
-                            data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button">
-                            <i class="fas fa-globe nav-icon"></i> 语言
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" 
+                            data-bs-toggle="dropdown" href="#" role="button">
+                            <i class="fas fa-globe nav-icon"></i> 
+                            <span class="nav-text">中文</span>
                         </a>
-                        <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
-                            <li><a class="dropdown-item active" href="./"><i class="fas fa-check me-2"></i>
-                                    中文</a>
-                            </li>
-                            <li><a class="dropdown-item" href="../en/">English</a></li>
-                            <li><a class="dropdown-item" href="../it/">Italiano</a></li>
-                            <li><a class="dropdown-item" href="../jp/">日本語</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end glass-dropdown">
+                            <li><a class="dropdown-item active" href="./">
+                                <span class="flag-emoji me-2">🇨🇳</span>中文简体</a></li>
+                            <li><a class="dropdown-item" href="../en/">
+                                <span class="flag-emoji me-2">🇬🇧</span>English</a></li>
+                            <li><a class="dropdown-item" href="../it/">
+                                <span class="flag-emoji me-2">🇮🇹</span>Italiano</a></li>
+                            <li><a class="dropdown-item" href="../jp/">
+                                <span class="flag-emoji me-2">🇯🇵</span>日本語</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -314,110 +367,184 @@
         </div>
     </nav>
 
+    <!-- 关于部分 - 增强版 -->
     <section class="about-section py-5" id="about">
         <div class="container">
-            <div class="row gy-4 align-items-center">
+            <!-- 区域标题 -->
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="section-badge">关于我们</span>
+                <h2 class="section-title-modern mt-3">用创意连接世界</h2>
+                <p class="section-subtitle">每一个像素都蕴含情感，每一行文字都承载思想</p>
+            </div>
+            
+            <div class="row gy-5 align-items-center">
                 <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="about-content">
-                        <h2 class="section-title mb-4">关于我们</h2>
-                        <div class="subtitle-line"></div>
-                        <p class="lead gradient-text mb-4">用独特视角，定格生活瞬间</p>
-                        <div class="about-text">
-                            <p class="mb-4">
-                                在这个充满可能的世界中，我们致力于捕捉那些稍纵即逝的珍贵时刻。通过镜头、笔触与代码，我们将平凡转化为非凡，用创意点亮生活的每一个角落，让每一次相遇都成为难忘的记忆。
-                            </p>
-                            <div class="features-grid">
-                                <div class="feature-item card-3d">
-                                    <i class="fas fa-camera-retro"></i>
-                                    <span>视觉艺术</span>
+                    <div class="about-content-modern">
+                        <!-- 特色标签 -->
+                        <div class="about-tags mb-4">
+                            <span class="skill-tag"><i class="fas fa-camera me-2"></i>摄影艺术</span>
+                            <span class="skill-tag"><i class="fas fa-pen-nib me-2"></i>内容创作</span>
+                            <span class="skill-tag"><i class="fas fa-code me-2"></i>Web开发</span>
+                            <span class="skill-tag"><i class="fas fa-palette me-2"></i>视觉设计</span>
+                        </div>
+                        
+                        <!-- 介绍文字 -->
+                        <p class="about-description">
+                            在这个充满可能的数字时代，我们用<strong>独特的视角</strong>捕捉世界的美好。
+                            通过镜头、文字与代码的完美融合，将每一个灵感转化为<strong>动人的作品</strong>。
+                        </p>
+                        
+                        <p class="about-description">
+                            从第一缕晨光到最后一抹晚霞，从宏大的自然景观到细微的生活瞬间，
+                            我们相信<strong>每一个画面都值得被记录</strong>，每一个故事都值得被讲述。
+                        </p>
+                        
+                        <!-- 数据展示 -->
+                        <div class="about-metrics">
+                            <div class="metric-item">
+                                <div class="metric-icon">
+                                    <i class="fas fa-images"></i>
                                 </div>
-                                <div class="feature-item card-3d">
-                                    <i class="fas fa-pen-fancy"></i>
-                                    <span>文字创作</span>
-                                </div>
-                                <div class="feature-item card-3d">
-                                    <i class="fas fa-code"></i>
-                                    <span>数字体验</span>
+                                <div class="metric-content">
+                                    <div class="metric-number">1000+</div>
+                                    <div class="metric-label">作品集</div>
                                 </div>
                             </div>
-                            <div class="mt-4">
-                                <a class="btn btn-primary rounded-pill"
-                                    href="../verify.html?redirect=zh-CN/profile.html">查看个人简介
-                                    <i class="fas fa-arrow-right ms-2"></i></a>
+                            <div class="metric-item">
+                                <div class="metric-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="metric-content">
+                                    <div class="metric-number">100%</div>
+                                    <div class="metric-label">用心创作</div>
+                                </div>
                             </div>
+                            <div class="metric-item">
+                                <div class="metric-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="metric-content">
+                                    <div class="metric-number">5</div>
+                                    <div class="metric-label">创作领域</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA按钮 -->
+                        <div class="about-cta mt-4">
+                            <a class="btn btn-primary-gradient" href="../verify.html?redirect=zh-CN/profile.html">
+                                <i class="fas fa-user-circle me-2"></i>了解更多
+                            </a>
+                            <a class="btn btn-outline-modern" href="contact.html">
+                                <i class="fas fa-envelope me-2"></i>联系我们
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5 ms-auto" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
-                    <div class="about-image">
-                        <img alt="关于我们的图片" class="img-fluid rounded-lg shadow-lg" src="../img/profile/about-me.jpg">
-                        <div class="image-frame"></div>
+                
+                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
+                    <div class="about-image-modern">
+                        <div class="image-wrapper">
+                            <img alt="关于我们" class="img-fluid" src="../img/profile/about-me.jpg">
+                            <div class="image-decoration image-decoration-1"></div>
+                            <div class="image-decoration image-decoration-2"></div>
+                        </div>
+                        <!-- 浮动卡片 -->
+                        <div class="floating-card floating-card-1" data-aos="zoom-in" data-aos-delay="400">
+                            <i class="fas fa-camera-retro"></i>
+                            <span>专业摄影</span>
+                        </div>
+                        <div class="floating-card floating-card-2" data-aos="zoom-in" data-aos-delay="600">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>创意设计</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="services-section py-5" id="services">
+    <!-- 服务部分 - 现代卡片设计 -->
+    <section class="services-section py-5 bg-light" id="services">
         <div class="container">
+            <!-- 标题 -->
             <div class="text-center mb-5" data-aos="fade-up">
-                <h2 class="section-title">创造与表达</h2>
-                <div class="subtitle-line mx-auto"></div>
-                <p class="lead text-muted">突破边界，释放心中无限创意</p>
+                <span class="section-badge">核心服务</span>
+                <h2 class="section-title-modern mt-3">创造与表达</h2>
+                <p class="section-subtitle">以专业技能为基础，用创意思维突破界限</p>
             </div>
 
+            <!-- 服务卡片 -->
             <div class="row g-4">
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-card glass-card">
-                        <div class="card-icon pulse-animation">
-                            <i class="fas fa-camera-retro"></i>
+                <!-- 视觉探索 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card-modern">
+                        <div class="service-card-header">
+                            <div class="service-icon-modern service-icon-1">
+                                <i class="fas fa-camera-retro"></i>
+                            </div>
+                            <div class="service-number">01</div>
                         </div>
-                        <div class="card-content">
-                            <h3>视觉探索</h3>
-                            <p>
-                                我们用专业的视角与技术，捕捉转瞬即逝的美好瞬间，让平凡的日常焕发非凡的光彩，创造永恒的视觉记忆。</p>
-                            <ul class="service-features">
-                                <li><i class="fas fa-check-circle"></i> 人像摄影</li>
-                                <li><i class="fas fa-check-circle"></i> 风景记录</li>
-                                <li><i class="fas fa-check-circle"></i> 创意拍摄</li>
-                            </ul>
-                        </div>
+                        <h3 class="service-title">视觉探索</h3>
+                        <p class="service-desc">
+                            用专业的视角捕捉每一个动人瞬间，让平凡的日常焕发非凡的光彩，创造永恒的视觉记忆
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle"></i>人像摄影</li>
+                            <li><i class="fas fa-check-circle"></i>风景记录</li>
+                            <li><i class="fas fa-check-circle"></i>创意拍摄</li>
+                        </ul>
+                        <a href="gallery.html" class="service-link">
+                            查看作品 <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
 
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-card glass-card">
-                        <div class="card-icon pulse-animation">
-                            <i class="fas fa-pen-fancy"></i>
+                <!-- 文字创作 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card-modern">
+                        <div class="service-card-header">
+                            <div class="service-icon-modern service-icon-2">
+                                <i class="fas fa-pen-fancy"></i>
+                            </div>
+                            <div class="service-number">02</div>
                         </div>
-                        <div class="card-content">
-                            <h3>文字创作</h3>
-                            <p>
-                                我们相信，文字有穿越时空的力量。每一次创作，都是对思想的探索，对情感的表达，用富有质感的文字讲述动人的故事。</p>
-                            <ul class="service-features">
-                                <li><i class="fas fa-check-circle"></i> 随笔散文</li>
-                                <li><i class="fas fa-check-circle"></i> 诗歌创作</li>
-                                <li><i class="fas fa-check-circle"></i> 内容策划</li>
-                            </ul>
-                        </div>
+                        <h3 class="service-title">文字创作</h3>
+                        <p class="service-desc">
+                            文字拥有穿越时空的力量，每一次创作都是对思想的探索，用富有质感的文字讲述动人故事
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle"></i>随笔散文</li>
+                            <li><i class="fas fa-check-circle"></i>诗歌创作</li>
+                            <li><i class="fas fa-check-circle"></i>内容策划</li>
+                        </ul>
+                        <a href="https://blog.alexander.xin" class="service-link">
+                            阅读博客 <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
 
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-card glass-card">
-                        <div class="card-icon pulse-animation">
-                            <i class="fas fa-paint-brush"></i>
+                <!-- 创意设计 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card-modern">
+                        <div class="service-card-header">
+                            <div class="service-icon-modern service-icon-3">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="service-number">03</div>
                         </div>
-                        <div class="card-content">
-                            <h3>创意设计</h3>
-                            <p>
-                                融合艺术与科技，我们将创意理念转化为令人惊叹的视觉设计，打造独特的美学体验，让每个作品都传递独特的创意理念。</p>
-                            <ul class="service-features">
-                                <li><i class="fas fa-check-circle"></i> 平面设计</li>
-                                <li><i class="fas fa-check-circle"></i> UI设计</li>
-                                <li><i class="fas fa-check-circle"></i> 插画创作</li>
-                            </ul>
-                        </div>
+                        <h3 class="service-title">创意设计</h3>
+                        <p class="service-desc">
+                            融合艺术与科技，将创意理念转化为令人惊叹的视觉设计，打造独特的美学体验和品牌价值
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-check-circle"></i>平面设计</li>
+                            <li><i class="fas fa-check-circle"></i>UI/UX设计</li>
+                            <li><i class="fas fa-check-circle"></i>品牌视觉</li>
+                        </ul>
+                        <a href="profile.html" class="service-link">
+                            了解更多 <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -605,65 +732,7 @@
         </div>
     </section>
 
-    <section class="text-section py-5" id="text">
-        <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h2 class="section-title">文字的力量</h2>
-                <div class="subtitle-line mx-auto"></div>
-                <p class="lead text-muted">以墨绘心灵，用字诉情感</p>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
-                    <div class="text-card glass-card">
-                        <div class="card-icon">
-                            <i class="fas fa-book-reader"></i>
-                        </div>
-                        <h3 class="card-title">心灵之窗</h3>
-                        <div class="card-content">
-                            <p class="text-content">
-                                生命如一部正在书写的诗篇，每一页都承载着独特的故事。当我们打开心灵之窗，我们能看见内心深处的宝藏；当我们敞开心扉，世界的绚丽风景便尽收眼底。愿我们的心窗永远朝向阳光，拥抱每一缕温暖，感受每一刻美好的悸动。
-                            </p>
-                            <div class="text-quote">
-                                <i class="fas fa-quote-left"></i>
-                                <p>心若向阳，生命绽放</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
-                    <div class="text-card glass-card">
-                        <div class="card-icon">
-                            <i class="fas fa-feather-alt"></i>
-                        </div>
-                        <h3 class="card-title">文化传承</h3>
-                        <div class="card-content">
-                            <p class="text-content">
-                                在中华文化浩瀚的长河中，每一滴水珠都闪烁着智慧的光芒。读史使我们明志，让我们在前人的足迹中汲取力量；读经让我们养性，使我们在古圣先贤的智慧中获得启迪。这些璀璨的文化瑰宝，是照亮我们前行道路的永恒明灯。
-                            </p>
-                            <div class="text-quote">
-                                <i class="fas fa-quote-left"></i>
-                                <p>承古韵，开新篇</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 text-center mt-5" data-aos="fade-up" data-aos-delay="250">
-                    <div class="blog-cta glass-card p-4">
-                        <h4 class="mb-3">发现更多精彩文章</h4>
-                        <p class="mb-4">探索我们收录的各类话题文章，从技术分享到生活感悟，还有更多等你发现</p>
-                        <a class="btn btn-primary btn-lg rounded-pill shadow-lg pulse-btn"
-                            href="https://blog.alexander.xin">
-                            <i class="fas fa-blog me-2"></i>访问我的博客
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 诗词和历史上的今天部分 - 重新设计为页脚上方的独立区域 -->
+    <!-- 诗词和历史上的今天部分 -->
     <section class="poem-history-section py-5">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
@@ -743,113 +812,138 @@
                 </button>
             </div>
         </div>
-    </div> <!-- 优化后的现代化页脚 -->
+    </div>
+    
+    <!-- 现代化页脚 -->
     <footer class="site-footer">
-        <div class="footer-particles"></div>
         <div class="container">
-            <!-- 主要内容区域 -->
-            <div class="footer-main">
+            <div class="footer-content">
                 <div class="row g-4">
-                    <!-- 品牌标识区域 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="footer-brand-section">
-                            <a class="footer-logo-link" href="#">
-                                <img alt="Logo" height="32" src="../img/branding/logo.png" width="32">
-                                <span>Alexander James Carter</span>
+                    <!-- 左侧：品牌和简介 -->
+                    <div class="col-lg-4 col-md-12">
+                        <div class="footer-brand">
+                            <a href="#intro" class="footer-logo">
+                                <img src="../img/branding/logo.png" alt="Logo" width="40" height="40">
+                                <span class="footer-logo-text">Alexander James Carter</span>
                             </a>
-                            <p class="footer-slogan">探索创意边界，分享生活美学，定格珍贵瞬间</p>
-                            <div class="footer-certifications">
-                                <a class="cert-badge license" href="license.html" title="查看许可证详情">
-                                    <i class="fab fa-creative-commons"></i>
-                                    <span>CC BY-NC-SA 4.0</span>
+                            <p class="footer-desc">用创意记录生活，用镜头定格美好</p>
+                            
+                            <!-- 社交链接 -->
+                            <div class="footer-social-links">
+                                <a href="https://github.com/AlexanderJ-Carter" target="_blank" rel="noopener" 
+                                    class="social-link" aria-label="GitHub">
+                                    <i class="fab fa-github"></i>
                                 </a>
-                                <a class="cert-badge ssl"
-                                    href="https://www.ssllabs.com/ssltest/analyze.html?d=alexander.xin" target="_blank"
-                                    rel="noopener" title="SSL安全连接测试">
-                                    <i class="fas fa-shield-alt"></i>
-                                    <span>SSL安全</span>
+                                <a href="https://blog.alexander.xin" target="_blank" rel="noopener" 
+                                    class="social-link" aria-label="博客">
+                                    <i class="fas fa-rss"></i>
                                 </a>
-                                <a class="cert-badge responsive" href="https://search.google.com/test/mobile-friendly"
-                                    target="_blank" rel="noopener" title="移动设备友好性测试">
-                                    <i class="fas fa-mobile-alt"></i>
-                                    <span>响应式</span>
-                                </a> <a class="cert-badge accessibility" href="accessibility.html" title="查看网站无障碍功能详情">
-                                    <i class="fas fa-universal-access"></i>
-                                    <span>无障碍</span>
-                                </a>
-                                <a class="cert-badge wcag" href="accessibility.html#wcag-compliance"
-                                    title="符合WCAG 2.1 AA标准详情">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>WCAG 2.1</span>
+                                <a href="contact.html" class="social-link" aria-label="联系">
+                                    <i class="fas fa-envelope"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 快速导航 -->
-                    <div class="col-lg-2 col-md-3 col-6">
-                        <div class="footer-nav-section">
-                            <h6 class="footer-section-title">内容浏览</h6>
-                            <ul class="footer-nav-list">
-                                <li><a href="https://blog.alexander.xin">博客文章</a></li>
-                                <li><a href="gallery.html">作品画廊</a></li>
-                                <li><a href="profile.html">个人简介</a></li>
-                                <li><a href="#portfolio">精选作品</a></li>
-                            </ul>
+                    <!-- 中间：快速链接 -->
+                    <div class="col-lg-5 col-md-7">
+                        <div class="row g-3">
+                            <div class="col-4">
+                                <h6 class="footer-title">导航</h6>
+                                <ul class="footer-links">
+                                    <li><a href="./">首页</a></li>
+                                    <li><a href="gallery.html">画廊</a></li>
+                                    <li><a href="profile.html">关于</a></li>
+                                    <li><a href="https://blog.alexander.xin" target="_blank" rel="noopener">博客</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-4">
+                                <h6 class="footer-title">工具</h6>
+                                <ul class="footer-links">
+                                    <li><a href="calendar.html">日历</a></li>
+                                    <li><a href="currency.html">汇率</a></li>
+                                    <li><a href="../time.html">时钟</a></li>
+                                    <li><a href="../map.html">地图</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-4">
+                                <h6 class="footer-title">帮助</h6>
+                                <ul class="footer-links">
+                                    <li><a href="contact.html">联系</a></li>
+                                    <li><a href="privacy.html">隐私</a></li>
+                                    <li><a href="terms.html">条款</a></li>
+                                    <li><a href="license.html">协议</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- 实用工具 -->
-                    <div class="col-lg-2 col-md-3 col-6">
-                        <div class="footer-nav-section">
-                            <h6 class="footer-section-title">实用工具</h6>
-                            <ul class="footer-nav-list">
-                                <li><a href="currency.html">货币转换</a></li>
-                                <li><a href="../time.html">标准时间</a></li>
-                                <li><a href="calendar.html">智能日历</a></li>
-                                <li><a href="../map.html">页面地图</a></li>
-                            </ul>
-                        </div>
-                    </div> <!-- 语言与社交 -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="footer-extras-section">
-                            <!-- 语言选择器 -->
-                            <div class="language-selector">
-                                <h6 class="footer-section-title">语言选择</h6>
-                                <div class="language-options">
-                                    <a class="lang-option active" href="./" title="中文简体">
-                                        <span class="flag">🇨🇳</span>
-                                        <span class="lang-text">中文</span>
-                                    </a>
-                                    <a class="lang-option" href="../en/" title="English">
-                                        <span class="flag">🇬🇧</span>
-                                        <span class="lang-text">English</span>
-                                    </a>
-                                    <a class="lang-option" href="../it/" title="Italiano">
-                                        <span class="flag">🇮🇹</span>
-                                        <span class="lang-text">Italiano</span>
-                                    </a>
-                                    <a class="lang-option" href="../jp/" title="日本語">
-                                        <span class="flag">🇯🇵</span>
-                                        <span class="lang-text">日本語</span>
-                                    </a>
-                                </div>
-                            </div>
+                    <!-- 右侧：语言 -->
+                    <div class="col-lg-3 col-md-5">
+                        <h6 class="footer-title">Language</h6>
+                        <div class="footer-languages-compact">
+                            <a href="./" class="lang-link-compact active" title="中文简体">🇨🇳 中文</a>
+                            <a href="../en/" class="lang-link-compact" title="English">🇬🇧 English</a>
+                            <a href="../it/" class="lang-link-compact" title="Italiano">🇮🇹 Italiano</a>
+                            <a href="../jp/" class="lang-link-compact" title="日本語">🇯🇵 日本語</a>
                         </div>
                     </div>
                 </div>
-            </div><!-- 页脚底部信息 -->
+            </div>
+            
+            <!-- 认证标签 -->
+            <div class="footer-badges-section">
+                <div class="container">
+                    <div class="badges-compact-wrapper">
+                        <div class="badge-category">
+                            <span class="category-label">开源与版权</span>
+                            <a href="license.html" class="badge-compact" title="CC BY-NC-SA 4.0">
+                                <i class="fab fa-creative-commons"></i> CC BY-NC-SA 4.0
+                            </a>
+                            <a href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io" 
+                                target="_blank" rel="noopener" class="badge-compact" title="开源项目">
+                                <i class="fab fa-github"></i> Open Source
+                            </a>
+                        </div>
+                        
+                        <div class="badge-category">
+                            <span class="category-label">WEB标准</span>
+                            <span class="badge-compact badge-static" title="HTML5">
+                                <i class="fab fa-html5"></i> HTML5
+                            </span>
+                            <span class="badge-compact badge-static" title="CSS3">
+                                <i class="fab fa-css3-alt"></i> CSS3
+                            </span>
+                            <span class="badge-compact badge-static" title="响应式">
+                                <i class="fas fa-mobile-alt"></i> Responsive
+                            </span>
+                        </div>
+                        
+                        <div class="badge-category">
+                            <span class="category-label">访问性与安全</span>
+                            <a href="accessibility.html" class="badge-compact" title="WCAG 2.1">
+                                <i class="fas fa-universal-access"></i> WCAG 2.1
+                            </a>
+                            <span class="badge-compact badge-static" title="HTTPS">
+                                <i class="fas fa-lock"></i> HTTPS
+                            </span>
+                            <span class="badge-compact badge-static" title="SEO">
+                                <i class="fas fa-search"></i> SEO
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 页脚底部 -->
             <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <div class="copyright-section">
-                        <p class="copyright">© 2025 Alexander James Carter. All rights reserved.</p>
-                    </div>
-                    <div class="footer-links-section">
-                        <a href="privacy.html">隐私政策</a>
-                        <a href="terms.html">使用条款</a>
-                        <a href="ads.html">广告服务</a>
-                        <a href="contact.html">联系我们</a>
-                    </div>
+                <div class="container">
+                    <p class="footer-copyright-center">
+                        © 2024-2025 Alexander James Carter. All rights reserved.
+                        <br>
+                        Powered by <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> 
+                        & <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a>
+                    </p>
                 </div>
             </div>
         </div>

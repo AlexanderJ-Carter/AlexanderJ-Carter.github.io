@@ -1,4 +1,4 @@
-/* 现代简约页脚设计 - 优化版 */
+/* 现代简约页脚设计 - 重构版 */
 body .site-footer {
     position: relative;
     background: linear-gradient(
@@ -8,12 +8,177 @@ body .site-footer {
     );
     color: #334155;
     border-top: 1px solid rgba(148, 163, 184, 0.15);
-    padding: 50px 0 0;
+    padding: 60px 0 0;
     overflow: hidden;
     z-index: 10;
     box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.08);
     font-size: 0.9rem;
     line-height: 1.6;
+}
+
+/* 页脚主要内容区域 */
+body .site-footer .footer-content {
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+/* 品牌区域 */
+body .site-footer .footer-brand {
+    margin-bottom: 1.5rem;
+}
+
+body .site-footer .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+body .site-footer .footer-logo img {
+    border-radius: 8px;
+}
+
+body .site-footer .footer-logo:hover {
+    color: #3b82f6;
+    transform: translateX(3px);
+}
+
+body .site-footer .footer-desc {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+}
+
+/* 社交链接 */
+body .site-footer .footer-social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 1.5rem;
+}
+
+body .site-footer .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(59, 130, 246, 0.08);
+    border-radius: 50%;
+    color: #3b82f6;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+body .site-footer .social-link:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* 页脚标题 */
+body .site-footer .footer-title {
+    color: #1e293b;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* 页脚链接列表 */
+body .site-footer .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+body .site-footer .footer-links li {
+    margin-bottom: 0.65rem;
+}
+
+body .site-footer .footer-links a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+body .site-footer .footer-links a:hover {
+    color: #3b82f6;
+    transform: translateX(3px);
+}
+
+/* 语言选择器 */
+body .site-footer .footer-languages {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+body .site-footer .lang-link {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+body .site-footer .lang-link.active {
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+body .site-footer .lang-link:hover {
+    color: #3b82f6;
+    transform: translateX(3px);
+}
+
+body .site-footer .lang-flag {
+    font-size: 1.2em;
+}
+
+/* 紧凑型语言选择器 */
+body .site-footer .footer-languages-compact {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+body .site-footer .lang-link-compact {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: rgba(248, 250, 252, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 8px;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+body .site-footer .lang-link-compact.active {
+    background: rgba(59, 130, 246, 0.08);
+    border-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    font-weight: 500;
+}
+
+body .site-footer .lang-link-compact:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.25);
+    color: #3b82f6;
+    transform: translateY(-1px);
 }
 
 /* 页脚背景粒子效果 */
@@ -1147,4 +1312,732 @@ body.dark-mode .site-footer .footer-links-section a:hover {
     background: transparent !important;
     border-top: 1px solid rgba(71, 85, 105, 0.2) !important;
     color: #cbd5e1 !important;
+}
+
+/* ========================================
+   重新设计的页脚底部区域
+   ======================================== */
+
+/* 版权区域增强 */
+.copyright-section {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.copyright {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.copyright-sub {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin: 0;
+    font-style: italic;
+}
+
+/* 快速链接网格布局 */
+.footer-quick-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.25rem;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 12px;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.footer-link:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: #a855f7;
+    color: #a855f7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15);
+}
+
+.footer-link i {
+    font-size: 1.1em;
+    opacity: 0.8;
+}
+
+/* 网站信息 */
+.site-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    margin-bottom: 1rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.info-item i {
+    color: #a855f7;
+    font-size: 0.9em;
+}
+
+/* ICP备案信息(可选) */
+.icp-info {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+}
+
+.icp-info a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.icp-info a:hover {
+    color: #a855f7;
+}
+
+/* 平板响应式 */
+@media (min-width: 768px) {
+    .footer-quick-links {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 900px;
+    }
+    
+    .footer-link {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .footer-link i {
+        font-size: 1.5em;
+    }
+    
+    .site-info {
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+    }
+    
+    .copyright-section {
+        margin-bottom: 2rem;
+    }
+}
+
+/* 大屏幕响应式 */
+@media (min-width: 992px) {
+    .footer-bottom-content {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .footer-quick-links {
+        gap: 1rem;
+    }
+    
+    .footer-link:hover i {
+        transform: scale(1.2);
+    }
+}
+
+/* 小屏幕优化 */
+@media (max-width: 576px) {
+    .footer-quick-links {
+        gap: 0.5rem;
+    }
+    
+    .footer-link {
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .footer-link span {
+        font-size: 0.8rem;
+    }
+    
+    .site-info {
+        gap: 0.5rem;
+    }
+    
+    .info-item {
+        font-size: 0.75rem;
+    }
+    
+    .copyright {
+        font-size: 0.85rem;
+    }
+    
+    .copyright-sub {
+        font-size: 0.75rem;
+    }
+}
+
+/* 深色模式适配 */
+[data-bs-theme='dark'] .footer-link,
+body.dark-mode .footer-link {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(71, 85, 105, 0.3);
+    color: #cbd5e1;
+}
+
+[data-bs-theme='dark'] .footer-link:hover,
+body.dark-mode .footer-link:hover {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: #a855f7;
+    color: #a855f7;
+}
+
+[data-bs-theme='dark'] .copyright,
+body.dark-mode .copyright {
+    color: #94a3b8;
+}
+
+[data-bs-theme='dark'] .copyright-sub,
+body.dark-mode .copyright-sub {
+    color: #64748b;
+}
+
+[data-bs-theme='dark'] .info-item,
+body.dark-mode .info-item {
+    color: #94a3b8;
+}
+
+[data-bs-theme='dark'] .site-info,
+body.dark-mode .site-info {
+    border-color: rgba(71, 85, 105, 0.2);
+}
+
+/* ====== 新页脚底部样式 (重构版) ====== */
+body .site-footer .footer-bottom-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+body .site-footer .footer-copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+body .site-footer .footer-bottom-badges {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+body .site-footer .footer-bottom-badges .footer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(59, 130, 246, 0.08);
+    border-radius: 20px;
+    color: #3b82f6;
+    text-decoration: none;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+body .site-footer .footer-bottom-badges .footer-badge:hover {
+    background: rgba(59, 130, 246, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+body .site-footer .footer-bottom-badges .footer-badge i {
+    font-size: 1rem;
+}
+
+body .site-footer .footer-bottom-badges .footer-badge .badge-text {
+    font-weight: 500;
+}
+
+body .site-footer .footer-bottom-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+body .site-footer .footer-bottom-links a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+body .site-footer .footer-bottom-links a:hover {
+    color: #3b82f6;
+}
+
+body .site-footer .link-separator {
+    color: #cbd5e1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* ====== 认证标签区域 ====== */
+body .site-footer .footer-certifications {
+    padding: 40px 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(248, 250, 252, 0.5) 100%
+    );
+    border-top: 1px solid rgba(148, 163, 184, 0.12);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+body .site-footer .certifications-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    align-items: start;
+}
+
+body .site-footer .cert-group {
+    text-align: center;
+}
+
+body .site-footer .cert-group-title {
+    color: #475569;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+body .site-footer .cert-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+body .site-footer .cert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 24px;
+    color: #3b82f6;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+body .site-footer .cert-badge:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+body .site-footer .cert-badge-static {
+    cursor: default;
+    background: linear-gradient(135deg, rgba(100, 116, 139, 0.08) 0%, rgba(71, 85, 105, 0.08) 100%);
+    border-color: rgba(100, 116, 139, 0.15);
+    color: #64748b;
+}
+
+body .site-footer .cert-badge-static:hover {
+    background: linear-gradient(135deg, rgba(100, 116, 139, 0.12) 0%, rgba(71, 85, 105, 0.12) 100%);
+    transform: none;
+    box-shadow: none;
+}
+
+body .site-footer .cert-badge i {
+    font-size: 1.1em;
+}
+
+/* 页脚底部内容重构 */
+body .site-footer .footer-bottom-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+body .site-footer .footer-copyright-section {
+    order: 1;
+}
+
+body .site-footer .footer-copyright {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin: 0 0 0.5rem 0;
+}
+
+body .site-footer .footer-powered {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+body .site-footer .footer-powered a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+body .site-footer .footer-powered a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+body .site-footer .footer-legal-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    order: 2;
+}
+
+body .site-footer .footer-legal-links a {
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+body .site-footer .footer-legal-links a:hover {
+    color: #3b82f6;
+}
+
+body .site-footer .footer-legal-links .separator {
+    color: #cbd5e1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* 响应式布局 */
+@media (max-width: 991px) {
+    body .site-footer .footer-content {
+        padding-bottom: 30px;
+    }
+    
+    body .site-footer .footer-brand {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    body .site-footer .footer-social-links {
+        justify-content: center;
+    }
+    
+    body .site-footer .footer-title {
+        margin-top: 1.5rem;
+    }
+    
+    body .site-footer .certifications-wrapper {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body .site-footer {
+        padding: 40px 0 0;
+        font-size: 0.85rem;
+    }
+    
+    body .site-footer .footer-content {
+        text-align: center;
+    }
+    
+    body .site-footer .footer-logo {
+        justify-content: center;
+        font-size: 1.1rem;
+    }
+    
+    body .site-footer .footer-social-links {
+        justify-content: center;
+    }
+    
+    body .site-footer .social-link {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+    
+    body .site-footer .footer-title {
+        font-size: 0.95rem;
+        margin-top: 1.5rem;
+    }
+    
+    body .site-footer .footer-links a,
+    body .site-footer .lang-link {
+        font-size: 0.85rem;
+    }
+    
+    body .site-footer .footer-certifications {
+        padding: 30px 0;
+    }
+    
+    body .site-footer .certifications-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    body .site-footer .cert-group-title {
+        font-size: 0.8rem;
+    }
+    
+    body .site-footer .cert-badge {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    body .site-footer .footer-bottom-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.25rem;
+    }
+    
+    body .site-footer .footer-bottom-badges {
+        justify-content: center;
+    }
+    
+    body .site-footer .footer-bottom-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    body .site-footer .footer-certifications {
+        padding: 25px 0;
+    }
+    
+    body .site-footer .certifications-wrapper {
+        gap: 1.5rem;
+    }
+    
+    body .site-footer .cert-badge span {
+        display: none;
+    }
+    
+    body .site-footer .cert-badge {
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    
+    body .site-footer .cert-badge i {
+        font-size: 1.2em;
+        margin: 0;
+    }
+    
+    body .site-footer .footer-bottom-badges .footer-badge .badge-text {
+        display: none;
+    }
+    
+    body .site-footer .footer-bottom-badges .footer-badge {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    
+    body .site-footer .footer-bottom-badges .footer-badge i {
+        font-size: 1.1rem;
+    }
+    
+    body .site-footer .footer-powered {
+        font-size: 0.8rem;
+    }
+    
+    body .site-footer .footer-legal-links {
+        font-size: 0.85rem;
+    }
+    
+    body .site-footer .badge-category {
+        justify-content: center;
+    }
+    
+    body .site-footer .category-label {
+        display: none;
+    }
+    
+    body .site-footer .badge-compact {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+    }
+}
+
+/* ====== 紧凑型认证标签区域 (新版) ====== */
+body .site-footer .footer-badges-section {
+    padding: 20px 0;
+    background: rgba(248, 250, 252, 0.5);
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+body .site-footer .badges-compact-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+body .site-footer .badge-category {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+body .site-footer .category-label {
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-right: 8px;
+    border-right: 2px solid rgba(148, 163, 184, 0.2);
+}
+
+body .site-footer .badge-compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 16px;
+    color: #3b82f6;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+body .site-footer .badge-compact:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateY(-1px);
+}
+
+body .site-footer .badge-compact.badge-static {
+    background: rgba(241, 245, 249, 0.8);
+    border-color: rgba(148, 163, 184, 0.12);
+    color: #64748b;
+    cursor: default;
+}
+
+body .site-footer .badge-compact.badge-static:hover {
+    transform: none;
+}
+
+body .site-footer .badge-compact i {
+    font-size: 0.95em;
+}
+
+/* 简化的页脚底部 - 居中版权 */
+body .site-footer .footer-copyright-center {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin: 0;
+    line-height: 1.8;
+}
+
+body .site-footer .footer-copyright-center a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+body .site-footer .footer-copyright-center a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    body .site-footer .footer-badges-section {
+        padding: 15px 0;
+    }
+    
+    body .site-footer .badges-compact-wrapper {
+        gap: 1.5rem;
+    }
+    
+    body .site-footer .badge-compact {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+    }
+    
+    body .site-footer .footer-copyright-center {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body .site-footer .badges-compact-wrapper {
+        gap: 1rem;
+    }
+    
+    body .site-footer .badge-category {
+        justify-content: center;
+    }
+    
+    body .site-footer .category-label {
+        display: none;
+    }
+    
+    body .site-footer .badge-compact {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+        gap: 4px;
+    }
+    
+    body .site-footer .footer-copyright-center {
+        font-size: 0.75rem;
+    }
 }

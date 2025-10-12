@@ -265,3 +265,984 @@
         display: none;
     }
 }
+
+/* ========================================
+   现代化Hero区域样式
+   ======================================== */
+
+/* Hero渐变叠加层 */
+.hero-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(102, 126, 234, 0.8) 0%, 
+        rgba(118, 75, 162, 0.7) 50%,
+        rgba(240, 147, 251, 0.6) 100%);
+    z-index: 1;
+}
+
+.overlay-content {
+    z-index: 2;
+}
+
+/* Hero欢迎标签 */
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: white;
+    letter-spacing: 0.5px;
+}
+
+/* Hero主标题 */
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    color: white;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+}
+
+.gradient-text-vibrant {
+    background: linear-gradient(135deg, #ffd700 0%, #ff6b9d 50%, #c471f5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 900;
+    display: inline-block;
+    animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        filter: hue-rotate(20deg);
+    }
+}
+
+/* Hero副标题 */
+.hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 700px;
+    margin: 0 auto;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero按钮组 */
+.hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-hero-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-hero-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
+    color: white;
+}
+
+.btn-hero-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.4s ease;
+}
+
+.btn-hero-secondary:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    color: white;
+}
+
+/* Hero统计数据 */
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 滚动指示器 */
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0.8;
+}
+
+.scroll-mouse {
+    width: 28px;
+    height: 45px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    position: relative;
+}
+
+.scroll-wheel {
+    width: 4px;
+    height: 8px;
+    background: white;
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-animation 2s infinite;
+}
+
+@keyframes scroll-animation {
+    0% {
+        top: 8px;
+        opacity: 1;
+    }
+    50% {
+        top: 20px;
+        opacity: 0.5;
+    }
+    100% {
+        top: 8px;
+        opacity: 1;
+    }
+}
+
+.scroll-text {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .hero-badge {
+        font-size: 0.85rem;
+        padding: 0.6rem 1.25rem;
+    }
+    
+    .hero-title {
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-cta-group {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .btn-hero-primary,
+    .btn-hero-secondary {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .hero-stats {
+        gap: 1rem;
+        padding: 1.5rem 1rem;
+    }
+    
+    .stat-divider {
+        height: 30px;
+    }
+    
+    .scroll-indicator {
+        bottom: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .stat-divider {
+        width: 60px;
+        height: 1px;
+    }
+}
+
+/* ========================================
+   现代化关于部分样式
+   ======================================== */
+
+/* 区域徽章 */
+.section-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    border-radius: 50px;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 现代标题 */
+.section-title-modern {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: var(--dark-text);
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--gray-text);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 技能标签 */
+.about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.25rem;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border: 1px solid rgba(102, 126, 234, 0.15);
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--dark-text);
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+    border-color: var(--primary-color);
+}
+
+.skill-tag i {
+    color: var(--primary-color);
+}
+
+/* 关于描述 */
+.about-description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--gray-text);
+    margin-bottom: 1.5rem;
+}
+
+.about-description strong {
+    color: var(--dark-text);
+    font-weight: 600;
+}
+
+/* 数据指标 */
+.about-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.metric-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.metric-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+}
+
+.metric-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 12px;
+    color: white;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.metric-number {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--dark-text);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    color: var(--gray-text);
+}
+
+/* CTA按钮组 */
+.about-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-primary-gradient {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    color: white;
+    padding: 0.875rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+.btn-outline-modern {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.875rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-modern:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* 现代化图片区域 */
+.about-image-modern {
+    position: relative;
+}
+
+.image-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.image-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+/* 图片装饰 */
+.image-decoration {
+    position: absolute;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.image-decoration-1 {
+    width: 100%;
+    height: 100%;
+    top: 20px;
+    right: -20px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+}
+
+.image-decoration-2 {
+    width: 100%;
+    height: 100%;
+    bottom: -20px;
+    left: -20px;
+    background: linear-gradient(135deg, rgba(240, 147, 251, 0.2), rgba(245, 87, 108, 0.2));
+}
+
+/* 浮动卡片 */
+.floating-card {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    font-weight: 600;
+    z-index: 10;
+    animation: float 3s ease-in-out infinite;
+}
+
+.floating-card-1 {
+    top: 10%;
+    right: -5%;
+    animation-delay: 0s;
+}
+
+.floating-card-2 {
+    bottom: 15%;
+    left: -5%;
+    animation-delay: 1.5s;
+}
+
+.floating-card i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* 响应式适配 */
+@media (max-width: 992px) {
+    .about-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .floating-card {
+        font-size: 0.85rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .floating-card i {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-tags {
+        justify-content: center;
+    }
+    
+    .about-metrics {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-cta {
+        flex-direction: column;
+    }
+    
+    .btn-primary-gradient,
+    .btn-outline-modern {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .floating-card {
+        position: static;
+        margin: 1rem 0;
+        animation: none;
+    }
+    
+    .image-decoration {
+        display: none;
+    }
+}
+
+/* ========================================
+   现代化服务卡片样式
+   ======================================== */
+
+.services-section {
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.service-card-modern {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.service-card-modern:hover::before {
+    transform: scaleX(1);
+}
+
+.service-card-modern:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+}
+
+/* 卡片头部 */
+.service-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+/* 服务图标 */
+.service-icon-modern {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.service-icon-modern::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    background: inherit;
+    opacity: 0.2;
+    transform: scale(1.3);
+    transition: transform 0.4s ease;
+}
+
+.service-card-modern:hover .service-icon-modern {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.service-card-modern:hover .service-icon-modern::after {
+    transform: scale(1.5);
+}
+
+.service-icon-1 {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.service-icon-2 {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+}
+
+.service-icon-3 {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+/* 服务编号 */
+.service-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(102, 126, 234, 0.08);
+    line-height: 1;
+}
+
+/* 服务标题 */
+.service-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-text);
+    margin-bottom: 1rem;
+}
+
+/* 服务描述 */
+.service-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--gray-text);
+    margin-bottom: 1.5rem;
+}
+
+/* 服务列表 */
+.service-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+}
+
+.service-list li {
+    padding: 0.5rem 0;
+    color: var(--dark-text);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.service-list i {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+}
+
+/* 服务链接 */
+.service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.service-link:hover {
+    gap: 0.75rem;
+    color: #764ba2;
+}
+
+.service-link i {
+    transition: transform 0.3s ease;
+}
+
+.service-link:hover i {
+    transform: translateX(3px);
+}
+
+/* 响应式优化 */
+@media (max-width: 992px) {
+    .service-card-modern {
+        padding: 2rem 1.5rem;
+    }
+    
+    .service-icon-modern {
+        width: 60px;
+        height: 60px;
+        font-size: 1.75rem;
+    }
+    
+    .service-number {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-title {
+        font-size: 1.3rem;
+    }
+    
+    .service-desc {
+        font-size: 0.95rem;
+    }
+}
+
+/* ========================================
+   作品集图片修复 - 统一比例和响应式
+   ======================================== */
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3; /* 固定宽高比 4:3 */
+    overflow: hidden;
+    border-radius: 15px;
+    background: #f0f0f0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 裁剪填充,保持比例 */
+    object-position: center;
+    transition: transform 0.6s ease;
+}
+
+.portfolio-card:hover .portfolio-image {
+    transform: scale(1.1);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        transparent 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio-card:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-overlay h5 {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    transform: translateY(20px);
+    transition: transform 0.3s ease 0.1s;
+}
+
+.portfolio-card:hover .portfolio-overlay h5 {
+    transform: translateY(0);
+}
+
+.portfolio-overlay p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    transform: translateY(20px);
+    transition: transform 0.3s ease 0.15s;
+}
+
+.portfolio-card:hover .portfolio-overlay p {
+    transform: translateY(0);
+}
+
+.portfolio-icons {
+    display: flex;
+    gap: 0.75rem;
+    transform: translateY(20px);
+    transition: transform 0.3s ease 0.2s;
+}
+
+.portfolio-card:hover .portfolio-icons {
+    transform: translateY(0);
+}
+
+.portfolio-link {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.portfolio-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+    color: white;
+}
+
+/* 筛选按钮 */
+.portfolio-filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.5rem;
+    border: 2px solid #e0e0e0;
+    background: white;
+    color: #666;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* 响应式优化 */
+@media (max-width: 1200px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+    
+    .portfolio-card {
+        aspect-ratio: 1/1; /* 移动端使用正方形 */
+    }
+    
+    .portfolio-overlay h5 {
+        font-size: 1.1rem;
+    }
+    
+    .portfolio-overlay p {
+        font-size: 0.85rem;
+    }
+    
+    .portfolio-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .filter-btn {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .portfolio-card {
+        aspect-ratio: 16/9; /* 小屏使用16:9 */
+    }
+    
+    /* 移动端始终显示标题 */
+    .portfolio-overlay {
+        opacity: 1;
+        background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.7) 0%,
+            transparent 60%
+        );
+    }
+    
+    .portfolio-overlay h5,
+    .portfolio-overlay p {
+        transform: translateY(0);
+    }
+    
+    .portfolio-icons {
+        transform: translateY(0);
+    }
+}
