@@ -1,5 +1,6 @@
 /* ========================================
    日历页面 - 现代明亮设计
+   完全重写版本 - 适配现有HTML结构
    ======================================== */
 
 :root {
@@ -7,7 +8,7 @@
     --calendar-primary: #667eea;
     --calendar-secondary: #764ba2;
     --calendar-accent: #f093fb;
-    --calendar-light-bg: #fafbff;
+    --calendar-light-bg: #f5f7fa;
     --calendar-card-bg: #ffffff;
     --calendar-text-primary: #2c3e50;
     --calendar-text-secondary: #6c757d;
@@ -15,8 +16,6 @@
     /* 渐变色彩 */
     --calendar-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --calendar-gradient-soft: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-    --calendar-gradient-warm: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-    --calendar-gradient-cool: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
     --calendar-gradient-hero: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
     
     /* 状态色彩 */
@@ -26,7 +25,6 @@
     --calendar-info: #2196f3;
     
     /* 过渡动画 */
-    --transition-slow: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     --transition-medium: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     --transition-fast: all 0.2s ease;
     
@@ -38,41 +36,72 @@
     --shadow-soft: 0 4px 20px rgba(102, 126, 234, 0.15);
     --shadow-medium: 0 8px 30px rgba(102, 126, 234, 0.2);
     --shadow-hover: 0 12px 40px rgba(102, 126, 234, 0.25);
-    --shadow-colored: 0 10px 40px rgba(118, 75, 162, 0.2);
     
     /* 圆角 */
-    --border-radius-sm: 10px;
     --border-radius: 20px;
     --border-radius-lg: 30px;
 }
 
 /* ========================================
-   通用样式
+   页面加载器
    ======================================== */
 
-body {
-    background: var(--calendar-light-bg);
-    color: var(--calendar-text-primary);
-    font-family: var(--font-body);
-    overflow-x: hidden;
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--calendar-gradient-hero);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.5s ease;
 }
 
-.main-content {
-    padding-top: 80px;
+.page-loader.loaded {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loader-content p {
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 /* ========================================
-   Hero区域 - 明亮渐变设计
+   Hero区域
    ======================================== */
 
 .calendar-hero {
     background: var(--calendar-gradient-hero);
-    min-height: 65vh;
+    min-height: 60vh;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
-    padding: 5rem 0;
+    padding: 5rem 0 4rem;
+    margin-top: 80px;
 }
 
 .calendar-hero::before {
@@ -83,8 +112,8 @@ body {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(168, 237, 234, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(254, 214, 227, 0.3) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(168, 237, 234, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(254, 214, 227, 0.4) 0%, transparent 50%);
     z-index: 1;
 }
 
@@ -97,7 +126,7 @@ body {
     font-family: var(--font-heading);
     font-size: 3.5rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2c3e50 0%, #667eea 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -173,6 +202,7 @@ body {
     backdrop-filter: blur(15px);
     transition: var(--transition-medium);
     border: 1px solid rgba(255, 255, 255, 0.8);
+    min-width: 300px;
 }
 
 .preview-card:hover {
@@ -194,20 +224,102 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--calendar-text-primary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
-.preview-card p {
+.current-date,
+.current-lunar {
     color: var(--calendar-text-secondary);
-    margin: 0;
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+}
+
+.current-date {
+    font-weight: 600;
+    color: var(--calendar-primary);
 }
 
 /* ========================================
-   日历主体区域
+   控制面板
    ======================================== */
 
-.calendar-section {
-    padding: 5rem 0;
+.calendar-controls {
+    padding: 3rem 0 2rem;
+    background: var(--calendar-light-bg);
+}
+
+.control-panel {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+}
+
+.calendar-navigation {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.current-month {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: var(--calendar-gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    min-width: 200px;
+    text-align: center;
+}
+
+.calendar-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* 新拟态按钮 - 改为明亮渐变风格 */
+.neumorphism-button,
+.btn.neumorphism-button {
+    background: var(--calendar-gradient-primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-medium);
+    box-shadow: var(--shadow-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0.3px;
+}
+
+.neumorphism-button:hover,
+.btn.neumorphism-button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    filter: brightness(1.1);
+    color: white;
+}
+
+.neumorphism-button:active,
+.btn.neumorphism-button:active {
+    transform: translateY(0);
+}
+
+.neumorphism-button i {
+    font-size: 1rem;
+}
+
+/* ========================================
+   日历主体
+   ======================================== */
+
+.calendar-main {
+    padding: 2rem 0 5rem;
     background: var(--calendar-light-bg);
 }
 
@@ -216,82 +328,40 @@ body {
     border-radius: var(--border-radius);
     padding: 2.5rem;
     box-shadow: var(--shadow-medium);
-    margin-bottom: 2rem;
 }
 
-/* 日历头部 */
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
+.calendar-grid {
+    width: 100%;
+}
+
+/* 星期标题 */
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
     border-bottom: 2px solid rgba(102, 126, 234, 0.1);
 }
 
-.calendar-header h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    background: var(--calendar-gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
-}
-
-.calendar-nav {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.calendar-nav button {
-    background: var(--calendar-gradient-primary);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition-medium);
-    box-shadow: var(--shadow-soft);
-    font-size: 1.2rem;
-}
-
-.calendar-nav button:hover {
-    transform: scale(1.1);
-    box-shadow: var(--shadow-hover);
-}
-
-.calendar-nav .current-month {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--calendar-text-primary);
-    min-width: 200px;
+.weekday {
     text-align: center;
+    font-weight: 700;
+    color: var(--calendar-primary);
+    padding: 1rem 0;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* 日历网格 */
-.calendar-grid {
+/* 日期网格 */
+.calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
 }
 
-.calendar-weekday {
-    text-align: center;
-    font-weight: 700;
-    color: var(--calendar-primary);
-    padding: 1rem 0;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.calendar-day {
+.day {
     aspect-ratio: 1;
     display: flex;
     flex-direction: column;
@@ -299,40 +369,84 @@ body {
     justify-content: center;
     background: white;
     border: 2px solid rgba(102, 126, 234, 0.1);
-    border-radius: var(--border-radius-sm);
+    border-radius: 15px;
     cursor: pointer;
     transition: var(--transition-fast);
     position: relative;
-    padding: 0.5rem;
+    padding: 0.75rem 0.5rem;
 }
 
-.calendar-day:hover {
+.day:hover {
     background: var(--calendar-gradient-soft);
     border-color: var(--calendar-primary);
     transform: scale(1.05);
     box-shadow: var(--shadow-soft);
 }
 
-.calendar-day.today {
+.day-number {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--calendar-text-primary);
+}
+
+.day-lunar {
+    font-size: 0.75rem;
+    color: var(--calendar-text-secondary);
+    margin-top: 4px;
+}
+
+/* 今天 */
+.day.today {
     background: var(--calendar-gradient-primary);
     color: white;
     border-color: var(--calendar-primary);
     box-shadow: var(--shadow-medium);
-    font-weight: 700;
 }
 
-.calendar-day.selected {
-    background: var(--calendar-gradient-cool);
+.day.today .day-number,
+.day.today .day-lunar {
+    color: white;
+}
+
+/* 选中的日期 */
+.day.selected {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
     border-color: var(--calendar-info);
     box-shadow: var(--shadow-soft);
 }
 
-.calendar-day.other-month {
+/* 其他月份的日期 */
+.day.other-month {
     opacity: 0.3;
     pointer-events: none;
 }
 
-.calendar-day.has-event::after {
+.day.other-month:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* 节假日 */
+.day.holiday .day-lunar {
+    color: var(--calendar-danger);
+    font-weight: 700;
+}
+
+.day.holiday::after {
+    content: '休';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: var(--calendar-danger);
+    color: white;
+    font-size: 0.65rem;
+    padding: 2px 5px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* 有事件的日期 */
+.day.has-event::before {
     content: '';
     position: absolute;
     bottom: 5px;
@@ -343,462 +457,67 @@ body {
     box-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
 }
 
-.day-number {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.day-lunar {
-    font-size: 0.7rem;
-    color: var(--calendar-text-secondary);
-    margin-top: 2px;
-}
-
-.calendar-day.holiday .day-lunar {
-    color: var(--calendar-danger);
-    font-weight: 600;
-}
-
 /* ========================================
-   日程管理侧边栏
+   模态框
    ======================================== */
-
-.schedule-sidebar {
-    background: white;
-    border-radius: var(--border-radius);
-    padding: 2rem;
-    box-shadow: var(--shadow-medium);
-    height: fit-content;
-    position: sticky;
-    top: 100px;
-}
-
-.schedule-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.schedule-header h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: var(--calendar-gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
-}
-
-.add-schedule-btn {
-    background: var(--calendar-gradient-primary);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition-medium);
-    box-shadow: var(--shadow-soft);
-    font-size: 1.2rem;
-}
-
-.add-schedule-btn:hover {
-    transform: rotate(90deg) scale(1.1);
-    box-shadow: var(--shadow-hover);
-}
-
-.schedule-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.schedule-item {
-    background: var(--calendar-light-bg);
-    padding: 1rem;
-    border-radius: var(--border-radius-sm);
-    margin-bottom: 1rem;
-    border-left: 4px solid var(--calendar-primary);
-    transition: var(--transition-fast);
-    cursor: pointer;
-}
-
-.schedule-item:hover {
-    transform: translateX(5px);
-    box-shadow: var(--shadow-soft);
-}
-
-.schedule-item.completed {
-    opacity: 0.6;
-    border-left-color: var(--calendar-success);
-}
-
-.schedule-item.completed .schedule-title {
-    text-decoration: line-through;
-}
-
-.schedule-time {
-    font-size: 0.85rem;
-    color: var(--calendar-text-secondary);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.schedule-title {
-    font-weight: 600;
-    color: var(--calendar-text-primary);
-    margin-bottom: 0.25rem;
-}
-
-.schedule-desc {
-    font-size: 0.9rem;
-    color: var(--calendar-text-secondary);
-    margin: 0;
-}
-
-.schedule-actions {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-}
-
-.schedule-actions button {
-    padding: 0.3rem 0.75rem;
-    border: none;
-    border-radius: var(--border-radius-sm);
-    cursor: pointer;
-    transition: var(--transition-fast);
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-.btn-complete {
-    background: var(--calendar-success);
-    color: white;
-}
-
-.btn-edit {
-    background: var(--calendar-info);
-    color: white;
-}
-
-.btn-delete {
-    background: var(--calendar-danger);
-    color: white;
-}
-
-.schedule-actions button:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-soft);
-}
-
-/* 空状态 */
-.empty-schedule {
-    text-align: center;
-    padding: 3rem 1rem;
-    color: var(--calendar-text-secondary);
-}
-
-.empty-schedule i {
-    font-size: 3rem;
-    color: var(--calendar-primary);
-    opacity: 0.3;
-    margin-bottom: 1rem;
-}
-
-.empty-schedule p {
-    margin: 0;
-    font-size: 1rem;
-}
-
-/* ========================================
-   按钮样式
-   ======================================== */
-
-.calendar-button {
-    background: var(--calendar-gradient-primary);
-    border: none;
-    border-radius: var(--border-radius-lg);
-    color: white;
-    padding: 0.875rem 2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition-medium);
-    box-shadow: var(--shadow-soft);
-    letter-spacing: 0.5px;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.calendar-button:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-3px);
-    filter: brightness(1.1);
-}
-
-.calendar-button:active {
-    transform: translateY(0);
-    box-shadow: var(--shadow-soft);
-}
-
-.calendar-button-secondary {
-    background: var(--calendar-gradient-soft);
-    color: var(--calendar-text-primary);
-}
-
-.calendar-button-outline {
-    background: transparent;
-    border: 2px solid var(--calendar-primary);
-    color: var(--calendar-primary);
-    box-shadow: none;
-}
-
-.calendar-button-outline:hover {
-    background: var(--calendar-gradient-primary);
-    color: white;
-    border-color: transparent;
-}
-
-/* ========================================
-   模态框样式
-   ======================================== */
-
-.calendar-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.3s ease-out;
-}
-
-.calendar-modal.active {
-    display: flex;
-}
 
 .modal-content {
-    background: white;
     border-radius: var(--border-radius);
-    padding: 2.5rem;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: var(--shadow-colored);
-    animation: slideInUp 0.4s ease-out;
-    max-height: 90vh;
-    overflow-y: auto;
+    border: none;
+    box-shadow: var(--shadow-medium);
 }
 
 .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+    background: var(--calendar-gradient-soft);
+    border-bottom: none;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    padding: 1.5rem 2rem;
 }
 
-.modal-header h3 {
-    font-size: 1.75rem;
+.modal-header .modal-title {
     font-weight: 700;
-    background: var(--calendar-gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--calendar-text-secondary);
-    transition: var(--transition-fast);
-    width: 35px;
-    height: 35px;
+    color: var(--calendar-text-primary);
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: 50%;
+    gap: 0.75rem;
 }
 
-.modal-close:hover {
-    background: rgba(102, 126, 234, 0.1);
+.modal-header .modal-title i {
     color: var(--calendar-primary);
-    transform: rotate(90deg);
+    font-size: 1.3rem;
 }
 
 .modal-body {
-    margin-bottom: 2rem;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    font-weight: 600;
-    color: var(--calendar-text-primary);
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-}
-
-.form-control {
-    width: 100%;
-    padding: 0.875rem 1rem;
-    border: 2px solid rgba(102, 126, 234, 0.2);
-    border-radius: var(--border-radius-sm);
-    font-size: 1rem;
-    transition: var(--transition-fast);
-    font-family: var(--font-body);
-    background: white;
-    color: var(--calendar-text-primary);
-}
-
-.form-control:focus {
-    outline: none;
-    border-color: var(--calendar-primary);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-textarea.form-control {
-    resize: vertical;
-    min-height: 100px;
+    padding: 2rem;
 }
 
 .modal-footer {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
+    border-top: none;
+    padding: 1rem 2rem 2rem;
 }
 
-/* ========================================
-   工具栏
-   ======================================== */
-
-.calendar-toolbar {
-    background: white;
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-soft);
-    margin-bottom: 2rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.toolbar-group {
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-}
-
-.toolbar-button {
-    padding: 0.5rem 1.25rem;
-    border: 2px solid rgba(102, 126, 234, 0.2);
-    background: white;
-    border-radius: var(--border-radius-lg);
-    cursor: pointer;
-    transition: var(--transition-fast);
+.form-label {
     font-weight: 600;
     color: var(--calendar-text-primary);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
-.toolbar-button:hover {
-    background: var(--calendar-gradient-primary);
-    color: white;
-    border-color: transparent;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-soft);
-}
-
-.toolbar-button.active {
-    background: var(--calendar-gradient-primary);
-    color: white;
-    border-color: transparent;
-}
-
-.view-toggle {
-    display: flex;
-    gap: 0;
+.form-control {
     border: 2px solid rgba(102, 126, 234, 0.2);
-    border-radius: var(--border-radius-lg);
-    overflow: hidden;
-}
-
-.view-toggle button {
-    padding: 0.5rem 1rem;
-    border: none;
-    background: white;
-    cursor: pointer;
-    transition: var(--transition-fast);
-    font-weight: 600;
-    color: var(--calendar-text-primary);
-}
-
-.view-toggle button:hover {
-    background: rgba(102, 126, 234, 0.1);
-}
-
-.view-toggle button.active {
-    background: var(--calendar-gradient-primary);
-    color: white;
-}
-
-/* ========================================
-   节假日标记
-   ======================================== */
-
-.holiday-badge {
-    position: absolute;
-    top: 3px;
-    right: 3px;
-    background: var(--calendar-danger);
-    color: white;
-    font-size: 0.6rem;
-    padding: 2px 5px;
     border-radius: 10px;
-    font-weight: 600;
+    padding: 0.75rem 1rem;
+    transition: var(--transition-fast);
 }
 
-.festival-name {
-    font-size: 0.65rem;
-    color: var(--calendar-danger);
-    font-weight: 600;
-    margin-top: 2px;
+.form-control:focus {
+    border-color: var(--calendar-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
 }
 
 /* ========================================
-   动画定义
+   动画
    ======================================== */
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
 
 @keyframes fadeInDown {
     from {
@@ -833,32 +552,12 @@ textarea.form-control {
     }
 }
 
-@keyframes slideInUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 @keyframes pulse {
     0%, 100% {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.1);
-    }
-}
-
-@keyframes shimmer {
-    0% {
-        background-position: -1000px 0;
-    }
-    100% {
-        background-position: 1000px 0;
+        transform: scale(1.05);
     }
 }
 
@@ -889,13 +588,23 @@ textarea.form-control {
         padding: 0.75rem 1.25rem;
     }
     
-    .calendar-grid {
+    .calendar-days {
         gap: 8px;
     }
     
-    .schedule-sidebar {
-        position: static;
-        margin-top: 2rem;
+    .calendar-navigation,
+    .calendar-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .current-month {
+        font-size: 1.5rem;
+    }
+    
+    .control-panel .d-flex {
+        flex-direction: column;
+        gap: 1.5rem;
     }
 }
 
@@ -903,6 +612,7 @@ textarea.form-control {
     .calendar-hero {
         min-height: 50vh;
         padding: 3rem 0;
+        margin-top: 70px;
     }
     
     .calendar-intro h1 {
@@ -922,45 +632,37 @@ textarea.form-control {
         justify-content: center;
     }
     
-    .calendar-header {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .calendar-nav .current-month {
+    .preview-card {
         min-width: auto;
+        width: 100%;
     }
     
     .calendar-container {
         padding: 1.5rem;
     }
     
-    .calendar-grid {
+    .calendar-days {
         gap: 5px;
     }
     
-    .calendar-day {
-        padding: 0.25rem;
+    .day {
+        padding: 0.5rem 0.25rem;
     }
     
     .day-number {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
     
     .day-lunar {
-        font-size: 0.6rem;
+        font-size: 0.65rem;
     }
     
-    .calendar-toolbar {
-        flex-direction: column;
-        align-items: stretch;
+    .weekday {
+        font-size: 0.85rem;
+        padding: 0.75rem 0;
     }
     
-    .toolbar-group {
-        justify-content: center;
-    }
-    
-    .modal-content {
+    .control-panel {
         padding: 1.5rem;
     }
 }
@@ -970,32 +672,54 @@ textarea.form-control {
         font-size: 1.75rem;
     }
     
-    .calendar-weekday {
+    .calendar-intro .lead {
+        font-size: 1rem;
+    }
+    
+    .calendar-hero {
+        padding: 2rem 0;
+    }
+    
+    .weekday {
         font-size: 0.75rem;
         padding: 0.5rem 0;
     }
     
-    .calendar-grid {
+    .calendar-days {
         gap: 3px;
     }
     
-    .day-lunar,
-    .festival-name {
+    .day {
+        padding: 0.25rem;
+        border-radius: 10px;
+    }
+    
+    .day-number {
+        font-size: 0.9rem;
+    }
+    
+    .day-lunar {
         display: none;
     }
     
-    .calendar-nav button {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+    .day.holiday::after {
+        font-size: 0.55rem;
+        padding: 1px 3px;
     }
     
-    .calendar-nav .current-month {
-        font-size: 1.2rem;
+    .current-month {
+        font-size: 1.3rem;
+        min-width: auto;
     }
     
-    .schedule-sidebar {
-        padding: 1.5rem;
+    .neumorphism-button,
+    .btn.neumorphism-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .control-panel {
+        padding: 1rem;
     }
 }
 
@@ -1005,11 +729,9 @@ textarea.form-control {
 
 @media print {
     .calendar-hero,
-    .calendar-toolbar,
-    .schedule-sidebar,
-    .calendar-nav,
+    .calendar-controls,
     .navbar,
-    .footer {
+    .page-loader {
         display: none !important;
     }
     
@@ -1018,54 +740,55 @@ textarea.form-control {
         border: 1px solid #ddd;
     }
     
-    .calendar-day:hover {
+    .day:hover {
         transform: none;
+    }
+    
+    .calendar-main {
+        padding: 0;
     }
 }
 
 /* ========================================
-   加载动画
+   新拟态类兼容
    ======================================== */
 
-.loading-skeleton {
-    background: linear-gradient(
-        90deg,
-        rgba(102, 126, 234, 0.05) 0%,
-        rgba(102, 126, 234, 0.15) 50%,
-        rgba(102, 126, 234, 0.05) 100%
-    );
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: var(--border-radius-sm);
-}
-
-/* ========================================
-   辅助类
-   ======================================== */
-
-.text-gradient {
-    background: var(--calendar-gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.shadow-soft {
-    box-shadow: var(--shadow-soft);
-}
-
-.shadow-medium {
+.neumorphism {
+    background: white;
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow-medium);
 }
 
-.shadow-hover {
-    box-shadow: var(--shadow-hover);
-}
-
-.rounded {
+.neumorphism-card {
+    background: white;
     border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-medium);
 }
 
-.rounded-lg {
+.neumorphism-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-5px);
+}
+
+.neumorphism-feature {
+    background: rgba(255, 255, 255, 0.95);
     border-radius: var(--border-radius-lg);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-medium);
+}
+
+.neumorphism-feature:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+}
+
+.neumorphism-feature i {
+    color: var(--calendar-primary);
+    font-size: 1.2rem;
 }
