@@ -1,42 +1,23 @@
 :root {
-    --gallery-primary: #1a1a1a;
-    --gallery-secondary: #f8f5f2;
-    --gallery-accent: #c9a77c;
-    --gallery-dark: #121212;
+    --gallery-primary: #6B9FE5;
+    --gallery-secondary: #FFF5F0;
+    --gallery-accent: #FF8B94;
+    --gallery-soft-blue: #A8D8EA;
+    --gallery-soft-pink: #FFB6C1;
+    --gallery-soft-green: #B8E6D5;
     --gallery-light: #ffffff;
-    --gallery-gradient: linear-gradient(135deg, #c9a77c 0%, #e2d1b2 100%);
+    --gallery-text: #4A5568;
+    --gallery-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gallery-soft-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    --gallery-spring-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    --gallery-fresh-gradient: linear-gradient(135deg, #fff0f5 0%, #e6f7ff 100%);
     --transition-slow: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     --transition-medium: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Montserrat', sans-serif;
     --font-serif: 'Cormorant Garamond', serif;
-    --gallery-neumorphism-light: rgba(255, 255, 255, 0.8);
-    --gallery-neumorphism-shadow1: rgba(255, 255, 255, 0.9);
-    --gallery-neumorphism-shadow2: rgba(209, 217, 230, 0.8);
-    --gallery-insta-gradient: linear-gradient(
-        45deg,
-        #f09433 0%,
-        #e6683c 25%,
-        #dc2743 50%,
-        #cc2366 75%,
-        #bc1888 100%
-    );
-    --gallery-modern-gradient: linear-gradient(
-        120deg,
-        #84fab0 0%,
-        #8fd3f4 100%
-    );
-    --gallery-artistic-overlay: linear-gradient(
-        to bottom,
-        rgba(32, 6, 49, 0.6),
-        rgba(60, 12, 82, 0.4)
-    );
-    --gallery-artistic-bg: linear-gradient(
-        135deg,
-        #6b46c1 0%,
-        #9f7aea 50%,
-        #6b46c1 100%
-    );
+    --gallery-card-shadow: 0 8px 30px rgba(102, 126, 234, 0.12);
+    --gallery-card-hover-shadow: 0 15px 50px rgba(102, 126, 234, 0.2);
 }
 
 /* 画廊Hero区域 */
@@ -68,9 +49,9 @@
     line-height: 1.8;
 }
 
-/* 改进页面标题区域 - 更换艺术感背景 */
+/* 清新明亮的页面标题区域 */
 .page-title.parallax-hero {
-    background-image: var(--gallery-artistic-bg);
+    background: var(--gallery-spring-gradient);
     position: relative;
     overflow: hidden;
 }
@@ -82,8 +63,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M81.28 88H68.413l19.298 19.298L81.28 88zm2.107 0h13.226L90 107.838 83.387 88zm15.334 0h12.866l-19.298 19.298L98.72 88zm-32.927-2.207L73.586 78h32.827l.5.5 7.294 7.293L115.414 87l-24.707 24.707-.707.707L64.586 87l1.207-1.207zm2.62.207L74 80.414 79.586 86H68.414L74 80.414zm16 0L96 80.414 101.586 86H90.414L96 80.414zm16 0L112 80.414 117.586 86h-11.172L112 80.414zm-8-6h11.173L112 85.586 106.414 80zM80 85.586L74.414 80h11.172L80 85.586zm16 0L90.414 80h11.172L96 85.586zm-8-6h11.172L96 85.586 90.414 80zM82 78h-3.586l3.586-3.586V78zm-8 0h-3.586l3.586-3.586V78zm16 0h-3.586l3.586-3.586V78zm-8 0h-3.586L86 74.414 82.414 78zm0-4h3.586L74 85.586 70.414 82h3.586zm16 0h3.586L90 85.586 86.414 82h3.586zm-8 0h3.586L86 85.586 82.414 82h3.586zm-8 0h3.586L70 85.586 66.414 82H70zm24.586 9.414l-24.293 24.293-24.293-24.293-1.414 1.414L70 109.414l25.414-25.414 25.414 25.414L145.414 84l-1.414-1.414-24.293 24.293z' fill='%23ffffff' fill-opacity='0.13' fill-rule='evenodd'/%3E%3C/svg%3E");
-    opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.6;
     z-index: 1;
 }
 
@@ -96,45 +77,47 @@
     bottom: 0;
     background: linear-gradient(
         135deg,
-        rgba(108, 17, 168, 0.6) 0%,
-        rgba(184, 97, 246, 0.4) 100%
+        rgba(168, 237, 234, 0.3) 0%,
+        rgba(254, 214, 227, 0.3) 100%
     );
-    mix-blend-mode: multiply;
     z-index: 2;
 }
 
 .page-title .overlay-content {
     position: relative;
     z-index: 3;
-    padding: 6rem 0;
+    padding: 5rem 0;
 }
 
 .page-title h1 {
     font-size: 3.5rem;
     margin-bottom: 1.5rem;
     font-family: var(--font-heading), sans-serif;
-    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
     letter-spacing: 2px;
-    color: white;
+    background: var(--gallery-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 10px rgba(102, 126, 234, 0.3));
 }
 
 .page-title .section-divider {
     width: 120px;
-    height: 3px;
-    background: var(--gallery-insta-gradient);
+    height: 4px;
+    background: var(--gallery-gradient);
     margin: 0 auto 1.5rem;
-    border-radius: 3px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
 }
 
 .page-title p {
     max-width: 700px;
     margin: 0 auto;
     font-size: 1.2rem;
-    line-height: 1.6;
+    line-height: 1.8;
     font-family: var(--font-serif), sans-serif;
     font-style: italic;
-    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--gallery-text);
 }
 
 /* 完全重写画廊网格布局 - 确保所有图片统一显示为小方块 */
@@ -146,26 +129,42 @@
     margin-top: 30px;
 }
 
-/* 统一所有图片卡片的样式 */
+/* 清新明亮的图片卡片样式 */
 .gallery-item {
     position: relative;
-    border-radius: 16px;
-    box-shadow: 8px 8px 16px var(--gallery-neumorphism-shadow2),
-        -8px -8px 16px var(--gallery-neumorphism-shadow1);
-    background: var(--gallery-neumorphism-light);
-    padding: 10px;
+    border-radius: 20px;
+    box-shadow: var(--gallery-card-shadow);
+    background: var(--gallery-light);
+    padding: 15px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow: hidden;
-    height: 100%; /* 确保每个项目高度一致 */
+    height: 100%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px; /* 确保底部间距一致 */
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gallery-gradient);
+    opacity: 0;
+    transition: var(--transition-medium);
 }
 
 .gallery-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 12px 12px 20px var(--gallery-neumorphism-shadow2),
-        -12px -12px 20px var(--gallery-neumorphism-shadow1);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--gallery-card-hover-shadow);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.gallery-item:hover::before {
+    opacity: 1;
 }
 
 /* 确保卡片内容为正方形 - 添加aspect-ratio备用解决方案 */
@@ -238,24 +237,27 @@
 }
 
 /* 暗黑模式适配 */
+/* 明亮主题优先，不使用深色模式 */
 @media (prefers-color-scheme: dark) {
+    /* 保持明亮风格，不应用深色主题 */
     .filter-btn {
-        color: var(--gallery-secondary);
+        color: var(--gallery-primary);
     }
 
     .gallery-intro h2,
     .gallery-intro p {
-        color: var(--gallery-secondary);
+        color: #2c3e50;
     }
 
     :root {
-        --gallery-neumorphism-light: rgba(40, 40, 50, 0.8);
-        --gallery-neumorphism-shadow1: rgba(50, 50, 60, 0.5);
-        --gallery-neumorphism-shadow2: rgba(15, 15, 20, 0.8);
+        /* 保持明亮配色 */
+        --gallery-neumorphism-light: rgba(255, 255, 255, 0.9);
+        --gallery-neumorphism-shadow1: rgba(102, 126, 234, 0.15);
+        --gallery-neumorphism-shadow2: rgba(118, 75, 162, 0.1);
     }
 
     .gallery-card {
-        background: #2a2a35;
+        background: rgba(255, 255, 255, 0.95);
     }
 
     .gallery-item {
@@ -1069,12 +1071,13 @@ body.dark-mode .filter-btn {
 
 /* 暗色主题适配 */
 @media (prefers-color-scheme: dark) {
+    /* 保持明亮风格的footer */
     .gallery-footer {
         background: linear-gradient(
             135deg,
-            rgba(6, 11, 21, 0.98) 0%,
-            rgba(15, 23, 42, 0.96) 50%,
-            rgba(6, 11, 21, 0.98) 100%
+            rgba(168, 237, 234, 0.98) 0%,
+            rgba(254, 214, 227, 0.96) 50%,
+            rgba(168, 237, 234, 0.98) 100%
         );
     }
 }
