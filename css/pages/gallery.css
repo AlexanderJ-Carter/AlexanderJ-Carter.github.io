@@ -1,15 +1,19 @@
 :root {
-    --gallery-primary: #6B9FE5;
-    --gallery-secondary: #FFF5F0;
-    --gallery-accent: #FF8B94;
-    --gallery-soft-blue: #A8D8EA;
-    --gallery-soft-pink: #FFB6C1;
-    --gallery-soft-green: #B8E6D5;
+    --gallery-primary: #6b9fe5;
+    --gallery-secondary: #fff5f0;
+    --gallery-accent: #ff8b94;
+    --gallery-soft-blue: #a8d8ea;
+    --gallery-soft-pink: #ffb6c1;
+    --gallery-soft-green: #b8e6d5;
     --gallery-light: #ffffff;
-    --gallery-text: #4A5568;
+    --gallery-text: #4a5568;
     --gallery-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gallery-soft-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-    --gallery-spring-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    --gallery-spring-gradient: linear-gradient(
+        135deg,
+        #a8edea 0%,
+        #fed6e3 100%
+    );
     --gallery-fresh-gradient: linear-gradient(135deg, #fff0f5 0%, #e6f7ff 100%);
     --transition-slow: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     --transition-medium: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);

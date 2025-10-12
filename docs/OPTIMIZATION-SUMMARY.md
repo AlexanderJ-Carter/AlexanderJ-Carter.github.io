@@ -184,23 +184,23 @@ cover: "../img/music-cover-default.png",
 
 ### Files Changed
 
-| Type | Count | Description |
-|------|-------|-------------|
-| CSS Files | 1 | Modified css/base/custom.css |
-| JS Files | 1 | Modified js/music-player.js |
-| HTML Files | 13 | Updated CSS imports |
-| Documentation | 1 | Updated README.md |
-| Removed | 1 | Deleted backup file |
-| **Total** | **17** | Files modified or removed |
+| Type          | Count  | Description                  |
+| ------------- | ------ | ---------------------------- |
+| CSS Files     | 1      | Modified css/base/custom.css |
+| JS Files      | 1      | Modified js/music-player.js  |
+| HTML Files    | 13     | Updated CSS imports          |
+| Documentation | 1      | Updated README.md            |
+| Removed       | 1      | Deleted backup file          |
+| **Total**     | **17** | Files modified or removed    |
 
 ### Performance Impact
 
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| CSS Files per page | 14 | 13 | -1 file |
-| CSS Load (redundant) | ~2900 lines | ~1879 lines | -1021 lines |
-| HTTP Requests | N+1 | N | -1 request |
-| Maintenance Complexity | High | Medium | Simplified |
+| Metric                 | Before      | After       | Improvement |
+| ---------------------- | ----------- | ----------- | ----------- |
+| CSS Files per page     | 14          | 13          | -1 file     |
+| CSS Load (redundant)   | ~2900 lines | ~1879 lines | -1021 lines |
+| HTTP Requests          | N+1         | N           | -1 request  |
+| Maintenance Complexity | High        | Medium      | Simplified  |
 
 ---
 

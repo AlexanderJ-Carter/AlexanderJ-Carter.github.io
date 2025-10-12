@@ -10,7 +10,7 @@ class ModernCalendar {
         this.events = this.loadEvents() || [];
         this.holidays = {};
         this.viewMode = 'month'; // month, week, day
-        
+
         this.init();
     }
 
@@ -96,10 +96,10 @@ class ModernCalendar {
         // 清空现有内容（保留星期标题）
         const weekdays = gridElement.querySelectorAll('.calendar-weekday');
         gridElement.innerHTML = '';
-        
+
         // 重新添加星期标题
         const weekdayNames = ['日', '一', '二', '三', '四', '五', '六'];
-        weekdayNames.forEach(day => {
+        weekdayNames.forEach((day) => {
             const weekdayEl = document.createElement('div');
             weekdayEl.className = 'calendar-weekday';
             weekdayEl.textContent = day;
@@ -108,32 +108,42 @@ class ModernCalendar {
 
         const year = this.currentDate.getFullYear();
         const month = this.currentDate.getMonth();
-        
+
         // 获取当月第一天和最后一天
         const firstDay = new Date(year, month, 1);
         const lastDay = new Date(year, month + 1, 0);
-        
+
         // 获取上月最后几天
         const prevMonthLastDay = new Date(year, month, 0).getDate();
         const firstDayOfWeek = firstDay.getDay();
-        
+
         // 渲染上月日期
         for (let i = firstDayOfWeek - 1; i >= 0; i--) {
             const day = prevMonthLastDay - i;
-            const dayElement = this.createDayElement(day, true, year, month - 1);
+            const dayElement = this.createDayElement(
+                day,
+                true,
+                year,
+                month - 1
+            );
             gridElement.appendChild(dayElement);
         }
-        
+
         // 渲染当月日期
         for (let day = 1; day <= lastDay.getDate(); day++) {
             const dayElement = this.createDayElement(day, false, year, month);
             gridElement.appendChild(dayElement);
         }
-        
+
         // 渲染下月日期
         const remainingDays = 42 - (firstDayOfWeek + lastDay.getDate());
         for (let day = 1; day <= remainingDays; day++) {
-            const dayElement = this.createDayElement(day, true, year, month + 1);
+            const dayElement = this.createDayElement(
+                day,
+                true,
+                year,
+                month + 1
+            );
             gridElement.appendChild(dayElement);
         }
     }
@@ -141,54 +151,60 @@ class ModernCalendar {
     createDayElement(day, isOtherMonth, year, month) {
         const dayElement = document.createElement('div');
         dayElement.className = 'calendar-day';
-        
+
         if (isOtherMonth) {
             dayElement.classList.add('other-month');
         }
-        
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        
+
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(
+            day
+        ).padStart(2, '0')}`;
+
         // 检查是否是今天
         const today = new Date();
-        if (year === today.getFullYear() && 
-            month === today.getMonth() && 
-            day === today.getDate() && 
-            !isOtherMonth) {
+        if (
+            year === today.getFullYear() &&
+            month === today.getMonth() &&
+            day === today.getDate() &&
+            !isOtherMonth
+        ) {
             dayElement.classList.add('today');
         }
-        
+
         // 检查是否被选中
-        if (this.selectedDate && 
-            year === this.selectedDate.getFullYear() && 
-            month === this.selectedDate.getMonth() && 
-            day === this.selectedDate.getDate() && 
-            !isOtherMonth) {
+        if (
+            this.selectedDate &&
+            year === this.selectedDate.getFullYear() &&
+            month === this.selectedDate.getMonth() &&
+            day === this.selectedDate.getDate() &&
+            !isOtherMonth
+        ) {
             dayElement.classList.add('selected');
         }
-        
+
         // 检查是否有事件
         if (this.hasEvent(dateStr)) {
             dayElement.classList.add('has-event');
         }
-        
+
         // 检查是否是节假日
         const holiday = this.holidays[dateStr];
         if (holiday && !isOtherMonth) {
             dayElement.classList.add('holiday');
-            
+
             // 添加节假日标记
             const holidayBadge = document.createElement('span');
             holidayBadge.className = 'holiday-badge';
             holidayBadge.textContent = '休';
             dayElement.appendChild(holidayBadge);
         }
-        
+
         // 日期数字
         const dayNumber = document.createElement('div');
         dayNumber.className = 'day-number';
         dayNumber.textContent = day;
         dayElement.appendChild(dayNumber);
-        
+
         // 农历/节日信息
         if (!isOtherMonth) {
             const lunarInfo = this.getLunarInfo(year, month, day);
@@ -199,14 +215,14 @@ class ModernCalendar {
                 dayElement.appendChild(dayLunar);
             }
         }
-        
+
         // 点击事件
         if (!isOtherMonth) {
             dayElement.addEventListener('click', () => {
                 this.selectDate(new Date(year, month, day));
             });
         }
-        
+
         return dayElement;
     }
 
@@ -227,8 +243,10 @@ class ModernCalendar {
         // 筛选选中日期或今天的事件
         const targetDate = this.selectedDate || new Date();
         const dateStr = this.formatDate(targetDate);
-        
-        const todayEvents = this.events.filter(event => event.date === dateStr);
+
+        const todayEvents = this.events.filter(
+            (event) => event.date === dateStr
+        );
 
         if (todayEvents.length === 0) {
             scheduleList.innerHTML = `
@@ -240,26 +258,48 @@ class ModernCalendar {
             return;
         }
 
-        scheduleList.innerHTML = todayEvents.map(event => `
-            <li class="schedule-item ${event.completed ? 'completed' : ''}" data-id="${event.id}">
+        scheduleList.innerHTML = todayEvents
+            .map(
+                (event) => `
+            <li class="schedule-item ${
+                event.completed ? 'completed' : ''
+            }" data-id="${event.id}">
                 <div class="schedule-time">
                     <i class="fas fa-clock"></i> ${event.time || '全天'}
                 </div>
-                <div class="schedule-title">${this.escapeHtml(event.title)}</div>
-                ${event.description ? `<div class="schedule-desc">${this.escapeHtml(event.description)}</div>` : ''}
+                <div class="schedule-title">${this.escapeHtml(
+                    event.title
+                )}</div>
+                ${
+                    event.description
+                        ? `<div class="schedule-desc">${this.escapeHtml(
+                              event.description
+                          )}</div>`
+                        : ''
+                }
                 <div class="schedule-actions">
-                    <button class="btn-complete" onclick="calendar.toggleComplete(${event.id})">
-                        <i class="fas fa-${event.completed ? 'undo' : 'check'}"></i>
+                    <button class="btn-complete" onclick="calendar.toggleComplete(${
+                        event.id
+                    })">
+                        <i class="fas fa-${
+                            event.completed ? 'undo' : 'check'
+                        }"></i>
                     </button>
-                    <button class="btn-edit" onclick="calendar.editEvent(${event.id})">
+                    <button class="btn-edit" onclick="calendar.editEvent(${
+                        event.id
+                    })">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button class="btn-delete" onclick="calendar.deleteEvent(${event.id})">
+                    <button class="btn-delete" onclick="calendar.deleteEvent(${
+                        event.id
+                    })">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
             </li>
-        `).join('');
+        `
+            )
+            .join('');
     }
 
     // ========================================
@@ -300,12 +340,14 @@ class ModernCalendar {
             document.getElementById('eventTitle').value = event.title;
             document.getElementById('eventDate').value = event.date;
             document.getElementById('eventTime').value = event.time || '';
-            document.getElementById('eventDescription').value = event.description || '';
+            document.getElementById('eventDescription').value =
+                event.description || '';
             document.getElementById('saveEvent').dataset.id = event.id;
         } else {
             // 新建模式
             const targetDate = this.selectedDate || new Date();
-            document.getElementById('eventDate').value = this.formatDate(targetDate);
+            document.getElementById('eventDate').value =
+                this.formatDate(targetDate);
             document.getElementById('saveEvent').removeAttribute('data-id');
         }
 
@@ -331,7 +373,9 @@ class ModernCalendar {
         const title = document.getElementById('eventTitle').value.trim();
         const date = document.getElementById('eventDate').value;
         const time = document.getElementById('eventTime').value;
-        const description = document.getElementById('eventDescription').value.trim();
+        const description = document
+            .getElementById('eventDescription')
+            .value.trim();
         const id = document.getElementById('saveEvent').dataset.id;
 
         if (!title || !date) {
@@ -341,7 +385,7 @@ class ModernCalendar {
 
         if (id) {
             // 更新现有事件
-            const event = this.events.find(e => e.id == id);
+            const event = this.events.find((e) => e.id == id);
             if (event) {
                 event.title = title;
                 event.date = date;
@@ -356,7 +400,7 @@ class ModernCalendar {
                 date,
                 time,
                 description,
-                completed: false
+                completed: false,
             };
             this.events.push(event);
         }
@@ -364,13 +408,13 @@ class ModernCalendar {
         this.saveEvents();
         this.closeModal();
         this.render();
-        
+
         // 显示成功提示
         this.showToast('日程已保存', 'success');
     }
 
     editEvent(id) {
-        const event = this.events.find(e => e.id === id);
+        const event = this.events.find((e) => e.id === id);
         if (event) {
             this.openModal(event);
         }
@@ -378,7 +422,7 @@ class ModernCalendar {
 
     deleteEvent(id) {
         if (confirm('确定要删除这个日程吗？')) {
-            this.events = this.events.filter(e => e.id !== id);
+            this.events = this.events.filter((e) => e.id !== id);
             this.saveEvents();
             this.render();
             this.showToast('日程已删除', 'info');
@@ -386,7 +430,7 @@ class ModernCalendar {
     }
 
     toggleComplete(id) {
-        const event = this.events.find(e => e.id === id);
+        const event = this.events.find((e) => e.id === id);
         if (event) {
             event.completed = !event.completed;
             this.saveEvents();
@@ -395,7 +439,7 @@ class ModernCalendar {
     }
 
     hasEvent(dateStr) {
-        return this.events.some(event => event.date === dateStr);
+        return this.events.some((event) => event.date === dateStr);
     }
 
     // ========================================
@@ -414,7 +458,10 @@ class ModernCalendar {
 
     saveEvents() {
         try {
-            localStorage.setItem('calendar_events', JSON.stringify(this.events));
+            localStorage.setItem(
+                'calendar_events',
+                JSON.stringify(this.events)
+            );
         } catch (e) {
             console.error('保存事件失败:', e);
         }
@@ -461,21 +508,64 @@ class ModernCalendar {
     getLunarInfo(year, month, day) {
         // 这里返回简化的农历信息
         // 实际项目中应使用专业的农历库
-        const lunarMonths = ['正月', '二月', '三月', '四月', '五月', '六月',
-                             '七月', '八月', '九月', '十月', '冬月', '腊月'];
-        const lunarDays = ['初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十',
-                          '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十',
-                          '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'];
-        
+        const lunarMonths = [
+            '正月',
+            '二月',
+            '三月',
+            '四月',
+            '五月',
+            '六月',
+            '七月',
+            '八月',
+            '九月',
+            '十月',
+            '冬月',
+            '腊月',
+        ];
+        const lunarDays = [
+            '初一',
+            '初二',
+            '初三',
+            '初四',
+            '初五',
+            '初六',
+            '初七',
+            '初八',
+            '初九',
+            '初十',
+            '十一',
+            '十二',
+            '十三',
+            '十四',
+            '十五',
+            '十六',
+            '十七',
+            '十八',
+            '十九',
+            '二十',
+            '廿一',
+            '廿二',
+            '廿三',
+            '廿四',
+            '廿五',
+            '廿六',
+            '廿七',
+            '廿八',
+            '廿九',
+            '三十',
+        ];
+
         // 简单的农历映射（仅作演示）
-        const dayOfYear = Math.floor((new Date(year, month, day) - new Date(year, 0, 0)) / 86400000);
+        const dayOfYear = Math.floor(
+            (new Date(year, month, day) - new Date(year, 0, 0)) / 86400000
+        );
         const lunarMonth = Math.floor(dayOfYear / 30) % 12;
         const lunarDay = dayOfYear % 30;
-        
+
         if (day === 1) {
             return lunarMonths[month];
         }
-        
+
         return lunarDays[Math.min(lunarDay, 29)];
     }
 
@@ -496,9 +586,9 @@ class ModernCalendar {
             '<': '&lt;',
             '>': '&gt;',
             '"': '&quot;',
-            "'": '&#039;'
+            "'": '&#039;',
         };
-        return text.replace(/[&<>"']/g, m => map[m]);
+        return text.replace(/[&<>"']/g, (m) => map[m]);
     }
 
     showToast(message, type = 'info') {
@@ -517,9 +607,9 @@ class ModernCalendar {
             animation: slideInRight 0.3s ease-out;
         `;
         toast.textContent = message;
-        
+
         document.body.appendChild(toast);
-        
+
         setTimeout(() => {
             toast.style.animation = 'slideOutRight 0.3s ease-out';
             setTimeout(() => toast.remove(), 300);
@@ -534,12 +624,12 @@ class ModernCalendar {
         const dataStr = JSON.stringify(this.events, null, 2);
         const dataBlob = new Blob([dataStr], { type: 'application/json' });
         const url = URL.createObjectURL(dataBlob);
-        
+
         const link = document.createElement('a');
         link.href = url;
         link.download = `calendar-events-${this.formatDate(new Date())}.json`;
         link.click();
-        
+
         URL.revokeObjectURL(url);
         this.showToast('日历数据已导出', 'success');
     }
@@ -569,7 +659,7 @@ let calendar;
 
 document.addEventListener('DOMContentLoaded', () => {
     calendar = new ModernCalendar();
-    
+
     // 添加动画样式
     const style = document.createElement('style');
     style.textContent = `

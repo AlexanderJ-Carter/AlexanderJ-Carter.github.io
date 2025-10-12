@@ -1,7 +1,7 @@
 .poem-history-section {
     position: relative;
     background: linear-gradient(rgba(30, 30, 60, 0.9), rgba(30, 30, 60, 0.9)),
-    url("../img/backgrounds/main-bg.jpg") center/cover no-repeat fixed;
+        url('../img/backgrounds/main-bg.jpg') center/cover no-repeat fixed;
     padding: 4rem 0;
     overflow: hidden;
     color: #fff;
@@ -10,7 +10,7 @@
 }
 
 .poem-history-section::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;

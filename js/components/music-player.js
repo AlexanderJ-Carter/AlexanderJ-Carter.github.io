@@ -1,40 +1,40 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const musicPlayer = document.getElementById("music-player");
-    const toggleButton = document.getElementById("toggle-music-player");
-    const music = document.getElementById("background-music");
-    const songTitle = document.getElementById("song-title");
-    const volumeSlider = document.getElementById("volume-slider");
-    const progressBar = document.getElementById("progress-bar");
-    const nextSongButton = document.getElementById("next-song");
-    const prevSongButton = document.getElementById("prev-song");
-    const shuffleButton = document.getElementById("shuffle-song");
-    const repeatButton = document.getElementById("repeat-song");
-    const songThumbnail = document.getElementById("song-thumbnail");
-    const visualizerCanvas = document.getElementById("music-visualizer");
-    const currentTimeEl = document.getElementById("current-time");
-    const durationEl = document.getElementById("duration");
+document.addEventListener('DOMContentLoaded', function () {
+    const musicPlayer = document.getElementById('music-player');
+    const toggleButton = document.getElementById('toggle-music-player');
+    const music = document.getElementById('background-music');
+    const songTitle = document.getElementById('song-title');
+    const volumeSlider = document.getElementById('volume-slider');
+    const progressBar = document.getElementById('progress-bar');
+    const nextSongButton = document.getElementById('next-song');
+    const prevSongButton = document.getElementById('prev-song');
+    const shuffleButton = document.getElementById('shuffle-song');
+    const repeatButton = document.getElementById('repeat-song');
+    const songThumbnail = document.getElementById('song-thumbnail');
+    const visualizerCanvas = document.getElementById('music-visualizer');
+    const currentTimeEl = document.getElementById('current-time');
+    const durationEl = document.getElementById('duration');
 
     // 歌曲列表
     const songs = [
         {
-            title: "冬忆 (Winter Memory)",
-            src: "../music/piano/winter-memory.flac",
-            cover: "../img/misc/music-cover-default.png",
+            title: '冬忆 (Winter Memory)',
+            src: '../music/piano/winter-memory.flac',
+            cover: '../img/misc/music-cover-default.png',
         },
         {
-            title: "天空の城 (Castle in the Sky)",
-            src: "../music/classical/castle-in-sky.flac",
-            cover: "../img/misc/music-cover-default.png",
+            title: '天空の城 (Castle in the Sky)',
+            src: '../music/classical/castle-in-sky.flac',
+            cover: '../img/misc/music-cover-default.png',
         },
         {
-            title: "彩云追月 (Colorful Clouds Chasing Moon)",
-            src: "../music/traditional/colorful-clouds-chasing-moon.ogg",
-            cover: "../img/misc/music-cover-default.png",
+            title: '彩云追月 (Colorful Clouds Chasing Moon)',
+            src: '../music/traditional/colorful-clouds-chasing-moon.ogg',
+            cover: '../img/misc/music-cover-default.png',
         },
         {
-            title: "雨的印记 (Kiss the Rain)",
-            src: "../music/piano/kiss-the-rain.ogg",
-            cover: "../img/misc/music-cover-default.png",
+            title: '雨的印记 (Kiss the Rain)',
+            src: '../music/piano/kiss-the-rain.ogg',
+            cover: '../img/misc/music-cover-default.png',
         },
     ];
 
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 修复：取消轮播鼠标悬停暂停事件，只保留播放按钮控制
     // 这样避免了进入界面就暂停的问题
-    const codeCarousel = document.getElementById("codeCarousel");
+    const codeCarousel = document.getElementById('codeCarousel');
     if (codeCarousel) {
         const carousel = new bootstrap.Carousel(codeCarousel, {
             interval: 5000,
@@ -62,8 +62,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (existingListeners.length > 0) {
             existingListeners.forEach((listener) => {
-                if (listener.type === "mouseenter" || listener.type === "mouseleave") {
-                    codeCarousel.removeEventListener(listener.type, listener.listener);
+                if (
+                    listener.type === 'mouseenter' ||
+                    listener.type === 'mouseleave'
+                ) {
+                    codeCarousel.removeEventListener(
+                        listener.type,
+                        listener.listener
+                    );
                 }
             });
         }
@@ -74,18 +80,18 @@ document.addEventListener("DOMContentLoaded", function () {
         music.src = songs[index].src;
 
         // 设置歌曲标题和添加加载动画
-        songTitle.classList.add("loading");
-        songTitle.setAttribute("data-title", songs[index].title);
+        songTitle.classList.add('loading');
+        songTitle.setAttribute('data-title', songs[index].title);
 
         // 根据当前语言环境设置正确的前缀文本
-        const isEnglish = document.documentElement.lang === "en-US";
-        const prefix = isEnglish ? "Now Playing: " : "当前播放: ";
+        const isEnglish = document.documentElement.lang === 'en-US';
+        const prefix = isEnglish ? 'Now Playing: ' : '当前播放: ';
         songTitle.textContent = `${prefix}${songs[index].title}`;
 
         // 设置专辑封面
         if (songThumbnail) {
             // 默认封面
-            const defaultCover = "img/music-cover-default.png";
+            const defaultCover = 'img/music-cover-default.png';
 
             // 检查歌曲是否有封面，如果有则使用，否则使用默认封面
             const coverUrl = songs[index].cover || defaultCover;
@@ -95,23 +101,23 @@ document.addEventListener("DOMContentLoaded", function () {
             img.onload = function () {
                 songThumbnail.style.backgroundImage = `url('${coverUrl}')`;
                 // 移除占位符样式
-                songThumbnail.classList.remove("loading");
+                songThumbnail.classList.remove('loading');
             };
             img.onerror = function () {
                 // 封面加载失败时使用默认封面
                 songThumbnail.style.backgroundImage = `url('${defaultCover}')`;
-                songThumbnail.classList.remove("loading");
+                songThumbnail.classList.remove('loading');
             };
             img.src = coverUrl;
 
             // 添加加载中的样式
-            songThumbnail.classList.add("loading");
+            songThumbnail.classList.add('loading');
         }
 
         // 歌曲加载完成后移除加载动画
-        music.addEventListener("canplay", function onCanPlay() {
-            songTitle.classList.remove("loading");
-            music.removeEventListener("canplay", onCanPlay);
+        music.addEventListener('canplay', function onCanPlay() {
+            songTitle.classList.remove('loading');
+            music.removeEventListener('canplay', onCanPlay);
 
             // 更新持续时间显示
             durationEl.textContent = formatTime(music.duration);
@@ -146,9 +152,9 @@ document.addEventListener("DOMContentLoaded", function () {
             music
                 .play()
                 .then(() => {
-                    toggleButton.classList.add("playing");
+                    toggleButton.classList.add('playing');
                 })
-                .catch((err) => console.error("自动播放失败:", err));
+                .catch((err) => console.error('自动播放失败:', err));
         }
     }
 
@@ -164,7 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
             currentSongIndex = randomIndex;
         } else {
             // 正常播放或循环模式
-            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            currentSongIndex =
+                (currentSongIndex - 1 + songs.length) % songs.length;
         }
 
         loadSong(currentSongIndex);
@@ -174,23 +181,23 @@ document.addEventListener("DOMContentLoaded", function () {
             music
                 .play()
                 .then(() => {
-                    toggleButton.classList.add("playing");
+                    toggleButton.classList.add('playing');
                 })
-                .catch((err) => console.error("自动播放失败:", err));
+                .catch((err) => console.error('自动播放失败:', err));
         }
     }
 
     // 随机播放功能
     function shuffleSongs() {
         isShuffling = !isShuffling;
-        shuffleButton.classList.toggle("active", isShuffling);
+        shuffleButton.classList.toggle('active', isShuffling);
 
         if (isShuffling) {
             shuffleButton.innerHTML = '<i class="fas fa-random"></i>';
-            showToast("随机播放已开启");
+            showToast('随机播放已开启');
         } else {
             shuffleButton.innerHTML = '<i class="fas fa-random"></i>';
-            showToast("随机播放已关闭");
+            showToast('随机播放已关闭');
         }
     }
 
@@ -201,18 +208,18 @@ document.addEventListener("DOMContentLoaded", function () {
         switch (repeatMode) {
             case 0:
                 repeatButton.innerHTML = '<i class="fas fa-redo"></i>';
-                repeatButton.classList.remove("active");
-                showToast("列表播放");
+                repeatButton.classList.remove('active');
+                showToast('列表播放');
                 break;
             case 1:
                 repeatButton.innerHTML = '<i class="fas fa-redo-alt"></i>';
-                repeatButton.classList.add("active");
-                showToast("单曲循环");
+                repeatButton.classList.add('active');
+                showToast('单曲循环');
                 break;
             case 2:
                 repeatButton.innerHTML = '<i class="fas fa-sync-alt"></i>';
-                repeatButton.classList.add("active");
-                showToast("列表循环");
+                repeatButton.classList.add('active');
+                showToast('列表循环');
                 break;
         }
     }
@@ -223,7 +230,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!audioContext) {
             try {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                audioContext = new (window.AudioContext ||
+                    window.webkitAudioContext)();
                 analyser = audioContext.createAnalyser();
                 const source = audioContext.createMediaElementSource(music);
                 source.connect(analyser);
@@ -233,14 +241,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 const bufferLength = analyser.frequencyBinCount;
                 dataArray = new Uint8Array(bufferLength);
 
-                canvasCtx = visualizerCanvas.getContext("2d");
+                canvasCtx = visualizerCanvas.getContext('2d');
                 visualizerCanvas.width = visualizerCanvas.clientWidth;
                 visualizerCanvas.height = visualizerCanvas.clientHeight;
 
                 // 开始绘制可视化效果
                 drawVisualizer();
             } catch (error) {
-                console.log("音频可视化不受支持: ", error);
+                console.log('音频可视化不受支持: ', error);
             }
         }
     }
@@ -252,7 +260,11 @@ document.addEventListener("DOMContentLoaded", function () {
         requestAnimationFrame(drawVisualizer);
 
         // 只有在播放器可见时才绘制
-        if (musicPlayer && musicPlayer.classList.contains("open") && isPlaying) {
+        if (
+            musicPlayer &&
+            musicPlayer.classList.contains('open') &&
+            isPlaying
+        ) {
             analyser.getByteFrequencyData(dataArray);
 
             canvasCtx.clearRect(
@@ -276,8 +288,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     0,
                     visualizerCanvas.height
                 );
-                gradient.addColorStop(0, "rgba(0, 123, 255, 0.8)");
-                gradient.addColorStop(1, "rgba(0, 123, 255, 0.2)");
+                gradient.addColorStop(0, 'rgba(0, 123, 255, 0.8)');
+                gradient.addColorStop(1, 'rgba(0, 123, 255, 0.2)');
 
                 canvasCtx.fillStyle = gradient;
                 canvasCtx.fillRect(
@@ -294,32 +306,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 格式化时间显示，优化为一种更友好的格式
     function formatTime(seconds) {
-        if (isNaN(seconds) || !isFinite(seconds)) return "0:00";
+        if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
 
         const mins = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
-        return `${mins}:${secs.toString().padStart(2, "0")}`;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
     }
 
     // 显示提示信息
     function showToast(message) {
         // 检查是否已有提示，如果有则移除
-        const existingToast = document.querySelector(".music-toast");
+        const existingToast = document.querySelector('.music-toast');
         if (existingToast) {
             document.body.removeChild(existingToast);
         }
 
-        const toast = document.createElement("div");
-        toast.className = "music-toast";
+        const toast = document.createElement('div');
+        toast.className = 'music-toast';
         toast.textContent = message;
         document.body.appendChild(toast);
 
         setTimeout(() => {
-            toast.classList.add("show");
+            toast.classList.add('show');
         }, 10);
 
         setTimeout(() => {
-            toast.classList.remove("show");
+            toast.classList.remove('show');
             setTimeout(() => {
                 if (document.body.contains(toast)) {
                     document.body.removeChild(toast);
@@ -329,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 更新进度条和时间显示
-    music.addEventListener("timeupdate", function () {
+    music.addEventListener('timeupdate', function () {
         if (music.duration > 0) {
             progressBar.value = (music.currentTime / music.duration) * 100;
 
@@ -340,9 +352,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 修复：移除原有点击事件，重新绑定播放按钮事件
     if (toggleButton) {
-        toggleButton.removeEventListener("click", null);
-        toggleButton.addEventListener("click", function () {
-            musicPlayer.classList.toggle("open");
+        toggleButton.removeEventListener('click', null);
+        toggleButton.addEventListener('click', function () {
+            musicPlayer.classList.toggle('open');
 
             // 延迟执行播放/暂停操作，以确保UI先更新
             setTimeout(() => {
@@ -351,23 +363,23 @@ document.addEventListener("DOMContentLoaded", function () {
                         .play()
                         .then(() => {
                             isPlaying = true;
-                            toggleButton.classList.add("playing");
+                            toggleButton.classList.add('playing');
                         })
                         .catch((err) => {
-                            console.error("播放失败:", err);
+                            console.error('播放失败:', err);
                             isPlaying = false;
                         });
                 } else {
                     music.pause();
                     isPlaying = false;
-                    toggleButton.classList.remove("playing");
+                    toggleButton.classList.remove('playing');
                 }
             }, 100);
         });
     }
 
     // 进度条点击和拖动事件优化
-    progressBar.addEventListener("input", function () {
+    progressBar.addEventListener('input', function () {
         if (!isNaN(music.duration) && isFinite(music.duration)) {
             const seekTime = (progressBar.value / 100) * music.duration;
             // 实时更新当前时间显示
@@ -375,52 +387,52 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    progressBar.addEventListener("change", function () {
+    progressBar.addEventListener('change', function () {
         if (!isNaN(music.duration) && isFinite(music.duration)) {
             music.currentTime = (progressBar.value / 100) * music.duration;
         }
     });
 
     // 音量滑块事件优化
-    volumeSlider.addEventListener("input", function () {
+    volumeSlider.addEventListener('input', function () {
         music.volume = volumeSlider.value;
 
         // 根据音量更新音量图标
-        const volumeIcons = document.querySelectorAll(".volume-control i");
+        const volumeIcons = document.querySelectorAll('.volume-control i');
         if (volumeIcons.length >= 2) {
             if (music.volume === 0) {
-                volumeIcons[0].className = "fas fa-volume-mute";
+                volumeIcons[0].className = 'fas fa-volume-mute';
             } else if (music.volume < 0.5) {
-                volumeIcons[0].className = "fas fa-volume-down";
+                volumeIcons[0].className = 'fas fa-volume-down';
             } else {
-                volumeIcons[0].className = "fas fa-volume-up";
+                volumeIcons[0].className = 'fas fa-volume-up';
             }
         }
     });
 
     // 注册事件监听器
     if (shuffleButton) {
-        shuffleButton.addEventListener("click", shuffleSongs);
+        shuffleButton.addEventListener('click', shuffleSongs);
     }
 
     if (repeatButton) {
-        repeatButton.addEventListener("click", toggleRepeat);
+        repeatButton.addEventListener('click', toggleRepeat);
     }
 
     if (nextSongButton) {
-        nextSongButton.addEventListener("click", playNextSong);
+        nextSongButton.addEventListener('click', playNextSong);
     }
 
     if (prevSongButton) {
-        prevSongButton.addEventListener("click", playPrevSong);
+        prevSongButton.addEventListener('click', playPrevSong);
     }
 
     // 修改音乐结束事件
-    music.addEventListener("ended", function () {
+    music.addEventListener('ended', function () {
         if (repeatMode === 1) {
             // 单曲循环
             music.currentTime = 0;
-            music.play().catch((err) => console.error("播放失败:", err));
+            music.play().catch((err) => console.error('播放失败:', err));
         } else if (repeatMode === 2 || songs.length > 1) {
             // 列表循环或正常播放下一首
             playNextSong();
@@ -436,19 +448,19 @@ document.addEventListener("DOMContentLoaded", function () {
     function resetHideTimeout() {
         clearTimeout(hideTimeout);
         hideTimeout = setTimeout(() => {
-            musicPlayer.classList.remove("open");
+            musicPlayer.classList.remove('open');
         }, 8000); // 增加到8秒，给用户更多操作时间
     }
 
     // 点击播放器外部区域时关闭
-    document.addEventListener("click", function (e) {
+    document.addEventListener('click', function (e) {
         if (!musicPlayer.contains(e.target) && e.target !== toggleButton) {
-            musicPlayer.classList.remove("open");
+            musicPlayer.classList.remove('open');
         }
     });
 
     // 窗口大小改变时重新调整可视化器大小
-    window.addEventListener("resize", function () {
+    window.addEventListener('resize', function () {
         if (visualizerCanvas && canvasCtx) {
             visualizerCanvas.width = visualizerCanvas.clientWidth;
             visualizerCanvas.height = visualizerCanvas.clientHeight;

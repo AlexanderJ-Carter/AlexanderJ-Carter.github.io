@@ -12,31 +12,35 @@
     --calendar-card-bg: #ffffff;
     --calendar-text-primary: #2c3e50;
     --calendar-text-secondary: #6c757d;
-    
+
     /* 渐变色彩 */
-    --calendar-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --calendar-gradient-primary: linear-gradient(
+        135deg,
+        #667eea 0%,
+        #764ba2 100%
+    );
     --calendar-gradient-soft: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
     --calendar-gradient-hero: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-    
+
     /* 状态色彩 */
     --calendar-success: #4caf50;
     --calendar-warning: #ff9800;
     --calendar-danger: #f44336;
     --calendar-info: #2196f3;
-    
+
     /* 过渡动画 */
     --transition-medium: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     --transition-fast: all 0.2s ease;
-    
+
     /* 字体 */
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Roboto', sans-serif;
-    
+
     /* 阴影效果 */
     --shadow-soft: 0 4px 20px rgba(102, 126, 234, 0.15);
     --shadow-medium: 0 8px 30px rgba(102, 126, 234, 0.2);
     --shadow-hover: 0 12px 40px rgba(102, 126, 234, 0.25);
-    
+
     /* 圆角 */
     --border-radius: 20px;
     --border-radius-lg: 30px;
@@ -80,7 +84,9 @@
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .loader-content p {
@@ -111,9 +117,16 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 50%, rgba(168, 237, 234, 0.4) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(254, 214, 227, 0.4) 0%, transparent 50%);
+    background: radial-gradient(
+            circle at 20% 50%,
+            rgba(168, 237, 234, 0.4) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(254, 214, 227, 0.4) 0%,
+            transparent 50%
+        );
     z-index: 1;
 }
 
@@ -644,7 +657,8 @@
 }
 
 @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1);
     }
     50% {
@@ -661,25 +675,25 @@
     .container {
         max-width: 1320px;
     }
-    
+
     .stat-card {
         padding: 2rem;
     }
-    
+
     .stat-icon-modern {
         width: 64px;
         height: 64px;
         font-size: 1.8rem;
     }
-    
+
     .stat-value-modern {
         font-size: 2rem;
     }
-    
+
     .day {
         min-height: 100px;
     }
-    
+
     .day-number {
         font-size: 1.3rem;
     }
@@ -689,11 +703,11 @@
     .calendar-intro h1 {
         font-size: 3rem;
     }
-    
+
     .calendar-container {
         padding: 2rem;
     }
-    
+
     /* 统计卡片适度缩小 */
     .stat-card-bg {
         font-size: 7rem;
@@ -704,29 +718,29 @@
     .calendar-intro h1 {
         font-size: 2.5rem;
     }
-    
+
     .calendar-features {
         gap: 1rem;
     }
-    
+
     .feature-item {
         padding: 0.75rem 1.25rem;
     }
-    
+
     .calendar-days {
         gap: 8px;
     }
-    
+
     .calendar-navigation,
     .calendar-actions {
         flex-direction: column;
         width: 100%;
     }
-    
+
     .current-month {
         font-size: 1.5rem;
     }
-    
+
     .control-panel .d-flex {
         flex-direction: column;
         gap: 1.5rem;
@@ -739,131 +753,131 @@
         padding: 3rem 0;
         margin-top: 70px;
     }
-    
+
     .calendar-intro h1 {
         font-size: 2rem;
     }
-    
+
     .calendar-intro .lead {
         font-size: 1.1rem;
     }
-    
+
     .calendar-features {
         flex-direction: column;
         gap: 0.75rem;
     }
-    
+
     /* 统计卡片平板优化 */
     .stat-card {
         padding: 1.5rem;
     }
-    
+
     .stat-card-bg {
         font-size: 6rem;
     }
-    
+
     .stat-icon-modern {
         width: 52px;
         height: 52px;
         font-size: 1.5rem;
     }
-    
+
     .stat-value-modern {
         font-size: 1.6rem;
     }
-    
+
     /* 日历控制区优化 */
     .calendar-controls {
         padding: 1.25rem;
     }
-    
+
     .calendar-navigation .btn {
         padding: 0.7rem 1.25rem;
     }
-    
+
     .current-month {
         font-size: 1.5rem;
     }
-    
+
     /* 侧边栏在平板上保持可见 */
     .sidebar-card {
         margin-bottom: 1.5rem;
     }
-    
+
     .countdown-list {
         gap: 0.875rem;
     }
-    
+
     /* 日历格子适中 */
     .day {
         min-height: 65px;
         padding: 0.5rem;
     }
-    
+
     .day-number {
         font-size: 1.1rem;
     }
-    
+
     .feature-item {
         justify-content: center;
     }
-    
+
     .preview-card {
         min-width: auto;
         width: 100%;
     }
-    
+
     .calendar-container {
         padding: 1.5rem;
     }
-    
+
     .calendar-days {
         gap: 5px;
     }
-    
+
     /* 移动端周数列变窄 */
     .with-week-numbers .calendar-weekdays,
     .with-week-numbers .calendar-days {
         grid-template-columns: 30px repeat(7, 1fr);
     }
-    
+
     .week-number-header,
     .week-number {
         font-size: 0.75rem;
     }
-    
+
     .day {
         padding: 0.5rem 0.25rem;
     }
-    
+
     .day-number {
         font-size: 1rem;
     }
-    
+
     .day-lunar {
         font-size: 0.65rem;
     }
-    
+
     /* 统计面板响应式 */
     .stat-value {
         font-size: 1.4rem;
     }
-    
+
     .stat-icon {
         font-size: 1.5rem;
     }
-    
+
     /* 重要日期侧边栏响应式 */
     .important-dates {
         position: static;
         margin-top: 2rem;
     }
-    
+
     .weekday {
         font-size: 0.85rem;
         padding: 0.75rem 0;
     }
-    
+
     .control-panel {
         padding: 1.5rem;
     }
@@ -873,57 +887,57 @@
     .calendar-intro h1 {
         font-size: 1.75rem;
     }
-    
+
     .calendar-intro .lead {
         font-size: 1rem;
     }
-    
+
     .calendar-hero {
         padding: 2rem 0;
     }
-    
+
     /* 小屏幕隐藏周数列 */
     .with-week-numbers .calendar-weekdays,
     .with-week-numbers .calendar-days {
         grid-template-columns: repeat(7, 1fr);
     }
-    
+
     .week-number-header,
     .week-number {
         display: none;
     }
-    
+
     /* 新统计卡片小屏优化 */
     .stat-card {
         padding: 1.25rem;
         border-radius: 15px;
     }
-    
+
     .stat-card-bg {
         font-size: 5rem;
         right: -10px;
         bottom: -10px;
     }
-    
+
     .stat-content {
         gap: 0.75rem;
     }
-    
+
     .stat-icon-modern {
         width: 48px;
         height: 48px;
         font-size: 1.3rem;
         border-radius: 12px;
     }
-    
+
     .stat-label-modern {
         font-size: 0.75rem;
     }
-    
+
     .stat-value-modern {
         font-size: 1.4rem;
     }
-    
+
     /* 节假日说明优化 */
     .holiday-info-alert {
         font-size: 0.8rem;
@@ -931,110 +945,110 @@
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .badge-group {
         margin-left: 0;
         margin-top: 0.5rem;
         gap: 0.5rem;
     }
-    
+
     .badge-group .badge {
         font-size: 0.75rem;
         padding: 0.2rem 0.5rem;
     }
-    
+
     /* 侧边栏优化 */
     .sidebar-card {
         padding: 1.25rem;
     }
-    
+
     .sidebar-title {
         font-size: 1rem;
         margin-bottom: 1rem;
     }
-    
+
     .countdown-item {
         padding: 0.75rem;
     }
-    
+
     .countdown-name {
         font-size: 0.875rem;
     }
-    
+
     .countdown-days {
         font-size: 1.1rem;
     }
-    
+
     .quick-nav-btn {
         padding: 0.75rem 0.875rem;
         font-size: 0.875rem;
     }
-    
+
     /* 日历控制按钮 */
     .calendar-controls {
         flex-direction: column;
         gap: 0.75rem;
     }
-    
+
     .calendar-navigation {
         width: 100%;
     }
-    
+
     .calendar-actions {
         width: 100%;
         flex-wrap: wrap;
         gap: 0.5rem;
     }
-    
+
     .calendar-actions .btn {
         flex: 1;
         min-width: calc(50% - 0.25rem);
         font-size: 0.85rem;
         padding: 0.6rem 0.75rem;
     }
-    
+
     .calendar-actions .btn i {
         margin-right: 0.25rem;
     }
-    
+
     .weekday {
         font-size: 0.75rem;
         padding: 0.5rem 0;
     }
-    
+
     .calendar-days {
         gap: 3px;
     }
-    
+
     .day {
         padding: 0.25rem;
         border-radius: 10px;
     }
-    
+
     .day-number {
         font-size: 0.9rem;
     }
-    
+
     .day-lunar {
         display: none;
     }
-    
+
     .day.holiday::after {
         font-size: 0.55rem;
         padding: 1px 3px;
     }
-    
+
     .current-month {
         font-size: 1.3rem;
         min-width: auto;
     }
-    
+
     .neumorphism-button,
     .btn.neumorphism-button {
         padding: 0.6rem 1rem;
         font-size: 0.9rem;
     }
-    
+
     .control-panel {
         padding: 1rem;
     }
@@ -1072,7 +1086,12 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent
+    );
     transition: left 0.5s;
 }
 
@@ -1087,7 +1106,11 @@
 
 .stat-icon {
     font-size: 2rem;
-    background: linear-gradient(135deg, var(--calendar-primary) 0%, var(--calendar-secondary) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--calendar-primary) 0%,
+        var(--calendar-secondary) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1118,7 +1141,11 @@
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--calendar-primary), var(--calendar-secondary));
+    background: linear-gradient(
+        90deg,
+        var(--calendar-primary),
+        var(--calendar-secondary)
+    );
     border-radius: 10px;
     transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
@@ -1132,13 +1159,22 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
     animation: shimmer 2s infinite;
 }
 
 @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 /* ========================================
@@ -1164,7 +1200,11 @@
     font-size: 1.2rem;
     font-weight: 700;
     margin: 0;
-    background: linear-gradient(135deg, var(--calendar-primary) 0%, var(--calendar-secondary) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--calendar-primary) 0%,
+        var(--calendar-secondary) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1172,7 +1212,11 @@
 
 .sidebar-header h3 i {
     margin-right: 0.5rem;
-    background: linear-gradient(135deg, var(--calendar-primary) 0%, var(--calendar-secondary) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--calendar-primary) 0%,
+        var(--calendar-secondary) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -1183,7 +1227,11 @@
     height: 36px;
     border-radius: 50%;
     border: none;
-    background: linear-gradient(135deg, var(--calendar-primary) 0%, var(--calendar-secondary) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--calendar-primary) 0%,
+        var(--calendar-secondary) 100%
+    );
     color: white;
     cursor: pointer;
     display: flex;
@@ -1224,7 +1272,7 @@
 
 .date-card:hover {
     transform: translateX(5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .date-card.holiday-card {
@@ -1307,16 +1355,16 @@
     .statistics-panel {
         display: none !important;
     }
-    
+
     .calendar-container {
         box-shadow: none;
         border: 1px solid #ddd;
     }
-    
+
     .day:hover {
         transform: none;
     }
-    
+
     .calendar-main {
         padding: 0;
     }
@@ -1707,36 +1755,36 @@
         min-height: 44px;
         min-width: 44px;
     }
-    
+
     /* 日历格子触摸优化 */
     .day {
         cursor: pointer;
         -webkit-tap-highlight-color: transparent;
     }
-    
+
     .day:active {
         transform: scale(0.95);
         transition: transform 0.1s ease;
     }
-    
+
     /* 统计卡片触摸反馈 */
     .stat-card:active {
         transform: scale(0.98);
         transition: transform 0.1s ease;
     }
-    
+
     /* 禁用悬停动画,使用active状态 */
     .stat-card:hover {
         transform: none;
     }
-    
+
     /* 快速导航按钮触摸反馈 */
     .quick-nav-btn:active {
         transform: scale(0.97);
         background: var(--calendar-gradient-primary);
         color: white;
     }
-    
+
     /* 倒计时项目触摸反馈 */
     .countdown-item:active {
         transform: scale(0.98);
@@ -1750,16 +1798,16 @@
         min-height: 40vh;
         padding: 2rem 0;
     }
-    
+
     .calendar-intro h1 {
         font-size: 2rem;
         margin-bottom: 0.5rem;
     }
-    
+
     .calendar-intro .lead {
         font-size: 1rem;
     }
-    
+
     .calendar-features {
         margin-top: 1rem;
     }
@@ -1786,11 +1834,11 @@ html {
     .modal-dialog {
         margin: 0.5rem;
     }
-    
+
     .modal-content {
         border-radius: 15px;
     }
-    
+
     .modal-header,
     .modal-body,
     .modal-footer {

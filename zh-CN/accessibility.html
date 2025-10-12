@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>无障碍功能 - Alexander James Carter</title>
     <meta name="description" content="了解我们网站的无障碍功能，包括WCAG 2.1合规性、键盘导航、屏幕阅读器支持等">
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    
+
     <!-- Custom CSS -->
     <link href="../css/base/style.default.css" rel="stylesheet">
     <link href="../css/components/navigation.css" rel="stylesheet">
     <link href="../css/components/footer-enhanced.css" rel="stylesheet">
-    
+
     <style>
         .accessibility-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -22,20 +23,20 @@
             padding: 80px 0;
             text-align: center;
         }
-        
+
         .feature-card {
             background: white;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
             height: 100%;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .feature-icon {
             width: 60px;
             height: 60px;
@@ -48,12 +49,12 @@
             color: white;
             font-size: 24px;
         }
-        
+
         .accessibility-test {
             background: #f8f9fa;
             padding: 60px 0;
         }
-        
+
         .test-result {
             background: white;
             border-radius: 10px;
@@ -61,7 +62,7 @@
             margin: 10px 0;
             border-left: 4px solid #28a745;
         }
-        
+
         .wcag-compliance {
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             color: white;
@@ -70,6 +71,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- 导航栏 -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
@@ -117,7 +119,7 @@
                     <p class="text-muted">我们相信互联网应该对每个人都可访问，无论其能力如何。我们的网站遵循最佳实践，确保所有用户都能获得优质的浏览体验。</p>
                 </div>
             </div>
-            
+
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
                     <div class="feature-card">
@@ -134,7 +136,7 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
@@ -150,7 +152,7 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
@@ -166,7 +168,7 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
@@ -182,7 +184,7 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
@@ -198,7 +200,7 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="col-md-6 col-lg-4">
                     <div class="feature-card">
                         <div class="feature-icon">
@@ -216,7 +218,7 @@
                 </div>
             </div>
         </div>
-    </section>    <!-- WCAG合规性 -->
+    </section> <!-- WCAG合规性 -->
     <section id="wcag-compliance" class="wcag-compliance">
         <div class="container">
             <div class="row">
@@ -257,27 +259,30 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <h2 class="text-center mb-5">推荐的无障碍测试工具</h2>
-                    
+
                     <div class="test-result">
                         <h5><i class="fas fa-wave-square me-2"></i>WAVE Web Accessibility Evaluator</h5>
                         <p>由WebAIM提供的免费在线工具，可以检测网页的无障碍问题。</p>
-                        <a href="https://wave.webaim.org/" target="_blank" rel="noopener" class="btn btn-outline-primary">
+                        <a href="https://wave.webaim.org/" target="_blank" rel="noopener"
+                            class="btn btn-outline-primary">
                             测试本站 <i class="fas fa-external-link-alt ms-1"></i>
                         </a>
                     </div>
-                    
+
                     <div class="test-result">
                         <h5><i class="fab fa-google me-2"></i>Google Lighthouse</h5>
                         <p>Google开发的开源工具，包含无障碍性审计功能。</p>
-                        <a href="https://developers.google.com/web/tools/lighthouse" target="_blank" rel="noopener" class="btn btn-outline-primary">
+                        <a href="https://developers.google.com/web/tools/lighthouse" target="_blank" rel="noopener"
+                            class="btn btn-outline-primary">
                             了解更多 <i class="fas fa-external-link-alt ms-1"></i>
                         </a>
                     </div>
-                    
+
                     <div class="test-result">
                         <h5><i class="fas fa-mobile-alt me-2"></i>Mobile-Friendly Test</h5>
                         <p>Google的移动设备友好性测试工具。</p>
-                        <a href="https://search.google.com/test/mobile-friendly" target="_blank" rel="noopener" class="btn btn-outline-primary">
+                        <a href="https://search.google.com/test/mobile-friendly" target="_blank" rel="noopener"
+                            class="btn btn-outline-primary">
                             测试移动友好性 <i class="fas fa-external-link-alt ms-1"></i>
                         </a>
                     </div>
@@ -304,4 +309,5 @@
     <!-- JavaScript -->
     <script src="../js/vendor/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -443,7 +443,7 @@
     .navbar {
         padding: 0.5rem 0;
     }
-    
+
     .brand-text {
         font-size: 1rem;
         max-width: 150px;
@@ -451,7 +451,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-    
+
     /* 汉堡菜单按钮 */
     .navbar-toggler {
         border: none;
@@ -459,17 +459,17 @@
         border-radius: 8px;
         background: rgba(102, 126, 234, 0.1);
     }
-    
+
     .navbar-toggler:focus {
         box-shadow: none;
         outline: none;
     }
-    
+
     .navbar-toggler-icon {
         width: 24px;
         height: 24px;
     }
-    
+
     /* 移动端菜单 */
     .navbar-collapse {
         position: absolute;
@@ -484,40 +484,40 @@
         padding: 1rem 0;
         margin-top: 0.5rem;
     }
-    
+
     .navbar-nav {
         padding: 0 1rem;
     }
-    
+
     .nav-item {
         margin: 0.25rem 0;
     }
-    
+
     .nav-link {
         padding: 0.75rem 1rem !important;
         border-radius: 10px;
         transition: all 0.3s ease;
     }
-    
+
     .nav-link:hover,
     .nav-link.active {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white !important;
         transform: translateX(5px);
     }
-    
+
     .nav-link .nav-icon {
         width: 24px;
         display: inline-block;
     }
-    
+
     /* 分隔线 */
     .nav-divider {
         height: 1px;
         background: rgba(0, 0, 0, 0.1);
         margin: 0.5rem 1rem;
     }
-    
+
     /* 下拉菜单 */
     .dropdown-menu {
         position: static !important;
@@ -528,13 +528,13 @@
         margin: 0.5rem 1rem;
         border-radius: 10px;
     }
-    
+
     .dropdown-item {
         padding: 0.75rem 1rem;
         border-radius: 8px;
         margin: 0.25rem 0;
     }
-    
+
     /* 主题切换按钮 */
     .theme-toggle-btn {
         width: 100%;
@@ -543,7 +543,7 @@
         margin: 0.25rem 0;
         border-radius: 10px;
     }
-    
+
     /* 返回顶部按钮 */
     .back-to-top {
         bottom: 20px;
@@ -552,16 +552,16 @@
         height: 50px;
         font-size: 1.25rem;
     }
-    
+
     /* Dark Mode移动端适配 */
     .dark-mode .navbar-collapse {
         background: rgba(30, 30, 30, 0.98);
     }
-    
+
     .dark-mode .nav-divider {
         background: rgba(255, 255, 255, 0.1);
     }
-    
+
     .dark-mode .dropdown-menu {
         background: rgba(255, 255, 255, 0.05);
     }
@@ -571,11 +571,11 @@
     .brand-text {
         display: none;
     }
-    
+
     .nav-logo {
         height: 35px;
     }
-    
+
     .back-to-top {
         width: 45px;
         height: 45px;
@@ -601,15 +601,15 @@
     .nav-text {
         display: none;
     }
-    
+
     .navbar-nav {
         gap: 0.25rem;
     }
-    
+
     .nav-link {
         padding: 0.5rem 0.75rem;
     }
-    
+
     .nav-icon {
         font-size: 1.1rem;
     }
@@ -741,11 +741,11 @@
     .footer-social {
         justify-content: center;
     }
-    
+
     .footer-badges {
         justify-content: center;
     }
-    
+
     .social-icon {
         width: 36px;
         height: 36px;

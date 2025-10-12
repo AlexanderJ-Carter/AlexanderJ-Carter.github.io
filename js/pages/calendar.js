@@ -11,10 +11,10 @@ class Calendar {
         this.holidays = {}; // 将在initHolidays中填充
         this.viewMode = 'month'; // month, week, day
         this.importantDates = this.loadImportantDates(); // 纪念日
-        
+
         // 初始化2025-2030年的节假日数据
         this.initHolidays();
-        
+
         this.init();
     }
 
@@ -35,19 +35,19 @@ class Calendar {
     initHolidays() {
         const currentYear = new Date().getFullYear();
         const years = [];
-        
+
         // 生成当前年份前后各5年的数据
         for (let i = -2; i <= 5; i++) {
             years.push(currentYear + i);
         }
-        
-        years.forEach(year => {
+
+        years.forEach((year) => {
             // 添加固定阳历节日
             this.addFixedHolidays(year);
-            
+
             // 添加固定纪念日
             this.addFestivals(year);
-            
+
             // 添加农历节日（春节、清明、端午、中秋）
             this.addLunarHolidays(year);
         });
@@ -59,16 +59,16 @@ class Calendar {
     addFixedHolidays(year) {
         // 元旦：1月1日
         this.holidays[`${year}-01-01`] = { name: '元旦', type: 'holiday' };
-        
+
         // 劳动节：5月1日
         this.holidays[`${year}-05-01`] = { name: '劳动节', type: 'holiday' };
-        
+
         // 国庆节：10月1日-7日
         for (let day = 1; day <= 7; day++) {
             const dateStr = `${year}-10-${String(day).padStart(2, '0')}`;
             this.holidays[dateStr] = { name: '国庆节', type: 'holiday' };
         }
-        
+
         // 添加已知的特定年份调休和假期安排
         this.addYearSpecificHolidays(year);
     }
@@ -81,59 +81,120 @@ class Calendar {
             2025: {
                 holidays: {
                     '01-01': '元旦',
-                    '01-28': '除夕', '01-29': '春节', '01-30': '春节', '01-31': '春节',
-                    '02-01': '春节', '02-02': '春节', '02-03': '春节', '02-04': '春节',
-                    '04-04': '清明节', '04-05': '清明节', '04-06': '清明节',
-                    '05-01': '劳动节', '05-02': '劳动节', '05-03': '劳动节', 
-                    '05-04': '劳动节', '05-05': '劳动节',
-                    '05-31': '端午节', '06-01': '端午节', '06-02': '端午节',
-                    '10-01': '国庆节', '10-02': '国庆节', '10-03': '国庆节',
-                    '10-04': '国庆节', '10-05': '国庆节', '10-06': '中秋节', '10-07': '国庆节'
+                    '01-28': '除夕',
+                    '01-29': '春节',
+                    '01-30': '春节',
+                    '01-31': '春节',
+                    '02-01': '春节',
+                    '02-02': '春节',
+                    '02-03': '春节',
+                    '02-04': '春节',
+                    '04-04': '清明节',
+                    '04-05': '清明节',
+                    '04-06': '清明节',
+                    '05-01': '劳动节',
+                    '05-02': '劳动节',
+                    '05-03': '劳动节',
+                    '05-04': '劳动节',
+                    '05-05': '劳动节',
+                    '05-31': '端午节',
+                    '06-01': '端午节',
+                    '06-02': '端午节',
+                    '10-01': '国庆节',
+                    '10-02': '国庆节',
+                    '10-03': '国庆节',
+                    '10-04': '国庆节',
+                    '10-05': '国庆节',
+                    '10-06': '中秋节',
+                    '10-07': '国庆节',
                 },
-                workdays: ['01-26', '02-08', '04-27', '09-28', '10-11']
+                workdays: ['01-26', '02-08', '04-27', '09-28', '10-11'],
             },
             // 2026年数据（预估，需根据国务院公告更新）
             2026: {
                 holidays: {
-                    '01-01': '元旦', '01-02': '元旦', '01-03': '元旦',
-                    '02-16': '除夕', '02-17': '春节', '02-18': '春节', '02-19': '春节',
-                    '02-20': '春节', '02-21': '春节', '02-22': '春节', '02-23': '春节',
-                    '04-04': '清明节', '04-05': '清明节', '04-06': '清明节',
-                    '05-01': '劳动节', '05-02': '劳动节', '05-03': '劳动节',
-                    '06-19': '端午节', '06-20': '端午节', '06-21': '端午节',
-                    '10-01': '国庆节', '10-02': '国庆节', '10-03': '国庆节',
-                    '10-04': '中秋节', '10-05': '国庆节', '10-06': '国庆节', '10-07': '国庆节'
+                    '01-01': '元旦',
+                    '01-02': '元旦',
+                    '01-03': '元旦',
+                    '02-16': '除夕',
+                    '02-17': '春节',
+                    '02-18': '春节',
+                    '02-19': '春节',
+                    '02-20': '春节',
+                    '02-21': '春节',
+                    '02-22': '春节',
+                    '02-23': '春节',
+                    '04-04': '清明节',
+                    '04-05': '清明节',
+                    '04-06': '清明节',
+                    '05-01': '劳动节',
+                    '05-02': '劳动节',
+                    '05-03': '劳动节',
+                    '06-19': '端午节',
+                    '06-20': '端午节',
+                    '06-21': '端午节',
+                    '10-01': '国庆节',
+                    '10-02': '国庆节',
+                    '10-03': '国庆节',
+                    '10-04': '中秋节',
+                    '10-05': '国庆节',
+                    '10-06': '国庆节',
+                    '10-07': '国庆节',
                 },
-                workdays: [] // 待国务院公告
+                workdays: [], // 待国务院公告
             },
             // 2027年数据（预估）
             2027: {
                 holidays: {
-                    '01-01': '元旦', '01-02': '元旦', '01-03': '元旦',
-                    '02-06': '除夕', '02-07': '春节', '02-08': '春节', '02-09': '春节',
-                    '02-10': '春节', '02-11': '春节', '02-12': '春节', '02-13': '春节',
-                    '04-04': '清明节', '04-05': '清明节', '04-06': '清明节',
-                    '05-01': '劳动节', '05-02': '劳动节', '05-03': '劳动节',
-                    '06-09': '端午节', '06-10': '端午节', '06-11': '端午节',
-                    '09-24': '中秋节', '09-25': '中秋节', '09-26': '中秋节',
-                    '10-01': '国庆节', '10-02': '国庆节', '10-03': '国庆节',
-                    '10-04': '国庆节', '10-05': '国庆节', '10-06': '国庆节', '10-07': '国庆节'
+                    '01-01': '元旦',
+                    '01-02': '元旦',
+                    '01-03': '元旦',
+                    '02-06': '除夕',
+                    '02-07': '春节',
+                    '02-08': '春节',
+                    '02-09': '春节',
+                    '02-10': '春节',
+                    '02-11': '春节',
+                    '02-12': '春节',
+                    '02-13': '春节',
+                    '04-04': '清明节',
+                    '04-05': '清明节',
+                    '04-06': '清明节',
+                    '05-01': '劳动节',
+                    '05-02': '劳动节',
+                    '05-03': '劳动节',
+                    '06-09': '端午节',
+                    '06-10': '端午节',
+                    '06-11': '端午节',
+                    '09-24': '中秋节',
+                    '09-25': '中秋节',
+                    '09-26': '中秋节',
+                    '10-01': '国庆节',
+                    '10-02': '国庆节',
+                    '10-03': '国庆节',
+                    '10-04': '国庆节',
+                    '10-05': '国庆节',
+                    '10-06': '国庆节',
+                    '10-07': '国庆节',
                 },
-                workdays: []
-            }
+                workdays: [],
+            },
         };
 
         if (specificHolidays[year]) {
             const yearData = specificHolidays[year];
-            
+
             // 添加假期
             Object.entries(yearData.holidays).forEach(([dateStr, name]) => {
                 this.holidays[`${year}-${dateStr}`] = { name, type: 'holiday' };
             });
-            
+
             // 添加调休工作日
-            yearData.workdays.forEach(dateStr => {
-                this.holidays[`${year}-${dateStr}`] = { name: '调休', type: 'workday' };
+            yearData.workdays.forEach((dateStr) => {
+                this.holidays[`${year}-${dateStr}`] = {
+                    name: '调休',
+                    type: 'workday',
+                };
             });
         }
     }
@@ -154,13 +215,16 @@ class Calendar {
             '09-10': '教师节',
             '11-11': '双十一',
             '12-24': '平安夜',
-            '12-25': '圣诞节'
+            '12-25': '圣诞节',
         };
 
         Object.entries(festivals).forEach(([dateStr, name]) => {
             const fullDate = `${year}-${dateStr}`;
             // 不覆盖已存在的法定假日
-            if (!this.holidays[fullDate] || this.holidays[fullDate].type !== 'holiday') {
+            if (
+                !this.holidays[fullDate] ||
+                this.holidays[fullDate].type !== 'holiday'
+            ) {
                 this.holidays[fullDate] = { name, type: 'festival' };
             }
         });
@@ -180,7 +244,7 @@ class Calendar {
             2027: '02-07',
             2028: '01-26',
             2029: '02-13',
-            2030: '02-03'
+            2030: '02-03',
         };
 
         // 如果有该年的春节数据，可以标注（已在具体假期中处理）
@@ -236,9 +300,10 @@ class Calendar {
 
         // 键盘快捷键
         document.addEventListener('keydown', (e) => {
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-            
-            switch(e.key) {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')
+                return;
+
+            switch (e.key) {
                 case 'ArrowLeft':
                     this.previousMonth();
                     break;
@@ -260,7 +325,7 @@ class Calendar {
         const now = new Date();
         const currentDateEl = document.getElementById('currentDate');
         const currentLunarEl = document.getElementById('currentLunar');
-        
+
         if (currentDateEl) {
             const options = {
                 year: 'numeric',
@@ -268,9 +333,12 @@ class Calendar {
                 day: 'numeric',
                 weekday: 'long',
             };
-            currentDateEl.textContent = now.toLocaleDateString('zh-CN', options);
+            currentDateEl.textContent = now.toLocaleDateString(
+                'zh-CN',
+                options
+            );
         }
-        
+
         // 显示农历（如果有lunar.js）
         if (currentLunarEl && typeof LunarCalendar !== 'undefined') {
             try {
@@ -302,12 +370,13 @@ class Calendar {
                 year: 'numeric',
                 month: 'long',
             });
-            
+
             // 如果是预估数据年份，添加标记
             if (year > 2025) {
-                monthText += ' <span style="font-size: 0.7em; color: #f59e0b;">*预估</span>';
+                monthText +=
+                    ' <span style="font-size: 0.7em; color: #f59e0b;">*预估</span>';
             }
-            
+
             currentMonthEl.innerHTML = monthText;
         }
 
@@ -324,12 +393,19 @@ class Calendar {
 
         // 添加周数列头
         const calendarGrid = calendarDays.parentElement;
-        if (calendarGrid && !calendarGrid.classList.contains('with-week-numbers')) {
+        if (
+            calendarGrid &&
+            !calendarGrid.classList.contains('with-week-numbers')
+        ) {
             calendarGrid.classList.add('with-week-numbers');
-            
+
             // 修改星期行，添加周数标题
-            const weekdaysRow = calendarGrid.querySelector('.calendar-weekdays');
-            if (weekdaysRow && !weekdaysRow.querySelector('.week-number-header')) {
+            const weekdaysRow =
+                calendarGrid.querySelector('.calendar-weekdays');
+            if (
+                weekdaysRow &&
+                !weekdaysRow.querySelector('.week-number-header')
+            ) {
                 const weekHeader = document.createElement('div');
                 weekHeader.className = 'week-number-header';
                 weekHeader.textContent = '周';
@@ -348,7 +424,7 @@ class Calendar {
             const weekStartDate = new Date(startDate);
             weekStartDate.setDate(startDate.getDate() + week * 7);
             const weekNumber = this.getWeekNumber(weekStartDate);
-            
+
             const weekLabel = document.createElement('div');
             weekLabel.className = 'week-number';
             weekLabel.textContent = weekNumber;
@@ -359,7 +435,7 @@ class Calendar {
             for (let day = 0; day < 7; day++) {
                 const currentDate = new Date(startDate);
                 currentDate.setDate(startDate.getDate() + week * 7 + day);
-                
+
                 const dayElement = this.createDayElement(currentDate, month);
                 calendarDays.appendChild(dayElement);
             }
@@ -379,17 +455,20 @@ class Calendar {
         const isCurrentMonth = date.getMonth() === currentMonth;
         const today = new Date();
         const dateStr = this.formatDate(date);
-        
+
         // 添加类名
         if (!isCurrentMonth) {
             dayElement.classList.add('other-month');
         }
-        
+
         if (date.toDateString() === today.toDateString()) {
             dayElement.classList.add('today');
         }
-        
-        if (this.selectedDate && date.toDateString() === this.selectedDate.toDateString()) {
+
+        if (
+            this.selectedDate &&
+            date.toDateString() === this.selectedDate.toDateString()
+        ) {
             dayElement.classList.add('selected');
         }
 
@@ -455,7 +534,7 @@ class Calendar {
                     date.getMonth() + 1,
                     date.getDate()
                 );
-                
+
                 if (lunar) {
                     // 初一显示月份
                     if (lunar.lunarDay === 1) {
@@ -526,17 +605,17 @@ class Calendar {
     goToNextHoliday() {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        
+
         // 获取所有法定假日
         const holidays = Object.entries(this.holidays)
             .filter(([date, info]) => info.type === 'holiday')
             .map(([date, info]) => ({
                 date: new Date(date),
-                name: info.name
+                name: info.name,
             }))
-            .filter(h => h.date >= today)
+            .filter((h) => h.date >= today)
             .sort((a, b) => a.date - b.date);
-        
+
         if (holidays.length > 0) {
             const nextHoliday = holidays[0];
             this.currentDate = new Date(nextHoliday.date);
@@ -551,17 +630,19 @@ class Calendar {
      * 跳转到指定日期
      */
     goToDate() {
-        const dateStr = prompt('请输入日期 (格式: YYYY-MM-DD):', 
-            this.currentDate.toISOString().split('T')[0]);
-        
+        const dateStr = prompt(
+            '请输入日期 (格式: YYYY-MM-DD):',
+            this.currentDate.toISOString().split('T')[0]
+        );
+
         if (!dateStr) return;
-        
+
         const targetDate = new Date(dateStr);
         if (isNaN(targetDate.getTime())) {
             this.showToast('日期格式不正确', 'error');
             return;
         }
-        
+
         this.currentDate = targetDate;
         this.renderCalendar();
         this.updateStatistics();
@@ -584,11 +665,11 @@ class Calendar {
     quickAddEvent(dateStr) {
         const modal = document.getElementById('eventModal');
         const dateInput = document.getElementById('eventDate');
-        
+
         if (dateInput) {
             dateInput.value = dateStr;
         }
-        
+
         if (modal && typeof bootstrap !== 'undefined') {
             const bsModal = new bootstrap.Modal(modal);
             bsModal.show();
@@ -602,7 +683,9 @@ class Calendar {
         const title = document.getElementById('eventTitle')?.value?.trim();
         const date = document.getElementById('eventDate')?.value;
         const time = document.getElementById('eventTime')?.value;
-        const description = document.getElementById('eventDescription')?.value?.trim();
+        const description = document
+            .getElementById('eventDescription')
+            ?.value?.trim();
         const color = document.getElementById('eventColor')?.value || 'blue';
 
         if (!title || !date) {
@@ -622,7 +705,7 @@ class Calendar {
             time,
             description,
             color,
-            created: new Date().toISOString()
+            created: new Date().toISOString(),
         });
 
         // 保存到本地存储
@@ -650,8 +733,8 @@ class Calendar {
     deleteEvent(date, eventId) {
         if (!this.events[date]) return;
 
-        this.events[date] = this.events[date].filter(e => e.id !== eventId);
-        
+        this.events[date] = this.events[date].filter((e) => e.id !== eventId);
+
         if (this.events[date].length === 0) {
             delete this.events[date];
         }
@@ -675,7 +758,7 @@ class Calendar {
             const date = new Date(today);
             date.setDate(today.getDate() + i);
             const dateStr = this.formatDate(date);
-            
+
             const events = this.events[dateStr];
             if (events && events.length > 0) {
                 upcoming.push({ date: dateStr, events });
@@ -697,8 +780,14 @@ class Calendar {
             if (info.type === 'holiday') {
                 const holidayDate = new Date(dateStr);
                 if (holidayDate > now) {
-                    const days = Math.ceil((holidayDate - now) / (1000 * 60 * 60 * 24));
-                    upcomingHolidays.push({ date: dateStr, name: info.name, days });
+                    const days = Math.ceil(
+                        (holidayDate - now) / (1000 * 60 * 60 * 24)
+                    );
+                    upcomingHolidays.push({
+                        date: dateStr,
+                        name: info.name,
+                        days,
+                    });
                 }
             }
         });
@@ -737,44 +826,48 @@ class Calendar {
             }
 
             this.showToast('正在生成图片...', 'info');
-            
+
             // 获取日历容器
-            const calendarElement = document.getElementById('calendarContainer');
+            const calendarElement =
+                document.getElementById('calendarContainer');
             if (!calendarElement) {
                 this.showToast('未找到日历元素', 'error');
                 return;
             }
 
             // 临时隐藏按钮
-            const buttons = calendarElement.querySelectorAll('.calendar-controls button, .calendar-actions button');
-            buttons.forEach(btn => btn.style.opacity = '0');
+            const buttons = calendarElement.querySelectorAll(
+                '.calendar-controls button, .calendar-actions button'
+            );
+            buttons.forEach((btn) => (btn.style.opacity = '0'));
 
             // 使用html2canvas截图
             const canvas = await html2canvas(calendarElement, {
                 backgroundColor: '#f8f9fa',
                 scale: 2, // 提高清晰度
                 logging: false,
-                useCORS: true
+                useCORS: true,
             });
 
             // 恢复按钮
-            buttons.forEach(btn => btn.style.opacity = '1');
+            buttons.forEach((btn) => (btn.style.opacity = '1'));
 
             // 转换为图片并下载
             canvas.toBlob((blob) => {
                 const url = URL.createObjectURL(blob);
                 const link = document.createElement('a');
                 const date = new Date();
-                const filename = `日历_${date.getFullYear()}年${date.getMonth() + 1}月.png`;
-                
+                const filename = `日历_${date.getFullYear()}年${
+                    date.getMonth() + 1
+                }月.png`;
+
                 link.href = url;
                 link.download = filename;
                 link.click();
-                
+
                 URL.revokeObjectURL(url);
                 this.showToast('导出成功！', 'success');
             });
-
         } catch (error) {
             console.error('导出失败:', error);
             this.showToast('导出失败，请稍后重试', 'error');
@@ -792,9 +885,11 @@ class Calendar {
             }
 
             const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+            script.src =
+                'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
             script.onload = () => resolve();
-            script.onerror = () => reject(new Error('Failed to load html2canvas'));
+            script.onerror = () =>
+                reject(new Error('Failed to load html2canvas'));
             document.head.appendChild(script);
         });
     }
@@ -814,7 +909,10 @@ class Calendar {
 
     saveEvents() {
         try {
-            localStorage.setItem('calendar_events', JSON.stringify(this.events));
+            localStorage.setItem(
+                'calendar_events',
+                JSON.stringify(this.events)
+            );
         } catch (e) {
             console.error('保存事件失败:', e);
         }
@@ -845,11 +943,17 @@ class Calendar {
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             z-index: 10000;
             animation: slideInRight 0.3s ease-out;
-            border-left: 4px solid ${type === 'success' ? '#4caf50' : type === 'error' ? '#f44336' : '#2196f3'};
+            border-left: 4px solid ${
+                type === 'success'
+                    ? '#4caf50'
+                    : type === 'error'
+                    ? '#f44336'
+                    : '#2196f3'
+            };
         `;
-        
+
         document.body.appendChild(toast);
-        
+
         setTimeout(() => {
             toast.style.animation = 'slideOutRight 0.3s ease-out';
             setTimeout(() => toast.remove(), 300);
@@ -860,11 +964,13 @@ class Calendar {
      * 新增功能：周数计算
      */
     getWeekNumber(date) {
-        const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        const d = new Date(
+            Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+        );
         const dayNum = d.getUTCDay() || 7;
         d.setUTCDate(d.getUTCDate() + 4 - dayNum);
         const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-        return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
     }
 
     /**
@@ -872,9 +978,9 @@ class Calendar {
      */
     switchViewMode(mode) {
         this.viewMode = mode;
-        
+
         // 更新按钮状态
-        document.querySelectorAll('[data-view-mode]').forEach(btn => {
+        document.querySelectorAll('[data-view-mode]').forEach((btn) => {
             btn.classList.toggle('active', btn.dataset.viewMode === mode);
         });
 
@@ -887,10 +993,16 @@ class Calendar {
     loadImportantDates() {
         try {
             const stored = localStorage.getItem('important_dates');
-            return stored ? JSON.parse(stored) : [
-                { name: '生日', date: '1990-01-01', type: 'birthday' },
-                { name: '纪念日', date: '2020-01-01', type: 'anniversary' }
-            ];
+            return stored
+                ? JSON.parse(stored)
+                : [
+                      { name: '生日', date: '1990-01-01', type: 'birthday' },
+                      {
+                          name: '纪念日',
+                          date: '2020-01-01',
+                          type: 'anniversary',
+                      },
+                  ];
         } catch (e) {
             return [];
         }
@@ -898,7 +1010,10 @@ class Calendar {
 
     saveImportantDates() {
         try {
-            localStorage.setItem('important_dates', JSON.stringify(this.importantDates));
+            localStorage.setItem(
+                'important_dates',
+                JSON.stringify(this.importantDates)
+            );
         } catch (e) {
             console.error('保存纪念日失败:', e);
         }
@@ -920,11 +1035,14 @@ class Calendar {
         const birth = new Date(birthDate);
         let age = today.getFullYear() - birth.getFullYear();
         const monthDiff = today.getMonth() - birth.getMonth();
-        
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+
+        if (
+            monthDiff < 0 ||
+            (monthDiff === 0 && today.getDate() < birth.getDate())
+        ) {
             age--;
         }
-        
+
         return age;
     }
 
@@ -934,12 +1052,16 @@ class Calendar {
     getNextBirthday(birthDate) {
         const today = new Date();
         const birth = new Date(birthDate);
-        const thisYearBirthday = new Date(today.getFullYear(), birth.getMonth(), birth.getDate());
-        
+        const thisYearBirthday = new Date(
+            today.getFullYear(),
+            birth.getMonth(),
+            birth.getDate()
+        );
+
         if (thisYearBirthday < today) {
             thisYearBirthday.setFullYear(today.getFullYear() + 1);
         }
-        
+
         const daysUntil = this.daysBetween(today, thisYearBirthday);
         return { date: thisYearBirthday, daysUntil };
     }
@@ -950,63 +1072,72 @@ class Calendar {
     updateStatistics() {
         const today = new Date();
         const year = today.getFullYear();
-        
+
         // 1. 更新当前星期几
-        const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        const weekdays = [
+            '星期日',
+            '星期一',
+            '星期二',
+            '星期三',
+            '星期四',
+            '星期五',
+            '星期六',
+        ];
         const weekdayEl = document.getElementById('currentWeekday');
         if (weekdayEl) {
             weekdayEl.textContent = weekdays[today.getDay()];
         }
-        
+
         // 2. 更新当前是第几周
         const weekNumber = this.getWeekNumber(today);
         const weekNumEl = document.getElementById('currentWeekNum');
         if (weekNumEl) {
             weekNumEl.textContent = `第${weekNumber}周`;
         }
-        
+
         // 3. 更新下个假期倒计时
         this.updateNextHolidayCountdown();
-        
+
         // 4. 更新年度进度
         const startOfYear = new Date(year, 0, 1);
         const daysPassed = this.daysBetween(startOfYear, today) + 1;
-        const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        const isLeapYear =
+            (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
         const totalDays = isLeapYear ? 366 : 365;
         const yearProgress = ((daysPassed / totalDays) * 100).toFixed(1);
-        
+
         const progressEl = document.getElementById('yearProgress');
         if (progressEl) {
             progressEl.textContent = `${yearProgress}%`;
         }
-        
+
         // 5. 更新侧边栏倒计时列表
         this.updateCountdownList();
     }
-    
+
     /**
      * 更新下个假期倒计时
      */
     updateNextHolidayCountdown() {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        
+
         // 获取所有法定假日
         const holidays = Object.entries(this.holidays)
             .filter(([date, info]) => info.type === 'holiday')
             .map(([date, info]) => ({
                 date: new Date(date),
                 name: info.name,
-                dateStr: date
+                dateStr: date,
             }))
-            .filter(h => h.date >= today)
+            .filter((h) => h.date >= today)
             .sort((a, b) => a.date - b.date);
-        
+
         const countdownEl = document.getElementById('nextHolidayCountdown');
         if (countdownEl && holidays.length > 0) {
             const nextHoliday = holidays[0];
             const days = this.daysBetween(today, nextHoliday.date);
-            
+
             if (days === 0) {
                 countdownEl.textContent = '今天！';
             } else {
@@ -1016,50 +1147,60 @@ class Calendar {
             countdownEl.textContent = '无';
         }
     }
-    
+
     /**
      * 更新侧边栏倒计时列表
      */
     updateCountdownList() {
         const listEl = document.getElementById('countdownList');
         if (!listEl) return;
-        
+
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        
+
         // 获取即将到来的假期和节日
         const upcomingDates = Object.entries(this.holidays)
             .map(([date, info]) => ({
                 date: new Date(date),
                 name: info.name,
                 type: info.type,
-                dateStr: date
+                dateStr: date,
             }))
-            .filter(item => item.date >= today)
+            .filter((item) => item.date >= today)
             .sort((a, b) => a.date - b.date)
             .slice(0, 5); // 只显示最近的5个
-        
+
         if (upcomingDates.length === 0) {
-            listEl.innerHTML = '<div class="text-muted">暂无即将到来的假期</div>';
+            listEl.innerHTML =
+                '<div class="text-muted">暂无即将到来的假期</div>';
             return;
         }
-        
-        listEl.innerHTML = upcomingDates.map(item => {
-            const days = this.daysBetween(today, item.date);
-            const typeClass = item.type === 'holiday' ? 'holiday' : 
-                             item.type === 'workday' ? '' : 'festival';
-            const daysClass = days <= 3 ? 'urgent' : days <= 7 ? 'soon' : '';
-            
-            return `
+
+        listEl.innerHTML = upcomingDates
+            .map((item) => {
+                const days = this.daysBetween(today, item.date);
+                const typeClass =
+                    item.type === 'holiday'
+                        ? 'holiday'
+                        : item.type === 'workday'
+                        ? ''
+                        : 'festival';
+                const daysClass =
+                    days <= 3 ? 'urgent' : days <= 7 ? 'soon' : '';
+
+                return `
                 <div class="countdown-item ${typeClass}">
                     <div class="countdown-name">${item.name}</div>
-                    <div class="countdown-date">${this.formatDateChinese(item.date)}</div>
+                    <div class="countdown-date">${this.formatDateChinese(
+                        item.date
+                    )}</div>
                     <div class="countdown-days ${daysClass}">
                         ${days === 0 ? '今天' : `${days}天后`}
                     </div>
                 </div>
             `;
-        }).join('');
+            })
+            .join('');
     }
 
     /**
@@ -1067,9 +1208,11 @@ class Calendar {
      */
     insertStatisticsPanel(stats) {
         let panel = document.getElementById('calendar-statistics');
-        
+
         if (!panel) {
-            const controlSection = document.querySelector('.calendar-controls .container .row');
+            const controlSection = document.querySelector(
+                '.calendar-controls .container .row'
+            );
             if (controlSection) {
                 const col = document.createElement('div');
                 col.className = 'col-12 mt-3';
@@ -1114,11 +1257,21 @@ class Calendar {
             }
         } else {
             // 更新现有面板
-            document.getElementById('stat-week').textContent = `第${stats.weekNumber}周`;
-            document.getElementById('stat-passed').textContent = `${stats.daysPassed}天`;
-            document.getElementById('stat-remaining').textContent = `${stats.daysRemaining}天`;
-            document.getElementById('stat-progress').textContent = `${stats.yearProgress}%`;
-            document.querySelector('.progress-fill').style.width = `${stats.yearProgress}%`;
+            document.getElementById(
+                'stat-week'
+            ).textContent = `第${stats.weekNumber}周`;
+            document.getElementById(
+                'stat-passed'
+            ).textContent = `${stats.daysPassed}天`;
+            document.getElementById(
+                'stat-remaining'
+            ).textContent = `${stats.daysRemaining}天`;
+            document.getElementById(
+                'stat-progress'
+            ).textContent = `${stats.yearProgress}%`;
+            document.querySelector(
+                '.progress-fill'
+            ).style.width = `${stats.yearProgress}%`;
         }
     }
 
@@ -1126,11 +1279,13 @@ class Calendar {
      * 渲染重要日期倒计时
      */
     renderImportantDates() {
-        const container = document.querySelector('.calendar-main .container .row');
+        const container = document.querySelector(
+            '.calendar-main .container .row'
+        );
         if (!container) return;
 
         let sidebar = document.getElementById('important-dates-sidebar');
-        
+
         if (!sidebar) {
             const col = document.createElement('div');
             col.className = 'col-lg-4 mt-4 mt-lg-0';
@@ -1149,7 +1304,7 @@ class Calendar {
                     <div id="holiday-countdown-list" class="dates-list"></div>
                 </div>
             `;
-            
+
             // 将日历容器改为col-lg-8
             const calendarCol = container.querySelector('.col-12');
             if (calendarCol) {
@@ -1170,40 +1325,52 @@ class Calendar {
         if (!list) return;
 
         const today = new Date();
-        
+
         if (this.importantDates.length === 0) {
             list.innerHTML = '<p class="empty-message">暂无重要日期</p>';
             return;
         }
 
-        list.innerHTML = this.importantDates.map(item => {
-            const date = new Date(item.date);
-            const age = item.type === 'birthday' ? this.calculateAge(item.date) : null;
-            const next = item.type === 'birthday' ? this.getNextBirthday(item.date) : null;
-            const daysSince = this.daysBetween(date, today);
-            
-            let subtitle = '';
-            if (item.type === 'birthday' && age !== null) {
-                subtitle = `${age}岁 · ${next.daysUntil}天后生日`;
-            } else if (item.type === 'anniversary') {
-                subtitle = `已经${daysSince}天`;
-            }
-            
-            return `
+        list.innerHTML = this.importantDates
+            .map((item) => {
+                const date = new Date(item.date);
+                const age =
+                    item.type === 'birthday'
+                        ? this.calculateAge(item.date)
+                        : null;
+                const next =
+                    item.type === 'birthday'
+                        ? this.getNextBirthday(item.date)
+                        : null;
+                const daysSince = this.daysBetween(date, today);
+
+                let subtitle = '';
+                if (item.type === 'birthday' && age !== null) {
+                    subtitle = `${age}岁 · ${next.daysUntil}天后生日`;
+                } else if (item.type === 'anniversary') {
+                    subtitle = `已经${daysSince}天`;
+                }
+
+                return `
                 <div class="date-card">
                     <div class="date-icon ${item.type}">
-                        <i class="fas fa-${item.type === 'birthday' ? 'birthday-cake' : 'heart'}"></i>
+                        <i class="fas fa-${
+                            item.type === 'birthday' ? 'birthday-cake' : 'heart'
+                        }"></i>
                     </div>
                     <div class="date-info">
                         <div class="date-name">${item.name}</div>
                         <div class="date-details">${subtitle}</div>
                     </div>
-                    <button class="btn-delete-date" onclick="calendar.deleteImportantDate('${item.date}')">
+                    <button class="btn-delete-date" onclick="calendar.deleteImportantDate('${
+                        item.date
+                    }')">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
             `;
-        }).join('');
+            })
+            .join('');
     }
 
     /**
@@ -1221,17 +1388,17 @@ class Calendar {
                 const holidayDate = new Date(dateStr);
                 if (holidayDate >= today) {
                     const daysUntil = this.daysBetween(today, holidayDate);
-                    
+
                     // 避免重复显示同一个假期
-                    const existing = upcoming.find(h => h.name === info.name);
+                    const existing = upcoming.find((h) => h.name === info.name);
                     if (!existing || daysUntil < existing.daysUntil) {
                         if (existing) {
                             upcoming.splice(upcoming.indexOf(existing), 1);
                         }
-                        upcoming.push({ 
-                            name: info.name, 
-                            date: dateStr, 
-                            daysUntil 
+                        upcoming.push({
+                            name: info.name,
+                            date: dateStr,
+                            daysUntil,
                         });
                     }
                 }
@@ -1246,7 +1413,9 @@ class Calendar {
             return;
         }
 
-        list.innerHTML = top5.map(holiday => `
+        list.innerHTML = top5
+            .map(
+                (holiday) => `
             <div class="date-card holiday-card">
                 <div class="date-icon holiday">
                     <i class="fas fa-umbrella-beach"></i>
@@ -1254,11 +1423,17 @@ class Calendar {
                 <div class="date-info">
                     <div class="date-name">${holiday.name}</div>
                     <div class="date-details">
-                        ${holiday.daysUntil === 0 ? '今天！' : `还有${holiday.daysUntil}天`}
+                        ${
+                            holiday.daysUntil === 0
+                                ? '今天！'
+                                : `还有${holiday.daysUntil}天`
+                        }
                     </div>
                 </div>
             </div>
-        `).join('');
+        `
+            )
+            .join('');
     }
 
     /**
@@ -1274,7 +1449,9 @@ class Calendar {
             return;
         }
 
-        const type = confirm('这是生日吗？\n确定 = 生日\n取消 = 纪念日') ? 'birthday' : 'anniversary';
+        const type = confirm('这是生日吗？\n确定 = 生日\n取消 = 纪念日')
+            ? 'birthday'
+            : 'anniversary';
 
         this.importantDates.push({ name, date, type });
         this.saveImportantDates();
@@ -1287,7 +1464,9 @@ class Calendar {
      */
     deleteImportantDate(date) {
         if (confirm('确定要删除这个重要日期吗？')) {
-            this.importantDates = this.importantDates.filter(item => item.date !== date);
+            this.importantDates = this.importantDates.filter(
+                (item) => item.date !== date
+            );
             this.saveImportantDates();
             this.updateImportantDatesList();
             this.showToast('已删除', 'info');
@@ -1300,7 +1479,7 @@ let calendar;
 
 document.addEventListener('DOMContentLoaded', () => {
     calendar = new Calendar();
-    
+
     // 隐藏加载器
     const loader = document.querySelector('.page-loader');
     if (loader) {
@@ -1308,7 +1487,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loader.classList.add('loaded');
         }, 500);
     }
-    
+
     // 添加动画样式
     if (!document.getElementById('calendar-animations')) {
         const style = document.createElement('style');

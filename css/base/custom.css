@@ -117,7 +117,7 @@ body.dark-mode .btn {
 
 .code-block code {
     color: #d4d4d4;
-    font-family: "Consolas", "Monaco", monospace;
+    font-family: 'Consolas', 'Monaco', monospace;
     line-height: 1.5;
 }
 
@@ -195,11 +195,11 @@ body.dark-mode .btn {
 }
 
 .intro-heading {
-    font-family: "Segoe UI", sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 .intro {
-    background-image: url("../../img/backgrounds/main-bg.jpg");
+    background-image: url('../../img/backgrounds/main-bg.jpg');
 }
 
 /* 文字部分样式增强 */
@@ -284,8 +284,8 @@ body.dark-mode .btn {
     background: linear-gradient(
             rgba(240, 245, 255, 0.9),
             rgba(230, 240, 250, 0.9)
-    ),
-    url("../../img/backgrounds/main-bg.jpg") center/cover no-repeat fixed;
+        ),
+        url('../../img/backgrounds/main-bg.jpg') center/cover no-repeat fixed;
     padding: 4rem 0;
 }
 

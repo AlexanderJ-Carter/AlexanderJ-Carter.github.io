@@ -13,23 +13,23 @@
     --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.1);
     --transition-speed: 0.3s;
     --gradient-primary: linear-gradient(
-            90deg,
-            var(--primary-color),
-            var(--secondary-color)
+        90deg,
+        var(--primary-color),
+        var(--secondary-color)
     );
     --gradient-overlay: linear-gradient(
-            45deg,
-            rgba(0, 123, 255, 0.2),
-            rgba(0, 210, 255, 0.2)
+        45deg,
+        rgba(0, 123, 255, 0.2),
+        rgba(0, 210, 255, 0.2)
     );
 }
 
 /* 关于部分样式 */
 .about-section {
     background: linear-gradient(
-            to right,
-            var(--light-bg) 50%,
-            var(--white) 50%
+        to right,
+        var(--light-bg) 50%,
+        var(--white) 50%
     );
 }
 
@@ -138,7 +138,7 @@
     padding: 2rem;
     height: 100%;
     transition: transform var(--transition-speed) ease,
-    box-shadow var(--transition-speed) ease;
+        box-shadow var(--transition-speed) ease;
     box-shadow: var(--box-shadow-sm);
 }
 
@@ -151,9 +151,9 @@
     width: 80px;
     height: 80px;
     background: linear-gradient(
-            45deg,
-            var(--primary-color),
-            var(--secondary-color)
+        45deg,
+        var(--primary-color),
+        var(--secondary-color)
     );
     border-radius: 50%;
     display: flex;
@@ -277,10 +277,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, 
-        rgba(102, 126, 234, 0.8) 0%, 
+    background: linear-gradient(
+        135deg,
+        rgba(102, 126, 234, 0.8) 0%,
         rgba(118, 75, 162, 0.7) 50%,
-        rgba(240, 147, 251, 0.6) 100%);
+        rgba(240, 147, 251, 0.6) 100%
+    );
     z-index: 1;
 }
 
@@ -325,7 +327,8 @@
 }
 
 @keyframes gradient-shift {
-    0%, 100% {
+    0%,
+    100% {
         filter: hue-rotate(0deg);
     }
     50% {
@@ -491,31 +494,31 @@
         font-size: 0.85rem;
         padding: 0.6rem 1.25rem;
     }
-    
+
     .hero-title {
         margin-bottom: 1.5rem;
     }
-    
+
     .hero-cta-group {
         flex-direction: column;
         gap: 0.75rem;
     }
-    
+
     .btn-hero-primary,
     .btn-hero-secondary {
         width: 100%;
         max-width: 300px;
     }
-    
+
     .hero-stats {
         gap: 1rem;
         padding: 1.5rem 1rem;
     }
-    
+
     .stat-divider {
         height: 30px;
     }
-    
+
     .scroll-indicator {
         bottom: 2rem;
     }
@@ -526,7 +529,7 @@
         flex-direction: column;
         gap: 1.5rem;
     }
-    
+
     .stat-divider {
         width: 60px;
         height: 1px;
@@ -541,7 +544,11 @@
 .section-badge {
     display: inline-block;
     padding: 0.5rem 1.25rem;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    background: linear-gradient(
+        135deg,
+        rgba(102, 126, 234, 0.1),
+        rgba(118, 75, 162, 0.1)
+    );
     border: 1px solid rgba(102, 126, 234, 0.2);
     border-radius: 50px;
     color: var(--primary-color);
@@ -734,7 +741,11 @@
     height: 100%;
     top: 20px;
     right: -20px;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+    background: linear-gradient(
+        135deg,
+        rgba(102, 126, 234, 0.3),
+        rgba(118, 75, 162, 0.3)
+    );
 }
 
 .image-decoration-2 {
@@ -742,7 +753,11 @@
     height: 100%;
     bottom: -20px;
     left: -20px;
-    background: linear-gradient(135deg, rgba(240, 147, 251, 0.2), rgba(245, 87, 108, 0.2));
+    background: linear-gradient(
+        135deg,
+        rgba(240, 147, 251, 0.2),
+        rgba(245, 87, 108, 0.2)
+    );
 }
 
 /* 浮动卡片 */
@@ -778,7 +793,8 @@
 }
 
 @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0px);
     }
     50% {
@@ -791,12 +807,12 @@
     .about-metrics {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .floating-card {
         font-size: 0.85rem;
         padding: 0.75rem 1rem;
     }
-    
+
     .floating-card i {
         font-size: 1.2rem;
     }
@@ -806,27 +822,27 @@
     .about-tags {
         justify-content: center;
     }
-    
+
     .about-metrics {
         grid-template-columns: 1fr;
     }
-    
+
     .about-cta {
         flex-direction: column;
     }
-    
+
     .btn-primary-gradient,
     .btn-outline-modern {
         width: 100%;
         text-align: center;
     }
-    
+
     .floating-card {
         position: static;
         margin: 1rem 0;
         animation: none;
     }
-    
+
     .image-decoration {
         display: none;
     }
@@ -1001,13 +1017,13 @@
     .service-card-modern {
         padding: 2rem 1.5rem;
     }
-    
+
     .service-icon-modern {
         width: 60px;
         height: 60px;
         font-size: 1.75rem;
     }
-    
+
     .service-number {
         font-size: 2.5rem;
     }
@@ -1017,7 +1033,7 @@
     .service-title {
         font-size: 1.3rem;
     }
-    
+
     .service-desc {
         font-size: 0.95rem;
     }
@@ -1192,25 +1208,25 @@
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1rem;
     }
-    
+
     .portfolio-card {
         aspect-ratio: 1/1; /* 移动端使用正方形 */
     }
-    
+
     .portfolio-overlay h5 {
         font-size: 1.1rem;
     }
-    
+
     .portfolio-overlay p {
         font-size: 0.85rem;
     }
-    
+
     .portfolio-link {
         width: 40px;
         height: 40px;
         font-size: 1rem;
     }
-    
+
     .filter-btn {
         padding: 0.5rem 1.2rem;
         font-size: 0.9rem;
@@ -1222,11 +1238,11 @@
         grid-template-columns: 1fr;
         gap: 1rem;
     }
-    
+
     .portfolio-card {
         aspect-ratio: 16/9; /* 小屏使用16:9 */
     }
-    
+
     /* 移动端始终显示标题 */
     .portfolio-overlay {
         opacity: 1;
@@ -1236,12 +1252,12 @@
             transparent 60%
         );
     }
-    
+
     .portfolio-overlay h5,
     .portfolio-overlay p {
         transform: translateY(0);
     }
-    
+
     .portfolio-icons {
         transform: translateY(0);
     }
