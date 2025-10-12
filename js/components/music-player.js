@@ -17,24 +17,24 @@ document.addEventListener("DOMContentLoaded", function () {
     // 歌曲列表
     const songs = [
         {
-            title: "冬忆",
-            src: "../music/冬忆.flac",
-            cover: "../img/music-cover-default.png",
+            title: "冬忆 (Winter Memory)",
+            src: "../music/piano/winter-memory.flac",
+            cover: "../img/misc/music-cover-default.png",
         },
         {
-            title: "天空の城",
-            src: "../music/天空之城.flac",
-            cover: "../img/music-cover-default.png",
+            title: "天空の城 (Castle in the Sky)",
+            src: "../music/classical/castle-in-sky.flac",
+            cover: "../img/misc/music-cover-default.png",
         },
         {
-            title: "彩云追月",
-            src: "../music/彩云追月.ogg",
-            cover: "../img/music-cover-default.png",
+            title: "彩云追月 (Colorful Clouds Chasing Moon)",
+            src: "../music/traditional/colorful-clouds-chasing-moon.ogg",
+            cover: "../img/misc/music-cover-default.png",
         },
         {
-            title: "雨的印记",
-            src: "../music/雨的印记.ogg",
-            cover: "../img/music-cover-default.png",
+            title: "雨的印记 (Kiss the Rain)",
+            src: "../music/piano/kiss-the-rain.ogg",
+            cover: "../img/misc/music-cover-default.png",
         },
     ];
 
