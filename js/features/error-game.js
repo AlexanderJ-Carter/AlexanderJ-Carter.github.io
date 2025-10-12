@@ -66,8 +66,8 @@ function startGame() {
     paddleX = (gameWidth - paddleWidth) / 2; // 初始化球
     ballX = gameWidth / 2;
     ballY = gameHeight / 2;
-    ballSpeedX = 2;
-    ballSpeedY = -2;
+    ballSpeedX = 1.2;
+    ballSpeedY = -1.2;
 
     // 设置球的初始位置
     ball.style.left = ballX - 7.5 + 'px';
@@ -328,8 +328,8 @@ function resetGame() {
     // 重置球和挡板位置
     ballX = gameWidth / 2;
     ballY = gameHeight / 2;
-    ballSpeedX = 2;
-    ballSpeedY = -2;
+    ballSpeedX = 1.2;
+    ballSpeedY = -1.2;
     paddleX = (gameWidth - paddleWidth) / 2;
 
     // 移除现有砖块
