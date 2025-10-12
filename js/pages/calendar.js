@@ -9,6 +9,8 @@ class Calendar {
         this.selectedDate = null;
         this.events = this.loadEvents() || {};
         this.holidays = this.init2025Holidays();
+        this.viewMode = 'month'; // month, week, day
+        this.importantDates = this.loadImportantDates(); // 纪念日
         
         this.init();
     }
@@ -18,6 +20,8 @@ class Calendar {
         this.updateCurrentDateDisplay();
         this.renderCalendar();
         this.updateCountdown();
+        this.updateStatistics();
+        this.renderImportantDates();
         this.startClock();
     }
 
@@ -110,6 +114,14 @@ class Calendar {
             todayBtn.addEventListener('click', () => this.goToToday());
         }
 
+        // 视图切换
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('[data-view-mode]')) {
+                const mode = e.target.dataset.viewMode;
+                this.switchViewMode(mode);
+            }
+        });
+
         // 保存事件
         const saveBtn = document.getElementById('saveEvent');
         if (saveBtn) {
@@ -129,6 +141,24 @@ class Calendar {
                 document.getElementById('eventForm')?.reset();
             });
         }
+
+        // 键盘快捷键
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            switch(e.key) {
+                case 'ArrowLeft':
+                    this.previousMonth();
+                    break;
+                case 'ArrowRight':
+                    this.nextMonth();
+                    break;
+                case 't':
+                case 'T':
+                    this.goToToday();
+                    break;
+            }
+        });
     }
 
     /**
@@ -193,18 +223,47 @@ class Calendar {
 
         calendarDays.innerHTML = '';
 
+        // 添加周数列头
+        const calendarGrid = calendarDays.parentElement;
+        if (calendarGrid && !calendarGrid.classList.contains('with-week-numbers')) {
+            calendarGrid.classList.add('with-week-numbers');
+            
+            // 修改星期行，添加周数标题
+            const weekdaysRow = calendarGrid.querySelector('.calendar-weekdays');
+            if (weekdaysRow && !weekdaysRow.querySelector('.week-number-header')) {
+                const weekHeader = document.createElement('div');
+                weekHeader.className = 'week-number-header';
+                weekHeader.textContent = '周';
+                weekdaysRow.insertBefore(weekHeader, weekdaysRow.firstChild);
+            }
+        }
+
         // 计算需要显示的总天数（6周 = 42天）
         const totalCells = 42;
         const startDate = new Date(firstDay);
         startDate.setDate(startDate.getDate() - firstDayWeekday);
 
-        // 生成42个日期单元格
-        for (let i = 0; i < totalCells; i++) {
-            const currentDate = new Date(startDate);
-            currentDate.setDate(startDate.getDate() + i);
+        // 生成日历（按周分组，每周添加周数）
+        for (let week = 0; week < 6; week++) {
+            // 添加周数标签
+            const weekStartDate = new Date(startDate);
+            weekStartDate.setDate(startDate.getDate() + week * 7);
+            const weekNumber = this.getWeekNumber(weekStartDate);
             
-            const dayElement = this.createDayElement(currentDate, month);
-            calendarDays.appendChild(dayElement);
+            const weekLabel = document.createElement('div');
+            weekLabel.className = 'week-number';
+            weekLabel.textContent = weekNumber;
+            weekLabel.title = `第${weekNumber}周`;
+            calendarDays.appendChild(weekLabel);
+
+            // 添加该周的7天
+            for (let day = 0; day < 7; day++) {
+                const currentDate = new Date(startDate);
+                currentDate.setDate(startDate.getDate() + week * 7 + day);
+                
+                const dayElement = this.createDayElement(currentDate, month);
+                calendarDays.appendChild(dayElement);
+            }
         }
 
         // 更新即将到来的事件列表
@@ -359,6 +418,65 @@ class Calendar {
         this.selectedDate = null;
         this.renderCalendar();
         this.updateCurrentDateDisplay();
+        this.updateStatistics();
+    }
+
+    /**
+     * 跳转到下一个假期
+     */
+    goToNextHoliday() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        // 获取所有法定假日
+        const holidays = Object.entries(this.holidays)
+            .filter(([date, info]) => info.type === 'holiday')
+            .map(([date, info]) => ({
+                date: new Date(date),
+                name: info.name
+            }))
+            .filter(h => h.date >= today)
+            .sort((a, b) => a.date - b.date);
+        
+        if (holidays.length > 0) {
+            const nextHoliday = holidays[0];
+            this.currentDate = new Date(nextHoliday.date);
+            this.renderCalendar();
+            this.showToast(`已跳转到 ${nextHoliday.name}`);
+        } else {
+            this.showToast('没有找到即将到来的假期', 'warning');
+        }
+    }
+
+    /**
+     * 跳转到指定日期
+     */
+    goToDate() {
+        const dateStr = prompt('请输入日期 (格式: YYYY-MM-DD):', 
+            this.currentDate.toISOString().split('T')[0]);
+        
+        if (!dateStr) return;
+        
+        const targetDate = new Date(dateStr);
+        if (isNaN(targetDate.getTime())) {
+            this.showToast('日期格式不正确', 'error');
+            return;
+        }
+        
+        this.currentDate = targetDate;
+        this.renderCalendar();
+        this.updateStatistics();
+        this.showToast(`已跳转到 ${this.formatDateChinese(targetDate)}`);
+    }
+
+    /**
+     * 格式化日期为中文
+     */
+    formatDateChinese(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}年${month}月${day}日`;
     }
 
     /**
@@ -568,6 +686,444 @@ class Calendar {
             toast.style.animation = 'slideOutRight 0.3s ease-out';
             setTimeout(() => toast.remove(), 300);
         }, 3000);
+    }
+
+    /**
+     * 新增功能：周数计算
+     */
+    getWeekNumber(date) {
+        const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+        const dayNum = d.getUTCDay() || 7;
+        d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+        const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+        return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+    }
+
+    /**
+     * 切换视图模式
+     */
+    switchViewMode(mode) {
+        this.viewMode = mode;
+        
+        // 更新按钮状态
+        document.querySelectorAll('[data-view-mode]').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.viewMode === mode);
+        });
+
+        this.renderCalendar();
+    }
+
+    /**
+     * 加载重要纪念日
+     */
+    loadImportantDates() {
+        try {
+            const stored = localStorage.getItem('important_dates');
+            return stored ? JSON.parse(stored) : [
+                { name: '生日', date: '1990-01-01', type: 'birthday' },
+                { name: '纪念日', date: '2020-01-01', type: 'anniversary' }
+            ];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    saveImportantDates() {
+        try {
+            localStorage.setItem('important_dates', JSON.stringify(this.importantDates));
+        } catch (e) {
+            console.error('保存纪念日失败:', e);
+        }
+    }
+
+    /**
+     * 计算两个日期之间的天数
+     */
+    daysBetween(date1, date2) {
+        const oneDay = 24 * 60 * 60 * 1000;
+        return Math.round(Math.abs((date1 - date2) / oneDay));
+    }
+
+    /**
+     * 计算年龄
+     */
+    calculateAge(birthDate) {
+        const today = new Date();
+        const birth = new Date(birthDate);
+        let age = today.getFullYear() - birth.getFullYear();
+        const monthDiff = today.getMonth() - birth.getMonth();
+        
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+        
+        return age;
+    }
+
+    /**
+     * 获取下一个生日
+     */
+    getNextBirthday(birthDate) {
+        const today = new Date();
+        const birth = new Date(birthDate);
+        const thisYearBirthday = new Date(today.getFullYear(), birth.getMonth(), birth.getDate());
+        
+        if (thisYearBirthday < today) {
+            thisYearBirthday.setFullYear(today.getFullYear() + 1);
+        }
+        
+        const daysUntil = this.daysBetween(today, thisYearBirthday);
+        return { date: thisYearBirthday, daysUntil };
+    }
+
+    /**
+     * 更新统计信息
+     */
+    updateStatistics() {
+        const today = new Date();
+        const year = today.getFullYear();
+        
+        // 1. 更新当前星期几
+        const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        const weekdayEl = document.getElementById('currentWeekday');
+        if (weekdayEl) {
+            weekdayEl.textContent = weekdays[today.getDay()];
+        }
+        
+        // 2. 更新当前是第几周
+        const weekNumber = this.getWeekNumber(today);
+        const weekNumEl = document.getElementById('currentWeekNum');
+        if (weekNumEl) {
+            weekNumEl.textContent = `第${weekNumber}周`;
+        }
+        
+        // 3. 更新下个假期倒计时
+        this.updateNextHolidayCountdown();
+        
+        // 4. 更新年度进度
+        const startOfYear = new Date(year, 0, 1);
+        const daysPassed = this.daysBetween(startOfYear, today) + 1;
+        const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+        const totalDays = isLeapYear ? 366 : 365;
+        const yearProgress = ((daysPassed / totalDays) * 100).toFixed(1);
+        
+        const progressEl = document.getElementById('yearProgress');
+        if (progressEl) {
+            progressEl.textContent = `${yearProgress}%`;
+        }
+        
+        // 5. 更新侧边栏倒计时列表
+        this.updateCountdownList();
+    }
+    
+    /**
+     * 更新下个假期倒计时
+     */
+    updateNextHolidayCountdown() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        // 获取所有法定假日
+        const holidays = Object.entries(this.holidays)
+            .filter(([date, info]) => info.type === 'holiday')
+            .map(([date, info]) => ({
+                date: new Date(date),
+                name: info.name,
+                dateStr: date
+            }))
+            .filter(h => h.date >= today)
+            .sort((a, b) => a.date - b.date);
+        
+        const countdownEl = document.getElementById('nextHolidayCountdown');
+        if (countdownEl && holidays.length > 0) {
+            const nextHoliday = holidays[0];
+            const days = this.daysBetween(today, nextHoliday.date);
+            
+            if (days === 0) {
+                countdownEl.textContent = '今天！';
+            } else {
+                countdownEl.textContent = `${days}天`;
+            }
+        } else if (countdownEl) {
+            countdownEl.textContent = '无';
+        }
+    }
+    
+    /**
+     * 更新侧边栏倒计时列表
+     */
+    updateCountdownList() {
+        const listEl = document.getElementById('countdownList');
+        if (!listEl) return;
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        // 获取即将到来的假期和节日
+        const upcomingDates = Object.entries(this.holidays)
+            .map(([date, info]) => ({
+                date: new Date(date),
+                name: info.name,
+                type: info.type,
+                dateStr: date
+            }))
+            .filter(item => item.date >= today)
+            .sort((a, b) => a.date - b.date)
+            .slice(0, 5); // 只显示最近的5个
+        
+        if (upcomingDates.length === 0) {
+            listEl.innerHTML = '<div class="text-muted">暂无即将到来的假期</div>';
+            return;
+        }
+        
+        listEl.innerHTML = upcomingDates.map(item => {
+            const days = this.daysBetween(today, item.date);
+            const typeClass = item.type === 'holiday' ? 'holiday' : 
+                             item.type === 'workday' ? '' : 'festival';
+            const daysClass = days <= 3 ? 'urgent' : days <= 7 ? 'soon' : '';
+            
+            return `
+                <div class="countdown-item ${typeClass}">
+                    <div class="countdown-name">${item.name}</div>
+                    <div class="countdown-date">${this.formatDateChinese(item.date)}</div>
+                    <div class="countdown-days ${daysClass}">
+                        ${days === 0 ? '今天' : `${days}天后`}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    /**
+     * 插入统计面板
+     */
+    insertStatisticsPanel(stats) {
+        let panel = document.getElementById('calendar-statistics');
+        
+        if (!panel) {
+            const controlSection = document.querySelector('.calendar-controls .container .row');
+            if (controlSection) {
+                const col = document.createElement('div');
+                col.className = 'col-12 mt-3';
+                col.innerHTML = `
+                    <div id="calendar-statistics" class="statistics-panel neumorphism" data-aos="fade-up">
+                        <div class="row g-3">
+                            <div class="col-md-3 col-6">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-calendar-week"></i></div>
+                                    <div class="stat-value" id="stat-week">第${stats.weekNumber}周</div>
+                                    <div class="stat-label">${stats.year}年</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-hourglass-start"></i></div>
+                                    <div class="stat-value" id="stat-passed">${stats.daysPassed}天</div>
+                                    <div class="stat-label">已过去</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-hourglass-end"></i></div>
+                                    <div class="stat-value" id="stat-remaining">${stats.daysRemaining}天</div>
+                                    <div class="stat-label">还剩余</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="stat-card">
+                                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                                    <div class="stat-value" id="stat-progress">${stats.yearProgress}%</div>
+                                    <div class="stat-label">年度进度</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="year-progress-bar mt-3">
+                            <div class="progress-fill" style="width: ${stats.yearProgress}%"></div>
+                        </div>
+                    </div>
+                `;
+                controlSection.appendChild(col);
+            }
+        } else {
+            // 更新现有面板
+            document.getElementById('stat-week').textContent = `第${stats.weekNumber}周`;
+            document.getElementById('stat-passed').textContent = `${stats.daysPassed}天`;
+            document.getElementById('stat-remaining').textContent = `${stats.daysRemaining}天`;
+            document.getElementById('stat-progress').textContent = `${stats.yearProgress}%`;
+            document.querySelector('.progress-fill').style.width = `${stats.yearProgress}%`;
+        }
+    }
+
+    /**
+     * 渲染重要日期倒计时
+     */
+    renderImportantDates() {
+        const container = document.querySelector('.calendar-main .container .row');
+        if (!container) return;
+
+        let sidebar = document.getElementById('important-dates-sidebar');
+        
+        if (!sidebar) {
+            const col = document.createElement('div');
+            col.className = 'col-lg-4 mt-4 mt-lg-0';
+            col.innerHTML = `
+                <div id="important-dates-sidebar" class="important-dates neumorphism" data-aos="fade-left">
+                    <div class="sidebar-header">
+                        <h3><i class="fas fa-heart"></i> 重要日期</h3>
+                        <button class="btn-add-date" onclick="calendar.addImportantDate()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="important-dates-list" class="dates-list"></div>
+                    <div class="sidebar-header mt-4">
+                        <h3><i class="fas fa-calendar-check"></i> 假期倒计时</h3>
+                    </div>
+                    <div id="holiday-countdown-list" class="dates-list"></div>
+                </div>
+            `;
+            
+            // 将日历容器改为col-lg-8
+            const calendarCol = container.querySelector('.col-12');
+            if (calendarCol) {
+                calendarCol.className = 'col-lg-8';
+                container.appendChild(col);
+            }
+        }
+
+        this.updateImportantDatesList();
+        this.updateHolidayCountdown();
+    }
+
+    /**
+     * 更新重要日期列表
+     */
+    updateImportantDatesList() {
+        const list = document.getElementById('important-dates-list');
+        if (!list) return;
+
+        const today = new Date();
+        
+        if (this.importantDates.length === 0) {
+            list.innerHTML = '<p class="empty-message">暂无重要日期</p>';
+            return;
+        }
+
+        list.innerHTML = this.importantDates.map(item => {
+            const date = new Date(item.date);
+            const age = item.type === 'birthday' ? this.calculateAge(item.date) : null;
+            const next = item.type === 'birthday' ? this.getNextBirthday(item.date) : null;
+            const daysSince = this.daysBetween(date, today);
+            
+            let subtitle = '';
+            if (item.type === 'birthday' && age !== null) {
+                subtitle = `${age}岁 · ${next.daysUntil}天后生日`;
+            } else if (item.type === 'anniversary') {
+                subtitle = `已经${daysSince}天`;
+            }
+            
+            return `
+                <div class="date-card">
+                    <div class="date-icon ${item.type}">
+                        <i class="fas fa-${item.type === 'birthday' ? 'birthday-cake' : 'heart'}"></i>
+                    </div>
+                    <div class="date-info">
+                        <div class="date-name">${item.name}</div>
+                        <div class="date-details">${subtitle}</div>
+                    </div>
+                    <button class="btn-delete-date" onclick="calendar.deleteImportantDate('${item.date}')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+        }).join('');
+    }
+
+    /**
+     * 更新假期倒计时
+     */
+    updateHolidayCountdown() {
+        const list = document.getElementById('holiday-countdown-list');
+        if (!list) return;
+
+        const today = new Date();
+        const upcoming = [];
+
+        Object.entries(this.holidays).forEach(([dateStr, info]) => {
+            if (info.type === 'holiday') {
+                const holidayDate = new Date(dateStr);
+                if (holidayDate >= today) {
+                    const daysUntil = this.daysBetween(today, holidayDate);
+                    
+                    // 避免重复显示同一个假期
+                    const existing = upcoming.find(h => h.name === info.name);
+                    if (!existing || daysUntil < existing.daysUntil) {
+                        if (existing) {
+                            upcoming.splice(upcoming.indexOf(existing), 1);
+                        }
+                        upcoming.push({ 
+                            name: info.name, 
+                            date: dateStr, 
+                            daysUntil 
+                        });
+                    }
+                }
+            }
+        });
+
+        upcoming.sort((a, b) => a.daysUntil - b.daysUntil);
+        const top5 = upcoming.slice(0, 5);
+
+        if (top5.length === 0) {
+            list.innerHTML = '<p class="empty-message">今年已无假期</p>';
+            return;
+        }
+
+        list.innerHTML = top5.map(holiday => `
+            <div class="date-card holiday-card">
+                <div class="date-icon holiday">
+                    <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <div class="date-info">
+                    <div class="date-name">${holiday.name}</div>
+                    <div class="date-details">
+                        ${holiday.daysUntil === 0 ? '今天！' : `还有${holiday.daysUntil}天`}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    /**
+     * 添加重要日期
+     */
+    addImportantDate() {
+        const name = prompt('请输入日期名称（如：生日、纪念日）：');
+        if (!name) return;
+
+        const date = prompt('请输入日期（格式：YYYY-MM-DD）：');
+        if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+            alert('日期格式错误！');
+            return;
+        }
+
+        const type = confirm('这是生日吗？\n确定 = 生日\n取消 = 纪念日') ? 'birthday' : 'anniversary';
+
+        this.importantDates.push({ name, date, type });
+        this.saveImportantDates();
+        this.updateImportantDatesList();
+        this.showToast('已添加重要日期', 'success');
+    }
+
+    /**
+     * 删除重要日期
+     */
+    deleteImportantDate(date) {
+        if (confirm('确定要删除这个重要日期吗？')) {
+            this.importantDates = this.importantDates.filter(item => item.date !== date);
+            this.saveImportantDates();
+            this.updateImportantDatesList();
+            this.showToast('已删除', 'info');
+        }
     }
 }
 

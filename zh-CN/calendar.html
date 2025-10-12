@@ -205,11 +205,61 @@
         <!-- 日历主体 -->
         <section class="calendar-main" id="calendar-main">
             <div class="container">
+                <!-- 统计面板 -->
+                <div class="row mb-4" data-aos="fade-up">
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-primary">
+                                <i class="fas fa-calendar-day"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">今天是</div>
+                                <div class="stat-value" id="currentWeekday">加载中...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-pink">
+                                <i class="fas fa-calendar-week"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">第几周</div>
+                                <div class="stat-value" id="currentWeekNum">加载中...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-blue">
+                                <i class="fas fa-umbrella-beach"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">距离假期</div>
+                                <div class="stat-value" id="nextHolidayCountdown">加载中...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon stat-icon-sunset">
+                                <i class="fas fa-hourglass-half"></i>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">本年进度</div>
+                                <div class="stat-value" id="yearProgress">加载中...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
-                    <div class="col-12">
+                    <!-- 日历主体 -->
+                    <div class="col-lg-9 mb-4">
                         <div class="calendar-container neumorphism" data-aos="fade-up" id="calendarContainer">
                             <div class="calendar-grid">
                                 <div class="calendar-weekdays">
+                                    <div class="weekday">周</div>
                                     <div class="weekday">日</div>
                                     <div class="weekday">一</div>
                                     <div class="weekday">二</div>
@@ -221,6 +271,37 @@
                                 <div class="calendar-days" id="calendarDays">
                                     <!-- 动态生成日期 -->
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 侧边栏 -->
+                    <div class="col-lg-3">
+                        <!-- 重要日期倒计时 -->
+                        <div class="sidebar-card neumorphism mb-4" data-aos="fade-left">
+                            <h5 class="sidebar-title">
+                                <i class="fas fa-clock"></i> 重要日期倒计时
+                            </h5>
+                            <div id="countdownList" class="countdown-list">
+                                <!-- 动态生成 -->
+                            </div>
+                        </div>
+
+                        <!-- 快速跳转 -->
+                        <div class="sidebar-card neumorphism" data-aos="fade-left" data-aos-delay="100">
+                            <h5 class="sidebar-title">
+                                <i class="fas fa-bolt"></i> 快速跳转
+                            </h5>
+                            <div class="quick-nav">
+                                <button class="quick-nav-btn" onclick="calendar.goToToday()">
+                                    <i class="fas fa-calendar-day"></i> 今天
+                                </button>
+                                <button class="quick-nav-btn" onclick="calendar.goToNextHoliday()">
+                                    <i class="fas fa-umbrella-beach"></i> 下个假期
+                                </button>
+                                <button class="quick-nav-btn" onclick="calendar.goToDate()">
+                                    <i class="fas fa-calendar-alt"></i> 指定日期
+                                </button>
                             </div>
                         </div>
                     </div>

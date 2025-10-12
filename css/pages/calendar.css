@@ -344,6 +344,20 @@
     border-bottom: 2px solid rgba(102, 126, 234, 0.1);
 }
 
+/* 带周数的星期标题 */
+.with-week-numbers .calendar-weekdays {
+    grid-template-columns: 40px repeat(7, 1fr);
+}
+
+.week-number-header {
+    text-align: center;
+    font-weight: 700;
+    color: var(--calendar-secondary);
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
 .weekday {
     text-align: center;
     font-weight: 700;
@@ -359,6 +373,29 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
+}
+
+/* 带周数的日期网格 */
+.with-week-numbers .calendar-days {
+    grid-template-columns: 40px repeat(7, 1fr);
+}
+
+/* 周数标签 */
+.week-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--calendar-secondary);
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.week-number:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
 }
 
 .day {
@@ -699,6 +736,17 @@
         gap: 5px;
     }
     
+    /* 移动端周数列变窄 */
+    .with-week-numbers .calendar-weekdays,
+    .with-week-numbers .calendar-days {
+        grid-template-columns: 30px repeat(7, 1fr);
+    }
+    
+    .week-number-header,
+    .week-number {
+        font-size: 0.75rem;
+    }
+    
     .day {
         padding: 0.5rem 0.25rem;
     }
@@ -709,6 +757,21 @@
     
     .day-lunar {
         font-size: 0.65rem;
+    }
+    
+    /* 统计面板响应式 */
+    .stat-value {
+        font-size: 1.4rem;
+    }
+    
+    .stat-icon {
+        font-size: 1.5rem;
+    }
+    
+    /* 重要日期侧边栏响应式 */
+    .important-dates {
+        position: static;
+        margin-top: 2rem;
     }
     
     .weekday {
@@ -732,6 +795,26 @@
     
     .calendar-hero {
         padding: 2rem 0;
+    }
+    
+    /* 小屏幕隐藏周数列 */
+    .with-week-numbers .calendar-weekdays,
+    .with-week-numbers .calendar-days {
+        grid-template-columns: repeat(7, 1fr);
+    }
+    
+    .week-number-header,
+    .week-number {
+        display: none;
+    }
+    
+    /* 统计卡片2列布局 */
+    .statistics-panel .row {
+        --bs-gutter-x: 0.5rem;
+    }
+    
+    .stat-card {
+        padding: 1rem;
     }
     
     .weekday {
@@ -781,11 +864,267 @@
    打印样式
    ======================================== */
 
+/* ========================================
+   统计面板样式
+   ======================================== */
+
+.statistics-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    transition: left 0.5s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.stat-card:hover::before {
+    left: 100%;
+}
+
+.stat-icon {
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--calendar-primary) 0%, var(--calendar-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0.5rem 0;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.year-progress-bar {
+    height: 10px;
+    background: #ecf0f1;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--calendar-primary), var(--calendar-secondary));
+    border-radius: 10px;
+    transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* ========================================
+   重要日期侧边栏样式
+   ======================================== */
+
+.important-dates {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(135deg, var(--calendar-primary) 0%, var(--calendar-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.sidebar-header h3 i {
+    margin-right: 0.5rem;
+    background: linear-gradient(135deg, var(--calendar-primary) 0%, var(--calendar-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.btn-add-date {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, var(--calendar-primary) 0%, var(--calendar-secondary) 100%);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-add-date:hover {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.dates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.empty-message {
+    text-align: center;
+    color: #95a5a6;
+    padding: 2rem 0;
+    font-style: italic;
+}
+
+.date-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.date-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.date-card.holiday-card {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+}
+
+.date-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.date-icon.birthday {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+}
+
+.date-icon.anniversary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.date-icon.holiday {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.date-info {
+    flex: 1;
+}
+
+.date-name {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.date-details {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.btn-delete-date {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.date-card:hover .btn-delete-date {
+    opacity: 1;
+}
+
+.btn-delete-date:hover {
+    background: #e74c3c;
+    color: white;
+    transform: scale(1.1);
+}
+
 @media print {
     .calendar-hero,
     .calendar-controls,
     .navbar,
-    .page-loader {
+    .page-loader,
+    .important-dates,
+    .statistics-panel {
         display: none !important;
     }
     
@@ -845,4 +1184,204 @@
 .neumorphism-feature i {
     color: var(--calendar-primary);
     font-size: 1.2rem;
+}
+
+/* ========================================
+   统计面板
+   ======================================== */
+
+.stat-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: var(--transition-medium);
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.stat-icon-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.stat-icon-pink {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.stat-icon-blue {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.stat-icon-sunset {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--calendar-text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--calendar-text-primary);
+    line-height: 1.2;
+}
+
+/* ========================================
+   侧边栏
+   ======================================== */
+
+.sidebar-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+}
+
+.sidebar-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--calendar-text-primary);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar-title i {
+    color: var(--calendar-primary);
+}
+
+/* 倒计时列表 */
+.countdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.countdown-item {
+    padding: 1rem;
+    background: var(--calendar-light-bg);
+    border-radius: 10px;
+    border-left: 4px solid var(--calendar-primary);
+    transition: var(--transition-fast);
+}
+
+.countdown-item:hover {
+    transform: translateX(3px);
+    box-shadow: var(--shadow-soft);
+}
+
+.countdown-item.holiday {
+    border-left-color: var(--calendar-danger);
+}
+
+.countdown-item.festival {
+    border-left-color: var(--calendar-info);
+}
+
+.countdown-name {
+    font-weight: 600;
+    color: var(--calendar-text-primary);
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+}
+
+.countdown-date {
+    font-size: 0.8rem;
+    color: var(--calendar-text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.countdown-days {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--calendar-primary);
+}
+
+.countdown-days.urgent {
+    color: var(--calendar-danger);
+}
+
+.countdown-days.soon {
+    color: var(--calendar-warning);
+}
+
+/* 快速导航 */
+.quick-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.quick-nav-btn {
+    background: var(--calendar-gradient-soft);
+    border: none;
+    border-radius: 10px;
+    padding: 0.875rem 1rem;
+    font-weight: 600;
+    color: var(--calendar-text-primary);
+    cursor: pointer;
+    transition: var(--transition-medium);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.quick-nav-btn:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-soft);
+    background: var(--calendar-gradient-primary);
+    color: white;
+}
+
+.quick-nav-btn i {
+    font-size: 1.1rem;
+}
+
+/* ========================================
+   周数列增强样式
+   ======================================== */
+
+.week-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--calendar-primary);
+    font-size: 0.9rem;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 8px;
+    transition: var(--transition-fast);
+}
+
+.week-number:hover {
+    background: rgba(102, 126, 234, 0.15);
+    transform: scale(1.05);
 }
