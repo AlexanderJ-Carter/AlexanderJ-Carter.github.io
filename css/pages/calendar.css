@@ -426,7 +426,12 @@
     box-shadow: none;
 }
 
-/* 节假日 */
+/* 节假日（法定假日） */
+.day.holiday {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+    border-color: var(--calendar-danger);
+}
+
 .day.holiday .day-lunar {
     color: var(--calendar-danger);
     font-weight: 700;
@@ -445,16 +450,65 @@
     font-weight: 600;
 }
 
-/* 有事件的日期 */
+/* 调休工作日 */
+.day.workday {
+    background: linear-gradient(135deg, #fff9e6 0%, #ffedcc 100%);
+    border-color: var(--calendar-warning);
+}
+
+.day.workday .day-lunar {
+    color: var(--calendar-warning);
+    font-weight: 700;
+}
+
+.day.workday::after {
+    content: '班';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: var(--calendar-warning);
+    color: white;
+    font-size: 0.65rem;
+    padding: 2px 5px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+/* 纪念日/节日（非法定假日） */
+.day.festival .day-lunar {
+    color: var(--calendar-info);
+    font-weight: 600;
+}
+
+.day.festival {
+    border-color: rgba(33, 150, 243, 0.3);
+}
+
+/* 有用户事件的日期 */
 .day.has-event::before {
     content: '';
     position: absolute;
     bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 6px;
     height: 6px;
-    background: var(--calendar-warning);
+    background: var(--calendar-success);
     border-radius: 50%;
-    box-shadow: 0 0 8px rgba(255, 152, 0, 0.6);
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}
+
+/* 今天且是节假日 */
+.day.today.holiday,
+.day.today.workday,
+.day.today.festival {
+    background: var(--calendar-gradient-primary);
+}
+
+.day.today.holiday .day-lunar,
+.day.today.workday .day-lunar,
+.day.today.festival .day-lunar {
+    color: white;
 }
 
 /* ========================================
