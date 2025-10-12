@@ -8,9 +8,12 @@ class Calendar {
         this.currentDate = new Date();
         this.selectedDate = null;
         this.events = this.loadEvents() || {};
-        this.holidays = this.init2025Holidays();
+        this.holidays = {}; // 将在initHolidays中填充
         this.viewMode = 'month'; // month, week, day
         this.importantDates = this.loadImportantDates(); // 纪念日
+        
+        // 初始化2025-2030年的节假日数据
+        this.initHolidays();
         
         this.init();
     }
@@ -26,73 +29,162 @@ class Calendar {
     }
 
     /**
-     * 初始化2025年完整节假日数据（国务院标准）
+     * 初始化多年节假日数据（2025-2030）
+     * 包含固定节日和农历节日
      */
-    init2025Holidays() {
-        return {
-            // 元旦：1月1日放假，与周末连休（共3天）
-            '2025-01-01': { name: '元旦', type: 'holiday' },
+    initHolidays() {
+        const currentYear = new Date().getFullYear();
+        const years = [];
+        
+        // 生成当前年份前后各5年的数据
+        for (let i = -2; i <= 5; i++) {
+            years.push(currentYear + i);
+        }
+        
+        years.forEach(year => {
+            // 添加固定阳历节日
+            this.addFixedHolidays(year);
             
-            // 春节：1月28日至2月4日放假调休，共8天
-            '2025-01-28': { name: '除夕', type: 'holiday' },
-            '2025-01-29': { name: '春节', type: 'holiday' },
-            '2025-01-30': { name: '春节', type: 'holiday' },
-            '2025-01-31': { name: '春节', type: 'holiday' },
-            '2025-02-01': { name: '春节', type: 'holiday' },
-            '2025-02-02': { name: '春节', type: 'holiday' },
-            '2025-02-03': { name: '春节', type: 'holiday' },
-            '2025-02-04': { name: '春节', type: 'holiday' },
+            // 添加固定纪念日
+            this.addFestivals(year);
             
-            // 清明节：4月4日至6日放假调休，共3天
-            '2025-04-04': { name: '清明节', type: 'holiday' },
-            '2025-04-05': { name: '清明节', type: 'holiday' },
-            '2025-04-06': { name: '清明节', type: 'holiday' },
-            
-            // 劳动节：5月1日至5日放假调休，共5天
-            '2025-05-01': { name: '劳动节', type: 'holiday' },
-            '2025-05-02': { name: '劳动节', type: 'holiday' },
-            '2025-05-03': { name: '劳动节', type: 'holiday' },
-            '2025-05-04': { name: '劳动节', type: 'holiday' },
-            '2025-05-05': { name: '劳动节', type: 'holiday' },
-            
-            // 端午节：5月31日至6月2日放假调休，共3天
-            '2025-05-31': { name: '端午节', type: 'holiday' },
-            '2025-06-01': { name: '端午节', type: 'holiday' },
-            '2025-06-02': { name: '端午节', type: 'holiday' },
-            
-            // 中秋节：10月6日放假，与国庆节连休
-            '2025-10-06': { name: '中秋节', type: 'holiday' },
-            
-            // 国庆节：10月1日至7日放假调休，共7天
-            '2025-10-01': { name: '国庆节', type: 'holiday' },
-            '2025-10-02': { name: '国庆节', type: 'holiday' },
-            '2025-10-03': { name: '国庆节', type: 'holiday' },
-            '2025-10-04': { name: '国庆节', type: 'holiday' },
-            '2025-10-05': { name: '国庆节', type: 'holiday' },
-            '2025-10-07': { name: '国庆节', type: 'holiday' },
-            
-            // 调休工作日
-            '2025-01-26': { name: '调休', type: 'workday' },
-            '2025-02-08': { name: '调休', type: 'workday' },
-            '2025-04-27': { name: '调休', type: 'workday' },
-            '2025-09-28': { name: '调休', type: 'workday' },
-            '2025-10-11': { name: '调休', type: 'workday' },
-            
-            // 其他纪念日（非法定假日）
-            '2025-02-14': { name: '情人节', type: 'festival' },
-            '2025-03-08': { name: '妇女节', type: 'festival' },
-            '2025-03-12': { name: '植树节', type: 'festival' },
-            '2025-04-01': { name: '愚人节', type: 'festival' },
-            '2025-05-04': { name: '青年节', type: 'festival' },
-            '2025-06-01': { name: '儿童节', type: 'festival' },
-            '2025-07-01': { name: '建党节', type: 'festival' },
-            '2025-08-01': { name: '建军节', type: 'festival' },
-            '2025-09-10': { name: '教师节', type: 'festival' },
-            '2025-10-01': { name: '国庆节', type: 'holiday' },
-            '2025-11-11': { name: '双十一', type: 'festival' },
-            '2025-12-24': { name: '平安夜', type: 'festival' },
-            '2025-12-25': { name: '圣诞节', type: 'festival' },
+            // 添加农历节日（春节、清明、端午、中秋）
+            this.addLunarHolidays(year);
+        });
+    }
+
+    /**
+     * 添加固定阳历法定节假日
+     */
+    addFixedHolidays(year) {
+        // 元旦：1月1日
+        this.holidays[`${year}-01-01`] = { name: '元旦', type: 'holiday' };
+        
+        // 劳动节：5月1日
+        this.holidays[`${year}-05-01`] = { name: '劳动节', type: 'holiday' };
+        
+        // 国庆节：10月1日-7日
+        for (let day = 1; day <= 7; day++) {
+            const dateStr = `${year}-10-${String(day).padStart(2, '0')}`;
+            this.holidays[dateStr] = { name: '国庆节', type: 'holiday' };
+        }
+        
+        // 添加已知的特定年份调休和假期安排
+        this.addYearSpecificHolidays(year);
+    }
+
+    /**
+     * 添加特定年份的详细假期安排（根据国务院公告）
+     */
+    addYearSpecificHolidays(year) {
+        const specificHolidays = {
+            2025: {
+                holidays: {
+                    '01-01': '元旦',
+                    '01-28': '除夕', '01-29': '春节', '01-30': '春节', '01-31': '春节',
+                    '02-01': '春节', '02-02': '春节', '02-03': '春节', '02-04': '春节',
+                    '04-04': '清明节', '04-05': '清明节', '04-06': '清明节',
+                    '05-01': '劳动节', '05-02': '劳动节', '05-03': '劳动节', 
+                    '05-04': '劳动节', '05-05': '劳动节',
+                    '05-31': '端午节', '06-01': '端午节', '06-02': '端午节',
+                    '10-01': '国庆节', '10-02': '国庆节', '10-03': '国庆节',
+                    '10-04': '国庆节', '10-05': '国庆节', '10-06': '中秋节', '10-07': '国庆节'
+                },
+                workdays: ['01-26', '02-08', '04-27', '09-28', '10-11']
+            },
+            // 2026年数据（预估，需根据国务院公告更新）
+            2026: {
+                holidays: {
+                    '01-01': '元旦', '01-02': '元旦', '01-03': '元旦',
+                    '02-16': '除夕', '02-17': '春节', '02-18': '春节', '02-19': '春节',
+                    '02-20': '春节', '02-21': '春节', '02-22': '春节', '02-23': '春节',
+                    '04-04': '清明节', '04-05': '清明节', '04-06': '清明节',
+                    '05-01': '劳动节', '05-02': '劳动节', '05-03': '劳动节',
+                    '06-19': '端午节', '06-20': '端午节', '06-21': '端午节',
+                    '10-01': '国庆节', '10-02': '国庆节', '10-03': '国庆节',
+                    '10-04': '中秋节', '10-05': '国庆节', '10-06': '国庆节', '10-07': '国庆节'
+                },
+                workdays: [] // 待国务院公告
+            },
+            // 2027年数据（预估）
+            2027: {
+                holidays: {
+                    '01-01': '元旦', '01-02': '元旦', '01-03': '元旦',
+                    '02-06': '除夕', '02-07': '春节', '02-08': '春节', '02-09': '春节',
+                    '02-10': '春节', '02-11': '春节', '02-12': '春节', '02-13': '春节',
+                    '04-04': '清明节', '04-05': '清明节', '04-06': '清明节',
+                    '05-01': '劳动节', '05-02': '劳动节', '05-03': '劳动节',
+                    '06-09': '端午节', '06-10': '端午节', '06-11': '端午节',
+                    '09-24': '中秋节', '09-25': '中秋节', '09-26': '中秋节',
+                    '10-01': '国庆节', '10-02': '国庆节', '10-03': '国庆节',
+                    '10-04': '国庆节', '10-05': '国庆节', '10-06': '国庆节', '10-07': '国庆节'
+                },
+                workdays: []
+            }
         };
+
+        if (specificHolidays[year]) {
+            const yearData = specificHolidays[year];
+            
+            // 添加假期
+            Object.entries(yearData.holidays).forEach(([dateStr, name]) => {
+                this.holidays[`${year}-${dateStr}`] = { name, type: 'holiday' };
+            });
+            
+            // 添加调休工作日
+            yearData.workdays.forEach(dateStr => {
+                this.holidays[`${year}-${dateStr}`] = { name: '调休', type: 'workday' };
+            });
+        }
+    }
+
+    /**
+     * 添加固定纪念日
+     */
+    addFestivals(year) {
+        const festivals = {
+            '02-14': '情人节',
+            '03-08': '妇女节',
+            '03-12': '植树节',
+            '04-01': '愚人节',
+            '05-04': '青年节',
+            '06-01': '儿童节',
+            '07-01': '建党节',
+            '08-01': '建军节',
+            '09-10': '教师节',
+            '11-11': '双十一',
+            '12-24': '平安夜',
+            '12-25': '圣诞节'
+        };
+
+        Object.entries(festivals).forEach(([dateStr, name]) => {
+            const fullDate = `${year}-${dateStr}`;
+            // 不覆盖已存在的法定假日
+            if (!this.holidays[fullDate] || this.holidays[fullDate].type !== 'holiday') {
+                this.holidays[fullDate] = { name, type: 'festival' };
+            }
+        });
+    }
+
+    /**
+     * 添加农历节日（使用简化算法，实际应用需要精确的农历库）
+     */
+    addLunarHolidays(year) {
+        // 这里使用预设数据，实际生产环境应使用农历计算库
+        // 农历春节在阳历的日期（农历正月初一）
+        const lunarNewYear = {
+            2023: '01-22',
+            2024: '02-10',
+            2025: '01-29',
+            2026: '02-17',
+            2027: '02-07',
+            2028: '01-26',
+            2029: '02-13',
+            2030: '02-03'
+        };
+
+        // 如果有该年的春节数据，可以标注（已在具体假期中处理）
+        // 这里主要是为了未来扩展
     }
 
     /**
@@ -206,10 +298,17 @@ class Calendar {
         // 更新月份标题
         const currentMonthEl = document.getElementById('currentMonth');
         if (currentMonthEl) {
-            currentMonthEl.textContent = this.currentDate.toLocaleDateString('zh-CN', {
+            let monthText = this.currentDate.toLocaleDateString('zh-CN', {
                 year: 'numeric',
                 month: 'long',
             });
+            
+            // 如果是预估数据年份，添加标记
+            if (year > 2025) {
+                monthText += ' <span style="font-size: 0.7em; color: #f59e0b;">*预估</span>';
+            }
+            
+            currentMonthEl.innerHTML = monthText;
         }
 
         // 获取当前月的第一天和最后一天
@@ -626,9 +725,78 @@ class Calendar {
     /**
      * 导出日历
      */
-    exportCalendar() {
-        // 导出为图片或PDF
-        this.showToast('导出功能开发中', 'info');
+    /**
+     * 导出日历为图片
+     */
+    async exportCalendar() {
+        try {
+            // 检查是否加载了html2canvas
+            if (typeof html2canvas === 'undefined') {
+                // 动态加载html2canvas
+                await this.loadHtml2Canvas();
+            }
+
+            this.showToast('正在生成图片...', 'info');
+            
+            // 获取日历容器
+            const calendarElement = document.getElementById('calendarContainer');
+            if (!calendarElement) {
+                this.showToast('未找到日历元素', 'error');
+                return;
+            }
+
+            // 临时隐藏按钮
+            const buttons = calendarElement.querySelectorAll('.calendar-controls button, .calendar-actions button');
+            buttons.forEach(btn => btn.style.opacity = '0');
+
+            // 使用html2canvas截图
+            const canvas = await html2canvas(calendarElement, {
+                backgroundColor: '#f8f9fa',
+                scale: 2, // 提高清晰度
+                logging: false,
+                useCORS: true
+            });
+
+            // 恢复按钮
+            buttons.forEach(btn => btn.style.opacity = '1');
+
+            // 转换为图片并下载
+            canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                const date = new Date();
+                const filename = `日历_${date.getFullYear()}年${date.getMonth() + 1}月.png`;
+                
+                link.href = url;
+                link.download = filename;
+                link.click();
+                
+                URL.revokeObjectURL(url);
+                this.showToast('导出成功！', 'success');
+            });
+
+        } catch (error) {
+            console.error('导出失败:', error);
+            this.showToast('导出失败，请稍后重试', 'error');
+        }
+    }
+
+    /**
+     * 动态加载html2canvas库
+     */
+    loadHtml2Canvas() {
+        return new Promise((resolve, reject) => {
+            if (typeof html2canvas !== 'undefined') {
+                resolve();
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error('Failed to load html2canvas'));
+            document.head.appendChild(script);
+        });
     }
 
     /**

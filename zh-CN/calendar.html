@@ -196,6 +196,17 @@
                                     </button>
                                 </div>
                             </div>
+                            <!-- 节假日说明 -->
+                            <div class="holiday-info-alert mt-3 mb-0" role="alert">
+                                <i class="fas fa-info-circle"></i> 
+                                <strong>节假日说明：</strong>
+                                2025年数据来自国务院公告，2026-2027年为预估数据，具体以国务院最新公告为准。
+                                <span class="badge-group">
+                                    <span class="badge badge-holiday">休</span> 法定假日
+                                    <span class="badge badge-workday">班</span> 调休工作日
+                                    <span class="badge badge-festival">●</span> 纪念日
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -208,46 +219,66 @@
                 <!-- 统计面板 -->
                 <div class="row mb-4" data-aos="fade-up">
                     <div class="col-md-3 col-6 mb-3">
-                        <div class="stat-card">
-                            <div class="stat-icon stat-icon-primary">
+                        <div class="stat-card stat-card-gradient-1">
+                            <div class="stat-card-bg">
                                 <i class="fas fa-calendar-day"></i>
                             </div>
-                            <div class="stat-info">
-                                <div class="stat-label">今天是</div>
-                                <div class="stat-value" id="currentWeekday">加载中...</div>
+                            <div class="stat-content">
+                                <div class="stat-icon-modern">
+                                    <i class="fas fa-calendar-day"></i>
+                                </div>
+                                <div class="stat-info-modern">
+                                    <div class="stat-label-modern">今天是</div>
+                                    <div class="stat-value-modern" id="currentWeekday">加载中...</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-3">
-                        <div class="stat-card">
-                            <div class="stat-icon stat-icon-pink">
+                        <div class="stat-card stat-card-gradient-2">
+                            <div class="stat-card-bg">
                                 <i class="fas fa-calendar-week"></i>
                             </div>
-                            <div class="stat-info">
-                                <div class="stat-label">第几周</div>
-                                <div class="stat-value" id="currentWeekNum">加载中...</div>
+                            <div class="stat-content">
+                                <div class="stat-icon-modern">
+                                    <i class="fas fa-calendar-week"></i>
+                                </div>
+                                <div class="stat-info-modern">
+                                    <div class="stat-label-modern">本年第</div>
+                                    <div class="stat-value-modern" id="currentWeekNum">加载中...</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-3">
-                        <div class="stat-card">
-                            <div class="stat-icon stat-icon-blue">
+                        <div class="stat-card stat-card-gradient-3">
+                            <div class="stat-card-bg">
                                 <i class="fas fa-umbrella-beach"></i>
                             </div>
-                            <div class="stat-info">
-                                <div class="stat-label">距离假期</div>
-                                <div class="stat-value" id="nextHolidayCountdown">加载中...</div>
+                            <div class="stat-content">
+                                <div class="stat-icon-modern">
+                                    <i class="fas fa-umbrella-beach"></i>
+                                </div>
+                                <div class="stat-info-modern">
+                                    <div class="stat-label-modern">距离假期</div>
+                                    <div class="stat-value-modern" id="nextHolidayCountdown">加载中...</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-3">
-                        <div class="stat-card">
-                            <div class="stat-icon stat-icon-sunset">
-                                <i class="fas fa-hourglass-half"></i>
+                        <div class="stat-card stat-card-gradient-4">
+                            <div class="stat-card-bg">
+                                <i class="fas fa-chart-line"></i>
                             </div>
-                            <div class="stat-info">
-                                <div class="stat-label">本年进度</div>
-                                <div class="stat-value" id="yearProgress">加载中...</div>
+                            <div class="stat-content">
+                                <div class="stat-icon-modern">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="stat-info-modern">
+                                    <div class="stat-label-modern">本年进度</div>
+                                    <div class="stat-value-modern" id="yearProgress">加载中...</div>
+                                </div>
                             </div>
                         </div>
                     </div>

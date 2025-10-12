@@ -656,6 +656,35 @@
    响应式设计
    ======================================== */
 
+/* 超大屏幕优化 */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1320px;
+    }
+    
+    .stat-card {
+        padding: 2rem;
+    }
+    
+    .stat-icon-modern {
+        width: 64px;
+        height: 64px;
+        font-size: 1.8rem;
+    }
+    
+    .stat-value-modern {
+        font-size: 2rem;
+    }
+    
+    .day {
+        min-height: 100px;
+    }
+    
+    .day-number {
+        font-size: 1.3rem;
+    }
+}
+
 @media (max-width: 1200px) {
     .calendar-intro h1 {
         font-size: 3rem;
@@ -663,6 +692,11 @@
     
     .calendar-container {
         padding: 2rem;
+    }
+    
+    /* 统计卡片适度缩小 */
+    .stat-card-bg {
+        font-size: 7rem;
     }
 }
 
@@ -717,6 +751,57 @@
     .calendar-features {
         flex-direction: column;
         gap: 0.75rem;
+    }
+    
+    /* 统计卡片平板优化 */
+    .stat-card {
+        padding: 1.5rem;
+    }
+    
+    .stat-card-bg {
+        font-size: 6rem;
+    }
+    
+    .stat-icon-modern {
+        width: 52px;
+        height: 52px;
+        font-size: 1.5rem;
+    }
+    
+    .stat-value-modern {
+        font-size: 1.6rem;
+    }
+    
+    /* 日历控制区优化 */
+    .calendar-controls {
+        padding: 1.25rem;
+    }
+    
+    .calendar-navigation .btn {
+        padding: 0.7rem 1.25rem;
+    }
+    
+    .current-month {
+        font-size: 1.5rem;
+    }
+    
+    /* 侧边栏在平板上保持可见 */
+    .sidebar-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .countdown-list {
+        gap: 0.875rem;
+    }
+    
+    /* 日历格子适中 */
+    .day {
+        min-height: 65px;
+        padding: 0.5rem;
+    }
+    
+    .day-number {
+        font-size: 1.1rem;
     }
     
     .feature-item {
@@ -808,13 +893,108 @@
         display: none;
     }
     
-    /* 统计卡片2列布局 */
-    .statistics-panel .row {
-        --bs-gutter-x: 0.5rem;
+    /* 新统计卡片小屏优化 */
+    .stat-card {
+        padding: 1.25rem;
+        border-radius: 15px;
     }
     
-    .stat-card {
-        padding: 1rem;
+    .stat-card-bg {
+        font-size: 5rem;
+        right: -10px;
+        bottom: -10px;
+    }
+    
+    .stat-content {
+        gap: 0.75rem;
+    }
+    
+    .stat-icon-modern {
+        width: 48px;
+        height: 48px;
+        font-size: 1.3rem;
+        border-radius: 12px;
+    }
+    
+    .stat-label-modern {
+        font-size: 0.75rem;
+    }
+    
+    .stat-value-modern {
+        font-size: 1.4rem;
+    }
+    
+    /* 节假日说明优化 */
+    .holiday-info-alert {
+        font-size: 0.8rem;
+        padding: 0.875rem 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .badge-group {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        gap: 0.5rem;
+    }
+    
+    .badge-group .badge {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+    }
+    
+    /* 侧边栏优化 */
+    .sidebar-card {
+        padding: 1.25rem;
+    }
+    
+    .sidebar-title {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .countdown-item {
+        padding: 0.75rem;
+    }
+    
+    .countdown-name {
+        font-size: 0.875rem;
+    }
+    
+    .countdown-days {
+        font-size: 1.1rem;
+    }
+    
+    .quick-nav-btn {
+        padding: 0.75rem 0.875rem;
+        font-size: 0.875rem;
+    }
+    
+    /* 日历控制按钮 */
+    .calendar-controls {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .calendar-navigation {
+        width: 100%;
+    }
+    
+    .calendar-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .calendar-actions .btn {
+        flex: 1;
+        min-width: calc(50% - 0.25rem);
+        font-size: 0.85rem;
+        padding: 0.6rem 0.75rem;
+    }
+    
+    .calendar-actions .btn i {
+        margin-right: 0.25rem;
     }
     
     .weekday {
@@ -1187,69 +1367,144 @@
 }
 
 /* ========================================
-   统计面板
+   统计面板 - 现代渐变卡片设计
    ======================================== */
 
 .stat-card {
-    background: white;
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-soft);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: var(--transition-medium);
+    position: relative;
+    border-radius: 20px;
+    padding: 1.75rem;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     height: 100%;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
-.stat-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 15px;
+/* 背景装饰图标 */
+.stat-card-bg {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    font-size: 8rem;
+    opacity: 0.1;
+    color: white;
+    pointer-events: none;
+    transition: all 0.4s ease;
+}
+
+.stat-card:hover .stat-card-bg {
+    transform: scale(1.1) rotate(10deg);
+    opacity: 0.15;
+}
+
+/* 渐变背景 - 4种配色 */
+.stat-card-gradient-1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.stat-card-gradient-2 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.stat-card-gradient-3 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+}
+
+.stat-card-gradient-4 {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+}
+
+/* 内容布局 */
+.stat-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+/* 现代图标样式 */
+.stat-icon-modern {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.25);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: white;
     flex-shrink: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.stat-icon-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.stat-card:hover .stat-icon-modern {
+    transform: scale(1.1) rotate(-5deg);
+    background: rgba(255, 255, 255, 0.35);
 }
 
-.stat-icon-pink {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.stat-icon-blue {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.stat-icon-sunset {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-}
-
-.stat-info {
+/* 信息文字 */
+.stat-info-modern {
     flex: 1;
 }
 
-.stat-label {
-    font-size: 0.85rem;
-    color: var(--calendar-text-secondary);
+.stat-label-modern {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 0.25rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
 }
 
-.stat-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--calendar-text-primary);
+.stat-value-modern {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: white;
     line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 添加闪光动画 */
+@keyframes shine {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.stat-card:hover::before {
+    left: 100%;
 }
 
 /* ========================================
@@ -1384,4 +1639,161 @@
 .week-number:hover {
     background: rgba(102, 126, 234, 0.15);
     transform: scale(1.05);
+}
+
+/* ========================================
+   节假日说明提示框
+   ======================================== */
+
+.holiday-info-alert {
+    background: rgba(102, 126, 234, 0.1);
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+    color: var(--calendar-text-primary);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.holiday-info-alert i {
+    color: var(--calendar-primary);
+    margin-right: 0.5rem;
+}
+
+.badge-group {
+    margin-left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.badge-group .badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+}
+
+.badge-holiday {
+    background: #ef4444;
+    color: white;
+}
+
+.badge-workday {
+    background: #f59e0b;
+    color: white;
+}
+
+.badge-festival {
+    background: #3b82f6;
+    color: white;
+}
+
+/* ========================================
+   移动端触摸优化
+   ======================================== */
+
+/* 移动设备触摸反馈 */
+@media (hover: none) and (pointer: coarse) {
+    /* 增大按钮触摸区域 */
+    .calendar-navigation .btn,
+    .calendar-actions .btn,
+    .quick-nav-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* 日历格子触摸优化 */
+    .day {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .day:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
+    }
+    
+    /* 统计卡片触摸反馈 */
+    .stat-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    /* 禁用悬停动画,使用active状态 */
+    .stat-card:hover {
+        transform: none;
+    }
+    
+    /* 快速导航按钮触摸反馈 */
+    .quick-nav-btn:active {
+        transform: scale(0.97);
+        background: var(--calendar-gradient-primary);
+        color: white;
+    }
+    
+    /* 倒计时项目触摸反馈 */
+    .countdown-item:active {
+        transform: scale(0.98);
+        box-shadow: var(--shadow-hover);
+    }
+}
+
+/* 横屏模式优化 */
+@media (orientation: landscape) and (max-height: 600px) {
+    .calendar-hero {
+        min-height: 40vh;
+        padding: 2rem 0;
+    }
+    
+    .calendar-intro h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .calendar-intro .lead {
+        font-size: 1rem;
+    }
+    
+    .calendar-features {
+        margin-top: 1rem;
+    }
+}
+
+/* 防止文字选择影响触摸体验 */
+.stat-card,
+.quick-nav-btn,
+.day,
+.countdown-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 优化小屏设备上的模态框 */
+@media (max-width: 576px) {
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .modal-content {
+        border-radius: 15px;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem;
+    }
 }
