@@ -1,39 +1,53 @@
 # Alexander James Carter's Personal Website 🌐
 
-## 🆕 最新更新
-
-### 🎯 当前版本: v2.2.0 - "安全与文档增强版"
-
-📅 **发布时间**: 2025年7月22日 | 🏷️ **版本类型**: 功能更新 | 📦 **状态**: 稳定版
-
-#### 新增功能特性
-
-**🔒 安全框架完善**
-- 新增完整的安全漏洞披露政策 (`security-policy.html`)
-- 建立安全研究者致谢机制 (`security-acknowledgments.html`)
-- 配置PGP加密通信支持 (`pgp-key.asc`)
-- 部署标准化的 `security.txt` 文件
-
-**📚 文档与版权管理**
-- 创建标准化版权模板 (`COPYRIGHT-TEMPLATE.md`)
-- 建立完整的文档管理体系
-- 优化项目结构和文件组织
-
-**🏗️ 项目结构重组**
-- 新增 `security/` 目录统一管理安全相关文件
-- 新增 `docs/` 目录集中存放文档文件
-- 新增 `config/` 目录管理配置文件
-- 优化文件分类和路径结构
-
----
-
-[![Current Version](https://img.shields.io/badge/Version-v2.2.0-blue.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/releases)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2025.07.22-green.svg)](https://alexander.xin)
+[![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=plastic&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00IDEyTDEyIDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/AlexanderJ-Carter/AlexanderJ-Carter.github.io)
+[![Current Version](https://img.shields.io/badge/Version-v2.3.0-blue.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/releases)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2025.10.21-green.svg)](https://alexander.xin)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Active-green)](https://alexander.xin)
+[![Cloudflare](https://img.shields.io/badge/Cloudflare-CDN-orange?logo=cloudflare&logoColor=white)](https://www.cloudflare.com/)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![PWA](https://img.shields.io/badge/PWA-5A0FC8?logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
+[![WCAG 2.1](https://img.shields.io/badge/WCAG-2.1_AA-green?logo=w3c&logoColor=white)](https://www.w3.org/WAI/WCAG21/quickref/)
+
+## 🆕 最新更新
+
+### 🎯 当前版本: v2.3.0 - "UI/UX全面优化版"
+
+📅 **发布时间**: 2025年10月21日 | 🏷️ **版本类型**: 功能更新 | 📦 **状态**: 稳定版
+
+#### 新增功能特性
+
+**🎨 导航栏现代化重构**
+- 重新设计顶部导航栏，采用玻璃态设计风格
+- 新增工具下拉菜单（日历/汇率转换/世界时钟/联系方式）
+- 整合博客外链，优化导航结构
+- 增强语言选择器，添加国旗emoji图标
+- 移除冗余导航项，简化用户操作流程
+
+**🦶 页脚紧凑布局优化**
+- 三列紧凑式布局：品牌信息/快速导航/语言选择
+- 导航链接精简化（画廊/日历/汇率/联系等）
+- 语言选择器改为2×2网格卡片式布局
+- 新增Web标准认证标签区域
+- 集成9大认证徽章（CC协议/开源/HTML5/CSS3/响应式/WCAG 2.1/HTTPS/SEO）
+- 版权信息居中展示，添加Cloudflare支持标识
+
+**📱 响应式体验增强**
+- 全新移动端导航菜单优化
+- 页脚在小屏幕下完美堆叠
+- 认证徽章自适应显示（桌面端显示文字，移动端仅显示图标）
+- 优化触摸目标尺寸，提升移动端交互体验
+
+**🎯 日历功能增强**
+- 实现日历导出为图片功能（html2canvas）
+- 重新设计统计卡片，添加渐变背景和装饰图标
+- 玻璃态图标设计，优化视觉层次
+- 增强超大屏/平板/手机等多尺寸响应式支持
+- 优化横屏模式和触摸设备体验
+
+---
 
 ## 📖 项目简介
 
@@ -77,13 +91,31 @@
 
 ## 🚀 版本信息
 
-### 🎯 当前版本: v2.2.0
+### 🎯 当前版本: v2.3.0
 
-![Release Date](https://img.shields.io/badge/Release%20Date-2025.07.22-brightgreen)
+![Release Date](https://img.shields.io/badge/Release%20Date-2025.10.21-brightgreen)
 ![Build Status](https://img.shields.io/badge/Build-Stable-success)
 ![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue)
 
-#### "安全与文档增强版"
+#### "UI/UX全面优化版"
+
+**🎨 核心更新**
+- 导航栏现代化重构（玻璃态设计 + 工具下拉菜单）
+- 页脚紧凑布局优化（三列布局 + 认证标签）
+- 日历功能增强（图片导出 + 响应式优化）
+- 全站响应式体验提升
+
+**📦 发布详情**
+- 版本号: 2.3.0
+- 发布日期: 2025年10月21日
+- 版本类型: Minor Update
+- 状态: Stable
+
+---
+
+### 📜 版本历史
+
+#### v2.2.0 - "安全与文档增强版" (2025-07-22)
 
 📅 发布时间: 2025年7月22日 | 🏷️ 版本类型: 功能更新 | 📦 状态: 稳定版
 

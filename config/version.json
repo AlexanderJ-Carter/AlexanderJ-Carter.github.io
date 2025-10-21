@@ -1,120 +1,237 @@
-{
-    "version": "2.2.0",
-    "name": "Alexander James Carter's Personal Website",
-    "description": "展示个人作品和内容分享的个人网页",
-    "author": "Alexander James Carter",
-    "homepage": "https://alexander.xin",
-    "license": "CC BY-NC-SA 4.0",
-    "release": {
-        "version": "2.2.0",
-        "codename": "Security & Documentation Enhancement",
-        "date": "2025-07-22",
-        "type": "minor",
-        "status": "stable"
-    },
-    "features": {
-        "highlights": [
-            "� 完整安全漏洞披露政策框架",
-            "🏆 安全研究者致谢机制建设",
-            "� PGP加密通信支持配置",
-            "📋 RFC 9116标准安全配置文件",
-            "📚 标准化版权声明模板",
-            "�️ 项目文件结构重组优化"
-        ],
-        "technical": {
-            "pwa": true,
-            "multilingual": true,
-            "responsive": true,
-            "dark_mode": true,
-            "music_player": true,
-            "chatbot": true,
-            "gallery": true,
-            "license_system": true,
-            "seo_optimized": true
-        }
-    },
-    "languages": ["zh-CN", "en", "it", "ja"],
-    "compatibility": {
-        "browsers": {
-            "chrome": ">=88",
-            "firefox": ">=85",
-            "safari": ">=14",
-            "edge": ">=88"
-        },
-        "devices": ["desktop", "tablet", "mobile"]
-    },
-    "dependencies": {
-        "bootstrap": "5.3.0",
-        "font-awesome": "6.0.0",
-        "aos": "2.3.1",
-        "glightbox": "3.2.0"
-    },
-    "changelog": {
-        "2.1.2": {
-            "date": "2025-06-09",
-            "title": "Documentation & Configuration Optimization",
-            "type": "patch",
-            "breaking_changes": false,
-            "changes": {
-                "added": [
-                    "增强版 sitemap.xml 包含所有多语言页面",
-                    "优化版 robots.txt 配置和搜索引擎规则",
-                    "完善的文档版本同步管理",
-                    "多语言页面 hreflang 标签支持",
-                    "日语支持的 sitemap 配置"
-                ],
-                "improved": [
-                    "README.md 版本信息同步更新",
-                    "网站地图结构和优先级优化",
-                    "搜索引擎爬虫友好性提升",
-                    "多语言 URL 结构标准化",
-                    "文档格式和内容一致性"
-                ],
-                "updated": [
-                    "版本号统一更新至 2.1.2",
-                    "最后更新时间同步至 2025-06-09",
-                    "所有配置文件时间戳更新",
-                    "sitemap 条目完整性检查"
-                ]
-            }
-        },
-        "2.1.1": {
-            "date": "2025-06-07",
-            "title": "Gallery & Footer Enhancement",
-            "type": "patch",
-            "breaking_changes": false,
-            "changes": {
-                "improved": [
-                    "画廊页面显示问题优化",
-                    "页脚功能与样式增强",
-                    "整体页面性能提升"
-                ],
-                "fixed": [
-                    "画廊页面交互体验问题",
-                    "页脚在不同屏幕尺寸下的适配",
-                    "移动端显示效果优化"
-                ]
-            }
-        },
-        "2.1.0": {
-            "date": "2025-06-06",
-            "title": "License & Documentation Enhancement",
-            "type": "major",
-            "breaking_changes": false,
-            "changes": {
-                "added": [
-                    "Creative Commons BY-NC-SA 4.0 许可证系统",
-                    "多语言许可证页面 (中文/英文/意大利语/日语)",
-                    "详细的版权使用指南和FAQ",
-                    "版本控制和更新日志系统",
-                    "COPYRIGHT-TEMPLATE.md 模板文件"
-                ],
-                "fixed": [
-                    "修复 index.html 中重复的 share.js 引用",
-                    "优化页脚许可证信息显示",
-                    "清理不必要的文件和代码"
-                ],
-                "improved": [
+{{
+
+    "version": "2.3.0",    "version": "2.2.0",
+
+    "name": "Alexander James Carter's Personal Website",    "name": "Alexander James Carter's Personal Website",
+
+    "description": "展示个人作品和内容分享的个人网页",    "description": "展示个人作品和内容分享的个人网页",
+
+    "author": "Alexander James Carter",    "author": "Alexander James Carter",
+
+    "homepage": "https://alexander.xin",    "homepage": "https://alexander.xin",
+
+    "license": "CC BY-NC-SA 4.0",    "license": "CC BY-NC-SA 4.0",
+
+    "release": {    "release": {
+
+        "version": "2.3.0",        "version": "2.2.0",
+
+        "codename": "UI/UX Comprehensive Optimization",        "codename": "Security & Documentation Enhancement",
+
+        "date": "2025-10-21",        "date": "2025-07-22",
+
+        "type": "minor",        "type": "minor",
+
+        "status": "stable"        "status": "stable"
+
+    },    },
+
+    "features": {    "features": {
+
+        "highlights": [        "highlights": [
+
+            "🎨 导航栏现代化重构 - 玻璃态设计风格",            "� 完整安全漏洞披露政策框架",
+
+            "🔽 新增工具下拉菜单 - 日历/汇率/时钟/联系",            "🏆 安全研究者致谢机制建设",
+
+            "🦶 页脚紧凑布局优化 - 三列布局设计",            "� PGP加密通信支持配置",
+
+            "🏷️ Web标准认证标签 - 9大认证徽章",            "📋 RFC 9116标准安全配置文件",
+
+            "📱 响应式体验增强 - 移动端完美适配",            "📚 标准化版权声明模板",
+
+            "📅 日历功能增强 - 图片导出功能",            "�️ 项目文件结构重组优化"
+
+            "🌐 语言选择器优化 - 2×2网格卡片式",        ],
+
+            "☁️ 添加Cloudflare支持标识"        "technical": {
+
+        ],            "pwa": true,
+
+        "technical": {            "multilingual": true,
+
+            "pwa": true,            "responsive": true,
+
+            "multilingual": true,            "dark_mode": true,
+
+            "responsive": true,            "music_player": true,
+
+            "dark_mode": true,            "chatbot": true,
+
+            "music_player": true,            "gallery": true,
+
+            "chatbot": true,            "license_system": true,
+
+            "gallery": true,            "seo_optimized": true
+
+            "license_system": true,        }
+
+            "seo_optimized": true,    },
+
+            "accessibility": true,    "languages": ["zh-CN", "en", "it", "ja"],
+
+            "glass_morphism": true,    "compatibility": {
+
+            "web_standards": true        "browsers": {
+
+        }            "chrome": ">=88",
+
+    },            "firefox": ">=85",
+
+    "languages": ["zh-CN", "en", "it", "ja"],            "safari": ">=14",
+
+    "compatibility": {            "edge": ">=88"
+
+        "browsers": {        },
+
+            "chrome": ">=88",        "devices": ["desktop", "tablet", "mobile"]
+
+            "firefox": ">=85",    },
+
+            "safari": ">=14",    "dependencies": {
+
+            "edge": ">=88"        "bootstrap": "5.3.0",
+
+        },        "font-awesome": "6.0.0",
+
+        "devices": ["desktop", "tablet", "mobile"]        "aos": "2.3.1",
+
+    },        "glightbox": "3.2.0"
+
+    "dependencies": {    },
+
+        "bootstrap": "5.3.0",    "changelog": {
+
+        "font-awesome": "6.0.0",        "2.1.2": {
+
+        "aos": "2.3.1",            "date": "2025-06-09",
+
+        "glightbox": "3.2.0",            "title": "Documentation & Configuration Optimization",
+
+        "html2canvas": "1.4.1"            "type": "patch",
+
+    },            "breaking_changes": false,
+
+    "changelog": {            "changes": {
+
+        "2.3.0": {                "added": [
+
+            "date": "2025-10-21",                    "增强版 sitemap.xml 包含所有多语言页面",
+
+            "title": "UI/UX Comprehensive Optimization",                    "优化版 robots.txt 配置和搜索引擎规则",
+
+            "type": "minor",                    "完善的文档版本同步管理",
+
+            "breaking_changes": false,                    "多语言页面 hreflang 标签支持",
+
+            "changes": {                    "日语支持的 sitemap 配置"
+
+                "added": [                ],
+
+                    "导航栏玻璃态设计和工具下拉菜单",                "improved": [
+
+                    "页脚Web标准认证标签（9个徽章）",                    "README.md 版本信息同步更新",
+
+                    "日历导出为图片功能（html2canvas）",                    "网站地图结构和优先级优化",
+
+                    "语言选择器2×2网格卡片式布局",                    "搜索引擎爬虫友好性提升",
+
+                    "Cloudflare CDN支持标识"                    "多语言 URL 结构标准化",
+
+                ],                    "文档格式和内容一致性"
+
+                "improved": [                ],
+
+                    "导航栏结构优化，移除冗余项目",                "updated": [
+
+                    "页脚三列紧凑布局设计",                    "版本号统一更新至 2.1.2",
+
+                    "移动端响应式体验全面提升",                    "最后更新时间同步至 2025-06-09",
+
+                    "日历页面响应式和触摸优化",                    "所有配置文件时间戳更新",
+
+                    "页脚认证标签在小屏只显示图标"                    "sitemap 条目完整性检查"
+
+                ],                ]
+
+                "updated": [            }
+
+                    "导航链接文字精简化",        },
+
+                    "页脚版权信息居中显示",        "2.1.1": {
+
+                    "社交图标样式优化",            "date": "2025-06-07",
+
+                    "认证徽章设计标准化"            "title": "Gallery & Footer Enhancement",
+
+                ]            "type": "patch",
+
+            }            "breaking_changes": false,
+
+        },            "changes": {
+
+        "2.2.0": {                "improved": [
+
+            "date": "2025-07-22",                    "画廊页面显示问题优化",
+
+            "title": "Security & Documentation Enhancement",                    "页脚功能与样式增强",
+
+            "type": "minor",                    "整体页面性能提升"
+
+            "breaking_changes": false,                ],
+
+            "changes": {                "fixed": [
+
+                "added": [                    "画廊页面交互体验问题",
+
+                    "完整安全漏洞披露政策框架",                    "页脚在不同屏幕尺寸下的适配",
+
+                    "安全研究者致谢机制",                    "移动端显示效果优化"
+
+                    "PGP加密通信支持",                ]
+
+                    "RFC 9116标准security.txt文件",            }
+
+                    "标准化版权声明模板"        },
+
+                ],        "2.1.0": {
+
+                "improved": [            "date": "2025-06-06",
+
+                    "项目文件结构重组",            "title": "License & Documentation Enhancement",
+
+                    "文档管理体系建设",            "type": "major",
+
+                    "security/docs/config目录规划"            "breaking_changes": false,
+
+                ]            "changes": {
+
+            }                "added": [
+
+        }                    "Creative Commons BY-NC-SA 4.0 许可证系统",
+
+    },                    "多语言许可证页面 (中文/英文/意大利语/日语)",
+
+    "meta": {                    "详细的版权使用指南和FAQ",
+
+        "repository": "https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io",                    "版本控制和更新日志系统",
+
+        "deployment": "GitHub Pages",                    "COPYRIGHT-TEMPLATE.md 模板文件"
+
+        "cdn": ["Cloudflare", "jsDelivr", "CDNJS"],                ],
+
+        "analytics": "Google Analytics 4",                "fixed": [
+
+        "last_updated": "2025-10-21T00:00:00Z",                    "修复 index.html 中重复的 share.js 引用",
+
+        "next_version": "2.4.0",                    "优化页脚许可证信息显示",
+
+        "maintenance_status": "active"                    "清理不必要的文件和代码"
+
+    }                ],
+
+}                "improved": [
+
                     "README.md 文档结构优化",
                     "许可证页面交互体验",
                     "版权信息的标准化展示"
