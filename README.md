@@ -1,8 +1,8 @@
 # Alexander James Carter's Personal Website 🌐
 
 [![zread](https://img.shields.io/badge/Ask_Zread-_.svg?style=plastic&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00IDEyTDEyIDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff)](https://zread.ai/AlexanderJ-Carter/AlexanderJ-Carter.github.io)
-[![Current Version](https://img.shields.io/badge/Version-v2.3.0-blue.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/releases)
-[![Last Updated](https://img.shields.io/badge/Last%20Updated-2025.10.21-green.svg)](https://alexander.xin)
+[![Current Version](https://img.shields.io/badge/Version-v2.4.0-blue.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/releases)
+[![Last Updated](https://img.shields.io/badge/Last%20Updated-2025.11.24-green.svg)](https://alexander.xin)
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Active-green)](https://alexander.xin)
 [![Cloudflare](https://img.shields.io/badge/Cloudflare-CDN-orange?logo=cloudflare&logoColor=white)](https://www.cloudflare.com/)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
@@ -13,39 +13,37 @@
 
 ## 🆕 最新更新
 
-### 🎯 当前版本: v2.3.0 - "UI/UX全面优化版"
+### 🎯 当前版本: v2.4.0 - "导航栏现代化重构版"
 
-📅 **发布时间**: 2025年10月21日 | 🏷️ **版本类型**: 功能更新 | 📦 **状态**: 稳定版
+📅 **发布时间**: 2025年11月24日 | 🏷️ **版本类型**: 功能更新 | 📦 **状态**: 稳定版
 
 #### 新增功能特性
 
-**🎨 导航栏现代化重构**
-- 重新设计顶部导航栏，采用玻璃态设计风格
-- 新增工具下拉菜单（日历/汇率转换/世界时钟/联系方式）
-- 整合博客外链，优化导航结构
-- 增强语言选择器，添加国旗emoji图标
-- 移除冗余导航项，简化用户操作流程
+**🎨 导航栏全面现代化重构**
+- **玻璃态设计升级**: 采用backdrop-filter: blur(20px)打造高级玻璃态效果
+- **渐变背景动画**: 导航链接悬停时显示流畅的渐变背景动画
+- **Logo动画优化**: Logo悬停时旋转和缩放动画，增强品牌识别度
+- **图标交互增强**: 导航图标悬停时旋转和缩放，提升交互反馈
+- **进度条美化**: 顶部滚动进度条使用三色渐变，增加视觉吸引力
+- **返回顶部按钮**: 重新设计返回顶部按钮，使用渐变背景和流畅动画
 
-**🦶 页脚紧凑布局优化**
-- 三列紧凑式布局：品牌信息/快速导航/语言选择
-- 导航链接精简化（画廊/日历/汇率/联系等）
-- 语言选择器改为2×2网格卡片式布局
-- 新增Web标准认证标签区域
-- 集成9大认证徽章（CC协议/开源/HTML5/CSS3/响应式/WCAG 2.1/HTTPS/SEO）
-- 版权信息居中展示，添加Cloudflare支持标识
+**🌐 多语言版本统一优化**
+- **导航栏统一**: 所有语言版本（中文/英文/意大利语/日语）使用统一的导航栏样式
+- **响应式优化**: 移动端导航菜单完美适配，触摸目标尺寸优化
+- **暗黑模式支持**: 完整的暗黑模式适配，确保所有元素在暗黑模式下正常显示
+- **语言选择器**: 优化语言选择器样式，使用渐变背景和流畅过渡
 
-**📱 响应式体验增强**
-- 全新移动端导航菜单优化
-- 页脚在小屏幕下完美堆叠
-- 认证徽章自适应显示（桌面端显示文字，移动端仅显示图标）
-- 优化触摸目标尺寸，提升移动端交互体验
+**🎯 CSS架构优化**
+- **变量系统统一**: 在style.default.css中统一所有基础变量
+- **组件化设计**: navigation.css完全重构，采用模块化设计
+- **性能优化**: 使用will-change和transform优化动画性能
+- **代码清理**: 删除过时的文档文件，保持文档库整洁
 
-**🎯 日历功能增强**
-- 实现日历导出为图片功能（html2canvas）
-- 重新设计统计卡片，添加渐变背景和装饰图标
-- 玻璃态图标设计，优化视觉层次
-- 增强超大屏/平板/手机等多尺寸响应式支持
-- 优化横屏模式和触摸设备体验
+**✨ 用户体验提升**
+- **视觉一致性**: 导航栏与全站设计风格统一，品牌形象增强
+- **交互流畅性**: 所有动画使用cubic-bezier缓动函数，提升流畅度
+- **无障碍优化**: 所有交互元素添加aria-label，提升可访问性
+- **响应式设计**: 完美适配桌面端、平板和移动设备
 
 ---
 
@@ -91,23 +89,23 @@
 
 ## 🚀 版本信息
 
-### 🎯 当前版本: v2.3.0
+### 🎯 当前版本: v2.4.0
 
-![Release Date](https://img.shields.io/badge/Release%20Date-2025.10.21-brightgreen)
+![Release Date](https://img.shields.io/badge/Release%20Date-2025.11.24-brightgreen)
 ![Build Status](https://img.shields.io/badge/Build-Stable-success)
 ![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue)
 
-#### "UI/UX全面优化版"
+#### "导航栏现代化重构版"
 
 **🎨 核心更新**
-- 导航栏现代化重构（玻璃态设计 + 工具下拉菜单）
-- 页脚紧凑布局优化（三列布局 + 认证标签）
-- 日历功能增强（图片导出 + 响应式优化）
-- 全站响应式体验提升
+- 导航栏全面现代化重构（玻璃态设计升级 + 渐变动画）
+- 多语言版本统一优化（统一导航栏样式）
+- CSS架构优化（变量系统统一 + 组件化设计）
+- 用户体验提升（视觉一致性 + 交互流畅性）
 
 **📦 发布详情**
-- 版本号: 2.3.0
-- 发布日期: 2025年10月21日
+- 版本号: 2.4.0
+- 发布日期: 2025年11月24日
 - 版本类型: Minor Update
 - 状态: Stable
 
@@ -421,7 +419,7 @@ PWA 应用配置文件，定义应用名称、图标、主题色等。
 
 ⭐ 如果这个项目对你有帮助，请考虑给它一个星标！
 
-**当前版本: v2.2.0** | **最后更新: 2025年7月22日**
+**当前版本: v2.4.0** | **最后更新: 2025年11月24日**
 
 ## 📄 重要安全与版权文档
 

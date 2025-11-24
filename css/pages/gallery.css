@@ -1,13 +1,14 @@
 :root {
-    --gallery-primary: #6b9fe5;
+    /* 画廊特定变量（使用统一配色） */
+    --gallery-primary: var(--primary-color, #6366f1);
     --gallery-secondary: #fff5f0;
-    --gallery-accent: #ff8b94;
+    --gallery-accent: var(--accent-color, #ec4899);
     --gallery-soft-blue: #a8d8ea;
     --gallery-soft-pink: #ffb6c1;
     --gallery-soft-green: #b8e6d5;
     --gallery-light: #ffffff;
-    --gallery-text: #4a5568;
-    --gallery-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gallery-text: #1e293b;
+    --gallery-gradient: var(--gradient-primary);
     --gallery-soft-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
     --gallery-spring-gradient: linear-gradient(
         135deg,
@@ -53,11 +54,19 @@
     line-height: 1.8;
 }
 
-/* 清新明亮的页面标题区域 */
+/* 高级感页面标题区域 - 改进版 */
 .page-title.parallax-hero {
-    background: var(--gallery-spring-gradient);
+    background: linear-gradient(
+        135deg,
+        rgba(99, 102, 241, 0.95) 0%,
+        rgba(139, 92, 246, 0.95) 50%,
+        rgba(168, 85, 247, 0.95) 100%
+    );
     position: relative;
     overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
 }
 
 .page-title.parallax-hero::before {
@@ -67,9 +76,23 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.6;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
     z-index: 1;
+    animation: subtlePulse 8s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
 }
 
 .page-title.parallax-hero::after {
@@ -81,8 +104,9 @@
     bottom: 0;
     background: linear-gradient(
         135deg,
-        rgba(168, 237, 234, 0.3) 0%,
-        rgba(254, 214, 227, 0.3) 100%
+        rgba(255, 255, 255, 0.1) 0%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.05) 100%
     );
     z-index: 2;
 }
@@ -94,9 +118,16 @@
 }
 
 .page-title h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: 1.5rem;
     font-family: var(--font-heading), sans-serif;
+    font-weight: 700;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     letter-spacing: 2px;
     background: var(--gallery-gradient);
     -webkit-background-clip: text;
@@ -270,11 +301,28 @@
 }
 
 body.dark-mode .gallery-card {
-    background: #2a2a35;
+    background: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .gallery-card:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border-color: rgba(99, 102, 241, 0.3);
 }
 
 body.dark-mode .filter-btn {
-    color: rgba(255, 255, 255, 0.8);
+    background: var(--dark-bg-tertiary);
+    color: var(--dark-text-secondary);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .filter-btn:hover,
+body.dark-mode .filter-btn.active {
+    background: var(--gradient-primary);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: var(--shadow-primary);
 }
 
 /* 添加"点赞"和"收藏"按钮效果 */
@@ -298,8 +346,8 @@ body.dark-mode .filter-btn {
     margin-top: 2rem;
 }
 
-.dark-mode .comments-section {
-    background-color: var(--dark-bg, #1a1d23);
+body.dark-mode .comments-section {
+    background-color: var(--dark-bg);
 }
 
 .comments-card {
@@ -311,9 +359,10 @@ body.dark-mode .filter-btn {
     background-color: #ffffff;
 }
 
-.dark-mode .comments-card {
-    background-color: var(--dark-card-bg, #2a2d35);
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+body.dark-mode .comments-card {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
 }
 
 .giscus-container {
@@ -329,9 +378,9 @@ body.dark-mode .filter-btn {
     border: 1px dashed rgba(0, 0, 0, 0.1);
 }
 
-.dark-mode .comments-loading {
-    background-color: rgba(255, 255, 255, 0.02);
-    border-color: rgba(255, 255, 255, 0.1);
+body.dark-mode .comments-loading {
+    background-color: var(--dark-bg-tertiary);
+    border-color: var(--dark-border);
 }
 
 /* 确保 Giscus iframe 正确显示 */
@@ -360,7 +409,7 @@ body.dark-mode .filter-btn {
 }
 
 /* 暗黑模式下的 Giscus 主题适配 */
-.dark-mode .giscus {
+body.dark-mode .giscus {
     color-scheme: dark;
 }
 

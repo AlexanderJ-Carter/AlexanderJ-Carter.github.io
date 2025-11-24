@@ -6,7 +6,24 @@ html {
     overflow: hidden;
     font-family: 'Montserrat', sans-serif;
     color: #333;
-    background: #f8f9fa;
+    background: linear-gradient(
+        135deg,
+        #f8fafc 0%,
+        #e2e8f0 30%,
+        #f1f5f9 60%,
+        #ffffff 100%
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 .error-container {
@@ -24,53 +41,111 @@ html {
 }
 
 h1 {
-    font-size: 8rem;
+    font-size: clamp(5rem, 15vw, 10rem);
     margin: 0;
-    background: linear-gradient(45deg, #ff5e62, #ff9966);
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: bounce 2s ease infinite;
-    font-weight: bold;
-    color: #ff5e62;
+    animation: bounce 2s ease infinite, glow 3s ease-in-out infinite;
+    font-weight: 900;
     line-height: 1;
     font-family: 'Montserrat', sans-serif;
-    text-shadow: 3px 3px 0 rgba(255, 94, 98, 0.3);
+    position: relative;
+    letter-spacing: -0.02em;
+}
+
+@keyframes glow {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.6));
+    }
 }
 
 .error-message {
-    margin: 1rem 0;
-    font-size: 2rem;
-    color: #333;
+    margin: 1.5rem 0;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: #1e293b;
     font-family: 'Pacifico', cursive;
+    font-weight: 600;
+    background: linear-gradient(135deg, #1e293b 0%, #6366f1 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .error-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: #666;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    margin-bottom: 2.5rem;
+    color: #64748b;
     font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    animation: fadeInUp 1s ease 0.2s both;
 }
 
 .btn-home {
     color: white;
     border: none;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 0.75rem 2rem;
-    background: linear-gradient(135deg, #ff5e62 0%, #ff9966 100%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.9rem 2.5rem;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
     border-radius: 30px;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 1rem;
-    margin-top: 1rem;
-    box-shadow: 0 3px 10px rgba(255, 94, 98, 0.3);
+    margin: 0.75rem;
+    box-shadow: 
+        0 8px 25px rgba(99, 102, 241, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 1s ease 0.4s both;
+}
+
+.btn-home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: left 0.5s ease;
 }
 
 .btn-home:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255, 94, 98, 0.5);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 
+        0 12px 35px rgba(99, 102, 241, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+}
+
+.btn-home:hover::before {
+    left: 100%;
 }
 
 .btn-home:active {
@@ -84,12 +159,23 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.8) 0%,
-        rgba(248, 249, 250, 0.8) 100%
-    );
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.05) 0%, transparent 70%);
     z-index: 1;
+    animation: backgroundPulse 10s ease-in-out infinite;
+}
+
+@keyframes backgroundPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
 }
 
 /* 浮动元素 */
@@ -105,10 +191,11 @@ h1 {
 
 .floating-element {
     position: absolute;
-    font-size: 6rem;
-    color: rgba(200, 200, 200, 0.2);
+    font-size: clamp(4rem, 12vw, 8rem);
+    color: rgba(99, 102, 241, 0.15);
     animation: float 10s ease-in-out infinite;
-    font-weight: bold;
+    font-weight: 900;
+    text-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
 }
 
 .floating-element-1 {
@@ -128,43 +215,54 @@ h1 {
 
 /* 游戏元素样式 */
 .game-container {
-    width: 300px;
+    width: min(90vw, 400px);
     position: relative;
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden;
     display: none;
-    height: 250px;
-    background-color: #f8f9fa;
-    margin: 1.5rem auto;
-    border: 1px solid #ddd;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: min(60vw, 300px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
+    margin: 2rem auto;
+    border: 2px solid rgba(99, 102, 241, 0.2);
+    box-shadow: 
+        0 10px 40px rgba(99, 102, 241, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.5);
     -webkit-user-select: none;
     user-select: none;
-    touch-action: none; /* 防止触摸设备上的默认行为 */
+    touch-action: none;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
 
 .paddle {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 15px;
-    background-color: #333;
-    bottom: 10px;
-    border-radius: 15px;
+    width: 100px;
+    height: 18px;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    bottom: 15px;
+    border-radius: 20px;
     z-index: 4;
+    box-shadow: 
+        0 4px 15px rgba(99, 102, 241, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.1s ease;
 }
 
 .ball {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
-    background-color: #ff5e62;
+    background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
     transform: translate(-50%, -50%);
     z-index: 5;
+    box-shadow: 
+        0 4px 15px rgba(236, 72, 153, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .brick {
@@ -206,20 +304,22 @@ h1 {
 }
 
 .game-button {
-    padding: 0.5rem 1rem;
-    background: #ff5e62;
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
     color: white;
     border: none;
-    border-radius: 20px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
 
 .game-button:hover {
-    background: #ff4248;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
 }
 
 .game-instructions {
@@ -325,4 +425,62 @@ h1 {
     .touch-instructions {
         display: block;
     }
+}
+
+/* 暗黑模式适配 */
+body.dark-mode {
+    background: linear-gradient(
+        135deg,
+        var(--dark-bg) 0%,
+        var(--dark-bg-secondary) 50%,
+        var(--dark-bg-tertiary) 100%
+    );
+}
+
+body.dark-mode h1 {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode .error-message {
+    background: linear-gradient(135deg, var(--dark-text-primary) 0%, var(--primary-color) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode .error-subtitle {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .error-background {
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+}
+
+body.dark-mode .floating-element {
+    color: rgba(99, 102, 241, 0.2);
+}
+
+body.dark-mode .game-container {
+    background: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .game-score {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .game-message {
+    background-color: var(--dark-card-bg);
+    color: var(--primary-color);
+}
+
+body.dark-mode .game-instructions,
+body.dark-mode .touch-instructions {
+    color: var(--dark-text-secondary);
 }

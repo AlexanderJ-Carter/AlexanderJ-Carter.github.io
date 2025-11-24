@@ -1,23 +1,25 @@
 /* 汇率页面样式 - 现代设计 */
 :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --success-gradient: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-    --danger-gradient: linear-gradient(135deg, #f857a6 0%, #ff5858 100%);
-    --info-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    --primary-color: #667eea;
-    --secondary-color: #11998e;
-    --danger-color: #f857a6;
-    --text-color: #2d3748;
-    --text-light: #718096;
-    --light-bg: #f7fafc;
+    /* 使用统一配色方案 */
+    --primary-gradient: var(--gradient-primary, linear-gradient(135deg, #6366f1, #8b5cf6));
+    --success-gradient: var(--gradient-success, linear-gradient(135deg, #10b981, #34d399));
+    --danger-gradient: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+    --info-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    --primary-color: var(--primary-color, #6366f1);
+    --secondary-color: var(--success-color, #10b981);
+    --danger-color: var(--error-color, #ef4444);
+    --text-color: #1e293b;
+    --text-light: #64748b;
+    --light-bg: #f8fafc;
     --card-bg: #ffffff;
-    --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    --card-hover-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --card-shadow: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12));
+    --card-hover-shadow: var(--shadow-xl, 0 16px 48px rgba(0, 0, 0, 0.2));
+    --transition: var(--transition-smooth, all 0.4s cubic-bezier(0.4, 0, 0.2, 1));
 }
 
 body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+    background-attachment: fixed;
     min-height: 100vh;
 }
 
@@ -494,26 +496,29 @@ body {
     position: fixed;
     top: 2rem;
     left: 2rem;
-    padding: 0.8rem 1.5rem;
-    background: white;
-    border: none;
+    padding: 0.9rem 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(99, 102, 241, 0.1);
     border-radius: 30px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    color: #667eea;
+    box-shadow: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12));
+    color: var(--primary-color, #6366f1);
     text-decoration: none;
-    transition: var(--transition);
+    transition: var(--transition-smooth, all 0.4s ease);
     z-index: 1000;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .back-btn:hover {
     transform: translateX(-5px);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
-    background: var(--primary-gradient);
+    box-shadow: var(--shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.16));
+    background: var(--gradient-primary, linear-gradient(135deg, #6366f1, #8b5cf6));
     color: white;
+    border-color: transparent;
 }
 
 .back-btn i {

@@ -42,49 +42,141 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
+    <!-- 统一样式系统 -->
+    <link href="css/base/style.default.css" id="theme-stylesheet" rel="stylesheet">
+    <link href="css/components/navigation.css" rel="stylesheet">
+    <link href="css/components/footer.css" rel="stylesheet">
+    <link href="css/base/custom.css" rel="stylesheet">
+    <link href="css/base/enhanced.css" rel="stylesheet">
+    
     <!-- Homepage Styles -->
-    <link rel="stylesheet" href="css/pages/homepage-new.css">
+    <link rel="stylesheet" href="css/pages/homepage.css">
 
     <!-- Homepage JavaScript -->
     <script src="js/pages/homepage.js" defer></script>
+    <script src="js/core/navigation.js" defer></script>
+    <script src="js/utils/enhanced.js" defer></script>
 </head>
 
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="img/branding/logo.png" alt="Logo">
-                <span>Alexander James Carter</span>
+    <!-- 现代化导航栏 -->
+    <nav aria-label="主导航" class="navbar navbar-expand-lg navbar-glass sticky-top py-2" id="navbar">
+        <div class="scroll-progress"></div>
+        <div class="container position-relative">
+            <a aria-label="返回顶部" class="navbar-brand" href="#intro">
+                <img alt="网站Logo" class="nav-logo" height="39" src="img/branding/logo.png" width="40">
+                <span class="brand-text">Alexander James Carter</span>
             </a>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#languages">Languages</a></li>
-                <li><a href="time.html">Time</a></li>
-            </ul>
+
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="切换导航菜单"
+                class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <button aria-label="返回顶部" class="back-to-top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">
+                            <i class="fas fa-star nav-icon"></i> Features
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#languages">
+                            <i class="fas fa-globe nav-icon"></i> Languages
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="time.html">
+                            <i class="fas fa-clock nav-icon"></i> Time
+                        </a>
+                    </li>
+                    <li class="nav-item nav-divider"></li>
+                    <li class="nav-item dropdown">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle language-selector"
+                            data-bs-toggle="dropdown" href="#" id="navbarDropdown" role="button">
+                            <i class="fas fa-globe nav-icon"></i> Language
+                        </a>
+                        <ul aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-end glass-dropdown">
+                            <li><a class="dropdown-item" href="zh-CN/index.html"><span class="me-2">🇨🇳</span>中文</a></li>
+                            <li><a class="dropdown-item active" href="index.html"><span class="me-2">🇬🇧</span>English</a></li>
+                            <li><a class="dropdown-item" href="it/index.html"><span class="me-2">🇮🇹</span>Italiano</a></li>
+                            <li><a class="dropdown-item" href="jp/index.html"><span class="me-2">🇯🇵</span>日本語</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <button aria-label="切换主题" class="theme-toggle-btn" id="theme-toggle">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <!-- 主要内容 -->
     <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1 class="hero-title animate-in">Explore Creativity, Share Life</h1>
-            <div class="hero-multilang animate-in animate-delay-1">
-                <span class="lang-text zh">探索创造力，分享生活 🌟</span>
-                <span class="lang-text en">Explore Creativity, Share Life 🌟</span>
-                <span class="lang-text it">Esplora la Creatività, Condividi la Vita 🌟</span>
-                <span class="lang-text ja">創造性を探求し、人生を共有する 🌟</span>
-                <span class="lang-text fr">Explorez la Créativité, Partagez la Vie 🌟</span>
-                <span class="lang-text de">Entdecke Kreativität, Teile das Leben 🌟</span>
-                <span class="lang-text es">Explora la Creatividad, Comparte la Vida 🌟</span>
-                <span class="lang-text ru">Исследуй Творчество, Делись Жизнью 🌟</span>
+        <!-- Hero Section - 高级感优化 -->
+        <section class="hero intro parallax-hero dark-overlay bg-cover d-flex align-items-center" id="intro">
+            <div class="hero-particles"></div>
+            <div class="hero-gradient-overlay"></div>
+            <div class="overlay-content w-100 text-white position-relative">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8 mx-auto text-center">
+                            <!-- 欢迎标签 -->
+                            <div class="hero-badge animate__animated animate__fadeInDown" data-aos="fade-down">
+                                <i class="fas fa-sparkles me-2"></i>
+                                Welcome to Creative World
+                            </div>
+
+                            <!-- 主标题 -->
+                            <h1 class="hero-title mb-4 animate__animated animate__fadeInUp" data-aos="fade-up"
+                                data-aos-delay="100">
+                                Explore <span class="gradient-text-vibrant">Infinite Possibilities</span><br>
+                                Create <span class="gradient-text-vibrant">Extraordinary Future</span>
+                            </h1>
+
+                            <!-- 多语言展示 -->
+                            <div class="hero-multilang animate-in animate-delay-1 mb-4" data-aos="fade-up" data-aos-delay="200">
+                                <span class="lang-text zh">探索创造力，分享生活 🌟</span>
+                                <span class="lang-text en">Explore Creativity, Share Life 🌟</span>
+                                <span class="lang-text it">Esplora la Creatività, Condividi la Vita 🌟</span>
+                                <span class="lang-text ja">創造性を探求し、人生を共有する 🌟</span>
+                            </div>
+
+                            <!-- 副标题 -->
+                            <p class="hero-subtitle mb-5 animate__animated animate__fadeIn" data-aos="fade-up"
+                                data-aos-delay="300">
+                                A global platform connecting cultures through visual storytelling, creative writing, and digital innovation.
+                                <br>Welcome to a world where creativity knows no boundaries.
+                            </p>
+
+                            <!-- CTA按钮组 -->
+                            <div class="hero-cta-group animate__animated animate__fadeInUp" data-aos="fade-up"
+                                data-aos-delay="400">
+                                <a class="btn btn-hero-primary btn-lg" href="zh-CN/index.html">
+                                    <i class="fas fa-rocket me-2"></i>Start Exploring
+                                </a>
+                                <a class="btn btn-hero-secondary btn-lg" href="zh-CN/gallery.html">
+                                    <i class="fas fa-images me-2"></i>View Gallery
+                                </a>
+                            </div>
+
+                            <!-- 滚动提示 -->
+                            <div class="scroll-indicator animate__animated animate__fadeInUp animate__delay-3s" data-aos="fade-up" data-aos-delay="500">
+                                <div class="scroll-mouse">
+                                    <div class="scroll-wheel"></div>
+                                </div>
+                                <p class="scroll-text">Scroll to Explore More</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="hero-subtitle animate-in animate-delay-2">
-                A global platform connecting cultures through visual storytelling, creative writing, and digital
-                innovation.
-                Welcome to a world where creativity knows no boundaries.
-            </p>
         </section>
 
         <!-- 特色展示 -->
@@ -220,21 +312,141 @@
         </section>
     </main>
 
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="en/contact-en.html">Contact</a>
-                <a href="https://github.com/AlexanderJ-Carter" target="_blank" rel="noopener">GitHub</a>
-                <a href="en/privacy-en.html">Privacy</a>
-                <a href="en/terms-en.html">Terms</a>
+    <!-- 现代化页脚 -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row footer-main">
+                <div class="col-lg-4 footer-brand-section">
+                    <a href="index.html" class="footer-logo-link">
+                        <img src="img/branding/logo.png" alt="Logo" width="40" height="40">
+                        <span>Alexander James Carter</span>
+                    </a>
+                    <p class="footer-slogan">
+                        Explore creativity, share life, capture moments. A global platform connecting cultures through visual storytelling and digital innovation.
+                    </p>
+                    <div class="footer-certifications">
+                        <a href="zh-CN/license.html" class="cert-badge license">
+                            <i class="fas fa-certificate"></i>
+                            <span>CC BY-NC-SA 4.0</span>
+                        </a>
+                        <a href="https://github.com/AlexanderJ-Carter" class="cert-badge" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                            <span>Open Source</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-nav-section">
+                    <h5 class="footer-section-title">Quick Links</h5>
+                    <ul class="footer-nav-list">
+                        <li><a href="zh-CN/gallery.html">Gallery</a></li>
+                        <li><a href="zh-CN/profile.html">Profile</a></li>
+                        <li><a href="zh-CN/contact.html">Contact</a></li>
+                        <li><a href="time.html">Time Service</a></li>
+                        <li><a href="map.html">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6 footer-nav-section">
+                    <h5 class="footer-section-title">Legal</h5>
+                    <ul class="footer-nav-list">
+                        <li><a href="zh-CN/privacy.html">Privacy Policy</a></li>
+                        <li><a href="zh-CN/terms.html">Terms of Service</a></li>
+                        <li><a href="zh-CN/license.html">License</a></li>
+                        <li><a href="zh-CN/ads.html">Advertising</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 footer-extras-section">
+                    <h5 class="footer-section-title">Languages</h5>
+                    <div class="language-selector">
+                        <div class="language-options">
+                            <a href="zh-CN/index.html" class="lang-option">
+                                <span class="flag">🇨🇳</span>
+                                <span class="lang-text">中文</span>
+                            </a>
+                            <a href="index.html" class="lang-option active">
+                                <span class="flag">🇬🇧</span>
+                                <span class="lang-text">English</span>
+                            </a>
+                            <a href="it/index.html" class="lang-option">
+                                <span class="flag">🇮🇹</span>
+                                <span class="lang-text">Italiano</span>
+                            </a>
+                            <a href="jp/index.html" class="lang-option">
+                                <span class="flag">🇯🇵</span>
+                                <span class="lang-text">日本語</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <p class="footer-copyright">
-                © 2025 Alexander James Carter. All rights reserved.
-            </p>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="footer-copyright-section">
+                        <p class="footer-copyright">© 2025 Alexander James Carter. All rights reserved.</p>
+                        <p class="footer-powered">Powered by <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></p>
+                    </div>
+                    <div class="footer-legal-links">
+                        <a href="zh-CN/privacy.html">Privacy</a>
+                        <span class="separator">•</span>
+                        <a href="zh-CN/terms.html">Terms</a>
+                        <span class="separator">•</span>
+                        <a href="zh-CN/license.html">License</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <!-- 脚本 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/components/chatbot.js"></script>
+    <script src="js/components/cookie-consent.js"></script>
+    
+    <script>
+        // 初始化AOS动画
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // 主题切换功能
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-bs-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-bs-theme', newTheme);
+                document.body.classList.toggle('dark-mode', newTheme === 'dark');
+                
+                const icon = this.querySelector('i');
+                if (newTheme === 'dark') {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+                
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // 加载保存的主题
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-bs-theme', savedTheme);
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                const icon = themeToggle.querySelector('i');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+    </script>
 </body>
 
 </html>

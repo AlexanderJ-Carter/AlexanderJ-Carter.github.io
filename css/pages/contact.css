@@ -1,6 +1,7 @@
 /* 联系页面样式 - 高级设计版 */
 body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -246,16 +247,16 @@ main {
 .contact-btn {
     display: inline-block;
     padding: 0.9rem 2.5rem;
-    background: linear-gradient(45deg, #007bff, #00c6ff);
+    background: var(--gradient-primary, linear-gradient(135deg, #6366f1, #8b5cf6));
     color: white;
     border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease;
+    transition: var(--transition-smooth, all 0.4s ease);
     border: none;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+    box-shadow: var(--shadow-primary, 0 8px 24px rgba(99, 102, 241, 0.25));
     position: relative;
     overflow: hidden;
 }
@@ -279,7 +280,7 @@ main {
 
 .contact-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.35);
     color: white;
 }
 
@@ -301,27 +302,28 @@ main {
     top: 2rem;
     left: 2rem;
     padding: 0.9rem 1.5rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(99, 102, 241, 0.1);
     border-radius: 30px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    color: #007bff;
+    box-shadow: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12));
+    color: var(--primary-color, #6366f1);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: var(--transition-smooth, all 0.4s ease);
     z-index: 1000;
     display: flex;
     align-items: center;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    font-weight: 500;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-weight: 600;
     letter-spacing: 0.5px;
 }
 
 .back-btn:hover {
     transform: translateX(-8px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    background: white;
-    color: #0056b3;
+    box-shadow: var(--shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.16));
+    background: var(--gradient-primary, linear-gradient(135deg, #6366f1, #8b5cf6));
+    color: white;
+    border-color: transparent;
 }
 
 .back-btn i {
@@ -655,4 +657,141 @@ main {
     .qr-title {
         font-size: 1.5rem;
     }
+}
+
+/* ========================================
+   统一暗黑模式样式 - 使用全局变量
+   ======================================== */
+
+body.dark-mode {
+    background: linear-gradient(
+        135deg,
+        var(--dark-bg) 0%,
+        var(--dark-bg-secondary) 50%,
+        var(--dark-bg-tertiary) 100%
+    );
+}
+
+body.dark-mode .contact-container {
+    background: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .contact-container::before {
+    background: var(--gradient-primary);
+    opacity: 0.8;
+}
+
+body.dark-mode .contact-header h1 {
+    color: var(--dark-text-primary);
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode .contact-header h1::after {
+    background: var(--gradient-primary);
+}
+
+body.dark-mode .contact-header p {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .contact-item {
+    background: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .contact-item:hover {
+    background: var(--dark-bg-tertiary);
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+}
+
+body.dark-mode .contact-icon {
+    background: var(--dark-bg-tertiary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .contact-title {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .contact-info {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .contact-btn {
+    background: var(--gradient-primary);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+}
+
+body.dark-mode .contact-btn:hover {
+    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4);
+}
+
+body.dark-mode .back-btn {
+    background: var(--dark-card-bg);
+    color: var(--primary-color);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .back-btn:hover {
+    background: var(--gradient-primary);
+    color: #ffffff;
+    border-color: transparent;
+}
+
+body.dark-mode .qr-modal {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+body.dark-mode .qr-modal-content {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .qr-title {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .qr-desc {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .qr-close {
+    color: var(--dark-text-secondary);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .qr-close:hover {
+    color: var(--error-color);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .qr-image {
+    background-color: var(--dark-bg-secondary);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .copy-btn {
+    background: var(--gradient-primary);
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.3);
+}
+
+body.dark-mode .copy-btn:hover {
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+body.dark-mode .language-options {
+    border-top-color: var(--dark-border);
+}
+
+body.dark-mode .language-options p {
+    color: var(--dark-text-secondary);
 }

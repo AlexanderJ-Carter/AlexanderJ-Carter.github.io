@@ -7,36 +7,48 @@ document.addEventListener("DOMContentLoaded", function () {
     const languageDropdown = document.querySelector(".language-dropdown");
     const navLinks = document.querySelectorAll(".nav-link");
 
-    // 滚动处理
-    window.addEventListener("scroll", function () {
-        // 导航栏背景透明度变化
-        if (window.scrollY > 100) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
+    // 滚动处理（优化性能，使用节流）
+    let ticking = false;
+    function handleScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                // 导航栏背景透明度变化
+                if (window.scrollY > 100) {
+                    navbar.classList.add("scrolled");
+                } else {
+                    navbar.classList.remove("scrolled");
+                }
 
-        // 显示/隐藏返回顶部按钮
-        if (window.scrollY > 500) {
-            backToTopBtn.classList.add("show");
-        } else {
-            backToTopBtn.classList.remove("show");
-        }
+                // 显示/隐藏返回顶部按钮
+                if (backToTopBtn) {
+                    if (window.scrollY > 500) {
+                        backToTopBtn.classList.add("show");
+                    } else {
+                        backToTopBtn.classList.remove("show");
+                    }
+                }
 
-        // 更新进度条
-        if (progressBar) {
-            const winScroll =
-                document.body.scrollTop || document.documentElement.scrollTop;
-            const height =
-                document.documentElement.scrollHeight -
-                document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            progressBar.style.width = scrolled + "%";
-        }
+                // 更新进度条
+                if (progressBar) {
+                    const winScroll =
+                        document.body.scrollTop || document.documentElement.scrollTop;
+                    const height =
+                        document.documentElement.scrollHeight -
+                        document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    progressBar.style.width = scrolled + "%";
+                }
 
-        // 根据滚动位置突出显示当前导航项
-        updateActiveNavItem();
-    });
+                // 根据滚动位置突出显示当前导航项
+                updateActiveNavItem();
+                
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // 返回顶部按钮点击事件
     if (backToTopBtn) {
@@ -68,15 +80,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 平滑滚动到锚点
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    // 平滑滚动到锚点（避免与enhanced.js重复）
+    // 注意：enhanced.js中已有initSmoothScroll函数，这里只处理导航栏特定的滚动
+    const navAnchors = document.querySelectorAll('.navbar a[href^="#"]');
+    navAnchors.forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
-            if (this.getAttribute("href") !== "#") {
+            const href = this.getAttribute("href");
+            if (href && href !== "#" && href !== "#!") {
                 e.preventDefault();
-                const targetId = this.getAttribute("href");
+                const targetId = href;
                 const targetElement = document.querySelector(targetId);
 
-                if (targetElement) {
+                if (targetElement && navbar) {
                     const navbarHeight = navbar.offsetHeight;
                     const targetPosition =
                         targetElement.getBoundingClientRect().top +
@@ -90,6 +105,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // 更新URL但不进行滚动
                     history.pushState(null, null, targetId);
+                    
+                    // 关闭移动端菜单
+                    const navbarCollapse = document.querySelector(".navbar-collapse");
+                    if (navbarCollapse && navbarCollapse.classList.contains("show")) {
+                        const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                        bsCollapse.hide();
+                    }
                 }
             }
         });

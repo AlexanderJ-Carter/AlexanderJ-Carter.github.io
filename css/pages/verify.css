@@ -279,6 +279,105 @@ body {
     margin-right: 6px;
 }
 
+/* ========================================
+   统一暗黑模式样式 - 使用全局变量
+   ======================================== */
+
+body.dark-mode {
+    background: linear-gradient(
+        135deg,
+        var(--dark-bg) 0%,
+        var(--dark-bg-secondary) 50%,
+        var(--dark-bg-tertiary) 100%
+    );
+}
+
+body.dark-mode .verification-container {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .verification-container::before {
+    background: radial-gradient(
+        circle,
+        rgba(99, 102, 241, 0.15) 0%,
+        rgba(139, 92, 246, 0.1) 50%,
+        transparent 80%
+    );
+}
+
+body.dark-mode .verification-title {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .verification-title i {
+    background: var(--gradient-primary);
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);
+}
+
+body.dark-mode .verification-text {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .back-btn {
+    background: var(--dark-card-bg);
+    color: var(--dark-text-primary);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .back-btn:hover {
+    background: var(--gradient-primary);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+body.dark-mode .continue-btn {
+    background: var(--gradient-primary);
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+body.dark-mode .continue-btn:hover {
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+}
+
+body.dark-mode .error-message {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--error-color);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+body.dark-mode .loader {
+    border-color: rgba(99, 102, 241, 0.2);
+    border-top-color: var(--primary-color);
+}
+
+body.dark-mode .loading-indicator p {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .auto-redirect-text {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .auto-redirect-text i {
+    color: var(--primary-color);
+}
+
+body.dark-mode #countdown {
+    color: var(--primary-color);
+}
+
+body.dark-mode .security-info {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .security-info i {
+    color: var(--success-color);
+}
+
 /* 响应式调整 */
 @media (max-width: 576px) {
     .verification-container {

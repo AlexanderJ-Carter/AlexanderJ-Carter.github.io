@@ -72,6 +72,39 @@
     --dark-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     --dark-highlight: rgba(255, 255, 255, 0.1);
     --dark-card-bg: rgba(30, 30, 30, 0.8);
+
+    /* 统一的主色调变量（现代化配色方案） */
+    --primary-color: #6366f1; /* Indigo - 更现代的主色 */
+    --secondary-color: #8b5cf6; /* Purple - 优雅的次要色 */
+    --accent-color: #ec4899; /* Pink - 活力的强调色 */
+    --success-color: #10b981; /* Green - 成功状态 */
+    --warning-color: #f59e0b; /* Amber - 警告状态 */
+    --error-color: #ef4444; /* Red - 错误状态 */
+    --light-color: #ffffff;
+    --dark-color: #1e293b; /* 更柔和的深色 */
+
+    /* 统一的渐变变量（优化配色） */
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --gradient-secondary: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+    --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    --gradient-warm: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+
+    /* 统一的过渡效果 */
+    --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --transition-fast: all 0.2s ease-in-out;
+    --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* 统一的玻璃效果变量（优化透明度） */
+    --glass-bg: rgba(255, 255, 255, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
+
+    /* 统一的阴影变量 */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2);
+    --shadow-primary: 0 8px 24px rgba(99, 102, 241, 0.25);
 }
 
 *,

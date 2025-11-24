@@ -1,51 +1,56 @@
+/* About页面特定变量 - 使用style.default.css中的基础变量 */
 :root {
-    --primary-color: #007bff;
-    --secondary-color: #00d2ff;
-    --success-color: #28a745;
-    --light-bg: #f8f9fa;
-    --white: #fff;
-    --dark-text: #333;
-    --gray-text: #666;
-    --grid-gap: 1.5rem;
-    --border-radius: 10px;
-    --card-radius: 15px;
-    --box-shadow-sm: 0 3px 10px rgba(0, 0, 0, 0.1);
-    --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.1);
-    --transition-speed: 0.3s;
-    --gradient-primary: linear-gradient(
+    /* 页面特定的颜色变量（如果与全局不同） */
+    --about-primary: #007bff;
+    --about-secondary: #00d2ff;
+    --about-light-bg: #f8f9fa;
+    --about-white: #fff;
+    --about-dark-text: #333;
+    --about-gray-text: #666;
+    --about-grid-gap: 1.5rem;
+    --about-border-radius: 10px;
+    --about-card-radius: 15px;
+    --about-box-shadow-sm: 0 3px 10px rgba(0, 0, 0, 0.1);
+    --about-box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.1);
+    --about-transition-speed: 0.3s;
+    --about-gradient-primary: linear-gradient(
         90deg,
-        var(--primary-color),
-        var(--secondary-color)
+        var(--about-primary),
+        var(--about-secondary)
     );
-    --gradient-overlay: linear-gradient(
+    --about-gradient-overlay: linear-gradient(
         45deg,
         rgba(0, 123, 255, 0.2),
         rgba(0, 210, 255, 0.2)
     );
 }
 
-/* 关于部分样式 */
+/* 关于部分样式（优化配色） */
 .about-section {
     background: linear-gradient(
-        to right,
-        var(--light-bg) 50%,
-        var(--white) 50%
+        135deg,
+        #f8fafc 0%,
+        #e2e8f0 50%,
+        #ffffff 100%
     );
-}
-
-.section-title {
-    font-size: clamp(2rem, 5vw, 2.5rem);
-    font-weight: 600;
-    margin-bottom: 1rem;
+    padding: 6rem 0;
     position: relative;
+    overflow: hidden;
 }
 
-.subtitle-line {
-    width: 50px;
-    height: 3px;
-    background: var(--gradient-primary);
-    margin-bottom: 2rem;
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+    pointer-events: none;
 }
+
+/* section-title和subtitle-line已统一到enhanced.css，此处删除重复定义 */
 
 .about-content {
     padding-right: 2rem;
@@ -61,12 +66,12 @@
 .feature-item {
     text-align: center;
     padding: 1rem;
-    background: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow-sm);
-    transition: transform var(--transition-speed) ease;
-    margin-right: var(--grid-gap);
-    margin-bottom: var(--grid-gap);
+    background: var(--about-white);
+    border-radius: var(--about-border-radius);
+    box-shadow: var(--about-box-shadow-sm);
+    transition: transform var(--about-transition-speed) ease;
+    margin-right: var(--about-grid-gap);
+    margin-bottom: var(--about-grid-gap);
 }
 
 .features-grid > *:nth-child(3n) {
@@ -79,7 +84,7 @@
 
 .feature-item i {
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var(--about-primary);
     margin-bottom: 0.5rem;
 }
 
@@ -87,7 +92,7 @@
 .about-image {
     position: relative;
     overflow: hidden;
-    border-radius: var(--card-radius);
+    border-radius: var(--about-card-radius);
 }
 
 .image-overlay {
@@ -96,7 +101,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background: var(--gradient-overlay);
+    background: var(--about-gradient-overlay);
     pointer-events: none;
 }
 
@@ -127,14 +132,16 @@
     }
 }
 
-/* 服务部分样式 */
+/* 服务部分样式（优化配色） */
 .services-section {
-    background: linear-gradient(135deg, var(--light-bg) 0%, #e9ecef 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
+    padding: 6rem 0;
+    position: relative;
 }
 
 .service-card {
     background: var(--white);
-    border-radius: var(--card-radius);
+    border-radius: var(--about-card-radius);
     padding: 2rem;
     height: 100%;
     transition: transform var(--transition-speed) ease,
@@ -144,7 +151,7 @@
 
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: var(--box-shadow-lg);
+    box-shadow: var(--about-box-shadow-lg);
 }
 
 .card-icon {
@@ -170,7 +177,7 @@
 .card-content h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: var(--dark-text);
+    color: var(--about-dark-text);
 }
 
 .service-features {
@@ -183,7 +190,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
-    color: var(--gray-text);
+    color: var(--about-gray-text);
 }
 
 .service-features li i {
@@ -195,7 +202,7 @@
 /* 响应式设计 */
 @media (max-width: 992px) {
     .about-section {
-        background: var(--light-bg);
+        background: var(--about-light-bg);
     }
 
     .about-content {
@@ -212,7 +219,7 @@
     }
 
     .features-grid > *:nth-child(3n) {
-        margin-right: var(--grid-gap);
+        margin-right: var(--about-grid-gap);
     }
 
     .features-grid > *:nth-child(2n) {
@@ -234,16 +241,139 @@
     }
 }
 
-/* 支持暗模式 */
+/* ========================================
+   统一暗黑模式样式 - 使用全局变量
+   ======================================== */
+
+body.dark-mode .about-section {
+    background: linear-gradient(
+        135deg,
+        var(--dark-bg) 0%,
+        var(--dark-bg-secondary) 50%,
+        var(--dark-bg-tertiary) 100%
+    );
+}
+
+body.dark-mode .about-section::before {
+    background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+}
+
+body.dark-mode .about-content p {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .feature-item {
+    background: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .feature-item:hover {
+    background: var(--dark-bg-tertiary);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+body.dark-mode .feature-item i {
+    color: var(--primary-color);
+}
+
+body.dark-mode .about-image img {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--dark-border);
+}
+
+body.dark-mode .image-frame {
+    border-color: var(--dark-border);
+}
+
+/* 服务部分暗黑模式 */
+body.dark-mode .services-section {
+    background: linear-gradient(
+        135deg,
+        var(--dark-bg) 0%,
+        var(--dark-bg-secondary) 50%,
+        var(--dark-bg-tertiary) 100%
+    );
+}
+
+body.dark-mode .services-section::before {
+    background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+}
+
+body.dark-mode .section-title-modern {
+    color: var(--dark-text-primary);
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode .section-subtitle {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .section-badge {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.3);
+    color: var(--primary-color);
+}
+
+body.dark-mode .service-card-modern {
+    background: var(--dark-card-bg);
+    border: 1px solid var(--dark-border);
+    box-shadow: var(--dark-shadow);
+}
+
+body.dark-mode .service-card-modern::before {
+    background: var(--gradient-primary);
+}
+
+body.dark-mode .service-card-modern:hover {
+    background: var(--dark-bg-tertiary);
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: 0 15px 40px rgba(99, 102, 241, 0.25);
+}
+
+body.dark-mode .service-title {
+    color: var(--dark-text-primary);
+}
+
+body.dark-mode .service-desc {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .service-list {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .service-list i {
+    color: var(--success-color);
+}
+
+body.dark-mode .service-link {
+    color: var(--primary-color);
+}
+
+body.dark-mode .service-link:hover {
+    color: var(--primary-color);
+}
+
+body.dark-mode .service-number {
+    color: var(--dark-text-secondary);
+}
+
+/* 支持系统暗模式偏好（作为后备） */
 @media (prefers-color-scheme: dark) {
     :root {
-        --light-bg: #222;
-        --white: #333;
-        --dark-text: #eee;
-        --gray-text: #bbb;
-        --box-shadow-sm: 0 3px 10px rgba(0, 0, 0, 0.2);
-        --box-shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.3);
-        --gradient-primary: linear-gradient(90deg, #0095ff, #00e5ff);
+        --about-light-bg: var(--dark-bg-secondary);
+        --about-white: var(--dark-card-bg);
+        --about-dark-text: var(--dark-text-primary);
+        --about-gray-text: var(--dark-text-secondary);
+        --about-box-shadow-sm: var(--dark-shadow);
+        --about-box-shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.4);
+        --about-gradient-primary: var(--gradient-primary);
     }
 }
 
@@ -434,58 +564,139 @@
 }
 
 /* 滚动指示器 */
+/* 高级滚动指示器 - 现代化设计 */
 .scroll-indicator {
     position: absolute;
-    bottom: 3rem;
+    bottom: 4rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    opacity: 0.8;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease 2s forwards;
+    cursor: pointer;
+    z-index: 10;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
 }
 
 .scroll-mouse {
-    width: 28px;
-    height: 45px;
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    border-radius: 15px;
+    width: 32px;
+    height: 52px;
+    border: 2.5px solid rgba(255, 255, 255, 0.8);
+    border-radius: 18px;
     position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-indicator:hover .scroll-mouse {
+    border-color: rgba(255, 255, 255, 1);
+    box-shadow: 
+        0 12px 40px rgba(99, 102, 241, 0.3),
+        inset 0 0 30px rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
 }
 
 .scroll-wheel {
-    width: 4px;
-    height: 8px;
-    background: white;
-    border-radius: 2px;
+    width: 5px;
+    height: 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.6) 100%);
+    border-radius: 3px;
     position: absolute;
-    top: 8px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    animation: scroll-animation 2s infinite;
+    animation: scroll-animation 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
 }
 
 @keyframes scroll-animation {
     0% {
-        top: 8px;
+        top: 10px;
         opacity: 1;
+        transform: translateX(-50%) scale(1);
     }
     50% {
-        top: 20px;
-        opacity: 0.5;
+        top: 24px;
+        opacity: 0.4;
+        transform: translateX(-50%) scale(0.8);
     }
     100% {
-        top: 8px;
+        top: 10px;
         opacity: 1;
+        transform: translateX(-50%) scale(1);
     }
 }
 
 .scroll-text {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.95);
     margin: 0;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+}
+
+.scroll-indicator:hover .scroll-text {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: rgba(99, 102, 241, 0.4);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+/* 添加向下箭头动画 */
+.scroll-indicator::after {
+    content: '';
+    position: absolute;
+    bottom: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
+    animation: arrowPulse 2s ease infinite;
+}
+
+@keyframes arrowPulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(5px);
+    }
 }
 
 /* 响应式优化 */
@@ -524,6 +735,41 @@
     }
 }
 
+/* 滚动指示器暗黑模式 */
+body.dark-mode .scroll-mouse {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .scroll-indicator:hover .scroll-mouse {
+    border-color: rgba(99, 102, 241, 0.8);
+    box-shadow: 
+        0 12px 40px rgba(99, 102, 241, 0.4),
+        inset 0 0 30px rgba(99, 102, 241, 0.2);
+}
+
+body.dark-mode .scroll-wheel {
+    background: linear-gradient(180deg, rgba(99, 102, 241, 1) 0%, rgba(139, 92, 246, 0.6) 100%);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+body.dark-mode .scroll-text {
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+body.dark-mode .scroll-indicator:hover .scroll-text {
+    background: rgba(99, 102, 241, 0.3);
+    border-color: rgba(99, 102, 241, 0.5);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+body.dark-mode .scroll-indicator::after {
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.8) 0%, transparent 100%);
+}
+
 @media (max-width: 576px) {
     .hero-stats {
         flex-direction: column;
@@ -551,7 +797,7 @@
     );
     border: 1px solid rgba(102, 126, 234, 0.2);
     border-radius: 50px;
-    color: var(--primary-color);
+    color: var(--about-primary);
     font-weight: 600;
     font-size: 0.875rem;
     letter-spacing: 1px;
@@ -562,13 +808,13 @@
 .section-title-modern {
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
-    color: var(--dark-text);
+    color: var(--about-dark-text);
     margin-bottom: 1rem;
 }
 
 .section-subtitle {
     font-size: 1.1rem;
-    color: var(--gray-text);
+    color: var(--about-gray-text);
     max-width: 600px;
     margin: 0 auto;
 }
@@ -589,7 +835,7 @@
     border-radius: 50px;
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--dark-text);
+    color: var(--about-dark-text);
     transition: all 0.3s ease;
 }
 
@@ -600,19 +846,19 @@
 }
 
 .skill-tag i {
-    color: var(--primary-color);
+    color: var(--about-primary);
 }
 
 /* 关于描述 */
 .about-description {
     font-size: 1.05rem;
     line-height: 1.8;
-    color: var(--gray-text);
+    color: var(--about-gray-text);
     margin-bottom: 1.5rem;
 }
 
 .about-description strong {
-    color: var(--dark-text);
+    color: var(--about-dark-text);
     font-weight: 600;
 }
 
@@ -656,14 +902,14 @@
 .metric-number {
     font-size: 1.75rem;
     font-weight: 800;
-    color: var(--dark-text);
+    color: var(--about-dark-text);
     line-height: 1;
     margin-bottom: 0.25rem;
 }
 
 .metric-label {
     font-size: 0.85rem;
-    color: var(--gray-text);
+    color: var(--about-gray-text);
 }
 
 /* CTA按钮组 */
@@ -693,7 +939,7 @@
 .btn-outline-modern {
     background: transparent;
     border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    color: var(--about-primary);
     padding: 0.875rem 2rem;
     border-radius: 50px;
     font-weight: 600;
@@ -789,7 +1035,7 @@
 
 .floating-card i {
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var(--about-primary);
 }
 
 @keyframes float {
@@ -956,7 +1202,7 @@
 .service-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--dark-text);
+    color: var(--about-dark-text);
     margin-bottom: 1rem;
 }
 
@@ -964,7 +1210,7 @@
 .service-desc {
     font-size: 1rem;
     line-height: 1.7;
-    color: var(--gray-text);
+    color: var(--about-gray-text);
     margin-bottom: 1.5rem;
 }
 
@@ -977,14 +1223,14 @@
 
 .service-list li {
     padding: 0.5rem 0;
-    color: var(--dark-text);
+    color: var(--about-dark-text);
     display: flex;
     align-items: center;
     gap: 0.75rem;
 }
 
 .service-list i {
-    color: var(--primary-color);
+    color: var(--about-primary);
     font-size: 0.875rem;
 }
 
@@ -993,7 +1239,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--primary-color);
+    color: var(--about-primary);
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;

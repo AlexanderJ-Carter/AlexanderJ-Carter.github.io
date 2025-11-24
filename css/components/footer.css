@@ -2041,3 +2041,47 @@ body .site-footer .footer-copyright-center a:hover {
         font-size: 0.75rem;
     }
 }
+
+/* ========================================
+   页脚徽章区域暗黑模式样式
+   ======================================== */
+
+body.dark-mode .site-footer .footer-badges-section {
+    background: rgba(30, 30, 30, 0.5);
+    border-top-color: var(--dark-border);
+    border-bottom-color: var(--dark-border);
+}
+
+body.dark-mode .site-footer .category-label {
+    color: var(--dark-text-secondary);
+    border-right-color: var(--dark-border);
+}
+
+body.dark-mode .site-footer .badge-compact {
+    background: var(--dark-bg-tertiary);
+    border-color: var(--dark-border);
+    color: var(--primary-color);
+}
+
+body.dark-mode .site-footer .badge-compact:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: rgba(99, 102, 241, 0.4);
+    color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+}
+
+body.dark-mode .site-footer .badge-compact.badge-static {
+    background: var(--dark-bg-secondary);
+    border-color: var(--dark-border);
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .site-footer .badge-compact.badge-static:hover {
+    background: var(--dark-bg-secondary);
+    border-color: var(--dark-border);
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .site-footer .badge-compact i {
+    color: inherit;
+}

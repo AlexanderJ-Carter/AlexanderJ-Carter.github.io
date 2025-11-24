@@ -6,7 +6,7 @@
   - `style.default.css` – 全站核心基础样式。
   - `custom.css` – 自定义补充样式与布局细节。
   - `enhanced.css` – 渐进增强和辅助特性样式。
-  - `display.css` – 可见性、布局状态相关的工具类。
+  - ~~`display.css`~~ – 已合并到 `enhanced.css`
 - **components/**：可复用组件、导航、页脚以及功能模块样式。
 - **pages/**：单独页面或语言版本专属的样式文件。
 - **themes/**：节日或专题活动主题样式（例如新年、诗歌主题）。

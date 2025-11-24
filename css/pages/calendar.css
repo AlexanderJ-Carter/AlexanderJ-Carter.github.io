@@ -4,21 +4,17 @@
    ======================================== */
 
 :root {
-    /* 明亮清新主题色彩 */
-    --calendar-primary: #667eea;
-    --calendar-secondary: #764ba2;
-    --calendar-accent: #f093fb;
-    --calendar-light-bg: #f5f7fa;
+    /* 明亮清新主题色彩（使用统一配色） */
+    --calendar-primary: var(--primary-color, #6366f1);
+    --calendar-secondary: var(--secondary-color, #8b5cf6);
+    --calendar-accent: var(--accent-color, #ec4899);
+    --calendar-light-bg: #f8fafc;
     --calendar-card-bg: #ffffff;
-    --calendar-text-primary: #2c3e50;
-    --calendar-text-secondary: #6c757d;
+    --calendar-text-primary: #1e293b;
+    --calendar-text-secondary: #64748b;
 
-    /* 渐变色彩 */
-    --calendar-gradient-primary: linear-gradient(
-        135deg,
-        #667eea 0%,
-        #764ba2 100%
-    );
+    /* 渐变色彩（使用统一渐变） */
+    --calendar-gradient-primary: var(--gradient-primary);
     --calendar-gradient-soft: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
     --calendar-gradient-hero: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
 
@@ -36,10 +32,10 @@
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Roboto', sans-serif;
 
-    /* 阴影效果 */
-    --shadow-soft: 0 4px 20px rgba(102, 126, 234, 0.15);
-    --shadow-medium: 0 8px 30px rgba(102, 126, 234, 0.2);
-    --shadow-hover: 0 12px 40px rgba(102, 126, 234, 0.25);
+    /* 阴影效果（使用统一阴影变量） */
+    --shadow-soft: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.08));
+    --shadow-medium: var(--shadow-md, 0 4px 16px rgba(0, 0, 0, 0.12));
+    --shadow-hover: var(--shadow-lg, 0 8px 32px rgba(0, 0, 0, 0.16));
 
     /* 圆角 */
     --border-radius: 20px;

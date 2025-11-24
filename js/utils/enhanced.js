@@ -133,32 +133,43 @@ function initParticles() {
     }
 }
 
-// 导航栏滚动效果
+// 导航栏滚动效果（优化性能，避免与navigation.js重复）
 function initNavbarScroll() {
     const navbar = document.querySelector('.navbar');
     const scrollProgress = document.querySelector('.scroll-progress');
 
     if (navbar) {
-        window.addEventListener('scroll', function () {
-            // 导航栏背景变化
-            if (window.scrollY > 100) {
-                navbar.classList.add('navbar-scrolled');
-            } else {
-                navbar.classList.remove('navbar-scrolled');
-            }
+        // 使用节流优化性能
+        let ticking = false;
+        function handleScroll() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    // 导航栏背景变化
+                    if (window.scrollY > 100) {
+                        navbar.classList.add('navbar-scrolled');
+                    } else {
+                        navbar.classList.remove('navbar-scrolled');
+                    }
 
-            // 滚动进度条
-            if (scrollProgress) {
-                const winScroll =
-                    document.body.scrollTop ||
-                    document.documentElement.scrollTop;
-                const height =
-                    document.documentElement.scrollHeight -
-                    document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                scrollProgress.style.width = scrolled + '%';
+                    // 滚动进度条（如果navigation.js没有处理）
+                    if (scrollProgress && !document.querySelector('.navbar .scroll-progress')) {
+                        const winScroll =
+                            document.body.scrollTop ||
+                            document.documentElement.scrollTop;
+                        const height =
+                            document.documentElement.scrollHeight -
+                            document.documentElement.clientHeight;
+                        const scrolled = (winScroll / height) * 100;
+                        scrollProgress.style.width = scrolled + '%';
+                    }
+                    
+                    ticking = false;
+                });
+                ticking = true;
             }
-        });
+        }
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
     }
 }
 
@@ -203,7 +214,7 @@ function initSmoothScroll() {
     });
 }
 
-// 作品集筛选功能
+// 作品集筛选功能（合并自display.js）
 function initPortfolioFilter() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const portfolioItems = document.querySelectorAll('.portfolio-item');
@@ -227,11 +238,8 @@ function initPortfolioFilter() {
                             item.style.transform = 'scale(1)';
                         }, 100);
                     } else {
-                        if (
-                            item
-                                .getAttribute('data-category')
-                                .includes(filterValue)
-                        ) {
+                        const category = item.getAttribute('data-category');
+                        if (category && category.includes(filterValue)) {
                             item.style.display = 'block';
                             setTimeout(() => {
                                 item.style.opacity = '1';
@@ -1026,6 +1034,35 @@ function initLanguageSelector() {
         });
     });
 }
+
+// 性能优化功能（合并自perf.js）
+(function initPerformanceOptimizations() {
+    try {
+        // 确保所有图片默认使用懒加载
+        document.querySelectorAll('img:not([loading])').forEach((img) => {
+            img.setAttribute('loading', 'lazy');
+        });
+
+        // 为外部链接添加安全属性
+        document.querySelectorAll('a[target="_blank"]').forEach((a) => {
+            if (!a.rel) a.rel = 'noopener';
+            else if (!/noopener/.test(a.rel)) a.rel += ' noopener';
+        });
+
+        // 安全初始化AOS（如果可用）
+        if (window.AOS && typeof AOS.init === 'function') {
+            AOS.init({ once: true, duration: 700, easing: 'ease-out' });
+        }
+
+        // 安全初始化Highlight.js（如果可用）
+        if (window.hljs && typeof window.hljs.highlightAll === 'function') {
+            window.hljs.highlightAll();
+        }
+    } catch (e) {
+        // 静默失败，不影响主要功能
+        console && console.debug && console.debug('性能优化初始化错误:', e);
+    }
+})();
 
 // 添加到DOMContentLoaded事件中
 document.addEventListener('DOMContentLoaded', function () {
