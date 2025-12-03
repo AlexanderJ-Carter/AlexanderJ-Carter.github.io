@@ -1,5 +1,5 @@
 # Security Policy for alexander.xin
-# Last updated: 2025-07-22
+# Last updated: 2025-12-04
 
 # Contact information for security reports
 Contact: mailto:2253940186@qq.com

@@ -1,6 +1,6 @@
 # Robots.txt for Alexander James Carter's Personal Website
 # https://alexander.xin
-# Last updated: 2025-06-09
+# Last updated: 2025-12-04
 
 # Allow all search engines to index the site
 User-agent: *

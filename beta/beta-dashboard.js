@@ -969,11 +969,11 @@ class BetaDashboard {
             case 'financial':
                 this.showApiLimitationModal();
                 break;
-            case 'analytics':
-                this.showComingSoon('数据分析工具');
+            case 'audio':
+                window.location.href = 'audio-visualizer.html';
                 break;
-            case 'ai':
-                this.showComingSoon('AI智能助手');
+            case 'game':
+                window.location.href = 'mini-game.html';
                 break;
             case 'experimental':
                 this.showExperimentalFeatures();
@@ -1005,8 +1005,7 @@ class BetaDashboard {
             },
             {
                 name: '🎵 音频可视化器',
-                action: () =>
-                    this.showToast('🎵 音频可视化器开发中...', 'info'),
+                action: () => window.open('audio-visualizer.html', '_blank'),
             },
             {
                 name: '🤖 AI聊天机器人',
