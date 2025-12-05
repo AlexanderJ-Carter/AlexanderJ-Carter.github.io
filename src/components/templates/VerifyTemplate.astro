@@ -186,8 +186,15 @@ const content = verifyData[lang as Lang] || verifyData['en-US'];
   // Turnstile callback
   window.onTurnstileSuccess = function (token) {
     console.log('Verification successful', token);
-    // Redirect back to previous page or home
-    const returnUrl = sessionStorage.getItem('returnUrl') || '/';
+    
+    // Set verification status
+    sessionStorage.setItem('is_verified', 'true');
+    
+    // Get redirect URL from query params
+    const urlParams = new URLSearchParams(window.location.search);
+    const returnUrl = urlParams.get('redirect') || '/';
+    
+    // Redirect
     window.location.href = returnUrl;
   };
 </script>
