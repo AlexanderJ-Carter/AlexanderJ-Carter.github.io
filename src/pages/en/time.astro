@@ -1,0 +1,274 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+// import { getLangFromUrl } from '../../i18n/ui';
+
+// const lang = getLangFromUrl(Astro.url);
+---
+
+<BaseLayout title="Time Service | Alexander James Carter">
+  <section class="pt-32 pb-12 bg-mesh-gradient">
+    <div class="container mx-auto px-4 lg:px-8 text-center">
+      <p
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm font-medium mb-4"
+      >
+        <span>🕐</span> Standard Time / World Clocks
+      </p>
+      <h1
+        class="text-5xl md:text-6xl font-display font-bold mb-4 gradient-text"
+      >
+        Time Service Hub
+      </h1>
+      <p
+        class="text-lg text-[rgb(var(--color-text-secondary))] max-w-3xl mx-auto"
+      >
+        Reliable, clear time info with quick world clocks and simple API
+        examples.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-14 container mx-auto px-4 lg:px-8">
+    <div class="grid gap-8 lg:grid-cols-3">
+      <div class="lg:col-span-2 space-y-6">
+        <div class="glass-card p-8">
+          <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6"
+          >
+            <div>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+                Local time
+              </p>
+              <h2 class="text-3xl font-bold">Beijing / UTC+8</h2>
+            </div>
+            <button
+              onclick="copyTime()"
+              class="px-4 py-2 rounded-full border border-[rgb(var(--color-border))] hover:border-primary-500 hover:text-primary-500 transition-colors text-sm flex items-center gap-2"
+            >
+              <span>📋</span>Copy time
+            </button>
+          </div>
+
+          <div
+            class="bg-gradient-to-br from-primary-500/10 to-accent-500/10 rounded-2xl p-8 border border-primary-500/20"
+          >
+            <div
+              id="mainTime"
+              class="text-6xl md:text-7xl font-bold font-mono text-center mb-4"
+            >
+              00:00:00
+            </div>
+            <div
+              class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 text-[rgb(var(--color-text-secondary))]"
+              id="timeStatus"
+            >
+              <span id="currentDate">--</span>
+              <span class="hidden sm:block">•</span>
+              <span id="currentDay">--</span>
+              <span class="hidden sm:block">•</span>
+              <span id="isoShort">--</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+            <div class="bg-[rgb(var(--color-bg-secondary))] rounded-xl p-4">
+              <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-1">
+                🔢 Unix Timestamp
+              </p>
+              <p id="timestamp" class="font-semibold font-mono text-lg">--</p>
+            </div>
+            <div class="bg-[rgb(var(--color-bg-secondary))] rounded-xl p-4">
+              <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-1">
+                📌 ISO 8601
+              </p>
+              <p id="isoTime" class="font-semibold font-mono text-xs break-all">
+                --
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">🌍 World clocks</h3>
+            <span class="text-sm text-[rgb(var(--color-text-secondary))]"
+              >Refreshes every second</span
+            >
+          </div>
+          <div
+            id="timezoneGrid"
+            class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"
+          >
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="glass-card p-6">
+          <h3 class="text-lg font-bold mb-3">⚡ Quick facts</h3>
+          <ul class="space-y-2 text-sm text-[rgb(var(--color-text-secondary))]">
+            <li class="flex items-center justify-between">
+              <span>City</span><span class="font-semibold">Beijing</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span>Timezone</span><span class="font-semibold">UTC+8 (CST)</span
+              >
+            </li>
+            <li class="flex items-center justify-between">
+              <span>DST</span><span class="font-semibold">Not applied</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="glass-card p-6">
+          <h3 class="text-lg font-bold mb-3">🔌 API</h3>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-3">
+            Call it if you need:
+          </p>
+          <code
+            class="block bg-[rgb(var(--color-bg-secondary))] rounded-lg p-3 text-xs font-mono overflow-x-auto"
+            >curl "https://time.alexander.xin?format=json"</code
+          >
+          <code
+            class="block bg-[rgb(var(--color-bg-secondary))] rounded-lg p-3 text-xs font-mono overflow-x-auto mt-2"
+            >curl "https://time.alexander.xin?text=1"</code
+          >
+        </div>
+
+        <div class="glass-card p-6 bg-blue-50/60 dark:bg-blue-900/20">
+          <h3 class="text-lg font-bold mb-2">💡 Tip</h3>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+            Copy button grabs your local time; cards refresh every second.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const timezones = [
+    { name: 'London', offset: 0, city: 'London, UK', flag: '🇬🇧' },
+    { name: 'Paris', offset: 1, city: 'Paris, France', flag: '🇫🇷' },
+    { name: 'Tokyo', offset: 9, city: 'Tokyo, Japan', flag: '🇯🇵' },
+    { name: 'Sydney', offset: 11, city: 'Sydney, Australia', flag: '🇦🇺' },
+    { name: 'New York', offset: -5, city: 'New York, USA', flag: '🇺🇸' },
+    { name: 'Los Angeles', offset: -8, city: 'Los Angeles, USA', flag: '🇺🇸' },
+    { name: 'Dubai', offset: 4, city: 'Dubai, UAE', flag: '🇦🇪' },
+    { name: 'Singapore', offset: 8, city: 'Singapore', flag: '🇸🇬' },
+    { name: 'Hong Kong', offset: 8, city: 'Hong Kong', flag: '🇭🇰' },
+    { name: 'Shanghai', offset: 8, city: 'Shanghai, China', flag: '🇨🇳' },
+    { name: 'Beijing', offset: 8, city: 'Beijing, China', flag: '🇨🇳' },
+    { name: 'Seoul', offset: 9, city: 'Seoul, South Korea', flag: '🇰🇷' },
+  ];
+
+  function formatParts(date) {
+    return {
+      hh: String(date.getHours()).padStart(2, '0'),
+      mm: String(date.getMinutes()).padStart(2, '0'),
+      ss: String(date.getSeconds()).padStart(2, '0'),
+    };
+  }
+
+  function renderLocalTime() {
+    const now = new Date();
+    const days = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+    const { hh, mm, ss } = formatParts(now);
+
+    const main = document.getElementById('mainTime');
+    const dateEl = document.getElementById('currentDate');
+    const dayEl = document.getElementById('currentDay');
+    const isoEl = document.getElementById('isoTime');
+    const isoShort = document.getElementById('isoShort');
+    const tsEl = document.getElementById('timestamp');
+
+    if (main) main.textContent = `${hh}:${mm}:${ss}`;
+    if (dateEl)
+      dateEl.textContent = now.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
+    if (dayEl) dayEl.textContent = days[now.getDay()];
+    if (isoEl) isoEl.textContent = now.toISOString();
+    if (isoShort)
+      isoShort.textContent = now.toISOString().slice(0, 19).replace('T', ' ');
+    if (tsEl) tsEl.textContent = Math.floor(now.getTime() / 1000).toString();
+  }
+
+  function renderTimezones() {
+    const now = new Date();
+    const grid = document.getElementById('timezoneGrid');
+    if (!grid) return;
+
+    const baseOffsetHours = 8; // local UTC+8
+    if (!grid.dataset.rendered) {
+      grid.innerHTML = timezones
+        .map((tz, idx) => {
+          const tzDate = new Date(
+            now.getTime() + (tz.offset - baseOffsetHours) * 3600 * 1000
+          );
+          const { hh, mm } = formatParts(tzDate);
+          return `
+          <div class="glass-card p-4" data-idx="${idx}">
+            <div class="flex items-center justify-between mb-2">
+              <div class="font-semibold">${tz.name}</div>
+              <span class="text-xl">${tz.flag || ''}</span>
+            </div>
+            <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-2">${tz.city}</p>
+            <div class="flex items-baseline gap-2">
+              <p class="text-3xl font-bold font-mono" data-role="tz-time">${hh}:${mm}</p>
+              <span class="text-xs text-[rgb(var(--color-text-secondary))]">UTC${tz.offset >= 0 ? '+' : ''}${tz.offset}</span>
+            </div>
+          </div>
+        `;
+        })
+        .join('');
+      grid.dataset.rendered = 'true';
+    } else {
+      grid.querySelectorAll('[data-idx]').forEach((card) => {
+        const idx = Number(card.getAttribute('data-idx'));
+        const tz = timezones[idx];
+        const tzDate = new Date(
+          now.getTime() + (tz.offset - baseOffsetHours) * 3600 * 1000
+        );
+        const { hh, mm } = formatParts(tzDate);
+        const timeEl = card.querySelector('[data-role="tz-time"]');
+        if (timeEl) timeEl.textContent = `${hh}:${mm}`;
+      });
+    }
+  }
+
+  function copyTime() {
+    const now = new Date();
+    const text = now.toLocaleString('en-US');
+    navigator.clipboard.writeText(text).then(() => {
+      const status = document.getElementById('timeStatus');
+      if (status) {
+        const original = status.textContent;
+        status.textContent = status.dataset.copiedText || 'Copied';
+        status.dataset.copiedText = original || '';
+        setTimeout(() => {
+          status.textContent = original || '';
+        }, 1500);
+      }
+    });
+  }
+
+  function tick() {
+    renderLocalTime();
+    renderTimezones();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    tick();
+    setInterval(tick, 1000);
+  });
+</script>

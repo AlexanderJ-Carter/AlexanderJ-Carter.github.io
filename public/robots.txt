@@ -1,0 +1,17 @@
+# robots.txt for alexander.xin
+# https://alexander.xin/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /verify
+Disallow: /en/verify
+Disallow: /404
+Disallow: /en/404
+
+# Sitemap
+Sitemap: https://alexander.xin/sitemap.xml
+Sitemap: https://alexander.xin/sitemap-index.xml
+
+# Crawl-delay (optional)
+Crawl-delay: 1
+

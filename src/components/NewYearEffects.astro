@@ -1,0 +1,218 @@
+---
+// New Year Effects Component
+// Adds festive animations like snowflakes, fireworks, etc.
+---
+
+<div
+  id="new-year-effects"
+  class="fixed inset-0 pointer-events-none z-40 overflow-hidden"
+>
+</div>
+
+<script>
+  // Check if it's New Year period (Dec 20 - Jan 15)
+  function isNewYearPeriod() {
+    const today = new Date();
+    const month = today.getMonth() + 1; // 1-12
+    const date = today.getDate();
+
+    // December 20-31 or January 1-15
+    return (month === 12 && date >= 20) || (month === 1 && date <= 15);
+  }
+
+  // Check if it's Spring Festival period (around Jan-Feb)
+  function isSpringFestivalPeriod() {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const date = today.getDate();
+
+    // Roughly Jan 15 - Feb 20
+    return (month === 1 && date >= 15) || (month === 2 && date <= 20);
+  }
+
+  // Check if it's Christmas period (Dec 20 - Dec 31)
+  function isChristmasPeriod() {
+    const today = new Date();
+    const month = today.getMonth() + 1;
+    const date = today.getDate();
+    return month === 12 && date >= 20;
+  }
+
+  // Create snowflake
+  function createSnowflake() {
+    const snowflake = document.createElement('div');
+    snowflake.className = 'snowflake';
+    snowflake.innerHTML = '❄️';
+    snowflake.style.left = Math.random() * 100 + '%';
+    snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+    snowflake.style.animationDelay = Math.random() * 2 + 's';
+    snowflake.style.opacity = (Math.random() * 0.5 + 0.5).toString();
+    snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+    return snowflake;
+  }
+
+  // Create firework
+  function createFirework() {
+    const firework = document.createElement('div');
+    firework.className = 'firework';
+    const emojis = ['🎆', '✨', '🎇', '💫', '⭐'];
+    firework.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+    firework.style.left = Math.random() * 100 + '%';
+    firework.style.top = Math.random() * 30 + '%';
+    firework.style.animationDuration = Math.random() * 2 + 1.5 + 's';
+    firework.style.animationDelay = Math.random() * 1 + 's';
+    firework.style.fontSize = Math.random() * 15 + 15 + 'px';
+    return firework;
+  }
+
+  // Create confetti
+  function createConfetti() {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    const colors = ['🎊', '🎉', '🎈', '✨', '💫'];
+    confetti.innerHTML = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.left = Math.random() * 100 + '%';
+    confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+    confetti.style.animationDelay = Math.random() * 1 + 's';
+    confetti.style.fontSize = Math.random() * 12 + 10 + 'px';
+    return confetti;
+  }
+
+  // Initialize effects
+  function initNewYearEffects() {
+    const container = document.getElementById('new-year-effects');
+    if (!container) return;
+
+    // Check user preference
+    const disableEffects =
+      localStorage.getItem('disableFestiveEffects') === 'true';
+    if (disableEffects) return;
+
+    if (isNewYearPeriod() || isChristmasPeriod()) {
+      // Add snowflakes
+      for (let i = 0; i < 25; i++) {
+        setTimeout(() => {
+          const snowflake = createSnowflake();
+          container.appendChild(snowflake);
+          setTimeout(() => snowflake.remove(), 6000);
+        }, i * 150);
+      }
+
+      // Add occasional fireworks
+      const fireworkInterval = setInterval(() => {
+        if (Math.random() > 0.75) {
+          const firework = createFirework();
+          container.appendChild(firework);
+          setTimeout(() => firework.remove(), 3000);
+        }
+      }, 2500);
+
+      // Clean up interval on page unload
+      window.addEventListener('beforeunload', () => {
+        clearInterval(fireworkInterval);
+      });
+    } else if (isSpringFestivalPeriod()) {
+      // Add confetti for Spring Festival
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const confetti = createConfetti();
+          container.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 5000);
+        }, i * 250);
+      }
+
+      // Add occasional fireworks
+      const springFireworkInterval = setInterval(() => {
+        if (Math.random() > 0.8) {
+          const firework = createFirework();
+          container.appendChild(firework);
+          setTimeout(() => firework.remove(), 3000);
+        }
+      }, 3000);
+
+      // Clean up interval on page unload
+      window.addEventListener('beforeunload', () => {
+        clearInterval(springFireworkInterval);
+      });
+    }
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNewYearEffects);
+  } else {
+    initNewYearEffects();
+  }
+</script>
+
+<style>
+  .snowflake {
+    position: absolute;
+    top: -20px;
+    animation: snowfall linear infinite;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @keyframes snowfall {
+    0% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) translateX(20px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .firework {
+    position: absolute;
+    animation: firework-burst ease-out forwards;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @keyframes firework-burst {
+    0% {
+      transform: scale(0) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5) rotate(180deg);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(0) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .confetti {
+    position: absolute;
+    top: -20px;
+    animation: confetti-fall linear infinite;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) translateX(30px) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .snowflake,
+    .firework,
+    .confetti {
+      animation: none;
+      display: none;
+    }
+  }
+</style>

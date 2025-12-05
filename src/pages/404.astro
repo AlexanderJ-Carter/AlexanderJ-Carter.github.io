@@ -1,0 +1,398 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+
+const translations = {
+  'zh-CN': {
+    title: '页面未找到',
+    message:
+      '抱歉,您访问的页面似乎不存在了。可能是链接错误,或者页面已经被移动。',
+    suggestions: '您可以尝试:',
+    home: '返回首页',
+    back: '返回上一页',
+    tip: '小提示: 也许这个页面正在与宇宙中的某个平行世界相连... 🌌',
+  },
+  'en-US': {
+    title: 'Page Not Found',
+    message:
+      'Sorry, the page you are looking for does not exist. It may have been moved or the link is incorrect.',
+    suggestions: 'You can try:',
+    home: 'Go Home',
+    back: 'Go Back',
+    tip: 'Fun fact: This page might be connected to a parallel universe... 🌌',
+  },
+  'en-GB': {
+    title: 'Page Not Found',
+    message:
+      'Sorry, the page you are looking for does not exist. It may have been moved or the link is incorrect.',
+    suggestions: 'You can try:',
+    home: 'Go Home',
+    back: 'Go Back',
+    tip: 'Fun fact: This page might be connected to a parallel universe... 🌌',
+  },
+  fr: {
+    title: 'Page non trouvée',
+    message:
+      "Désolé, la page que vous recherchez n'existe pas. Elle a peut-être été déplacée ou le lien est incorrect.",
+    suggestions: 'Vous pouvez essayer:',
+    home: 'Accueil',
+    back: 'Retour',
+    tip: 'Fait amusant: Cette page pourrait être connectée à un univers parallèle... 🌌',
+  },
+  ru: {
+    title: 'Страница не найдена',
+    message:
+      'Извините, страница, которую вы ищете, не существует. Возможно, она была перемещена или ссылка неверна.',
+    suggestions: 'Вы можете попробовать:',
+    home: 'На главную',
+    back: 'Назад',
+    tip: 'Интересный факт: Эта страница может быть связана с параллельной вселенной... 🌌',
+  },
+};
+
+const t404 = translations[lang] || translations['zh-CN'];
+---
+
+<BaseLayout title={`${t404.title} - 404`} showHeader={false} showFooter={false}>
+  <section
+    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+  >
+    <!-- Animated Background -->
+    <div class="absolute inset-0 bg-mesh-gradient"></div>
+
+    <!-- Floating Elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+      <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
+      <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
+      <div class="particle" style="left: 70%; animation-delay: 1s;"></div>
+      <div class="particle" style="left: 90%; animation-delay: 3s;"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 container mx-auto px-4 lg:px-8 text-center">
+      <div class="max-w-3xl mx-auto">
+        <!-- 404 Number with Animation -->
+        <div class="mb-8">
+          <h1
+            id="error-404"
+            class="text-9xl md:text-[12rem] font-display font-bold gradient-text"
+          >
+            404
+          </h1>
+        </div>
+
+        <!-- Animated Icon -->
+        <div class="mb-8">
+          <div
+            id="error-icon"
+            class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-5xl cursor-pointer hover:scale-110 transition-transform"
+            onclick="rotateIcon()"
+          >
+            🔍
+          </div>
+        </div>
+
+        <!-- Message -->
+        <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+          {t404.title}
+        </h2>
+
+        <p
+          class="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] mb-8 max-w-xl mx-auto"
+        >
+          {t404.message}
+        </p>
+
+        <!-- Interactive Game -->
+        <div class="glass-card p-8 mb-8 max-w-md mx-auto">
+          <h3 class="text-xl font-bold mb-4">
+            {
+              lang === 'zh-CN'
+                ? '🎮 小游戏：找到隐藏的数字'
+                : '🎮 Mini Game: Find the Hidden Number'
+            }
+          </h3>
+          <div id="number-game" class="space-y-4">
+            <div class="grid grid-cols-5 gap-2 mb-4">
+              {
+                Array.from({ length: 25 }).map((_, i) => (
+                  <div
+                    class="number-cell w-12 h-12 flex items-center justify-center rounded-lg bg-[rgb(var(--color-bg-secondary))] cursor-pointer hover:bg-[rgb(var(--color-bg-accent))] transition-colors"
+                    data-number={i + 1}
+                  >
+                    ?
+                  </div>
+                ))
+              }
+            </div>
+            <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+              {
+                lang === 'zh-CN'
+                  ? '点击方块找到数字 404！'
+                  : 'Click the squares to find the number 404!'
+              }
+            </p>
+            <div id="game-result" class="hidden">
+              <p class="text-green-500 font-bold text-lg">
+                {lang === 'zh-CN' ? '🎉 找到了！' : '🎉 Found it!'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="glass-card p-8 mb-8 max-w-2xl mx-auto">
+          <h3 class="text-xl font-bold mb-4">{t404.suggestions}</h3>
+          <div class="grid md:grid-cols-2 gap-4 text-left">
+            <a
+              href={lang === 'zh-CN' ? '/' : `/${lang}/`}
+              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors group"
+            >
+              <span class="text-2xl group-hover:scale-110 transition-transform"
+                >🏠</span
+              >
+              <div>
+                <div class="font-semibold mb-1">
+                  {lang === 'zh-CN' ? '返回首页' : 'Go Home'}
+                </div>
+                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                  {
+                    lang === 'zh-CN'
+                      ? '从主页重新开始浏览'
+                      : 'Start browsing from the homepage'
+                  }
+                </div>
+              </div>
+            </a>
+
+            <a
+              href={lang === 'zh-CN' ? '/gallery' : `/${lang}/gallery`}
+              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors group"
+            >
+              <span class="text-2xl group-hover:scale-110 transition-transform"
+                >🖼️</span
+              >
+              <div>
+                <div class="font-semibold mb-1">
+                  {lang === 'zh-CN' ? '浏览作品集' : 'Browse Gallery'}
+                </div>
+                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                  {
+                    lang === 'zh-CN'
+                      ? '查看摄影作品和项目'
+                      : 'View photography and projects'
+                  }
+                </div>
+              </div>
+            </a>
+
+            <a
+              href={lang === 'zh-CN' ? '/about' : `/${lang}/about`}
+              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors group"
+            >
+              <span class="text-2xl group-hover:scale-110 transition-transform"
+                >👤</span
+              >
+              <div>
+                <div class="font-semibold mb-1">
+                  {lang === 'zh-CN' ? '了解更多' : 'Learn More'}
+                </div>
+                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                  {lang === 'zh-CN' ? '访问关于页面' : 'Visit the about page'}
+                </div>
+              </div>
+            </a>
+
+            <a
+              href={lang === 'zh-CN' ? '/contact' : `/${lang}/contact`}
+              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors group"
+            >
+              <span class="text-2xl group-hover:scale-110 transition-transform"
+                >📧</span
+              >
+              <div>
+                <div class="font-semibold mb-1">
+                  {lang === 'zh-CN' ? '联系我们' : 'Contact Us'}
+                </div>
+                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                  {
+                    lang === 'zh-CN'
+                      ? '报告错误或寻求帮助'
+                      : 'Report an error or get help'
+                  }
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={lang === 'zh-CN' ? '/' : `/${lang}/`}
+            class="btn-primary inline-flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              ></path>
+            </svg>
+            {t404.home}
+          </a>
+
+          <button
+            onclick="history.back()"
+            class="btn-secondary inline-flex items-center gap-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            {t404.back}
+          </button>
+        </div>
+
+        <!-- Fun Element -->
+        <div class="mt-12 text-sm text-[rgb(var(--color-text-tertiary))]">
+          <p>{t404.tip}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  // Animate 404 number
+  const error404 = document.getElementById('error-404');
+  if (error404) {
+    let rotation = 0;
+    setInterval(() => {
+      rotation += 5;
+      error404.style.transform = `rotate(${rotation}deg) scale(${1 + Math.sin((rotation * Math.PI) / 180) * 0.1})`;
+    }, 100);
+  }
+
+  // Rotate icon on click
+  function rotateIcon() {
+    const icon = document.getElementById('error-icon');
+    if (icon) {
+      icon.style.transform = 'rotate(360deg) scale(1.2)';
+      setTimeout(() => {
+        icon.style.transform = '';
+      }, 500);
+    }
+  }
+
+  // Number game
+  const cells = document.querySelectorAll('.number-cell');
+  const targetNumber = 404;
+  let found = false;
+
+  cells.forEach((cell) => {
+    cell.addEventListener('click', (e) => {
+      if (found) return;
+
+      const target = e.currentTarget;
+      if (!target) return;
+
+      const number = Math.floor(Math.random() * 500) + 1;
+      target.textContent = number;
+      target.classList.add('bg-primary-500/20');
+
+      if (number === targetNumber) {
+        found = true;
+        const result = document.getElementById('game-result');
+        if (result) {
+          result.classList.remove('hidden');
+          target.classList.add('bg-green-500', 'text-white', 'animate-pulse');
+        }
+        // Confetti effect
+        for (let i = 0; i < 20; i++) {
+          setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.textContent = ['🎉', '🎊', '✨', '⭐'][
+              Math.floor(Math.random() * 4)
+            ];
+            confetti.className = 'fixed text-2xl pointer-events-none';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.top = Math.random() * 100 + '%';
+            confetti.style.animation = 'confetti-fall 2s ease-out forwards';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 2000);
+          }, i * 50);
+        }
+      }
+    });
+  });
+
+  // Make function global
+  window.rotateIcon = rotateIcon;
+</script>
+
+<style>
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  @keyframes bounce-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s ease-in-out infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+
+  #error-404 {
+    transition: transform 0.1s ease-out;
+  }
+
+  .number-cell {
+    transition: all 0.3s ease;
+  }
+</style>

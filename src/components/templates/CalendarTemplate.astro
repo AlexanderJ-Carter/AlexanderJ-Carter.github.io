@@ -1,0 +1,394 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+
+type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+
+const calendarData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '智能日历',
+    headerTitle: '📅 智能日历',
+    headerDesc:
+      '管理您的时间，规划您的生活。支持节假日显示、自定义日程和事件管理',
+    prevMonth: '← 上月',
+    nextMonth: '下月 →',
+    loading: '加载中...',
+    weekdays: ['日', '一', '二', '三', '四', '五', '六'],
+    today: '今天',
+    addEvent: '添加日程',
+    upcomingEvents: '近期日程',
+    noEvents: '暂无近期日程',
+    eventTitle: '日程标题',
+    eventTime: '时间',
+    eventDesc: '描述',
+    save: '保存',
+    cancel: '取消',
+    delete: '删除',
+  },
+  'en-US': {
+    title: 'Smart Calendar',
+    headerTitle: '📅 Smart Calendar',
+    headerDesc:
+      'Manage your time, plan your life. Supports holiday display, custom schedules, and event management',
+    prevMonth: '← Prev',
+    nextMonth: 'Next →',
+    loading: 'Loading...',
+    weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    today: 'Today',
+    addEvent: 'Add Event',
+    upcomingEvents: 'Upcoming Events',
+    noEvents: 'No upcoming events',
+    eventTitle: 'Event Title',
+    eventTime: 'Time',
+    eventDesc: 'Description',
+    save: 'Save',
+    cancel: 'Cancel',
+    delete: 'Delete',
+  },
+  'en-GB': {
+    title: 'Smart Calendar',
+    headerTitle: '📅 Smart Calendar',
+    headerDesc:
+      'Manage your time, plan your life. Supports holiday display, custom schedules, and event management',
+    prevMonth: '← Prev',
+    nextMonth: 'Next →',
+    loading: 'Loading...',
+    weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    today: 'Today',
+    addEvent: 'Add Event',
+    upcomingEvents: 'Upcoming Events',
+    noEvents: 'No upcoming events',
+    eventTitle: 'Event Title',
+    eventTime: 'Time',
+    eventDesc: 'Description',
+    save: 'Save',
+    cancel: 'Cancel',
+    delete: 'Delete',
+  },
+  fr: {
+    title: 'Calendrier Intelligent',
+    headerTitle: '📅 Calendrier Intelligent',
+    headerDesc:
+      "Gérez votre temps, planifiez votre vie. Prend en charge l'affichage des jours fériés, les horaires personnalisés et la gestion des événements",
+    prevMonth: '← Préc',
+    nextMonth: 'Suiv →',
+    loading: 'Chargement...',
+    weekdays: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+    today: "Aujourd'hui",
+    addEvent: 'Ajouter un événement',
+    upcomingEvents: 'Événements à venir',
+    noEvents: "Pas d'événements à venir",
+    eventTitle: "Titre de l'événement",
+    eventTime: 'Heure',
+    eventDesc: 'Description',
+    save: 'Enregistrer',
+    cancel: 'Annuler',
+    delete: 'Supprimer',
+  },
+  ru: {
+    title: 'Умный календарь',
+    headerTitle: '📅 Умный календарь',
+    headerDesc:
+      'Управляйте своим временем, планируйте свою жизнь. Поддержка отображения праздников, пользовательских расписаний и управления событиями',
+    prevMonth: '← Пред',
+    nextMonth: 'След →',
+    loading: 'Загрузка...',
+    weekdays: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+    today: 'Сегодня',
+    addEvent: 'Добавить событие',
+    upcomingEvents: 'Предстоящие события',
+    noEvents: 'Нет предстоящих событий',
+    eventTitle: 'Название события',
+    eventTime: 'Время',
+    eventDesc: 'Описание',
+    save: 'Сохранить',
+    cancel: 'Отмена',
+    delete: 'Удалить',
+  },
+};
+
+const content = calendarData[lang as Lang] || calendarData['en-US'];
+---
+
+<BaseLayout title={`${content.title} - Alexander Carter`}>
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 bg-mesh-gradient">
+    <div class="container mx-auto px-4 lg:px-8 text-center">
+      <h1
+        class="text-5xl md:text-6xl font-display font-bold mb-6 gradient-text"
+      >
+        {content.headerTitle}
+      </h1>
+      <p
+        class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+      >
+        {content.headerDesc}
+      </p>
+    </div>
+  </section>
+
+  <!-- Calendar Section -->
+  <section class="py-16 container mx-auto px-4 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Calendar Display -->
+      <div class="lg:col-span-2">
+        <div class="glass-card p-8">
+          <!-- Month Navigation -->
+          <div class="flex items-center justify-between mb-8">
+            <button
+              onclick="prevMonth()"
+              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+            >
+              {content.prevMonth}
+            </button>
+            <h2 class="text-2xl font-bold" id="currentMonth">
+              {content.loading}
+            </h2>
+            <button
+              onclick="nextMonth()"
+              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+            >
+              {content.nextMonth}
+            </button>
+          </div>
+
+          <!-- Weekdays -->
+          <div class="grid grid-cols-7 gap-2 mb-2">
+            {
+              content.weekdays.map((day: string) => (
+                <div class="text-center font-bold text-[rgb(var(--color-text-secondary))] py-2">
+                  {day}
+                </div>
+              ))
+            }
+          </div>
+
+          <!-- Days Grid -->
+          <div id="calendarGrid" class="grid grid-cols-7 gap-2">
+            <!-- Days will be inserted here by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-8">
+        <!-- Today's Info -->
+        <div class="glass-card p-6">
+          <h3 class="text-xl font-bold mb-4">{content.today}</h3>
+          <div id="todayInfo" class="text-[rgb(var(--color-text-secondary))]">
+            <!-- Today info inserted by JS -->
+          </div>
+          <button
+            onclick="openAddEventModal()"
+            class="mt-4 w-full py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+          >
+            {content.addEvent}
+          </button>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="glass-card p-6">
+          <h3 class="text-xl font-bold mb-4">{content.upcomingEvents}</h3>
+          <div id="upcomingEvents" class="space-y-4">
+            <p class="text-[rgb(var(--color-text-secondary))] text-sm">
+              {content.noEvents}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add Event Modal -->
+  <div
+    id="eventModal"
+    class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50"
+  >
+    <div class="glass-card p-8 max-w-md w-full mx-4">
+      <h3 class="text-2xl font-bold mb-6">{content.addEvent}</h3>
+      <form id="eventForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1"
+            >{content.eventTitle}</label
+          >
+          <input
+            type="text"
+            name="title"
+            required
+            class="w-full px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1"
+            >{content.eventTime}</label
+          >
+          <input
+            type="datetime-local"
+            name="time"
+            required
+            class="w-full px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1"
+            >{content.eventDesc}</label
+          >
+          <textarea
+            name="description"
+            rows="3"
+            class="w-full px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
+          ></textarea>
+        </div>
+        <div class="flex justify-end gap-4 mt-6">
+          <button
+            type="button"
+            onclick="closeEventModal()"
+            class="px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))]"
+          >
+            {content.cancel}
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600"
+          >
+            {content.save}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  // @ts-nocheck
+  let currentDate = new Date();
+  const currentMonthElement = document.getElementById('currentMonth');
+  const calendarGrid = document.getElementById('calendarGrid');
+  const todayInfo = document.getElementById('todayInfo');
+
+  // Chinese holidays data (Month is 0-indexed: 0=Jan, 1=Feb, etc.)
+  const holidays = {
+    '0-1': '元旦',
+    '1-14': '情人节',
+    '2-8': '妇女节',
+    '3-5': '清明节',
+    '4-1': '劳动节',
+    '4-4': '青年节',
+    '5-1': '儿童节',
+    '7-1': '建军节',
+    '8-10': '教师节',
+    '9-1': '国庆节',
+    '9-2': '国庆假期',
+    '9-3': '国庆假期',
+    '9-4': '国庆假期',
+    '9-5': '国庆假期',
+    '9-6': '国庆假期',
+    '9-7': '国庆假期',
+    '11-24': '平安夜',
+    '11-25': '圣诞节',
+  };
+
+  // Lunar holidays approximation or fixed dates could be added here
+  // For a real production app, use a library like 'chinese-lunar-calendar' or fetch from an API
+
+  function renderCalendar() {
+    if (!currentMonthElement || !calendarGrid) return;
+
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    // Update header
+    currentMonthElement.textContent = currentDate.toLocaleDateString(
+      undefined,
+      { month: 'long', year: 'numeric' }
+    );
+
+    // Clear grid
+    calendarGrid.innerHTML = '';
+
+    // First day of the month
+    const firstDay = new Date(year, month, 1).getDay();
+    // Days in month
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Padding for empty days
+    for (let i = 0; i < firstDay; i++) {
+      const emptyDay = document.createElement('div');
+      emptyDay.className =
+        'h-24 bg-[rgb(var(--color-bg-secondary))] rounded-lg opacity-50';
+      calendarGrid.appendChild(emptyDay);
+    }
+
+    // Days
+    const today = new Date();
+    for (let i = 1; i <= daysInMonth; i++) {
+      const dayElement = document.createElement('div');
+      const isToday =
+        i === today.getDate() &&
+        month === today.getMonth() &&
+        year === today.getFullYear();
+
+      // Check for holiday
+      const holidayKey = `${month}-${i}`;
+      const holidayName = holidays[holidayKey];
+
+      dayElement.className = `h-24 p-2 rounded-lg border border-[rgb(var(--color-border))] hover:border-primary-500 transition-colors relative flex flex-col justify-between ${isToday ? 'bg-primary-500/10 border-primary-500' : 'bg-[rgb(var(--color-bg-secondary))]'}`;
+
+      let holidayHtml = '';
+      if (holidayName) {
+        holidayHtml = `<span class="text-xs text-red-500 font-bold truncate w-full">${holidayName}</span>`;
+      }
+
+      dayElement.innerHTML = `
+        <span class="font-bold ${isToday ? 'text-primary-500' : 'text-[rgb(var(--color-text-primary))]'}">${i}</span>
+        ${holidayHtml}
+      `;
+
+      calendarGrid.appendChild(dayElement);
+    }
+
+    // Update Today Info
+    if (todayInfo) {
+      const todayKey = `${today.getMonth()}-${today.getDate()}`;
+      const todayHoliday = holidays[todayKey];
+
+      todayInfo.innerHTML = `
+            <div class="text-4xl font-bold text-primary-500 mb-2">${today.getDate()}</div>
+            <div class="text-lg mb-2">${today.toLocaleDateString(undefined, { weekday: 'long', month: 'long', year: 'numeric' })}</div>
+            ${todayHoliday ? `<div class="text-red-500 font-bold">🎉 ${todayHoliday}</div>` : ''}
+        `;
+    }
+  }
+
+  window['prevMonth'] = function () {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+  };
+
+  window['nextMonth'] = function () {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+  };
+
+  // Modal functions
+  window['openAddEventModal'] = function () {
+    const modal = document.getElementById('eventModal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+  };
+
+  // Modal close function
+  window['closeEventModal'] = function () {
+    const modal = document.getElementById('eventModal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  };
+
+  // Initial render
+  renderCalendar();
+</script>

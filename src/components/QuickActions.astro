@@ -1,0 +1,225 @@
+---
+import { getLangFromUrl } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+
+const translations = {
+  'zh-CN': {
+    search: '搜索',
+    theme: '主题',
+    language: '语言',
+  },
+  'en-US': {
+    search: 'Search',
+    theme: 'Theme',
+    language: 'Language',
+  },
+  'en-GB': {
+    search: 'Search',
+    theme: 'Theme',
+    language: 'Language',
+  },
+  fr: {
+    search: 'Rechercher',
+    theme: 'Thème',
+    language: 'Langue',
+  },
+  ru: {
+    search: 'Поиск',
+    theme: 'Тема',
+    language: 'Язык',
+  },
+};
+
+const t = translations[lang] || translations['zh-CN'];
+---
+
+<div
+  id="quick-actions"
+  class="fixed bottom-40 right-6 z-40 flex flex-col gap-3"
+>
+  <!-- Search Button -->
+  <button
+    id="quick-search-btn"
+    aria-label={t.search}
+    class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+    </svg>
+    <span
+      class="absolute right-full mr-3 px-3 py-1 bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-primary))] rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap"
+    >
+      {t.search}
+    </span>
+  </button>
+</div>
+
+<!-- Search Modal -->
+<div id="search-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+  <div class="flex items-start justify-center min-h-screen px-4 pt-20 pb-20">
+    <div
+      class="fixed inset-0 bg-[rgb(var(--color-bg-primary))] bg-opacity-90 backdrop-blur-sm"
+      onclick="closeSearchModal()"
+    >
+    </div>
+    <div class="relative glass-card rounded-2xl p-6 max-w-2xl w-full mt-8">
+      <div class="flex items-center gap-4 mb-6">
+        <svg
+          class="w-6 h-6 text-[rgb(var(--color-text-secondary))]"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+        <input
+          type="text"
+          id="search-input"
+          placeholder={lang === 'zh-CN' ? '搜索页面...' : 'Search pages...'}
+          class="flex-1 bg-transparent border-none outline-none text-lg text-[rgb(var(--color-text-primary))] placeholder-[rgb(var(--color-text-tertiary))]"
+          autofocus
+        />
+        <button
+          onclick="closeSearchModal()"
+          class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="search-results" class="space-y-2 max-h-96 overflow-y-auto">
+        <!-- Results will be populated here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ lang }} is:inline>
+  const quickSearchBtn = document.getElementById('quick-search-btn');
+  const searchModal = document.getElementById('search-modal');
+  const searchInput = document.getElementById('search-input');
+  const searchResults = document.getElementById('search-results');
+
+  // Simple page index for search
+  const pageIndex = [
+    {
+      title: lang === 'zh-CN' ? '首页' : 'Home',
+      url: lang === 'zh-CN' ? '/' : `/${lang}/`,
+      keywords: 'home,首页,主页',
+    },
+    {
+      title: lang === 'zh-CN' ? '关于我' : 'About',
+      url: lang === 'zh-CN' ? '/about' : `/${lang}/about`,
+      keywords: 'about,关于,简介',
+    },
+    {
+      title: lang === 'zh-CN' ? '作品画廊' : 'Gallery',
+      url: lang === 'zh-CN' ? '/gallery' : `/${lang}/gallery`,
+      keywords: 'gallery,画廊,作品',
+    },
+    {
+      title: lang === 'zh-CN' ? '联系我' : 'Contact',
+      url: lang === 'zh-CN' ? '/contact' : `/${lang}/contact`,
+      keywords: 'contact,联系,联系方式',
+    },
+    {
+      title: lang === 'zh-CN' ? '日历' : 'Calendar',
+      url: lang === 'zh-CN' ? '/calendar' : `/${lang}/calendar`,
+      keywords: 'calendar,日历',
+    },
+    {
+      title: lang === 'zh-CN' ? '汇率' : 'Currency',
+      url: lang === 'zh-CN' ? '/currency' : `/${lang}/currency`,
+      keywords: 'currency,汇率,exchange',
+    },
+    {
+      title: lang === 'zh-CN' ? '时间' : 'Time',
+      url: lang === 'zh-CN' ? '/time' : `/${lang}/time`,
+      keywords: 'time,时间,world time',
+    },
+  ];
+
+  function openSearchModal() {
+    if (searchModal) {
+      searchModal.classList.remove('hidden');
+      searchInput?.focus();
+    }
+  }
+
+  function closeSearchModal() {
+    if (searchModal) {
+      searchModal.classList.add('hidden');
+      if (searchInput) searchInput.value = '';
+      if (searchResults) searchResults.innerHTML = '';
+    }
+  }
+
+  function performSearch(query) {
+    if (!searchResults || !query.trim()) {
+      if (searchResults) searchResults.innerHTML = '';
+      return;
+    }
+
+    const results = pageIndex.filter(
+      (page) =>
+        page.title.toLowerCase().includes(query.toLowerCase()) ||
+        page.keywords.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if (results.length === 0) {
+      searchResults.innerHTML = `<p class="text-center text-[rgb(var(--color-text-secondary))] py-8">${lang === 'zh-CN' ? '未找到结果' : 'No results found'}</p>`;
+      return;
+    }
+
+    searchResults.innerHTML = results
+      .map(
+        (page) => `
+      <a href="${page.url}" onclick="closeSearchModal()" class="block p-4 rounded-lg bg-[rgb(var(--color-bg-secondary))] hover:bg-[rgb(var(--color-bg-accent))] transition-colors">
+        <div class="font-semibold text-[rgb(var(--color-text-primary))] mb-1">${page.title}</div>
+        <div class="text-sm text-[rgb(var(--color-text-secondary))]">${page.url}</div>
+      </a>
+    `
+      )
+      .join('');
+  }
+
+  // Event listeners
+  quickSearchBtn?.addEventListener('click', openSearchModal);
+  searchInput?.addEventListener('input', (e) => {
+    performSearch(e.target.value);
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !searchModal?.classList.contains('hidden')) {
+      closeSearchModal();
+    }
+    // Open with Ctrl+K or Cmd+K
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearchModal();
+    }
+  });
+
+  // Make functions global for onclick handlers
+  window.closeSearchModal = closeSearchModal;
+</script>

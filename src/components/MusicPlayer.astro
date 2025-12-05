@@ -1,0 +1,515 @@
+---
+// 音乐播放器组件 - 使用真实音乐文件
+const lang = 'zh-CN'; // 可以从Astro.props获取
+
+const musicTracks = [
+  {
+    title: lang === 'zh-CN' ? '天空之城' : 'Castle in the Sky',
+    artist: lang === 'zh-CN' ? '久石让' : 'Joe Hisaishi',
+    file: '/music/classical/castle-in-sky.flac',
+    cover: '🏰',
+    category: 'classical',
+  },
+  {
+    title: lang === 'zh-CN' ? '雨的印记' : 'Kiss the Rain',
+    artist: lang === 'zh-CN' ? 'Yiruma' : 'Yiruma',
+    file: '/music/piano/kiss-the-rain.ogg',
+    cover: '🌧️',
+    category: 'piano',
+  },
+  {
+    title: lang === 'zh-CN' ? '冬日记忆' : 'Winter Memory',
+    artist: lang === 'zh-CN' ? '未知' : 'Unknown',
+    file: '/music/piano/winter-memory.flac',
+    cover: '❄️',
+    category: 'piano',
+  },
+  {
+    title: lang === 'zh-CN' ? '彩云追月' : 'Colorful Clouds Chasing Moon',
+    artist: lang === 'zh-CN' ? '传统音乐' : 'Traditional',
+    file: '/music/traditional/colorful-clouds-chasing-moon.ogg',
+    cover: '🌙',
+    category: 'traditional',
+  },
+];
+---
+
+<div
+  class="music-player-widget fixed bottom-8 left-8 z-50 hidden"
+  id="music-player-widget"
+>
+  <div class="music-player-content glass-card p-4 w-80 max-w-full">
+    <!-- 播放器头部 -->
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg font-semibold flex items-center gap-2">
+        <span class="text-2xl">🎵</span>
+        <span>音乐播放器</span>
+      </h3>
+      <button
+        id="music-close"
+        class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- 封面和信息 -->
+    <div class="text-center mb-4">
+      <div
+        class="w-32 h-32 mx-auto bg-gradient-to-br from-primary-500 to-accent-500 rounded-2xl flex items-center justify-center text-6xl mb-3 animate-pulse"
+        id="music-cover"
+      >
+        🎹
+      </div>
+      <h4 class="font-semibold text-lg mb-1" id="music-title">选择一首歌曲</h4>
+      <p
+        class="text-sm text-[rgb(var(--color-text-secondary))]"
+        id="music-artist"
+      >
+        -
+      </p>
+    </div>
+
+    <!-- 进度条 -->
+    <div class="mb-4">
+      <input
+        type="range"
+        id="music-progress"
+        class="w-full h-2 rounded-lg appearance-none cursor-pointer"
+        min="0"
+        max="100"
+        value="0"
+        style="background: linear-gradient(90deg, rgb(59, 130, 246) 0%, rgb(209, 213, 219) 0%);"
+      />
+      <div
+        class="flex justify-between text-xs text-[rgb(var(--color-text-tertiary))] mt-1"
+      >
+        <span id="music-current">0:00</span>
+        <span id="music-duration">0:00</span>
+      </div>
+    </div>
+
+    <!-- 音量控制 -->
+    <div class="flex items-center gap-3 mb-4">
+      <svg
+        class="w-5 h-5 text-[rgb(var(--color-text-secondary))]"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M10 3.75a.75.75 0 00-1.264-.546L5.203 6H2.667a.75.75 0 00-.75.75v6.5c0 .414.336.75.75.75h2.536l3.533 2.796A.75.75 0 0010 16.25V3.75z"
+        ></path>
+      </svg>
+      <input
+        type="range"
+        id="music-volume"
+        class="flex-1 h-2 rounded-lg appearance-none cursor-pointer"
+        min="0"
+        max="100"
+        value="50"
+      />
+    </div>
+
+    <!-- 控制按钮 -->
+    <div class="flex items-center justify-center gap-4">
+      <button
+        id="music-prev"
+        class="p-3 hover:bg-[rgb(var(--color-bg-secondary))] rounded-full transition-all hover:scale-110"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z"
+          ></path>
+        </svg>
+      </button>
+      <button
+        id="music-play"
+        class="p-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-full transition-all hover:scale-110 shadow-lg"
+      >
+        <svg class="w-6 h-6 play-icon" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"
+          ></path>
+        </svg>
+        <svg
+          class="w-6 h-6 pause-icon hidden"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"
+          ></path>
+        </svg>
+      </button>
+      <button
+        id="music-next"
+        class="p-3 hover:bg-[rgb(var(--color-bg-secondary))] rounded-full transition-all hover:scale-110"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z"
+          ></path>
+        </svg>
+      </button>
+      <button
+        id="music-shuffle"
+        class="p-3 hover:bg-[rgb(var(--color-bg-secondary))] rounded-full transition-all hover:scale-110"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- 播放列表 -->
+    <div class="mt-4 max-h-48 overflow-y-auto">
+      <h5
+        class="text-sm font-semibold mb-2 text-[rgb(var(--color-text-secondary))]"
+      >
+        播放列表
+      </h5>
+      <div class="space-y-1">
+        {
+          musicTracks.map((track, index) => (
+            <button
+              class="music-track w-full text-left p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3"
+              data-index={index}
+              data-file={track.file}
+            >
+              <span class="text-2xl">{track.cover}</span>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-medium truncate">{track.title}</div>
+                <div class="text-xs text-[rgb(var(--color-text-tertiary))] truncate">
+                  {track.artist}
+                </div>
+              </div>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 音乐按钮 -->
+<button
+  id="music-toggle"
+  class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-full shadow-lg hover:scale-110 transition-all flex items-center justify-center"
+  aria-label="打开音乐播放器"
+>
+  <span class="text-2xl">🎵</span>
+</button>
+
+<audio id="music-audio" preload="metadata"></audio>
+
+<script>
+  const audio = document.getElementById('music-audio') as HTMLAudioElement;
+  const player = document.getElementById('music-player-widget');
+  const toggleBtn = document.getElementById('music-toggle');
+  const closeBtn = document.getElementById('music-close');
+  const playBtn = document.getElementById('music-play');
+  const prevBtn = document.getElementById('music-prev');
+  const nextBtn = document.getElementById('music-next');
+  const shuffleBtn = document.getElementById('music-shuffle');
+  const progress = document.getElementById(
+    'music-progress'
+  ) as HTMLInputElement;
+  const volume = document.getElementById('music-volume') as HTMLInputElement;
+  const tracks = document.querySelectorAll('.music-track');
+
+  let currentTrack = 0;
+  let isPlaying = false;
+  let isShuffled = false;
+
+  // 音乐数据
+  const musicData = [
+    {
+      title: '天空之城',
+      artist: '久石让',
+      file: '/music/classical/castle-in-sky.flac',
+      cover: '🏰',
+    },
+    {
+      title: '雨的印记',
+      artist: 'Yiruma',
+      file: '/music/piano/kiss-the-rain.ogg',
+      cover: '🌧️',
+    },
+    {
+      title: '冬日记忆',
+      artist: '未知',
+      file: '/music/piano/winter-memory.flac',
+      cover: '❄️',
+    },
+    {
+      title: '彩云追月',
+      artist: '传统音乐',
+      file: '/music/traditional/colorful-clouds-chasing-moon.ogg',
+      cover: '🌙',
+    },
+  ];
+
+  // 切换播放器显示
+  toggleBtn?.addEventListener('click', () => {
+    player?.classList.toggle('hidden');
+    toggleBtn.classList.toggle('hidden');
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    player?.classList.add('hidden');
+    toggleBtn?.classList.remove('hidden');
+  });
+
+  // 加载音轨
+  function loadTrack(index: number) {
+    if (index < 0 || index >= musicData.length) return;
+    const track = musicData[index];
+
+    // 检查文件是否存在
+    audio.src = track.file;
+    audio.load();
+
+    const titleEl = document.getElementById('music-title');
+    const artistEl = document.getElementById('music-artist');
+    const coverEl = document.getElementById('music-cover');
+
+    if (titleEl) titleEl.textContent = track.title;
+    if (artistEl) artistEl.textContent = track.artist;
+    if (coverEl) coverEl.textContent = track.cover;
+
+    currentTrack = index;
+
+    // 更新列表高亮
+    tracks.forEach((t, i) => {
+      if (i === index) {
+        t.classList.add('bg-primary-500/10', 'border-primary-500');
+      } else {
+        t.classList.remove('bg-primary-500/10', 'border-primary-500');
+      }
+    });
+  }
+
+  // 播放/暂停
+  playBtn?.addEventListener('click', async () => {
+    try {
+      if (isPlaying) {
+        audio.pause();
+      } else {
+        // 如果还没有加载音轨，先加载第一首
+        if (!audio.src || audio.src === window.location.href) {
+          loadTrack(0);
+        }
+        await audio.play();
+      }
+    } catch (error) {
+      console.error('播放错误:', error);
+      // 如果自动播放被阻止，提示用户
+      if ((error as any).name === 'NotAllowedError') {
+        alert('请点击页面任意位置后，再点击播放按钮');
+      }
+    }
+  });
+
+  audio.addEventListener('play', () => {
+    isPlaying = true;
+    document.querySelector('.play-icon')?.classList.add('hidden');
+    document.querySelector('.pause-icon')?.classList.remove('hidden');
+  });
+
+  audio.addEventListener('pause', () => {
+    isPlaying = false;
+    document.querySelector('.play-icon')?.classList.remove('hidden');
+    document.querySelector('.pause-icon')?.classList.add('hidden');
+  });
+
+  // 进度更新
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progress.value = percent.toString();
+      progress.style.background = `linear-gradient(90deg, rgb(59, 130, 246) ${percent}%, rgb(209, 213, 219) ${percent}%)`;
+
+      document.getElementById('music-current')!.textContent = formatTime(
+        audio.currentTime
+      );
+      document.getElementById('music-duration')!.textContent = formatTime(
+        audio.duration
+      );
+    }
+  });
+
+  // 拖动进度条
+  progress?.addEventListener('input', () => {
+    if (audio.duration) {
+      const time = (parseFloat(progress.value) / 100) * audio.duration;
+      audio.currentTime = time;
+    }
+  });
+
+  // 进度条样式更新
+  progress?.addEventListener('input', () => {
+    if (progress) {
+      const percent = parseFloat(progress.value);
+      progress.style.background = `linear-gradient(90deg, rgb(59, 130, 246) ${percent}%, rgb(209, 213, 219) ${percent}%)`;
+    }
+  });
+
+  // 音量控制
+  volume?.addEventListener('input', () => {
+    audio.volume = parseFloat(volume.value) / 100;
+  });
+
+  // 随机播放
+  shuffleBtn?.addEventListener('click', () => {
+    isShuffled = !isShuffled;
+    shuffleBtn.classList.toggle('text-primary-500', isShuffled);
+  });
+
+  // 自动播放下一曲
+  audio.addEventListener('ended', async () => {
+    if (isShuffled) {
+      currentTrack = Math.floor(Math.random() * musicData.length);
+    } else {
+      currentTrack = (currentTrack + 1) % musicData.length;
+    }
+    loadTrack(currentTrack);
+    try {
+      await audio.play();
+    } catch (error) {
+      console.error('自动播放失败:', error);
+    }
+  });
+
+  // 错误处理
+  audio.addEventListener('error', (e) => {
+    console.error('音频加载错误:', e);
+    const errorMsg = document.getElementById('music-artist');
+    if (errorMsg) {
+      errorMsg.textContent = '加载失败，请检查网络连接';
+      errorMsg.classList.add('text-red-500');
+    }
+  });
+
+  // 加载完成
+  audio.addEventListener('loadedmetadata', () => {
+    const durationEl = document.getElementById('music-duration');
+    if (durationEl && audio.duration) {
+      durationEl.textContent = formatTime(audio.duration);
+    }
+  });
+
+  // 播放列表点击
+  tracks.forEach((track, index) => {
+    track.addEventListener('click', async () => {
+      loadTrack(index);
+      try {
+        await audio.play();
+      } catch (error) {
+        console.error('播放失败:', error);
+      }
+    });
+  });
+
+  // 上一曲/下一曲的异步播放
+  prevBtn?.addEventListener('click', async () => {
+    currentTrack = (currentTrack - 1 + musicData.length) % musicData.length;
+    loadTrack(currentTrack);
+    if (isPlaying) {
+      try {
+        await audio.play();
+      } catch (error) {
+        console.error('播放失败:', error);
+      }
+    }
+  });
+
+  nextBtn?.addEventListener('click', async () => {
+    currentTrack = (currentTrack + 1) % musicData.length;
+    loadTrack(currentTrack);
+    if (isPlaying) {
+      try {
+        await audio.play();
+      } catch (error) {
+        console.error('播放失败:', error);
+      }
+    }
+  });
+
+  // 格式化时间
+  function formatTime(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  // 初始化
+  audio.volume = 0.5;
+  if (volume) volume.value = '50';
+
+  // 延迟加载第一首，避免立即加载
+  setTimeout(() => {
+    loadTrack(0);
+  }, 100);
+</script>
+
+<style>
+  .music-player-widget {
+    animation: slideInRight 0.3s ease-out;
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  input[type='range'] {
+    -webkit-appearance: none;
+    background: rgb(209, 213, 219);
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgb(59, 130, 246);
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  input[type='range']::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgb(59, 130, 246);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+</style>

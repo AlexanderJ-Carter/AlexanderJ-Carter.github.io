@@ -1,0 +1,794 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+
+type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+
+const currencyData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '智能汇率工具',
+    headerTitle: '💱 智能汇率工具',
+    headerDesc: '实时汇率查询 · 自定义汇率计算 · 结售汇小助手',
+    mainRatesTitle: '主要货币汇率',
+    subTitle: '今日参考汇率（1单位外币 = ? 人民币）',
+    refresh: '刷新',
+    refreshing: '更新中...',
+    source: '数据源',
+    converterTitle: '💰 汇率计算器',
+    converterDesc: '支持实时汇率和自定义汇率计算',
+    amount: '金额',
+    from: '从',
+    to: '到',
+    customRate: '自定义汇率',
+    customRatePlaceholder: '留空使用实时汇率',
+    customRateHint: '例如：银行牌价、结售汇价格等',
+    result: '计算结果',
+    convert: '立即计算',
+    useRealRate: '使用实时汇率',
+    currentRate: '当前汇率',
+    loading: '加载中...',
+    updated: '更新时间',
+    justNow: '刚刚',
+    minutesAgo: '分钟前',
+    hoursAgo: '小时前',
+    tipsTitle: '💡 结售汇小贴士',
+    tips: [
+      {
+        icon: '🏦',
+        title: '银行牌价差异',
+        desc: '各银行现钞买入价和现汇买入价通常不同，现钞价会略低，建议提前对比。',
+      },
+      {
+        icon: '⏰',
+        title: '最佳兑换时机',
+        desc: '汇率波动较大时，可分批兑换降低风险。出国前1-2周关注汇率走势为佳。',
+      },
+      {
+        icon: '📱',
+        title: '手机银行方便快捷',
+        desc: '使用手机银行结售汇通常手续费更低，且可以7×24小时操作，到账快。',
+      },
+      {
+        icon: '💳',
+        title: '境外消费建议',
+        desc: '信用卡境外消费通常按当日汇率结算，小额高频消费可能产生额外手续费。',
+      },
+    ],
+  },
+  'en-US': {
+    title: 'Smart Currency Tool',
+    headerTitle: '💱 Smart Currency Tool',
+    headerDesc: 'Real-time Rates · Custom Rate Calculator · Exchange Helper',
+    mainRatesTitle: 'Major Exchange Rates',
+    subTitle: "Today's Reference Rates (1 foreign currency = ? CNY)",
+    refresh: 'Refresh',
+    refreshing: 'Updating...',
+    source: 'Data Source',
+    converterTitle: '💰 Currency Converter',
+    converterDesc: 'Supports real-time and custom rate calculations',
+    amount: 'Amount',
+    from: 'From',
+    to: 'To',
+    customRate: 'Custom Rate',
+    customRatePlaceholder: 'Leave empty for real-time rate',
+    customRateHint: 'E.g.: Bank rate, exchange counter price',
+    result: 'Result',
+    convert: 'Calculate',
+    useRealRate: 'Use Real-time Rate',
+    currentRate: 'Current Rate',
+    loading: 'Loading...',
+    updated: 'Updated',
+    justNow: 'Just now',
+    minutesAgo: 'min ago',
+    hoursAgo: 'hrs ago',
+    tipsTitle: '💡 Exchange Tips',
+    tips: [
+      {
+        icon: '🏦',
+        title: 'Bank Rate Differences',
+        desc: 'Cash buying rates and transfer buying rates differ. Cash rates are usually lower.',
+      },
+      {
+        icon: '⏰',
+        title: 'Best Time to Exchange',
+        desc: 'Monitor rates 1-2 weeks before travel. Split large exchanges to reduce risk.',
+      },
+      {
+        icon: '📱',
+        title: 'Mobile Banking Benefits',
+        desc: 'Lower fees and 24/7 availability. Most transactions complete instantly.',
+      },
+      {
+        icon: '💳',
+        title: 'Overseas Spending',
+        desc: 'Credit cards use daily rates. Watch for fees on small frequent transactions.',
+      },
+    ],
+  },
+  'en-GB': {
+    title: 'Smart Currency Tool',
+    headerTitle: '💱 Smart Currency Tool',
+    headerDesc: 'Real-time Rates · Custom Rate Calculator · Exchange Helper',
+    mainRatesTitle: 'Major Exchange Rates',
+    subTitle: "Today's Reference Rates (1 foreign currency = ? CNY)",
+    refresh: 'Refresh',
+    refreshing: 'Updating...',
+    source: 'Data Source',
+    converterTitle: '💰 Currency Converter',
+    converterDesc: 'Supports real-time and custom rate calculations',
+    amount: 'Amount',
+    from: 'From',
+    to: 'To',
+    customRate: 'Custom Rate',
+    customRatePlaceholder: 'Leave empty for real-time rate',
+    customRateHint: 'E.g.: Bank rate, exchange counter price',
+    result: 'Result',
+    convert: 'Calculate',
+    useRealRate: 'Use Real-time Rate',
+    currentRate: 'Current Rate',
+    loading: 'Loading...',
+    updated: 'Updated',
+    justNow: 'Just now',
+    minutesAgo: 'min ago',
+    hoursAgo: 'hrs ago',
+    tipsTitle: '💡 Exchange Tips',
+    tips: [
+      {
+        icon: '🏦',
+        title: 'Bank Rate Differences',
+        desc: 'Cash buying rates and transfer buying rates differ. Cash rates are usually lower.',
+      },
+      {
+        icon: '⏰',
+        title: 'Best Time to Exchange',
+        desc: 'Monitor rates 1-2 weeks before travel. Split large exchanges to reduce risk.',
+      },
+      {
+        icon: '📱',
+        title: 'Mobile Banking Benefits',
+        desc: 'Lower fees and 24/7 availability. Most transactions complete instantly.',
+      },
+      {
+        icon: '💳',
+        title: 'Overseas Spending',
+        desc: 'Credit cards use daily rates. Watch for fees on small frequent transactions.',
+      },
+    ],
+  },
+  fr: {
+    title: 'Outil de change intelligent',
+    headerTitle: '💱 Outil de change intelligent',
+    headerDesc:
+      'Taux en temps réel · Calculateur personnalisé · Assistant de change',
+    mainRatesTitle: 'Taux de change principaux',
+    subTitle: 'Taux de référence du jour (1 devise = ? CNY)',
+    refresh: 'Actualiser',
+    refreshing: 'Mise à jour...',
+    source: 'Source de données',
+    converterTitle: '💰 Convertisseur de devises',
+    converterDesc: 'Prend en charge les calculs en temps réel et personnalisés',
+    amount: 'Montant',
+    from: 'De',
+    to: 'À',
+    customRate: 'Taux personnalisé',
+    customRatePlaceholder: 'Laissez vide pour le taux en temps réel',
+    customRateHint: 'Ex : Taux bancaire, prix du guichet',
+    result: 'Résultat',
+    convert: 'Calculer',
+    useRealRate: 'Utiliser le taux en temps réel',
+    currentRate: 'Taux actuel',
+    loading: 'Chargement...',
+    updated: 'Mis à jour',
+    justNow: "À l'instant",
+    minutesAgo: 'min',
+    hoursAgo: 'h',
+    tipsTitle: '💡 Conseils de change',
+    tips: [
+      {
+        icon: '🏦',
+        title: 'Différences bancaires',
+        desc: "Les taux d'achat en espèces et virements diffèrent. Les espèces sont généralement plus bas.",
+      },
+      {
+        icon: '⏰',
+        title: 'Meilleur moment pour échanger',
+        desc: 'Surveillez les taux 1-2 semaines avant le voyage. Divisez les gros montants.',
+      },
+      {
+        icon: '📱',
+        title: 'Avantages bancaires mobiles',
+        desc: 'Frais réduits et disponibilité 24h/24. La plupart des transactions sont instantanées.',
+      },
+      {
+        icon: '💳',
+        title: "Dépenses à l'étranger",
+        desc: 'Les cartes utilisent les taux quotidiens. Attention aux frais sur petites transactions.',
+      },
+    ],
+  },
+  ru: {
+    title: 'Умный валютный инструмент',
+    headerTitle: '💱 Умный валютный инструмент',
+    headerDesc:
+      'Курсы в реальном времени · Пользовательский калькулятор · Помощник обмена',
+    mainRatesTitle: 'Основные курсы валют',
+    subTitle: 'Референсные курсы сегодня (1 валюта = ? CNY)',
+    refresh: 'Обновить',
+    refreshing: 'Обновление...',
+    source: 'Источник данных',
+    converterTitle: '💰 Конвертер валют',
+    converterDesc:
+      'Поддержка расчетов в реальном времени и пользовательских курсов',
+    amount: 'Сумма',
+    from: 'Из',
+    to: 'В',
+    customRate: 'Пользовательский курс',
+    customRatePlaceholder: 'Оставьте пустым для текущего курса',
+    customRateHint: 'Например: Банковский курс, цена обменника',
+    result: 'Результат',
+    convert: 'Рассчитать',
+    useRealRate: 'Использовать текущий курс',
+    currentRate: 'Текущий курс',
+    loading: 'Загрузка...',
+    updated: 'Обновлено',
+    justNow: 'Только что',
+    minutesAgo: 'мин назад',
+    hoursAgo: 'ч назад',
+    tipsTitle: '💡 Советы по обмену',
+    tips: [
+      {
+        icon: '🏦',
+        title: 'Разница банковских курсов',
+        desc: 'Курсы покупки наличных и переводов различаются. Наличные обычно ниже.',
+      },
+      {
+        icon: '⏰',
+        title: 'Лучшее время обмена',
+        desc: 'Следите за курсами за 1-2 недели до поездки. Разделяйте крупные суммы.',
+      },
+      {
+        icon: '📱',
+        title: 'Преимущества мобильного банка',
+        desc: 'Более низкие комиссии и доступность 24/7. Большинство операций мгновенны.',
+      },
+      {
+        icon: '💳',
+        title: 'Траты за границей',
+        desc: 'Карты используют дневные курсы. Остерегайтесь комиссий за мелкие операции.',
+      },
+    ],
+  },
+};
+
+const content = currencyData[lang as Lang] || currencyData['en-US'];
+---
+
+<BaseLayout title={`${content.title} - Alexander Carter`}>
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 bg-mesh-gradient">
+    <div class="container mx-auto px-4 lg:px-8 text-center">
+      <h1
+        class="text-5xl md:text-6xl font-display font-bold mb-6 gradient-text"
+      >
+        {content.headerTitle}
+      </h1>
+      <p
+        class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+      >
+        {content.headerDesc}
+      </p>
+    </div>
+  </section>
+
+  <!-- Currency Rates Section -->
+  <section class="py-16 container mx-auto px-4 lg:px-8">
+    <!-- Main Currency Rates -->
+    <div class="mb-16">
+      <div
+        class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6"
+      >
+        <div>
+          <h2 class="text-3xl font-bold mb-2 flex items-center gap-3">
+            <span class="text-4xl">💹</span>
+            {content.mainRatesTitle}
+          </h2>
+          <p class="text-[rgb(var(--color-text-secondary))] mb-1">
+            {content.subTitle}
+          </p>
+          <p
+            class="text-sm text-[rgb(var(--color-text-tertiary))] flex items-center gap-2"
+            id="rates-updated"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span id="update-time-text">{content.loading}</span>
+          </p>
+        </div>
+        <button
+          id="refresh-rates"
+          class="px-6 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
+        >
+          <svg
+            id="refresh-icon"
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            ></path>
+          </svg>
+          <span id="refresh-text">{content.refresh}</span>
+        </button>
+      </div>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        id="rates-grid"
+      >
+        <!-- Rates will be inserted here -->
+        <div class="glass-card p-6 animate-pulse">
+          <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4">
+          </div>
+          <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+        </div>
+      </div>
+      <p
+        class="text-xs text-[rgb(var(--color-text-tertiary))] mt-4 text-center"
+      >
+        {content.source}: <a
+          href="https://open.er-api.com"
+          target="_blank"
+          class="text-primary-500 hover:underline">open.er-api.com</a
+        >
+      </p>
+    </div>
+
+    <!-- Converter -->
+    <div class="max-w-3xl mx-auto mb-16">
+      <div class="glass-card p-8 md:p-10">
+        <div class="mb-6">
+          <h3 class="text-3xl font-bold mb-2">{content.converterTitle}</h3>
+          <p class="text-[rgb(var(--color-text-secondary))]">
+            {content.converterDesc}
+          </p>
+        </div>
+        <form id="converter-form" class="space-y-6">
+          <div>
+            <label
+              class="block text-sm font-medium mb-2 text-[rgb(var(--color-text-primary))]"
+              >{content.amount}</label
+            >
+            <input
+              type="number"
+              id="amount"
+              value="100"
+              min="0"
+              step="0.01"
+              placeholder="100"
+              class="w-full px-4 py-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] text-lg focus:border-primary-500 focus:outline-none transition-colors"
+            />
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                class="block text-sm font-medium mb-2 text-[rgb(var(--color-text-primary))]"
+                >{content.from}</label
+              >
+              <select
+                id="from-currency"
+                class="w-full px-4 py-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none transition-colors"
+              >
+                <option value="CNY" selected>CNY - 人民币 ¥</option>
+                <option value="USD">USD - 美元 $</option>
+                <option value="EUR">EUR - 欧元 €</option>
+                <option value="GBP">GBP - 英镑 £</option>
+                <option value="JPY">JPY - 日元 ¥</option>
+                <option value="HKD">HKD - 港币 HK$</option>
+                <option value="AUD">AUD - 澳元 A$</option>
+                <option value="CAD">CAD - 加元 C$</option>
+                <option value="SGD">SGD - 新元 S$</option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-sm font-medium mb-2 text-[rgb(var(--color-text-primary))]"
+                >{content.to}</label
+              >
+              <select
+                id="to-currency"
+                class="w-full px-4 py-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none transition-colors"
+              >
+                <option value="USD" selected>USD - 美元 $</option>
+                <option value="EUR">EUR - 欧元 €</option>
+                <option value="GBP">GBP - 英镑 £</option>
+                <option value="JPY">JPY - 日元 ¥</option>
+                <option value="HKD">HKD - 港币 HK$</option>
+                <option value="CNY">CNY - 人民币 ¥</option>
+                <option value="AUD">AUD - 澳元 A$</option>
+                <option value="CAD">CAD - 加元 C$</option>
+                <option value="SGD">SGD - 新元 S$</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Custom Rate Input -->
+          <div class="border-t border-[rgb(var(--color-border))] pt-6">
+            <div class="flex items-center justify-between mb-2">
+              <label
+                class="block text-sm font-medium text-[rgb(var(--color-text-primary))]"
+                >{content.customRate}</label
+              >
+              <button
+                type="button"
+                id="use-real-rate-btn"
+                class="text-xs text-primary-500 hover:text-primary-600 font-medium"
+              >
+                {content.useRealRate}
+              </button>
+            </div>
+            <input
+              type="number"
+              id="custom-rate"
+              placeholder={content.customRatePlaceholder}
+              step="0.0001"
+              min="0"
+              class="w-full px-4 py-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-accent-500 focus:outline-none transition-colors"
+            />
+            <p
+              class="text-xs text-[rgb(var(--color-text-tertiary))] mt-1 flex items-center gap-1"
+            >
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fill-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              {content.customRateHint}
+            </p>
+            <p
+              id="current-rate-display"
+              class="text-sm text-[rgb(var(--color-text-secondary))] mt-2"
+            >
+            </p>
+          </div>
+
+          <button
+            type="button"
+            id="convert-btn"
+            class="w-full py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-xl hover:shadow-xl hover:scale-[1.02] transition-all duration-300 font-bold text-lg flex items-center justify-center gap-2"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+              ></path>
+            </svg>
+            {content.convert}
+          </button>
+          <div
+            class="mt-6 p-8 bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-xl text-center border-2 border-primary-200 dark:border-primary-800"
+          >
+            <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-3">
+              {content.result}
+            </p>
+            <p
+              id="conversion-result"
+              class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent"
+            >
+              --
+            </p>
+            <p
+              id="rate-used"
+              class="text-xs text-[rgb(var(--color-text-tertiary))] mt-3"
+            >
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-8">
+        <h3 class="text-3xl font-bold mb-2">{content.tipsTitle}</h3>
+        <p class="text-[rgb(var(--color-text-secondary))]">
+          实用建议，助您更好地管理外汇
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          content.tips.map((tip: any) => (
+            <div class="glass-card p-6 hover:shadow-lg transition-all duration-300 group">
+              <div class="flex items-start gap-4">
+                <div class="text-4xl flex-shrink-0 group-hover:scale-110 transition-transform">
+                  {tip.icon}
+                </div>
+                <div>
+                  <h4 class="text-lg font-bold mb-2 text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors">
+                    {tip.title}
+                  </h4>
+                  <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+                    {tip.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const amountInput = document.getElementById('amount');
+  const fromSelect = document.getElementById('from-currency');
+  const toSelect = document.getElementById('to-currency');
+  const customRateInput = document.getElementById('custom-rate');
+  const resultElement = document.getElementById('conversion-result');
+  const rateUsedElement = document.getElementById('rate-used');
+  const currentRateDisplay = document.getElementById('current-rate-display');
+  const convertBtn = document.getElementById('convert-btn');
+  const useRealRateBtn = document.getElementById('use-real-rate-btn');
+  const ratesGrid = document.getElementById('rates-grid');
+  const updateTimeText = document.getElementById('update-time-text');
+  const refreshBtn = document.getElementById('refresh-rates');
+  const refreshIcon = document.getElementById('refresh-icon');
+  const refreshText = document.getElementById('refresh-text');
+
+  // Store last update time
+  let lastUpdateTime = null;
+
+  // Major currencies to display
+  const majorCurrencies = [
+    'USD',
+    'EUR',
+    'GBP',
+    'JPY',
+    'HKD',
+    'AUD',
+    'CAD',
+    'SGD',
+  ];
+
+  // Currency symbols
+  const currencySymbols = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    JPY: '¥',
+    CNY: '¥',
+    HKD: 'HK$',
+    AUD: 'A$',
+    CAD: 'C$',
+    SGD: 'S$',
+  };
+
+  function getTimeAgo(date) {
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+
+    if (diffMins < 1) return '刚刚';
+    if (diffMins < 60) return `${diffMins} 分钟前`;
+    if (diffHours < 24) return `${diffHours} 小时前`;
+    return date.toLocaleString('zh-CN', {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
+
+  function updateTimeDisplay() {
+    if (lastUpdateTime && updateTimeText) {
+      updateTimeText.textContent = getTimeAgo(lastUpdateTime);
+    }
+  }
+
+  async function fetchRates() {
+    if (!ratesGrid) return;
+
+    // Update button state
+    if (refreshBtn && refreshIcon && refreshText) {
+      refreshBtn.disabled = true;
+      refreshIcon.classList.add('animate-spin');
+      refreshText.textContent = '更新中...';
+    }
+
+    ratesGrid.innerHTML =
+      '<div class="col-span-full text-center py-8 text-[rgb(var(--color-text-secondary))]"><svg class="animate-spin h-8 w-8 mx-auto mb-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>加载中...</div>';
+
+    try {
+      const response = await fetch('https://open.er-api.com/v6/latest/CNY');
+      const data = await response.json();
+
+      if (data.result === 'success' && data.rates) {
+        lastUpdateTime = new Date(data.time_last_update_unix * 1000);
+
+        ratesGrid.innerHTML = '';
+        updateTimeDisplay();
+
+        majorCurrencies.forEach((currency) => {
+          const rate = data.rates[currency];
+          if (rate) {
+            const inverseRate = (1 / rate).toFixed(4);
+            const symbol = currencySymbols[currency] || currency;
+
+            const card = document.createElement('div');
+            card.className =
+              'glass-card p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer group';
+            card.innerHTML = `
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <span class="text-2xl font-bold text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors">${currency}</span>
+                                    <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-1">1 ${currency}</p>
+                                </div>
+                                <span class="text-3xl opacity-50 group-hover:opacity-100 transition-opacity">${symbol}</span>
+                            </div>
+                            <div class="text-3xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent">
+                                ¥${inverseRate}
+                            </div>
+                        `;
+            ratesGrid.appendChild(card);
+          }
+        });
+      } else {
+        throw new Error('API returned no data');
+      }
+    } catch (error) {
+      console.error('Error fetching rates:', error);
+      ratesGrid.innerHTML =
+        '<div class="col-span-full text-center py-8 text-red-500">⚠️ 加载失败，请稍后重试</div>';
+    } finally {
+      // Reset button state
+      if (refreshBtn && refreshIcon && refreshText) {
+        refreshBtn.disabled = false;
+        refreshIcon.classList.remove('animate-spin');
+        refreshText.textContent = '刷新';
+      }
+    }
+  }
+
+  async function convertCurrency() {
+    const amount = parseFloat(amountInput.value);
+    const from = fromSelect.value;
+    const to = toSelect.value;
+    const customRate = parseFloat(customRateInput.value);
+
+    if (!amount || !from || !to || isNaN(amount)) {
+      resultElement.textContent = '--';
+      return;
+    }
+
+    resultElement.textContent = '计算中...';
+
+    try {
+      if (from === to) {
+        const symbol = currencySymbols[to] || '';
+        resultElement.textContent = `${symbol}${amount.toFixed(2)}`;
+        rateUsedElement.textContent = '相同货币，无需转换';
+        return;
+      }
+
+      let rate;
+      let rateSource = '';
+
+      // Use custom rate if provided
+      if (!isNaN(customRate) && customRate > 0) {
+        rate = customRate;
+        rateSource = '使用自定义汇率';
+      } else {
+        // Fetch rate from API
+        const response = await fetch(
+          `https://open.er-api.com/v6/latest/${from}`
+        );
+        const data = await response.json();
+
+        if (data.result === 'success' && data.rates && data.rates[to]) {
+          rate = data.rates[to];
+          rateSource = '使用实时汇率';
+        } else {
+          throw new Error('无法获取汇率');
+        }
+      }
+
+      const result = amount * rate;
+      const symbol = currencySymbols[to] || '';
+      resultElement.textContent = `${symbol}${result.toFixed(2)}`;
+      rateUsedElement.textContent = `${rateSource}: 1 ${from} = ${rate.toFixed(4)} ${to}`;
+    } catch (error) {
+      console.error('Currency conversion error:', error);
+      resultElement.textContent = '转换失败';
+      rateUsedElement.textContent = '请检查网络连接或稍后重试';
+    }
+  }
+
+  async function showCurrentRate() {
+    const from = fromSelect.value;
+    const to = toSelect.value;
+
+    if (from === to || !from || !to) {
+      currentRateDisplay.textContent = '';
+      return;
+    }
+
+    try {
+      const response = await fetch(`https://open.er-api.com/v6/latest/${from}`);
+      const data = await response.json();
+
+      if (data.result === 'success' && data.rates && data.rates[to]) {
+        const rate = data.rates[to];
+        currentRateDisplay.textContent = `💹 当前汇率: 1 ${from} = ${rate.toFixed(4)} ${to}`;
+      }
+    } catch (error) {
+      currentRateDisplay.textContent = '';
+    }
+  }
+
+  async function useRealRate() {
+    const from = fromSelect.value;
+    const to = toSelect.value;
+
+    if (from === to) return;
+
+    try {
+      const response = await fetch(`https://open.er-api.com/v6/latest/${from}`);
+      const data = await response.json();
+
+      if (data.result === 'success' && data.rates && data.rates[to]) {
+        customRateInput.value = data.rates[to].toFixed(4);
+      }
+    } catch (error) {
+      console.error('Error fetching rate:', error);
+    }
+  }
+
+  // Event listeners
+  if (convertBtn) {
+    convertBtn.addEventListener('click', convertCurrency);
+  }
+
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', fetchRates);
+  }
+
+  if (useRealRateBtn) {
+    useRealRateBtn.addEventListener('click', useRealRate);
+  }
+
+  if (fromSelect && toSelect) {
+    fromSelect.addEventListener('change', showCurrentRate);
+    toSelect.addEventListener('change', showCurrentRate);
+  }
+
+  // Update time display every minute
+  setInterval(updateTimeDisplay, 60000);
+
+  // Initial load
+  fetchRates();
+  showCurrentRate();
+</script>

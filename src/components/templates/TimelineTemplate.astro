@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+
+type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+
+const timelineData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '时间轴',
+    description: '我的学习和成长之路',
+    back: '返回',
+    headerTitle: '成长历程',
+    headerDesc: '记录每一个重要的里程碑和转折点',
+    events: [
+      {
+        year: 2025,
+        title: '现在',
+        description: '继续学习、创新和分享',
+        icon: '🚀',
+        color: 'from-purple-500 to-pink-500'
+      },
+      {
+        year: 2024,
+        title: '个人网站重设计',
+        description: '使用Astro框架完全重构个人网站',
+        icon: '🎨',
+        color: 'from-blue-500 to-purple-500'
+      },
+      {
+        year: 2023,
+        title: '深入学习Web开发',
+        description: '学习React、Node.js、数据库等核心技术',
+        icon: '📚',
+        color: 'from-green-500 to-blue-500'
+      },
+      {
+        year: 2022,
+        title: '开始编程之旅',
+        description: '第一次接触编程，创建第一个项目',
+        icon: '💻',
+        color: 'from-orange-500 to-red-500'
+      }
+    ]
+  },
+  'en-US': {
+    title: 'Timeline',
+    description: 'My learning and growth journey',
+    back: 'Back',
+    headerTitle: 'Journey',
+    headerDesc: 'Recording every important milestone and turning point',
+    events: [
+      {
+        year: 2025,
+        title: 'Present',
+        description: 'Keep learning, innovating and sharing',
+        icon: '🚀',
+        color: 'from-purple-500 to-pink-500'
+      },
+      {
+        year: 2024,
+        title: 'Website Redesign',
+        description: 'Completely redesigned personal website with Astro',
+        icon: '🎨',
+        color: 'from-blue-500 to-purple-500'
+      },
+      {
+        year: 2023,
+        title: 'Deep Dive into Web Dev',
+        description: 'Learned React, Node.js, databases and core tech',
+        icon: '📚',
+        color: 'from-green-500 to-blue-500'
+      },
+      {
+        year: 2022,
+        title: 'Started Programming',
+        description: 'First contact with programming, created first project',
+        icon: '💻',
+        color: 'from-orange-500 to-red-500'
+      }
+    ]
+  },
+  'en-GB': {
+    title: 'Timeline',
+    description: 'My learning and growth journey',
+    back: 'Back',
+    headerTitle: 'Journey',
+    headerDesc: 'Recording every important milestone and turning point',
+    events: [
+      {
+        year: 2025,
+        title: 'Present',
+        description: 'Keep learning, innovating and sharing',
+        icon: '🚀',
+        color: 'from-purple-500 to-pink-500'
+      },
+      {
+        year: 2024,
+        title: 'Website Redesign',
+        description: 'Completely redesigned personal website with Astro',
+        icon: '🎨',
+        color: 'from-blue-500 to-purple-500'
+      },
+      {
+        year: 2023,
+        title: 'Deep Dive into Web Dev',
+        description: 'Learned React, Node.js, databases and core tech',
+        icon: '📚',
+        color: 'from-green-500 to-blue-500'
+      },
+      {
+        year: 2022,
+        title: 'Started Programming',
+        description: 'First contact with programming, created first project',
+        icon: '💻',
+        color: 'from-orange-500 to-red-500'
+      }
+    ]
+  },
+  'fr': {
+    title: 'Chronologie',
+    description: 'Mon parcours d\'apprentissage et de croissance',
+    back: 'Retour',
+    headerTitle: 'Parcours',
+    headerDesc: 'Enregistrement de chaque étape importante et tournant',
+    events: [
+      {
+        year: 2025,
+        title: 'Présent',
+        description: 'Continuer à apprendre, innover et partager',
+        icon: '🚀',
+        color: 'from-purple-500 to-pink-500'
+      },
+      {
+        year: 2024,
+        title: 'Refonte du site web',
+        description: 'Site web personnel entièrement repensé avec Astro',
+        icon: '🎨',
+        color: 'from-blue-500 to-purple-500'
+      },
+      {
+        year: 2023,
+        title: 'Plongée dans le développement Web',
+        description: 'Appris React, Node.js, bases de données et technologies de base',
+        icon: '📚',
+        color: 'from-green-500 to-blue-500'
+      },
+      {
+        year: 2022,
+        title: 'Début de la programmation',
+        description: 'Premier contact avec la programmation, création du premier projet',
+        icon: '💻',
+        color: 'from-orange-500 to-red-500'
+      }
+    ]
+  },
+  'ru': {
+    title: 'Хронология',
+    description: 'Мой путь обучения и роста',
+    back: 'Назад',
+    headerTitle: 'Путь',
+    headerDesc: 'Запись каждого важного этапа и поворотного момента',
+    events: [
+      {
+        year: 2025,
+        title: 'Настоящее',
+        description: 'Продолжать учиться, внедрять инновации и делиться',
+        icon: '🚀',
+        color: 'from-purple-500 to-pink-500'
+      },
+      {
+        year: 2024,
+        title: 'Редизайн веб-сайта',
+        description: 'Полностью переработанный личный веб-сайт с Astro',
+        icon: '🎨',
+        color: 'from-blue-500 to-purple-500'
+      },
+      {
+        year: 2023,
+        title: 'Погружение в веб-разработку',
+        description: 'Изучил React, Node.js, базы данных и основные технологии',
+        icon: '📚',
+        color: 'from-green-500 to-blue-500'
+      },
+      {
+        year: 2022,
+        title: 'Начало программирования',
+        description: 'Первый контакт с программированием, создан первый проект',
+        icon: '💻',
+        color: 'from-orange-500 to-red-500'
+      }
+    ]
+  }
+};
+
+const content = timelineData[lang as Lang] || timelineData['en-US'];
+---
+
+<BaseLayout 
+  title={content.title}
+  description={content.description}
+>
+  <main class="min-h-screen py-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Back Button -->
+      <button 
+        onclick="history.back()" 
+        class="mb-8 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-accent))] transition-colors flex items-center gap-2"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        {content.back}
+      </button>
+
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent">
+          {content.headerTitle}
+        </h1>
+        <p class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+          {content.headerDesc}
+        </p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="relative">
+        <!-- Vertical Line -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary-500/20 via-accent-500/20 to-primary-500/20 rounded-full"></div>
+
+        <div class="space-y-12">
+          {content.events.map((event: any, index: number) => (
+            <div class={`flex items-center justify-between ${index % 2 === 0 ? 'flex-row-reverse reveal-right' : 'reveal-left'}`}>
+              <!-- Content -->
+              <div class="w-5/12">
+                <div class="glass-card p-6 hover:scale-105 transition-transform duration-300 group">
+                  <div class={`text-4xl mb-4 bg-gradient-to-r ${event.color} bg-clip-text text-transparent font-bold`}>
+                    {event.year}
+                  </div>
+                  <h3 class="text-xl font-bold mb-2 text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors">
+                    {event.title}
+                  </h3>
+                  <p class="text-[rgb(var(--color-text-secondary))]">
+                    {event.description}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Icon -->
+              <div class="relative z-10 w-12 h-12 rounded-full bg-[rgb(var(--color-bg-primary))] border-4 border-[rgb(var(--color-bg-secondary))] flex items-center justify-center text-2xl shadow-lg">
+                {event.icon}
+              </div>
+
+              <!-- Spacer -->
+              <div class="w-5/12"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Enhanced timeline animations */
+  .glass-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Timeline line progressive reveal */
+  .timeline-line {
+    animation: line-grow 2s ease-out forwards;
+  }
+
+  @keyframes line-grow {
+    from {
+      height: 0;
+    }
+    to {
+      height: 100%;
+    }
+  }
+
+  /* Icon pulse animation */
+  .timeline-icon {
+    animation: icon-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes icon-pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+</style>

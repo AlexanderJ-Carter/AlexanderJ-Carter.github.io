@@ -1,0 +1,111 @@
+---
+// 实时统计数字组件
+interface Stat {
+  end: number;
+  suffix?: string;
+  label: string;
+  icon: string;
+  duration?: number;
+}
+
+interface Props {
+  stats: Stat[];
+}
+
+const { stats } = Astro.props;
+---
+
+<div class="stats-container grid grid-cols-2 md:grid-cols-4 gap-6">
+  {
+    stats.map((stat, index) => (
+      <div
+        class="stat-card glass-card p-6 text-center transform hover:scale-105 transition-all duration-300"
+        data-aos="fade-up"
+        data-aos-delay={index * 100}
+      >
+        <div class="stat-icon text-4xl mb-3">{stat.icon}</div>
+        <div class="stat-number text-3xl font-bold mb-2 gradient-text">
+          <span
+            class="counter"
+            data-end={stat.end}
+            data-suffix={stat.suffix || ''}
+          >
+            {stat.end}
+            {stat.suffix || ''}
+          </span>
+        </div>
+        <div class="stat-label text-sm text-[rgb(var(--color-text-secondary))]">
+          {stat.label}
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  // 数字动画
+  function animateCounter(element: Element) {
+    const end = parseInt(element.getAttribute('data-end') || '0');
+    const suffix = element.getAttribute('data-suffix') || '';
+    const duration = 2000;
+    const steps = 60;
+    const increment = end / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= end) {
+        element.textContent = end + suffix;
+        clearInterval(timer);
+      } else {
+        element.textContent = Math.floor(current) + suffix;
+      }
+    }, duration / steps);
+  }
+
+  // 使用 Intersection Observer 在元素可见时触发动画
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const counter = entry.target.querySelector('.counter');
+          if (counter) {
+            animateCounter(counter);
+          }
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  document.querySelectorAll('.stat-card').forEach((card) => {
+    observer.observe(card);
+  });
+</script>
+
+<style>
+  .stat-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .stat-card:hover::before {
+    left: 100%;
+  }
+</style>

@@ -1,0 +1,370 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+
+type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+
+const privacyData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '隐私政策',
+    back: '返回首页',
+    headerTitle: '隐私政策',
+    lastUpdated: '最后更新: 2025年1月',
+    sections: [
+      {
+        title: '1. 信息收集',
+        content: '本网站致力于保护您的隐私。我们收集的信息类型包括:',
+        list: [
+          {
+            title: '访问数据',
+            desc: '我们可能会收集您的浏览器类型、IP地址、访问时间和浏览的页面',
+          },
+          {
+            title: 'Cookie',
+            desc: '我们使用Cookie来改善您的浏览体验,如记住您的主题偏好和语言选择',
+          },
+          {
+            title: '本地存储',
+            desc: '某些设置(如主题和语言偏好)会保存在您的浏览器本地存储中',
+          },
+        ],
+      },
+      {
+        title: '2. 信息使用',
+        content: '收集的信息仅用于:',
+        list: [
+          { title: '网站优化', desc: '分析访问数据以改进网站性能和用户体验' },
+          { title: '个性化', desc: '保存您的偏好设置' },
+          { title: '安全', desc: '检测和防止恶意访问' },
+        ],
+      },
+      {
+        title: '3. 第三方服务',
+        content: '本网站可能会使用以下第三方服务:',
+        list: [
+          { title: 'Google Analytics', desc: '用于网站流量分析' },
+          { title: 'Cloudflare', desc: '用于CDN加速和安全防护' },
+        ],
+      },
+      {
+        title: '4. 联系方式',
+        content: '如果您对本隐私政策有任何疑问,请通过联系页面与我联系。',
+      },
+    ],
+  },
+  'en-US': {
+    title: 'Privacy Policy',
+    back: 'Back to Home',
+    headerTitle: 'Privacy Policy',
+    lastUpdated: 'Last Updated: January 2025',
+    sections: [
+      {
+        title: '1. Information Collection',
+        content:
+          'This website is committed to protecting your privacy. The types of information we collect include:',
+        list: [
+          {
+            title: 'Access Data',
+            desc: 'We may collect your browser type, IP address, access times, and pages viewed',
+          },
+          {
+            title: 'Cookies',
+            desc: 'We use Cookies to improve your browsing experience, such as remembering your theme preference and language selection',
+          },
+          {
+            title: 'Local Storage',
+            desc: "Certain settings (such as theme and language preferences) are saved in your browser's local storage",
+          },
+        ],
+      },
+      {
+        title: '2. Information Usage',
+        content: 'The collected information is used only for:',
+        list: [
+          {
+            title: 'Website Optimization',
+            desc: 'Analyzing access data to improve website performance and user experience',
+          },
+          { title: 'Personalization', desc: 'Saving your preference settings' },
+          {
+            title: 'Security',
+            desc: 'Detecting and preventing malicious access',
+          },
+        ],
+      },
+      {
+        title: '3. Third-Party Services',
+        content: 'This website may use the following third-party services:',
+        list: [
+          { title: 'Google Analytics', desc: 'For website traffic analysis' },
+          {
+            title: 'Cloudflare',
+            desc: 'For CDN acceleration and security protection',
+          },
+        ],
+      },
+      {
+        title: '4. Contact Information',
+        content:
+          'If you have any questions about this privacy policy, please contact me via the contact page.',
+      },
+    ],
+  },
+  'en-GB': {
+    title: 'Privacy Policy',
+    back: 'Back to Home',
+    headerTitle: 'Privacy Policy',
+    lastUpdated: 'Last Updated: January 2025',
+    sections: [
+      {
+        title: '1. Information Collection',
+        content:
+          'This website is committed to protecting your privacy. The types of information we collect include:',
+        list: [
+          {
+            title: 'Access Data',
+            desc: 'We may collect your browser type, IP address, access times, and pages viewed',
+          },
+          {
+            title: 'Cookies',
+            desc: 'We use Cookies to improve your browsing experience, such as remembering your theme preference and language selection',
+          },
+          {
+            title: 'Local Storage',
+            desc: "Certain settings (such as theme and language preferences) are saved in your browser's local storage",
+          },
+        ],
+      },
+      {
+        title: '2. Information Usage',
+        content: 'The collected information is used only for:',
+        list: [
+          {
+            title: 'Website Optimization',
+            desc: 'Analyzing access data to improve website performance and user experience',
+          },
+          { title: 'Personalization', desc: 'Saving your preference settings' },
+          {
+            title: 'Security',
+            desc: 'Detecting and preventing malicious access',
+          },
+        ],
+      },
+      {
+        title: '3. Third-Party Services',
+        content: 'This website may use the following third-party services:',
+        list: [
+          { title: 'Google Analytics', desc: 'For website traffic analysis' },
+          {
+            title: 'Cloudflare',
+            desc: 'For CDN acceleration and security protection',
+          },
+        ],
+      },
+      {
+        title: '4. Contact Information',
+        content:
+          'If you have any questions about this privacy policy, please contact me via the contact page.',
+      },
+    ],
+  },
+  fr: {
+    title: 'Politique de Confidentialité',
+    back: "Retour à l'accueil",
+    headerTitle: 'Politique de Confidentialité',
+    lastUpdated: 'Dernière mise à jour : Janvier 2025',
+    sections: [
+      {
+        title: "1. Collecte d'informations",
+        content:
+          "Ce site web s'engage à protéger votre vie privée. Les types d'informations que nous recueillons comprennent :",
+        list: [
+          {
+            title: "Données d'accès",
+            desc: "Nous pouvons collecter votre type de navigateur, votre adresse IP, les heures d'accès et les pages consultées",
+          },
+          {
+            title: 'Cookies',
+            desc: 'Nous utilisons des cookies pour améliorer votre expérience de navigation, comme la mémorisation de vos préférences de thème et de langue',
+          },
+          {
+            title: 'Stockage local',
+            desc: 'Certains paramètres (tels que les préférences de thème et de langue) sont enregistrés dans le stockage local de votre navigateur',
+          },
+        ],
+      },
+      {
+        title: '2. Utilisation des informations',
+        content: 'Les informations collectées sont utilisées uniquement pour :',
+        list: [
+          {
+            title: 'Optimisation du site web',
+            desc: "Analyser les données d'accès pour améliorer les performances du site web et l'expérience utilisateur",
+          },
+          {
+            title: 'Personnalisation',
+            desc: 'Enregistrer vos paramètres de préférence',
+          },
+          {
+            title: 'Sécurité',
+            desc: 'Détecter et prévenir les accès malveillants',
+          },
+        ],
+      },
+      {
+        title: '3. Services tiers',
+        content: 'Ce site web peut utiliser les services tiers suivants :',
+        list: [
+          {
+            title: 'Google Analytics',
+            desc: "Pour l'analyse du trafic du site web",
+          },
+          {
+            title: 'Cloudflare',
+            desc: "Pour l'accélération CDN et la protection de la sécurité",
+          },
+        ],
+      },
+      {
+        title: '4. Coordonnées',
+        content:
+          'Si vous avez des questions concernant cette politique de confidentialité, veuillez me contacter via la page de contact.',
+      },
+    ],
+  },
+  ru: {
+    title: 'Политика конфиденциальности',
+    back: 'На главную',
+    headerTitle: 'Политика конфиденциальности',
+    lastUpdated: 'Последнее обновление: Январь 2025',
+    sections: [
+      {
+        title: '1. Сбор информации',
+        content:
+          'Этот веб-сайт обязуется защищать вашу конфиденциальность. Типы информации, которую мы собираем, включают:',
+        list: [
+          {
+            title: 'Данные доступа',
+            desc: 'Мы можем собирать тип вашего браузера, IP-адрес, время доступа и просмотренные страницы',
+          },
+          {
+            title: 'Cookies',
+            desc: 'Мы используем файлы cookie для улучшения вашего опыта просмотра, например, для запоминания ваших предпочтений темы и выбора языка',
+          },
+          {
+            title: 'Локальное хранилище',
+            desc: 'Некоторые настройки (такие как предпочтения темы и языка) сохраняются в локальном хранилище вашего браузера',
+          },
+        ],
+      },
+      {
+        title: '2. Использование информации',
+        content: 'Собранная информация используется только для:',
+        list: [
+          {
+            title: 'Оптимизация веб-сайта',
+            desc: 'Анализ данных доступа для улучшения производительности веб-сайта и пользовательского опыта',
+          },
+          {
+            title: 'Персонализация',
+            desc: 'Сохранение ваших настроек предпочтений',
+          },
+          {
+            title: 'Безопасность',
+            desc: 'Обнаружение и предотвращение вредоносного доступа',
+          },
+        ],
+      },
+      {
+        title: '3. Сторонние сервисы',
+        content:
+          'Этот веб-сайт может использовать следующие сторонние сервисы:',
+        list: [
+          { title: 'Google Analytics', desc: 'Для анализа трафика веб-сайта' },
+          {
+            title: 'Cloudflare',
+            desc: 'Для ускорения CDN и защиты безопасности',
+          },
+        ],
+      },
+      {
+        title: '4. Контактная информация',
+        content:
+          'Если у вас есть какие-либо вопросы по поводу этой политики конфиденциальности, пожалуйста, свяжитесь со мной через страницу контактов.',
+      },
+    ],
+  },
+};
+
+const content = privacyData[lang as Lang] || privacyData['en-US'];
+---
+
+<BaseLayout title={`${content.title} - Alexander Carter`} showFooter={false}>
+  <section class="pt-32 pb-16 min-h-screen">
+    <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+      <!-- Back Button -->
+      <a
+        href={`/${lang === 'zh-CN' ? '' : lang}`}
+        class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <span>{content.back}</span>
+      </a>
+
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <div
+          class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6"
+        >
+          🔒
+        </div>
+        <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">
+          {content.headerTitle}
+        </h1>
+        <p class="text-lg text-[rgb(var(--color-text-secondary))]">
+          {content.lastUpdated}
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div class="glass-card p-8 md:p-12 space-y-8">
+        {
+          content.sections.map((section: any) => (
+            <div class="space-y-4">
+              <h2 class="text-2xl font-bold text-[rgb(var(--color-text-primary))]">
+                {section.title}
+              </h2>
+              <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+                {section.content}
+              </p>
+              {section.list && (
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                  {section.list.map((item: any) => (
+                    <li class="text-[rgb(var(--color-text-secondary))]">
+                      <strong class="text-[rgb(var(--color-text-primary))]">
+                        {item.title}
+                      </strong>
+                      : {item.desc}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

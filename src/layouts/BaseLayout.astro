@@ -1,0 +1,145 @@
+---
+import '../styles/global.css';
+import { getLangFromUrl, useTranslations } from '../i18n/ui';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ThemeScript from '../components/ThemeScript.astro';
+import BackToTop from '../components/BackToTop.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import NewYearEffects from '../components/NewYearEffects.astro';
+import MouseFollower from '../components/MouseFollower.astro';
+import PageLoader from '../components/PageLoader.astro';
+import QuickActions from '../components/QuickActions.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import ShareButton from '../components/ShareButton.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  protectedPage?: boolean;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { 
+  title = t('site.title'), 
+  description = t('site.description'),
+  image = '/img/branding/logo.png',
+  showHeader = true,
+  showFooter = true,
+  protectedPage = false
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.title')}`;
+---
+
+<!DOCTYPE html>
+<html lang={lang} class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/img/branding/favicon.ico">
+  <link rel="apple-touch-icon" href="/img/branding/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="generator" content={Astro.generator}>
+  <meta name="theme-color" content="#667eea">
+  
+  <!-- Primary Meta Tags -->
+  <title>{fullTitle}</title>
+  <meta name="title" content={fullTitle}>
+  <meta name="description" content={description}>
+  <meta name="author" content="Alexander James Carter">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href={canonicalURL}>
+  
+  <!-- Alternate Language URLs -->
+  <link rel="alternate" hreflang="zh-CN" href={new URL('/', Astro.site)}>
+  <link rel="alternate" hreflang="en-US" href={new URL('/en-US/', Astro.site)}>
+  <link rel="alternate" hreflang="en-GB" href={new URL('/en-GB/', Astro.site)}>
+  <link rel="alternate" hreflang="fr" href={new URL('/fr/', Astro.site)}>
+  <link rel="alternate" hreflang="ru" href={new URL('/ru/', Astro.site)}>
+  <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)}>
+
+  {protectedPage && (
+    <script is:inline>
+      (function() {
+        try {
+          const isVerified = sessionStorage.getItem('is_verified');
+          if (isVerified !== 'true') {
+            const currentPath = window.location.pathname;
+            window.location.href = `/verify?redirect=${encodeURIComponent(currentPath)}`;
+          }
+        } catch (e) {
+          console.error('Auth check failed', e);
+        }
+      })();
+    </script>
+  )}
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={canonicalURL}>
+  <meta property="og:title" content={fullTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={new URL(image, Astro.site)}>
+  <meta property="og:locale" content={lang}>
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content={canonicalURL}>
+  <meta name="twitter:title" content={fullTitle}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={new URL(image, Astro.site)}>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Theme Script (no flash) -->
+  <ThemeScript />
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alexander James Carter",
+      "url": "https://alexander.xin",
+      "image": "https://alexander.xin/img/profile/about-me.jpg",
+      "sameAs": [
+        "https://github.com/AlexanderJ-Carter"
+      ],
+      "description": {description},
+      "jobTitle": "Developer & Designer"
+    }
+  </script>
+</head>
+<body class="antialiased">
+  {showHeader && <Header />}
+  
+  <main>
+    <slot />
+  </main>
+  
+  {showFooter && <Footer />}
+  
+  <BackToTop />
+  <CookieConsent />
+  <NewYearEffects />
+  <MouseFollower />
+  <PageLoader />
+  <QuickActions />
+  <ReadingProgress />
+  <ShareButton />
+  
+  <!-- Scroll Animations -->
+  <script src="../scripts/scroll-animations.ts"></script>
+</body>
+</html>

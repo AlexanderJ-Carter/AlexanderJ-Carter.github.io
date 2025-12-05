@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+
+type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+
+const verifyData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '安全验证',
+    headerTitle: '🔐 安全验证',
+    headerDesc: '请完成以下验证以访问受保护的内容',
+    verifying: '正在验证您的访问权限...',
+    verifyDesc: '请稍候，我们正在确认您的身份。这通常只需要几秒钟。',
+    manualVerify: '如果验证没有自动开始，请点击下方按钮：',
+    verifyButton: '开始验证',
+    helpTitle: '为什么需要验证？',
+    helpDesc:
+      '为了保护网站内容的安全，防止恶意爬虫和攻击，我们需要确认您是真实用户。感谢您的理解与配合。',
+    footer: '安全验证由 Cloudflare Turnstile 提供支持',
+  },
+  'en-US': {
+    title: 'Security Verification',
+    headerTitle: '🔐 Security Verification',
+    headerDesc:
+      'Please complete the verification below to access protected content',
+    verifying: 'Verifying your access...',
+    verifyDesc:
+      'Please wait while we confirm your identity. This usually takes just a few seconds.',
+    manualVerify:
+      'If verification does not start automatically, please click the button below:',
+    verifyButton: 'Start Verification',
+    helpTitle: 'Why is verification needed?',
+    helpDesc:
+      'To protect website content and prevent malicious crawlers and attacks, we need to confirm you are a real user. Thank you for your understanding and cooperation.',
+    footer: 'Security verification powered by Cloudflare Turnstile',
+  },
+  'en-GB': {
+    title: 'Security Verification',
+    headerTitle: '🔐 Security Verification',
+    headerDesc:
+      'Please complete the verification below to access protected content',
+    verifying: 'Verifying your access...',
+    verifyDesc:
+      'Please wait while we confirm your identity. This usually takes just a few seconds.',
+    manualVerify:
+      'If verification does not start automatically, please click the button below:',
+    verifyButton: 'Start Verification',
+    helpTitle: 'Why is verification needed?',
+    helpDesc:
+      'To protect website content and prevent malicious crawlers and attacks, we need to confirm you are a real user. Thank you for your understanding and cooperation.',
+    footer: 'Security verification powered by Cloudflare Turnstile',
+  },
+  fr: {
+    title: 'Vérification de sécurité',
+    headerTitle: '🔐 Vérification de sécurité',
+    headerDesc:
+      'Veuillez compléter la vérification ci-dessous pour accéder au contenu protégé',
+    verifying: 'Vérification de votre accès...',
+    verifyDesc:
+      'Veuillez patienter pendant que nous confirmons votre identité. Cela ne prend généralement que quelques secondes.',
+    manualVerify:
+      'Si la vérification ne démarre pas automatiquement, veuillez cliquer sur le bouton ci-dessous :',
+    verifyButton: 'Démarrer la vérification',
+    helpTitle: 'Pourquoi la vérification est-elle nécessaire ?',
+    helpDesc:
+      'Pour protéger le contenu du site web et empêcher les robots malveillants et les attaques, nous devons confirmer que vous êtes un utilisateur réel. Merci de votre compréhension et de votre coopération.',
+    footer: 'Vérification de sécurité propulsée par Cloudflare Turnstile',
+  },
+  ru: {
+    title: 'Проверка безопасности',
+    headerTitle: '🔐 Проверка безопасности',
+    headerDesc:
+      'Пожалуйста, пройдите проверку ниже, чтобы получить доступ к защищенному контенту',
+    verifying: 'Проверка вашего доступа...',
+    verifyDesc:
+      'Пожалуйста, подождите, пока мы подтвердим вашу личность. Обычно это занимает всего несколько секунд.',
+    manualVerify:
+      'Если проверка не начинается автоматически, нажмите кнопку ниже:',
+    verifyButton: 'Начать проверку',
+    helpTitle: 'Зачем нужна проверка?',
+    helpDesc:
+      'Для защиты контента сайта и предотвращения вредоносных сканеров и атак нам необходимо подтвердить, что вы реальный пользователь. Спасибо за понимание и сотрудничество.',
+    footer: 'Проверка безопасности при поддержке Cloudflare Turnstile',
+  },
+};
+
+const content = verifyData[lang as Lang] || verifyData['en-US'];
+---
+
+<BaseLayout
+  title={`${content.title} - Alexander Carter`}
+  showHeader={false}
+  showFooter={false}
+>
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 bg-mesh-gradient">
+    <div class="container mx-auto px-4 lg:px-8 text-center">
+      <h1
+        class="text-5xl md:text-6xl font-display font-bold mb-6 gradient-text"
+      >
+        {content.headerTitle}
+      </h1>
+      <p
+        class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+      >
+        {content.headerDesc}
+      </p>
+    </div>
+  </section>
+
+  <!-- Auth Section -->
+  <section
+    class="py-16 container mx-auto px-4 lg:px-8 flex justify-center items-center min-h-[60vh]"
+  >
+    <div class="max-w-md w-full">
+      <!-- Cloudflare Turnstile Verification -->
+      <div
+        class="glass-card p-8 mb-8 flex flex-col items-center justify-center min-h-[360px] relative overflow-hidden"
+      >
+        <!-- Background Decoration -->
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-accent-500/5 pointer-events-none"
+        >
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center w-full">
+          <div
+            class="w-16 h-16 mb-6 rounded-full bg-[rgb(var(--color-bg-secondary))] flex items-center justify-center shadow-inner"
+          >
+            <svg
+              class="w-8 h-8 text-primary-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              ></path>
+            </svg>
+          </div>
+
+          <h3
+            class="text-xl font-bold mb-2 text-[rgb(var(--color-text-primary))]"
+          >
+            {content.verifying}
+          </h3>
+          <p class="text-center text-[rgb(var(--color-text-secondary))] mb-8">
+            {content.verifyDesc}
+          </p>
+
+          <!-- Turnstile Widget Container -->
+          <div
+            class="cf-turnstile"
+            data-sitekey="0x4AAAAAAAxh-W-wK-wK-wK"
+            data-callback="onTurnstileSuccess"
+            data-theme="auto"
+          >
+          </div>
+
+          <div class="mt-6 text-xs text-[rgb(var(--color-text-tertiary))]">
+            {content.footer}
+          </div>
+        </div>
+      </div>
+
+      <!-- Help Text -->
+      <div class="text-center">
+        <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+          {content.helpTitle}
+          <br />
+          <span class="opacity-75">
+            {content.helpDesc}
+          </span>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  // Turnstile callback
+  window.onTurnstileSuccess = function (token) {
+    console.log('Verification successful', token);
+    // Redirect back to previous page or home
+    const returnUrl = sessionStorage.getItem('returnUrl') || '/';
+    window.location.href = returnUrl;
+  };
+</script>

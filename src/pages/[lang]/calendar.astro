@@ -1,0 +1,16 @@
+---
+import CalendarTemplate from '../../components/templates/CalendarTemplate.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en-US' } },
+    { params: { lang: 'en-GB' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'ru' } },
+  ];
+}
+
+const { lang } = Astro.params;
+---
+
+<CalendarTemplate lang={lang} />

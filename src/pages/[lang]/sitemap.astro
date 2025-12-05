@@ -1,0 +1,12 @@
+---
+import SitemapTemplate from '../../components/templates/SitemapTemplate.astro';
+import { languages } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+---
+
+<SitemapTemplate lang={lang} />

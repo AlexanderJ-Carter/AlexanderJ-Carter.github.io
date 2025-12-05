@@ -1,0 +1,251 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+
+type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+
+const timeData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '标准时间服务',
+    tag: '标准时间 / 世界时区',
+    headerTitle: '时间服务中心',
+    headerDesc:
+      '专注于可靠、清晰的时间信息与常用时区对照，支持复制与 API 调用。',
+    localTime: '当前所在地',
+    beijingTime: '北京 / UTC+8',
+    copy: '复制',
+    copied: '已复制',
+    worldClocks: '世界时区',
+    london: '伦敦 / UTC+0',
+    newYork: '纽约 / UTC-5',
+    tokyo: '东京 / UTC+9',
+    sydney: '悉尼 / UTC+11',
+    apiTitle: '开发者 API',
+    apiDesc: '获取标准时间的简单 API 示例',
+    apiExample: 'GET https://api.alexander.xin/time/now',
+  },
+  'en-US': {
+    title: 'Standard Time Service',
+    tag: 'Standard Time / World Clocks',
+    headerTitle: 'Time Service Hub',
+    headerDesc:
+      'Reliable, clear time info with quick world clocks and simple API examples.',
+    localTime: 'Local Time',
+    beijingTime: 'Beijing / UTC+8',
+    copy: 'Copy',
+    copied: 'Copied',
+    worldClocks: 'World Clocks',
+    london: 'London / UTC+0',
+    newYork: 'New York / UTC-5',
+    tokyo: 'Tokyo / UTC+9',
+    sydney: 'Sydney / UTC+11',
+    apiTitle: 'Developer API',
+    apiDesc: 'Simple API example to get standard time',
+    apiExample: 'GET https://api.alexander.xin/time/now',
+  },
+  'en-GB': {
+    title: 'Standard Time Service',
+    tag: 'Standard Time / World Clocks',
+    headerTitle: 'Time Service Hub',
+    headerDesc:
+      'Reliable, clear time info with quick world clocks and simple API examples.',
+    localTime: 'Local Time',
+    beijingTime: 'Beijing / UTC+8',
+    copy: 'Copy',
+    copied: 'Copied',
+    worldClocks: 'World Clocks',
+    london: 'London / UTC+0',
+    newYork: 'New York / UTC-5',
+    tokyo: 'Tokyo / UTC+9',
+    sydney: 'Sydney / UTC+11',
+    apiTitle: 'Developer API',
+    apiDesc: 'Simple API example to get standard time',
+    apiExample: 'GET https://api.alexander.xin/time/now',
+  },
+  fr: {
+    title: "Service de l'heure standard",
+    tag: 'Heure standard / Horloges mondiales',
+    headerTitle: 'Centre de service horaire',
+    headerDesc:
+      "Informations horaires fiables et claires avec horloges mondiales rapides et exemples d'API simples.",
+    localTime: 'Heure locale',
+    beijingTime: 'Pékin / UTC+8',
+    copy: 'Copier',
+    copied: 'Copié',
+    worldClocks: 'Horloges mondiales',
+    london: 'Londres / UTC+0',
+    newYork: 'New York / UTC-5',
+    tokyo: 'Tokyo / UTC+9',
+    sydney: 'Sydney / UTC+11',
+    apiTitle: 'API Développeur',
+    apiDesc: "Exemple d'API simple pour obtenir l'heure standard",
+    apiExample: 'GET https://api.alexander.xin/time/now',
+  },
+  ru: {
+    title: 'Служба стандартного времени',
+    tag: 'Стандартное время / Мировые часы',
+    headerTitle: 'Центр службы времени',
+    headerDesc:
+      'Надежная, четкая информация о времени с быстрыми мировыми часами и простыми примерами API.',
+    localTime: 'Местное время',
+    beijingTime: 'Пекин / UTC+8',
+    copy: 'Копировать',
+    copied: 'Скопировано',
+    worldClocks: 'Мировые часы',
+    london: 'Лондон / UTC+0',
+    newYork: 'Нью-Йорк / UTC-5',
+    tokyo: 'Токио / UTC+9',
+    sydney: 'Сидней / UTC+11',
+    apiTitle: 'API для разработчиков',
+    apiDesc: 'Простой пример API для получения стандартного времени',
+    apiExample: 'GET https://api.alexander.xin/time/now',
+  },
+};
+
+const content = timeData[lang as Lang] || timeData['en-US'];
+---
+
+<BaseLayout title={`${content.title} - Alexander Carter`}>
+  <section class="pt-32 pb-12 bg-mesh-gradient">
+    <div class="container mx-auto px-4 lg:px-8 text-center">
+      <p
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm font-medium mb-4"
+      >
+        <span>🕐</span>{' '}
+        {content.tag}
+      </p>
+      <h1
+        class="text-5xl md:text-6xl font-display font-bold mb-4 gradient-text"
+      >
+        {content.headerTitle}
+      </h1>
+      <p
+        class="text-lg text-[rgb(var(--color-text-secondary))] max-w-3xl mx-auto"
+      >
+        {content.headerDesc}
+      </p>
+    </div>
+  </section>
+
+  <section class="py-14 container mx-auto px-4 lg:px-8">
+    <div class="grid gap-8 lg:grid-cols-3">
+      <!-- Primary time block -->
+      <div class="lg:col-span-2 space-y-6">
+        <div class="glass-card p-8">
+          <div
+            class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6"
+          >
+            <div>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+                {content.localTime}
+              </p>
+              <h2 class="text-3xl font-bold">
+                {content.beijingTime}
+              </h2>
+            </div>
+            <button
+              class="px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors text-sm font-medium flex items-center gap-2"
+              onclick="copyTime()"
+            >
+              <span>📋</span>
+              {content.copy}
+            </button>
+          </div>
+
+          <div
+            class="text-6xl md:text-8xl font-mono font-bold tracking-tight text-center py-8"
+            id="main-clock"
+          >
+            00:00:00
+          </div>
+          <div
+            class="text-center text-[rgb(var(--color-text-secondary))]"
+            id="main-date"
+          >
+            ----/--/--
+          </div>
+        </div>
+      </div>
+
+      <!-- World Clocks -->
+      <div class="space-y-6">
+        <div class="glass-card p-6">
+          <h3 class="text-xl font-bold mb-4">{content.worldClocks}</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <span>{content.london}</span>
+              <span class="font-mono" id="clock-london">--:--</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span>{content.newYork}</span>
+              <span class="font-mono" id="clock-ny">--:--</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span>{content.tokyo}</span>
+              <span class="font-mono" id="clock-tokyo">--:--</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span>{content.sydney}</span>
+              <span class="font-mono" id="clock-sydney">--:--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- API Info -->
+        <div class="glass-card p-6 bg-primary-500/5 border-primary-500/20">
+          <h3 class="text-lg font-bold mb-2 text-primary-500">
+            {content.apiTitle}
+          </h3>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-3">
+            {content.apiDesc}
+          </p>
+          <code
+            class="block p-3 bg-black/20 rounded text-xs font-mono break-all"
+          >
+            {content.apiExample}
+          </code>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  function updateClocks() {
+    const now = new Date();
+
+    // Main Clock (Beijing)
+    const beijingTime = new Date(
+      now.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' })
+    );
+    document.getElementById('main-clock').textContent =
+      beijingTime.toLocaleTimeString('en-GB', { hour12: false });
+    document.getElementById('main-date').textContent =
+      beijingTime.toLocaleDateString();
+
+    // World Clocks
+    const formatTime = (tz) =>
+      new Date(
+        now.toLocaleString('en-US', { timeZone: tz })
+      ).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+    document.getElementById('clock-london').textContent =
+      formatTime('Europe/London');
+    document.getElementById('clock-ny').textContent =
+      formatTime('America/New_York');
+    document.getElementById('clock-tokyo').textContent =
+      formatTime('Asia/Tokyo');
+    document.getElementById('clock-sydney').textContent =
+      formatTime('Australia/Sydney');
+  }
+
+  setInterval(updateClocks, 1000);
+  updateClocks();
+
+  function copyTime() {
+    const time = document.getElementById('main-clock').textContent;
+    navigator.clipboard.writeText(time);
+    alert('Copied!');
+  }
+</script>

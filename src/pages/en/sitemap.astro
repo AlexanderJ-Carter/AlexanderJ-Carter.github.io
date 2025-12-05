@@ -1,0 +1,324 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+
+const mainPages = [
+  {
+    name: 'Home',
+    href: '/en/',
+    desc: 'Explore creativity, share life',
+    icon: '🏠',
+  },
+  {
+    name: 'About',
+    href: '/en/about',
+    desc: 'Learn about my story and philosophy',
+    icon: '👤',
+  },
+  {
+    name: 'Gallery',
+    href: '/en/gallery',
+    desc: 'Complete photography gallery',
+    icon: '🖼️',
+  },
+  {
+    name: 'Timeline',
+    href: '/en/timeline',
+    desc: 'My learning and growth journey',
+    icon: '📅',
+  },
+];
+
+const toolPages = [
+  {
+    name: 'Calendar',
+    href: '/en/calendar',
+    desc: 'Feature-rich calendar tool',
+    icon: '📆',
+  },
+  {
+    name: 'Currency',
+    href: '/en/currency',
+    desc: 'Real-time currency converter',
+    icon: '💱',
+  },
+  {
+    name: 'World Time',
+    href: '/en/time',
+    desc: 'World time display tool',
+    icon: '🕐',
+  },
+];
+
+const policyPages = [
+  {
+    name: 'Privacy',
+    href: '/en/privacy',
+    desc: 'Data protection and privacy',
+    icon: '🔒',
+  },
+  { name: 'Terms', href: '/en/terms', desc: 'Terms of service', icon: '📄' },
+  {
+    name: 'License',
+    href: '/en/license',
+    desc: 'License information',
+    icon: '📜',
+  },
+  {
+    name: 'Accessibility',
+    href: '/en/accessibility',
+    desc: 'Accessibility information',
+    icon: '♿',
+  },
+];
+
+const externalLinks = [
+  {
+    name: 'Blog',
+    href: 'https://blog.alexander.xin',
+    desc: 'Latest articles and thoughts',
+    icon: '📝',
+  },
+  {
+    name: 'GitHub',
+    href: 'https://github.com/AlexanderJ-Carter',
+    desc: 'Open source projects',
+    icon: '💻',
+  },
+];
+
+const languages = [
+  { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+  { code: 'en', name: 'English', flag: '🇬🇧', href: '/en/' },
+];
+---
+
+<BaseLayout
+  title="Sitemap"
+  description="Complete site structure and navigation map"
+>
+  <!-- Hero Section -->
+  <section
+    class="relative py-24 bg-gradient-to-br from-primary-500/20 via-accent-500/20 to-primary-500/20 overflow-hidden"
+  >
+    <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto">
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
+        >
+          <span class="text-2xl">🗺️</span>
+          <span class="text-sm font-medium">Site Navigation</span>
+        </div>
+        <h1
+          class="text-5xl md:text-7xl font-display font-bold mb-6 gradient-text"
+        >
+          Sitemap
+        </h1>
+        <p class="text-xl text-[rgb(var(--color-text-secondary))] mb-8">
+          Explore the complete site structure and quickly find the features and
+          content you need
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/en/gallery" class="btn-primary"> Start Exploring </a>
+          <a href="/en/" class="btn-secondary"> Back to Home </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-16 bg-[rgb(var(--color-bg-secondary))]">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="glass-card p-8 max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-8">Site Overview</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="text-center">
+            <div class="text-4xl font-bold text-primary-500 mb-2">20+</div>
+            <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+              Pages
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-accent-500 mb-2">2</div>
+            <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+              Languages
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-green-500 mb-2">3</div>
+            <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+              Tools
+            </div>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl font-bold text-purple-500 mb-2">∞</div>
+            <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+              Possibilities
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-20 container mx-auto px-4 lg:px-8">
+    <!-- Main Pages -->
+    <div class="glass-card p-8 mb-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="text-3xl">🏠</span>
+        <span>Main Pages</span>
+      </h2>
+      <p class="text-[rgb(var(--color-text-secondary))] mb-6 italic">
+        Core pages showcasing main content and features
+      </p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {
+          mainPages.map((page) => (
+            <a
+              href={page.href}
+              class="group p-4 rounded-xl border border-[rgb(var(--color-border))] hover:border-primary-500 hover:bg-primary-500/10 transition-all hover:-translate-y-1"
+            >
+              <div class="text-3xl mb-2">{page.icon}</div>
+              <h3 class="font-semibold mb-1 group-hover:text-primary-500 transition-colors">
+                {page.name}
+              </h3>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+                {page.desc}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Tool Pages -->
+    <div class="glass-card p-8 mb-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="text-3xl">⚙️</span>
+        <span>Tools</span>
+      </h2>
+      <p class="text-[rgb(var(--color-text-secondary))] mb-6 italic">
+        Practical tools and content pages
+      </p>
+      <div class="grid md:grid-cols-3 gap-4">
+        {
+          toolPages.map((page) => (
+            <a
+              href={page.href}
+              class="group p-4 rounded-xl border border-[rgb(var(--color-border))] hover:border-accent-500 hover:bg-accent-500/10 transition-all hover:-translate-y-1"
+            >
+              <div class="text-3xl mb-2">{page.icon}</div>
+              <h3 class="font-semibold mb-1 group-hover:text-accent-500 transition-colors">
+                {page.name}
+              </h3>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+                {page.desc}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Policy Pages -->
+    <div class="glass-card p-8 mb-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="text-3xl">📋</span>
+        <span>Legal Pages</span>
+      </h2>
+      <p class="text-[rgb(var(--color-text-secondary))] mb-6 italic">
+        Learn about terms, privacy, and licensing
+      </p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {
+          policyPages.map((page) => (
+            <a
+              href={page.href}
+              class="group p-4 rounded-xl border border-[rgb(var(--color-border))] hover:border-green-500 hover:bg-green-500/10 transition-all hover:-translate-y-1"
+            >
+              <div class="text-3xl mb-2">{page.icon}</div>
+              <h3 class="font-semibold mb-1 group-hover:text-green-500 transition-colors">
+                {page.name}
+              </h3>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+                {page.desc}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Languages -->
+    <div class="glass-card p-8 mb-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="text-3xl">🌍</span>
+        <span>Languages</span>
+      </h2>
+      <p class="text-[rgb(var(--color-text-secondary))] mb-6 italic">
+        Experience complete interfaces in different languages
+      </p>
+      <div class="grid md:grid-cols-2 gap-4">
+        {
+          languages.map((langItem) => (
+            <a
+              href={langItem.href}
+              class={`group p-6 rounded-xl border-2 transition-all hover:-translate-y-1 ${
+                langItem.code === lang
+                  ? 'border-primary-500 bg-primary-500/10'
+                  : 'border-[rgb(var(--color-border))] hover:border-primary-500 hover:bg-primary-500/5'
+              }`}
+            >
+              <div class="flex items-center gap-4">
+                <span class="text-4xl">{langItem.flag}</span>
+                <div>
+                  <h3 class="font-bold text-lg mb-1">{langItem.name}</h3>
+                  <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+                    {langItem.code === 'zh-CN'
+                      ? 'Complete Simplified Chinese interface'
+                      : 'Complete English interface'}
+                  </p>
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- External Links -->
+    <div class="glass-card p-8">
+      <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+        <span class="text-3xl">🔗</span>
+        <span>External Links</span>
+      </h2>
+      <p class="text-[rgb(var(--color-text-secondary))] mb-6 italic">
+        Connect to a broader content world
+      </p>
+      <div class="grid md:grid-cols-2 gap-4">
+        {
+          externalLinks.map((link) => (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group p-4 rounded-xl border border-[rgb(var(--color-border))] hover:border-purple-500 hover:bg-purple-500/10 transition-all hover:-translate-y-1"
+            >
+              <div class="text-3xl mb-2">{link.icon}</div>
+              <h3 class="font-semibold mb-1 group-hover:text-purple-500 transition-colors">
+                {link.name} <span class="text-xs">↗</span>
+              </h3>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+                {link.desc}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

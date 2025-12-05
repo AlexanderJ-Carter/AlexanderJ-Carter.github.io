@@ -1,0 +1,531 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const skills = [
+  { name: 'C/C++', level: 95, icon: '⚙️', category: 'programming' },
+  { name: 'Python', level: 90, icon: '🐍', category: 'programming' },
+  { name: 'Java', level: 85, icon: '☕', category: 'programming' },
+  { name: 'HTML/CSS/JS', level: 88, icon: '🌐', category: 'web' },
+  { name: 'Verilog', level: 80, icon: '💾', category: 'hardware' },
+  { name: 'MATLAB', level: 78, icon: '📊', category: 'tools' },
+  { name: 'Photography', level: 92, icon: '📷', category: 'creative' },
+  { name: 'UI/UX Design', level: 85, icon: '🎨', category: 'creative' },
+];
+
+const education = [
+  {
+    year: '2023 - Present',
+    title: 'Undergraduate Studies',
+    institution: 'Key University in China',
+    degree: 'Electronics & Information Technology',
+    description:
+      'Studying electronic information technology and computer science, developing engineering and practical skills.',
+    highlights: [
+      'Professional Learning',
+      'Practical Projects',
+      'Skill Development',
+    ],
+    icon: '🎓',
+  },
+  {
+    year: '2017 - 2023',
+    title: 'High School Education',
+    institution: 'Key High School',
+    degree: 'High School Diploma',
+    description:
+      'Built strong foundation in science and mathematics, developed passion for technology and creativity.',
+    highlights: [
+      'Science Studies',
+      'Comprehensive Development',
+      'Interest Cultivation',
+    ],
+    icon: '📚',
+  },
+];
+
+// Projects section temporarily hidden for privacy
+
+const interests = [
+  {
+    name: 'Photography',
+    icon: '📷',
+    description: 'Capturing moments and emotions through lens',
+  },
+  {
+    name: 'Web Dev',
+    icon: '💻',
+    description: 'Building beautiful and functional websites',
+  },
+  {
+    name: 'Music',
+    icon: '🎵',
+    description: 'Classical, piano, and traditional Chinese music',
+  },
+  {
+    name: 'Design',
+    icon: '🎨',
+    description: 'UI/UX design and visual creativity',
+  },
+  {
+    name: 'Hardware',
+    icon: '🔧',
+    description: 'FPGA and embedded system development',
+  },
+  {
+    name: 'Languages',
+    icon: '🌍',
+    description: 'Learning Italian and Japanese',
+  },
+];
+
+const languages = [
+  { name: 'Chinese', level: 100, proficiency: 'Native' },
+  { name: 'English', level: 85, proficiency: 'Fluent' },
+  { name: 'Italian', level: 30, proficiency: 'Beginner' },
+  { name: 'Japanese', level: 20, proficiency: 'Beginner' },
+];
+---
+
+<BaseLayout title={t('about.title')} protectedPage={true}>
+  <section class="pt-32 pb-16 bg-mesh-gradient">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="mb-8 inline-block">
+          <div
+            class="w-32 h-32 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 p-1"
+          >
+            <div
+              class="w-full h-full rounded-full bg-[rgb(var(--color-bg-primary))] flex items-center justify-center text-6xl"
+            >
+              👨‍💻
+            </div>
+          </div>
+        </div>
+
+        <h1 class="text-5xl md:text-6xl font-display font-bold mb-6">
+          <span class="gradient-text">Alexander James Carter</span>
+        </h1>
+
+        <p class="text-xl text-[rgb(var(--color-text-secondary))] mb-8">
+          Developer | Designer | Photographer
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span
+            class="px-4 py-2 rounded-full bg-primary-500/10 text-primary-500 font-medium"
+            >20 years old</span
+          >
+          <span
+            class="px-4 py-2 rounded-full bg-accent-500/10 text-accent-500 font-medium"
+            >Beijing</span
+          >
+          <span
+            class="px-4 py-2 rounded-full bg-green-500/10 text-green-500 font-medium"
+            >Student</span
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 container mx-auto px-4 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <!-- Bio Section -->
+      <div class="glass-card p-8 md:p-12 mb-12" data-aos="fade-up">
+        <h2
+          class="text-3xl font-display font-bold mb-6 flex items-center gap-3"
+        >
+          <span class="text-4xl">👋</span>
+          {t('about.bio')}
+        </h2>
+        <div
+          class="prose prose-lg max-w-none text-[rgb(var(--color-text-secondary))]"
+        >
+          <p class="mb-4 leading-relaxed">
+            Hello! I'm <strong>Alexander James Carter</strong>, a 20-year-old
+            student passionate about creativity and technology. Currently
+            studying <strong
+              >Electronic Information Science and Technology at Tsinghua
+              University</strong
+            >, where I'm not only learning solid technical knowledge but also
+            cultivating my enthusiasm for technological innovation and pursuit
+            of beautiful things.
+          </p>
+          <p class="mb-4 leading-relaxed">
+            I believe that <strong>the combination of technology and art</strong
+            > can create amazing works. From code to pixels, from algorithms to design,
+            I'm passionate about exploring the intersection of different fields, perfectly
+            blending rational logical thinking with emotional creative expression.
+          </p>
+          <p class="mb-4 leading-relaxed">
+            In the <strong>technical field</strong>, I'm proficient in C/C++,
+            Python and other programming languages, familiar with Verilog
+            hardware design, and have a strong interest in web development. I
+            enjoy hands-on practice, transforming theoretical knowledge into
+            practical results through projects.
+          </p>
+          <p class="leading-relaxed">
+            In terms of <strong>artistic creation</strong>, photography is my
+            favorite. Capturing beautiful moments in life through my lens,
+            capturing the poetic pictures woven by light and shadow. I'm also
+            passionate about UI/UX design, dedicated to creating user
+            experiences that are both beautiful and practical.
+          </p>
+        </div>
+
+        <!-- Quick Facts -->
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div
+            class="text-center p-4 bg-[rgb(var(--color-bg-primary))] rounded-lg"
+          >
+            <div class="text-3xl mb-2">🎂</div>
+            <div class="text-2xl font-bold text-primary-500">20</div>
+            <div class="text-sm text-[rgb(var(--color-text-tertiary))]">
+              Years
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-[rgb(var(--color-bg-primary))] rounded-lg"
+          >
+            <div class="text-3xl mb-2">📍</div>
+            <div class="text-lg font-bold">Beijing</div>
+            <div class="text-sm text-[rgb(var(--color-text-tertiary))]">
+              China
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-[rgb(var(--color-bg-primary))] rounded-lg"
+          >
+            <div class="text-3xl mb-2">🎓</div>
+            <div class="text-lg font-bold">Student</div>
+            <div class="text-sm text-[rgb(var(--color-text-tertiary))]">
+              Tsinghua
+            </div>
+          </div>
+          <div
+            class="text-center p-4 bg-[rgb(var(--color-bg-primary))] rounded-lg"
+          >
+            <div class="text-3xl mb-2">💻</div>
+            <div class="text-lg font-bold">Developer</div>
+            <div class="text-sm text-[rgb(var(--color-text-tertiary))]">
+              Full Stack
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills Section -->
+      <div
+        class="glass-card p-8 md:p-12 mb-12"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <h2
+          class="text-3xl font-display font-bold mb-8 flex items-center gap-3"
+        >
+          <span class="text-4xl">🛠️</span>
+          {t('about.skills')}
+        </h2>
+
+        <!-- Skill Categories -->
+        <div class="grid md:grid-cols-2 gap-8">
+          {
+            skills.map((skill) => (
+              <div class="skill-item-enhanced">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-3">
+                    <span class="text-3xl">{skill.icon}</span>
+                    <div>
+                      <span class="font-semibold text-lg block">
+                        {skill.name}
+                      </span>
+                      <span class="text-xs text-[rgb(var(--color-text-tertiary))] capitalize">
+                        {skill.category}
+                      </span>
+                    </div>
+                  </div>
+                  <span class="text-2xl font-bold text-primary-500">
+                    {skill.level}%
+                  </span>
+                </div>
+                <div class="h-4 bg-[rgb(var(--color-bg-secondary))] rounded-full overflow-hidden relative">
+                  <div
+                    class="h-full bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600 rounded-full transition-all duration-1000 skill-bar"
+                    style={`width: 0%`}
+                    data-width={skill.level}
+                  >
+                    <div class="absolute inset-0 bg-white/20 animate-pulse" />
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Education Section -->
+      <div
+        class="glass-card p-8 md:p-12 mb-12"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        <h2
+          class="text-3xl font-display font-bold mb-8 flex items-center gap-3"
+        >
+          <span class="text-4xl">🎓</span>
+          Education
+        </h2>
+        <div class="space-y-8">
+          {
+            education.map((edu, index) => (
+              <div class="flex gap-6 group">
+                <div class="flex flex-col items-center flex-shrink-0">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-2xl group-hover:scale-110 transition-transform">
+                    {edu.icon}
+                  </div>
+                  {index < education.length - 1 && (
+                    <div class="w-1 h-full bg-gradient-to-b from-primary-500 to-accent-500 mt-4" />
+                  )}
+                </div>
+                <div class="flex-1 pb-8">
+                  <div class="text-primary-500 font-bold mb-2">{edu.year}</div>
+                  <h3 class="text-2xl font-bold mb-1">{edu.title}</h3>
+                  <div class="text-lg text-accent-500 font-semibold mb-2">
+                    {edu.institution}
+                  </div>
+                  <div class="text-sm text-[rgb(var(--color-text-tertiary))] mb-3">
+                    {edu.degree}
+                  </div>
+                  <p class="text-[rgb(var(--color-text-secondary))] mb-4 leading-relaxed">
+                    {edu.description}
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    {edu.highlights.map((highlight) => (
+                      <span class="px-3 py-1 bg-primary-500/10 text-primary-500 rounded-full text-sm font-medium">
+                        {highlight}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Interests Section -->
+      <div
+        class="glass-card p-8 md:p-12 mb-12"
+        data-aos="fade-up"
+        data-aos-delay="400"
+      >
+        <h2
+          class="text-3xl font-display font-bold mb-8 flex items-center gap-3"
+        >
+          <span class="text-4xl">❤️</span>
+          Interests & Hobbies
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {
+            interests.map((interest) => (
+              <div class="flex items-start gap-4 p-4 bg-[rgb(var(--color-bg-primary))] rounded-lg hover:bg-[rgb(var(--color-bg-accent))] transition-colors cursor-pointer group">
+                <span class="text-3xl group-hover:scale-110 transition-transform">
+                  {interest.icon}
+                </span>
+                <div>
+                  <div class="font-semibold mb-1">{interest.name}</div>
+                  <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                    {interest.description}
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Languages Section -->
+      <div
+        class="glass-card p-8 md:p-12 mb-12"
+        data-aos="fade-up"
+        data-aos-delay="500"
+      >
+        <h2
+          class="text-3xl font-display font-bold mb-8 flex items-center gap-3"
+        >
+          <span class="text-4xl">🌍</span>
+          Languages
+        </h2>
+        <div class="space-y-6">
+          {
+            languages.map((language) => (
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center gap-3">
+                    <span class="font-semibold text-lg">{language.name}</span>
+                    <span class="text-sm px-3 py-1 rounded-full bg-primary-500/10 text-primary-500 font-medium">
+                      {language.proficiency}
+                    </span>
+                  </div>
+                  <span class="text-xl font-bold text-primary-500">
+                    {language.level}%
+                  </span>
+                </div>
+                <div class="h-3 bg-[rgb(var(--color-bg-secondary))] rounded-full overflow-hidden">
+                  <div
+                    class="h-full bg-gradient-to-r from-primary-500 to-accent-500 rounded-full transition-all duration-1000"
+                    style={`width: ${language.level}%`}
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="glass-card p-8 md:p-12">
+        <h2 class="text-3xl font-display font-bold mb-8">
+          {t('about.contact')}
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <a
+            href="https://github.com/AlexanderJ-Carter"
+            target="_blank"
+            class="flex items-center gap-4 p-4 rounded-lg bg-[rgb(var(--color-bg-secondary))] hover:bg-[rgb(var(--color-bg-accent))] transition-colors group"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white flex-shrink-0 group-hover:scale-110 transition-transform"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <div class="font-semibold">GitHub</div>
+              <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                @AlexanderJ-Carter
+              </div>
+            </div>
+          </a>
+
+          <a
+            href="mailto:contact-us@alexander.xin"
+            class="flex items-center gap-4 p-4 rounded-lg bg-[rgb(var(--color-bg-secondary))] hover:bg-[rgb(var(--color-bg-accent))] transition-colors group"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white flex-shrink-0 group-hover:scale-110 transition-transform"
+            >
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M0 4v8c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4V4c0-2.21-1.79-4-4-4H4C1.79 0 0 1.79 0 4zm22 0l-10 6.5L2 4h20z"
+                ></path>
+              </svg>
+            </div>
+            <div>
+              <div class="font-semibold">Email</div>
+              <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                contact-us@alexander.xin
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .skill-item-enhanced {
+    padding: 1.25rem;
+    background: rgb(var(--color-bg-primary));
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+  }
+
+  .skill-item-enhanced:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(var(--color-primary-rgb), 0.15);
+  }
+
+  [data-aos] {
+    opacity: 0;
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+
+  [data-aos].aos-animate {
+    opacity: 1;
+  }
+
+  [data-aos='fade-up'] {
+    transform: translateY(30px);
+  }
+
+  [data-aos='fade-up'].aos-animate {
+    transform: translateY(0);
+  }
+</style>
+
+<script is:inline>
+  // Animate skill bars on scroll
+  const observeSkillBars = () => {
+    const skillBars = document.querySelectorAll('.skill-bar');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const bar = entry.target;
+            const targetWidth = bar.getAttribute('data-width');
+            if (targetWidth) {
+              setTimeout(() => {
+                bar.style.width = `${targetWidth}%`;
+              }, 100);
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    skillBars.forEach((bar) => observer.observe(bar));
+  };
+
+  // Simple AOS (Animate On Scroll) implementation
+  const initAOS = () => {
+    const elements = document.querySelectorAll('[data-aos]');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('aos-animate');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+  };
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      observeSkillBars();
+      initAOS();
+    });
+  } else {
+    observeSkillBars();
+    initAOS();
+  }
+</script>

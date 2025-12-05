@@ -1,0 +1,359 @@
+---
+// Holiday Greeting Modal Component
+// Displays special greetings on holidays
+---
+
+<div id="holiday-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+  <div
+    class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
+  >
+    <!-- Background overlay -->
+    <div
+      class="fixed inset-0 transition-opacity bg-[rgb(var(--color-bg-primary))] bg-opacity-75 backdrop-blur-sm"
+      aria-hidden="true"
+    >
+    </div>
+
+    <!-- Center modal -->
+    <span
+      class="hidden sm:inline-block sm:align-middle sm:h-screen"
+      aria-hidden="true">&#8203;</span
+    >
+
+    <div
+      class="inline-block align-bottom glass-card rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-fade-in-up"
+    >
+      <!-- Modal Header -->
+      <div class="p-6 pb-4 text-center">
+        <div id="holiday-icon" class="text-6xl mb-4 animate-bounce-slow">
+          🎉
+        </div>
+        <h2
+          id="holiday-title"
+          class="text-3xl font-display font-bold mb-2 gradient-text"
+        >
+          节日快乐!
+        </h2>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="px-6 pb-4">
+        <p
+          id="holiday-message"
+          class="text-center text-[rgb(var(--color-text-secondary))] mb-4"
+        >
+          祝您在这个特别的日子里:
+        </p>
+
+        <div id="holiday-wishes" class="space-y-3 mb-6">
+          <div
+            class="flex items-center gap-3 p-3 rounded-lg bg-[rgb(var(--color-bg-accent))] hover:scale-105 transition-transform"
+          >
+            <span class="text-2xl">❤️</span>
+            <span class="font-medium">身体健康</span>
+          </div>
+          <div
+            class="flex items-center gap-3 p-3 rounded-lg bg-[rgb(var(--color-bg-accent))] hover:scale-105 transition-transform"
+          >
+            <span class="text-2xl">⭐</span>
+            <span class="font-medium">万事如意</span>
+          </div>
+          <div
+            class="flex items-center gap-3 p-3 rounded-lg bg-[rgb(var(--color-bg-accent))] hover:scale-105 transition-transform"
+          >
+            <span class="text-2xl">😊</span>
+            <span class="font-medium">阖家欢乐</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 pb-6 flex gap-3">
+        <button
+          id="accept-greeting-btn"
+          class="flex-1 px-4 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+        >
+          <span>💌</span>
+          <span>收下祝福</span>
+        </button>
+        <button
+          id="hide-today-btn"
+          class="flex-1 px-4 py-3 bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-primary))] rounded-lg font-semibold hover:bg-[rgb(var(--color-bg-accent))] transition-all duration-300 flex items-center justify-center gap-2"
+        >
+          <span>📅</span>
+          <span>今日不再提醒</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounce-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-out;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  // Holiday definitions
+  const holidays = [
+    {
+      name: '新年',
+      dates: ['01-01'],
+      icon: '🎊',
+      title: '新年快乐!',
+      message: '祝您在新的一年里:',
+      wishes: [
+        { icon: '🎯', text: '目标达成' },
+        { icon: '💪', text: '身体健康' },
+        { icon: '🌟', text: '万事如意' },
+      ],
+    },
+    {
+      name: '春节',
+      dates: [
+        '01-21',
+        '01-22',
+        '01-23',
+        '01-24',
+        '01-25',
+        '01-26',
+        '01-27',
+        '01-28',
+        '01-29',
+        '02-01',
+        '02-02',
+        '02-03',
+        '02-04',
+        '02-05',
+        '02-06',
+        '02-07',
+        '02-08',
+        '02-09',
+        '02-10',
+      ], // 农历春节通常在这些日期间
+      icon: '🧧',
+      title: '春节快乐!',
+      message: '在这个喜庆的日子里,祝您:',
+      wishes: [
+        { icon: '🎆', text: '新春大吉' },
+        { icon: '💰', text: '财源广进' },
+        { icon: '🏮', text: '阖家团圆' },
+      ],
+    },
+    {
+      name: '情人节',
+      dates: ['02-14'],
+      icon: '💝',
+      title: '情人节快乐!',
+      message: '愿爱与温暖常伴您左右:',
+      wishes: [
+        { icon: '💕', text: '爱情甜蜜' },
+        { icon: '🌹', text: '浪漫相伴' },
+        { icon: '💑', text: '幸福长久' },
+      ],
+    },
+    {
+      name: '劳动节',
+      dates: ['05-01'],
+      icon: '⚒️',
+      title: '劳动节快乐!',
+      message: '感谢您的辛勤付出,祝您:',
+      wishes: [
+        { icon: '🏖️', text: '假期愉快' },
+        { icon: '😌', text: '休息充足' },
+        { icon: '💼', text: '工作顺利' },
+      ],
+    },
+    {
+      name: '儿童节',
+      dates: ['06-01'],
+      icon: '🎈',
+      title: '儿童节快乐!',
+      message: '愿您永葆童心:',
+      wishes: [
+        { icon: '🎁', text: '快乐无忧' },
+        { icon: '🎨', text: '创意无限' },
+        { icon: '🌈', text: '梦想成真' },
+      ],
+    },
+    {
+      name: '中秋节',
+      dates: [
+        '09-15',
+        '09-16',
+        '09-17',
+        '09-29',
+        '10-01',
+        '10-02',
+        '10-03',
+        '10-04',
+      ], // 农历八月十五,日期会变
+      icon: '🥮',
+      title: '中秋节快乐!',
+      message: '月圆人团圆,祝您:',
+      wishes: [
+        { icon: '🌕', text: '花好月圆' },
+        { icon: '👨‍👩‍👧‍👦', text: '阖家团圆' },
+        { icon: '🎑', text: '心想事成' },
+      ],
+    },
+    {
+      name: '国庆节',
+      dates: ['10-01', '10-02', '10-03', '10-04', '10-05', '10-06', '10-07'],
+      icon: '🇨🇳',
+      title: '国庆节快乐!',
+      message: '祝祖国繁荣昌盛,祝您:',
+      wishes: [
+        { icon: '🎊', text: '节日快乐' },
+        { icon: '✈️', text: '旅途愉快' },
+        { icon: '🌟', text: '前程似锦' },
+      ],
+    },
+    {
+      name: '圣诞节',
+      dates: ['12-24', '12-25'],
+      icon: '🎄',
+      title: '圣诞快乐!',
+      message: '在这个温馨的节日里,祝您:',
+      wishes: [
+        { icon: '🎅', text: '礼物多多' },
+        { icon: '❄️', text: '温暖常在' },
+        { icon: '⭐', text: '梦想成真' },
+      ],
+    },
+  ];
+
+  // Check if today is a holiday
+  function getTodayHoliday() {
+    const today = new Date();
+    // Use local timezone to avoid timezone offset issues
+    // Get local date components directly
+    const month = today.getMonth() + 1; // 1-12
+    const date = today.getDate(); // 1-31
+    const monthDay = `${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+
+    return holidays.find((holiday) => holiday.dates.includes(monthDay));
+  }
+
+  // Check if greeting should be shown today
+  function shouldShowGreeting() {
+    const hideUntil = localStorage.getItem('hideHolidayGreetingUntil');
+    if (hideUntil) {
+      const hideDate = new Date(hideUntil);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (hideDate >= today) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // Show holiday greeting
+  function showHolidayGreeting() {
+    const holiday = getTodayHoliday();
+    if (!holiday || !shouldShowGreeting()) {
+      return;
+    }
+
+    // Update modal content
+    const modal = document.getElementById('holiday-modal');
+    const icon = document.getElementById('holiday-icon');
+    const title = document.getElementById('holiday-title');
+    const message = document.getElementById('holiday-message');
+    const wishesContainer = document.getElementById('holiday-wishes');
+
+    if (icon) icon.textContent = holiday.icon;
+    if (title) title.textContent = holiday.title;
+    if (message) message.textContent = holiday.message;
+
+    if (wishesContainer) {
+      wishesContainer.innerHTML = holiday.wishes
+        .map(
+          (wish) => `
+        <div class="flex items-center gap-3 p-3 rounded-lg bg-[rgb(var(--color-bg-accent))] hover:scale-105 transition-transform">
+          <span class="text-2xl">${wish.icon}</span>
+          <span class="font-medium">${wish.text}</span>
+        </div>
+      `
+        )
+        .join('');
+    }
+
+    // Show modal
+    if (modal) {
+      modal.classList.remove('hidden');
+    }
+  }
+
+  // Close modal
+  function closeModal() {
+    const modal = document.getElementById('holiday-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+    }
+  }
+
+  // Hide for today
+  function hideForToday() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    localStorage.setItem('hideHolidayGreetingUntil', tomorrow.toISOString());
+    closeModal();
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    // Show greeting after a short delay for better UX
+    setTimeout(showHolidayGreeting, 1000);
+
+    // Event listeners
+    const acceptBtn = document.getElementById('accept-greeting-btn');
+    const hideTodayBtn = document.getElementById('hide-today-btn');
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', closeModal);
+    }
+
+    if (hideTodayBtn) {
+      hideTodayBtn.addEventListener('click', hideForToday);
+    }
+
+    // Close on background click
+    const modal = document.getElementById('holiday-modal');
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  });
+</script>

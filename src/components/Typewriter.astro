@@ -1,0 +1,99 @@
+---
+// 打字机效果组件
+interface Props {
+  texts: string[];
+  speed?: number;
+}
+
+const { texts, speed = 100 } = Astro.props;
+---
+
+<div class="typewriter-container">
+  <span class="typewriter-text" id="typewriter"></span>
+  <span class="typewriter-cursor">|</span>
+</div>
+
+<script define:vars={{ texts, speed }} is:inline>
+  let currentTextIndex = 0;
+  let currentCharIndex = 0;
+  let isDeleting = false;
+  const typewriterElement = document.getElementById('typewriter');
+
+  function type() {
+    if (!typewriterElement) return;
+
+    const currentText = texts[currentTextIndex];
+
+    if (!isDeleting) {
+      // 正在输入
+      typewriterElement.textContent = currentText.substring(
+        0,
+        currentCharIndex + 1
+      );
+      currentCharIndex++;
+
+      if (currentCharIndex === currentText.length) {
+        // 输入完成,等待后开始删除
+        isDeleting = true;
+        setTimeout(type, 2000);
+        return;
+      }
+    } else {
+      // 正在删除
+      typewriterElement.textContent = currentText.substring(
+        0,
+        currentCharIndex - 1
+      );
+      currentCharIndex--;
+
+      if (currentCharIndex === 0) {
+        // 删除完成,切换到下一个文本
+        isDeleting = false;
+        currentTextIndex = (currentTextIndex + 1) % texts.length;
+        setTimeout(type, 500);
+        return;
+      }
+    }
+
+    setTimeout(type, isDeleting ? speed / 2 : speed);
+  }
+
+  // 页面加载后开始打字效果
+  if (typeof window !== 'undefined') {
+    setTimeout(type, 1000);
+  }
+</script>
+
+<style>
+  .typewriter-container {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .typewriter-text {
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .typewriter-cursor {
+    display: inline-block;
+    margin-left: 4px;
+    animation: blink 1s infinite;
+    font-weight: 600;
+    color: rgb(var(--color-text-primary));
+  }
+
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+</style>

@@ -1,0 +1,295 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+// import { getLangFromUrl } from '../../i18n/ui';
+
+// const lang = getLangFromUrl(Astro.url);
+---
+
+<BaseLayout title="Smart Calendar | Alexander James Carter">
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 bg-mesh-gradient">
+    <div class="container mx-auto px-4 lg:px-8 text-center">
+      <h1
+        class="text-5xl md:text-6xl font-display font-bold mb-6 gradient-text"
+      >
+        📅 Smart Calendar
+      </h1>
+      <p
+        class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+      >
+        Manage your time, plan your life. Support for holiday display, custom
+        scheduling and event management
+      </p>
+    </div>
+  </section>
+
+  <!-- Calendar Section -->
+  <section class="py-16 container mx-auto px-4 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Calendar Display -->
+      <div class="lg:col-span-2">
+        <div class="glass-card p-8">
+          <!-- Month Navigation -->
+          <div class="flex items-center justify-between mb-8">
+            <button
+              onclick="prevMonth()"
+              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+            >
+              ← Previous
+            </button>
+            <h2 class="text-2xl font-bold" id="currentMonth">Loading...</h2>
+            <button
+              onclick="nextMonth()"
+              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+            >
+              Next →
+            </button>
+          </div>
+
+          <!-- Weekdays -->
+          <div class="grid grid-cols-7 gap-2 mb-2">
+            {
+              ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+                <div class="text-center font-bold text-[rgb(var(--color-text-secondary))] py-2">
+                  {day}
+                </div>
+              ))
+            }
+          </div>
+
+          <!-- Days Grid -->
+          <div class="grid grid-cols-7 gap-2" id="calendarGrid">
+            <!-- Calendar days will be generated here -->
+          </div>
+
+          <!-- Legend -->
+          <div class="mt-8 pt-8 border-t border-[rgb(var(--color-border))]">
+            <div class="flex flex-wrap gap-4 text-sm">
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-4 h-4 bg-gradient-to-r from-primary-500 to-accent-500 rounded"
+                >
+                </div>
+                <span>Today</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-red-500 rounded"></div>
+                <span>Holiday</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-yellow-500 rounded"></div>
+                <span>Event</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-6">
+        <!-- Today Info -->
+        <div class="glass-card p-6">
+          <h3 class="text-lg font-bold mb-4">📌 Today</h3>
+          <div class="space-y-2 text-sm">
+            <p>
+              <span class="text-[rgb(var(--color-text-secondary))]">Date:</span>
+              <span id="todayDate">--</span>
+            </p>
+            <p>
+              <span class="text-[rgb(var(--color-text-secondary))]">Day:</span>
+              <span id="todayDay">--</span>
+            </p>
+            <p>
+              <span class="text-[rgb(var(--color-text-secondary))]">Time:</span>
+              <span id="currentTime">--:--:--</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Event Manager -->
+        <div class="glass-card p-6">
+          <h3 class="text-lg font-bold mb-4">✏️ Add Event</h3>
+          <div class="space-y-3">
+            <input
+              type="text"
+              id="eventName"
+              placeholder="Event name"
+              class="w-full px-3 py-2 border-2 border-[rgb(var(--color-border))] rounded-lg focus:outline-none focus:border-primary-500"
+            />
+            <input
+              type="date"
+              id="eventDate"
+              class="w-full px-3 py-2 border-2 border-[rgb(var(--color-border))] rounded-lg focus:outline-none focus:border-primary-500"
+            />
+            <button
+              onclick="addEvent()"
+              class="w-full px-4 py-2 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-lg font-medium hover:shadow-lg transition-all"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+
+        <!-- Holiday Info -->
+        <div class="glass-card p-6">
+          <h3 class="text-lg font-bold mb-4">🎉 Holidays</h3>
+          <div class="space-y-2 text-sm" id="holidayList">
+            <p class="text-[rgb(var(--color-text-secondary))]">Loading...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section
+    class="py-16 container mx-auto px-4 lg:px-8 border-t border-[rgb(var(--color-border))]"
+  >
+    <h2 class="text-4xl font-bold text-center mb-12">Features</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="glass-card p-8 text-center">
+        <div class="text-5xl mb-4">📍</div>
+        <h3 class="text-xl font-bold mb-2">Holiday Display</h3>
+        <p class="text-[rgb(var(--color-text-secondary))]">
+          Automatically show major holidays and international festivals
+        </p>
+      </div>
+      <div class="glass-card p-8 text-center">
+        <div class="text-5xl mb-4">📝</div>
+        <h3 class="text-xl font-bold mb-2">Event Management</h3>
+        <p class="text-[rgb(var(--color-text-secondary))]">
+          Add and manage your schedule events
+        </p>
+      </div>
+      <div class="glass-card p-8 text-center">
+        <div class="text-5xl mb-4">🌐</div>
+        <h3 class="text-xl font-bold mb-2">Real-time</h3>
+        <p class="text-[rgb(var(--color-text-secondary))]">
+          Display accurate current time and timezone information
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  let currentDate = new Date();
+
+  function renderCalendar() {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+
+    const currentMonthEl = document.getElementById('currentMonth');
+    if (currentMonthEl) {
+      currentMonthEl.textContent = `${month + 1}/${year}`;
+    }
+
+    const firstDay = new Date(year, month, 1);
+    const grid = document.getElementById('calendarGrid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+
+    const today = new Date();
+    let date = new Date(firstDay);
+    date.setDate(date.getDate() - firstDay.getDay());
+
+    for (let i = 0; i < 42; i++) {
+      const dayElement = document.createElement('div');
+      const isToday = date.toDateString() === today.toDateString();
+      const isCurrentMonth = date.getMonth() === month;
+
+      let className =
+        'aspect-square flex flex-col items-center justify-center rounded-lg cursor-pointer transition-all duration-300 p-1 text-sm font-medium ';
+
+      if (!isCurrentMonth) {
+        className +=
+          'text-[rgb(var(--color-text-secondary))] bg-[rgb(var(--color-bg-secondary))]';
+      } else if (isToday) {
+        className +=
+          'bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:shadow-lg';
+      } else {
+        className +=
+          'bg-[rgb(var(--color-bg-secondary))] hover:bg-[rgb(var(--color-bg-accent))]';
+      }
+
+      dayElement.className = className;
+      dayElement.innerHTML = `<span>${date.getDate()}</span>`;
+
+      grid.appendChild(dayElement);
+      date.setDate(date.getDate() + 1);
+    }
+
+    updateTodayInfo();
+    updateHolidayList();
+  }
+
+  function updateTodayInfo() {
+    const today = new Date();
+    const days = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ];
+    const todayDateEl = document.getElementById('todayDate');
+    if (todayDateEl) {
+      todayDateEl.textContent = today.toLocaleDateString('en-US');
+    }
+    const todayDayEl = document.getElementById('todayDay');
+    if (todayDayEl) {
+      todayDayEl.textContent = days[today.getDay()];
+    }
+
+    const time = today.toLocaleTimeString('en-US', { hour12: false });
+    const currentTimeEl = document.getElementById('currentTime');
+    if (currentTimeEl) {
+      currentTimeEl.textContent = time;
+    }
+  }
+
+  function updateHolidayList() {
+    const holidayList = document.getElementById('holidayList');
+    if (holidayList) {
+      holidayList.innerHTML =
+        '<p class="text-[rgb(var(--color-text-secondary))]">No special holidays this month</p>';
+    }
+  }
+
+  function prevMonth() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+  }
+
+  function nextMonth() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+  }
+
+  function addEvent() {
+    const nameInput = document.getElementById('eventName');
+    const dateInput = document.getElementById('eventDate');
+
+    if (!nameInput?.value || !dateInput?.value) {
+      alert('Please enter event name and date');
+      return;
+    }
+
+    alert(`✓ Event added: ${nameInput.value} (${dateInput.value})`);
+    if (nameInput) nameInput.value = '';
+    if (dateInput) dateInput.value = '';
+  }
+
+  window.prevMonth = prevMonth;
+  window.nextMonth = nextMonth;
+  window.addEvent = addEvent;
+
+  // Update time every second
+  setInterval(updateTodayInfo, 1000);
+
+  // Initial render
+  renderCalendar();
+</script>

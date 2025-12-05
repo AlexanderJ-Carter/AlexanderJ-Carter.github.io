@@ -1,0 +1,770 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+
+type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+
+const sitemapData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '网站地图',
+    description: '完整的网站结构导航和页面地图',
+    headerTitle: '网站地图',
+    headerDesc: '探索网站的所有角落',
+    mainPagesTitle: '主要页面',
+    toolPagesTitle: '实用工具',
+    policyPagesTitle: '政策条款',
+    externalLinksTitle: '外部链接',
+    languagesTitle: '语言版本',
+    mainPages: [
+      {
+        name: '网站首页',
+        href: '/',
+        desc: '探索创意，分享生活的起点',
+        icon: '🏠',
+      },
+      {
+        name: '关于我',
+        href: '/about',
+        desc: '了解我的故事和理念',
+        icon: '👤',
+      },
+      {
+        name: '作品画廊',
+        href: '/gallery',
+        desc: '完整的摄影作品展示空间',
+        icon: '🖼️',
+      },
+      {
+        name: '时间轴',
+        href: '/timeline',
+        desc: '我的学习和成长之路',
+        icon: '📅',
+      },
+    ],
+    toolPages: [
+      {
+        name: '智能日历',
+        href: '/calendar',
+        desc: '功能丰富的日历工具',
+        icon: '📆',
+      },
+      {
+        name: '货币转换',
+        href: '/currency',
+        desc: '实时汇率转换工具',
+        icon: '💱',
+      },
+      { name: '世界时间', href: '/time', desc: '世界时间显示工具', icon: '🕐' },
+    ],
+    policyPages: [
+      {
+        name: '隐私政策',
+        href: '/privacy',
+        desc: '数据保护和隐私说明',
+        icon: '🔒',
+      },
+      {
+        name: '服务条款',
+        href: '/terms',
+        desc: '网站使用规则和协议',
+        icon: '📄',
+      },
+      {
+        name: '许可证',
+        href: '/license',
+        desc: '版权许可和使用说明',
+        icon: '📜',
+      },
+      {
+        name: '无障碍',
+        href: '/accessibility',
+        desc: '无障碍访问说明',
+        icon: '♿',
+      },
+    ],
+    externalLinks: [
+      {
+        name: '个人博客',
+        href: 'https://blog.alexander.xin',
+        desc: '最新文章分享和思考记录',
+        icon: '📝',
+      },
+      {
+        name: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        desc: '开源项目和代码仓库',
+        icon: '💻',
+      },
+    ],
+    languages: [
+      { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
+      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
+      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
+    ],
+  },
+  'en-US': {
+    title: 'Sitemap',
+    description: 'Complete site structure and navigation map',
+    headerTitle: 'Sitemap',
+    headerDesc: 'Explore every corner of the website',
+    mainPagesTitle: 'Main Pages',
+    toolPagesTitle: 'Tools',
+    policyPagesTitle: 'Policies',
+    externalLinksTitle: 'External Links',
+    languagesTitle: 'Languages',
+    mainPages: [
+      {
+        name: 'Home',
+        href: '/en-US/',
+        desc: 'Explore creativity, share life',
+        icon: '🏠',
+      },
+      {
+        name: 'About',
+        href: '/en-US/about',
+        desc: 'Learn about my story and philosophy',
+        icon: '👤',
+      },
+      {
+        name: 'Gallery',
+        href: '/en-US/gallery',
+        desc: 'Complete photography gallery',
+        icon: '🖼️',
+      },
+      {
+        name: 'Timeline',
+        href: '/en-US/timeline',
+        desc: 'My learning and growth journey',
+        icon: '📅',
+      },
+    ],
+    toolPages: [
+      {
+        name: 'Calendar',
+        href: '/en-US/calendar',
+        desc: 'Feature-rich calendar tool',
+        icon: '📆',
+      },
+      {
+        name: 'Currency',
+        href: '/en-US/currency',
+        desc: 'Real-time currency converter',
+        icon: '💱',
+      },
+      {
+        name: 'World Time',
+        href: '/en-US/time',
+        desc: 'World time display tool',
+        icon: '🕐',
+      },
+    ],
+    policyPages: [
+      {
+        name: 'Privacy',
+        href: '/en-US/privacy',
+        desc: 'Data protection and privacy',
+        icon: '🔒',
+      },
+      {
+        name: 'Terms',
+        href: '/en-US/terms',
+        desc: 'Terms of service',
+        icon: '📄',
+      },
+      {
+        name: 'License',
+        href: '/en-US/license',
+        desc: 'License information',
+        icon: '📜',
+      },
+      {
+        name: 'Accessibility',
+        href: '/en-US/accessibility',
+        desc: 'Accessibility information',
+        icon: '♿',
+      },
+    ],
+    externalLinks: [
+      {
+        name: 'Blog',
+        href: 'https://blog.alexander.xin',
+        desc: 'Latest articles and thoughts',
+        icon: '📝',
+      },
+      {
+        name: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        desc: 'Open source projects',
+        icon: '💻',
+      },
+    ],
+    languages: [
+      { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
+      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
+      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
+    ],
+  },
+  'en-GB': {
+    title: 'Sitemap',
+    description: 'Complete site structure and navigation map',
+    headerTitle: 'Sitemap',
+    headerDesc: 'Explore every corner of the website',
+    mainPagesTitle: 'Main Pages',
+    toolPagesTitle: 'Tools',
+    policyPagesTitle: 'Policies',
+    externalLinksTitle: 'External Links',
+    languagesTitle: 'Languages',
+    mainPages: [
+      {
+        name: 'Home',
+        href: '/en-GB/',
+        desc: 'Explore creativity, share life',
+        icon: '🏠',
+      },
+      {
+        name: 'About',
+        href: '/en-GB/about',
+        desc: 'Learn about my story and philosophy',
+        icon: '👤',
+      },
+      {
+        name: 'Gallery',
+        href: '/en-GB/gallery',
+        desc: 'Complete photography gallery',
+        icon: '🖼️',
+      },
+      {
+        name: 'Timeline',
+        href: '/en-GB/timeline',
+        desc: 'My learning and growth journey',
+        icon: '📅',
+      },
+    ],
+    toolPages: [
+      {
+        name: 'Calendar',
+        href: '/en-GB/calendar',
+        desc: 'Feature-rich calendar tool',
+        icon: '📆',
+      },
+      {
+        name: 'Currency',
+        href: '/en-GB/currency',
+        desc: 'Real-time currency converter',
+        icon: '💱',
+      },
+      {
+        name: 'World Time',
+        href: '/en-GB/time',
+        desc: 'World time display tool',
+        icon: '🕐',
+      },
+    ],
+    policyPages: [
+      {
+        name: 'Privacy',
+        href: '/en-GB/privacy',
+        desc: 'Data protection and privacy',
+        icon: '🔒',
+      },
+      {
+        name: 'Terms',
+        href: '/en-GB/terms',
+        desc: 'Terms of service',
+        icon: '📄',
+      },
+      {
+        name: 'License',
+        href: '/en-GB/license',
+        desc: 'License information',
+        icon: '📜',
+      },
+      {
+        name: 'Accessibility',
+        href: '/en-GB/accessibility',
+        desc: 'Accessibility information',
+        icon: '♿',
+      },
+    ],
+    externalLinks: [
+      {
+        name: 'Blog',
+        href: 'https://blog.alexander.xin',
+        desc: 'Latest articles and thoughts',
+        icon: '📝',
+      },
+      {
+        name: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        desc: 'Open source projects',
+        icon: '💻',
+      },
+    ],
+    languages: [
+      { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
+      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
+      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
+    ],
+  },
+  fr: {
+    title: 'Plan du site',
+    description: 'Structure complète du site et plan de navigation',
+    headerTitle: 'Plan du site',
+    headerDesc: 'Explorez tous les coins du site web',
+    mainPagesTitle: 'Pages principales',
+    toolPagesTitle: 'Outils',
+    policyPagesTitle: 'Politiques',
+    externalLinksTitle: 'Liens externes',
+    languagesTitle: 'Langues',
+    mainPages: [
+      {
+        name: 'Accueil',
+        href: '/fr/',
+        desc: 'Explorez la créativité, partagez la vie',
+        icon: '🏠',
+      },
+      {
+        name: 'À propos',
+        href: '/fr/about',
+        desc: 'Découvrez mon histoire et ma philosophie',
+        icon: '👤',
+      },
+      {
+        name: 'Galerie',
+        href: '/fr/gallery',
+        desc: 'Galerie de photographie complète',
+        icon: '🖼️',
+      },
+      {
+        name: 'Chronologie',
+        href: '/fr/timeline',
+        desc: "Mon parcours d'apprentissage et de croissance",
+        icon: '📅',
+      },
+    ],
+    toolPages: [
+      {
+        name: 'Calendrier',
+        href: '/fr/calendar',
+        desc: 'Outil de calendrier riche en fonctionnalités',
+        icon: '📆',
+      },
+      {
+        name: 'Devise',
+        href: '/fr/currency',
+        desc: 'Convertisseur de devises en temps réel',
+        icon: '💱',
+      },
+      {
+        name: 'Heure mondiale',
+        href: '/fr/time',
+        desc: "Outil d'affichage de l'heure mondiale",
+        icon: '🕐',
+      },
+    ],
+    policyPages: [
+      {
+        name: 'Confidentialité',
+        href: '/fr/privacy',
+        desc: 'Protection des données et confidentialité',
+        icon: '🔒',
+      },
+      {
+        name: 'Conditions',
+        href: '/fr/terms',
+        desc: "Conditions d'utilisation",
+        icon: '📄',
+      },
+      {
+        name: 'Licence',
+        href: '/fr/license',
+        desc: 'Informations sur la licence',
+        icon: '📜',
+      },
+      {
+        name: 'Accessibilité',
+        href: '/fr/accessibility',
+        desc: "Informations sur l'accessibilité",
+        icon: '♿',
+      },
+    ],
+    externalLinks: [
+      {
+        name: 'Blog',
+        href: 'https://blog.alexander.xin',
+        desc: 'Derniers articles et réflexions',
+        icon: '📝',
+      },
+      {
+        name: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        desc: 'Projets open source',
+        icon: '💻',
+      },
+    ],
+    languages: [
+      { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
+      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
+      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
+    ],
+  },
+  ru: {
+    title: 'Карта сайта',
+    description: 'Полная структура сайта и карта навигации',
+    headerTitle: 'Карта сайта',
+    headerDesc: 'Исследуйте каждый уголок сайта',
+    mainPagesTitle: 'Основные страницы',
+    toolPagesTitle: 'Инструменты',
+    policyPagesTitle: 'Политики',
+    externalLinksTitle: 'Внешние ссылки',
+    languagesTitle: 'Языки',
+    mainPages: [
+      {
+        name: 'Главная',
+        href: '/ru/',
+        desc: 'Исследуйте творчество, делитесь жизнью',
+        icon: '🏠',
+      },
+      {
+        name: 'Обо мне',
+        href: '/ru/about',
+        desc: 'Узнайте о моей истории и философии',
+        icon: '👤',
+      },
+      {
+        name: 'Галерея',
+        href: '/ru/gallery',
+        desc: 'Полная галерея фотографий',
+        icon: '🖼️',
+      },
+      {
+        name: 'Хронология',
+        href: '/ru/timeline',
+        desc: 'Мой путь обучения и роста',
+        icon: '📅',
+      },
+    ],
+    toolPages: [
+      {
+        name: 'Календарь',
+        href: '/ru/calendar',
+        desc: 'Многофункциональный инструмент календаря',
+        icon: '📆',
+      },
+      {
+        name: 'Валюта',
+        href: '/ru/currency',
+        desc: 'Конвертер валют в реальном времени',
+        icon: '💱',
+      },
+      {
+        name: 'Мировое время',
+        href: '/ru/time',
+        desc: 'Инструмент отображения мирового времени',
+        icon: '🕐',
+      },
+    ],
+    policyPages: [
+      {
+        name: 'Конфиденциальность',
+        href: '/ru/privacy',
+        desc: 'Защита данных и конфиденциальность',
+        icon: '🔒',
+      },
+      {
+        name: 'Условия',
+        href: '/ru/terms',
+        desc: 'Условия использования',
+        icon: '📄',
+      },
+      {
+        name: 'Лицензия',
+        href: '/ru/license',
+        desc: 'Информация о лицензии',
+        icon: '📜',
+      },
+      {
+        name: 'Доступность',
+        href: '/ru/accessibility',
+        desc: 'Информация о доступности',
+        icon: '♿',
+      },
+    ],
+    externalLinks: [
+      {
+        name: 'Блог',
+        href: 'https://blog.alexander.xin',
+        desc: 'Последние статьи и мысли',
+        icon: '📝',
+      },
+      {
+        name: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        desc: 'Проекты с открытым исходным кодом',
+        icon: '💻',
+      },
+    ],
+    languages: [
+      { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
+      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
+      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
+    ],
+  },
+};
+
+const content = sitemapData[lang as Lang] || sitemapData['en-US'];
+---
+
+<BaseLayout title={content.title} description={content.description}>
+  <!-- Hero Section -->
+  <section
+    class="relative py-24 bg-gradient-to-br from-primary-500/20 via-accent-500/20 to-primary-500/20 overflow-hidden"
+  >
+    <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto">
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
+        >
+          <span class="text-2xl">🗺️</span>
+          <span class="text-sm font-medium text-white/90"
+            >{content.headerTitle}</span
+          >
+        </div>
+        <h1
+          class="text-5xl md:text-7xl font-display font-bold mb-8 gradient-text animate-fade-in"
+        >
+          {content.headerTitle}
+        </h1>
+        <p
+          class="text-xl text-[rgb(var(--color-text-secondary))] mb-12 max-w-2xl mx-auto leading-relaxed"
+        >
+          {content.headerDesc}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sitemap Content -->
+  <section class="py-20">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div
+        class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        <!-- Main Pages -->
+        <div
+          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
+        >
+          <h2
+            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
+          >
+            <span
+              class="p-2 rounded-lg bg-primary-500/10 text-primary-500 group-hover:scale-110 transition-transform"
+              >📑</span
+            >
+            {content.mainPagesTitle}
+          </h2>
+          <ul class="space-y-4">
+            {
+              content.mainPages.map((page: any) => (
+                <li>
+                  <a
+                    href={page.href}
+                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
+                  >
+                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
+                      {page.icon}
+                    </span>
+                    <div>
+                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-primary-500 transition-colors">
+                        {page.name}
+                      </div>
+                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                        {page.desc}
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Tools -->
+        <div
+          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
+        >
+          <h2
+            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
+          >
+            <span
+              class="p-2 rounded-lg bg-accent-500/10 text-accent-500 group-hover:scale-110 transition-transform"
+              >🛠️</span
+            >
+            {content.toolPagesTitle}
+          </h2>
+          <ul class="space-y-4">
+            {
+              content.toolPages.map((page: any) => (
+                <li>
+                  <a
+                    href={page.href}
+                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
+                  >
+                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
+                      {page.icon}
+                    </span>
+                    <div>
+                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-accent-500 transition-colors">
+                        {page.name}
+                      </div>
+                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                        {page.desc}
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Policies -->
+        <div
+          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
+        >
+          <h2
+            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
+          >
+            <span
+              class="p-2 rounded-lg bg-green-500/10 text-green-500 group-hover:scale-110 transition-transform"
+              >⚖️</span
+            >
+            {content.policyPagesTitle}
+          </h2>
+          <ul class="space-y-4">
+            {
+              content.policyPages.map((page: any) => (
+                <li>
+                  <a
+                    href={page.href}
+                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
+                  >
+                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
+                      {page.icon}
+                    </span>
+                    <div>
+                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-green-500 transition-colors">
+                        {page.name}
+                      </div>
+                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                        {page.desc}
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- External Links -->
+        <div
+          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
+        >
+          <h2
+            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
+          >
+            <span
+              class="p-2 rounded-lg bg-purple-500/10 text-purple-500 group-hover:scale-110 transition-transform"
+              >🔗</span
+            >
+            {content.externalLinksTitle}
+          </h2>
+          <ul class="space-y-4">
+            {
+              content.externalLinks.map((link: any) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
+                  >
+                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
+                      {link.icon}
+                    </span>
+                    <div>
+                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-purple-500 transition-colors flex items-center gap-2">
+                        {link.name}
+                        <svg
+                          class="w-4 h-4 opacity-50"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                      </div>
+                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                        {link.desc}
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Languages -->
+        <div
+          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group md:col-span-2 lg:col-span-2"
+        >
+          <h2
+            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
+          >
+            <span
+              class="p-2 rounded-lg bg-orange-500/10 text-orange-500 group-hover:scale-110 transition-transform"
+              >🌍</span
+            >
+            {content.languagesTitle}
+          </h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {
+              content.languages.map((language: any) => (
+                <a
+                  href={language.href}
+                  class="flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/lang text-center"
+                >
+                  <span class="text-4xl group-hover/lang:scale-110 transition-transform filter drop-shadow-lg">
+                    {language.flag}
+                  </span>
+                  <span class="font-medium text-[rgb(var(--color-text-primary))] group-hover/lang:text-orange-500 transition-colors">
+                    {language.name}
+                  </span>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

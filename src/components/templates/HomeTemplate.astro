@@ -1,0 +1,552 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/ui';
+import Typewriter from '../Typewriter.astro';
+import StatsCounter from '../StatsCounter.astro';
+import MusicPlayer from '../MusicPlayer.astro';
+import HolidayGreeting from '../HolidayGreeting.astro';
+import PoemHistory from '../PoemHistory.astro';
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+
+// Data for different languages
+const typewriterData: Record<Lang, string[]> = {
+  'zh-CN': [
+    '摄影爱好者 📸',
+    '代码创作者 💻',
+    '设计探索者 🎨',
+    '音乐聆听者 🎵',
+    '终身学习者 📚',
+  ],
+  'en-US': [
+    'Photography Enthusiast 📸',
+    'Code Creator 💻',
+    'Design Explorer 🎨',
+    'Music Lover 🎵',
+    'Lifelong Learner 📚',
+  ],
+  'en-GB': [
+    'Photography Enthusiast 📸',
+    'Code Creator 💻',
+    'Design Explorer 🎨',
+    'Music Lover 🎵',
+    'Lifelong Learner 📚',
+  ],
+  fr: [
+    'Passionné de Photographie 📸',
+    'Créateur de Code 💻',
+    'Explorateur de Design 🎨',
+    'Amateur de Musique 🎵',
+    'Apprenant à Vie 📚',
+  ],
+  ru: [
+    'Любитель Фотографии 📸',
+    'Создатель Кода 💻',
+    'Исследователь Дизайна 🎨',
+    'Любитель Музыки 🎵',
+    'Вечный Студент 📚',
+  ],
+};
+
+const statsData: Record<Lang, any[]> = {
+  'zh-CN': [
+    { end: 1200, suffix: '+', label: '创作作品', icon: '📸', duration: 2000 },
+    { end: 5, suffix: '+', label: '专业领域', icon: '🎯', duration: 2000 },
+    { end: 100, suffix: '%', label: '用心投入', icon: '❤️', duration: 2000 },
+    { end: 365, suffix: '天', label: '持续创作', icon: '⏰', duration: 2000 },
+  ],
+  'en-US': [
+    {
+      end: 1200,
+      suffix: '+',
+      label: 'Works Created',
+      icon: '📸',
+      duration: 2000,
+    },
+    { end: 5, suffix: '+', label: 'Pro Fields', icon: '🎯', duration: 2000 },
+    { end: 100, suffix: '%', label: 'Dedication', icon: '❤️', duration: 2000 },
+    {
+      end: 365,
+      suffix: ' Days',
+      label: 'Continuous Creation',
+      icon: '⏰',
+      duration: 2000,
+    },
+  ],
+  'en-GB': [
+    {
+      end: 1200,
+      suffix: '+',
+      label: 'Works Created',
+      icon: '📸',
+      duration: 2000,
+    },
+    { end: 5, suffix: '+', label: 'Pro Fields', icon: '🎯', duration: 2000 },
+    { end: 100, suffix: '%', label: 'Dedication', icon: '❤️', duration: 2000 },
+    {
+      end: 365,
+      suffix: ' Days',
+      label: 'Continuous Creation',
+      icon: '⏰',
+      duration: 2000,
+    },
+  ],
+  fr: [
+    {
+      end: 1200,
+      suffix: '+',
+      label: 'Œuvres Créées',
+      icon: '📸',
+      duration: 2000,
+    },
+    { end: 5, suffix: '+', label: 'Domaines Pro', icon: '🎯', duration: 2000 },
+    { end: 100, suffix: '%', label: 'Dévouement', icon: '❤️', duration: 2000 },
+    {
+      end: 365,
+      suffix: ' Jours',
+      label: 'Création Continue',
+      icon: '⏰',
+      duration: 2000,
+    },
+  ],
+  ru: [
+    {
+      end: 1200,
+      suffix: '+',
+      label: 'Работ Создано',
+      icon: '📸',
+      duration: 2000,
+    },
+    { end: 5, suffix: '+', label: 'Проф. Области', icon: '🎯', duration: 2000 },
+    { end: 100, suffix: '%', label: 'Преданность', icon: '❤️', duration: 2000 },
+    {
+      end: 365,
+      suffix: ' Дней',
+      label: 'Непрерывное Творчество',
+      icon: '⏰',
+      duration: 2000,
+    },
+  ],
+};
+
+const featuredWorksData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '精选作品',
+    subtitle: '探索我的最新创作',
+    viewAll: '查看全部',
+    items: [
+      {
+        title: '山间晨雾',
+        category: '风景',
+        image: '/img/gallery/landscape-01.jpg',
+      },
+      {
+        title: '雨后花瓣',
+        category: '自然',
+        image: '/img/gallery/nature-flower-01.jpg',
+      },
+      {
+        title: '精致甜点',
+        category: '美食',
+        image: '/img/gallery/food-01.jpg',
+      },
+    ],
+  },
+  'en-US': {
+    title: 'Featured Works',
+    subtitle: 'Explore my latest creations',
+    viewAll: 'View All',
+    items: [
+      {
+        title: 'Morning Mist',
+        category: 'Landscape',
+        image: '/img/gallery/landscape-01.jpg',
+      },
+      {
+        title: 'Rain Petals',
+        category: 'Nature',
+        image: '/img/gallery/nature-flower-01.jpg',
+      },
+      {
+        title: 'Exquisite Dessert',
+        category: 'Food',
+        image: '/img/gallery/food-01.jpg',
+      },
+    ],
+  },
+  'en-GB': {
+    title: 'Featured Works',
+    subtitle: 'Explore my latest creations',
+    viewAll: 'View All',
+    items: [
+      {
+        title: 'Morning Mist',
+        category: 'Landscape',
+        image: '/img/gallery/landscape-01.jpg',
+      },
+      {
+        title: 'Rain Petals',
+        category: 'Nature',
+        image: '/img/gallery/nature-flower-01.jpg',
+      },
+      {
+        title: 'Exquisite Dessert',
+        category: 'Food',
+        image: '/img/gallery/food-01.jpg',
+      },
+    ],
+  },
+  fr: {
+    title: 'Œuvres en Vedette',
+    subtitle: 'Explorez mes dernières créations',
+    viewAll: 'Voir Tout',
+    items: [
+      {
+        title: 'Brume Matinale',
+        category: 'Paysage',
+        image: '/img/gallery/landscape-01.jpg',
+      },
+      {
+        title: 'Pétales de Pluie',
+        category: 'Nature',
+        image: '/img/gallery/nature-flower-01.jpg',
+      },
+      {
+        title: 'Dessert Exquis',
+        category: 'Nourriture',
+        image: '/img/gallery/food-01.jpg',
+      },
+    ],
+  },
+  ru: {
+    title: 'Избранные Работы',
+    subtitle: 'Изучите мои последние творения',
+    viewAll: 'Посмотреть Все',
+    items: [
+      {
+        title: 'Утренний Туман',
+        category: 'Пейзаж',
+        image: '/img/gallery/landscape-01.jpg',
+      },
+      {
+        title: 'Лепестки Дождя',
+        category: 'Природа',
+        image: '/img/gallery/nature-flower-01.jpg',
+      },
+      {
+        title: 'Изысканный Десерт',
+        category: 'Еда',
+        image: '/img/gallery/food-01.jpg',
+      },
+    ],
+  },
+};
+
+const introData: Record<Lang, any> = {
+  'zh-CN': {
+    lead: '在光影与代码之间，我寻找那些能触动心弦的瞬间。',
+    paragraphs: [
+      '每一张照片都是一段静默的旅程，像是从流逝中截取的呼吸。',
+      '我用镜头记录光线的温度；用代码整理思绪的秩序。愿这些碎片，能在你的眼里汇成一条小小的河流。',
+      '欢迎驻足，和我一起在这些影像与文字之间，发现平凡里的温柔。',
+    ],
+  },
+  'en-US': {
+    lead: 'Between light and code, I search for moments that touch the heart.',
+    paragraphs: [
+      'Each photograph is a quiet journey, a breath caught from the passing of time.',
+      'I capture the warmth of light with a lens and the order of thought with code. May these fragments become a small river in your eyes.',
+      'Stay a while — wander these images and words with me, and find tenderness in the ordinary.',
+    ],
+  },
+  'en-GB': {
+    lead: 'Between light and code, I search for moments that touch the heart.',
+    paragraphs: [
+      'Each photograph is a quiet journey, a breath caught from the passing of time.',
+      'I capture the warmth of light with a lens and the order of thought with code. May these fragments become a small river in your eyes.',
+      'Stay a while — wander these images and words with me, and find tenderness in the ordinary.',
+    ],
+  },
+  fr: {
+    lead: 'Entre lumière et code, je cherche des instants qui touchent le cœur.',
+    paragraphs: [
+      'Chaque photographie est un voyage silencieux, une respiration prise au passage du temps.',
+      "J'explore la chaleur de la lumière avec l'objectif et l'ordre de la pensée avec le code. Que ces fragments forment une petite rivière dans vos yeux.",
+      "Prenez un moment — parcourez ces images et ces mots avec moi, et découvrez la tendresse dans l'ordinaire.",
+    ],
+  },
+  ru: {
+    lead: 'Между светом и кодом я ищу мгновения, которые трогают сердце.',
+    paragraphs: [
+      'Каждая фотография — тихое путешествие, вздох, вырванный у течения времени.',
+      'Я ловлю тепло света объективом и упорядочиваю мысли кодом. Пусть эти фрагменты сложатся в маленькую реку в ваших глазах.',
+      'Останьтесь ненадолго — пройдитесь по этим образам и словам со мной и найдите нежность в обыденном.',
+    ],
+  },
+};
+
+const quoteData: Record<Lang, any> = {
+  'zh-CN': {
+    text: '设计不仅仅是外观和感觉。设计就是它是如何工作的。',
+    author: 'Steve Jobs',
+  },
+  'en-US': {
+    text: 'Design is not just what it looks like and feels like. Design is how it works.',
+    author: 'Steve Jobs',
+  },
+  'en-GB': {
+    text: 'Design is not just what it looks like and feels like. Design is how it works.',
+    author: 'Steve Jobs',
+  },
+  fr: {
+    text: "Le design n'est pas seulement ce à quoi il ressemble et ce qu'il ressent. Le design est comment cela fonctionne.",
+    author: 'Steve Jobs',
+  },
+  ru: {
+    text: 'Дизайн — это не только то, как это выглядит и чувствуется. Дизайн — это то, как это работает.',
+    author: 'Steve Jobs',
+  },
+};
+
+const typewriterTexts = typewriterData[lang as Lang] || typewriterData['en-US'];
+const stats = statsData[lang as Lang] || statsData['en-US'];
+const featured = featuredWorksData[lang as Lang] || featuredWorksData['en-US'];
+const quote = quoteData[lang as Lang] || quoteData['en-US'];
+const intro = introData[lang as Lang] || introData['en-US'];
+---
+
+<BaseLayout>
+  <!-- Music Player -->
+  <MusicPlayer />
+
+  <!-- Hero Section -->
+  <section
+    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+  >
+    <!-- Animated Mesh Gradient Background -->
+    <div class="absolute inset-0 bg-mesh-gradient"></div>
+
+    <!-- Particles Effect -->
+    <div class="absolute inset-0 opacity-30">
+      <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;">
+      </div>
+      <div class="particle" style="left: 80%; top: 30%; animation-delay: 2s;">
+      </div>
+      <div class="particle" style="left: 50%; top: 50%; animation-delay: 4s;">
+      </div>
+      <div class="particle" style="left: 20%; top: 70%; animation-delay: 1s;">
+      </div>
+      <div class="particle" style="left: 90%; top: 60%; animation-delay: 3s;">
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 container mx-auto px-4 lg:px-8 text-center">
+      <div class="max-w-4xl mx-auto">
+        <!-- Greeting Badge -->
+        <div
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 fade-in"
+        >
+          <span class="relative flex h-3 w-3">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-3 w-3 bg-primary-500"
+            ></span>
+          </span>
+          <span class="text-sm font-medium">{t('hero.greeting')}</span>
+        </div>
+
+        <!-- Name with Gradient -->
+        <h1
+          class="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 fade-in-delay-1"
+        >
+          <span class="gradient-text"> {t('hero.name')} </span>
+        </h1>
+
+        <!-- Typewriter Effect -->
+        <div
+          class="text-2xl md:text-4xl font-semibold mb-4 fade-in-delay-2 text-balance min-h-[3rem] flex items-center justify-center"
+        >
+          <Typewriter texts={typewriterTexts} speed={100} />
+        </div>
+
+        <p
+          class="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] mb-6 fade-in-delay-3 text-balance max-w-2xl mx-auto"
+        >
+          {t('hero.subtitle')}
+        </p>
+
+        <div
+          class="max-w-3xl mx-auto text-[rgb(var(--color-text-secondary))] mb-12 fade-in-delay-4 prose prose-invert"
+        >
+          <p class="lead text-lg font-medium mb-3">{intro.lead}</p>
+          {intro.paragraphs.map((p: string) => <p>{p}</p>)}
+        </div>
+
+        <!-- CTA Buttons -->
+        <div
+          class="flex flex-col sm:flex-row gap-4 justify-center fade-in-delay-3"
+        >
+          <a href="/gallery" class="btn-primary glow-on-hover">
+            <span>{t('hero.cta.primary')}</span>
+            <svg
+              class="w-5 h-5 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              ></path>
+            </svg>
+          </a>
+          <a href="/about" class="btn-secondary">
+            <span>{t('hero.cta.secondary')}</span>
+            <svg
+              class="w-5 h-5 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div
+      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+    >
+      <svg
+        class="w-6 h-6 text-[rgb(var(--color-text-secondary))]"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-20 bg-[rgb(var(--color-bg-secondary))] reveal">
+    <div class="container mx-auto px-4 lg:px-8">
+      <StatsCounter stats={stats} />
+    </div>
+  </section>
+
+  <!-- Featured Works Section -->
+  <section class="py-20 reveal">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{featured.title}</h2>
+        <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+          {featured.subtitle}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        {
+          featured.items.map((item: any) => (
+            <div class="group relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer">
+              <div class="absolute inset-0 bg-gray-200 animate-pulse" />
+              <img
+                src={item.image}
+                alt={item.title}
+                class="object-cover w-full h-full transform transition-transform duration-500 group-hover:scale-110 relative z-10"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col justify-end p-6">
+                <span class="text-primary-400 text-sm font-medium mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                  {item.category}
+                </span>
+                <h3 class="text-white text-xl font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                  {item.title}
+                </h3>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="text-center">
+        <a
+          href="/gallery"
+          class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium transition-colors group"
+        >
+          {featured.viewAll}
+          <svg
+            class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Section -->
+  <section
+    class="py-20 bg-[rgb(var(--color-bg-secondary))] relative overflow-hidden"
+  >
+    <div
+      class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none"
+    >
+      <svg
+        class="absolute top-10 left-10 w-32 h-32"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z"
+        ></path>
+      </svg>
+    </div>
+    <div class="container mx-auto px-4 text-center relative z-10">
+      <blockquote class="max-w-3xl mx-auto">
+        <p
+          class="text-2xl md:text-4xl font-serif italic mb-8 leading-relaxed text-[rgb(var(--color-text-primary))]"
+        >
+          "{quote.text}"
+        </p>
+        <footer
+          class="text-lg text-[rgb(var(--color-text-secondary))] font-medium"
+        >
+          — {quote.author}
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Holiday Greeting -->
+  <HolidayGreeting />
+
+  <!-- Poem History Section -->
+  <PoemHistory />
+</BaseLayout>

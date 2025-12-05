@@ -1,0 +1,306 @@
+---
+import { getLangFromUrl, useTranslations, languages } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Helper function to get language-prefixed path
+function getLangPath(path: string) {
+  if (lang === 'zh-CN') return path;
+  return `/${lang}${path}`;
+}
+
+interface SubMenuItem {
+  href: string;
+  label: string;
+  icon: string;
+  desc: string;
+  external?: boolean;
+}
+
+interface NavItem {
+  href?: string;
+  label: string;
+  icon: string;
+  external?: boolean;
+  submenu?: SubMenuItem[];
+}
+
+const mainNavItems: NavItem[] = [
+  { href: lang === 'zh-CN' ? '/' : `/${lang}/`, label: t('nav.home'), icon: '🏠' },
+  { 
+    label: lang === 'zh-CN' ? '创意' : (lang === 'fr' ? 'Créatif' : (lang === 'ru' ? 'Творчество' : 'Creative')),
+    icon: '✨',
+    submenu: [
+      { href: getLangPath('/gallery'), label: t('nav.gallery'), icon: '🎨', desc: lang === 'zh-CN' ? '作品展示' : (lang === 'fr' ? 'Galerie' : (lang === 'ru' ? 'Галерея' : 'Gallery')) },
+    ]
+  },
+  { 
+    label: lang === 'zh-CN' ? '工具' : (lang === 'fr' ? 'Outils' : (lang === 'ru' ? 'Инструменты' : 'Tools')),
+    icon: '⚙️',
+    submenu: [
+      { href: getLangPath('/calendar'), label: lang === 'zh-CN' ? '日历' : (lang === 'fr' ? 'Calendrier' : (lang === 'ru' ? 'Календарь' : 'Calendar')), icon: '📅', desc: lang === 'zh-CN' ? '智能日历' : (lang === 'fr' ? 'Calendrier intelligent' : (lang === 'ru' ? 'Умный календарь' : 'Smart Calendar')) },
+      { href: getLangPath('/currency'), label: lang === 'zh-CN' ? '汇率' : (lang === 'fr' ? 'Taux de change' : (lang === 'ru' ? 'Курс валют' : 'Exchange')), icon: '💱', desc: lang === 'zh-CN' ? '汇率转换' : (lang === 'fr' ? 'Convertisseur de devises' : (lang === 'ru' ? 'Конвертер валют' : 'Currency')) },
+      { href: getLangPath('/time'), label: lang === 'zh-CN' ? '时间' : (lang === 'fr' ? 'Heure' : (lang === 'ru' ? 'Время' : 'Time')), icon: '🕐', desc: lang === 'zh-CN' ? '世界时间' : (lang === 'fr' ? 'Heure mondiale' : (lang === 'ru' ? 'Мировое время' : 'World Time')) },
+    ]
+  },
+  { href: 'https://blog.alexander.xin', label: t('nav.blog'), icon: '📝', external: true },
+  { href: getLangPath('/about'), label: t('nav.about'), icon: '👤' },
+  { href: getLangPath('/contact'), label: t('nav.contact'), icon: '✉️' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 nav-glass transition-all duration-300" id="header">
+  <div class="scroll-indicator" id="scroll-indicator"></div>
+  
+  <nav class="container mx-auto px-4 lg:px-8 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <a href={lang === 'zh-CN' ? '/' : `/${lang}/`} class="flex items-center gap-3 group">
+        <img 
+          src="/img/branding/logo.png" 
+          alt="Logo" 
+          class="w-10 h-10 rounded-full transform group-hover:scale-110 transition-transform duration-300"
+        >
+        <span class="font-display font-bold text-xl hidden sm:block text-[rgb(var(--color-text-primary))]">
+          Alexander Carter
+        </span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-2">
+        {mainNavItems.map((item) => (
+          item.submenu ? (
+            <div class="relative group">
+              <button class="flex items-center gap-2 px-3 py-2 rounded-lg text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] font-medium transition-all duration-200 group">
+                <span>{item.icon}</span>
+                <span>{item.label}</span>
+                <svg class="w-4 h-4 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+              </button>
+              <!-- Submenu -->
+              <div class="absolute left-0 mt-0 w-56 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 group-hover:mt-2 z-50">
+                {item.submenu.map((subitem, idx) => (
+                  <a 
+                    href={subitem.href}
+                    class={`flex items-center gap-3 px-4 py-3 hover:bg-primary-500/10 transition-all duration-200 ${idx === 0 ? 'rounded-t-xl' : ''} ${idx === item.submenu!.length - 1 ? 'rounded-b-xl' : ''}`}
+                    target={subitem.external ? '_blank' : undefined}
+                  >
+                    <span class="text-2xl">{subitem.icon}</span>
+                    <div>
+                      <div class="font-semibold text-[rgb(var(--color-text-primary))]">{subitem.label}</div>
+                      <div class="text-xs text-[rgb(var(--color-text-secondary))]">{subitem.desc}</div>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a 
+              href={item.href}
+              class="flex items-center gap-2 px-3 py-2 rounded-lg text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] font-medium transition-all duration-200 relative group"
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+            >
+              <span>{item.icon}</span>
+              <span>{item.label}</span>
+              <span class="absolute bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 group-hover:w-full transition-all duration-300"></span>
+            </a>
+          )
+        ))}
+      </div>
+      
+      <!-- Right Side Actions -->
+      <div class="flex items-center gap-4">
+        <!-- Theme Toggle -->
+        <button 
+          id="theme-toggle"
+          aria-label={t('theme.toggle')}
+          class="p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors duration-200"
+        >
+          <svg class="w-6 h-6 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+          <svg class="w-6 h-6 moon-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+        
+        <!-- Language Switcher -->
+        <div class="relative group">
+          <button class="p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors duration-200 flex items-center gap-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+            </svg>
+            <span class="text-sm font-medium hidden sm:block">{languages[lang]}</span>
+          </button>
+          <div class="absolute right-0 mt-2 w-32 glass-card opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            {Object.entries(languages).map(([code, name]) => (
+              <a 
+                href={code === 'zh-CN' ? '/' : `/${code}/`}
+                class="block px-4 py-2 text-sm hover:bg-[rgb(var(--color-bg-secondary))] transition-colors first:rounded-t-lg last:rounded-b-lg"
+                class:list={{ 'font-bold text-primary-500': code === lang }}
+              >
+                {name}
+              </a>
+            ))}
+          </div>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button 
+          id="mobile-menu-toggle"
+          aria-label="Toggle menu"
+          class="md:hidden p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors duration-200"
+        >
+          <svg class="w-6 h-6 hamburger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg class="w-6 h-6 close hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 space-y-1">
+      {mainNavItems.map((item) => (
+        item.submenu ? (
+          <div>
+            <button class="mobile-submenu-toggle w-full text-left py-3 px-4 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors duration-200 flex items-center justify-between font-medium">
+              <span class="flex items-center gap-2">
+                <span>{item.icon}</span>
+                {item.label}
+              </span>
+              <svg class="w-4 h-4 submenu-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+              </svg>
+            </button>
+            <div class="mobile-submenu hidden pl-4 space-y-1 bg-[rgb(var(--color-bg-accent))] rounded-lg my-1">
+              {item.submenu.map((subitem) => (
+                <a 
+                  href={subitem.href}
+                  class="block py-2 px-3 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-primary-500/10 rounded transition-colors text-sm"
+                  target={subitem.external ? '_blank' : undefined}
+                >
+                  <span>{subitem.icon}</span> {subitem.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a 
+            href={item.href}
+            class="block py-3 px-4 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors duration-200 flex items-center gap-2 font-medium"
+            target={item.external ? '_blank' : undefined}
+          >
+            <span>{item.icon}</span>
+            {item.label}
+          </a>
+        )
+      ))}
+    </div>
+  </nav>
+</header>
+
+<style>
+  .scroll-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #d946ef);
+    width: 0%;
+    transition: width 0.1s ease;
+  }
+
+  #header.nav-hidden {
+    transform: translateY(-100%);
+  }
+  
+  .dark .sun-icon {
+    display: none;
+  }
+  
+  .dark .moon-icon {
+    display: block;
+  }
+</style>
+
+<script is:inline>
+  let lastScrollY = 0;
+  const scrollThreshold = 12;
+
+  // Theme toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  themeToggle?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  });
+  
+  // Mobile menu toggle
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburger = mobileMenuToggle?.querySelector('.hamburger');
+  const close = mobileMenuToggle?.querySelector('.close');
+  
+  mobileMenuToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+    hamburger?.classList.toggle('hidden');
+    close?.classList.toggle('hidden');
+  });
+
+  // Mobile submenu toggle
+  const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle');
+  submenuToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      const btn = e.currentTarget;
+      if (!btn) return;
+      const submenu = btn.nextElementSibling;
+      const arrow = btn.querySelector('.submenu-arrow');
+      submenu?.classList.toggle('hidden');
+      arrow?.classList.toggle('rotate-180');
+    });
+  });
+  
+  // Close menu on link click
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      hamburger?.classList.remove('hidden');
+      close?.classList.add('hidden');
+    });
+  });
+  
+  // Scroll progress indicator
+  window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    const indicator = document.getElementById('scroll-indicator');
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    
+    if (indicator) {
+      indicator.style.width = `${scrollPercent}%`;
+    }
+    
+    if (scrollTop > 10) {
+      header?.classList.add('shadow-lg');
+    } else {
+      header?.classList.remove('shadow-lg');
+    }
+
+    if (header) {
+      if (scrollTop > lastScrollY + scrollThreshold) {
+        header.classList.add('nav-hidden');
+      } else if (scrollTop < lastScrollY - scrollThreshold || scrollTop < 10) {
+        header.classList.remove('nav-hidden');
+      }
+    }
+
+    lastScrollY = scrollTop;
+  });
+</script>

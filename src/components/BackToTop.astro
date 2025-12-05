@@ -1,0 +1,80 @@
+---
+import { getLangFromUrl } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const ariaLabel = lang === 'zh-CN' ? '回到顶部' : 'Back to top';
+---
+
+<button
+  id="back-to-top"
+  aria-label={ariaLabel}
+  class="fixed bottom-24 right-6 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white shadow-lg hover:shadow-xl transform transition-all duration-300 opacity-0 invisible translate-y-4 hover:scale-110 group"
+>
+  <svg
+    class="w-6 h-6 mx-auto group-hover:-translate-y-1 transition-transform duration-300"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+<script>
+  const backToTopButton = document.getElementById('back-to-top');
+  const scrollThreshold = 400; // Show button after scrolling 400px
+
+  // Show/hide button based on scroll position
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    if (scrollTop > scrollThreshold) {
+      backToTopButton?.classList.remove(
+        'opacity-0',
+        'invisible',
+        'translate-y-4'
+      );
+      backToTopButton?.classList.add('opacity-100', 'visible', 'translate-y-0');
+    } else {
+      backToTopButton?.classList.add('opacity-0', 'invisible', 'translate-y-4');
+      backToTopButton?.classList.remove(
+        'opacity-100',
+        'visible',
+        'translate-y-0'
+      );
+    }
+  });
+
+  // Smooth scroll to top
+  backToTopButton?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  });
+</script>
+
+<style>
+  #back-to-top {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  #back-to-top:hover {
+    background: linear-gradient(135deg, #3b82f6 0%, #d946ef 100%);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 640px) {
+    #back-to-top {
+      bottom: 5.5rem;
+      right: 1rem;
+      width: 2.75rem;
+      height: 2.75rem;
+    }
+  }
+</style>

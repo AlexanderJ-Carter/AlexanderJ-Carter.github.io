@@ -1,0 +1,424 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+// import { getLangFromUrl } from '../../i18n/ui';
+
+// const lang = getLangFromUrl(Astro.url);
+---
+
+<BaseLayout title="Exchange Rate | Alexander James Carter">
+  <!-- Hero Section -->
+  <section class="pt-32 pb-16 bg-mesh-gradient">
+    <div class="container mx-auto px-4 lg:px-8 text-center">
+      <h1
+        class="text-5xl md:text-6xl font-display font-bold mb-6 gradient-text"
+      >
+        💱 Exchange Rate
+      </h1>
+      <p
+        class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+      >
+        View real-time exchange rates, currency trends and perform currency
+        conversions
+      </p>
+    </div>
+  </section>
+
+  <!-- Currency Rates Section -->
+  <section class="py-16 container mx-auto px-4 lg:px-8">
+    <!-- Main Currency Rates -->
+    <div class="mb-12">
+      <h2 class="text-3xl font-bold mb-8">Major Currency Rates (to CNY)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          [
+            { code: 'USD', name: 'US Dollar', rate: '7.25' },
+            { code: 'EUR', name: 'Euro', rate: '8.10' },
+            { code: 'GBP', name: 'British Pound', rate: '9.35' },
+            { code: 'JPY', name: 'Japanese Yen', rate: '0.048' },
+            { code: 'AUD', name: 'Australian Dollar', rate: '4.85' },
+            { code: 'CAD', name: 'Canadian Dollar', rate: '5.20' },
+          ].map(({ code, name, rate }) => (
+            <div class="glass-card p-6 hover:shadow-lg transition-all duration-300">
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <h3 class="text-2xl font-bold">{code}</h3>
+                  <p class="text-[rgb(var(--color-text-secondary))]">{name}</p>
+                </div>
+                <div class="text-5xl">
+                  {code === 'USD' && '🇺🇸'}
+                  {code === 'EUR' && '🇪🇺'}
+                  {code === 'GBP' && '🇬🇧'}
+                  {code === 'JPY' && '🇯🇵'}
+                  {code === 'AUD' && '🇦🇺'}
+                  {code === 'CAD' && '🇨🇦'}
+                </div>
+              </div>
+              <div class="pt-4 border-t border-[rgb(var(--color-border))]">
+                <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+                  1 {code} ={' '}
+                </p>
+                <p class="text-2xl font-bold text-primary-500">¥ {rate}</p>
+                <p class="text-xs text-[rgb(var(--color-text-secondary))] mt-2">
+                  Updated: Today
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Currency Calculator -->
+  <section
+    class="py-16 container mx-auto px-4 lg:px-8 border-t border-[rgb(var(--color-border))]"
+  >
+    <h2 class="text-3xl font-bold mb-12">Currency Calculator</h2>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Calculator -->
+      <div class="glass-card p-8">
+        <h3 class="text-2xl font-bold mb-6">Calculate Conversion</h3>
+
+        <div class="space-y-6">
+          <!-- Calculation Type -->
+          <div>
+            <label class="block text-sm font-medium mb-3">Conversion Type</label
+            >
+            <div class="flex gap-4">
+              <label class="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  name="calcType"
+                  value="buy"
+                  checked
+                  class="w-4 h-4"
+                  onchange="updateLabels(); calculate();"
+                />
+                <span class="ml-2">Buy (CNY → Foreign)</span>
+              </label>
+              <label class="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  name="calcType"
+                  value="sell"
+                  class="w-4 h-4"
+                  onchange="updateLabels(); calculate();"
+                />
+                <span class="ml-2">Sell (Foreign → CNY)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Currency Select -->
+          <div>
+            <label class="block text-sm font-medium mb-3">Select Currency</label
+            >
+            <select
+              id="currency-select"
+              class="w-full px-4 py-2 border-2 border-[rgb(var(--color-border))] rounded-lg focus:outline-none focus:border-primary-500 bg-[rgb(var(--color-bg-secondary))]"
+              onchange="updateRate()"
+            >
+              <option value="USD">US Dollar (USD) - 1 USD = 7.25 CNY</option>
+              <option value="EUR">Euro (EUR) - 1 EUR = 8.10 CNY</option>
+              <option value="GBP">British Pound (GBP) - 1 GBP = 9.35 CNY</option
+              >
+              <option value="JPY"
+                >Japanese Yen (JPY) - 100 JPY = 4.80 CNY</option
+              >
+              <option value="AUD"
+                >Australian Dollar (AUD) - 1 AUD = 4.85 CNY</option
+              >
+              <option value="CAD"
+                >Canadian Dollar (CAD) - 1 CAD = 5.20 CNY</option
+              >
+            </select>
+          </div>
+
+          <!-- Amount Input -->
+          <div>
+            <label class="block text-sm font-medium mb-3">
+              Amount <span id="amount-label">(CNY)</span>
+            </label>
+            <div class="flex gap-2">
+              <span
+                class="flex items-center px-3 bg-[rgb(var(--color-bg-secondary))] rounded-lg"
+                id="input-currency">¥</span
+              >
+              <input
+                type="number"
+                id="amount-input"
+                placeholder="Enter amount"
+                class="flex-1 px-4 py-2 border-2 border-[rgb(var(--color-border))] rounded-lg focus:outline-none focus:border-primary-500"
+                oninput="calculate()"
+              />
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div>
+            <label class="block text-sm font-medium mb-3">
+              Result <span id="result-label">(Foreign)</span>
+            </label>
+            <div class="flex gap-2">
+              <span
+                class="flex items-center px-3 bg-[rgb(var(--color-bg-secondary))] rounded-lg"
+                id="output-currency">$</span
+              >
+              <input
+                type="text"
+                id="result-output"
+                placeholder="Result"
+                class="flex-1 px-4 py-2 border-2 border-[rgb(var(--color-border))] rounded-lg bg-[rgb(var(--color-bg-secondary))] cursor-default"
+                readonly
+              />
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex gap-3">
+            <button
+              onclick="calculate()"
+              class="flex-1 px-6 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-lg font-medium hover:shadow-lg transition-all"
+            >
+              Calculate
+            </button>
+            <button
+              onclick="resetCalculator()"
+              class="flex-1 px-6 py-3 border-2 border-[rgb(var(--color-border))] rounded-lg font-medium hover:bg-[rgb(var(--color-bg-secondary))] transition-all"
+            >
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info & Tips -->
+      <div class="space-y-6">
+        <!-- Usage Instructions -->
+        <div class="glass-card p-8">
+          <h4 class="text-lg font-bold mb-4">📖 Instructions</h4>
+          <div class="space-y-3 text-sm">
+            <p>
+              <strong>Buy</strong><br />
+              Convert CNY to foreign currency. Enter CNY amount to see foreign currency
+              amount.
+            </p>
+            <p>
+              <strong>Sell</strong><br />
+              Convert foreign currency to CNY. Enter foreign currency amount to see
+              CNY amount.
+            </p>
+            <p class="text-[rgb(var(--color-text-secondary))]">
+              💡 Rates are for reference only, check with your bank for actual
+              rates.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="glass-card p-8">
+          <h4 class="text-lg font-bold mb-4">💡 Tips</h4>
+          <div class="space-y-2 text-sm">
+            <p>• Currency exchange may incur fees</p>
+            <p>• Different banks may have different rates</p>
+            <p>• Consult your bank for large transactions</p>
+            <p>• Real-time rates may have delays</p>
+          </div>
+        </div>
+
+        <!-- Data Source -->
+        <div
+          class="glass-card p-8 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20"
+        >
+          <h4 class="text-lg font-bold mb-2">📊 Data Source</h4>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+            Data from
+            <a
+              href="https://exchangerate-api.com"
+              target="_blank"
+              rel="noopener"
+              class="text-primary-500 hover:underline"
+            >
+              ExchangeRate-API
+            </a>
+            , for reference only
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const currencySymbols = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    JPY: '¥',
+    AUD: 'A$',
+    CAD: 'C$',
+  };
+
+  const rates = {
+    USD: 7.25,
+    EUR: 8.1,
+    GBP: 9.35,
+    JPY: 0.048,
+    AUD: 4.85,
+    CAD: 5.2,
+  };
+
+  // let lastUpdated = '';
+
+  function updateLabels() {
+    const typeRadio = document.querySelector('input[name="calcType"]:checked');
+    const currencySelect = document.getElementById('currency-select');
+    const amountLabel = document.getElementById('amount-label');
+    const resultLabel = document.getElementById('result-label');
+    const inputCurrency = document.getElementById('input-currency');
+    const outputCurrency = document.getElementById('output-currency');
+
+    if (
+      !typeRadio ||
+      !currencySelect ||
+      !amountLabel ||
+      !resultLabel ||
+      !inputCurrency ||
+      !outputCurrency
+    )
+      return;
+
+    const type = typeRadio.value || 'buy';
+    const currency = currencySelect.value || 'USD';
+
+    if (type === 'buy') {
+      amountLabel.textContent = '(CNY)';
+      resultLabel.textContent = '(Foreign)';
+      inputCurrency.textContent = '¥';
+      outputCurrency.textContent = currencySymbols[currency] || '$';
+    } else {
+      amountLabel.textContent = '(Foreign)';
+      resultLabel.textContent = '(CNY)';
+      inputCurrency.textContent = currencySymbols[currency] || '$';
+      outputCurrency.textContent = '¥';
+    }
+  }
+
+  async function fetchRealRates() {
+    try {
+      let data = null;
+
+      try {
+        const response = await fetch(
+          'https://api.exchangerate-api.com/v4/latest/CNY',
+          {
+            method: 'GET',
+            headers: { Accept: 'application/json' },
+          }
+        );
+        if (response.ok) {
+          data = await response.json();
+        }
+      } catch (e) {
+        try {
+          const response = await fetch(
+            'https://api.exchangerate.host/latest?base=CNY'
+          );
+          if (response.ok) {
+            const result = await response.json();
+            if (result.success && result.rates) {
+              data = {
+                rates: result.rates,
+                time_last_updated: Math.floor(Date.now() / 1000),
+              };
+            }
+          }
+        } catch (e2) {
+          console.warn('Failed to fetch rates');
+        }
+      }
+
+      if (data && data.rates) {
+        const cnyRates = data.rates;
+        if (
+          cnyRates.USD &&
+          cnyRates.EUR &&
+          cnyRates.GBP &&
+          cnyRates.JPY &&
+          cnyRates.AUD &&
+          cnyRates.CAD
+        ) {
+          rates.USD = 1 / cnyRates.USD;
+          rates.EUR = 1 / cnyRates.EUR;
+          rates.GBP = 1 / cnyRates.GBP;
+          rates.JPY = 100 / cnyRates.JPY;
+          rates.AUD = 1 / cnyRates.AUD;
+          rates.CAD = 1 / cnyRates.CAD;
+          // lastUpdated = new Date(data.time_last_updated * 1000).toLocaleString('en-US');
+          calculate();
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to fetch rates, using fallback', error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchRealRates();
+  });
+
+  function updateRate() {
+    updateLabels();
+    calculate();
+  }
+
+  function calculate() {
+    const typeRadio = document.querySelector('input[name="calcType"]:checked');
+    const currencySelect = document.getElementById('currency-select');
+    const amountInput = document.getElementById('amount-input');
+    const resultOutput = document.getElementById('result-output');
+
+    if (!typeRadio || !currencySelect || !amountInput || !resultOutput) return;
+
+    const type = typeRadio.value;
+    const currency = currencySelect.value;
+    const amount = parseFloat(amountInput.value) || 0;
+    const rate = rates[currency];
+
+    if (amount === 0 || !rate) {
+      resultOutput.value = '';
+      return;
+    }
+
+    let result;
+    if (type === 'buy') {
+      result = amount / rate;
+    } else {
+      result = amount * rate;
+    }
+
+    resultOutput.value = result.toFixed(2);
+  }
+
+  function resetCalculator() {
+    const amountInput = document.getElementById('amount-input');
+    const resultOutput = document.getElementById('result-output');
+    const buyRadio = document.querySelector(
+      'input[name="calcType"][value="buy"]'
+    );
+    const currencySelect = document.getElementById('currency-select');
+
+    if (amountInput) amountInput.value = '';
+    if (resultOutput) resultOutput.value = '';
+    if (buyRadio) buyRadio.checked = true;
+    if (currencySelect) currencySelect.value = 'USD';
+
+    updateLabels();
+  }
+
+  window.updateLabels = updateLabels;
+  window.calculate = calculate;
+  window.updateRate = updateRate;
+  window.resetCalculator = resetCalculator;
+</script>
