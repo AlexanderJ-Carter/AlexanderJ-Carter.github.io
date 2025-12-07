@@ -9,13 +9,13 @@ Contact: mailto:contact-us@alexander.xin
 Preferred-Languages: zh-CN, en
 
 # Our security acknowledgments page
-Acknowledgments: https://alexander.xin/security/security-acknowledgments.html
+Acknowledgments: https://alexander.xin/security/acknowledgments
 
 # Security-related job postings (currently not available)
 # Hiring: https://alexander.xin/careers
 
 # Vulnerability disclosure policy
-Policy: https://alexander.xin/security/security-policy.html
+Policy: https://alexander.xin/security/policy
 
 # PGP key for encrypted communications
 Encryption: https://alexander.xin/security/pgp-key.asc

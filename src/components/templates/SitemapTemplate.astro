@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const sitemapData: Record<Lang, any> = {
   'zh-CN': {
@@ -98,7 +98,113 @@ const sitemapData: Record<Lang, any> = {
       },
     ],
     languages: [
-      { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
+      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
+      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
+      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
+      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
+    ],
+  },
+  'zh-TW': {
+    title: '網站地圖',
+    description: '完整的網站結構導航和頁面地圖',
+    headerTitle: '網站地圖',
+    headerDesc: '探索網站的所有角落',
+    mainPagesTitle: '主要頁面',
+    toolPagesTitle: '實用工具',
+    policyPagesTitle: '政策條款',
+    externalLinksTitle: '外部連結',
+    languagesTitle: '語言版本',
+    mainPages: [
+      {
+        name: '網站首頁',
+        href: '/zh-TW/',
+        desc: '探索創意，分享生活的起點',
+        icon: '🏠',
+      },
+      {
+        name: '關於我',
+        href: '/zh-TW/about',
+        desc: '了解我的故事和理念',
+        icon: '👤',
+      },
+      {
+        name: '作品畫廊',
+        href: '/zh-TW/gallery',
+        desc: '完整的攝影作品展示空間',
+        icon: '🖼️',
+      },
+      {
+        name: '時間軸',
+        href: '/zh-TW/timeline',
+        desc: '我的學習和成長之路',
+        icon: '📅',
+      },
+    ],
+    toolPages: [
+      {
+        name: '智能日曆',
+        href: '/zh-TW/calendar',
+        desc: '功能豐富的日曆工具',
+        icon: '📆',
+      },
+      {
+        name: '貨幣轉換',
+        href: '/zh-TW/currency',
+        desc: '即時匯率轉換工具',
+        icon: '💱',
+      },
+      {
+        name: '世界時間',
+        href: '/zh-TW/time',
+        desc: '世界時間顯示工具',
+        icon: '🕐',
+      },
+    ],
+    policyPages: [
+      {
+        name: '隱私政策',
+        href: '/zh-TW/privacy',
+        desc: '資料保護和隱私說明',
+        icon: '🔒',
+      },
+      {
+        name: '服務條款',
+        href: '/zh-TW/terms',
+        desc: '網站使用規則和協議',
+        icon: '📄',
+      },
+      {
+        name: '許可證',
+        href: '/zh-TW/license',
+        desc: '版權許可和使用說明',
+        icon: '📜',
+      },
+      {
+        name: '無障礙',
+        href: '/zh-TW/accessibility',
+        desc: '無障礙訪問說明',
+        icon: '♿',
+      },
+    ],
+    externalLinks: [
+      {
+        name: '個人部落格',
+        href: 'https://blog.alexander.xin',
+        desc: '最新文章分享和思考記錄',
+        icon: '📝',
+      },
+      {
+        name: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        desc: '開源專案和程式碼倉庫',
+        icon: '💻',
+      },
+    ],
+    languages: [
+      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
+      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
       { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
       { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
       { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
@@ -202,7 +308,8 @@ const sitemapData: Record<Lang, any> = {
       },
     ],
     languages: [
-      { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
+      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
       { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
       { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
       { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
@@ -306,7 +413,8 @@ const sitemapData: Record<Lang, any> = {
       },
     ],
     languages: [
-      { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
+      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
       { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
       { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
       { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
@@ -410,7 +518,8 @@ const sitemapData: Record<Lang, any> = {
       },
     ],
     languages: [
-      { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
+      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
       { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
       { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
       { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
@@ -514,7 +623,8 @@ const sitemapData: Record<Lang, any> = {
       },
     ],
     languages: [
-      { code: 'zh-CN', name: '中文', flag: '🇨🇳', href: '/' },
+      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
+      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
       { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
       { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
       { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },

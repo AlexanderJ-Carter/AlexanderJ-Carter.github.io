@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const verifyData: Record<Lang, any> = {
   'zh-CN': {
@@ -18,6 +18,19 @@ const verifyData: Record<Lang, any> = {
     helpDesc:
       '为了保护网站内容的安全，防止恶意爬虫和攻击，我们需要确认您是真实用户。感谢您的理解与配合。',
     footer: '安全验证由 Cloudflare Turnstile 提供支持',
+  },
+  'zh-TW': {
+    title: '安全驗證',
+    headerTitle: '🔐 安全驗證',
+    headerDesc: '請完成以下驗證以存取受保護的內容',
+    verifying: '正在驗證您的存取權限...',
+    verifyDesc: '請稍候，我們正在確認您的身分。這通常只需要幾秒鐘。',
+    manualVerify: '如果驗證沒有自動開始，請點擊下方按鈕：',
+    verifyButton: '開始驗證',
+    helpTitle: '為什麼需要驗證？',
+    helpDesc:
+      '為了保護網站內容的安全，防止惡意爬蟲和攻擊，我們需要確認您是真實用戶。感謝您的理解與配合。',
+    footer: '安全驗證由 Cloudflare Turnstile 提供支援',
   },
   'en-US': {
     title: 'Security Verification',
@@ -153,7 +166,11 @@ const content = verifyData[lang as Lang] || verifyData['en-US'];
           </p>
 
           <!-- Turnstile Widget Container -->
-          <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+          <script
+            is:inline
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            async
+            defer></script>
           <div
             class="cf-turnstile"
             data-sitekey="0x4AAAAAABdh_m4Oroh5Egsy"
@@ -186,14 +203,14 @@ const content = verifyData[lang as Lang] || verifyData['en-US'];
   // Turnstile callback
   window.onTurnstileSuccess = function (token) {
     console.log('Verification successful', token);
-    
+
     // Set verification status
     sessionStorage.setItem('is_verified', 'true');
-    
+
     // Get redirect URL from query params
     const urlParams = new URLSearchParams(window.location.search);
     const returnUrl = urlParams.get('redirect') || '/';
-    
+
     // Redirect
     window.location.href = returnUrl;
   };

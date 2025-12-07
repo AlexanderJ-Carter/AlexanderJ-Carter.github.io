@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const calendarData: Record<Lang, any> = {
   'zh-CN': {
@@ -25,6 +25,26 @@ const calendarData: Record<Lang, any> = {
     save: '保存',
     cancel: '取消',
     delete: '删除',
+  },
+  'zh-TW': {
+    title: '智能日曆',
+    headerTitle: '📅 智能日曆',
+    headerDesc:
+      '管理您的時間，規劃您的生活。支持節假日顯示、自定義日程和事件管理',
+    prevMonth: '← 上月',
+    nextMonth: '下月 →',
+    loading: '加載中...',
+    weekdays: ['日', '一', '二', '三', '四', '五', '六'],
+    today: '今天',
+    addEvent: '添加日程',
+    upcomingEvents: '近期日程',
+    noEvents: '暫無近期日程',
+    eventTitle: '日程標題',
+    eventTime: '時間',
+    eventDesc: '描述',
+    save: '保存',
+    cancel: '取消',
+    delete: '刪除',
   },
   'en-US': {
     title: 'Smart Calendar',

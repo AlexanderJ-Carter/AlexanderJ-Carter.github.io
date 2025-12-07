@@ -12,8 +12,8 @@ export function getStaticPaths() {
 }
 
 const { lang: urlLang } = Astro.params;
-// Map 'en' to 'en-US' for internal logic
-const lang = urlLang === 'en' ? 'en-US' : urlLang;
+// Map 'en' to 'en-GB' for internal logic
+const lang = urlLang === 'en' ? 'en-GB' : urlLang;
 ---
 
 <HomeTemplate lang={lang} />

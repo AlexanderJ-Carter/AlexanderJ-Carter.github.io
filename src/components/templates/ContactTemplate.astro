@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const contactData: Record<Lang, any> = {
   'zh-CN': {
@@ -27,6 +27,28 @@ const contactData: Record<Lang, any> = {
     submit: '发送消息',
     success: '✓ 消息已发送！感谢您的联系。',
     quickLinks: '或者通过以下方式快速联系我：',
+  },
+  'zh-TW': {
+    title: '聯繫我',
+    description: '讓我們建立聯繫和合作',
+    back: '返回',
+    headerTitle: '讓我們聯繫',
+    headerDesc:
+      '無論是合作洽談、建議反饋還是簡單問候，我都很樂意聽到你的想法。讓我們一起創造美好的數字體驗，分享創意與靈感。',
+    email: '電子郵件',
+    location: '位置',
+    locationValue: '北京，中國',
+    formTitle: '發送消息',
+    nameLabel: '您的名字',
+    namePlaceholder: '張三',
+    emailLabel: '您的郵箱',
+    subjectLabel: '主題',
+    subjectPlaceholder: '詢問關於...',
+    messageLabel: '消息',
+    messagePlaceholder: '寫下您的消息...',
+    submit: '發送消息',
+    success: '✓ 消息已發送！感謝您的聯繫。',
+    quickLinks: '或者通過以下方式快速聯繫我：',
   },
   'en-US': {
     title: 'Contact Me',

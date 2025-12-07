@@ -29,19 +29,19 @@ interface NavItem {
 const mainNavItems: NavItem[] = [
   { href: lang === 'zh-CN' ? '/' : `/${lang}/`, label: t('nav.home'), icon: '🏠' },
   { 
-    label: lang === 'zh-CN' ? '创意' : (lang === 'fr' ? 'Créatif' : (lang === 'ru' ? 'Творчество' : 'Creative')),
+    label: lang === 'zh-CN' ? '创意' : (lang === 'zh-TW' ? '創意' : (lang === 'fr' ? 'Créatif' : (lang === 'ru' ? 'Творчество' : 'Creative'))),
     icon: '✨',
     submenu: [
-      { href: getLangPath('/gallery'), label: t('nav.gallery'), icon: '🎨', desc: lang === 'zh-CN' ? '作品展示' : (lang === 'fr' ? 'Galerie' : (lang === 'ru' ? 'Галерея' : 'Gallery')) },
+      { href: getLangPath('/gallery'), label: t('nav.gallery'), icon: '🎨', desc: lang === 'zh-CN' ? '作品展示' : (lang === 'zh-TW' ? '作品展示' : (lang === 'fr' ? 'Galerie' : (lang === 'ru' ? 'Галерея' : 'Gallery'))) },
     ]
   },
   { 
-    label: lang === 'zh-CN' ? '工具' : (lang === 'fr' ? 'Outils' : (lang === 'ru' ? 'Инструменты' : 'Tools')),
+    label: lang === 'zh-CN' ? '工具' : (lang === 'zh-TW' ? '工具' : (lang === 'fr' ? 'Outils' : (lang === 'ru' ? 'Инструменты' : 'Tools'))),
     icon: '⚙️',
     submenu: [
-      { href: getLangPath('/calendar'), label: lang === 'zh-CN' ? '日历' : (lang === 'fr' ? 'Calendrier' : (lang === 'ru' ? 'Календарь' : 'Calendar')), icon: '📅', desc: lang === 'zh-CN' ? '智能日历' : (lang === 'fr' ? 'Calendrier intelligent' : (lang === 'ru' ? 'Умный календарь' : 'Smart Calendar')) },
-      { href: getLangPath('/currency'), label: lang === 'zh-CN' ? '汇率' : (lang === 'fr' ? 'Taux de change' : (lang === 'ru' ? 'Курс валют' : 'Exchange')), icon: '💱', desc: lang === 'zh-CN' ? '汇率转换' : (lang === 'fr' ? 'Convertisseur de devises' : (lang === 'ru' ? 'Конвертер валют' : 'Currency')) },
-      { href: getLangPath('/time'), label: lang === 'zh-CN' ? '时间' : (lang === 'fr' ? 'Heure' : (lang === 'ru' ? 'Время' : 'Time')), icon: '🕐', desc: lang === 'zh-CN' ? '世界时间' : (lang === 'fr' ? 'Heure mondiale' : (lang === 'ru' ? 'Мировое время' : 'World Time')) },
+      { href: getLangPath('/calendar'), label: lang === 'zh-CN' ? '日历' : (lang === 'zh-TW' ? '日曆' : (lang === 'fr' ? 'Calendrier' : (lang === 'ru' ? 'Календарь' : 'Calendar'))), icon: '📅', desc: lang === 'zh-CN' ? '智能日历' : (lang === 'zh-TW' ? '智能日曆' : (lang === 'fr' ? 'Calendrier intelligent' : (lang === 'ru' ? 'Умный календарь' : 'Smart Calendar'))) },
+      { href: getLangPath('/currency'), label: lang === 'zh-CN' ? '汇率' : (lang === 'zh-TW' ? '匯率' : (lang === 'fr' ? 'Taux de change' : (lang === 'ru' ? 'Курс валют' : 'Exchange'))), icon: '💱', desc: lang === 'zh-CN' ? '汇率转换' : (lang === 'zh-TW' ? '匯率轉換' : (lang === 'fr' ? 'Convertisseur de devises' : (lang === 'ru' ? 'Конвертер валют' : 'Currency'))) },
+      { href: getLangPath('/time'), label: lang === 'zh-CN' ? '时间' : (lang === 'zh-TW' ? '時間' : (lang === 'fr' ? 'Heure' : (lang === 'ru' ? 'Время' : 'Time'))), icon: '🕐', desc: lang === 'zh-CN' ? '世界时间' : (lang === 'zh-TW' ? '世界時間' : (lang === 'fr' ? 'Heure mondiale' : (lang === 'ru' ? 'Мировое время' : 'World Time'))) },
     ]
   },
   { href: 'https://blog.alexander.xin', label: t('nav.blog'), icon: '📝', external: true },

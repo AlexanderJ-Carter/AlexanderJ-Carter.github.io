@@ -5,12 +5,18 @@ import { useTranslations } from '../../i18n/ui';
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const categoriesData: Record<Lang, any[]> = {
   'zh-CN': [
     { id: 'all', label: '全部' },
     { id: 'landscape', label: '风景' },
+    { id: 'nature', label: '自然' },
+    { id: 'food', label: '美食' },
+  ],
+  'zh-TW': [
+    { id: 'all', label: '全部' },
+    { id: 'landscape', label: '風景' },
     { id: 'nature', label: '自然' },
     { id: 'food', label: '美食' },
   ],
@@ -26,128 +32,800 @@ const categoriesData: Record<Lang, any[]> = {
     { id: 'nature', label: 'Nature' },
     { id: 'food', label: 'Food' },
   ],
-  'fr': [
+  fr: [
     { id: 'all', label: 'Tout' },
     { id: 'landscape', label: 'Paysage' },
     { id: 'nature', label: 'Nature' },
     { id: 'food', label: 'Nourriture' },
   ],
-  'ru': [
+  ru: [
     { id: 'all', label: 'Все' },
     { id: 'landscape', label: 'Пейзаж' },
     { id: 'nature', label: 'Природа' },
     { id: 'food', label: 'Еда' },
-  ]
+  ],
 };
 
 const galleryItemsData: Record<Lang, any[]> = {
   'zh-CN': [
     // Landscape photos
-    { id: 1, category: 'landscape', title: '山间晨雾', description: '清晨的山间，薄雾缭绕', image: '/img/gallery/landscape-01.jpg' },
-    { id: 2, category: 'landscape', title: '海岸日落', description: '夕阳西下，海天一色', image: '/img/gallery/landscape-02.jpg' },
-    { id: 3, category: 'landscape', title: '城市天际线', description: '都市的繁华与宁静', image: '/img/gallery/landscape-03.jpg' },
-    { id: 4, category: 'landscape', title: '星空银河', description: '浩瀚星空，璀璨银河', image: '/img/gallery/landscape-04.jpg' },
-    { id: 5, category: 'landscape', title: '山谷云海', description: '云雾翻腾，如梦如幻', image: '/img/gallery/landscape-05.jpg' },
-    { id: 6, category: 'landscape', title: '湖光山色', description: '湖水静谧，倒映青山', image: '/img/gallery/landscape-06.jpg' },
-    { id: 7, category: 'landscape', title: '雪域高原', description: '皑皑白雪，壮丽雪山', image: '/img/gallery/landscape-07.jpg' },
-    { id: 8, category: 'landscape', title: '秋色斑斓', description: '层林尽染，五彩秋光', image: '/img/gallery/landscape-08.jpg' },
-    { id: 9, category: 'landscape', title: '日出东方', description: '旭日初升，霞光万丈', image: '/img/gallery/landscape-09.jpg' },
-    { id: 10, category: 'landscape', title: '峡谷奇观', description: '鬼斧神工，自然奇迹', image: '/img/gallery/landscape-10.jpg' },
-    { id: 11, category: 'landscape', title: '田园诗意', description: '乡村美景，宁静祥和', image: '/img/gallery/landscape-11.jpg' },
-    { id: 12, category: 'landscape', title: '沙漠孤烟', description: '大漠风光，苍凉壮美', image: '/img/gallery/landscape-12.jpg' },
-    { id: 13, category: 'landscape', title: '森林秘境', description: '密林深处，神秘幽静', image: '/img/gallery/landscape-13.jpg' },
+    {
+      id: 1,
+      category: 'landscape',
+      title: '山间晨雾',
+      description: '清晨的山间，薄雾缭绕',
+      image: '/img/gallery/landscape-01.jpg',
+    },
+    {
+      id: 2,
+      category: 'landscape',
+      title: '海岸日落',
+      description: '夕阳西下，海天一色',
+      image: '/img/gallery/landscape-02.jpg',
+    },
+    {
+      id: 3,
+      category: 'landscape',
+      title: '城市天际线',
+      description: '都市的繁华与宁静',
+      image: '/img/gallery/landscape-03.jpg',
+    },
+    {
+      id: 4,
+      category: 'landscape',
+      title: '星空银河',
+      description: '浩瀚星空，璀璨银河',
+      image: '/img/gallery/landscape-04.jpg',
+    },
+    {
+      id: 5,
+      category: 'landscape',
+      title: '山谷云海',
+      description: '云雾翻腾，如梦如幻',
+      image: '/img/gallery/landscape-05.jpg',
+    },
+    {
+      id: 6,
+      category: 'landscape',
+      title: '湖光山色',
+      description: '湖水静谧，倒映青山',
+      image: '/img/gallery/landscape-06.jpg',
+    },
+    {
+      id: 7,
+      category: 'landscape',
+      title: '雪域高原',
+      description: '皑皑白雪，壮丽雪山',
+      image: '/img/gallery/landscape-07.jpg',
+    },
+    {
+      id: 8,
+      category: 'landscape',
+      title: '秋色斑斓',
+      description: '层林尽染，五彩秋光',
+      image: '/img/gallery/landscape-08.jpg',
+    },
+    {
+      id: 9,
+      category: 'landscape',
+      title: '日出东方',
+      description: '旭日初升，霞光万丈',
+      image: '/img/gallery/landscape-09.jpg',
+    },
+    {
+      id: 10,
+      category: 'landscape',
+      title: '峡谷奇观',
+      description: '鬼斧神工，自然奇迹',
+      image: '/img/gallery/landscape-10.jpg',
+    },
+    {
+      id: 11,
+      category: 'landscape',
+      title: '田园诗意',
+      description: '乡村美景，宁静祥和',
+      image: '/img/gallery/landscape-11.jpg',
+    },
+    {
+      id: 12,
+      category: 'landscape',
+      title: '沙漠孤烟',
+      description: '大漠风光，苍凉壮美',
+      image: '/img/gallery/landscape-12.jpg',
+    },
+    {
+      id: 13,
+      category: 'landscape',
+      title: '森林秘境',
+      description: '密林深处，神秘幽静',
+      image: '/img/gallery/landscape-13.jpg',
+    },
     // Nature photos
-    { id: 14, category: 'nature', title: '雨后花瓣', description: '雨露滋润，花开正艳', image: '/img/gallery/nature-flower-01.jpg' },
-    { id: 15, category: 'nature', title: '晨光花影', description: '晨曦初照，花影婆娑', image: '/img/gallery/nature-flower-02.jpg' },
+    {
+      id: 14,
+      category: 'nature',
+      title: '雨后花瓣',
+      description: '雨露滋润，花开正艳',
+      image: '/img/gallery/nature-flower-01.jpg',
+    },
+    {
+      id: 15,
+      category: 'nature',
+      title: '晨光花影',
+      description: '晨曦初照，花影婆娑',
+      image: '/img/gallery/nature-flower-02.jpg',
+    },
     // Food photos
-    { id: 16, category: 'food', title: '精致甜点', description: '甜蜜时光，味蕾盛宴', image: '/img/gallery/food-01.jpg' },
-    { id: 17, category: 'food', title: '传统美食', description: '经典味道，传承文化', image: '/img/gallery/food-02.jpg' },
-    { id: 18, category: 'food', title: '创意料理', description: '色香味俱全，艺术佳作', image: '/img/gallery/food-03.jpg' },
+    {
+      id: 16,
+      category: 'food',
+      title: '精致甜点',
+      description: '甜蜜时光，味蕾盛宴',
+      image: '/img/gallery/food-01.jpg',
+    },
+    {
+      id: 17,
+      category: 'food',
+      title: '传统美食',
+      description: '经典味道，传承文化',
+      image: '/img/gallery/food-02.jpg',
+    },
+    {
+      id: 18,
+      category: 'food',
+      title: '创意料理',
+      description: '色香味俱全，艺术佳作',
+      image: '/img/gallery/food-03.jpg',
+    },
+  ],
+  'zh-TW': [
+    // Landscape photos
+    {
+      id: 1,
+      category: 'landscape',
+      title: '山間晨霧',
+      description: '清晨的山間，薄霧繚繞',
+      image: '/img/gallery/landscape-01.jpg',
+    },
+    {
+      id: 2,
+      category: 'landscape',
+      title: '海岸日落',
+      description: '夕陽西下，海天一色',
+      image: '/img/gallery/landscape-02.jpg',
+    },
+    {
+      id: 3,
+      category: 'landscape',
+      title: '城市天際線',
+      description: '都市的繁華與寧靜',
+      image: '/img/gallery/landscape-03.jpg',
+    },
+    {
+      id: 4,
+      category: 'landscape',
+      title: '星空銀河',
+      description: '浩瀚星空，璀璨銀河',
+      image: '/img/gallery/landscape-04.jpg',
+    },
+    {
+      id: 5,
+      category: 'landscape',
+      title: '山谷雲海',
+      description: '雲霧翻騰，如夢如幻',
+      image: '/img/gallery/landscape-05.jpg',
+    },
+    {
+      id: 6,
+      category: 'landscape',
+      title: '湖光山色',
+      description: '湖水靜謐，倒映青山',
+      image: '/img/gallery/landscape-06.jpg',
+    },
+    {
+      id: 7,
+      category: 'landscape',
+      title: '雪域高原',
+      description: '皚皚白雪，壯麗雪山',
+      image: '/img/gallery/landscape-07.jpg',
+    },
+    {
+      id: 8,
+      category: 'landscape',
+      title: '秋色斑斕',
+      description: '層林盡染，五彩秋光',
+      image: '/img/gallery/landscape-08.jpg',
+    },
+    {
+      id: 9,
+      category: 'landscape',
+      title: '日出東方',
+      description: '旭日初升，霞光萬丈',
+      image: '/img/gallery/landscape-09.jpg',
+    },
+    {
+      id: 10,
+      category: 'landscape',
+      title: '峽谷奇觀',
+      description: '鬼斧神工，自然奇蹟',
+      image: '/img/gallery/landscape-10.jpg',
+    },
+    {
+      id: 11,
+      category: 'landscape',
+      title: '田園詩意',
+      description: '鄉村美景，寧靜祥和',
+      image: '/img/gallery/landscape-11.jpg',
+    },
+    {
+      id: 12,
+      category: 'landscape',
+      title: '沙漠孤煙',
+      description: '大漠風光，蒼涼壯美',
+      image: '/img/gallery/landscape-12.jpg',
+    },
+    {
+      id: 13,
+      category: 'landscape',
+      title: '森林秘境',
+      description: '密林深處，神秘幽靜',
+      image: '/img/gallery/landscape-13.jpg',
+    },
+    // Nature photos
+    {
+      id: 14,
+      category: 'nature',
+      title: '雨後花瓣',
+      description: '雨露滋潤，花開正豔',
+      image: '/img/gallery/nature-flower-01.jpg',
+    },
+    {
+      id: 15,
+      category: 'nature',
+      title: '晨光花影',
+      description: '晨曦初照，花影婆娑',
+      image: '/img/gallery/nature-flower-02.jpg',
+    },
+    // Food photos
+    {
+      id: 16,
+      category: 'food',
+      title: '精緻甜點',
+      description: '甜蜜時光，味蕾盛宴',
+      image: '/img/gallery/food-01.jpg',
+    },
+    {
+      id: 17,
+      category: 'food',
+      title: '傳統美食',
+      description: '經典味道，傳承文化',
+      image: '/img/gallery/food-02.jpg',
+    },
+    {
+      id: 18,
+      category: 'food',
+      title: '創意料理',
+      description: '色香味俱全，藝術佳作',
+      image: '/img/gallery/food-03.jpg',
+    },
   ],
   'en-US': [
-    { id: 1, category: 'landscape', title: 'Mountain Morning Mist', description: 'Misty morning in the mountains', image: '/img/gallery/landscape-01.jpg' },
-    { id: 2, category: 'landscape', title: 'Coastal Sunset', description: 'Sunset over the ocean', image: '/img/gallery/landscape-02.jpg' },
-    { id: 3, category: 'landscape', title: 'City Skyline', description: 'Urban beauty and serenity', image: '/img/gallery/landscape-03.jpg' },
-    { id: 4, category: 'landscape', title: 'Starry Galaxy', description: 'Vast starry sky and Milky Way', image: '/img/gallery/landscape-04.jpg' },
-    { id: 5, category: 'landscape', title: 'Valley Cloud Sea', description: 'Rolling clouds, dreamlike scenery', image: '/img/gallery/landscape-05.jpg' },
-    { id: 6, category: 'landscape', title: 'Lake & Mountains', description: 'Tranquil lake reflecting peaks', image: '/img/gallery/landscape-06.jpg' },
-    { id: 7, category: 'landscape', title: 'Snowy Plateau', description: 'Majestic snow-capped mountains', image: '/img/gallery/landscape-07.jpg' },
-    { id: 8, category: 'landscape', title: 'Autumn Colors', description: 'Colorful fall foliage', image: '/img/gallery/landscape-08.jpg' },
-    { id: 9, category: 'landscape', title: 'Sunrise East', description: 'Dawn breaking with golden rays', image: '/img/gallery/landscape-09.jpg' },
-    { id: 10, category: 'landscape', title: 'Canyon Wonder', description: 'Nature\'s masterpiece', image: '/img/gallery/landscape-10.jpg' },
-    { id: 11, category: 'landscape', title: 'Pastoral Beauty', description: 'Peaceful countryside scenery', image: '/img/gallery/landscape-11.jpg' },
-    { id: 12, category: 'landscape', title: 'Desert Solitude', description: 'Vast desert landscape', image: '/img/gallery/landscape-12.jpg' },
-    { id: 13, category: 'landscape', title: 'Forest Sanctuary', description: 'Deep in the mysterious woods', image: '/img/gallery/landscape-13.jpg' },
-    { id: 14, category: 'nature', title: 'Petals After Rain', description: 'Dewdrops on blooming flowers', image: '/img/gallery/nature-flower-01.jpg' },
-    { id: 15, category: 'nature', title: 'Morning Flower Shadow', description: 'Dawn light through petals', image: '/img/gallery/nature-flower-02.jpg' },
-    { id: 16, category: 'food', title: 'Exquisite Dessert', description: 'Sweet moment, feast for senses', image: '/img/gallery/food-01.jpg' },
-    { id: 17, category: 'food', title: 'Traditional Cuisine', description: 'Classic taste, cultural heritage', image: '/img/gallery/food-02.jpg' },
-    { id: 18, category: 'food', title: 'Creative Dish', description: 'Culinary art masterpiece', image: '/img/gallery/food-03.jpg' },
+    {
+      id: 1,
+      category: 'landscape',
+      title: 'Mountain Morning Mist',
+      description: 'Misty morning in the mountains',
+      image: '/img/gallery/landscape-01.jpg',
+    },
+    {
+      id: 2,
+      category: 'landscape',
+      title: 'Coastal Sunset',
+      description: 'Sunset over the ocean',
+      image: '/img/gallery/landscape-02.jpg',
+    },
+    {
+      id: 3,
+      category: 'landscape',
+      title: 'City Skyline',
+      description: 'Urban beauty and serenity',
+      image: '/img/gallery/landscape-03.jpg',
+    },
+    {
+      id: 4,
+      category: 'landscape',
+      title: 'Starry Galaxy',
+      description: 'Vast starry sky and Milky Way',
+      image: '/img/gallery/landscape-04.jpg',
+    },
+    {
+      id: 5,
+      category: 'landscape',
+      title: 'Valley Cloud Sea',
+      description: 'Rolling clouds, dreamlike scenery',
+      image: '/img/gallery/landscape-05.jpg',
+    },
+    {
+      id: 6,
+      category: 'landscape',
+      title: 'Lake & Mountains',
+      description: 'Tranquil lake reflecting peaks',
+      image: '/img/gallery/landscape-06.jpg',
+    },
+    {
+      id: 7,
+      category: 'landscape',
+      title: 'Snowy Plateau',
+      description: 'Majestic snow-capped mountains',
+      image: '/img/gallery/landscape-07.jpg',
+    },
+    {
+      id: 8,
+      category: 'landscape',
+      title: 'Autumn Colors',
+      description: 'Colorful fall foliage',
+      image: '/img/gallery/landscape-08.jpg',
+    },
+    {
+      id: 9,
+      category: 'landscape',
+      title: 'Sunrise East',
+      description: 'Dawn breaking with golden rays',
+      image: '/img/gallery/landscape-09.jpg',
+    },
+    {
+      id: 10,
+      category: 'landscape',
+      title: 'Canyon Wonder',
+      description: "Nature's masterpiece",
+      image: '/img/gallery/landscape-10.jpg',
+    },
+    {
+      id: 11,
+      category: 'landscape',
+      title: 'Pastoral Beauty',
+      description: 'Peaceful countryside scenery',
+      image: '/img/gallery/landscape-11.jpg',
+    },
+    {
+      id: 12,
+      category: 'landscape',
+      title: 'Desert Solitude',
+      description: 'Vast desert landscape',
+      image: '/img/gallery/landscape-12.jpg',
+    },
+    {
+      id: 13,
+      category: 'landscape',
+      title: 'Forest Sanctuary',
+      description: 'Deep in the mysterious woods',
+      image: '/img/gallery/landscape-13.jpg',
+    },
+    {
+      id: 14,
+      category: 'nature',
+      title: 'Petals After Rain',
+      description: 'Dewdrops on blooming flowers',
+      image: '/img/gallery/nature-flower-01.jpg',
+    },
+    {
+      id: 15,
+      category: 'nature',
+      title: 'Morning Flower Shadow',
+      description: 'Dawn light through petals',
+      image: '/img/gallery/nature-flower-02.jpg',
+    },
+    {
+      id: 16,
+      category: 'food',
+      title: 'Exquisite Dessert',
+      description: 'Sweet moment, feast for senses',
+      image: '/img/gallery/food-01.jpg',
+    },
+    {
+      id: 17,
+      category: 'food',
+      title: 'Traditional Cuisine',
+      description: 'Classic taste, cultural heritage',
+      image: '/img/gallery/food-02.jpg',
+    },
+    {
+      id: 18,
+      category: 'food',
+      title: 'Creative Dish',
+      description: 'Culinary art masterpiece',
+      image: '/img/gallery/food-03.jpg',
+    },
   ],
   'en-GB': [
-    { id: 1, category: 'landscape', title: 'Mountain Morning Mist', description: 'Misty morning in the mountains', image: '/img/gallery/landscape-01.jpg' },
-    { id: 2, category: 'landscape', title: 'Coastal Sunset', description: 'Sunset over the ocean', image: '/img/gallery/landscape-02.jpg' },
-    { id: 3, category: 'landscape', title: 'City Skyline', description: 'Urban beauty and serenity', image: '/img/gallery/landscape-03.jpg' },
-    { id: 4, category: 'landscape', title: 'Starry Galaxy', description: 'Vast starry sky and Milky Way', image: '/img/gallery/landscape-04.jpg' },
-    { id: 5, category: 'landscape', title: 'Valley Cloud Sea', description: 'Rolling clouds, dreamlike scenery', image: '/img/gallery/landscape-05.jpg' },
-    { id: 6, category: 'landscape', title: 'Lake & Mountains', description: 'Tranquil lake reflecting peaks', image: '/img/gallery/landscape-06.jpg' },
-    { id: 7, category: 'landscape', title: 'Snowy Plateau', description: 'Majestic snow-capped mountains', image: '/img/gallery/landscape-07.jpg' },
-    { id: 8, category: 'landscape', title: 'Autumn Colours', description: 'Colourful fall foliage', image: '/img/gallery/landscape-08.jpg' },
-    { id: 9, category: 'landscape', title: 'Sunrise East', description: 'Dawn breaking with golden rays', image: '/img/gallery/landscape-09.jpg' },
-    { id: 10, category: 'landscape', title: 'Canyon Wonder', description: 'Nature\'s masterpiece', image: '/img/gallery/landscape-10.jpg' },
-    { id: 11, category: 'landscape', title: 'Pastoral Beauty', description: 'Peaceful countryside scenery', image: '/img/gallery/landscape-11.jpg' },
-    { id: 12, category: 'landscape', title: 'Desert Solitude', description: 'Vast desert landscape', image: '/img/gallery/landscape-12.jpg' },
-    { id: 13, category: 'landscape', title: 'Forest Sanctuary', description: 'Deep in the mysterious woods', image: '/img/gallery/landscape-13.jpg' },
-    { id: 14, category: 'nature', title: 'Petals After Rain', description: 'Dewdrops on blooming flowers', image: '/img/gallery/nature-flower-01.jpg' },
-    { id: 15, category: 'nature', title: 'Morning Flower Shadow', description: 'Dawn light through petals', image: '/img/gallery/nature-flower-02.jpg' },
-    { id: 16, category: 'food', title: 'Exquisite Dessert', description: 'Sweet moment, feast for senses', image: '/img/gallery/food-01.jpg' },
-    { id: 17, category: 'food', title: 'Traditional Cuisine', description: 'Classic taste, cultural heritage', image: '/img/gallery/food-02.jpg' },
-    { id: 18, category: 'food', title: 'Creative Dish', description: 'Culinary art masterpiece', image: '/img/gallery/food-03.jpg' },
+    {
+      id: 1,
+      category: 'landscape',
+      title: 'Mountain Morning Mist',
+      description: 'Misty morning in the mountains',
+      image: '/img/gallery/landscape-01.jpg',
+    },
+    {
+      id: 2,
+      category: 'landscape',
+      title: 'Coastal Sunset',
+      description: 'Sunset over the ocean',
+      image: '/img/gallery/landscape-02.jpg',
+    },
+    {
+      id: 3,
+      category: 'landscape',
+      title: 'City Skyline',
+      description: 'Urban beauty and serenity',
+      image: '/img/gallery/landscape-03.jpg',
+    },
+    {
+      id: 4,
+      category: 'landscape',
+      title: 'Starry Galaxy',
+      description: 'Vast starry sky and Milky Way',
+      image: '/img/gallery/landscape-04.jpg',
+    },
+    {
+      id: 5,
+      category: 'landscape',
+      title: 'Valley Cloud Sea',
+      description: 'Rolling clouds, dreamlike scenery',
+      image: '/img/gallery/landscape-05.jpg',
+    },
+    {
+      id: 6,
+      category: 'landscape',
+      title: 'Lake & Mountains',
+      description: 'Tranquil lake reflecting peaks',
+      image: '/img/gallery/landscape-06.jpg',
+    },
+    {
+      id: 7,
+      category: 'landscape',
+      title: 'Snowy Plateau',
+      description: 'Majestic snow-capped mountains',
+      image: '/img/gallery/landscape-07.jpg',
+    },
+    {
+      id: 8,
+      category: 'landscape',
+      title: 'Autumn Colours',
+      description: 'Colourful fall foliage',
+      image: '/img/gallery/landscape-08.jpg',
+    },
+    {
+      id: 9,
+      category: 'landscape',
+      title: 'Sunrise East',
+      description: 'Dawn breaking with golden rays',
+      image: '/img/gallery/landscape-09.jpg',
+    },
+    {
+      id: 10,
+      category: 'landscape',
+      title: 'Canyon Wonder',
+      description: "Nature's masterpiece",
+      image: '/img/gallery/landscape-10.jpg',
+    },
+    {
+      id: 11,
+      category: 'landscape',
+      title: 'Pastoral Beauty',
+      description: 'Peaceful countryside scenery',
+      image: '/img/gallery/landscape-11.jpg',
+    },
+    {
+      id: 12,
+      category: 'landscape',
+      title: 'Desert Solitude',
+      description: 'Vast desert landscape',
+      image: '/img/gallery/landscape-12.jpg',
+    },
+    {
+      id: 13,
+      category: 'landscape',
+      title: 'Forest Sanctuary',
+      description: 'Deep in the mysterious woods',
+      image: '/img/gallery/landscape-13.jpg',
+    },
+    {
+      id: 14,
+      category: 'nature',
+      title: 'Petals After Rain',
+      description: 'Dewdrops on blooming flowers',
+      image: '/img/gallery/nature-flower-01.jpg',
+    },
+    {
+      id: 15,
+      category: 'nature',
+      title: 'Morning Flower Shadow',
+      description: 'Dawn light through petals',
+      image: '/img/gallery/nature-flower-02.jpg',
+    },
+    {
+      id: 16,
+      category: 'food',
+      title: 'Exquisite Dessert',
+      description: 'Sweet moment, feast for senses',
+      image: '/img/gallery/food-01.jpg',
+    },
+    {
+      id: 17,
+      category: 'food',
+      title: 'Traditional Cuisine',
+      description: 'Classic taste, cultural heritage',
+      image: '/img/gallery/food-02.jpg',
+    },
+    {
+      id: 18,
+      category: 'food',
+      title: 'Creative Dish',
+      description: 'Culinary art masterpiece',
+      image: '/img/gallery/food-03.jpg',
+    },
   ],
-  'fr': [
-    { id: 1, category: 'landscape', title: 'Brume Matinale de Montagne', description: 'Matin brumeux dans les montagnes', image: '/img/gallery/landscape-01.jpg' },
-    { id: 2, category: 'landscape', title: 'Coucher de Soleil Côtier', description: 'Coucher de soleil sur l\'océan', image: '/img/gallery/landscape-02.jpg' },
-    { id: 3, category: 'landscape', title: 'Horizon de la Ville', description: 'Beauté et sérénité urbaines', image: '/img/gallery/landscape-03.jpg' },
-    { id: 4, category: 'landscape', title: 'Galaxie Étoilée', description: 'Vaste ciel étoilé et Voie Lactée', image: '/img/gallery/landscape-04.jpg' },
-    { id: 5, category: 'landscape', title: 'Mer de Nuages de la Vallée', description: 'Nuages roulants, paysage onirique', image: '/img/gallery/landscape-05.jpg' },
-    { id: 6, category: 'landscape', title: 'Lac et Montagnes', description: 'Lac tranquille reflétant les sommets', image: '/img/gallery/landscape-06.jpg' },
-    { id: 7, category: 'landscape', title: 'Plateau Enneigé', description: 'Montagnes majestueuses enneigées', image: '/img/gallery/landscape-07.jpg' },
-    { id: 8, category: 'landscape', title: 'Couleurs d\'Automne', description: 'Feuillage coloré d\'automne', image: '/img/gallery/landscape-08.jpg' },
-    { id: 9, category: 'landscape', title: 'Lever du Soleil à l\'Est', description: 'Aube avec des rayons dorés', image: '/img/gallery/landscape-09.jpg' },
-    { id: 10, category: 'landscape', title: 'Merveille du Canyon', description: 'Chef-d\'œuvre de la nature', image: '/img/gallery/landscape-10.jpg' },
-    { id: 11, category: 'landscape', title: 'Beauté Pastorale', description: 'Paysage campagnard paisible', image: '/img/gallery/landscape-11.jpg' },
-    { id: 12, category: 'landscape', title: 'Solitude du Désert', description: 'Vaste paysage désertique', image: '/img/gallery/landscape-12.jpg' },
-    { id: 13, category: 'landscape', title: 'Sanctuaire Forestier', description: 'Au cœur des bois mystérieux', image: '/img/gallery/landscape-13.jpg' },
-    { id: 14, category: 'nature', title: 'Pétales Après la Pluie', description: 'Gouttes de rosée sur fleurs', image: '/img/gallery/nature-flower-01.jpg' },
-    { id: 15, category: 'nature', title: 'Ombre de Fleur Matinale', description: 'Lumière de l\'aube à travers pétales', image: '/img/gallery/nature-flower-02.jpg' },
-    { id: 16, category: 'food', title: 'Dessert Exquis', description: 'Moment sucré, festin des sens', image: '/img/gallery/food-01.jpg' },
-    { id: 17, category: 'food', title: 'Cuisine Traditionnelle', description: 'Goût classique, héritage culturel', image: '/img/gallery/food-02.jpg' },
-    { id: 18, category: 'food', title: 'Plat Créatif', description: 'Chef-d\'œuvre culinaire', image: '/img/gallery/food-03.jpg' },
+  fr: [
+    {
+      id: 1,
+      category: 'landscape',
+      title: 'Brume Matinale de Montagne',
+      description: 'Matin brumeux dans les montagnes',
+      image: '/img/gallery/landscape-01.jpg',
+    },
+    {
+      id: 2,
+      category: 'landscape',
+      title: 'Coucher de Soleil Côtier',
+      description: "Coucher de soleil sur l'océan",
+      image: '/img/gallery/landscape-02.jpg',
+    },
+    {
+      id: 3,
+      category: 'landscape',
+      title: 'Horizon de la Ville',
+      description: 'Beauté et sérénité urbaines',
+      image: '/img/gallery/landscape-03.jpg',
+    },
+    {
+      id: 4,
+      category: 'landscape',
+      title: 'Galaxie Étoilée',
+      description: 'Vaste ciel étoilé et Voie Lactée',
+      image: '/img/gallery/landscape-04.jpg',
+    },
+    {
+      id: 5,
+      category: 'landscape',
+      title: 'Mer de Nuages de la Vallée',
+      description: 'Nuages roulants, paysage onirique',
+      image: '/img/gallery/landscape-05.jpg',
+    },
+    {
+      id: 6,
+      category: 'landscape',
+      title: 'Lac et Montagnes',
+      description: 'Lac tranquille reflétant les sommets',
+      image: '/img/gallery/landscape-06.jpg',
+    },
+    {
+      id: 7,
+      category: 'landscape',
+      title: 'Plateau Enneigé',
+      description: 'Montagnes majestueuses enneigées',
+      image: '/img/gallery/landscape-07.jpg',
+    },
+    {
+      id: 8,
+      category: 'landscape',
+      title: "Couleurs d'Automne",
+      description: "Feuillage coloré d'automne",
+      image: '/img/gallery/landscape-08.jpg',
+    },
+    {
+      id: 9,
+      category: 'landscape',
+      title: "Lever du Soleil à l'Est",
+      description: 'Aube avec des rayons dorés',
+      image: '/img/gallery/landscape-09.jpg',
+    },
+    {
+      id: 10,
+      category: 'landscape',
+      title: 'Merveille du Canyon',
+      description: "Chef-d'œuvre de la nature",
+      image: '/img/gallery/landscape-10.jpg',
+    },
+    {
+      id: 11,
+      category: 'landscape',
+      title: 'Beauté Pastorale',
+      description: 'Paysage campagnard paisible',
+      image: '/img/gallery/landscape-11.jpg',
+    },
+    {
+      id: 12,
+      category: 'landscape',
+      title: 'Solitude du Désert',
+      description: 'Vaste paysage désertique',
+      image: '/img/gallery/landscape-12.jpg',
+    },
+    {
+      id: 13,
+      category: 'landscape',
+      title: 'Sanctuaire Forestier',
+      description: 'Au cœur des bois mystérieux',
+      image: '/img/gallery/landscape-13.jpg',
+    },
+    {
+      id: 14,
+      category: 'nature',
+      title: 'Pétales Après la Pluie',
+      description: 'Gouttes de rosée sur fleurs',
+      image: '/img/gallery/nature-flower-01.jpg',
+    },
+    {
+      id: 15,
+      category: 'nature',
+      title: 'Ombre de Fleur Matinale',
+      description: "Lumière de l'aube à travers pétales",
+      image: '/img/gallery/nature-flower-02.jpg',
+    },
+    {
+      id: 16,
+      category: 'food',
+      title: 'Dessert Exquis',
+      description: 'Moment sucré, festin des sens',
+      image: '/img/gallery/food-01.jpg',
+    },
+    {
+      id: 17,
+      category: 'food',
+      title: 'Cuisine Traditionnelle',
+      description: 'Goût classique, héritage culturel',
+      image: '/img/gallery/food-02.jpg',
+    },
+    {
+      id: 18,
+      category: 'food',
+      title: 'Plat Créatif',
+      description: "Chef-d'œuvre culinaire",
+      image: '/img/gallery/food-03.jpg',
+    },
   ],
-  'ru': [
-    { id: 1, category: 'landscape', title: 'Утренний Туман в Горах', description: 'Туманное утро в горах', image: '/img/gallery/landscape-01.jpg' },
-    { id: 2, category: 'landscape', title: 'Прибрежный Закат', description: 'Закат над океаном', image: '/img/gallery/landscape-02.jpg' },
-    { id: 3, category: 'landscape', title: 'Городской Пейзаж', description: 'Городская красота и спокойствие', image: '/img/gallery/landscape-03.jpg' },
-    { id: 4, category: 'landscape', title: 'Звездная Галактика', description: 'Бескрайнее звездное небо', image: '/img/gallery/landscape-04.jpg' },
-    { id: 5, category: 'landscape', title: 'Море Облаков в Долине', description: 'Катящиеся облака', image: '/img/gallery/landscape-05.jpg' },
-    { id: 6, category: 'landscape', title: 'Озеро и Горы', description: 'Спокойное озеро', image: '/img/gallery/landscape-06.jpg' },
-    { id: 7, category: 'landscape', title: 'Снежное Плоскогорье', description: 'Величественные горы', image: '/img/gallery/landscape-07.jpg' },
-    { id: 8, category: 'landscape', title: 'Осенние Краски', description: 'Цветная осенняя листва', image: '/img/gallery/landscape-08.jpg' },
-    { id: 9, category: 'landscape', title: 'Восход на Востоке', description: 'Рассвет с золотыми лучами', image: '/img/gallery/landscape-09.jpg' },
-    { id: 10, category: 'landscape', title: 'Чудо Каньона', description: 'Шедевр природы', image: '/img/gallery/landscape-10.jpg' },
-    { id: 11, category: 'landscape', title: 'Пасторальная Красота', description: 'Мирный сельский пейзаж', image: '/img/gallery/landscape-11.jpg' },
-    { id: 12, category: 'landscape', title: 'Пустынное Уединение', description: 'Бескрайний пустынный пейзаж', image: '/img/gallery/landscape-12.jpg' },
-    { id: 13, category: 'landscape', title: 'Лесной Святилище', description: 'В глубине таинственного леса', image: '/img/gallery/landscape-13.jpg' },
-    { id: 14, category: 'nature', title: 'Лепестки После Дождя', description: 'Капли росы на цветах', image: '/img/gallery/nature-flower-01.jpg' },
-    { id: 15, category: 'nature', title: 'Утренняя Тень Цветка', description: 'Утренний свет сквозь лепестки', image: '/img/gallery/nature-flower-02.jpg' },
-    { id: 16, category: 'food', title: 'Изысканный Десерт', description: 'Сладкий момент', image: '/img/gallery/food-01.jpg' },
-    { id: 17, category: 'food', title: 'Традиционная Кухня', description: 'Классический вкус', image: '/img/gallery/food-02.jpg' },
-    { id: 18, category: 'food', title: 'Креативное Блюдо', description: 'Кулинарный шедевр', image: '/img/gallery/food-03.jpg' },
-  ]
+  ru: [
+    {
+      id: 1,
+      category: 'landscape',
+      title: 'Утренний Туман в Горах',
+      description: 'Туманное утро в горах',
+      image: '/img/gallery/landscape-01.jpg',
+    },
+    {
+      id: 2,
+      category: 'landscape',
+      title: 'Прибрежный Закат',
+      description: 'Закат над океаном',
+      image: '/img/gallery/landscape-02.jpg',
+    },
+    {
+      id: 3,
+      category: 'landscape',
+      title: 'Городской Пейзаж',
+      description: 'Городская красота и спокойствие',
+      image: '/img/gallery/landscape-03.jpg',
+    },
+    {
+      id: 4,
+      category: 'landscape',
+      title: 'Звездная Галактика',
+      description: 'Бескрайнее звездное небо',
+      image: '/img/gallery/landscape-04.jpg',
+    },
+    {
+      id: 5,
+      category: 'landscape',
+      title: 'Море Облаков в Долине',
+      description: 'Катящиеся облака',
+      image: '/img/gallery/landscape-05.jpg',
+    },
+    {
+      id: 6,
+      category: 'landscape',
+      title: 'Озеро и Горы',
+      description: 'Спокойное озеро',
+      image: '/img/gallery/landscape-06.jpg',
+    },
+    {
+      id: 7,
+      category: 'landscape',
+      title: 'Снежное Плоскогорье',
+      description: 'Величественные горы',
+      image: '/img/gallery/landscape-07.jpg',
+    },
+    {
+      id: 8,
+      category: 'landscape',
+      title: 'Осенние Краски',
+      description: 'Цветная осенняя листва',
+      image: '/img/gallery/landscape-08.jpg',
+    },
+    {
+      id: 9,
+      category: 'landscape',
+      title: 'Восход на Востоке',
+      description: 'Рассвет с золотыми лучами',
+      image: '/img/gallery/landscape-09.jpg',
+    },
+    {
+      id: 10,
+      category: 'landscape',
+      title: 'Чудо Каньона',
+      description: 'Шедевр природы',
+      image: '/img/gallery/landscape-10.jpg',
+    },
+    {
+      id: 11,
+      category: 'landscape',
+      title: 'Пасторальная Красота',
+      description: 'Мирный сельский пейзаж',
+      image: '/img/gallery/landscape-11.jpg',
+    },
+    {
+      id: 12,
+      category: 'landscape',
+      title: 'Пустынное Уединение',
+      description: 'Бескрайний пустынный пейзаж',
+      image: '/img/gallery/landscape-12.jpg',
+    },
+    {
+      id: 13,
+      category: 'landscape',
+      title: 'Лесной Святилище',
+      description: 'В глубине таинственного леса',
+      image: '/img/gallery/landscape-13.jpg',
+    },
+    {
+      id: 14,
+      category: 'nature',
+      title: 'Лепестки После Дождя',
+      description: 'Капли росы на цветах',
+      image: '/img/gallery/nature-flower-01.jpg',
+    },
+    {
+      id: 15,
+      category: 'nature',
+      title: 'Утренняя Тень Цветка',
+      description: 'Утренний свет сквозь лепестки',
+      image: '/img/gallery/nature-flower-02.jpg',
+    },
+    {
+      id: 16,
+      category: 'food',
+      title: 'Изысканный Десерт',
+      description: 'Сладкий момент',
+      image: '/img/gallery/food-01.jpg',
+    },
+    {
+      id: 17,
+      category: 'food',
+      title: 'Традиционная Кухня',
+      description: 'Классический вкус',
+      image: '/img/gallery/food-02.jpg',
+    },
+    {
+      id: 18,
+      category: 'food',
+      title: 'Креативное Блюдо',
+      description: 'Кулинарный шедевр',
+      image: '/img/gallery/food-03.jpg',
+    },
+  ],
 };
 
-const categories = categoriesData[lang as Lang] || categoriesData['en-US'];
-const galleryItems = galleryItemsData[lang as Lang] || galleryItemsData['en-US'];
+const categories = categoriesData[lang as Lang] || categoriesData['en-GB'];
+const galleryItems =
+  galleryItemsData[lang as Lang] || galleryItemsData['en-GB'];
 ---
 
 <BaseLayout title={t('gallery.title')}>
@@ -162,7 +840,17 @@ const galleryItems = galleryItemsData[lang as Lang] || galleryItemsData['en-US']
       <p
         class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
       >
-        {lang === 'zh-CN' ? '探索我的摄影作品集，记录生活中的美好瞬间' : (lang === 'fr' ? 'Explorez ma collection de photographies, capturant les beaux moments de la vie' : (lang === 'ru' ? 'Исследуйте мою коллекцию фотографий, запечатлевая прекрасные моменты жизни' : 'Explore my photography portfolio, capturing beautiful moments in life'))}
+        {
+          lang === 'zh-CN'
+            ? '探索我的摄影作品集，记录生活中的美好瞬间'
+            : lang === 'zh-TW'
+              ? '探索我的攝影作品集，記錄生活中的美好瞬間'
+              : lang === 'fr'
+                ? 'Explorez ma collection de photographies, capturant les beaux moments de la vie'
+                : lang === 'ru'
+                  ? 'Исследуйте мою коллекцию фотографий, запечатлевая прекрасные моменты жизни'
+                  : 'Explore my photography portfolio, capturing beautiful moments in life'
+        }
       </p>
     </div>
   </section>
@@ -172,110 +860,216 @@ const galleryItems = galleryItemsData[lang as Lang] || galleryItemsData['en-US']
     <!-- Stats Bar -->
     <div class="flex flex-wrap justify-center gap-8 mb-12">
       <div class="text-center">
-        <div class="text-4xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent" id="total-count">0</div>
-        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">{lang === 'zh-CN' ? '总作品数' : (lang === 'fr' ? 'Total' : (lang === 'ru' ? 'Всего' : 'Total Works'))}</div>
+        <div
+          class="text-4xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent"
+          id="total-count"
+        >
+          0
+        </div>
+        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">
+          {
+            lang === 'zh-CN'
+              ? '总作品数'
+              : lang === 'zh-TW'
+                ? '總作品數'
+                : lang === 'fr'
+                  ? 'Total'
+                  : lang === 'ru'
+                    ? 'Всего'
+                    : 'Total Works'
+          }
+        </div>
       </div>
       <div class="text-center">
-        <div class="text-4xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent">{galleryItems.filter(i => i.category === 'landscape').length}</div>
-        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">{lang === 'zh-CN' ? '风景摄影' : (lang === 'fr' ? 'Paysages' : (lang === 'ru' ? 'Пейзажи' : 'Landscapes'))}</div>
+        <div
+          class="text-4xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent"
+        >
+          {galleryItems.filter((i) => i.category === 'landscape').length}
+        </div>
+        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">
+          {
+            lang === 'zh-CN'
+              ? '风景摄影'
+              : lang === 'zh-TW'
+                ? '風景攝影'
+                : lang === 'fr'
+                  ? 'Paysages'
+                  : lang === 'ru'
+                    ? 'Пейзажи'
+                    : 'Landscapes'
+          }
+        </div>
       </div>
       <div class="text-center">
-        <div class="text-4xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent">{galleryItems.filter(i => i.category === 'nature').length}</div>
-        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">{lang === 'zh-CN' ? '自然微距' : (lang === 'fr' ? 'Nature' : (lang === 'ru' ? 'Природа' : 'Nature'))}</div>
+        <div
+          class="text-4xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent"
+        >
+          {galleryItems.filter((i) => i.category === 'nature').length}
+        </div>
+        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">
+          {
+            lang === 'zh-CN'
+              ? '自然微距'
+              : lang === 'zh-TW'
+                ? '自然微距'
+                : lang === 'fr'
+                  ? 'Nature'
+                  : lang === 'ru'
+                    ? 'Природа'
+                    : 'Nature'
+          }
+        </div>
       </div>
       <div class="text-center">
-        <div class="text-4xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent">{galleryItems.filter(i => i.category === 'food').length}</div>
-        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">{lang === 'zh-CN' ? '美食摄影' : (lang === 'fr' ? 'Nourriture' : (lang === 'ru' ? 'Еда' : 'Food'))}</div>
+        <div
+          class="text-4xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent"
+        >
+          {galleryItems.filter((i) => i.category === 'food').length}
+        </div>
+        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">
+          {
+            lang === 'zh-CN'
+              ? '美食摄影'
+              : lang === 'zh-TW'
+                ? '美食攝影'
+                : lang === 'fr'
+                  ? 'Nourriture'
+                  : lang === 'ru'
+                    ? 'Еда'
+                    : 'Food'
+          }
+        </div>
       </div>
     </div>
 
     <!-- Filter Tabs -->
     <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-tabs">
-      {categories.map((cat) => (
-        <button
-          class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 filter-btn hover:scale-105 hover:shadow-lg"
-          class:list={{
-            'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg': cat.id === 'all',
-            'glass-card hover:bg-[rgb(var(--color-bg-tertiary))]': cat.id !== 'all',
-          }}
-          data-category={cat.id}
-        >
-          {cat.label}
-        </button>
-      ))}
+      {
+        categories.map((cat) => (
+          <button
+            class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 filter-btn hover:scale-105 hover:shadow-lg"
+            class:list={{
+              'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg':
+                cat.id === 'all',
+              'glass-card hover:bg-[rgb(var(--color-bg-tertiary))]':
+                cat.id !== 'all',
+            }}
+            data-filter={cat.id}
+          >
+            {cat.label}
+          </button>
+        ))
+      }
     </div>
 
-    <!-- Masonry Grid with improved layout -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
-      {galleryItems.map((item, index) => (
-        <article
-          class="gallery-item group cursor-pointer animate-fade-in"
-          data-category={item.category}
-          data-image={item.image}
-          data-title={item.title}
-          data-description={item.description}
-          style={`animation-delay: ${index * 0.05}s`}
-        >
-          <div class="glass-card overflow-hidden rounded-2xl transform transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl">
-            <div class="relative overflow-hidden aspect-[4/3] bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/20 dark:to-accent-900/20">
-              <img
-                src={item.image}
-                alt={item.title}
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div class="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 class="text-xl font-bold mb-2">{item.title}</h3>
-                  <p class="text-sm text-white/90">{item.description}</p>
-                </div>
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <!-- Category Badge -->
-              <div class="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/50 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {categories.find(c => c.id === item.category)?.label}
-              </div>
+    <!-- Gallery Grid -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      id="gallery-grid"
+    >
+      {
+        galleryItems.map((item) => (
+          <div
+            class="group relative overflow-hidden rounded-2xl shadow-lg aspect-[4/3] cursor-pointer gallery-item"
+            data-category={item.category}
+          >
+            <img
+              src={item.image}
+              alt={item.title}
+              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+              <h3 class="text-white text-xl font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                {item.title}
+              </h3>
+              <p class="text-gray-200 text-sm mt-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                {item.description}
+              </p>
             </div>
           </div>
-        </article>
-      ))}
+        ))
+      }
     </div>
   </section>
-
-  <!-- Lightbox Modal -->
-  <div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/95 backdrop-blur-sm">
-    <button id="close-lightbox" class="absolute top-6 right-6 z-50 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all hover:scale-110">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
-    <button id="prev-image" class="absolute left-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all hover:scale-110">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-      </svg>
-    </button>
-    <button id="next-image" class="absolute right-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm flex items-center justify-center text-white transition-all hover:scale-110">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-      </svg>
-    </button>
-    <div class="absolute inset-0 flex items-center justify-center p-4 md:p-8">
-      <div class="relative max-w-7xl max-h-full">
-        <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
-        <div class="mt-6 text-center text-white">
-          <h3 id="lightbox-title" class="text-2xl font-bold mb-2"></h3>
-          <p id="lightbox-description" class="text-white/80"></p>
-          <p id="lightbox-counter" class="text-sm text-white/60 mt-4"></p>
-        </div>
-      </div>
-    </div>
-  </div>
 </BaseLayout>
 
-<script src="../../scripts/gallery.ts"></script>
+<script>
+  // Gallery filtering logic
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const totalCount = document.getElementById('total-count');
+
+  // Update total count
+  if (totalCount) {
+    totalCount.textContent = galleryItems.length.toString();
+  }
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      // Update active button state
+      filterBtns.forEach((b) => {
+        b.classList.remove(
+          'bg-gradient-to-r',
+          'from-primary-500',
+          'to-accent-500',
+          'text-white',
+          'shadow-lg'
+        );
+        b.classList.add(
+          'glass-card',
+          'hover:bg-[rgb(var(--color-bg-tertiary))]'
+        );
+      });
+      btn.classList.remove(
+        'glass-card',
+        'hover:bg-[rgb(var(--color-bg-tertiary))]'
+      );
+      btn.classList.add(
+        'bg-gradient-to-r',
+        'from-primary-500',
+        'to-accent-500',
+        'text-white',
+        'shadow-lg'
+      );
+
+      const filterValue = btn.getAttribute('data-filter');
+      let visibleCount = 0;
+
+      galleryItems.forEach((item) => {
+        const itemCategory = item.getAttribute('data-category');
+        if (filterValue === 'all' || filterValue === itemCategory) {
+          (item as HTMLElement).style.display = 'block';
+          // Add animation
+          item.classList.add('animate-fade-in');
+          setTimeout(() => item.classList.remove('animate-fade-in'), 500);
+          visibleCount++;
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+
+      // Update count based on filter
+      if (totalCount) {
+        totalCount.textContent = visibleCount.toString();
+      }
+    });
+  });
+</script>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

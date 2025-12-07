@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const accessibilityData: Record<Lang, any> = {
   'zh-CN': {
@@ -44,6 +44,45 @@ const accessibilityData: Record<Lang, any> = {
     feedbackTitle: '反馈与联系',
     feedbackDesc:
       '如果您在使用本网站时遇到任何无障碍问题,或者对我们的无障碍功能有任何建议,请联系我们。我们将尽力解决您的问题。',
+  },
+  'zh-TW': {
+    title: '無障礙聲明',
+    back: '返回首頁',
+    headerTitle: '無障礙聲明',
+    headerDesc: '致力於為所有用戶提供可訪問的Web體驗',
+    commitmentTitle: '我們的承諾',
+    commitmentDesc:
+      'alexander.xin 致力於確保我們的網站對所有人都是無障礙的,包括殘障人士。我們不斷努力改進我們網站的可訪問性和可用性,並遵循相關的無障礙標準和最佳實踐。',
+    featuresTitle: '無障礙功能',
+    featuresDesc: '我們的網站包含以下無障礙功能:',
+    features: [
+      {
+        icon: '⌨️',
+        title: '鍵盤導航',
+        desc: '所有功能都可以通過鍵盤訪問,無需使用滑鼠',
+      },
+      {
+        icon: '👁️',
+        title: '高對比度',
+        desc: '提供高對比度模式,確保文本清晰易讀',
+      },
+      {
+        icon: '📱',
+        title: '響應式設計',
+        desc: '適配各種螢幕尺寸和設備,支持縮放',
+      },
+      {
+        icon: '🗣️',
+        title: '螢幕閱讀器',
+        desc: '優化了ARIA標籤,支持主流螢幕閱讀器',
+      },
+    ],
+    standardsTitle: '一致性標準',
+    standardsDesc:
+      '本網站努力符合萬維網聯盟(W3C)發布的Web內容無障礙指南(WCAG) 2.1 AA級標準。',
+    feedbackTitle: '反饋與聯繫',
+    feedbackDesc:
+      '如果您在使用本網站時遇到任何無障礙問題,或者對我們的無障礙功能有任何建議,請聯繫我們。我們將盡力解決您的問題。',
   },
   'en-US': {
     title: 'Accessibility Statement',

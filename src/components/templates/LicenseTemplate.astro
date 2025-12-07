@@ -3,14 +3,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const licenseData: Record<Lang, any> = {
   'zh-CN': {
     title: '许可证',
     description: '内容使用许可说明',
     back: '返回首页',
-    headerTitle: '📜 内容许可证',
+    headerTitle: '内容许可证',
     headerDesc: '了解如何使用本网站的内容',
     contentTitle: '内容许可',
     contentP1: '本网站的内容采用',
@@ -37,6 +37,38 @@ const licenseData: Record<Lang, any> = {
     disclaimerTitle: '免责声明',
     disclaimer:
       '本网站提供的所有代码示例和技术文章仅供参考。作者不对因使用这些内容而导致的任何直接或间接损失负责。',
+  },
+  'zh-TW': {
+    title: '許可證',
+    description: '內容使用許可說明',
+    back: '返回首頁',
+    headerTitle: '內容許可證',
+    headerDesc: '了解如何使用本網站的內容',
+    contentTitle: '內容許可',
+    contentP1: '本網站的內容採用',
+    licenseName:
+      '知識共享署名-非商業性使用-相同方式共享 4.0 國際許可協議 (CC BY-NC-SA 4.0)',
+    contentP2: '進行許可。',
+    rightsTitle: '您有權：',
+    rights: [
+      { title: '共享', desc: '在任何媒介以任何形式複製、發行本作品' },
+      { title: '演繹', desc: '修改、轉換或以本作品為基礎進行創作' },
+    ],
+    conditionsTitle: '只要您遵守以下許可條款：',
+    conditions: [
+      {
+        title: '署名',
+        desc: '您必須給出適當的署名，提供指向本許可協議的連結，同時標明是否（對原始作品）作了修改。',
+      },
+      { title: '非商業性使用', desc: '您不得將本作品用於商業目的。' },
+      {
+        title: '相同方式共享',
+        desc: '如果您再混合、轉換或者基於本作品進行創作，您必須基於與原先許可協議相同的許可協議分發您貢獻的作品。',
+      },
+    ],
+    disclaimerTitle: '免責聲明',
+    disclaimer:
+      '本網站提供的所有代碼示例和技術文章僅供參考。作者不對因使用這些內容而導致的任何直接或間接損失負責。',
   },
   'en-US': {
     title: 'License',
@@ -198,16 +230,18 @@ const licenseData: Record<Lang, any> = {
 const content = licenseData[lang as Lang] || licenseData['en-US'];
 ---
 
-<BaseLayout title={`${content.title} - Alexander Carter`} showFooter={false}>
-  <section class="pt-32 pb-16 min-h-screen">
-    <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
-      <!-- Back Button -->
-      <a
-        href={`/${lang === 'zh-CN' ? '' : lang}`}
-        class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
+<BaseLayout
+  title={`${content.title} | Alexander James Carter`}
+  description={content.description}
+>
+  <div class="container mx-auto px-4 py-12 lg:py-20 max-w-5xl">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div
+        class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-500/20 to-accent-500/20 text-primary-500 mb-6 shadow-sm border border-primary-100 dark:border-primary-900/30"
       >
         <svg
-          class="w-5 h-5"
+          class="w-10 h-10"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -215,117 +249,217 @@ const content = licenseData[lang as Lang] || licenseData['en-US'];
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            stroke-width="1.5"
+            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+          ></path>
         </svg>
-        <span>{content.back}</span>
-      </a>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+        {content.headerTitle}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        {content.headerDesc}
+      </p>
+    </div>
 
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <div
-          class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6"
-        >
-          ⚖️
-        </div>
-        <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">
-          {content.headerTitle}
-        </h1>
-        <p class="text-lg text-[rgb(var(--color-text-secondary))]">
-          {content.headerDesc}
-        </p>
+    <!-- License Badge Card -->
+    <div
+      class="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-12 shadow-xl shadow-gray-100/50 dark:shadow-none border border-gray-100 dark:border-gray-700 mb-12 text-center relative overflow-hidden group"
+    >
+      <div
+        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-500 to-accent-500"
+      >
       </div>
 
-      <!-- Content -->
-      <div class="glass-card p-8 md:p-12 space-y-6">
-        <div>
-          <h2
-            class="text-2xl font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+      <div class="relative z-10">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
+          {content.contentTitle}
+        </h2>
+        <p
+          class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
+        >
+          {content.contentP1}
+          <a
+            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-primary-500 hover:text-primary-600 font-bold underline decoration-2 underline-offset-4 transition-colors"
           >
-            {content.contentTitle}
-          </h2>
-          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-            {content.contentP1}
-            <a
-              href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans"
-              target="_blank"
-              class="text-primary-500 hover:text-primary-600 font-semibold"
-            >
-              {content.licenseName}
-            </a>
-            {content.contentP2}
-          </p>
-        </div>
+            {content.licenseName}
+          </a>
+          {content.contentP2}
+        </p>
 
-        <!-- CC License Badge -->
-        <div class="flex justify-center my-8">
+        <!-- CC Icons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-4">
+          <!-- CC -->
           <div
-            class="p-6 bg-[rgb(var(--color-bg-secondary))] rounded-lg inline-flex flex-col items-center gap-4"
+            class="flex flex-col items-center gap-2"
+            title="Creative Commons"
           >
-            <div class="flex gap-2 text-4xl">
-              <i class="fab fa-creative-commons"></i>
-              <i class="fab fa-creative-commons-by"></i>
-              <i class="fab fa-creative-commons-nc"></i>
-              <i class="fab fa-creative-commons-sa"></i>
-            </div>
-            <span
-              class="font-mono text-sm text-[rgb(var(--color-text-secondary))]"
-              >CC BY-NC-SA 4.0</span
+            <svg
+              class="w-12 h-12 text-gray-800 dark:text-gray-200"
+              viewBox="0 0 24 24"
+              fill="currentColor"
             >
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zm-5.455-9.818c0-2.114 1.32-3.938 3.163-4.668.26-.103.545.09.545.37v1.08c0 .18-.11.34-.277.41-1.03.43-1.75 1.45-1.75 2.627 0 1.178.72 2.197 1.75 2.628.167.07.277.23.277.41v1.08c0 .28-.285.473-.545.37-1.843-.73-3.163-2.554-3.163-4.668zm10.91 0c0-2.114-1.32-3.938-3.164-4.668-.26-.103-.545.09-.545.37v1.08c0 .18.11.34.276.41 1.03.43 1.75 1.45 1.75 2.627 0 1.178-.72 2.197-1.75 2.628-.166.07-.276.23-.276.41v1.08c0 .28.285.473.545.37 1.843-.73 3.164-2.554 3.164-4.668z"
+              ></path>
+            </svg>
+            <span class="text-xs font-bold text-gray-500">CC</span>
+          </div>
+          <!-- BY -->
+          <div class="flex flex-col items-center gap-2" title="Attribution">
+            <svg
+              class="w-12 h-12 text-gray-800 dark:text-gray-200"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zm-2.182-9.273c0 .904.733 1.637 1.637 1.637.904 0 1.636-.733 1.636-1.637 0-.904-.732-1.636-1.636-1.636-.904 0-1.637.732-1.637 1.636zm4.91 5.455v-1.637c0-1.205-.977-2.182-2.182-2.182h-1.09v-1.09h1.09c.3 0 .546-.246.546-.546v-1.09c0-.3-.246-.546-.546-.546h-1.09c-.3 0-.546.246-.546.546v1.09c0 .3.246.546.546.546h1.09v1.09h-1.09c-1.205 0-2.182.977-2.182 2.182v1.637c0 .3.246.545.546.545h4.364c.3 0 .545-.245.545-.545z"
+              ></path>
+            </svg>
+            <span class="text-xs font-bold text-gray-500">BY</span>
+          </div>
+          <!-- NC -->
+          <div class="flex flex-col items-center gap-2" title="NonCommercial">
+            <svg
+              class="w-12 h-12 text-gray-800 dark:text-gray-200"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zm1.32-14.66c.26-.102.545.09.545.37v1.08c0 .18-.11.34-.277.41-1.03.43-1.75 1.45-1.75 2.627 0 1.178.72 2.197 1.75 2.628.167.07.277.23.277.41v1.08c0 .28-.285.473-.545.37-1.843-.73-3.163-2.554-3.163-4.668 0-2.114 1.32-3.938 3.163-4.668zm-2.64 9.336c-.26.103-.545-.09-.545-.37v-1.08c0-.18.11-.34.277-.41 1.03-.43 1.75-1.45 1.75-2.627 0-1.178-.72-2.197-1.75-2.628-.167-.07-.277-.23-.277-.41v-1.08c0-.28.285-.473.545-.37 1.843.73 3.163 2.554 3.163 4.668 0 2.114-1.32 3.938-3.163 4.668z"
+              ></path>
+            </svg>
+            <span class="text-xs font-bold text-gray-500">NC</span>
+          </div>
+          <!-- SA -->
+          <div class="flex flex-col items-center gap-2" title="ShareAlike">
+            <svg
+              class="w-12 h-12 text-gray-800 dark:text-gray-200"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zm-5.455-9.818c0-3.01 2.445-5.455 5.455-5.455 3.01 0 5.455 2.445 5.455 5.455 0 3.01-2.445 5.455-5.455 5.455-3.01 0-5.455-2.445-5.455-5.455zm8.727 0c0-1.806-1.466-3.273-3.272-3.273-1.806 0-3.273 1.467-3.273 3.273 0 1.806 1.467 3.273 3.273 3.273 1.806 0 3.272-1.467 3.272-3.273zm-4.91 0l1.637-1.636v1.09h2.182v1.092h-2.182v1.09l-1.636-1.636z"
+              ></path>
+            </svg>
+            <span class="text-xs font-bold text-gray-500">SA</span>
           </div>
         </div>
 
-        <div>
-          <h3
-            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
-          >
-            {content.rightsTitle}
-          </h3>
-          <ul class="list-disc list-inside space-y-2 ml-4">
-            {
-              content.rights.map((item: any) => (
-                <li class="text-[rgb(var(--color-text-secondary))]">
-                  <strong class="text-[rgb(var(--color-text-primary))]">
-                    {item.title}
-                  </strong>
-                  : {item.desc}
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div>
-          <h3
-            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
-          >
-            {content.conditionsTitle}
-          </h3>
-          <ul class="list-disc list-inside space-y-2 ml-4">
-            {
-              content.conditions.map((item: any) => (
-                <li class="text-[rgb(var(--color-text-secondary))]">
-                  <strong class="text-[rgb(var(--color-text-primary))]">
-                    {item.title}
-                  </strong>
-                  : {item.desc}
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div
-          class="mt-8 p-6 bg-primary-500/10 border border-primary-500/20 rounded-lg"
-        >
-          <h3 class="text-xl font-bold text-primary-500 mb-3">
-            {content.disclaimerTitle}
-          </h3>
-          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-            {content.disclaimer}
-          </p>
-        </div>
+        <div class="text-sm text-gray-500 font-mono">CC BY-NC-SA 4.0</div>
       </div>
     </div>
-  </section>
+
+    <!-- Rights & Conditions Grid -->
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <!-- Rights -->
+      <div
+        class="bg-green-50 dark:bg-green-900/10 rounded-2xl p-8 border border-green-100 dark:border-green-800/30"
+      >
+        <h3
+          class="text-xl font-bold mb-6 flex items-center gap-3 text-green-700 dark:text-green-400"
+        >
+          <span
+            class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center text-sm"
+            >✓</span
+          >
+          {content.rightsTitle}
+        </h3>
+        <ul class="space-y-4">
+          {
+            content.rights.map((item: any) => (
+              <li class="flex gap-3">
+                <svg
+                  class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                <div>
+                  <strong class="block text-gray-800 dark:text-gray-200 mb-1">
+                    {item.title}
+                  </strong>
+                  <span class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                    {item.desc}
+                  </span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Conditions -->
+      <div
+        class="bg-orange-50 dark:bg-orange-900/10 rounded-2xl p-8 border border-orange-100 dark:border-orange-800/30"
+      >
+        <h3
+          class="text-xl font-bold mb-6 flex items-center gap-3 text-orange-700 dark:text-orange-400"
+        >
+          <span
+            class="w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-900/50 flex items-center justify-center text-sm"
+            >!</span
+          >
+          {content.conditionsTitle}
+        </h3>
+        <ul class="space-y-4">
+          {
+            content.conditions.map((item: any) => (
+              <li class="flex gap-3">
+                <svg
+                  class="w-6 h-6 text-orange-500 flex-shrink-0 mt-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  />
+                </svg>
+                <div>
+                  <strong class="block text-gray-800 dark:text-gray-200 mb-1">
+                    {item.title}
+                  </strong>
+                  <span class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                    {item.desc}
+                  </span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div
+      class="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 text-center"
+    >
+      <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">
+        {content.disclaimerTitle}
+      </h3>
+      <p class="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        {content.disclaimer}
+      </p>
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500;
+  }
+</style>

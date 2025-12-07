@@ -12,7 +12,7 @@ export default defineConfig({
         defaultLocale: 'zh-CN',
         locales: {
           'zh-CN': 'zh-CN',
-          'en-US': 'en-US',
+          'zh-TW': 'zh-TW',
           'en-GB': 'en-GB',
           'fr': 'fr',
           'ru': 'ru',
@@ -22,7 +22,7 @@ export default defineConfig({
   ],
   i18n: {
     defaultLocale: 'zh-CN',
-    locales: ['zh-CN', 'en-US', 'en-GB', 'fr', 'ru'],
+    locales: ['zh-CN', 'zh-TW', 'en-GB', 'fr', 'ru'],
     routing: {
       prefixDefaultLocale: false,
       redirectToDefaultLocale: true,

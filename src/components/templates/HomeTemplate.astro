@@ -10,7 +10,7 @@ import PoemHistory from '../PoemHistory.astro';
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 // Data for different languages
 const typewriterData: Record<Lang, string[]> = {
@@ -20,6 +20,13 @@ const typewriterData: Record<Lang, string[]> = {
     '设计探索者 🎨',
     '音乐聆听者 🎵',
     '终身学习者 📚',
+  ],
+  'zh-TW': [
+    '攝影愛好者 📸',
+    '代碼創作者 💻',
+    '設計探索者 🎨',
+    '音樂聆聽者 🎵',
+    '終身學習者 📚',
   ],
   'en-US': [
     'Photography Enthusiast 📸',
@@ -57,6 +64,12 @@ const statsData: Record<Lang, any[]> = {
     { end: 5, suffix: '+', label: '专业领域', icon: '🎯', duration: 2000 },
     { end: 100, suffix: '%', label: '用心投入', icon: '❤️', duration: 2000 },
     { end: 365, suffix: '天', label: '持续创作', icon: '⏰', duration: 2000 },
+  ],
+  'zh-TW': [
+    { end: 1200, suffix: '+', label: '創作作品', icon: '📸', duration: 2000 },
+    { end: 5, suffix: '+', label: '專業領域', icon: '🎯', duration: 2000 },
+    { end: 100, suffix: '%', label: '用心投入', icon: '❤️', duration: 2000 },
+    { end: 365, suffix: '天', label: '持續創作', icon: '⏰', duration: 2000 },
   ],
   'en-US': [
     {
@@ -150,6 +163,28 @@ const featuredWorksData: Record<Lang, any> = {
       },
       {
         title: '精致甜点',
+        category: '美食',
+        image: '/img/gallery/food-01.jpg',
+      },
+    ],
+  },
+  'zh-TW': {
+    title: '精選作品',
+    subtitle: '探索我的最新創作',
+    viewAll: '查看全部',
+    items: [
+      {
+        title: '山間晨霧',
+        category: '風景',
+        image: '/img/gallery/landscape-01.jpg',
+      },
+      {
+        title: '雨後花瓣',
+        category: '自然',
+        image: '/img/gallery/nature-flower-01.jpg',
+      },
+      {
+        title: '精緻甜點',
         category: '美食',
         image: '/img/gallery/food-01.jpg',
       },
@@ -254,6 +289,14 @@ const introData: Record<Lang, any> = {
       '欢迎驻足，和我一起在这些影像与文字之间，发现平凡里的温柔。',
     ],
   },
+  'zh-TW': {
+    lead: '在光影與代碼之間，我尋找那些能觸動心弦的瞬間。',
+    paragraphs: [
+      '每一張照片都是一段靜默的旅程，像是從流逝中截取的呼吸。',
+      '我用鏡頭記錄光線的溫度；用代碼整理思緒的秩序。願這些碎片，能在你的眼裡匯成一條小小的河流。',
+      '歡迎駐足，和我一起在這些影像與文字之間，發現平凡裡的溫柔。',
+    ],
+  },
   'en-US': {
     lead: 'Between light and code, I search for moments that touch the heart.',
     paragraphs: [
@@ -291,6 +334,10 @@ const introData: Record<Lang, any> = {
 const quoteData: Record<Lang, any> = {
   'zh-CN': {
     text: '设计不仅仅是外观和感觉。设计就是它是如何工作的。',
+    author: 'Steve Jobs',
+  },
+  'zh-TW': {
+    text: '設計不僅僅是外觀和感覺。設計就是它是如何工作的。',
     author: 'Steve Jobs',
   },
   'en-US': {

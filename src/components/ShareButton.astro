@@ -8,33 +8,50 @@ const translations = {
     share: '分享',
     copied: '已复制链接',
     shareTo: '分享到',
+    copyLink: '复制链接',
+    nativeShare: '系统分享',
+  },
+  'zh-TW': {
+    share: '分享',
+    copied: '已複製連結',
+    shareTo: '分享到',
+    copyLink: '複製連結',
+    nativeShare: '系統分享',
   },
   'en-US': {
     share: 'Share',
     copied: 'Link copied',
     shareTo: 'Share to',
+    copyLink: 'Copy Link',
+    nativeShare: 'Native Share',
   },
   'en-GB': {
     share: 'Share',
     copied: 'Link copied',
     shareTo: 'Share to',
+    copyLink: 'Copy Link',
+    nativeShare: 'Native Share',
   },
   fr: {
     share: 'Partager',
     copied: 'Lien copié',
     shareTo: 'Partager sur',
+    copyLink: 'Copier le lien',
+    nativeShare: 'Partage natif',
   },
   ru: {
     share: 'Поделиться',
     copied: 'Ссылка скопирована',
     shareTo: 'Поделиться в',
+    copyLink: 'Скопировать ссылку',
+    nativeShare: 'Системный шэринг',
   },
 };
 
 const t = translations[lang] || translations['zh-CN'];
 ---
 
-<div id="share-button" class="fixed bottom-32 right-8 z-40">
+<div id="share-button" class="fixed z-40">
   <button
     aria-label={t.share}
     class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center group"
@@ -58,7 +75,7 @@ const t = translations[lang] || translations['zh-CN'];
   <!-- Share Menu -->
   <div
     id="share-menu"
-    class="hidden absolute bottom-full right-0 mb-3 glass-card rounded-xl p-3 min-w-[200px] shadow-xl"
+    class="hidden absolute bottom-full left-0 mb-3 glass-card rounded-xl p-3 min-w-[200px] w-max max-w-[min(320px,_calc(100vw_-_2.5rem))] max-h-[60vh] overflow-y-auto shadow-xl origin-bottom-left"
   >
     <div class="space-y-2">
       <button
@@ -66,7 +83,7 @@ const t = translations[lang] || translations['zh-CN'];
         class="w-full text-left px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3"
       >
         <span>🔗</span>
-        <span>{lang === 'zh-CN' ? '复制链接' : 'Copy Link'}</span>
+        <span>{t.copyLink}</span>
       </button>
       <a
         id="instagram-share"
@@ -94,13 +111,40 @@ const t = translations[lang] || translations['zh-CN'];
         class="w-full text-left px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3 hidden"
       >
         <span>📱</span>
-        <span>{lang === 'zh-CN' ? '系统分享' : 'Native Share'}</span>
+        <span>{t.nativeShare}</span>
       </button>
     </div>
   </div>
 </div>
 
-<script>
+<style>
+  /* Share sits above safe-area and leaves room for BackToTop */
+  #share-button {
+    left: 1rem;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
+  }
+
+  @media (min-width: 768px) {
+    #share-button {
+      left: 1.5rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 2rem);
+    }
+  }
+
+  /* Keep menu within viewport on very narrow screens */
+  @media (max-width: 480px) {
+    #share-menu {
+      max-width: calc(100vw - 1.5rem);
+      left: 0;
+      right: auto;
+    }
+  }
+</style>
+
+<script define:vars={{ lang, translations }} is:inline>
+  const messages = translations[lang] || translations['zh-CN'];
+  const fallbackMessages = translations['zh-CN'];
+
   function toggleShareMenu() {
     const menu = document.getElementById('share-menu');
     if (menu) {
@@ -108,44 +152,52 @@ const t = translations[lang] || translations['zh-CN'];
     }
   }
 
-  function copyLink() {
+  function showToast(text) {
+    const toast = document.createElement('div');
+    toast.className =
+      'fixed bottom-24 left-4 md:left-6 bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-primary))] px-4 py-2 rounded-lg shadow-lg z-50';
+    toast.textContent = text;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.remove();
+    }, 2000);
+  }
+
+  async function copyLink() {
     const url = window.location.href;
-    const copiedText =
-      document.documentElement.lang === 'zh-CN' ? '已复制链接' : 'Link copied';
-    navigator.clipboard.writeText(url).then(() => {
-      // Show toast notification
-      const toast = document.createElement('div');
-      toast.className =
-        'fixed bottom-20 right-8 bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-primary))] px-4 py-2 rounded-lg shadow-lg z-50';
-      toast.textContent = copiedText;
-      document.body.appendChild(toast);
-      setTimeout(() => {
-        toast.remove();
-      }, 2000);
-      toggleShareMenu();
-    });
+    const copiedText = messages.copied || fallbackMessages.copied;
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(url);
+        showToast(copiedText);
+      } else {
+        throw new Error('Clipboard API not available');
+      }
+    } catch (err) {
+      // Fallback: prompt user to copy manually
+      const promptText =
+        messages.copyLink || fallbackMessages.copyLink || 'Copy Link';
+      window.prompt(promptText, url);
+      showToast(copiedText);
+    }
+    toggleShareMenu();
   }
 
   // Update share links on page load
   function updateShareLinks() {
-    const instagramShare = document.getElementById(
-      'instagram-share'
-    ) as HTMLAnchorElement;
-    const facebookShare = document.getElementById(
-      'facebook-share'
-    ) as HTMLAnchorElement;
+    const instagramShare = document.getElementById('instagram-share');
+    const facebookShare = document.getElementById('facebook-share');
     const nativeShareBtn = document.getElementById('native-share-btn');
 
     if (typeof window !== 'undefined') {
       const url = encodeURIComponent(window.location.href);
-      // const title = encodeURIComponent(document.title);
 
       if (instagramShare) {
         // Instagram doesn't support direct URL sharing, so link to Instagram
         instagramShare.href = `https://www.instagram.com`;
         instagramShare.onclick = (e) => {
           e.preventDefault();
-          updateShareLinks();
           window.open(instagramShare.href, '_blank');
         };
       }
@@ -153,11 +205,10 @@ const t = translations[lang] || translations['zh-CN'];
         facebookShare.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
         facebookShare.onclick = (e) => {
           e.preventDefault();
-          updateShareLinks();
           window.open(facebookShare.href, '_blank');
         };
       }
-      if (nativeShareBtn && (navigator as any).share) {
+      if (nativeShareBtn && 'share' in navigator) {
         nativeShareBtn.classList.remove('hidden');
       }
     }
@@ -181,11 +232,13 @@ const t = translations[lang] || translations['zh-CN'];
   document.addEventListener('click', (e) => {
     const shareButton = document.getElementById('share-button');
     const shareMenu = document.getElementById('share-menu');
+    const target = e.target;
+    if (!target || !(target instanceof Node)) return;
     if (
       shareButton &&
       shareMenu &&
-      !shareButton.contains(e.target as Node) &&
-      !shareMenu.contains(e.target as Node)
+      !shareButton.contains(target) &&
+      !shareMenu.contains(target)
     ) {
       shareMenu.classList.add('hidden');
     }
@@ -200,8 +253,8 @@ const t = translations[lang] || translations['zh-CN'];
 
   // Make functions global
   if (typeof window !== 'undefined') {
-    (window as any).toggleShareMenu = toggleShareMenu;
-    (window as any).copyLink = copyLink;
-    (window as any).nativeShare = nativeShare;
+    window['toggleShareMenu'] = toggleShareMenu;
+    window['copyLink'] = copyLink;
+    window['nativeShare'] = nativeShare;
   }
 </script>

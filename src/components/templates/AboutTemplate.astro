@@ -5,7 +5,7 @@ import { useTranslations } from '../../i18n/ui';
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const skillsData: Record<Lang, any[]> = {
   'zh-CN': [
@@ -17,6 +17,16 @@ const skillsData: Record<Lang, any[]> = {
     { name: 'MATLAB', level: 80, icon: '📊', category: '工具' },
     { name: '摄影', level: 88, icon: '📷', category: '创意' },
     { name: 'UI/UX设计', level: 75, icon: '🎨', category: '创意' },
+  ],
+  'zh-TW': [
+    { name: 'C/C++', level: 95, icon: '⚙️', category: '程式設計' },
+    { name: 'Python', level: 90, icon: '🐍', category: '程式設計' },
+    { name: 'Java', level: 70, icon: '☕', category: '程式設計' },
+    { name: 'HTML/CSS/JS', level: 85, icon: '🌐', category: 'Web開發' },
+    { name: 'Verilog', level: 80, icon: '🔌', category: '硬體' },
+    { name: 'MATLAB', level: 80, icon: '📊', category: '工具' },
+    { name: '攝影', level: 88, icon: '📷', category: '創意' },
+    { name: 'UI/UX設計', level: 75, icon: '🎨', category: '創意' },
   ],
   'en-US': [
     { name: 'C/C++', level: 95, icon: '⚙️', category: 'Programming' },
@@ -86,6 +96,28 @@ const educationData: Record<Lang, any[]> = {
         '打下坚实的理科基础，培养了对科技和创意的兴趣，为后续学习奠定基础。',
       icon: '📚',
       highlights: ['理科学习', '综合发展', '兴趣培养'],
+    },
+  ],
+  'zh-TW': [
+    {
+      year: '2023 - 至今',
+      title: '本科在讀',
+      institution: '重點大學',
+      degree: '電子資訊相關專業',
+      description:
+        '學習電子資訊、計算機科學相關知識，培養工程實踐能力，探索技術與藝術的結合。',
+      icon: '🎓',
+      highlights: ['專業學習', '實踐項目', '技能提升'],
+    },
+    {
+      year: '2017 - 2023',
+      title: '中學教育',
+      institution: '重點中學',
+      degree: '高中畢業',
+      description:
+        '打下堅實的理科基礎，培養了對科技和創意的興趣，為後續學習奠定基礎。',
+      icon: '📚',
+      highlights: ['理科學習', '綜合發展', '興趣培養'],
     },
   ],
   'en-US': [
@@ -219,6 +251,14 @@ const interestsData: Record<Lang, any[]> = {
     { name: '开源贡献', icon: '💻', description: '参与开源项目' },
     { name: '创意设计', icon: '🎨', description: 'UI/UX、平面设计' },
   ],
+  'zh-TW': [
+    { name: '攝影創作', icon: '📸', description: '風景、人像、美食攝影' },
+    { name: '閱讀寫作', icon: '📖', description: '技術部落格、文學作品' },
+    { name: '音樂欣賞', icon: '🎵', description: '古典音樂、鋼琴曲' },
+    { name: '戶外運動', icon: '🏃', description: '徒步、騎行、探索' },
+    { name: '開源貢獻', icon: '💻', description: '參與開源項目' },
+    { name: '創意設計', icon: '🎨', description: 'UI/UX、平面設計' },
+  ],
   'en-US': [
     {
       name: 'Photography',
@@ -342,6 +382,11 @@ const languagesData: Record<Lang, any[]> = {
     { name: '汉语', level: 100, proficiency: '母语' },
     { name: '英语', level: 85, proficiency: '流利' },
     { name: '意大利语', level: 30, proficiency: '初级学习中' },
+  ],
+  'zh-TW': [
+    { name: '漢語', level: 100, proficiency: '母語' },
+    { name: '英語', level: 85, proficiency: '流利' },
+    { name: '義大利語', level: 30, proficiency: '初級學習中' },
   ],
   'en-US': [
     { name: 'Chinese', level: 100, proficiency: 'Native' },

@@ -14,6 +14,15 @@ const translations = {
     back: '返回上一页',
     tip: '小提示: 也许这个页面正在与宇宙中的某个平行世界相连... 🌌',
   },
+  'zh-TW': {
+    title: '頁面未找到',
+    message:
+      '抱歉,您訪問的頁面似乎不存在了。可能是鏈接錯誤,或者頁面已經被移動。',
+    suggestions: '您可以嘗試:',
+    home: '返回首頁',
+    back: '返回上一頁',
+    tip: '小提示: 也許這個頁面正在與宇宙中的某個平行世界相連... 🌌',
+  },
   'en-US': {
     title: 'Page Not Found',
     message:
@@ -112,7 +121,9 @@ const t404 = translations[lang] || translations['zh-CN'];
             {
               lang === 'zh-CN'
                 ? '🎮 小游戏：找到隐藏的数字'
-                : '🎮 Mini Game: Find the Hidden Number'
+                : lang === 'zh-TW'
+                  ? '🎮 小遊戲：找到隱藏的數字'
+                  : '🎮 Mini Game: Find the Hidden Number'
             }
           </h3>
           <div id="number-game" class="space-y-4">
@@ -132,12 +143,20 @@ const t404 = translations[lang] || translations['zh-CN'];
               {
                 lang === 'zh-CN'
                   ? '点击方块找到数字 404！'
-                  : 'Click the squares to find the number 404!'
+                  : lang === 'zh-TW'
+                    ? '點擊方塊找到數字 404！'
+                    : 'Click the squares to find the number 404!'
               }
             </p>
             <div id="game-result" class="hidden">
               <p class="text-green-500 font-bold text-lg">
-                {lang === 'zh-CN' ? '🎉 找到了！' : '🎉 Found it!'}
+                {
+                  lang === 'zh-CN'
+                    ? '🎉 找到了！'
+                    : lang === 'zh-TW'
+                      ? '🎉 找到了！'
+                      : '🎉 Found it!'
+                }
               </p>
             </div>
           </div>
@@ -156,13 +175,21 @@ const t404 = translations[lang] || translations['zh-CN'];
               >
               <div>
                 <div class="font-semibold mb-1">
-                  {lang === 'zh-CN' ? '返回首页' : 'Go Home'}
+                  {
+                    lang === 'zh-CN'
+                      ? '返回首页'
+                      : lang === 'zh-TW'
+                        ? '返回首頁'
+                        : 'Go Home'
+                  }
                 </div>
                 <div class="text-sm text-[rgb(var(--color-text-secondary))]">
                   {
                     lang === 'zh-CN'
                       ? '从主页重新开始浏览'
-                      : 'Start browsing from the homepage'
+                      : lang === 'zh-TW'
+                        ? '從主頁重新開始瀏覽'
+                        : 'Start browsing from the homepage'
                   }
                 </div>
               </div>
@@ -177,13 +204,21 @@ const t404 = translations[lang] || translations['zh-CN'];
               >
               <div>
                 <div class="font-semibold mb-1">
-                  {lang === 'zh-CN' ? '浏览作品集' : 'Browse Gallery'}
+                  {
+                    lang === 'zh-CN'
+                      ? '浏览作品集'
+                      : lang === 'zh-TW'
+                        ? '瀏覽作品集'
+                        : 'Browse Gallery'
+                  }
                 </div>
                 <div class="text-sm text-[rgb(var(--color-text-secondary))]">
                   {
                     lang === 'zh-CN'
                       ? '查看摄影作品和项目'
-                      : 'View photography and projects'
+                      : lang === 'zh-TW'
+                        ? '查看攝影作品和項目'
+                        : 'View photography and projects'
                   }
                 </div>
               </div>
@@ -198,10 +233,22 @@ const t404 = translations[lang] || translations['zh-CN'];
               >
               <div>
                 <div class="font-semibold mb-1">
-                  {lang === 'zh-CN' ? '了解更多' : 'Learn More'}
+                  {
+                    lang === 'zh-CN'
+                      ? '了解更多'
+                      : lang === 'zh-TW'
+                        ? '了解更多'
+                        : 'Learn More'
+                  }
                 </div>
                 <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                  {lang === 'zh-CN' ? '访问关于页面' : 'Visit the about page'}
+                  {
+                    lang === 'zh-CN'
+                      ? '访问关于页面'
+                      : lang === 'zh-TW'
+                        ? '訪問關於頁面'
+                        : 'Visit the about page'
+                  }
                 </div>
               </div>
             </a>
@@ -215,13 +262,21 @@ const t404 = translations[lang] || translations['zh-CN'];
               >
               <div>
                 <div class="font-semibold mb-1">
-                  {lang === 'zh-CN' ? '联系我们' : 'Contact Us'}
+                  {
+                    lang === 'zh-CN'
+                      ? '联系我们'
+                      : lang === 'zh-TW'
+                        ? '聯繫我們'
+                        : 'Contact Us'
+                  }
                 </div>
                 <div class="text-sm text-[rgb(var(--color-text-secondary))]">
                   {
                     lang === 'zh-CN'
                       ? '报告错误或寻求帮助'
-                      : 'Report an error or get help'
+                      : lang === 'zh-TW'
+                        ? '報告錯誤或尋求幫助'
+                        : 'Report an error or get help'
                   }
                 </div>
               </div>

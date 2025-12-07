@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const termsData: Record<Lang, any> = {
   'zh-CN': {
@@ -44,6 +44,47 @@ const termsData: Record<Lang, any> = {
         title: '5. 条款修改',
         content:
           '作者保留随时修改这些条款的权利。修改后的条款将在发布时生效。继续使用本网站即表示您接受修改后的条款。',
+      },
+    ],
+  },
+  'zh-TW': {
+    title: '服務條款',
+    back: '返回首頁',
+    headerTitle: '服務條款',
+    lastUpdated: '最後更新: 2025年1月',
+    sections: [
+      {
+        title: '1. 條款接受',
+        content:
+          '歡迎訪問 alexander.xin。通過訪問和使用本網站,您同意遵守以下服務條款。如果您不同意這些條款,請不要使用本網站。',
+      },
+      {
+        title: '2. 網站用途',
+        content: '本網站是一個個人作品展示平台,用於:',
+        list: [
+          '展示攝影作品和創意項目',
+          '分享技術知識和經驗',
+          '提供個人信息和聯繫方式',
+        ],
+      },
+      {
+        title: '3. 用戶行為',
+        content: '使用本網站時,您同意:',
+        list: [
+          '不進行任何破壞網站安全或運行的行為',
+          '不濫用網站資源或進行惡意攻擊',
+          '尊重知識產權和他人權利',
+        ],
+      },
+      {
+        title: '4. 免責聲明',
+        content:
+          '本網站按"原樣"提供。作者不對網站的可用性、準確性或完整性做出任何保證。使用本網站的風險由您自行承擔。',
+      },
+      {
+        title: '5. 條款修改',
+        content:
+          '作者保留隨時修改這些條款的權利。修改後的條款將在發布時生效。繼續使用本網站即表示您接受修改後的條款。',
       },
     ],
   },
@@ -215,7 +256,7 @@ const termsData: Record<Lang, any> = {
   },
 };
 
-const content = termsData[lang as Lang] || termsData['en-US'];
+const content = termsData[lang as Lang] || termsData['en-GB'];
 ---
 
 <BaseLayout title={`${content.title} - Alexander Carter`} showFooter={false}>

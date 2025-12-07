@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const privacyData: Record<Lang, any> = {
   'zh-CN': {
@@ -50,6 +50,53 @@ const privacyData: Record<Lang, any> = {
       {
         title: '4. 联系方式',
         content: '如果您对本隐私政策有任何疑问,请通过联系页面与我联系。',
+      },
+    ],
+  },
+  'zh-TW': {
+    title: '隱私權政策',
+    back: '返回首頁',
+    headerTitle: '隱私權政策',
+    lastUpdated: '最後更新: 2025年1月',
+    sections: [
+      {
+        title: '1. 資訊收集',
+        content: '本網站致力於保護您的隱私。我們收集的資訊類型包括:',
+        list: [
+          {
+            title: '訪問數據',
+            desc: '我們可能會收集您的瀏覽器類型、IP位址、訪問時間和瀏覽的頁面',
+          },
+          {
+            title: 'Cookie',
+            desc: '我們使用Cookie來改善您的瀏覽體驗,如記住您的主題偏好和語言選擇',
+          },
+          {
+            title: '本地存儲',
+            desc: '某些設置(如主題和語言偏好)會保存在您的瀏覽器本地存儲中',
+          },
+        ],
+      },
+      {
+        title: '2. 資訊使用',
+        content: '收集的資訊僅用於:',
+        list: [
+          { title: '網站優化', desc: '分析訪問數據以改進網站性能和用戶體驗' },
+          { title: '個性化', desc: '保存您的偏好設置' },
+          { title: '安全', desc: '檢測和防止惡意訪問' },
+        ],
+      },
+      {
+        title: '3. 第三方服務',
+        content: '本網站可能會使用以下第三方服務:',
+        list: [
+          { title: 'Google Analytics', desc: '用於網站流量分析' },
+          { title: 'Cloudflare', desc: '用於CDN加速和安全防護' },
+        ],
+      },
+      {
+        title: '4. 聯絡方式',
+        content: '如果您對本隱私權政策有任何疑問,請通過聯絡頁面與我聯繫。',
       },
     ],
   },
@@ -141,10 +188,10 @@ const privacyData: Record<Lang, any> = {
         content: 'The collected information is used only for:',
         list: [
           {
-            title: 'Website Optimization',
-            desc: 'Analyzing access data to improve website performance and user experience',
+            title: 'Website Optimisation',
+            desc: 'Analysing access data to improve website performance and user experience',
           },
-          { title: 'Personalization', desc: 'Saving your preference settings' },
+          { title: 'Personalisation', desc: 'Saving your preference settings' },
           {
             title: 'Security',
             desc: 'Detecting and preventing malicious access',

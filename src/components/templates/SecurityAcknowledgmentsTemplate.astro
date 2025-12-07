@@ -1,0 +1,550 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+
+const securityAcknowledgmentsData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '安全致谢',
+    description: '感谢为网站安全做出贡献的安全研究者',
+    lastUpdated: '2025年12月4日',
+    headerDesc:
+      '感谢以下安全研究者负责任地报告安全漏洞，帮助我们改善网站安全性',
+    lastUpdatedLabel: '最后更新日期：',
+    sidebarTitle: '安全目录',
+    nav: {
+      overview: '1. 致谢说明',
+      reports: '2. 安全报告',
+      contact: '3. 报告漏洞',
+      policy: '4. 安全政策',
+    },
+    sections: {
+      overview: {
+        title: '致谢说明',
+        content:
+          '我们深深感谢所有关注网站安全的研究者。通过负责任的漏洞披露，您帮助我们：',
+        list: [
+          '提升网站整体安全水平',
+          '保护用户数据和隐私',
+          '建立更好的安全防护机制',
+          '完善安全响应流程',
+        ],
+        note: '每一个安全报告都是对我们网站安全的宝贵贡献！',
+      },
+      reports: {
+        title: '安全报告',
+        emptyTitle: '暂无安全报告',
+        emptyDesc:
+          '目前还没有收到安全漏洞报告。我们感谢所有关注网站安全的研究者。',
+      },
+      contact: {
+        title: '发现安全问题？',
+        content: '如果您发现了安全漏洞，请通过以下方式负责任地报告：',
+        emailTitle: '邮件报告',
+        emailDesc: '发送详细报告到：',
+        encryptedTitle: '加密通信',
+        encryptedDesc: '敏感信息请使用PGP加密：',
+        downloadKey: '下载PGP公钥',
+        commitment:
+          '我们承诺在收到报告后24小时内回复，并在合理时间内修复问题。',
+      },
+      policy: {
+        title: '相关政策',
+        content: '了解更多安全相关信息：',
+        securityPolicy: '安全政策',
+        securityTxt: 'Security.txt',
+      },
+    },
+  },
+  'zh-TW': {
+    title: '安全致謝',
+    description: '感謝為網站安全做出貢獻的安全研究者',
+    lastUpdated: '2025年12月4日',
+    headerDesc:
+      '感謝以下安全研究者負責任地報告安全漏洞，幫助我們改善網站安全性',
+    lastUpdatedLabel: '最後更新日期：',
+    sidebarTitle: '安全目錄',
+    nav: {
+      overview: '1. 致謝說明',
+      reports: '2. 安全報告',
+      contact: '3. 報告漏洞',
+      policy: '4. 安全政策',
+    },
+    sections: {
+      overview: {
+        title: '致謝說明',
+        content:
+          '我們深深感謝所有關注網站安全的研究者。通過負責任的漏洞披露，您幫助我們：',
+        list: [
+          '提升網站整體安全水平',
+          '保護用戶數據和隱私',
+          '建立更好的安全防護機制',
+          '完善安全響應流程',
+        ],
+        note: '每一個安全報告都是對我們網站安全的寶貴貢獻！',
+      },
+      reports: {
+        title: '安全報告',
+        emptyTitle: '暫無安全報告',
+        emptyDesc:
+          '目前還沒有收到安全漏洞報告。我們感謝所有關注網站安全的研究者。',
+      },
+      contact: {
+        title: '發現安全問題？',
+        content: '如果您發現了安全漏洞，請通過以下方式負責任地報告：',
+        emailTitle: '郵件報告',
+        emailDesc: '發送詳細報告到：',
+        encryptedTitle: '加密通信',
+        encryptedDesc: '敏感資訊請使用PGP加密：',
+        downloadKey: '下載PGP公鑰',
+        commitment:
+          '我們承諾在收到報告後24小時內回覆，並在合理時間內修復問題。',
+      },
+      policy: {
+        title: '相關政策',
+        content: '了解更多安全相關資訊：',
+        securityPolicy: '安全政策',
+        securityTxt: 'Security.txt',
+      },
+    },
+  },
+  'en-US': {
+    title: 'Security Acknowledgments',
+    description:
+      'Thank you to security researchers who contribute to website security',
+    lastUpdated: 'December 4, 2025',
+    headerDesc:
+      'We thank the following security researchers for responsibly reporting security vulnerabilities and helping us improve website security.',
+    lastUpdatedLabel: 'Last Updated: ',
+    sidebarTitle: 'Security Contents',
+    nav: {
+      overview: '1. Overview',
+      reports: '2. Security Reports',
+      contact: '3. Report Vulnerability',
+      policy: '4. Security Policy',
+    },
+    sections: {
+      overview: {
+        title: 'Overview',
+        content:
+          'We deeply appreciate all researchers who care about website security. Through responsible vulnerability disclosure, you help us:',
+        list: [
+          'Improve overall website security level',
+          'Protect user data and privacy',
+          'Establish better security protection mechanisms',
+          'Improve security response processes',
+        ],
+        note: 'Every security report is a valuable contribution to our website security!',
+      },
+      reports: {
+        title: 'Security Reports',
+        emptyTitle: 'No Security Reports Yet',
+        emptyDesc:
+          'No security vulnerability reports have been received yet. We thank all researchers who care about website security.',
+      },
+      contact: {
+        title: 'Found a Security Issue?',
+        content:
+          'If you have discovered a security vulnerability, please report it responsibly via the following methods:',
+        emailTitle: 'Email Report',
+        emailDesc: 'Send detailed report to:',
+        encryptedTitle: 'Encrypted Communication',
+        encryptedDesc: 'Please use PGP encryption for sensitive information:',
+        downloadKey: 'Download PGP Public Key',
+        commitment:
+          'We commit to replying within 24 hours of receiving the report and fixing the issue within a reasonable time.',
+      },
+      policy: {
+        title: 'Related Policies',
+        content: 'Learn more about security related information:',
+        securityPolicy: 'Security Policy',
+        securityTxt: 'Security.txt',
+      },
+    },
+  },
+  'en-GB': {
+    title: 'Security Acknowledgements',
+    description:
+      'Thank you to security researchers who contribute to website security',
+    lastUpdated: 'December 4, 2025',
+    headerDesc:
+      'We thank the following security researchers for responsibly reporting security vulnerabilities and helping us improve website security.',
+    lastUpdatedLabel: 'Last Updated: ',
+    sidebarTitle: 'Security Contents',
+    nav: {
+      overview: '1. Overview',
+      reports: '2. Security Reports',
+      contact: '3. Report Vulnerability',
+      policy: '4. Security Policy',
+    },
+    sections: {
+      overview: {
+        title: 'Overview',
+        content:
+          'We deeply appreciate all researchers who care about website security. Through responsible vulnerability disclosure, you help us:',
+        list: [
+          'Improve overall website security level',
+          'Protect user data and privacy',
+          'Establish better security protection mechanisms',
+          'Improve security response processes',
+        ],
+        note: 'Every security report is a valuable contribution to our website security!',
+      },
+      reports: {
+        title: 'Security Reports',
+        emptyTitle: 'No Security Reports Yet',
+        emptyDesc:
+          'No security vulnerability reports have been received yet. We thank all researchers who care about website security.',
+      },
+      contact: {
+        title: 'Found a Security Issue?',
+        content:
+          'If you have discovered a security vulnerability, please report it responsibly via the following methods:',
+        emailTitle: 'Email Report',
+        emailDesc: 'Send detailed report to:',
+        encryptedTitle: 'Encrypted Communication',
+        encryptedDesc: 'Please use PGP encryption for sensitive information:',
+        downloadKey: 'Download PGP Public Key',
+        commitment:
+          'We commit to replying within 24 hours of receiving the report and fixing the issue within a reasonable time.',
+      },
+      policy: {
+        title: 'Related Policies',
+        content: 'Learn more about security related information:',
+        securityPolicy: 'Security Policy',
+        securityTxt: 'Security.txt',
+      },
+    },
+  },
+  fr: {
+    title: 'Remerciements de Sécurité',
+    description:
+      'Merci aux chercheurs en sécurité qui contribuent à la sécurité du site web',
+    lastUpdated: '4 Décembre 2025',
+    headerDesc:
+      'Nous remercions les chercheurs en sécurité suivants pour avoir signalé de manière responsable les vulnérabilités de sécurité et nous avoir aidés à améliorer la sécurité du site web.',
+    lastUpdatedLabel: 'Dernière mise à jour : ',
+    sidebarTitle: 'Contenu de sécurité',
+    nav: {
+      overview: "1. Vue d'ensemble",
+      reports: '2. Rapports de sécurité',
+      contact: '3. Signaler une vulnérabilité',
+      policy: '4. Politique de sécurité',
+    },
+    sections: {
+      overview: {
+        title: "Vue d'ensemble",
+        content:
+          'Nous apprécions profondément tous les chercheurs qui se soucient de la sécurité du site web. Grâce à la divulgation responsable des vulnérabilités, vous nous aidez à :',
+        list: [
+          'Améliorer le niveau global de sécurité du site web',
+          'Protéger les données et la vie privée des utilisateurs',
+          'Établir de meilleurs mécanismes de protection de sécurité',
+          'Améliorer les processus de réponse aux incidents de sécurité',
+        ],
+        note: 'Chaque rapport de sécurité est une contribution précieuse à la sécurité de notre site web !',
+      },
+      reports: {
+        title: 'Rapports de sécurité',
+        emptyTitle: 'Aucun rapport de sécurité pour le moment',
+        emptyDesc:
+          "Aucun rapport de vulnérabilité de sécurité n'a encore été reçu. Nous remercions tous les chercheurs qui se soucient de la sécurité du site web.",
+      },
+      contact: {
+        title: 'Vous avez trouvé un problème de sécurité ?',
+        content:
+          'Si vous avez découvert une vulnérabilité de sécurité, veuillez la signaler de manière responsable via les méthodes suivantes :',
+        emailTitle: 'Rapport par e-mail',
+        emailDesc: 'Envoyer un rapport détaillé à :',
+        encryptedTitle: 'Communication chiffrée',
+        encryptedDesc:
+          'Veuillez utiliser le chiffrement PGP pour les informations sensibles :',
+        downloadKey: 'Télécharger la clé publique PGP',
+        commitment:
+          'Nous nous engageons à répondre dans les 24 heures suivant la réception du rapport et à résoudre le problème dans un délai raisonnable.',
+      },
+      policy: {
+        title: 'Politiques connexes',
+        content: 'En savoir plus sur les informations liées à la sécurité :',
+        securityPolicy: 'Politique de sécurité',
+        securityTxt: 'Security.txt',
+      },
+    },
+  },
+  ru: {
+    title: 'Благодарности за безопасность',
+    description:
+      'Спасибо исследователям безопасности, которые вносят вклад в безопасность веб-сайта',
+    lastUpdated: '4 декабря 2025 г.',
+    headerDesc:
+      'Мы благодарим следующих исследователей безопасности за ответственное сообщение об уязвимостях безопасности и помощь в улучшении безопасности веб-сайта.',
+    lastUpdatedLabel: 'Последнее обновление: ',
+    sidebarTitle: 'Содержание безопасности',
+    nav: {
+      overview: '1. Обзор',
+      reports: '2. Отчеты о безопасности',
+      contact: '3. Сообщить об уязвимости',
+      policy: '4. Политика безопасности',
+    },
+    sections: {
+      overview: {
+        title: 'Обзор',
+        content:
+          'Мы глубоко ценим всех исследователей, которые заботятся о безопасности веб-сайта. Благодаря ответственному раскрытию уязвимостей вы помогаете нам:',
+        list: [
+          'Повысить общий уровень безопасности веб-сайта',
+          'Защитить данные и конфиденциальность пользователей',
+          'Создать лучшие механизмы защиты безопасности',
+          'Улучшить процессы реагирования на инциденты безопасности',
+        ],
+        note: 'Каждый отчет о безопасности является ценным вкладом в безопасность нашего веб-сайта!',
+      },
+      reports: {
+        title: 'Отчеты о безопасности',
+        emptyTitle: 'Пока нет отчетов о безопасности',
+        emptyDesc:
+          'Отчетов об уязвимостях безопасности пока не поступало. Мы благодарим всех исследователей, которые заботятся о безопасности веб-сайта.',
+      },
+      contact: {
+        title: 'Нашли проблему безопасности?',
+        content:
+          'Если вы обнаружили уязвимость безопасности, пожалуйста, сообщите о ней ответственно следующими способами:',
+        emailTitle: 'Отчет по электронной почте',
+        emailDesc: 'Отправить подробный отчет на:',
+        encryptedTitle: 'Зашифрованная связь',
+        encryptedDesc:
+          'Пожалуйста, используйте шифрование PGP для конфиденциальной информации:',
+        downloadKey: 'Скачать открытый ключ PGP',
+        commitment:
+          'Мы обязуемся ответить в течение 24 часов после получения отчета и устранить проблему в разумные сроки.',
+      },
+      policy: {
+        title: 'Связанные политики',
+        content: 'Узнайте больше информации, связанной с безопасностью:',
+        securityPolicy: 'Политика безопасности',
+        securityTxt: 'Security.txt',
+      },
+    },
+  },
+};
+
+const t =
+  securityAcknowledgmentsData[lang as Lang] ||
+  securityAcknowledgmentsData['en-US'];
+---
+
+<BaseLayout
+  title={`${t.title} | Alexander James Carter`}
+  description={t.description}
+>
+  <div class="container mx-auto px-4 py-12 lg:py-20 max-w-6xl">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+        {t.title}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        {t.headerDesc}
+      </p>
+      <p class="text-sm text-gray-500 mt-4">
+        {t.lastUpdatedLabel}{t.lastUpdated}
+      </p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Sidebar Navigation -->
+      <div class="lg:w-1/4">
+        <div
+          class="sticky top-24 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-700"
+        >
+          <h5 class="font-bold mb-4 text-lg">{t.sidebarTitle}</h5>
+          <nav class="flex flex-col space-y-2">
+            <a
+              href="#overview"
+              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
+              >{t.nav.overview}</a
+            >
+            <a
+              href="#reports"
+              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
+              >{t.nav.reports}</a
+            >
+            <a
+              href="#contact"
+              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
+              >{t.nav.contact}</a
+            >
+            <a
+              href="#policy"
+              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
+              >{t.nav.policy}</a
+            >
+          </nav>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="lg:w-3/4 space-y-8">
+        <!-- 1. Overview -->
+        <section
+          id="overview"
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
+        >
+          <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+            <span class="text-primary-500">🛡️</span>
+            {t.sections.overview.title}
+          </h2>
+          <p class="mb-4 text-gray-600 dark:text-gray-300">
+            {t.sections.overview.content}
+          </p>
+          <ul
+            class="list-disc list-inside space-y-2 mb-6 text-gray-600 dark:text-gray-300"
+          >
+            {t.sections.overview.list.map((item: string) => <li>{item}</li>)}
+          </ul>
+          <div
+            class="bg-red-50 dark:bg-red-900/20 rounded-xl p-4 flex gap-3 items-center border border-red-100 dark:border-red-800"
+          >
+            <span class="text-red-500 text-xl">❤️</span>
+            <p class="text-red-700 dark:text-red-200 font-medium">
+              {t.sections.overview.note}
+            </p>
+          </div>
+        </section>
+
+        <!-- 2. Reports -->
+        <section
+          id="reports"
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
+        >
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+            <span class="text-primary-500">📋</span>
+            {t.sections.reports.title}
+          </h2>
+
+          <!-- Empty State -->
+          <div
+            class="bg-blue-50 dark:bg-blue-900/10 rounded-xl p-8 text-center border border-blue-100 dark:border-blue-800"
+          >
+            <div
+              class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <span class="text-green-500 text-2xl">✓</span>
+            </div>
+            <h4 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">
+              {t.sections.reports.emptyTitle}
+            </h4>
+            <p class="text-gray-600 dark:text-gray-400">
+              {t.sections.reports.emptyDesc}
+            </p>
+          </div>
+        </section>
+
+        <!-- 3. Contact -->
+        <section
+          id="contact"
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
+        >
+          <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+            <span class="text-primary-500">📧</span>
+            {t.sections.contact.title}
+          </h2>
+          <p class="mb-6 text-gray-600 dark:text-gray-300">
+            {t.sections.contact.content}
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div
+              class="bg-gray-50 dark:bg-gray-700/50 p-6 rounded-xl border border-gray-100 dark:border-gray-600"
+            >
+              <h5 class="font-bold mb-3 flex items-center gap-2">
+                <span class="text-primary-500">✉️</span>
+                {t.sections.contact.emailTitle}
+              </h5>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                {t.sections.contact.emailDesc}
+              </p>
+              <a
+                href="mailto:2253940186@qq.com"
+                class="inline-flex items-center justify-center w-full px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+              >
+                2253940186@qq.com
+              </a>
+            </div>
+            <div
+              class="bg-gray-50 dark:bg-gray-700/50 p-6 rounded-xl border border-gray-100 dark:border-gray-600"
+            >
+              <h5 class="font-bold mb-3 flex items-center gap-2">
+                <span class="text-green-500">🔒</span>
+                {t.sections.contact.encryptedTitle}
+              </h5>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                {t.sections.contact.encryptedDesc}
+              </p>
+              <a
+                href="/security/pgp-key.asc"
+                target="_blank"
+                class="inline-flex items-center justify-center w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+              >
+                {t.sections.contact.downloadKey}
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex gap-3 items-center border border-blue-100 dark:border-blue-800"
+          >
+            <span class="text-blue-500">⏱️</span>
+            <p class="text-sm text-blue-700 dark:text-blue-200">
+              {t.sections.contact.commitment}
+            </p>
+          </div>
+        </section>
+
+        <!-- 4. Policy -->
+        <section
+          id="policy"
+          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
+        >
+          <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+            <span class="text-primary-500">📄</span>
+            {t.sections.policy.title}
+          </h2>
+          <p class="mb-6 text-gray-600 dark:text-gray-300">
+            {t.sections.policy.content}
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="/security/policy"
+              class="px-6 py-2 border border-primary-500 text-primary-500 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors flex items-center gap-2"
+            >
+              <span>🛡️</span>
+              {t.sections.policy.securityPolicy}
+            </a>
+            <a
+              href="/.well-known/security.txt"
+              class="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors flex items-center gap-2"
+            >
+              <span>📝</span>
+              {t.sections.policy.securityTxt}
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+  }
+</style>

@@ -8,7 +8,7 @@ const ariaLabel = lang === 'zh-CN' ? '回到顶部' : 'Back to top';
 <button
   id="back-to-top"
   aria-label={ariaLabel}
-  class="fixed bottom-24 right-6 z-40 w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white shadow-lg hover:shadow-xl transform transition-all duration-300 opacity-0 invisible translate-y-4 hover:scale-110 group"
+  class="fixed z-40 w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white shadow-lg hover:shadow-xl transform transition-all duration-300 opacity-0 invisible translate-y-4 hover:scale-110 group"
 >
   <svg
     class="w-6 h-6 mx-auto group-hover:-translate-y-1 transition-transform duration-300"
@@ -68,11 +68,22 @@ const ariaLabel = lang === 'zh-CN' ? '回到顶部' : 'Back to top';
     background: linear-gradient(135deg, #3b82f6 0%, #d946ef 100%);
   }
 
-  /* Mobile responsive */
+  /* Position above Share with comfortable spacing */
+  #back-to-top {
+    right: 1rem;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 4.75rem);
+  }
+
+  @media (min-width: 768px) {
+    #back-to-top {
+      right: 1.5rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 6.5rem);
+    }
+  }
+
+  /* Mobile responsive sizing */
   @media (max-width: 640px) {
     #back-to-top {
-      bottom: 5.5rem;
-      right: 1rem;
       width: 2.75rem;
       height: 2.75rem;
     }

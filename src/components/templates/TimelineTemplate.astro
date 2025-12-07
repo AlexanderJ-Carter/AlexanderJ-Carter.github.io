@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const timelineData: Record<Lang, any> = {
   'zh-CN': {
@@ -38,6 +38,43 @@ const timelineData: Record<Lang, any> = {
         year: 2022,
         title: '开始编程之旅',
         description: '第一次接触编程，创建第一个项目',
+        icon: '💻',
+        color: 'from-orange-500 to-red-500'
+      }
+    ]
+  },
+  'zh-TW': {
+    title: '時間軸',
+    description: '我的學習和成長之路',
+    back: '返回',
+    headerTitle: '成長歷程',
+    headerDesc: '記錄每一個重要的里程碑和轉折點',
+    events: [
+      {
+        year: 2025,
+        title: '現在',
+        description: '繼續學習、創新和分享',
+        icon: '🚀',
+        color: 'from-purple-500 to-pink-500'
+      },
+      {
+        year: 2024,
+        title: '個人網站重設計',
+        description: '使用Astro框架完全重構個人網站',
+        icon: '🎨',
+        color: 'from-blue-500 to-purple-500'
+      },
+      {
+        year: 2023,
+        title: '深入學習Web開發',
+        description: '學習React、Node.js、資料庫等核心技術',
+        icon: '📚',
+        color: 'from-green-500 to-blue-500'
+      },
+      {
+        year: 2022,
+        title: '開始程式設計之旅',
+        description: '第一次接觸程式設計，創建第一個專案',
         icon: '💻',
         color: 'from-orange-500 to-red-500'
       }

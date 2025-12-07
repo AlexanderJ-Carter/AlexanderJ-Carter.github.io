@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
 
 const timeData: Record<Lang, any> = {
   'zh-CN': {
@@ -23,6 +23,25 @@ const timeData: Record<Lang, any> = {
     sydney: '悉尼 / UTC+11',
     apiTitle: '开发者 API',
     apiDesc: '获取标准时间的简单 API 示例',
+    apiExample: 'GET https://api.alexander.xin/time/now',
+  },
+  'zh-TW': {
+    title: '標準時間服務',
+    tag: '標準時間 / 世界時區',
+    headerTitle: '時間服務中心',
+    headerDesc:
+      '專注於可靠、清晰的時間資訊與常用時區對照，支援複製與 API 呼叫。',
+    localTime: '當前所在地',
+    beijingTime: '北京 / UTC+8',
+    copy: '複製',
+    copied: '已複製',
+    worldClocks: '世界時區',
+    london: '倫敦 / UTC+0',
+    newYork: '紐約 / UTC-5',
+    tokyo: '東京 / UTC+9',
+    sydney: '雪梨 / UTC+11',
+    apiTitle: '開發者 API',
+    apiDesc: '獲取標準時間的簡單 API 範例',
     apiExample: 'GET https://api.alexander.xin/time/now',
   },
   'en-US': {
@@ -211,7 +230,7 @@ const content = timeData[lang as Lang] || timeData['en-US'];
   </section>
 </BaseLayout>
 
-<script is:inline>
+<script is:inline define:vars={{ content, lang }}>
   function updateClocks() {
     const now = new Date();
 
@@ -222,7 +241,7 @@ const content = timeData[lang as Lang] || timeData['en-US'];
     document.getElementById('main-clock').textContent =
       beijingTime.toLocaleTimeString('en-GB', { hour12: false });
     document.getElementById('main-date').textContent =
-      beijingTime.toLocaleDateString();
+      beijingTime.toLocaleDateString(lang);
 
     // World Clocks
     const formatTime = (tz) =>
@@ -246,6 +265,9 @@ const content = timeData[lang as Lang] || timeData['en-US'];
   function copyTime() {
     const time = document.getElementById('main-clock').textContent;
     navigator.clipboard.writeText(time);
-    alert('Copied!');
+    alert(content.copied);
   }
+
+  // Expose copyTime to global scope for onclick
+  window.copyTime = copyTime;
 </script>
