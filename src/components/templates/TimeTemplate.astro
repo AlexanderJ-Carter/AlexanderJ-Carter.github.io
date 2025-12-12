@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 const timeData: Record<Lang, any> = {
   'zh-CN': {
@@ -44,25 +44,7 @@ const timeData: Record<Lang, any> = {
     apiDesc: '獲取標準時間的簡單 API 範例',
     apiExample: 'GET https://api.alexander.xin/time/now',
   },
-  'en-US': {
-    title: 'Standard Time Service',
-    tag: 'Standard Time / World Clocks',
-    headerTitle: 'Time Service Hub',
-    headerDesc:
-      'Reliable, clear time info with quick world clocks and simple API examples.',
-    localTime: 'Local Time',
-    beijingTime: 'Beijing / UTC+8',
-    copy: 'Copy',
-    copied: 'Copied',
-    worldClocks: 'World Clocks',
-    london: 'London / UTC+0',
-    newYork: 'New York / UTC-5',
-    tokyo: 'Tokyo / UTC+9',
-    sydney: 'Sydney / UTC+11',
-    apiTitle: 'Developer API',
-    apiDesc: 'Simple API example to get standard time',
-    apiExample: 'GET https://api.alexander.xin/time/now',
-  },
+
   'en-GB': {
     title: 'Standard Time Service',
     tag: 'Standard Time / World Clocks',
@@ -122,7 +104,7 @@ const timeData: Record<Lang, any> = {
   },
 };
 
-const content = timeData[lang as Lang] || timeData['en-US'];
+const content = timeData[lang as Lang] || timeData['en-GB'];
 ---
 
 <BaseLayout title={`${content.title} - Alexander Carter`}>
@@ -231,23 +213,32 @@ const content = timeData[lang as Lang] || timeData['en-US'];
 </BaseLayout>
 
 <script is:inline define:vars={{ content, lang }}>
+  const localeMap = {
+    'zh-CN': 'zh-CN',
+    'zh-TW': 'zh-TW',
+    'en-GB': 'en-GB',
+    fr: 'fr-FR',
+    ru: 'ru-RU',
+  };
+  const locale = localeMap[lang] || 'en-GB';
+
   function updateClocks() {
     const now = new Date();
 
     // Main Clock (Beijing)
     const beijingTime = new Date(
-      now.toLocaleString('en-US', { timeZone: 'Asia/Shanghai' })
+      now.toLocaleString(locale, { timeZone: 'Asia/Shanghai' })
     );
     document.getElementById('main-clock').textContent =
-      beijingTime.toLocaleTimeString('en-GB', { hour12: false });
+      beijingTime.toLocaleTimeString(locale, { hour12: false });
     document.getElementById('main-date').textContent =
-      beijingTime.toLocaleDateString(lang);
+      beijingTime.toLocaleDateString(locale);
 
     // World Clocks
     const formatTime = (tz) =>
       new Date(
-        now.toLocaleString('en-US', { timeZone: tz })
-      ).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        now.toLocaleString(locale, { timeZone: tz })
+      ).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
 
     document.getElementById('clock-london').textContent =
       formatTime('Europe/London');

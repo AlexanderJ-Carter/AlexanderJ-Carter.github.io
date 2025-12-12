@@ -1,13 +1,9 @@
 ---
 import TimelineTemplate from '../../components/templates/TimelineTemplate.astro';
+import { languages } from '../../i18n/ui';
 
 export function getStaticPaths() {
-  return [
-    { params: { lang: 'en-US' } },
-    { params: { lang: 'en-GB' } },
-    { params: { lang: 'fr' } },
-    { params: { lang: 'ru' } },
-  ];
+  return Object.keys(languages).map((lang) => ({ params: { lang } }));
 }
 
 const { lang } = Astro.params;

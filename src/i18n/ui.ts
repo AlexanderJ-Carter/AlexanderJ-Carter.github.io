@@ -2,8 +2,8 @@ export const languages = {
   'zh-CN': '中文 (简体)',
   'zh-TW': '中文 (繁體)',
   'en-GB': 'English',
-  'fr': 'Français',
-  'ru': 'Русский',
+  fr: 'Français',
+  ru: 'Русский',
 };
 
 export const defaultLang = 'zh-CN';
@@ -26,7 +26,8 @@ export const ui = {
     'home.featured': '精选作品',
     'home.featured.desc': '摄影与设计的完美结合',
     'home.about.title': '关于我',
-    'home.about.desc': '热爱创意与技术的结合，擅长将设计理念转化为高质量的实现。',
+    'home.about.desc':
+      '热爱创意与技术的结合，擅长将设计理念转化为高质量的实现。',
     'home.skills.title': '技能专长',
     'home.stats.photos': '张照片',
     'home.stats.projects': '个项目',
@@ -57,13 +58,16 @@ export const ui = {
     'about.bio.text4': ',致力于探索技术与艺术的无限可能。',
     'about.bio.text5': '我相信',
     'about.bio.text6': '技术与艺术的结合',
-    'about.bio.text7': '能够创造出令人惊叹的作品。从代码到像素,从算法到设计,我热衷于探索不同领域的交叉点,将理性的逻辑思维与感性的创意表达完美融合。',
+    'about.bio.text7':
+      '能够创造出令人惊叹的作品。从代码到像素,从算法到设计,我热衷于探索不同领域的交叉点,将理性的逻辑思维与感性的创意表达完美融合。',
     'about.bio.text8': '在',
     'about.bio.text9': '技术领域',
-    'about.bio.text10': ',我擅长 C/C++、Python 等编程语言,熟悉 Verilog 硬件设计, 并对 Web 开发有浓厚兴趣。我喜欢动手实践,通过一个个项目将理论知识转化为实际成果。',
+    'about.bio.text10':
+      ',我擅长 C/C++、Python 等编程语言,熟悉 Verilog 硬件设计, 并对 Web 开发有浓厚兴趣。我喜欢动手实践,通过一个个项目将理论知识转化为实际成果。',
     'about.bio.text11': '在',
     'about.bio.text12': '艺术创作',
-    'about.bio.text13': '方面,摄影是我的最爱。用镜头记录生活中的美好瞬间,捕捉光影交织的诗意画面。我也热衷于 UI/UX 设计,致力于创造既美观又实用的用户体验。',
+    'about.bio.text13':
+      '方面,摄影是我的最爱。用镜头记录生活中的美好瞬间,捕捉光影交织的诗意画面。我也热衷于 UI/UX 设计,致力于创造既美观又实用的用户体验。',
     'about.education': '教育经历',
     'about.interests': '兴趣爱好',
     'about.languages': '语言能力',
@@ -95,7 +99,8 @@ export const ui = {
     'home.featured': '精選作品',
     'home.featured.desc': '攝影與設計的完美結合',
     'home.about.title': '關於我',
-    'home.about.desc': '熱愛創意與技術的結合，擅長將設計理念轉化為高質量的實現。',
+    'home.about.desc':
+      '熱愛創意與技術的結合，擅長將設計理念轉化為高質量的實現。',
     'home.skills.title': '技能專長',
     'home.stats.photos': '張照片',
     'home.stats.projects': '個項目',
@@ -126,13 +131,16 @@ export const ui = {
     'about.bio.text4': ',致力於探索技術與藝術的無限可能。',
     'about.bio.text5': '我相信',
     'about.bio.text6': '技術與藝術的結合',
-    'about.bio.text7': '能夠創造出令人驚嘆的作品。從代碼到像素,從算法到設計,我熱衷於探索不同領域的交叉點,將理性的邏輯思維與感性的創意表達完美融合。',
+    'about.bio.text7':
+      '能夠創造出令人驚嘆的作品。從代碼到像素,從算法到設計,我熱衷於探索不同領域的交叉點,將理性的邏輯思維與感性的創意表達完美融合。',
     'about.bio.text8': '在',
     'about.bio.text9': '技術領域',
-    'about.bio.text10': ',我擅長 C/C++、Python 等編程語言,熟悉 Verilog 硬件設計, 並對 Web 開發有濃厚興趣。我喜歡動手實踐,通過一個個項目將理論知識轉化為實際成果。',
+    'about.bio.text10':
+      ',我擅長 C/C++、Python 等編程語言,熟悉 Verilog 硬件設計, 並對 Web 開發有濃厚興趣。我喜歡動手實踐,通過一個個項目將理論知識轉化為實際成果。',
     'about.bio.text11': '在',
     'about.bio.text12': '藝術創作',
-    'about.bio.text13': '方面,攝影是我的最愛。用鏡頭記錄生活中的美好瞬間,捕捉光影交織的詩意畫面。我也熱衷於 UI/UX 設計,致力於創造既美觀又實用的用戶體驗。',
+    'about.bio.text13':
+      '方面,攝影是我的最愛。用鏡頭記錄生活中的美好瞬間,捕捉光影交織的詩意畫面。我也熱衷於 UI/UX 設計,致力於創造既美觀又實用的用戶體驗。',
     'about.education': '教育經歷',
     'about.interests': '興趣愛好',
     'about.languages': '語言能力',
@@ -155,16 +163,18 @@ export const ui = {
     'nav.blog': 'Blog',
     'nav.about': 'About',
     'nav.contact': 'Contact',
-    'hero.greeting': 'Hi, I\'m',
+    'hero.greeting': "Hi, I'm",
     'hero.name': 'Alexander James Carter',
     'hero.title': 'Explore Creativity, Share Life',
-    'hero.subtitle': 'Capturing the world through lens, creating the future with code',
+    'hero.subtitle':
+      'Capturing the world through lens, creating the future with code',
     'hero.cta.primary': 'View Work',
     'hero.cta.secondary': 'Learn More',
     'home.featured': 'Featured Work',
     'home.featured.desc': 'Perfect blend of photography and design',
     'home.about.title': 'About Me',
-    'home.about.desc': 'Passionate about combining creativity and technology, skilled at transforming design concepts into high-quality implementations.',
+    'home.about.desc':
+      'Passionate about combining creativity and technology, skilled at transforming design concepts into high-quality implementations.',
     'home.skills.title': 'Skills',
     'home.stats.photos': 'Photos',
     'home.stats.projects': 'Projects',
@@ -189,19 +199,24 @@ export const ui = {
     'about.location': 'Beijing',
     'about.status': 'Student',
     'about.role': 'Developer',
-    'about.bio.text1': 'Hello! I\'m',
-    'about.bio.text2': ', a 20-year-old student passionate about creativity and technology. Currently studying',
+    'about.bio.text1': "Hello! I'm",
+    'about.bio.text2':
+      ', a 20-year-old student passionate about creativity and technology. Currently studying',
     'about.bio.text3': 'Electronic Information Science and Technology',
-    'about.bio.text4': 'at a key university in China, dedicated to exploring the infinite possibilities of technology and art.',
+    'about.bio.text4':
+      'at a key university in China, dedicated to exploring the infinite possibilities of technology and art.',
     'about.bio.text5': 'I believe that',
     'about.bio.text6': 'the combination of technology and art',
-    'about.bio.text7': 'can create amazing works. From code to pixels, from algorithms to design, I\'m passionate about exploring the intersection of different fields, perfectly blending rational logical thinking with emotional creative expression.',
+    'about.bio.text7':
+      "can create amazing works. From code to pixels, from algorithms to design, I'm passionate about exploring the intersection of different fields, perfectly blending rational logical thinking with emotional creative expression.",
     'about.bio.text8': 'In the',
     'about.bio.text9': 'technical field',
-    'about.bio.text10': ', I\'m proficient in C/C++, Python and other programming languages, familiar with Verilog hardware design, and have a strong interest in web development. I enjoy hands-on practice, transforming theoretical knowledge into practical results through projects.',
+    'about.bio.text10':
+      ", I'm proficient in C/C++, Python and other programming languages, familiar with Verilog hardware design, and have a strong interest in web development. I enjoy hands-on practice, transforming theoretical knowledge into practical results through projects.",
     'about.bio.text11': 'In terms of',
     'about.bio.text12': 'artistic creation',
-    'about.bio.text13': ', photography is my favourite. Capturing beautiful moments in life through my lens, capturing the poetic pictures woven by light and shadow. I\'m also passionate about UI/UX design, dedicated to creating user experiences that are both beautiful and practical.',
+    'about.bio.text13':
+      ", photography is my favourite. Capturing beautiful moments in life through my lens, capturing the poetic pictures woven by light and shadow. I'm also passionate about UI/UX design, dedicated to creating user experiences that are both beautiful and practical.",
     'about.education': 'Education',
     'about.interests': 'Interests & Hobbies',
     'about.languages': 'Languages',
@@ -216,9 +231,10 @@ export const ui = {
     'sitemap.languages': 'Languages',
     'sitemap.external': 'External Links',
   },
-  'fr': {
+  fr: {
     'site.title': 'Alexander James Carter',
-    'site.description': 'Explorer la créativité, partager la vie, capturer des moments',
+    'site.description':
+      'Explorer la créativité, partager la vie, capturer des moments',
     'nav.home': 'Accueil',
     'nav.gallery': 'Galerie',
     'nav.blog': 'Blog',
@@ -227,13 +243,15 @@ export const ui = {
     'hero.greeting': 'Salut, je suis',
     'hero.name': 'Alexander James Carter',
     'hero.title': 'Explorer la créativité, partager la vie',
-    'hero.subtitle': 'Capturer le monde à travers l\'objectif, créer l\'avenir avec le code',
+    'hero.subtitle':
+      "Capturer le monde à travers l'objectif, créer l'avenir avec le code",
     'hero.cta.primary': 'Voir les travaux',
     'hero.cta.secondary': 'En savoir plus',
     'home.featured': 'Travaux sélectionnés',
     'home.featured.desc': 'Mélange parfait de photographie et de design',
     'home.about.title': 'À propos de moi',
-    'home.about.desc': 'Passionné par la combinaison de créativité et de technologie, habile à transformer les concepts de design en implémentations de haute qualité.',
+    'home.about.desc':
+      'Passionné par la combinaison de créativité et de technologie, habile à transformer les concepts de design en implémentations de haute qualité.',
     'home.skills.title': 'Compétences',
     'home.stats.photos': 'Photos',
     'home.stats.projects': 'Projets',
@@ -259,18 +277,23 @@ export const ui = {
     'about.status': 'Étudiant',
     'about.role': 'Développeur',
     'about.bio.text1': 'Bonjour! Je suis',
-    'about.bio.text2': ', un étudiant de 20 ans passionné par la créativité et la technologie. Actuellement étudiant',
-    'about.bio.text3': 'Science et technologie de l\'information électronique',
-    'about.bio.text4': 'dans une université clé en Chine, dédié à explorer les possibilités infinies de la technologie et de l\'art.',
+    'about.bio.text2':
+      ', un étudiant de 20 ans passionné par la créativité et la technologie. Actuellement étudiant',
+    'about.bio.text3': "Science et technologie de l'information électronique",
+    'about.bio.text4':
+      "dans une université clé en Chine, dédié à explorer les possibilités infinies de la technologie et de l'art.",
     'about.bio.text5': 'Je crois que',
-    'about.bio.text6': 'la combinaison de la technologie et de l\'art',
-    'about.bio.text7': 'peut créer des œuvres étonnantes. Du code aux pixels, des algorithmes au design, je suis passionné par l\'exploration de l\'intersection de différents domaines, mélangeant parfaitement la pensée logique rationnelle avec l\'expression créative émotionnelle.',
+    'about.bio.text6': "la combinaison de la technologie et de l'art",
+    'about.bio.text7':
+      "peut créer des œuvres étonnantes. Du code aux pixels, des algorithmes au design, je suis passionné par l'exploration de l'intersection de différents domaines, mélangeant parfaitement la pensée logique rationnelle avec l'expression créative émotionnelle.",
     'about.bio.text8': 'Dans le',
     'about.bio.text9': 'domaine technique',
-    'about.bio.text10': ', je maîtrise C/C++, Python et d\'autres langages de programmation, familier avec la conception matérielle Verilog, et j\'ai un fort intérêt pour le développement web. J\'aime la pratique, transformer les connaissances théoriques en résultats pratiques grâce à des projets.',
+    'about.bio.text10':
+      ", je maîtrise C/C++, Python et d'autres langages de programmation, familier avec la conception matérielle Verilog, et j'ai un fort intérêt pour le développement web. J'aime la pratique, transformer les connaissances théoriques en résultats pratiques grâce à des projets.",
     'about.bio.text11': 'En termes de',
     'about.bio.text12': 'création artistique',
-    'about.bio.text13': ', la photographie est ma préférée. Capturer les beaux moments de la vie à travers mon objectif, capturer les images poétiques tissées par la lumière et l\'ombre. Je suis également passionné par le design UI/UX, dédié à créer des expériences utilisateur à la fois belles et pratiques.',
+    'about.bio.text13':
+      ", la photographie est ma préférée. Capturer les beaux moments de la vie à travers mon objectif, capturer les images poétiques tissées par la lumière et l'ombre. Je suis également passionné par le design UI/UX, dédié à créer des expériences utilisateur à la fois belles et pratiques.",
     'about.education': 'Éducation',
     'about.interests': 'Intérêts et passe-temps',
     'about.languages': 'Langues',
@@ -285,9 +308,10 @@ export const ui = {
     'sitemap.languages': 'Langues',
     'sitemap.external': 'Liens externes',
   },
-  'ru': {
+  ru: {
     'site.title': 'Alexander James Carter',
-    'site.description': 'Исследуйте творчество, делитесь жизнью, запечатлевайте моменты',
+    'site.description':
+      'Исследуйте творчество, делитесь жизнью, запечатлевайте моменты',
     'nav.home': 'Главная',
     'nav.gallery': 'Галерея',
     'nav.blog': 'Блог',
@@ -296,13 +320,15 @@ export const ui = {
     'hero.greeting': 'Привет, я',
     'hero.name': 'Alexander James Carter',
     'hero.title': 'Исследуйте творчество, делитесь жизнью',
-    'hero.subtitle': 'Запечатлевая мир через объектив, создавая будущее с помощью кода',
+    'hero.subtitle':
+      'Запечатлевая мир через объектив, создавая будущее с помощью кода',
     'hero.cta.primary': 'Посмотреть работы',
     'hero.cta.secondary': 'Узнать больше',
     'home.featured': 'Избранные работы',
     'home.featured.desc': 'Идеальное сочетание фотографии и дизайна',
     'home.about.title': 'Обо мне',
-    'home.about.desc': 'Увлечен сочетанием творчества и технологий, умеет превращать концепции дизайна в высококачественные реализации.',
+    'home.about.desc':
+      'Увлечен сочетанием творчества и технологий, умеет превращать концепции дизайна в высококачественные реализации.',
     'home.skills.title': 'Навыки',
     'home.stats.photos': 'Фотографий',
     'home.stats.projects': 'Проектов',
@@ -328,18 +354,23 @@ export const ui = {
     'about.status': 'Студент',
     'about.role': 'Разработчик',
     'about.bio.text1': 'Привет! Я',
-    'about.bio.text2': ', 20-летний студент, увлеченный творчеством и технологиями. В настоящее время изучаю',
+    'about.bio.text2':
+      ', 20-летний студент, увлеченный творчеством и технологиями. В настоящее время изучаю',
     'about.bio.text3': 'Электронную информационную науку и технологии',
-    'about.bio.text4': 'в ключевом университете Китая, посвященный исследованию бесконечных возможностей технологий и искусства.',
+    'about.bio.text4':
+      'в ключевом университете Китая, посвященный исследованию бесконечных возможностей технологий и искусства.',
     'about.bio.text5': 'Я верю, что',
     'about.bio.text6': 'сочетание технологий и искусства',
-    'about.bio.text7': 'может создавать удивительные произведения. От кода к пикселям, от алгоритмов к дизайну, я увлечен исследованием пересечения различных областей, идеально сочетая рациональное логическое мышление с эмоциональным творческим выражением.',
+    'about.bio.text7':
+      'может создавать удивительные произведения. От кода к пикселям, от алгоритмов к дизайну, я увлечен исследованием пересечения различных областей, идеально сочетая рациональное логическое мышление с эмоциональным творческим выражением.',
     'about.bio.text8': 'В',
     'about.bio.text9': 'технической области',
-    'about.bio.text10': ', я владею C/C++, Python и другими языками программирования, знаком с аппаратным дизайном Verilog и имею большой интерес к веб-разработке. Мне нравится практика, превращение теоретических знаний в практические результаты через проекты.',
+    'about.bio.text10':
+      ', я владею C/C++, Python и другими языками программирования, знаком с аппаратным дизайном Verilog и имею большой интерес к веб-разработке. Мне нравится практика, превращение теоретических знаний в практические результаты через проекты.',
     'about.bio.text11': 'В плане',
     'about.bio.text12': 'художественного творчества',
-    'about.bio.text13': ', фотография - моя любимая. Запечатлевая прекрасные моменты жизни через мой объектив, захватывая поэтические картины, сотканные светом и тенью. Я также увлечен дизайном UI/UX, посвящен созданию пользовательского опыта, который одновременно красив и практичен.',
+    'about.bio.text13':
+      ', фотография - моя любимая. Запечатлевая прекрасные моменты жизни через мой объектив, захватывая поэтические картины, сотканные светом и тенью. Я также увлечен дизайном UI/UX, посвящен созданию пользовательского опыта, который одновременно красив и практичен.',
     'about.education': 'Образование',
     'about.interests': 'Интересы и хобби',
     'about.languages': 'Языки',
@@ -365,7 +396,7 @@ export function getLangFromUrl(url: URL) {
 }
 
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof typeof ui[typeof defaultLang]) {
+  return function t(key: keyof (typeof ui)[typeof defaultLang]) {
     return ui[lang][key] || ui[defaultLang][key];
-  }
+  };
 }

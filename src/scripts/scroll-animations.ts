@@ -27,7 +27,8 @@ revealElements.forEach((el) => observer.observe(el));
 let ticking = false;
 
 function updateParallax(): void {
-  const parallaxElements = document.querySelectorAll<HTMLElement>('.parallax-layer');
+  const parallaxElements =
+    document.querySelectorAll<HTMLElement>('.parallax-layer');
   const scrolled = window.pageYOffset;
 
   parallaxElements.forEach((el) => {
@@ -56,18 +57,19 @@ card3dElements.forEach((card) => {
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     const rotateX = (y - centerY) / 10;
     const rotateY = (centerX - x) / 10;
-    
+
     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
   });
-  
+
   card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+    card.style.transform =
+      'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
   });
 });
 
@@ -75,7 +77,7 @@ card3dElements.forEach((card) => {
 document.addEventListener('DOMContentLoaded', () => {
   // Trigger initial check for elements in viewport
   updateParallax();
-  
+
   // Add loaded class to body for CSS animations
   document.body.classList.add('page-loaded');
 });

@@ -143,8 +143,18 @@
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* 
+   * The .text-balance utility uses the CSS property `text-wrap: balance` for improved text wrapping.
+   * As of 2024, this property is only supported in recent versions of Chrome and Edge.
+   * See: https://caniuse.com/mdn-css_properties_text-wrap_balance
+   * This @supports block ensures progressive enhancement and graceful degradation.
+   */
+  /* Fallback: define .text-balance as an empty class for unsupported browsers */
+  .text-balance {}
+  @supports (text-wrap: balance) {
+    .text-balance {
+      text-wrap: balance;
+    }
   }
 
   .bg-mesh-gradient {
