@@ -52,6 +52,40 @@
   html {
     scroll-behavior: smooth;
   }
+
+  /* 跳过导航：键盘聚焦时显示 */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0.5rem;
+    z-index: 9999;
+    padding: 0.75rem 1rem;
+    background: rgb(14 165 233);
+    color: white;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 0.5rem;
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
+  /* Selection & focus – 统一选中与焦点样式 */
+  ::selection {
+    background: rgb(14 165 233 / 0.25);
+    color: rgb(var(--color-text-primary));
+  }
+
+  .dark ::selection {
+    background: rgb(56 189 248 / 0.35);
+  }
+
+  *:focus-visible {
+    outline: 2px solid rgb(14 165 233);
+    outline-offset: 2px;
+  }
 }
 
 @layer components {
@@ -62,6 +96,16 @@
     border: 1px solid var(--glass-border);
     border-radius: 1rem;
     box-shadow: var(--shadow-lg);
+  }
+
+  /* 编辑风引用块：左侧竖线强调 */
+  .quote-block {
+    border-left: 4px solid rgb(14 165 233);
+    padding-left: 1.5rem;
+  }
+
+  .dark .quote-block {
+    border-left-color: rgb(56 189 248);
   }
 
   /* Gradient Text */
@@ -150,7 +194,8 @@
    * This @supports block ensures progressive enhancement and graceful degradation.
    */
   /* Fallback: define .text-balance as an empty class for unsupported browsers */
-  .text-balance {}
+  .text-balance {
+  }
   @supports (text-wrap: balance) {
     .text-balance {
       text-wrap: balance;

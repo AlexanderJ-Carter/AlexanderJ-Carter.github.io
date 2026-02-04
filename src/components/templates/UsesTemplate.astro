@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+const t: Record<Lang, Record<string, string>> = {
+  'zh-CN': {
+    title: '我在用什么',
+    subtitle: '日常使用的工具与环境',
+    intro:
+      '列一些我日常会用到的软件、硬件和网站。无推广、无 affiliate，纯个人记录。',
+    sectionDev: '开发',
+    sectionDesign: '设计与创作',
+    sectionOther: '其他',
+    back: '返回首页',
+  },
+  'zh-TW': {
+    title: '我在用什麼',
+    subtitle: '日常使用的工具與環境',
+    intro:
+      '列一些我日常會用到的軟體、硬體和網站。無推廣、無 affiliate，純個人記錄。',
+    sectionDev: '開發',
+    sectionDesign: '設計與創作',
+    sectionOther: '其他',
+    back: '返回首頁',
+  },
+  'en-GB': {
+    title: 'Uses',
+    subtitle: 'Tools and setup I use',
+    intro:
+      'A short list of software, hardware and sites I use. No promotions or affiliate links — just a personal reference.',
+    sectionDev: 'Development',
+    sectionDesign: 'Design & creative',
+    sectionOther: 'Other',
+    back: 'Back to home',
+  },
+  fr: {
+    title: 'Uses',
+    subtitle: 'Outils et environnement',
+    intro:
+      "Quelques logiciels, matériels et sites que j'utilise. Pas de pub ni liens affiliés — juste une référence perso.",
+    sectionDev: 'Développement',
+    sectionDesign: 'Design et création',
+    sectionOther: 'Autre',
+    back: "Retour à l'accueil",
+  },
+  ru: {
+    title: 'Uses',
+    subtitle: 'Инструменты и окружение',
+    intro:
+      'Софт, железо и сайты, которыми пользуюсь. Без рекламы и партнёрских ссылок — личная шпаргалка.',
+    sectionDev: 'Разработка',
+    sectionDesign: 'Дизайн и творчество',
+    sectionOther: 'Прочее',
+    back: 'На главную',
+  },
+};
+
+// Single source for items; labels can be translated in the template if needed
+const devItems = [
+  { name: 'Astro', desc: 'Static site generator for this site' },
+  { name: 'Tailwind CSS', desc: 'Utility-first CSS' },
+  { name: 'VS Code / Cursor', desc: 'Editor' },
+  { name: 'Git', desc: 'Version control' },
+  { name: 'Node.js', desc: 'Runtime' },
+];
+const designItems = [
+  { name: 'Figma', desc: 'UI / mockups' },
+  { name: 'Lightroom / 手机修图', desc: 'Photo editing' },
+  { name: 'Google Fonts', desc: 'Inter, Playfair Display' },
+];
+const otherItems = [
+  { name: 'GitHub', desc: 'Code & Pages' },
+  { name: 'Cloudflare', desc: 'DNS / CDN' },
+  { name: 'Notion / 笔记', desc: 'Notes' },
+];
+
+const text = t[lang as Lang] || t['zh-CN'];
+const baseUrl = lang === 'zh-CN' ? '/' : `/${lang === 'en-GB' ? 'en' : lang}/`;
+---
+
+<BaseLayout title={text.title} description={text.subtitle}>
+  <section class="relative py-16 md:py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-3xl">
+      <div class="text-center mb-12">
+        <span
+          class="inline-block px-4 py-2 rounded-full bg-accent-500/20 text-accent-600 dark:text-accent-400 text-sm font-medium mb-4"
+        >
+          🛠 Uses
+        </span>
+        <h1
+          class="text-4xl md:text-5xl font-display font-bold mb-4 gradient-text"
+        >
+          {text.title}
+        </h1>
+        <p class="text-[rgb(var(--color-text-secondary))]">
+          {text.subtitle}
+        </p>
+      </div>
+
+      <p class="text-[rgb(var(--color-text-secondary))] text-sm mb-10">
+        {text.intro}
+      </p>
+
+      <div class="space-y-8">
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+          >
+            {text.sectionDev}
+          </h2>
+          <ul class="space-y-3">
+            {
+              devItems.map((item) => (
+                <li class="flex justify-between gap-4 flex-wrap">
+                  <span class="font-medium text-[rgb(var(--color-text-primary))]">
+                    {item.name}
+                  </span>
+                  <span class="text-sm text-[rgb(var(--color-text-secondary))]">
+                    {item.desc}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+          >
+            {text.sectionDesign}
+          </h2>
+          <ul class="space-y-3">
+            {
+              designItems.map((item) => (
+                <li class="flex justify-between gap-4 flex-wrap">
+                  <span class="font-medium text-[rgb(var(--color-text-primary))]">
+                    {item.name}
+                  </span>
+                  <span class="text-sm text-[rgb(var(--color-text-secondary))]">
+                    {item.desc}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+          >
+            {text.sectionOther}
+          </h2>
+          <ul class="space-y-3">
+            {
+              otherItems.map((item) => (
+                <li class="flex justify-between gap-4 flex-wrap">
+                  <span class="font-medium text-[rgb(var(--color-text-primary))]">
+                    {item.name}
+                  </span>
+                  <span class="text-sm text-[rgb(var(--color-text-secondary))]">
+                    {item.desc}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href={baseUrl}
+          class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium"
+        >
+          ← {text.back}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,416 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+const t: Record<Lang, Record<string, string>> = {
+  'zh-CN': {
+    title: '彩蛋',
+    subtitle: '发现一些好玩的小惊喜',
+    randomQuote: '随机一言',
+    randomQuoteDesc: '点击刷新，获取一句随机语录',
+    refresh: '换一句',
+    randomWork: '随机作品',
+    randomWorkDesc: '随机展示一张画廊作品，点击可前往画廊',
+    viewGallery: '前往画廊',
+    konamiTitle: 'Konami 彩蛋',
+    konamiDesc:
+      '在任意页面使用键盘输入：上 上 下 下 左 右 左 右 B A，试试看会发生什么？',
+    konamiHint: '（方向键 ↑↑↓↓←→←→ 然后 B A）',
+    typingTitle: '打字速度小测',
+    typingDesc: '在下方输入框中尽可能快地打出给出的句子',
+    start: '开始',
+    again: '再来一次',
+    yourTime: '你的用时',
+    seconds: '秒',
+    placeholder: '在此输入...',
+    sentence: '用镜头记录世界，用代码创造未来。',
+  },
+  'zh-TW': {
+    title: '彩蛋',
+    subtitle: '發現一些好玩的小驚喜',
+    randomQuote: '隨機一言',
+    randomQuoteDesc: '點擊刷新，獲取一句隨機語錄',
+    refresh: '換一句',
+    randomWork: '隨機作品',
+    randomWorkDesc: '隨機展示一張畫廊作品，點擊可前往畫廊',
+    viewGallery: '前往畫廊',
+    konamiTitle: 'Konami 彩蛋',
+    konamiDesc:
+      '在任意頁面使用鍵盤輸入：上 上 下 下 左 右 左 右 B A，試試看會發生什麼？',
+    konamiHint: '（方向鍵 ↑↑↓↓←→←→ 然後 B A）',
+    typingTitle: '打字速度小測',
+    typingDesc: '在下方輸入框中盡可能快地打出給出的句子',
+    start: '開始',
+    again: '再來一次',
+    yourTime: '你的用時',
+    seconds: '秒',
+    placeholder: '在此輸入...',
+    sentence: '用鏡頭記錄世界，用代碼創造未來。',
+  },
+  'en-GB': {
+    title: 'Easter Eggs',
+    subtitle: 'Discover some fun little surprises',
+    randomQuote: 'Random Quote',
+    randomQuoteDesc: 'Click refresh to get a random quote',
+    refresh: 'Refresh',
+    randomWork: 'Random Work',
+    randomWorkDesc:
+      'A random piece from the gallery. Click to visit the gallery.',
+    viewGallery: 'Go to Gallery',
+    konamiTitle: 'Konami Code',
+    konamiDesc:
+      'On any page, press: Up Up Down Down Left Right Left Right B A. See what happens!',
+    konamiHint: '(Arrow keys ↑↑↓↓←→←→ then B A)',
+    typingTitle: 'Typing Speed Test',
+    typingDesc: 'Type the sentence below as fast as you can in the input box.',
+    start: 'Start',
+    again: 'Try Again',
+    yourTime: 'Your time',
+    seconds: 's',
+    placeholder: 'Type here...',
+    sentence: 'Capture the world with a lens, create the future with code.',
+  },
+  fr: {
+    title: 'Easter Eggs',
+    subtitle: 'Découvrez des surprises amusantes',
+    randomQuote: 'Citation aléatoire',
+    randomQuoteDesc: 'Cliquez pour une nouvelle citation',
+    refresh: 'Rafraîchir',
+    randomWork: 'Œuvre aléatoire',
+    randomWorkDesc: 'Une œuvre aléatoire de la galerie. Cliquez pour visiter.',
+    viewGallery: 'Voir la galerie',
+    konamiTitle: 'Code Konami',
+    konamiDesc:
+      "Sur n'importe quelle page : Haut Haut Bas Bas Gauche Droite Gauche Droite B A.",
+    konamiHint: '(Touches fléchées puis B A)',
+    typingTitle: 'Test de vitesse',
+    typingDesc: 'Tapez la phrase ci-dessous le plus vite possible.',
+    start: 'Commencer',
+    again: 'Réessayer',
+    yourTime: 'Votre temps',
+    seconds: 's',
+    placeholder: 'Tapez ici...',
+    sentence:
+      'Capturez le monde avec un objectif, créez le futur avec le code.',
+  },
+  ru: {
+    title: 'Пасхалки',
+    subtitle: 'Найдите весёлые сюрпризы',
+    randomQuote: 'Случайная цитата',
+    randomQuoteDesc: 'Нажмите, чтобы получить новую цитату',
+    refresh: 'Обновить',
+    randomWork: 'Случайная работа',
+    randomWorkDesc: 'Случайная работа из галереи. Нажмите, чтобы перейти.',
+    viewGallery: 'В галерею',
+    konamiTitle: 'Код Konami',
+    konamiDesc:
+      'На любой странице: Вверх Вверх Вниз Вниз Влево Вправо Влево Вправо B A.',
+    konamiHint: '(Стрелки затем B A)',
+    typingTitle: 'Тест скорости набора',
+    typingDesc: 'Введите предложение ниже как можно быстрее.',
+    start: 'Начать',
+    again: 'Ещё раз',
+    yourTime: 'Ваше время',
+    seconds: 'с',
+    placeholder: 'Введите здесь...',
+    sentence: 'Запечатлей мир объективом, создай будущее кодом.',
+  },
+};
+
+const text = t[lang as Lang] || t['zh-CN'];
+
+// 随机一言数据（中英混合，前端随机取）
+const quotes = [
+  {
+    zh: '在光影与代码之间，寻找触动心弦的瞬间。',
+    en: 'Between light and code, find the moment that touches the heart.',
+  },
+  {
+    zh: '设计不仅仅是外观，更是如何运作。',
+    en: 'Design is not just what it looks like. Design is how it works.',
+  },
+  { zh: '保持饥饿，保持愚蠢。', en: 'Stay hungry, stay foolish.' },
+  { zh: '代码如诗，简洁即美。', en: 'Code is poetry. Simplicity is beauty.' },
+  {
+    zh: '每一张照片都是时间的切片。',
+    en: 'Every photograph is a slice of time.',
+  },
+  { zh: '创造源于约束。', en: 'Creativity comes from constraint.' },
+  { zh: '细节成就完美。', en: 'Details make perfection.' },
+  { zh: '做一件事，并把它做好。', en: 'Do one thing and do it well.' },
+  { zh: '学习是终身的事业。', en: 'Learning is a lifelong journey.' },
+  {
+    zh: '简单是可靠的先决条件。',
+    en: 'Simplicity is a prerequisite for reliability.',
+  },
+];
+
+// 画廊图片列表（用于随机展示）
+const galleryImages = [
+  { src: '/img/gallery/landscape-01.jpg', title: '山间晨雾' },
+  { src: '/img/gallery/landscape-02.jpg', title: '海岸日落' },
+  { src: '/img/gallery/landscape-03.jpg', title: '城市天际线' },
+  { src: '/img/gallery/landscape-04.jpg', title: '星空银河' },
+  { src: '/img/gallery/landscape-05.jpg', title: '山谷云海' },
+  { src: '/img/gallery/landscape-06.jpg', title: '湖光山色' },
+  { src: '/img/gallery/landscape-07.jpg', title: '雪域高原' },
+  { src: '/img/gallery/landscape-08.jpg', title: '森林晨曦' },
+  { src: '/img/gallery/landscape-09.jpg', title: '沙漠星空' },
+  { src: '/img/gallery/landscape-10.jpg', title: '梯田晨光' },
+  { src: '/img/gallery/landscape-11.jpg', title: '雪山倒影' },
+  { src: '/img/gallery/landscape-12.jpg', title: '海边礁石' },
+  { src: '/img/gallery/landscape-13.jpg', title: '秋日枫林' },
+  { src: '/img/gallery/nature-flower-01.jpg', title: '雨后花瓣' },
+  { src: '/img/gallery/nature-flower-02.jpg', title: '野花烂漫' },
+  { src: '/img/gallery/food-01.jpg', title: '精致甜点' },
+  { src: '/img/gallery/food-02.jpg', title: '午后咖啡' },
+  { src: '/img/gallery/food-03.jpg', title: '家常美味' },
+];
+
+// 服务端随机选一张图（构建时固定，刷新页面会变）
+const randomIndex = Math.floor(Math.random() * galleryImages.length);
+const randomImage = galleryImages[randomIndex];
+const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang}/gallery`;
+---
+
+<BaseLayout title={text.title} description={text.subtitle}>
+  <section class="relative py-16 md:py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient opacity-60"></div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <span
+          class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
+        >
+          ✨ {lang === 'zh-CN' ? '好玩' : 'Fun'}
+        </span>
+        <h1
+          class="text-4xl md:text-6xl font-display font-bold mb-4 gradient-text"
+        >
+          {text.title}
+        </h1>
+        <p
+          class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+        >
+          {text.subtitle}
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- 随机一言 -->
+        <div class="glass-card p-8 reveal">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-3xl">💬</span>
+            <h2 class="text-2xl font-bold">{text.randomQuote}</h2>
+          </div>
+          <p class="text-[rgb(var(--color-text-secondary))] text-sm mb-6">
+            {text.randomQuoteDesc}
+          </p>
+          <div
+            id="quote-box"
+            class="min-h-[100px] p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))]/80 border border-[rgb(var(--color-border))] mb-4"
+          >
+            <p
+              id="quote-text"
+              class="text-lg font-medium text-[rgb(var(--color-text-primary))] leading-relaxed"
+            >
+              —
+            </p>
+            <p
+              id="quote-lang"
+              class="text-sm text-[rgb(var(--color-text-tertiary))] mt-2"
+            >
+            </p>
+          </div>
+          <button
+            type="button"
+            id="quote-refresh"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-500/20 hover:bg-primary-500/30 text-primary-600 dark:text-primary-400 font-medium transition-colors"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              ></path>
+            </svg>
+            {text.refresh}
+          </button>
+        </div>
+
+        <!-- 随机作品 -->
+        <div class="glass-card p-8 reveal-right">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-3xl">🖼️</span>
+            <h2 class="text-2xl font-bold">{text.randomWork}</h2>
+          </div>
+          <p class="text-[rgb(var(--color-text-secondary))] text-sm mb-6">
+            {text.randomWorkDesc}
+          </p>
+          <a
+            href={galleryPath}
+            class="block group relative overflow-hidden rounded-xl aspect-[4/3] mb-4"
+          >
+            <img
+              src={randomImage.src}
+              alt={randomImage.title}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4"
+            >
+              <span class="text-white font-medium">{randomImage.title}</span>
+            </div>
+          </a>
+          <a
+            href={galleryPath}
+            class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium transition-colors"
+          >
+            {text.viewGallery}
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Konami 彩蛋说明 -->
+      <div class="glass-card p-8 max-w-3xl mx-auto mt-8 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">🎮</span>
+          <h2 class="text-2xl font-bold">{text.konamiTitle}</h2>
+        </div>
+        <p class="text-[rgb(var(--color-text-secondary))] mb-2">
+          {text.konamiDesc}
+        </p>
+        <p class="text-sm text-[rgb(var(--color-text-tertiary))]">
+          {text.konamiHint}
+        </p>
+      </div>
+
+      <!-- 打字速度小测 -->
+      <div class="glass-card p-8 max-w-3xl mx-auto mt-8 reveal">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">⌨️</span>
+          <h2 class="text-2xl font-bold">{text.typingTitle}</h2>
+        </div>
+        <p class="text-[rgb(var(--color-text-secondary))] mb-6">
+          {text.typingDesc}
+        </p>
+        <p
+          id="typing-sentence"
+          class="text-xl font-medium text-[rgb(var(--color-text-primary))] mb-4 p-4 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
+        >
+          {text.sentence}
+        </p>
+        <div class="flex flex-wrap gap-4 items-center">
+          <input
+            type="text"
+            id="typing-input"
+            placeholder={text.placeholder}
+            class="flex-1 min-w-[200px] px-4 py-3 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+            disabled
+          />
+          <button
+            type="button"
+            id="typing-start"
+            class="px-6 py-3 rounded-lg bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold hover:opacity-90 transition-opacity"
+          >
+            {text.start}
+          </button>
+        </div>
+        <div
+          id="typing-result"
+          class="hidden mt-4 p-4 rounded-lg bg-primary-500/10 border border-primary-500/30"
+        >
+          <p class="font-semibold text-primary-600 dark:text-primary-400">
+            🎉 {text.yourTime}: <span id="typing-time">0</span>
+            {text.seconds}
+          </p>
+          <button
+            type="button"
+            id="typing-again"
+            class="mt-2 text-sm text-primary-500 hover:underline"
+          >
+            {text.again}
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ quotes: JSON.stringify(quotes), lang }} is:inline>
+    (function () {
+      const quoteText = document.getElementById('quote-text');
+      const quoteLang = document.getElementById('quote-lang');
+      const quoteRefresh = document.getElementById('quote-refresh');
+      const quoteBox = document.getElementById('quote-box');
+
+      function pickQuote() {
+        const list = typeof quotes === 'string' ? JSON.parse(quotes) : quotes;
+        const i = Math.floor(Math.random() * list.length);
+        const q = list[i];
+        const useZh = lang === 'zh-CN' || lang === 'zh-TW';
+        if (quoteText) quoteText.textContent = useZh ? q.zh : q.en;
+        if (quoteLang)
+          quoteLang.textContent = useZh ? '— ' + q.en : '— ' + q.zh;
+        if (quoteBox) quoteBox.classList.add('animate-pulse');
+        setTimeout(() => quoteBox?.classList.remove('animate-pulse'), 300);
+      }
+
+      pickQuote();
+      quoteRefresh?.addEventListener('click', pickQuote);
+
+      // Typing game
+      const sentenceEl = document.getElementById('typing-sentence');
+      const inputEl = document.getElementById('typing-input');
+      const startBtn = document.getElementById('typing-start');
+      const resultEl = document.getElementById('typing-result');
+      const timeEl = document.getElementById('typing-time');
+      const againBtn = document.getElementById('typing-again');
+
+      if (!sentenceEl || !inputEl || !startBtn) return;
+
+      const sentence = sentenceEl.textContent || '';
+      let startTime = 0;
+
+      startBtn.addEventListener('click', () => {
+        inputEl.disabled = false;
+        inputEl.value = '';
+        inputEl.focus();
+        resultEl?.classList.add('hidden');
+        startTime = Date.now();
+      });
+
+      inputEl.addEventListener('input', () => {
+        if (inputEl.value === sentence) {
+          inputEl.disabled = true;
+          const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
+          if (timeEl) timeEl.textContent = elapsed;
+          resultEl?.classList.remove('hidden');
+        }
+      });
+
+      againBtn?.addEventListener('click', () => {
+        startBtn?.click();
+      });
+    })();
+  </script>
+</BaseLayout>

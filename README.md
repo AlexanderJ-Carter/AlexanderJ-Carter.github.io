@@ -49,6 +49,22 @@
 
 - <https://alexander.xin>
 
+## 本地开发与 Cloudflare 人机验证
+
+线上域名若经过 Cloudflare 且开启了 Bot 防护，直接访问可能会遇到人机验证（Captcha）。**本地调试时请使用本地地址，请求不会经过 Cloudflare，可避免验证：**
+
+```bash
+npm install
+npm run dev
+```
+
+在浏览器打开 **http://localhost:4321**（或终端显示的本地 URL）进行开发和预览，所有请求都在本机完成，不会触发 Cloudflare 人机认证。
+
+若需要在不关掉防护的前提下临时测试线上环境，可在 Cloudflare 控制台：
+
+- **Development Mode**：临时关闭缓存与部分安全检测（约 3 小时），便于调试。
+- **IP Access Rules**：将你的开发机 IP 加入白名单，对指定 IP 跳过质询。
+
 ## License
 
 - MIT License. 查看 `LICENSE` 了解详情。

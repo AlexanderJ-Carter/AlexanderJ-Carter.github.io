@@ -23,244 +23,203 @@ const socialLinks = [
   },
 ];
 
-const exploreLinks = [
-  {
-    label: lang === 'zh-CN' ? '关于我' : 'About',
-    href: lang === 'zh-CN' ? '/about' : '/en/about',
-  },
+function getLangPath(path: string) {
+  return lang === 'zh-CN' ? path : `/${lang === 'en-GB' ? 'en' : lang}${path}`;
+}
+
+const mainNavLinks = [
+  { label: lang === 'zh-CN' ? '关于' : 'About', href: getLangPath('/about') },
   {
     label: lang === 'zh-CN' ? '画廊' : 'Gallery',
-    href: lang === 'zh-CN' ? '/gallery' : '/en/gallery',
+    href: getLangPath('/gallery'),
   },
   {
+    label: lang === 'zh-CN' ? '联系' : 'Contact',
+    href: getLangPath('/contact'),
+  },
+  { label: lang === 'zh-CN' ? '彩蛋' : 'Fun', href: getLangPath('/fun') },
+];
+
+const toolsNavLinks = [
+  {
     label: lang === 'zh-CN' ? '日历' : 'Calendar',
-    href: lang === 'zh-CN' ? '/calendar' : '/en/calendar',
+    href: getLangPath('/calendar'),
   },
   {
     label: lang === 'zh-CN' ? '汇率' : 'Currency',
-    href: lang === 'zh-CN' ? '/currency' : '/en/currency',
+    href: getLangPath('/currency'),
   },
-  {
-    label: lang === 'zh-CN' ? '世界时间' : 'World Time',
-    href: lang === 'zh-CN' ? '/time' : '/en/time',
-  },
+  { label: lang === 'zh-CN' ? '时间' : 'Time', href: getLangPath('/time') },
+  { label: 'Now', href: getLangPath('/now') },
+  { label: 'Uses', href: getLangPath('/uses') },
 ];
 
 const resourceLinks = [
   {
-    label: lang === 'zh-CN' ? '隐私政策' : 'Privacy',
-    href: lang === 'zh-CN' ? '/privacy' : '/en/privacy',
+    label: lang === 'zh-CN' ? '隐私' : 'Privacy',
+    href: getLangPath('/privacy'),
   },
-  {
-    label: lang === 'zh-CN' ? '服务条款' : 'Terms',
-    href: lang === 'zh-CN' ? '/terms' : '/en/terms',
-  },
+  { label: lang === 'zh-CN' ? '条款' : 'Terms', href: getLangPath('/terms') },
   {
     label: lang === 'zh-CN' ? '许可证' : 'License',
-    href: lang === 'zh-CN' ? '/license' : '/en/license',
+    href: getLangPath('/license'),
   },
   {
     label: lang === 'zh-CN' ? '无障碍' : 'Accessibility',
-    href: lang === 'zh-CN' ? '/accessibility' : '/en/accessibility',
+    href: getLangPath('/accessibility'),
   },
   {
-    label: lang === 'zh-CN' ? '安全政策' : 'Security',
-    href: '/security/policy',
+    label: lang === 'zh-CN' ? '安全' : 'Security',
+    href: getLangPath('/security/policy'),
   },
 ];
 ---
 
 <footer
-  class="mt-24 border-t border-[rgb(var(--color-border))] bg-gradient-to-b from-[rgb(var(--color-bg-primary))] to-[rgb(var(--color-bg-secondary))]"
+  class="footer-new mt-24 border-t border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-secondary))]"
 >
-  <div class="container mx-auto px-4 lg:px-8 py-12">
-    <!-- Main Footer Content -->
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4 mb-8">
-      <!-- Brand -->
-      <div class="space-y-4">
-        <div class="flex items-center gap-3">
-          <img
-            src="/img/branding/logo.png"
-            alt="Logo"
-            class="w-10 h-10 rounded-lg"
-          />
-          <div>
-            <p
-              class="font-display font-semibold text-[rgb(var(--color-text-primary))]"
-            >
-              Alexander Carter
-            </p>
-            <p class="text-xs text-[rgb(var(--color-text-secondary))]">
-              {
-                lang === 'zh-CN'
-                  ? '创意与技术的结合'
-                  : 'Creativity meets technology'
-              }
-            </p>
-          </div>
-        </div>
-        <div class="flex items-center gap-3">
-          {
-            socialLinks.map((social) => (
-              <a
-                href={social.href}
-                class="w-9 h-9 flex items-center justify-center rounded-lg border border-[rgb(var(--color-border))] hover:border-primary-500 hover:bg-primary-500/10 hover:text-primary-500 transition-all"
-                aria-label={social.name}
-                target={social.href.startsWith('http') ? '_blank' : undefined}
-                rel={
-                  social.href.startsWith('http')
-                    ? 'noopener noreferrer'
-                    : undefined
-                }
-              >
-                <svg
-                  class="w-4 h-4"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d={social.icon} />
-                </svg>
-              </a>
-            ))
-          }
-        </div>
-      </div>
-
-      <!-- Navigation -->
-      <div>
-        <h3
-          class="font-semibold text-sm mb-4 text-[rgb(var(--color-text-primary))] uppercase tracking-wider"
-        >
-          {lang === 'zh-CN' ? '导航' : 'Navigation'}
-        </h3>
-        <ul class="space-y-2.5 text-sm">
-          {
-            exploreLinks.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-
-      <!-- Resources -->
-      <div>
-        <h3
-          class="font-semibold text-sm mb-4 text-[rgb(var(--color-text-primary))] uppercase tracking-wider"
-        >
-          {lang === 'zh-CN' ? '资源' : 'Resources'}
-        </h3>
-        <ul class="space-y-2.5 text-sm">
-          {
-            resourceLinks.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-
-      <!-- Contact & Info -->
-      <div>
-        <h3
-          class="font-semibold text-sm mb-4 text-[rgb(var(--color-text-primary))] uppercase tracking-wider"
-        >
-          {lang === 'zh-CN' ? '联系' : 'Contact'}
-        </h3>
-        <div class="space-y-2.5 text-sm">
-          <a
-            href="mailto:contact-us@alexander.xin"
-            class="block text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors"
+  <div class="container mx-auto px-4 lg:px-8 py-8 lg:py-10">
+    <!-- 第一行：品牌 + 导航 + 社交 -->
+    <div
+      class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 lg:gap-8"
+    >
+      <div class="flex items-center gap-3 shrink-0">
+        <img src="/img/branding/logo.png" alt="" class="w-10 h-10 rounded-xl" />
+        <div>
+          <p
+            class="font-display font-semibold text-[rgb(var(--color-text-primary))]"
           >
-            contact-us@alexander.xin
-          </a>
-          <p class="text-[rgb(var(--color-text-secondary))] text-xs">
-            {lang === 'zh-CN' ? '北京，中国' : 'Beijing, China'}
+            Alexander Carter
           </p>
-          <a
-            href={lang === 'zh-CN' ? '/sitemap' : '/en/sitemap'}
-            class="inline-block mt-3 text-xs text-primary-500 hover:underline"
-          >
-            {lang === 'zh-CN' ? '🗺️ 网站地图' : '🗺️ Sitemap'}
-          </a>
+          <p class="text-xs text-[rgb(var(--color-text-secondary))]">
+            {lang === 'zh-CN' ? '创意与技术' : 'Creativity & technology'}
+          </p>
         </div>
+      </div>
+      <nav
+        class="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm"
+        aria-label={lang === 'zh-CN' ? '页脚导航' : 'Footer navigation'}
+      >
+        {
+          mainNavLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        <span
+          class="text-[rgb(var(--color-border))] hidden sm:inline"
+          aria-hidden="true">·</span
+        >
+        {
+          toolsNavLinks.map((link) => (
+            <a
+              href={link.href}
+              class="text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+        <span
+          class="text-[rgb(var(--color-border))] hidden sm:inline"
+          aria-hidden="true">·</span
+        >
+        <a
+          href={getLangPath('/sitemap')}
+          class="text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors"
+          >{lang === 'zh-CN' ? '网站地图' : 'Sitemap'}</a
+        >
+      </nav>
+      <div class="flex items-center gap-2 shrink-0">
+        {
+          socialLinks.map((social) => (
+            <a
+              href={social.href}
+              class="w-9 h-9 flex items-center justify-center rounded-lg bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
+              aria-label={social.name}
+              target={social.href.startsWith('http') ? '_blank' : undefined}
+              rel={
+                social.href.startsWith('http')
+                  ? 'noopener noreferrer'
+                  : undefined
+              }
+            >
+              <svg
+                class="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d={social.icon} />
+              </svg>
+            </a>
+          ))
+        }
       </div>
     </div>
 
-    <!-- Badges -->
-    <div class="border-t border-[rgb(var(--color-border))] pt-8">
-      <div class="flex flex-wrap items-center justify-center gap-3 text-xs">
+    <!-- 第二行：法律链接 + 邮箱（小字一行） -->
+    <div
+      class="mt-6 pt-6 border-t border-[rgb(var(--color-border))] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-[rgb(var(--color-text-tertiary))]"
+    >
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+        {
+          resourceLinks.map((link) => (
+            <a
+              href={link.href}
+              class="hover:text-primary-500 transition-colors"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+      <a
+        href="mailto:contact-us@alexander.xin"
+        class="hover:text-primary-500 transition-colors break-all"
+        aria-label={lang === 'zh-CN' ? '发送邮件' : 'Send email'}
+      >
+        contact-us@alexander.xin
+      </a>
+    </div>
+
+    <!-- 第三行：版权 + 许可徽章 -->
+    <div
+      class="mt-5 pt-5 border-t border-[rgb(var(--color-border))] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs"
+    >
+      <p class="text-[rgb(var(--color-text-tertiary))]">
+        © {currentYear} Alexander James Carter
+      </p>
+      <div class="flex flex-wrap items-center gap-3">
         <a
-          href={lang === 'zh-CN' ? '/license' : '/en/license'}
-          class="px-3 py-1.5 rounded-md bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] hover:border-primary-500 transition-colors flex items-center gap-1.5"
+          href={getLangPath('/license')}
+          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
         >
-          <span>CC</span>
-          <span class="text-[rgb(var(--color-text-secondary))]"
-            >BY-NC-SA 4.0</span
-          >
+          <span class="font-medium">CC</span> BY-NC-ND 4.0
         </a>
         <a
           href="https://github.com/AlexanderJ-Carter"
           target="_blank"
           rel="noopener noreferrer"
-          class="px-3 py-1.5 rounded-md bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] hover:border-primary-500 transition-colors flex items-center gap-1.5"
+          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
         >
-          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-            <path
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
+            ><path
               d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-            ></path>
-          </svg>
-          <span class="text-[rgb(var(--color-text-secondary))]"
-            >Open Source</span
+            ></path></svg
           >
+          GitHub
         </a>
         <a
-          href={lang === 'zh-CN' ? '/accessibility' : '/en/accessibility'}
-          class="px-3 py-1.5 rounded-md bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] hover:border-primary-500 transition-colors"
+          href={getLangPath('/accessibility')}
+          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
         >
-          <span class="text-[rgb(var(--color-text-secondary))]"
-            >♿ WCAG 2.1</span
-          >
+          ♿ WCAG 2.1
         </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer Bottom -->
-  <div
-    class="border-t border-[rgb(var(--color-border))] py-4 px-4 lg:px-8 bg-[rgb(var(--color-bg-primary))]"
-  >
-    <div
-      class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-[rgb(var(--color-text-tertiary))]"
-    >
-      <p>© {currentYear} Alexander James Carter</p>
-      <div class="flex items-center gap-2 flex-wrap justify-center">
-        <a
-          href="https://pages.github.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-primary-500 transition-colors">GitHub Pages</a
-        >
-        <span>·</span>
-        <a
-          href="https://www.cloudflare.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="hover:text-primary-500 transition-colors">Cloudflare</a
-        >
       </div>
     </div>
   </div>

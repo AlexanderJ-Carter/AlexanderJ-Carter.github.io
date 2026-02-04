@@ -33,6 +33,7 @@ const mainNavItems: NavItem[] = [
     icon: '✨',
     submenu: [
       { href: getLangPath('/gallery'), label: t('nav.gallery'), icon: '🎨', desc: lang === 'zh-CN' ? '作品展示' : (lang === 'zh-TW' ? '作品展示' : (lang === 'fr' ? 'Galerie' : (lang === 'ru' ? 'Галерея' : 'Gallery'))) },
+      { href: getLangPath('/fun'), label: lang === 'zh-CN' ? '彩蛋' : (lang === 'zh-TW' ? '彩蛋' : (lang === 'fr' ? 'Easter Eggs' : (lang === 'ru' ? 'Пасхалки' : 'Easter Eggs'))), icon: '🥚', desc: lang === 'zh-CN' ? '好玩的小惊喜' : (lang === 'zh-TW' ? '好玩的小驚喜' : (lang === 'fr' ? 'Surprises' : (lang === 'ru' ? 'Сюрпризы' : 'Fun & surprises'))) },
     ]
   },
   { 
@@ -42,6 +43,8 @@ const mainNavItems: NavItem[] = [
       { href: getLangPath('/calendar'), label: lang === 'zh-CN' ? '日历' : (lang === 'zh-TW' ? '日曆' : (lang === 'fr' ? 'Calendrier' : (lang === 'ru' ? 'Календарь' : 'Calendar'))), icon: '📅', desc: lang === 'zh-CN' ? '智能日历' : (lang === 'zh-TW' ? '智能日曆' : (lang === 'fr' ? 'Calendrier intelligent' : (lang === 'ru' ? 'Умный календарь' : 'Smart Calendar'))) },
       { href: getLangPath('/currency'), label: lang === 'zh-CN' ? '汇率' : (lang === 'zh-TW' ? '匯率' : (lang === 'fr' ? 'Taux de change' : (lang === 'ru' ? 'Курс валют' : 'Exchange'))), icon: '💱', desc: lang === 'zh-CN' ? '汇率转换' : (lang === 'zh-TW' ? '匯率轉換' : (lang === 'fr' ? 'Convertisseur de devises' : (lang === 'ru' ? 'Конвертер валют' : 'Currency'))) },
       { href: getLangPath('/time'), label: lang === 'zh-CN' ? '时间' : (lang === 'zh-TW' ? '時間' : (lang === 'fr' ? 'Heure' : (lang === 'ru' ? 'Время' : 'Time'))), icon: '🕐', desc: lang === 'zh-CN' ? '世界时间' : (lang === 'zh-TW' ? '世界時間' : (lang === 'fr' ? 'Heure mondiale' : (lang === 'ru' ? 'Мировое время' : 'World Time'))) },
+      { href: getLangPath('/now'), label: 'Now', icon: '📍', desc: lang === 'zh-CN' ? '此刻在做什么' : (lang === 'zh-TW' ? '此刻在做什麼' : (lang === 'fr' ? 'Ce que je fais' : (lang === 'ru' ? 'Чем занимаюсь' : 'What I\'m doing now'))) },
+      { href: getLangPath('/uses'), label: 'Uses', icon: '🛠', desc: lang === 'zh-CN' ? '使用的工具' : (lang === 'zh-TW' ? '使用的工具' : (lang === 'fr' ? 'Outils utilisés' : (lang === 'ru' ? 'Инструменты' : 'Tools I use'))) },
     ]
   },
   { href: 'https://blog.alexander.xin', label: t('nav.blog'), icon: '📝', external: true },

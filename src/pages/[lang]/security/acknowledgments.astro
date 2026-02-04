@@ -1,0 +1,16 @@
+---
+import SecurityAcknowledgmentsTemplate from '../../../components/templates/SecurityAcknowledgmentsTemplate.astro';
+import { languages } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  const paths = Object.keys(languages).map((lang) => ({ params: { lang } }));
+  paths.push({ params: { lang: 'en' } });
+  return paths;
+}
+
+const { lang: urlLang } = Astro.params;
+const lang = urlLang === 'en' ? 'en-GB' : urlLang;
+const pathPrefix = lang === 'en-GB' ? '/en' : `/${lang}`;
+---
+
+<SecurityAcknowledgmentsTemplate lang={lang} pathPrefix={pathPrefix} />

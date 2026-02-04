@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+const t: Record<Lang, Record<string, string>> = {
+  'zh-CN': {
+    title: '此刻',
+    subtitle: '最近在做什么',
+    intro: '这是「/now」页面，灵感来自 ',
+    introLink: 'nownownow',
+    introEnd: '。会不定期更新，记录当下在做的事。',
+    sectionLife: '生活与学习',
+    life: '在校学习电子信息相关课程，课余做一点个人项目与摄影。最近在把网站收拾得更顺手一些，并保持阅读和运动。',
+    sectionFocus: '当前重心',
+    focus:
+      '完成课业、维护这个站点、偶尔写写博客。没有付费推广或虚假内容，这里就是个人小角落。',
+    updated: '本页最后更新',
+    back: '返回首页',
+  },
+  'zh-TW': {
+    title: '此刻',
+    subtitle: '最近在做什麼',
+    intro: '這是「/now」頁面，靈感來自 ',
+    introLink: 'nownownow',
+    introEnd: '。會不定期更新，記錄當下在做的事。',
+    sectionLife: '生活與學習',
+    life: '在校學習電子信息相關課程，課餘做一點個人項目與攝影。最近在把網站收拾得更順手一些，並保持閱讀和運動。',
+    sectionFocus: '當前重心',
+    focus:
+      '完成課業、維護這個站點、偶爾寫寫部落格。沒有付費推廣或虛假內容，這裡就是個人小角落。',
+    updated: '本頁最後更新',
+    back: '返回首頁',
+  },
+  'en-GB': {
+    title: 'Now',
+    subtitle: "What I'm doing lately",
+    intro: 'This is a /now page, inspired by ',
+    introLink: 'nownownow',
+    introEnd: '. I update it from time to time.',
+    sectionLife: 'Life & study',
+    life: 'Studying electronics and related subjects; side projects and photography in spare time. Lately: improving this site and keeping up with reading and exercise.',
+    sectionFocus: 'Current focus',
+    focus:
+      'Coursework, maintaining this site, and the occasional blog post. No paid promotions or fake content — just a personal corner of the web.',
+    updated: 'Last updated',
+    back: 'Back to home',
+  },
+  fr: {
+    title: 'Maintenant',
+    subtitle: 'Ce que je fais en ce moment',
+    intro: "Cette page « /now » s'inspire de ",
+    introLink: 'nownownow',
+    introEnd: '. Mise à jour de temps en temps.',
+    sectionLife: 'Vie et études',
+    life: 'Études en électronique et sujets connexes ; projets perso et photo à côté. Dernièrement : améliorer ce site, lecture et sport.',
+    sectionFocus: 'Priorité actuelle',
+    focus:
+      'Les cours, ce site, et parfois le blog. Pas de pub payante ni de contenu factice — un coin perso du web.',
+    updated: 'Dernière mise à jour',
+    back: "Retour à l'accueil",
+  },
+  ru: {
+    title: 'Сейчас',
+    subtitle: 'Чем занимаюсь',
+    intro: 'Страница «/now», идея с ',
+    introLink: 'nownownow',
+    introEnd: '. Обновляю время от времени.',
+    sectionLife: 'Жизнь и учёба',
+    life: 'Учусь по направлению электроники и смежным дисциплинам; в свободное время — личные проекты и фотография. В последнее время: доработка сайта, чтение и спорт.',
+    sectionFocus: 'Сейчас в приоритете',
+    focus:
+      'Учёба, поддержка этого сайта, иногда блог. Без платной рекламы и фейков — просто личный уголок в сети.',
+    updated: 'Обновлено',
+    back: 'На главную',
+  },
+};
+
+const text = t[lang as Lang] || t['zh-CN'];
+const nowDate = new Date().toISOString().slice(0, 10);
+---
+
+<BaseLayout title={text.title} description={text.subtitle}>
+  <section class="relative py-16 md:py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-3xl">
+      <div class="text-center mb-12">
+        <span
+          class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
+        >
+          📍 Now
+        </span>
+        <h1
+          class="text-4xl md:text-5xl font-display font-bold mb-4 gradient-text"
+        >
+          {text.title}
+        </h1>
+        <p class="text-[rgb(var(--color-text-secondary))]">
+          {text.subtitle}
+        </p>
+      </div>
+
+      <div class="space-y-8">
+        <p class="text-[rgb(var(--color-text-secondary))] text-sm">
+          {text.intro}
+          <a
+            href="https://nownownow.com/about"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-primary-500 hover:underline"
+          >
+            {text.introLink}
+          </a>
+          {text.introEnd}
+        </p>
+
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
+          >
+            {text.sectionLife}
+          </h2>
+          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+            {text.life}
+          </p>
+        </div>
+
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
+          >
+            {text.sectionFocus}
+          </h2>
+          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+            {text.focus}
+          </p>
+        </div>
+
+        <p class="text-sm text-[rgb(var(--color-text-tertiary))]">
+          {text.updated}: <time datetime={nowDate}>{nowDate}</time>
+        </p>
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href={lang === 'zh-CN' ? '/' : `/${lang === 'en-GB' ? 'en' : lang}/`}
+          class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium"
+        >
+          ← {text.back}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,18 @@
+/* TEAM */
+Creator: Alexander James Carter
+Site: https://alexander.xin
+Location: Beijing, China
+
+/* SITE */
+Last update: 2026
+Language: Chinese (Simplified), English, Français, Русский
+Doctype: HTML5
+IDE: Cursor / VS Code
+Build: Astro
+Standards: HTML5, CSS3, ES2022
+Components: Tailwind CSS, Typography
+
+/* THANKS */
+Hosting: GitHub Pages
+CDN: Cloudflare
+Fonts: Google Fonts (Inter, Playfair Display)

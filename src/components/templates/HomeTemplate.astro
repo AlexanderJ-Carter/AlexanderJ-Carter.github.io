@@ -375,6 +375,19 @@ const intro = introData[lang as Lang] || introData['en-US'];
   >
     <!-- Animated Mesh Gradient Background -->
     <div class="absolute inset-0 bg-mesh-gradient"></div>
+    <!-- Subtle hero glow border -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div
+        class="absolute inset-0 border-[1px] border-white/10 dark:border-white/5 rounded-none"
+        aria-hidden="true"
+      >
+      </div>
+      <div
+        class="absolute -inset-[1px] bg-gradient-to-r from-primary-500/20 via-accent-500/20 to-primary-500/20 blur-2xl opacity-40 animate-gradient bg-300% bg-[length:200%_200%]"
+        aria-hidden="true"
+      >
+      </div>
+    </div>
 
     <!-- Particles Effect -->
     <div class="absolute inset-0 opacity-30">
@@ -495,7 +508,12 @@ const intro = introData[lang as Lang] || introData['en-US'];
   </section>
 
   <!-- Stats Section -->
-  <section class="py-20 bg-[rgb(var(--color-bg-secondary))] reveal">
+  <section class="py-20 bg-[rgb(var(--color-bg-secondary))] reveal relative">
+    <div
+      class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--color-border))] to-transparent"
+      aria-hidden="true"
+    >
+    </div>
     <div class="container mx-auto px-4 lg:px-8">
       <StatsCounter stats={stats} />
     </div>
@@ -514,8 +532,11 @@ const intro = introData[lang as Lang] || introData['en-US'];
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
         {
           featured.items.map((item: any) => (
-            <div class="group relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer">
-              <div class="absolute inset-0 bg-gray-200 animate-pulse" />
+            <a
+              href="/gallery"
+              class="group block relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer card-3d hover:shadow-2xl hover:shadow-primary-500/10 dark:hover:shadow-primary-500/20"
+            >
+              <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse" />
               <img
                 src={item.image}
                 alt={item.title}
@@ -530,7 +551,11 @@ const intro = introData[lang as Lang] || introData['en-US'];
                   {item.title}
                 </h3>
               </div>
-            </div>
+              <div
+                class="absolute inset-0 rounded-2xl ring-2 ring-transparent group-hover:ring-primary-400/50 transition-all duration-300 z-30 pointer-events-none"
+                aria-hidden="true"
+              />
+            </a>
           ))
         }
       </div>
@@ -575,15 +600,15 @@ const intro = introData[lang as Lang] || introData['en-US'];
         ></path>
       </svg>
     </div>
-    <div class="container mx-auto px-4 text-center relative z-10">
-      <blockquote class="max-w-3xl mx-auto">
+    <div class="container mx-auto px-4 relative z-10">
+      <blockquote class="quote-block max-w-3xl mx-auto text-left">
         <p
-          class="text-2xl md:text-4xl font-serif italic mb-8 leading-relaxed text-[rgb(var(--color-text-primary))]"
+          class="text-2xl md:text-4xl font-serif italic mb-6 leading-relaxed text-[rgb(var(--color-text-primary))]"
         >
           "{quote.text}"
         </p>
         <footer
-          class="text-lg text-[rgb(var(--color-text-secondary))] font-medium"
+          class="text-lg text-[rgb(var(--color-text-secondary))] font-medium not-italic"
         >
           — {quote.author}
         </footer>

@@ -1,6 +1,6 @@
 ---
-import SitemapTemplate from '../../components/templates/SitemapTemplate.astro';
-import { languages } from '../../i18n/ui';
+import SecurityPolicyTemplate from '../../../components/templates/SecurityPolicyTemplate.astro';
+import { languages } from '../../../i18n/ui';
 
 export function getStaticPaths() {
   const paths = Object.keys(languages).map((lang) => ({ params: { lang } }));
@@ -12,4 +12,4 @@ const { lang: urlLang } = Astro.params;
 const lang = urlLang === 'en' ? 'en-GB' : urlLang;
 ---
 
-<SitemapTemplate lang={lang} />
+<SecurityPolicyTemplate lang={lang} />

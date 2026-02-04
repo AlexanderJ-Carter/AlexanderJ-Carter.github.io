@@ -1,5 +1,5 @@
 ---
-import SitemapTemplate from '../../components/templates/SitemapTemplate.astro';
+import FunTemplate from '../../components/templates/FunTemplate.astro';
 import { languages } from '../../i18n/ui';
 
 export function getStaticPaths() {
@@ -12,4 +12,4 @@ const { lang: urlLang } = Astro.params;
 const lang = urlLang === 'en' ? 'en-GB' : urlLang;
 ---
 
-<SitemapTemplate lang={lang} />
+<FunTemplate lang={lang} />

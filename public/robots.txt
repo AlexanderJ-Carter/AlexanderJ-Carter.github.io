@@ -1,17 +1,19 @@
-# robots.txt for alexander.xin
 # https://alexander.xin/robots.txt
+# Allow all crawlers; disallow protected/utility paths.
 
 User-agent: *
 Allow: /
+
+# Protected and utility paths (no indexing)
 Disallow: /verify
+Disallow: /zh-CN/verify
+Disallow: /zh-TW/verify
+Disallow: /en-GB/verify
 Disallow: /en/verify
-Disallow: /404
-Disallow: /en/404
+Disallow: /fr/verify
+Disallow: /ru/verify
+Disallow: /404.html
 
-# Sitemap
-Sitemap: https://alexander.xin/sitemap.xml
+# Sitemaps
 Sitemap: https://alexander.xin/sitemap-index.xml
-
-# Crawl-delay (optional)
-Crawl-delay: 1
-
+Sitemap: https://alexander.xin/sitemap-0.xml

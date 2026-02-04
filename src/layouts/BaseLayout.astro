@@ -46,6 +46,7 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
   <link rel="icon" type="image/x-icon" href="/img/branding/favicon.ico">
   <link rel="apple-touch-icon" href="/img/branding/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.json">
+  <link rel="author" href="/humans.txt">
   <meta name="generator" content={Astro.generator}>
   <meta name="theme-color" content="#667eea">
   
@@ -121,9 +122,10 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
   </script>
 </head>
 <body class="antialiased">
+  <a href="#main-content" class="skip-link">{lang === 'zh-CN' ? '跳到主内容' : 'Skip to main content'}</a>
   {showHeader && <Header />}
   
-  <main>
+  <main id="main-content" tabindex="-1">
     <slot />
   </main>
   
@@ -140,5 +142,32 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
   
   <!-- Scroll Animations -->
   <script src="../scripts/scroll-animations.ts"></script>
+
+  <!-- Konami Code Easter Egg -->
+  <script is:inline>
+    (function () {
+      const konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+      let index = 0;
+      document.addEventListener('keydown', function (e) {
+        index = e.key === konami[index] ? index + 1 : 0;
+        if (index === konami.length) {
+          index = 0;
+          for (let i = 0; i < 50; i++) {
+            setTimeout(function () {
+              const el = document.createElement('div');
+              el.textContent = ['🎉', '🎊', '✨', '⭐', '💫', '🌟'][Math.floor(Math.random() * 6)];
+              el.style.cssText = 'position:fixed;pointer-events:none;font-size:1.5rem;left:' + Math.random() * 100 + '%;top:' + Math.random() * 100 + '%;animation:konami-float 2.5s ease-out forwards;z-index:9999;';
+              document.body.appendChild(el);
+              setTimeout(function () { el.remove(); }, 2500);
+            }, i * 40);
+          }
+          const style = document.createElement('style');
+          style.textContent = '@keyframes konami-float{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(1.5)}}';
+          document.head.appendChild(style);
+          setTimeout(function () { style.remove(); }, 3000);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
