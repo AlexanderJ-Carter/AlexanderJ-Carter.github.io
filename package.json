@@ -3,6 +3,9 @@
   "type": "module",
   "version": "3.0.0",
   "license": "MIT",
+  "overrides": {
+    "lodash": ">=4.17.22"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
