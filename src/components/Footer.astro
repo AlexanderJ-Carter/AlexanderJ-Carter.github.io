@@ -267,7 +267,7 @@ const nativeShareLabel = lang === 'zh-CN' ? '系统分享' : lang === 'zh-TW' ? 
   </div>
 </footer>
 
-<script define:vars={{ copiedLabel }}>
+<script define:vars={{ copiedLabel }} is:inline>
   (function () {
     const copyBtn = document.getElementById('footer-copy-link');
     const twitterLink = document.getElementById('footer-twitter-share');
