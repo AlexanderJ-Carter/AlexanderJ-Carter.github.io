@@ -52,7 +52,7 @@ npm install
 npm run dev
 ```
 
-在浏览器打开 **http://localhost:4321**。若线上域名经 Cloudflare 并开启 Bot 防护，本地访问不会经过 Cloudflare，可避免人机验证。线上测试可在 Cloudflare 控制台使用 **Development Mode** 或 **IP Access Rules** 将本机 IP 加入白名单。
+在浏览器打开 **http://localhost:4321** 。若线上域名经 Cloudflare 并开启 Bot 防护，本地访问不会经过 Cloudflare，可避免人机验证。线上测试可在 Cloudflare 控制台使用 **Development Mode** 或 **IP Access Rules** 将本机 IP 加入白名单。
 
 ## 许可
 
