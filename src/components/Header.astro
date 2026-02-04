@@ -60,10 +60,15 @@ const mainNavItems: NavItem[] = [
     <div class="flex items-center justify-between">
       <!-- Logo -->
       <a href={lang === 'zh-CN' ? '/' : `/${lang}/`} class="flex items-center gap-3 group">
-        <img 
-          src="/img/branding/logo.png" 
-          alt="Logo" 
-          class="w-10 h-10 rounded-full transform group-hover:scale-110 transition-transform duration-300"
+        <img
+          src="/img/branding/logo.png"
+          alt="Logo"
+          class="w-10 h-10 rounded-full transform group-hover:scale-110 transition-transform duration-300 dark:hidden"
+        >
+        <img
+          src="/img/branding/logo-dark.png"
+          alt="Logo"
+          class="w-10 h-10 rounded-full transform group-hover:scale-110 transition-transform duration-300 hidden dark:block"
         >
         <span class="font-display font-bold text-xl hidden sm:block text-[rgb(var(--color-text-primary))]">
           Alexander Carter

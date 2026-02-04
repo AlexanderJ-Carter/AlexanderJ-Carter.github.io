@@ -1,5 +1,6 @@
 # https://alexander.xin/robots.txt
 # Allow all crawlers; disallow protected/utility paths.
+# Last updated: 2026-02-04
 
 User-agent: *
 Allow: /

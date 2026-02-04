@@ -11,7 +11,6 @@ import MouseFollower from '../components/MouseFollower.astro';
 import PageLoader from '../components/PageLoader.astro';
 import QuickActions from '../components/QuickActions.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
-import ShareButton from '../components/ShareButton.astro';
 
 interface Props {
   title?: string;
@@ -138,7 +137,6 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
   <PageLoader />
   <QuickActions />
   <ReadingProgress />
-  <ShareButton />
   
   <!-- Scroll Animations -->
   <script src="../scripts/scroll-animations.ts"></script>

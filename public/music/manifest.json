@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-02-04T08:28:06.039Z",
+  "tracks": [
+    {
+      "file": "/music/classical/castle-in-sky.flac",
+      "title": "Castle In Sky",
+      "artist": "未知",
+      "cover": "🏰"
+    },
+    {
+      "file": "/music/piano/kiss-the-rain.ogg",
+      "title": "Kiss The Rain",
+      "artist": "未知",
+      "cover": "🎹"
+    },
+    {
+      "file": "/music/piano/winter-memory.flac",
+      "title": "Winter Memory",
+      "artist": "未知",
+      "cover": "🎹"
+    },
+    {
+      "file": "/music/traditional/colorful-clouds-chasing-moon.ogg",
+      "title": "Colorful Clouds Chasing Moon",
+      "artist": "未知",
+      "cover": "🌙"
+    }
+  ]
+}

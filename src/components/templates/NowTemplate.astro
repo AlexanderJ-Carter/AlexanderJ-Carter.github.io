@@ -16,6 +16,13 @@ const t: Record<Lang, Record<string, string>> = {
     sectionFocus: '当前重心',
     focus:
       '完成课业、维护这个站点、偶尔写写博客。没有付费推广或虚假内容，这里就是个人小角落。',
+    sectionReading: '正在读',
+    reading: '技术博客和产品文章；偶尔翻一翻非虚构和小说。',
+    sectionBullets: '最近在做的几件事',
+    bullet1: '把 Uses / Now 页面写得更实在一点',
+    bullet2: '坚持每周运动几次',
+    bullet3: '整理相册和画廊里的图',
+    bullet4: '学一点新东西（语言或框架）',
     updated: '本页最后更新',
     back: '返回首页',
   },
@@ -30,6 +37,13 @@ const t: Record<Lang, Record<string, string>> = {
     sectionFocus: '當前重心',
     focus:
       '完成課業、維護這個站點、偶爾寫寫部落格。沒有付費推廣或虛假內容，這裡就是個人小角落。',
+    sectionReading: '正在讀',
+    reading: '技術部落格和產品文章；偶爾翻一翻非虛構和小說。',
+    sectionBullets: '最近在做的幾件事',
+    bullet1: '把 Uses / Now 頁面寫得更實在一點',
+    bullet2: '堅持每週運動幾次',
+    bullet3: '整理相簿和畫廊裡的圖',
+    bullet4: '學一點新東西（語言或框架）',
     updated: '本頁最後更新',
     back: '返回首頁',
   },
@@ -44,6 +58,13 @@ const t: Record<Lang, Record<string, string>> = {
     sectionFocus: 'Current focus',
     focus:
       'Coursework, maintaining this site, and the occasional blog post. No paid promotions or fake content — just a personal corner of the web.',
+    sectionReading: 'Reading',
+    reading: 'Tech blogs and product writing; occasionally non-fiction and fiction.',
+    sectionBullets: 'Lately',
+    bullet1: 'Making the Uses and Now pages more useful',
+    bullet2: 'Keeping a few workout sessions per week',
+    bullet3: 'Organising photos and the gallery',
+    bullet4: 'Picking up something new (language or tool)',
     updated: 'Last updated',
     back: 'Back to home',
   },
@@ -58,6 +79,13 @@ const t: Record<Lang, Record<string, string>> = {
     sectionFocus: 'Priorité actuelle',
     focus:
       'Les cours, ce site, et parfois le blog. Pas de pub payante ni de contenu factice — un coin perso du web.',
+    sectionReading: 'En train de lire',
+    reading: 'Blogs tech et articles produit ; de temps en temps essais et romans.',
+    sectionBullets: 'En ce moment',
+    bullet1: 'Rendre les pages Uses et Now plus utiles',
+    bullet2: 'Garder quelques séances de sport par semaine',
+    bullet3: 'Ranger les photos et la galerie',
+    bullet4: 'Apprendre un truc nouveau (langage ou outil)',
     updated: 'Dernière mise à jour',
     back: "Retour à l'accueil",
   },
@@ -72,6 +100,13 @@ const t: Record<Lang, Record<string, string>> = {
     sectionFocus: 'Сейчас в приоритете',
     focus:
       'Учёба, поддержка этого сайта, иногда блог. Без платной рекламы и фейков — просто личный уголок в сети.',
+    sectionReading: 'Читаю',
+    reading: 'Технические блоги и статьи о продуктах; иногда нон-фикшн и художественное.',
+    sectionBullets: 'В последнее время',
+    bullet1: 'Делаю страницы Uses и Now полезнее',
+    bullet2: 'Поддерживаю несколько тренировок в неделю',
+    bullet3: 'Разбираю фото и галерею',
+    bullet4: 'Учу что-то новое (язык или инструмент)',
     updated: 'Обновлено',
     back: 'На главную',
   },
@@ -135,6 +170,31 @@ const nowDate = new Date().toISOString().slice(0, 10);
           <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
             {text.focus}
           </p>
+        </div>
+
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
+          >
+            {text.sectionReading}
+          </h2>
+          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+            {text.reading}
+          </p>
+        </div>
+
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
+          >
+            {text.sectionBullets}
+          </h2>
+          <ul class="list-disc list-inside space-y-2 text-[rgb(var(--color-text-secondary))]">
+            <li>{text.bullet1}</li>
+            <li>{text.bullet2}</li>
+            <li>{text.bullet3}</li>
+            <li>{text.bullet4}</li>
+          </ul>
         </div>
 
         <p class="text-sm text-[rgb(var(--color-text-tertiary))]">

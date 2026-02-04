@@ -237,17 +237,28 @@ const t = translations[lang] || translations['zh-CN'];
 </script>
 
 <style>
-  /* Keep this dock clear of other floating buttons */
+  /* 搜索按钮：左侧固定，与右侧音乐/分享/回到顶部错开，移动端留足触控区域 */
   #quick-actions {
     left: 1rem;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 4.5rem);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
   }
 
   @media (min-width: 768px) {
     #quick-actions {
-      left: auto;
-      right: 1.5rem;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 8.5rem);
+      left: 1.5rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+    }
+  }
+
+  @media (max-width: 640px) {
+    #quick-actions {
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+    }
+    #quick-search-btn {
+      width: 2.75rem;
+      height: 2.75rem;
+      min-width: 44px;
+      min-height: 44px;
     }
   }
 </style>

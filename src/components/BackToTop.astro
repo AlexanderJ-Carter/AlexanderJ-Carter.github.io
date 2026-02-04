@@ -68,24 +68,24 @@ const ariaLabel = lang === 'zh-CN' ? '回到顶部' : 'Back to top';
     background: linear-gradient(135deg, #3b82f6 0%, #d946ef 100%);
   }
 
-  /* Position above Share with comfortable spacing */
+  /* 位于分享按钮上方，与音乐 FAB 同列 */
   #back-to-top {
     right: 1rem;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 4.75rem);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 8.5rem);
   }
 
   @media (min-width: 768px) {
     #back-to-top {
       right: 1.5rem;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 6.5rem);
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 9rem);
     }
   }
 
-  /* Mobile responsive sizing */
   @media (max-width: 640px) {
     #back-to-top {
       width: 2.75rem;
       height: 2.75rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 8rem);
     }
   }
 </style>

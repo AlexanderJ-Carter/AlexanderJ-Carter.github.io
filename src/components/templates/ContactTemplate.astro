@@ -27,6 +27,8 @@ const contactData: Record<Lang, any> = {
     submit: '发送消息',
     success: '✓ 消息已发送！感谢您的联系。',
     quickLinks: '或者通过以下方式快速联系我：',
+    contactNotice:
+      '通过本页发送的消息仅用于回复与沟通，不构成保密或合同关系。我们不会将您的信息用于营销或转交第三方，具体见隐私政策与服务条款。',
   },
   'zh-TW': {
     title: '聯繫我',
@@ -49,6 +51,8 @@ const contactData: Record<Lang, any> = {
     submit: '發送消息',
     success: '✓ 消息已發送！感謝您的聯繫。',
     quickLinks: '或者通過以下方式快速聯繫我：',
+    contactNotice:
+      '透過本頁發送的訊息僅用於回覆與溝通，不構成保密或契約關係。我們不會將您的資訊用於行銷或轉交第三方，具體見隱私權政策與服務條款。',
   },
   'en-US': {
     title: 'Contact Me',
@@ -71,6 +75,8 @@ const contactData: Record<Lang, any> = {
     submit: 'Send Message',
     success: '✓ Message sent! Thank you for reaching out.',
     quickLinks: 'Or reach out to me quickly through:',
+    contactNotice:
+      'Messages sent through this page are used only for reply and communication and do not create a confidential or contractual relationship. We do not use your information for marketing or share it with third parties; see our Privacy Policy and Terms of Service.',
   },
   'en-GB': {
     title: 'Contact Me',
@@ -93,6 +99,8 @@ const contactData: Record<Lang, any> = {
     submit: 'Send Message',
     success: '✓ Message sent! Thank you for reaching out.',
     quickLinks: 'Or reach out to me quickly through:',
+    contactNotice:
+      'Messages sent through this page are used only for reply and communication and do not create a confidential or contractual relationship. We do not use your information for marketing or share it with third parties; see our Privacy Policy and Terms of Service.',
   },
   fr: {
     title: 'Contactez-moi',
@@ -115,6 +123,8 @@ const contactData: Record<Lang, any> = {
     submit: 'Envoyer le Message',
     success: '✓ Message envoyé ! Merci de nous avoir contactés.',
     quickLinks: 'Ou contactez-moi rapidement via :',
+    contactNotice:
+      "Les messages envoyés via cette page sont utilisés uniquement pour la réponse et la communication et ne créent pas de relation confidentielle ou contractuelle. Nous n'utilisons pas vos informations à des fins marketing ni ne les partageons avec des tiers ; voir notre Politique de confidentialité et Conditions d'utilisation.",
   },
   ru: {
     title: 'Свяжитесь со мной',
@@ -137,6 +147,8 @@ const contactData: Record<Lang, any> = {
     submit: 'Отправить Сообщение',
     success: '✓ Сообщение отправлено! Спасибо за обращение.',
     quickLinks: 'Или свяжитесь со мной быстро через:',
+    contactNotice:
+      'Сообщения, отправленные через эту страницу, используются только для ответа и общения и не создают конфиденциальных или договорных отношений. Мы не используем вашу информацию в маркетинговых целях и не передаём её третьим лицам; см. нашу Политику конфиденциальности и Условия использования.',
   },
 };
 
@@ -327,6 +339,15 @@ const content = contactData[lang as Lang] || contactData['en-US'];
           </a>
         </div>
       </div>
+
+      <!-- Contact notice (privacy & terms) -->
+      {
+        content.contactNotice && (
+          <p class="mt-10 text-sm text-center text-[rgb(var(--color-text-tertiary))] max-w-xl mx-auto border-t border-[rgb(var(--color-border))] pt-6">
+            {content.contactNotice}
+          </p>
+        )
+      }
     </div>
   </main>
 </BaseLayout>

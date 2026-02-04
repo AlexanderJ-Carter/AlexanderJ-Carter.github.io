@@ -1,30 +1,25 @@
 # Security Policy for alexander.xin
+# https://alexander.xin/.well-known/security.txt
 # Last updated: 2026-02-04
 
+# Intro (optional): report vulnerabilities responsibly
 # Contact information for security reports
-Contact: mailto:2253940186@qq.com
 Contact: mailto:contact-us@alexander.xin
 
 # Preferred languages for security reports
 Preferred-Languages: zh-CN, en
 
-# Our security acknowledgments page
-Acknowledgments: https://alexander.xin/security/acknowledgments
-
-# Security-related job postings (currently not available)
-# Hiring: https://alexander.xin/careers
-
 # Vulnerability disclosure policy
 Policy: https://alexander.xin/security/policy
 
-# PGP key for encrypted communications
+# Security acknowledgments (researchers who helped)
+Acknowledgments: https://alexander.xin/security/acknowledgments
+
+# PGP key for encrypted communications (sensitive reports)
 Encryption: https://alexander.xin/security/pgp-key.asc
 
 # Canonical URL for this file
 Canonical: https://alexander.xin/.well-known/security.txt
 
-# File expiration date (key never expires)
-Expires: 2030-07-22T00:00:00.000Z
-
-# Digital signature for file integrity
-# Signature: https://alexander.xin/.well-known/security.txt.sig
+# This file expires; renew before this date (RFC 9116)
+Expires: 2027-02-04T00:00:00.000Z

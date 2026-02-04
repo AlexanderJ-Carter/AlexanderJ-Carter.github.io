@@ -852,6 +852,19 @@ const galleryItems =
                   : 'Explore my photography portfolio, capturing beautiful moments in life'
         }
       </p>
+      <p class="mt-4 text-sm text-[rgb(var(--color-text-tertiary))] max-w-xl mx-auto">
+        {
+          lang === 'zh-CN'
+            ? '使用下方分类筛选风景、自然、美食，或直接浏览全部作品。'
+            : lang === 'zh-TW'
+              ? '使用下方分類篩選風景、自然、美食，或直接瀏覽全部作品。'
+              : lang === 'fr'
+                ? 'Filtrez par paysage, nature ou nourriture, ou parcourez tout.'
+                : lang === 'ru'
+                  ? 'Фильтруйте по пейзажу, природе или еде или смотрите все работы.'
+                  : 'Filter by landscape, nature or food, or browse all works.'
+        }
+      </p>
     </div>
   </section>
 

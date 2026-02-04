@@ -73,6 +73,11 @@ const resourceLinks = [
     href: getLangPath('/security/policy'),
   },
 ];
+
+const shareLabel = lang === 'zh-CN' ? '分享本页' : lang === 'zh-TW' ? '分享本頁' : lang === 'en-GB' ? 'Share this page' : lang === 'fr' ? 'Partager cette page' : lang === 'ru' ? 'Поделиться' : 'Share this page';
+const copyLinkLabel = lang === 'zh-CN' ? '复制链接' : lang === 'zh-TW' ? '複製連結' : lang === 'en-GB' ? 'Copy link' : lang === 'fr' ? 'Copier le lien' : lang === 'ru' ? 'Скопировать ссылку' : 'Copy link';
+const copiedLabel = lang === 'zh-CN' ? '已复制' : lang === 'zh-TW' ? '已複製' : lang === 'en-GB' ? 'Copied' : lang === 'fr' ? 'Copié' : lang === 'ru' ? 'Скопировано' : 'Copied';
+const nativeShareLabel = lang === 'zh-CN' ? '系统分享' : lang === 'zh-TW' ? '系統分享' : lang === 'en-GB' ? 'Share' : lang === 'fr' ? 'Partager' : lang === 'ru' ? 'Поделиться' : 'Share';
 ---
 
 <footer
@@ -84,7 +89,8 @@ const resourceLinks = [
       class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 lg:gap-8"
     >
       <div class="flex items-center gap-3 shrink-0">
-        <img src="/img/branding/logo.png" alt="" class="w-10 h-10 rounded-xl" />
+        <img src="/img/branding/logo.png" alt="" class="w-10 h-10 rounded-xl dark:hidden" />
+        <img src="/img/branding/logo-dark.png" alt="" class="w-10 h-10 rounded-xl hidden dark:block" />
         <div>
           <p
             class="font-display font-semibold text-[rgb(var(--color-text-primary))]"
@@ -134,31 +140,67 @@ const resourceLinks = [
           >{lang === 'zh-CN' ? '网站地图' : 'Sitemap'}</a
         >
       </nav>
-      <div class="flex items-center gap-2 shrink-0">
-        {
-          socialLinks.map((social) => (
-            <a
-              href={social.href}
-              class="w-9 h-9 flex items-center justify-center rounded-lg bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
-              aria-label={social.name}
-              target={social.href.startsWith('http') ? '_blank' : undefined}
-              rel={
-                social.href.startsWith('http')
-                  ? 'noopener noreferrer'
-                  : undefined
-              }
-            >
-              <svg
-                class="w-4 h-4"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
+      <div class="flex flex-wrap items-center gap-3 shrink-0">
+        <!-- 分享本页：复制链接、Twitter/X、系统分享 -->
+        <div class="flex items-center gap-2" role="group" aria-label={shareLabel}>
+          <span class="text-xs text-[rgb(var(--color-text-tertiary))] hidden sm:inline">{shareLabel}</span>
+          <button
+            type="button"
+            id="footer-copy-link"
+            class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors text-xs"
+            aria-label={copyLinkLabel}
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span>{copyLinkLabel}</span>
+          </button>
+          <a
+            id="footer-twitter-share"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors text-xs"
+            aria-label="Twitter / X"
+          >
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>X</span>
+          </a>
+          <button
+            type="button"
+            id="footer-native-share"
+            class="footer-native-share hidden inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors text-xs"
+            aria-label={nativeShareLabel}
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+            <span>{nativeShareLabel}</span>
+          </button>
+        </div>
+        <span class="text-[rgb(var(--color-border))] hidden md:inline" aria-hidden="true">·</span>
+        <div class="flex items-center gap-2">
+          {
+            socialLinks.map((social) => (
+              <a
+                href={social.href}
+                class="w-9 h-9 flex items-center justify-center rounded-lg bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
+                aria-label={social.name}
+                target={social.href.startsWith('http') ? '_blank' : undefined}
+                rel={
+                  social.href.startsWith('http')
+                    ? 'noopener noreferrer'
+                    : undefined
+                }
               >
-                <path d={social.icon} />
-              </svg>
-            </a>
-          ))
-        }
+                <svg
+                  class="w-4 h-4"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d={social.icon} />
+                </svg>
+              </a>
+            ))
+          }
+        </div>
       </div>
     </div>
 
@@ -224,3 +266,43 @@ const resourceLinks = [
     </div>
   </div>
 </footer>
+
+<script define:vars={{ copiedLabel }}>
+  (function () {
+    const copyBtn = document.getElementById('footer-copy-link');
+    const twitterLink = document.getElementById('footer-twitter-share');
+    const nativeBtn = document.getElementById('footer-native-share');
+
+    if (copyBtn) {
+      const copySpan = copyBtn.querySelector('span');
+      copyBtn.addEventListener('click', async function () {
+        const url = window.location.href;
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(url);
+          } else {
+            throw new Error('Clipboard not available');
+          }
+          if (copySpan) {
+            const orig = copySpan.textContent;
+            copySpan.textContent = copiedLabel || 'Copied';
+            setTimeout(function () { copySpan.textContent = orig; }, 1500);
+          }
+        } catch (_) {
+          window.prompt('Copy this URL:', url);
+        }
+      });
+    }
+
+    if (twitterLink) {
+      twitterLink.href = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent(document.title || '');
+    }
+
+    if (nativeBtn && typeof navigator !== 'undefined' && navigator.share) {
+      nativeBtn.classList.remove('hidden');
+      nativeBtn.addEventListener('click', function () {
+        navigator.share({ title: document.title, url: window.location.href }).catch(function () {});
+      });
+    }
+  })();
+</script>

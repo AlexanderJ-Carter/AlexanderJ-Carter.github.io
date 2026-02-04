@@ -12,6 +12,8 @@ const t: Record<Lang, Record<string, string>> = {
       '列一些我日常会用到的软件、硬件和网站。无推广、无 affiliate，纯个人记录。',
     sectionDev: '开发',
     sectionDesign: '设计与创作',
+    sectionHardware: '硬件与设备',
+    sectionRead: '阅读与输入',
     sectionOther: '其他',
     back: '返回首页',
   },
@@ -22,6 +24,8 @@ const t: Record<Lang, Record<string, string>> = {
       '列一些我日常會用到的軟體、硬體和網站。無推廣、無 affiliate，純個人記錄。',
     sectionDev: '開發',
     sectionDesign: '設計與創作',
+    sectionHardware: '硬體與設備',
+    sectionRead: '閱讀與輸入',
     sectionOther: '其他',
     back: '返回首頁',
   },
@@ -32,6 +36,8 @@ const t: Record<Lang, Record<string, string>> = {
       'A short list of software, hardware and sites I use. No promotions or affiliate links — just a personal reference.',
     sectionDev: 'Development',
     sectionDesign: 'Design & creative',
+    sectionHardware: 'Hardware & devices',
+    sectionRead: 'Reading & input',
     sectionOther: 'Other',
     back: 'Back to home',
   },
@@ -42,6 +48,8 @@ const t: Record<Lang, Record<string, string>> = {
       "Quelques logiciels, matériels et sites que j'utilise. Pas de pub ni liens affiliés — juste une référence perso.",
     sectionDev: 'Développement',
     sectionDesign: 'Design et création',
+    sectionHardware: 'Matériel',
+    sectionRead: 'Lecture et saisie',
     sectionOther: 'Autre',
     back: "Retour à l'accueil",
   },
@@ -52,28 +60,42 @@ const t: Record<Lang, Record<string, string>> = {
       'Софт, железо и сайты, которыми пользуюсь. Без рекламы и партнёрских ссылок — личная шпаргалка.',
     sectionDev: 'Разработка',
     sectionDesign: 'Дизайн и творчество',
+    sectionHardware: 'Железо и устройства',
+    sectionRead: 'Чтение и ввод',
     sectionOther: 'Прочее',
     back: 'На главную',
   },
 };
 
-// Single source for items; labels can be translated in the template if needed
 const devItems = [
   { name: 'Astro', desc: 'Static site generator for this site' },
   { name: 'Tailwind CSS', desc: 'Utility-first CSS' },
-  { name: 'VS Code / Cursor', desc: 'Editor' },
+  { name: 'VS Code / Cursor', desc: 'Daily editor for code and Markdown' },
   { name: 'Git', desc: 'Version control' },
-  { name: 'Node.js', desc: 'Runtime' },
+  { name: 'Node.js', desc: 'Local dev and scripts' },
+  { name: 'TypeScript', desc: 'Typed JS for larger projects' },
+  { name: 'Prettier / ESLint', desc: 'Formatting and lint' },
 ];
 const designItems = [
-  { name: 'Figma', desc: 'UI / mockups' },
+  { name: 'Figma', desc: 'UI mockups and simple graphics' },
   { name: 'Lightroom / 手机修图', desc: 'Photo editing' },
-  { name: 'Google Fonts', desc: 'Inter, Playfair Display' },
+  { name: 'Google Fonts', desc: 'Inter, Playfair Display on this site' },
+  { name: 'Unsplash / Pexels', desc: 'Reference and assets' },
+];
+const hardwareItems = [
+  { name: 'Laptop', desc: 'Main dev and study machine' },
+  { name: 'Phone', desc: 'Photos, reading, messaging' },
+  { name: 'Headphones', desc: 'Music, calls, focus' },
+];
+const readItems = [
+  { name: 'Kindle / 微信读书', desc: 'E-books and short reads' },
+  { name: 'RSS', desc: 'Blogs and feeds' },
+  { name: 'Notion / 笔记', desc: 'Notes and todos' },
 ];
 const otherItems = [
-  { name: 'GitHub', desc: 'Code & Pages' },
-  { name: 'Cloudflare', desc: 'DNS / CDN' },
-  { name: 'Notion / 笔记', desc: 'Notes' },
+  { name: 'GitHub', desc: 'Code host and Pages' },
+  { name: 'Cloudflare', desc: 'DNS, CDN, security' },
+  { name: 'Domain & email', desc: 'Site and contact' },
 ];
 
 const text = t[lang as Lang] || t['zh-CN'];
@@ -136,6 +158,50 @@ const baseUrl = lang === 'zh-CN' ? '/' : `/${lang === 'en-GB' ? 'en' : lang}/`;
           <ul class="space-y-3">
             {
               designItems.map((item) => (
+                <li class="flex justify-between gap-4 flex-wrap">
+                  <span class="font-medium text-[rgb(var(--color-text-primary))]">
+                    {item.name}
+                  </span>
+                  <span class="text-sm text-[rgb(var(--color-text-secondary))]">
+                    {item.desc}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+          >
+            {text.sectionHardware}
+          </h2>
+          <ul class="space-y-3">
+            {
+              hardwareItems.map((item) => (
+                <li class="flex justify-between gap-4 flex-wrap">
+                  <span class="font-medium text-[rgb(var(--color-text-primary))]">
+                    {item.name}
+                  </span>
+                  <span class="text-sm text-[rgb(var(--color-text-secondary))]">
+                    {item.desc}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+          >
+            {text.sectionRead}
+          </h2>
+          <ul class="space-y-3">
+            {
+              readItems.map((item) => (
                 <li class="flex justify-between gap-4 flex-wrap">
                   <span class="font-medium text-[rgb(var(--color-text-primary))]">
                     {item.name}
