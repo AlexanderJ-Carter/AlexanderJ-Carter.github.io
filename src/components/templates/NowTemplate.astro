@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedTools from '../RelatedTools.astro';
 
 const { lang } = Astro.props;
 type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
@@ -127,7 +128,7 @@ const nowDate = new Date().toISOString().slice(0, 10);
           📍 Now
         </span>
         <h1
-          class="text-4xl md:text-5xl font-display font-bold mb-4 gradient-text"
+          class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight"
         >
           {text.title}
         </h1>
@@ -202,14 +203,7 @@ const nowDate = new Date().toISOString().slice(0, 10);
         </p>
       </div>
 
-      <div class="mt-12 text-center">
-        <a
-          href={lang === 'zh-CN' ? '/' : `/${lang === 'en-GB' ? 'en' : lang}/`}
-          class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium"
-        >
-          ← {text.back}
-        </a>
-      </div>
+      <RelatedTools lang={lang} current="now" />
     </div>
   </section>
 </BaseLayout>

@@ -45,6 +45,8 @@ const mainNavItems: NavItem[] = [
       { href: getLangPath('/time'), label: lang === 'zh-CN' ? '时间' : (lang === 'zh-TW' ? '時間' : (lang === 'fr' ? 'Heure' : (lang === 'ru' ? 'Время' : 'Time'))), icon: '🕐', desc: lang === 'zh-CN' ? '世界时间' : (lang === 'zh-TW' ? '世界時間' : (lang === 'fr' ? 'Heure mondiale' : (lang === 'ru' ? 'Мировое время' : 'World Time'))) },
       { href: getLangPath('/now'), label: 'Now', icon: '📍', desc: lang === 'zh-CN' ? '此刻在做什么' : (lang === 'zh-TW' ? '此刻在做什麼' : (lang === 'fr' ? 'Ce que je fais' : (lang === 'ru' ? 'Чем занимаюсь' : 'What I\'m doing now'))) },
       { href: getLangPath('/uses'), label: 'Uses', icon: '🛠', desc: lang === 'zh-CN' ? '使用的工具' : (lang === 'zh-TW' ? '使用的工具' : (lang === 'fr' ? 'Outils utilisés' : (lang === 'ru' ? 'Инструменты' : 'Tools I use'))) },
+      { href: getLangPath('/units'), label: lang === 'zh-CN' ? '单位换算' : (lang === 'zh-TW' ? '單位換算' : (lang === 'fr' ? 'Unités' : (lang === 'ru' ? 'Единицы' : 'Units'))), icon: '📐', desc: lang === 'zh-CN' ? '温度·长度·重量' : (lang === 'zh-TW' ? '溫度·長度·重量' : (lang === 'fr' ? 'Température, longueur, poids' : (lang === 'ru' ? 'Температура, длина, вес' : 'Temperature, length, weight'))) },
+      { href: getLangPath('/qr'), label: lang === 'zh-CN' ? 'QR 生成' : (lang === 'zh-TW' ? 'QR 生成' : (lang === 'fr' ? 'QR Code' : (lang === 'ru' ? 'QR-код' : 'QR Code'))), icon: '📱', desc: lang === 'zh-CN' ? '链接转二维码' : (lang === 'zh-TW' ? '連結轉二維碼' : (lang === 'fr' ? 'Lien en QR' : (lang === 'ru' ? 'Ссылка в QR' : 'URL to QR code'))) },
     ]
   },
   { href: 'https://blog.alexander.xin', label: t('nav.blog'), icon: '📝', external: true },
@@ -70,7 +72,7 @@ const mainNavItems: NavItem[] = [
           alt="Logo"
           class="w-10 h-10 rounded-full transform group-hover:scale-110 transition-transform duration-300 hidden dark:block"
         >
-        <span class="font-display font-bold text-xl hidden sm:block text-[rgb(var(--color-text-primary))]">
+        <span class="font-heading font-bold text-xl hidden sm:block text-[rgb(var(--color-text-primary))] tracking-tight">
           Alexander Carter
         </span>
       </a>
@@ -218,10 +220,10 @@ const mainNavItems: NavItem[] = [
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #3b82f6, #d946ef);
+    height: 2px;
+    background: linear-gradient(90deg, #0ea5e9, #d946ef);
     width: 0%;
-    transition: width 0.1s ease;
+    transition: width 0.15s ease-out;
   }
 
   #header.nav-hidden {

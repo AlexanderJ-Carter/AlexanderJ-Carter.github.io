@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedTools from '../RelatedTools.astro';
 
 const { lang } = Astro.props;
 
@@ -16,6 +17,7 @@ const calendarData: Record<Lang, any> = {
     loading: '加载中...',
     weekdays: ['日', '一', '二', '三', '四', '五', '六'],
     today: '今天',
+    goToToday: '回到今天',
     addEvent: '添加日程',
     upcomingEvents: '近期日程',
     noEvents: '暂无近期日程',
@@ -36,6 +38,7 @@ const calendarData: Record<Lang, any> = {
     loading: '加載中...',
     weekdays: ['日', '一', '二', '三', '四', '五', '六'],
     today: '今天',
+    goToToday: '回到今天',
     addEvent: '添加日程',
     upcomingEvents: '近期日程',
     noEvents: '暫無近期日程',
@@ -56,6 +59,7 @@ const calendarData: Record<Lang, any> = {
     loading: 'Loading...',
     weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     today: 'Today',
+    goToToday: 'Go to today',
     addEvent: 'Add Event',
     upcomingEvents: 'Upcoming Events',
     noEvents: 'No upcoming events',
@@ -76,6 +80,7 @@ const calendarData: Record<Lang, any> = {
     loading: 'Loading...',
     weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     today: 'Today',
+    goToToday: 'Go to today',
     addEvent: 'Add Event',
     upcomingEvents: 'Upcoming Events',
     noEvents: 'No upcoming events',
@@ -96,6 +101,7 @@ const calendarData: Record<Lang, any> = {
     loading: 'Chargement...',
     weekdays: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
     today: "Aujourd'hui",
+    goToToday: "Retour à aujourd'hui",
     addEvent: 'Ajouter un événement',
     upcomingEvents: 'Événements à venir',
     noEvents: "Pas d'événements à venir",
@@ -116,6 +122,7 @@ const calendarData: Record<Lang, any> = {
     loading: 'Загрузка...',
     weekdays: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
     today: 'Сегодня',
+    goToToday: 'На сегодня',
     addEvent: 'Добавить событие',
     upcomingEvents: 'Предстоящие события',
     noEvents: 'Нет предстоящих событий',
@@ -133,16 +140,15 @@ const content = calendarData[lang as Lang] || calendarData['en-US'];
 
 <BaseLayout title={`${content.title} - Alexander Carter`}>
   <!-- Hero Section -->
-  <section class="pt-32 pb-16 bg-mesh-gradient">
-    <div class="container mx-auto px-4 lg:px-8 text-center">
-      <h1
-        class="text-5xl md:text-6xl font-display font-bold mb-6 gradient-text"
-      >
+  <section class="relative pt-28 pb-16 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true" />
+    <div class="absolute inset-0 opacity-100" style="background: var(--hero-spotlight);" aria-hidden="true" />
+    <div class="section-divider" aria-hidden="true" />
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
         {content.headerTitle}
       </h1>
-      <p
-        class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
-      >
+      <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
         {content.headerDesc}
       </p>
     </div>
@@ -155,20 +161,17 @@ const content = calendarData[lang as Lang] || calendarData['en-US'];
       <div class="lg:col-span-2">
         <div class="glass-card p-8">
           <!-- Month Navigation -->
-          <div class="flex items-center justify-between mb-8">
-            <button
-              onclick="prevMonth()"
-              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
-            >
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-8">
+            <button type="button" onclick="prevMonth()" class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors" aria-label={content.prevMonth}>
               {content.prevMonth}
             </button>
-            <h2 class="text-2xl font-bold" id="currentMonth">
+            <h2 class="text-2xl font-heading font-bold order-first w-full md:order-none md:w-auto" id="currentMonth">
               {content.loading}
             </h2>
-            <button
-              onclick="nextMonth()"
-              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
-            >
+            <button type="button" onclick="goToToday()" class="px-3 py-1.5 rounded-lg bg-primary-500/15 text-primary-600 dark:text-primary-400 hover:bg-primary-500/25 text-sm font-medium transition-colors">
+              {content.goToToday}
+            </button>
+            <button type="button" onclick="nextMonth()" class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors" aria-label={content.nextMonth}>
               {content.nextMonth}
             </button>
           </div>
@@ -216,6 +219,8 @@ const content = calendarData[lang as Lang] || calendarData['en-US'];
             </p>
           </div>
         </div>
+
+        <RelatedTools lang={lang === 'en-US' ? 'en-GB' : lang} current="calendar" />
       </div>
     </div>
   </section>
@@ -390,6 +395,17 @@ const content = calendarData[lang as Lang] || calendarData['en-US'];
     currentDate.setMonth(currentDate.getMonth() + 1);
     renderCalendar();
   };
+
+  window['goToToday'] = function () {
+    currentDate = new Date();
+    renderCalendar();
+  };
+
+  document.addEventListener('keydown', function (e) {
+    if (e.target && (e.target.closest('input') || e.target.closest('textarea'))) return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); window['prevMonth'](); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); window['nextMonth'](); }
+  });
 
   // Modal functions
   window['openAddEventModal'] = function () {

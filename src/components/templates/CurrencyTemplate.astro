@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedTools from '../RelatedTools.astro';
 
 const { lang } = Astro.props;
 
@@ -12,6 +13,7 @@ const currencyData: Record<Lang, any> = {
     headerDesc: '实时汇率查询 · 自定义汇率计算 · 结售汇小助手',
     mainRatesTitle: '主要货币汇率',
     subTitle: '今日参考汇率（1单位外币 = ? 人民币）',
+    disclaimer: '仅供参考，不作为交易或结售汇依据。实际以银行/机构为准。',
     refresh: '刷新',
     refreshing: '更新中...',
     source: '数据源',
@@ -71,6 +73,7 @@ const currencyData: Record<Lang, any> = {
     headerDesc: '即時匯率查詢 · 自定義匯率計算 · 結售匯小幫手',
     mainRatesTitle: '主要貨幣匯率',
     subTitle: '今日參考匯率（1單位外幣 = ? 人民幣）',
+    disclaimer: '僅供參考，不作為交易或結售匯依據。實際以銀行/機構為準。',
     refresh: '重新整理',
     refreshing: '更新中...',
     source: '資料來源',
@@ -130,6 +133,7 @@ const currencyData: Record<Lang, any> = {
     headerDesc: 'Real-time Rates · Custom Rate Calculator · Exchange Helper',
     mainRatesTitle: 'Major Exchange Rates',
     subTitle: "Today's Reference Rates (1 foreign currency = ? CNY)",
+    disclaimer: 'For reference only. Not for trading or exchange. Check your bank for actual rates.',
     refresh: 'Refresh',
     refreshing: 'Updating...',
     source: 'Data Source',
@@ -189,6 +193,7 @@ const currencyData: Record<Lang, any> = {
     headerDesc: 'Real-time Rates · Custom Rate Calculator · Exchange Helper',
     mainRatesTitle: 'Major Exchange Rates',
     subTitle: "Today's Reference Rates (1 foreign currency = ? CNY)",
+    disclaimer: 'For reference only. Not for trading or exchange. Check your bank for actual rates.',
     refresh: 'Refresh',
     refreshing: 'Updating...',
     source: 'Data Source',
@@ -249,6 +254,7 @@ const currencyData: Record<Lang, any> = {
       'Taux en temps réel · Calculateur personnalisé · Assistant de change',
     mainRatesTitle: 'Taux de change principaux',
     subTitle: 'Taux de référence du jour (1 devise = ? CNY)',
+    disclaimer: 'À titre indicatif uniquement. Consultez votre banque pour les taux réels.',
     refresh: 'Actualiser',
     refreshing: 'Mise à jour...',
     source: 'Source de données',
@@ -309,6 +315,7 @@ const currencyData: Record<Lang, any> = {
       'Курсы в реальном времени · Пользовательский калькулятор · Помощник обмена',
     mainRatesTitle: 'Основные курсы валют',
     subTitle: 'Референсные курсы сегодня (1 валюта = ? CNY)',
+    disclaimer: 'Только для справки. Не для сделок. Актуальные курсы уточняйте в банке.',
     refresh: 'Обновить',
     refreshing: 'Обновление...',
     source: 'Источник данных',
@@ -370,16 +377,15 @@ const content = currencyData[lang as Lang] || currencyData['en-US'];
 
 <BaseLayout title={`${content.title} - Alexander Carter`}>
   <!-- Hero Section -->
-  <section class="pt-32 pb-16 bg-mesh-gradient">
-    <div class="container mx-auto px-4 lg:px-8 text-center">
-      <h1
-        class="text-5xl md:text-6xl font-display font-bold mb-6 gradient-text"
-      >
+  <section class="relative pt-28 pb-16 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true" />
+    <div class="absolute inset-0 opacity-100" style="background: var(--hero-spotlight);" aria-hidden="true" />
+    <div class="section-divider" aria-hidden="true" />
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
         {content.headerTitle}
       </h1>
-      <p
-        class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
-      >
+      <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
         {content.headerDesc}
       </p>
     </div>
@@ -400,6 +406,11 @@ const content = currencyData[lang as Lang] || currencyData['en-US'];
           <p class="text-[rgb(var(--color-text-secondary))] mb-1">
             {content.subTitle}
           </p>
+          {content.disclaimer && (
+            <p class="text-xs text-[rgb(var(--color-text-tertiary))] mb-2">
+              {content.disclaimer}
+            </p>
+          )}
           <p
             class="text-sm text-[rgb(var(--color-text-tertiary))] flex items-center gap-2"
             id="rates-updated"
@@ -642,6 +653,10 @@ const content = currencyData[lang as Lang] || currencyData['en-US'];
           ))
         }
       </div>
+    </div>
+
+    <div class="container mx-auto px-4 lg:px-8 max-w-4xl mt-16">
+      <RelatedTools lang={lang === 'en-US' ? 'en-GB' : lang} current="currency" />
     </div>
   </section>
 </BaseLayout>

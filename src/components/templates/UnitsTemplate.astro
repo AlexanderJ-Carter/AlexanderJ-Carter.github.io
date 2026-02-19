@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedTools from '../RelatedTools.astro';
+
+const { lang } = Astro.props;
+
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+const t: Record<Lang, any> = {
+  'zh-CN': {
+    title: '单位换算',
+    tag: '温度 · 长度 · 重量',
+    headerTitle: '单位换算',
+    headerDesc: '常用单位互转：温度、长度、重量，实时换算。',
+    temp: '温度',
+    length: '长度',
+    weight: '重量',
+    celsius: '摄氏度 °C',
+    fahrenheit: '华氏度 °F',
+    meter: '米 m',
+    km: '千米 km',
+    foot: '英尺 ft',
+    inch: '英寸 in',
+    kg: '千克 kg',
+    lb: '磅 lb',
+    relatedTitle: '更多小工具',
+    back: '返回首页',
+  },
+  'zh-TW': {
+    title: '單位換算',
+    tag: '溫度 · 長度 · 重量',
+    headerTitle: '單位換算',
+    headerDesc: '常用單位互轉：溫度、長度、重量，即時換算。',
+    temp: '溫度',
+    length: '長度',
+    weight: '重量',
+    celsius: '攝氏度 °C',
+    fahrenheit: '華氏度 °F',
+    meter: '米 m',
+    km: '千米 km',
+    foot: '英尺 ft',
+    inch: '英寸 in',
+    kg: '千克 kg',
+    lb: '磅 lb',
+    relatedTitle: '更多小工具',
+    back: '返回首頁',
+  },
+  'en-GB': {
+    title: 'Unit Converter',
+    tag: 'Temperature · Length · Weight',
+    headerTitle: 'Unit Converter',
+    headerDesc: 'Convert temperature, length, and weight on the fly.',
+    temp: 'Temperature',
+    length: 'Length',
+    weight: 'Weight',
+    celsius: 'Celsius °C',
+    fahrenheit: 'Fahrenheit °F',
+    meter: 'Meter m',
+    km: 'Kilometer km',
+    foot: 'Foot ft',
+    inch: 'Inch in',
+    kg: 'Kilogram kg',
+    lb: 'Pound lb',
+    relatedTitle: 'More tools',
+    back: 'Back to home',
+  },
+  fr: {
+    title: 'Convertisseur d\'unités',
+    tag: 'Température · Longueur · Poids',
+    headerTitle: 'Convertisseur d\'unités',
+    headerDesc: 'Convertissez température, longueur et poids.',
+    temp: 'Température',
+    length: 'Longueur',
+    weight: 'Poids',
+    celsius: 'Celsius °C',
+    fahrenheit: 'Fahrenheit °F',
+    meter: 'Mètre m',
+    km: 'Kilomètre km',
+    foot: 'Pied ft',
+    inch: 'Pouce in',
+    kg: 'Kilogramme kg',
+    lb: 'Livre lb',
+    relatedTitle: 'Plus d’outils',
+    back: "Retour à l'accueil",
+  },
+  ru: {
+    title: 'Конвертер единиц',
+    tag: 'Температура · Длина · Вес',
+    headerTitle: 'Конвертер единиц',
+    headerDesc: 'Перевод температуры, длины и веса.',
+    temp: 'Температура',
+    length: 'Длина',
+    weight: 'Вес',
+    celsius: 'Цельсий °C',
+    fahrenheit: 'Фаренгейт °F',
+    meter: 'Метр m',
+    km: 'Км km',
+    foot: 'Фут ft',
+    inch: 'Дюйм in',
+    kg: 'Кг kg',
+    lb: 'Фунт lb',
+    relatedTitle: 'Ещё инструменты',
+    back: 'На главную',
+  },
+};
+
+const content = t[lang as Lang] || t['en-GB'];
+---
+
+<BaseLayout title={`${content.title} - Alexander Carter`}>
+  <section class="relative pt-28 pb-16 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true" />
+    <div class="absolute inset-0 opacity-100" style="background: var(--hero-spotlight);" aria-hidden="true" />
+    <div class="section-divider" aria-hidden="true" />
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
+      <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10 text-sm font-medium mb-4">
+        📐 {content.tag}
+      </p>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
+        {content.headerTitle}
+      </h1>
+      <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+        {content.headerDesc}
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12 container mx-auto px-4 lg:px-8 max-w-4xl">
+    <div class="grid gap-8 md:grid-cols-3">
+      <div class="glass-card p-6 rounded-2xl reveal">
+        <h2 class="text-lg font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">{content.temp}</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs text-[rgb(var(--color-text-tertiary))] mb-1">{content.celsius}</label>
+            <input type="number" id="unit-c" step="0.1" class="unit-input w-full px-3 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none" value="25" />
+          </div>
+          <div>
+            <label class="block text-xs text-[rgb(var(--color-text-tertiary))] mb-1">{content.fahrenheit}</label>
+            <input type="number" id="unit-f" step="0.1" class="unit-input w-full px-3 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none" value="77" />
+          </div>
+        </div>
+      </div>
+      <div class="glass-card p-6 rounded-2xl reveal">
+        <h2 class="text-lg font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">{content.length}</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs text-[rgb(var(--color-text-tertiary))] mb-1">{content.meter}</label>
+            <input type="number" id="unit-m" step="0.01" class="unit-input w-full px-3 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none" value="1" />
+          </div>
+          <div>
+            <label class="block text-xs text-[rgb(var(--color-text-tertiary))] mb-1">{content.km}</label>
+            <input type="number" id="unit-km" step="0.001" class="unit-input w-full px-3 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none" value="0.001" />
+          </div>
+          <div>
+            <label class="block text-xs text-[rgb(var(--color-text-tertiary))] mb-1">{content.foot} / {content.inch}</label>
+            <input type="text" id="unit-ft" readonly class="w-full px-3 py-2 rounded-lg bg-[rgb(var(--color-bg-accent))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] text-sm" value="3.28 ft" />
+          </div>
+        </div>
+      </div>
+      <div class="glass-card p-6 rounded-2xl reveal">
+        <h2 class="text-lg font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">{content.weight}</h2>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs text-[rgb(var(--color-text-tertiary))] mb-1">{content.kg}</label>
+            <input type="number" id="unit-kg" step="0.01" class="unit-input w-full px-3 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none" value="1" />
+          </div>
+          <div>
+            <label class="block text-xs text-[rgb(var(--color-text-tertiary))] mb-1">{content.lb}</label>
+            <input type="number" id="unit-lb" step="0.01" class="unit-input w-full px-3 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none" value="2.205" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <RelatedTools lang={lang} current="units" />
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    const c = document.getElementById('unit-c');
+    const f = document.getElementById('unit-f');
+    const m = document.getElementById('unit-m');
+    const km = document.getElementById('unit-km');
+    const ft = document.getElementById('unit-ft');
+    const kg = document.getElementById('unit-kg');
+    const lb = document.getElementById('unit-lb');
+
+    function fromC(v) { return (v * 9/5) + 32; }
+    function fromF(v) { return (v - 32) * 5/9; }
+    function fromM(v) { return v / 1000; }
+    function fromKm(v) { return v * 1000; }
+    function mToFt(m) { const totalIn = m * 39.3701; const ftVal = Math.floor(totalIn / 12); const inVal = (totalIn % 12).toFixed(2); return ftVal + ' ft ' + inVal + ' in'; }
+    function fromKg(v) { return v * 2.20462; }
+    function fromLb(v) { return v / 2.20462; }
+
+    if (c && f) {
+      c.addEventListener('input', function () { const v = parseFloat(c.value) || 0; f.value = fromC(v).toFixed(2); });
+      f.addEventListener('input', function () { const v = parseFloat(f.value) || 0; c.value = fromF(v).toFixed(2); });
+    }
+    if (m && km && ft) {
+      m.addEventListener('input', function () { const v = parseFloat(m.value) || 0; km.value = fromM(v).toFixed(6); ft.value = mToFt(v); });
+      km.addEventListener('input', function () { const v = parseFloat(km.value) || 0; m.value = fromKm(v).toFixed(4); ft.value = mToFt(fromKm(v)); });
+      m.dispatchEvent(new Event('input'));
+    }
+    if (kg && lb) {
+      kg.addEventListener('input', function () { const v = parseFloat(kg.value) || 0; lb.value = fromKg(v).toFixed(2); });
+      lb.addEventListener('input', function () { const v = parseFloat(lb.value) || 0; kg.value = fromLb(v).toFixed(2); });
+    }
+  })();
+</script>

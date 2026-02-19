@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedTools from '../RelatedTools.astro';
+
+const { lang } = Astro.props;
+
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+const t: Record<Lang, any> = {
+  'zh-CN': {
+    title: 'QR 码生成',
+    tag: '链接 · 文本转二维码',
+    headerTitle: 'QR 码生成',
+    headerDesc: '输入链接或文字，即时生成二维码，可右键保存图片。',
+    placeholder: '输入网址或文字，例如 https://alexander.xin',
+    generate: '生成',
+    relatedTitle: '更多小工具',
+    back: '返回首页',
+  },
+  'zh-TW': {
+    title: 'QR 碼生成',
+    tag: '連結 · 文字轉二維碼',
+    headerTitle: 'QR 碼生成',
+    headerDesc: '輸入連結或文字，即時生成二維碼，可右鍵儲存圖片。',
+    placeholder: '輸入網址或文字，例如 https://alexander.xin',
+    generate: '生成',
+    relatedTitle: '更多小工具',
+    back: '返回首頁',
+  },
+  'en-GB': {
+    title: 'QR Code Generator',
+    tag: 'Link · Text to QR',
+    headerTitle: 'QR Code Generator',
+    headerDesc: 'Enter a URL or text to generate a QR code. Right-click to save the image.',
+    placeholder: 'Enter URL or text, e.g. https://alexander.xin',
+    generate: 'Generate',
+    relatedTitle: 'More tools',
+    back: 'Back to home',
+  },
+  fr: {
+    title: 'Générateur QR',
+    tag: 'Lien · Texte en QR',
+    headerTitle: 'Générateur QR',
+    headerDesc: 'Entrez une URL ou du texte pour générer un QR code. Clic droit pour enregistrer.',
+    placeholder: 'URL ou texte, ex. https://alexander.xin',
+    generate: 'Générer',
+    relatedTitle: 'Plus d’outils',
+    back: "Retour à l'accueil",
+  },
+  ru: {
+    title: 'Генератор QR',
+    tag: 'Ссылка · Текст в QR',
+    headerTitle: 'Генератор QR',
+    headerDesc: 'Введите URL или текст для создания QR-кода. ПКМ — сохранить изображение.',
+    placeholder: 'URL или текст, напр. https://alexander.xin',
+    generate: 'Создать',
+    relatedTitle: 'Ещё инструменты',
+    back: 'На главную',
+  },
+};
+
+const content = t[lang as Lang] || t['en-GB'];
+---
+
+<BaseLayout title={`${content.title} - Alexander Carter`}>
+  <section class="relative pt-28 pb-16 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true" />
+    <div class="absolute inset-0 opacity-100" style="background: var(--hero-spotlight);" aria-hidden="true" />
+    <div class="section-divider" aria-hidden="true" />
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
+      <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10 text-sm font-medium mb-4">
+        📱 {content.tag}
+      </p>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
+        {content.headerTitle}
+      </h1>
+      <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+        {content.headerDesc}
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12 container mx-auto px-4 lg:px-8 max-w-xl">
+    <div class="glass-card p-8 rounded-2xl reveal">
+      <label class="block text-sm font-medium text-[rgb(var(--color-text-primary))] mb-2" for="qr-input">
+        {content.placeholder}
+      </label>
+      <input
+        type="text"
+        id="qr-input"
+        class="w-full px-4 py-3 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none mb-4"
+        placeholder={content.placeholder}
+        value="https://alexander.xin"
+      />
+      <div class="flex justify-center p-6 bg-white dark:bg-gray-800 rounded-xl border border-[rgb(var(--color-border))]">
+        <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://alexander.xin" alt="QR Code" class="max-w-full h-auto" width="200" height="200" />
+      </div>
+      <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-3">
+        QR 由 api.qrserver.com 生成，可右键保存图片
+      </p>
+    </div>
+
+    <RelatedTools lang={lang} current="qr" />
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    const input = document.getElementById('qr-input');
+    const img = document.getElementById('qr-image');
+    if (!input || !img) return;
+    function update() {
+      const data = input.value.trim() || 'https://alexander.xin';
+      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=' + encodeURIComponent(data);
+      img.alt = 'QR: ' + data;
+    }
+    input.addEventListener('input', update);
+    input.addEventListener('change', update);
+  })();
+</script>

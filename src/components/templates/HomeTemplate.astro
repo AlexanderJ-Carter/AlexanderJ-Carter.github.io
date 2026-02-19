@@ -373,8 +373,13 @@ const intro = introData[lang as Lang] || introData['en-US'];
   <section
     class="relative min-h-screen flex items-center justify-center overflow-hidden"
   >
-    <!-- Animated Mesh Gradient Background -->
+    <!-- Animated Mesh Gradient + Spotlight -->
     <div class="absolute inset-0 bg-mesh-gradient"></div>
+    <div
+      class="absolute inset-0 pointer-events-none opacity-100"
+      style="background: var(--hero-spotlight);"
+      aria-hidden="true"
+    />
     <!-- Subtle hero glow border -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden">
       <div
@@ -423,7 +428,7 @@ const intro = introData[lang as Lang] || introData['en-US'];
 
         <!-- Name with Gradient -->
         <h1
-          class="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 fade-in-delay-1"
+          class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight mb-6 fade-in-delay-1"
         >
           <span class="gradient-text"> {t('hero.name')} </span>
         </h1>
@@ -436,21 +441,17 @@ const intro = introData[lang as Lang] || introData['en-US'];
         </div>
 
         <p
-          class="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] mb-6 fade-in-delay-3 text-balance max-w-2xl mx-auto"
+          class="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] mb-8 fade-in-delay-3 text-balance max-w-2xl mx-auto"
         >
           {t('hero.subtitle')}
         </p>
-
-        <div
-          class="max-w-3xl mx-auto text-[rgb(var(--color-text-secondary))] mb-12 fade-in-delay-4 prose prose-invert"
-        >
-          <p class="lead text-lg font-medium mb-3">{intro.lead}</p>
-          {intro.paragraphs.map((p: string) => <p>{p}</p>)}
-        </div>
+        <p class="text-[rgb(var(--color-text-secondary))] max-w-xl mx-auto mb-10 fade-in-delay-4 lead font-medium">
+          {intro.lead}
+        </p>
 
         <!-- CTA Buttons -->
         <div
-          class="flex flex-col sm:flex-row gap-4 justify-center fade-in-delay-3"
+          class="flex flex-col sm:flex-row gap-4 justify-center fade-in-delay-4"
         >
           <a href="/gallery" class="btn-primary glow-on-hover">
             <span>{t('hero.cta.primary')}</span>
@@ -509,21 +510,27 @@ const intro = introData[lang as Lang] || introData['en-US'];
 
   <!-- Stats Section -->
   <section class="py-20 bg-[rgb(var(--color-bg-secondary))] reveal relative">
-    <div
-      class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgb(var(--color-border))] to-transparent"
-      aria-hidden="true"
-    >
-    </div>
+    <div class="section-divider" aria-hidden="true" />
     <div class="container mx-auto px-4 lg:px-8">
       <StatsCounter stats={stats} />
     </div>
   </section>
 
+  <!-- Intro / About snippet -->
+  <section class="py-16 reveal">
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
+      <div class="prose prose-lg dark:prose-invert max-w-none text-[rgb(var(--color-text-secondary))]">
+        {intro.paragraphs.map((p: string) => <p class="mb-4 last:mb-0">{p}</p>)}
+      </div>
+    </div>
+  </section>
+
   <!-- Featured Works Section -->
-  <section class="py-20 reveal">
+  <section class="py-20 reveal bg-[rgb(var(--color-bg-secondary))]">
+    <div class="section-divider" aria-hidden="true" />
     <div class="container mx-auto px-4 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">{featured.title}</h2>
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">{featured.title}</h2>
         <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
           {featured.subtitle}
         </p>
@@ -585,8 +592,9 @@ const intro = introData[lang as Lang] || introData['en-US'];
 
   <!-- Quote Section -->
   <section
-    class="py-20 bg-[rgb(var(--color-bg-secondary))] relative overflow-hidden"
+    class="py-20 bg-[rgb(var(--color-bg-primary))] relative overflow-hidden"
   >
+    <div class="section-divider" aria-hidden="true" />
     <div
       class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none"
     >
