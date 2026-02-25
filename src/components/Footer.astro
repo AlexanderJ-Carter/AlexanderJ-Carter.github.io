@@ -2,8 +2,40 @@
 import { getLangFromUrl } from '../i18n/ui';
 
 const lang = getLangFromUrl(Astro.url);
-
 const currentYear = new Date().getFullYear();
+
+function getLangPath(path: string) {
+  return lang === 'zh-CN' ? path : `/${lang === 'en-GB' ? 'en' : lang}${path}`;
+}
+
+const mainLinks = [
+  { label: lang === 'zh-CN' ? '关于' : lang === 'zh-TW' ? '關於' : lang === 'fr' ? 'À propos' : lang === 'ru' ? 'Обо мне' : 'About', href: getLangPath('/about') },
+  { label: lang === 'zh-CN' ? '画廊' : lang === 'zh-TW' ? '畫廊' : lang === 'fr' ? 'Galerie' : lang === 'ru' ? 'Галерея' : 'Gallery', href: getLangPath('/gallery') },
+  { label: lang === 'zh-CN' ? '项目' : lang === 'zh-TW' ? '專案' : lang === 'fr' ? 'Projets' : lang === 'ru' ? 'Проекты' : 'Projects', href: getLangPath('/projects') },
+  { label: lang === 'zh-CN' ? '联系' : lang === 'zh-TW' ? '聯繫' : lang === 'fr' ? 'Contact' : lang === 'ru' ? 'Контакт' : 'Contact', href: getLangPath('/contact') },
+  { label: lang === 'zh-CN' ? '彩蛋' : lang === 'zh-TW' ? '彩蛋' : lang === 'fr' ? 'Easter Eggs' : lang === 'ru' ? 'Пасхалки' : 'Fun', href: getLangPath('/fun') },
+  { label: lang === 'zh-CN' ? '时间线' : lang === 'zh-TW' ? '時間軸' : lang === 'fr' ? 'Chronologie' : lang === 'ru' ? 'Хронология' : 'Timeline', href: getLangPath('/timeline') },
+];
+
+const toolLinks = [
+  { label: lang === 'zh-CN' ? '日历' : lang === 'zh-TW' ? '日曆' : lang === 'fr' ? 'Calendrier' : lang === 'ru' ? 'Календарь' : 'Calendar', href: getLangPath('/calendar') },
+  { label: lang === 'zh-CN' ? '汇率' : lang === 'zh-TW' ? '匯率' : lang === 'fr' ? 'Taux de change' : lang === 'ru' ? 'Курс валют' : 'Currency', href: getLangPath('/currency') },
+  { label: lang === 'zh-CN' ? '时间' : lang === 'zh-TW' ? '時間' : lang === 'fr' ? 'Heure' : lang === 'ru' ? 'Время' : 'Time', href: getLangPath('/time') },
+  { label: 'Now', href: getLangPath('/now') },
+  { label: lang === 'zh-CN' ? '本站' : lang === 'zh-TW' ? '本站' : lang === 'fr' ? 'Le site' : lang === 'ru' ? 'О сайте' : 'About site', href: getLangPath('/uses') },
+  { label: lang === 'zh-CN' ? '单位换算' : lang === 'zh-TW' ? '單位換算' : lang === 'fr' ? 'Unités' : lang === 'ru' ? 'Единицы' : 'Units', href: getLangPath('/units') },
+  { label: lang === 'zh-CN' ? 'QR 生成' : lang === 'zh-TW' ? 'QR 生成' : lang === 'fr' ? 'QR Code' : lang === 'ru' ? 'QR-код' : 'QR Code', href: getLangPath('/qr') },
+  { label: lang === 'zh-CN' ? '网站地图' : lang === 'zh-TW' ? '網站地圖' : lang === 'fr' ? 'Plan du site' : lang === 'ru' ? 'Карта сайта' : 'Sitemap', href: getLangPath('/sitemap') },
+];
+
+const legalLinks = [
+  { label: lang === 'zh-CN' ? '隐私政策' : lang === 'zh-TW' ? '隱私政策' : lang === 'fr' ? 'Confidentialité' : lang === 'ru' ? 'Конфиденциальность' : 'Privacy', href: getLangPath('/privacy') },
+  { label: lang === 'zh-CN' ? '使用条款' : lang === 'zh-TW' ? '使用條款' : lang === 'fr' ? 'Conditions' : lang === 'ru' ? 'Условия' : 'Terms', href: getLangPath('/terms') },
+  { label: lang === 'zh-CN' ? '许可证' : lang === 'zh-TW' ? '許可證' : lang === 'fr' ? 'Licence' : lang === 'ru' ? 'Лицензия' : 'License', href: getLangPath('/license') },
+  { label: lang === 'zh-CN' ? '无障碍' : lang === 'zh-TW' ? '無障礙' : lang === 'fr' ? 'Accessibilité' : lang === 'ru' ? 'Доступность' : 'Accessibility', href: getLangPath('/accessibility') },
+  { label: lang === 'zh-CN' ? '安全政策' : lang === 'zh-TW' ? '安全政策' : lang === 'fr' ? 'Sécurité' : lang === 'ru' ? 'Безопасность' : 'Security', href: getLangPath('/security/policy') },
+  { label: lang === 'zh-CN' ? '安全致谢' : lang === 'zh-TW' ? '安全致謝' : lang === 'fr' ? 'Remerciements' : lang === 'ru' ? 'Благодарности' : 'Acknowledgments', href: getLangPath('/security/acknowledgments') },
+];
 
 const socialLinks = [
   {
@@ -23,178 +55,63 @@ const socialLinks = [
   },
 ];
 
-function getLangPath(path: string) {
-  return lang === 'zh-CN' ? path : `/${lang === 'en-GB' ? 'en' : lang}${path}`;
-}
+const taglineMap: Record<string, string> = {
+  'zh-CN': '创意 · 技术 · 探索',
+  'zh-TW': '創意 · 技術 · 探索',
+  'en-GB': 'Creativity · Technology · Exploration',
+  fr: 'Créativité · Technologie · Exploration',
+  ru: 'Творчество · Технологии · Исследование',
+};
 
-const mainNavLinks = [
-  { label: lang === 'zh-CN' ? '关于' : 'About', href: getLangPath('/about') },
-  {
-    label: lang === 'zh-CN' ? '画廊' : 'Gallery',
-    href: getLangPath('/gallery'),
-  },
-  {
-    label: lang === 'zh-CN' ? '联系' : 'Contact',
-    href: getLangPath('/contact'),
-  },
-  { label: lang === 'zh-CN' ? '彩蛋' : 'Fun', href: getLangPath('/fun') },
-];
+const colTitles: Record<string, { main: string; tools: string; legal: string }> = {
+  'zh-CN': { main: '导航', tools: '工具', legal: '更多' },
+  'zh-TW': { main: '導航', tools: '工具', legal: '更多' },
+  'en-GB': { main: 'Pages', tools: 'Tools', legal: 'Info' },
+  fr: { main: 'Pages', tools: 'Outils', legal: 'Infos' },
+  ru: { main: 'Страницы', tools: 'Инструменты', legal: 'Инфо' },
+};
 
-const toolsNavLinks = [
-  {
-    label: lang === 'zh-CN' ? '日历' : 'Calendar',
-    href: getLangPath('/calendar'),
-  },
-  {
-    label: lang === 'zh-CN' ? '汇率' : 'Currency',
-    href: getLangPath('/currency'),
-  },
-  { label: lang === 'zh-CN' ? '时间' : 'Time', href: getLangPath('/time') },
-  { label: 'Now', href: getLangPath('/now') },
-  { label: 'Uses', href: getLangPath('/uses') },
-];
-
-const resourceLinks = [
-  {
-    label: lang === 'zh-CN' ? '隐私' : 'Privacy',
-    href: getLangPath('/privacy'),
-  },
-  { label: lang === 'zh-CN' ? '条款' : 'Terms', href: getLangPath('/terms') },
-  {
-    label: lang === 'zh-CN' ? '许可证' : 'License',
-    href: getLangPath('/license'),
-  },
-  {
-    label: lang === 'zh-CN' ? '无障碍' : 'Accessibility',
-    href: getLangPath('/accessibility'),
-  },
-  {
-    label: lang === 'zh-CN' ? '安全' : 'Security',
-    href: getLangPath('/security/policy'),
-  },
-];
-
-const shareLabel = lang === 'zh-CN' ? '分享本页' : lang === 'zh-TW' ? '分享本頁' : lang === 'en-GB' ? 'Share this page' : lang === 'fr' ? 'Partager cette page' : lang === 'ru' ? 'Поделиться' : 'Share this page';
-const copyLinkLabel = lang === 'zh-CN' ? '复制链接' : lang === 'zh-TW' ? '複製連結' : lang === 'en-GB' ? 'Copy link' : lang === 'fr' ? 'Copier le lien' : lang === 'ru' ? 'Скопировать ссылку' : 'Copy link';
-const copiedLabel = lang === 'zh-CN' ? '已复制' : lang === 'zh-TW' ? '已複製' : lang === 'en-GB' ? 'Copied' : lang === 'fr' ? 'Copié' : lang === 'ru' ? 'Скопировано' : 'Copied';
-const nativeShareLabel = lang === 'zh-CN' ? '系统分享' : lang === 'zh-TW' ? '系統分享' : lang === 'en-GB' ? 'Share' : lang === 'fr' ? 'Partager' : lang === 'ru' ? 'Поделиться' : 'Share';
+const tagline = taglineMap[lang] || taglineMap['en-GB'];
+const cols = colTitles[lang] || colTitles['en-GB'];
 ---
 
-<footer
-  class="footer-new mt-24 border-t border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-secondary))]"
->
-  <div class="container mx-auto px-4 lg:px-8 py-8 lg:py-10">
-    <!-- 第一行：品牌 + 导航 + 社交 -->
-    <div
-      class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 lg:gap-8"
-    >
-      <div class="flex items-center gap-3 shrink-0">
-        <img src="/img/branding/logo.png" alt="" class="w-10 h-10 rounded-xl dark:hidden" />
-        <img src="/img/branding/logo-dark.png" alt="" class="w-10 h-10 rounded-xl hidden dark:block" />
-        <div>
-          <p
-            class="font-heading font-semibold text-[rgb(var(--color-text-primary))] tracking-tight"
-          >
-            Alexander Carter
-          </p>
-          <p class="text-xs text-[rgb(var(--color-text-secondary))]">
-            {lang === 'zh-CN' ? '创意与技术' : 'Creativity & technology'}
-          </p>
-        </div>
-      </div>
-      <nav
-        class="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm"
-        aria-label={lang === 'zh-CN' ? '页脚导航' : 'Footer navigation'}
-      >
-        {
-          mainNavLinks.map((link) => (
-            <a
-              href={link.href}
-              class="text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-        <span
-          class="text-[rgb(var(--color-border))] hidden sm:inline"
-          aria-hidden="true">·</span
-        >
-        {
-          toolsNavLinks.map((link) => (
-            <a
-              href={link.href}
-              class="text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-        <span
-          class="text-[rgb(var(--color-border))] hidden sm:inline"
-          aria-hidden="true">·</span
-        >
+<footer class="mt-24 bg-[rgb(var(--color-bg-secondary))]">
+  <!-- Gradient top divider -->
+  <div class="h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
+
+  <div class="container mx-auto px-4 lg:px-8 py-12 lg:py-16">
+
+    <!-- Main grid: 4 columns on desktop, 2 on tablet, 1 on mobile -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-12">
+
+      <!-- Brand column -->
+      <div class="sm:col-span-2 lg:col-span-1">
         <a
-          href={getLangPath('/sitemap')}
-          class="text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors"
-          >{lang === 'zh-CN' ? '网站地图' : 'Sitemap'}</a
+          href={lang === 'zh-CN' ? '/' : lang === 'en-GB' ? '/en/' : `/${lang}/`}
+          class="flex items-center gap-3 mb-3 group w-fit"
+          aria-label="Alexander Carter — Home"
         >
-      </nav>
-      <div class="flex flex-wrap items-center gap-3 shrink-0">
-        <!-- 分享本页：复制链接、Twitter/X、系统分享 -->
-        <div class="flex items-center gap-2" role="group" aria-label={shareLabel}>
-          <span class="text-xs text-[rgb(var(--color-text-tertiary))] hidden sm:inline">{shareLabel}</span>
-          <button
-            type="button"
-            id="footer-copy-link"
-            class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors text-xs"
-            aria-label={copyLinkLabel}
-          >
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-            <span>{copyLinkLabel}</span>
-          </button>
-          <a
-            id="footer-twitter-share"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors text-xs"
-            aria-label="Twitter / X"
-          >
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            <span>X</span>
-          </a>
-          <button
-            type="button"
-            id="footer-native-share"
-            class="footer-native-share hidden inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors text-xs"
-            aria-label={nativeShareLabel}
-          >
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
-            <span>{nativeShareLabel}</span>
-          </button>
-        </div>
-        <span class="text-[rgb(var(--color-border))] hidden md:inline" aria-hidden="true">·</span>
-        <div class="flex items-center gap-2">
+          <img src="/img/branding/logo.png" alt="" class="w-10 h-10 rounded-xl dark:hidden flex-shrink-0" loading="lazy" decoding="async" />
+          <img src="/img/branding/logo-dark.png" alt="" class="w-10 h-10 rounded-xl hidden dark:block flex-shrink-0" loading="lazy" decoding="async" />
+          <span class="font-heading font-bold text-lg text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors tracking-tight leading-tight">
+            Alexander Carter
+          </span>
+        </a>
+        <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-5 leading-relaxed">
+          {tagline}
+        </p>
+        <!-- Social links -->
+        <div class="flex flex-wrap items-center gap-2">
           {
             socialLinks.map((social) => (
               <a
                 href={social.href}
-                class="w-9 h-9 flex items-center justify-center rounded-lg bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
+                class="w-9 h-9 flex items-center justify-center rounded-lg bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 active:scale-95 transition-all duration-150"
                 aria-label={social.name}
                 target={social.href.startsWith('http') ? '_blank' : undefined}
-                rel={
-                  social.href.startsWith('http')
-                    ? 'noopener noreferrer'
-                    : undefined
-                }
+                rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
               >
-                <svg
-                  class="w-4 h-4"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d={social.icon} />
                 </svg>
               </a>
@@ -202,107 +119,112 @@ const nativeShareLabel = lang === 'zh-CN' ? '系统分享' : lang === 'zh-TW' ? 
           }
         </div>
       </div>
-    </div>
 
-    <!-- 第二行：法律链接 + 邮箱（小字一行） -->
-    <div
-      class="mt-6 pt-6 border-t border-[rgb(var(--color-border))] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-[rgb(var(--color-text-tertiary))]"
-    >
-      <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
-        {
-          resourceLinks.map((link) => (
-            <a
-              href={link.href}
-              class="hover:text-primary-500 transition-colors"
-            >
-              {link.label}
-            </a>
-          ))
-        }
+      <!-- Pages column -->
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-[rgb(var(--color-text-tertiary))] mb-4 select-none">
+          {cols.main}
+        </h3>
+        <ul class="space-y-2.5">
+          {
+            mainLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 link-underline transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
-      <a
-        href="mailto:contact-us@alexander.xin"
-        class="hover:text-primary-500 transition-colors break-all"
-        aria-label={lang === 'zh-CN' ? '发送邮件' : 'Send email'}
-      >
-        contact-us@alexander.xin
-      </a>
+
+      <!-- Tools column -->
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-[rgb(var(--color-text-tertiary))] mb-4 select-none">
+          {cols.tools}
+        </h3>
+        <ul class="space-y-2.5">
+          {
+            toolLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 link-underline transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Legal & contact column -->
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-widest text-[rgb(var(--color-text-tertiary))] mb-4 select-none">
+          {cols.legal}
+        </h3>
+        <ul class="space-y-2.5">
+          {
+            legalLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 link-underline transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-5 pt-5 border-t border-[rgb(var(--color-border))]">
+          <a
+            href="mailto:contact-us@alexander.xin"
+            class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors break-all leading-relaxed"
+            aria-label={lang === 'zh-CN' ? '发送邮件' : 'Send email'}
+          >
+            contact-us@alexander.xin
+          </a>
+        </div>
+      </div>
+
     </div>
 
-    <!-- 第三行：版权 + 许可徽章 -->
-    <div
-      class="mt-5 pt-5 border-t border-[rgb(var(--color-border))] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs"
-    >
-      <p class="text-[rgb(var(--color-text-tertiary))]">
+    <!-- Bottom bar -->
+    <div class="pt-8 border-t border-[rgb(var(--color-border))] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <p class="text-xs text-[rgb(var(--color-text-tertiary))]">
         © {currentYear} Alexander James Carter
       </p>
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="flex flex-wrap items-center gap-2.5">
         <a
           href={getLangPath('/license')}
-          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
+          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-xs text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
         >
-          <span class="font-medium">CC</span> BY-NC-ND 4.0
+          <span class="font-semibold">CC</span> BY-NC-ND 4.0
         </a>
         <a
           href="https://github.com/AlexanderJ-Carter"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
+          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-xs text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
         >
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
-            ><path
-              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-            ></path></svg
-          >
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg>
           GitHub
         </a>
         <a
           href={getLangPath('/accessibility')}
-          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
+          class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-xs text-[rgb(var(--color-text-secondary))] hover:border-primary-500 hover:text-primary-500 transition-colors"
         >
           ♿ WCAG 2.1
         </a>
       </div>
     </div>
+
   </div>
 </footer>
-
-<script define:vars={{ copiedLabel }} is:inline>
-  (function () {
-    const copyBtn = document.getElementById('footer-copy-link');
-    const twitterLink = document.getElementById('footer-twitter-share');
-    const nativeBtn = document.getElementById('footer-native-share');
-
-    if (copyBtn) {
-      const copySpan = copyBtn.querySelector('span');
-      copyBtn.addEventListener('click', async function () {
-        const url = window.location.href;
-        try {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            await navigator.clipboard.writeText(url);
-          } else {
-            throw new Error('Clipboard not available');
-          }
-          if (copySpan) {
-            const orig = copySpan.textContent;
-            copySpan.textContent = copiedLabel || 'Copied';
-            setTimeout(function () { copySpan.textContent = orig; }, 1500);
-          }
-        } catch (_) {
-          window.prompt('Copy this URL:', url);
-        }
-      });
-    }
-
-    if (twitterLink) {
-      twitterLink.href = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(window.location.href) + '&text=' + encodeURIComponent(document.title || '');
-    }
-
-    if (nativeBtn && typeof navigator !== 'undefined' && navigator.share) {
-      nativeBtn.classList.remove('hidden');
-      nativeBtn.addEventListener('click', function () {
-        navigator.share({ title: document.title, url: window.location.href }).catch(function () {});
-      });
-    }
-  })();
-</script>

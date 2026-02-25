@@ -3,7 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+function getLangPath(path: string) {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
 
 const accessibilityData: Record<Lang, any> = {
   'zh-CN': {
@@ -83,46 +89,6 @@ const accessibilityData: Record<Lang, any> = {
     feedbackTitle: '反饋與聯繫',
     feedbackDesc:
       '如果您在使用本網站時遇到任何無障礙問題,或者對我們的無障礙功能有任何建議,請聯繫我們。我們將盡力解決您的問題。',
-  },
-  'en-US': {
-    title: 'Accessibility Statement',
-    back: 'Back to Home',
-    headerTitle: 'Accessibility Statement',
-    headerDesc:
-      'Committed to providing an accessible Web experience for all users',
-    commitmentTitle: 'Our Commitment',
-    commitmentDesc:
-      'alexander.xin is committed to ensuring that our website is accessible to everyone, including people with disabilities. We continuously strive to improve the accessibility and usability of our website and follow relevant accessibility standards and best practices.',
-    featuresTitle: 'Accessibility Features',
-    featuresDesc: 'Our website includes the following accessibility features:',
-    features: [
-      {
-        icon: '⌨️',
-        title: 'Keyboard Navigation',
-        desc: 'All functions are accessible via keyboard without using a mouse',
-      },
-      {
-        icon: '👁️',
-        title: 'High Contrast',
-        desc: 'Provides high contrast mode to ensure text is clear and readable',
-      },
-      {
-        icon: '📱',
-        title: 'Responsive Design',
-        desc: 'Adapts to various screen sizes and devices, supports zooming',
-      },
-      {
-        icon: '🗣️',
-        title: 'Screen Readers',
-        desc: 'Optimized ARIA labels, supports mainstream screen readers',
-      },
-    ],
-    standardsTitle: 'Conformance Standards',
-    standardsDesc:
-      'This website strives to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA published by the World Wide Web Consortium (W3C).',
-    feedbackTitle: 'Feedback and Contact',
-    feedbackDesc:
-      'If you encounter any accessibility issues while using this website, or have any suggestions for our accessibility features, please contact us. We will do our best to resolve your issues.',
   },
   'en-GB': {
     title: 'Accessibility Statement',
@@ -247,15 +213,15 @@ const accessibilityData: Record<Lang, any> = {
   },
 };
 
-const content = accessibilityData[lang as Lang] || accessibilityData['en-US'];
+const content = accessibilityData[lang as Lang] || accessibilityData['en-GB'];
 ---
 
-<BaseLayout title={`${content.title} - Alexander Carter`} showFooter={false}>
+<BaseLayout title={`${content.title} - Alexander Carter`}>
   <section class="pt-32 pb-16 min-h-screen">
     <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
       <!-- Back Button -->
       <a
-        href={`/${lang === 'zh-CN' ? '' : lang}`}
+        href={getLangPath('/')}
         class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
       >
         <svg
@@ -274,19 +240,45 @@ const content = accessibilityData[lang as Lang] || accessibilityData['en-US'];
       </a>
 
       <!-- Header -->
-      <div class="text-center mb-12">
+      <div class="text-center mb-10">
         <div
           class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6"
         >
           ♿
         </div>
-        <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-3">
           {content.headerTitle}
         </h1>
         <p class="text-lg text-[rgb(var(--color-text-secondary))]">
           {content.headerDesc}
         </p>
       </div>
+
+      <!-- Legal nav -->
+      <nav
+        class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[rgb(var(--color-text-secondary))] mb-10"
+        aria-label={lang === 'zh-CN' || lang === 'zh-TW' ? '法律与政策导航' : 'Legal & policy navigation'}
+      >
+        <a href={getLangPath('/privacy')} class="link-underline hover:text-primary-500">
+          {lang === 'zh-CN' ? '隐私政策' : lang === 'zh-TW' ? '隱私權政策' : 'Privacy'}
+        </a>
+        <span aria-hidden="true">·</span>
+        <a href={getLangPath('/terms')} class="link-underline hover:text-primary-500">
+          {lang === 'zh-CN' ? '服务条款' : lang === 'zh-TW' ? '服務條款' : 'Terms'}
+        </a>
+        <span aria-hidden="true">·</span>
+        <a href={getLangPath('/license')} class="link-underline hover:text-primary-500">
+          {lang === 'zh-CN' ? '许可证' : lang === 'zh-TW' ? '許可證' : 'License'}
+        </a>
+        <span aria-hidden="true">·</span>
+        <a href={getLangPath('/accessibility')} class="link-underline hover:text-primary-500">
+          {lang === 'zh-CN' ? '无障碍' : lang === 'zh-TW' ? '無障礙' : 'Accessibility'}
+        </a>
+        <span aria-hidden="true">·</span>
+        <a href={getLangPath('/security/policy')} class="link-underline hover:text-primary-500">
+          {lang === 'zh-CN' ? '安全政策' : lang === 'zh-TW' ? '安全政策' : 'Security'}
+        </a>
+      </nav>
 
       <!-- Content -->
       <div class="glass-card p-8 md:p-12 prose prose-lg max-w-none">

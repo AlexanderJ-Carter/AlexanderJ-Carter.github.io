@@ -2,16 +2,24 @@
 import { getLangFromUrl } from '../i18n/ui';
 
 const lang = getLangFromUrl(Astro.url);
-const ariaLabel = lang === 'zh-CN' ? '回到顶部' : 'Back to top';
+const ariaLabels: Record<string, string> = {
+  'zh-CN': '回到顶部',
+  'zh-TW': '回到頂部',
+  'en-GB': 'Back to top',
+  fr: 'Retour en haut',
+  ru: 'Наверх',
+};
+const ariaLabel = ariaLabels[lang] ?? 'Back to top';
 ---
 
 <button
   id="back-to-top"
+  type="button"
   aria-label={ariaLabel}
-  class="fixed z-40 w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white shadow-lg hover:shadow-xl transform transition-all duration-300 opacity-0 invisible translate-y-4 hover:scale-110 group"
+  class="fixed z-40 w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white shadow-lg hover:shadow-xl active:scale-95 transform transition-all duration-300 ease-out opacity-0 invisible translate-y-4 hover:scale-110 group back-to-top-btn focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))]"
 >
   <svg
-    class="w-6 h-6 mx-auto group-hover:-translate-y-1 transition-transform duration-300"
+    class="w-6 h-6 mx-auto group-hover:-translate-y-0.5 transition-transform duration-300"
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
@@ -28,32 +36,22 @@ const ariaLabel = lang === 'zh-CN' ? '回到顶部' : 'Back to top';
   const backToTopButton = document.getElementById('back-to-top');
   const scrollThreshold = 400; // Show button after scrolling 400px
 
-  // Show/hide button based on scroll position
+  // Show/hide button based on scroll position (use data-visible for transition + pointer-events)
   window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
     if (scrollTop > scrollThreshold) {
-      backToTopButton?.classList.remove(
-        'opacity-0',
-        'invisible',
-        'translate-y-4'
-      );
-      backToTopButton?.classList.add('opacity-100', 'visible', 'translate-y-0');
+      backToTopButton?.setAttribute('data-visible', 'true');
     } else {
-      backToTopButton?.classList.add('opacity-0', 'invisible', 'translate-y-4');
-      backToTopButton?.classList.remove(
-        'opacity-100',
-        'visible',
-        'translate-y-0'
-      );
+      backToTopButton?.removeAttribute('data-visible');
     }
   });
 
-  // Smooth scroll to top
+  // Scroll to top (smooth only when user has not requested reduced motion)
   backToTopButton?.addEventListener('click', () => {
+    const preferReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: preferReduced ? 'auto' : 'smooth',
     });
   });
 </script>
@@ -62,13 +60,22 @@ const ariaLabel = lang === 'zh-CN' ? '回到顶部' : 'Back to top';
   #back-to-top {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    pointer-events: none;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0s linear 0.3s;
+  }
+
+  #back-to-top[data-visible] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition-delay: 0s;
   }
 
   #back-to-top:hover {
-    background: linear-gradient(135deg, #3b82f6 0%, #d946ef 100%);
+    background: linear-gradient(135deg, #0ea5e9 0%, #d946ef 100%);
   }
 
-  /* 位于分享按钮上方，与音乐 FAB 同列 */
   #back-to-top {
     right: 1rem;
     bottom: calc(env(safe-area-inset-bottom, 0px) + 8.5rem);

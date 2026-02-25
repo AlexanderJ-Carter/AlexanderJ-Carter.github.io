@@ -19,6 +19,8 @@ interface Props {
   showHeader?: boolean;
   showFooter?: boolean;
   protectedPage?: boolean;
+  /** 附加到 <main> 的 class，用于全宽或间距等 */
+  mainClass?: string;
 }
 
 const lang = getLangFromUrl(Astro.url);
@@ -30,7 +32,8 @@ const {
   image = '/img/branding/logo.png',
   showHeader = true,
   showFooter = true,
-  protectedPage = false
+  protectedPage = false,
+  mainClass = ''
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -60,7 +63,8 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
   
   <!-- Alternate Language URLs -->
   <link rel="alternate" hreflang="zh-CN" href={new URL('/', Astro.site)}>
-  <link rel="alternate" hreflang="en-GB" href={new URL('/en-GB/', Astro.site)}>
+  <link rel="alternate" hreflang="zh-TW" href={new URL('/zh-TW/', Astro.site)}>
+  <link rel="alternate" hreflang="en-GB" href={new URL('/en/', Astro.site)}>
   <link rel="alternate" hreflang="fr" href={new URL('/fr/', Astro.site)}>
   <link rel="alternate" hreflang="ru" href={new URL('/ru/', Astro.site)}>
   <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)}>
@@ -124,7 +128,7 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
   <a href="#main-content" class="skip-link">{lang === 'zh-CN' ? '跳到主内容' : 'Skip to main content'}</a>
   {showHeader && <Header />}
   
-  <main id="main-content" tabindex="-1">
+  <main id="main-content" tabindex="-1" class={mainClass}>
     <slot />
   </main>
   

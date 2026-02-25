@@ -4,10 +4,11 @@ import { getLangFromUrl, useTranslations, languages } from '../i18n/ui';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-// Helper function to get language-prefixed path
+// Helper: 与 Footer 一致，en-GB 使用 /en/ 前缀
 function getLangPath(path: string) {
   if (lang === 'zh-CN') return path;
-  return `/${lang}${path}`;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
 }
 
 interface SubMenuItem {
@@ -27,12 +28,13 @@ interface NavItem {
 }
 
 const mainNavItems: NavItem[] = [
-  { href: lang === 'zh-CN' ? '/' : `/${lang}/`, label: t('nav.home'), icon: '🏠' },
+  { href: lang === 'zh-CN' ? '/' : lang === 'en-GB' ? '/en/' : `/${lang}/`, label: t('nav.home'), icon: '🏠' },
   { 
     label: lang === 'zh-CN' ? '创意' : (lang === 'zh-TW' ? '創意' : (lang === 'fr' ? 'Créatif' : (lang === 'ru' ? 'Творчество' : 'Creative'))),
     icon: '✨',
     submenu: [
       { href: getLangPath('/gallery'), label: t('nav.gallery'), icon: '🎨', desc: lang === 'zh-CN' ? '作品展示' : (lang === 'zh-TW' ? '作品展示' : (lang === 'fr' ? 'Galerie' : (lang === 'ru' ? 'Галерея' : 'Gallery'))) },
+      { href: getLangPath('/projects'), label: lang === 'zh-CN' ? '项目' : (lang === 'zh-TW' ? '專案' : (lang === 'fr' ? 'Projets' : (lang === 'ru' ? 'Проекты' : 'Projects'))), icon: '🛠', desc: lang === 'zh-CN' ? '我构建的作品' : (lang === 'zh-TW' ? '我構建的作品' : (lang === 'fr' ? "Ce que j'ai construit" : (lang === 'ru' ? 'То, что я создал' : "Things I've built"))) },
       { href: getLangPath('/fun'), label: lang === 'zh-CN' ? '彩蛋' : (lang === 'zh-TW' ? '彩蛋' : (lang === 'fr' ? 'Easter Eggs' : (lang === 'ru' ? 'Пасхалки' : 'Easter Eggs'))), icon: '🥚', desc: lang === 'zh-CN' ? '好玩的小惊喜' : (lang === 'zh-TW' ? '好玩的小驚喜' : (lang === 'fr' ? 'Surprises' : (lang === 'ru' ? 'Сюрпризы' : 'Fun & surprises'))) },
     ]
   },
@@ -44,7 +46,7 @@ const mainNavItems: NavItem[] = [
       { href: getLangPath('/currency'), label: lang === 'zh-CN' ? '汇率' : (lang === 'zh-TW' ? '匯率' : (lang === 'fr' ? 'Taux de change' : (lang === 'ru' ? 'Курс валют' : 'Exchange'))), icon: '💱', desc: lang === 'zh-CN' ? '汇率转换' : (lang === 'zh-TW' ? '匯率轉換' : (lang === 'fr' ? 'Convertisseur de devises' : (lang === 'ru' ? 'Конвертер валют' : 'Currency'))) },
       { href: getLangPath('/time'), label: lang === 'zh-CN' ? '时间' : (lang === 'zh-TW' ? '時間' : (lang === 'fr' ? 'Heure' : (lang === 'ru' ? 'Время' : 'Time'))), icon: '🕐', desc: lang === 'zh-CN' ? '世界时间' : (lang === 'zh-TW' ? '世界時間' : (lang === 'fr' ? 'Heure mondiale' : (lang === 'ru' ? 'Мировое время' : 'World Time'))) },
       { href: getLangPath('/now'), label: 'Now', icon: '📍', desc: lang === 'zh-CN' ? '此刻在做什么' : (lang === 'zh-TW' ? '此刻在做什麼' : (lang === 'fr' ? 'Ce que je fais' : (lang === 'ru' ? 'Чем занимаюсь' : 'What I\'m doing now'))) },
-      { href: getLangPath('/uses'), label: 'Uses', icon: '🛠', desc: lang === 'zh-CN' ? '使用的工具' : (lang === 'zh-TW' ? '使用的工具' : (lang === 'fr' ? 'Outils utilisés' : (lang === 'ru' ? 'Инструменты' : 'Tools I use'))) },
+      { href: getLangPath('/uses'), label: lang === 'zh-CN' ? '本站' : (lang === 'zh-TW' ? '本站' : (lang === 'fr' ? 'Le site' : (lang === 'ru' ? 'О сайте' : 'About site'))), icon: '🌐', desc: lang === 'zh-CN' ? '关于本站' : (lang === 'zh-TW' ? '關於本站' : (lang === 'fr' ? 'À propos du site' : (lang === 'ru' ? 'О сайте' : 'About this site'))) },
       { href: getLangPath('/units'), label: lang === 'zh-CN' ? '单位换算' : (lang === 'zh-TW' ? '單位換算' : (lang === 'fr' ? 'Unités' : (lang === 'ru' ? 'Единицы' : 'Units'))), icon: '📐', desc: lang === 'zh-CN' ? '温度·长度·重量' : (lang === 'zh-TW' ? '溫度·長度·重量' : (lang === 'fr' ? 'Température, longueur, poids' : (lang === 'ru' ? 'Температура, длина, вес' : 'Temperature, length, weight'))) },
       { href: getLangPath('/qr'), label: lang === 'zh-CN' ? 'QR 生成' : (lang === 'zh-TW' ? 'QR 生成' : (lang === 'fr' ? 'QR Code' : (lang === 'ru' ? 'QR-код' : 'QR Code'))), icon: '📱', desc: lang === 'zh-CN' ? '链接转二维码' : (lang === 'zh-TW' ? '連結轉二維碼' : (lang === 'fr' ? 'Lien en QR' : (lang === 'ru' ? 'Ссылка в QR' : 'URL to QR code'))) },
     ]
@@ -61,7 +63,7 @@ const mainNavItems: NavItem[] = [
   <nav class="container mx-auto px-4 lg:px-8 py-4">
     <div class="flex items-center justify-between">
       <!-- Logo -->
-      <a href={lang === 'zh-CN' ? '/' : `/${lang}/`} class="flex items-center gap-3 group">
+      <a href={lang === 'zh-CN' ? '/' : lang === 'en-GB' ? '/en/' : `/${lang}/`} class="flex items-center gap-3 group">
         <img
           src="/img/branding/logo.png"
           alt="Logo"
@@ -81,21 +83,22 @@ const mainNavItems: NavItem[] = [
       <div class="hidden md:flex items-center gap-2">
         {mainNavItems.map((item) => (
           item.submenu ? (
-            <div class="relative group">
-              <button class="flex items-center gap-2 px-3 py-2 rounded-lg text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] font-medium transition-all duration-200 group">
+            <div class="relative group submenu-group">
+              <button type="button" aria-haspopup="true" aria-expanded="false" class="submenu-btn flex items-center gap-2 px-3 py-2 rounded-lg text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] font-medium transition-all duration-200 group focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2">
                 <span>{item.icon}</span>
                 <span>{item.label}</span>
-                <svg class="w-4 h-4 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                <svg class="submenu-chevron w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
               <!-- Submenu -->
-              <div class="absolute left-0 mt-0 w-56 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 group-hover:mt-2 z-50">
+              <div class="submenu-panel absolute left-0 mt-0 w-56 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-xl shadow-xl opacity-0 invisible scale-95 origin-top-left group-hover:opacity-100 group-hover:visible group-hover:scale-100 group-hover:mt-2 transition-all duration-200 ease-out z-50">
                 {item.submenu.map((subitem, idx) => (
                   <a 
                     href={subitem.href}
-                    class={`flex items-center gap-3 px-4 py-3 hover:bg-primary-500/10 transition-all duration-200 ${idx === 0 ? 'rounded-t-xl' : ''} ${idx === item.submenu!.length - 1 ? 'rounded-b-xl' : ''}`}
+                    class={`flex items-center gap-3 px-4 py-3 hover:bg-primary-500/10 active:bg-primary-500/15 transition-colors duration-150 ${idx === 0 ? 'rounded-t-xl' : ''} ${idx === item.submenu!.length - 1 ? 'rounded-b-xl' : ''}`}
                     target={subitem.external ? '_blank' : undefined}
+                    rel={subitem.external ? 'noopener noreferrer' : undefined}
                   >
                     <span class="text-2xl">{subitem.icon}</span>
                     <div>
@@ -109,7 +112,7 @@ const mainNavItems: NavItem[] = [
           ) : (
             <a 
               href={item.href}
-              class="flex items-center gap-2 px-3 py-2 rounded-lg text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] font-medium transition-all duration-200 relative group"
+              class="flex items-center gap-2 px-3 py-2 rounded-lg text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] font-medium transition-all duration-200 relative group focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
               target={item.external ? '_blank' : undefined}
               rel={item.external ? 'noopener noreferrer' : undefined}
             >
@@ -126,8 +129,9 @@ const mainNavItems: NavItem[] = [
         <!-- Theme Toggle -->
         <button 
           id="theme-toggle"
+          type="button"
           aria-label={t('theme.toggle')}
-          class="p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors duration-200"
+          class="p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200"
         >
           <svg class="w-6 h-6 sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -138,21 +142,26 @@ const mainNavItems: NavItem[] = [
         </button>
         
         <!-- Language Switcher -->
-        <div class="relative group">
-          <button class="p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors duration-200 flex items-center gap-2">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="relative group lang-group" id="lang-switcher">
+          <button type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" id="lang-switcher-btn" class="p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200 flex items-center gap-2">
+            <svg class="w-5 h-5 text-[rgb(var(--color-text-secondary))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
             </svg>
-            <span class="text-sm font-medium hidden sm:block">{languages[lang]}</span>
+            <span class="text-sm font-medium hidden sm:block text-[rgb(var(--color-text-secondary))]">{languages[lang]}</span>
           </button>
-          <div class="absolute right-0 mt-2 w-32 glass-card opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <div id="lang-menu" role="menu" class="lang-panel absolute right-0 mt-2 w-40 glass-card opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 rounded-xl overflow-hidden shadow-xl z-50 py-1">
             {Object.entries(languages).map(([code, name]) => (
-              <a 
-                href={code === 'zh-CN' ? '/' : `/${code}/`}
-                class="block px-4 py-2 text-sm hover:bg-[rgb(var(--color-bg-secondary))] transition-colors first:rounded-t-lg last:rounded-b-lg"
-                class:list={{ 'font-bold text-primary-500': code === lang }}
+              <a
+                href={code === 'zh-CN' ? '/' : code === 'en-GB' ? '/en/' : `/${code}/`}
+                role="menuitem"
+                class="flex items-center justify-between px-4 py-2.5 text-sm text-[rgb(var(--color-text-secondary))] hover:bg-primary-500/10 hover:text-primary-500 transition-colors"
+                class:list={{ 'font-semibold !text-primary-500 bg-primary-500/8': code === lang }}
+                aria-current={code === lang ? 'true' : undefined}
               >
-                {name}
+                <span>{name}</span>
+                {code === lang && (
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary-500 flex-shrink-0" aria-hidden="true"></span>
+                )}
               </a>
             ))}
           </div>
@@ -161,8 +170,11 @@ const mainNavItems: NavItem[] = [
         <!-- Mobile Menu Toggle -->
         <button 
           id="mobile-menu-toggle"
-          aria-label="Toggle menu"
-          class="md:hidden p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors duration-200"
+          type="button"
+          aria-label={lang === 'zh-CN' ? '打开菜单' : 'Toggle menu'}
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          class="md:hidden p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200"
         >
           <svg class="w-6 h-6 hamburger" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -175,7 +187,7 @@ const mainNavItems: NavItem[] = [
     </div>
     
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 space-y-1">
+    <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 space-y-1" role="navigation" aria-label={lang === 'zh-CN' ? '主导航' : 'Main navigation'}>
       {mainNavItems.map((item) => (
         item.submenu ? (
           <div>
@@ -194,6 +206,7 @@ const mainNavItems: NavItem[] = [
                   href={subitem.href}
                   class="block py-2 px-3 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-primary-500/10 rounded transition-colors text-sm"
                   target={subitem.external ? '_blank' : undefined}
+                  rel={subitem.external ? 'noopener noreferrer' : undefined}
                 >
                   <span>{subitem.icon}</span> {subitem.label}
                 </a>
@@ -229,13 +242,40 @@ const mainNavItems: NavItem[] = [
   #header.nav-hidden {
     transform: translateY(-100%);
   }
-  
+
   .dark .sun-icon {
     display: none;
   }
-  
+
   .dark .moon-icon {
     display: block;
+  }
+
+  /* Keyboard/click-opened submenus */
+  .submenu-group[data-open] .submenu-panel {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1) !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .submenu-group[data-open] .submenu-chevron {
+    transform: rotate(180deg);
+  }
+
+  .lang-group[data-open] .lang-panel {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Active nav link */
+  .nav-link-active {
+    color: rgb(14 165 233) !important;
+    background-color: rgb(14 165 233 / 0.08) !important;
+  }
+
+  .nav-link-active .active-indicator {
+    width: 100% !important;
   }
 </style>
 
@@ -243,28 +283,138 @@ const mainNavItems: NavItem[] = [
   let lastScrollY = 0;
   const scrollThreshold = 12;
 
-  // Theme toggle
+  // ── Theme toggle ────────────────────────────────────────────────────────────
   const themeToggle = document.getElementById('theme-toggle');
   themeToggle?.addEventListener('click', () => {
     const isDark = document.documentElement.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
-  
-  // Mobile menu toggle
+
+  // ── Desktop submenu: click + keyboard support ────────────────────────────────
+  function closeAllSubmenus() {
+    document.querySelectorAll('.submenu-group[data-open]').forEach((g) => {
+      g.removeAttribute('data-open');
+      g.querySelector('button[aria-haspopup]')?.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  document.querySelectorAll('.submenu-group').forEach((group) => {
+    const btn = group.querySelector('button.submenu-btn');
+
+    // Click toggles open/close
+    btn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = group.hasAttribute('data-open');
+      closeAllSubmenus();
+      closeLangMenu();
+      if (!isOpen) {
+        group.setAttribute('data-open', '');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    // Keyboard: Enter/Space toggles; Escape closes; ArrowDown opens and moves focus
+    btn?.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        group.removeAttribute('data-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.focus();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        group.setAttribute('data-open', '');
+        btn.setAttribute('aria-expanded', 'true');
+        group.querySelector('.submenu-panel a')?.focus();
+      }
+    });
+
+    // Trap focus — close when focus leaves the group entirely
+    group.addEventListener('focusout', (e) => {
+      if (!group.contains(e.relatedTarget)) {
+        group.removeAttribute('data-open');
+        btn?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // ── Language switcher: click + keyboard support ──────────────────────────────
+  const langGroup = document.getElementById('lang-switcher');
+  const langBtn = document.getElementById('lang-switcher-btn');
+  const langMenu = document.getElementById('lang-menu');
+
+  function closeLangMenu() {
+    langGroup?.removeAttribute('data-open');
+    langBtn?.setAttribute('aria-expanded', 'false');
+  }
+
+  langBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = langGroup?.hasAttribute('data-open');
+    closeAllSubmenus();
+    if (!isOpen) {
+      langGroup?.setAttribute('data-open', '');
+      langBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      closeLangMenu();
+    }
+  });
+
+  langBtn?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeLangMenu();
+      langBtn.focus();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      langGroup?.setAttribute('data-open', '');
+      langBtn.setAttribute('aria-expanded', 'true');
+      langMenu?.querySelector('a')?.focus();
+    }
+  });
+
+  langGroup?.addEventListener('focusout', (e) => {
+    if (!langGroup.contains(e.relatedTarget)) closeLangMenu();
+  });
+
+  // Click anywhere outside closes all
+  document.addEventListener('click', () => {
+    closeAllSubmenus();
+    closeLangMenu();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeAllSubmenus();
+      closeLangMenu();
+    }
+  });
+
+  // ── Active page indicator ────────────────────────────────────────────────────
+  (function markActivePage() {
+    const path = window.location.pathname.replace(/\/$/, '') || '/';
+    document.querySelectorAll('header a[href]:not([target="_blank"])').forEach((a) => {
+      const href = a.getAttribute('href')?.replace(/\/$/, '') || '';
+      if (href && href === path) {
+        a.setAttribute('aria-current', 'page');
+        a.classList.add('nav-link-active');
+      }
+    });
+  })();
+
+  // ── Mobile menu toggle ───────────────────────────────────────────────────────
   const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburger = mobileMenuToggle?.querySelector('.hamburger');
   const close = mobileMenuToggle?.querySelector('.close');
-  
+
   mobileMenuToggle?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
     hamburger?.classList.toggle('hidden');
     close?.classList.toggle('hidden');
+    const isOpen = !mobileMenu?.classList.contains('hidden');
+    mobileMenuToggle?.setAttribute('aria-expanded', String(isOpen));
   });
 
   // Mobile submenu toggle
-  const submenuToggles = document.querySelectorAll('.mobile-submenu-toggle');
-  submenuToggles.forEach(toggle => {
+  document.querySelectorAll('.mobile-submenu-toggle').forEach((toggle) => {
     toggle.addEventListener('click', (e) => {
       const btn = e.currentTarget;
       if (!btn) return;
@@ -274,29 +424,27 @@ const mainNavItems: NavItem[] = [
       arrow?.classList.toggle('rotate-180');
     });
   });
-  
-  // Close menu on link click
-  const mobileLinks = mobileMenu?.querySelectorAll('a');
-  mobileLinks?.forEach(link => {
+
+  // Close mobile menu on link click
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
+      mobileMenu.classList.add('hidden');
       hamburger?.classList.remove('hidden');
       close?.classList.add('hidden');
+      mobileMenuToggle?.setAttribute('aria-expanded', 'false');
     });
   });
-  
-  // Scroll progress indicator
+
+  // ── Scroll progress + hide-on-scroll ────────────────────────────────────────
   window.addEventListener('scroll', () => {
     const header = document.getElementById('header');
     const indicator = document.getElementById('scroll-indicator');
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    
-    if (indicator) {
-      indicator.style.width = `${scrollPercent}%`;
-    }
-    
+    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    if (indicator) indicator.style.width = `${scrollPercent}%`;
+
     if (scrollTop > 10) {
       header?.classList.add('shadow-lg');
     } else {

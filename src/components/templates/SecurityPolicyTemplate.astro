@@ -3,7 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+function getLangPath(path: string) {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
 
 const securityPolicyData: Record<Lang, any> = {
   'zh-CN': {
@@ -231,140 +237,6 @@ const securityPolicyData: Record<Lang, any> = {
         preferredLangLabel: '首選語言：',
         preferredLang: '中文、英文',
         note: '對於敏感漏洞，建議使用PGP加密郵件。我們會在收到報告後優先處理高危漏洞。',
-      },
-    },
-  },
-  'en-US': {
-    title: 'Security Policy',
-    description:
-      'Website Security Vulnerability Disclosure Policy and Reporting Guidelines',
-    lastUpdated: 'February 4, 2026',
-    headerDesc:
-      'We value website security and welcome security researchers to responsibly report discovered security vulnerabilities.',
-    lastUpdatedLabel: 'Last Updated: ',
-    sidebarTitle: 'Policy Contents',
-    nav: {
-      overview: '1. Overview',
-      scope: '2. Scope',
-      guidelines: '3. Guidelines',
-      process: '4. Process',
-      legal: '5. Legal',
-      restrictions: '6. Restrictions',
-      contact: '7. Contact',
-    },
-    sections: {
-      overview: {
-        title: 'Overview',
-        content:
-          'We are committed to protecting user data and website security. If you discover a security vulnerability on our website, we encourage you to disclose it to us responsibly so that we can fix the issue promptly.',
-        commitmentTitle: 'Our Commitment',
-        commitments: [
-          'Take every security report seriously',
-          'Acknowledge receipt within 24 hours',
-          'Protect the identity of the reporter and the information provided',
-          'Publicly thank contributors after the fix (with your consent)',
-        ],
-      },
-      scope: {
-        title: 'Scope',
-        content: 'This policy applies to the following domains and services:',
-        domains: [
-          { label: 'Main Domain:', value: 'alexander.xin' },
-          { label: 'Subdomains:', value: '*.alexander.xin' },
-          { label: 'GitHub Pages:', value: 'alexanderj-carter.github.io' },
-        ],
-        excludeTitle: 'Exclusions',
-        excludes: [
-          'Third-party services and external links',
-          'Social media accounts',
-          'Other services not directly controlled by us',
-        ],
-      },
-      guidelines: {
-        title: 'Reporting Guidelines',
-        content:
-          'To help us quickly understand and fix the issue, please include the following information in your report:',
-        basicInfoTitle: 'Basic Information',
-        basicInfo: [
-          'Vulnerability type and severity assessment',
-          'Affected URL or function',
-          'Detailed reproduction steps',
-          'Potential impact description',
-        ],
-        techDetailsTitle: 'Technical Details',
-        techDetails: [
-          'Request and response examples',
-          'Screenshots or video demonstration',
-          'Tools and technologies used',
-          'Suggested fix (optional)',
-        ],
-      },
-      process: {
-        title: 'Handling Process',
-        steps: [
-          {
-            step: 1,
-            title: 'Report Receipt',
-            desc: 'Acknowledge receipt within 24 hours',
-          },
-          {
-            step: 2,
-            title: 'Initial Assessment',
-            desc: 'Complete initial analysis within 3-5 days',
-          },
-          {
-            step: 3,
-            title: 'Vulnerability Fix',
-            desc: 'Develop a fix plan based on severity',
-          },
-          {
-            step: 4,
-            title: 'Public Acknowledgment',
-            desc: 'Update acknowledgment page after fix',
-          },
-        ],
-      },
-      legal: {
-        title: 'Legal Protection',
-        content:
-          'For security research activities following this policy, we commit to:',
-        commitments: [
-          'Not taking legal action against researchers',
-          'Not reporting research activities to law enforcement',
-          'Working with researchers to resolve discovered issues',
-        ],
-        note: 'Researchers must follow responsible disclosure principles, not maliciously exploit vulnerabilities, and not access or modify others data.',
-      },
-      restrictions: {
-        title: 'Testing Restrictions',
-        allowedTitle: 'Allowed Testing',
-        allowed: [
-          'Automated vulnerability scanning (reasonable frequency)',
-          'Manual security testing',
-          'Social engineering testing (technical level only)',
-        ],
-        forbiddenTitle: 'Forbidden Actions',
-        forbidden: [
-          'Denial of Service attacks (DoS/DDoS)',
-          'Accessing, modifying, or deleting others data',
-          'Maliciously destroying website functionality',
-          'Physical attacks or social engineering',
-          'Publicly disclosing unpatched vulnerabilities',
-        ],
-      },
-      contact: {
-        title: 'Contact Information',
-        mainContactTitle: 'Main Contact',
-        emailLabel: 'Email:',
-        backupEmailLabel: 'Backup Email:',
-        encryptedContactTitle: 'Encrypted Communication',
-        pgpKeyLabel: 'PGP Key:',
-        downloadKey: 'Download Public Key',
-        keyStatusLabel: 'Key Status:',
-        keyStatus: 'Never Expires',
-        preferredLangLabel: 'Preferred Languages:',
-        preferredLang: 'Chinese, English',
-        note: 'For sensitive vulnerabilities, it is recommended to use PGP encrypted email. We will prioritize high-risk vulnerabilities upon receipt.',
       },
     },
   },
@@ -773,365 +645,452 @@ const securityPolicyData: Record<Lang, any> = {
   },
 };
 
-const t = securityPolicyData[lang as Lang] || securityPolicyData['en-US'];
+const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
 ---
 
 <BaseLayout
   title={`${t.title} | Alexander James Carter`}
   description={t.description}
 >
-  <div class="container mx-auto px-4 py-12 lg:py-20 max-w-6xl">
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-        {t.title}
-      </h1>
-      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-        {t.headerDesc}
-      </p>
-      <p class="text-sm text-gray-500 mt-4">
-        {t.lastUpdatedLabel}{t.lastUpdated}
-      </p>
-    </div>
-
-    <div class="flex flex-col lg:flex-row gap-8">
-      <!-- Sidebar Navigation -->
-      <div class="lg:w-1/4">
-        <div
-          class="sticky top-24 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-xl p-6 shadow-lg border border-gray-100 dark:border-gray-700"
+  <section class="pt-32 pb-16 min-h-screen">
+    <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
+      <!-- Back Button -->
+      <a
+        href={getLangPath('/')}
+        class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
         >
-          <h5 class="font-bold mb-4 text-lg">{t.sidebarTitle}</h5>
-          <nav class="flex flex-col space-y-2">
-            <a
-              href="#overview"
-              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
-              >{t.nav.overview}</a
-            >
-            <a
-              href="#scope"
-              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
-              >{t.nav.scope}</a
-            >
-            <a
-              href="#guidelines"
-              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
-              >{t.nav.guidelines}</a
-            >
-            <a
-              href="#process"
-              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
-              >{t.nav.process}</a
-            >
-            <a
-              href="#legal"
-              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
-              >{t.nav.legal}</a
-            >
-            <a
-              href="#restrictions"
-              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
-              >{t.nav.restrictions}</a
-            >
-            <a
-              href="#contact"
-              class="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-colors"
-              >{t.nav.contact}</a
-            >
-          </nav>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <span
+          >{
+            lang === 'zh-CN'
+              ? '返回首页'
+              : lang === 'zh-TW'
+                ? '返回首頁'
+                : lang === 'fr'
+                  ? "Retour à l'accueil"
+                  : lang === 'ru'
+                    ? 'На главную'
+                    : 'Back to home'
+          }</span
+        >
+      </a>
+
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <div
+          class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6"
+        >
+          🛡️
         </div>
+        <h1
+          class="text-4xl md:text-5xl font-heading font-bold mb-3 gradient-text"
+        >
+          {t.title}
+        </h1>
+        <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+          {t.headerDesc}
+        </p>
+        <p class="text-sm text-[rgb(var(--color-text-tertiary))] mt-3">
+          {t.lastUpdatedLabel}{t.lastUpdated}
+        </p>
       </div>
 
-      <!-- Main Content -->
-      <div class="lg:w-3/4 space-y-8">
-        <!-- 1. Overview -->
-        <section
-          id="overview"
-          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
+      <!-- Legal nav -->
+      <nav
+        class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[rgb(var(--color-text-secondary))] mb-10"
+        aria-label={lang === 'zh-CN' || lang === 'zh-TW'
+          ? '法律与政策导航'
+          : 'Legal & policy navigation'}
+      >
+        <a
+          href={getLangPath('/privacy')}
+          class="link-underline hover:text-primary-500"
         >
-          <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <span class="text-primary-500">🛡️</span>
-            {t.sections.overview.title}
-          </h2>
-          <p class="text-gray-600 dark:text-gray-300 mb-6">
-            {t.sections.overview.content}
-          </p>
-          <div
-            class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-100 dark:border-blue-800"
-          >
+          {
+            lang === 'zh-CN'
+              ? '隐私政策'
+              : lang === 'zh-TW'
+                ? '隱私權政策'
+                : 'Privacy'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/terms')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '服务条款'
+              : lang === 'zh-TW'
+                ? '服務條款'
+                : 'Terms'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/license')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '许可证'
+              : lang === 'zh-TW'
+                ? '許可證'
+                : 'License'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/accessibility')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '无障碍'
+              : lang === 'zh-TW'
+                ? '無障礙'
+                : 'Accessibility'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/security/policy')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '安全政策'
+              : lang === 'zh-TW'
+                ? '安全政策'
+                : 'Security'
+          }
+        </a>
+      </nav>
+
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Sidebar Navigation -->
+        <div class="lg:w-1/4">
+          <div class="sticky top-24 glass-card p-6 rounded-xl">
             <h5
-              class="font-bold text-blue-800 dark:text-blue-300 mb-3 flex items-center gap-2"
+              class="font-heading font-bold mb-4 text-sm uppercase tracking-wide text-[rgb(var(--color-text-tertiary))]"
             >
-              👍 {t.sections.overview.commitmentTitle}
+              {t.sidebarTitle}
             </h5>
+            <nav class="flex flex-col space-y-1.5">
+              <a
+                href="#overview"
+                class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors py-0.5"
+                >{t.nav.overview}</a
+              >
+              <a
+                href="#scope"
+                class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors py-0.5"
+                >{t.nav.scope}</a
+              >
+              <a
+                href="#guidelines"
+                class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors py-0.5"
+                >{t.nav.guidelines}</a
+              >
+              <a
+                href="#process"
+                class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors py-0.5"
+                >{t.nav.process}</a
+              >
+              <a
+                href="#legal"
+                class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors py-0.5"
+                >{t.nav.legal}</a
+              >
+              <a
+                href="#restrictions"
+                class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors py-0.5"
+                >{t.nav.restrictions}</a
+              >
+              <a
+                href="#contact"
+                class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors py-0.5"
+                >{t.nav.contact}</a
+              >
+            </nav>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="lg:w-3/4 space-y-8">
+          <!-- 1. Overview -->
+          <section id="overview" class="glass-card p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span class="text-primary-500">🛡️</span>
+              {t.sections.overview.title}
+            </h2>
+            <p class="text-[rgb(var(--color-text-secondary))] mb-6">
+              {t.sections.overview.content}
+            </p>
+            <div
+              class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-100 dark:border-blue-800"
+            >
+              <h5
+                class="font-bold text-blue-800 dark:text-blue-300 mb-3 flex items-center gap-2"
+              >
+                👍 {t.sections.overview.commitmentTitle}
+              </h5>
+              <ul
+                class="list-disc list-inside space-y-2 text-blue-700 dark:text-blue-200"
+              >
+                {
+                  t.sections.overview.commitments.map((item: string) => (
+                    <li>{item}</li>
+                  ))
+                }
+              </ul>
+            </div>
+          </section>
+
+          <!-- 2. Scope -->
+          <section id="scope" class="glass-card p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span class="text-primary-500">🌐</span>
+              {t.sections.scope.title}
+            </h2>
+            <p class="mb-4 text-[rgb(var(--color-text-secondary))]">
+              {t.sections.scope.content}
+            </p>
             <ul
-              class="list-disc list-inside space-y-2 text-blue-700 dark:text-blue-200"
+              class="list-disc list-inside space-y-2 mb-6 text-[rgb(var(--color-text-secondary))]"
             >
               {
-                t.sections.overview.commitments.map((item: string) => (
+                t.sections.scope.domains.map((item: any) => (
+                  <li>
+                    <strong>{item.label}</strong>
+                    {item.value}
+                  </li>
+                ))
+              }
+            </ul>
+
+            <div
+              class="bg-yellow-50 dark:bg-yellow-900/20 rounded-xl p-6 border border-yellow-100 dark:border-yellow-800"
+            >
+              <h5
+                class="font-bold text-yellow-800 dark:text-yellow-300 mb-3 flex items-center gap-2"
+              >
+                ⚠️ {t.sections.scope.excludeTitle}
+              </h5>
+              <ul
+                class="list-disc list-inside space-y-2 text-yellow-700 dark:text-yellow-200"
+              >
+                {
+                  t.sections.scope.excludes.map((item: string) => (
+                    <li>{item}</li>
+                  ))
+                }
+              </ul>
+            </div>
+          </section>
+
+          <!-- 3. Guidelines -->
+          <section id="guidelines" class="glass-card p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span class="text-primary-500">📋</span>
+              {t.sections.guidelines.title}
+            </h2>
+            <p class="mb-6 text-[rgb(var(--color-text-secondary))]">
+              {t.sections.guidelines.content}
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="font-bold mb-3 text-lg">
+                  {t.sections.guidelines.basicInfoTitle}
+                </h4>
+                <ul
+                  class="list-disc list-inside space-y-2 text-[rgb(var(--color-text-secondary))]"
+                >
+                  {
+                    t.sections.guidelines.basicInfo.map((item: string) => (
+                      <li>{item}</li>
+                    ))
+                  }
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold mb-3 text-lg">
+                  {t.sections.guidelines.techDetailsTitle}
+                </h4>
+                <ul
+                  class="list-disc list-inside space-y-2 text-[rgb(var(--color-text-secondary))]"
+                >
+                  {
+                    t.sections.guidelines.techDetails.map((item: string) => (
+                      <li>{item}</li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. Process -->
+          <section id="process" class="glass-card p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+              <span class="text-primary-500">🔄</span>
+              {t.sections.process.title}
+            </h2>
+            <div class="grid md:grid-cols-2 gap-4">
+              {
+                t.sections.process.steps.map((item: any) => (
+                  <div class="bg-[rgb(var(--color-bg-secondary))] p-4 rounded-xl border border-[rgb(var(--color-border))]">
+                    <h5 class="font-bold mb-1 flex items-center gap-2">
+                      <span class="bg-primary-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">
+                        {item.step}
+                      </span>
+                      {item.title}
+                    </h5>
+                    <p class="text-sm text-[rgb(var(--color-text-tertiary))] ml-8">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <!-- 5. Legal -->
+          <section id="legal" class="glass-card p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span class="text-primary-500">⚖️</span>
+              {t.sections.legal.title}
+            </h2>
+            <p class="mb-4 text-[rgb(var(--color-text-secondary))]">
+              {t.sections.legal.content}
+            </p>
+            <ul
+              class="list-disc list-inside space-y-2 mb-6 text-[rgb(var(--color-text-secondary))]"
+            >
+              {
+                t.sections.legal.commitments.map((item: string) => (
                   <li>{item}</li>
                 ))
               }
             </ul>
-          </div>
-        </section>
 
-        <!-- 2. Scope -->
-        <section
-          id="scope"
-          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
-        >
-          <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <span class="text-primary-500">🌐</span>
-            {t.sections.scope.title}
-          </h2>
-          <p class="mb-4 text-gray-600 dark:text-gray-300">
-            {t.sections.scope.content}
-          </p>
-          <ul
-            class="list-disc list-inside space-y-2 mb-6 text-gray-600 dark:text-gray-300"
-          >
-            {
-              t.sections.scope.domains.map((item: any) => (
-                <li>
-                  <strong>{item.label}</strong>
-                  {item.value}
-                </li>
-              ))
-            }
-          </ul>
-
-          <div
-            class="bg-yellow-50 dark:bg-yellow-900/20 rounded-xl p-6 border border-yellow-100 dark:border-yellow-800"
-          >
-            <h5
-              class="font-bold text-yellow-800 dark:text-yellow-300 mb-3 flex items-center gap-2"
+            <div
+              class="bg-[rgb(var(--color-bg-secondary))] rounded-xl p-4 flex gap-3 items-start border border-[rgb(var(--color-border))]"
             >
-              ⚠️ {t.sections.scope.excludeTitle}
-            </h5>
-            <ul
-              class="list-disc list-inside space-y-2 text-yellow-700 dark:text-yellow-200"
+              <span class="text-primary-500 mt-1">ℹ️</span>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+                {t.sections.legal.note}
+              </p>
+            </div>
+          </section>
+
+          <!-- 6. Restrictions -->
+          <section id="restrictions" class="glass-card p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span class="text-primary-500">🚫</span>
+              {t.sections.restrictions.title}
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 class="font-bold mb-3 text-green-600 dark:text-green-400">
+                  ✅ {t.sections.restrictions.allowedTitle}
+                </h4>
+                <ul
+                  class="list-disc list-inside space-y-2 text-[rgb(var(--color-text-secondary))]"
+                >
+                  {
+                    t.sections.restrictions.allowed.map((item: string) => (
+                      <li>{item}</li>
+                    ))
+                  }
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold mb-3 text-red-600 dark:text-red-400">
+                  ❌ {t.sections.restrictions.forbiddenTitle}
+                </h4>
+                <ul
+                  class="list-disc list-inside space-y-2 text-[rgb(var(--color-text-secondary))]"
+                >
+                  {
+                    t.sections.restrictions.forbidden.map((item: string) => (
+                      <li>{item}</li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- 7. Contact -->
+          <section id="contact" class="glass-card p-8 rounded-2xl">
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+              <span class="text-primary-500">📧</span>
+              {t.sections.contact.title}
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8 mb-6">
+              <div>
+                <h5 class="font-bold mb-3">
+                  {t.sections.contact.mainContactTitle}
+                </h5>
+                <p class="text-[rgb(var(--color-text-secondary))]">
+                  <strong>{t.sections.contact.emailLabel}</strong><a
+                    href="mailto:contact-us@alexander.xin"
+                    class="text-primary-500 hover:underline"
+                    >contact-us@alexander.xin</a
+                  >
+                </p>
+              </div>
+              <div>
+                <h5 class="font-bold mb-3">
+                  {t.sections.contact.encryptedContactTitle}
+                </h5>
+                <p class="mb-2 text-[rgb(var(--color-text-secondary))]">
+                  <strong>{t.sections.contact.pgpKeyLabel}</strong>
+                  <a
+                    href="/security/pgp-key.asc"
+                    target="_blank"
+                    class="text-primary-500 hover:underline"
+                    >{t.sections.contact.downloadKey}</a
+                  >
+                </p>
+                <p class="mb-2 text-[rgb(var(--color-text-secondary))]">
+                  <strong>{t.sections.contact.keyStatusLabel}</strong>{
+                    t.sections.contact.keyStatus
+                  }
+                </p>
+                <p class="text-[rgb(var(--color-text-secondary))]">
+                  <strong>{t.sections.contact.preferredLangLabel}</strong>{
+                    t.sections.contact.preferredLang
+                  }
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex gap-3 items-start"
             >
-              {t.sections.scope.excludes.map((item: string) => <li>{item}</li>)}
-            </ul>
-          </div>
-        </section>
-
-        <!-- 3. Guidelines -->
-        <section
-          id="guidelines"
-          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
-        >
-          <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <span class="text-primary-500">📋</span>
-            {t.sections.guidelines.title}
-          </h2>
-          <p class="mb-6 text-gray-600 dark:text-gray-300">
-            {t.sections.guidelines.content}
-          </p>
-
-          <div class="grid md:grid-cols-2 gap-6">
-            <div>
-              <h4 class="font-bold mb-3 text-lg">
-                {t.sections.guidelines.basicInfoTitle}
-              </h4>
-              <ul
-                class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300"
-              >
-                {
-                  t.sections.guidelines.basicInfo.map((item: string) => (
-                    <li>{item}</li>
-                  ))
-                }
-              </ul>
-            </div>
-            <div>
-              <h4 class="font-bold mb-3 text-lg">
-                {t.sections.guidelines.techDetailsTitle}
-              </h4>
-              <ul
-                class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300"
-              >
-                {
-                  t.sections.guidelines.techDetails.map((item: string) => (
-                    <li>{item}</li>
-                  ))
-                }
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <!-- 4. Process -->
-        <section
-          id="process"
-          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
-        >
-          <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-            <span class="text-primary-500">🔄</span>
-            {t.sections.process.title}
-          </h2>
-          <div class="grid md:grid-cols-2 gap-4">
-            {
-              t.sections.process.steps.map((item: any) => (
-                <div class="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl border border-gray-100 dark:border-gray-600">
-                  <h5 class="font-bold mb-1 flex items-center gap-2">
-                    <span class="bg-primary-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">
-                      {item.step}
-                    </span>
-                    {item.title}
-                  </h5>
-                  <p class="text-sm text-gray-500 dark:text-gray-400 ml-8">
-                    {item.desc}
-                  </p>
-                </div>
-              ))
-            }
-          </div>
-        </section>
-
-        <!-- 5. Legal -->
-        <section
-          id="legal"
-          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
-        >
-          <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <span class="text-primary-500">⚖️</span>
-            {t.sections.legal.title}
-          </h2>
-          <p class="mb-4 text-gray-600 dark:text-gray-300">
-            {t.sections.legal.content}
-          </p>
-          <ul
-            class="list-disc list-inside space-y-2 mb-6 text-gray-600 dark:text-gray-300"
-          >
-            {
-              t.sections.legal.commitments.map((item: string) => (
-                <li>{item}</li>
-              ))
-            }
-          </ul>
-
-          <div
-            class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4 flex gap-3 items-start"
-          >
-            <span class="text-primary-500 mt-1">ℹ️</span>
-            <p class="text-sm text-gray-600 dark:text-gray-300">
-              {t.sections.legal.note}
-            </p>
-          </div>
-        </section>
-
-        <!-- 6. Restrictions -->
-        <section
-          id="restrictions"
-          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
-        >
-          <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-            <span class="text-primary-500">🚫</span>
-            {t.sections.restrictions.title}
-          </h2>
-          <div class="grid md:grid-cols-2 gap-8">
-            <div>
-              <h4 class="font-bold mb-3 text-green-600 dark:text-green-400">
-                ✅ {t.sections.restrictions.allowedTitle}
-              </h4>
-              <ul
-                class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300"
-              >
-                {
-                  t.sections.restrictions.allowed.map((item: string) => (
-                    <li>{item}</li>
-                  ))
-                }
-              </ul>
-            </div>
-            <div>
-              <h4 class="font-bold mb-3 text-red-600 dark:text-red-400">
-                ❌ {t.sections.restrictions.forbiddenTitle}
-              </h4>
-              <ul
-                class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-300"
-              >
-                {
-                  t.sections.restrictions.forbidden.map((item: string) => (
-                    <li>{item}</li>
-                  ))
-                }
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <!-- 7. Contact -->
-        <section
-          id="contact"
-          class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm border border-gray-100 dark:border-gray-700"
-        >
-          <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-            <span class="text-primary-500">📧</span>
-            {t.sections.contact.title}
-          </h2>
-          <div class="grid md:grid-cols-2 gap-8 mb-6">
-            <div>
-              <h5 class="font-bold mb-3">
-                {t.sections.contact.mainContactTitle}
-              </h5>
-              <p class="text-gray-600 dark:text-gray-300">
-                <strong>{t.sections.contact.emailLabel}</strong><a
-                  href="mailto:contact-us@alexander.xin"
-                  class="text-primary-500 hover:underline"
-                  >contact-us@alexander.xin</a
-                >
+              <span class="text-blue-500 mt-1">💡</span>
+              <p class="text-sm text-blue-700 dark:text-blue-200">
+                {t.sections.contact.note}
               </p>
             </div>
-            <div>
-              <h5 class="font-bold mb-3">
-                {t.sections.contact.encryptedContactTitle}
-              </h5>
-              <p class="mb-2 text-gray-600 dark:text-gray-300">
-                <strong>{t.sections.contact.pgpKeyLabel}</strong>
-                <a
-                  href="/security/pgp-key.asc"
-                  target="_blank"
-                  class="text-primary-500 hover:underline"
-                  >{t.sections.contact.downloadKey}</a
-                >
-              </p>
-              <p class="mb-2 text-gray-600 dark:text-gray-300">
-                <strong>{t.sections.contact.keyStatusLabel}</strong>{
-                  t.sections.contact.keyStatus
-                }
-              </p>
-              <p class="text-gray-600 dark:text-gray-300">
-                <strong>{t.sections.contact.preferredLangLabel}</strong>{
-                  t.sections.contact.preferredLang
-                }
-              </p>
-            </div>
-          </div>
-
-          <div
-            class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex gap-3 items-start"
-          >
-            <span class="text-blue-500 mt-1">💡</span>
-            <p class="text-sm text-blue-700 dark:text-blue-200">
-              {t.sections.contact.note}
-            </p>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </BaseLayout>
-
-<style>
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500;
-  }
-
-  /* Smooth scrolling for anchor links */
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 100px;
-  }
-</style>

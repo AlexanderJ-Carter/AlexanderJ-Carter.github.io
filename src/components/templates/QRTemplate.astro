@@ -44,7 +44,7 @@ const t: Record<Lang, any> = {
     headerDesc: 'Entrez une URL ou du texte pour générer un QR code. Clic droit pour enregistrer.',
     placeholder: 'URL ou texte, ex. https://alexander.xin',
     generate: 'Générer',
-    relatedTitle: 'Plus d’outils',
+    relatedTitle: "Plus d'outils",
     back: "Retour à l'accueil",
   },
   ru: {
@@ -93,7 +93,7 @@ const content = t[lang as Lang] || t['en-GB'];
         value="https://alexander.xin"
       />
       <div class="flex justify-center p-6 bg-white dark:bg-gray-800 rounded-xl border border-[rgb(var(--color-border))]">
-        <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://alexander.xin" alt="QR Code" class="max-w-full h-auto" width="200" height="200" />
+        <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://alexander.xin" alt="QR Code" class="max-w-full h-auto" width="200" height="200" loading="lazy" decoding="async" />
       </div>
       <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-3">
         QR 由 api.qrserver.com 生成，可右键保存图片

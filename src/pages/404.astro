@@ -96,7 +96,7 @@ const t404 = translations[lang] || translations['zh-CN'];
         </div>
 
         <!-- Message -->
-        <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">
           {t404.title}
         </h2>
 
@@ -121,12 +121,14 @@ const t404 = translations[lang] || translations['zh-CN'];
             <div class="grid grid-cols-5 gap-2 mb-4">
               {
                 Array.from({ length: 25 }).map((_, i) => (
-                  <div
-                    class="number-cell w-12 h-12 flex items-center justify-center rounded-lg bg-[rgb(var(--color-bg-secondary))] cursor-pointer hover:bg-[rgb(var(--color-bg-accent))] transition-colors"
+                  <button
+                    type="button"
+                    class="number-cell w-12 h-12 flex items-center justify-center rounded-lg bg-[rgb(var(--color-bg-secondary))] cursor-pointer hover:bg-[rgb(var(--color-bg-accent))] focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors"
                     data-number={i + 1}
+                    aria-label={lang === 'zh-CN' ? `方块 ${i + 1}` : lang === 'zh-TW' ? `方塊 ${i + 1}` : `Cell ${i + 1}`}
                   >
                     ?
-                  </div>
+                  </button>
                 ))
               }
             </div>
@@ -139,7 +141,7 @@ const t404 = translations[lang] || translations['zh-CN'];
                     : 'Click the squares to find the number 404!'
               }
             </p>
-            <div id="game-result" class="hidden">
+            <div id="game-result" class="hidden" role="status" aria-live="polite">
               <p class="text-green-500 font-bold text-lg">
                 {
                   lang === 'zh-CN'
@@ -159,7 +161,7 @@ const t404 = translations[lang] || translations['zh-CN'];
           <div class="grid md:grid-cols-2 gap-4 text-left">
             <a
               href={lang === 'zh-CN' ? '/' : `/${lang}/`}
-              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors group"
+              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
             >
               <span class="text-2xl group-hover:scale-110 transition-transform"
                 >🏠</span
@@ -188,7 +190,7 @@ const t404 = translations[lang] || translations['zh-CN'];
 
             <a
               href={lang === 'zh-CN' ? '/gallery' : `/${lang}/gallery`}
-              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors group"
+              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
             >
               <span class="text-2xl group-hover:scale-110 transition-transform"
                 >🖼️</span
@@ -217,7 +219,7 @@ const t404 = translations[lang] || translations['zh-CN'];
 
             <a
               href={lang === 'zh-CN' ? '/about' : `/${lang}/about`}
-              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors group"
+              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
             >
               <span class="text-2xl group-hover:scale-110 transition-transform"
                 >👤</span
@@ -246,7 +248,7 @@ const t404 = translations[lang] || translations['zh-CN'];
 
             <a
               href={lang === 'zh-CN' ? '/contact' : `/${lang}/contact`}
-              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors group"
+              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
             >
               <span class="text-2xl group-hover:scale-110 transition-transform"
                 >📧</span
@@ -269,6 +271,36 @@ const t404 = translations[lang] || translations['zh-CN'];
                         ? '報告錯誤或尋求幫助'
                         : 'Report an error or get help'
                   }
+                </div>
+              </div>
+            </a>
+
+            <a
+              href={lang === 'zh-CN' ? '/timeline' : `/${lang}/timeline`}
+              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
+            >
+              <span class="text-2xl group-hover:scale-110 transition-transform">📅</span>
+              <div>
+                <div class="font-semibold mb-1">
+                  {lang === 'zh-CN' ? '时间轴' : lang === 'zh-TW' ? '時間軸' : lang === 'fr' ? 'Chronologie' : lang === 'ru' ? 'Хронология' : 'Timeline'}
+                </div>
+                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                  {lang === 'zh-CN' ? '成长与学习记录' : lang === 'zh-TW' ? '成長與學習記錄' : 'Growth and learning journey'}
+                </div>
+              </div>
+            </a>
+
+            <a
+              href={lang === 'zh-CN' ? '/sitemap' : `/${lang}/sitemap`}
+              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
+            >
+              <span class="text-2xl group-hover:scale-110 transition-transform">🗺️</span>
+              <div>
+                <div class="font-semibold mb-1">
+                  {lang === 'zh-CN' ? '网站地图' : lang === 'zh-TW' ? '網站地圖' : lang === 'fr' ? 'Plan du site' : lang === 'ru' ? 'Карта сайта' : 'Sitemap'}
+                </div>
+                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                  {lang === 'zh-CN' ? '查看全站导航' : lang === 'zh-TW' ? '查看全站導航' : 'View full site navigation'}
                 </div>
               </div>
             </a>
@@ -298,6 +330,7 @@ const t404 = translations[lang] || translations['zh-CN'];
           </a>
 
           <button
+            type="button"
             onclick="history.back()"
             class="btn-secondary inline-flex items-center gap-2"
           >

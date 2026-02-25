@@ -91,6 +91,27 @@
     outline: 2px solid rgb(14 165 233);
     outline-offset: 2px;
   }
+
+  /* 移动端点击高亮去除，改用 focus-visible */
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+  }
+
+  /* 尊重用户“减少动效”偏好 */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
 @layer components {
@@ -101,6 +122,26 @@
     border: 1px solid var(--glass-border);
     border-radius: 1rem;
     box-shadow: var(--shadow-lg);
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .glass-card:hover {
+    border-color: rgba(14, 165, 233, 0.25);
+  }
+  .dark .glass-card:hover {
+    border-color: rgba(56, 189, 248, 0.2);
+  }
+
+  /* 正文可读性：行高与段落间距 */
+  .prose {
+    @apply leading-relaxed;
+  }
+  .prose p {
+    @apply mb-4 last:mb-0;
+  }
+
+  /* 正文/文章内链接使用下划线动画 */
+  .prose a:not(.no-underline) {
+    @apply link-underline;
   }
 
   /* 编辑风引用块：左侧竖线强调 */
@@ -125,8 +166,9 @@
     @apply px-8 py-4 rounded-full font-semibold;
     @apply bg-gradient-to-r from-primary-500 to-accent-500;
     @apply text-white shadow-lg hover:shadow-xl;
-    @apply transform hover:scale-105 transition-all duration-300;
+    @apply transform hover:scale-105 active:scale-[0.98] transition-all duration-300 ease-out;
     @apply hover:from-primary-600 hover:to-accent-600;
+    @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
   }
 
   .btn-secondary {
@@ -134,8 +176,39 @@
     @apply bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-primary))];
     @apply border-2 border-[rgb(var(--color-border))];
     @apply hover:border-primary-500 hover:text-primary-500;
-    @apply transform hover:scale-105 transition-all duration-300;
+    @apply transform hover:scale-105 active:scale-[0.98] transition-all duration-300 ease-out;
+    @apply focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
   }
+
+  /* 内容区链接：悬停下划线从左展开 */
+  .link-underline {
+    @apply relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.25s ease-out;
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    width: 100%;
+  }
+
+  /* 输入框 / 选择框：统一 focus 过渡 */
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    @apply transition-colors duration-200;
+  }
+  input:focus, select:focus, textarea:focus {
+    @apply outline-none;
+  }
+
 
   /* Section divider – consistent top border for sections */
   .section-divider {
@@ -636,5 +709,18 @@
 
   .pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* 打印时隐藏浮动控件与装饰，只保留主内容 */
+  @media print {
+    #back-to-top,
+    #quick-actions,
+    #reading-progress,
+    #cookie-consent,
+    #new-year-effects,
+    #mouse-follower,
+    #page-loader {
+      display: none !important;
+    }
   }
 }

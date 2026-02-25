@@ -10,7 +10,7 @@ import PoemHistory from '../PoemHistory.astro';
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 // Data for different languages
 const typewriterData: Record<Lang, string[]> = {
@@ -27,13 +27,6 @@ const typewriterData: Record<Lang, string[]> = {
     '設計探索者 🎨',
     '音樂聆聽者 🎵',
     '終身學習者 📚',
-  ],
-  'en-US': [
-    'Photography Enthusiast 📸',
-    'Code Creator 💻',
-    'Design Explorer 🎨',
-    'Music Lover 🎵',
-    'Lifelong Learner 📚',
   ],
   'en-GB': [
     'Photography Enthusiast 📸',
@@ -71,41 +64,11 @@ const statsData: Record<Lang, any[]> = {
     { end: 100, suffix: '%', label: '用心投入', icon: '❤️', duration: 2000 },
     { end: 365, suffix: '天', label: '持續創作', icon: '⏰', duration: 2000 },
   ],
-  'en-US': [
-    {
-      end: 1200,
-      suffix: '+',
-      label: 'Works Created',
-      icon: '📸',
-      duration: 2000,
-    },
-    { end: 5, suffix: '+', label: 'Pro Fields', icon: '🎯', duration: 2000 },
-    { end: 100, suffix: '%', label: 'Dedication', icon: '❤️', duration: 2000 },
-    {
-      end: 365,
-      suffix: ' Days',
-      label: 'Continuous Creation',
-      icon: '⏰',
-      duration: 2000,
-    },
-  ],
   'en-GB': [
-    {
-      end: 1200,
-      suffix: '+',
-      label: 'Works Created',
-      icon: '📸',
-      duration: 2000,
-    },
+    { end: 1200, suffix: '+', label: 'Works Created', icon: '📸', duration: 2000 },
     { end: 5, suffix: '+', label: 'Pro Fields', icon: '🎯', duration: 2000 },
     { end: 100, suffix: '%', label: 'Dedication', icon: '❤️', duration: 2000 },
-    {
-      end: 365,
-      suffix: ' Days',
-      label: 'Continuous Creation',
-      icon: '⏰',
-      duration: 2000,
-    },
+    { end: 365, suffix: ' Days', label: 'Continuous Creation', icon: '⏰', duration: 2000 },
   ],
   fr: [
     {
@@ -190,48 +153,14 @@ const featuredWorksData: Record<Lang, any> = {
       },
     ],
   },
-  'en-US': {
-    title: 'Featured Works',
-    subtitle: 'Explore my latest creations',
-    viewAll: 'View All',
-    items: [
-      {
-        title: 'Morning Mist',
-        category: 'Landscape',
-        image: '/img/gallery/landscape-01.jpg',
-      },
-      {
-        title: 'Rain Petals',
-        category: 'Nature',
-        image: '/img/gallery/nature-flower-01.jpg',
-      },
-      {
-        title: 'Exquisite Dessert',
-        category: 'Food',
-        image: '/img/gallery/food-01.jpg',
-      },
-    ],
-  },
   'en-GB': {
     title: 'Featured Works',
     subtitle: 'Explore my latest creations',
     viewAll: 'View All',
     items: [
-      {
-        title: 'Morning Mist',
-        category: 'Landscape',
-        image: '/img/gallery/landscape-01.jpg',
-      },
-      {
-        title: 'Rain Petals',
-        category: 'Nature',
-        image: '/img/gallery/nature-flower-01.jpg',
-      },
-      {
-        title: 'Exquisite Dessert',
-        category: 'Food',
-        image: '/img/gallery/food-01.jpg',
-      },
+      { title: 'Morning Mist', category: 'Landscape', image: '/img/gallery/landscape-01.jpg' },
+      { title: 'Rain Petals', category: 'Nature', image: '/img/gallery/nature-flower-01.jpg' },
+      { title: 'Exquisite Dessert', category: 'Food', image: '/img/gallery/food-01.jpg' },
     ],
   },
   fr: {
@@ -297,14 +226,6 @@ const introData: Record<Lang, any> = {
       '歡迎駐足，和我一起在這些影像與文字之間，發現平凡裡的溫柔。',
     ],
   },
-  'en-US': {
-    lead: 'Between light and code, I search for moments that touch the heart.',
-    paragraphs: [
-      'Each photograph is a quiet journey, a breath caught from the passing of time.',
-      'I capture the warmth of light with a lens and the order of thought with code. May these fragments become a small river in your eyes.',
-      'Stay a while — wander these images and words with me, and find tenderness in the ordinary.',
-    ],
-  },
   'en-GB': {
     lead: 'Between light and code, I search for moments that touch the heart.',
     paragraphs: [
@@ -331,38 +252,59 @@ const introData: Record<Lang, any> = {
   },
 };
 
-const quoteData: Record<Lang, any> = {
-  'zh-CN': {
-    text: '设计不仅仅是外观和感觉。设计就是它是如何工作的。',
-    author: 'Steve Jobs',
-  },
-  'zh-TW': {
-    text: '設計不僅僅是外觀和感覺。設計就是它是如何工作的。',
-    author: 'Steve Jobs',
-  },
-  'en-US': {
-    text: 'Design is not just what it looks like and feels like. Design is how it works.',
-    author: 'Steve Jobs',
-  },
-  'en-GB': {
-    text: 'Design is not just what it looks like and feels like. Design is how it works.',
-    author: 'Steve Jobs',
-  },
-  fr: {
-    text: "Le design n'est pas seulement ce à quoi il ressemble et ce qu'il ressent. Le design est comment cela fonctionne.",
-    author: 'Steve Jobs',
-  },
-  ru: {
-    text: 'Дизайн — это не только то, как это выглядит и чувствуется. Дизайн — это то, как это работает.',
-    author: 'Steve Jobs',
-  },
+const quoteData: Record<Lang, any[]> = {
+  'zh-CN': [
+    { text: '设计不仅仅是外观和感觉。设计就是它是如何工作的。', author: 'Steve Jobs' },
+    { text: '完美不是无可增添，而是无可删减。', author: 'Antoine de Saint-Exupéry' },
+    { text: '简单是终极的复杂。', author: 'Leonardo da Vinci' },
+    { text: '每张照片都是一张时间的证书。', author: 'Susan Sontag' },
+    { text: '想象力比知识更重要。', author: 'Albert Einstein' },
+    { text: '光是我们感知的方式，也是我们表达的媒介。', author: 'Ansel Adams' },
+  ],
+  'zh-TW': [
+    { text: '設計不僅僅是外觀和感覺。設計就是它是如何工作的。', author: 'Steve Jobs' },
+    { text: '完美不是無可增添，而是無可刪減。', author: 'Antoine de Saint-Exupéry' },
+    { text: '簡單是終極的複雜。', author: 'Leonardo da Vinci' },
+    { text: '每張照片都是一張時間的證書。', author: 'Susan Sontag' },
+    { text: '想像力比知識更重要。', author: 'Albert Einstein' },
+    { text: '光是我們感知的方式，也是我們表達的媒介。', author: 'Ansel Adams' },
+  ],
+  'en-GB': [
+    { text: 'Design is not just what it looks like and feels like. Design is how it works.', author: 'Steve Jobs' },
+    { text: 'Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away.', author: 'Antoine de Saint-Exupéry' },
+    { text: 'Simplicity is the ultimate sophistication.', author: 'Leonardo da Vinci' },
+    { text: 'A photograph is a certificate of presence.', author: 'Roland Barthes' },
+    { text: 'Imagination is more important than knowledge.', author: 'Albert Einstein' },
+    { text: 'Light makes photography. Embrace light. Admire it. Love it. But above all, know light.', author: 'George Eastman' },
+  ],
+  fr: [
+    { text: "Le design n'est pas seulement ce à quoi il ressemble et ce qu'il ressent. Le design est comment cela fonctionne.", author: 'Steve Jobs' },
+    { text: 'La perfection est atteinte, non pas lorsqu\'il n\'y a plus rien à ajouter, mais lorsqu\'il n\'y a plus rien à enlever.', author: 'Antoine de Saint-Exupéry' },
+    { text: 'La simplicité est la sophistication suprême.', author: 'Léonard de Vinci' },
+    { text: "Une photographie, c'est un certificat de présence.", author: 'Roland Barthes' },
+    { text: "L'imagination est plus importante que le savoir.", author: 'Albert Einstein' },
+  ],
+  ru: [
+    { text: 'Дизайн — это не только то, как это выглядит и чувствуется. Дизайн — это то, как это работает.', author: 'Steve Jobs' },
+    { text: 'Совершенство достигается не тогда, когда нечего добавить, а тогда, когда нечего убрать.', author: 'Антуан де Сент-Экзюпери' },
+    { text: 'Простота — это высшая степень изощрённости.', author: 'Леонардо да Винчи' },
+    { text: 'Воображение важнее знания.', author: 'Альберт Эйнштейн' },
+    { text: 'Фотография — это сертификат присутствия.', author: 'Ролан Барт' },
+  ],
 };
 
-const typewriterTexts = typewriterData[lang as Lang] || typewriterData['en-US'];
-const stats = statsData[lang as Lang] || statsData['en-US'];
-const featured = featuredWorksData[lang as Lang] || featuredWorksData['en-US'];
-const quote = quoteData[lang as Lang] || quoteData['en-US'];
-const intro = introData[lang as Lang] || introData['en-US'];
+const typewriterTexts = typewriterData[lang as Lang] || typewriterData['en-GB'];
+const stats = statsData[lang as Lang] || statsData['en-GB'];
+const featured = featuredWorksData[lang as Lang] || featuredWorksData['en-GB'];
+const quotes = quoteData[lang as Lang] || quoteData['en-GB'];
+const intro = introData[lang as Lang] || introData['en-GB'];
+
+// Language path helper (consistent with Header/Footer)
+function getLangPath(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = (lang as string) === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
 ---
 
 <BaseLayout>
@@ -453,7 +395,7 @@ const intro = introData[lang as Lang] || introData['en-US'];
         <div
           class="flex flex-col sm:flex-row gap-4 justify-center fade-in-delay-4"
         >
-          <a href="/gallery" class="btn-primary glow-on-hover">
+          <a href={getLangPath('/gallery')} class="btn-primary glow-on-hover">
             <span>{t('hero.cta.primary')}</span>
             <svg
               class="w-5 h-5 ml-2"
@@ -469,7 +411,7 @@ const intro = introData[lang as Lang] || introData['en-US'];
               ></path>
             </svg>
           </a>
-          <a href="/about" class="btn-secondary">
+          <a href={getLangPath('/about')} class="btn-secondary">
             <span>{t('hero.cta.secondary')}</span>
             <svg
               class="w-5 h-5 ml-2"
@@ -540,7 +482,7 @@ const intro = introData[lang as Lang] || introData['en-US'];
         {
           featured.items.map((item: any) => (
             <a
-              href="/gallery"
+              href={getLangPath('/gallery')}
               class="group block relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer card-3d hover:shadow-2xl hover:shadow-primary-500/10 dark:hover:shadow-primary-500/20"
             >
               <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse" />
@@ -549,6 +491,7 @@ const intro = introData[lang as Lang] || introData['en-US'];
                 alt={item.title}
                 class="object-cover w-full h-full transform transition-transform duration-500 group-hover:scale-110 relative z-10"
                 loading="lazy"
+                decoding="async"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col justify-end p-6">
                 <span class="text-primary-400 text-sm font-medium mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
@@ -569,7 +512,7 @@ const intro = introData[lang as Lang] || introData['en-US'];
 
       <div class="text-center">
         <a
-          href="/gallery"
+          href={getLangPath('/gallery')}
           class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium transition-colors group"
         >
           {featured.viewAll}
@@ -609,24 +552,46 @@ const intro = introData[lang as Lang] || introData['en-US'];
       </svg>
     </div>
     <div class="container mx-auto px-4 relative z-10">
-      <blockquote class="quote-block max-w-3xl mx-auto text-left">
+      <blockquote
+        class="quote-block max-w-3xl mx-auto text-left"
+        id="home-quote"
+        data-quotes={JSON.stringify(quotes)}
+      >
         <p
+          id="quote-text"
           class="text-2xl md:text-4xl font-serif italic mb-6 leading-relaxed text-[rgb(var(--color-text-primary))]"
         >
-          "{quote.text}"
+          "{quotes[0].text}"
         </p>
         <footer
           class="text-lg text-[rgb(var(--color-text-secondary))] font-medium not-italic"
         >
-          — {quote.author}
+          — <span id="quote-author">{quotes[0].author}</span>
         </footer>
       </blockquote>
     </div>
+    <script is:inline>
+      (function () {
+        const el = document.getElementById('home-quote');
+        if (!el) return;
+        try {
+          const quotesRaw = el.getAttribute('data-quotes');
+          if (!quotesRaw) return;
+          const all = JSON.parse(quotesRaw);
+          if (!Array.isArray(all) || all.length < 2) return;
+          const pick = all[Math.floor(Math.random() * all.length)];
+          const textEl = document.getElementById('quote-text');
+          const authorEl = document.getElementById('quote-author');
+          if (textEl) textEl.textContent = '\u201C' + pick.text + '\u201D';
+          if (authorEl) authorEl.textContent = pick.author;
+        } catch (_) {}
+      })();
+    </script>
   </section>
 
   <!-- Holiday Greeting -->
   <HolidayGreeting />
 
   <!-- Poem History Section -->
-  <PoemHistory />
+  <PoemHistory lang={lang} />
 </BaseLayout>

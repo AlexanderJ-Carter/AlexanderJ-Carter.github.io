@@ -3,7 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+function getLangPath(path: string) {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
 
 const termsData: Record<Lang, any> = {
   'zh-CN': {
@@ -115,62 +121,6 @@ const termsData: Record<Lang, any> = {
         title: '8. 責任限制',
         content:
           '在法律允許的最大範圍內，作者對因存取、使用或無法使用本網站而產生的任何直接、間接、附帶、後果性或懲罰性損害不承擔責任，包括但不限於資料遺失、業務中斷或利潤損失。',
-      },
-    ],
-  },
-  'en-US': {
-    title: 'Terms of Service',
-    back: 'Back to Home',
-    headerTitle: 'Terms of Service',
-    lastUpdated: 'Last Updated: 4 February 2026',
-    sections: [
-      {
-        title: '1. Acceptance of Terms',
-        content:
-          'Welcome to alexander.xin. By accessing and using this website, you agree to comply with the following terms of service. If you do not agree to these terms, please do not use this website.',
-      },
-      {
-        title: '2. Website Purpose',
-        content: 'This website is a personal portfolio platform used for:',
-        list: [
-          'Showcasing photography and creative projects',
-          'Sharing technical knowledge and experience',
-          'Providing personal information and contact details',
-        ],
-      },
-      {
-        title: '3. User Conduct',
-        content: 'When using this website, you agree:',
-        list: [
-          'Not to engage in any behavior that compromises website security or operation',
-          'Not to misuse website resources or conduct malicious attacks',
-          'To respect intellectual property and the rights of others',
-        ],
-      },
-      {
-        title: '4. Disclaimer',
-        content:
-          'This website is provided "as is". The author makes no warranties regarding the availability, accuracy, or completeness of the website. Use of this website is at your own risk.',
-      },
-      {
-        title: '5. Modification of Terms',
-        content:
-          'The author reserves the right to modify these terms at any time. Modified terms will be effective upon posting. Continued use of this website constitutes your acceptance of the modified terms.',
-      },
-      {
-        title: '6. Intellectual Property',
-        content:
-          'Unless otherwise marked or attributed to third parties, all content on this website is owned by the author. Your use of content must comply with the NOTICE file and the license page on this site; commercial use or creation of derivative works without permission is not permitted.',
-      },
-      {
-        title: '7. Trademarks and Third-Party Marks',
-        content:
-          'Product names, company names, service names, and logos mentioned on this website (including but not limited to GitHub, Cloudflare, Google, Astro, Creative Commons, WCAG) may be trademarks or registered trademarks of their respective owners. Their use here is for identification and reference only and does not imply endorsement, sponsorship, or affiliation. This website is not affiliated with, endorsed by, or sponsored by these rights holders.',
-      },
-      {
-        title: '8. Limitation of Liability',
-        content:
-          'To the maximum extent permitted by law, the author shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from access to, use of, or inability to use this website, including but not limited to loss of data, business interruption, or loss of profits.',
       },
     ],
   },
@@ -354,7 +304,7 @@ const content = termsData[lang as Lang] || termsData['en-GB'];
     <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
       <!-- Back Button -->
       <a
-        href={`/${lang === 'zh-CN' ? '' : lang}`}
+        href={getLangPath('/')}
         class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
       >
         <svg
@@ -373,19 +323,92 @@ const content = termsData[lang as Lang] || termsData['en-GB'];
       </a>
 
       <!-- Header -->
-      <div class="text-center mb-12">
+      <div class="text-center mb-10">
         <div
           class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6"
         >
           📋
         </div>
-        <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-3">
           {content.headerTitle}
         </h1>
-        <p class="text-lg text-[rgb(var(--color-text-secondary))]">
+        <p class="text-sm text-[rgb(var(--color-text-tertiary))]">
           {content.lastUpdated}
         </p>
       </div>
+
+      <!-- Legal nav -->
+      <nav
+        class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[rgb(var(--color-text-secondary))] mb-10"
+        aria-label={lang === 'zh-CN' || lang === 'zh-TW'
+          ? '法律与政策导航'
+          : 'Legal & policy navigation'}
+      >
+        <a
+          href={getLangPath('/privacy')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '隐私政策'
+              : lang === 'zh-TW'
+                ? '隱私權政策'
+                : 'Privacy'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/terms')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '服务条款'
+              : lang === 'zh-TW'
+                ? '服務條款'
+                : 'Terms'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/license')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '许可证'
+              : lang === 'zh-TW'
+                ? '許可證'
+                : 'License'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/accessibility')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '无障碍'
+              : lang === 'zh-TW'
+                ? '無障礙'
+                : 'Accessibility'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/security/policy')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '安全政策'
+              : lang === 'zh-TW'
+                ? '安全政策'
+                : 'Security'
+          }
+        </a>
+      </nav>
 
       <!-- Content -->
       <div class="glass-card p-8 md:p-12 space-y-8">

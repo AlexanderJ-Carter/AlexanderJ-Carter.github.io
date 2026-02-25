@@ -3,7 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+function getLangPath(path: string) {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
 
 const privacyData: Record<Lang, any> = {
   'zh-CN': {
@@ -109,69 +115,6 @@ const privacyData: Record<Lang, any> = {
         title: '5. 第三方與商標說明',
         content:
           '上述第三方服務各有其隱私政策與條款，本網站不控制其資料收集與處理行為，請參閱各服務提供方的官方說明。本網站提及的產品或服務名稱（如 Google、Cloudflare 等）可能為各自權利人的商標或註冊商標，僅用於說明用途，不構成授權或背書。',
-      },
-    ],
-  },
-  'en-US': {
-    title: 'Privacy Policy',
-    back: 'Back to Home',
-    headerTitle: 'Privacy Policy',
-    lastUpdated: 'Last Updated: 4 February 2026',
-    sections: [
-      {
-        title: '1. Information Collection',
-        content:
-          'This website is committed to protecting your privacy. The types of information we collect include:',
-        list: [
-          {
-            title: 'Access Data',
-            desc: 'We may collect your browser type, IP address, access times, and pages viewed',
-          },
-          {
-            title: 'Cookies',
-            desc: 'We use Cookies to improve your browsing experience, such as remembering your theme preference and language selection',
-          },
-          {
-            title: 'Local Storage',
-            desc: "Certain settings (such as theme and language preferences) are saved in your browser's local storage",
-          },
-        ],
-      },
-      {
-        title: '2. Information Usage',
-        content: 'The collected information is used only for:',
-        list: [
-          {
-            title: 'Website Optimization',
-            desc: 'Analyzing access data to improve website performance and user experience',
-          },
-          { title: 'Personalization', desc: 'Saving your preference settings' },
-          {
-            title: 'Security',
-            desc: 'Detecting and preventing malicious access',
-          },
-        ],
-      },
-      {
-        title: '3. Third-Party Services',
-        content: 'This website may use the following third-party services:',
-        list: [
-          { title: 'Google Analytics', desc: 'For website traffic analysis' },
-          {
-            title: 'Cloudflare',
-            desc: 'For CDN acceleration and security protection',
-          },
-        ],
-      },
-      {
-        title: '4. Contact Information',
-        content:
-          'If you have any questions about this privacy policy, please contact me via the contact page. This policy was last updated on 4 February 2026.',
-      },
-      {
-        title: '5. Third-Party and Trademark Notice',
-        content:
-          'The above third-party services have their own privacy policies and terms; this website does not control their data practices. Please refer to each provider’s official documentation. Product or service names mentioned (e.g. Google, Cloudflare) may be trademarks or registered trademarks of their respective owners; use here is for reference only and does not imply endorsement.',
       },
     ],
   },
@@ -376,15 +319,15 @@ const privacyData: Record<Lang, any> = {
   },
 };
 
-const content = privacyData[lang as Lang] || privacyData['en-US'];
+const content = privacyData[lang as Lang] || privacyData['en-GB'];
 ---
 
-<BaseLayout title={`${content.title} - Alexander Carter`} showFooter={false}>
+<BaseLayout title={`${content.title} - Alexander Carter`}>
   <section class="pt-32 pb-16 min-h-screen">
     <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
       <!-- Back Button -->
       <a
-        href={`/${lang === 'zh-CN' ? '' : lang}`}
+        href={getLangPath('/')}
         class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
       >
         <svg
@@ -403,19 +346,45 @@ const content = privacyData[lang as Lang] || privacyData['en-US'];
       </a>
 
       <!-- Header -->
-      <div class="text-center mb-12">
+      <div class="text-center mb-10">
         <div
           class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6"
         >
           🔒
         </div>
-        <h1 class="text-4xl md:text-5xl font-display font-bold mb-4">
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-3">
           {content.headerTitle}
         </h1>
-        <p class="text-lg text-[rgb(var(--color-text-secondary))]">
+        <p class="text-sm text-[rgb(var(--color-text-tertiary))]">
           {content.lastUpdated}
         </p>
       </div>
+
+      <!-- Legal nav -->
+      <nav
+        class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[rgb(var(--color-text-secondary))] mb-10"
+        aria-label={lang === 'zh-CN' || lang === 'zh-TW' ? '法律与政策导航' : 'Legal & policy navigation'}
+      >
+        <a href={getLangPath('/privacy')} class="link-underline hover:text-primary-500">
+          {lang === 'zh-CN' ? '隐私政策' : lang === 'zh-TW' ? '隱私權政策' : 'Privacy'}
+        </a>
+        <span aria-hidden="true">·</span>
+        <a href={getLangPath('/terms')} class="link-underline hover:text-primary-500">
+          {lang === 'zh-CN' ? '服务条款' : lang === 'zh-TW' ? '服務條款' : 'Terms'}
+        </a>
+        <span aria-hidden="true">·</span>
+        <a href={getLangPath('/license')} class="link-underline hover:text-primary-500">
+          {lang === 'zh-CN' ? '许可证' : lang === 'zh-TW' ? '許可證' : 'License'}
+        </a>
+        <span aria-hidden="true">·</span>
+        <a href={getLangPath('/accessibility')} class="link-underline hover:text-primary-500">
+          {lang === 'zh-CN' ? '无障碍' : lang === 'zh-TW' ? '無障礙' : 'Accessibility'}
+        </a>
+        <span aria-hidden="true">·</span>
+        <a href={getLangPath('/security/policy')} class="link-underline hover:text-primary-500">
+          {lang === 'zh-CN' ? '安全政策' : lang === 'zh-TW' ? '安全政策' : 'Security'}
+        </a>
+      </nav>
 
       <!-- Content -->
       <div class="glass-card p-8 md:p-12 space-y-8">

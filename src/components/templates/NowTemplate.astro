@@ -19,8 +19,12 @@ const t: Record<Lang, Record<string, string>> = {
       '完成课业、维护这个站点、偶尔写写博客。没有付费推广或虚假内容，这里就是个人小角落。',
     sectionReading: '正在读',
     reading: '技术博客和产品文章；偶尔翻一翻非虚构和小说。',
+    sectionListening: '最近在听',
+    listening: '喜欢钢琴与古典风格的音乐，常在写代码时循环播放几首轻音乐。网站里有一个小小的播放器，装着几首常听的曲子。',
+    sectionLearning: '正在学',
+    learning: 'Web 开发更深入的部分（性能优化、构建工具链）；Verilog 高级设计模式；以及日语入门。',
     sectionBullets: '最近在做的几件事',
-    bullet1: '把 Uses / Now 页面写得更实在一点',
+    bullet1: '持续完善这个网站的体验与内容',
     bullet2: '坚持每周运动几次',
     bullet3: '整理相册和画廊里的图',
     bullet4: '学一点新东西（语言或框架）',
@@ -34,14 +38,18 @@ const t: Record<Lang, Record<string, string>> = {
     introLink: 'nownownow',
     introEnd: '。會不定期更新，記錄當下在做的事。',
     sectionLife: '生活與學習',
-    life: '在校學習電子信息相關課程，課餘做一點個人項目與攝影。最近在把網站收拾得更順手一些，並保持閱讀和運動。',
+    life: '在校學習電子資訊相關課程，課餘做一點個人專案與攝影。最近在把網站收拾得更順手一些，並保持閱讀和運動。',
     sectionFocus: '當前重心',
     focus:
       '完成課業、維護這個站點、偶爾寫寫部落格。沒有付費推廣或虛假內容，這裡就是個人小角落。',
     sectionReading: '正在讀',
     reading: '技術部落格和產品文章；偶爾翻一翻非虛構和小說。',
+    sectionListening: '最近在聽',
+    listening: '喜歡鋼琴與古典風格的音樂，常在寫程式時循環播放幾首輕音樂。網站裡有一個小小的播放器，裝著幾首常聽的曲子。',
+    sectionLearning: '正在學',
+    learning: 'Web 開發更深入的部分（效能優化、建構工具鏈）；Verilog 高階設計模式；以及日語入門。',
     sectionBullets: '最近在做的幾件事',
-    bullet1: '把 Uses / Now 頁面寫得更實在一點',
+    bullet1: '持續完善這個網站的體驗與內容',
     bullet2: '堅持每週運動幾次',
     bullet3: '整理相簿和畫廊裡的圖',
     bullet4: '學一點新東西（語言或框架）',
@@ -61,8 +69,12 @@ const t: Record<Lang, Record<string, string>> = {
       'Coursework, maintaining this site, and the occasional blog post. No paid promotions or fake content — just a personal corner of the web.',
     sectionReading: 'Reading',
     reading: 'Tech blogs and product writing; occasionally non-fiction and fiction.',
+    sectionListening: 'Listening to',
+    listening: 'Piano and light classical music while coding. The site has a small built-in player with a few favourites — feel free to try it.',
+    sectionLearning: 'Learning',
+    learning: 'Deeper web development (performance, build tooling); advanced Verilog design patterns; and picking up some Japanese basics.',
     sectionBullets: 'Lately',
-    bullet1: 'Making the Uses and Now pages more useful',
+    bullet1: 'Continuously improving this site\'s UX and content',
     bullet2: 'Keeping a few workout sessions per week',
     bullet3: 'Organising photos and the gallery',
     bullet4: 'Picking up something new (language or tool)',
@@ -82,8 +94,12 @@ const t: Record<Lang, Record<string, string>> = {
       'Les cours, ce site, et parfois le blog. Pas de pub payante ni de contenu factice — un coin perso du web.',
     sectionReading: 'En train de lire',
     reading: 'Blogs tech et articles produit ; de temps en temps essais et romans.',
+    sectionListening: "J'écoute",
+    listening: "De la musique pour piano et classique légère pendant le coding. Le site a un petit lecteur intégré avec quelques favoris.",
+    sectionLearning: 'En train d\'apprendre',
+    learning: 'Développement web approfondi (performances, outils de build) ; patterns Verilog avancés ; et bases du japonais.',
     sectionBullets: 'En ce moment',
-    bullet1: 'Rendre les pages Uses et Now plus utiles',
+    bullet1: "Améliorer continuellement l'expérience du site",
     bullet2: 'Garder quelques séances de sport par semaine',
     bullet3: 'Ranger les photos et la galerie',
     bullet4: 'Apprendre un truc nouveau (langage ou outil)',
@@ -103,8 +119,12 @@ const t: Record<Lang, Record<string, string>> = {
       'Учёба, поддержка этого сайта, иногда блог. Без платной рекламы и фейков — просто личный уголок в сети.',
     sectionReading: 'Читаю',
     reading: 'Технические блоги и статьи о продуктах; иногда нон-фикшн и художественное.',
+    sectionListening: 'Слушаю',
+    listening: 'Фортепианную и лёгкую классическую музыку во время работы с кодом. На сайте есть встроенный плеер с несколькими любимыми треками.',
+    sectionLearning: 'Изучаю',
+    learning: 'Углублённую веб-разработку (производительность, инструменты сборки); продвинутые паттерны Verilog; и основы японского.',
     sectionBullets: 'В последнее время',
-    bullet1: 'Делаю страницы Uses и Now полезнее',
+    bullet1: 'Постоянно улучшаю UX и контент сайта',
     bullet2: 'Поддерживаю несколько тренировок в неделю',
     bullet3: 'Разбираю фото и галерею',
     bullet4: 'Учу что-то новое (язык или инструмент)',
@@ -188,19 +208,53 @@ const nowDate = new Date().toISOString().slice(0, 10);
           <h2
             class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
           >
+            {text.sectionListening}
+          </h2>
+          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+            {text.listening}
+          </p>
+        </div>
+
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
+          >
+            {text.sectionLearning}
+          </h2>
+          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+            {text.learning}
+          </p>
+        </div>
+
+        <div class="glass-card p-8 reveal">
+          <h2
+            class="text-xl font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+          >
             {text.sectionBullets}
           </h2>
-          <ul class="list-disc list-inside space-y-2 text-[rgb(var(--color-text-secondary))]">
-            <li>{text.bullet1}</li>
-            <li>{text.bullet2}</li>
-            <li>{text.bullet3}</li>
-            <li>{text.bullet4}</li>
+          <ul class="space-y-3">
+            {[text.bullet1, text.bullet2, text.bullet3, text.bullet4].map((item) => (
+              <li class="flex items-start gap-3 text-[rgb(var(--color-text-secondary))]">
+                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-primary-500/15 text-primary-500 flex items-center justify-center" aria-hidden="true">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
           </ul>
         </div>
 
-        <p class="text-sm text-[rgb(var(--color-text-tertiary))]">
-          {text.updated}: <time datetime={nowDate}>{nowDate}</time>
-        </p>
+        <div class="flex items-center justify-between text-sm text-[rgb(var(--color-text-tertiary))]">
+          <p>{text.updated}: <time datetime={nowDate}>{nowDate}</time></p>
+          <a
+            href={lang === 'zh-CN' ? '/' : `/${lang === 'en-GB' ? 'en' : lang}/`}
+            class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1"
+          >
+            ← {text.back}
+          </a>
+        </div>
       </div>
 
       <RelatedTools lang={lang} current="now" />

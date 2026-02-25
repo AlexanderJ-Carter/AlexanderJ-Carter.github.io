@@ -3,7 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+function getLangPath(path: string) {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
 
 const licenseData: Record<Lang, any> = {
   'zh-CN': {
@@ -83,48 +89,6 @@ const licenseData: Record<Lang, any> = {
       '本項目源代碼（HTML、CSS、JavaScript、Astro 組件與配置檔案）採用 BSD 3-Clause 許可證。允許在保留版權聲明且不利用作者名義背書的前提下使用、修改與再分發。詳見倉庫根目錄 LICENSE 檔案。',
     contentExtraNote:
       '超出上述許可的使用（包括商業使用或創作演繹作品）須事先獲得著作權人書面許可。',
-  },
-  'en-US': {
-    title: 'License',
-    description: 'Content Usage License',
-    back: 'Back to Home',
-    headerTitle: 'License',
-    headerDesc: 'Content Usage License',
-    contentTitle: 'Content License',
-    contentP1: 'The content of this website is licensed under the',
-    licenseName:
-      'Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)',
-    contentP2: '.',
-    rightsTitle: 'You are free to:',
-    rights: [
-      {
-        title: 'Share',
-        desc: 'copy and redistribute the material in any medium or format (with attribution; non-commercial only; no derivatives)',
-      },
-    ],
-    conditionsTitle: 'Under the following terms:',
-    conditions: [
-      {
-        title: 'Attribution',
-        desc: 'You must give appropriate credit, provide a link to the license, and indicate if changes were made.',
-      },
-      {
-        title: 'NonCommercial',
-        desc: 'You may not use the material for commercial purposes.',
-      },
-      {
-        title: 'NoDerivatives',
-        desc: 'You may not remix, transform, or build upon the material; you may only share it unchanged.',
-      },
-    ],
-    disclaimerTitle: 'Disclaimer',
-    disclaimer:
-      'All code examples and technical articles provided on this website are for reference only. The author is not responsible for any direct or indirect damages resulting from the use of this content.',
-    codeLicenseTitle: 'Source Code License',
-    codeLicenseDesc:
-      "The source code of this project (HTML, CSS, JavaScript, Astro components, and configuration files) is licensed under the BSD 3-Clause License. Use, modification, and redistribution are permitted provided that the copyright notice is retained and the author's name is not used for endorsement. See the LICENSE file in the repository root.",
-    contentExtraNote:
-      'Any use beyond the above (including commercial use or creation of derivative works) requires prior written permission from the copyright holder.',
   },
   'en-GB': {
     title: 'License',
@@ -254,44 +218,70 @@ const licenseData: Record<Lang, any> = {
   },
 };
 
-const content = licenseData[lang as Lang] || licenseData['en-US'];
+const content = licenseData[lang as Lang] || licenseData['en-GB'];
 ---
 
 <BaseLayout
   title={`${content.title} | Alexander James Carter`}
   description={content.description}
 >
-  <div class="container mx-auto px-4 py-12 lg:py-20 max-w-5xl">
+  <section class="pt-32 pb-16 min-h-screen">
+  <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+    <!-- Back Button -->
+    <a
+      href={getLangPath('/')}
+      class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      <span>{content.back}</span>
+    </a>
+
     <!-- Header -->
-    <div class="text-center mb-16">
+    <div class="text-center mb-12">
       <div
-        class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-primary-500/20 to-accent-500/20 text-primary-500 mb-6 shadow-sm border border-primary-100 dark:border-primary-900/30"
+        class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6"
       >
-        <svg
-          class="w-10 h-10"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-          ></path>
-        </svg>
+        📄
       </div>
-      <h1 class="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+      <h1 class="text-4xl md:text-5xl font-heading font-bold mb-3 gradient-text">
         {content.headerTitle}
       </h1>
-      <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+      <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
         {content.headerDesc}
       </p>
     </div>
 
+    <!-- Legal nav -->
+    <nav
+      class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[rgb(var(--color-text-secondary))] mb-10"
+      aria-label={lang === 'zh-CN' || lang === 'zh-TW' ? '法律与政策导航' : 'Legal & policy navigation'}
+    >
+      <a href={getLangPath('/privacy')} class="link-underline hover:text-primary-500">
+        {lang === 'zh-CN' ? '隐私政策' : lang === 'zh-TW' ? '隱私權政策' : 'Privacy'}
+      </a>
+      <span aria-hidden="true">·</span>
+      <a href={getLangPath('/terms')} class="link-underline hover:text-primary-500">
+        {lang === 'zh-CN' ? '服务条款' : lang === 'zh-TW' ? '服務條款' : 'Terms'}
+      </a>
+      <span aria-hidden="true">·</span>
+      <a href={getLangPath('/license')} class="link-underline hover:text-primary-500">
+        {lang === 'zh-CN' ? '许可证' : lang === 'zh-TW' ? '許可證' : 'License'}
+      </a>
+      <span aria-hidden="true">·</span>
+      <a href={getLangPath('/accessibility')} class="link-underline hover:text-primary-500">
+        {lang === 'zh-CN' ? '无障碍' : lang === 'zh-TW' ? '無障礙' : 'Accessibility'}
+      </a>
+      <span aria-hidden="true">·</span>
+      <a href={getLangPath('/security/policy')} class="link-underline hover:text-primary-500">
+        {lang === 'zh-CN' ? '安全政策' : lang === 'zh-TW' ? '安全政策' : 'Security'}
+      </a>
+    </nav>
+
     <!-- License Badge Card -->
     <div
-      class="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-12 shadow-xl shadow-gray-100/50 dark:shadow-none border border-gray-100 dark:border-gray-700 mb-12 text-center relative overflow-hidden group"
+      class="glass-card rounded-3xl p-8 md:p-12 mb-12 text-center relative overflow-hidden"
     >
       <div
         class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-500 to-accent-500"
@@ -299,11 +289,11 @@ const content = licenseData[lang as Lang] || licenseData['en-US'];
       </div>
 
       <div class="relative z-10">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
+        <h2 class="text-2xl font-bold mb-6 text-[rgb(var(--color-text-primary))]">
           {content.contentTitle}
         </h2>
         <p
-          class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
+          class="text-lg text-[rgb(var(--color-text-secondary))] mb-8 max-w-3xl mx-auto leading-relaxed"
         >
           {content.contentP1}
           <a
@@ -376,7 +366,7 @@ const content = licenseData[lang as Lang] || licenseData['en-US'];
           </div>
         </div>
 
-        <div class="text-sm text-gray-500 font-mono">CC BY-NC-ND 4.0</div>
+        <div class="text-sm text-[rgb(var(--color-text-tertiary))] font-mono">CC BY-NC-ND 4.0</div>
         {
           content.contentExtraNote && (
             <p class="mt-6 text-sm text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20 rounded-xl px-4 py-3 max-w-2xl mx-auto border border-amber-200 dark:border-amber-800">
@@ -388,13 +378,11 @@ const content = licenseData[lang as Lang] || licenseData['en-US'];
     </div>
 
     <!-- Source Code License -->
-    <div
-      class="bg-slate-50 dark:bg-slate-800/50 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 mb-12"
-    >
-      <h2 class="text-xl font-bold mb-4 text-gray-800 dark:text-gray-100">
+    <div class="glass-card p-8 mb-12">
+      <h2 class="text-xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">
         {content.codeLicenseTitle}
       </h2>
-      <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+      <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
         {content.codeLicenseDesc}
       </p>
       <a
@@ -453,10 +441,10 @@ const content = licenseData[lang as Lang] || licenseData['en-US'];
                   />
                 </svg>
                 <div>
-                  <strong class="block text-gray-800 dark:text-gray-200 mb-1">
+                  <strong class="block text-[rgb(var(--color-text-primary))] mb-1">
                     {item.title}
                   </strong>
-                  <span class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  <span class="text-[rgb(var(--color-text-secondary))] text-sm leading-relaxed">
                     {item.desc}
                   </span>
                 </div>
@@ -497,10 +485,10 @@ const content = licenseData[lang as Lang] || licenseData['en-US'];
                   />
                 </svg>
                 <div>
-                  <strong class="block text-gray-800 dark:text-gray-200 mb-1">
+                  <strong class="block text-[rgb(var(--color-text-primary))] mb-1">
                     {item.title}
                   </strong>
-                  <span class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  <span class="text-[rgb(var(--color-text-secondary))] text-sm leading-relaxed">
                     {item.desc}
                   </span>
                 </div>
@@ -512,21 +500,14 @@ const content = licenseData[lang as Lang] || licenseData['en-US'];
     </div>
 
     <!-- Disclaimer -->
-    <div
-      class="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 text-center"
-    >
-      <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">
+    <div class="glass-card p-8 text-center">
+      <h3 class="text-lg font-heading font-bold text-[rgb(var(--color-text-primary))] mb-3">
         {content.disclaimerTitle}
       </h3>
-      <p class="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+      <p class="text-[rgb(var(--color-text-secondary))] max-w-3xl mx-auto">
         {content.disclaimer}
       </p>
     </div>
   </div>
+  </section>
 </BaseLayout>
-
-<style>
-  .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500;
-  }
-</style>

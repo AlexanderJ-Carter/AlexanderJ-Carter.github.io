@@ -1,0 +1,15 @@
+---
+import ProjectsTemplate from '../../components/templates/ProjectsTemplate.astro';
+import { languages } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  const paths = Object.keys(languages).map((lang) => ({ params: { lang } }));
+  paths.push({ params: { lang: 'en' } });
+  return paths;
+}
+
+const { lang: urlLang } = Astro.params;
+const lang = urlLang === 'en' ? 'en-GB' : urlLang;
+---
+
+<ProjectsTemplate lang={lang} />

@@ -1,0 +1,526 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedTools from '../RelatedTools.astro';
+
+const { lang } = Astro.props;
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+const t: Record<Lang, Record<string, string>> = {
+  'zh-CN': {
+    title: '个人项目',
+    subtitle: '我构建的作品与工具',
+    badge: '🛠 Projects',
+    intro: '这里展示了一些我正在或曾经构建的项目——从 Web 工具到硬件设计，兴趣驱动，持续迭代。',
+    filterAll: '全部',
+    filterWeb: 'Web',
+    filterHardware: '硬件',
+    filterTools: '工具',
+    statusDone: '已完成',
+    statusWip: '进行中',
+    viewSource: '查看源码',
+    viewDemo: '在线演示',
+    back: '返回首页',
+  },
+  'zh-TW': {
+    title: '個人專案',
+    subtitle: '我構建的作品與工具',
+    badge: '🛠 Projects',
+    intro: '這裡展示了一些我正在或曾經構建的專案——從 Web 工具到硬體設計，興趣驅動，持續迭代。',
+    filterAll: '全部',
+    filterWeb: 'Web',
+    filterHardware: '硬體',
+    filterTools: '工具',
+    statusDone: '已完成',
+    statusWip: '進行中',
+    viewSource: '查看原始碼',
+    viewDemo: '線上演示',
+    back: '返回首頁',
+  },
+  'en-GB': {
+    title: 'Projects',
+    subtitle: 'Things I\'ve built',
+    badge: '🛠 Projects',
+    intro: 'A selection of projects I\'ve built or am currently working on — from web tools to hardware design, driven by curiosity and iteration.',
+    filterAll: 'All',
+    filterWeb: 'Web',
+    filterHardware: 'Hardware',
+    filterTools: 'Tools',
+    statusDone: 'Completed',
+    statusWip: 'In Progress',
+    viewSource: 'Source',
+    viewDemo: 'Demo',
+    back: 'Back to home',
+  },
+  fr: {
+    title: 'Projets',
+    subtitle: 'Ce que j\'ai construit',
+    badge: '🛠 Projets',
+    intro: "Une sélection de projets que j'ai construits ou sur lesquels je travaille — des outils web à la conception matérielle, guidés par la curiosité.",
+    filterAll: 'Tous',
+    filterWeb: 'Web',
+    filterHardware: 'Matériel',
+    filterTools: 'Outils',
+    statusDone: 'Terminé',
+    statusWip: 'En cours',
+    viewSource: 'Code source',
+    viewDemo: 'Démo',
+    back: "Retour à l'accueil",
+  },
+  ru: {
+    title: 'Проекты',
+    subtitle: 'То, что я создал',
+    badge: '🛠 Проекты',
+    intro: 'Подборка проектов, которые я создал или над которыми работаю — от веб-инструментов до аппаратного дизайна.',
+    filterAll: 'Все',
+    filterWeb: 'Web',
+    filterHardware: 'Железо',
+    filterTools: 'Инструменты',
+    statusDone: 'Завершён',
+    statusWip: 'В работе',
+    viewSource: 'Исходный код',
+    viewDemo: 'Демо',
+    back: 'На главную',
+  },
+};
+
+const projectsData: Record<Lang, any[]> = {
+  'zh-CN': [
+    {
+      title: '个人主页',
+      desc: '你现在所在的网站。Astro + Tailwind CSS + TypeScript 构建的静态站点，多语言支持，部署在 GitHub Pages。',
+      tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
+      category: 'web',
+      status: 'wip',
+      github: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+      demo: 'https://alexander.xin',
+    },
+    {
+      title: '世界时间 API',
+      desc: '基于 Cloudflare Workers 的世界时间查询 API，低延迟，免费使用，支持时区名称与 UTC 偏移。',
+      tags: ['Cloudflare Workers', 'JavaScript', 'API'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/time',
+    },
+    {
+      title: 'FPGA 信号处理器',
+      desc: '在 FPGA 开发板上实现的数字信号处理模块，使用 Verilog 编写，包含 FIR 滤波器与简单 FSM 控制器。',
+      tags: ['Verilog', 'FPGA', 'DSP'],
+      category: 'hardware',
+      status: 'done',
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'QR 码生成器',
+      desc: '纯前端 QR 码生成工具，粘贴链接即可生成可下载的二维码，无需后端。',
+      tags: ['JavaScript', 'Astro', 'Web API'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/qr',
+    },
+    {
+      title: '摄影后期脚本',
+      desc: '一套 Python 脚本，用于批量处理 RAW 文件、重命名、生成 Web 端缩略图，集成 Exif 信息提取。',
+      tags: ['Python', 'Pillow', 'ExifRead'],
+      category: 'tools',
+      status: 'wip',
+      github: null,
+      demo: null,
+    },
+    {
+      title: '汇率转换小工具',
+      desc: '调用开放汇率 API 的前端汇率换算页，支持常用货币，轻量、无追踪。',
+      tags: ['JavaScript', 'Fetch API', 'Astro'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/currency',
+    },
+  ],
+  'zh-TW': [
+    {
+      title: '個人主頁',
+      desc: '你現在所在的網站。Astro + Tailwind CSS + TypeScript 構建的靜態站點，多語言支援，部署在 GitHub Pages。',
+      tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
+      category: 'web',
+      status: 'wip',
+      github: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+      demo: 'https://alexander.xin',
+    },
+    {
+      title: '世界時間 API',
+      desc: '基於 Cloudflare Workers 的世界時間查詢 API，低延遲，免費使用，支援時區名稱與 UTC 偏移。',
+      tags: ['Cloudflare Workers', 'JavaScript', 'API'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/time',
+    },
+    {
+      title: 'FPGA 信號處理器',
+      desc: '在 FPGA 開發板上實現的數位信號處理模組，使用 Verilog 編寫，包含 FIR 濾波器與簡單 FSM 控制器。',
+      tags: ['Verilog', 'FPGA', 'DSP'],
+      category: 'hardware',
+      status: 'done',
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'QR 碼生成器',
+      desc: '純前端 QR 碼生成工具，貼上連結即可生成可下載的二維碼，無需後端。',
+      tags: ['JavaScript', 'Astro', 'Web API'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/qr',
+    },
+    {
+      title: '攝影後製腳本',
+      desc: '一套 Python 腳本，用於批次處理 RAW 檔案、重新命名、生成 Web 端縮圖，整合 Exif 資訊提取。',
+      tags: ['Python', 'Pillow', 'ExifRead'],
+      category: 'tools',
+      status: 'wip',
+      github: null,
+      demo: null,
+    },
+    {
+      title: '匯率換算小工具',
+      desc: '呼叫開放匯率 API 的前端匯率換算頁，支援常用貨幣，輕量、無追蹤。',
+      tags: ['JavaScript', 'Fetch API', 'Astro'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/currency',
+    },
+  ],
+  'en-GB': [
+    {
+      title: 'Personal Website',
+      desc: "The site you're on. A static site built with Astro + Tailwind CSS + TypeScript, multilingual, deployed on GitHub Pages.",
+      tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
+      category: 'web',
+      status: 'wip',
+      github: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+      demo: 'https://alexander.xin',
+    },
+    {
+      title: 'World Time API',
+      desc: 'A low-latency world time API built on Cloudflare Workers, supporting timezone names and UTC offsets.',
+      tags: ['Cloudflare Workers', 'JavaScript', 'API'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/time',
+    },
+    {
+      title: 'FPGA Signal Processor',
+      desc: 'A digital signal processing module implemented on an FPGA development board, written in Verilog — includes a FIR filter and a simple FSM controller.',
+      tags: ['Verilog', 'FPGA', 'DSP'],
+      category: 'hardware',
+      status: 'done',
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'QR Code Generator',
+      desc: 'A zero-backend, client-side QR code generator. Paste a URL, get a downloadable QR code instantly.',
+      tags: ['JavaScript', 'Astro', 'Web API'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/qr',
+    },
+    {
+      title: 'Photography Post-Processing Scripts',
+      desc: 'A set of Python scripts for batch-processing RAW files, renaming, generating web thumbnails, and extracting Exif metadata.',
+      tags: ['Python', 'Pillow', 'ExifRead'],
+      category: 'tools',
+      status: 'wip',
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'Currency Converter',
+      desc: 'A lightweight, tracking-free currency converter that calls an open exchange rates API.',
+      tags: ['JavaScript', 'Fetch API', 'Astro'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/currency',
+    },
+  ],
+  fr: [
+    {
+      title: 'Site personnel',
+      desc: "Le site sur lequel vous vous trouvez. Un site statique Astro + Tailwind CSS + TypeScript, multilingue, hébergé sur GitHub Pages.",
+      tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
+      category: 'web',
+      status: 'wip',
+      github: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+      demo: 'https://alexander.xin',
+    },
+    {
+      title: 'API Heure Mondiale',
+      desc: 'Une API de temps mondiale faible latence sur Cloudflare Workers, supportant les noms de fuseaux horaires et les décalages UTC.',
+      tags: ['Cloudflare Workers', 'JavaScript', 'API'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/time',
+    },
+    {
+      title: 'Processeur de signal FPGA',
+      desc: 'Un module de traitement de signal numérique sur FPGA, écrit en Verilog — inclut un filtre FIR et un contrôleur FSM simple.',
+      tags: ['Verilog', 'FPGA', 'DSP'],
+      category: 'hardware',
+      status: 'done',
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'Générateur de QR Code',
+      desc: 'Générateur de QR code côté client, sans backend. Collez une URL, obtenez un QR code téléchargeable.',
+      tags: ['JavaScript', 'Astro', 'Web API'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/qr',
+    },
+    {
+      title: 'Convertisseur de devises',
+      desc: 'Convertisseur de devises léger et sans tracking, utilisant une API de taux de change ouverte.',
+      tags: ['JavaScript', 'Fetch API', 'Astro'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/currency',
+    },
+  ],
+  ru: [
+    {
+      title: 'Личный сайт',
+      desc: 'Сайт, на котором вы сейчас находитесь. Статический сайт на Astro + Tailwind CSS + TypeScript, многоязычный, развёрнут на GitHub Pages.',
+      tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
+      category: 'web',
+      status: 'wip',
+      github: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+      demo: 'https://alexander.xin',
+    },
+    {
+      title: 'API мирового времени',
+      desc: 'Низкозадержечный API мирового времени на Cloudflare Workers, поддерживает имена временных зон и смещения UTC.',
+      tags: ['Cloudflare Workers', 'JavaScript', 'API'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/time',
+    },
+    {
+      title: 'Обработчик сигналов на FPGA',
+      desc: 'Модуль цифровой обработки сигналов на FPGA, написанный на Verilog — включает FIR-фильтр и простой FSM-контроллер.',
+      tags: ['Verilog', 'FPGA', 'DSP'],
+      category: 'hardware',
+      status: 'done',
+      github: null,
+      demo: null,
+    },
+    {
+      title: 'Генератор QR-кодов',
+      desc: 'Клиентский генератор QR-кодов без бэкенда. Вставьте URL — получите QR-код для скачивания.',
+      tags: ['JavaScript', 'Astro', 'Web API'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/qr',
+    },
+    {
+      title: 'Конвертер валют',
+      desc: 'Лёгкий конвертер валют без трекинга, использующий открытый API обменных курсов.',
+      tags: ['JavaScript', 'Fetch API', 'Astro'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/currency',
+    },
+  ],
+};
+
+const text = t[lang as Lang] || t['en-GB'];
+const projects = projectsData[lang as Lang] || projectsData['en-GB'];
+
+function getLangPath(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = (lang as string) === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+---
+
+<BaseLayout title={text.title} description={text.subtitle}>
+  <section class="relative py-16 md:py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient opacity-40" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+
+      <!-- Header -->
+      <div class="text-center mb-12 max-w-2xl mx-auto">
+        <span class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4">
+          {text.badge}
+        </span>
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight">
+          {text.title}
+        </h1>
+        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+          {text.intro}
+        </p>
+      </div>
+
+      <!-- Filter buttons -->
+      <div class="flex flex-wrap justify-center gap-2 mb-10" id="project-filters">
+        {[
+          { key: 'all', label: text.filterAll },
+          { key: 'web', label: text.filterWeb },
+          { key: 'hardware', label: text.filterHardware },
+          { key: 'tools', label: text.filterTools },
+        ].map(({ key, label }) => (
+          <button
+            type="button"
+            data-filter={key}
+            class={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 ${
+              key === 'all'
+                ? 'bg-primary-500 text-white border-transparent'
+                : 'bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-secondary))] border-[rgb(var(--color-border))] hover:border-primary-500 hover:text-primary-500'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Projects grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12" id="projects-grid">
+        {projects.map((project: any) => (
+          <article
+            class="glass-card p-6 rounded-2xl flex flex-col gap-4 reveal hover:border-primary-500/30 transition-all duration-300"
+            data-category={project.category}
+          >
+            <!-- Status badge -->
+            <div class="flex items-center justify-between">
+              <span class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
+                project.status === 'done'
+                  ? 'bg-green-500/10 text-green-600 dark:text-green-400'
+                  : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
+              }`}>
+                <span class={`w-1.5 h-1.5 rounded-full ${project.status === 'done' ? 'bg-green-500' : 'bg-amber-500 animate-pulse'}`}></span>
+                {project.status === 'done' ? text.statusDone : text.statusWip}
+              </span>
+              <span class="text-xs text-[rgb(var(--color-text-tertiary))] uppercase tracking-wide">
+                {project.category}
+              </span>
+            </div>
+
+            <!-- Title + description -->
+            <div class="flex-1">
+              <h2 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+                {project.title}
+              </h2>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+                {project.desc}
+              </p>
+            </div>
+
+            <!-- Tech tags -->
+            <div class="flex flex-wrap gap-1.5">
+              {project.tags.map((tag: string) => (
+                <span class="px-2 py-0.5 rounded-md bg-primary-500/10 text-primary-600 dark:text-primary-400 text-xs font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <!-- Links -->
+            {(project.github || project.demo) && (
+              <div class="flex items-center gap-3 pt-1 border-t border-[rgb(var(--color-border))]">
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors link-underline"
+                  >
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                    {text.viewSource}
+                  </a>
+                )}
+                {project.demo && (
+                  <a
+                    href={project.demo.startsWith('http') ? project.demo : getLangPath(project.demo)}
+                    target={project.demo.startsWith('http') ? '_blank' : undefined}
+                    rel={project.demo.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    class="inline-flex items-center gap-1.5 text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors link-underline"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    {text.viewDemo}
+                  </a>
+                )}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+
+      <!-- Back link -->
+      <div class="text-center">
+        <a
+          href={getLangPath('/')}
+          class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1"
+        >
+          ← {text.back}
+        </a>
+      </div>
+
+      <RelatedTools lang={lang} current="projects" />
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  (function () {
+    const filters = document.getElementById('project-filters');
+    const grid = document.getElementById('projects-grid');
+    if (!filters || !grid) return;
+
+    filters.addEventListener('click', function (e) {
+      const btn = e.target.closest('[data-filter]');
+      if (!btn) return;
+
+      const active = btn.getAttribute('data-filter');
+
+      // Update button styles
+      filters.querySelectorAll('[data-filter]').forEach(function (b) {
+        if (b.getAttribute('data-filter') === active) {
+          b.classList.add('bg-primary-500', 'text-white', 'border-transparent');
+          b.classList.remove('bg-[rgb(var(--color-bg-secondary))]', 'text-[rgb(var(--color-text-secondary))]', 'border-[rgb(var(--color-border))]');
+        } else {
+          b.classList.remove('bg-primary-500', 'text-white', 'border-transparent');
+          b.classList.add('bg-[rgb(var(--color-bg-secondary))]', 'text-[rgb(var(--color-text-secondary))]', 'border-[rgb(var(--color-border))]');
+        }
+      });
+
+      // Filter project cards
+      grid.querySelectorAll('[data-category]').forEach(function (card) {
+        const cat = card.getAttribute('data-category');
+        if (active === 'all' || cat === active) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  })();
+</script>

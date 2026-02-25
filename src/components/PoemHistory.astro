@@ -1,6 +1,61 @@
 ---
 // 诗词和历史上的今天组件
 const lang = Astro.props.lang || 'zh-CN';
+const isZh = lang === 'zh-CN' || lang === 'zh-TW';
+
+// Curated quotes for non-Chinese visitors (grouped by language for variety)
+const internationalQuotes: Record<string, { text: string; author: string; source?: string }[]> = {
+  'en-GB': [
+    { text: 'A photograph is a certificate of presence.', author: 'Roland Barthes', source: 'Camera Lucida' },
+    { text: 'Photography is the art of frozen time — the ability to store emotion and feelings within a frame.', author: 'Meshack Otieno' },
+    { text: 'Light makes photography. Embrace light. Admire it. Love it. But above all, know light.', author: 'George Eastman' },
+    { text: 'The best camera is the one you have with you.', author: 'Chase Jarvis' },
+    { text: 'Simplicity is the ultimate sophistication.', author: 'Leonardo da Vinci' },
+    { text: 'Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away.', author: 'Antoine de Saint-Exupéry' },
+    { text: 'The purpose of art is washing the dust of daily life off our souls.', author: 'Pablo Picasso' },
+    { text: 'In photography there is a reality so subtle that it becomes more real than reality.', author: 'Alfred Stieglitz' },
+  ],
+  fr: [
+    { text: "Une photographie, c'est un certificat de présence.", author: 'Roland Barthes', source: 'La chambre claire' },
+    { text: 'La perfection est atteinte, non pas lorsqu\'il n\'y a plus rien à ajouter, mais lorsqu\'il n\'y a plus rien à enlever.', author: 'Antoine de Saint-Exupéry' },
+    { text: 'La simplicité est la sophistication suprême.', author: 'Léonard de Vinci' },
+    { text: "L'imagination est plus importante que le savoir.", author: 'Albert Einstein' },
+    { text: "La lumière est la matière première de la photographie.", author: 'Ansel Adams' },
+    { text: "Chaque image est une histoire.", author: 'Henri Cartier-Bresson' },
+  ],
+  ru: [
+    { text: 'Совершенство достигается не тогда, когда нечего добавить, а тогда, когда нечего убрать.', author: 'Антуан де Сент-Экзюпери' },
+    { text: 'Воображение важнее знания.', author: 'Альберт Эйнштейн' },
+    { text: 'Простота — это высшая степень изощрённости.', author: 'Леонардо да Винчи' },
+    { text: 'Фотография — это сертификат присутствия.', author: 'Ролан Барт' },
+    { text: 'Свет — это живопись, написанная мгновением.', author: 'Man Ray' },
+  ],
+};
+
+const sectionTitle = isZh
+  ? '每日灵感'
+  : (lang === 'fr' ? 'Inspiration du jour' : (lang === 'ru' ? 'Вдохновение дня' : 'Daily Inspiration'));
+
+const sectionSubtitle = isZh
+  ? '诗词与历史的交织，为生活注入文化气息'
+  : (lang === 'fr' ? 'Citations et histoire se croisent pour enrichir le quotidien'
+    : (lang === 'ru' ? 'Цитаты и история переплетаются, привнося культуру в жизнь'
+      : 'Quotes and history intertwined, enriching life with culture'));
+
+const poemTitle = isZh
+  ? '今日诗词'
+  : (lang === 'fr' ? 'Citation du jour' : (lang === 'ru' ? 'Цитата дня' : 'Quote of the Day'));
+
+const historyTitle = isZh
+  ? '历史上的今天'
+  : (lang === 'fr' ? 'Ce jour dans l\'histoire' : (lang === 'ru' ? 'В этот день' : 'On This Day'));
+
+const poemLoadingText = isZh ? '载入诗词中...' : '...';
+const historyLoadingText = isZh ? '载入中...' : '...';
+const historyEventLoadingText = isZh ? '正在获取历史事件...' : '...';
+
+// Pass quotes to client script as JSON
+const intlQuotesJson = JSON.stringify(internationalQuotes[lang] || internationalQuotes['en-GB']);
 ---
 
 <section
@@ -10,19 +65,15 @@ const lang = Astro.props.lang || 'zh-CN';
   <div class="container mx-auto px-4 lg:px-8 relative z-10">
     <div class="text-center mb-12">
       <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
-        {lang === 'zh-CN' ? '每日灵感' : 'Daily Inspiration'}
+        {sectionTitle}
       </h2>
       <p class="text-[rgb(var(--color-text-secondary))]">
-        {
-          lang === 'zh-CN'
-            ? '诗词与历史的交织，为生活注入文化气息'
-            : 'Poetry and history intertwine, bringing cultural richness to life'
-        }
+        {sectionSubtitle}
       </p>
     </div>
 
     <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-      <!-- 诗词部分 -->
+      <!-- 诗词/Quote部分 -->
       <div class="glass-card p-8 h-full">
         <div class="flex items-center justify-center mb-6">
           <div
@@ -44,24 +95,46 @@ const lang = Astro.props.lang || 'zh-CN';
           </div>
         </div>
         <h3 class="text-2xl font-bold text-center mb-6">
-          {lang === 'zh-CN' ? '今日诗词' : 'Poem of the Day'}
+          {poemTitle}
         </h3>
         <div class="text-center min-h-[120px] flex flex-col justify-center">
-          <div
-            id="poem_sentence"
-            class="text-xl md:text-2xl font-medium mb-4 text-[rgb(var(--color-text-primary))] leading-relaxed"
-          >
-            {lang === 'zh-CN' ? '载入诗词中...' : 'Loading poem...'}
-          </div>
-          <div
-            class="h-px bg-gradient-to-r from-transparent via-[rgb(var(--color-border))] to-transparent my-4"
-          >
-          </div>
-          <div
-            id="poem_info"
-            class="text-sm text-[rgb(var(--color-text-secondary))]"
-          >
-          </div>
+          {isZh ? (
+            <>
+              <div
+                id="poem_sentence"
+                class="text-xl md:text-2xl font-medium mb-4 text-[rgb(var(--color-text-primary))] leading-relaxed"
+              >
+                {poemLoadingText}
+              </div>
+              <div
+                class="h-px bg-gradient-to-r from-transparent via-[rgb(var(--color-border))] to-transparent my-4"
+              >
+              </div>
+              <div
+                id="poem_info"
+                class="text-sm text-[rgb(var(--color-text-secondary))]"
+              >
+              </div>
+            </>
+          ) : (
+            <div id="intl-quote-block" class="text-center">
+              <p
+                id="intl-quote-text"
+                class="text-lg md:text-xl font-medium mb-4 text-[rgb(var(--color-text-primary))] leading-relaxed italic"
+              >
+                ...
+              </p>
+              <div
+                class="h-px bg-gradient-to-r from-transparent via-[rgb(var(--color-border))] to-transparent my-4"
+              >
+              </div>
+              <p
+                id="intl-quote-author"
+                class="text-sm text-[rgb(var(--color-text-secondary))]"
+              >
+              </p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -86,7 +159,7 @@ const lang = Astro.props.lang || 'zh-CN';
           </div>
         </div>
         <h3 class="text-2xl font-bold text-center mb-6">
-          {lang === 'zh-CN' ? '历史上的今天' : 'On This Day'}
+          {historyTitle}
         </h3>
         <div
           id="history-today"
@@ -95,14 +168,10 @@ const lang = Astro.props.lang || 'zh-CN';
           <div
             class="history-date text-lg font-semibold mb-3 text-[rgb(var(--color-text-primary))]"
           >
-            {lang === 'zh-CN' ? '载入中...' : 'Loading...'}
+            {historyLoadingText}
           </div>
           <div class="history-event text-[rgb(var(--color-text-secondary))]">
-            {
-              lang === 'zh-CN'
-                ? '正在获取历史事件...'
-                : 'Fetching historical events...'
-            }
+            {historyEventLoadingText}
           </div>
         </div>
       </div>
@@ -117,30 +186,51 @@ const lang = Astro.props.lang || 'zh-CN';
     const lang = document.documentElement.lang || 'zh-CN';
     const isZh = lang.startsWith('zh');
 
-    // 加载诗词
-    if (typeof jinrishici !== 'undefined') {
-      jinrishici.load(function (result) {
-        const sentence = document.querySelector('#poem_sentence');
-        const info = document.querySelector('#poem_info');
+    // 加载诗词（只在中文环境下）
+    if (isZh) {
+      if (typeof jinrishici !== 'undefined') {
+        jinrishici.load(function (result) {
+          const sentence = document.querySelector('#poem_sentence');
+          const info = document.querySelector('#poem_info');
 
-        if (sentence && info && result && result.data) {
-          sentence.innerHTML = result.data.content;
-          info.innerHTML = `【${result.data.origin.dynasty}】${result.data.origin.author}《${result.data.origin.title}》`;
+          if (sentence && info && result && result.data) {
+            sentence.innerHTML = result.data.content;
+            info.innerHTML = `【${result.data.origin.dynasty}】${result.data.origin.author}《${result.data.origin.title}》`;
 
-          sentence.style.opacity = '0';
-          info.style.opacity = '0';
+            sentence.style.opacity = '0';
+            info.style.opacity = '0';
 
-          setTimeout(() => {
-            sentence.style.transition = 'opacity 0.8s ease';
-            sentence.style.opacity = '1';
-          }, 300);
+            setTimeout(() => {
+              sentence.style.transition = 'opacity 0.8s ease';
+              sentence.style.opacity = '1';
+            }, 300);
 
-          setTimeout(() => {
-            info.style.transition = 'opacity 0.8s ease';
-            info.style.opacity = '1';
-          }, 600);
+            setTimeout(() => {
+              info.style.transition = 'opacity 0.8s ease';
+              info.style.opacity = '1';
+            }, 600);
+          }
+        });
+      }
+    } else {
+      // 非中文：从全局注入的引言库随机选一条
+      var all = window.__intlQuotes || [];
+      if (Array.isArray(all) && all.length > 0) {
+        var pick = all[Math.floor(Math.random() * all.length)];
+        var textEl = document.getElementById('intl-quote-text');
+        var authorEl = document.getElementById('intl-quote-author');
+        if (textEl) {
+          textEl.textContent = '\u201C' + pick.text + '\u201D';
+          textEl.style.opacity = '0';
+          setTimeout(function () { textEl.style.transition = 'opacity 0.8s ease'; textEl.style.opacity = '1'; }, 100);
         }
-      });
+        if (authorEl) {
+          var src = pick.source ? pick.author + ', ' + pick.source : pick.author;
+          authorEl.textContent = '— ' + src;
+          authorEl.style.opacity = '0';
+          setTimeout(function () { authorEl.style.transition = 'opacity 0.8s ease'; authorEl.style.opacity = '1'; }, 400);
+        }
+      }
     }
 
     // 加载历史上的今天
@@ -159,7 +249,11 @@ const lang = Astro.props.lang || 'zh-CN';
           ? 'ja'
           : docLang.startsWith('it')
             ? 'it'
-            : 'zh';
+            : docLang.startsWith('fr')
+              ? 'fr'
+              : docLang.startsWith('ru')
+                ? 'ru'
+                : 'zh';
 
       const endpoint = (l) =>
         `https://${l}.wikipedia.org/api/rest_v1/feed/onthisday/events/${monthNum}/${dayNum}`;
@@ -182,7 +276,7 @@ const lang = Astro.props.lang || 'zh-CN';
           (isZh ? '历史事件' : 'Historical event');
         const dateLabel = isZh
           ? `${year ? year + '年 ' : ''}${monthNum}/${dayNum}`
-          : `${monthNum}/${dayNum}${year ? ' ' + year : ''}`;
+          : `${monthNum}/${dayNum}${year ? ' · ' + year : ''}`;
 
         historyEl.innerHTML = `
           <div class="history-date text-lg font-semibold mb-3 text-[rgb(var(--color-text-primary))]">${dateLabel}</div>
@@ -271,7 +365,16 @@ const lang = Astro.props.lang || 'zh-CN';
   }
 </script>
 
-<script
-  is:inline
-  src="https://sdk.jinrishici.com/v2/browser/jinrishici.js"
-  async></script>
+{isZh && (
+  <script
+    is:inline
+    src="https://sdk.jinrishici.com/v2/browser/jinrishici.js"
+    async></script>
+)}
+
+{!isZh && (
+  <script is:inline define:vars={{ intlQuotesJson }}>
+    // Set global quotes array SYNCHRONOUSLY before main init
+    window.__intlQuotes = JSON.parse(intlQuotesJson || '[]');
+  </script>
+)}

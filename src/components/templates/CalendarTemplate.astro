@@ -4,7 +4,7 @@ import RelatedTools from '../RelatedTools.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 const calendarData: Record<Lang, any> = {
   'zh-CN': {
@@ -48,27 +48,6 @@ const calendarData: Record<Lang, any> = {
     save: '保存',
     cancel: '取消',
     delete: '刪除',
-  },
-  'en-US': {
-    title: 'Smart Calendar',
-    headerTitle: '📅 Smart Calendar',
-    headerDesc:
-      'Manage your time, plan your life. Supports holiday display, custom schedules, and event management',
-    prevMonth: '← Prev',
-    nextMonth: 'Next →',
-    loading: 'Loading...',
-    weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    today: 'Today',
-    goToToday: 'Go to today',
-    addEvent: 'Add Event',
-    upcomingEvents: 'Upcoming Events',
-    noEvents: 'No upcoming events',
-    eventTitle: 'Event Title',
-    eventTime: 'Time',
-    eventDesc: 'Description',
-    save: 'Save',
-    cancel: 'Cancel',
-    delete: 'Delete',
   },
   'en-GB': {
     title: 'Smart Calendar',
@@ -135,7 +114,7 @@ const calendarData: Record<Lang, any> = {
   },
 };
 
-const content = calendarData[lang as Lang] || calendarData['en-US'];
+const content = calendarData[lang as Lang] || calendarData['en-GB'];
 ---
 
 <BaseLayout title={`${content.title} - Alexander Carter`}>
@@ -220,7 +199,7 @@ const content = calendarData[lang as Lang] || calendarData['en-US'];
           </div>
         </div>
 
-        <RelatedTools lang={lang === 'en-US' ? 'en-GB' : lang} current="calendar" />
+        <RelatedTools lang={lang} current="calendar" />
       </div>
     </div>
   </section>

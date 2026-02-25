@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 const verifyData: Record<Lang, any> = {
   'zh-CN': {
@@ -31,22 +31,6 @@ const verifyData: Record<Lang, any> = {
     helpDesc:
       '為了保護網站內容的安全，防止惡意爬蟲和攻擊，我們需要確認您是真實用戶。感謝您的理解與配合。',
     footer: '安全驗證由 Cloudflare Turnstile 提供支援',
-  },
-  'en-US': {
-    title: 'Security Verification',
-    headerTitle: '🔐 Security Verification',
-    headerDesc:
-      'Please complete the verification below to access protected content',
-    verifying: 'Verifying your access...',
-    verifyDesc:
-      'Please wait while we confirm your identity. This usually takes just a few seconds.',
-    manualVerify:
-      'If verification does not start automatically, please click the button below:',
-    verifyButton: 'Start Verification',
-    helpTitle: 'Why is verification needed?',
-    helpDesc:
-      'To protect website content and prevent malicious crawlers and attacks, we need to confirm you are a real user. Thank you for your understanding and cooperation.',
-    footer: 'Security verification powered by Cloudflare Turnstile',
   },
   'en-GB': {
     title: 'Security Verification',
@@ -98,7 +82,7 @@ const verifyData: Record<Lang, any> = {
   },
 };
 
-const content = verifyData[lang as Lang] || verifyData['en-US'];
+const content = verifyData[lang as Lang] || verifyData['en-GB'];
 ---
 
 <BaseLayout

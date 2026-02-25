@@ -36,7 +36,7 @@ const timeData: Record<Lang, any> = {
     calendar: '日历',
     currency: '汇率',
     now: '此刻',
-    uses: 'Uses',
+    uses: '本站',
     units: '单位换算',
     qr: 'QR 生成',
     back: '返回首页',
@@ -66,7 +66,7 @@ const timeData: Record<Lang, any> = {
     calendar: '日曆',
     currency: '匯率',
     now: '此刻',
-    uses: 'Uses',
+    uses: '本站',
     units: '單位換算',
     qr: 'QR 生成',
     back: '返回首頁',
@@ -96,7 +96,7 @@ const timeData: Record<Lang, any> = {
     calendar: 'Calendar',
     currency: 'Currency',
     now: 'Now',
-    uses: 'Uses',
+    uses: 'About site',
     units: 'Units',
     qr: 'QR Code',
     back: 'Back to home',
@@ -122,14 +122,14 @@ const timeData: Record<Lang, any> = {
     apiExample: 'GET https://api.alexander.xin/time/now',
     apiReturns: 'JSON : iso, timestamp, timezone, datetime',
     apiSetup: 'Guide (Worker / Tunnel)',
-    relatedTitle: 'Plus d’outils',
+    relatedTitle: "Plus d'outils",
     calendar: 'Calendrier',
     currency: 'Taux de change',
     now: 'Maintenant',
-    uses: 'Uses',
+    uses: 'Le site',
     units: 'Unités',
     qr: 'QR Code',
-    back: 'Retour à l’accueil',
+    back: "Retour à l'accueil",
   },
   ru: {
     title: 'Мировое время',
@@ -156,7 +156,7 @@ const timeData: Record<Lang, any> = {
     calendar: 'Календарь',
     currency: 'Курс валют',
     now: 'Сейчас',
-    uses: 'Uses',
+    uses: 'О сайте',
     units: 'Единицы',
     qr: 'QR-код',
     back: 'На главную',
@@ -166,10 +166,11 @@ const timeData: Record<Lang, any> = {
 const content = timeData[lang as Lang] || timeData['en-GB'];
 
 const worldZones = [
-  { id: 'london', label: content.london, tz: 'Europe/London', utc: 'UTC+0' },
-  { id: 'ny', label: content.newYork, tz: 'America/New_York', utc: 'UTC-5' },
-  { id: 'tokyo', label: content.tokyo, tz: 'Asia/Tokyo', utc: 'UTC+9' },
-  { id: 'sydney', label: content.sydney, tz: 'Australia/Sydney', utc: 'UTC+11' },
+  { id: 'utc', label: content.utc, tz: 'UTC', utc: 'UTC+0', icon: '🌐' },
+  { id: 'london', label: content.london, tz: 'Europe/London', utc: 'UTC+0', icon: '🇬🇧' },
+  { id: 'ny', label: content.newYork, tz: 'America/New_York', utc: 'UTC−5', icon: '🇺🇸' },
+  { id: 'tokyo', label: content.tokyo, tz: 'Asia/Tokyo', utc: 'UTC+9', icon: '🇯🇵' },
+  { id: 'sydney', label: content.sydney, tz: 'Australia/Sydney', utc: 'UTC+11', icon: '🇦🇺' },
 ];
 
 const relatedTools = [
@@ -183,19 +184,24 @@ const relatedTools = [
 ---
 
 <BaseLayout title={`${content.title} - Alexander Carter`}>
-  <!-- Hero -->
-  <section class="relative pt-28 pb-16 overflow-hidden">
+  <!-- Hero：时钟氛围 + 实时指示 -->
+  <section class="relative pt-28 pb-20 overflow-hidden">
     <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true" />
-    <div class="absolute inset-0 opacity-100" style="background: var(--hero-spotlight);" aria-hidden="true" />
+    <div class="absolute inset-0 opacity-90" style="background: var(--hero-spotlight);" aria-hidden="true" />
+    <!-- 装饰：同心圆模拟表盘 -->
+    <div class="absolute right-1/4 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full border border-primary-500/10 pointer-events-none" aria-hidden="true" />
+    <div class="absolute right-1/4 top-1/2 -translate-y-1/2 w-48 h-48 rounded-full border border-primary-500/15 pointer-events-none" aria-hidden="true" />
+    <div class="absolute right-1/4 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full border border-primary-500/20 pointer-events-none" aria-hidden="true" />
     <div class="section-divider" aria-hidden="true" />
     <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
-      <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10 text-sm font-medium mb-4">
-        <span aria-hidden="true">🕐</span> {content.tag}
-      </p>
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium mb-5">
+        <span class="time-live-dot inline-block w-2 h-2 rounded-full bg-primary-500 animate-pulse" aria-hidden="true" />
+        <span>{content.tag}</span>
+      </div>
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
         {content.headerTitle}
       </h1>
-      <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+      <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto leading-relaxed">
         {content.headerDesc}
       </p>
     </div>
@@ -209,18 +215,42 @@ const relatedTools = [
         <!-- Beijing / Primary clock -->
         <div class="glass-card p-8 md:p-10 relative overflow-hidden rounded-2xl reveal">
           <div class="absolute top-0 right-0 w-40 h-40 bg-primary-500/10 rounded-full -translate-y-1/2 translate-x-1/2" aria-hidden="true" />
-          <div class="relative">
+          <div class="relative flex flex-col md:flex-row md:items-start gap-6">
+            <!-- 指针式钟表（北京时间） -->
+            <div class="flex-shrink-0 mx-auto md:mx-0">
+              <div class="relative w-32 h-32 sm:w-40 sm:h-40">
+                <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md" role="img" aria-hidden="true">
+                  <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="1.5" class="text-[rgb(var(--color-border))]" />
+                  <circle cx="50" cy="50" r="2" fill="currentColor" class="text-primary-500" />
+                  <!-- 12/3/6/9 刻度 -->
+                  <line x1="50" y1="8" x2="50" y2="14" stroke="currentColor" stroke-width="2" class="text-[rgb(var(--color-text-primary))]" />
+                  <line x1="86" y1="50" x2="92" y2="50" stroke="currentColor" stroke-width="2" class="text-[rgb(var(--color-text-primary))]" />
+                  <line x1="50" y1="86" x2="50" y2="92" stroke="currentColor" stroke-width="2" class="text-[rgb(var(--color-text-primary))]" />
+                  <line x1="8" y1="50" x2="14" y2="50" stroke="currentColor" stroke-width="2" class="text-[rgb(var(--color-text-primary))]" />
+                  <!-- 时针 -->
+                  <line id="analog-hour" x1="50" y1="50" x2="50" y2="28" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="text-[rgb(var(--color-text-primary))]" transform="rotate(0 50 50)" />
+                  <!-- 分针 -->
+                  <line id="analog-minute" x1="50" y1="50" x2="50" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="text-primary-500" transform="rotate(0 50 50)" />
+                  <!-- 秒针 -->
+                  <line id="analog-second" x1="50" y1="50" x2="50" y2="14" stroke="currentColor" stroke-width="1" stroke-linecap="round" class="text-accent-500" transform="rotate(0 50 50)" />
+                </svg>
+              </div>
+            </div>
+            <div class="flex-1 min-w-0">
             <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <div>
-                <p class="text-sm font-medium text-[rgb(var(--color-text-secondary))] uppercase tracking-wider">
-                  {content.beijingLabel}
-                </p>
-                <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-0.5">{content.beijingTz}</p>
+              <div class="flex items-center gap-2">
+                <span class="text-2xl" aria-hidden="true">🇨🇳</span>
+                <div>
+                  <p class="text-sm font-medium text-[rgb(var(--color-text-secondary))] uppercase tracking-wider">
+                    {content.beijingLabel}
+                  </p>
+                  <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-0.5">{content.beijingTz}</p>
+                </div>
               </div>
               <button
                 type="button"
                 id="copy-main"
-                class="copy-btn inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/15 border border-[rgb(var(--color-border))] hover:border-primary-500/40 text-sm font-medium text-[rgb(var(--color-text-primary))] transition-colors"
+                class="time-copy-btn inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/15 border border-[rgb(var(--color-border))] hover:border-primary-500/40 text-sm font-medium text-[rgb(var(--color-text-primary))] transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
                 data-copy-label={content.copy}
                 data-copied-label={content.copied}
               >
@@ -237,15 +267,36 @@ const relatedTools = [
               ----/--/--
             </p>
             <p class="text-sm text-[rgb(var(--color-text-tertiary))] mt-2 font-mono" id="main-utc">
-              UTC --
+              UTC+8
             </p>
+            <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-3 font-mono" id="main-unix">
+              Unix: --
+            </p>
+            <div class="mt-4 h-1 rounded-full bg-[rgb(var(--color-bg-secondary))] overflow-hidden" aria-hidden="true">
+              <div id="main-clock-tick" class="h-full bg-gradient-to-r from-primary-500 to-accent-500 rounded-full transition-all duration-100" style="width: 0%"></div>
+            </div>
+            </div>
           </div>
         </div>
 
         <!-- Your local time -->
         <div class="glass-card p-6 rounded-2xl border border-[rgb(var(--color-border))]/60 reveal">
-          <p class="text-sm font-medium text-[rgb(var(--color-text-secondary))] mb-2">{content.yourTime}</p>
-          <p class="text-3xl md:text-4xl font-mono font-bold tracking-tight tabular-nums text-[rgb(var(--color-text-primary))]" id="local-clock">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <p class="text-sm font-medium text-[rgb(var(--color-text-secondary))] flex items-center gap-2">
+              <span aria-hidden="true">📍</span> {content.yourTime}
+            </p>
+            <button
+              type="button"
+              id="copy-local"
+              class="time-copy-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/15 border border-[rgb(var(--color-border))] hover:border-primary-500/40 text-xs font-medium text-[rgb(var(--color-text-primary))] transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+              data-copy-label={content.copy}
+              data-copied-label={content.copied}
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+              <span class="copy-btn-text">{content.copy}</span>
+            </button>
+          </div>
+          <p class="text-3xl md:text-4xl font-mono font-bold tracking-tight tabular-nums text-[rgb(var(--color-text-primary))] mt-2" id="local-clock">
             --:--:--
           </p>
           <p class="text-[rgb(var(--color-text-tertiary))] text-sm mt-1" id="local-date">--</p>
@@ -258,23 +309,39 @@ const relatedTools = [
           <h2 class="text-lg font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">
             {content.worldClocks}
           </h2>
-          <ul class="space-y-3" aria-label={content.worldClocks}>
+          <ul class="space-y-2" aria-label={content.worldClocks}>
             {worldZones.map((z) => (
-              <li class="flex items-center justify-between gap-4 py-2 border-b border-[rgb(var(--color-border))]/50 last:border-0">
-                <div>
-                  <span class="font-medium text-[rgb(var(--color-text-primary))]">{z.label}</span>
-                  <span class="text-xs text-[rgb(var(--color-text-tertiary))] ml-2">{z.utc}</span>
+              <li class="flex items-center justify-between gap-3 py-2.5 px-3 rounded-xl hover:bg-[rgb(var(--color-bg-accent))]/50 transition-colors">
+                <div class="flex items-center gap-3 min-w-0">
+                  <span class="text-lg shrink-0" aria-hidden="true">{z.icon}</span>
+                  <div class="min-w-0">
+                    <span class="font-medium text-[rgb(var(--color-text-primary))]">{z.label}</span>
+                    <span class="text-xs text-[rgb(var(--color-text-tertiary))] ml-2">{z.utc}</span>
+                  </div>
                 </div>
-                <span class="font-mono text-lg tabular-nums text-[rgb(var(--color-text-primary))]" id={`clock-${z.id}`}>--:--</span>
+                <span class="font-mono text-lg tabular-nums text-[rgb(var(--color-text-primary))] shrink-0" id={`clock-${z.id}`}>--:--</span>
               </li>
             ))}
           </ul>
         </div>
 
         <div class="glass-card p-6 rounded-2xl border border-primary-500/20 bg-primary-500/5 dark:bg-primary-500/10 reveal">
-          <h3 class="text-base font-heading font-bold text-primary-600 dark:text-primary-400 mb-2">
-            {content.apiTitle}
-          </h3>
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <h3 class="text-base font-heading font-bold text-primary-600 dark:text-primary-400">
+              {content.apiTitle}
+            </h3>
+            <button
+              type="button"
+              id="copy-api-url"
+              class="time-copy-btn inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-primary-500/10 hover:bg-primary-500/20 text-primary-600 dark:text-primary-400 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+              data-copy-value="https://api.alexander.xin/time/now"
+              data-copy-label={content.copy}
+              data-copied-label={content.copied}
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+              <span class="copy-btn-text">{content.copy}</span>
+            </button>
+          </div>
           <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-3">
             {content.apiDesc}
           </p>
@@ -295,7 +362,7 @@ const relatedTools = [
         {relatedTools.map((tool) => (
           <a
             href={tool.href}
-            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/10 border border-[rgb(var(--color-border))] hover:border-primary-500/30 text-[rgb(var(--color-text-primary))] font-medium transition-colors"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/10 border border-[rgb(var(--color-border))] hover:border-primary-500/30 text-[rgb(var(--color-text-primary))] font-medium transition-colors active:scale-[0.98]"
           >
             <span aria-hidden="true">{tool.icon}</span>
             {tool.label}
@@ -303,7 +370,7 @@ const relatedTools = [
         ))}
       </nav>
       <p class="mt-6">
-        <a href={getLangPath('/')} class="text-primary-500 hover:text-primary-600 font-medium text-sm inline-flex items-center gap-1">
+        <a href={getLangPath('/')} class="link-underline text-primary-500 hover:text-primary-600 font-medium text-sm inline-flex items-center gap-1">
           ← {content.back}
         </a>
       </p>
@@ -314,17 +381,41 @@ const relatedTools = [
 <script is:inline define:vars={{ lang }}>
   const localeMap = { 'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW', 'en-GB': 'en-GB', fr: 'fr-FR', ru: 'ru-RU' };
   const locale = localeMap[lang] || 'en-GB';
+  const zones = [
+    { id: 'utc', tz: 'UTC' },
+    { id: 'london', tz: 'Europe/London' },
+    { id: 'ny', tz: 'America/New_York' },
+    { id: 'tokyo', tz: 'Asia/Tokyo' },
+    { id: 'sydney', tz: 'Australia/Sydney' },
+  ];
 
   function updateClocks() {
     const now = new Date();
+    const ms = now.getMilliseconds();
 
     const beijingTime = new Date(now.toLocaleString(locale, { timeZone: 'Asia/Shanghai' }));
     const mainClock = document.getElementById('main-clock');
     const mainDate = document.getElementById('main-date');
     const mainUtc = document.getElementById('main-utc');
+    const mainUnix = document.getElementById('main-unix');
+    const mainTick = document.getElementById('main-clock-tick');
     if (mainClock) mainClock.textContent = beijingTime.toLocaleTimeString(locale, { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
     if (mainDate) mainDate.textContent = beijingTime.toLocaleDateString(locale, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
     if (mainUtc) mainUtc.textContent = 'UTC+8';
+    if (mainUnix) mainUnix.textContent = 'Unix: ' + Math.floor(now.getTime() / 1000);
+    if (mainTick) mainTick.style.width = (ms / 1000) * 100 + '%';
+
+    const hourHand = document.getElementById('analog-hour');
+    const minuteHand = document.getElementById('analog-minute');
+    const secondHand = document.getElementById('analog-second');
+    if (hourHand && minuteHand && secondHand) {
+      const h = beijingTime.getHours() % 12 + beijingTime.getMinutes() / 60 + beijingTime.getSeconds() / 3600;
+      const m = beijingTime.getMinutes() + beijingTime.getSeconds() / 60 + beijingTime.getMilliseconds() / 60000;
+      const s = beijingTime.getSeconds() + beijingTime.getMilliseconds() / 1000;
+      hourHand.setAttribute('transform', `rotate(${h * 30} 50 50)`);
+      minuteHand.setAttribute('transform', `rotate(${m * 6} 50 50)`);
+      secondHand.setAttribute('transform', `rotate(${s * 6} 50 50)`);
+    }
 
     const localClock = document.getElementById('local-clock');
     const localDate = document.getElementById('local-date');
@@ -332,34 +423,43 @@ const relatedTools = [
     if (localDate) localDate.textContent = now.toLocaleDateString(locale, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
 
     const formatTime = (tz) => new Date(now.toLocaleString(locale, { timeZone: tz })).toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit' });
-    const zones = [{ id: 'london', tz: 'Europe/London' }, { id: 'ny', tz: 'America/New_York' }, { id: 'tokyo', tz: 'Asia/Tokyo' }, { id: 'sydney', tz: 'Australia/Sydney' }];
     zones.forEach((z) => {
       const el = document.getElementById('clock-' + z.id);
       if (el) el.textContent = formatTime(z.tz);
     });
   }
 
-  setInterval(updateClocks, 1000);
+  setInterval(updateClocks, 100);
   updateClocks();
 
-  const copyBtn = document.getElementById('copy-main');
-  if (copyBtn) {
-    const labelEl = copyBtn.querySelector('.copy-btn-text');
-    const copyLabel = copyBtn.getAttribute('data-copy-label') || 'Copy';
-    const copiedLabel = copyBtn.getAttribute('data-copied-label') || 'Copied';
-    copyBtn.addEventListener('click', async () => {
-      const mainClock = document.getElementById('main-clock');
-      const mainDate = document.getElementById('main-date');
-      const text = mainClock && mainDate ? mainClock.textContent + ' ' + mainDate.textContent : '';
+  function setupCopyBtn(btn, getText, successClass) {
+    if (!btn) return;
+    const labelEl = btn.querySelector('.copy-btn-text');
+    const copyLabel = btn.getAttribute('data-copy-label') || 'Copy';
+    const copiedLabel = btn.getAttribute('data-copied-label') || 'Copied';
+    btn.addEventListener('click', async () => {
+      const text = typeof getText === 'function' ? getText() : (btn.getAttribute('data-copy-value') || '');
       try {
         await navigator.clipboard.writeText(text);
         if (labelEl) labelEl.textContent = copiedLabel;
-        copyBtn.classList.add('!border-primary-500', '!bg-primary-500/20');
+        btn.classList.add(successClass || '!border-primary-500', '!bg-primary-500/20');
         setTimeout(() => {
           if (labelEl) labelEl.textContent = copyLabel;
-          copyBtn.classList.remove('!border-primary-500', '!bg-primary-500/20');
+          btn.classList.remove(successClass || '!border-primary-500', '!bg-primary-500/20');
         }, 2000);
       } catch (_) {}
     });
   }
+
+  setupCopyBtn(document.getElementById('copy-main'), function () {
+    const mainClock = document.getElementById('main-clock');
+    const mainDate = document.getElementById('main-date');
+    return mainClock && mainDate ? mainClock.textContent + ' ' + mainDate.textContent : '';
+  });
+  setupCopyBtn(document.getElementById('copy-local'), function () {
+    const localClock = document.getElementById('local-clock');
+    const localDate = document.getElementById('local-date');
+    return localClock && localDate ? localClock.textContent + ' ' + localDate.textContent : '';
+  });
+  setupCopyBtn(document.getElementById('copy-api-url'));
 </script>

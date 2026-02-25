@@ -68,7 +68,7 @@ const t = translations[lang] || translations['zh-CN'];
         <p class="text-sm md:text-base text-[rgb(var(--color-text-secondary))] mb-4">
           {t.message}
           <a
-            href={lang === 'zh-CN' ? '/privacy' : `/${lang}/privacy`}
+            href={lang === 'zh-CN' ? '/privacy' : `/${lang === 'en-GB' ? 'en' : lang}/privacy`}
             class="text-primary-500 hover:underline ml-1"
           >
             {t.learnMore}

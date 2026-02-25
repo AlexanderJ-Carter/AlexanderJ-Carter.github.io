@@ -5,7 +5,7 @@ import { useTranslations } from '../../i18n/ui';
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 const categoriesData: Record<Lang, any[]> = {
   'zh-CN': [
@@ -19,12 +19,6 @@ const categoriesData: Record<Lang, any[]> = {
     { id: 'landscape', label: '風景' },
     { id: 'nature', label: '自然' },
     { id: 'food', label: '美食' },
-  ],
-  'en-US': [
-    { id: 'all', label: 'All' },
-    { id: 'landscape', label: 'Landscape' },
-    { id: 'nature', label: 'Nature' },
-    { id: 'food', label: 'Food' },
   ],
   'en-GB': [
     { id: 'all', label: 'All' },
@@ -306,134 +300,6 @@ const galleryItemsData: Record<Lang, any[]> = {
       category: 'food',
       title: '創意料理',
       description: '色香味俱全，藝術佳作',
-      image: '/img/gallery/food-03.jpg',
-    },
-  ],
-  'en-US': [
-    {
-      id: 1,
-      category: 'landscape',
-      title: 'Mountain Morning Mist',
-      description: 'Misty morning in the mountains',
-      image: '/img/gallery/landscape-01.jpg',
-    },
-    {
-      id: 2,
-      category: 'landscape',
-      title: 'Coastal Sunset',
-      description: 'Sunset over the ocean',
-      image: '/img/gallery/landscape-02.jpg',
-    },
-    {
-      id: 3,
-      category: 'landscape',
-      title: 'City Skyline',
-      description: 'Urban beauty and serenity',
-      image: '/img/gallery/landscape-03.jpg',
-    },
-    {
-      id: 4,
-      category: 'landscape',
-      title: 'Starry Galaxy',
-      description: 'Vast starry sky and Milky Way',
-      image: '/img/gallery/landscape-04.jpg',
-    },
-    {
-      id: 5,
-      category: 'landscape',
-      title: 'Valley Cloud Sea',
-      description: 'Rolling clouds, dreamlike scenery',
-      image: '/img/gallery/landscape-05.jpg',
-    },
-    {
-      id: 6,
-      category: 'landscape',
-      title: 'Lake & Mountains',
-      description: 'Tranquil lake reflecting peaks',
-      image: '/img/gallery/landscape-06.jpg',
-    },
-    {
-      id: 7,
-      category: 'landscape',
-      title: 'Snowy Plateau',
-      description: 'Majestic snow-capped mountains',
-      image: '/img/gallery/landscape-07.jpg',
-    },
-    {
-      id: 8,
-      category: 'landscape',
-      title: 'Autumn Colors',
-      description: 'Colorful fall foliage',
-      image: '/img/gallery/landscape-08.jpg',
-    },
-    {
-      id: 9,
-      category: 'landscape',
-      title: 'Sunrise East',
-      description: 'Dawn breaking with golden rays',
-      image: '/img/gallery/landscape-09.jpg',
-    },
-    {
-      id: 10,
-      category: 'landscape',
-      title: 'Canyon Wonder',
-      description: "Nature's masterpiece",
-      image: '/img/gallery/landscape-10.jpg',
-    },
-    {
-      id: 11,
-      category: 'landscape',
-      title: 'Pastoral Beauty',
-      description: 'Peaceful countryside scenery',
-      image: '/img/gallery/landscape-11.jpg',
-    },
-    {
-      id: 12,
-      category: 'landscape',
-      title: 'Desert Solitude',
-      description: 'Vast desert landscape',
-      image: '/img/gallery/landscape-12.jpg',
-    },
-    {
-      id: 13,
-      category: 'landscape',
-      title: 'Forest Sanctuary',
-      description: 'Deep in the mysterious woods',
-      image: '/img/gallery/landscape-13.jpg',
-    },
-    {
-      id: 14,
-      category: 'nature',
-      title: 'Petals After Rain',
-      description: 'Dewdrops on blooming flowers',
-      image: '/img/gallery/nature-flower-01.jpg',
-    },
-    {
-      id: 15,
-      category: 'nature',
-      title: 'Morning Flower Shadow',
-      description: 'Dawn light through petals',
-      image: '/img/gallery/nature-flower-02.jpg',
-    },
-    {
-      id: 16,
-      category: 'food',
-      title: 'Exquisite Dessert',
-      description: 'Sweet moment, feast for senses',
-      image: '/img/gallery/food-01.jpg',
-    },
-    {
-      id: 17,
-      category: 'food',
-      title: 'Traditional Cuisine',
-      description: 'Classic taste, cultural heritage',
-      image: '/img/gallery/food-02.jpg',
-    },
-    {
-      id: 18,
-      category: 'food',
-      title: 'Creative Dish',
-      description: 'Culinary art masterpiece',
       image: '/img/gallery/food-03.jpg',
     },
   ],
@@ -829,40 +695,52 @@ const galleryItems =
 ---
 
 <BaseLayout title={t('gallery.title')}>
-  <!-- Hero Section -->
-  <section class="pt-32 pb-16 bg-mesh-gradient">
-    <div class="container mx-auto px-4 lg:px-8 text-center">
-      <h1
-        class="text-5xl md:text-6xl font-heading font-bold mb-6 gradient-text tracking-tight"
-      >
+  <!-- Hero: 创意视觉层次 + 胶片感装饰 -->
+  <section class="relative pt-28 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient opacity-90"></div>
+    <div class="absolute inset-0 bg-[var(--hero-spotlight)] opacity-60"></div>
+    <!-- 装饰：模拟胶片齿孔 -->
+    <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-24 pointer-events-none opacity-[0.07] dark:opacity-[0.12]" aria-hidden="true">
+      <div class="flex justify-between px-2 max-w-4xl mx-auto gap-1">
+        {Array.from({ length: 24 }).map((_) => (
+          <div class="w-2 h-2 rounded-full bg-[rgb(var(--color-text-primary))]" />
+        ))}
+      </div>
+    </div>
+    <div class="container relative z-10 mx-auto px-4 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium text-[rgb(var(--color-text-secondary))] mb-6">
+        <span class="text-lg" aria-hidden="true">📷</span>
+        <span>
+          {lang === 'zh-CN' ? '摄影作品集' : lang === 'zh-TW' ? '攝影作品集' : lang === 'fr' ? 'Portfolio photo' : lang === 'ru' ? 'Фотопортфолио' : 'Photo Portfolio'}
+        </span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
         {t('gallery.title')}
       </h1>
-      <p
-        class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
-      >
+      <p class="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto leading-relaxed">
         {
           lang === 'zh-CN'
-            ? '探索我的摄影作品集，记录生活中的美好瞬间'
+            ? '探索摄影作品集，记录生活中的美好瞬间'
             : lang === 'zh-TW'
-              ? '探索我的攝影作品集，記錄生活中的美好瞬間'
+              ? '探索攝影作品集，記錄生活中的美好瞬間'
               : lang === 'fr'
-                ? 'Explorez ma collection de photographies, capturant les beaux moments de la vie'
+                ? 'Explorez ma collection, capturant les beaux moments de la vie'
                 : lang === 'ru'
-                  ? 'Исследуйте мою коллекцию фотографий, запечатлевая прекрасные моменты жизни'
+                  ? 'Исследуйте коллекцию фотографий, запечатлевая прекрасные моменты жизни'
                   : 'Explore my photography portfolio, capturing beautiful moments in life'
         }
       </p>
-      <p class="mt-4 text-sm text-[rgb(var(--color-text-tertiary))] max-w-xl mx-auto">
+      <p class="mt-3 text-sm text-[rgb(var(--color-text-tertiary))]">
         {
           lang === 'zh-CN'
-            ? '使用下方分类筛选风景、自然、美食，或直接浏览全部作品。'
+            ? '点击作品可放大查看 · 使用分类快速筛选'
             : lang === 'zh-TW'
-              ? '使用下方分類篩選風景、自然、美食，或直接瀏覽全部作品。'
+              ? '點擊作品可放大查看 · 使用分類快速篩選'
               : lang === 'fr'
-                ? 'Filtrez par paysage, nature ou nourriture, ou parcourez tout.'
+                ? 'Cliquez pour agrandir · Filtrez par catégorie'
                 : lang === 'ru'
-                  ? 'Фильтруйте по пейзажу, природе или еде или смотрите все работы.'
-                  : 'Filter by landscape, nature or food, or browse all works.'
+                  ? 'Нажмите для увеличения · Фильтр по категориям'
+                  : 'Click to enlarge · Filter by category'
         }
       </p>
     </div>
@@ -870,219 +748,301 @@ const galleryItems =
 
   <!-- Gallery Section -->
   <section class="py-16 container mx-auto px-4 lg:px-8">
-    <!-- Stats Bar -->
-    <div class="flex flex-wrap justify-center gap-8 mb-12">
-      <div class="text-center">
-        <div
-          class="text-4xl font-heading font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent"
-          id="total-count"
-        >
-          0
-        </div>
-        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">
-          {
-            lang === 'zh-CN'
-              ? '总作品数'
-              : lang === 'zh-TW'
-                ? '總作品數'
-                : lang === 'fr'
-                  ? 'Total'
-                  : lang === 'ru'
-                    ? 'Всего'
-                    : 'Total Works'
-          }
-        </div>
+    <!-- 统计与筛选：紧凑胶囊 + 带图标 -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-10">
+      <div class="flex flex-wrap gap-3" id="gallery-stats">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm">
+          <span aria-hidden="true">📷</span>
+          <strong id="total-count" class="text-primary-500">{galleryItems.length}</strong>
+          <span class="text-[rgb(var(--color-text-secondary))]">
+            {lang === 'zh-CN' ? '件作品' : lang === 'zh-TW' ? '件作品' : lang === 'fr' ? 'œuvres' : lang === 'ru' ? 'работ' : 'works'}
+          </span>
+        </span>
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm">
+          <span aria-hidden="true">🏔️</span> {galleryItems.filter((i) => i.category === 'landscape').length}
+        </span>
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm">
+          <span aria-hidden="true">🌿</span> {galleryItems.filter((i) => i.category === 'nature').length}
+        </span>
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm">
+          <span aria-hidden="true">🍽️</span> {galleryItems.filter((i) => i.category === 'food').length}
+        </span>
       </div>
-      <div class="text-center">
-        <div
-          class="text-4xl font-heading font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent"
-        >
-          {galleryItems.filter((i) => i.category === 'landscape').length}
-        </div>
-        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">
-          {
-            lang === 'zh-CN'
-              ? '风景摄影'
-              : lang === 'zh-TW'
-                ? '風景攝影'
-                : lang === 'fr'
-                  ? 'Paysages'
-                  : lang === 'ru'
-                    ? 'Пейзажи'
-                    : 'Landscapes'
-          }
-        </div>
-      </div>
-      <div class="text-center">
-        <div
-          class="text-4xl font-heading font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent"
-        >
-          {galleryItems.filter((i) => i.category === 'nature').length}
-        </div>
-        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">
-          {
-            lang === 'zh-CN'
-              ? '自然微距'
-              : lang === 'zh-TW'
-                ? '自然微距'
-                : lang === 'fr'
-                  ? 'Nature'
-                  : lang === 'ru'
-                    ? 'Природа'
-                    : 'Nature'
-          }
-        </div>
-      </div>
-      <div class="text-center">
-        <div
-          class="text-4xl font-heading font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent"
-        >
-          {galleryItems.filter((i) => i.category === 'food').length}
-        </div>
-        <div class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">
-          {
-            lang === 'zh-CN'
-              ? '美食摄影'
-              : lang === 'zh-TW'
-                ? '美食攝影'
-                : lang === 'fr'
-                  ? 'Nourriture'
-                  : lang === 'ru'
-                    ? 'Еда'
-                    : 'Food'
-          }
-        </div>
+      <div class="flex flex-wrap gap-2" id="filter-tabs" role="tablist" aria-label={lang === 'zh-CN' ? '按分类筛选' : 'Filter by category'}>
+        {
+          categories.map((cat) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={cat.id === 'all'}
+              tabindex={cat.id === 'all' ? 0 : -1}
+              class="gallery-filter-btn px-4 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+              class:list={{
+                'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg':
+                  cat.id === 'all',
+                'glass-card text-[rgb(var(--color-text-secondary))] hover:bg-[rgb(var(--color-bg-accent))] hover:text-[rgb(var(--color-text-primary))]':
+                  cat.id !== 'all',
+              }}
+              data-filter={cat.id}
+            >
+              {cat.id === 'all' && '✨ '}
+              {cat.id === 'landscape' && '🏔️ '}
+              {cat.id === 'nature' && '🌿 '}
+              {cat.id === 'food' && '🍽️ '}
+              {cat.label}
+            </button>
+          ))
+        }
       </div>
     </div>
 
-    <!-- Filter Tabs -->
-    <div class="flex flex-wrap justify-center gap-3 mb-12" id="filter-tabs">
-      {
-        categories.map((cat) => (
-          <button
-            class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 filter-btn hover:scale-105 hover:shadow-lg"
-            class:list={{
-              'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg':
-                cat.id === 'all',
-              'glass-card hover:bg-[rgb(var(--color-bg-tertiary))]':
-                cat.id !== 'all',
-            }}
-            data-filter={cat.id}
-          >
-            {cat.label}
-          </button>
-        ))
-      }
-    </div>
-
-    <!-- Gallery Grid -->
+    <!-- 画廊网格：首张大图 featured，卡片可点击灯箱 -->
     <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
       id="gallery-grid"
     >
       {
-        galleryItems.map((item) => (
-          <div
-            class="group relative overflow-hidden rounded-2xl shadow-lg aspect-[4/3] cursor-pointer gallery-item"
-            data-category={item.category}
-          >
-            <img
-              src={item.image}
-              alt={item.title}
-              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-              <h3 class="text-white text-xl font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                {item.title}
-              </h3>
-              <p class="text-gray-200 text-sm mt-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                {item.description}
-              </p>
-            </div>
-          </div>
-        ))
+        galleryItems.map((item, index) => {
+          const catLabel = categories.find((c) => c.id === item.category)?.label ?? item.category;
+          return (
+            <button
+              type="button"
+              class="gallery-item group relative overflow-hidden rounded-2xl shadow-lg aspect-[4/3] cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 border-0 p-0"
+              class:list={{
+                'md:col-span-2': index === 0,
+              }}
+              data-category={item.category}
+              data-gallery-index={index}
+              data-image={item.image}
+              data-title={item.title}
+              data-description={item.description}
+              aria-label={lang === 'zh-CN' ? `查看：${item.title}` : `View: ${item.title}`}
+            >
+              <img
+                src={item.image}
+                alt=""
+                class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-out"
+                loading={index < 6 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 md:p-6">
+                <span class="inline-flex items-center gap-2 text-white/90 text-xs font-medium mb-2">
+                  {item.category === 'landscape' && '🏔️ '}
+                  {item.category === 'nature' && '🌿 '}
+                  {item.category === 'food' && '🍽️ '}
+                  {catLabel}
+                </span>
+                <h3 class="text-white text-lg md:text-xl font-bold">{item.title}</h3>
+                <p class="text-gray-200 text-sm mt-1 line-clamp-2">{item.description}</p>
+                <span class="mt-3 inline-flex items-center gap-1.5 text-sm text-white/80 font-medium">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  </svg>
+                  {lang === 'zh-CN' ? '放大查看' : lang === 'zh-TW' ? '放大查看' : lang === 'fr' ? 'Agrandir' : lang === 'ru' ? 'Увеличить' : 'View larger'}
+                </span>
+              </div>
+            </button>
+          );
+        })
       }
     </div>
   </section>
+
+  <!-- Lightbox 灯箱 -->
+  <div
+    id="gallery-lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label={lang === 'zh-CN' ? '作品大图' : 'Image viewer'}
+    class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
+  >
+    <button
+      type="button"
+      id="lightbox-close"
+      class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
+      aria-label={lang === 'zh-CN' ? '关闭' : 'Close'}
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    </button>
+    <button
+      type="button"
+      id="lightbox-prev"
+      class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
+      aria-label={lang === 'zh-CN' ? '上一张' : 'Previous'}
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+    </button>
+    <button
+      type="button"
+      id="lightbox-next"
+      class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
+      aria-label={lang === 'zh-CN' ? '下一张' : 'Next'}
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+    </button>
+    <div class="relative max-w-5xl max-h-[85vh] w-full flex flex-col items-center">
+      <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[70vh] w-auto object-contain rounded-lg shadow-2xl" />
+      <div class="mt-4 text-center text-white px-4">
+        <h2 id="lightbox-title" class="text-xl font-bold"></h2>
+        <p id="lightbox-desc" class="text-white/80 text-sm mt-1"></p>
+      </div>
+    </div>
+  </div>
 </BaseLayout>
 
 <script>
-  // Gallery filtering logic
-  const filterBtns = document.querySelectorAll('.filter-btn');
+  const filterBtns = document.querySelectorAll('.gallery-filter-btn');
   const galleryItems = document.querySelectorAll('.gallery-item');
-  const totalCount = document.getElementById('total-count');
+  const totalCountEl = document.getElementById('total-count');
+  const lightbox = document.getElementById('gallery-lightbox');
+  const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+  const lightboxTitle = document.getElementById('lightbox-title');
+  const lightboxDesc = document.getElementById('lightbox-desc');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
 
-  // Update total count
-  if (totalCount) {
-    totalCount.textContent = galleryItems.length.toString();
+  let currentFilter = 'all';
+  let currentLightboxIndex = 0;
+
+  function getVisibleItems(): Element[] {
+    return Array.from(galleryItems).filter((el) => {
+      const cat = el.getAttribute('data-category');
+      return currentFilter === 'all' || cat === currentFilter;
+    });
   }
+
+  function openLightbox(index: number) {
+    const visible = getVisibleItems();
+    const item = visible[index];
+    if (!item || !lightbox || !lightboxImage || !lightboxTitle || !lightboxDesc) return;
+    const img = item.getAttribute('data-image');
+    const title = item.getAttribute('data-title');
+    const desc = item.getAttribute('data-description');
+    if (img) lightboxImage.src = img;
+    lightboxImage.alt = title || '';
+    if (lightboxTitle) lightboxTitle.textContent = title || '';
+    if (lightboxDesc) lightboxDesc.textContent = desc || '';
+    currentLightboxIndex = index;
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    lightboxClose?.focus();
+  }
+
+  function closeLightbox() {
+    if (lightbox) {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+    }
+    document.body.style.overflow = '';
+  }
+
+  function showLightboxPrev() {
+    const visible = getVisibleItems();
+    if (visible.length === 0) return;
+    currentLightboxIndex = (currentLightboxIndex - 1 + visible.length) % visible.length;
+    const item = visible[currentLightboxIndex];
+    const img = item.getAttribute('data-image');
+    const title = item.getAttribute('data-title');
+    const desc = item.getAttribute('data-description');
+    if (lightboxImage && img) lightboxImage.src = img;
+    if (lightboxImage) lightboxImage.alt = title || '';
+    if (lightboxTitle) lightboxTitle.textContent = title || '';
+    if (lightboxDesc) lightboxDesc.textContent = desc || '';
+  }
+
+  function showLightboxNext() {
+    const visible = getVisibleItems();
+    if (visible.length === 0) return;
+    currentLightboxIndex = (currentLightboxIndex + 1) % visible.length;
+    const item = visible[currentLightboxIndex];
+    const img = item.getAttribute('data-image');
+    const title = item.getAttribute('data-title');
+    const desc = item.getAttribute('data-description');
+    if (lightboxImage && img) lightboxImage.src = img;
+    if (lightboxImage) lightboxImage.alt = title || '';
+    if (lightboxTitle) lightboxTitle.textContent = title || '';
+    if (lightboxDesc) lightboxDesc.textContent = desc || '';
+  }
+
+  galleryItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      const visible = getVisibleItems();
+      const idx = visible.indexOf(item);
+      if (idx !== -1) openLightbox(idx);
+    });
+  });
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightboxPrev?.addEventListener('click', showLightboxPrev);
+  lightboxNext?.addEventListener('click', showLightboxNext);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox?.classList.contains('flex')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showLightboxPrev();
+    if (e.key === 'ArrowRight') showLightboxNext();
+  });
 
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      // Update active button state
+      const filterValue = btn.getAttribute('data-filter') || 'all';
+      currentFilter = filterValue;
+
       filterBtns.forEach((b) => {
-        b.classList.remove(
-          'bg-gradient-to-r',
-          'from-primary-500',
-          'to-accent-500',
-          'text-white',
-          'shadow-lg'
-        );
-        b.classList.add(
-          'glass-card',
-          'hover:bg-[rgb(var(--color-bg-tertiary))]'
-        );
+        const isActive = b.getAttribute('data-filter') === filterValue;
+        b.setAttribute('aria-selected', String(isActive));
+        (b as HTMLElement).tabIndex = isActive ? 0 : -1;
+        b.classList.remove('bg-gradient-to-r', 'from-primary-500', 'to-accent-500', 'text-white', 'shadow-lg');
+        b.classList.add('glass-card', 'text-[rgb(var(--color-text-secondary))]');
       });
-      btn.classList.remove(
-        'glass-card',
-        'hover:bg-[rgb(var(--color-bg-tertiary))]'
-      );
-      btn.classList.add(
-        'bg-gradient-to-r',
-        'from-primary-500',
-        'to-accent-500',
-        'text-white',
-        'shadow-lg'
-      );
+      btn.classList.remove('glass-card', 'text-[rgb(var(--color-text-secondary))]');
+      btn.classList.add('bg-gradient-to-r', 'from-primary-500', 'to-accent-500', 'text-white', 'shadow-lg');
 
-      const filterValue = btn.getAttribute('data-filter');
       let visibleCount = 0;
-
       galleryItems.forEach((item) => {
         const itemCategory = item.getAttribute('data-category');
-        if (filterValue === 'all' || filterValue === itemCategory) {
-          (item as HTMLElement).style.display = 'block';
-          // Add animation
-          item.classList.add('animate-fade-in');
-          setTimeout(() => item.classList.remove('animate-fade-in'), 500);
+        const show = filterValue === 'all' || filterValue === itemCategory;
+        (item as HTMLElement).style.display = show ? '' : 'none';
+        if (show) {
+          item.classList.add('gallery-reveal');
           visibleCount++;
-        } else {
-          (item as HTMLElement).style.display = 'none';
         }
       });
-
-      // Update count based on filter
-      if (totalCount) {
-        totalCount.textContent = visibleCount.toString();
-      }
+      if (totalCountEl) totalCountEl.textContent = String(visibleCount);
     });
   });
 </script>
 
 <style>
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+  .gallery-reveal {
+    animation: galleryReveal 0.4s ease-out forwards;
   }
 
-  @keyframes fadeIn {
+  @keyframes galleryReveal {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: scale(0.96);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1);
+    }
+  }
+
+  #gallery-lightbox.flex {
+    animation: lightboxIn 0.2s ease-out;
+  }
+
+  @keyframes lightboxIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 </style>

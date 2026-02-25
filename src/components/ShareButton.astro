@@ -41,13 +41,18 @@ const translations = {
   },
 };
 
-const t = translations[lang] || translations['zh-CN'];
+const t = translations[lang] || translations['en-GB'];
 ---
 
 <div id="share-button" class="fixed z-40">
   <button
+    type="button"
+    id="share-toggle-btn"
     aria-label={t.share}
-    class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+    aria-haspopup="true"
+    aria-expanded="false"
+    aria-controls="share-menu"
+    class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 text-white shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center group focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:ring-offset-2"
     onclick="toggleShareMenu()"
   >
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,38 +77,40 @@ const t = translations[lang] || translations['zh-CN'];
   >
     <div class="space-y-2">
       <button
+        type="button"
         onclick="copyLink()"
-        class="w-full text-left px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3"
+        class="w-full text-left px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset"
       >
-        <span>🔗</span>
+        <span aria-hidden="true">🔗</span>
         <span>{t.copyLink}</span>
       </button>
       <a
-        id="instagram-share"
+        id="twitter-share"
         href="#"
         target="_blank"
         rel="noopener noreferrer"
-        class="block w-full text-left px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3"
+        class="block w-full text-left px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset"
       >
-        <span>📷</span>
-        <span>Instagram</span>
+        <span aria-hidden="true">𝕏</span>
+        <span>Twitter / X</span>
       </a>
       <a
         id="facebook-share"
         href="#"
         target="_blank"
         rel="noopener noreferrer"
-        class="block w-full text-left px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3"
+        class="block w-full text-left px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset"
       >
-        <span>📘</span>
+        <span aria-hidden="true">📘</span>
         <span>Facebook</span>
       </a>
       <button
+        type="button"
         id="native-share-btn"
         onclick="nativeShare()"
-        class="w-full text-left px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3 hidden"
+        class="w-full text-left px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-3 hidden focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset"
       >
-        <span>📱</span>
+        <span aria-hidden="true">📱</span>
         <span>{t.nativeShare}</span>
       </button>
     </div>
@@ -149,13 +156,15 @@ const t = translations[lang] || translations['zh-CN'];
 </style>
 
 <script define:vars={{ lang, translations }} is:inline>
-  const messages = translations[lang] || translations['zh-CN'];
-  const fallbackMessages = translations['zh-CN'];
+  const messages = translations[lang] || translations['en-GB'];
+  const fallbackMessages = translations['en-GB'];
 
   function toggleShareMenu() {
     const menu = document.getElementById('share-menu');
+    const btn = document.getElementById('share-toggle-btn');
     if (menu) {
-      menu.classList.toggle('hidden');
+      const isHidden = menu.classList.toggle('hidden');
+      if (btn) btn.setAttribute('aria-expanded', String(!isHidden));
     }
   }
 
@@ -193,27 +202,19 @@ const t = translations[lang] || translations['zh-CN'];
 
   // Update share links on page load
   function updateShareLinks() {
-    const instagramShare = document.getElementById('instagram-share');
+    const twitterShare = document.getElementById('twitter-share');
     const facebookShare = document.getElementById('facebook-share');
     const nativeShareBtn = document.getElementById('native-share-btn');
 
     if (typeof window !== 'undefined') {
       const url = encodeURIComponent(window.location.href);
+      const title = encodeURIComponent(document.title || '');
 
-      if (instagramShare) {
-        // Instagram doesn't support direct URL sharing, so link to Instagram
-        instagramShare.href = `https://www.instagram.com`;
-        instagramShare.onclick = (e) => {
-          e.preventDefault();
-          window.open(instagramShare.href, '_blank');
-        };
+      if (twitterShare) {
+        twitterShare.href = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
       }
       if (facebookShare) {
         facebookShare.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-        facebookShare.onclick = (e) => {
-          e.preventDefault();
-          window.open(facebookShare.href, '_blank');
-        };
       }
       if (nativeShareBtn && 'share' in navigator) {
         nativeShareBtn.classList.remove('hidden');
@@ -239,6 +240,7 @@ const t = translations[lang] || translations['zh-CN'];
   document.addEventListener('click', (e) => {
     const shareButton = document.getElementById('share-button');
     const shareMenu = document.getElementById('share-menu');
+    const toggleBtn = document.getElementById('share-toggle-btn');
     const target = e.target;
     if (!target || !(target instanceof Node)) return;
     if (
@@ -248,6 +250,7 @@ const t = translations[lang] || translations['zh-CN'];
       !shareMenu.contains(target)
     ) {
       shareMenu.classList.add('hidden');
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
     }
   });
 

@@ -4,7 +4,7 @@ import RelatedTools from '../RelatedTools.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 const currencyData: Record<Lang, any> = {
   'zh-CN': {
@@ -124,66 +124,6 @@ const currencyData: Record<Lang, any> = {
         icon: '💳',
         title: '境外消費建議',
         desc: '信用卡境外消費通常按當日匯率結算，小額高頻消費可能產生額外手續費。',
-      },
-    ],
-  },
-  'en-US': {
-    title: 'Smart Currency Tool',
-    headerTitle: '💱 Smart Currency Tool',
-    headerDesc: 'Real-time Rates · Custom Rate Calculator · Exchange Helper',
-    mainRatesTitle: 'Major Exchange Rates',
-    subTitle: "Today's Reference Rates (1 foreign currency = ? CNY)",
-    disclaimer: 'For reference only. Not for trading or exchange. Check your bank for actual rates.',
-    refresh: 'Refresh',
-    refreshing: 'Updating...',
-    source: 'Data Source',
-    converterTitle: '💰 Currency Converter',
-    converterDesc: 'Supports real-time and custom rate calculations',
-    amount: 'Amount',
-    from: 'From',
-    to: 'To',
-    customRate: 'Custom Rate',
-    customRatePlaceholder: 'Leave empty for real-time rate',
-    customRateHint: 'E.g.: Bank rate, exchange counter price',
-    result: 'Result',
-    convert: 'Calculate',
-    useRealRate: 'Use Real-time Rate',
-    currentRate: 'Current Rate',
-    loading: 'Loading...',
-    updated: 'Updated',
-    justNow: 'Just now',
-    minutesAgo: 'min ago',
-    hoursAgo: 'hrs ago',
-    errorLoading: '⚠️ Failed to load, please try again later',
-    calculating: 'Calculating...',
-    sameCurrency: 'Same currency, no conversion needed',
-    usingCustomRate: 'Using custom rate',
-    usingRealRateStatus: 'Using real-time rate',
-    errorFetching: 'Unable to fetch rate',
-    convertError: 'Conversion failed',
-    networkError: 'Please check your connection or try again later',
-    tipsTitle: '💡 Exchange Tips',
-    tipsDesc: 'Practical advice to help you manage foreign exchange better',
-    tips: [
-      {
-        icon: '🏦',
-        title: 'Bank Rate Differences',
-        desc: 'Cash buying rates and transfer buying rates differ. Cash rates are usually lower.',
-      },
-      {
-        icon: '⏰',
-        title: 'Best Time to Exchange',
-        desc: 'Monitor rates 1-2 weeks before travel. Split large exchanges to reduce risk.',
-      },
-      {
-        icon: '📱',
-        title: 'Mobile Banking Benefits',
-        desc: 'Lower fees and 24/7 availability. Most transactions complete instantly.',
-      },
-      {
-        icon: '💳',
-        title: 'Overseas Spending',
-        desc: 'Credit cards use daily rates. Watch for fees on small frequent transactions.',
       },
     ],
   },
@@ -372,7 +312,7 @@ const currencyData: Record<Lang, any> = {
   },
 };
 
-const content = currencyData[lang as Lang] || currencyData['en-US'];
+const content = currencyData[lang as Lang] || currencyData['en-GB'];
 ---
 
 <BaseLayout title={`${content.title} - Alexander Carter`}>
@@ -656,7 +596,7 @@ const content = currencyData[lang as Lang] || currencyData['en-US'];
     </div>
 
     <div class="container mx-auto px-4 lg:px-8 max-w-4xl mt-16">
-      <RelatedTools lang={lang === 'en-US' ? 'en-GB' : lang} current="currency" />
+      <RelatedTools lang={lang} current="currency" />
     </div>
   </section>
 </BaseLayout>

@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const { lang } = Astro.props;
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-US' | 'en-GB' | 'fr' | 'ru';
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 const sitemapData: Record<Lang, any> = {
   'zh-CN': {
@@ -36,6 +36,12 @@ const sitemapData: Record<Lang, any> = {
         icon: '🖼️',
       },
       {
+        name: '项目',
+        href: '/projects',
+        desc: '我的开发项目与作品集',
+        icon: '🛠️',
+      },
+      {
         name: '彩蛋',
         href: '/fun',
         desc: '好玩的小惊喜与互动',
@@ -63,7 +69,9 @@ const sitemapData: Record<Lang, any> = {
       },
       { name: '世界时间', href: '/time', desc: '世界时间显示工具', icon: '🕐' },
       { name: 'Now', href: '/now', desc: '此刻在做什么', icon: '📍' },
-      { name: 'Uses', href: '/uses', desc: '使用的工具与环境', icon: '🛠' },
+      { name: '关于本站', href: '/uses', desc: '本站技术与结构说明', icon: '🌐' },
+      { name: '单位换算', href: '/units', desc: '温度·长度·重量换算', icon: '📐' },
+      { name: 'QR 生成', href: '/qr', desc: '链接转二维码', icon: '📱' },
     ],
     policyPages: [
       {
@@ -96,6 +104,12 @@ const sitemapData: Record<Lang, any> = {
         desc: '安全漏洞披露与报告指南',
         icon: '🛡️',
       },
+      {
+        name: '安全致谢',
+        href: '/security/acknowledgments',
+        desc: '感谢安全研究人员',
+        icon: '🙏',
+      },
     ],
     externalLinks: [
       {
@@ -114,8 +128,7 @@ const sitemapData: Record<Lang, any> = {
     languages: [
       { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
       { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
-      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'en-GB', name: 'English', flag: '🇬🇧', href: '/en/' },
       { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
       { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
     ],
@@ -150,6 +163,12 @@ const sitemapData: Record<Lang, any> = {
         icon: '🖼️',
       },
       {
+        name: '專案',
+        href: '/zh-TW/projects',
+        desc: '我的開發專案與作品集',
+        icon: '🛠️',
+      },
+      {
         name: '彩蛋',
         href: '/zh-TW/fun',
         desc: '好玩的小驚喜與互動',
@@ -182,12 +201,9 @@ const sitemapData: Record<Lang, any> = {
         icon: '🕐',
       },
       { name: 'Now', href: '/zh-TW/now', desc: '此刻在做什麼', icon: '📍' },
-      {
-        name: 'Uses',
-        href: '/zh-TW/uses',
-        desc: '使用的工具與環境',
-        icon: '🛠',
-      },
+      { name: '關於本站', href: '/zh-TW/uses', desc: '本站技術與結構說明', icon: '🌐' },
+      { name: '單位換算', href: '/zh-TW/units', desc: '溫度·長度·重量換算', icon: '📐' },
+      { name: 'QR 生成', href: '/zh-TW/qr', desc: '連結轉二維碼', icon: '📱' },
     ],
     policyPages: [
       {
@@ -220,6 +236,12 @@ const sitemapData: Record<Lang, any> = {
         desc: '安全漏洞披露與報告指南',
         icon: '🛡️',
       },
+      {
+        name: '安全致謝',
+        href: '/zh-TW/security/acknowledgments',
+        desc: '感謝安全研究人員',
+        icon: '🙏',
+      },
     ],
     externalLinks: [
       {
@@ -238,137 +260,7 @@ const sitemapData: Record<Lang, any> = {
     languages: [
       { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
       { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
-      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
-      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
-      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
-    ],
-  },
-  'en-US': {
-    title: 'Sitemap',
-    description: 'Complete site structure and navigation map',
-    headerTitle: 'Sitemap',
-    headerDesc: 'Explore every corner of the website',
-    mainPagesTitle: 'Main Pages',
-    toolPagesTitle: 'Tools',
-    policyPagesTitle: 'Policies',
-    externalLinksTitle: 'External Links',
-    languagesTitle: 'Languages',
-    mainPages: [
-      {
-        name: 'Home',
-        href: '/en-US/',
-        desc: 'Explore creativity, share life',
-        icon: '🏠',
-      },
-      {
-        name: 'About',
-        href: '/en-US/about',
-        desc: 'Learn about my story and philosophy',
-        icon: '👤',
-      },
-      {
-        name: 'Gallery',
-        href: '/en-US/gallery',
-        desc: 'Complete photography gallery',
-        icon: '🖼️',
-      },
-      {
-        name: 'Easter Eggs',
-        href: '/en-US/fun',
-        desc: 'Fun surprises and interactions',
-        icon: '🥚',
-      },
-      {
-        name: 'Timeline',
-        href: '/en-US/timeline',
-        desc: 'My learning and growth journey',
-        icon: '📅',
-      },
-    ],
-    toolPages: [
-      {
-        name: 'Calendar',
-        href: '/en-US/calendar',
-        desc: 'Feature-rich calendar tool',
-        icon: '📆',
-      },
-      {
-        name: 'Currency',
-        href: '/en-US/currency',
-        desc: 'Real-time currency converter',
-        icon: '💱',
-      },
-      {
-        name: 'World Time',
-        href: '/en-US/time',
-        desc: 'World time display tool',
-        icon: '🕐',
-      },
-      {
-        name: 'Now',
-        href: '/en-US/now',
-        desc: "What I'm doing now",
-        icon: '📍',
-      },
-      {
-        name: 'Uses',
-        href: '/en-US/uses',
-        desc: 'Tools and setup',
-        icon: '🛠',
-      },
-    ],
-    policyPages: [
-      {
-        name: 'Privacy',
-        href: '/en-US/privacy',
-        desc: 'Data protection and privacy',
-        icon: '🔒',
-      },
-      {
-        name: 'Terms',
-        href: '/en-US/terms',
-        desc: 'Terms of service',
-        icon: '📄',
-      },
-      {
-        name: 'License',
-        href: '/en-US/license',
-        desc: 'License information',
-        icon: '📜',
-      },
-      {
-        name: 'Accessibility',
-        href: '/en-US/accessibility',
-        desc: 'Accessibility information',
-        icon: '♿',
-      },
-      {
-        name: 'Security Policy',
-        href: '/en/security/policy',
-        desc: 'Vulnerability disclosure and reporting',
-        icon: '🛡️',
-      },
-    ],
-    externalLinks: [
-      {
-        name: 'Blog',
-        href: 'https://blog.alexander.xin',
-        desc: 'Latest articles and thoughts',
-        icon: '📝',
-      },
-      {
-        name: 'GitHub',
-        href: 'https://github.com/AlexanderJ-Carter',
-        desc: 'Open source projects',
-        icon: '💻',
-      },
-    ],
-    languages: [
-      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
-      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
-      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'en-GB', name: 'English', flag: '🇬🇧', href: '/en/' },
       { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
       { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
     ],
@@ -386,31 +278,37 @@ const sitemapData: Record<Lang, any> = {
     mainPages: [
       {
         name: 'Home',
-        href: '/en-GB/',
+        href: '/en/',
         desc: 'Explore creativity, share life',
         icon: '🏠',
       },
       {
         name: 'About',
-        href: '/en-GB/about',
+        href: '/en/about',
         desc: 'Learn about my story and philosophy',
         icon: '👤',
       },
       {
         name: 'Gallery',
-        href: '/en-GB/gallery',
+        href: '/en/gallery',
         desc: 'Complete photography gallery',
         icon: '🖼️',
       },
       {
+        name: 'Projects',
+        href: '/en/projects',
+        desc: 'My development projects and portfolio',
+        icon: '🛠️',
+      },
+      {
         name: 'Easter Eggs',
-        href: '/en-GB/fun',
+        href: '/en/fun',
         desc: 'Fun surprises and interactions',
         icon: '🥚',
       },
       {
         name: 'Timeline',
-        href: '/en-GB/timeline',
+        href: '/en/timeline',
         desc: 'My learning and growth journey',
         icon: '📅',
       },
@@ -418,57 +316,59 @@ const sitemapData: Record<Lang, any> = {
     toolPages: [
       {
         name: 'Calendar',
-        href: '/en-GB/calendar',
+        href: '/en/calendar',
         desc: 'Feature-rich calendar tool',
         icon: '📆',
       },
       {
         name: 'Currency',
-        href: '/en-GB/currency',
+        href: '/en/currency',
         desc: 'Real-time currency converter',
         icon: '💱',
       },
       {
         name: 'World Time',
-        href: '/en-GB/time',
+        href: '/en/time',
         desc: 'World time display tool',
         icon: '🕐',
       },
       {
         name: 'Now',
-        href: '/en-GB/now',
+        href: '/en/now',
         desc: "What I'm doing now",
         icon: '📍',
       },
       {
-        name: 'Uses',
-        href: '/en-GB/uses',
-        desc: 'Tools and setup',
-        icon: '🛠',
+        name: 'About this site',
+        href: '/en/uses',
+        desc: 'How this site is built',
+        icon: '🌐',
       },
+      { name: 'Units', href: '/en/units', desc: 'Temperature, length, weight', icon: '📐' },
+      { name: 'QR Code', href: '/en/qr', desc: 'URL to QR code', icon: '📱' },
     ],
     policyPages: [
       {
         name: 'Privacy',
-        href: '/en-GB/privacy',
+        href: '/en/privacy',
         desc: 'Data protection and privacy',
         icon: '🔒',
       },
       {
         name: 'Terms',
-        href: '/en-GB/terms',
+        href: '/en/terms',
         desc: 'Terms of service',
         icon: '📄',
       },
       {
         name: 'License',
-        href: '/en-GB/license',
+        href: '/en/license',
         desc: 'License information',
         icon: '📜',
       },
       {
         name: 'Accessibility',
-        href: '/en-GB/accessibility',
+        href: '/en/accessibility',
         desc: 'Accessibility information',
         icon: '♿',
       },
@@ -477,6 +377,12 @@ const sitemapData: Record<Lang, any> = {
         href: '/en/security/policy',
         desc: 'Vulnerability disclosure and reporting',
         icon: '🛡️',
+      },
+      {
+        name: 'Acknowledgments',
+        href: '/en/security/acknowledgments',
+        desc: 'Thanks to security researchers',
+        icon: '🙏',
       },
     ],
     externalLinks: [
@@ -496,8 +402,7 @@ const sitemapData: Record<Lang, any> = {
     languages: [
       { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
       { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
-      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'en-GB', name: 'English', flag: '🇬🇧', href: '/en/' },
       { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
       { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
     ],
@@ -530,6 +435,12 @@ const sitemapData: Record<Lang, any> = {
         href: '/fr/gallery',
         desc: 'Galerie de photographie complète',
         icon: '🖼️',
+      },
+      {
+        name: 'Projets',
+        href: '/fr/projects',
+        desc: 'Mes projets de développement et portfolio',
+        icon: '🛠️',
       },
       {
         name: 'Easter Eggs',
@@ -565,11 +476,13 @@ const sitemapData: Record<Lang, any> = {
       },
       { name: 'Now', href: '/fr/now', desc: 'Ce que je fais', icon: '📍' },
       {
-        name: 'Uses',
+        name: 'À propos du site',
         href: '/fr/uses',
-        desc: 'Outils et environnement',
-        icon: '🛠',
+        desc: 'Comment le site est construit',
+        icon: '🌐',
       },
+      { name: 'Unités', href: '/fr/units', desc: 'Température, longueur, poids', icon: '📐' },
+      { name: 'QR Code', href: '/fr/qr', desc: 'URL en code QR', icon: '📱' },
     ],
     policyPages: [
       {
@@ -602,6 +515,12 @@ const sitemapData: Record<Lang, any> = {
         desc: 'Divulgation et signalement des vulnérabilités',
         icon: '🛡️',
       },
+      {
+        name: 'Remerciements',
+        href: '/fr/security/acknowledgments',
+        desc: 'Merci aux chercheurs en sécurité',
+        icon: '🙏',
+      },
     ],
     externalLinks: [
       {
@@ -620,8 +539,7 @@ const sitemapData: Record<Lang, any> = {
     languages: [
       { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
       { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
-      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'en-GB', name: 'English', flag: '🇬🇧', href: '/en/' },
       { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
       { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
     ],
@@ -654,6 +572,12 @@ const sitemapData: Record<Lang, any> = {
         href: '/ru/gallery',
         desc: 'Полная галерея фотографий',
         icon: '🖼️',
+      },
+      {
+        name: 'Проекты',
+        href: '/ru/projects',
+        desc: 'Мои проекты и портфолио',
+        icon: '🛠️',
       },
       {
         name: 'Пасхалки',
@@ -689,11 +613,13 @@ const sitemapData: Record<Lang, any> = {
       },
       { name: 'Now', href: '/ru/now', desc: 'Чем занимаюсь', icon: '📍' },
       {
-        name: 'Uses',
+        name: 'О сайте',
         href: '/ru/uses',
-        desc: 'Инструменты и окружение',
-        icon: '🛠',
+        desc: 'Как сделан этот сайт',
+        icon: '🌐',
       },
+      { name: 'Единицы', href: '/ru/units', desc: 'Температура, длина, вес', icon: '📐' },
+      { name: 'QR-код', href: '/ru/qr', desc: 'Ссылка в QR-код', icon: '📱' },
     ],
     policyPages: [
       {
@@ -726,6 +652,12 @@ const sitemapData: Record<Lang, any> = {
         desc: 'Раскрытие и отчётность по уязвимостям',
         icon: '🛡️',
       },
+      {
+        name: 'Благодарности',
+        href: '/ru/security/acknowledgments',
+        desc: 'Благодарим исследователей безопасности',
+        icon: '🙏',
+      },
     ],
     externalLinks: [
       {
@@ -744,15 +676,14 @@ const sitemapData: Record<Lang, any> = {
     languages: [
       { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
       { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-US', name: 'English (US)', flag: '🇺🇸', href: '/en-US/' },
-      { code: 'en-GB', name: 'English (UK)', flag: '🇬🇧', href: '/en-GB/' },
+      { code: 'en-GB', name: 'English', flag: '🇬🇧', href: '/en/' },
       { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
       { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
     ],
   },
 };
 
-const content = sitemapData[lang as Lang] || sitemapData['en-US'];
+const content = sitemapData[lang as Lang] || sitemapData['en-GB'];
 ---
 
 <BaseLayout title={content.title} description={content.description}>

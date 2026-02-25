@@ -149,209 +149,170 @@ const quotes = [
 
 // 画廊图片列表（用于随机展示）
 const galleryImages = [
-  { src: '/img/gallery/landscape-01.jpg', title: '山间晨雾' },
-  { src: '/img/gallery/landscape-02.jpg', title: '海岸日落' },
-  { src: '/img/gallery/landscape-03.jpg', title: '城市天际线' },
-  { src: '/img/gallery/landscape-04.jpg', title: '星空银河' },
-  { src: '/img/gallery/landscape-05.jpg', title: '山谷云海' },
-  { src: '/img/gallery/landscape-06.jpg', title: '湖光山色' },
-  { src: '/img/gallery/landscape-07.jpg', title: '雪域高原' },
-  { src: '/img/gallery/landscape-08.jpg', title: '森林晨曦' },
-  { src: '/img/gallery/landscape-09.jpg', title: '沙漠星空' },
-  { src: '/img/gallery/landscape-10.jpg', title: '梯田晨光' },
-  { src: '/img/gallery/landscape-11.jpg', title: '雪山倒影' },
-  { src: '/img/gallery/landscape-12.jpg', title: '海边礁石' },
-  { src: '/img/gallery/landscape-13.jpg', title: '秋日枫林' },
-  { src: '/img/gallery/nature-flower-01.jpg', title: '雨后花瓣' },
-  { src: '/img/gallery/nature-flower-02.jpg', title: '野花烂漫' },
-  { src: '/img/gallery/food-01.jpg', title: '精致甜点' },
-  { src: '/img/gallery/food-02.jpg', title: '午后咖啡' },
-  { src: '/img/gallery/food-03.jpg', title: '家常美味' },
+  { src: '/img/gallery/landscape-01.jpg', zh: '山间晨雾', en: 'Mountain Morning Mist' },
+  { src: '/img/gallery/landscape-02.jpg', zh: '海岸日落', en: 'Coastal Sunset' },
+  { src: '/img/gallery/landscape-03.jpg', zh: '城市天际线', en: 'City Skyline' },
+  { src: '/img/gallery/landscape-04.jpg', zh: '星空银河', en: 'Starry Milky Way' },
+  { src: '/img/gallery/landscape-05.jpg', zh: '山谷云海', en: 'Valley Cloud Sea' },
+  { src: '/img/gallery/landscape-06.jpg', zh: '湖光山色', en: 'Lake and Mountains' },
+  { src: '/img/gallery/landscape-07.jpg', zh: '雪域高原', en: 'Snow-Capped Plateau' },
+  { src: '/img/gallery/landscape-08.jpg', zh: '森林晨曦', en: 'Forest at Dawn' },
+  { src: '/img/gallery/landscape-09.jpg', zh: '沙漠星空', en: 'Desert Starscape' },
+  { src: '/img/gallery/landscape-10.jpg', zh: '梯田晨光', en: 'Terraced Fields at Sunrise' },
+  { src: '/img/gallery/landscape-11.jpg', zh: '雪山倒影', en: 'Snow Peak Reflection' },
+  { src: '/img/gallery/landscape-12.jpg', zh: '海边礁石', en: 'Rocky Shoreline' },
+  { src: '/img/gallery/landscape-13.jpg', zh: '秋日枫林', en: 'Autumn Maple Forest' },
+  { src: '/img/gallery/nature-flower-01.jpg', zh: '雨后花瓣', en: 'Petals After Rain' },
+  { src: '/img/gallery/nature-flower-02.jpg', zh: '野花烂漫', en: 'Wildflowers in Bloom' },
+  { src: '/img/gallery/food-01.jpg', zh: '精致甜点', en: 'Artisan Dessert' },
+  { src: '/img/gallery/food-02.jpg', zh: '午后咖啡', en: 'Afternoon Coffee' },
+  { src: '/img/gallery/food-03.jpg', zh: '家常美味', en: 'Homestyle Dish' },
 ];
 
 // 服务端随机选一张图（构建时固定，刷新页面会变）
 const randomIndex = Math.floor(Math.random() * galleryImages.length);
 const randomImage = galleryImages[randomIndex];
-const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang}/gallery`;
+const imageTitle = (lang === 'zh-CN' || lang === 'zh-TW') ? randomImage.zh : randomImage.en;
+const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' : lang}/gallery`;
 ---
 
 <BaseLayout title={text.title} description={text.subtitle}>
-  <section class="relative py-16 md:py-24 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient opacity-60"></div>
+  <section class="relative py-20 md:py-28 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient opacity-50" aria-hidden="true" />
+    <div class="absolute inset-0 opacity-80" style="background: var(--hero-spotlight);" aria-hidden="true" />
     <div class="container mx-auto px-4 lg:px-8 relative z-10">
-      <div class="text-center mb-16">
-        <span
-          class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
-        >
-          ✨ {lang === 'zh-CN' ? '好玩' : 'Fun'}
+      <header class="text-center mb-14">
+        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium mb-5">
+          <span aria-hidden="true">🥚</span>
+          {text.subtitle}
         </span>
-        <h1
-          class="text-4xl md:text-6xl font-display font-bold mb-4 gradient-text"
-        >
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 gradient-text tracking-tight">
           {text.title}
         </h1>
-        <p
-          class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
-        >
-          {text.subtitle}
+        <p class="text-[rgb(var(--color-text-secondary))] max-w-xl mx-auto">
+          {lang === 'zh-CN' ? '小游戏、随机语录与隐藏惊喜' : lang === 'zh-TW' ? '小遊戲、隨機語錄與隱藏驚喜' : lang === 'fr' ? 'Mini-jeux, citations et surprises' : lang === 'ru' ? 'Мини-игры, цитаты и сюрпризы' : 'Mini games, random quotes & hidden surprises'}
         </p>
-      </div>
+      </header>
 
-      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         <!-- 随机一言 -->
-        <div class="glass-card p-8 reveal">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="text-3xl">💬</span>
-            <h2 class="text-2xl font-bold">{text.randomQuote}</h2>
+        <article class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-primary-500">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">💬</span>
+            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.randomQuote}</h2>
           </div>
-          <p class="text-[rgb(var(--color-text-secondary))] text-sm mb-6">
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
             {text.randomQuoteDesc}
           </p>
           <div
             id="quote-box"
-            class="min-h-[100px] p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))]/80 border border-[rgb(var(--color-border))] mb-4"
+            class="min-h-[88px] p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))]/80 border border-[rgb(var(--color-border))] mb-4 transition-colors duration-200"
           >
-            <p
-              id="quote-text"
-              class="text-lg font-medium text-[rgb(var(--color-text-primary))] leading-relaxed"
-            >
+            <p id="quote-text" class="text-base md:text-lg font-medium text-[rgb(var(--color-text-primary))] leading-relaxed">
               —
             </p>
-            <p
-              id="quote-lang"
-              class="text-sm text-[rgb(var(--color-text-tertiary))] mt-2"
-            >
-            </p>
+            <p id="quote-lang" class="text-sm text-[rgb(var(--color-text-tertiary))] mt-2"></p>
           </div>
           <button
             type="button"
             id="quote-refresh"
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-500/20 hover:bg-primary-500/30 text-primary-600 dark:text-primary-400 font-medium transition-colors"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
           >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-              ></path>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
             {text.refresh}
           </button>
-        </div>
+        </article>
 
         <!-- 随机作品 -->
-        <div class="glass-card p-8 reveal-right">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="text-3xl">🖼️</span>
-            <h2 class="text-2xl font-bold">{text.randomWork}</h2>
+        <article class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-accent-500">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">🖼️</span>
+            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.randomWork}</h2>
           </div>
-          <p class="text-[rgb(var(--color-text-secondary))] text-sm mb-6">
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
             {text.randomWorkDesc}
           </p>
           <a
             href={galleryPath}
-            class="block group relative overflow-hidden rounded-xl aspect-[4/3] mb-4"
+            class="block group relative overflow-hidden rounded-xl aspect-[4/3] mb-4 ring-2 ring-transparent hover:ring-primary-500/30 transition-all duration-300"
           >
             <img
               src={randomImage.src}
-              alt={randomImage.title}
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              alt={imageTitle}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
+              decoding="async"
             />
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4"
-            >
-              <span class="text-white font-medium">{randomImage.title}</span>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="text-white font-medium">{imageTitle}</span>
             </div>
           </a>
           <a
             href={galleryPath}
-            class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium transition-colors"
+            class="link-underline inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium text-sm"
           >
             {text.viewGallery}
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-            </svg>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
           </a>
-        </div>
+        </article>
       </div>
 
-      <!-- Konami 彩蛋说明 -->
-      <div class="glass-card p-8 max-w-3xl mx-auto mt-8 reveal">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-3xl">🎮</span>
-          <h2 class="text-2xl font-bold">{text.konamiTitle}</h2>
-        </div>
-        <p class="text-[rgb(var(--color-text-secondary))] mb-2">
-          {text.konamiDesc}
-        </p>
-        <p class="text-sm text-[rgb(var(--color-text-tertiary))]">
-          {text.konamiHint}
-        </p>
-      </div>
-
-      <!-- 打字速度小测 -->
-      <div class="glass-card p-8 max-w-3xl mx-auto mt-8 reveal">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-3xl">⌨️</span>
-          <h2 class="text-2xl font-bold">{text.typingTitle}</h2>
-        </div>
-        <p class="text-[rgb(var(--color-text-secondary))] mb-6">
-          {text.typingDesc}
-        </p>
-        <p
-          id="typing-sentence"
-          class="text-xl font-medium text-[rgb(var(--color-text-primary))] mb-4 p-4 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
-        >
-          {text.sentence}
-        </p>
-        <div class="flex flex-wrap gap-4 items-center">
-          <input
-            type="text"
-            id="typing-input"
-            placeholder={text.placeholder}
-            class="flex-1 min-w-[200px] px-4 py-3 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
-            disabled
-          />
-          <button
-            type="button"
-            id="typing-start"
-            class="px-6 py-3 rounded-lg bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold hover:opacity-90 transition-opacity"
-          >
-            {text.start}
-          </button>
-        </div>
-        <div
-          id="typing-result"
-          class="hidden mt-4 p-4 rounded-lg bg-primary-500/10 border border-primary-500/30"
-        >
-          <p class="font-semibold text-primary-600 dark:text-primary-400">
-            🎉 {text.yourTime}: <span id="typing-time">0</span>
-            {text.seconds}
+      <!-- Konami + 打字 两栏或堆叠 -->
+      <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-6">
+        <article class="glass-card p-6 md:p-8 rounded-2xl reveal">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">🎮</span>
+            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.konamiTitle}</h2>
+          </div>
+          <p class="text-[rgb(var(--color-text-secondary))] text-sm mb-2">
+            {text.konamiDesc}
           </p>
-          <button
-            type="button"
-            id="typing-again"
-            class="mt-2 text-sm text-primary-500 hover:underline"
+          <p class="text-xs text-[rgb(var(--color-text-tertiary))] font-mono">
+            {text.konamiHint}
+          </p>
+        </article>
+
+        <article class="glass-card p-6 md:p-8 rounded-2xl reveal">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">⌨️</span>
+            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.typingTitle}</h2>
+          </div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+            {text.typingDesc}
+          </p>
+          <p
+            id="typing-sentence"
+            class="text-base font-medium text-[rgb(var(--color-text-primary))] mb-3 p-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
           >
-            {text.again}
-          </button>
-        </div>
+            {text.sentence}
+          </p>
+          <div class="flex flex-wrap gap-3 items-center">
+            <input
+              type="text"
+              id="typing-input"
+              placeholder={text.placeholder}
+              class="flex-1 min-w-[180px] px-4 py-2.5 rounded-xl border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none text-sm"
+              disabled
+            />
+            <button
+              type="button"
+              id="typing-start"
+              class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold text-sm hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+            >
+              {text.start}
+            </button>
+          </div>
+          <div id="typing-result" class="hidden mt-4 p-3 rounded-xl bg-primary-500/10 border border-primary-500/30">
+            <p class="font-semibold text-primary-600 dark:text-primary-400 text-sm">
+              🎉 {text.yourTime}: <span id="typing-time">0</span> {text.seconds}
+            </p>
+            <button type="button" id="typing-again" class="mt-2 text-sm text-primary-500 hover:underline focus-visible:ring-2 focus-visible:ring-primary-500 rounded">
+              {text.again}
+            </button>
+          </div>
+        </article>
       </div>
     </div>
   </section>
