@@ -292,6 +292,7 @@ const content = timelineData[lang as Lang] || timelineData['en-GB'];
   <!-- Hero -->
   <section class="relative py-20 md:py-28 overflow-hidden">
     <div class="absolute inset-0 bg-mesh-gradient opacity-50" aria-hidden="true"></div>
+    <div class="aurora" aria-hidden="true"></div>
     <div class="absolute inset-0 opacity-80" style="background: var(--hero-spotlight);" aria-hidden="true"></div>
 
     <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-5xl">
@@ -309,16 +310,30 @@ const content = timelineData[lang as Lang] || timelineData['en-GB'];
       </header>
 
       <!-- Timeline -->
-      <ol class="relative" aria-label={content.headerTitle}>
+      <ol class="relative" id="timeline-ol" aria-label={content.headerTitle}>
         <!-- Central vertical line (desktop only) -->
         <div
           class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-500/10 via-primary-500/40 to-primary-500/10"
+          aria-hidden="true"
+        ></div>
+        <!-- Scroll progress overlay (desktop) -->
+        <div
+          class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 w-[3px] rounded-full bg-gradient-to-b from-primary-500 via-accent-500 to-primary-500 origin-top"
+          id="timeline-progress"
+          style="height: 0%; transition: height 0.15s ease-out;"
           aria-hidden="true"
         ></div>
 
         <!-- Left gutter line (mobile) -->
         <div
           class="md:hidden absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary-500/10 via-primary-500/40 to-primary-500/10"
+          aria-hidden="true"
+        ></div>
+        <!-- Scroll progress overlay (mobile) -->
+        <div
+          class="md:hidden absolute left-6 top-0 w-[3px] rounded-full bg-gradient-to-b from-primary-500 via-accent-500 to-primary-500 origin-top -translate-x-[1px]"
+          id="timeline-progress-mobile"
+          style="height: 0%; transition: height 0.15s ease-out;"
           aria-hidden="true"
         ></div>
 
@@ -413,3 +428,27 @@ const content = timelineData[lang as Lang] || timelineData['en-GB'];
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  (function () {
+    const ol = document.getElementById('timeline-ol');
+    const bar = document.getElementById('timeline-progress');
+    const barMobile = document.getElementById('timeline-progress-mobile');
+    if (!ol) return;
+
+    function update() {
+      const rect = ol.getBoundingClientRect();
+      const olTop = rect.top + window.scrollY;
+      const olHeight = rect.height;
+      if (olHeight <= 0) return;
+
+      const scrolled = window.scrollY + window.innerHeight * 0.5 - olTop;
+      const pct = Math.max(0, Math.min(100, (scrolled / olHeight) * 100));
+      if (bar) bar.style.height = pct + '%';
+      if (barMobile) barMobile.style.height = pct + '%';
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>

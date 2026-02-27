@@ -121,6 +121,50 @@ const t: Record<Lang, Record<string, string>> = {
 
 const text = t[lang as Lang] || t['zh-CN'];
 
+const memoryText: Record<Lang, Record<string, string>> = {
+  'zh-CN': {
+    title: '记忆翻牌',
+    desc: '翻转卡片，找到所有配对的图案。尽量用最少的步数完成！',
+    moves: '步数',
+    matched: '已配对',
+    reset: '重新开始',
+    complete: '全部找到！',
+  },
+  'zh-TW': {
+    title: '記憶翻牌',
+    desc: '翻轉卡片，找到所有配對的圖案。盡量用最少的步數完成！',
+    moves: '步數',
+    matched: '已配對',
+    reset: '重新開始',
+    complete: '全部找到！',
+  },
+  'en-GB': {
+    title: 'Memory Match',
+    desc: 'Flip the cards and find all matching pairs. Try to do it in the fewest moves!',
+    moves: 'Moves',
+    matched: 'Matched',
+    reset: 'Play Again',
+    complete: 'All matched!',
+  },
+  fr: {
+    title: 'Jeu de mémoire',
+    desc: 'Retournez les cartes et trouvez les paires. Essayez en un minimum de coups !',
+    moves: 'Coups',
+    matched: 'Paires',
+    reset: 'Rejouer',
+    complete: 'Tout trouvé !',
+  },
+  ru: {
+    title: 'Найди пару',
+    desc: 'Переворачивайте карточки и находите пары. Постарайтесь сделать это за минимум ходов!',
+    moves: 'Ходы',
+    matched: 'Пары',
+    reset: 'Заново',
+    complete: 'Все найдено!',
+  },
+};
+const mem = memoryText[lang as Lang] || memoryText['en-GB'];
+
 // 随机一言数据（中英混合，前端随机取）
 const quotes = [
   {
@@ -314,6 +358,39 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
           </div>
         </article>
       </div>
+
+      <!-- Memory Match Game -->
+      <div class="max-w-5xl mx-auto mt-6">
+        <article class="glass-card p-6 md:p-8 rounded-2xl reveal border-t-4 border-t-green-500">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">🃏</span>
+            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{mem.title}</h2>
+          </div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+            {mem.desc}
+          </p>
+          <div class="flex items-center gap-6 mb-4 text-sm font-medium">
+            <span class="text-[rgb(var(--color-text-secondary))]">{mem.moves}: <span id="mem-moves" class="text-primary-500 font-bold">0</span></span>
+            <span class="text-[rgb(var(--color-text-secondary))]">{mem.matched}: <span id="mem-matched" class="text-green-500 font-bold">0</span>/6</span>
+          </div>
+          <div id="mem-board" class="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-4" role="group" aria-label={mem.title}>
+            <!-- Cards inserted by JS -->
+          </div>
+          <div id="mem-complete" class="hidden text-center py-4">
+            <p class="text-lg font-bold text-green-500 mb-2">🎉 {mem.complete}</p>
+          </div>
+          <button
+            type="button"
+            id="mem-reset"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500/15 hover:bg-green-500/25 text-green-600 dark:text-green-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            {mem.reset}
+          </button>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -374,4 +451,171 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
       });
     })();
   </script>
+
+  <!-- Memory Match Game Script -->
+  <script is:inline>
+    (function () {
+      var board = document.getElementById('mem-board');
+      var movesEl = document.getElementById('mem-moves');
+      var matchedEl = document.getElementById('mem-matched');
+      var completeEl = document.getElementById('mem-complete');
+      var resetBtn = document.getElementById('mem-reset');
+      if (!board) return;
+
+      var emojis = ['🌸', '🌊', '🏔️', '🌙', '🔥', '🍃'];
+      var cards = [];
+      var flipped = [];
+      var matched = 0;
+      var moves = 0;
+      var locked = false;
+
+      function shuffle(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+        }
+        return arr;
+      }
+
+      function createCard(emoji, idx) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'mem-card';
+        btn.setAttribute('data-emoji', emoji);
+        btn.setAttribute('data-index', idx);
+        btn.setAttribute('aria-label', 'Card ' + (idx + 1));
+        btn.innerHTML = '<span class="mem-card-back">?</span><span class="mem-card-front">' + emoji + '</span>';
+        btn.addEventListener('click', function () { flipCard(btn); });
+        return btn;
+      }
+
+      function init() {
+        board.innerHTML = '';
+        cards = [];
+        flipped = [];
+        matched = 0;
+        moves = 0;
+        locked = false;
+        if (movesEl) movesEl.textContent = '0';
+        if (matchedEl) matchedEl.textContent = '0';
+        if (completeEl) completeEl.classList.add('hidden');
+
+        var deck = shuffle(emojis.concat(emojis));
+        for (var i = 0; i < deck.length; i++) {
+          var card = createCard(deck[i], i);
+          cards.push(card);
+          board.appendChild(card);
+        }
+      }
+
+      function flipCard(btn) {
+        if (locked) return;
+        if (btn.classList.contains('flipped') || btn.classList.contains('mem-matched')) return;
+        if (flipped.length >= 2) return;
+
+        btn.classList.add('flipped');
+        flipped.push(btn);
+
+        if (flipped.length === 2) {
+          moves++;
+          if (movesEl) movesEl.textContent = moves;
+          locked = true;
+
+          var a = flipped[0].getAttribute('data-emoji');
+          var b = flipped[1].getAttribute('data-emoji');
+
+          if (a === b) {
+            flipped[0].classList.add('mem-matched');
+            flipped[1].classList.add('mem-matched');
+            matched++;
+            if (matchedEl) matchedEl.textContent = matched;
+            flipped = [];
+            locked = false;
+
+            if (matched === emojis.length) {
+              setTimeout(function () {
+                if (completeEl) completeEl.classList.remove('hidden');
+              }, 400);
+            }
+          } else {
+            setTimeout(function () {
+              flipped[0].classList.remove('flipped');
+              flipped[1].classList.remove('flipped');
+              flipped = [];
+              locked = false;
+            }, 800);
+          }
+        }
+      }
+
+      resetBtn?.addEventListener('click', init);
+      init();
+    })();
+  </script>
 </BaseLayout>
+
+<style>
+  .mem-card {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    perspective: 600px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    outline: none;
+  }
+
+  .mem-card:focus-visible {
+    outline: 2px solid rgb(14 165 233);
+    outline-offset: 2px;
+    border-radius: 0.75rem;
+  }
+
+  .mem-card-back,
+  .mem-card-front {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    backface-visibility: hidden;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .mem-card-back {
+    background: linear-gradient(135deg, rgb(14 165 233 / 0.15), rgb(217 70 239 / 0.15));
+    border: 1px solid var(--glass-border);
+    color: rgb(var(--color-text-tertiary));
+    transform: rotateY(0deg);
+  }
+
+  .mem-card-front {
+    background: rgb(var(--color-bg-secondary));
+    border: 2px solid rgb(14 165 233 / 0.3);
+    transform: rotateY(180deg);
+  }
+
+  .mem-card.flipped .mem-card-back,
+  .mem-card.mem-matched .mem-card-back {
+    transform: rotateY(-180deg);
+  }
+
+  .mem-card.flipped .mem-card-front,
+  .mem-card.mem-matched .mem-card-front {
+    transform: rotateY(0deg);
+  }
+
+  .mem-card.mem-matched {
+    pointer-events: none;
+  }
+
+  .mem-card.mem-matched .mem-card-front {
+    border-color: rgb(34 197 94 / 0.5);
+    background: rgb(34 197 94 / 0.08);
+  }
+</style>

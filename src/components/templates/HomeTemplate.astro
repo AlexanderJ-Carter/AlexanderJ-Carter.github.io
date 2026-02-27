@@ -317,6 +317,7 @@ function getLangPath(path: string): string {
   >
     <!-- Animated Mesh Gradient + Spotlight -->
     <div class="absolute inset-0 bg-mesh-gradient"></div>
+    <div class="aurora" aria-hidden="true"></div>
     <div
       class="absolute inset-0 pointer-events-none opacity-100"
       style="background: var(--hero-spotlight);"
@@ -347,6 +348,20 @@ function getLangPath(path: string): string {
       <div class="particle" style="left: 20%; top: 70%; animation-delay: 1s;">
       </div>
       <div class="particle" style="left: 90%; top: 60%; animation-delay: 3s;">
+      </div>
+    </div>
+
+    <!-- Floating Tech Stack Orbit -->
+    <div class="tech-orbit hidden lg:block" aria-hidden="true">
+      <div class="orbit-ring orbit-ring-1">
+        <span class="orbit-icon" style="--angle: 0deg; --delay: 0s;">C++</span>
+        <span class="orbit-icon" style="--angle: 120deg; --delay: -4s;">Py</span>
+        <span class="orbit-icon" style="--angle: 240deg; --delay: -8s;">JS</span>
+      </div>
+      <div class="orbit-ring orbit-ring-2">
+        <span class="orbit-icon" style="--angle: 60deg; --delay: -2s;">Astro</span>
+        <span class="orbit-icon" style="--angle: 180deg; --delay: -6s;">CSS</span>
+        <span class="orbit-icon" style="--angle: 300deg; --delay: -10s;">Git</span>
       </div>
     </div>
 
@@ -595,3 +610,82 @@ function getLangPath(path: string): string {
   <!-- Poem History Section -->
   <PoemHistory lang={lang} />
 </BaseLayout>
+
+<style>
+  /* Tech Stack Orbit */
+  .tech-orbit {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .orbit-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px dashed rgba(14, 165, 233, 0.12);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .orbit-ring-1 {
+    width: min(700px, 90vw);
+    height: min(700px, 90vw);
+    animation: orbit-spin 30s linear infinite;
+  }
+
+  .orbit-ring-2 {
+    width: min(500px, 65vw);
+    height: min(500px, 65vw);
+    animation: orbit-spin 24s linear infinite reverse;
+  }
+
+  .orbit-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: rgb(var(--color-text-tertiary));
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.06);
+    /* Position on the ring using angle custom property */
+    transform: rotate(var(--angle)) translateX(calc(min(350px, 45vw))) rotate(calc(-1 * var(--angle)));
+    animation: orbit-counter-spin 30s linear infinite;
+    animation-delay: var(--delay);
+  }
+
+  .orbit-ring-2 .orbit-icon {
+    transform: rotate(var(--angle)) translateX(calc(min(250px, 32.5vw))) rotate(calc(-1 * var(--angle)));
+    animation-direction: reverse;
+    animation-duration: 24s;
+  }
+
+  @keyframes orbit-spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @keyframes orbit-counter-spin {
+    from { transform: rotate(var(--angle)) translateX(calc(min(350px, 45vw))) rotate(calc(-1 * var(--angle) - 0deg)); }
+    to   { transform: rotate(var(--angle)) translateX(calc(min(350px, 45vw))) rotate(calc(-1 * var(--angle) - 360deg)); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-ring,
+    .orbit-icon {
+      animation: none !important;
+    }
+  }
+</style>
