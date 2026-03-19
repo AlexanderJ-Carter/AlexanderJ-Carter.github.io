@@ -28,8 +28,34 @@ jobs:
       - name: Type checking
         run: npx astro check
 
+      - name: Detect changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+        with:
+          files: |
+            **/*.astro
+            **/*.css
+            **/*.js
+            **/*.mjs
+            **/*.ts
+            **/*.json
+            **/*.md
+            **/*.yml
+            **/*.yaml
+
       - name: Lint with Prettier
-        run: npx prettier --check .
+        if: steps.changed-files.outputs.any_changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          files="${{ steps.changed-files.outputs.all_changed_files }}"
+          echo "Checking files with Prettier:"
+          printf '%s\n' $files
+          npx prettier --check $files
+
+      - name: Skip Prettier when no relevant changes
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: echo "No files requiring Prettier check in this run."
 
       - name: Check build
         run: npm run build
