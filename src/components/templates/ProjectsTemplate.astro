@@ -8,12 +8,12 @@ type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 const t: Record<Lang, Record<string, string>> = {
   'zh-CN': {
     title: '个人项目',
-    subtitle: '我构建的作品与工具',
+    subtitle: '生活向的小项目与站点页面',
     badge: '🛠 Projects',
-    intro: '这里展示了一些我正在或曾经构建的项目——从 Web 工具到硬件设计，兴趣驱动，持续迭代。',
+    intro: '这里是偏生活化、好用导向的小项目：记录、工具、页面体验，持续慢慢打磨。',
     filterAll: '全部',
     filterWeb: 'Web',
-    filterHardware: '硬件',
+    filterHardware: '生活',
     filterTools: '工具',
     statusDone: '已完成',
     statusWip: '进行中',
@@ -23,12 +23,12 @@ const t: Record<Lang, Record<string, string>> = {
   },
   'zh-TW': {
     title: '個人專案',
-    subtitle: '我構建的作品與工具',
+    subtitle: '生活向的小專案與站點頁面',
     badge: '🛠 Projects',
-    intro: '這裡展示了一些我正在或曾經構建的專案——從 Web 工具到硬體設計，興趣驅動，持續迭代。',
+    intro: '這裡是偏生活化、好用導向的小專案：記錄、工具、頁面體驗，持續慢慢打磨。',
     filterAll: '全部',
     filterWeb: 'Web',
-    filterHardware: '硬體',
+    filterHardware: '生活',
     filterTools: '工具',
     statusDone: '已完成',
     statusWip: '進行中',
@@ -38,12 +38,12 @@ const t: Record<Lang, Record<string, string>> = {
   },
   'en-GB': {
     title: 'Projects',
-    subtitle: 'Things I\'ve built',
+    subtitle: 'Lifestyle pages and small projects',
     badge: '🛠 Projects',
-    intro: 'A selection of projects I\'ve built or am currently working on — from web tools to hardware design, driven by curiosity and iteration.',
+    intro: 'A collection of practical, lifestyle-focused pages and small projects, built for daily use and better UX.',
     filterAll: 'All',
     filterWeb: 'Web',
-    filterHardware: 'Hardware',
+    filterHardware: 'Lifestyle',
     filterTools: 'Tools',
     statusDone: 'Completed',
     statusWip: 'In Progress',
@@ -53,12 +53,12 @@ const t: Record<Lang, Record<string, string>> = {
   },
   fr: {
     title: 'Projets',
-    subtitle: 'Ce que j\'ai construit',
+    subtitle: 'Pages lifestyle et petits projets',
     badge: '🛠 Projets',
-    intro: "Une sélection de projets que j'ai construits ou sur lesquels je travaille — des outils web à la conception matérielle, guidés par la curiosité.",
+    intro: 'Une collection de pages pratiques et de petits projets orientés usage quotidien.',
     filterAll: 'Tous',
     filterWeb: 'Web',
-    filterHardware: 'Matériel',
+    filterHardware: 'Lifestyle',
     filterTools: 'Outils',
     statusDone: 'Terminé',
     statusWip: 'En cours',
@@ -68,12 +68,12 @@ const t: Record<Lang, Record<string, string>> = {
   },
   ru: {
     title: 'Проекты',
-    subtitle: 'То, что я создал',
+    subtitle: 'Лайфстайл-страницы и небольшие проекты',
     badge: '🛠 Проекты',
-    intro: 'Подборка проектов, которые я создал или над которыми работаю — от веб-инструментов до аппаратного дизайна.',
+    intro: 'Подборка практичных, жизненных страниц и небольших проектов для повседневного использования.',
     filterAll: 'Все',
     filterWeb: 'Web',
-    filterHardware: 'Железо',
+    filterHardware: 'Lifestyle',
     filterTools: 'Инструменты',
     statusDone: 'Завершён',
     statusWip: 'В работе',
@@ -95,22 +95,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: 'https://alexander.xin',
     },
     {
-      title: '世界时间 API',
-      desc: '基于 Cloudflare Workers 的世界时间查询 API，低延迟，免费使用，支持时区名称与 UTC 偏移。',
-      tags: ['Cloudflare Workers', 'JavaScript', 'API'],
+      title: 'Now 实时面板',
+      desc: '展示本地时间、UTC、时间戳和常用入口，作为访客友好的即时信息页。',
+      tags: ['Time', 'UX', 'Now'],
       category: 'tools',
       status: 'done',
       github: null,
-      demo: '/time',
-    },
-    {
-      title: 'FPGA 信号处理器',
-      desc: '在 FPGA 开发板上实现的数字信号处理模块，使用 Verilog 编写，包含 FIR 滤波器与简单 FSM 控制器。',
-      tags: ['Verilog', 'FPGA', 'DSP'],
-      category: 'hardware',
-      status: 'done',
-      github: null,
-      demo: null,
+      demo: '/now',
     },
     {
       title: 'QR 码生成器',
@@ -122,13 +113,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
-      title: '摄影后期脚本',
-      desc: '一套 Python 脚本，用于批量处理 RAW 文件、重命名、生成 Web 端缩略图，集成 Exif 信息提取。',
-      tags: ['Python', 'Pillow', 'ExifRead'],
-      category: 'tools',
+      title: '阅读清单页面',
+      desc: '整理长期书单、正在读和推荐阅读，页面更偏轻量和可持续更新。',
+      tags: ['Reading', 'List', 'Lifestyle'],
+      category: 'web',
       status: 'wip',
       github: null,
-      demo: null,
+      demo: '/reading',
     },
     {
       title: '汇率转换小工具',
@@ -151,22 +142,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: 'https://alexander.xin',
     },
     {
-      title: '世界時間 API',
-      desc: '基於 Cloudflare Workers 的世界時間查詢 API，低延遲，免費使用，支援時區名稱與 UTC 偏移。',
-      tags: ['Cloudflare Workers', 'JavaScript', 'API'],
+      title: 'Now 即時面板',
+      desc: '展示本地時間、UTC、時間戳和常用入口，作為訪客友好的即時資訊頁。',
+      tags: ['Time', 'UX', 'Now'],
       category: 'tools',
       status: 'done',
       github: null,
-      demo: '/time',
-    },
-    {
-      title: 'FPGA 信號處理器',
-      desc: '在 FPGA 開發板上實現的數位信號處理模組，使用 Verilog 編寫，包含 FIR 濾波器與簡單 FSM 控制器。',
-      tags: ['Verilog', 'FPGA', 'DSP'],
-      category: 'hardware',
-      status: 'done',
-      github: null,
-      demo: null,
+      demo: '/now',
     },
     {
       title: 'QR 碼生成器',
@@ -178,13 +160,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
-      title: '攝影後製腳本',
-      desc: '一套 Python 腳本，用於批次處理 RAW 檔案、重新命名、生成 Web 端縮圖，整合 Exif 資訊提取。',
-      tags: ['Python', 'Pillow', 'ExifRead'],
-      category: 'tools',
+      title: '閱讀清單頁面',
+      desc: '整理長期書單、正在讀和推薦閱讀，頁面更偏輕量和可持續更新。',
+      tags: ['Reading', 'List', 'Lifestyle'],
+      category: 'web',
       status: 'wip',
       github: null,
-      demo: null,
+      demo: '/reading',
     },
     {
       title: '匯率換算小工具',
@@ -207,22 +189,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: 'https://alexander.xin',
     },
     {
-      title: 'World Time API',
-      desc: 'A low-latency world time API built on Cloudflare Workers, supporting timezone names and UTC offsets.',
-      tags: ['Cloudflare Workers', 'JavaScript', 'API'],
+      title: 'Now Live Panel',
+      desc: 'A visitor-first page with local time, UTC, timestamp and practical quick links.',
+      tags: ['Time', 'UX', 'Now'],
       category: 'tools',
       status: 'done',
       github: null,
-      demo: '/time',
-    },
-    {
-      title: 'FPGA Signal Processor',
-      desc: 'A digital signal processing module implemented on an FPGA development board, written in Verilog — includes a FIR filter and a simple FSM controller.',
-      tags: ['Verilog', 'FPGA', 'DSP'],
-      category: 'hardware',
-      status: 'done',
-      github: null,
-      demo: null,
+      demo: '/now',
     },
     {
       title: 'QR Code Generator',
@@ -234,13 +207,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
-      title: 'Photography Post-Processing Scripts',
-      desc: 'A set of Python scripts for batch-processing RAW files, renaming, generating web thumbnails, and extracting Exif metadata.',
-      tags: ['Python', 'Pillow', 'ExifRead'],
-      category: 'tools',
+      title: 'Reading List Page',
+      desc: 'A lightweight page for long-term reading lists, current picks and curated recommendations.',
+      tags: ['Reading', 'List', 'Lifestyle'],
+      category: 'web',
       status: 'wip',
       github: null,
-      demo: null,
+      demo: '/reading',
     },
     {
       title: 'Currency Converter',
@@ -263,22 +236,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: 'https://alexander.xin',
     },
     {
-      title: 'API Heure Mondiale',
-      desc: 'Une API de temps mondiale faible latence sur Cloudflare Workers, supportant les noms de fuseaux horaires et les décalages UTC.',
-      tags: ['Cloudflare Workers', 'JavaScript', 'API'],
+      title: 'Panneau Now',
+      desc: 'Une page orientée visiteur avec heure locale, UTC, timestamp et accès rapides.',
+      tags: ['Time', 'UX', 'Now'],
       category: 'tools',
       status: 'done',
       github: null,
-      demo: '/time',
-    },
-    {
-      title: 'Processeur de signal FPGA',
-      desc: 'Un module de traitement de signal numérique sur FPGA, écrit en Verilog — inclut un filtre FIR et un contrôleur FSM simple.',
-      tags: ['Verilog', 'FPGA', 'DSP'],
-      category: 'hardware',
-      status: 'done',
-      github: null,
-      demo: null,
+      demo: '/now',
     },
     {
       title: 'Générateur de QR Code',
@@ -310,22 +274,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: 'https://alexander.xin',
     },
     {
-      title: 'API мирового времени',
-      desc: 'Низкозадержечный API мирового времени на Cloudflare Workers, поддерживает имена временных зон и смещения UTC.',
-      tags: ['Cloudflare Workers', 'JavaScript', 'API'],
+      title: 'Now живая панель',
+      desc: 'Страница для посетителей с локальным временем, UTC, timestamp и быстрыми ссылками.',
+      tags: ['Time', 'UX', 'Now'],
       category: 'tools',
       status: 'done',
       github: null,
-      demo: '/time',
-    },
-    {
-      title: 'Обработчик сигналов на FPGA',
-      desc: 'Модуль цифровой обработки сигналов на FPGA, написанный на Verilog — включает FIR-фильтр и простой FSM-контроллер.',
-      tags: ['Verilog', 'FPGA', 'DSP'],
-      category: 'hardware',
-      status: 'done',
-      github: null,
-      demo: null,
+      demo: '/now',
     },
     {
       title: 'Генератор QR-кодов',
@@ -381,7 +336,6 @@ function getLangPath(path: string): string {
         {[
           { key: 'all', label: text.filterAll },
           { key: 'web', label: text.filterWeb },
-          { key: 'hardware', label: text.filterHardware },
           { key: 'tools', label: text.filterTools },
         ].map(({ key, label }) => (
           <button
@@ -472,6 +426,27 @@ function getLangPath(path: string): string {
             )}
           </article>
         ))}
+      </div>
+
+      <div class="glass-card p-6 rounded-2xl mb-10">
+        <h2 class="text-xl font-heading font-bold mb-3 text-[rgb(var(--color-text-primary))]">
+          {lang === 'zh-CN' ? '有趣项目推荐' : lang === 'zh-TW' ? '有趣專案推薦' : lang === 'fr' ? 'Projets amusants' : lang === 'ru' ? 'Интересные проекты' : 'Fun Project Picks'}
+        </h2>
+        <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+          {lang === 'zh-CN' ? '一些值得体验的交互项目，用来找灵感和炫技。' : lang === 'zh-TW' ? '一些值得體驗的互動專案，用來找靈感和炫技。' : lang === 'fr' ? 'Quelques projets interactifs inspirants.' : lang === 'ru' ? 'Несколько вдохновляющих интерактивных проектов.' : 'A few inspiring interactive projects to explore.'}
+        </p>
+        <div class="grid md:grid-cols-3 gap-3">
+          {[
+            { name: 'SceneryStack', href: 'https://scenerystack.org/', desc: 'Accessible interactive framework' },
+            { name: 'Excalidraw', href: 'https://github.com/excalidraw/excalidraw', desc: 'Whiteboard with great UX' },
+            { name: 'Browser Brawl', href: 'https://github.com/RichardHruby/browser-brawl', desc: 'Realtime AI-vs-AI browser arena' },
+          ].map((item) => (
+            <a href={item.href} target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] hover:border-primary-500/50 transition-colors">
+              <div class="font-semibold text-[rgb(var(--color-text-primary))]">{item.name}</div>
+              <div class="text-xs mt-1 text-[rgb(var(--color-text-tertiary))]">{item.desc}</div>
+            </a>
+          ))}
+        </div>
       </div>
 
       <!-- Back link -->

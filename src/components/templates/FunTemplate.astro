@@ -26,6 +26,13 @@ const t: Record<Lang, Record<string, string>> = {
     seconds: '秒',
     placeholder: '在此输入...',
     sentence: '用镜头记录世界，用代码创造未来。',
+    taskTitle: '随机任务卡',
+    taskDesc: '给自己一个 5~15 分钟的小挑战，立刻开做。',
+    taskBtn: '抽一个任务',
+    breathingTitle: '呼吸节奏器',
+    breathingDesc: '跟随节奏呼吸：吸气 4 秒，停顿 4 秒，呼气 4 秒，停顿 4 秒。',
+    breathingStart: '开始呼吸',
+    breathingStop: '停止',
   },
   'zh-TW': {
     title: '彩蛋',
@@ -48,6 +55,13 @@ const t: Record<Lang, Record<string, string>> = {
     seconds: '秒',
     placeholder: '在此輸入...',
     sentence: '用鏡頭記錄世界，用代碼創造未來。',
+    taskTitle: '隨機任務卡',
+    taskDesc: '給自己一個 5~15 分鐘的小挑戰，立刻開始。',
+    taskBtn: '抽一個任務',
+    breathingTitle: '呼吸節奏器',
+    breathingDesc: '跟隨節奏呼吸：吸氣 4 秒，停頓 4 秒，呼氣 4 秒，停頓 4 秒。',
+    breathingStart: '開始呼吸',
+    breathingStop: '停止',
   },
   'en-GB': {
     title: 'Easter Eggs',
@@ -71,6 +85,13 @@ const t: Record<Lang, Record<string, string>> = {
     seconds: 's',
     placeholder: 'Type here...',
     sentence: 'Capture the world with a lens, create the future with code.',
+    taskTitle: 'Random Task Card',
+    taskDesc: 'Pick a 5-15 minute mini challenge and do it now.',
+    taskBtn: 'Draw a task',
+    breathingTitle: 'Breathing Rhythm',
+    breathingDesc: 'Follow the rhythm: inhale 4s, hold 4s, exhale 4s, hold 4s.',
+    breathingStart: 'Start breathing',
+    breathingStop: 'Stop',
   },
   fr: {
     title: 'Easter Eggs',
@@ -94,6 +115,13 @@ const t: Record<Lang, Record<string, string>> = {
     placeholder: 'Tapez ici...',
     sentence:
       'Capturez le monde avec un objectif, créez le futur avec le code.',
+    taskTitle: 'Carte de mission aléatoire',
+    taskDesc: 'Choisissez un mini défi de 5 à 15 minutes et lancez-vous.',
+    taskBtn: 'Tirer une mission',
+    breathingTitle: 'Rythme respiratoire',
+    breathingDesc: 'Suivez le rythme : inspirez 4s, retenez 4s, expirez 4s, retenez 4s.',
+    breathingStart: 'Démarrer',
+    breathingStop: 'Arrêter',
   },
   ru: {
     title: 'Пасхалки',
@@ -116,6 +144,13 @@ const t: Record<Lang, Record<string, string>> = {
     seconds: 'с',
     placeholder: 'Введите здесь...',
     sentence: 'Запечатлей мир объективом, создай будущее кодом.',
+    taskTitle: 'Случайная задача',
+    taskDesc: 'Выберите мини-задачу на 5-15 минут и начните сразу.',
+    taskBtn: 'Выбрать задачу',
+    breathingTitle: 'Ритм дыхания',
+    breathingDesc: 'Следуйте ритму: вдох 4с, пауза 4с, выдох 4с, пауза 4с.',
+    breathingStart: 'Начать',
+    breathingStop: 'Стоп',
   },
 };
 
@@ -164,6 +199,13 @@ const memoryText: Record<Lang, Record<string, string>> = {
   },
 };
 const mem = memoryText[lang as Lang] || memoryText['en-GB'];
+const microTasks: Record<Lang, string[]> = {
+  'zh-CN': ['整理桌面 5 分钟', '写下 3 条今日目标', '喝一杯水并站立拉伸', '删除 5 个无用文件', '阅读 1 页书并记一句话'],
+  'zh-TW': ['整理桌面 5 分鐘', '寫下 3 條今日目標', '喝一杯水並站立伸展', '刪除 5 個無用檔案', '閱讀 1 頁書並記一句話'],
+  'en-GB': ['Tidy your desk for 5 minutes', 'Write 3 goals for today', 'Drink water and do a quick stretch', 'Delete 5 useless files', 'Read one page and keep one quote'],
+  fr: ['Rangez votre bureau 5 minutes', "Notez 3 objectifs d'aujourd'hui", 'Buvez de l’eau et étirez-vous', 'Supprimez 5 fichiers inutiles', 'Lisez une page et retenez une phrase'],
+  ru: ['Уберите стол 5 минут', 'Запишите 3 цели на сегодня', 'Выпейте воду и потянитесь', 'Удалите 5 ненужных файлов', 'Прочитайте 1 страницу и запишите мысль'],
+};
 
 // 随机一言数据（中英混合，前端随机取）
 const quotes = [
@@ -391,10 +433,50 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
           </button>
         </article>
       </div>
+
+      <!-- Extra mini widgets -->
+      <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-6">
+        <article class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-cyan-500">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">🎯</span>
+            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.taskTitle}</h2>
+          </div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">{text.taskDesc}</p>
+          <div id="task-result" class="p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] min-h-[72px] text-[rgb(var(--color-text-primary))] font-medium mb-4"></div>
+          <button
+            type="button"
+            id="task-draw"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-600 dark:text-cyan-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+          >
+            {text.taskBtn}
+          </button>
+        </article>
+
+        <article class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-violet-500">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">🫁</span>
+            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.breathingTitle}</h2>
+          </div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">{text.breathingDesc}</p>
+          <div class="flex items-center gap-5">
+            <div id="breath-circle" class="breath-circle">
+              <span id="breath-phase">Ready</span>
+            </div>
+            <div class="flex flex-col gap-2">
+              <button type="button" id="breath-start" class="px-4 py-2 rounded-lg bg-violet-500/15 hover:bg-violet-500/25 text-violet-600 dark:text-violet-400 font-medium">
+                {text.breathingStart}
+              </button>
+              <button type="button" id="breath-stop" class="px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]">
+                {text.breathingStop}
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
-  <script define:vars={{ quotes: JSON.stringify(quotes), lang }} is:inline>
+  <script define:vars={{ quotes: JSON.stringify(quotes), lang, microTasks: JSON.stringify(microTasks[lang as Lang] || microTasks['en-GB']) }} is:inline>
     (function () {
       const quoteText = document.getElementById('quote-text');
       const quoteLang = document.getElementById('quote-lang');
@@ -449,6 +531,57 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
       againBtn?.addEventListener('click', () => {
         startBtn?.click();
       });
+
+      // Random task card
+      const tasks = typeof microTasks === 'string' ? JSON.parse(microTasks) : microTasks;
+      const taskResult = document.getElementById('task-result');
+      const taskDraw = document.getElementById('task-draw');
+      function drawTask() {
+        if (!Array.isArray(tasks) || tasks.length === 0 || !taskResult) return;
+        const i = Math.floor(Math.random() * tasks.length);
+        taskResult.textContent = tasks[i];
+      }
+      drawTask();
+      taskDraw?.addEventListener('click', drawTask);
+
+      // Breathing rhythm
+      const circle = document.getElementById('breath-circle');
+      const phaseEl = document.getElementById('breath-phase');
+      const startBreath = document.getElementById('breath-start');
+      const stopBreath = document.getElementById('breath-stop');
+      const phases = [
+        { key: 'inhale', zh: '吸气 4s', en: 'Inhale 4s' },
+        { key: 'hold', zh: '停顿 4s', en: 'Hold 4s' },
+        { key: 'exhale', zh: '呼气 4s', en: 'Exhale 4s' },
+        { key: 'hold2', zh: '停顿 4s', en: 'Hold 4s' }
+      ];
+      let timer = null;
+      let idx = 0;
+      function setPhase() {
+        if (!phaseEl || !circle) return;
+        const isZh = lang === 'zh-CN' || lang === 'zh-TW';
+        const p = phases[idx];
+        phaseEl.textContent = isZh ? p.zh : p.en;
+        circle.classList.remove('inhale', 'hold', 'exhale');
+        if (p.key === 'inhale') circle.classList.add('inhale');
+        if (p.key === 'exhale') circle.classList.add('exhale');
+        if (p.key === 'hold' || p.key === 'hold2') circle.classList.add('hold');
+        idx = (idx + 1) % phases.length;
+      }
+      function stopRhythm() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+        if (phaseEl) phaseEl.textContent = 'Ready';
+        circle?.classList.remove('inhale', 'hold', 'exhale');
+      }
+      startBreath?.addEventListener('click', () => {
+        if (timer) return;
+        setPhase();
+        timer = setInterval(setPhase, 4000);
+      });
+      stopBreath?.addEventListener('click', stopRhythm);
     })();
   </script>
 
@@ -617,5 +750,43 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
   .mem-card.mem-matched .mem-card-front {
     border-color: rgb(34 197 94 / 0.5);
     background: rgb(34 197 94 / 0.08);
+  }
+
+  .breath-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(139 92 246 / 0.12);
+    border: 2px solid rgb(139 92 246 / 0.3);
+    color: rgb(var(--color-text-primary));
+    font-size: 0.78rem;
+    font-weight: 700;
+    transition: transform 1s ease, background-color 0.6s ease, border-color 0.6s ease;
+    text-align: center;
+    padding: 0.4rem;
+  }
+  .breath-circle.inhale {
+    transform: scale(1.18);
+    background: rgb(16 185 129 / 0.16);
+    border-color: rgb(16 185 129 / 0.45);
+  }
+  .breath-circle.exhale {
+    transform: scale(0.9);
+    background: rgb(59 130 246 / 0.16);
+    border-color: rgb(59 130 246 / 0.45);
+  }
+  .breath-circle.hold {
+    transform: scale(1.02);
+    background: rgb(139 92 246 / 0.16);
+    border-color: rgb(139 92 246 / 0.45);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .breath-circle {
+      transition: none;
+    }
   }
 </style>

@@ -1,5 +1,8 @@
 export {};
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const coarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
 // Intersection Observer for scroll-triggered animations
 const observerOptions: IntersectionObserverInit = {
   threshold: 0.1,
@@ -25,10 +28,14 @@ revealElements.forEach((el) => observer.observe(el));
 
 // Parallax effect on scroll
 let ticking = false;
+const parallaxElements =
+  document.querySelectorAll<HTMLElement>('.parallax-layer');
 
 function updateParallax(): void {
-  const parallaxElements =
-    document.querySelectorAll<HTMLElement>('.parallax-layer');
+  if (reducedMotion) {
+    ticking = false;
+    return;
+  }
   const scrolled = window.pageYOffset;
 
   parallaxElements.forEach((el) => {
@@ -50,28 +57,29 @@ function requestParallaxUpdate(): void {
 window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
 
 // 3D Card tilt effect
-const card3dElements = document.querySelectorAll<HTMLElement>('.card-3d');
+if (!reducedMotion && !coarsePointer) {
+  const card3dElements = document.querySelectorAll<HTMLElement>('.card-3d');
+  card3dElements.forEach((card) => {
+    card.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-card3dElements.forEach((card) => {
-  card.addEventListener('mousemove', (e: MouseEvent) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / 10;
+      const rotateY = (centerX - x) / 10;
 
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+    }, { passive: true });
 
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+    card.addEventListener('mouseleave', () => {
+      card.style.transform =
+        'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+    });
   });
-
-  card.addEventListener('mouseleave', () => {
-    card.style.transform =
-      'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-  });
-});
+}
 
 // Initialize animations on page load
 document.addEventListener('DOMContentLoaded', () => {

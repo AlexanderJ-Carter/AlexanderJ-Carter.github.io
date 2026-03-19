@@ -12,6 +12,8 @@ import PageLoader from '../components/PageLoader.astro';
 import QuickActions from '../components/QuickActions.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import Toast from '../components/Toast.astro';
+import KeyboardShortcuts from '../components/KeyboardShortcuts.astro';
+import SiteAssistant from '../components/SiteAssistant.astro';
 
 interface Props {
   title?: string;
@@ -143,35 +145,255 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
   <Toast />
   <QuickActions />
   <ReadingProgress />
-  
+  <KeyboardShortcuts lang={lang} />
+  <SiteAssistant />
+  <button
+    id="cyber-toggle"
+    type="button"
+    class="cyber-toggle"
+    aria-label={lang === 'zh-CN' ? '切换赛博模式' : 'Toggle cyber mode'}
+  >
+    ⚡
+  </button>
+
+  <div id="external-blog-modal" class="external-modal hidden" role="dialog" aria-modal="true" aria-label={lang === 'zh-CN' ? '外链跳转提示' : 'External link notice'}>
+    <div class="external-modal-backdrop" id="external-blog-backdrop"></div>
+    <div class="external-modal-card">
+      <h2>{lang === 'zh-CN' ? '即将离开本站' : lang === 'zh-TW' ? '即將離開本站' : lang === 'fr' ? 'Vous allez quitter ce site' : lang === 'ru' ? 'Вы переходите на внешний сайт' : 'You are leaving this site'}</h2>
+      <p>
+        {lang === 'zh-CN'
+          ? '你将跳转到博客站点。我们会附带来源参数并记录返回路径，方便你返回当前页面。'
+          : lang === 'zh-TW'
+            ? '你將跳轉到部落格站點。我們會附帶來源參數並記錄返回路徑，方便你返回當前頁面。'
+            : lang === 'fr'
+              ? 'Vous allez ouvrir le blog externe. Un paramètre de source et un chemin de retour seront ajoutés.'
+              : lang === 'ru'
+                ? 'Вы откроете внешний блог. Будут добавлены параметры источника и обратного перехода.'
+                : 'You are opening the external blog. Source tracking and return path will be included.'}
+      </p>
+      <label class="external-remember">
+        <input id="external-blog-remember" type="checkbox" />
+        <span>{lang === 'zh-CN' ? '7天内不再提示' : lang === 'zh-TW' ? '7天內不再提示' : lang === 'fr' ? 'Ne plus afficher pendant 7 jours' : lang === 'ru' ? 'Не показывать 7 дней' : 'Do not show again for 7 days'}</span>
+      </label>
+      <div class="external-modal-actions">
+        <button id="external-blog-cancel" type="button">
+          {lang === 'zh-CN' ? '取消' : lang === 'zh-TW' ? '取消' : lang === 'fr' ? 'Annuler' : lang === 'ru' ? 'Отмена' : 'Cancel'}
+        </button>
+        <a id="external-blog-go" href="https://blog.alexander.xin" rel="noopener noreferrer">
+          {lang === 'zh-CN' ? '继续前往博客' : lang === 'zh-TW' ? '繼續前往部落格' : lang === 'fr' ? 'Continuer vers le blog' : lang === 'ru' ? 'Перейти в блог' : 'Continue to blog'}
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Scroll Animations -->
   <script src="../scripts/scroll-animations.ts"></script>
 
   <!-- Konami Code Easter Egg -->
   <script is:inline>
     (function () {
-      const konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-      let index = 0;
-      document.addEventListener('keydown', function (e) {
-        index = e.key === konami[index] ? index + 1 : 0;
-        if (index === konami.length) {
-          index = 0;
-          for (let i = 0; i < 50; i++) {
-            setTimeout(function () {
-              const el = document.createElement('div');
-              el.textContent = ['🎉', '🎊', '✨', '⭐', '💫', '🌟'][Math.floor(Math.random() * 6)];
-              el.style.cssText = 'position:fixed;pointer-events:none;font-size:1.5rem;left:' + Math.random() * 100 + '%;top:' + Math.random() * 100 + '%;animation:konami-float 2.5s ease-out forwards;z-index:9999;';
-              document.body.appendChild(el);
-              setTimeout(function () { el.remove(); }, 2500);
-            }, i * 40);
+      const initKonami = function () {
+        const konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let index = 0;
+        document.addEventListener('keydown', function (e) {
+          index = e.key === konami[index] ? index + 1 : 0;
+          if (index === konami.length) {
+            index = 0;
+            for (let i = 0; i < 50; i++) {
+              setTimeout(function () {
+                const el = document.createElement('div');
+                el.textContent = ['🎉', '🎊', '✨', '⭐', '💫', '🌟'][Math.floor(Math.random() * 6)];
+                el.style.cssText = 'position:fixed;pointer-events:none;font-size:1.5rem;left:' + Math.random() * 100 + '%;top:' + Math.random() * 100 + '%;animation:konami-float 2.5s ease-out forwards;z-index:9999;';
+                document.body.appendChild(el);
+                setTimeout(function () { el.remove(); }, 2500);
+              }, i * 40);
+            }
+            const style = document.createElement('style');
+            style.textContent = '@keyframes konami-float{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(1.5)}}';
+            document.head.appendChild(style);
+            setTimeout(function () { style.remove(); }, 3000);
           }
-          const style = document.createElement('style');
-          style.textContent = '@keyframes konami-float{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(1.5)}}';
-          document.head.appendChild(style);
-          setTimeout(function () { style.remove(); }, 3000);
+        });
+      };
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(initKonami, { timeout: 2000 });
+      } else {
+        setTimeout(initKonami, 800);
+      }
+    })();
+  </script>
+
+  <script is:inline>
+    (function () {
+      const modal = document.getElementById('external-blog-modal');
+      const backdrop = document.getElementById('external-blog-backdrop');
+      const cancel = document.getElementById('external-blog-cancel');
+      const go = document.getElementById('external-blog-go');
+      const remember = document.getElementById('external-blog-remember');
+      if (!modal || !go) return;
+      const skipKey = 'skip_blog_notice_until';
+      function open(url) {
+        go.setAttribute('href', url);
+        go.setAttribute('target', '_blank');
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      document.addEventListener('click', function (e) {
+        const target = e.target;
+        if (!(target instanceof Element)) return;
+        const link = target.closest('a[href*="blog.alexander.xin"]');
+        if (!link) return;
+        e.preventDefault();
+        const href = link.getAttribute('href') || 'https://blog.alexander.xin';
+        const u = new URL(href, window.location.origin);
+        u.searchParams.set('utm_source', 'alexander-main-site');
+        u.searchParams.set('utm_medium', 'referral');
+        u.searchParams.set('utm_campaign', 'site-navigation');
+        u.searchParams.set('from', window.location.pathname);
+        u.searchParams.set('return_url', window.location.href);
+        const until = Number(localStorage.getItem(skipKey) || 0);
+        if (until > Date.now()) {
+          window.open(u.toString(), '_blank', 'noopener');
+          return;
         }
+        open(u.toString());
+      });
+
+      go.addEventListener('click', () => {
+        if (remember instanceof HTMLInputElement && remember.checked) {
+          const sevenDays = 7 * 24 * 60 * 60 * 1000;
+          localStorage.setItem(skipKey, String(Date.now() + sevenDays));
+        }
+      });
+
+      cancel?.addEventListener('click', close);
+      backdrop?.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+      });
+    })();
+  </script>
+
+  <script is:inline>
+    (function () {
+      const key = 'cyber_mode_enabled';
+      const btn = document.getElementById('cyber-toggle');
+      const html = document.documentElement;
+      if (!btn) return;
+      try {
+        if (localStorage.getItem(key) === '1') html.classList.add('cyber-mode');
+      } catch (_) {}
+      btn.addEventListener('click', () => {
+        html.classList.toggle('cyber-mode');
+        try {
+          localStorage.setItem(key, html.classList.contains('cyber-mode') ? '1' : '0');
+        } catch (_) {}
       });
     })();
   </script>
 </body>
 </html>
+
+<style>
+  .external-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+  }
+  .external-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0.55);
+    backdrop-filter: blur(2px);
+  }
+  .external-modal-card {
+    position: relative;
+    width: min(32rem, calc(100vw - 2rem));
+    margin: 18vh auto 0;
+    border-radius: 1rem;
+    border: 1px solid rgb(var(--color-border));
+    background: rgb(var(--color-bg-secondary));
+    box-shadow: 0 20px 42px rgb(0 0 0 / 0.25);
+    padding: 1rem 1rem 0.95rem;
+  }
+  .external-modal-card h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: rgb(var(--color-text-primary));
+  }
+  .external-modal-card p {
+    margin: 0.6rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgb(var(--color-text-secondary));
+  }
+  .external-modal-actions {
+    margin-top: 0.95rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.6rem;
+  }
+  .external-modal-actions button,
+  .external-modal-actions a {
+    border-radius: 0.6rem;
+    border: 1px solid rgb(var(--color-border));
+    padding: 0.45rem 0.75rem;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: rgb(var(--color-text-primary));
+    background: rgb(var(--color-bg-primary));
+  }
+  .external-modal-actions a {
+    background: rgb(14 165 233 / 0.16);
+    border-color: rgb(14 165 233 / 0.35);
+    color: rgb(14 165 233);
+    font-weight: 600;
+  }
+  .external-remember {
+    margin-top: 0.75rem;
+    display: inline-flex;
+    gap: 0.45rem;
+    align-items: center;
+    font-size: 0.82rem;
+    color: rgb(var(--color-text-secondary));
+  }
+  .cyber-toggle {
+    position: fixed;
+    left: 1rem;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 5.3rem);
+    z-index: 41;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 9999px;
+    border: 1px solid rgb(6 182 212 / 0.45);
+    background: linear-gradient(135deg, rgb(6 182 212 / 0.3), rgb(168 85 247 / 0.35));
+    color: rgb(34 211 238);
+    box-shadow: 0 10px 25px rgb(34 211 238 / 0.25);
+    font-size: 1.1rem;
+  }
+  html.cyber-mode body {
+    background-image:
+      linear-gradient(rgb(6 182 212 / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(168 85 247 / 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  html.cyber-mode .gradient-text {
+    text-shadow: 0 0 18px rgb(34 211 238 / 0.35);
+    filter: saturate(1.15);
+  }
+  html.cyber-mode .glass-card {
+    border-color: rgb(6 182 212 / 0.35);
+    box-shadow: 0 0 0 1px rgb(6 182 212 / 0.08), 0 12px 32px rgb(2 132 199 / 0.14);
+  }
+  @media (max-width: 640px) {
+    .cyber-toggle {
+      left: 0.85rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 4.7rem);
+    }
+  }
+</style>

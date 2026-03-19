@@ -123,6 +123,54 @@ const mainNavItems: NavItem[] = [
                   ? 'Сюрпризы'
                   : 'Fun & surprises',
       },
+      {
+        href: getLangPath('/friends'),
+        label:
+          lang === 'zh-CN'
+            ? '友链'
+            : lang === 'zh-TW'
+              ? '友鏈'
+              : lang === 'fr'
+                ? 'Amis'
+                : lang === 'ru'
+                  ? 'Друзья'
+                  : 'Friends',
+        icon: '🔗',
+        desc:
+          lang === 'zh-CN'
+            ? '朋友的网站'
+            : lang === 'zh-TW'
+              ? '朋友的網站'
+              : lang === 'fr'
+                ? 'Sites amis'
+                : lang === 'ru'
+                  ? 'Сайты друзей'
+                  : "Friends' sites",
+      },
+      {
+        href: getLangPath('/reading'),
+        label:
+          lang === 'zh-CN'
+            ? '阅读'
+            : lang === 'zh-TW'
+              ? '閱讀'
+              : lang === 'fr'
+                ? 'Lecture'
+                : lang === 'ru'
+                  ? 'Чтение'
+                  : 'Reading',
+        icon: '📚',
+        desc:
+          lang === 'zh-CN'
+            ? '推荐书单'
+            : lang === 'zh-TW'
+              ? '推薦書單'
+              : lang === 'fr'
+                ? 'Livres recommandés'
+                : lang === 'ru'
+                  ? 'Рекомендуемые книги'
+                  : 'Recommended books',
+      },
     ],
   },
   {
@@ -296,6 +344,106 @@ const mainNavItems: NavItem[] = [
                 : lang === 'ru'
                   ? 'Ссылка в QR'
                   : 'URL to QR code',
+      },
+      {
+        href: 'https://tools.alexander.xin',
+        label:
+          lang === 'zh-CN'
+            ? '工具中台'
+            : lang === 'zh-TW'
+              ? '工具中台'
+              : lang === 'fr'
+                ? 'Hub Outils'
+                : lang === 'ru'
+                  ? 'Хаб инструментов'
+                  : 'Tool Hub',
+        icon: '🧰',
+        desc:
+          lang === 'zh-CN'
+            ? '更多在线工具'
+            : lang === 'zh-TW'
+              ? '更多線上工具'
+              : lang === 'fr'
+                ? 'Plus d’outils'
+                : lang === 'ru'
+                  ? 'Больше инструментов'
+                  : 'More online tools',
+        external: true,
+      },
+      {
+        href: 'https://linux-command.alexander.xin',
+        label:
+          lang === 'zh-CN'
+            ? 'Linux 指令'
+            : lang === 'zh-TW'
+              ? 'Linux 指令'
+              : lang === 'fr'
+                ? 'Commandes Linux'
+                : lang === 'ru'
+                  ? 'Linux команды'
+                  : 'Linux Commands',
+        icon: '🐧',
+        desc:
+          lang === 'zh-CN'
+            ? '快速查询命令'
+            : lang === 'zh-TW'
+              ? '快速查詢命令'
+              : lang === 'fr'
+                ? 'Recherche rapide'
+                : lang === 'ru'
+                  ? 'Быстрый поиск команд'
+                  : 'Quick command lookup',
+        external: true,
+      },
+      {
+        href: 'https://cook.alexander.xin',
+        label:
+          lang === 'zh-CN'
+            ? '做饭菜谱'
+            : lang === 'zh-TW'
+              ? '做飯菜譜'
+              : lang === 'fr'
+                ? 'Recettes'
+                : lang === 'ru'
+                  ? 'Рецепты'
+                  : 'Cooking',
+        icon: '🍳',
+        desc:
+          lang === 'zh-CN'
+            ? '程序员友好的菜谱站'
+            : lang === 'zh-TW'
+              ? '程式設計師友善菜譜站'
+              : lang === 'fr'
+                ? 'Recettes pratiques'
+                : lang === 'ru'
+                  ? 'Удобный сайт рецептов'
+                  : 'Developer-friendly recipes',
+        external: true,
+      },
+      {
+        href: 'https://netq.alexander.xin',
+        label:
+          lang === 'zh-CN'
+            ? 'NetQ 排查'
+            : lang === 'zh-TW'
+              ? 'NetQ 排查'
+              : lang === 'fr'
+                ? 'NetQ CLI'
+                : lang === 'ru'
+                  ? 'NetQ CLI'
+                  : 'NetQ CLI',
+        icon: '🧪',
+        desc:
+          lang === 'zh-CN'
+            ? '交互式网络排查 CLI'
+            : lang === 'zh-TW'
+              ? '互動式網路排查 CLI'
+              : lang === 'fr'
+                ? 'CLI de diagnostic réseau'
+                : lang === 'ru'
+                  ? 'CLI для сетевой диагностики'
+                  : 'Interactive network troubleshooting CLI',
+        external: true,
       },
     ],
   },
@@ -881,8 +1029,9 @@ const mainNavItems: NavItem[] = [
     });
   });
 
-  // ── Scroll progress + hide-on-scroll ────────────────────────────────────────
-  window.addEventListener('scroll', () => {
+  // ── Scroll progress + hide-on-scroll (rAF throttled) ───────────────────────
+  let headerScrollTicking = false;
+  function updateHeaderOnScroll() {
     const header = document.getElementById('header');
     const indicator = document.getElementById('scroll-indicator');
     const scrollTop = window.scrollY;
@@ -907,5 +1056,11 @@ const mainNavItems: NavItem[] = [
     }
 
     lastScrollY = scrollTop;
-  });
+    headerScrollTicking = false;
+  }
+  window.addEventListener('scroll', () => {
+    if (headerScrollTicking) return;
+    headerScrollTicking = true;
+    requestAnimationFrame(updateHeaderOnScroll);
+  }, { passive: true });
 </script>

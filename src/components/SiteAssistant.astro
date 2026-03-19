@@ -1,0 +1,409 @@
+---
+import { getLangFromUrl } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+
+function getLangPath(path: string) {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+
+const labels = {
+  'zh-CN': {
+    open: '打开生活助手',
+    close: '关闭',
+    title: '生活助手',
+    subtitle: '问我一些站内常见问题',
+    placeholder: '试试：时间在哪看？有什么好玩的？',
+    send: '发送',
+    clear: '清空',
+    quick: '快捷提问',
+    q1: '时间在哪里看？',
+    q2: '有什么好玩的页面？',
+    q3: '有做饭页面吗？',
+    q4: '还有更多工具吗？',
+    q5: 'NetQ 是什么？',
+    q6: '怎么切换语言或深色模式？',
+    q7: '博客和隐私页面在哪？',
+    q8: '站内搜索怎么用？',
+    q9: '音乐播放器和电台怎么开？',
+    fallback: '我暂时不懂这个问题。你可以试试上面的快捷提问，或者先用 Ctrl/Cmd + K 搜索页面。',
+  },
+  'zh-TW': {
+    open: '打開生活助手',
+    close: '關閉',
+    title: '生活助手',
+    subtitle: '問我一些站內常見問題',
+    placeholder: '試試：時間在哪看？有什麼好玩的？',
+    send: '送出',
+    clear: '清空',
+    quick: '快捷提問',
+    q1: '時間在哪裡看？',
+    q2: '有什麼好玩的頁面？',
+    q3: '有做飯頁面嗎？',
+    q4: '還有更多工具嗎？',
+    q5: 'NetQ 是什麼？',
+    q6: '怎麼切換語言或深色模式？',
+    q7: '部落格和隱私頁面在哪？',
+    q8: '站內搜尋怎麼用？',
+    q9: '音樂播放器和電台怎麼開？',
+    fallback: '我暫時不懂這個問題。可以先試上面的快捷提問，或用 Ctrl/Cmd + K 搜尋頁面。',
+  },
+  'en-GB': {
+    open: 'Open lifestyle assistant',
+    close: 'Close',
+    title: 'Lifestyle Assistant',
+    subtitle: 'Ask common site questions',
+    placeholder: 'Try: where is time page? any fun pages?',
+    send: 'Send',
+    clear: 'Clear',
+    quick: 'Quick prompts',
+    q1: 'Where is time page?',
+    q2: 'Any fun pages?',
+    q3: 'Do you have cooking pages?',
+    q4: 'More tools?',
+    q5: 'What is NetQ?',
+    q6: 'How to switch language or dark mode?',
+    q7: 'Where are blog and privacy pages?',
+    q8: 'How do I use site search?',
+    q9: 'How to open music player/radio?',
+    fallback: 'I do not have that answer yet. Try a quick prompt above or press Ctrl/Cmd + K to search.',
+  },
+  fr: {
+    open: "Ouvrir l'assistant",
+    close: 'Fermer',
+    title: 'Assistant lifestyle',
+    subtitle: 'Questions fréquentes du site',
+    placeholder: "Ex: où voir l'heure ? pages fun ?",
+    send: 'Envoyer',
+    clear: 'Effacer',
+    quick: 'Questions rapides',
+    q1: "Où voir l'heure ?",
+    q2: 'Des pages fun ?',
+    q3: 'Une page cuisine ?',
+    q4: 'Plus d’outils ?',
+    q5: 'C’est quoi NetQ ?',
+    q6: 'Comment changer la langue ou le thème sombre ?',
+    q7: 'Où sont le blog et la confidentialité ?',
+    q8: 'Comment utiliser la recherche du site ?',
+    q9: 'Comment lancer le lecteur/radio ?',
+    fallback: "Je n'ai pas encore cette réponse. Essayez une question rapide ou Ctrl/Cmd + K.",
+  },
+  ru: {
+    open: 'Открыть помощника',
+    close: 'Закрыть',
+    title: 'Lifestyle помощник',
+    subtitle: 'Частые вопросы по сайту',
+    placeholder: 'Например: где время? что интересного?',
+    send: 'Отправить',
+    clear: 'Очистить',
+    quick: 'Быстрые вопросы',
+    q1: 'Где страница времени?',
+    q2: 'Какие есть fun страницы?',
+    q3: 'Есть кулинарная страница?',
+    q4: 'Есть еще инструменты?',
+    q5: 'Что такое NetQ?',
+    q6: 'Как сменить язык или тему?',
+    q7: 'Где блог и страница приватности?',
+    q8: 'Как пользоваться поиском по сайту?',
+    q9: 'Как открыть плеер и радио?',
+    fallback: 'Пока не знаю этот ответ. Попробуйте быстрые вопросы выше или Ctrl/Cmd + K.',
+  },
+};
+
+const text = labels[lang as keyof typeof labels] || labels['zh-CN'];
+---
+
+<div class="life-assistant">
+  <button id="assistant-toggle" type="button" class="assistant-fab" aria-label={text.open} aria-expanded="false">
+    <span aria-hidden="true">💬</span>
+  </button>
+
+  <section id="assistant-panel" class="assistant-panel hidden" aria-label={text.title}>
+    <header class="assistant-header">
+      <div>
+        <h2>{text.title}</h2>
+        <p>{text.subtitle}</p>
+      </div>
+      <button id="assistant-close" type="button" class="assistant-close" aria-label={text.close}>×</button>
+    </header>
+
+    <div id="assistant-log" class="assistant-log">
+      <div class="bubble bot">👋 {lang === 'zh-CN' ? '你好！可以问我站内导航和功能。' : lang === 'zh-TW' ? '你好！可以問我站內導覽和功能。' : lang === 'fr' ? 'Bonjour ! Je peux aider pour la navigation du site.' : lang === 'ru' ? 'Привет! Я помогу с навигацией по сайту.' : 'Hi! I can help with site navigation.'}</div>
+    </div>
+
+    <div class="assistant-quick">
+      <p>{text.quick}</p>
+      <div class="quick-grid">
+        <button type="button" data-q={text.q1}>{text.q1}</button>
+        <button type="button" data-q={text.q2}>{text.q2}</button>
+        <button type="button" data-q={text.q3}>{text.q3}</button>
+        <button type="button" data-q={text.q4}>{text.q4}</button>
+        <button type="button" data-q={text.q5}>{text.q5}</button>
+        <button type="button" data-q={text.q6}>{text.q6}</button>
+        <button type="button" data-q={text.q7}>{text.q7}</button>
+        <button type="button" data-q={text.q8}>{text.q8}</button>
+        <button type="button" data-q={text.q9}>{text.q9}</button>
+      </div>
+    </div>
+
+    <form id="assistant-form" class="assistant-form">
+      <input id="assistant-input" type="text" placeholder={text.placeholder} autocomplete="off" />
+      <button type="submit">{text.send}</button>
+      <button id="assistant-clear" type="button" class="ghost">{text.clear}</button>
+    </form>
+  </section>
+</div>
+
+<script define:vars={{ lang, fallback: text.fallback, links: JSON.stringify({
+  time: getLangPath('/time'),
+  fun: getLangPath('/fun'),
+  gallery: getLangPath('/gallery'),
+  tools: 'https://tools.alexander.xin',
+  cook: 'https://cook.alexander.xin',
+  linux: 'https://linux-command.alexander.xin',
+  netq: 'https://netq.alexander.xin',
+  now: getLangPath('/now'),
+  friends: getLangPath('/friends'),
+  privacy: getLangPath('/privacy'),
+  blog: 'https://blog.alexander.xin',
+  reading: getLangPath('/reading'),
+  contact: getLangPath('/contact'),
+  security: getLangPath('/security/policy'),
+}) }} is:inline>
+  (function () {
+    const toggle = document.getElementById('assistant-toggle');
+    const panel = document.getElementById('assistant-panel');
+    const closeBtn = document.getElementById('assistant-close');
+    const form = document.getElementById('assistant-form');
+    const input = document.getElementById('assistant-input');
+    const log = document.getElementById('assistant-log');
+    const clearBtn = document.getElementById('assistant-clear');
+    const quickRoot = panel?.querySelector('.quick-grid');
+    const navLinks = typeof links === 'string' ? JSON.parse(links) : links;
+    if (!toggle || !panel || !form || !input || !log) return;
+
+    function addBubble(role, html) {
+      const el = document.createElement('div');
+      el.className = `bubble ${role}`;
+      el.innerHTML = html;
+      log.appendChild(el);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function answer(q) {
+      const s = String(q || '').toLowerCase();
+      if (s.includes('时间') || s.includes('time') || s.includes('heure') || s.includes('время')) {
+        return `你可以先看 <a href="${navLinks.now}">Now 实时面板</a>，或者直接去 <a href="${navLinks.time}">世界时间</a>。`;
+      }
+      if (s.includes('好玩') || s.includes('fun') || s.includes('彩蛋') || s.includes('игр')) {
+        return `推荐从 <a href="${navLinks.fun}">Fun 页面</a> 开始，再逛 <a href="${navLinks.gallery}">Gallery</a>。`;
+      }
+      if (s.includes('做饭') || s.includes('cook') || s.includes('recipe') || s.includes('cuisine')) {
+        return `有的，直接打开 <a href="${navLinks.cook}" target="_blank" rel="noopener noreferrer">cook.alexander.xin</a>。`;
+      }
+      if (s.includes('netq') || s.includes('网络') || s.includes('排查') || s.includes('cli')) {
+        return `NetQ 是一个交互式网络排查 CLI，可做公网 IP、DNS、Ping/Traceroute、TCP/HTTP 连通性检查。入口：<a href="${navLinks.netq}" target="_blank" rel="noopener noreferrer">netq.alexander.xin</a>。`;
+      }
+      if (s.includes('语言') || s.includes('language') || s.includes('lang') || s.includes('主题') || s.includes('dark')) {
+        return `右上角有语言切换和主题切换按钮；也可以按 <strong>d</strong> 快捷切换主题，按 <strong>?</strong> 查看快捷键。`;
+      }
+      if (s.includes('博客') || s.includes('blog') || s.includes('隐私') || s.includes('privacy') || s.includes('政策')) {
+        return `博客入口：<a href="${navLinks.blog}" target="_blank" rel="noopener noreferrer">blog.alexander.xin</a>；隐私页面：<a href="${navLinks.privacy}">Privacy</a>。`;
+      }
+      if (s.includes('搜索') || s.includes('search') || s.includes('ctrl') || s.includes('cmd')) {
+        return `按 <strong>Ctrl/Cmd + K</strong> 可以打开全局搜索，或点左下角搜索按钮；支持页面名和关键词。`;
+      }
+      if (s.includes('音乐') || s.includes('电台') || s.includes('radio') || s.includes('player')) {
+        return `右下角的 🎵 按钮就是播放器入口，展开后可切换「本地歌单 / 氛围电台」。`;
+      }
+      if (s.includes('阅读') || s.includes('reading') || s.includes('书')) {
+        return `可以去 <a href="${navLinks.reading}">Reading 页面</a> 看推荐书单和持续更新内容。`;
+      }
+      if (s.includes('联系') || s.includes('contact') || s.includes('邮箱') || s.includes('email')) {
+        return `你可以直接前往 <a href="${navLinks.contact}">Contact 页面</a>，或者邮件联系。`;
+      }
+      if (s.includes('安全') || s.includes('security')) {
+        return `安全政策入口在 <a href="${navLinks.security}">Security Policy</a>。`;
+      }
+      if (s.includes('工具') || s.includes('tool') || s.includes('linux') || s.includes('命令')) {
+        return `常用入口：<a href="${navLinks.tools}" target="_blank" rel="noopener noreferrer">工具中台</a>、<a href="${navLinks.linux}" target="_blank" rel="noopener noreferrer">Linux 指令</a>、<a href="${navLinks.netq}" target="_blank" rel="noopener noreferrer">NetQ</a>。`;
+      }
+      if (s.includes('友链') || s.includes('friends') || s.includes('合作')) {
+        return `可以去 <a href="${navLinks.friends}">友情链接页面</a> 看看。`;
+      }
+      return fallback;
+    }
+
+    function sendQuestion(q) {
+      const question = String(q || '').trim();
+      if (!question) return;
+      addBubble('user', question.replace(/[<>&]/g, ''));
+      addBubble('bot', answer(question));
+    }
+
+    toggle.addEventListener('click', () => {
+      const hidden = panel.classList.contains('hidden');
+      panel.classList.toggle('hidden');
+      toggle.setAttribute('aria-expanded', hidden ? 'true' : 'false');
+      toggle.classList.toggle('edge-hide', !hidden);
+      if (hidden) input.focus();
+    });
+    closeBtn?.addEventListener('click', () => {
+      panel.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.classList.add('edge-hide');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        panel.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.classList.add('edge-hide');
+      }
+    });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      sendQuestion(input.value);
+      input.value = '';
+      input.focus();
+    });
+    clearBtn?.addEventListener('click', () => {
+      log.innerHTML = '';
+    });
+    quickRoot?.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-q]');
+      if (!btn) return;
+      sendQuestion(btn.getAttribute('data-q') || '');
+    });
+    toggle.classList.add('edge-hide');
+  })();
+</script>
+
+<style>
+  .life-assistant {
+    position: fixed;
+    right: 1rem;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 4.9rem);
+    z-index: 46;
+  }
+  .assistant-fab {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    border: 1px solid rgb(14 165 233 / 0.45);
+    background: radial-gradient(circle at 20% 20%, rgb(56 189 248), rgb(217 70 239));
+    color: #fff;
+    box-shadow: 0 12px 28px rgb(14 165 233 / 0.35);
+    font-size: 1.2rem;
+    transition: transform 0.22s ease, border-radius 0.22s ease;
+  }
+  .assistant-fab.edge-hide {
+    transform: translateX(0.95rem);
+    border-radius: 0.9rem 0 0 0.9rem;
+  }
+  .assistant-fab.edge-hide:hover,
+  .assistant-fab.edge-hide:focus-visible {
+    transform: translateX(0);
+  }
+  .assistant-panel {
+    position: absolute;
+    right: 0;
+    bottom: 3.6rem;
+    width: min(24rem, calc(100vw - 1.2rem));
+    border-radius: 1rem;
+    border: 1px solid rgb(var(--color-border));
+    background: rgb(var(--color-bg-secondary));
+    box-shadow: 0 24px 42px rgb(0 0 0 / 0.26);
+    overflow: hidden;
+  }
+  .assistant-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.8rem 0.9rem;
+    border-bottom: 1px solid rgb(var(--color-border));
+    background: linear-gradient(90deg, rgb(14 165 233 / 0.1), rgb(168 85 247 / 0.1));
+  }
+  .assistant-header h2 { margin: 0; font-size: 0.95rem; color: rgb(var(--color-text-primary)); }
+  .assistant-header p { margin: 0.15rem 0 0; font-size: 0.75rem; color: rgb(var(--color-text-tertiary)); }
+  .assistant-close { border: 0; background: transparent; color: rgb(var(--color-text-secondary)); font-size: 1.2rem; }
+  .assistant-log {
+    max-height: min(42vh, 20rem);
+    overflow: auto;
+    padding: 0.8rem 0.9rem 0.25rem;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .bubble {
+    max-width: 88%;
+    padding: 0.5rem 0.65rem;
+    border-radius: 0.7rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+  .bubble.user {
+    margin-left: auto;
+    background: rgb(14 165 233 / 0.14);
+    color: rgb(var(--color-text-primary));
+    border: 1px solid rgb(14 165 233 / 0.35);
+  }
+  .bubble.bot {
+    margin-right: auto;
+    background: rgb(var(--color-bg-primary));
+    color: rgb(var(--color-text-secondary));
+    border: 1px solid rgb(var(--color-border));
+  }
+  .bubble a { color: rgb(14 165 233); text-decoration: underline; }
+  .assistant-quick { padding: 0.2rem 0.9rem 0.55rem; }
+  .assistant-quick p { margin: 0 0 0.45rem; font-size: 0.76rem; color: rgb(var(--color-text-tertiary)); }
+  .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; max-height: 12rem; overflow: auto; }
+  .quick-grid button {
+    border: 1px solid rgb(var(--color-border));
+    background: rgb(var(--color-bg-primary));
+    border-radius: 0.55rem;
+    padding: 0.42rem 0.5rem;
+    font-size: 0.75rem;
+    color: rgb(var(--color-text-primary));
+    text-align: left;
+  }
+  .quick-grid button:hover { border-color: rgb(14 165 233 / 0.5); }
+  .assistant-form {
+    padding: 0.7rem 0.9rem 0.9rem;
+    border-top: 1px solid rgb(var(--color-border));
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 0.45rem;
+  }
+  .assistant-form input {
+    min-width: 0;
+    border: 1px solid rgb(var(--color-border));
+    background: rgb(var(--color-bg-primary));
+    border-radius: 0.6rem;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.82rem;
+    color: rgb(var(--color-text-primary));
+  }
+  .assistant-form button {
+    border: 1px solid rgb(var(--color-border));
+    background: rgb(14 165 233 / 0.15);
+    color: rgb(14 165 233);
+    border-radius: 0.6rem;
+    padding: 0.48rem 0.62rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .assistant-form button.ghost {
+    background: rgb(var(--color-bg-primary));
+    color: rgb(var(--color-text-secondary));
+  }
+  @media (max-width: 640px) {
+    .life-assistant {
+      right: 0.6rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 4.3rem);
+    }
+    .assistant-panel {
+      width: min(24rem, calc(100vw - 1rem));
+    }
+  }
+</style>

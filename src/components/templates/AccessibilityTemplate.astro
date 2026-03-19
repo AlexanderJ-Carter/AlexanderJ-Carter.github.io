@@ -50,6 +50,14 @@ const accessibilityData: Record<Lang, any> = {
     feedbackTitle: '反馈与联系',
     feedbackDesc:
       '如果您在使用本网站时遇到任何无障碍问题,或者对我们的无障碍功能有任何建议,请联系我们。我们将尽力解决您的问题。',
+    actionTitle: '可操作指南',
+    actionDesc: '以下是快速提升可访问体验的建议与开关：',
+    guide1: '键盘导航：使用 Tab / Shift+Tab 在可交互元素间移动',
+    guide2: '快速搜索：使用 Ctrl/Cmd + K 打开全局搜索',
+    guide3: '跳过导航：页面开头可使用“跳到主内容”链接',
+    shortcutsTitle: '常用快捷键',
+    contrastBtn: '切换高对比度预览',
+    motionBtn: '切换减少动画预览',
   },
   'zh-TW': {
     title: '無障礙聲明',
@@ -89,6 +97,14 @@ const accessibilityData: Record<Lang, any> = {
     feedbackTitle: '反饋與聯繫',
     feedbackDesc:
       '如果您在使用本網站時遇到任何無障礙問題,或者對我們的無障礙功能有任何建議,請聯繫我們。我們將盡力解決您的問題。',
+    actionTitle: '可操作指南',
+    actionDesc: '以下是快速提升可訪問體驗的建議與開關：',
+    guide1: '鍵盤導覽：使用 Tab / Shift+Tab 在互動元素間移動',
+    guide2: '快速搜尋：使用 Ctrl/Cmd + K 開啟全域搜尋',
+    guide3: '跳過導覽：頁面開頭可使用「跳到主內容」連結',
+    shortcutsTitle: '常用快捷鍵',
+    contrastBtn: '切換高對比預覽',
+    motionBtn: '切換減少動畫預覽',
   },
   'en-GB': {
     title: 'Accessibility Statement',
@@ -129,6 +145,14 @@ const accessibilityData: Record<Lang, any> = {
     feedbackTitle: 'Feedback and Contact',
     feedbackDesc:
       'If you encounter any accessibility issues while using this website, or have any suggestions for our accessibility features, please contact us. We will do our best to resolve your issues.',
+    actionTitle: 'Actionable Guide',
+    actionDesc: 'Use these quick tips and controls for better accessibility:',
+    guide1: 'Keyboard navigation: use Tab / Shift+Tab to move between controls',
+    guide2: 'Quick search: use Ctrl/Cmd + K to open global search',
+    guide3: 'Skip navigation: use the "Skip to main content" link at page top',
+    shortcutsTitle: 'Common Shortcuts',
+    contrastBtn: 'Toggle high contrast preview',
+    motionBtn: 'Toggle reduced motion preview',
   },
   fr: {
     title: "Déclaration d'accessibilité",
@@ -170,6 +194,14 @@ const accessibilityData: Record<Lang, any> = {
     feedbackTitle: 'Commentaires et contact',
     feedbackDesc:
       "Si vous rencontrez des problèmes d'accessibilité lors de l'utilisation de ce site web, ou si vous avez des suggestions pour nos fonctionnalités d'accessibilité, veuillez nous contacter. Nous ferons de notre mieux pour résoudre vos problèmes.",
+    actionTitle: 'Guide pratique',
+    actionDesc: 'Astuces et options rapides pour une meilleure accessibilité :',
+    guide1: 'Navigation clavier : utilisez Tab / Shift+Tab',
+    guide2: 'Recherche rapide : Ctrl/Cmd + K',
+    guide3: 'Lien de saut : utilisez "Passer au contenu principal"',
+    shortcutsTitle: 'Raccourcis utiles',
+    contrastBtn: 'Activer le contraste élevé',
+    motionBtn: 'Activer la réduction des animations',
   },
   ru: {
     title: 'Заявление о доступности',
@@ -210,6 +242,14 @@ const accessibilityData: Record<Lang, any> = {
     feedbackTitle: 'Обратная связь и контакты',
     feedbackDesc:
       'Если вы столкнулись с какими-либо проблемами доступности при использовании этого веб-сайта или у вас есть предложения по нашим функциям доступности, пожалуйста, свяжитесь с нами. Мы сделаем все возможное, чтобы решить ваши проблемы.',
+    actionTitle: 'Практическое руководство',
+    actionDesc: 'Быстрые советы и переключатели для удобства:',
+    guide1: 'Клавиатура: Tab / Shift+Tab для навигации',
+    guide2: 'Быстрый поиск: Ctrl/Cmd + K',
+    guide3: 'Пропуск навигации: ссылка "Skip to main content" сверху',
+    shortcutsTitle: 'Полезные сочетания',
+    contrastBtn: 'Переключить высокий контраст',
+    motionBtn: 'Переключить уменьшение анимации',
   },
 };
 
@@ -309,6 +349,31 @@ const content = accessibilityData[lang as Lang] || accessibilityData['en-GB'];
           {content.standardsDesc}
         </p>
 
+        <h2>{content.actionTitle}</h2>
+        <p>{content.actionDesc}</p>
+        <ul class="list-disc list-inside space-y-2">
+          <li>{content.guide1}</li>
+          <li>{content.guide2}</li>
+          <li>{content.guide3}</li>
+        </ul>
+
+        <h3>{content.shortcutsTitle}</h3>
+        <div class="flex flex-wrap gap-3 not-prose">
+          <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm">Tab</kbd>
+          <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm">Shift + Tab</kbd>
+          <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm">Ctrl/Cmd + K</kbd>
+          <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm">/</kbd>
+        </div>
+
+        <div class="flex flex-wrap gap-3 not-prose mt-4">
+          <button id="acc-contrast-toggle" type="button" class="px-4 py-2 rounded-lg bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium">
+            {content.contrastBtn}
+          </button>
+          <button id="acc-motion-toggle" type="button" class="px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]">
+            {content.motionBtn}
+          </button>
+        </div>
+
         <h2>{content.feedbackTitle}</h2>
         <p>
           {content.feedbackDesc}
@@ -317,3 +382,32 @@ const content = accessibilityData[lang as Lang] || accessibilityData['en-GB'];
     </div>
   </section>
 </BaseLayout>
+
+<script is:inline>
+  (function () {
+    const contrastBtn = document.getElementById('acc-contrast-toggle');
+    const motionBtn = document.getElementById('acc-motion-toggle');
+    const html = document.documentElement;
+    const styleId = 'accessibility-preview-style';
+    function ensureStyle() {
+      let style = document.getElementById(styleId);
+      if (!style) {
+        style = document.createElement('style');
+        style.id = styleId;
+        style.textContent = `
+          html.acc-high-contrast { filter: contrast(1.15) saturate(1.05); }
+          html.acc-reduced-motion *, html.acc-reduced-motion *::before, html.acc-reduced-motion *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+          }
+        `;
+        document.head.appendChild(style);
+      }
+    }
+    ensureStyle();
+    contrastBtn?.addEventListener('click', () => html.classList.toggle('acc-high-contrast'));
+    motionBtn?.addEventListener('click', () => html.classList.toggle('acc-reduced-motion'));
+  })();
+</script>

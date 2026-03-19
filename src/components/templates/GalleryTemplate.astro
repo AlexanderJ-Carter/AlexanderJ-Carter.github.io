@@ -12,30 +12,40 @@ const categoriesData: Record<Lang, any[]> = {
     { id: 'all', label: '全部' },
     { id: 'landscape', label: '风景' },
     { id: 'nature', label: '自然' },
+    { id: 'architecture', label: '建筑' },
+    { id: 'street', label: '街拍' },
     { id: 'food', label: '美食' },
   ],
   'zh-TW': [
     { id: 'all', label: '全部' },
     { id: 'landscape', label: '風景' },
     { id: 'nature', label: '自然' },
+    { id: 'architecture', label: '建築' },
+    { id: 'street', label: '街拍' },
     { id: 'food', label: '美食' },
   ],
   'en-GB': [
     { id: 'all', label: 'All' },
     { id: 'landscape', label: 'Landscape' },
     { id: 'nature', label: 'Nature' },
+    { id: 'architecture', label: 'Architecture' },
+    { id: 'street', label: 'Street' },
     { id: 'food', label: 'Food' },
   ],
   fr: [
     { id: 'all', label: 'Tout' },
     { id: 'landscape', label: 'Paysage' },
     { id: 'nature', label: 'Nature' },
+    { id: 'architecture', label: 'Architecture' },
+    { id: 'street', label: 'Rue' },
     { id: 'food', label: 'Nourriture' },
   ],
   ru: [
     { id: 'all', label: 'Все' },
     { id: 'landscape', label: 'Пейзаж' },
     { id: 'nature', label: 'Природа' },
+    { id: 'architecture', label: 'Архитектура' },
+    { id: 'street', label: 'Улица' },
     { id: 'food', label: 'Еда' },
   ],
 };
@@ -171,6 +181,64 @@ const galleryItemsData: Record<Lang, any[]> = {
       description: '色香味俱全，艺术佳作',
       image: '/img/gallery/food-03.jpg',
     },
+    // Architecture photos (Unsplash)
+    {
+      id: 19,
+      category: 'architecture',
+      title: '现代建筑',
+      description: '线条简洁，光影交织',
+      image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+    },
+    {
+      id: 20,
+      category: 'architecture',
+      title: '古典韵味',
+      description: '历史沉淀，岁月痕迹',
+      image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80',
+    },
+    {
+      id: 21,
+      category: 'architecture',
+      title: '城市轮廓',
+      description: '高楼林立，都市繁华',
+      image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&q=80',
+    },
+    {
+      id: 22,
+      category: 'architecture',
+      title: '光影空间',
+      description: '建筑之美，光影之舞',
+      image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=800&q=80',
+    },
+    // Street photos (Unsplash)
+    {
+      id: 23,
+      category: 'street',
+      title: '街头光影',
+      description: '光影交错，人间烟火',
+      image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80',
+    },
+    {
+      id: 24,
+      category: 'street',
+      title: '都市节奏',
+      description: '人来人往，步履匆匆',
+      image: 'https://images.unsplash.com/photo-1517732306149-e8f829eb588a?w=800&q=80',
+    },
+    {
+      id: 25,
+      category: 'street',
+      title: '夜色阑珊',
+      description: '霓虹闪烁，城市不眠',
+      image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&q=80',
+    },
+    {
+      id: 26,
+      category: 'street',
+      title: '街角故事',
+      description: '平凡街角，生活百态',
+      image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
+    },
   ],
   'zh-TW': [
     // Landscape photos
@@ -302,6 +370,64 @@ const galleryItemsData: Record<Lang, any[]> = {
       description: '色香味俱全，藝術佳作',
       image: '/img/gallery/food-03.jpg',
     },
+    // Architecture photos
+    {
+      id: 19,
+      category: 'architecture',
+      title: '現代建築',
+      description: '線條簡潔，光影交織',
+      image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+    },
+    {
+      id: 20,
+      category: 'architecture',
+      title: '古典韻味',
+      description: '歷史沉沉澱，歲月痕跡',
+      image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80',
+    },
+    {
+      id: 21,
+      category: 'architecture',
+      title: '城市輪廓',
+      description: '高樓林立，都市繁華',
+      image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&q=80',
+    },
+    {
+      id: 22,
+      category: 'architecture',
+      title: '光影空間',
+      description: '建築之美，光影之舞',
+      image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=800&q=80',
+    },
+    // Street photos
+    {
+      id: 23,
+      category: 'street',
+      title: '街頭光影',
+      description: '光影交錯，人間煙火',
+      image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80',
+    },
+    {
+      id: 24,
+      category: 'street',
+      title: '都市節奏',
+      description: '人來人往，步履匆匆',
+      image: 'https://images.unsplash.com/photo-1517732306149-e8f829eb588a?w=800&q=80',
+    },
+    {
+      id: 25,
+      category: 'street',
+      title: '夜色闌珊',
+      description: '霓虹閃爍，城市不眠',
+      image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&q=80',
+    },
+    {
+      id: 26,
+      category: 'street',
+      title: '街角故事',
+      description: '平凡街角，生活百態',
+      image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
+    },
   ],
   'en-GB': [
     {
@@ -429,6 +555,64 @@ const galleryItemsData: Record<Lang, any[]> = {
       title: 'Creative Dish',
       description: 'Culinary art masterpiece',
       image: '/img/gallery/food-03.jpg',
+    },
+    // Architecture
+    {
+      id: 19,
+      category: 'architecture',
+      title: 'Modern Architecture',
+      description: 'Clean lines, interwoven light',
+      image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+    },
+    {
+      id: 20,
+      category: 'architecture',
+      title: 'Classical Charm',
+      description: 'Historical depth, timeless beauty',
+      image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80',
+    },
+    {
+      id: 21,
+      category: 'architecture',
+      title: 'Urban Skyline',
+      description: 'Towering buildings, city pulse',
+      image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&q=80',
+    },
+    {
+      id: 22,
+      category: 'architecture',
+      title: 'Light & Space',
+      description: 'Architectural beauty, dancing light',
+      image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=800&q=80',
+    },
+    // Street
+    {
+      id: 23,
+      category: 'street',
+      title: 'Street Light',
+      description: 'Light and shadow, daily life',
+      image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80',
+    },
+    {
+      id: 24,
+      category: 'street',
+      title: 'Urban Rhythm',
+      description: 'Busy streets, hurried steps',
+      image: 'https://images.unsplash.com/photo-1517732306149-e8f829eb588a?w=800&q=80',
+    },
+    {
+      id: 25,
+      category: 'street',
+      title: 'Night City',
+      description: 'Neon glow, sleepless city',
+      image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&q=80',
+    },
+    {
+      id: 26,
+      category: 'street',
+      title: 'Corner Stories',
+      description: 'Ordinary corners, life stories',
+      image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
     },
   ],
   fr: [
@@ -558,6 +742,64 @@ const galleryItemsData: Record<Lang, any[]> = {
       description: "Chef-d'œuvre culinaire",
       image: '/img/gallery/food-03.jpg',
     },
+    // Architecture
+    {
+      id: 19,
+      category: 'architecture',
+      title: 'Architecture Moderne',
+      description: 'Lignes épurées, lumière entrelacée',
+      image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+    },
+    {
+      id: 20,
+      category: 'architecture',
+      title: 'Charme Classique',
+      description: 'Profondeur historique, beauté intemporelle',
+      image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80',
+    },
+    {
+      id: 21,
+      category: 'architecture',
+      title: 'Horizon Urbain',
+      description: 'Gratte-ciel, pouls de la ville',
+      image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&q=80',
+    },
+    {
+      id: 22,
+      category: 'architecture',
+      title: 'Lumière & Espace',
+      description: 'Beauté architecturale, lumière dansante',
+      image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=800&q=80',
+    },
+    // Street
+    {
+      id: 23,
+      category: 'street',
+      title: 'Lumière de Rue',
+      description: 'Ombres et lumières, vie quotidienne',
+      image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80',
+    },
+    {
+      id: 24,
+      category: 'street',
+      title: 'Rythme Urbain',
+      description: 'Rues animées, pas pressés',
+      image: 'https://images.unsplash.com/photo-1517732306149-e8f829eb588a?w=800&q=80',
+    },
+    {
+      id: 25,
+      category: 'street',
+      title: 'Ville Nocturne',
+      description: 'Lueurs néon, ville insomniaque',
+      image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&q=80',
+    },
+    {
+      id: 26,
+      category: 'street',
+      title: 'Histoires de Coin',
+      description: 'Coins ordinaires, histoires de vie',
+      image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
+    },
   ],
   ru: [
     {
@@ -686,12 +928,79 @@ const galleryItemsData: Record<Lang, any[]> = {
       description: 'Кулинарный шедевр',
       image: '/img/gallery/food-03.jpg',
     },
+    // Architecture
+    {
+      id: 19,
+      category: 'architecture',
+      title: 'Современная Архитектура',
+      description: 'Чистые линии, переплетённый свет',
+      image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+    },
+    {
+      id: 20,
+      category: 'architecture',
+      title: 'Классическое Очарование',
+      description: 'Историческая глубина, вечная красота',
+      image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80',
+    },
+    {
+      id: 21,
+      category: 'architecture',
+      title: 'Городской Горизонт',
+      description: 'Высотные здания, пульс города',
+      image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&q=80',
+    },
+    {
+      id: 22,
+      category: 'architecture',
+      title: 'Свет и Пространство',
+      description: 'Архитектурная красота, танцующий свет',
+      image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=800&q=80',
+    },
+    // Street
+    {
+      id: 23,
+      category: 'street',
+      title: 'Уличный Свет',
+      description: 'Свет и тень, повседневная жизнь',
+      image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80',
+    },
+    {
+      id: 24,
+      category: 'street',
+      title: 'Городской Ритм',
+      description: 'Оживлённые улицы, спешащие шаги',
+      image: 'https://images.unsplash.com/photo-1517732306149-e8f829eb588a?w=800&q=80',
+    },
+    {
+      id: 25,
+      category: 'street',
+      title: 'Ночной Город',
+      description: 'Неоновое свечение, бессонный город',
+      image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=800&q=80',
+    },
+    {
+      id: 26,
+      category: 'street',
+      title: 'Истории Уголков',
+      description: 'Обычные углы, жизненные истории',
+      image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
+    },
   ],
 };
 
 const categories = categoriesData[lang as Lang] || categoriesData['en-GB'];
 const galleryItems =
   galleryItemsData[lang as Lang] || galleryItemsData['en-GB'];
+
+const sourceText: Record<Lang, any> = {
+  'zh-CN': { title: '图片来源策略', all: '全部来源', local: '仅本站素材', remote: '包含外部图源', localTag: '本地', remoteTag: '外部', note: '优先展示本站自有素材；外部图源来自 Unsplash，仅作展示参考。' },
+  'zh-TW': { title: '圖片來源策略', all: '全部來源', local: '僅本站素材', remote: '包含外部圖源', localTag: '本地', remoteTag: '外部', note: '優先展示本站自有素材；外部圖源來自 Unsplash，僅作展示參考。' },
+  'en-GB': { title: 'Image Source Policy', all: 'All sources', local: 'Local assets only', remote: 'Include external sources', localTag: 'Local', remoteTag: 'External', note: 'Local assets are prioritised; external images are from Unsplash for showcase reference.' },
+  fr: { title: 'Politique des sources', all: 'Toutes les sources', local: 'Ressources locales', remote: 'Inclure sources externes', localTag: 'Local', remoteTag: 'Externe', note: 'Les ressources locales sont prioritaires ; les images externes proviennent d’Unsplash.' },
+  ru: { title: 'Политика источников', all: 'Все источники', local: 'Только локальные', remote: 'Включая внешние', localTag: 'Локальные', remoteTag: 'Внешние', note: 'Локальные изображения в приоритете; внешние источники — Unsplash.' },
+};
+const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
 ---
 
 <BaseLayout title={t('gallery.title')}>
@@ -813,6 +1122,18 @@ const galleryItems =
           <span aria-hidden="true">🍽️</span>
           {galleryItems.filter((i) => i.category === 'food').length}
         </span>
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm"
+        >
+          <span aria-hidden="true">🏛️</span>
+          {galleryItems.filter((i) => i.category === 'architecture').length}
+        </span>
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm"
+        >
+          <span aria-hidden="true">🌃</span>
+          {galleryItems.filter((i) => i.category === 'street').length}
+        </span>
       </div>
       <div
         class="flex flex-wrap gap-2"
@@ -840,10 +1161,27 @@ const galleryItems =
               {cat.id === 'landscape' && '🏔️ '}
               {cat.id === 'nature' && '🌿 '}
               {cat.id === 'food' && '🍽️ '}
+              {cat.id === 'architecture' && '🏛️ '}
+              {cat.id === 'street' && '🌃 '}
               {cat.label}
             </button>
           ))
         }
+      </div>
+      <div class="glass-card rounded-xl p-3 text-xs sm:text-sm max-w-sm">
+        <p class="font-semibold text-[rgb(var(--color-text-primary))] mb-1">{sourceUi.title}</p>
+        <p class="text-[rgb(var(--color-text-secondary))]">{sourceUi.note}</p>
+        <div class="mt-3">
+          <label for="source-filter" class="sr-only">{sourceUi.title}</label>
+          <select
+            id="source-filter"
+            class="w-full rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+          >
+            <option value="all">{sourceUi.all}</option>
+            <option value="local">{sourceUi.local}</option>
+            <option value="remote">{sourceUi.remote}</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -865,6 +1203,7 @@ const galleryItems =
                 'md:col-span-2': index === 0,
               }}
               data-category={item.category}
+              data-source={item.image.startsWith('http') ? 'remote' : 'local'}
               data-gallery-index={index}
               data-image={item.image}
               data-title={item.title}
@@ -879,17 +1218,23 @@ const galleryItems =
               />
               <img
                 src={item.image}
-                alt=""
+                alt={`${item.title} - ${item.description}`}
                 class="gallery-image absolute inset-0 w-full h-full object-cover opacity-0 transform group-hover:scale-105 transition-all duration-500 ease-out"
                 loading={index < 6 ? 'eager' : 'lazy'}
                 decoding="async"
+                referrerpolicy="no-referrer"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 md:p-6">
                 <span class="inline-flex items-center gap-2 text-white/90 text-xs font-medium mb-2">
                   {item.category === 'landscape' && '🏔️ '}
                   {item.category === 'nature' && '🌿 '}
                   {item.category === 'food' && '🍽️ '}
+                  {item.category === 'architecture' && '🏛️ '}
+                  {item.category === 'street' && '🌃 '}
                   {catLabel}
+                </span>
+                <span class="inline-flex items-center w-fit mb-2 px-2 py-0.5 rounded bg-black/35 text-white/90 text-[11px]">
+                  {item.image.startsWith('http') ? sourceUi.remoteTag : sourceUi.localTag}
                 </span>
                 <h3 class="text-white text-lg md:text-xl font-bold">
                   {item.title}
@@ -1001,6 +1346,7 @@ const galleryItems =
   const filterBtns = document.querySelectorAll('.gallery-filter-btn');
   const galleryItems = document.querySelectorAll('.gallery-item');
   const totalCountEl = document.getElementById('total-count');
+  const sourceFilterEl = document.getElementById('source-filter') as HTMLSelectElement | null;
   const lightbox = document.getElementById('gallery-lightbox');
   const lightboxImage = document.getElementById(
     'lightbox-image'
@@ -1012,6 +1358,7 @@ const galleryItems =
   const lightboxNext = document.getElementById('lightbox-next');
 
   let currentFilter = 'all';
+  let currentSourceFilter = 'all';
   let currentLightboxIndex = 0;
 
   function initGalleryImageLoading() {
@@ -1038,8 +1385,21 @@ const galleryItems =
   function getVisibleItems(): Element[] {
     return Array.from(galleryItems).filter((el) => {
       const cat = el.getAttribute('data-category');
-      return currentFilter === 'all' || cat === currentFilter;
+      const source = el.getAttribute('data-source');
+      const categoryOk = currentFilter === 'all' || cat === currentFilter;
+      const sourceOk = currentSourceFilter === 'all' || source === currentSourceFilter;
+      return categoryOk && sourceOk;
     });
+  }
+
+  function applyFilters() {
+    const visible = getVisibleItems();
+    galleryItems.forEach((item) => {
+      const show = visible.includes(item);
+      (item as HTMLElement).style.display = show ? '' : 'none';
+      if (show) item.classList.add('gallery-reveal');
+    });
+    if (totalCountEl) totalCountEl.textContent = String(visible.length);
   }
 
   function openLightbox(index: number) {
@@ -1153,17 +1513,15 @@ const galleryItems =
       );
 
       let visibleCount = 0;
-      galleryItems.forEach((item) => {
-        const itemCategory = item.getAttribute('data-category');
-        const show = filterValue === 'all' || filterValue === itemCategory;
-        (item as HTMLElement).style.display = show ? '' : 'none';
-        if (show) {
-          item.classList.add('gallery-reveal');
-          visibleCount++;
-        }
-      });
+      applyFilters();
+      visibleCount = getVisibleItems().length;
       if (totalCountEl) totalCountEl.textContent = String(visibleCount);
     });
+  });
+
+  sourceFilterEl?.addEventListener('change', () => {
+    currentSourceFilter = sourceFilterEl.value;
+    applyFilters();
   });
 </script>
 
@@ -1238,6 +1596,17 @@ const galleryItems =
     }
     to {
       opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-item .gallery-image,
+    .gallery-item .gallery-skeleton,
+    .gallery-reveal,
+    #gallery-lightbox.flex {
+      animation: none !important;
+      transition: none !important;
+      transform: none !important;
     }
   }
 </style>

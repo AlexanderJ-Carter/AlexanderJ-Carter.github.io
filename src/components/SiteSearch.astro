@@ -1,0 +1,174 @@
+---
+/**
+ * 全局搜索组件
+ * 提供网站内容搜索功能
+ */
+const { lang = 'zh-CN' } = Astro.props;
+
+const translations = {
+  'zh-CN': {
+    placeholder: '搜索页面...',
+    noResults: '未找到结果',
+    hint: '按 / 快速搜索',
+    pages: '页面',
+    tools: '工具',
+  },
+  'zh-TW': {
+    placeholder: '搜尋頁面...',
+    noResults: '未找到結果',
+    hint: '按 / 快速搜尋',
+    pages: '頁面',
+    tools: '工具',
+  },
+  'en-GB': {
+    placeholder: 'Search pages...',
+    noResults: 'No results found',
+    hint: 'Press / to search',
+    pages: 'Pages',
+    tools: 'Tools',
+  },
+  fr: {
+    placeholder: 'Rechercher...',
+    noResults: 'Aucun résultat',
+    hint: 'Appuyez sur / pour rechercher',
+    pages: 'Pages',
+    tools: 'Outils',
+  },
+  ru: {
+    placeholder: 'Поиск страниц...',
+    noResults: 'Результатов не найдено',
+    hint: 'Нажмите / для поиска',
+    pages: 'Страницы',
+    tools: 'Инструменты',
+  },
+};
+
+const t = translations[lang as keyof typeof translations] || translations['zh-CN'];
+
+// 搜索数据 - 简单的静态搜索索引
+const searchIndex = [
+  // Pages
+  { title: { 'zh-CN': '首页', 'zh-TW': '首頁', 'en-GB': 'Home', fr: 'Accueil', ru: 'Главная' }, url: '/', category: 'pages' },
+  { title: { 'zh-CN': '画廊', 'zh-TW': '畫廊', 'en-GB': 'Gallery', fr: 'Galerie', ru: 'Галерея' }, url: '/gallery', category: 'pages' },
+  { title: { 'zh-CN': '项目', 'zh-TW': '專案', 'en-GB': 'Projects', fr: 'Projets', ru: 'Проекты' }, url: '/projects', category: 'pages' },
+  { title: { 'zh-CN': '关于', 'zh-TW': '關於', 'en-GB': 'About', fr: 'À propos', ru: 'О нас' }, url: '/about', category: 'pages' },
+  { title: { 'zh-CN': '联系', 'zh-TW': '聯繫', 'en-GB': 'Contact', fr: 'Contact', ru: 'Контакты' }, url: '/contact', category: 'pages' },
+  { title: { 'zh-CN': '时间轴', 'zh-TW': '時間軸', 'en-GB': 'Timeline', fr: 'Chronologie', ru: 'Хронология' }, url: '/timeline', category: 'pages' },
+  { title: { 'zh-CN': '友链', 'zh-TW': '友鏈', 'en-GB': 'Friends', fr: 'Amis', ru: 'Друзья' }, url: '/friends', category: 'pages' },
+  { title: { 'zh-CN': '阅读清单', 'zh-TW': '閱讀清單', 'en-GB': 'Reading List', fr: 'Liste de lecture', ru: 'Список чтения' }, url: '/reading', category: 'pages' },
+  // Tools
+  { title: { 'zh-CN': '日历', 'zh-TW': '日曆', 'en-GB': 'Calendar', fr: 'Calendrier', ru: 'Календарь' }, url: '/calendar', category: 'tools' },
+  { title: { 'zh-CN': '汇率', 'zh-TW': '匯率', 'en-GB': 'Currency', fr: 'Devises', ru: 'Валюта' }, url: '/currency', category: 'tools' },
+  { title: { 'zh-CN': '世界时间', 'zh-TW': '世界時間', 'en-GB': 'World Time', fr: 'Heure mondiale', ru: 'Мировое время' }, url: '/time', category: 'tools' },
+  { title: { 'zh-CN': '单位换算', 'zh-TW': '單位換算', 'en-GB': 'Unit Converter', fr: 'Convertisseur', ru: 'Конвертер единиц' }, url: '/units', category: 'tools' },
+  { title: { 'zh-CN': 'QR 生成', 'zh-TW': 'QR 生成', 'en-GB': 'QR Code', fr: 'QR Code', ru: 'QR-код' }, url: '/qr', category: 'tools' },
+];
+
+function getLangPath(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+---
+
+<div id="site-search" class="relative">
+  <!-- Search Input -->
+  <div class="relative">
+    <input
+      type="search"
+      id="search-input"
+      placeholder={t.placeholder}
+      class="w-full pl-10 pr-16 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] placeholder-[rgb(var(--color-text-tertiary))] focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+      autocomplete="off"
+    />
+    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[rgb(var(--color-text-tertiary))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+    <kbd class="absolute right-3 top-1/2 -translate-y-1/2 px-2 py-0.5 rounded bg-[rgb(var(--color-bg-accent))] text-xs text-[rgb(var(--color-text-tertiary))] hidden sm:inline-block">
+      /
+    </kbd>
+  </div>
+
+  <!-- Search Results -->
+  <div id="search-results" class="absolute top-full left-0 right-0 mt-2 glass-card rounded-xl shadow-xl max-h-80 overflow-y-auto hidden z-50">
+    <!-- Results will be injected here -->
+  </div>
+</div>
+
+<script define:vars={{ lang, searchIndex, t, getLangPath }}>
+  const input = document.getElementById('search-input');
+  const results = document.getElementById('search-results');
+
+  function search(query) {
+    if (!query.trim()) {
+      results.classList.add('hidden');
+      return;
+    }
+
+    const q = query.toLowerCase();
+    const matches = searchIndex.filter(item => {
+      const title = item.title[lang] || item.title['en-GB'];
+      return title.toLowerCase().includes(q);
+    });
+
+    if (matches.length === 0) {
+      results.innerHTML = `
+        <div class="p-4 text-center text-[rgb(var(--color-text-tertiary))]">
+          ${t.noResults}
+        </div>
+      `;
+    } else {
+      const grouped = matches.reduce((acc, item) => {
+        if (!acc[item.category]) acc[item.category] = [];
+        acc[item.category].push(item);
+        return acc;
+      }, {});
+
+      let html = '';
+      for (const [category, items] of Object.entries(grouped)) {
+        html += `
+          <div class="px-3 py-2 text-xs font-semibold text-[rgb(var(--color-text-tertiary))] uppercase tracking-wide bg-[rgb(var(--color-bg-accent))]">
+            ${category === 'pages' ? t.pages : t.tools}
+          </div>
+        `;
+        for (const item of items) {
+          const title = item.title[lang] || item.title['en-GB'];
+          const url = getLangPath(item.url);
+          html += `
+            <a href="${url}" class="block px-4 py-3 hover:bg-primary-500/10 transition-colors">
+              <span class="text-[rgb(var(--color-text-primary))]">${title}</span>
+            </a>
+          `;
+        }
+      }
+      results.innerHTML = html;
+    }
+
+    results.classList.remove('hidden');
+  }
+
+  input?.addEventListener('input', (e) => search(e.target.value));
+
+  // Focus on / key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      e.preventDefault();
+      input?.focus();
+    }
+  });
+
+  // Close results on click outside
+  document.addEventListener('click', (e) => {
+    if (!document.getElementById('site-search')?.contains(e.target)) {
+      results?.classList.add('hidden');
+    }
+  });
+
+  // Hide results on escape
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      results?.classList.add('hidden');
+      input.blur();
+    }
+  });
+</script>

@@ -1,0 +1,287 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedTools from '../RelatedTools.astro';
+
+const { lang } = Astro.props;
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+const t: Record<Lang, Record<string, string>> = {
+  'zh-CN': {
+    title: '友情链接',
+    subtitle: '我的朋友们',
+    badge: '🔗 Friends',
+    intro: '这里是一些我喜欢的网站和朋友们的主页，欢迎互链。',
+    apply: '申请友链',
+    applyDesc: '发送邮件至',
+    requirements: '友链要求',
+    req1: '网站内容健康、积极向上',
+    req2: '网站能够正常访问',
+    req3: '优先考虑技术博客或创意作品集',
+    back: '返回首页',
+    noDesc: '这个人很懒，什么都没写',
+    adTitle: '合作展示位',
+    adDesc: '这里可展示你的品牌、产品或活动，欢迎联系合作。',
+    adCta: '咨询合作',
+    placeholderTag: '待加入',
+  },
+  'zh-TW': {
+    title: '友情連結',
+    subtitle: '我的朋友們',
+    badge: '🔗 Friends',
+    intro: '這裡是一些我喜歡的網站和朋友們的主頁，歡迎互鏈。',
+    apply: '申請友鏈',
+    applyDesc: '發送郵件至',
+    requirements: '友鏈要求',
+    req1: '網站內容健康、積極向上',
+    req2: '網站能夠正常訪問',
+    req3: '優先考慮技術部落格或創意作品集',
+    back: '返回首頁',
+    noDesc: '這個人很懶，什麼都沒寫',
+    adTitle: '合作展示位',
+    adDesc: '這裡可展示你的品牌、產品或活動，歡迎聯繫合作。',
+    adCta: '諮詢合作',
+    placeholderTag: '待加入',
+  },
+  'en-GB': {
+    title: 'Friends',
+    subtitle: 'People & Sites I Enjoy',
+    badge: '🔗 Friends',
+    intro: 'Here are some websites I enjoy and my friends\' homepages. Link exchanges welcome.',
+    apply: 'Apply for Link Exchange',
+    applyDesc: 'Send email to',
+    requirements: 'Requirements',
+    req1: 'Website content must be healthy and positive',
+    req2: 'Website must be accessible',
+    req3: 'Tech blogs or creative portfolios preferred',
+    back: 'Back to home',
+    noDesc: 'No description provided',
+    adTitle: 'Partner Spotlight',
+    adDesc: 'A reserved slot for your brand, product, or campaign.',
+    adCta: 'Enquire now',
+    placeholderTag: 'Coming soon',
+  },
+  fr: {
+    title: 'Amis',
+    subtitle: 'Gens et sites que j\'apprécie',
+    badge: '🔗 Amis',
+    intro: 'Voici quelques sites Web que j\'apprécie et les pages d\'accueil de mes amis. Échanges de liens bienvenus.',
+    apply: 'Demander un échange de lien',
+    applyDesc: 'Envoyer un email à',
+    requirements: 'Conditions',
+    req1: 'Le contenu du site doit être sain et positif',
+    req2: 'Le site doit être accessible',
+    req3: 'Blogs techniques ou portfolios créatifs préférés',
+    back: "Retour à l'accueil",
+    noDesc: 'Aucune description fournie',
+    adTitle: 'Espace partenaire',
+    adDesc: 'Un emplacement pour votre marque, produit ou campagne.',
+    adCta: 'Nous contacter',
+    placeholderTag: 'Bientôt',
+  },
+  ru: {
+    title: 'Друзья',
+    subtitle: 'Люди и сайты, которые мне нравятся',
+    badge: '🔗 Друзья',
+    intro: 'Здесь представлены сайты, которые мне нравятся, и домашние страницы моих друзей. Обмен ссылками приветствуется.',
+    apply: 'Подать заявку на обмен ссылками',
+    applyDesc: 'Отправить письмо на',
+    requirements: 'Требования',
+    req1: 'Содержание сайта должно быть здоровым и позитивным',
+    req2: 'Сайт должен быть доступен',
+    req3: 'Предпочитаются технические блоги или креативные портфолио',
+    back: 'На главную',
+    noDesc: 'Описание не предоставлено',
+    adTitle: 'Партнерский слот',
+    adDesc: 'Место для вашего бренда, продукта или кампании.',
+    adCta: 'Связаться',
+    placeholderTag: 'Скоро',
+  },
+};
+
+// 友链数据 - 可以根据实际情况修改
+const friendsData = [
+  {
+    name: 'Alexander James Carter',
+    url: 'https://alexander.xin',
+    avatar: '/img/branding/logo.png',
+    desc: {
+      'zh-CN': '这是我的个人网站',
+      'zh-TW': '這是我的個人網站',
+      'en-GB': 'This is my personal website',
+      'fr': 'C\'est mon site personnel',
+      'ru': 'Это мой личный сайт',
+    },
+    tags: ['Developer', 'Photographer'],
+  },
+  {
+    name: 'Your Site Here',
+    url: 'mailto:security@alexander.xin?subject=Friend%20Link%20Request',
+    avatar: '/img/branding/logo.png',
+    desc: {
+      'zh-CN': '这里是预留友链位，欢迎互链申请。',
+      'zh-TW': '這裡是預留友鏈位，歡迎互鏈申請。',
+      'en-GB': 'Reserved friend-link slot. Link exchange welcome.',
+      fr: 'Espace réservé. Échange de liens bienvenu.',
+      ru: 'Резервный слот для обмена ссылками.',
+    },
+    tags: ['Placeholder'],
+  },
+  {
+    name: 'Creative / Dev Partner',
+    url: 'mailto:security@alexander.xin?subject=Partnership%20Inquiry',
+    avatar: '/img/branding/logo-dark.png',
+    desc: {
+      'zh-CN': '招募中：创作者、开发者、个人站长。',
+      'zh-TW': '招募中：創作者、開發者、個人站長。',
+      'en-GB': 'Open for creators, developers, and indie web owners.',
+      fr: 'Ouvert aux créateurs, développeurs et indépendants.',
+      ru: 'Открыто для авторов, разработчиков и владельцев сайтов.',
+    },
+    tags: ['Sponsor', 'Collab'],
+  },
+];
+
+const text = t[lang as Lang] || t['en-GB'];
+
+function getLangPath(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = (lang as string) === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+---
+
+<BaseLayout title={text.title} description={text.subtitle}>
+  <section class="relative py-16 md:py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient opacity-40" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+
+      <!-- Header -->
+      <div class="text-center mb-12 max-w-2xl mx-auto">
+        <span class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4">
+          {text.badge}
+        </span>
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight">
+          {text.title}
+        </h1>
+        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+          {text.intro}
+        </p>
+      </div>
+
+      <!-- Friends Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {friendsData.map((friend) => (
+          <a
+            href={friend.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="glass-card card-hover p-6 rounded-2xl flex flex-col items-center text-center gap-4 reveal group"
+          >
+            <!-- Avatar -->
+            <div class="relative">
+              <img
+                src={friend.avatar}
+                alt={friend.name}
+                class="w-20 h-20 rounded-full object-cover ring-4 ring-primary-500/20 group-hover:ring-primary-500/40 transition-all duration-300"
+                loading="lazy"
+              />
+              <span class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-[rgb(var(--color-bg-primary))]"></span>
+            </div>
+
+            <!-- Info -->
+            <div>
+              <h2 class="text-lg font-heading font-bold text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors">
+                {friend.name}
+              </h2>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))] mt-1 line-clamp-2">
+                {friend.desc[lang as Lang] || friend.desc['en-GB'] || text.noDesc}
+              </p>
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-1.5 justify-center">
+              {friend.tags.map((tag) => (
+                <span class="px-2 py-0.5 rounded-md bg-accent-500/10 text-accent-600 dark:text-accent-400 text-xs font-medium">
+                  {tag === 'Placeholder' ? text.placeholderTag : tag}
+                </span>
+              ))}
+            </div>
+
+            <!-- Visit indicator -->
+            <span class="text-xs text-[rgb(var(--color-text-tertiary))] group-hover:text-primary-500 transition-colors flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              {lang === 'zh-CN' ? '访问' : lang === 'zh-TW' ? '訪問' : 'Visit'}
+            </span>
+          </a>
+        ))}
+
+        <!-- Add Friend Card -->
+        <a
+          href="mailto:security@alexander.xin?subject=Friend Link Request"
+          class="glass-card card-hover p-6 rounded-2xl flex flex-col items-center justify-center text-center gap-4 reveal group border-2 border-dashed border-[rgb(var(--color-border))] hover:border-primary-500/50 transition-colors min-h-[240px]"
+        >
+          <div class="w-16 h-16 rounded-full bg-primary-500/10 flex items-center justify-center group-hover:bg-primary-500/20 transition-colors">
+            <svg class="w-8 h-8 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+          </div>
+          <span class="font-medium text-[rgb(var(--color-text-secondary))] group-hover:text-primary-500 transition-colors">
+            {text.apply}
+          </span>
+        </a>
+      </div>
+
+      <!-- Partner spotlight -->
+      <div class="glass-card p-6 rounded-2xl max-w-xl mx-auto mb-12 border border-primary-500/30">
+        <h3 class="font-heading font-bold text-lg mb-2 text-[rgb(var(--color-text-primary))]">
+          📢 {text.adTitle}
+        </h3>
+        <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">{text.adDesc}</p>
+        <a
+          href="mailto:security@alexander.xin?subject=Partner%20Spotlight"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium transition-colors"
+        >
+          {text.adCta}
+        </a>
+      </div>
+
+      <!-- Requirements -->
+      <div class="glass-card p-6 rounded-2xl max-w-xl mx-auto mb-12">
+        <h3 class="font-heading font-bold text-lg mb-4 text-[rgb(var(--color-text-primary))]">
+          📋 {text.requirements}
+        </h3>
+        <ul class="space-y-2 text-sm text-[rgb(var(--color-text-secondary))]">
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+            {text.req1}
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+            {text.req2}
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+            {text.req3}
+          </li>
+        </ul>
+        <p class="mt-4 text-sm text-[rgb(var(--color-text-tertiary))]">
+          {text.applyDesc} <a href="mailto:security@alexander.xin" class="text-primary-500 hover:underline">security@alexander.xin</a>
+        </p>
+      </div>
+
+      <!-- Back link -->
+      <div class="text-center">
+        <a
+          href={getLangPath('/')}
+          class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1"
+        >
+          ← {text.back}
+        </a>
+      </div>
+
+      <RelatedTools lang={lang} current="friends" />
+    </div>
+  </section>
+</BaseLayout>

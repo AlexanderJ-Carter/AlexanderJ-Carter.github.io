@@ -1,0 +1,135 @@
+---
+const { lang = 'zh-CN' } = Astro.props;
+
+const text = {
+  'zh-CN': {
+    title: '氛围电台',
+    subtitle: '免费外部音乐源，无需 API Key',
+    choose: '选择电台',
+    play: '播放',
+    pause: '暂停',
+    note: '提示：首次播放受浏览器自动播放策略限制，需点击触发。',
+  },
+  'zh-TW': {
+    title: '氛圍電台',
+    subtitle: '免費外部音樂源，無需 API Key',
+    choose: '選擇電台',
+    play: '播放',
+    pause: '暫停',
+    note: '提示：首次播放受瀏覽器策略限制，需點擊觸發。',
+  },
+  'en-GB': {
+    title: 'Ambient Radio',
+    subtitle: 'Free external music streams, no API key',
+    choose: 'Choose station',
+    play: 'Play',
+    pause: 'Pause',
+    note: 'Tip: first playback requires a user click due to autoplay rules.',
+  },
+  fr: {
+    title: 'Radio Ambiante',
+    subtitle: 'Flux musicaux gratuits, sans clé API',
+    choose: 'Choisir une station',
+    play: 'Lecture',
+    pause: 'Pause',
+    note: 'Astuce : le premier lancement nécessite un clic utilisateur.',
+  },
+  ru: {
+    title: 'Атмосферное радио',
+    subtitle: 'Бесплатные внешние потоки, без API ключа',
+    choose: 'Выбрать станцию',
+    play: 'Play',
+    pause: 'Pause',
+    note: 'Подсказка: первый запуск требует клика пользователя.',
+  },
+};
+
+const labels = text[lang as keyof typeof text] || text['en-GB'];
+
+const stations = [
+  { name: 'SomaFM Groove Salad', url: 'https://ice2.somafm.com/groovesalad-128-mp3' },
+  { name: 'SomaFM Drone Zone', url: 'https://ice2.somafm.com/dronezone-128-mp3' },
+  { name: 'SomaFM Space Station', url: 'https://ice2.somafm.com/spacestation-128-mp3' },
+];
+---
+
+<section class="py-16 bg-[rgb(var(--color-bg-secondary))] reveal">
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="max-w-3xl mx-auto glass-card rounded-2xl p-6 md:p-8 border border-primary-500/20">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="text-2xl" aria-hidden="true">📻</span>
+        <h2 class="text-2xl md:text-3xl font-heading font-bold">{labels.title}</h2>
+      </div>
+      <p class="text-[rgb(var(--color-text-secondary))] mb-5">{labels.subtitle}</p>
+
+      <div class="grid sm:grid-cols-[1fr_auto] gap-3 items-center">
+        <label for="ambient-station" class="sr-only">{labels.choose}</label>
+        <select
+          id="ambient-station"
+          class="rounded-xl border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-4 py-2.5 text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+        >
+          {stations.map((s) => <option value={s.url}>{s.name}</option>)}
+        </select>
+        <button
+          id="ambient-toggle"
+          type="button"
+          class="rounded-xl px-5 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold hover:opacity-90 transition-opacity"
+        >
+          {labels.play}
+        </button>
+      </div>
+
+      <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-4">{labels.note}</p>
+      <audio id="ambient-audio" preload="none"></audio>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ stations: JSON.stringify(stations), playText: labels.play, pauseText: labels.pause }} is:inline>
+  (function () {
+    const stationEl = document.getElementById('ambient-station');
+    const btn = document.getElementById('ambient-toggle');
+    const audio = document.getElementById('ambient-audio');
+    if (!stationEl || !btn || !audio) return;
+    let playing = false;
+
+    function updateSource() {
+      const selected = stationEl.value;
+      if (audio.src !== selected) {
+        audio.src = selected;
+        audio.load();
+      }
+    }
+    updateSource();
+
+    stationEl.addEventListener('change', async () => {
+      const wasPlaying = playing;
+      updateSource();
+      if (wasPlaying) {
+        try {
+          await audio.play();
+        } catch (_) {}
+      }
+    });
+
+    btn.addEventListener('click', async () => {
+      if (!playing) {
+        updateSource();
+        try {
+          await audio.play();
+          playing = true;
+          btn.textContent = pauseText;
+        } catch (_) {}
+      } else {
+        audio.pause();
+        playing = false;
+        btn.textContent = playText;
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      playing = false;
+      btn.textContent = playText;
+    });
+  })();
+</script>

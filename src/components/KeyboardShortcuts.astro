@@ -1,0 +1,178 @@
+---
+/**
+ * 全局键盘快捷键组件
+ * 提供网站级别的快捷键支持
+ */
+const { lang = 'zh-CN' } = Astro.props;
+
+const shortcuts = [
+  { key: 'h', label: lang === 'zh-CN' ? '首页' : lang === 'zh-TW' ? '首頁' : 'Home', url: '/' },
+  { key: 'g', label: lang === 'zh-CN' ? '画廊' : lang === 'zh-TW' ? '畫廊' : 'Gallery', url: '/gallery' },
+  { key: 'p', label: lang === 'zh-CN' ? '项目' : lang === 'zh-TW' ? '專案' : 'Projects', url: '/projects' },
+  { key: 'a', label: lang === 'zh-CN' ? '关于' : lang === 'zh-TW' ? '關於' : 'About', url: '/about' },
+  { key: 'c', label: lang === 'zh-CN' ? '联系' : lang === 'zh-TW' ? '聯繫' : 'Contact', url: '/contact' },
+  { key: 't', label: lang === 'zh-CN' ? '时间' : lang === 'zh-TW' ? '時間' : 'Time', url: '/time' },
+  { key: '/', label: lang === 'zh-CN' ? '搜索' : lang === 'zh-TW' ? '搜尋' : 'Search', action: 'search' },
+  { key: 'd', label: lang === 'zh-CN' ? '切换主题' : lang === 'zh-TW' ? '切換主題' : 'Toggle theme', action: 'theme' },
+  { key: '?', label: lang === 'zh-CN' ? '帮助' : lang === 'zh-TW' ? '幫助' : 'Help', action: 'help' },
+];
+
+function getLangPath(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+---
+
+<!-- Keyboard Shortcuts Modal -->
+<div id="shortcuts-modal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
+  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="shortcuts-backdrop"></div>
+  <div class="absolute inset-0 flex items-center justify-center p-4">
+    <div class="glass-card rounded-2xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-4">
+        <h2 id="shortcuts-title" class="text-xl font-heading font-bold">
+          ⌨️ {lang === 'zh-CN' ? '键盘快捷键' : lang === 'zh-TW' ? '鍵盤快速鍵' : 'Keyboard Shortcuts'}
+        </h2>
+        <button id="close-shortcuts" type="button" class="p-2 hover:bg-[rgb(var(--color-bg-accent))] rounded-lg transition-colors" aria-label="Close">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="space-y-2">
+        {shortcuts.map((shortcut) => (
+          <div class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] transition-colors">
+            <span class="text-[rgb(var(--color-text-secondary))]">{shortcut.label}</span>
+            <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm font-mono min-w-[2rem] text-center">
+              {shortcut.key}
+            </kbd>
+          </div>
+        ))}
+      </div>
+      <p class="mt-4 text-xs text-[rgb(var(--color-text-tertiary))] text-center">
+        {lang === 'zh-CN' ? '按 ? 显示/隐藏此帮助' : lang === 'zh-TW' ? '按 ? 顯示/隱藏此幫助' : 'Press ? to toggle this help'}
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Shortcut hint button (bottom right) -->
+<button
+  id="shortcuts-hint"
+  type="button"
+  class="shortcuts-hint fixed z-40 p-3 rounded-full glass-card hover:scale-110 transition-transform opacity-60 hover:opacity-100"
+  aria-label={lang === 'zh-CN' ? '键盘快捷键' : 'Keyboard shortcuts'}
+  title={lang === 'zh-CN' ? '键盘快捷键 (?)' : 'Keyboard shortcuts (?)'}
+>
+  <svg class="w-5 h-5 text-[rgb(var(--color-text-secondary))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  </svg>
+</button>
+
+<script define:vars={{ lang, shortcuts, getLangPath }}>
+  const modal = document.getElementById('shortcuts-modal');
+  const backdrop = document.getElementById('shortcuts-backdrop');
+  const closeBtn = document.getElementById('close-shortcuts');
+  const hintBtn = document.getElementById('shortcuts-hint');
+
+  function showModal() {
+    modal?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    closeBtn?.focus();
+  }
+
+  function hideModal() {
+    modal?.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // Toggle modal
+  hintBtn?.addEventListener('click', showModal);
+  closeBtn?.addEventListener('click', hideModal);
+  backdrop?.addEventListener('click', hideModal);
+
+  // Keyboard navigation
+  modal?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      hideModal();
+    }
+  });
+
+  // Global keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Ignore if typing in input/textarea
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) {
+      return;
+    }
+
+    const key = e.key.toLowerCase();
+
+    // Show/hide help
+    if (e.shiftKey && key === '/') {
+      e.preventDefault();
+      showModal();
+      return;
+    }
+
+    // Close modal
+    if (key === 'escape') {
+      hideModal();
+      return;
+    }
+
+    // Find matching shortcut
+    const shortcut = shortcuts.find(s => s.key === key);
+    if (shortcut) {
+      e.preventDefault();
+
+      if (shortcut.action === 'theme') {
+        document.getElementById('theme-toggle')?.click();
+      } else if (shortcut.action === 'search') {
+        const searchInput = document.querySelector('#site-search input');
+        if (searchInput) {
+          searchInput.focus();
+        }
+      } else if (shortcut.action === 'help') {
+        if (modal?.classList.contains('hidden')) {
+          showModal();
+        } else {
+          hideModal();
+        }
+      } else if (shortcut.url) {
+        window.location.href = getLangPath(shortcut.url);
+      }
+    }
+  });
+
+  // Show hint button on first visit
+  if (!localStorage.getItem('shortcuts-hint-seen')) {
+    setTimeout(() => {
+      hintBtn?.classList.add('animate-bounce');
+      setTimeout(() => {
+        hintBtn?.classList.remove('animate-bounce');
+      }, 3000);
+      localStorage.setItem('shortcuts-hint-seen', 'true');
+    }, 5000);
+  }
+</script>
+
+<style>
+  .shortcuts-hint {
+    right: 1rem;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 13rem);
+  }
+
+  @media (min-width: 768px) {
+    .shortcuts-hint {
+      right: 1.5rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 13.4rem);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .shortcuts-hint {
+      right: 0.6rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 12rem);
+    }
+  }
+</style>

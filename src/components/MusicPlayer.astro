@@ -132,6 +132,24 @@
       <h4 id="music-title" class="font-semibold text-[rgb(var(--color-text-primary))] truncate px-2">选择一首歌曲</h4>
       <p id="music-artist" class="text-sm text-[rgb(var(--color-text-secondary))] mt-0.5">-</p>
     </div>
+    <div class="mb-4">
+      <div class="grid grid-cols-2 gap-2">
+        <button type="button" id="music-mode-local" class="music-mode-btn active">本地歌单</button>
+        <button type="button" id="music-mode-radio" class="music-mode-btn">氛围电台</button>
+      </div>
+    </div>
+
+    <div id="music-radio-wrap" class="mb-4 hidden">
+      <div class="flex items-center gap-2 mb-2">
+        <select id="music-radio-station" class="flex-1 rounded-xl border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm text-[rgb(var(--color-text-primary))] outline-none">
+          <option value="https://ice2.somafm.com/groovesalad-128-mp3">SomaFM Groove Salad</option>
+          <option value="https://ice2.somafm.com/dronezone-128-mp3">SomaFM Drone Zone</option>
+          <option value="https://ice2.somafm.com/spacestation-128-mp3">SomaFM Space Station</option>
+        </select>
+        <button type="button" id="music-radio-apply" class="music-mode-btn !px-3">切台</button>
+      </div>
+      <p class="text-xs text-[rgb(var(--color-text-tertiary))]">电台与本地歌曲共用同一个播放器控制区。</p>
+    </div>
 
     <div class="mb-4">
       <div class="flex justify-between text-xs text-[rgb(var(--color-text-tertiary))] mb-1">
@@ -183,7 +201,7 @@
       </button>
     </div>
 
-    <div>
+    <div id="music-playlist-wrap">
       <h5 class="text-xs font-semibold text-[rgb(var(--color-text-tertiary))] uppercase tracking-wider mb-2">播放列表</h5>
       <div id="music-playlist-container" class="space-y-1">
         <p id="music-playlist-placeholder" class="text-sm text-[rgb(var(--color-text-tertiary))] py-4 text-center">加载中…</p>
@@ -211,14 +229,47 @@
   const volume = document.getElementById('music-volume');
   const playlistContainer = document.getElementById('music-playlist-container');
   const playlistPlaceholder = document.getElementById('music-playlist-placeholder');
+  const radioWrap = document.getElementById('music-radio-wrap');
+  const playlistWrap = document.getElementById('music-playlist-wrap');
+  const radioStation = document.getElementById('music-radio-station');
+  const radioApply = document.getElementById('music-radio-apply');
+  const modeLocal = document.getElementById('music-mode-local');
+  const modeRadio = document.getElementById('music-mode-radio');
 
   let musicData = [];
+  let playbackMode = 'local';
   let currentTrack = 0;
   let isPlaying = false;
   let panelPos = { x: 24, y: 80 };
   let miniPos = { x: defaultMiniPos.x, y: defaultMiniPos.y };
   let dragTarget = null;
   let dragOffset = { x: 0, y: 0 };
+
+  function getSelectedStationName() {
+    if (!radioStation) return 'Ambient Radio';
+    const opt = radioStation.options[radioStation.selectedIndex];
+    return opt?.textContent || 'Ambient Radio';
+  }
+
+  function setMode(mode) {
+    playbackMode = mode === 'radio' ? 'radio' : 'local';
+    const isRadio = playbackMode === 'radio';
+    radioWrap?.classList.toggle('hidden', !isRadio);
+    playlistWrap?.classList.toggle('hidden', isRadio);
+    modeLocal?.classList.toggle('active', !isRadio);
+    modeRadio?.classList.toggle('active', isRadio);
+    if (isRadio) {
+      const titleEl = document.getElementById('music-title');
+      const artistEl = document.getElementById('music-artist');
+      const miniTitle = document.getElementById('music-mini-title');
+      const name = getSelectedStationName();
+      if (titleEl) titleEl.textContent = '📻 ' + name;
+      if (miniTitle) miniTitle.textContent = '📻 ' + name;
+      if (artistEl) artistEl.textContent = 'Live Stream';
+    } else if (musicData.length > 0) {
+      loadTrack(currentTrack);
+    }
+  }
 
   function saveState() {
     try {
@@ -344,6 +395,7 @@
   }
 
   function loadTrack(index) {
+    if (playbackMode === 'radio') return;
     if (index < 0 || index >= musicData.length) return;
     const t = musicData[index];
     currentTrack = index;
@@ -435,8 +487,23 @@
       if (isPlaying) {
         audio.pause();
       } else {
-        if (musicData.length === 0) return;
-        if (!audio.src || audio.src === window.location.href) loadTrack(0);
+        if (playbackMode === 'radio') {
+          if (!radioStation) return;
+          if (audio.src !== radioStation.value) {
+            audio.src = radioStation.value;
+            audio.load();
+          }
+          const titleEl = document.getElementById('music-title');
+          const miniTitle = document.getElementById('music-mini-title');
+          const artistEl = document.getElementById('music-artist');
+          const name = getSelectedStationName();
+          if (titleEl) titleEl.textContent = '📻 ' + name;
+          if (miniTitle) miniTitle.textContent = '📻 ' + name;
+          if (artistEl) artistEl.textContent = 'Live Stream';
+        } else {
+          if (musicData.length === 0) return;
+          if (!audio.src || audio.src === window.location.href) loadTrack(0);
+        }
         await audio.play();
       }
     } catch (err) {
@@ -484,6 +551,7 @@
     if (miniProgress) setProgressStyle(miniProgress, 0);
   });
   audio.addEventListener('ended', async () => {
+    if (playbackMode === 'radio') return;
     if (musicData.length === 0) return;
     currentTrack = (currentTrack + 1) % musicData.length;
     loadTrack(currentTrack);
@@ -502,6 +570,7 @@
   });
 
   function prevNext(delta) {
+    if (playbackMode === 'radio') return;
     if (musicData.length === 0) return;
     currentTrack = (currentTrack + delta + musicData.length) % musicData.length;
     loadTrack(currentTrack);
@@ -511,6 +580,17 @@
   document.getElementById('music-next')?.addEventListener('click', () => prevNext(1));
   document.getElementById('music-mini-prev')?.addEventListener('click', () => prevNext(-1));
   document.getElementById('music-mini-next')?.addEventListener('click', () => prevNext(1));
+  modeLocal?.addEventListener('click', () => setMode('local'));
+  modeRadio?.addEventListener('click', () => setMode('radio'));
+  radioApply?.addEventListener('click', async () => {
+    if (!radioStation) return;
+    audio.src = radioStation.value;
+    audio.load();
+    if (isPlaying) {
+      try { await audio.play(); } catch (_) {}
+    }
+    if (playbackMode === 'radio') setMode('radio');
+  });
 
   loadState();
   applyMiniPos();
@@ -531,6 +611,7 @@
       musicData = [];
       setEmptyState();
     });
+  setMode('local');
 
   // 触摸拖拽支持（与鼠标共用同一套位置逻辑）
   function getClientPos(e) {
@@ -602,6 +683,20 @@
   }
   .music-btn { outline: none; }
   .music-btn:focus-visible { box-shadow: 0 0 0 2px rgb(14 165 233); }
+  .music-mode-btn {
+    border: 1px solid rgb(var(--color-border));
+    background: rgb(var(--color-bg-primary));
+    border-radius: 0.75rem;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.78rem;
+    color: rgb(var(--color-text-secondary));
+  }
+  .music-mode-btn.active {
+    color: rgb(14 165 233);
+    border-color: rgb(14 165 233 / 0.45);
+    background: rgb(14 165 233 / 0.12);
+    font-weight: 600;
+  }
   .music-panel { bottom: auto !important; right: auto !important; }
   .music-mini { bottom: auto !important; right: auto !important; }
 

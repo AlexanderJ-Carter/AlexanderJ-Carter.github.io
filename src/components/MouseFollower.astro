@@ -11,11 +11,14 @@
   let mouseY = 0;
   let followerX = 0;
   let followerY = 0;
+  let rafId = 0;
 
   // Check user preference
   const disableFollower = localStorage.getItem('disableMouseFollower') === 'true';
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const coarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
   
-  if (!disableFollower) {
+  if (!disableFollower && !reducedMotion && !coarsePointer) {
     // Update mouse position
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
@@ -32,7 +35,7 @@
         follower.style.top = followerY + 'px';
       }
       
-      requestAnimationFrame(animateFollower);
+      rafId = requestAnimationFrame(animateFollower);
     }
 
     // Hide on mouse leave
@@ -42,6 +45,15 @@
 
     document.addEventListener('mouseenter', () => {
       if (follower) follower.style.opacity = '1';
+    });
+
+    // Pause animation when tab is hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        if (rafId) cancelAnimationFrame(rafId);
+      } else {
+        animateFollower();
+      }
     });
 
     // Start animation

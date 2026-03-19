@@ -1,0 +1,315 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const { lang } = Astro.props;
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+const t: Record<Lang, Record<string, string>> = {
+  'zh-CN': {
+    title: '阅读清单',
+    subtitle: '推荐书籍与资源',
+    badge: '📚 Reading',
+    intro: '这里是一些我读过或正在阅读的好书，希望对你也有所帮助。',
+    currentlyReading: '正在阅读',
+    recommended: '推荐书单',
+    wantToRead: '想读',
+    back: '返回首页',
+  },
+  'zh-TW': {
+    title: '閱讀清單',
+    subtitle: '推薦書籍與資源',
+    badge: '📚 Reading',
+    intro: '這裡是一些我讀過或正在閱讀的好書，希望對你也有所幫助。',
+    currentlyReading: '正在閱讀',
+    recommended: '推薦書單',
+    wantToRead: '想讀',
+    back: '返回首頁',
+  },
+  'en-GB': {
+    title: 'Reading List',
+    subtitle: 'Recommended Books & Resources',
+    badge: '📚 Reading',
+    intro: 'Here are some books I\'ve read or am currently reading. Hope they help you too.',
+    currentlyReading: 'Currently Reading',
+    recommended: 'Recommended',
+    wantToRead: 'Want to Read',
+    back: 'Back to home',
+  },
+  fr: {
+    title: 'Liste de lecture',
+    subtitle: 'Livres et ressources recommandés',
+    badge: '📚 Lecture',
+    intro: 'Voici quelques livres que j\'ai lus ou que je suis en train de lire. J\'espère qu\'ils vous aideront aussi.',
+    currentlyReading: 'En cours de lecture',
+    recommended: 'Recommandés',
+    wantToRead: 'À lire',
+    back: "Retour à l'accueil",
+  },
+  ru: {
+    title: 'Список чтения',
+    subtitle: 'Рекомендуемые книги и ресурсы',
+    badge: '📚 Чтение',
+    intro: 'Вот несколько книг, которые я прочитал или читаю сейчас. Надеюсь, они помогут и вам.',
+    currentlyReading: 'Читаю сейчас',
+    recommended: 'Рекомендую',
+    wantToRead: 'Хочу прочитать',
+    back: 'На главную',
+  },
+};
+
+// 书籍数据
+const booksData = {
+  currentlyReading: [
+    {
+      title: '代码大全',
+      titleEn: 'Code Complete',
+      author: 'Steve McConnell',
+      cover: '📚',
+      progress: 45,
+      desc: {
+        'zh-CN': '软件构建的经典著作，深入讲解编程的最佳实践。',
+        'zh-TW': '軟體建構的經典著作，深入講解編程的最佳實踐。',
+        'en-GB': 'A classic on software construction, covering best practices in programming.',
+        'fr': 'Un classique sur la construction logicielle, couvrant les meilleures pratiques de programmation.',
+        'ru': 'Классика о построении программ, охватывающая лучшие практики программирования.',
+      },
+    },
+  ],
+  recommended: [
+    {
+      title: '深入理解计算机系统',
+      titleEn: 'Computer Systems: A Programmer\'s Perspective',
+      author: 'Randal E. Bryant',
+      cover: '💻',
+      rating: 5,
+      desc: {
+        'zh-CN': '从程序员视角理解计算机系统，CS 必读经典。',
+        'zh-TW': '從程式設計師視角理解計算機系統，CS 必讀經典。',
+        'en-GB': 'Understanding computer systems from a programmer\'s perspective. A CS must-read.',
+        'fr': 'Comprendre les systèmes informatiques du point de vue du programmeur. Un incontournable.',
+        'ru': 'Понимание компьютерных систем с точки зрения программиста. Обязательно к прочтению.',
+      },
+    },
+    {
+      title: '设计模式',
+      titleEn: 'Design Patterns',
+      author: 'Gang of Four',
+      cover: '🎨',
+      rating: 5,
+      desc: {
+        'zh-CN': '可复用面向对象软件的基础，软件工程师必备。',
+        'zh-TW': '可重用物件導向軟體的基礎，軟體工程師必備。',
+        'en-GB': 'Foundations of reusable object-oriented software. Essential for software engineers.',
+        'fr': 'Les bases des logiciels orientés objet réutilisables. Essentiel pour les ingénieurs.',
+        'ru': 'Основы многоразового объектно-ориентированного ПО. Необходимо для инженеров.',
+      },
+    },
+    {
+      title: 'JavaScript 高级程序设计',
+      titleEn: 'Professional JavaScript for Web Developers',
+      author: 'Matt Frisbie',
+      cover: '📜',
+      rating: 5,
+      desc: {
+        'zh-CN': 'JavaScript 权威指南，前端开发者必读。',
+        'zh-TW': 'JavaScript 權威指南，前端開發者必讀。',
+        'en-GB': 'The definitive JavaScript guide. A must-read for frontend developers.',
+        'fr': 'Le guide définitif de JavaScript. Indispensable pour les développeurs frontend.',
+        'ru': 'Окончательное руководство по JavaScript. Обязательно для фронтенд-разработчиков.',
+      },
+    },
+    {
+      title: '算法导论',
+      titleEn: 'Introduction to Algorithms',
+      author: 'Thomas H. Cormen',
+      cover: '🔢',
+      rating: 5,
+      desc: {
+        'zh-CN': '算法领域的经典教材，全面且深入。',
+        'zh-TW': '演算法領域的經典教材，全面且深入。',
+        'en-GB': 'A classic textbook on algorithms. Comprehensive and in-depth.',
+        'fr': 'Un manuel classique sur les algorithmes. Complet et approfondi.',
+        'ru': 'Классический учебник по алгоритмам. Всесторонний и глубокий.',
+      },
+    },
+    {
+      title: '代码整洁之道',
+      titleEn: 'Clean Code',
+      author: 'Robert C. Martin',
+      cover: '✨',
+      rating: 4,
+      desc: {
+        'zh-CN': '如何编写整洁、可维护的代码。',
+        'zh-TW': '如何編寫整潔、可維護的程式碼。',
+        'en-GB': 'How to write clean, maintainable code.',
+        'fr': 'Comment écrire un code propre et maintenable.',
+        'ru': 'Как писать чистый, поддерживаемый код.',
+      },
+    },
+    {
+      title: '摄影构图学',
+      titleEn: 'Photographic Composition',
+      author: 'Ben Clements',
+      cover: '📷',
+      rating: 4,
+      desc: {
+        'zh-CN': '摄影构图的经典教程，提升审美与技法。',
+        'zh-TW': '攝影構圖的經典教程，提升審美與技法。',
+        'en-GB': 'A classic tutorial on photographic composition. Improve your aesthetics and technique.',
+        'fr': 'Un tutoriel classique sur la composition photographique.',
+        'ru': 'Классическое руководство по композиции фотографии.',
+      },
+    },
+  ],
+  wantToRead: [
+    {
+      title: '系统之美',
+      titleEn: 'Thinking in Systems',
+      author: 'Donella Meadows',
+      cover: '🌐',
+      desc: {
+        'zh-CN': '系统思维入门经典，理解复杂世界的钥匙。',
+        'zh-TW': '系統思維入門經典，理解複雜世界的鑰匙。',
+        'en-GB': 'A primer on systems thinking. The key to understanding a complex world.',
+        'fr': 'Une introduction à la pensée systémique.',
+        'ru': 'Введение в системное мышление.',
+      },
+    },
+    {
+      title: '重构',
+      titleEn: 'Refactoring',
+      author: 'Martin Fowler',
+      cover: '🔧',
+      desc: {
+        'zh-CN': '改善既有代码的设计，程序员必备技能。',
+        'zh-TW': '改善既有程式碼的設計，程式設計師必備技能。',
+        'en-GB': 'Improving the design of existing code. An essential skill for programmers.',
+        'fr': 'Améliorer la conception du code existant.',
+        'ru': 'Улучшение дизайна существующего кода.',
+      },
+    },
+  ],
+};
+
+const text = t[lang as Lang] || t['en-GB'];
+
+function getLangPath(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = (lang as string) === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+
+function renderStars(rating: number): string {
+  return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+}
+---
+
+<BaseLayout title={text.title} description={text.subtitle}>
+  <section class="relative py-16 md:py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient opacity-40" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10">
+
+      <!-- Header -->
+      <div class="text-center mb-12 max-w-2xl mx-auto">
+        <span class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4">
+          {text.badge}
+        </span>
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight">
+          {text.title}
+        </h1>
+        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+          {text.intro}
+        </p>
+      </div>
+
+      <!-- Currently Reading -->
+      {booksData.currentlyReading.length > 0 && (
+        <div class="mb-12">
+          <h2 class="text-xl font-heading font-bold mb-6 text-[rgb(var(--color-text-primary))] flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            {text.currentlyReading}
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {booksData.currentlyReading.map((book) => (
+              <div class="glass-card p-6 rounded-2xl reveal flex gap-4">
+                <div class="text-4xl">{book.cover}</div>
+                <div class="flex-1">
+                  <h3 class="font-heading font-bold text-[rgb(var(--color-text-primary))]">{book.title}</h3>
+                  <p class="text-xs text-[rgb(var(--color-text-tertiary))] mb-1">{book.titleEn} · {book.author}</p>
+                  <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-3">{book.desc[lang as Lang] || book.desc['en-GB']}</p>
+                  <div class="flex items-center gap-3">
+                    <div class="flex-1 h-2 bg-[rgb(var(--color-bg-accent))] rounded-full overflow-hidden">
+                      <div class="h-full bg-gradient-to-r from-primary-500 to-accent-500 rounded-full transition-all duration-500" style={`width: ${book.progress}%`}></div>
+                    </div>
+                    <span class="text-xs font-medium text-[rgb(var(--color-text-tertiary))]">{book.progress}%</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Recommended Books -->
+      <div class="mb-12">
+        <h2 class="text-xl font-heading font-bold mb-6 text-[rgb(var(--color-text-primary))] flex items-center gap-2">
+          <span>⭐</span>
+          {text.recommended}
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {booksData.recommended.map((book) => (
+            <div class="glass-card card-hover p-6 rounded-2xl reveal">
+              <div class="flex items-start gap-4 mb-3">
+                <div class="text-3xl">{book.cover}</div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-heading font-bold text-[rgb(var(--color-text-primary))] truncate">{book.title}</h3>
+                  <p class="text-xs text-[rgb(var(--color-text-tertiary))] truncate">{book.titleEn}</p>
+                  <p class="text-xs text-[rgb(var(--color-text-tertiary))]">{book.author}</p>
+                </div>
+              </div>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-3 line-clamp-2">{book.desc[lang as Lang] || book.desc['en-GB']}</p>
+              {book.rating && (
+                <div class="text-amber-500 text-sm">{renderStars(book.rating)}</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Want to Read -->
+      {booksData.wantToRead.length > 0 && (
+        <div class="mb-12">
+          <h2 class="text-xl font-heading font-bold mb-6 text-[rgb(var(--color-text-primary))] flex items-center gap-2">
+            <span>📖</span>
+            {text.wantToRead}
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {booksData.wantToRead.map((book) => (
+              <div class="glass-card card-hover p-6 rounded-2xl reveal opacity-80 hover:opacity-100 transition-opacity">
+                <div class="flex items-start gap-4 mb-3">
+                  <div class="text-3xl">{book.cover}</div>
+                  <div class="flex-1 min-w-0">
+                    <h3 class="font-heading font-bold text-[rgb(var(--color-text-primary))] truncate">{book.title}</h3>
+                    <p class="text-xs text-[rgb(var(--color-text-tertiary))] truncate">{book.titleEn}</p>
+                    <p class="text-xs text-[rgb(var(--color-text-tertiary))]">{book.author}</p>
+                  </div>
+                </div>
+                <p class="text-sm text-[rgb(var(--color-text-secondary))] line-clamp-2">{book.desc[lang as Lang] || book.desc['en-GB']}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Back link -->
+      <div class="text-center">
+        <a
+          href={getLangPath('/')}
+          class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1"
+        >
+          ← {text.back}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

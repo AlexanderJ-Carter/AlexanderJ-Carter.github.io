@@ -466,7 +466,7 @@ function getLangPath(path: string): string {
   </section>
 
   <!-- Stats Section -->
-  <section class="py-20 bg-[rgb(var(--color-bg-secondary))] reveal relative">
+  <section class="py-20 bg-[rgb(var(--color-bg-secondary))] reveal relative perf-section">
     <div class="section-divider" aria-hidden="true" />
     <div class="container mx-auto px-4 lg:px-8">
       <StatsCounter stats={stats} />
@@ -474,7 +474,7 @@ function getLangPath(path: string): string {
   </section>
 
   <!-- Intro / About snippet -->
-  <section class="py-16 reveal">
+  <section class="py-16 reveal perf-section">
     <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
       <div class="prose prose-lg dark:prose-invert max-w-none text-[rgb(var(--color-text-secondary))]">
         {intro.paragraphs.map((p: string) => <p class="mb-4 last:mb-0">{p}</p>)}
@@ -483,7 +483,7 @@ function getLangPath(path: string): string {
   </section>
 
   <!-- Featured Works Section -->
-  <section class="py-20 reveal bg-[rgb(var(--color-bg-secondary))]">
+  <section class="py-20 reveal bg-[rgb(var(--color-bg-secondary))] perf-section">
     <div class="section-divider" aria-hidden="true" />
     <div class="container mx-auto px-4 lg:px-8">
       <div class="text-center mb-12">
@@ -550,7 +550,7 @@ function getLangPath(path: string): string {
 
   <!-- Quote Section -->
   <section
-    class="py-20 bg-[rgb(var(--color-bg-primary))] relative overflow-hidden"
+    class="py-20 bg-[rgb(var(--color-bg-primary))] relative overflow-hidden perf-section"
   >
     <div class="section-divider" aria-hidden="true" />
     <div
@@ -612,6 +612,11 @@ function getLangPath(path: string): string {
 </BaseLayout>
 
 <style>
+  .perf-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 900px;
+  }
+
   /* Tech Stack Orbit */
   .tech-orbit {
     position: absolute;

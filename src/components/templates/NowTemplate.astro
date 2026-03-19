@@ -7,257 +7,255 @@ type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 const t: Record<Lang, Record<string, string>> = {
   'zh-CN': {
-    title: '此刻',
-    subtitle: '最近在做什么',
-    intro: '这是「/now」页面，灵感来自 ',
-    introLink: 'nownownow',
-    introEnd: '。会不定期更新，记录当下在做的事。',
-    sectionLife: '生活与学习',
-    life: '在校学习电子信息相关课程，课余做一点个人项目与摄影。最近在把网站收拾得更顺手一些，并保持阅读和运动。',
-    sectionFocus: '当前重心',
-    focus:
-      '完成课业、维护这个站点、偶尔写写博客。没有付费推广或虚假内容，这里就是个人小角落。',
-    sectionReading: '正在读',
-    reading: '技术博客和产品文章；偶尔翻一翻非虚构和小说。',
-    sectionListening: '最近在听',
-    listening: '喜欢钢琴与古典风格的音乐，常在写代码时循环播放几首轻音乐。网站里有一个小小的播放器，装着几首常听的曲子。',
-    sectionLearning: '正在学',
-    learning: 'Web 开发更深入的部分（性能优化、构建工具链）；Verilog 高级设计模式；以及日语入门。',
-    sectionBullets: '最近在做的几件事',
-    bullet1: '持续完善这个网站的体验与内容',
-    bullet2: '坚持每周运动几次',
-    bullet3: '整理相册和画廊里的图',
-    bullet4: '学一点新东西（语言或框架）',
-    updated: '本页最后更新',
+    title: 'Now · 实时面板',
+    subtitle: '给访客的当前时间与常用入口',
+    badge: '⏱ 实时体验',
+    localTime: '本地时间',
+    utcTime: 'UTC 时间',
+    timezone: '当前时区',
+    unix: 'Unix 时间戳',
+    copy: '复制',
+    copied: '已复制',
+    quick: '快捷入口',
+    q1: '世界时间',
+    q2: '汇率换算',
+    q3: '工具中台',
+    q4: '做饭菜谱',
+    q5: 'Linux 指令',
+    q6: 'NetQ 网络排查',
+    note: '这个页面不再记录“我在做什么”，而是给你一个即时可用的时间与工具面板。',
     back: '返回首页',
   },
   'zh-TW': {
-    title: '此刻',
-    subtitle: '最近在做什麼',
-    intro: '這是「/now」頁面，靈感來自 ',
-    introLink: 'nownownow',
-    introEnd: '。會不定期更新，記錄當下在做的事。',
-    sectionLife: '生活與學習',
-    life: '在校學習電子資訊相關課程，課餘做一點個人專案與攝影。最近在把網站收拾得更順手一些，並保持閱讀和運動。',
-    sectionFocus: '當前重心',
-    focus:
-      '完成課業、維護這個站點、偶爾寫寫部落格。沒有付費推廣或虛假內容，這裡就是個人小角落。',
-    sectionReading: '正在讀',
-    reading: '技術部落格和產品文章；偶爾翻一翻非虛構和小說。',
-    sectionListening: '最近在聽',
-    listening: '喜歡鋼琴與古典風格的音樂，常在寫程式時循環播放幾首輕音樂。網站裡有一個小小的播放器，裝著幾首常聽的曲子。',
-    sectionLearning: '正在學',
-    learning: 'Web 開發更深入的部分（效能優化、建構工具鏈）；Verilog 高階設計模式；以及日語入門。',
-    sectionBullets: '最近在做的幾件事',
-    bullet1: '持續完善這個網站的體驗與內容',
-    bullet2: '堅持每週運動幾次',
-    bullet3: '整理相簿和畫廊裡的圖',
-    bullet4: '學一點新東西（語言或框架）',
-    updated: '本頁最後更新',
+    title: 'Now · 即時面板',
+    subtitle: '給訪客的目前時間與常用入口',
+    badge: '⏱ 即時體驗',
+    localTime: '本地時間',
+    utcTime: 'UTC 時間',
+    timezone: '目前時區',
+    unix: 'Unix 時間戳',
+    copy: '複製',
+    copied: '已複製',
+    quick: '快捷入口',
+    q1: '世界時間',
+    q2: '匯率換算',
+    q3: '工具中台',
+    q4: '做飯菜譜',
+    q5: 'Linux 指令',
+    q6: 'NetQ 網路排查',
+    note: '這個頁面不再記錄「我在做什麼」，而是給你一個即時可用的時間與工具面板。',
     back: '返回首頁',
   },
   'en-GB': {
-    title: 'Now',
-    subtitle: "What I'm doing lately",
-    intro: 'This is a /now page, inspired by ',
-    introLink: 'nownownow',
-    introEnd: '. I update it from time to time.',
-    sectionLife: 'Life & study',
-    life: 'Studying electronics and related subjects; side projects and photography in spare time. Lately: improving this site and keeping up with reading and exercise.',
-    sectionFocus: 'Current focus',
-    focus:
-      'Coursework, maintaining this site, and the occasional blog post. No paid promotions or fake content — just a personal corner of the web.',
-    sectionReading: 'Reading',
-    reading: 'Tech blogs and product writing; occasionally non-fiction and fiction.',
-    sectionListening: 'Listening to',
-    listening: 'Piano and light classical music while coding. The site has a small built-in player with a few favourites — feel free to try it.',
-    sectionLearning: 'Learning',
-    learning: 'Deeper web development (performance, build tooling); advanced Verilog design patterns; and picking up some Japanese basics.',
-    sectionBullets: 'Lately',
-    bullet1: 'Continuously improving this site\'s UX and content',
-    bullet2: 'Keeping a few workout sessions per week',
-    bullet3: 'Organising photos and the gallery',
-    bullet4: 'Picking up something new (language or tool)',
-    updated: 'Last updated',
+    title: 'Now · Live Panel',
+    subtitle: 'Useful time info and quick links for visitors',
+    badge: '⏱ Live utility',
+    localTime: 'Local Time',
+    utcTime: 'UTC Time',
+    timezone: 'Current Time Zone',
+    unix: 'Unix Timestamp',
+    copy: 'Copy',
+    copied: 'Copied',
+    quick: 'Quick Links',
+    q1: 'World Time',
+    q2: 'Currency',
+    q3: 'Tool Hub',
+    q4: 'Cooking',
+    q5: 'Linux Commands',
+    q6: 'NetQ Lab',
+    note: 'This page is now visitor-focused: live time and useful entry points.',
     back: 'Back to home',
   },
   fr: {
-    title: 'Maintenant',
-    subtitle: 'Ce que je fais en ce moment',
-    intro: "Cette page « /now » s'inspire de ",
-    introLink: 'nownownow',
-    introEnd: '. Mise à jour de temps en temps.',
-    sectionLife: 'Vie et études',
-    life: 'Études en électronique et sujets connexes ; projets perso et photo à côté. Dernièrement : améliorer ce site, lecture et sport.',
-    sectionFocus: 'Priorité actuelle',
-    focus:
-      'Les cours, ce site, et parfois le blog. Pas de pub payante ni de contenu factice — un coin perso du web.',
-    sectionReading: 'En train de lire',
-    reading: 'Blogs tech et articles produit ; de temps en temps essais et romans.',
-    sectionListening: "J'écoute",
-    listening: "De la musique pour piano et classique légère pendant le coding. Le site a un petit lecteur intégré avec quelques favoris.",
-    sectionLearning: 'En train d\'apprendre',
-    learning: 'Développement web approfondi (performances, outils de build) ; patterns Verilog avancés ; et bases du japonais.',
-    sectionBullets: 'En ce moment',
-    bullet1: "Améliorer continuellement l'expérience du site",
-    bullet2: 'Garder quelques séances de sport par semaine',
-    bullet3: 'Ranger les photos et la galerie',
-    bullet4: 'Apprendre un truc nouveau (langage ou outil)',
-    updated: 'Dernière mise à jour',
+    title: 'Now · Panneau en direct',
+    subtitle: 'Heure actuelle et liens utiles pour les visiteurs',
+    badge: '⏱ Utilitaire en direct',
+    localTime: 'Heure locale',
+    utcTime: 'Heure UTC',
+    timezone: 'Fuseau horaire',
+    unix: 'Horodatage Unix',
+    copy: 'Copier',
+    copied: 'Copié',
+    quick: 'Accès rapides',
+    q1: 'Heure mondiale',
+    q2: 'Devise',
+    q3: 'Hub Outils',
+    q4: 'Recettes',
+    q5: 'Commandes Linux',
+    q6: 'NetQ Lab',
+    note: "Cette page est orientée visiteur : heure en direct et accès utiles.",
     back: "Retour à l'accueil",
   },
   ru: {
-    title: 'Сейчас',
-    subtitle: 'Чем занимаюсь',
-    intro: 'Страница «/now», идея с ',
-    introLink: 'nownownow',
-    introEnd: '. Обновляю время от времени.',
-    sectionLife: 'Жизнь и учёба',
-    life: 'Учусь по направлению электроники и смежным дисциплинам; в свободное время — личные проекты и фотография. В последнее время: доработка сайта, чтение и спорт.',
-    sectionFocus: 'Сейчас в приоритете',
-    focus:
-      'Учёба, поддержка этого сайта, иногда блог. Без платной рекламы и фейков — просто личный уголок в сети.',
-    sectionReading: 'Читаю',
-    reading: 'Технические блоги и статьи о продуктах; иногда нон-фикшн и художественное.',
-    sectionListening: 'Слушаю',
-    listening: 'Фортепианную и лёгкую классическую музыку во время работы с кодом. На сайте есть встроенный плеер с несколькими любимыми треками.',
-    sectionLearning: 'Изучаю',
-    learning: 'Углублённую веб-разработку (производительность, инструменты сборки); продвинутые паттерны Verilog; и основы японского.',
-    sectionBullets: 'В последнее время',
-    bullet1: 'Постоянно улучшаю UX и контент сайта',
-    bullet2: 'Поддерживаю несколько тренировок в неделю',
-    bullet3: 'Разбираю фото и галерею',
-    bullet4: 'Учу что-то новое (язык или инструмент)',
-    updated: 'Обновлено',
+    title: 'Now · Живая панель',
+    subtitle: 'Текущее время и полезные ссылки для посетителей',
+    badge: '⏱ В реальном времени',
+    localTime: 'Местное время',
+    utcTime: 'Время UTC',
+    timezone: 'Часовой пояс',
+    unix: 'Unix timestamp',
+    copy: 'Копировать',
+    copied: 'Скопировано',
+    quick: 'Быстрые ссылки',
+    q1: 'Мировое время',
+    q2: 'Валюты',
+    q3: 'Хаб инструментов',
+    q4: 'Рецепты',
+    q5: 'Linux команды',
+    q6: 'NetQ Lab',
+    note: 'Эта страница теперь про удобство посетителя: время и быстрые входы.',
     back: 'На главную',
   },
 };
 
 const text = t[lang as Lang] || t['zh-CN'];
-const nowDate = new Date().toISOString().slice(0, 10);
+
+function getLangPath(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = (lang as string) === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
 ---
 
 <BaseLayout title={text.title} description={text.subtitle}>
   <section class="relative py-16 md:py-24 overflow-hidden">
     <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
-    <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-3xl">
-      <div class="text-center mb-12">
-        <span
-          class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
-        >
-          📍 Now
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-4xl">
+      <div class="text-center mb-10">
+        <span class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4">
+          {text.badge}
         </span>
-        <h1
-          class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight"
-        >
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight">
           {text.title}
         </h1>
-        <p class="text-[rgb(var(--color-text-secondary))]">
-          {text.subtitle}
-        </p>
+        <p class="text-[rgb(var(--color-text-secondary))]">{text.subtitle}</p>
       </div>
 
-      <div class="space-y-8">
-        <p class="text-[rgb(var(--color-text-secondary))] text-sm">
-          {text.intro}
-          <a
-            href="https://nownownow.com/about"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-primary-500 hover:underline"
-          >
-            {text.introLink}
-          </a>
-          {text.introEnd}
-        </p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <article class="glass-card p-6 rounded-2xl">
+          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">{text.localTime}</p>
+          <p id="now-local" class="text-2xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums">--:--:--</p>
+        </article>
+        <article class="glass-card p-6 rounded-2xl">
+          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">{text.utcTime}</p>
+          <p id="now-utc" class="text-2xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums">--:--:--</p>
+        </article>
+        <article class="glass-card p-6 rounded-2xl">
+          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">{text.timezone}</p>
+          <p id="now-tz" class="text-base font-medium text-[rgb(var(--color-text-primary))] break-all">-</p>
+        </article>
+        <article class="glass-card p-6 rounded-2xl">
+          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">{text.unix}</p>
+          <div class="flex items-center gap-3">
+            <p id="now-unix" class="text-xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums flex-1">-</p>
+            <button id="copy-unix" type="button" class="px-3 py-1.5 rounded-lg text-sm bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400">
+              {text.copy}
+            </button>
+          </div>
+        </article>
+      </div>
 
-        <div class="glass-card p-8 reveal">
-          <h2
-            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
-          >
-            {text.sectionLife}
-          </h2>
-          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-            {text.life}
-          </p>
+      <div class="glass-card p-6 rounded-2xl mt-6">
+        <h2 class="text-xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">{text.quick}</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <a href={getLangPath('/time')} class="quick-link">🕐 {text.q1}</a>
+          <a href={getLangPath('/currency')} class="quick-link">💱 {text.q2}</a>
+          <a href="https://tools.alexander.xin" target="_blank" rel="noopener noreferrer" class="quick-link">🧰 {text.q3}</a>
+          <a href="https://cook.alexander.xin" target="_blank" rel="noopener noreferrer" class="quick-link">🍳 {text.q4}</a>
+          <a href="https://linux-command.alexander.xin" target="_blank" rel="noopener noreferrer" class="quick-link">🐧 {text.q5}</a>
+          <a href="https://netq.alexander.xin" target="_blank" rel="noopener noreferrer" class="quick-link">🧪 {text.q6}</a>
         </div>
+      </div>
 
-        <div class="glass-card p-8 reveal">
-          <h2
-            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
-          >
-            {text.sectionFocus}
-          </h2>
-          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-            {text.focus}
-          </p>
-        </div>
+      <p class="mt-6 text-sm text-[rgb(var(--color-text-secondary))]">{text.note}</p>
 
-        <div class="glass-card p-8 reveal">
-          <h2
-            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
-          >
-            {text.sectionReading}
-          </h2>
-          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-            {text.reading}
-          </p>
-        </div>
-
-        <div class="glass-card p-8 reveal">
-          <h2
-            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
-          >
-            {text.sectionListening}
-          </h2>
-          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-            {text.listening}
-          </p>
-        </div>
-
-        <div class="glass-card p-8 reveal">
-          <h2
-            class="text-xl font-bold mb-3 text-[rgb(var(--color-text-primary))]"
-          >
-            {text.sectionLearning}
-          </h2>
-          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-            {text.learning}
-          </p>
-        </div>
-
-        <div class="glass-card p-8 reveal">
-          <h2
-            class="text-xl font-bold mb-4 text-[rgb(var(--color-text-primary))]"
-          >
-            {text.sectionBullets}
-          </h2>
-          <ul class="space-y-3">
-            {[text.bullet1, text.bullet2, text.bullet3, text.bullet4].map((item) => (
-              <li class="flex items-start gap-3 text-[rgb(var(--color-text-secondary))]">
-                <span class="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-primary-500/15 text-primary-500 flex items-center justify-center" aria-hidden="true">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                  </svg>
-                </span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div class="flex items-center justify-between text-sm text-[rgb(var(--color-text-tertiary))]">
-          <p>{text.updated}: <time datetime={nowDate}>{nowDate}</time></p>
-          <a
-            href={lang === 'zh-CN' ? '/' : `/${lang === 'en-GB' ? 'en' : lang}/`}
-            class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1"
-          >
-            ← {text.back}
-          </a>
-        </div>
+      <div class="mt-8">
+        <a href={getLangPath('/')} class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1">
+          ← {text.back}
+        </a>
       </div>
 
       <RelatedTools lang={lang} current="now" />
     </div>
   </section>
 </BaseLayout>
+
+<script define:vars={{ copiedText: text.copied, copyText: text.copy }} is:inline>
+  (function () {
+    const localEl = document.getElementById('now-local');
+    const utcEl = document.getElementById('now-utc');
+    const tzEl = document.getElementById('now-tz');
+    const unixEl = document.getElementById('now-unix');
+    const copyBtn = document.getElementById('copy-unix');
+
+    if (!localEl || !utcEl || !tzEl || !unixEl) return;
+
+    const localFmt = new Intl.DateTimeFormat(undefined, {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+    const utcFmt = new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+      timeZone: 'UTC',
+    });
+
+    function tick() {
+      const now = new Date();
+      localEl.textContent = localFmt.format(now);
+      utcEl.textContent = `${utcFmt.format(now)} UTC`;
+      unixEl.textContent = String(Math.floor(now.getTime() / 1000));
+      tzEl.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+    }
+
+    tick();
+    const timer = setInterval(tick, 1000);
+
+    copyBtn?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(unixEl.textContent || '');
+        copyBtn.textContent = copiedText;
+        window.setTimeout(() => {
+          copyBtn.textContent = copyText;
+        }, 1200);
+      } catch (_err) {
+        // ignore clipboard failures in restricted browsers
+      }
+    });
+
+    window.addEventListener('beforeunload', () => clearInterval(timer));
+  })();
+</script>
+
+<style>
+  .quick-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0.875rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(var(--color-border));
+    background: rgb(var(--color-bg-secondary));
+    color: rgb(var(--color-text-primary));
+    transition: all 0.2s ease;
+  }
+
+  .quick-link:hover {
+    border-color: rgb(var(--color-primary));
+    background: rgb(var(--color-bg-tertiary));
+    transform: translateY(-1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quick-link {
+      transition: none;
+    }
+    .quick-link:hover {
+      transform: none;
+    }
+  }
+</style>
