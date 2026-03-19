@@ -28,19 +28,7 @@ concurrency:
 
 jobs:
   release:
-    if: >-
-      ${
-        {
-          github.event_name == 'workflow_dispatch' ||
-          (
-            (
-              startsWith(github.event.head_commit.message, 'release:') ||
-              contains(github.event.head_commit.message, '[release]')
-            ) &&
-            !contains(github.event.head_commit.message, '[skip release]')
-          )
-        }
-      }
+    if: ${{ github.event_name == 'workflow_dispatch' || ((startsWith(github.event.head_commit.message, 'release:') || contains(github.event.head_commit.message, '[release]')) && !contains(github.event.head_commit.message, '[skip release]')) }}
     runs-on: ubuntu-latest
 
     steps:

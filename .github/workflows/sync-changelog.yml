@@ -1,0 +1,97 @@
+name: Sync CHANGELOG on Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update CHANGELOG.md
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RELEASE_BODY: ${{ github.event.release.body }}
+          RELEASE_DATE: ${{ github.event.release.published_at }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+
+          const changelogPath = 'CHANGELOG.md';
+          if (!fs.existsSync(changelogPath)) {
+            console.log('CHANGELOG.md not found, skip.');
+            process.exit(0);
+          }
+
+          const releaseTag = (process.env.RELEASE_TAG || '').trim();
+          if (!releaseTag) {
+            console.log('No release tag found, skip.');
+            process.exit(0);
+          }
+
+          const version = releaseTag.replace(/^v/, '');
+          const publishedAt = (process.env.RELEASE_DATE || new Date().toISOString());
+          const date = publishedAt.slice(0, 10);
+          const releaseUrl = `https://github.com/${process.env.REPOSITORY}/releases/tag/${releaseTag}`;
+
+          const raw = fs.readFileSync(changelogPath, 'utf8');
+          const heading = `## [${version}] - ${date}`;
+          const headingLoose = `## [${version}]`;
+
+          if (raw.includes(heading) || raw.includes(headingLoose)) {
+            console.log(`Version ${version} already exists in CHANGELOG, skip.`);
+            process.exit(0);
+          }
+
+          let body = (process.env.RELEASE_BODY || '').replace(/\r\n/g, '\n').trim();
+          if (!body) {
+            body = '- Auto-generated release. See full notes on GitHub.';
+          }
+
+          const section = [
+            '',
+            heading,
+            '',
+            '### Release Notes',
+            `- GitHub Release: ${releaseUrl}`,
+            '',
+            body,
+            ''
+          ].join('\n');
+
+          const markerIndex = raw.indexOf('\n## [');
+          let updated;
+          if (markerIndex !== -1) {
+            updated = raw.slice(0, markerIndex) + section + raw.slice(markerIndex);
+          } else {
+            updated = raw.trimEnd() + section + '\n';
+          }
+
+          fs.writeFileSync(changelogPath, updated, 'utf8');
+          console.log(`CHANGELOG updated for ${releaseTag}.`);
+          NODE
+
+      - name: Commit and push changes
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          if git diff --quiet -- CHANGELOG.md; then
+            echo "No changelog updates to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.md
+          git commit -m "docs(changelog): sync ${RELEASE_TAG} [skip release]"
+          git push origin HEAD:main
