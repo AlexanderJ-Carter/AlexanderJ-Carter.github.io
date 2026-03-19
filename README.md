@@ -112,6 +112,7 @@ npm audit
 | **Code Quality**   | PR 和主分支推送 | Prettier、TypeScript 检查 |
 | **Security Audit** | 每周日          | npm 依赖安全审计          |
 | **Lighthouse**     | 每周一          | 性能与 SEO 评分           |
+| **Auto Release**   | 推送到 main     | 自动打 Tag + 创建 Release |
 | **Dependabot**     | 每周一          | 自动依赖更新              |
 
 ## 安全
