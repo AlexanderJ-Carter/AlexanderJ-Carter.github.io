@@ -106,14 +106,24 @@ npm audit
 
 该项目使用 GitHub Actions 进行自动化：
 
-| 工作流             | 触发条件        | 功能                      |
-| ------------------ | --------------- | ------------------------- |
-| **Deploy**         | 推送到 main     | 构建和部署到 GitHub Pages |
-| **Code Quality**   | PR 和主分支推送 | Prettier、TypeScript 检查 |
-| **Security Audit** | 每周日          | npm 依赖安全审计          |
-| **Lighthouse**     | 每周一          | 性能与 SEO 评分           |
-| **Auto Release**   | 推送到 main     | 自动打 Tag + 创建 Release |
-| **Dependabot**     | 每周一          | 自动依赖更新              |
+| 工作流             | 触发条件          | 功能                      |
+| ------------------ | ----------------- | ------------------------- |
+| **Deploy**         | 推送到 main       | 构建和部署到 GitHub Pages |
+| **Code Quality**   | PR 和主分支推送   | Prettier、TypeScript 检查 |
+| **Security Audit** | 每周日            | npm 依赖安全审计          |
+| **Lighthouse**     | 每周一            | 性能与 SEO 评分           |
+| **Auto Release**   | 按关键词推送/手动 | 自动打 Tag + 创建 Release |
+| **Dependabot**     | 每周一            | 自动依赖更新              |
+
+### 自动发布约定
+
+- 推送到 main 时，仅当最新提交信息满足以下任一条件才触发自动发布：
+  - 以 release: 开头
+  - 包含 [release]
+- 若提交信息包含 [skip release]，即使满足上述条件也会跳过发布。
+- 也可在 Actions 页面手动触发 Auto Tag and Release：
+  - bump: patch / minor / major
+  - tag: 可显式指定版本号（例如 v3.1.0）
 
 ## 安全
 
