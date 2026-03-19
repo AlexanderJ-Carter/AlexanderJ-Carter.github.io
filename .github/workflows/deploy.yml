@@ -26,6 +26,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Security audit
+        run: npm audit --audit-level=moderate
+
+      - name: Lint code
+        run: npx prettier --check .
+
+      - name: Type check
+        run: npx astro check
+
       - name: Build site
         run: npm run build
 

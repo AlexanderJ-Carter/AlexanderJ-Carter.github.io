@@ -1,6 +1,6 @@
 # Security Policy for alexander.xin
 # https://alexander.xin/.well-known/security.txt
-# Last updated: 2026-02-04
+# Last updated: 2026-03-19
 
 # Intro (optional): report vulnerabilities responsibly
 # Contact information for security reports
@@ -22,4 +22,4 @@ Encryption: https://alexander.xin/security/pgp-key.asc
 Canonical: https://alexander.xin/.well-known/security.txt
 
 # This file expires; renew before this date (RFC 9116)
-Expires: 2027-02-04T00:00:00.000Z
+Expires: 2027-03-19T00:00:00.000Z

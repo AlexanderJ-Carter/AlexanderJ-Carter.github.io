@@ -226,174 +226,14 @@ const content = licenseData[lang as Lang] || licenseData['en-GB'];
   description={content.description}
 >
   <section class="pt-32 pb-16 min-h-screen">
-  <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
-    <!-- Back Button -->
-    <a
-      href={getLangPath('/')}
-      class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
-    >
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-      </svg>
-      <span>{content.back}</span>
-    </a>
-
-    <!-- Header -->
-    <div class="text-center mb-12">
-      <div
-        class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6"
-      >
-        📄
-      </div>
-      <h1 class="text-4xl md:text-5xl font-heading font-bold mb-3 gradient-text">
-        {content.headerTitle}
-      </h1>
-      <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
-        {content.headerDesc}
-      </p>
-    </div>
-
-    <!-- Legal nav -->
-    <nav
-      class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[rgb(var(--color-text-secondary))] mb-10"
-      aria-label={lang === 'zh-CN' || lang === 'zh-TW' ? '法律与政策导航' : 'Legal & policy navigation'}
-    >
-      <a href={getLangPath('/privacy')} class="link-underline hover:text-primary-500">
-        {lang === 'zh-CN' ? '隐私政策' : lang === 'zh-TW' ? '隱私權政策' : 'Privacy'}
-      </a>
-      <span aria-hidden="true">·</span>
-      <a href={getLangPath('/terms')} class="link-underline hover:text-primary-500">
-        {lang === 'zh-CN' ? '服务条款' : lang === 'zh-TW' ? '服務條款' : 'Terms'}
-      </a>
-      <span aria-hidden="true">·</span>
-      <a href={getLangPath('/license')} class="link-underline hover:text-primary-500">
-        {lang === 'zh-CN' ? '许可证' : lang === 'zh-TW' ? '許可證' : 'License'}
-      </a>
-      <span aria-hidden="true">·</span>
-      <a href={getLangPath('/accessibility')} class="link-underline hover:text-primary-500">
-        {lang === 'zh-CN' ? '无障碍' : lang === 'zh-TW' ? '無障礙' : 'Accessibility'}
-      </a>
-      <span aria-hidden="true">·</span>
-      <a href={getLangPath('/security/policy')} class="link-underline hover:text-primary-500">
-        {lang === 'zh-CN' ? '安全政策' : lang === 'zh-TW' ? '安全政策' : 'Security'}
-      </a>
-    </nav>
-
-    <!-- License Badge Card -->
-    <div
-      class="glass-card rounded-3xl p-8 md:p-12 mb-12 text-center relative overflow-hidden"
-    >
-      <div
-        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-500 to-accent-500"
-      >
-      </div>
-
-      <div class="relative z-10">
-        <h2 class="text-2xl font-bold mb-6 text-[rgb(var(--color-text-primary))]">
-          {content.contentTitle}
-        </h2>
-        <p
-          class="text-lg text-[rgb(var(--color-text-secondary))] mb-8 max-w-3xl mx-auto leading-relaxed"
-        >
-          {content.contentP1}
-          <a
-            href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-primary-500 hover:text-primary-600 font-bold underline decoration-2 underline-offset-4 transition-colors"
-          >
-            {content.licenseName}
-          </a>
-          {content.contentP2}
-        </p>
-
-        <!-- CC Icons -->
-        <div class="flex flex-wrap justify-center gap-4 mb-4">
-          <!-- CC -->
-          <div
-            class="flex flex-col items-center gap-2"
-            title="Creative Commons"
-          >
-            <svg
-              class="w-12 h-12 text-gray-800 dark:text-gray-200"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zm-5.455-9.818c0-2.114 1.32-3.938 3.163-4.668.26-.103.545.09.545.37v1.08c0 .18-.11.34-.277.41-1.03.43-1.75 1.45-1.75 2.627 0 1.178.72 2.197 1.75 2.628.167.07.277.23.277.41v1.08c0 .28-.285.473-.545.37-1.843-.73-3.163-2.554-3.163-4.668zm10.91 0c0-2.114-1.32-3.938-3.164-4.668-.26-.103-.545.09-.545.37v1.08c0 .18.11.34.276.41 1.03.43 1.75 1.45 1.75 2.627 0 1.178-.72 2.197-1.75 2.628-.166.07-.276.23-.276.41v1.08c0 .28.285.473.545.37 1.843-.73 3.164-2.554 3.164-4.668z"
-              ></path>
-            </svg>
-            <span class="text-xs font-bold text-gray-500">CC</span>
-          </div>
-          <!-- BY -->
-          <div class="flex flex-col items-center gap-2" title="Attribution">
-            <svg
-              class="w-12 h-12 text-gray-800 dark:text-gray-200"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zm-2.182-9.273c0 .904.733 1.637 1.637 1.637.904 0 1.636-.733 1.636-1.637 0-.904-.732-1.636-1.636-1.636-.904 0-1.637.732-1.637 1.636zm4.91 5.455v-1.637c0-1.205-.977-2.182-2.182-2.182h-1.09v-1.09h1.09c.3 0 .546-.246.546-.546v-1.09c0-.3-.246-.546-.546-.546h-1.09c-.3 0-.546.246-.546.546v1.09c0 .3.246.546.546.546h1.09v1.09h-1.09c-1.205 0-2.182.977-2.182 2.182v1.637c0 .3.246.545.546.545h4.364c.3 0 .545-.245.545-.545z"
-              ></path>
-            </svg>
-            <span class="text-xs font-bold text-gray-500">BY</span>
-          </div>
-          <!-- NC -->
-          <div class="flex flex-col items-center gap-2" title="NonCommercial">
-            <svg
-              class="w-12 h-12 text-gray-800 dark:text-gray-200"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zm1.32-14.66c.26-.102.545.09.545.37v1.08c0 .18-.11.34-.277.41-1.03.43-1.75 1.45-1.75 2.627 0 1.178.72 2.197 1.75 2.628.167.07.277.23.277.41v1.08c0 .28-.285.473-.545.37-1.843-.73-3.163-2.554-3.163-4.668 0-2.114 1.32-3.938 3.163-4.668zm-2.64 9.336c-.26.103-.545-.09-.545-.37v-1.08c0-.18.11-.34.277-.41 1.03-.43 1.75-1.45 1.75-2.627 0-1.178-.72-2.197-1.75-2.628-.167-.07-.277-.23-.277-.41v-1.08c0-.28.285-.473.545-.37 1.843.73 3.163 2.554 3.163 4.668 0 2.114-1.32 3.938-3.163 4.668z"
-              ></path>
-            </svg>
-            <span class="text-xs font-bold text-gray-500">NC</span>
-          </div>
-          <!-- ND -->
-          <div class="flex flex-col items-center gap-2" title="NoDerivatives">
-            <svg
-              class="w-12 h-12 text-gray-800 dark:text-gray-200"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path
-                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zM8.727 9.273v5.454h1.636v-3.818h1.09c.904 0 1.637-.733 1.637-1.636 0-.904-.733-1.637-1.636-1.637H8.727zm1.636 1.09h.546c.3 0 .546.246.546.546 0 .3-.246.546-.546.546h-.546v-1.09zm3.273-1.09h2.182c.904 0 1.636.733 1.636 1.636 0 .904-.732 1.637-1.636 1.637h-1.09v2.727h1.636v-1.09h.546c.3 0 .546-.246.546-.546v-2.182c0-.3-.246-.546-.546-.546h-2.182v1.09z"
-              ></path>
-            </svg>
-            <span class="text-xs font-bold text-gray-500">ND</span>
-          </div>
-        </div>
-
-        <div class="text-sm text-[rgb(var(--color-text-tertiary))] font-mono">CC BY-NC-ND 4.0</div>
-        {
-          content.contentExtraNote && (
-            <p class="mt-6 text-sm text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20 rounded-xl px-4 py-3 max-w-2xl mx-auto border border-amber-200 dark:border-amber-800">
-              ⚠️ {content.contentExtraNote}
-            </p>
-          )
-        }
-      </div>
-    </div>
-
-    <!-- Source Code License -->
-    <div class="glass-card p-8 mb-12">
-      <h2 class="text-xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">
-        {content.codeLicenseTitle}
-      </h2>
-      <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-        {content.codeLicenseDesc}
-      </p>
+    <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+      <!-- Back Button -->
       <a
-        href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/LICENSE"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 mt-4 text-primary-500 hover:text-primary-600 font-medium"
+        href={getLangPath('/')}
+        class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
       >
-        <span>BSD 3-Clause</span>
         <svg
-          class="w-4 h-4"
+          class="w-5 h-5"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -402,112 +242,429 @@ const content = licenseData[lang as Lang] || licenseData['en-GB'];
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-          ></path>
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
+        <span>{content.back}</span>
       </a>
-    </div>
 
-    <!-- Rights & Conditions Grid -->
-    <div class="grid md:grid-cols-2 gap-8 mb-12">
-      <!-- Rights -->
-      <div
-        class="bg-green-50 dark:bg-green-900/10 rounded-2xl p-8 border border-green-100 dark:border-green-800/30"
-      >
-        <h3
-          class="text-xl font-bold mb-6 flex items-center gap-3 text-green-700 dark:text-green-400"
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <div
+          class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6"
         >
-          <span
-            class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center text-sm"
-            >✓</span
-          >
-          {content.rightsTitle}
-        </h3>
-        <ul class="space-y-4">
-          {
-            content.rights.map((item: any) => (
-              <li class="flex gap-3">
-                <svg
-                  class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-                <div>
-                  <strong class="block text-[rgb(var(--color-text-primary))] mb-1">
-                    {item.title}
-                  </strong>
-                  <span class="text-[rgb(var(--color-text-secondary))] text-sm leading-relaxed">
-                    {item.desc}
-                  </span>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
+          📄
+        </div>
+        <h1
+          class="text-4xl md:text-5xl font-heading font-bold mb-3 gradient-text"
+        >
+          {content.headerTitle}
+        </h1>
+        <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+          {content.headerDesc}
+        </p>
       </div>
 
-      <!-- Conditions -->
-      <div
-        class="bg-orange-50 dark:bg-orange-900/10 rounded-2xl p-8 border border-orange-100 dark:border-orange-800/30"
+      <!-- Legal nav -->
+      <nav
+        class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[rgb(var(--color-text-secondary))] mb-10"
+        aria-label={lang === 'zh-CN' || lang === 'zh-TW'
+          ? '法律与政策导航'
+          : 'Legal & policy navigation'}
       >
-        <h3
-          class="text-xl font-bold mb-6 flex items-center gap-3 text-orange-700 dark:text-orange-400"
+        <a
+          href={getLangPath('/privacy')}
+          class="link-underline hover:text-primary-500"
         >
-          <span
-            class="w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-900/50 flex items-center justify-center text-sm"
-            >!</span
-          >
-          {content.conditionsTitle}
-        </h3>
-        <ul class="space-y-4">
           {
-            content.conditions.map((item: any) => (
-              <li class="flex gap-3">
-                <svg
-                  class="w-6 h-6 text-orange-500 flex-shrink-0 mt-0.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                  />
-                </svg>
-                <div>
-                  <strong class="block text-[rgb(var(--color-text-primary))] mb-1">
-                    {item.title}
-                  </strong>
-                  <span class="text-[rgb(var(--color-text-secondary))] text-sm leading-relaxed">
-                    {item.desc}
-                  </span>
-                </div>
-              </li>
-            ))
+            lang === 'zh-CN'
+              ? '隐私政策'
+              : lang === 'zh-TW'
+                ? '隱私權政策'
+                : 'Privacy'
           }
-        </ul>
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/terms')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '服务条款'
+              : lang === 'zh-TW'
+                ? '服務條款'
+                : 'Terms'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/license')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '许可证'
+              : lang === 'zh-TW'
+                ? '許可證'
+                : 'License'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/accessibility')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '无障碍'
+              : lang === 'zh-TW'
+                ? '無障礙'
+                : 'Accessibility'
+          }
+        </a>
+        <span aria-hidden="true">·</span>
+        <a
+          href={getLangPath('/security/policy')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '安全政策'
+              : lang === 'zh-TW'
+                ? '安全政策'
+                : 'Security'
+          }
+        </a>
+      </nav>
+
+      <!-- License Badge Card -->
+      <div
+        class="glass-card rounded-3xl p-8 md:p-12 mb-12 text-center relative overflow-hidden"
+      >
+        <div
+          class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-500 to-accent-500"
+        >
+        </div>
+
+        <div class="relative z-10">
+          <h2
+            class="text-2xl font-bold mb-6 text-[rgb(var(--color-text-primary))]"
+          >
+            {content.contentTitle}
+          </h2>
+          <p
+            class="text-lg text-[rgb(var(--color-text-secondary))] mb-8 max-w-3xl mx-auto leading-relaxed"
+          >
+            {content.contentP1}
+            <a
+              href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary-500 hover:text-primary-600 font-bold underline decoration-2 underline-offset-4 transition-colors"
+            >
+              {content.licenseName}
+            </a>
+            {content.contentP2}
+          </p>
+
+          <!-- CC Icons -->
+          <div class="flex flex-wrap justify-center gap-4 mb-4">
+            <!-- CC -->
+            <div
+              class="flex flex-col items-center gap-2"
+              title="Creative Commons"
+            >
+              <svg
+                class="w-12 h-12 text-gray-800 dark:text-gray-200"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zm-5.455-9.818c0-2.114 1.32-3.938 3.163-4.668.26-.103.545.09.545.37v1.08c0 .18-.11.34-.277.41-1.03.43-1.75 1.45-1.75 2.627 0 1.178.72 2.197 1.75 2.628.167.07.277.23.277.41v1.08c0 .28-.285.473-.545.37-1.843-.73-3.163-2.554-3.163-4.668zm10.91 0c0-2.114-1.32-3.938-3.164-4.668-.26-.103-.545.09-.545.37v1.08c0 .18.11.34.276.41 1.03.43 1.75 1.45 1.75 2.627 0 1.178-.72 2.197-1.75 2.628-.166.07-.276.23-.276.41v1.08c0 .28.285.473.545.37 1.843-.73 3.164-2.554 3.164-4.668z"
+                ></path>
+              </svg>
+              <span class="text-xs font-bold text-gray-500">CC</span>
+            </div>
+            <!-- BY -->
+            <div class="flex flex-col items-center gap-2" title="Attribution">
+              <svg
+                class="w-12 h-12 text-gray-800 dark:text-gray-200"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zm-2.182-9.273c0 .904.733 1.637 1.637 1.637.904 0 1.636-.733 1.636-1.637 0-.904-.732-1.636-1.636-1.636-.904 0-1.637.732-1.637 1.636zm4.91 5.455v-1.637c0-1.205-.977-2.182-2.182-2.182h-1.09v-1.09h1.09c.3 0 .546-.246.546-.546v-1.09c0-.3-.246-.546-.546-.546h-1.09c-.3 0-.546.246-.546.546v1.09c0 .3.246.546.546.546h1.09v1.09h-1.09c-1.205 0-2.182.977-2.182 2.182v1.637c0 .3.246.545.546.545h4.364c.3 0 .545-.245.545-.545z"
+                ></path>
+              </svg>
+              <span class="text-xs font-bold text-gray-500">BY</span>
+            </div>
+            <!-- NC -->
+            <div class="flex flex-col items-center gap-2" title="NonCommercial">
+              <svg
+                class="w-12 h-12 text-gray-800 dark:text-gray-200"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zm1.32-14.66c.26-.102.545.09.545.37v1.08c0 .18-.11.34-.277.41-1.03.43-1.75 1.45-1.75 2.627 0 1.178.72 2.197 1.75 2.628.167.07.277.23.277.41v1.08c0 .28-.285.473-.545.37-1.843-.73-3.163-2.554-3.163-4.668 0-2.114 1.32-3.938 3.163-4.668zm-2.64 9.336c-.26.103-.545-.09-.545-.37v-1.08c0-.18.11-.34.277-.41 1.03-.43 1.75-1.45 1.75-2.627 0-1.178-.72-2.197-1.75-2.628-.167-.07-.277-.23-.277-.41v-1.08c0-.28.285-.473.545-.37 1.843.73 3.163 2.554 3.163 4.668 0 2.114-1.32 3.938-3.163 4.668z"
+                ></path>
+              </svg>
+              <span class="text-xs font-bold text-gray-500">NC</span>
+            </div>
+            <!-- ND -->
+            <div class="flex flex-col items-center gap-2" title="NoDerivatives">
+              <svg
+                class="w-12 h-12 text-gray-800 dark:text-gray-200"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 21.818c-5.41 0-9.818-4.408-9.818-9.818S6.59 2.182 12 2.182 21.818 6.59 21.818 12 17.41 21.818 12 21.818zM8.727 9.273v5.454h1.636v-3.818h1.09c.904 0 1.637-.733 1.637-1.636 0-.904-.733-1.637-1.636-1.637H8.727zm1.636 1.09h.546c.3 0 .546.246.546.546 0 .3-.246.546-.546.546h-.546v-1.09zm3.273-1.09h2.182c.904 0 1.636.733 1.636 1.636 0 .904-.732 1.637-1.636 1.637h-1.09v2.727h1.636v-1.09h.546c.3 0 .546-.246.546-.546v-2.182c0-.3-.246-.546-.546-.546h-2.182v1.09z"
+                ></path>
+              </svg>
+              <span class="text-xs font-bold text-gray-500">ND</span>
+            </div>
+          </div>
+
+          <div class="text-sm text-[rgb(var(--color-text-tertiary))] font-mono">
+            CC BY-NC-ND 4.0
+          </div>
+          {
+            content.contentExtraNote && (
+              <p class="mt-6 text-sm text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20 rounded-xl px-4 py-3 max-w-2xl mx-auto border border-amber-200 dark:border-amber-800">
+                ⚠️ {content.contentExtraNote}
+              </p>
+            )
+          }
+        </div>
+      </div>
+
+      <!-- Source Code License -->
+      <div class="glass-card p-8 mb-12">
+        <h2
+          class="text-xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+        >
+          {content.codeLicenseTitle}
+        </h2>
+        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+          {content.codeLicenseDesc}
+        </p>
+        <a
+          href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/LICENSE"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 mt-4 text-primary-500 hover:text-primary-600 font-medium"
+        >
+          <span>BSD 3-Clause</span>
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            ></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- License quick map -->
+      <div class="glass-card p-6 mb-12">
+        <h3
+          class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]"
+        >
+          {
+            lang === 'zh-CN'
+              ? '许可速览'
+              : lang === 'zh-TW'
+                ? '許可速覽'
+                : lang === 'fr'
+                  ? 'Aperçu des licences'
+                  : lang === 'ru'
+                    ? 'Краткая карта лицензий'
+                    : 'License Quick Map'
+          }
+        </h3>
+        <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-5">
+          {
+            lang === 'zh-CN'
+              ? '便于快速判断“代码”与“内容”的使用边界。'
+              : lang === 'zh-TW'
+                ? '便於快速判斷「程式碼」與「內容」的使用邊界。'
+                : lang === 'fr'
+                  ? "Pour distinguer rapidement les limites d'utilisation entre le code et le contenu."
+                  : lang === 'ru'
+                    ? 'Быстрый ориентир по границам использования кода и контента.'
+                    : 'A quick guide to usage boundaries for code and content.'
+          }
+        </p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <a
+            href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/LICENSE"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-xl border border-[rgb(var(--color-border))] p-4 hover:border-primary-500/50 transition-colors"
+          >
+            <p
+              class="text-xs uppercase tracking-wide text-[rgb(var(--color-text-tertiary))] mb-1"
+            >
+              Source Code
+            </p>
+            <p class="font-semibold text-[rgb(var(--color-text-primary))]">
+              BSD 3-Clause
+            </p>
+            <p class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">
+              {
+                lang === 'zh-CN'
+                  ? '允许修改与再分发，需保留版权声明。'
+                  : lang === 'zh-TW'
+                    ? '允許修改與再散佈，需保留版權聲明。'
+                    : lang === 'fr'
+                      ? 'Modification et redistribution autorisées avec conservation de la notice de copyright.'
+                      : lang === 'ru'
+                        ? 'Разрешены изменение и распространение при сохранении уведомления об авторских правах.'
+                        : 'Modification and redistribution allowed with copyright notice retained.'
+              }
+            </p>
+          </a>
+
+          <a
+            href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/NOTICE"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-xl border border-[rgb(var(--color-border))] p-4 hover:border-primary-500/50 transition-colors"
+          >
+            <p
+              class="text-xs uppercase tracking-wide text-[rgb(var(--color-text-tertiary))] mb-1"
+            >
+              Site Content
+            </p>
+            <p class="font-semibold text-[rgb(var(--color-text-primary))]">
+              CC BY-NC-ND 4.0
+            </p>
+            <p class="text-sm text-[rgb(var(--color-text-secondary))] mt-1">
+              {
+                lang === 'zh-CN'
+                  ? '可原样转载并署名，禁止商用与演绎。'
+                  : lang === 'zh-TW'
+                    ? '可原樣轉載並署名，禁止商用與演繹。'
+                    : lang === 'fr'
+                      ? "Partage à l'identique avec attribution, sans usage commercial ni œuvres dérivées."
+                      : lang === 'ru'
+                        ? 'Разрешено делиться без изменений с указанием авторства, без коммерческого использования и производных.'
+                        : 'Share unchanged with attribution; no commercial use and no derivatives.'
+              }
+            </p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Rights & Conditions Grid -->
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        <!-- Rights -->
+        <div
+          class="bg-green-50 dark:bg-green-900/10 rounded-2xl p-8 border border-green-100 dark:border-green-800/30"
+        >
+          <h3
+            class="text-xl font-bold mb-6 flex items-center gap-3 text-green-700 dark:text-green-400"
+          >
+            <span
+              class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center text-sm"
+              >✓</span
+            >
+            {content.rightsTitle}
+          </h3>
+          <ul class="space-y-4">
+            {
+              content.rights.map((item: any) => (
+                <li class="flex gap-3">
+                  <svg
+                    class="w-6 h-6 text-green-500 flex-shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                  <div>
+                    <strong class="block text-[rgb(var(--color-text-primary))] mb-1">
+                      {item.title}
+                    </strong>
+                    <span class="text-[rgb(var(--color-text-secondary))] text-sm leading-relaxed">
+                      {item.desc}
+                    </span>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Conditions -->
+        <div
+          class="bg-orange-50 dark:bg-orange-900/10 rounded-2xl p-8 border border-orange-100 dark:border-orange-800/30"
+        >
+          <h3
+            class="text-xl font-bold mb-6 flex items-center gap-3 text-orange-700 dark:text-orange-400"
+          >
+            <span
+              class="w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-900/50 flex items-center justify-center text-sm"
+              >!</span
+            >
+            {content.conditionsTitle}
+          </h3>
+          <ul class="space-y-4">
+            {
+              content.conditions.map((item: any) => (
+                <li class="flex gap-3">
+                  <svg
+                    class="w-6 h-6 text-orange-500 flex-shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
+                  </svg>
+                  <div>
+                    <strong class="block text-[rgb(var(--color-text-primary))] mb-1">
+                      {item.title}
+                    </strong>
+                    <span class="text-[rgb(var(--color-text-secondary))] text-sm leading-relaxed">
+                      {item.desc}
+                    </span>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="glass-card p-8 text-center">
+        <h3
+          class="text-lg font-heading font-bold text-[rgb(var(--color-text-primary))] mb-3"
+        >
+          {content.disclaimerTitle}
+        </h3>
+        <p class="text-[rgb(var(--color-text-secondary))] max-w-3xl mx-auto">
+          {content.disclaimer}
+        </p>
       </div>
     </div>
-
-    <!-- Disclaimer -->
-    <div class="glass-card p-8 text-center">
-      <h3 class="text-lg font-heading font-bold text-[rgb(var(--color-text-primary))] mb-3">
-        {content.disclaimerTitle}
-      </h3>
-      <p class="text-[rgb(var(--color-text-secondary))] max-w-3xl mx-auto">
-        {content.disclaimer}
-      </p>
-    </div>
-  </div>
   </section>
 </BaseLayout>

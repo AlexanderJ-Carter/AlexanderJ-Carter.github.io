@@ -1,0 +1,46 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '05:00'
+    labels:
+      - 'dependencies'
+      - 'automated'
+    open-pull-requests-limit: 5
+    reviewers:
+      - 'AlexanderJ-Carter'
+    groups:
+      astro-stack:
+        patterns:
+          - 'astro'
+          - '@astrojs/*'
+      frontend-tooling:
+        patterns:
+          - 'tailwindcss'
+          - 'postcss'
+          - 'autoprefixer'
+          - 'typescript'
+          - 'prettier'
+    allow:
+      - dependency-type: 'all'
+    commit-message:
+      prefix: 'chore: '
+      prefix-scope: 'deps'
+    pull-request-branch-name:
+      separator: '/'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '06:00'
+    labels:
+      - 'dependencies'
+      - 'github-actions'
+    open-pull-requests-limit: 5
+    reviewers:
+      - 'AlexanderJ-Carter'

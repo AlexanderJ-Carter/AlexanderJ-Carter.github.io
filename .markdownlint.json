@@ -1,3 +1,12 @@
 {
-  "MD041": false
+  "MD041": false,
+  "MD003": "consistent",
+  "MD013": {
+    "line_length": 120,
+    "code_blocks": false,
+    "code_tables": false,
+    "headers": false
+  },
+  "MD033": false,
+  "MD034": false
 }

@@ -11,6 +11,7 @@ import MouseFollower from '../components/MouseFollower.astro';
 import PageLoader from '../components/PageLoader.astro';
 import QuickActions from '../components/QuickActions.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
+import Toast from '../components/Toast.astro';
 
 interface Props {
   title?: string;
@@ -139,6 +140,7 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
   <NewYearEffects />
   <MouseFollower />
   <PageLoader />
+  <Toast />
   <QuickActions />
   <ReadingProgress />
   

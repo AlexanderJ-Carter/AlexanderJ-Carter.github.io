@@ -1,0 +1,29 @@
+# Prettier Ignore Rules
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build output
+dist/
+.astro/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+*~
+
+# Git
+.git/
+.gitignore
+
+# Documentation generated files
+.github/workflows/

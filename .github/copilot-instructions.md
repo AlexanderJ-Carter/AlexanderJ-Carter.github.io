@@ -20,9 +20,8 @@ The project uses a specific "Template" pattern to handle internationalization wi
 
 ```astro
 // src/pages/about.astro
----
+
 import AboutTemplate from '../components/templates/AboutTemplate.astro';
----
 <AboutTemplate lang="zh-CN" />
 ```
 
@@ -90,3 +89,14 @@ The project uses a custom `IntersectionObserver` setup in `src/scripts/scroll-an
   ```
 
 - **Client Directives**: Use `client:load` or `client:visible` sparingly, only for interactive components (e.g., `MusicPlayer`, `Typewriter`). Default to static HTML.
+
+## Repo Guardrails
+
+- Keep AI instruction files aligned: `AGENT.md` (full rules) and `CLAUDE.md` (concise Claude rules).
+- Do not remove or break security disclosure assets:
+  - `public/.well-known/security.txt`
+  - `public/security/pgp-key.asc`
+  - `src/pages/security/policy.astro`
+  - `src/pages/security/acknowledgments.astro`
+  - `.github/SECURITY.md`
+- `public/music/manifest.json` is generated. Prefer `npm run build` (or `npm run generate-music`) instead of manual edits.

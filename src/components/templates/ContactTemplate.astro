@@ -143,20 +143,35 @@ const content = contactData[lang as Lang] || contactData['en-GB'];
   protectedPage={true}
 >
   <section class="relative py-20 md:py-28 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient opacity-50" aria-hidden="true"></div>
-    <div class="absolute inset-0 opacity-80" style="background: var(--hero-spotlight);" aria-hidden="true"></div>
+    <div
+      class="absolute inset-0 bg-mesh-gradient opacity-50"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="absolute inset-0 opacity-80"
+      style="background: var(--hero-spotlight);"
+      aria-hidden="true"
+    >
+    </div>
 
     <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-4xl">
       <!-- Header -->
       <header class="text-center mb-14">
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium mb-5">
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium mb-5"
+        >
           <span aria-hidden="true">✉️</span>
           {content.title}
         </span>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight"
+        >
           {content.headerTitle}
         </h1>
-        <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+        <p
+          class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+        >
           {content.headerDesc}
         </p>
       </header>
@@ -266,6 +281,82 @@ const content = contactData[lang as Lang] || contactData['en-GB'];
         </div>
       </div>
 
+      <!-- Contact Form -->
+      <div class="glass-card rounded-2xl p-6 md:p-8 mb-12 reveal">
+        <h2
+          class="text-2xl font-heading font-bold mb-6 text-[rgb(var(--color-text-primary))]"
+        >
+          {content.formTitle}
+        </h2>
+
+        <form id="contact-form" class="space-y-5" novalidate>
+          <div class="form-field">
+            <label for="contact-name">{content.nameLabel}</label>
+            <input
+              id="contact-name"
+              name="name"
+              type="text"
+              required
+              minlength="2"
+              maxlength="80"
+              placeholder={content.namePlaceholder}
+              autocomplete="name"
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="contact-email">{content.emailLabel}</label>
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              required
+              maxlength="120"
+              placeholder="you@example.com"
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="contact-subject">{content.subjectLabel}</label>
+            <input
+              id="contact-subject"
+              name="subject"
+              type="text"
+              required
+              minlength="4"
+              maxlength="120"
+              placeholder={content.subjectPlaceholder}
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="contact-message">{content.messageLabel}</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              required
+              minlength="10"
+              maxlength="2000"
+              rows="6"
+              placeholder={content.messagePlaceholder}></textarea>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button type="submit" class="btn-primary !px-6 !py-3"
+              >{content.submit}</button
+            >
+            <p
+              id="contact-submit-feedback"
+              class="hidden text-sm text-emerald-600 dark:text-emerald-400"
+              role="status"
+              aria-live="polite"
+            >
+            </p>
+          </div>
+        </form>
+      </div>
+
       <!-- Quick Links -->
       <div class="mt-12 text-center">
         <p class="text-[rgb(var(--color-text-secondary))] mb-6">
@@ -279,7 +370,12 @@ const content = contactData[lang as Lang] || contactData['en-GB'];
             aria-label="GitHub"
             class="p-3 rounded-full bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500 text-[rgb(var(--color-text-primary))] hover:text-white active:scale-95 transition-all duration-200"
           >
-            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <svg
+              class="w-6 h-6"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
               <path
                 d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
               ></path>
@@ -314,7 +410,7 @@ const content = contactData[lang as Lang] || contactData['en-GB'];
           <p class="mt-10 text-sm text-center text-[rgb(var(--color-text-tertiary))] max-w-xl mx-auto border-t border-[rgb(var(--color-border))] pt-6">
             {content.contactNotice}
           </p>
-          )
+        )
       }
 
       <!-- Back link -->
@@ -329,3 +425,54 @@ const content = contactData[lang as Lang] || contactData['en-GB'];
     </div>
   </section>
 </BaseLayout>
+
+<script define:vars={{ lang, successText: content.success }} is:inline>
+  const contactForm = document.getElementById('contact-form');
+  const submitFeedback = document.getElementById('contact-submit-feedback');
+
+  function getInvalidMessage(currentLang) {
+    if (currentLang === 'zh-CN') return '请先完善表单信息后再发送。';
+    if (currentLang === 'zh-TW') return '請先完善表單資訊後再傳送。';
+    if (currentLang === 'fr')
+      return "Veuillez d'abord compléter le formulaire.";
+    if (currentLang === 'ru')
+      return 'Пожалуйста, сначала заполните форму корректно.';
+    return 'Please complete the form before sending.';
+  }
+
+  contactForm?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (!(form instanceof HTMLFormElement)) return;
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      window.showToast?.({
+        message: getInvalidMessage(lang),
+        type: 'warning',
+      });
+      return;
+    }
+
+    const formData = new FormData(form);
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const subject = String(formData.get('subject') || '').trim();
+    const message = String(formData.get('message') || '').trim();
+
+    const mailBody = [`Name: ${name}`, `Email: ${email}`, '', message].join(
+      '\n'
+    );
+
+    const mailtoUrl = `mailto:contact-us@alexander.xin?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailBody)}`;
+
+    if (submitFeedback) {
+      submitFeedback.textContent = successText;
+      submitFeedback.classList.remove('hidden');
+    }
+
+    window.showToast?.({ message: successText, type: 'success' });
+    window.location.href = mailtoUrl;
+    form.reset();
+  });
+</script>

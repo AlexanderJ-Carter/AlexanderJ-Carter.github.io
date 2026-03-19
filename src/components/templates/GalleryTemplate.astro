@@ -700,24 +700,45 @@ const galleryItems =
     <div class="absolute inset-0 bg-mesh-gradient opacity-90"></div>
     <div class="absolute inset-0 bg-[var(--hero-spotlight)] opacity-60"></div>
     <!-- 装饰：模拟胶片齿孔 -->
-    <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-24 pointer-events-none opacity-[0.07] dark:opacity-[0.12]" aria-hidden="true">
+    <div
+      class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-24 pointer-events-none opacity-[0.07] dark:opacity-[0.12]"
+      aria-hidden="true"
+    >
       <div class="flex justify-between px-2 max-w-4xl mx-auto gap-1">
-        {Array.from({ length: 24 }).map((_) => (
-          <div class="w-2 h-2 rounded-full bg-[rgb(var(--color-text-primary))]" />
-        ))}
+        {
+          Array.from({ length: 24 }).map((_) => (
+            <div class="w-2 h-2 rounded-full bg-[rgb(var(--color-text-primary))]" />
+          ))
+        }
       </div>
     </div>
     <div class="container relative z-10 mx-auto px-4 lg:px-8 text-center">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium text-[rgb(var(--color-text-secondary))] mb-6">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium text-[rgb(var(--color-text-secondary))] mb-6"
+      >
         <span class="text-lg" aria-hidden="true">📷</span>
         <span>
-          {lang === 'zh-CN' ? '摄影作品集' : lang === 'zh-TW' ? '攝影作品集' : lang === 'fr' ? 'Portfolio photo' : lang === 'ru' ? 'Фотопортфолио' : 'Photo Portfolio'}
+          {
+            lang === 'zh-CN'
+              ? '摄影作品集'
+              : lang === 'zh-TW'
+                ? '攝影作品集'
+                : lang === 'fr'
+                  ? 'Portfolio photo'
+                  : lang === 'ru'
+                    ? 'Фотопортфолио'
+                    : 'Photo Portfolio'
+          }
         </span>
       </div>
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
+      <h1
+        class="text-4xl sm:text-5xl md:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight"
+      >
         {t('gallery.title')}
       </h1>
-      <p class="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto leading-relaxed">
+      <p
+        class="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto leading-relaxed"
+      >
         {
           lang === 'zh-CN'
             ? '探索摄影作品集，记录生活中的美好瞬间'
@@ -749,26 +770,56 @@ const galleryItems =
   <!-- Gallery Section -->
   <section class="py-16 container mx-auto px-4 lg:px-8">
     <!-- 统计与筛选：紧凑胶囊 + 带图标 -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-10">
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-10"
+    >
       <div class="flex flex-wrap gap-3" id="gallery-stats">
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm">
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm"
+        >
           <span aria-hidden="true">📷</span>
-          <strong id="total-count" class="text-primary-500">{galleryItems.length}</strong>
+          <strong id="total-count" class="text-primary-500"
+            >{galleryItems.length}</strong
+          >
           <span class="text-[rgb(var(--color-text-secondary))]">
-            {lang === 'zh-CN' ? '件作品' : lang === 'zh-TW' ? '件作品' : lang === 'fr' ? 'œuvres' : lang === 'ru' ? 'работ' : 'works'}
+            {
+              lang === 'zh-CN'
+                ? '件作品'
+                : lang === 'zh-TW'
+                  ? '件作品'
+                  : lang === 'fr'
+                    ? 'œuvres'
+                    : lang === 'ru'
+                      ? 'работ'
+                      : 'works'
+            }
           </span>
         </span>
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm">
-          <span aria-hidden="true">🏔️</span> {galleryItems.filter((i) => i.category === 'landscape').length}
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm"
+        >
+          <span aria-hidden="true">🏔️</span>
+          {galleryItems.filter((i) => i.category === 'landscape').length}
         </span>
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm">
-          <span aria-hidden="true">🌿</span> {galleryItems.filter((i) => i.category === 'nature').length}
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm"
+        >
+          <span aria-hidden="true">🌿</span>
+          {galleryItems.filter((i) => i.category === 'nature').length}
         </span>
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm">
-          <span aria-hidden="true">🍽️</span> {galleryItems.filter((i) => i.category === 'food').length}
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm"
+        >
+          <span aria-hidden="true">🍽️</span>
+          {galleryItems.filter((i) => i.category === 'food').length}
         </span>
       </div>
-      <div class="flex flex-wrap gap-2" id="filter-tabs" role="tablist" aria-label={lang === 'zh-CN' ? '按分类筛选' : 'Filter by category'}>
+      <div
+        class="flex flex-wrap gap-2"
+        id="filter-tabs"
+        role="tablist"
+        aria-label={lang === 'zh-CN' ? '按分类筛选' : 'Filter by category'}
+      >
         {
           categories.map((cat) => (
             <button
@@ -803,11 +854,13 @@ const galleryItems =
     >
       {
         galleryItems.map((item, index) => {
-          const catLabel = categories.find((c) => c.id === item.category)?.label ?? item.category;
+          const catLabel =
+            categories.find((c) => c.id === item.category)?.label ??
+            item.category;
           return (
             <button
               type="button"
-              class="gallery-item group relative overflow-hidden rounded-2xl shadow-lg aspect-[4/3] cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 border-0 p-0"
+              class="gallery-item card-hover group relative overflow-hidden rounded-2xl shadow-lg aspect-[4/3] cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 border-0 p-0 transition-all duration-300"
               class:list={{
                 'md:col-span-2': index === 0,
               }}
@@ -816,12 +869,18 @@ const galleryItems =
               data-image={item.image}
               data-title={item.title}
               data-description={item.description}
-              aria-label={lang === 'zh-CN' ? `查看：${item.title}` : `View: ${item.title}`}
+              aria-label={
+                lang === 'zh-CN' ? `查看：${item.title}` : `View: ${item.title}`
+              }
             >
+              <div
+                class="gallery-skeleton absolute inset-0"
+                aria-hidden="true"
+              />
               <img
                 src={item.image}
                 alt=""
-                class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-out"
+                class="gallery-image absolute inset-0 w-full h-full object-cover opacity-0 transform group-hover:scale-105 transition-all duration-500 ease-out"
                 loading={index < 6 ? 'eager' : 'lazy'}
                 decoding="async"
               />
@@ -832,13 +891,36 @@ const galleryItems =
                   {item.category === 'food' && '🍽️ '}
                   {catLabel}
                 </span>
-                <h3 class="text-white text-lg md:text-xl font-bold">{item.title}</h3>
-                <p class="text-gray-200 text-sm mt-1 line-clamp-2">{item.description}</p>
+                <h3 class="text-white text-lg md:text-xl font-bold">
+                  {item.title}
+                </h3>
+                <p class="text-gray-200 text-sm mt-1 line-clamp-2">
+                  {item.description}
+                </p>
                 <span class="mt-3 inline-flex items-center gap-1.5 text-sm text-white/80 font-medium">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                    />
                   </svg>
-                  {lang === 'zh-CN' ? '放大查看' : lang === 'zh-TW' ? '放大查看' : lang === 'fr' ? 'Agrandir' : lang === 'ru' ? 'Увеличить' : 'View larger'}
+                  {lang === 'zh-CN'
+                    ? '放大查看'
+                    : lang === 'zh-TW'
+                      ? '放大查看'
+                      : lang === 'fr'
+                        ? 'Agrandir'
+                        : lang === 'ru'
+                          ? 'Увеличить'
+                          : 'View larger'}
                 </span>
               </div>
             </button>
@@ -862,7 +944,13 @@ const galleryItems =
       class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
       aria-label={lang === 'zh-CN' ? '关闭' : 'Close'}
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        ><path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path></svg
+      >
     </button>
     <button
       type="button"
@@ -870,7 +958,13 @@ const galleryItems =
       class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
       aria-label={lang === 'zh-CN' ? '上一张' : 'Previous'}
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        ><path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 19l-7-7 7-7"></path></svg
+      >
     </button>
     <button
       type="button"
@@ -878,10 +972,23 @@ const galleryItems =
       class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
       aria-label={lang === 'zh-CN' ? '下一张' : 'Next'}
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        ><path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 5l7 7-7 7"></path></svg
+      >
     </button>
-    <div class="relative max-w-5xl max-h-[85vh] w-full flex flex-col items-center">
-      <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[70vh] w-auto object-contain rounded-lg shadow-2xl" />
+    <div
+      class="relative max-w-5xl max-h-[85vh] w-full flex flex-col items-center"
+    >
+      <img
+        id="lightbox-image"
+        src=""
+        alt=""
+        class="max-w-full max-h-[70vh] w-auto object-contain rounded-lg shadow-2xl"
+      />
       <div class="mt-4 text-center text-white px-4">
         <h2 id="lightbox-title" class="text-xl font-bold"></h2>
         <p id="lightbox-desc" class="text-white/80 text-sm mt-1"></p>
@@ -895,7 +1002,9 @@ const galleryItems =
   const galleryItems = document.querySelectorAll('.gallery-item');
   const totalCountEl = document.getElementById('total-count');
   const lightbox = document.getElementById('gallery-lightbox');
-  const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+  const lightboxImage = document.getElementById(
+    'lightbox-image'
+  ) as HTMLImageElement;
   const lightboxTitle = document.getElementById('lightbox-title');
   const lightboxDesc = document.getElementById('lightbox-desc');
   const lightboxClose = document.getElementById('lightbox-close');
@@ -904,6 +1013,27 @@ const galleryItems =
 
   let currentFilter = 'all';
   let currentLightboxIndex = 0;
+
+  function initGalleryImageLoading() {
+    galleryItems.forEach((item) => {
+      const image = item.querySelector('img') as HTMLImageElement | null;
+      if (!image) return;
+
+      const markLoaded = () => {
+        item.classList.add('is-loaded');
+      };
+
+      if (image.complete && image.naturalWidth > 0) {
+        markLoaded();
+        return;
+      }
+
+      image.addEventListener('load', markLoaded, { once: true });
+      image.addEventListener('error', markLoaded, { once: true });
+    });
+  }
+
+  initGalleryImageLoading();
 
   function getVisibleItems(): Element[] {
     return Array.from(galleryItems).filter((el) => {
@@ -915,7 +1045,8 @@ const galleryItems =
   function openLightbox(index: number) {
     const visible = getVisibleItems();
     const item = visible[index];
-    if (!item || !lightbox || !lightboxImage || !lightboxTitle || !lightboxDesc) return;
+    if (!item || !lightbox || !lightboxImage || !lightboxTitle || !lightboxDesc)
+      return;
     const img = item.getAttribute('data-image');
     const title = item.getAttribute('data-title');
     const desc = item.getAttribute('data-description');
@@ -941,7 +1072,8 @@ const galleryItems =
   function showLightboxPrev() {
     const visible = getVisibleItems();
     if (visible.length === 0) return;
-    currentLightboxIndex = (currentLightboxIndex - 1 + visible.length) % visible.length;
+    currentLightboxIndex =
+      (currentLightboxIndex - 1 + visible.length) % visible.length;
     const item = visible[currentLightboxIndex];
     const img = item.getAttribute('data-image');
     const title = item.getAttribute('data-title');
@@ -996,11 +1128,29 @@ const galleryItems =
         const isActive = b.getAttribute('data-filter') === filterValue;
         b.setAttribute('aria-selected', String(isActive));
         (b as HTMLElement).tabIndex = isActive ? 0 : -1;
-        b.classList.remove('bg-gradient-to-r', 'from-primary-500', 'to-accent-500', 'text-white', 'shadow-lg');
-        b.classList.add('glass-card', 'text-[rgb(var(--color-text-secondary))]');
+        b.classList.remove(
+          'bg-gradient-to-r',
+          'from-primary-500',
+          'to-accent-500',
+          'text-white',
+          'shadow-lg'
+        );
+        b.classList.add(
+          'glass-card',
+          'text-[rgb(var(--color-text-secondary))]'
+        );
       });
-      btn.classList.remove('glass-card', 'text-[rgb(var(--color-text-secondary))]');
-      btn.classList.add('bg-gradient-to-r', 'from-primary-500', 'to-accent-500', 'text-white', 'shadow-lg');
+      btn.classList.remove(
+        'glass-card',
+        'text-[rgb(var(--color-text-secondary))]'
+      );
+      btn.classList.add(
+        'bg-gradient-to-r',
+        'from-primary-500',
+        'to-accent-500',
+        'text-white',
+        'shadow-lg'
+      );
 
       let visibleCount = 0;
       galleryItems.forEach((item) => {
@@ -1018,6 +1168,51 @@ const galleryItems =
 </script>
 
 <style>
+  .gallery-item .gallery-skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(148, 163, 184, 0.18) 0%,
+      rgba(226, 232, 240, 0.35) 50%,
+      rgba(148, 163, 184, 0.18) 100%
+    );
+    background-size: 200% 100%;
+    animation: galleryShimmer 1.3s linear infinite;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+  }
+
+  .dark .gallery-item .gallery-skeleton {
+    background: linear-gradient(
+      90deg,
+      rgba(51, 65, 85, 0.5) 0%,
+      rgba(71, 85, 105, 0.7) 50%,
+      rgba(51, 65, 85, 0.5) 100%
+    );
+  }
+
+  .gallery-item .gallery-image {
+    filter: blur(6px);
+  }
+
+  .gallery-item.is-loaded .gallery-skeleton {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .gallery-item.is-loaded .gallery-image {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  @keyframes galleryShimmer {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+
   .gallery-reveal {
     animation: galleryReveal 0.4s ease-out forwards;
   }
