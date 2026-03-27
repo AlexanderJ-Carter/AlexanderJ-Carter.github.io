@@ -1,0 +1,338 @@
+---
+/**
+ * 番茄钟 / 专注计时器组件
+ * 帮助用户专注工作
+ */
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'zh-CN' } = Astro.props;
+
+const timerText = {
+  'zh-CN': {
+    title: '番茄钟',
+    work: '专注',
+    break: '休息',
+    start: '开始',
+    pause: '暂停',
+    reset: '重置',
+    sessions: '已完成',
+    minutes: '分钟',
+  },
+  'zh-TW': {
+    title: '番茄鐘',
+    work: '專注',
+    break: '休息',
+    start: '開始',
+    pause: '暫停',
+    reset: '重置',
+    sessions: '已完成',
+    minutes: '分鐘',
+  },
+  'en-GB': {
+    title: 'Pomodoro',
+    work: 'Work',
+    break: 'Break',
+    start: 'Start',
+    pause: 'Pause',
+    reset: 'Reset',
+    sessions: 'Sessions',
+    minutes: 'min',
+  },
+  fr: {
+    title: 'Pomodoro',
+    work: 'Travail',
+    break: 'Pause',
+    start: 'Démarrer',
+    pause: 'Pause',
+    reset: 'Réinitialiser',
+    sessions: 'Sessions',
+    minutes: 'min',
+  },
+  ru: {
+    title: 'Помодоро',
+    work: 'Работа',
+    break: 'Перерыв',
+    start: 'Старт',
+    pause: 'Пауза',
+    reset: 'Сброс',
+    sessions: 'Сессии',
+    minutes: 'мин',
+  },
+};
+
+const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
+---
+
+<div id="pomodoro-timer" class="pomodoro-widget glass-card rounded-2xl p-6 shadow-xl max-w-sm">
+  <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+    <span class="text-2xl">🍅</span>
+    {t.title}
+  </h3>
+
+  <!-- 模式切换 -->
+  <div class="flex gap-2 mb-6">
+    <button type="button" class="mode-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all" data-mode="work" data-active="true">
+      {t.work} (25{t.minutes})
+    </button>
+    <button type="button" class="mode-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all" data-mode="break" data-active="false">
+      {t.break} (5{t.minutes})
+    </button>
+  </div>
+
+  <!-- 倒计时显示 -->
+  <div class="text-center mb-6">
+    <div class="timer-display relative w-48 h-48 mx-auto mb-4">
+      <svg class="w-full h-full transform -rotate-90">
+        <circle
+          cx="96"
+          cy="96"
+          r="88"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="8"
+          class="opacity-10"
+        />
+        <circle
+          id="timer-progress"
+          cx="96"
+          cy="96"
+          r="88"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="8"
+          stroke-linecap="round"
+          stroke-dasharray="553"
+          stroke-dashoffset="0"
+          class="text-primary-500 transition-all duration-1000"
+        />
+      </svg>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span id="timer-display" class="text-5xl font-bold font-mono">25:00</span>
+      </div>
+    </div>
+
+    <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+      <span id="timer-status">{t.work}</span>
+    </div>
+  </div>
+
+  <!-- 控制按钮 -->
+  <div class="flex gap-3 mb-4">
+    <button id="timer-toggle" type="button" class="flex-1 py-3 px-6 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-colors">
+      {t.start}
+    </button>
+    <button id="timer-reset" type="button" class="py-3 px-6 bg-[rgb(var(--color-bg-accent))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg font-medium transition-colors">
+      {t.reset}
+    </button>
+  </div>
+
+  <!-- 统计 -->
+  <div class="flex items-center justify-center gap-2 text-sm text-[rgb(var(--color-text-secondary))]">
+    <span>{t.sessions}:</span>
+    <span id="session-count" class="font-bold text-primary-500">0</span>
+  </div>
+
+  <!-- 提示音开关 -->
+  <div class="mt-4 flex items-center justify-between">
+    <span class="text-sm">提示音</span>
+    <button id="sound-toggle" type="button" class="relative w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full transition-colors" aria-label="Toggle sound">
+      <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform" id="sound-toggle-dot"></span>
+    </button>
+  </div>
+</div>
+
+<style>
+  .pomodoro-widget {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+  }
+
+  .mode-btn {
+    @apply bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-secondary))];
+  }
+
+  .mode-btn[data-active="true"] {
+    @apply bg-primary-500 text-white;
+  }
+
+  #sound-toggle[data-active="true"] {
+    @apply bg-primary-500;
+  }
+
+  #sound-toggle[data-active="true"] #sound-toggle-dot {
+    @apply translate-x-6;
+  }
+</style>
+
+<script is:inline>
+  const WORK_TIME = 25 * 60; // 25分钟
+  const BREAK_TIME = 5 * 60; // 5分钟
+
+  let timeLeft = WORK_TIME;
+  let totalTime = WORK_TIME;
+  let isRunning = false;
+  let interval = null;
+  let sessions = 0;
+  let mode = 'work';
+  let soundEnabled = true;
+
+  const display = document.getElementById('timer-display');
+  const progress = document.getElementById('timer-progress');
+  const toggleBtn = document.getElementById('timer-toggle');
+  const resetBtn = document.getElementById('timer-reset');
+  const statusText = document.getElementById('timer-status');
+  const sessionCount = document.getElementById('session-count');
+  const soundToggle = document.getElementById('sound-toggle');
+
+  // 格式化时间
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  // 更新显示
+  function updateDisplay() {
+    display.textContent = formatTime(timeLeft);
+
+    // 更新进度环
+    const progressValue = (totalTime - timeLeft) / totalTime;
+    const dashOffset = 553 * (1 - progressValue);
+    progress.style.strokeDashoffset = dashOffset;
+
+    // 更新标题
+    document.title = `${formatTime(timeLeft)} - ${mode === 'work' ? '专注中' : '休息中'}`;
+  }
+
+  // 开始/暂停
+  toggleBtn.addEventListener('click', () => {
+    if (isRunning) {
+      pauseTimer();
+    } else {
+      startTimer();
+    }
+  });
+
+  function startTimer() {
+    isRunning = true;
+    toggleBtn.textContent = '暂停';
+
+    interval = setInterval(() => {
+      timeLeft--;
+      updateDisplay();
+
+      if (timeLeft <= 0) {
+        timerComplete();
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    isRunning = false;
+    toggleBtn.textContent = '开始';
+    clearInterval(interval);
+  }
+
+  // 重置
+  resetBtn.addEventListener('click', () => {
+    pauseTimer();
+    timeLeft = mode === 'work' ? WORK_TIME : BREAK_TIME;
+    totalTime = timeLeft;
+    updateDisplay();
+    document.title = '番茄钟';
+  });
+
+  // 计时完成
+  function timerComplete() {
+    pauseTimer();
+
+    if (soundEnabled) {
+      playNotificationSound();
+    }
+
+    if (mode === 'work') {
+      sessions++;
+      sessionCount.textContent = sessions;
+      switchMode('break');
+    } else {
+      switchMode('work');
+    }
+
+    // 浏览器通知
+    if (Notification.permission === 'granted') {
+      new Notification(mode === 'work' ? '休息结束，开始专注！' : '专注完成，休息一下！', {
+        body: mode === 'work' ? '25分钟专注时间开始' : '5分钟休息时间',
+        icon: '/img/branding/logo.png'
+      });
+    }
+  }
+
+  // 切换模式
+  function switchMode(newMode) {
+    mode = newMode;
+    const status = newMode === 'work' ? '专注' : '休息';
+
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.dataset.active = btn.dataset.mode === newMode;
+    });
+
+    statusText.textContent = status;
+    timeLeft = newMode === 'work' ? WORK_TIME : BREAK_TIME;
+    totalTime = timeLeft;
+    updateDisplay();
+  }
+
+  // 模式按钮
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!isRunning) {
+        switchMode(btn.dataset.mode);
+      }
+    });
+  });
+
+  // 提示音
+  function playNotificationSound() {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.value = 800;
+    oscillator.type = 'sine';
+    gainNode.gain.value = 0.3;
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.3);
+
+    setTimeout(() => {
+      const osc2 = audioContext.createOscillator();
+      const gain2 = audioContext.createGain();
+      osc2.connect(gain2);
+      gain2.connect(audioContext.destination);
+      osc2.frequency.value = 1000;
+      osc2.type = 'sine';
+      gain2.gain.value = 0.3;
+      osc2.start();
+      osc2.stop(audioContext.currentTime + 0.5);
+    }, 300);
+  }
+
+  // 提示音开关
+  soundToggle.addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    soundToggle.dataset.active = soundEnabled;
+  });
+
+  // 请求通知权限
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+
+  // 初始化
+  updateDisplay();
+</script>

@@ -10,6 +10,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "generate-music": "node scripts/generate-music-manifest.js",
+    "optimize-images": "node scripts/optimize-images.js",
     "build": "node scripts/generate-music-manifest.js && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -25,6 +26,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "prettier": "^3.3.0",
     "prettier-plugin-astro": "^0.14.0",
+    "sharp": "^0.34.5",
     "typescript": "^5.5.0"
   }
 }

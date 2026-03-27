@@ -1,0 +1,357 @@
+---
+/**
+ * 倒计时组件
+ * 自定义倒计时器
+ */
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'zh-CN' } = Astro.props;
+
+const countdownText = {
+  'zh-CN': {
+    title: '倒计时',
+    days: '天',
+    hours: '时',
+    minutes: '分',
+    seconds: '秒',
+    start: '开始',
+    pause: '暂停',
+    reset: '重置',
+    custom: '自定义',
+    preset: '快速选择',
+    preset5: '5分钟',
+    preset10: '10分钟',
+    preset30: '30分钟',
+    preset60: '1小时',
+  },
+  'zh-TW': {
+    title: '倒數計時',
+    days: '天',
+    hours: '時',
+    minutes: '分',
+    seconds: '秒',
+    start: '開始',
+    pause: '暫停',
+    reset: '重置',
+    custom: '自定義',
+    preset: '快速選擇',
+    preset5: '5分鐘',
+    preset10: '10分鐘',
+    preset30: '30分鐘',
+    preset60: '1小時',
+  },
+  'en-GB': {
+    title: 'Countdown',
+    days: 'Days',
+    hours: 'Hours',
+    minutes: 'Minutes',
+    seconds: 'Seconds',
+    start: 'Start',
+    pause: 'Pause',
+    reset: 'Reset',
+    custom: 'Custom',
+    preset: 'Quick Select',
+    preset5: '5 Minutes',
+    preset10: '10 Minutes',
+    preset30: '30 Minutes',
+    preset60: '1 Hour',
+  },
+  fr: {
+    title: 'Compte à Rebours',
+    days: 'Jours',
+    hours: 'Heures',
+    minutes: 'Minutes',
+    seconds: 'Secondes',
+    start: 'Démarrer',
+    pause: 'Pause',
+    reset: 'Réinitialiser',
+    custom: 'Personnaliser',
+    preset: 'Sélection Rapide',
+    preset5: '5 Minutes',
+    preset10: '10 Minutes',
+    preset30: '30 Minutes',
+    preset60: '1 Heure',
+  },
+  ru: {
+    title: 'Обратный Отсчёт',
+    days: 'Дней',
+    hours: 'Часов',
+    minutes: 'Минут',
+    seconds: 'Секунд',
+    start: 'Старт',
+    pause: 'Пауза',
+    reset: 'Сброс',
+    custom: 'Настроить',
+    preset: 'Быстрый Выбор',
+    preset5: '5 Минут',
+    preset10: '10 Минут',
+    preset30: '30 Минут',
+    preset60: '1 Час',
+  },
+};
+
+const t = countdownText[lang as keyof typeof countdownText] || countdownText['zh-CN'];
+---
+
+<div id="countdown-timer" class="countdown-widget glass-card rounded-2xl p-6 shadow-xl max-w-md">
+  <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+    <span class="text-2xl">⏱️</span>
+    {t.title}
+  </h3>
+
+  <!-- 倒计时显示 -->
+  <div class="grid grid-cols-4 gap-3 mb-6">
+    <div class="text-center">
+      <div class="glass-card rounded-xl p-3 mb-2">
+        <span id="countdown-days" class="text-3xl font-bold font-mono">00</span>
+      </div>
+      <span class="text-xs text-[rgb(var(--color-text-secondary))]">{t.days}</span>
+    </div>
+    <div class="text-center">
+      <div class="glass-card rounded-xl p-3 mb-2">
+        <span id="countdown-hours" class="text-3xl font-bold font-mono">00</span>
+      </div>
+      <span class="text-xs text-[rgb(var(--color-text-secondary))]">{t.hours}</span>
+    </div>
+    <div class="text-center">
+      <div class="glass-card rounded-xl p-3 mb-2">
+        <span id="countdown-minutes" class="text-3xl font-bold font-mono">00</span>
+      </div>
+      <span class="text-xs text-[rgb(var(--color-text-secondary))]">{t.minutes}</span>
+    </div>
+    <div class="text-center">
+      <div class="glass-card rounded-xl p-3 mb-2">
+        <span id="countdown-seconds" class="text-3xl font-bold font-mono">00</span>
+      </div>
+      <span class="text-xs text-[rgb(var(--color-text-secondary))]">{t.seconds}</span>
+    </div>
+  </div>
+
+  <!-- 快速选择 -->
+  <div class="mb-4">
+    <h4 class="text-sm font-semibold mb-3">{t.preset}</h4>
+    <div class="grid grid-cols-4 gap-2">
+      <button class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:text-white rounded text-sm font-medium transition-colors" data-minutes="5">
+        {t.preset5}
+      </button>
+      <button class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:text-white rounded text-sm font-medium transition-colors" data-minutes="10">
+        {t.preset10}
+      </button>
+      <button class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:text-white rounded text-sm font-medium transition-colors" data-minutes="30">
+        {t.preset30}
+      </button>
+      <button class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:bg-white rounded text-sm font-medium transition-colors" data-minutes="60">
+        {t.preset60}
+      </button>
+    </div>
+  </div>
+
+  <!-- 自定义时间输入 -->
+  <div class="mb-6">
+    <h4 class="text-sm font-semibold mb-3">{t.custom}</h4>
+    <div class="flex gap-2">
+      <input
+        type="number"
+        id="custom-days"
+        min="0"
+        max="365"
+        placeholder="0"
+        class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded text-center"
+      />
+      <input
+        type="number"
+        id="custom-hours"
+        min="0"
+        max="23"
+        placeholder="0"
+        class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded text-center"
+      />
+      <input
+        type="number"
+        id="custom-minutes"
+        min="0"
+        max="59"
+        placeholder="0"
+        class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded text-center"
+      />
+      <input
+        type="number"
+        id="custom-seconds"
+        min="0"
+        max="59"
+        placeholder="0"
+        class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded text-center"
+      />
+    </div>
+  </div>
+
+  <!-- 控制按钮 -->
+  <div class="flex gap-3">
+    <button id="countdown-toggle" type="button" class="flex-1 py-3 px-6 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-colors">
+      {t.start}
+    </button>
+    <button id="countdown-reset" type="button" class="py-3 px-6 bg-[rgb(var(--color-bg-accent))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg font-medium transition-colors">
+      {t.reset}
+    </button>
+  </div>
+
+  <!-- 进度条 -->
+  <div class="mt-6">
+    <div class="h-2 bg-[rgb(var(--color-bg-accent))] rounded-full overflow-hidden">
+      <div id="countdown-progress" class="h-full bg-gradient-to-r from-primary-500 to-purple-500 transition-all duration-1000" style="width: 0%"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .countdown-widget {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(251, 146, 60, 0.05) 100%);
+  }
+
+  .preset-btn.active {
+    @apply bg-primary-500 text-white;
+  }
+</style>
+
+<script is:inline>
+  let totalSeconds = 0;
+  let remainingSeconds = 0;
+  let isRunning = false;
+  let interval = null;
+
+  const daysEl = document.getElementById('countdown-days');
+  const hoursEl = document.getElementById('countdown-hours');
+  const minutesEl = document.getElementById('countdown-minutes');
+  const secondsEl = document.getElementById('countdown-seconds');
+  const progressEl = document.getElementById('countdown-progress');
+  const toggleBtn = document.getElementById('countdown-toggle');
+  const resetBtn = document.getElementById('countdown-reset');
+  const customDays = document.getElementById('custom-days');
+  const customHours = document.getElementById('custom-hours');
+  const customMinutes = document.getElementById('custom-minutes');
+  const customSeconds = document.getElementById('custom-seconds');
+
+  function updateDisplay() {
+    const d = Math.floor(remainingSeconds / 86400);
+    const h = Math.floor((remainingSeconds % 86400) / 3600);
+    const m = Math.floor((remainingSeconds % 3600) / 60);
+    const s = remainingSeconds % 60;
+
+    daysEl.textContent = d.toString().padStart(2, '0');
+    hoursEl.textContent = h.toString().padStart(2, '0');
+    minutesEl.textContent = m.toString().padStart(2, '0');
+    secondsEl.textContent = s.toString().padStart(2, '0');
+
+    // 更新进度条
+    if (totalSeconds > 0) {
+      const progress = ((totalSeconds - remainingSeconds) / totalSeconds) * 100;
+      progressEl.style.width = `${progress}%`;
+    }
+  }
+
+  function startCountdown() {
+    if (remainingSeconds <= 0) {
+      const d = parseInt(customDays.value || '0');
+      const h = parseInt(customHours.value || '0');
+      const m = parseInt(customMinutes.value || '0');
+      const s = parseInt(customSeconds.value || '0');
+
+      totalSeconds = d * 86400 + h * 3600 + m * 60 + s;
+      remainingSeconds = totalSeconds;
+    }
+
+    if (remainingSeconds <= 0) return;
+
+    isRunning = true;
+    toggleBtn.textContent = '暂停';
+
+    interval = setInterval(() => {
+      remainingSeconds--;
+      updateDisplay();
+
+      if (remainingSeconds <= 0) {
+        countdownComplete();
+      }
+    }, 1000);
+  }
+
+  function pauseCountdown() {
+    isRunning = false;
+    toggleBtn.textContent = '开始';
+    clearInterval(interval);
+  }
+
+  function resetCountdown() {
+    pauseCountdown();
+    totalSeconds = 0;
+    remainingSeconds = 0;
+    updateDisplay();
+    progressEl.style.width = '0%';
+    customDays.value = '';
+    customHours.value = '';
+    customMinutes.value = '';
+    customSeconds.value = '';
+  }
+
+  function countdownComplete() {
+    pauseCountdown();
+
+    // 播放提示音
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.value = 1000;
+    oscillator.type = 'sine';
+    gainNode.gain.value = 0.5;
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.5);
+
+    // 浏览器通知
+    if (Notification.permission === 'granted') {
+      new Notification('倒计时结束！', {
+        body: '时间到！',
+        icon: '/img/branding/logo.png'
+      });
+    }
+  }
+
+  // 快速选择按钮
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const minutes = parseInt(btn.dataset.minutes || '0');
+      totalSeconds = minutes * 60;
+      remainingSeconds = totalSeconds;
+      updateDisplay();
+
+      // 高亮按钮
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  toggleBtn.addEventListener('click', () => {
+    if (isRunning) {
+      pauseCountdown();
+    } else {
+      startCountdown();
+    }
+  });
+
+  resetBtn.addEventListener('click', resetCountdown);
+
+  // 初始化
+  updateDisplay();
+
+  // 请求通知权限
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+</script>
