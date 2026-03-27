@@ -1,0 +1,219 @@
+---
+/**
+ * 简易计算器组件
+ * 支持基础运算
+ */
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'zh-CN' } = Astro.props;
+
+const calcText = {
+  'zh-CN': {
+    title: '计算器',
+    clear: '清空',
+    history: '历史',
+  },
+  'zh-TW': {
+    title: '計算機',
+    clear: '清除',
+    history: '歷史',
+  },
+  'en-GB': {
+    title: 'Calculator',
+    clear: 'Clear',
+    history: 'History',
+  },
+  fr: {
+    title: 'Calculatrice',
+    clear: 'Effacer',
+    history: 'Historique',
+  },
+  ru: {
+    title: 'Калькулятор',
+    clear: 'Очистить',
+    history: 'История',
+  },
+};
+
+const t = calcText[lang as keyof typeof calcText] || calcText['zh-CN'];
+---
+
+<div id="calculator" class="calculator-widget glass-card rounded-2xl p-6 shadow-xl max-w-xs">
+  <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+    <span class="text-2xl">🔢</span>
+    {t.title}
+  </h3>
+
+  <!-- 显示屏 -->
+  <div class="mb-4">
+    <div class="bg-[rgb(var(--color-bg-secondary))] rounded-lg p-4 text-right">
+      <div id="calc-expression" class="text-sm text-[rgb(var(--color-text-tertiary))] h-6 overflow-x-auto"></div>
+      <div id="calc-display" class="text-3xl font-mono font-bold overflow-x-auto">0</div>
+    </div>
+  </div>
+
+  <!-- 按钮面板 -->
+  <div class="grid grid-cols-4 gap-2">
+    <button class="calc-btn func" data-action="clear">{t.clear}</button>
+    <button class="calc-btn func" data-action="backspace">⌫</button>
+    <button class="calc-btn func" data-action="percent">%</button>
+    <button class="calc-btn operator" data-action="operator" data-value="/">÷</button>
+
+    <button class="calc-btn number" data-value="7">7</button>
+    <button class="calc-btn number" data-value="8">8</button>
+    <button class="calc-btn number" data-value="9">9</button>
+    <button class="calc-btn operator" data-action="operator" data-value="*">×</button>
+
+    <button class="calc-btn number" data-value="4">4</button>
+    <button class="calc-btn number" data-value="5">5</button>
+    <button class="calc-btn number" data-value="6">6</button>
+    <button class="calc-btn operator" data-action="operator" data-value="-">−</button>
+
+    <button class="calc-btn number" data-value="1">1</button>
+    <button class="calc-btn number" data-value="2">2</button>
+    <button class="calc-btn number" data-value="3">3</button>
+    <button class="calc-btn operator" data-action="operator" data-value="+">+</button>
+
+    <button class="calc-btn number col-span-2" data-value="0">0</button>
+    <button class="calc-btn number" data-value=".">.</button>
+    <button class="calc-btn equals" data-action="equals">=</button>
+  </div>
+</div>
+
+<style>
+  .calculator-widget {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+  }
+
+  .calc-btn {
+    @apply py-3 rounded-lg font-medium transition-all active:scale-95;
+  }
+
+  .calc-btn.number {
+    @apply bg-[rgb(var(--color-bg-accent))] hover:bg-[rgb(var(--color-bg-secondary))];
+  }
+
+  .calc-btn.operator {
+    @apply bg-primary-500/20 text-primary-600 dark:text-primary-400 hover:bg-primary-500/30;
+  }
+
+  .calc-btn.func {
+    @apply bg-gray-500/20 text-[rgb(var(--color-text-secondary))] hover:bg-gray-500/30;
+  }
+
+  .calc-btn.equals {
+    @apply bg-gradient-to-r from-primary-500 to-purple-500 text-white hover:from-primary-600 hover:to-purple-600;
+  }
+</style>
+
+<script is:inline>
+  const display = document.getElementById('calc-display');
+  const expression = document.getElementById('calc-expression');
+  const buttons = document.querySelectorAll('.calc-btn');
+
+  let current = '0';
+  let prev = '';
+  let operator = null;
+  let shouldResetDisplay = false;
+
+  function updateDisplay() {
+    display.textContent = current;
+    expression.textContent = prev + (operator ? ` ${getOperatorSymbol(operator)} ` : '');
+  }
+
+  function getOperatorSymbol(op) {
+    const symbols = { '+': '+', '-': '−', '*': '×', '/': '÷' };
+    return symbols[op] || op;
+  }
+
+  function calculate() {
+    const prevNum = parseFloat(prev);
+    const currentNum = parseFloat(current);
+
+    let result;
+    switch (operator) {
+      case '+': result = prevNum + currentNum; break;
+      case '-': result = prevNum - currentNum; break;
+      case '*': result = prevNum * currentNum; break;
+      case '/': result = prevNum / currentNum; break;
+      default: return;
+    }
+
+    // 处理精度问题
+    current = Math.round(result * 1000000000) / 1000000000;
+    current = current.toString();
+    prev = '';
+    operator = null;
+    shouldResetDisplay = true;
+    updateDisplay();
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const action = btn.dataset.action;
+      const value = btn.dataset.value;
+
+      if (action === 'clear') {
+        current = '0';
+        prev = '';
+        operator = null;
+        updateDisplay();
+      } else if (action === 'backspace') {
+        current = current.length > 1 ? current.slice(0, -1) : '0';
+        updateDisplay();
+      } else if (action === 'percent') {
+        current = (parseFloat(current) / 100).toString();
+        updateDisplay();
+      } else if (action === 'operator') {
+        if (prev && operator && !shouldResetDisplay) {
+          calculate();
+        }
+        prev = current;
+        operator = value;
+        shouldResetDisplay = true;
+        updateDisplay();
+      } else if (action === 'equals') {
+        if (prev && operator) {
+          calculate();
+        }
+      } else if (value) {
+        // 数字或小数点
+        if (shouldResetDisplay) {
+          current = value === '.' ? '0.' : value;
+          shouldResetDisplay = false;
+        } else {
+          if (value === '.' && current.includes('.')) return;
+          if (current === '0' && value !== '.') {
+            current = value;
+          } else {
+            current += value;
+          }
+        }
+        updateDisplay();
+      }
+    });
+  });
+
+  // 键盘支持
+  document.addEventListener('keydown', (e) => {
+    const key = e.key;
+    if (/[0-9]/.test(key)) {
+      document.querySelector(`.calc-btn[data-value="${key}"]`)?.click();
+    } else if (key === '.') {
+      document.querySelector('.calc-btn[data-value="."]')?.click();
+    } else if (['+', '-', '*', '/'].includes(key)) {
+      document.querySelector(`.calc-btn[data-value="${key}"]`)?.click();
+    } else if (key === 'Enter' || key === '=') {
+      document.querySelector('.calc-btn[data-action="equals"]')?.click();
+    } else if (key === 'Escape' || key === 'c' || key === 'C') {
+      document.querySelector('.calc-btn[data-action="clear"]')?.click();
+    } else if (key === 'Backspace') {
+      document.querySelector('.calc-btn[data-action="backspace"]')?.click();
+    }
+  });
+
+  updateDisplay();
+</script>

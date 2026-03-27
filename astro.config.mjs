@@ -32,6 +32,18 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
+  vite: {
+    build: {
+      cssMinify: true,
+      minify: 'esbuild',
+      rollupOptions: {
+        output: {
+          assetFileNames: 'assets/[hash][extname]',
+          chunkFileNames: 'chunks/[hash].js',
+        },
+      },
+    },
+  },
   server: {
     host: true, // 允许通过局域网 / Tailscale IP 访问（如 http://100.x.x.x:4321）
     port: 4321,

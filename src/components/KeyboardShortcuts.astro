@@ -69,7 +69,7 @@ function getLangPath(path: string): string {
   </svg>
 </button>
 
-<script define:vars={{ lang, shortcuts, getLangPath }}>
+<script is:inline define:vars={{ lang, shortcuts, getLangPath }}>
   const modal = document.getElementById('shortcuts-modal');
   const backdrop = document.getElementById('shortcuts-backdrop');
   const closeBtn = document.getElementById('close-shortcuts');
@@ -121,6 +121,7 @@ function getLangPath(path: string): string {
     }
 
     // Find matching shortcut
+    // @ts-ignore - shortcuts is defined in define:vars
     const shortcut = shortcuts.find(s => s.key === key);
     if (shortcut) {
       e.preventDefault();

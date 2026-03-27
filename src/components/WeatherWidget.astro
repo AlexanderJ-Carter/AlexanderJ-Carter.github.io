@@ -1,0 +1,241 @@
+---
+/**
+ * 天气小组件
+ * 显示实时天气和7天预报
+ */
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'zh-CN' } = Astro.props;
+
+const weatherText = {
+  'zh-CN': {
+    title: '实时天气',
+    humidity: '湿度',
+    wind: '风速',
+    forecast: '7天预报',
+    loading: '加载中...',
+    error: '无法获取天气',
+    refresh: '刷新',
+  },
+  'zh-TW': {
+    title: '即時天氣',
+    humidity: '濕度',
+    wind: '風速',
+    forecast: '7天預報',
+    loading: '載入中...',
+    error: '無法取得天氣',
+    refresh: '重新整理',
+  },
+  'en-GB': {
+    title: 'Live Weather',
+    humidity: 'Humidity',
+    wind: 'Wind',
+    forecast: '7-Day Forecast',
+    loading: 'Loading...',
+    error: 'Unable to fetch weather',
+    refresh: 'Refresh',
+  },
+  fr: {
+    title: 'Météo en Direct',
+    humidity: 'Humidité',
+    wind: 'Vent',
+    forecast: 'Prévisions 7 jours',
+    loading: 'Chargement...',
+    error: 'Impossible de récupérer la météo',
+    refresh: 'Actualiser',
+  },
+  ru: {
+    title: 'Текущая Погода',
+    humidity: 'Влажность',
+    wind: 'Ветер',
+    forecast: 'Прогноз на 7 дней',
+    loading: 'Загрузка...',
+    error: 'Невозможно получить погоду',
+    refresh: 'Обновить',
+  },
+};
+
+const t = weatherText[lang as keyof typeof weatherText] || weatherText['zh-CN'];
+---
+
+<div id="weather-widget" class="weather-widget glass-card rounded-2xl p-6 shadow-xl">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-lg font-bold flex items-center gap-2">
+      <span class="text-2xl" id="weather-icon">🌤️</span>
+      {t.title}
+    </h3>
+    <button id="weather-refresh" type="button" class="p-2 hover:bg-white/20 rounded-lg transition-colors" aria-label={t.refresh}>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="weather-content" class="space-y-4">
+    <!-- 当前天气 -->
+    <div class="flex items-center justify-between">
+      <div>
+        <div class="text-5xl font-bold" id="weather-temp">--°</div>
+        <div class="text-sm text-[rgb(var(--color-text-secondary))]" id="weather-desc">{t.loading}</div>
+        <div class="text-xs text-[rgb(var(--color-text-tertiary))] mt-1" id="weather-location">--</div>
+      </div>
+      <div class="text-right space-y-2 text-sm">
+        <div class="flex items-center gap-2 justify-end">
+          <span class="text-[rgb(var(--color-text-secondary))]">{t.humidity}:</span>
+          <span id="weather-humidity">--%</span>
+        </div>
+        <div class="flex items-center gap-2 justify-end">
+          <span class="text-[rgb(var(--color-text-secondary))]">{t.wind}:</span>
+          <span id="weather-wind">-- m/s</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7天预报 -->
+    <div class="border-t border-[rgb(var(--color-border))] pt-4">
+      <h4 class="text-sm font-semibold mb-3">{t.forecast}</h4>
+      <div id="weather-forecast" class="grid grid-cols-7 gap-2 text-center">
+        <!-- 预报数据将通过JS填充 -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .weather-widget {
+    min-width: 320px;
+    max-width: 400px;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(217, 70, 239, 0.1) 100%);
+  }
+
+  .forecast-day {
+    @apply flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-white/10 transition-colors cursor-default;
+  }
+
+  .forecast-day .icon {
+    @apply text-2xl;
+  }
+
+  .forecast-day .temp {
+    @apply text-xs font-semibold;
+  }
+
+  .forecast-day .day {
+    @apply text-xs text-[rgb(var(--color-text-tertiary))];
+  }
+</style>
+
+<script is:inline>
+  // 使用免费的天气 API
+  async function fetchWeather() {
+    try {
+      // 获取用户位置
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+          const { latitude, longitude } = position.coords;
+
+          // 使用 Open-Meteo 免费API
+          const response = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=7`
+          );
+
+          const data = await response.json();
+          updateWeatherUI(data);
+        }, () => {
+          showError();
+        });
+      } else {
+        showError();
+      }
+    } catch (error) {
+      console.error('Weather fetch error:', error);
+      showError();
+    }
+  }
+
+  function updateWeatherUI(data) {
+    const current = data.current;
+    const daily = data.daily;
+
+    // 更新当前天气
+    const weatherCode = current.weather_code;
+    const { icon, desc } = getWeatherInfo(weatherCode);
+
+    document.getElementById('weather-icon').textContent = icon;
+    document.getElementById('weather-temp').textContent = `${Math.round(current.temperature_2m)}°`;
+    document.getElementById('weather-desc').textContent = desc;
+    document.getElementById('weather-humidity').textContent = `${current.relative_humidity_2m}%`;
+    document.getElementById('weather-wind').textContent = `${Math.round(current.wind_speed_10m)} m/s`;
+
+    // 根据时区获取城市名
+    const timezone = data.timezone;
+    document.getElementById('weather-location').textContent = timezone.split('/')[1] || '当前位置';
+
+    // 更新7天预报
+    const forecastContainer = document.getElementById('weather-forecast');
+    forecastContainer.innerHTML = '';
+
+    for (let i = 0; i < 7; i++) {
+      const dayInfo = getWeatherInfo(daily.weather_code[i]);
+      const date = new Date(daily.time[i]);
+      const dayName = date.toLocaleDateString('zh-CN', { weekday: 'short' });
+
+      const dayEl = document.createElement('div');
+      dayEl.className = 'forecast-day';
+      dayEl.innerHTML = `
+        <span class="day">${dayName}</span>
+        <span class="icon">${dayInfo.icon}</span>
+        <span class="temp">${Math.round(daily.temperature_2m_max[i])}°</span>
+      `;
+      forecastContainer.appendChild(dayEl);
+    }
+  }
+
+  function getWeatherInfo(code) {
+    const weatherMap = {
+      0: { icon: '☀️', desc: '晴朗' },
+      1: { icon: '🌤️', desc: '晴间多云' },
+      2: { icon: '⛅', desc: '多云' },
+      3: { icon: '☁️', desc: '阴天' },
+      45: { icon: '🌫️', desc: '雾' },
+      48: { icon: '🌫️', desc: '雾凇' },
+      51: { icon: '🌦️', desc: '小雨' },
+      53: { icon: '🌧️', desc: '中雨' },
+      55: { icon: '🌧️', desc: '大雨' },
+      61: { icon: '🌧️', desc: '小雨' },
+      63: { icon: '🌧️', desc: '中雨' },
+      65: { icon: '⛈️', desc: '大雨' },
+      71: { icon: '🌨️', desc: '小雪' },
+      73: { icon: '🌨️', desc: '中雪' },
+      75: { icon: '❄️', desc: '大雪' },
+      77: { icon: '🌨️', desc: '雪粒' },
+      80: { icon: '🌦️', desc: '阵雨' },
+      81: { icon: '🌧️', desc: '中阵雨' },
+      82: { icon: '⛈️', desc: '大阵雨' },
+      85: { icon: '🌨️', desc: '小阵雪' },
+      86: { icon: '🌨️', desc: '大阵雪' },
+      95: { icon: '⛈️', desc: '雷暴' },
+      96: { icon: '⛈️', desc: '雷暴伴小冰雹' },
+      99: { icon: '⛈️', desc: '雷暴伴大冰雹' },
+    };
+
+    return weatherMap[code] || { icon: '🌡️', desc: '未知' };
+  }
+
+  function showError() {
+    const t = window.weatherText || {};
+    document.getElementById('weather-desc').textContent = t.error || '无法获取天气';
+  }
+
+  // 刷新按钮
+  document.getElementById('weather-refresh')?.addEventListener('click', fetchWeather);
+
+  // 初始加载
+  fetchWeather();
+
+  // 每小时自动更新
+  setInterval(fetchWeather, 60 * 60 * 1000);
+</script>

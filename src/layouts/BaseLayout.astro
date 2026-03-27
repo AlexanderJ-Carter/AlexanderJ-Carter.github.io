@@ -14,6 +14,7 @@ import ReadingProgress from '../components/ReadingProgress.astro';
 import Toast from '../components/Toast.astro';
 import KeyboardShortcuts from '../components/KeyboardShortcuts.astro';
 import SiteAssistant from '../components/SiteAssistant.astro';
+import ServiceWorkerRegister from '../components/ServiceWorkerRegister.astro';
 
 interface Props {
   title?: string;
@@ -296,6 +297,7 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
       });
     })();
   </script>
+  <ServiceWorkerRegister lang={lang} />
 </body>
 </html>
 
