@@ -298,7 +298,15 @@ const termsData: Record<Lang, any> = {
 
 const content = termsData[lang as Lang] || termsData['en-GB'];
 const tocTitle =
-  lang === 'zh-CN' ? '目录导航' : lang === 'zh-TW' ? '目錄導航' : lang === 'fr' ? 'Sommaire' : lang === 'ru' ? 'Содержание' : 'Contents';
+  lang === 'zh-CN'
+    ? '目录导航'
+    : lang === 'zh-TW'
+      ? '目錄導航'
+      : lang === 'fr'
+        ? 'Sommaire'
+        : lang === 'ru'
+          ? 'Содержание'
+          : 'Contents';
 ---
 
 <BaseLayout title={`${content.title} - Alexander Carter`} showFooter={false}>
@@ -415,13 +423,23 @@ const tocTitle =
       <div class="flex flex-col lg:flex-row gap-8">
         <aside class="lg:w-1/4">
           <div class="sticky top-24 glass-card p-5 rounded-xl">
-            <h2 class="text-sm uppercase tracking-wide font-semibold text-[rgb(var(--color-text-tertiary))] mb-3">{tocTitle}</h2>
+            <h2
+              class="text-sm uppercase tracking-wide font-semibold text-[rgb(var(--color-text-tertiary))] mb-3"
+            >
+              {tocTitle}
+            </h2>
             <nav class="space-y-1.5">
-              {content.sections.map((section: any, i: number) => (
-                <a href={`#section-${i + 1}`} data-target={`section-${i + 1}`} class="toc-link block text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors rounded px-2 py-1">
-                  {section.title}
-                </a>
-              ))}
+              {
+                content.sections.map((section: any, i: number) => (
+                  <a
+                    href={`#section-${i + 1}`}
+                    data-target={`section-${i + 1}`}
+                    class="toc-link block text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors rounded px-2 py-1"
+                  >
+                    {section.title}
+                  </a>
+                ))
+              }
             </nav>
           </div>
         </aside>
@@ -458,17 +476,29 @@ const tocTitle =
 <script is:inline>
   (function () {
     const links = Array.from(document.querySelectorAll('.toc-link'));
-    const sections = Array.from(document.querySelectorAll('section[id^="section-"]'));
+    const sections = Array.from(
+      document.querySelectorAll('section[id^="section-"]')
+    );
     if (!links.length || !sections.length) return;
     const map = new Map(links.map((l) => [l.getAttribute('data-target'), l]));
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          links.forEach((l) => l.classList.remove('bg-primary-500/10', 'text-primary-500', 'font-semibold'));
+          links.forEach((l) =>
+            l.classList.remove(
+              'bg-primary-500/10',
+              'text-primary-500',
+              'font-semibold'
+            )
+          );
           const id = entry.target.getAttribute('id');
           const active = id ? map.get(id) : null;
-          active?.classList.add('bg-primary-500/10', 'text-primary-500', 'font-semibold');
+          active?.classList.add(
+            'bg-primary-500/10',
+            'text-primary-500',
+            'font-semibold'
+          );
         });
       },
       { rootMargin: '-25% 0px -60% 0px', threshold: [0.1, 0.3] }

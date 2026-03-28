@@ -66,7 +66,10 @@ const timerText = {
 const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
 ---
 
-<div id="pomodoro-timer" class="pomodoro-widget glass-card rounded-2xl p-6 shadow-xl max-w-sm">
+<div
+  id="pomodoro-timer"
+  class="pomodoro-widget glass-card rounded-2xl p-6 shadow-xl max-w-sm"
+>
   <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
     <span class="text-2xl">🍅</span>
     {t.title}
@@ -74,10 +77,20 @@ const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
 
   <!-- 模式切换 -->
   <div class="flex gap-2 mb-6">
-    <button type="button" class="mode-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all" data-mode="work" data-active="true">
+    <button
+      type="button"
+      class="mode-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all"
+      data-mode="work"
+      data-active="true"
+    >
       {t.work} (25{t.minutes})
     </button>
-    <button type="button" class="mode-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all" data-mode="break" data-active="false">
+    <button
+      type="button"
+      class="mode-btn flex-1 py-2 px-4 rounded-lg font-medium transition-all"
+      data-mode="break"
+      data-active="false"
+    >
       {t.break} (5{t.minutes})
     </button>
   </div>
@@ -93,8 +106,7 @@ const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
           fill="none"
           stroke="currentColor"
           stroke-width="8"
-          class="opacity-10"
-        />
+          class="opacity-10"></circle>
         <circle
           id="timer-progress"
           cx="96"
@@ -106,11 +118,12 @@ const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
           stroke-linecap="round"
           stroke-dasharray="553"
           stroke-dashoffset="0"
-          class="text-primary-500 transition-all duration-1000"
-        />
+          class="text-primary-500 transition-all duration-1000"></circle>
       </svg>
       <div class="absolute inset-0 flex items-center justify-center">
-        <span id="timer-display" class="text-5xl font-bold font-mono">25:00</span>
+        <span id="timer-display" class="text-5xl font-bold font-mono"
+          >25:00</span
+        >
       </div>
     </div>
 
@@ -121,16 +134,26 @@ const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
 
   <!-- 控制按钮 -->
   <div class="flex gap-3 mb-4">
-    <button id="timer-toggle" type="button" class="flex-1 py-3 px-6 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-colors">
+    <button
+      id="timer-toggle"
+      type="button"
+      class="flex-1 py-3 px-6 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-colors"
+    >
       {t.start}
     </button>
-    <button id="timer-reset" type="button" class="py-3 px-6 bg-[rgb(var(--color-bg-accent))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg font-medium transition-colors">
+    <button
+      id="timer-reset"
+      type="button"
+      class="py-3 px-6 bg-[rgb(var(--color-bg-accent))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg font-medium transition-colors"
+    >
       {t.reset}
     </button>
   </div>
 
   <!-- 统计 -->
-  <div class="flex items-center justify-center gap-2 text-sm text-[rgb(var(--color-text-secondary))]">
+  <div
+    class="flex items-center justify-center gap-2 text-sm text-[rgb(var(--color-text-secondary))]"
+  >
     <span>{t.sessions}:</span>
     <span id="session-count" class="font-bold text-primary-500">0</span>
   </div>
@@ -138,30 +161,41 @@ const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
   <!-- 提示音开关 -->
   <div class="mt-4 flex items-center justify-between">
     <span class="text-sm">提示音</span>
-    <button id="sound-toggle" type="button" class="relative w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full transition-colors" aria-label="Toggle sound">
-      <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform" id="sound-toggle-dot"></span>
+    <button
+      id="sound-toggle"
+      type="button"
+      class="relative w-12 h-6 bg-gray-300 dark:bg-gray-600 rounded-full transition-colors"
+      aria-label="Toggle sound"
+    >
+      <span
+        class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform"
+        id="sound-toggle-dot"></span>
     </button>
   </div>
 </div>
 
 <style>
   .pomodoro-widget {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(239, 68, 68, 0.05) 0%,
+      rgba(249, 115, 22, 0.05) 100%
+    );
   }
 
   .mode-btn {
     @apply bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-secondary))];
   }
 
-  .mode-btn[data-active="true"] {
+  .mode-btn[data-active='true'] {
     @apply bg-primary-500 text-white;
   }
 
-  #sound-toggle[data-active="true"] {
+  #sound-toggle[data-active='true'] {
     @apply bg-primary-500;
   }
 
-  #sound-toggle[data-active="true"] #sound-toggle-dot {
+  #sound-toggle[data-active='true'] #sound-toggle-dot {
     @apply translate-x-6;
   }
 </style>
@@ -262,10 +296,13 @@ const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
 
     // 浏览器通知
     if (Notification.permission === 'granted') {
-      new Notification(mode === 'work' ? '休息结束，开始专注！' : '专注完成，休息一下！', {
-        body: mode === 'work' ? '25分钟专注时间开始' : '5分钟休息时间',
-        icon: '/img/branding/logo.png'
-      });
+      new Notification(
+        mode === 'work' ? '休息结束，开始专注！' : '专注完成，休息一下！',
+        {
+          body: mode === 'work' ? '25分钟专注时间开始' : '5分钟休息时间',
+          icon: '/img/branding/logo.png',
+        }
+      );
     }
   }
 
@@ -274,7 +311,7 @@ const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
     mode = newMode;
     const status = newMode === 'work' ? '专注' : '休息';
 
-    document.querySelectorAll('.mode-btn').forEach(btn => {
+    document.querySelectorAll('.mode-btn').forEach((btn) => {
       btn.dataset.active = btn.dataset.mode === newMode;
     });
 
@@ -285,7 +322,7 @@ const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
   }
 
   // 模式按钮
-  document.querySelectorAll('.mode-btn').forEach(btn => {
+  document.querySelectorAll('.mode-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       if (!isRunning) {
         switchMode(btn.dataset.mode);
@@ -295,7 +332,9 @@ const t = timerText[lang as keyof typeof timerText] || timerText['zh-CN'];
 
   // 提示音
   function playNotificationSound() {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioContext = new (
+      window.AudioContext || window.webkitAudioContext
+    )();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
 

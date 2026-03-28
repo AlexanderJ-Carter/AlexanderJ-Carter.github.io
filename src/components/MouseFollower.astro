@@ -3,7 +3,11 @@
 // Adds a subtle cursor follower effect
 ---
 
-<div id="mouse-follower" class="fixed pointer-events-none z-50 transition-all duration-300 ease-out"></div>
+<div
+  id="mouse-follower"
+  class="fixed pointer-events-none z-50 transition-all duration-300 ease-out"
+>
+</div>
 
 <script>
   const follower = document.getElementById('mouse-follower');
@@ -14,10 +18,15 @@
   let rafId = 0;
 
   // Check user preference
-  const disableFollower = localStorage.getItem('disableMouseFollower') === 'true';
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const coarsePointer = window.matchMedia('(hover: none), (pointer: coarse)').matches;
-  
+  const disableFollower =
+    localStorage.getItem('disableMouseFollower') === 'true';
+  const reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+  const coarsePointer = window.matchMedia(
+    '(hover: none), (pointer: coarse)'
+  ).matches;
+
   if (!disableFollower && !reducedMotion && !coarsePointer) {
     // Update mouse position
     document.addEventListener('mousemove', (e) => {
@@ -29,12 +38,12 @@
     function animateFollower() {
       followerX += (mouseX - followerX) * 0.1;
       followerY += (mouseY - followerY) * 0.1;
-      
+
       if (follower) {
         follower.style.left = followerX + 'px';
         follower.style.top = followerY + 'px';
       }
-      
+
       rafId = requestAnimationFrame(animateFollower);
     }
 
@@ -66,7 +75,11 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.3), rgba(217, 70, 239, 0.1));
+    background: radial-gradient(
+      circle,
+      rgba(59, 130, 246, 0.3),
+      rgba(217, 70, 239, 0.1)
+    );
     border: 2px solid rgba(59, 130, 246, 0.2);
     transform: translate(-50%, -50%);
     opacity: 0;

@@ -133,7 +133,8 @@ const currencyData: Record<Lang, any> = {
     headerDesc: 'Real-time Rates · Custom Rate Calculator · Exchange Helper',
     mainRatesTitle: 'Major Exchange Rates',
     subTitle: "Today's Reference Rates (1 foreign currency = ? CNY)",
-    disclaimer: 'For reference only. Not for trading or exchange. Check your bank for actual rates.',
+    disclaimer:
+      'For reference only. Not for trading or exchange. Check your bank for actual rates.',
     refresh: 'Refresh',
     refreshing: 'Updating...',
     source: 'Data Source',
@@ -194,7 +195,8 @@ const currencyData: Record<Lang, any> = {
       'Taux en temps réel · Calculateur personnalisé · Assistant de change',
     mainRatesTitle: 'Taux de change principaux',
     subTitle: 'Taux de référence du jour (1 devise = ? CNY)',
-    disclaimer: 'À titre indicatif uniquement. Consultez votre banque pour les taux réels.',
+    disclaimer:
+      'À titre indicatif uniquement. Consultez votre banque pour les taux réels.',
     refresh: 'Actualiser',
     refreshing: 'Mise à jour...',
     source: 'Source de données',
@@ -255,7 +257,8 @@ const currencyData: Record<Lang, any> = {
       'Курсы в реальном времени · Пользовательский калькулятор · Помощник обмена',
     mainRatesTitle: 'Основные курсы валют',
     subTitle: 'Референсные курсы сегодня (1 валюта = ? CNY)',
-    disclaimer: 'Только для справки. Не для сделок. Актуальные курсы уточняйте в банке.',
+    disclaimer:
+      'Только для справки. Не для сделок. Актуальные курсы уточняйте в банке.',
     refresh: 'Обновить',
     refreshing: 'Обновление...',
     source: 'Источник данных',
@@ -318,14 +321,23 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
 <BaseLayout title={`${content.title} - Alexander Carter`}>
   <!-- Hero Section -->
   <section class="relative pt-28 pb-16 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true" />
-    <div class="absolute inset-0 opacity-100" style="background: var(--hero-spotlight);" aria-hidden="true" />
-    <div class="section-divider" aria-hidden="true" />
+    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true"></div>
+    <div
+      class="absolute inset-0 opacity-100"
+      style="background: var(--hero-spotlight);"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="section-divider" aria-hidden="true"></div>
     <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight"
+      >
         {content.headerTitle}
       </h1>
-      <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+      <p
+        class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+      >
         {content.headerDesc}
       </p>
     </div>
@@ -346,11 +358,13 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
           <p class="text-[rgb(var(--color-text-secondary))] mb-1">
             {content.subTitle}
           </p>
-          {content.disclaimer && (
-            <p class="text-xs text-[rgb(var(--color-text-tertiary))] mb-2">
-              {content.disclaimer}
-            </p>
-          )}
+          {
+            content.disclaimer && (
+              <p class="text-xs text-[rgb(var(--color-text-tertiary))] mb-2">
+                {content.disclaimer}
+              </p>
+            )
+          }
           <p
             class="text-sm text-[rgb(var(--color-text-tertiary))] flex items-center gap-2"
             id="rates-updated"

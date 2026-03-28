@@ -10,7 +10,15 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MUSIC_DIR = path.join(__dirname, '..', 'public', 'music');
 const MANIFEST_PATH = path.join(MUSIC_DIR, 'manifest.json');
-const AUDIO_EXT = new Set(['.mp3', '.ogg', '.flac', '.m4a', '.wav', '.webm', '.aac']);
+const AUDIO_EXT = new Set([
+  '.mp3',
+  '.ogg',
+  '.flac',
+  '.m4a',
+  '.wav',
+  '.webm',
+  '.aac',
+]);
 
 /** 根据文件夹名返回默认封面 emoji */
 function coverForFolder(dirName) {
@@ -25,12 +33,14 @@ function coverForFolder(dirName) {
 
 /** 将文件名转为可读标题，如 "castle-in-sky" -> "Castle In Sky" */
 function filenameToTitle(baseName) {
-  return baseName
-    .replace(/\s+/g, ' ')
-    .split(/[-_.]/)
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ')
-    .trim() || baseName;
+  return (
+    baseName
+      .replace(/\s+/g, ' ')
+      .split(/[-_.]/)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ')
+      .trim() || baseName
+  );
 }
 
 function scanDir(dir, basePath = '') {
@@ -38,8 +48,12 @@ function scanDir(dir, basePath = '') {
   if (!fs.existsSync(dir)) return entries;
 
   const items = fs.readdirSync(dir, { withFileTypes: true });
-  const dirs = items.filter((d) => d.isDirectory()).sort((a, b) => a.name.localeCompare(b.name));
-  const files = items.filter((d) => d.isFile()).sort((a, b) => a.name.localeCompare(b.name));
+  const dirs = items
+    .filter((d) => d.isDirectory())
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const files = items
+    .filter((d) => d.isFile())
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   for (const file of files) {
     const ext = path.extname(file.name).toLowerCase();
@@ -72,7 +86,9 @@ function main() {
     tracks,
   };
   fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2), 'utf8');
-  console.log(`[music-manifest] 已生成 ${tracks.length} 首歌曲 -> public/music/manifest.json`);
+  console.log(
+    `[music-manifest] 已生成 ${tracks.length} 首歌曲 -> public/music/manifest.json`
+  );
 }
 
 main();

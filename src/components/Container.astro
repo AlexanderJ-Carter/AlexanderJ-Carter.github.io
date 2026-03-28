@@ -8,7 +8,8 @@ interface Props {
 }
 
 const { class: className = '', size = 'default' } = Astro.props;
-const sizeClass = size === 'narrow' ? 'max-w-3xl' : size === 'wide' ? 'max-w-6xl' : 'max-w-5xl';
+const sizeClass =
+  size === 'narrow' ? 'max-w-3xl' : size === 'wide' ? 'max-w-6xl' : 'max-w-5xl';
 ---
 
 <div class:list={['container mx-auto px-4 lg:px-8', sizeClass, className]}>

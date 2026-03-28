@@ -48,7 +48,9 @@ const ariaLabel = ariaLabels[lang] ?? 'Back to top';
 
   // Scroll to top (smooth only when user has not requested reduced motion)
   backToTopButton?.addEventListener('click', () => {
-    const preferReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const preferReduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
     window.scrollTo({
       top: 0,
       behavior: preferReduced ? 'auto' : 'smooth',
@@ -61,7 +63,10 @@ const ariaLabel = ariaLabels[lang] ?? 'Back to top';
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     pointer-events: none;
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0s linear 0.3s;
+    transition:
+      opacity 0.3s ease-out,
+      transform 0.3s ease-out,
+      visibility 0s linear 0.3s;
   }
 
   #back-to-top[data-visible] {

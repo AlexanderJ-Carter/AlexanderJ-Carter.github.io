@@ -71,7 +71,10 @@ const colorText = {
 const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
 ---
 
-<div id="color-picker" class="color-widget glass-card rounded-2xl p-6 shadow-xl max-w-md">
+<div
+  id="color-picker"
+  class="color-widget glass-card rounded-2xl p-6 shadow-xl max-w-md"
+>
   <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
     <span class="text-2xl">🎨</span>
     {t.title}
@@ -79,7 +82,11 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
 
   <!-- 颜色选择 -->
   <div class="mb-6">
-    <div class="relative h-32 rounded-xl overflow-hidden mb-4 cursor-pointer" id="color-preview" style="background: #0ea5e9">
+    <div
+      class="relative h-32 rounded-xl overflow-hidden mb-4 cursor-pointer"
+      id="color-preview"
+      style="background: #0ea5e9"
+    >
       <input
         type="color"
         id="color-input"
@@ -87,7 +94,10 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
         class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
       />
       <div class="absolute inset-0 flex items-center justify-center">
-        <span class="text-white text-2xl font-mono font-bold drop-shadow-lg" id="color-hex-display">#0ea5e9</span>
+        <span
+          class="text-white text-2xl font-mono font-bold drop-shadow-lg"
+          id="color-hex-display">#0ea5e9</span
+        >
       </div>
     </div>
 
@@ -103,7 +113,10 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
           readonly
           class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded font-mono text-sm"
         />
-        <button class="copy-btn px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded text-sm" data-target="hex-value">{t.copy}</button>
+        <button
+          class="copy-btn px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded text-sm"
+          data-target="hex-value">{t.copy}</button
+        >
       </div>
 
       <!-- RGB -->
@@ -116,7 +129,10 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
           readonly
           class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded font-mono text-sm"
         />
-        <button class="copy-btn px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded text-sm" data-target="rgb-value">{t.copy}</button>
+        <button
+          class="copy-btn px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded text-sm"
+          data-target="rgb-value">{t.copy}</button
+        >
       </div>
 
       <!-- HSL -->
@@ -129,7 +145,10 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
           readonly
           class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded font-mono text-sm"
         />
-        <button class="copy-btn px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded text-sm" data-target="hsl-value">{t.copy}</button>
+        <button
+          class="copy-btn px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded text-sm"
+          data-target="hsl-value">{t.copy}</button
+        >
       </div>
     </div>
   </div>
@@ -138,7 +157,11 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
   <div>
     <div class="flex items-center justify-between mb-3">
       <h4 class="text-sm font-semibold">{t.palette}</h4>
-      <button id="generate-palette" type="button" class="px-4 py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded text-sm font-medium transition-all">
+      <button
+        id="generate-palette"
+        type="button"
+        class="px-4 py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded text-sm font-medium transition-all"
+      >
         {t.generate}
       </button>
     </div>
@@ -150,7 +173,11 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
 
 <style>
   .color-widget {
-    background: linear-gradient(135deg, rgba(236, 72, 153, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(236, 72, 153, 0.05) 0%,
+      rgba(168, 85, 247, 0.05) 100%
+    );
   }
 
   #color-preview:hover {
@@ -219,9 +246,15 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 
       switch (max) {
-        case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
-        case g: h = ((b - r) / d + 2) / 6; break;
-        case b: h = ((r - g) / d + 4) / 6; break;
+        case r:
+          h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+          break;
+        case g:
+          h = ((b - r) / d + 2) / 6;
+          break;
+        case b:
+          h = ((r - g) / d + 4) / 6;
+          break;
       }
     }
 
@@ -263,7 +296,7 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
   });
 
   // 复制按钮
-  document.querySelectorAll('.copy-btn').forEach(btn => {
+  document.querySelectorAll('.copy-btn').forEach((btn) => {
     btn.addEventListener('click', async (e) => {
       const target = e.target;
       const targetId = target.dataset.target;

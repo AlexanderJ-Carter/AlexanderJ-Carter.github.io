@@ -963,7 +963,9 @@ select:valid:not(:placeholder-shown) {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .form-field.has-error .form-message.error,

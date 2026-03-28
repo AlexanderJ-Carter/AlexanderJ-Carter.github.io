@@ -31,7 +31,8 @@ const t: Record<Lang, any> = {
     title: 'QR Code Generator',
     tag: 'Link · Text to QR',
     headerTitle: 'QR Code Generator',
-    headerDesc: 'Enter a URL or text to generate a QR code. Right-click to save the image.',
+    headerDesc:
+      'Enter a URL or text to generate a QR code. Right-click to save the image.',
     placeholder: 'Enter URL or text, e.g. https://alexander.xin',
     generate: 'Generate',
     relatedTitle: 'More tools',
@@ -41,7 +42,8 @@ const t: Record<Lang, any> = {
     title: 'Générateur QR',
     tag: 'Lien · Texte en QR',
     headerTitle: 'Générateur QR',
-    headerDesc: 'Entrez une URL ou du texte pour générer un QR code. Clic droit pour enregistrer.',
+    headerDesc:
+      'Entrez une URL ou du texte pour générer un QR code. Clic droit pour enregistrer.',
     placeholder: 'URL ou texte, ex. https://alexander.xin',
     generate: 'Générer',
     relatedTitle: "Plus d'outils",
@@ -51,7 +53,8 @@ const t: Record<Lang, any> = {
     title: 'Генератор QR',
     tag: 'Ссылка · Текст в QR',
     headerTitle: 'Генератор QR',
-    headerDesc: 'Введите URL или текст для создания QR-кода. ПКМ — сохранить изображение.',
+    headerDesc:
+      'Введите URL или текст для создания QR-кода. ПКМ — сохранить изображение.',
     placeholder: 'URL или текст, напр. https://alexander.xin',
     generate: 'Создать',
     relatedTitle: 'Ещё инструменты',
@@ -64,17 +67,28 @@ const content = t[lang as Lang] || t['en-GB'];
 
 <BaseLayout title={`${content.title} - Alexander Carter`}>
   <section class="relative pt-28 pb-16 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true" />
-    <div class="absolute inset-0 opacity-100" style="background: var(--hero-spotlight);" aria-hidden="true" />
-    <div class="section-divider" aria-hidden="true" />
+    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true"></div>
+    <div
+      class="absolute inset-0 opacity-100"
+      style="background: var(--hero-spotlight);"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="section-divider" aria-hidden="true"></div>
     <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
-      <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10 text-sm font-medium mb-4">
+      <p
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10 text-sm font-medium mb-4"
+      >
         📱 {content.tag}
       </p>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight"
+      >
         {content.headerTitle}
       </h1>
-      <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+      <p
+        class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+      >
         {content.headerDesc}
       </p>
     </div>
@@ -82,7 +96,10 @@ const content = t[lang as Lang] || t['en-GB'];
 
   <section class="py-12 container mx-auto px-4 lg:px-8 max-w-xl">
     <div class="glass-card p-8 rounded-2xl reveal">
-      <label class="block text-sm font-medium text-[rgb(var(--color-text-primary))] mb-2" for="qr-input">
+      <label
+        class="block text-sm font-medium text-[rgb(var(--color-text-primary))] mb-2"
+        for="qr-input"
+      >
         {content.placeholder}
       </label>
       <input
@@ -92,8 +109,19 @@ const content = t[lang as Lang] || t['en-GB'];
         placeholder={content.placeholder}
         value="https://alexander.xin"
       />
-      <div class="flex justify-center p-6 bg-white dark:bg-gray-800 rounded-xl border border-[rgb(var(--color-border))]">
-        <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://alexander.xin" alt="QR Code" class="max-w-full h-auto" width="200" height="200" loading="lazy" decoding="async" />
+      <div
+        class="flex justify-center p-6 bg-white dark:bg-gray-800 rounded-xl border border-[rgb(var(--color-border))]"
+      >
+        <img
+          id="qr-image"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://alexander.xin"
+          alt="QR Code"
+          class="max-w-full h-auto"
+          width="200"
+          height="200"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
       <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-3">
         QR 由 api.qrserver.com 生成，可右键保存图片
@@ -111,7 +139,9 @@ const content = t[lang as Lang] || t['en-GB'];
     if (!input || !img) return;
     function update() {
       const data = input.value.trim() || 'https://alexander.xin';
-      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=' + encodeURIComponent(data);
+      img.src =
+        'https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=' +
+        encodeURIComponent(data);
       img.alt = 'QR: ' + data;
     }
     input.addEventListener('input', update);

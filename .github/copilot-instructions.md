@@ -19,9 +19,8 @@ The project uses a specific "Template" pattern to handle internationalization wi
 **Example:**
 
 ```astro
-// src/pages/about.astro
-
-import AboutTemplate from '../components/templates/AboutTemplate.astro';
+// src/pages/about.astro import AboutTemplate from
+'../components/templates/AboutTemplate.astro';
 <AboutTemplate lang="zh-CN" />
 ```
 

@@ -32,7 +32,10 @@ export default {
       iso: now.toISOString(),
       timestamp: Math.floor(now.getTime() / 1000),
       timezone: 'Asia/Shanghai',
-      datetime: now.toLocaleString('en-CA', { timeZone: 'Asia/Shanghai', hour12: false }),
+      datetime: now.toLocaleString('en-CA', {
+        timeZone: 'Asia/Shanghai',
+        hour12: false,
+      }),
     };
 
     return new Response(JSON.stringify(body), {
@@ -134,7 +137,10 @@ app.get('/time/now', (req, res) => {
     iso: now.toISOString(),
     timestamp: Math.floor(now.getTime() / 1000),
     timezone: 'Asia/Shanghai',
-    datetime: now.toLocaleString('en-CA', { timeZone: 'Asia/Shanghai', hour12: false }),
+    datetime: now.toLocaleString('en-CA', {
+      timeZone: 'Asia/Shanghai',
+      hour12: false,
+    }),
   });
 });
 
@@ -164,9 +170,9 @@ cloudflared tunnel run time-api
 
 ## 小结
 
-| 方式 | 优点 | 适用场景 |
-|------|------|----------|
-| **Workers** | 无需服务器、不关机、延迟低、免费额度足 | 推荐，仅需返回当前时间 |
-| **Tunnel** | API 逻辑可任意复杂、跑在本地或自有机房 | 需要本地/私有环境或其它后端服务 |
+| 方式        | 优点                                   | 适用场景                        |
+| ----------- | -------------------------------------- | ------------------------------- |
+| **Workers** | 无需服务器、不关机、延迟低、免费额度足 | 推荐，仅需返回当前时间          |
+| **Tunnel**  | API 逻辑可任意复杂、跑在本地或自有机房 | 需要本地/私有环境或其它后端服务 |
 
 若只提供「当前时间」接口，用 **Workers** 即可，无需隧道。隧道适合「本地/内网服务整体暴露」或与现有后端一起用。

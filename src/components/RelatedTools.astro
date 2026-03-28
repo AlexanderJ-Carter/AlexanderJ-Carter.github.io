@@ -8,43 +8,134 @@ function getLangPath(path: string) {
   return `/${lang === 'en-GB' ? 'en' : lang}${path}`;
 }
 
-const labels: Record<Lang, { title: string; calendar: string; currency: string; time: string; now: string; uses: string; units: string; qr: string; projects: string; back: string }> = {
-  'zh-CN': { title: '更多小工具', calendar: '日历', currency: '汇率', time: '时间', now: '此刻', uses: '本站', units: '单位换算', qr: 'QR 生成', projects: '项目', back: '返回首页' },
-  'zh-TW': { title: '更多小工具', calendar: '日曆', currency: '匯率', time: '時間', now: '此刻', uses: '本站', units: '單位換算', qr: 'QR 生成', projects: '專案', back: '返回首頁' },
-  'en-GB': { title: 'More tools', calendar: 'Calendar', currency: 'Currency', time: 'Time', now: 'Now', uses: 'About site', units: 'Units', qr: 'QR Code', projects: 'Projects', back: 'Back to home' },
-  fr: { title: "Plus d'outils", calendar: 'Calendrier', currency: 'Taux de change', time: 'Heure', now: 'Maintenant', uses: 'Le site', units: 'Unités', qr: 'QR Code', projects: 'Projets', back: "Retour à l'accueil" },
-  ru: { title: 'Ещё инструменты', calendar: 'Календарь', currency: 'Курс валют', time: 'Время', now: 'Сейчас', uses: 'О сайте', units: 'Единицы', qr: 'QR-код', projects: 'Проекты', back: 'На главную' },
+const labels: Record<
+  Lang,
+  {
+    title: string;
+    calendar: string;
+    currency: string;
+    time: string;
+    now: string;
+    uses: string;
+    units: string;
+    qr: string;
+    projects: string;
+    back: string;
+  }
+> = {
+  'zh-CN': {
+    title: '更多小工具',
+    calendar: '日历',
+    currency: '汇率',
+    time: '时间',
+    now: '此刻',
+    uses: '本站',
+    units: '单位换算',
+    qr: 'QR 生成',
+    projects: '项目',
+    back: '返回首页',
+  },
+  'zh-TW': {
+    title: '更多小工具',
+    calendar: '日曆',
+    currency: '匯率',
+    time: '時間',
+    now: '此刻',
+    uses: '本站',
+    units: '單位換算',
+    qr: 'QR 生成',
+    projects: '專案',
+    back: '返回首頁',
+  },
+  'en-GB': {
+    title: 'More tools',
+    calendar: 'Calendar',
+    currency: 'Currency',
+    time: 'Time',
+    now: 'Now',
+    uses: 'About site',
+    units: 'Units',
+    qr: 'QR Code',
+    projects: 'Projects',
+    back: 'Back to home',
+  },
+  fr: {
+    title: "Plus d'outils",
+    calendar: 'Calendrier',
+    currency: 'Taux de change',
+    time: 'Heure',
+    now: 'Maintenant',
+    uses: 'Le site',
+    units: 'Unités',
+    qr: 'QR Code',
+    projects: 'Projets',
+    back: "Retour à l'accueil",
+  },
+  ru: {
+    title: 'Ещё инструменты',
+    calendar: 'Календарь',
+    currency: 'Курс валют',
+    time: 'Время',
+    now: 'Сейчас',
+    uses: 'О сайте',
+    units: 'Единицы',
+    qr: 'QR-код',
+    projects: 'Проекты',
+    back: 'На главную',
+  },
 };
 
 const t = labels[lang as Lang] || labels['en-GB'];
 
 const tools = [
-  { key: 'calendar', href: getLangPath('/calendar'), label: t.calendar, icon: '📅' },
-  { key: 'currency', href: getLangPath('/currency'), label: t.currency, icon: '💱' },
+  {
+    key: 'calendar',
+    href: getLangPath('/calendar'),
+    label: t.calendar,
+    icon: '📅',
+  },
+  {
+    key: 'currency',
+    href: getLangPath('/currency'),
+    label: t.currency,
+    icon: '💱',
+  },
   { key: 'time', href: getLangPath('/time'), label: t.time, icon: '🕐' },
   { key: 'now', href: getLangPath('/now'), label: t.now, icon: '📍' },
   { key: 'uses', href: getLangPath('/uses'), label: t.uses, icon: '🌐' },
   { key: 'units', href: getLangPath('/units'), label: t.units, icon: '📐' },
   { key: 'qr', href: getLangPath('/qr'), label: t.qr, icon: '📱' },
-  { key: 'projects', href: getLangPath('/projects'), label: t.projects, icon: '🛠' },
+  {
+    key: 'projects',
+    href: getLangPath('/projects'),
+    label: t.projects,
+    icon: '🛠',
+  },
 ].filter((tool) => tool.key !== current);
 ---
 
 <div class="mt-16 pt-12 border-t border-[rgb(var(--color-border))] reveal">
-  <p class="text-sm font-medium text-[rgb(var(--color-text-secondary))] mb-4">{t.title}</p>
+  <p class="text-sm font-medium text-[rgb(var(--color-text-secondary))] mb-4">
+    {t.title}
+  </p>
   <nav class="flex flex-wrap gap-3" aria-label={t.title}>
-    {tools.map((tool) => (
-      <a
-        href={tool.href}
-        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/10 active:scale-[0.98] border border-[rgb(var(--color-border))] hover:border-primary-500/30 text-[rgb(var(--color-text-primary))] font-medium transition-all duration-200"
-      >
-        <span aria-hidden="true">{tool.icon}</span>
-        {tool.label}
-      </a>
-    ))}
+    {
+      tools.map((tool) => (
+        <a
+          href={tool.href}
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/10 active:scale-[0.98] border border-[rgb(var(--color-border))] hover:border-primary-500/30 text-[rgb(var(--color-text-primary))] font-medium transition-all duration-200"
+        >
+          <span aria-hidden="true">{tool.icon}</span>
+          {tool.label}
+        </a>
+      ))
+    }
   </nav>
   <p class="mt-6">
-    <a href={getLangPath('/')} class="link-underline text-primary-500 hover:text-primary-600 font-medium text-sm inline-flex items-center gap-1">
+    <a
+      href={getLangPath('/')}
+      class="link-underline text-primary-500 hover:text-primary-600 font-medium text-sm inline-flex items-center gap-1"
+    >
       ← {t.back}
     </a>
   </p>

@@ -6,7 +6,11 @@
 // Declare showToast on window interface for TypeScript
 declare global {
   interface Window {
-    showToast?: (options: { message: string; type: 'success' | 'error' | 'warning' | 'info'; duration?: number }) => void;
+    showToast?: (options: {
+      message: string;
+      type: 'success' | 'error' | 'warning' | 'info';
+      duration?: number;
+    }) => void;
   }
 }
 
@@ -42,12 +46,16 @@ class FormValidator {
 
   private init(): void {
     if (!this.form) return;
-    const fields = this.form.querySelectorAll?.('input, textarea, select') || [];
-    
+    const fields =
+      this.form.querySelectorAll?.('input, textarea, select') || [];
+
     fields.forEach((field) => {
-      const input = field as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+      const input = field as
+        | HTMLInputElement
+        | HTMLTextAreaElement
+        | HTMLSelectElement;
       const fieldName = input.name;
-      
+
       if (!fieldName) return;
 
       // Add real-time validation
@@ -61,10 +69,11 @@ class FormValidator {
   }
 
   private validateField(fieldName: string): boolean {
-    const field = this.form.querySelector(
-      `[name="${fieldName}"]`
-    ) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
-    
+    const field = this.form.querySelector(`[name="${fieldName}"]`) as
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | HTMLSelectElement;
+
     if (!field) return true;
 
     const rules = this.rules[fieldName];
@@ -121,7 +130,7 @@ class FormValidator {
     errors: string[]
   ): void {
     let fieldContainer = field.closest('.form-field') as HTMLElement;
-    
+
     // If no form-field container, create one temporarily for styling
     if (!fieldContainer) {
       fieldContainer = field.parentElement as HTMLElement;
@@ -155,7 +164,9 @@ class FormValidator {
     }
 
     // Update success message
-    let successContainer = fieldContainer.querySelector('.form-message.success');
+    let successContainer = fieldContainer.querySelector(
+      '.form-message.success'
+    );
     if (!successContainer && isValid && hasValue) {
       successContainer = document.createElement('div');
       successContainer.className = 'form-message success';
@@ -163,12 +174,15 @@ class FormValidator {
     }
 
     if (successContainer) {
-      successContainer.innerHTML = isValid && hasValue ? `
+      successContainer.innerHTML =
+        isValid && hasValue
+          ? `
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
           <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
         </svg>
         验证通过
-      ` : '';
+      `
+          : '';
     }
   }
 
@@ -191,7 +205,10 @@ class FormValidator {
     let allValid = true;
 
     fields.forEach((field) => {
-      const input = field as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+      const input = field as
+        | HTMLInputElement
+        | HTMLTextAreaElement
+        | HTMLSelectElement;
       if (!this.validateField(input.name)) {
         allValid = false;
       }

@@ -120,14 +120,23 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
 <BaseLayout title={`${content.title} - Alexander Carter`}>
   <!-- Hero Section -->
   <section class="relative pt-28 pb-16 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true" />
-    <div class="absolute inset-0 opacity-100" style="background: var(--hero-spotlight);" aria-hidden="true" />
-    <div class="section-divider" aria-hidden="true" />
+    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true"></div>
+    <div
+      class="absolute inset-0 opacity-100"
+      style="background: var(--hero-spotlight);"
+      aria-hidden="true"
+    >
+    </div>
+    <div class="section-divider" aria-hidden="true"></div>
     <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight"
+      >
         {content.headerTitle}
       </h1>
-      <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+      <p
+        class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+      >
         {content.headerDesc}
       </p>
     </div>
@@ -141,16 +150,33 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
         <div class="glass-card p-8">
           <!-- Month Navigation -->
           <div class="flex flex-wrap items-center justify-between gap-2 mb-8">
-            <button type="button" onclick="prevMonth()" class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors" aria-label={content.prevMonth}>
+            <button
+              type="button"
+              onclick="prevMonth()"
+              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+              aria-label={content.prevMonth}
+            >
               {content.prevMonth}
             </button>
-            <h2 class="text-2xl font-heading font-bold order-first w-full md:order-none md:w-auto" id="currentMonth">
+            <h2
+              class="text-2xl font-heading font-bold order-first w-full md:order-none md:w-auto"
+              id="currentMonth"
+            >
               {content.loading}
             </h2>
-            <button type="button" onclick="goToToday()" class="px-3 py-1.5 rounded-lg bg-primary-500/15 text-primary-600 dark:text-primary-400 hover:bg-primary-500/25 text-sm font-medium transition-colors">
+            <button
+              type="button"
+              onclick="goToToday()"
+              class="px-3 py-1.5 rounded-lg bg-primary-500/15 text-primary-600 dark:text-primary-400 hover:bg-primary-500/25 text-sm font-medium transition-colors"
+            >
               {content.goToToday}
             </button>
-            <button type="button" onclick="nextMonth()" class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors" aria-label={content.nextMonth}>
+            <button
+              type="button"
+              onclick="nextMonth()"
+              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+              aria-label={content.nextMonth}
+            >
               {content.nextMonth}
             </button>
           </div>
@@ -381,9 +407,16 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
   };
 
   document.addEventListener('keydown', function (e) {
-    if (e.target && (e.target.closest('input') || e.target.closest('textarea'))) return;
-    if (e.key === 'ArrowLeft') { e.preventDefault(); window['prevMonth'](); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); window['nextMonth'](); }
+    if (e.target && (e.target.closest('input') || e.target.closest('textarea')))
+      return;
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      window['prevMonth']();
+    }
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      window['nextMonth']();
+    }
   });
 
   // Modal functions

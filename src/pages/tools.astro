@@ -17,8 +17,16 @@ import NotesWidget from '../components/NotesWidget.astro';
 
 const { lang } = Astro.props;
 
-const pageTitle = lang === 'zh-CN' ? '实用工具' : lang === 'zh-TW' ? '實用工具' : 'Useful Tools';
-const pageDesc = lang === 'zh-CN' ? '一系列实用的小工具和有趣的小组件' : 'A collection of useful tools and fun widgets';
+const pageTitle =
+  lang === 'zh-CN'
+    ? '实用工具'
+    : lang === 'zh-TW'
+      ? '實用工具'
+      : 'Useful Tools';
+const pageDesc =
+  lang === 'zh-CN'
+    ? '一系列实用的小工具和有趣的小组件'
+    : 'A collection of useful tools and fun widgets';
 ---
 
 <BaseLayout title={pageTitle} description={pageDesc}>
@@ -28,7 +36,9 @@ const pageDesc = lang === 'zh-CN' ? '一系列实用的小工具和有趣的小�
       <h1 class="text-4xl md:text-5xl font-bold mb-4">
         {pageTitle}
       </h1>
-      <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+      <p
+        class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
+      >
         {pageDesc}
       </p>
     </div>
@@ -87,22 +97,32 @@ const pageDesc = lang === 'zh-CN' ? '一系列实用的小工具和有趣的小�
 
       <!-- 更多工具占位 -->
       <div class="flex justify-center">
-        <div class="glass-card rounded-2xl p-6 shadow-xl max-w-sm w-full text-center">
+        <div
+          class="glass-card rounded-2xl p-6 shadow-xl max-w-sm w-full text-center"
+        >
           <h3 class="text-lg font-bold mb-4">🚀 更多工具</h3>
           <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
             {lang === 'zh-CN' ? '持续开发中...' : 'Coming soon...'}
           </p>
           <div class="space-y-2">
-            <div class="p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg text-sm">
+            <div
+              class="p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg text-sm"
+            >
               {lang === 'zh-CN' ? '🎮 小游戏' : '🎮 Mini Games'}
             </div>
-            <div class="p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg text-sm">
+            <div
+              class="p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg text-sm"
+            >
               {lang === 'zh-CN' ? '🎵 音频工具' : '🎵 Audio Tools'}
             </div>
-            <div class="p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg text-sm">
+            <div
+              class="p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg text-sm"
+            >
               {lang === 'zh-CN' ? '📸 图片工具' : '📸 Image Tools'}
             </div>
-            <div class="p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg text-sm">
+            <div
+              class="p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg text-sm"
+            >
               {lang === 'zh-CN' ? '🔮 神秘功能' : '🔮 Mystery Features'}
             </div>
           </div>
@@ -120,36 +140,71 @@ const pageDesc = lang === 'zh-CN' ? '一系列实用的小工具和有趣的小�
         <div class="flex items-start gap-3">
           <span class="text-2xl">🌤️</span>
           <div>
-            <strong>{lang === 'zh-CN' ? '天气小组件' : 'Weather Widget'}</strong>
-            <p>{lang === 'zh-CN' ? '需要允许位置权限，自动获取您所在地的实时天气信息' : 'Requires location permission to fetch real-time weather for your location'}</p>
+            <strong>{lang === 'zh-CN' ? '天气小组件' : 'Weather Widget'}</strong
+            >
+            <p>
+              {
+                lang === 'zh-CN'
+                  ? '需要允许位置权限，自动获取您所在地的实时天气信息'
+                  : 'Requires location permission to fetch real-time weather for your location'
+              }
+            </p>
           </div>
         </div>
         <div class="flex items-start gap-3">
           <span class="text-2xl">🍅</span>
           <div>
             <strong>{lang === 'zh-CN' ? '番茄钟' : 'Pomodoro Timer'}</strong>
-            <p>{lang === 'zh-CN' ? '25分钟专注工作，5分钟休息。完成后会收到浏览器通知' : '25 minutes of focused work, 5 minutes break. You\'ll receive browser notifications when complete'}</p>
+            <p>
+              {
+                lang === 'zh-CN'
+                  ? '25分钟专注工作，5分钟休息。完成后会收到浏览器通知'
+                  : "25 minutes of focused work, 5 minutes break. You'll receive browser notifications when complete"
+              }
+            </p>
           </div>
         </div>
         <div class="flex items-start gap-3">
           <span class="text-2xl">🔐</span>
           <div>
-            <strong>{lang === 'zh-CN' ? '密码生成器' : 'Password Generator'}</strong>
-            <p>{lang === 'zh-CN' ? '使用加密安全的随机数生成器，可自定义长度和字符类型' : 'Uses cryptographically secure random generator, customizable length and character types'}</p>
+            <strong
+              >{lang === 'zh-CN' ? '密码生成器' : 'Password Generator'}</strong
+            >
+            <p>
+              {
+                lang === 'zh-CN'
+                  ? '使用加密安全的随机数生成器，可自定义长度和字符类型'
+                  : 'Uses cryptographically secure random generator, customizable length and character types'
+              }
+            </p>
           </div>
         </div>
         <div class="flex items-start gap-3">
           <span class="text-2xl">💭</span>
           <div>
             <strong>{lang === 'zh-CN' ? '随机名言' : 'Random Quote'}</strong>
-            <p>{lang === 'zh-CN' ? '精选名言和诗句，每30秒自动更换，支持一键复制' : 'Curated quotes and poems, auto-refreshes every 30 seconds, supports one-click copy'}</p>
+            <p>
+              {
+                lang === 'zh-CN'
+                  ? '精选名言和诗句，每30秒自动更换，支持一键复制'
+                  : 'Curated quotes and poems, auto-refreshes every 30 seconds, supports one-click copy'
+              }
+            </p>
           </div>
         </div>
         <div class="flex items-start gap-3">
           <span class="text-2xl">🐙</span>
           <div>
-            <strong>GitHub {lang === 'zh-CN' ? '活动卡片' : 'Activity Card'}</strong>
-            <p>{lang === 'zh-CN' ? '实时显示 GitHub 账户统计和最近活动' : 'Real-time display of GitHub account stats and recent activities'}</p>
+            <strong
+              >GitHub {lang === 'zh-CN' ? '活动卡片' : 'Activity Card'}</strong
+            >
+            <p>
+              {
+                lang === 'zh-CN'
+                  ? '实时显示 GitHub 账户统计和最近活动'
+                  : 'Real-time display of GitHub account stats and recent activities'
+              }
+            </p>
           </div>
         </div>
       </div>

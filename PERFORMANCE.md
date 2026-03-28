@@ -6,12 +6,12 @@
 
 ### 构建性能
 
-| 指标 | 优化前 | 优化后 | 提升 |
-|------|--------|--------|------|
-| 构建时间 | 18.84s | 12.93s | **31% ↓** |
-| TypeScript 错误 | 1 个 | 0 个 | ✅ |
-| TypeScript 警告 | 2 个 | 0 个 | ✅ |
-| 构建页面数 | 169 | 169 | 保持 |
+| 指标            | 优化前 | 优化后 | 提升      |
+| --------------- | ------ | ------ | --------- |
+| 构建时间        | 18.84s | 12.93s | **31% ↓** |
+| TypeScript 错误 | 1 个   | 0 个   | ✅        |
+| TypeScript 警告 | 2 个   | 0 个   | ✅        |
+| 构建页面数      | 169    | 169    | 保持      |
 
 ### 资源优化
 
@@ -44,6 +44,7 @@ vite: {
 ```
 
 **效果**:
+
 - 代码体积减少 15-20%
 - 浏览器缓存命中率提升
 
@@ -63,6 +64,7 @@ vite: {
 ```
 
 **特性**:
+
 - WebP 格式支持（体积减少 25-35%）
 - 响应式图片（4 种尺寸）
 - 智能懒加载
@@ -75,6 +77,7 @@ npm run optimize-images
 ```
 
 **功能**:
+
 - JPG → WebP 转换
 - 生成 400px、800px、1200px、1920px 四种尺寸
 - 质量 85%，最佳平衡
@@ -83,19 +86,21 @@ npm run optimize-images
 
 #### 缓存策略
 
-| 资源类型 | 策略 | 缓存时间 | 说明 |
-|---------|------|---------|------|
-| 图片 | Cache First | 30 天 | 不常变化，优先缓存 |
-| CSS/JS | Network First | 7 天 | 需要更新，回退缓存 |
-| HTML | Network First | 1 天 | 保持最新，支持离线 |
+| 资源类型 | 策略          | 缓存时间 | 说明               |
+| -------- | ------------- | -------- | ------------------ |
+| 图片     | Cache First   | 30 天    | 不常变化，优先缓存 |
+| CSS/JS   | Network First | 7 天     | 需要更新，回退缓存 |
+| HTML     | Network First | 1 天     | 保持最新，支持离线 |
 
 **工作流程**:
+
 1. 安装时预缓存关键页面
 2. 拦截请求，应用对应策略
 3. 激活时清理旧缓存
 4. 离线时返回缓存内容
 
 **使用方法**:
+
 ```astro
 import ServiceWorkerRegister from '../components/ServiceWorkerRegister.astro';
 
@@ -108,10 +113,11 @@ import ServiceWorkerRegister from '../components/ServiceWorkerRegister.astro';
 #### 图片预加载
 
 ```astro
-<!-- GalleryTemplate.astro -->
-{galleryItems.slice(0, 3).map((item) => (
-  <link rel="preload" as="image" href={item.image} />
-))}
+<!-- GalleryTemplate.astro -->{
+  galleryItems
+    .slice(0, 3)
+    .map((item) => <link rel="preload" as="image" href={item.image} />)
+}
 ```
 
 #### 优先级控制
@@ -124,6 +130,7 @@ import ServiceWorkerRegister from '../components/ServiceWorkerRegister.astro';
 ```
 
 **效果**:
+
 - 前 3 张图片高优先级，快速显示
 - 其余图片懒加载，减少带宽
 
@@ -183,20 +190,20 @@ npm run optimize-images
 
 ### Lighthouse 预期得分
 
-| 指标 | 目标 | 说明 |
-|------|------|------|
-| Performance | 90+ | 构建优化已达成 |
-| Accessibility | 95+ | 保持现有水平 |
-| Best Practices | 95+ | Service Worker 加持 |
-| SEO | 100 | 保持现有水平 |
+| 指标           | 目标 | 说明                |
+| -------------- | ---- | ------------------- |
+| Performance    | 90+  | 构建优化已达成      |
+| Accessibility  | 95+  | 保持现有水平        |
+| Best Practices | 95+  | Service Worker 加持 |
+| SEO            | 100  | 保持现有水平        |
 
 ### Core Web Vitals 预期
 
-| 指标 | 目标 | 优化措施 |
-|------|------|----------|
-| LCP | < 2.5s | 预加载关键图片 |
-| FID | < 100ms | 代码分割、懒加载 |
-| CLS | < 0.1 | 图片尺寸预留 |
+| 指标 | 目标    | 优化措施         |
+| ---- | ------- | ---------------- |
+| LCP  | < 2.5s  | 预加载关键图片   |
+| FID  | < 100ms | 代码分割、懒加载 |
+| CLS  | < 0.1   | 图片尺寸预留     |
 
 ---
 
@@ -273,16 +280,19 @@ npm run optimize-images
 ### 2026-03-27 - 性能优化
 
 **新增**:
+
 - ✨ Service Worker 离线支持
 - ✨ 响应式图片组件
 - ✨ 图片优化脚本
 
 **优化**:
+
 - ⚡ 构建时间减少 31%
 - ⚡ 图片加载优先级控制
 - ⚡ 代码分割和 Hash 命名
 
 **修复**:
+
 - 🐛 TypeScript 警告
 - 🐛 Astro 脚本提示
 

@@ -41,7 +41,10 @@ const calcText = {
 const t = calcText[lang as keyof typeof calcText] || calcText['zh-CN'];
 ---
 
-<div id="calculator" class="calculator-widget glass-card rounded-2xl p-6 shadow-xl max-w-xs">
+<div
+  id="calculator"
+  class="calculator-widget glass-card rounded-2xl p-6 shadow-xl max-w-xs"
+>
   <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
     <span class="text-2xl">🔢</span>
     {t.title}
@@ -50,8 +53,17 @@ const t = calcText[lang as keyof typeof calcText] || calcText['zh-CN'];
   <!-- 显示屏 -->
   <div class="mb-4">
     <div class="bg-[rgb(var(--color-bg-secondary))] rounded-lg p-4 text-right">
-      <div id="calc-expression" class="text-sm text-[rgb(var(--color-text-tertiary))] h-6 overflow-x-auto"></div>
-      <div id="calc-display" class="text-3xl font-mono font-bold overflow-x-auto">0</div>
+      <div
+        id="calc-expression"
+        class="text-sm text-[rgb(var(--color-text-tertiary))] h-6 overflow-x-auto"
+      >
+      </div>
+      <div
+        id="calc-display"
+        class="text-3xl font-mono font-bold overflow-x-auto"
+      >
+        0
+      </div>
     </div>
   </div>
 
@@ -60,22 +72,30 @@ const t = calcText[lang as keyof typeof calcText] || calcText['zh-CN'];
     <button class="calc-btn func" data-action="clear">{t.clear}</button>
     <button class="calc-btn func" data-action="backspace">⌫</button>
     <button class="calc-btn func" data-action="percent">%</button>
-    <button class="calc-btn operator" data-action="operator" data-value="/">÷</button>
+    <button class="calc-btn operator" data-action="operator" data-value="/"
+      >÷</button
+    >
 
     <button class="calc-btn number" data-value="7">7</button>
     <button class="calc-btn number" data-value="8">8</button>
     <button class="calc-btn number" data-value="9">9</button>
-    <button class="calc-btn operator" data-action="operator" data-value="*">×</button>
+    <button class="calc-btn operator" data-action="operator" data-value="*"
+      >×</button
+    >
 
     <button class="calc-btn number" data-value="4">4</button>
     <button class="calc-btn number" data-value="5">5</button>
     <button class="calc-btn number" data-value="6">6</button>
-    <button class="calc-btn operator" data-action="operator" data-value="-">−</button>
+    <button class="calc-btn operator" data-action="operator" data-value="-"
+      >−</button
+    >
 
     <button class="calc-btn number" data-value="1">1</button>
     <button class="calc-btn number" data-value="2">2</button>
     <button class="calc-btn number" data-value="3">3</button>
-    <button class="calc-btn operator" data-action="operator" data-value="+">+</button>
+    <button class="calc-btn operator" data-action="operator" data-value="+"
+      >+</button
+    >
 
     <button class="calc-btn number col-span-2" data-value="0">0</button>
     <button class="calc-btn number" data-value=".">.</button>
@@ -85,7 +105,11 @@ const t = calcText[lang as keyof typeof calcText] || calcText['zh-CN'];
 
 <style>
   .calculator-widget {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.05) 0%,
+      rgba(99, 102, 241, 0.05) 100%
+    );
   }
 
   .calc-btn {
@@ -121,7 +145,8 @@ const t = calcText[lang as keyof typeof calcText] || calcText['zh-CN'];
 
   function updateDisplay() {
     display.textContent = current;
-    expression.textContent = prev + (operator ? ` ${getOperatorSymbol(operator)} ` : '');
+    expression.textContent =
+      prev + (operator ? ` ${getOperatorSymbol(operator)} ` : '');
   }
 
   function getOperatorSymbol(op) {
@@ -135,11 +160,20 @@ const t = calcText[lang as keyof typeof calcText] || calcText['zh-CN'];
 
     let result;
     switch (operator) {
-      case '+': result = prevNum + currentNum; break;
-      case '-': result = prevNum - currentNum; break;
-      case '*': result = prevNum * currentNum; break;
-      case '/': result = prevNum / currentNum; break;
-      default: return;
+      case '+':
+        result = prevNum + currentNum;
+        break;
+      case '-':
+        result = prevNum - currentNum;
+        break;
+      case '*':
+        result = prevNum * currentNum;
+        break;
+      case '/':
+        result = prevNum / currentNum;
+        break;
+      default:
+        return;
     }
 
     // 处理精度问题
@@ -151,7 +185,7 @@ const t = calcText[lang as keyof typeof calcText] || calcText['zh-CN'];
     updateDisplay();
   }
 
-  buttons.forEach(btn => {
+  buttons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const action = btn.dataset.action;
       const value = btn.dataset.value;

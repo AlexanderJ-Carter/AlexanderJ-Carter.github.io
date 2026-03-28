@@ -83,7 +83,7 @@ const t: Record<Lang, Record<string, string>> = {
     q4: 'Recettes',
     q5: 'Commandes Linux',
     q6: 'NetQ Lab',
-    note: "Cette page est orientée visiteur : heure en direct et accès utiles.",
+    note: 'Cette page est orientée visiteur : heure en direct et accès utiles.',
     back: "Retour à l'accueil",
   },
   ru: {
@@ -122,10 +122,14 @@ function getLangPath(path: string): string {
     <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
     <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-4xl">
       <div class="text-center mb-10">
-        <span class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4">
+        <span
+          class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
+        >
           {text.badge}
         </span>
-        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight">
+        <h1
+          class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight"
+        >
           {text.title}
         </h1>
         <p class="text-[rgb(var(--color-text-secondary))]">{text.subtitle}</p>
@@ -133,22 +137,54 @@ function getLangPath(path: string): string {
 
       <div class="grid md:grid-cols-2 gap-6">
         <article class="glass-card p-6 rounded-2xl">
-          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">{text.localTime}</p>
-          <p id="now-local" class="text-2xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums">--:--:--</p>
+          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">
+            {text.localTime}
+          </p>
+          <p
+            id="now-local"
+            class="text-2xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums"
+          >
+            --:--:--
+          </p>
         </article>
         <article class="glass-card p-6 rounded-2xl">
-          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">{text.utcTime}</p>
-          <p id="now-utc" class="text-2xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums">--:--:--</p>
+          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">
+            {text.utcTime}
+          </p>
+          <p
+            id="now-utc"
+            class="text-2xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums"
+          >
+            --:--:--
+          </p>
         </article>
         <article class="glass-card p-6 rounded-2xl">
-          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">{text.timezone}</p>
-          <p id="now-tz" class="text-base font-medium text-[rgb(var(--color-text-primary))] break-all">-</p>
+          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">
+            {text.timezone}
+          </p>
+          <p
+            id="now-tz"
+            class="text-base font-medium text-[rgb(var(--color-text-primary))] break-all"
+          >
+            -
+          </p>
         </article>
         <article class="glass-card p-6 rounded-2xl">
-          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">{text.unix}</p>
+          <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">
+            {text.unix}
+          </p>
           <div class="flex items-center gap-3">
-            <p id="now-unix" class="text-xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums flex-1">-</p>
-            <button id="copy-unix" type="button" class="px-3 py-1.5 rounded-lg text-sm bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400">
+            <p
+              id="now-unix"
+              class="text-xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums flex-1"
+            >
+              -
+            </p>
+            <button
+              id="copy-unix"
+              type="button"
+              class="px-3 py-1.5 rounded-lg text-sm bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400"
+            >
               {text.copy}
             </button>
           </div>
@@ -156,21 +192,50 @@ function getLangPath(path: string): string {
       </div>
 
       <div class="glass-card p-6 rounded-2xl mt-6">
-        <h2 class="text-xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">{text.quick}</h2>
+        <h2
+          class="text-xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+        >
+          {text.quick}
+        </h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           <a href={getLangPath('/time')} class="quick-link">🕐 {text.q1}</a>
           <a href={getLangPath('/currency')} class="quick-link">💱 {text.q2}</a>
-          <a href="https://tools.alexander.xin" target="_blank" rel="noopener noreferrer" class="quick-link">🧰 {text.q3}</a>
-          <a href="https://cook.alexander.xin" target="_blank" rel="noopener noreferrer" class="quick-link">🍳 {text.q4}</a>
-          <a href="https://linux-command.alexander.xin" target="_blank" rel="noopener noreferrer" class="quick-link">🐧 {text.q5}</a>
-          <a href="https://netq.alexander.xin" target="_blank" rel="noopener noreferrer" class="quick-link">🧪 {text.q6}</a>
+          <a
+            href="https://tools.alexander.xin"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="quick-link">🧰 {text.q3}</a
+          >
+          <a
+            href="https://cook.alexander.xin"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="quick-link">🍳 {text.q4}</a
+          >
+          <a
+            href="https://linux-command.alexander.xin"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="quick-link">🐧 {text.q5}</a
+          >
+          <a
+            href="https://netq.alexander.xin"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="quick-link">🧪 {text.q6}</a
+          >
         </div>
       </div>
 
-      <p class="mt-6 text-sm text-[rgb(var(--color-text-secondary))]">{text.note}</p>
+      <p class="mt-6 text-sm text-[rgb(var(--color-text-secondary))]">
+        {text.note}
+      </p>
 
       <div class="mt-8">
-        <a href={getLangPath('/')} class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1">
+        <a
+          href={getLangPath('/')}
+          class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1"
+        >
           ← {text.back}
         </a>
       </div>
@@ -180,7 +245,8 @@ function getLangPath(path: string): string {
   </section>
 </BaseLayout>
 
-<script define:vars={{ copiedText: text.copied, copyText: text.copy }} is:inline>
+<script define:vars={{ copiedText: text.copied, copyText: text.copy }} is:inline
+>
   (function () {
     const localEl = document.getElementById('now-local');
     const utcEl = document.getElementById('now-utc');
@@ -209,7 +275,8 @@ function getLangPath(path: string): string {
       localEl.textContent = localFmt.format(now);
       utcEl.textContent = `${utcFmt.format(now)} UTC`;
       unixEl.textContent = String(Math.floor(now.getTime() / 1000));
-      tzEl.textContent = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+      tzEl.textContent =
+        Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
     }
 
     tick();

@@ -12,71 +12,167 @@ const { lang = 'zh-CN' } = Astro.props;
 
 const quotes = {
   'zh-CN': [
-    { text: '生活不是等待暴风雨过去，而是学会在雨中跳舞。', author: '维维安·格林' },
+    {
+      text: '生活不是等待暴风雨过去，而是学会在雨中跳舞。',
+      author: '维维安·格林',
+    },
     { text: '不要因为走得太远，而忘记为什么出发。', author: '纪伯伦' },
     { text: '每一个不曾起舞的日子，都是对生命的辜负。', author: '尼采' },
-    { text: '世界上只有一种真正的英雄主义，那就是认清生活的真相后依然热爱生活。', author: '罗曼·罗兰' },
+    {
+      text: '世界上只有一种真正的英雄主义，那就是认清生活的真相后依然热爱生活。',
+      author: '罗曼·罗兰',
+    },
     { text: '你若盛开，清风自来。', author: '三毛' },
-    { text: '山中若有眠，枕的是月。夜中若渴，饮的是银瓶泻浆。', author: '张晓风' },
+    {
+      text: '山中若有眠，枕的是月。夜中若渴，饮的是银瓶泻浆。',
+      author: '张晓风',
+    },
     { text: '人生若只如初见，何事秋风悲画扇。', author: '纳兰性德' },
     { text: '醉后不知天在水，满船清梦压星河。', author: '唐温如' },
     { text: '人生得意须尽欢，莫使金樽空对月。', author: '李白' },
     { text: '山重水复疑无路，柳暗花明又一村。', author: '陆游' },
   ],
   'zh-TW': [
-    { text: '生活不是等待暴風雨過去，而是學會在雨中跳舞。', author: '維維安·格林' },
+    {
+      text: '生活不是等待暴風雨過去，而是學會在雨中跳舞。',
+      author: '維維安·格林',
+    },
     { text: '不要因為走得太遠，而忘記為什麼出發。', author: '紀伯倫' },
     { text: '每一個不曾起舞的日子，都是對生命的辜負。', author: '尼采' },
-    { text: '世界上只有一種真正的英雄主義，那就是認清生活的真相後依然熱愛生活。', author: '羅曼·羅蘭' },
+    {
+      text: '世界上只有一種真正的英雄主義，那就是認清生活的真相後依然熱愛生活。',
+      author: '羅曼·羅蘭',
+    },
     { text: '你若盛開，清風自來。', author: '三毛' },
-    { text: '山中若有眠，枕的是月。夜中若渴，飲的是銀瓶瀉漿。', author: '張曉風' },
+    {
+      text: '山中若有眠，枕的是月。夜中若渴，飲的是銀瓶瀉漿。',
+      author: '張曉風',
+    },
   ],
   'en-GB': [
-    { text: "Life isn't about waiting for the storm to pass, it's about learning to dance in the rain.", author: 'Vivian Greene' },
-    { text: "Don't forget why you started just because you've come a long way.", author: 'Kahlil Gibran' },
-    { text: 'Every day that you don\'t dance is a betrayal of life.', author: 'Friedrich Nietzsche' },
-    { text: 'The only true heroism is to love life even after seeing its truth.', author: 'Romain Rolland' },
+    {
+      text: "Life isn't about waiting for the storm to pass, it's about learning to dance in the rain.",
+      author: 'Vivian Greene',
+    },
+    {
+      text: "Don't forget why you started just because you've come a long way.",
+      author: 'Kahlil Gibran',
+    },
+    {
+      text: "Every day that you don't dance is a betrayal of life.",
+      author: 'Friedrich Nietzsche',
+    },
+    {
+      text: 'The only true heroism is to love life even after seeing its truth.',
+      author: 'Romain Rolland',
+    },
     { text: 'If you bloom, the breeze will come.', author: 'San Mao' },
-    { text: 'Be the change you wish to see in the world.', author: 'Mahatma Gandhi' },
-    { text: 'The only thing we have to fear is fear itself.', author: 'Franklin D. Roosevelt' },
-    { text: 'In the middle of difficulty lies opportunity.', author: 'Albert Einstein' },
+    {
+      text: 'Be the change you wish to see in the world.',
+      author: 'Mahatma Gandhi',
+    },
+    {
+      text: 'The only thing we have to fear is fear itself.',
+      author: 'Franklin D. Roosevelt',
+    },
+    {
+      text: 'In the middle of difficulty lies opportunity.',
+      author: 'Albert Einstein',
+    },
   ],
   fr: [
-    { text: "La vie n'est pas d'attendre que l'orage passe, c'est d'apprendre à danser sous la pluie.", author: 'Vivian Greene' },
-    { text: "N'oubliez pas pourquoi vous avez commencé simplement parce que vous avez fait un long chemin.", author: 'Kahlil Gibran' },
-    { text: "Chaque jour où vous ne dansez pas est une trahison de la vie.", author: 'Friedrich Nietzsche' },
+    {
+      text: "La vie n'est pas d'attendre que l'orage passe, c'est d'apprendre à danser sous la pluie.",
+      author: 'Vivian Greene',
+    },
+    {
+      text: "N'oubliez pas pourquoi vous avez commencé simplement parce que vous avez fait un long chemin.",
+      author: 'Kahlil Gibran',
+    },
+    {
+      text: 'Chaque jour où vous ne dansez pas est une trahison de la vie.',
+      author: 'Friedrich Nietzsche',
+    },
   ],
   ru: [
-    { text: 'Жизнь — это не ожидание, пока пройдет буря, а умение танцевать под дождем.', author: 'Вивиан Грин' },
-    { text: 'Не забывайте, зачем вы начали, только потому что прошли долгий путь.', author: 'Халиль Джебран' },
-    { text: 'Каждый день, когда вы не танцуете, — это предательство жизни.', author: 'Фридрих Ницше' },
+    {
+      text: 'Жизнь — это не ожидание, пока пройдет буря, а умение танцевать под дождем.',
+      author: 'Вивиан Грин',
+    },
+    {
+      text: 'Не забывайте, зачем вы начали, только потому что прошли долгий путь.',
+      author: 'Халиль Джебран',
+    },
+    {
+      text: 'Каждый день, когда вы не танцуете, — это предательство жизни.',
+      author: 'Фридрих Ницше',
+    },
   ],
 };
 
 const t = {
-  title: lang === 'zh-CN' ? '每日一言' : lang === 'zh-TW' ? '每日一言' : 'Daily Quote',
-  refresh: lang === 'zh-CN' ? '换一条' : lang === 'zh-TW' ? '換一條' : 'Refresh',
+  title:
+    lang === 'zh-CN'
+      ? '每日一言'
+      : lang === 'zh-TW'
+        ? '每日一言'
+        : 'Daily Quote',
+  refresh:
+    lang === 'zh-CN' ? '换一条' : lang === 'zh-TW' ? '換一條' : 'Refresh',
   copy: lang === 'zh-CN' ? '复制' : lang === 'zh-TW' ? '複製' : 'Copy',
 };
 
 const quoteList = quotes[lang as keyof typeof quotes] || quotes['en-GB'];
 ---
 
-<div id="random-quote" class="quote-widget glass-card rounded-2xl p-6 shadow-xl max-w-md">
+<div
+  id="random-quote"
+  class="quote-widget glass-card rounded-2xl p-6 shadow-xl max-w-md"
+>
   <div class="flex items-center justify-between mb-4">
     <h3 class="text-lg font-bold flex items-center gap-2">
       <span class="text-2xl">💭</span>
       {t.title}
     </h3>
     <div class="flex gap-2">
-      <button id="copy-quote" type="button" class="p-2 hover:bg-white/20 rounded-lg transition-colors" aria-label={t.copy}>
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+      <button
+        id="copy-quote"
+        type="button"
+        class="p-2 hover:bg-white/20 rounded-lg transition-colors"
+        aria-label={t.copy}
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+          ></path>
         </svg>
       </button>
-      <button id="refresh-quote" type="button" class="p-2 hover:bg-white/20 rounded-lg transition-colors" aria-label={t.refresh}>
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+      <button
+        id="refresh-quote"
+        type="button"
+        class="p-2 hover:bg-white/20 rounded-lg transition-colors"
+        aria-label={t.refresh}
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+          ></path>
         </svg>
       </button>
     </div>
@@ -86,7 +182,10 @@ const quoteList = quotes[lang as keyof typeof quotes] || quotes['en-GB'];
     <blockquote class="text-lg leading-relaxed font-medium" id="quote-text">
       <!-- 名言将通过 JS 填充 -->
     </blockquote>
-    <p class="text-sm text-[rgb(var(--color-text-secondary))] text-right" id="quote-author">
+    <p
+      class="text-sm text-[rgb(var(--color-text-secondary))] text-right"
+      id="quote-author"
+    >
       <!-- 作者将通过 JS 填充 -->
     </p>
   </div>
@@ -94,7 +193,11 @@ const quoteList = quotes[lang as keyof typeof quotes] || quotes['en-GB'];
 
 <style>
   .quote-widget {
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(168, 85, 247, 0.05) 0%,
+      rgba(236, 72, 153, 0.05) 100%
+    );
   }
 
   blockquote::before {

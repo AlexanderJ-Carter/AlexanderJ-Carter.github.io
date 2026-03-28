@@ -86,7 +86,9 @@
     // Check user preference
     const disableEffects =
       localStorage.getItem('disableFestiveEffects') === 'true';
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
     const smallScreen = window.matchMedia('(max-width: 768px)').matches;
     if (disableEffects || reducedMotion || smallScreen) return;
 

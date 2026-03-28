@@ -74,8 +74,18 @@ const sitemapData: Record<Lang, any> = {
         icon: '💱',
       },
       { name: '世界时间', href: '/time', desc: '世界时间显示工具', icon: '🕐' },
-      { name: '工具中台', href: 'https://tools.alexander.xin', desc: '更多免费工具集合', icon: '🧰' },
-      { name: 'Linux 指令查询', href: 'https://linux-command.alexander.xin', desc: 'Linux 命令速查', icon: '🐧' },
+      {
+        name: '工具中台',
+        href: 'https://tools.alexander.xin',
+        desc: '更多免费工具集合',
+        icon: '🧰',
+      },
+      {
+        name: 'Linux 指令查询',
+        href: 'https://linux-command.alexander.xin',
+        desc: 'Linux 命令速查',
+        icon: '🐧',
+      },
     ],
     policyPages: [
       {
@@ -222,8 +232,18 @@ const sitemapData: Record<Lang, any> = {
         desc: '世界時間顯示工具',
         icon: '🕐',
       },
-      { name: '工具中台', href: 'https://tools.alexander.xin', desc: '更多免費工具集合', icon: '🧰' },
-      { name: 'Linux 指令查詢', href: 'https://linux-command.alexander.xin', desc: 'Linux 命令速查', icon: '🐧' },
+      {
+        name: '工具中台',
+        href: 'https://tools.alexander.xin',
+        desc: '更多免費工具集合',
+        icon: '🧰',
+      },
+      {
+        name: 'Linux 指令查詢',
+        href: 'https://linux-command.alexander.xin',
+        desc: 'Linux 命令速查',
+        icon: '🐧',
+      },
     ],
     policyPages: [
       {
@@ -370,8 +390,18 @@ const sitemapData: Record<Lang, any> = {
         desc: 'World time display tool',
         icon: '🕐',
       },
-      { name: 'Tool Hub', href: 'https://tools.alexander.xin', desc: 'More free utility tools', icon: '🧰' },
-      { name: 'Linux Commands', href: 'https://linux-command.alexander.xin', desc: 'Quick Linux command lookup', icon: '🐧' },
+      {
+        name: 'Tool Hub',
+        href: 'https://tools.alexander.xin',
+        desc: 'More free utility tools',
+        icon: '🧰',
+      },
+      {
+        name: 'Linux Commands',
+        href: 'https://linux-command.alexander.xin',
+        desc: 'Quick Linux command lookup',
+        icon: '🐧',
+      },
     ],
     policyPages: [
       {
@@ -518,8 +548,18 @@ const sitemapData: Record<Lang, any> = {
         desc: "Outil d'affichage de l'heure mondiale",
         icon: '🕐',
       },
-      { name: 'Hub Outils', href: 'https://tools.alexander.xin', desc: 'Plus d’outils gratuits', icon: '🧰' },
-      { name: 'Commandes Linux', href: 'https://linux-command.alexander.xin', desc: 'Recherche rapide Linux', icon: '🐧' },
+      {
+        name: 'Hub Outils',
+        href: 'https://tools.alexander.xin',
+        desc: 'Plus d’outils gratuits',
+        icon: '🧰',
+      },
+      {
+        name: 'Commandes Linux',
+        href: 'https://linux-command.alexander.xin',
+        desc: 'Recherche rapide Linux',
+        icon: '🐧',
+      },
     ],
     policyPages: [
       {
@@ -666,8 +706,18 @@ const sitemapData: Record<Lang, any> = {
         desc: 'Инструмент отображения мирового времени',
         icon: '🕐',
       },
-      { name: 'Хаб инструментов', href: 'https://tools.alexander.xin', desc: 'Больше бесплатных инструментов', icon: '🧰' },
-      { name: 'Linux команды', href: 'https://linux-command.alexander.xin', desc: 'Быстрый поиск команд', icon: '🐧' },
+      {
+        name: 'Хаб инструментов',
+        href: 'https://tools.alexander.xin',
+        desc: 'Больше бесплатных инструментов',
+        icon: '🧰',
+      },
+      {
+        name: 'Linux команды',
+        href: 'https://linux-command.alexander.xin',
+        desc: 'Быстрый поиск команд',
+        icon: '🐧',
+      },
     ],
     policyPages: [
       {
@@ -801,8 +851,16 @@ const content = sitemapData[lang as Lang] || sitemapData['en-GB'];
                 <li>
                   <a
                     href={page.href}
-                    target={String(page.href).startsWith('http') ? '_blank' : undefined}
-                    rel={String(page.href).startsWith('http') ? 'noopener noreferrer' : undefined}
+                    target={
+                      String(page.href).startsWith('http')
+                        ? '_blank'
+                        : undefined
+                    }
+                    rel={
+                      String(page.href).startsWith('http')
+                        ? 'noopener noreferrer'
+                        : undefined
+                    }
                     class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
                   >
                     <span class="text-2xl group-hover/link:scale-110 transition-transform">

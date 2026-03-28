@@ -49,6 +49,7 @@
 ### 1.4 架构特点
 
 项目整体是 **纯静态站点**，采用 Astro Islands 架构：
+
 - 默认零客户端 JS，按需水合交互组件
 - 无自托管数据库或后端
 - 如需动态能力，优先使用第三方 API 或边缘函数（Cloudflare Workers 等）
@@ -121,14 +122,17 @@
 ### 3.2 文件修改优先级
 
 **优先级 1 - 页面内容层**（`src/components/templates/*.astro`）
+
 - 可以适度调整排版、模块结构、细节动效
 - 新增区块应复用现有组件和样式
 
 **优先级 2 - 页面壳层**（`src/layouts/BaseLayout.astro`、`Header.astro`、`Footer.astro`）
+
 - 只在有明确收益（SEO、可访问性、导航清晰度）时调整
 - 保持现有导航结构和语言切换行为
 
 **优先级 3 - 跨站逻辑/配置**（`astro.config.mjs`、`tailwind.config.mjs`、`src/scripts/*.ts`）
+
 - 非必要不要变更
 - 如果必须修改，应保证向下兼容并在 PR 说明中突出
 
@@ -151,21 +155,21 @@
 页面文件仅做**薄封装**，实际内容在 `src/components/templates/*.astro`：
 
 ```astro
-<!-- src/pages/example.astro -->
 ---
 import ExampleTemplate from '../components/templates/ExampleTemplate.astro';
 ---
 
+<!-- src/pages/example.astro -->
 <ExampleTemplate lang="zh-CN" />
 ```
 
 ```astro
-<!-- src/pages/[lang]/example.astro -->
 ---
 import ExampleTemplate from '../../components/templates/ExampleTemplate.astro';
 const { lang } = Astro.params;
 ---
 
+<!-- src/pages/[lang]/example.astro -->
 <ExampleTemplate lang={lang} />
 ```
 
@@ -201,6 +205,7 @@ const t = useTranslations(lang);
 ```
 
 **新增 key 的规则**：
+
 1. 在 `ui['zh-CN']` 中先写简体中文源文案
 2. 为其他语言补充翻译（可用英文占位，但不要留空）
 3. 避免使用过长、含歧义的 key 名
@@ -271,15 +276,18 @@ src/pages/security/acknowledgments.astro  # 安全致谢页面
 ### 6.2 视觉系统
 
 **颜色**:
+
 - Primary: `#0ea5e9` (Sky Blue)
 - Accent: `#d946ef` (Fuchsia)
 
 **字体**:
+
 - Sans: Inter (主要文本)
 - Display: Playfair Display (装饰标题)
 - Heading: Syne (标题)
 
 **效果**:
+
 - 玻璃态卡片 (Glass morphism)
 - 渐变背景 + Aurora 极光效果
 - 3D 卡片悬浮效果

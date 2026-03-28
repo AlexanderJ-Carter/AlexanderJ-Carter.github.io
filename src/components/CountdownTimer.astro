@@ -93,10 +93,14 @@ const countdownText = {
   },
 };
 
-const t = countdownText[lang as keyof typeof countdownText] || countdownText['zh-CN'];
+const t =
+  countdownText[lang as keyof typeof countdownText] || countdownText['zh-CN'];
 ---
 
-<div id="countdown-timer" class="countdown-widget glass-card rounded-2xl p-6 shadow-xl max-w-md">
+<div
+  id="countdown-timer"
+  class="countdown-widget glass-card rounded-2xl p-6 shadow-xl max-w-md"
+>
   <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
     <span class="text-2xl">⏱️</span>
     {t.title}
@@ -108,25 +112,38 @@ const t = countdownText[lang as keyof typeof countdownText] || countdownText['zh
       <div class="glass-card rounded-xl p-3 mb-2">
         <span id="countdown-days" class="text-3xl font-bold font-mono">00</span>
       </div>
-      <span class="text-xs text-[rgb(var(--color-text-secondary))]">{t.days}</span>
+      <span class="text-xs text-[rgb(var(--color-text-secondary))]"
+        >{t.days}</span
+      >
     </div>
     <div class="text-center">
       <div class="glass-card rounded-xl p-3 mb-2">
-        <span id="countdown-hours" class="text-3xl font-bold font-mono">00</span>
+        <span id="countdown-hours" class="text-3xl font-bold font-mono">00</span
+        >
       </div>
-      <span class="text-xs text-[rgb(var(--color-text-secondary))]">{t.hours}</span>
+      <span class="text-xs text-[rgb(var(--color-text-secondary))]"
+        >{t.hours}</span
+      >
     </div>
     <div class="text-center">
       <div class="glass-card rounded-xl p-3 mb-2">
-        <span id="countdown-minutes" class="text-3xl font-bold font-mono">00</span>
+        <span id="countdown-minutes" class="text-3xl font-bold font-mono"
+          >00</span
+        >
       </div>
-      <span class="text-xs text-[rgb(var(--color-text-secondary))]">{t.minutes}</span>
+      <span class="text-xs text-[rgb(var(--color-text-secondary))]"
+        >{t.minutes}</span
+      >
     </div>
     <div class="text-center">
       <div class="glass-card rounded-xl p-3 mb-2">
-        <span id="countdown-seconds" class="text-3xl font-bold font-mono">00</span>
+        <span id="countdown-seconds" class="text-3xl font-bold font-mono"
+          >00</span
+        >
       </div>
-      <span class="text-xs text-[rgb(var(--color-text-secondary))]">{t.seconds}</span>
+      <span class="text-xs text-[rgb(var(--color-text-secondary))]"
+        >{t.seconds}</span
+      >
     </div>
   </div>
 
@@ -134,16 +151,28 @@ const t = countdownText[lang as keyof typeof countdownText] || countdownText['zh
   <div class="mb-4">
     <h4 class="text-sm font-semibold mb-3">{t.preset}</h4>
     <div class="grid grid-cols-4 gap-2">
-      <button class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:text-white rounded text-sm font-medium transition-colors" data-minutes="5">
+      <button
+        class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:text-white rounded text-sm font-medium transition-colors"
+        data-minutes="5"
+      >
         {t.preset5}
       </button>
-      <button class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:text-white rounded text-sm font-medium transition-colors" data-minutes="10">
+      <button
+        class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:text-white rounded text-sm font-medium transition-colors"
+        data-minutes="10"
+      >
         {t.preset10}
       </button>
-      <button class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:text-white rounded text-sm font-medium transition-colors" data-minutes="30">
+      <button
+        class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:text-white rounded text-sm font-medium transition-colors"
+        data-minutes="30"
+      >
         {t.preset30}
       </button>
-      <button class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:bg-white rounded text-sm font-medium transition-colors" data-minutes="60">
+      <button
+        class="preset-btn py-2 px-3 bg-[rgb(var(--color-bg-accent))] hover:bg-primary-500 hover:bg-white rounded text-sm font-medium transition-colors"
+        data-minutes="60"
+      >
         {t.preset60}
       </button>
     </div>
@@ -190,25 +219,44 @@ const t = countdownText[lang as keyof typeof countdownText] || countdownText['zh
 
   <!-- 控制按钮 -->
   <div class="flex gap-3">
-    <button id="countdown-toggle" type="button" class="flex-1 py-3 px-6 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-colors">
+    <button
+      id="countdown-toggle"
+      type="button"
+      class="flex-1 py-3 px-6 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-colors"
+    >
       {t.start}
     </button>
-    <button id="countdown-reset" type="button" class="py-3 px-6 bg-[rgb(var(--color-bg-accent))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg font-medium transition-colors">
+    <button
+      id="countdown-reset"
+      type="button"
+      class="py-3 px-6 bg-[rgb(var(--color-bg-accent))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg font-medium transition-colors"
+    >
       {t.reset}
     </button>
   </div>
 
   <!-- 进度条 -->
   <div class="mt-6">
-    <div class="h-2 bg-[rgb(var(--color-bg-accent))] rounded-full overflow-hidden">
-      <div id="countdown-progress" class="h-full bg-gradient-to-r from-primary-500 to-purple-500 transition-all duration-1000" style="width: 0%"></div>
+    <div
+      class="h-2 bg-[rgb(var(--color-bg-accent))] rounded-full overflow-hidden"
+    >
+      <div
+        id="countdown-progress"
+        class="h-full bg-gradient-to-r from-primary-500 to-purple-500 transition-all duration-1000"
+        style="width: 0%"
+      >
+      </div>
     </div>
   </div>
 </div>
 
 <style>
   .countdown-widget {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(251, 146, 60, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(239, 68, 68, 0.05) 0%,
+      rgba(251, 146, 60, 0.05) 100%
+    );
   }
 
   .preset-btn.active {
@@ -300,7 +348,9 @@ const t = countdownText[lang as keyof typeof countdownText] || countdownText['zh
     pauseCountdown();
 
     // 播放提示音
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const audioContext = new (
+      window.AudioContext || window.webkitAudioContext
+    )();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
 
@@ -318,13 +368,13 @@ const t = countdownText[lang as keyof typeof countdownText] || countdownText['zh
     if (Notification.permission === 'granted') {
       new Notification('倒计时结束！', {
         body: '时间到！',
-        icon: '/img/branding/logo.png'
+        icon: '/img/branding/logo.png',
       });
     }
   }
 
   // 快速选择按钮
-  document.querySelectorAll('.preset-btn').forEach(btn => {
+  document.querySelectorAll('.preset-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const minutes = parseInt(btn.dataset.minutes || '0');
       totalSeconds = minutes * 60;
@@ -332,7 +382,9 @@ const t = countdownText[lang as keyof typeof countdownText] || countdownText['zh
       updateDisplay();
 
       // 高亮按钮
-      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      document
+        .querySelectorAll('.preset-btn')
+        .forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
     });
   });

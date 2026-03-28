@@ -28,7 +28,8 @@ const labels = {
     q7: '博客和隐私页面在哪？',
     q8: '站内搜索怎么用？',
     q9: '音乐播放器和电台怎么开？',
-    fallback: '我暂时不懂这个问题。你可以试试上面的快捷提问，或者先用 Ctrl/Cmd + K 搜索页面。',
+    fallback:
+      '我暂时不懂这个问题。你可以试试上面的快捷提问，或者先用 Ctrl/Cmd + K 搜索页面。',
   },
   'zh-TW': {
     open: '打開生活助手',
@@ -48,7 +49,8 @@ const labels = {
     q7: '部落格和隱私頁面在哪？',
     q8: '站內搜尋怎麼用？',
     q9: '音樂播放器和電台怎麼開？',
-    fallback: '我暫時不懂這個問題。可以先試上面的快捷提問，或用 Ctrl/Cmd + K 搜尋頁面。',
+    fallback:
+      '我暫時不懂這個問題。可以先試上面的快捷提問，或用 Ctrl/Cmd + K 搜尋頁面。',
   },
   'en-GB': {
     open: 'Open lifestyle assistant',
@@ -68,7 +70,8 @@ const labels = {
     q7: 'Where are blog and privacy pages?',
     q8: 'How do I use site search?',
     q9: 'How to open music player/radio?',
-    fallback: 'I do not have that answer yet. Try a quick prompt above or press Ctrl/Cmd + K to search.',
+    fallback:
+      'I do not have that answer yet. Try a quick prompt above or press Ctrl/Cmd + K to search.',
   },
   fr: {
     open: "Ouvrir l'assistant",
@@ -88,7 +91,8 @@ const labels = {
     q7: 'Où sont le blog et la confidentialité ?',
     q8: 'Comment utiliser la recherche du site ?',
     q9: 'Comment lancer le lecteur/radio ?',
-    fallback: "Je n'ai pas encore cette réponse. Essayez une question rapide ou Ctrl/Cmd + K.",
+    fallback:
+      "Je n'ai pas encore cette réponse. Essayez une question rapide ou Ctrl/Cmd + K.",
   },
   ru: {
     open: 'Открыть помощника',
@@ -108,7 +112,8 @@ const labels = {
     q7: 'Где блог и страница приватности?',
     q8: 'Как пользоваться поиском по сайту?',
     q9: 'Как открыть плеер и радио?',
-    fallback: 'Пока не знаю этот ответ. Попробуйте быстрые вопросы выше или Ctrl/Cmd + K.',
+    fallback:
+      'Пока не знаю этот ответ. Попробуйте быстрые вопросы выше или Ctrl/Cmd + K.',
   },
 };
 
@@ -116,21 +121,48 @@ const text = labels[lang as keyof typeof labels] || labels['zh-CN'];
 ---
 
 <div class="life-assistant">
-  <button id="assistant-toggle" type="button" class="assistant-fab" aria-label={text.open} aria-expanded="false">
+  <button
+    id="assistant-toggle"
+    type="button"
+    class="assistant-fab"
+    aria-label={text.open}
+    aria-expanded="false"
+  >
     <span aria-hidden="true">💬</span>
   </button>
 
-  <section id="assistant-panel" class="assistant-panel hidden" aria-label={text.title}>
+  <section
+    id="assistant-panel"
+    class="assistant-panel hidden"
+    aria-label={text.title}
+  >
     <header class="assistant-header">
       <div>
         <h2>{text.title}</h2>
         <p>{text.subtitle}</p>
       </div>
-      <button id="assistant-close" type="button" class="assistant-close" aria-label={text.close}>×</button>
+      <button
+        id="assistant-close"
+        type="button"
+        class="assistant-close"
+        aria-label={text.close}>×</button
+      >
     </header>
 
     <div id="assistant-log" class="assistant-log">
-      <div class="bubble bot">👋 {lang === 'zh-CN' ? '你好！可以问我站内导航和功能。' : lang === 'zh-TW' ? '你好！可以問我站內導覽和功能。' : lang === 'fr' ? 'Bonjour ! Je peux aider pour la navigation du site.' : lang === 'ru' ? 'Привет! Я помогу с навигацией по сайту.' : 'Hi! I can help with site navigation.'}</div>
+      <div class="bubble bot">
+        👋 {
+          lang === 'zh-CN'
+            ? '你好！可以问我站内导航和功能。'
+            : lang === 'zh-TW'
+              ? '你好！可以問我站內導覽和功能。'
+              : lang === 'fr'
+                ? 'Bonjour ! Je peux aider pour la navigation du site.'
+                : lang === 'ru'
+                  ? 'Привет! Я помогу с навигацией по сайту.'
+                  : 'Hi! I can help with site navigation.'
+        }
+      </div>
     </div>
 
     <div class="assistant-quick">
@@ -149,29 +181,43 @@ const text = labels[lang as keyof typeof labels] || labels['zh-CN'];
     </div>
 
     <form id="assistant-form" class="assistant-form">
-      <input id="assistant-input" type="text" placeholder={text.placeholder} autocomplete="off" />
+      <input
+        id="assistant-input"
+        type="text"
+        placeholder={text.placeholder}
+        autocomplete="off"
+      />
       <button type="submit">{text.send}</button>
-      <button id="assistant-clear" type="button" class="ghost">{text.clear}</button>
+      <button id="assistant-clear" type="button" class="ghost"
+        >{text.clear}</button
+      >
     </form>
   </section>
 </div>
 
-<script define:vars={{ lang, fallback: text.fallback, links: JSON.stringify({
-  time: getLangPath('/time'),
-  fun: getLangPath('/fun'),
-  gallery: getLangPath('/gallery'),
-  tools: 'https://tools.alexander.xin',
-  cook: 'https://cook.alexander.xin',
-  linux: 'https://linux-command.alexander.xin',
-  netq: 'https://netq.alexander.xin',
-  now: getLangPath('/now'),
-  friends: getLangPath('/friends'),
-  privacy: getLangPath('/privacy'),
-  blog: 'https://blog.alexander.xin',
-  reading: getLangPath('/reading'),
-  contact: getLangPath('/contact'),
-  security: getLangPath('/security/policy'),
-}) }} is:inline>
+<script
+  define:vars={{
+    lang,
+    fallback: text.fallback,
+    links: JSON.stringify({
+      time: getLangPath('/time'),
+      fun: getLangPath('/fun'),
+      gallery: getLangPath('/gallery'),
+      tools: 'https://tools.alexander.xin',
+      cook: 'https://cook.alexander.xin',
+      linux: 'https://linux-command.alexander.xin',
+      netq: 'https://netq.alexander.xin',
+      now: getLangPath('/now'),
+      friends: getLangPath('/friends'),
+      privacy: getLangPath('/privacy'),
+      blog: 'https://blog.alexander.xin',
+      reading: getLangPath('/reading'),
+      contact: getLangPath('/contact'),
+      security: getLangPath('/security/policy'),
+    }),
+  }}
+  is:inline
+>
   (function () {
     const toggle = document.getElementById('assistant-toggle');
     const panel = document.getElementById('assistant-panel');
@@ -194,40 +240,92 @@ const text = labels[lang as keyof typeof labels] || labels['zh-CN'];
 
     function answer(q) {
       const s = String(q || '').toLowerCase();
-      if (s.includes('时间') || s.includes('time') || s.includes('heure') || s.includes('время')) {
+      if (
+        s.includes('时间') ||
+        s.includes('time') ||
+        s.includes('heure') ||
+        s.includes('время')
+      ) {
         return `你可以先看 <a href="${navLinks.now}">Now 实时面板</a>，或者直接去 <a href="${navLinks.time}">世界时间</a>。`;
       }
-      if (s.includes('好玩') || s.includes('fun') || s.includes('彩蛋') || s.includes('игр')) {
+      if (
+        s.includes('好玩') ||
+        s.includes('fun') ||
+        s.includes('彩蛋') ||
+        s.includes('игр')
+      ) {
         return `推荐从 <a href="${navLinks.fun}">Fun 页面</a> 开始，再逛 <a href="${navLinks.gallery}">Gallery</a>。`;
       }
-      if (s.includes('做饭') || s.includes('cook') || s.includes('recipe') || s.includes('cuisine')) {
+      if (
+        s.includes('做饭') ||
+        s.includes('cook') ||
+        s.includes('recipe') ||
+        s.includes('cuisine')
+      ) {
         return `有的，直接打开 <a href="${navLinks.cook}" target="_blank" rel="noopener noreferrer">cook.alexander.xin</a>。`;
       }
-      if (s.includes('netq') || s.includes('网络') || s.includes('排查') || s.includes('cli')) {
+      if (
+        s.includes('netq') ||
+        s.includes('网络') ||
+        s.includes('排查') ||
+        s.includes('cli')
+      ) {
         return `NetQ 是一个交互式网络排查 CLI，可做公网 IP、DNS、Ping/Traceroute、TCP/HTTP 连通性检查。入口：<a href="${navLinks.netq}" target="_blank" rel="noopener noreferrer">netq.alexander.xin</a>。`;
       }
-      if (s.includes('语言') || s.includes('language') || s.includes('lang') || s.includes('主题') || s.includes('dark')) {
+      if (
+        s.includes('语言') ||
+        s.includes('language') ||
+        s.includes('lang') ||
+        s.includes('主题') ||
+        s.includes('dark')
+      ) {
         return `右上角有语言切换和主题切换按钮；也可以按 <strong>d</strong> 快捷切换主题，按 <strong>?</strong> 查看快捷键。`;
       }
-      if (s.includes('博客') || s.includes('blog') || s.includes('隐私') || s.includes('privacy') || s.includes('政策')) {
+      if (
+        s.includes('博客') ||
+        s.includes('blog') ||
+        s.includes('隐私') ||
+        s.includes('privacy') ||
+        s.includes('政策')
+      ) {
         return `博客入口：<a href="${navLinks.blog}" target="_blank" rel="noopener noreferrer">blog.alexander.xin</a>；隐私页面：<a href="${navLinks.privacy}">Privacy</a>。`;
       }
-      if (s.includes('搜索') || s.includes('search') || s.includes('ctrl') || s.includes('cmd')) {
+      if (
+        s.includes('搜索') ||
+        s.includes('search') ||
+        s.includes('ctrl') ||
+        s.includes('cmd')
+      ) {
         return `按 <strong>Ctrl/Cmd + K</strong> 可以打开全局搜索，或点左下角搜索按钮；支持页面名和关键词。`;
       }
-      if (s.includes('音乐') || s.includes('电台') || s.includes('radio') || s.includes('player')) {
+      if (
+        s.includes('音乐') ||
+        s.includes('电台') ||
+        s.includes('radio') ||
+        s.includes('player')
+      ) {
         return `右下角的 🎵 按钮就是播放器入口，展开后可切换「本地歌单 / 氛围电台」。`;
       }
       if (s.includes('阅读') || s.includes('reading') || s.includes('书')) {
         return `可以去 <a href="${navLinks.reading}">Reading 页面</a> 看推荐书单和持续更新内容。`;
       }
-      if (s.includes('联系') || s.includes('contact') || s.includes('邮箱') || s.includes('email')) {
+      if (
+        s.includes('联系') ||
+        s.includes('contact') ||
+        s.includes('邮箱') ||
+        s.includes('email')
+      ) {
         return `你可以直接前往 <a href="${navLinks.contact}">Contact 页面</a>，或者邮件联系。`;
       }
       if (s.includes('安全') || s.includes('security')) {
         return `安全政策入口在 <a href="${navLinks.security}">Security Policy</a>。`;
       }
-      if (s.includes('工具') || s.includes('tool') || s.includes('linux') || s.includes('命令')) {
+      if (
+        s.includes('工具') ||
+        s.includes('tool') ||
+        s.includes('linux') ||
+        s.includes('命令')
+      ) {
         return `常用入口：<a href="${navLinks.tools}" target="_blank" rel="noopener noreferrer">工具中台</a>、<a href="${navLinks.linux}" target="_blank" rel="noopener noreferrer">Linux 指令</a>、<a href="${navLinks.netq}" target="_blank" rel="noopener noreferrer">NetQ</a>。`;
       }
       if (s.includes('友链') || s.includes('friends') || s.includes('合作')) {
@@ -292,11 +390,17 @@ const text = labels[lang as keyof typeof labels] || labels['zh-CN'];
     height: 3rem;
     border-radius: 9999px;
     border: 1px solid rgb(14 165 233 / 0.45);
-    background: radial-gradient(circle at 20% 20%, rgb(56 189 248), rgb(217 70 239));
+    background: radial-gradient(
+      circle at 20% 20%,
+      rgb(56 189 248),
+      rgb(217 70 239)
+    );
     color: #fff;
     box-shadow: 0 12px 28px rgb(14 165 233 / 0.35);
     font-size: 1.2rem;
-    transition: transform 0.22s ease, border-radius 0.22s ease;
+    transition:
+      transform 0.22s ease,
+      border-radius 0.22s ease;
   }
   .assistant-fab.edge-hide {
     transform: translateX(0.95rem);
@@ -323,11 +427,28 @@ const text = labels[lang as keyof typeof labels] || labels['zh-CN'];
     gap: 0.6rem;
     padding: 0.8rem 0.9rem;
     border-bottom: 1px solid rgb(var(--color-border));
-    background: linear-gradient(90deg, rgb(14 165 233 / 0.1), rgb(168 85 247 / 0.1));
+    background: linear-gradient(
+      90deg,
+      rgb(14 165 233 / 0.1),
+      rgb(168 85 247 / 0.1)
+    );
   }
-  .assistant-header h2 { margin: 0; font-size: 0.95rem; color: rgb(var(--color-text-primary)); }
-  .assistant-header p { margin: 0.15rem 0 0; font-size: 0.75rem; color: rgb(var(--color-text-tertiary)); }
-  .assistant-close { border: 0; background: transparent; color: rgb(var(--color-text-secondary)); font-size: 1.2rem; }
+  .assistant-header h2 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: rgb(var(--color-text-primary));
+  }
+  .assistant-header p {
+    margin: 0.15rem 0 0;
+    font-size: 0.75rem;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .assistant-close {
+    border: 0;
+    background: transparent;
+    color: rgb(var(--color-text-secondary));
+    font-size: 1.2rem;
+  }
   .assistant-log {
     max-height: min(42vh, 20rem);
     overflow: auto;
@@ -354,10 +475,25 @@ const text = labels[lang as keyof typeof labels] || labels['zh-CN'];
     color: rgb(var(--color-text-secondary));
     border: 1px solid rgb(var(--color-border));
   }
-  .bubble a { color: rgb(14 165 233); text-decoration: underline; }
-  .assistant-quick { padding: 0.2rem 0.9rem 0.55rem; }
-  .assistant-quick p { margin: 0 0 0.45rem; font-size: 0.76rem; color: rgb(var(--color-text-tertiary)); }
-  .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; max-height: 12rem; overflow: auto; }
+  .bubble a {
+    color: rgb(14 165 233);
+    text-decoration: underline;
+  }
+  .assistant-quick {
+    padding: 0.2rem 0.9rem 0.55rem;
+  }
+  .assistant-quick p {
+    margin: 0 0 0.45rem;
+    font-size: 0.76rem;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    max-height: 12rem;
+    overflow: auto;
+  }
   .quick-grid button {
     border: 1px solid rgb(var(--color-border));
     background: rgb(var(--color-bg-primary));
@@ -367,7 +503,9 @@ const text = labels[lang as keyof typeof labels] || labels['zh-CN'];
     color: rgb(var(--color-text-primary));
     text-align: left;
   }
-  .quick-grid button:hover { border-color: rgb(14 165 233 / 0.5); }
+  .quick-grid button:hover {
+    border-color: rgb(14 165 233 / 0.5);
+  }
   .assistant-form {
     padding: 0.7rem 0.9rem 0.9rem;
     border-top: 1px solid rgb(var(--color-border));

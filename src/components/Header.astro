@@ -1058,9 +1058,13 @@ const mainNavItems: NavItem[] = [
     lastScrollY = scrollTop;
     headerScrollTicking = false;
   }
-  window.addEventListener('scroll', () => {
-    if (headerScrollTicking) return;
-    headerScrollTicking = true;
-    requestAnimationFrame(updateHeaderOnScroll);
-  }, { passive: true });
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (headerScrollTicking) return;
+      headerScrollTicking = true;
+      requestAnimationFrame(updateHeaderOnScroll);
+    },
+    { passive: true }
+  );
 </script>

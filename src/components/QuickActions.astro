@@ -82,7 +82,15 @@ const t = translations[lang] || translations['zh-CN'];
         <input
           type="text"
           id="search-input"
-          placeholder={lang === 'zh-CN' ? '搜索页面…' : lang === 'zh-TW' ? '搜尋頁面…' : lang === 'fr' ? 'Rechercher une page…' : lang === 'ru' ? 'Поиск страниц…' : 'Search pages…'}
+          placeholder={lang === 'zh-CN'
+            ? '搜索页面…'
+            : lang === 'zh-TW'
+              ? '搜尋頁面…'
+              : lang === 'fr'
+                ? 'Rechercher une page…'
+                : lang === 'ru'
+                  ? 'Поиск страниц…'
+                  : 'Search pages…'}
           class="flex-1 bg-transparent border-none outline-none text-base text-[rgb(var(--color-text-primary))] placeholder-[rgb(var(--color-text-tertiary))]"
           autofocus
         />
@@ -118,32 +126,299 @@ const t = translations[lang] || translations['zh-CN'];
   const searchResults = document.getElementById('search-results');
 
   // Build lang-prefixed URL helper (mirrors getLangPath server-side logic)
-  const langPrefix = lang === 'zh-CN' ? '' : '/' + (lang === 'en-GB' ? 'en' : lang);
-  function p(path) { return langPrefix + path; }
+  const langPrefix =
+    lang === 'zh-CN' ? '' : '/' + (lang === 'en-GB' ? 'en' : lang);
+  function p(path) {
+    return langPrefix + path;
+  }
 
   // Full page index for search
   const pageIndex = [
-    { title: lang === 'zh-CN' ? '首页' : lang === 'zh-TW' ? '首頁' : lang === 'fr' ? 'Accueil' : lang === 'ru' ? 'Главная' : 'Home', url: p('/'), keywords: 'home,首页,主页,accueil,главная' },
-    { title: lang === 'zh-CN' ? '关于我' : lang === 'zh-TW' ? '關於我' : lang === 'fr' ? 'À propos' : lang === 'ru' ? 'Обо мне' : 'About', url: p('/about'), keywords: 'about,关于,简介,a propos,обо мне' },
-    { title: lang === 'zh-CN' ? '作品画廊' : lang === 'zh-TW' ? '作品畫廊' : lang === 'fr' ? 'Galerie' : lang === 'ru' ? 'Галерея' : 'Gallery', url: p('/gallery'), keywords: 'gallery,画廊,作品,galerie,галерея,photo' },
-    { title: lang === 'zh-CN' ? '项目' : lang === 'zh-TW' ? '專案' : lang === 'fr' ? 'Projets' : lang === 'ru' ? 'Проекты' : 'Projects', url: p('/projects'), keywords: 'projects,项目,代码,code,work,projets,проекты' },
-    { title: lang === 'zh-CN' ? '联系我' : lang === 'zh-TW' ? '聯繫我' : lang === 'fr' ? 'Contact' : lang === 'ru' ? 'Контакт' : 'Contact', url: p('/contact'), keywords: 'contact,联系,联系方式,контакт,email' },
-    { title: lang === 'zh-CN' ? '彩蛋' : lang === 'zh-TW' ? '彩蛋' : lang === 'fr' ? 'Easter Eggs' : lang === 'ru' ? 'Пасхалки' : 'Fun', url: p('/fun'), keywords: 'fun,彩蛋,easter egg,好玩,pâques,пасхалки' },
-    { title: lang === 'zh-CN' ? '时间线' : lang === 'zh-TW' ? '時間軸' : lang === 'fr' ? 'Chronologie' : lang === 'ru' ? 'Хронология' : 'Timeline', url: p('/timeline'), keywords: 'timeline,时间线,history,经历,chronologie,хронология' },
-    { title: lang === 'zh-CN' ? '日历' : lang === 'zh-TW' ? '日曆' : lang === 'fr' ? 'Calendrier' : lang === 'ru' ? 'Календарь' : 'Calendar', url: p('/calendar'), keywords: 'calendar,日历,日曆,calendrier,календарь' },
-    { title: lang === 'zh-CN' ? '汇率' : lang === 'zh-TW' ? '匯率' : lang === 'fr' ? 'Taux de change' : lang === 'ru' ? 'Курс валют' : 'Currency', url: p('/currency'), keywords: 'currency,汇率,exchange,devise,курс валют' },
-    { title: lang === 'zh-CN' ? '时间' : lang === 'zh-TW' ? '時間' : lang === 'fr' ? 'Heure' : lang === 'ru' ? 'Время' : 'World Time', url: p('/time'), keywords: 'time,时间,world clock,timezone,heure,время' },
-    { title: 'Now', url: p('/now'), keywords: 'now,此刻,doing,en ce moment,сейчас' },
-    { title: lang === 'zh-CN' ? '本站' : lang === 'zh-TW' ? '本站' : lang === 'fr' ? 'Le site' : lang === 'ru' ? 'О сайте' : 'About site', url: p('/uses'), keywords: 'about,site,本站,tech stack,astro,о сайте' },
-    { title: lang === 'zh-CN' ? '单位换算' : lang === 'zh-TW' ? '單位換算' : lang === 'fr' ? 'Unités' : lang === 'ru' ? 'Единицы' : 'Units', url: p('/units'), keywords: 'units,单位,换算,converter,température,единицы' },
-    { title: lang === 'zh-CN' ? 'QR 生成' : lang === 'zh-TW' ? 'QR 生成' : lang === 'fr' ? 'QR Code' : lang === 'ru' ? 'QR-код' : 'QR Code', url: p('/qr'), keywords: 'qr,二维码,qr code,qr-код' },
-    { title: lang === 'zh-CN' ? '隐私政策' : lang === 'zh-TW' ? '隱私政策' : lang === 'fr' ? 'Confidentialité' : lang === 'ru' ? 'Конфиденциальность' : 'Privacy', url: p('/privacy'), keywords: 'privacy,隐私,конфиденциальность' },
-    { title: lang === 'zh-CN' ? '网站地图' : lang === 'zh-TW' ? '網站地圖' : lang === 'fr' ? 'Plan du site' : lang === 'ru' ? 'Карта сайта' : 'Sitemap', url: p('/sitemap'), keywords: 'sitemap,网站地图,всё,all pages' },
-    { title: lang === 'zh-CN' ? '博客' : lang === 'zh-TW' ? '部落格' : lang === 'fr' ? 'Blog' : lang === 'ru' ? 'Блог' : 'Blog', url: 'https://blog.alexander.xin', keywords: 'blog,博客,部落格,блог,write,writing' },
-    { title: lang === 'zh-CN' ? '工具中台' : lang === 'zh-TW' ? '工具中台' : lang === 'fr' ? 'Hub Outils' : lang === 'ru' ? 'Хаб инструментов' : 'Tool Hub', url: 'https://tools.alexander.xin', keywords: 'tools,tool hub,工具,实用工具,outils,инструменты' },
-    { title: lang === 'zh-CN' ? 'Linux 指令查询' : lang === 'zh-TW' ? 'Linux 指令查詢' : lang === 'fr' ? 'Commandes Linux' : lang === 'ru' ? 'Linux команды' : 'Linux Commands', url: 'https://linux-command.alexander.xin', keywords: 'linux,command,bash,shell,终端,命令,команды' },
-    { title: lang === 'zh-CN' ? '做饭菜谱' : lang === 'zh-TW' ? '做飯菜譜' : lang === 'fr' ? 'Recettes' : lang === 'ru' ? 'Рецепты' : 'Cooking Recipes', url: 'https://cook.alexander.xin', keywords: 'cook,recipe,菜谱,做饭,howtocook,food' },
-    { title: lang === 'zh-CN' ? 'NetQ 网络排查' : lang === 'zh-TW' ? 'NetQ 網路排查' : lang === 'fr' ? 'NetQ CLI' : lang === 'ru' ? 'NetQ CLI' : 'NetQ CLI', url: 'https://netq.alexander.xin', keywords: 'netq,network,dns,ping,traceroute,tcp,http,排查' },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '首页'
+          : lang === 'zh-TW'
+            ? '首頁'
+            : lang === 'fr'
+              ? 'Accueil'
+              : lang === 'ru'
+                ? 'Главная'
+                : 'Home',
+      url: p('/'),
+      keywords: 'home,首页,主页,accueil,главная',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '关于我'
+          : lang === 'zh-TW'
+            ? '關於我'
+            : lang === 'fr'
+              ? 'À propos'
+              : lang === 'ru'
+                ? 'Обо мне'
+                : 'About',
+      url: p('/about'),
+      keywords: 'about,关于,简介,a propos,обо мне',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '作品画廊'
+          : lang === 'zh-TW'
+            ? '作品畫廊'
+            : lang === 'fr'
+              ? 'Galerie'
+              : lang === 'ru'
+                ? 'Галерея'
+                : 'Gallery',
+      url: p('/gallery'),
+      keywords: 'gallery,画廊,作品,galerie,галерея,photo',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '项目'
+          : lang === 'zh-TW'
+            ? '專案'
+            : lang === 'fr'
+              ? 'Projets'
+              : lang === 'ru'
+                ? 'Проекты'
+                : 'Projects',
+      url: p('/projects'),
+      keywords: 'projects,项目,代码,code,work,projets,проекты',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '联系我'
+          : lang === 'zh-TW'
+            ? '聯繫我'
+            : lang === 'fr'
+              ? 'Contact'
+              : lang === 'ru'
+                ? 'Контакт'
+                : 'Contact',
+      url: p('/contact'),
+      keywords: 'contact,联系,联系方式,контакт,email',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '彩蛋'
+          : lang === 'zh-TW'
+            ? '彩蛋'
+            : lang === 'fr'
+              ? 'Easter Eggs'
+              : lang === 'ru'
+                ? 'Пасхалки'
+                : 'Fun',
+      url: p('/fun'),
+      keywords: 'fun,彩蛋,easter egg,好玩,pâques,пасхалки',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '时间线'
+          : lang === 'zh-TW'
+            ? '時間軸'
+            : lang === 'fr'
+              ? 'Chronologie'
+              : lang === 'ru'
+                ? 'Хронология'
+                : 'Timeline',
+      url: p('/timeline'),
+      keywords: 'timeline,时间线,history,经历,chronologie,хронология',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '日历'
+          : lang === 'zh-TW'
+            ? '日曆'
+            : lang === 'fr'
+              ? 'Calendrier'
+              : lang === 'ru'
+                ? 'Календарь'
+                : 'Calendar',
+      url: p('/calendar'),
+      keywords: 'calendar,日历,日曆,calendrier,календарь',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '汇率'
+          : lang === 'zh-TW'
+            ? '匯率'
+            : lang === 'fr'
+              ? 'Taux de change'
+              : lang === 'ru'
+                ? 'Курс валют'
+                : 'Currency',
+      url: p('/currency'),
+      keywords: 'currency,汇率,exchange,devise,курс валют',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '时间'
+          : lang === 'zh-TW'
+            ? '時間'
+            : lang === 'fr'
+              ? 'Heure'
+              : lang === 'ru'
+                ? 'Время'
+                : 'World Time',
+      url: p('/time'),
+      keywords: 'time,时间,world clock,timezone,heure,время',
+    },
+    {
+      title: 'Now',
+      url: p('/now'),
+      keywords: 'now,此刻,doing,en ce moment,сейчас',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '本站'
+          : lang === 'zh-TW'
+            ? '本站'
+            : lang === 'fr'
+              ? 'Le site'
+              : lang === 'ru'
+                ? 'О сайте'
+                : 'About site',
+      url: p('/uses'),
+      keywords: 'about,site,本站,tech stack,astro,о сайте',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '单位换算'
+          : lang === 'zh-TW'
+            ? '單位換算'
+            : lang === 'fr'
+              ? 'Unités'
+              : lang === 'ru'
+                ? 'Единицы'
+                : 'Units',
+      url: p('/units'),
+      keywords: 'units,单位,换算,converter,température,единицы',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? 'QR 生成'
+          : lang === 'zh-TW'
+            ? 'QR 生成'
+            : lang === 'fr'
+              ? 'QR Code'
+              : lang === 'ru'
+                ? 'QR-код'
+                : 'QR Code',
+      url: p('/qr'),
+      keywords: 'qr,二维码,qr code,qr-код',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '隐私政策'
+          : lang === 'zh-TW'
+            ? '隱私政策'
+            : lang === 'fr'
+              ? 'Confidentialité'
+              : lang === 'ru'
+                ? 'Конфиденциальность'
+                : 'Privacy',
+      url: p('/privacy'),
+      keywords: 'privacy,隐私,конфиденциальность',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '网站地图'
+          : lang === 'zh-TW'
+            ? '網站地圖'
+            : lang === 'fr'
+              ? 'Plan du site'
+              : lang === 'ru'
+                ? 'Карта сайта'
+                : 'Sitemap',
+      url: p('/sitemap'),
+      keywords: 'sitemap,网站地图,всё,all pages',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '博客'
+          : lang === 'zh-TW'
+            ? '部落格'
+            : lang === 'fr'
+              ? 'Blog'
+              : lang === 'ru'
+                ? 'Блог'
+                : 'Blog',
+      url: 'https://blog.alexander.xin',
+      keywords: 'blog,博客,部落格,блог,write,writing',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '工具中台'
+          : lang === 'zh-TW'
+            ? '工具中台'
+            : lang === 'fr'
+              ? 'Hub Outils'
+              : lang === 'ru'
+                ? 'Хаб инструментов'
+                : 'Tool Hub',
+      url: 'https://tools.alexander.xin',
+      keywords: 'tools,tool hub,工具,实用工具,outils,инструменты',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? 'Linux 指令查询'
+          : lang === 'zh-TW'
+            ? 'Linux 指令查詢'
+            : lang === 'fr'
+              ? 'Commandes Linux'
+              : lang === 'ru'
+                ? 'Linux команды'
+                : 'Linux Commands',
+      url: 'https://linux-command.alexander.xin',
+      keywords: 'linux,command,bash,shell,终端,命令,команды',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? '做饭菜谱'
+          : lang === 'zh-TW'
+            ? '做飯菜譜'
+            : lang === 'fr'
+              ? 'Recettes'
+              : lang === 'ru'
+                ? 'Рецепты'
+                : 'Cooking Recipes',
+      url: 'https://cook.alexander.xin',
+      keywords: 'cook,recipe,菜谱,做饭,howtocook,food',
+    },
+    {
+      title:
+        lang === 'zh-CN'
+          ? 'NetQ 网络排查'
+          : lang === 'zh-TW'
+            ? 'NetQ 網路排查'
+            : lang === 'fr'
+              ? 'NetQ CLI'
+              : lang === 'ru'
+                ? 'NetQ CLI'
+                : 'NetQ CLI',
+      url: 'https://netq.alexander.xin',
+      keywords: 'netq,network,dns,ping,traceroute,tcp,http,排查',
+    },
   ];
 
   function openSearchModal() {
@@ -173,7 +448,16 @@ const t = translations[lang] || translations['zh-CN'];
         page.keywords.toLowerCase().includes(query.toLowerCase())
     );
 
-    const noResultsMsg = lang === 'zh-CN' ? '未找到结果' : lang === 'zh-TW' ? '未找到結果' : lang === 'fr' ? 'Aucun résultat' : lang === 'ru' ? 'Ничего не найдено' : 'No results found';
+    const noResultsMsg =
+      lang === 'zh-CN'
+        ? '未找到结果'
+        : lang === 'zh-TW'
+          ? '未找到結果'
+          : lang === 'fr'
+            ? 'Aucun résultat'
+            : lang === 'ru'
+              ? 'Ничего не найдено'
+              : 'No results found';
 
     if (results.length === 0) {
       searchResults.innerHTML = `<p class="text-center text-[rgb(var(--color-text-secondary))] py-8 text-sm">${noResultsMsg}</p>`;

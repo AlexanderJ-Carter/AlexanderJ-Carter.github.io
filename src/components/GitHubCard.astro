@@ -67,35 +67,63 @@ const githubText = {
 const t = githubText[lang as keyof typeof githubText] || githubText['en-GB'];
 ---
 
-<div id="github-card" class="github-widget glass-card rounded-2xl p-6 shadow-xl max-w-md">
+<div
+  id="github-card"
+  class="github-widget glass-card rounded-2xl p-6 shadow-xl max-w-md"
+>
   <div class="flex items-center gap-4 mb-6">
     <div class="relative">
-      <img id="github-avatar" src="https://github.com/identicons/{username}.png" alt="GitHub Avatar" class="w-16 h-16 rounded-full" />
-      <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></div>
+      <img
+        id="github-avatar"
+        src="https://github.com/identicons/{username}.png"
+        alt="GitHub Avatar"
+        class="w-16 h-16 rounded-full"
+      />
+      <div
+        class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"
+      >
+      </div>
     </div>
     <div class="flex-1">
       <h3 class="text-lg font-bold" id="github-name">{username}</h3>
-      <p class="text-sm text-[rgb(var(--color-text-secondary))]" id="github-bio">{t.loading}</p>
+      <p
+        class="text-sm text-[rgb(var(--color-text-secondary))]"
+        id="github-bio"
+      >
+        {t.loading}
+      </p>
     </div>
   </div>
 
   <!-- 统计数据 -->
   <div class="grid grid-cols-4 gap-4 mb-6">
     <div class="text-center">
-      <div class="text-2xl font-bold text-primary-500" id="github-repos">--</div>
-      <div class="text-xs text-[rgb(var(--color-text-tertiary))]">{t.repos}</div>
+      <div class="text-2xl font-bold text-primary-500" id="github-repos">
+        --
+      </div>
+      <div class="text-xs text-[rgb(var(--color-text-tertiary))]">
+        {t.repos}
+      </div>
     </div>
     <div class="text-center">
       <div class="text-2xl font-bold text-yellow-500" id="github-stars">--</div>
-      <div class="text-xs text-[rgb(var(--color-text-tertiary))]">{t.stars}</div>
+      <div class="text-xs text-[rgb(var(--color-text-tertiary))]">
+        {t.stars}
+      </div>
     </div>
     <div class="text-center">
       <div class="text-2xl font-bold text-blue-500" id="github-forks">--</div>
-      <div class="text-xs text-[rgb(var(--color-text-tertiary))]">{t.forks}</div>
+      <div class="text-xs text-[rgb(var(--color-text-tertiary))]">
+        {t.forks}
+      </div>
     </div>
     <div class="text-center">
-      <div class="text-2xl font-bold text-purple-500" id="github-followers">--</div>
-      <div class="text-xs text-[rgb(var(--color-text-tertiary))]">{t.followers}</div>
+      <div class="text-2xl font-bold text-purple-500" id="github-followers">
+        --
+      </div>
+      <div class="text-xs text-[rgb(var(--color-text-tertiary))]">
+        {t.followers}
+      </div>
     </div>
   </div>
 
@@ -104,7 +132,9 @@ const t = githubText[lang as keyof typeof githubText] || githubText['en-GB'];
     <h4 class="text-sm font-semibold mb-3">{t.title}</h4>
     <div id="github-activity" class="space-y-3">
       <!-- 活动将通过 JS 填充 -->
-      <div class="text-center text-sm text-[rgb(var(--color-text-tertiary))]">{t.loading}</div>
+      <div class="text-center text-sm text-[rgb(var(--color-text-tertiary))]">
+        {t.loading}
+      </div>
     </div>
   </div>
 
@@ -121,7 +151,11 @@ const t = githubText[lang as keyof typeof githubText] || githubText['en-GB'];
 
 <style>
   .github-widget {
-    background: linear-gradient(135deg, rgba(24, 23, 23, 0.05) 0%, rgba(36, 41, 46, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(24, 23, 23, 0.05) 0%,
+      rgba(36, 41, 46, 0.05) 100%
+    );
   }
 
   .activity-item {
@@ -153,28 +187,40 @@ const t = githubText[lang as keyof typeof githubText] || githubText['en-GB'];
   async function fetchGitHubData() {
     try {
       // 获取用户信息
-      const userResponse = await fetch(`https://api.github.com/users/${username}`);
+      const userResponse = await fetch(
+        `https://api.github.com/users/${username}`
+      );
       const userData = await userResponse.json();
 
       // 更新UI
       document.getElementById('github-avatar').src = userData.avatar_url;
-      document.getElementById('github-name').textContent = userData.name || userData.login;
+      document.getElementById('github-name').textContent =
+        userData.name || userData.login;
       document.getElementById('github-bio').textContent = userData.bio || '';
-      document.getElementById('github-repos').textContent = userData.public_repos;
-      document.getElementById('github-followers').textContent = userData.followers;
+      document.getElementById('github-repos').textContent =
+        userData.public_repos;
+      document.getElementById('github-followers').textContent =
+        userData.followers;
 
       // 获取仓库统计
-      const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+      const reposResponse = await fetch(
+        `https://api.github.com/users/${username}/repos?per_page=100`
+      );
       const reposData = await reposResponse.json();
 
-      const stars = reposData.reduce((sum, repo) => sum + repo.stargazers_count, 0);
+      const stars = reposData.reduce(
+        (sum, repo) => sum + repo.stargazers_count,
+        0
+      );
       const forks = reposData.reduce((sum, repo) => sum + repo.forks_count, 0);
 
       document.getElementById('github-stars').textContent = stars;
       document.getElementById('github-forks').textContent = forks;
 
       // 获取最近活动
-      const eventsResponse = await fetch(`https://api.github.com/users/${username}/events/public?per_page=5`);
+      const eventsResponse = await fetch(
+        `https://api.github.com/users/${username}/events/public?per_page=5`
+      );
       const eventsData = await eventsResponse.json();
 
       displayActivities(eventsData);
@@ -187,7 +233,7 @@ const t = githubText[lang as keyof typeof githubText] || githubText['en-GB'];
     const container = document.getElementById('github-activity');
     container.innerHTML = '';
 
-    events.slice(0, 5).forEach(event => {
+    events.slice(0, 5).forEach((event) => {
       const item = document.createElement('div');
       item.className = 'activity-item';
 
@@ -212,14 +258,14 @@ const t = githubText[lang as keyof typeof githubText] || githubText['en-GB'];
 
   function getActivityIcon(type) {
     const icons = {
-      'PushEvent': '🚀',
-      'CreateEvent': '✨',
-      'DeleteEvent': '🗑️',
-      'IssuesEvent': '❓',
-      'IssueCommentEvent': '💬',
-      'WatchEvent': '⭐',
-      'ForkEvent': '🍴',
-      'PullRequestEvent': '🔄',
+      PushEvent: '🚀',
+      CreateEvent: '✨',
+      DeleteEvent: '🗑️',
+      IssuesEvent: '❓',
+      IssueCommentEvent: '💬',
+      WatchEvent: '⭐',
+      ForkEvent: '🍴',
+      PullRequestEvent: '🔄',
     };
     return icons[type] || '📝';
   }

@@ -15,6 +15,7 @@ import Toast from '../components/Toast.astro';
 import KeyboardShortcuts from '../components/KeyboardShortcuts.astro';
 import SiteAssistant from '../components/SiteAssistant.astro';
 import ServiceWorkerRegister from '../components/ServiceWorkerRegister.astro';
+import StructuredData from '../components/StructuredData.astro';
 
 interface Props {
   title?: string;
@@ -73,21 +74,20 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
   <link rel="alternate" hreflang="ru" href={new URL('/ru/', Astro.site)}>
   <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)}>
 
-  {protectedPage && (
-    <script is:inline>
-      (function() {
-        try {
-          const isVerified = sessionStorage.getItem('is_verified');
-          if (isVerified !== 'true') {
-            const currentPath = window.location.pathname;
-            window.location.href = `/verify?redirect=${encodeURIComponent(currentPath)}`;
-          }
-        } catch (e) {
-          console.error('Auth check failed', e);
+  <script is:inline define:vars={{ protectedPage }}>
+    (function() {
+      if (!protectedPage) return;
+      try {
+        const isVerified = sessionStorage.getItem('is_verified');
+        if (isVerified !== 'true') {
+          const currentPath = window.location.pathname;
+          window.location.href = `/verify?redirect=${encodeURIComponent(currentPath)}`;
         }
-      })();
-    </script>
-  )}
+      } catch (e) {
+        console.error('Auth check failed', e);
+      }
+    })();
+  </script>
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -113,20 +113,7 @@ const fullTitle = title === t('site.title') ? title : `${title} | ${t('site.titl
   <ThemeScript />
   
   <!-- Structured Data -->
-  <script type="application/ld+json" is:inline>
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Alexander James Carter",
-      "url": "https://alexander.xin",
-      "image": "https://alexander.xin/img/profile/about-me.jpg",
-      "sameAs": [
-        "https://github.com/AlexanderJ-Carter"
-      ],
-      "description": {description},
-      "jobTitle": "Developer & Designer"
-    }
-  </script>
+  <StructuredData description={description} />
 </head>
 <body class="antialiased">
   <a href="#main-content" class="skip-link">{lang === 'zh-CN' ? '跳到主内容' : 'Skip to main content'}</a>

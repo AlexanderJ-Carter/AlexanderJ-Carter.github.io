@@ -6,7 +6,8 @@ const lang = getLangFromUrl(Astro.url);
 const translations = {
   'zh-CN': {
     title: 'Cookie 使用提示',
-    message: '我们使用 Cookie 来改善您的浏览体验、分析网站流量，并个性化内容。继续使用本网站即表示您同意我们使用 Cookie。',
+    message:
+      '我们使用 Cookie 来改善您的浏览体验、分析网站流量，并个性化内容。继续使用本网站即表示您同意我们使用 Cookie。',
     accept: '接受',
     decline: '拒绝',
     settings: '设置',
@@ -14,7 +15,8 @@ const translations = {
   },
   'zh-TW': {
     title: 'Cookie 使用提示',
-    message: '我們使用 Cookie 來改善您的瀏覽體驗、分析網站流量，並個性化內容。繼續使用本網站即表示您同意我們使用 Cookie。',
+    message:
+      '我們使用 Cookie 來改善您的瀏覽體驗、分析網站流量，並個性化內容。繼續使用本網站即表示您同意我們使用 Cookie。',
     accept: '接受',
     decline: '拒絕',
     settings: '設定',
@@ -22,23 +24,26 @@ const translations = {
   },
   'en-GB': {
     title: 'Cookie Notice',
-    message: 'We use cookies to enhance your browsing experience, analyse site traffic, and personalise content. By continuing to use this site, you consent to our use of cookies.',
+    message:
+      'We use cookies to enhance your browsing experience, analyse site traffic, and personalise content. By continuing to use this site, you consent to our use of cookies.',
     accept: 'Accept',
     decline: 'Decline',
     settings: 'Settings',
     learnMore: 'Learn More',
   },
-  'fr': {
+  fr: {
     title: 'Avis sur les cookies',
-    message: 'Nous utilisons des cookies pour améliorer votre expérience de navigation, analyser le trafic du site et personnaliser le contenu. En continuant à utiliser ce site, vous acceptez notre utilisation des cookies.',
+    message:
+      'Nous utilisons des cookies pour améliorer votre expérience de navigation, analyser le trafic du site et personnaliser le contenu. En continuant à utiliser ce site, vous acceptez notre utilisation des cookies.',
     accept: 'Accepter',
     decline: 'Refuser',
     settings: 'Paramètres',
     learnMore: 'En savoir plus',
   },
-  'ru': {
+  ru: {
     title: 'Уведомление о cookies',
-    message: 'Мы используем cookies для улучшения вашего опыта просмотра, анализа трафика сайта и персонализации контента. Продолжая использовать этот сайт, вы соглашаетесь с использованием нами cookies.',
+    message:
+      'Мы используем cookies для улучшения вашего опыта просмотра, анализа трафика сайта и персонализации контента. Продолжая использовать этот сайт, вы соглашаетесь с использованием нами cookies.',
     accept: 'Принять',
     decline: 'Отклонить',
     settings: 'Настройки',
@@ -56,19 +61,27 @@ const t = translations[lang] || translations['zh-CN'];
   <div
     class="container mx-auto max-w-4xl glass-card p-6 md:p-8 rounded-2xl shadow-2xl border border-[rgb(var(--color-border))]"
   >
-    <div class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
+    <div
+      class="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6"
+    >
       <!-- Cookie Icon -->
       <div class="flex-shrink-0 text-4xl">🍪</div>
 
       <!-- Content -->
       <div class="flex-1">
-        <h3 class="text-lg md:text-xl font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+        <h3
+          class="text-lg md:text-xl font-bold mb-2 text-[rgb(var(--color-text-primary))]"
+        >
           {t.title}
         </h3>
-        <p class="text-sm md:text-base text-[rgb(var(--color-text-secondary))] mb-4">
+        <p
+          class="text-sm md:text-base text-[rgb(var(--color-text-secondary))] mb-4"
+        >
           {t.message}
           <a
-            href={lang === 'zh-CN' ? '/privacy' : `/${lang === 'en-GB' ? 'en' : lang}/privacy`}
+            href={lang === 'zh-CN'
+              ? '/privacy'
+              : `/${lang === 'en-GB' ? 'en' : lang}/privacy`}
             class="text-primary-500 hover:underline ml-1"
           >
             {t.learnMore}

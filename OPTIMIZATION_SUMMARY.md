@@ -11,13 +11,13 @@
 
 ### 性能提升
 
-| 类别 | 指标 | 优化前 | 优化后 | 提升 |
-|------|------|--------|--------|------|
-| 构建速度 | 总时间 | 18.84s | 12.93s | **31.3% ↓** |
-| 代码质量 | TypeScript 错误 | 1 | 0 | ✅ 100% |
-| 代码质量 | TypeScript 警告 | 2 | 0 | ✅ 100% |
-| 用户体验 | Service Worker | ❌ | ✅ | 离线支持 |
-| 资源优化 | 图片加载策略 | 基础 | 高级 | 优先级控制 |
+| 类别     | 指标            | 优化前 | 优化后 | 提升        |
+| -------- | --------------- | ------ | ------ | ----------- |
+| 构建速度 | 总时间          | 18.84s | 12.93s | **31.3% ↓** |
+| 代码质量 | TypeScript 错误 | 1      | 0      | ✅ 100%     |
+| 代码质量 | TypeScript 警告 | 2      | 0      | ✅ 100%     |
+| 用户体验 | Service Worker  | ❌     | ✅     | 离线支持    |
+| 资源优化 | 图片加载策略    | 基础   | 高级   | 优先级控制  |
 
 ---
 
@@ -30,6 +30,7 @@
 **文件**: `astro.config.mjs`
 
 **新增配置**:
+
 ```javascript
 vite: {
   build: {
@@ -46,6 +47,7 @@ vite: {
 ```
 
 **效果**:
+
 - ✅ CSS 体积减少 ~15%
 - ✅ JS 体积减少 ~20%
 - ✅ 浏览器缓存命中率提升
@@ -54,10 +56,12 @@ vite: {
 #### 1.2 TypeScript 完美通过
 
 **修复文件**:
+
 - `src/components/KeyboardShortcuts.astro` - 添加 `is:inline` 指令
 - `src/components/SiteSearch.astro` - 添加 `is:inline` 指令
 
 **结果**:
+
 ```
 Result (106 files):
 - 0 errors
@@ -73,11 +77,13 @@ Result (106 files):
 **文件**: `src/components/templates/GalleryTemplate.astro`
 
 **优化内容**:
+
 ```astro
-<!-- 1. 预加载关键图片 -->
-{galleryItems.slice(0, 3).map((item) => (
-  <link rel="preload" as="image" href={item.image} />
-))}
+<!-- 1. 预加载关键图片 -->{
+  galleryItems
+    .slice(0, 3)
+    .map((item) => <link rel="preload" as="image" href={item.image} />)
+}
 
 <!-- 2. 智能加载优先级 -->
 <img
@@ -89,6 +95,7 @@ Result (106 files):
 ```
 
 **效果**:
+
 - ✅ 前 3 张图片高优先级加载
 - ✅ 首屏图片立即加载（eager）
 - ✅ 其他图片懒加载节省带宽
@@ -99,12 +106,14 @@ Result (106 files):
 **新增文件**: `src/components/ResponsiveImage.astro`
 
 **功能**:
+
 - 自动生成 srcset
 - WebP 格式支持
 - 响应式尺寸（400w, 800w, 1200w, 1920w）
 - 懒加载和优先级控制
 
 **使用示例**:
+
 ```astro
 <ResponsiveImage
   src="/img/gallery/landscape-01.jpg"
@@ -119,18 +128,21 @@ Result (106 files):
 **新增文件**: `scripts/optimize-images.js`
 
 **功能**:
+
 - JPG → WebP 自动转换
 - 生成 4 种响应式尺寸
 - 质量 85%，最佳平衡
 - 自动批量处理
 
 **使用方法**:
+
 ```bash
 npm install --save-dev sharp
 npm run optimize-images
 ```
 
 **预期效果**:
+
 - 图片体积减少 **60-70%**
 - Gallery 图片从 25MB 减少到 ~8MB
 
@@ -144,24 +156,20 @@ npm run optimize-images
 
 **缓存策略**:
 
-| 资源类型 | 策略 | 缓存时间 | 原因 |
-|---------|------|---------|------|
-| 图片 (.jpg, .webp, .png) | Cache First | 30 天 | 不常变化，缓存优先 |
-| CSS/JS (.css, .js) | Network First | 7 天 | 需要更新，回退缓存 |
-| HTML (.html) | Network First | 1 天 | 保持最新，支持离线 |
+| 资源类型                 | 策略          | 缓存时间 | 原因               |
+| ------------------------ | ------------- | -------- | ------------------ |
+| 图片 (.jpg, .webp, .png) | Cache First   | 30 天    | 不常变化，缓存优先 |
+| CSS/JS (.css, .js)       | Network First | 7 天     | 需要更新，回退缓存 |
+| HTML (.html)             | Network First | 1 天     | 保持最新，支持离线 |
 
 **预缓存页面**:
+
 ```javascript
-const PRECACHE_URLS = [
-  '/',
-  '/gallery/',
-  '/projects/',
-  '/about/',
-  '/contact/',
-];
+const PRECACHE_URLS = ['/', '/gallery/', '/projects/', '/about/', '/contact/'];
 ```
 
 **工作流程**:
+
 1. **安装阶段**: 预缓存关键资源
 2. **激活阶段**: 清理旧缓存
 3. **请求拦截**: 应用对应缓存策略
@@ -174,6 +182,7 @@ const PRECACHE_URLS = [
 **集成位置**: `src/layouts/BaseLayout.astro`
 
 **效果**:
+
 - ✅ 离线可访问已缓存页面
 - ✅ 重复访问加载速度提升 50-70%
 - ✅ 减少网络请求
@@ -186,6 +195,7 @@ const PRECACHE_URLS = [
 #### 4.1 修复的文件
 
 **KeyboardShortcuts.astro**:
+
 ```diff
 - <script define:vars={{ lang, shortcuts, getLangPath }}>
 + <script is:inline define:vars={{ lang, shortcuts, getLangPath }}>
@@ -196,12 +206,14 @@ const PRECACHE_URLS = [
 ```
 
 **SiteSearch.astro**:
+
 ```diff
 - <script define:vars={{ lang, searchIndex, t, getLangPath }}>
 + <script is:inline define:vars={{ lang, searchIndex, t, getLangPath }}>
 ```
 
 **效果**:
+
 - ✅ 消除所有 TypeScript 警告
 - ✅ 明确脚本处理方式
 - ✅ 提升代码可维护性
@@ -212,20 +224,20 @@ const PRECACHE_URLS = [
 
 ### Lighthouse 预期得分
 
-| 指标 | 优化前 | 优化后 | 说明 |
-|------|--------|--------|------|
-| Performance | ~85 | **90+** | 构建优化 + 图片策略 |
-| Accessibility | 95 | **95+** | 保持现有水平 |
-| Best Practices | ~90 | **95+** | Service Worker 加持 |
-| SEO | 100 | **100** | 保持满分 |
+| 指标           | 优化前 | 优化后  | 说明                |
+| -------------- | ------ | ------- | ------------------- |
+| Performance    | ~85    | **90+** | 构建优化 + 图片策略 |
+| Accessibility  | 95     | **95+** | 保持现有水平        |
+| Best Practices | ~90    | **95+** | Service Worker 加持 |
+| SEO            | 100    | **100** | 保持满分            |
 
 ### Core Web Vitals 预期
 
-| 指标 | 优化前 | 优化后 | 改进措施 |
-|------|--------|--------|----------|
-| LCP | ~3.0s | **< 2.5s** | 图片预加载 + 优先级 |
-| FID | ~120ms | **< 100ms** | 代码分割 + 懒加载 |
-| CLS | ~0.15 | **< 0.1** | 图片尺寸预留 |
+| 指标 | 优化前 | 优化后      | 改进措施            |
+| ---- | ------ | ----------- | ------------------- |
+| LCP  | ~3.0s  | **< 2.5s**  | 图片预加载 + 优先级 |
+| FID  | ~120ms | **< 100ms** | 代码分割 + 懒加载   |
+| CLS  | ~0.15  | **< 0.1**   | 图片尺寸预留        |
 
 ---
 
@@ -238,7 +250,7 @@ const PRECACHE_URLS = [
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/generate-music-manifest.js && astro check && astro build",
-    "optimize-images": "node scripts/optimize-images.js",  // 新增
+    "optimize-images": "node scripts/optimize-images.js", // 新增
     "preview": "astro preview"
   }
 }
@@ -296,6 +308,7 @@ ls public/img/gallery-optimized/
 ```
 
 **输出示例**:
+
 ```
 landscape-01.webp          # 原始尺寸
 landscape-01-sm.webp       # 400px
@@ -324,6 +337,7 @@ landscape-01-xl.webp       # 1920px
 ### 2. 图片加载优化
 
 **最佳实践**:
+
 - ✅ 首屏图片 `eager` + `high` 优先级
 - ✅ 其他图片 `lazy` + `low` 优先级
 - ✅ 预加载前 3 张关键图片
@@ -332,6 +346,7 @@ landscape-01-xl.webp       # 1920px
 ### 3. Service Worker 策略
 
 **关键点**:
+
 - 图片使用 Cache First（不常变）
 - HTML/JS 使用 Network First（需要更新）
 - 预缓存关键页面
@@ -344,10 +359,12 @@ landscape-01-xl.webp       # 1920px
 ### 短期（立即可做）
 
 1. **执行图片优化**
+
    ```bash
    npm install --save-dev sharp
    npm run optimize-images
    ```
+
    预期减少 60-70% 图片体积
 
 2. **启用 CDN**
@@ -367,6 +384,7 @@ landscape-01-xl.webp       # 1920px
    - 推送首屏图片
 
 2. **资源提示**
+
    ```html
    <link rel="preconnect" href="https://images.unsplash.com" />
    <link rel="dns-prefetch" href="https://images.unsplash.com" />
@@ -449,6 +467,7 @@ OPTIMIZATION_SUMMARY.md             # 本文件
 4. 验证图片优化: `ls public/img/gallery-optimized/`
 
 **性能测试工具**:
+
 - [Lighthouse](https://developers.google.com/web/tools/lighthouse)
 - [WebPageTest](https://www.webpagetest.org/)
 - [PageSpeed Insights](https://pagespeed.web.dev/)

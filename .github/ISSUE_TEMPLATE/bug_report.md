@@ -1,9 +1,9 @@
 ---
 name: Bug Report 🐛
 about: Report a bug or issue you've found
-title: "[BUG] "
-labels: "bug"
-assignees: "AlexanderJ-Carter"
+title: '[BUG] '
+labels: 'bug'
+assignees: 'AlexanderJ-Carter'
 ---
 
 ## Description

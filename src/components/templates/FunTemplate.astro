@@ -119,7 +119,8 @@ const t: Record<Lang, Record<string, string>> = {
     taskDesc: 'Choisissez un mini défi de 5 à 15 minutes et lancez-vous.',
     taskBtn: 'Tirer une mission',
     breathingTitle: 'Rythme respiratoire',
-    breathingDesc: 'Suivez le rythme : inspirez 4s, retenez 4s, expirez 4s, retenez 4s.',
+    breathingDesc:
+      'Suivez le rythme : inspirez 4s, retenez 4s, expirez 4s, retenez 4s.',
     breathingStart: 'Démarrer',
     breathingStop: 'Arrêter',
   },
@@ -200,11 +201,41 @@ const memoryText: Record<Lang, Record<string, string>> = {
 };
 const mem = memoryText[lang as Lang] || memoryText['en-GB'];
 const microTasks: Record<Lang, string[]> = {
-  'zh-CN': ['整理桌面 5 分钟', '写下 3 条今日目标', '喝一杯水并站立拉伸', '删除 5 个无用文件', '阅读 1 页书并记一句话'],
-  'zh-TW': ['整理桌面 5 分鐘', '寫下 3 條今日目標', '喝一杯水並站立伸展', '刪除 5 個無用檔案', '閱讀 1 頁書並記一句話'],
-  'en-GB': ['Tidy your desk for 5 minutes', 'Write 3 goals for today', 'Drink water and do a quick stretch', 'Delete 5 useless files', 'Read one page and keep one quote'],
-  fr: ['Rangez votre bureau 5 minutes', "Notez 3 objectifs d'aujourd'hui", 'Buvez de l’eau et étirez-vous', 'Supprimez 5 fichiers inutiles', 'Lisez une page et retenez une phrase'],
-  ru: ['Уберите стол 5 минут', 'Запишите 3 цели на сегодня', 'Выпейте воду и потянитесь', 'Удалите 5 ненужных файлов', 'Прочитайте 1 страницу и запишите мысль'],
+  'zh-CN': [
+    '整理桌面 5 分钟',
+    '写下 3 条今日目标',
+    '喝一杯水并站立拉伸',
+    '删除 5 个无用文件',
+    '阅读 1 页书并记一句话',
+  ],
+  'zh-TW': [
+    '整理桌面 5 分鐘',
+    '寫下 3 條今日目標',
+    '喝一杯水並站立伸展',
+    '刪除 5 個無用檔案',
+    '閱讀 1 頁書並記一句話',
+  ],
+  'en-GB': [
+    'Tidy your desk for 5 minutes',
+    'Write 3 goals for today',
+    'Drink water and do a quick stretch',
+    'Delete 5 useless files',
+    'Read one page and keep one quote',
+  ],
+  fr: [
+    'Rangez votre bureau 5 minutes',
+    "Notez 3 objectifs d'aujourd'hui",
+    'Buvez de l’eau et étirez-vous',
+    'Supprimez 5 fichiers inutiles',
+    'Lisez une page et retenez une phrase',
+  ],
+  ru: [
+    'Уберите стол 5 минут',
+    'Запишите 3 цели на сегодня',
+    'Выпейте воду и потянитесь',
+    'Удалите 5 ненужных файлов',
+    'Прочитайте 1 страницу и запишите мысль',
+  ],
 };
 
 // 随机一言数据（中英混合，前端随机取）
@@ -235,21 +266,81 @@ const quotes = [
 
 // 画廊图片列表（用于随机展示）
 const galleryImages = [
-  { src: '/img/gallery/landscape-01.jpg', zh: '山间晨雾', en: 'Mountain Morning Mist' },
-  { src: '/img/gallery/landscape-02.jpg', zh: '海岸日落', en: 'Coastal Sunset' },
-  { src: '/img/gallery/landscape-03.jpg', zh: '城市天际线', en: 'City Skyline' },
-  { src: '/img/gallery/landscape-04.jpg', zh: '星空银河', en: 'Starry Milky Way' },
-  { src: '/img/gallery/landscape-05.jpg', zh: '山谷云海', en: 'Valley Cloud Sea' },
-  { src: '/img/gallery/landscape-06.jpg', zh: '湖光山色', en: 'Lake and Mountains' },
-  { src: '/img/gallery/landscape-07.jpg', zh: '雪域高原', en: 'Snow-Capped Plateau' },
-  { src: '/img/gallery/landscape-08.jpg', zh: '森林晨曦', en: 'Forest at Dawn' },
-  { src: '/img/gallery/landscape-09.jpg', zh: '沙漠星空', en: 'Desert Starscape' },
-  { src: '/img/gallery/landscape-10.jpg', zh: '梯田晨光', en: 'Terraced Fields at Sunrise' },
-  { src: '/img/gallery/landscape-11.jpg', zh: '雪山倒影', en: 'Snow Peak Reflection' },
-  { src: '/img/gallery/landscape-12.jpg', zh: '海边礁石', en: 'Rocky Shoreline' },
-  { src: '/img/gallery/landscape-13.jpg', zh: '秋日枫林', en: 'Autumn Maple Forest' },
-  { src: '/img/gallery/nature-flower-01.jpg', zh: '雨后花瓣', en: 'Petals After Rain' },
-  { src: '/img/gallery/nature-flower-02.jpg', zh: '野花烂漫', en: 'Wildflowers in Bloom' },
+  {
+    src: '/img/gallery/landscape-01.jpg',
+    zh: '山间晨雾',
+    en: 'Mountain Morning Mist',
+  },
+  {
+    src: '/img/gallery/landscape-02.jpg',
+    zh: '海岸日落',
+    en: 'Coastal Sunset',
+  },
+  {
+    src: '/img/gallery/landscape-03.jpg',
+    zh: '城市天际线',
+    en: 'City Skyline',
+  },
+  {
+    src: '/img/gallery/landscape-04.jpg',
+    zh: '星空银河',
+    en: 'Starry Milky Way',
+  },
+  {
+    src: '/img/gallery/landscape-05.jpg',
+    zh: '山谷云海',
+    en: 'Valley Cloud Sea',
+  },
+  {
+    src: '/img/gallery/landscape-06.jpg',
+    zh: '湖光山色',
+    en: 'Lake and Mountains',
+  },
+  {
+    src: '/img/gallery/landscape-07.jpg',
+    zh: '雪域高原',
+    en: 'Snow-Capped Plateau',
+  },
+  {
+    src: '/img/gallery/landscape-08.jpg',
+    zh: '森林晨曦',
+    en: 'Forest at Dawn',
+  },
+  {
+    src: '/img/gallery/landscape-09.jpg',
+    zh: '沙漠星空',
+    en: 'Desert Starscape',
+  },
+  {
+    src: '/img/gallery/landscape-10.jpg',
+    zh: '梯田晨光',
+    en: 'Terraced Fields at Sunrise',
+  },
+  {
+    src: '/img/gallery/landscape-11.jpg',
+    zh: '雪山倒影',
+    en: 'Snow Peak Reflection',
+  },
+  {
+    src: '/img/gallery/landscape-12.jpg',
+    zh: '海边礁石',
+    en: 'Rocky Shoreline',
+  },
+  {
+    src: '/img/gallery/landscape-13.jpg',
+    zh: '秋日枫林',
+    en: 'Autumn Maple Forest',
+  },
+  {
+    src: '/img/gallery/nature-flower-01.jpg',
+    zh: '雨后花瓣',
+    en: 'Petals After Rain',
+  },
+  {
+    src: '/img/gallery/nature-flower-02.jpg',
+    zh: '野花烂漫',
+    en: 'Wildflowers in Bloom',
+  },
   { src: '/img/gallery/food-01.jpg', zh: '精致甜点', en: 'Artisan Dessert' },
   { src: '/img/gallery/food-02.jpg', zh: '午后咖啡', en: 'Afternoon Coffee' },
   { src: '/img/gallery/food-03.jpg', zh: '家常美味', en: 'Homestyle Dish' },
@@ -258,34 +349,65 @@ const galleryImages = [
 // 服务端随机选一张图（构建时固定，刷新页面会变）
 const randomIndex = Math.floor(Math.random() * galleryImages.length);
 const randomImage = galleryImages[randomIndex];
-const imageTitle = (lang === 'zh-CN' || lang === 'zh-TW') ? randomImage.zh : randomImage.en;
-const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' : lang}/gallery`;
+const imageTitle =
+  lang === 'zh-CN' || lang === 'zh-TW' ? randomImage.zh : randomImage.en;
+const galleryPath =
+  lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' : lang}/gallery`;
 ---
 
 <BaseLayout title={text.title} description={text.subtitle}>
   <section class="relative py-20 md:py-28 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient opacity-50" aria-hidden="true" />
-    <div class="absolute inset-0 opacity-80" style="background: var(--hero-spotlight);" aria-hidden="true" />
+    <div
+      class="absolute inset-0 bg-mesh-gradient opacity-50"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="absolute inset-0 opacity-80"
+      style="background: var(--hero-spotlight);"
+      aria-hidden="true"
+    >
+    </div>
     <div class="container mx-auto px-4 lg:px-8 relative z-10">
       <header class="text-center mb-14">
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium mb-5">
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium mb-5"
+        >
           <span aria-hidden="true">🥚</span>
           {text.subtitle}
         </span>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 gradient-text tracking-tight">
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-3 gradient-text tracking-tight"
+        >
           {text.title}
         </h1>
         <p class="text-[rgb(var(--color-text-secondary))] max-w-xl mx-auto">
-          {lang === 'zh-CN' ? '小游戏、随机语录与隐藏惊喜' : lang === 'zh-TW' ? '小遊戲、隨機語錄與隱藏驚喜' : lang === 'fr' ? 'Mini-jeux, citations et surprises' : lang === 'ru' ? 'Мини-игры, цитаты и сюрпризы' : 'Mini games, random quotes & hidden surprises'}
+          {
+            lang === 'zh-CN'
+              ? '小游戏、随机语录与隐藏惊喜'
+              : lang === 'zh-TW'
+                ? '小遊戲、隨機語錄與隱藏驚喜'
+                : lang === 'fr'
+                  ? 'Mini-jeux, citations et surprises'
+                  : lang === 'ru'
+                    ? 'Мини-игры, цитаты и сюрпризы'
+                    : 'Mini games, random quotes & hidden surprises'
+          }
         </p>
       </header>
 
       <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         <!-- 随机一言 -->
-        <article class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-primary-500">
+        <article
+          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-primary-500"
+        >
           <div class="flex items-center gap-3 mb-3">
             <span class="text-2xl" aria-hidden="true">💬</span>
-            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.randomQuote}</h2>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.randomQuote}
+            </h2>
           </div>
           <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
             {text.randomQuoteDesc}
@@ -294,28 +416,52 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
             id="quote-box"
             class="min-h-[88px] p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))]/80 border border-[rgb(var(--color-border))] mb-4 transition-colors duration-200"
           >
-            <p id="quote-text" class="text-base md:text-lg font-medium text-[rgb(var(--color-text-primary))] leading-relaxed">
+            <p
+              id="quote-text"
+              class="text-base md:text-lg font-medium text-[rgb(var(--color-text-primary))] leading-relaxed"
+            >
               —
             </p>
-            <p id="quote-lang" class="text-sm text-[rgb(var(--color-text-tertiary))] mt-2"></p>
+            <p
+              id="quote-lang"
+              class="text-sm text-[rgb(var(--color-text-tertiary))] mt-2"
+            >
+            </p>
           </div>
           <button
             type="button"
             id="quote-refresh"
             class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              ></path>
             </svg>
             {text.refresh}
           </button>
         </article>
 
         <!-- 随机作品 -->
-        <article class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-accent-500">
+        <article
+          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-accent-500"
+        >
           <div class="flex items-center gap-3 mb-3">
             <span class="text-2xl" aria-hidden="true">🖼️</span>
-            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.randomWork}</h2>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.randomWork}
+            </h2>
           </div>
           <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
             {text.randomWorkDesc}
@@ -331,7 +477,9 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
               loading="lazy"
               decoding="async"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4"
+            >
               <span class="text-white font-medium">{imageTitle}</span>
             </div>
           </a>
@@ -340,7 +488,17 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
             class="link-underline inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium text-sm"
           >
             {text.viewGallery}
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg
+            >
           </a>
         </article>
       </div>
@@ -350,7 +508,11 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
         <article class="glass-card p-6 md:p-8 rounded-2xl reveal">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-2xl" aria-hidden="true">🎮</span>
-            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.konamiTitle}</h2>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.konamiTitle}
+            </h2>
           </div>
           <p class="text-[rgb(var(--color-text-secondary))] text-sm mb-2">
             {text.konamiDesc}
@@ -363,7 +525,11 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
         <article class="glass-card p-6 md:p-8 rounded-2xl reveal">
           <div class="flex items-center gap-3 mb-3">
             <span class="text-2xl" aria-hidden="true">⌨️</span>
-            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.typingTitle}</h2>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.typingTitle}
+            </h2>
           </div>
           <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
             {text.typingDesc}
@@ -390,11 +556,21 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
               {text.start}
             </button>
           </div>
-          <div id="typing-result" class="hidden mt-4 p-3 rounded-xl bg-primary-500/10 border border-primary-500/30">
-            <p class="font-semibold text-primary-600 dark:text-primary-400 text-sm">
-              🎉 {text.yourTime}: <span id="typing-time">0</span> {text.seconds}
+          <div
+            id="typing-result"
+            class="hidden mt-4 p-3 rounded-xl bg-primary-500/10 border border-primary-500/30"
+          >
+            <p
+              class="font-semibold text-primary-600 dark:text-primary-400 text-sm"
+            >
+              🎉 {text.yourTime}: <span id="typing-time">0</span>
+              {text.seconds}
             </p>
-            <button type="button" id="typing-again" class="mt-2 text-sm text-primary-500 hover:underline focus-visible:ring-2 focus-visible:ring-primary-500 rounded">
+            <button
+              type="button"
+              id="typing-again"
+              class="mt-2 text-sm text-primary-500 hover:underline focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
+            >
               {text.again}
             </button>
           </div>
@@ -403,31 +579,65 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
 
       <!-- Memory Match Game -->
       <div class="max-w-5xl mx-auto mt-6">
-        <article class="glass-card p-6 md:p-8 rounded-2xl reveal border-t-4 border-t-green-500">
+        <article
+          class="glass-card p-6 md:p-8 rounded-2xl reveal border-t-4 border-t-green-500"
+        >
           <div class="flex items-center gap-3 mb-3">
             <span class="text-2xl" aria-hidden="true">🃏</span>
-            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{mem.title}</h2>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {mem.title}
+            </h2>
           </div>
           <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
             {mem.desc}
           </p>
           <div class="flex items-center gap-6 mb-4 text-sm font-medium">
-            <span class="text-[rgb(var(--color-text-secondary))]">{mem.moves}: <span id="mem-moves" class="text-primary-500 font-bold">0</span></span>
-            <span class="text-[rgb(var(--color-text-secondary))]">{mem.matched}: <span id="mem-matched" class="text-green-500 font-bold">0</span>/6</span>
+            <span class="text-[rgb(var(--color-text-secondary))]"
+              >{mem.moves}: <span
+                id="mem-moves"
+                class="text-primary-500 font-bold">0</span
+              ></span
+            >
+            <span class="text-[rgb(var(--color-text-secondary))]"
+              >{mem.matched}: <span
+                id="mem-matched"
+                class="text-green-500 font-bold">0</span
+              >/6</span
+            >
           </div>
-          <div id="mem-board" class="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-4" role="group" aria-label={mem.title}>
+          <div
+            id="mem-board"
+            class="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-4"
+            role="group"
+            aria-label={mem.title}
+          >
             <!-- Cards inserted by JS -->
           </div>
           <div id="mem-complete" class="hidden text-center py-4">
-            <p class="text-lg font-bold text-green-500 mb-2">🎉 {mem.complete}</p>
+            <p class="text-lg font-bold text-green-500 mb-2">
+              🎉 {mem.complete}
+            </p>
           </div>
           <button
             type="button"
             id="mem-reset"
             class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500/15 hover:bg-green-500/25 text-green-600 dark:text-green-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              ></path>
             </svg>
             {mem.reset}
           </button>
@@ -436,13 +646,25 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
 
       <!-- Extra mini widgets -->
       <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-6">
-        <article class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-cyan-500">
+        <article
+          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-cyan-500"
+        >
           <div class="flex items-center gap-3 mb-3">
             <span class="text-2xl" aria-hidden="true">🎯</span>
-            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.taskTitle}</h2>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.taskTitle}
+            </h2>
           </div>
-          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">{text.taskDesc}</p>
-          <div id="task-result" class="p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] min-h-[72px] text-[rgb(var(--color-text-primary))] font-medium mb-4"></div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+            {text.taskDesc}
+          </p>
+          <div
+            id="task-result"
+            class="p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] min-h-[72px] text-[rgb(var(--color-text-primary))] font-medium mb-4"
+          >
+          </div>
           <button
             type="button"
             id="task-draw"
@@ -452,21 +674,37 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
           </button>
         </article>
 
-        <article class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-violet-500">
+        <article
+          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-violet-500"
+        >
           <div class="flex items-center gap-3 mb-3">
             <span class="text-2xl" aria-hidden="true">🫁</span>
-            <h2 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]">{text.breathingTitle}</h2>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.breathingTitle}
+            </h2>
           </div>
-          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">{text.breathingDesc}</p>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+            {text.breathingDesc}
+          </p>
           <div class="flex items-center gap-5">
             <div id="breath-circle" class="breath-circle">
               <span id="breath-phase">Ready</span>
             </div>
             <div class="flex flex-col gap-2">
-              <button type="button" id="breath-start" class="px-4 py-2 rounded-lg bg-violet-500/15 hover:bg-violet-500/25 text-violet-600 dark:text-violet-400 font-medium">
+              <button
+                type="button"
+                id="breath-start"
+                class="px-4 py-2 rounded-lg bg-violet-500/15 hover:bg-violet-500/25 text-violet-600 dark:text-violet-400 font-medium"
+              >
                 {text.breathingStart}
               </button>
-              <button type="button" id="breath-stop" class="px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]">
+              <button
+                type="button"
+                id="breath-stop"
+                class="px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]"
+              >
                 {text.breathingStop}
               </button>
             </div>
@@ -476,7 +714,16 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
     </div>
   </section>
 
-  <script define:vars={{ quotes: JSON.stringify(quotes), lang, microTasks: JSON.stringify(microTasks[lang as Lang] || microTasks['en-GB']) }} is:inline>
+  <script
+    define:vars={{
+      quotes: JSON.stringify(quotes),
+      lang,
+      microTasks: JSON.stringify(
+        microTasks[lang as Lang] || microTasks['en-GB']
+      ),
+    }}
+    is:inline
+  >
     (function () {
       const quoteText = document.getElementById('quote-text');
       const quoteLang = document.getElementById('quote-lang');
@@ -533,7 +780,8 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
       });
 
       // Random task card
-      const tasks = typeof microTasks === 'string' ? JSON.parse(microTasks) : microTasks;
+      const tasks =
+        typeof microTasks === 'string' ? JSON.parse(microTasks) : microTasks;
       const taskResult = document.getElementById('task-result');
       const taskDraw = document.getElementById('task-draw');
       function drawTask() {
@@ -553,7 +801,7 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
         { key: 'inhale', zh: '吸气 4s', en: 'Inhale 4s' },
         { key: 'hold', zh: '停顿 4s', en: 'Hold 4s' },
         { key: 'exhale', zh: '呼气 4s', en: 'Exhale 4s' },
-        { key: 'hold2', zh: '停顿 4s', en: 'Hold 4s' }
+        { key: 'hold2', zh: '停顿 4s', en: 'Hold 4s' },
       ];
       let timer = null;
       let idx = 0;
@@ -605,7 +853,9 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
       function shuffle(arr) {
         for (var i = arr.length - 1; i > 0; i--) {
           var j = Math.floor(Math.random() * (i + 1));
-          var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+          var tmp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = tmp;
         }
         return arr;
       }
@@ -617,8 +867,13 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
         btn.setAttribute('data-emoji', emoji);
         btn.setAttribute('data-index', idx);
         btn.setAttribute('aria-label', 'Card ' + (idx + 1));
-        btn.innerHTML = '<span class="mem-card-back">?</span><span class="mem-card-front">' + emoji + '</span>';
-        btn.addEventListener('click', function () { flipCard(btn); });
+        btn.innerHTML =
+          '<span class="mem-card-back">?</span><span class="mem-card-front">' +
+          emoji +
+          '</span>';
+        btn.addEventListener('click', function () {
+          flipCard(btn);
+        });
         return btn;
       }
 
@@ -643,7 +898,11 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
 
       function flipCard(btn) {
         if (locked) return;
-        if (btn.classList.contains('flipped') || btn.classList.contains('mem-matched')) return;
+        if (
+          btn.classList.contains('flipped') ||
+          btn.classList.contains('mem-matched')
+        )
+          return;
         if (flipped.length >= 2) return;
 
         btn.classList.add('flipped');
@@ -721,7 +980,11 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
   }
 
   .mem-card-back {
-    background: linear-gradient(135deg, rgb(14 165 233 / 0.15), rgb(217 70 239 / 0.15));
+    background: linear-gradient(
+      135deg,
+      rgb(14 165 233 / 0.15),
+      rgb(217 70 239 / 0.15)
+    );
     border: 1px solid var(--glass-border);
     color: rgb(var(--color-text-tertiary));
     transform: rotateY(0deg);
@@ -764,7 +1027,10 @@ const galleryPath = lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' 
     color: rgb(var(--color-text-primary));
     font-size: 0.78rem;
     font-weight: 700;
-    transition: transform 1s ease, background-color 0.6s ease, border-color 0.6s ease;
+    transition:
+      transform 1s ease,
+      background-color 0.6s ease,
+      border-color 0.6s ease;
     text-align: center;
     padding: 0.4rem;
   }

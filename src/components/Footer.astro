@@ -59,105 +59,334 @@ const i18n = {
 const t = i18n[lang as keyof typeof i18n] || i18n['zh-CN'];
 
 const mainLinks = [
-  { label: lang === 'zh-CN' ? '首页' : lang === 'zh-TW' ? '首頁' : 'Home', href: getLangPath('/') },
-  { label: lang === 'zh-CN' ? '关于' : lang === 'zh-TW' ? '關於' : lang === 'fr' ? 'À propos' : lang === 'ru' ? 'Обо мне' : 'About', href: getLangPath('/about') },
-  { label: lang === 'zh-CN' ? '画廊' : lang === 'zh-TW' ? '畫廊' : lang === 'fr' ? 'Galerie' : lang === 'ru' ? 'Галерея' : 'Gallery', href: getLangPath('/gallery') },
-  { label: lang === 'zh-CN' ? '生活项目' : lang === 'zh-TW' ? '生活專案' : lang === 'fr' ? 'Projets' : lang === 'ru' ? 'Проекты' : 'Projects', href: getLangPath('/projects') },
-  { label: lang === 'zh-CN' ? '彩蛋' : lang === 'zh-TW' ? '彩蛋' : 'Fun', href: getLangPath('/fun') },
-  { label: lang === 'zh-CN' ? '联系' : lang === 'zh-TW' ? '聯繫' : lang === 'fr' ? 'Contact' : lang === 'ru' ? 'Контакт' : 'Contact', href: getLangPath('/contact') },
+  {
+    label: lang === 'zh-CN' ? '首页' : lang === 'zh-TW' ? '首頁' : 'Home',
+    href: getLangPath('/'),
+  },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '关于'
+        : lang === 'zh-TW'
+          ? '關於'
+          : lang === 'fr'
+            ? 'À propos'
+            : lang === 'ru'
+              ? 'Обо мне'
+              : 'About',
+    href: getLangPath('/about'),
+  },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '画廊'
+        : lang === 'zh-TW'
+          ? '畫廊'
+          : lang === 'fr'
+            ? 'Galerie'
+            : lang === 'ru'
+              ? 'Галерея'
+              : 'Gallery',
+    href: getLangPath('/gallery'),
+  },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '生活项目'
+        : lang === 'zh-TW'
+          ? '生活專案'
+          : lang === 'fr'
+            ? 'Projets'
+            : lang === 'ru'
+              ? 'Проекты'
+              : 'Projects',
+    href: getLangPath('/projects'),
+  },
+  {
+    label: lang === 'zh-CN' ? '彩蛋' : lang === 'zh-TW' ? '彩蛋' : 'Fun',
+    href: getLangPath('/fun'),
+  },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '联系'
+        : lang === 'zh-TW'
+          ? '聯繫'
+          : lang === 'fr'
+            ? 'Contact'
+            : lang === 'ru'
+              ? 'Контакт'
+              : 'Contact',
+    href: getLangPath('/contact'),
+  },
 ];
 
 const featuredTools = [
   { label: 'Now', href: getLangPath('/now') },
-  { label: lang === 'zh-CN' ? '世界时间' : lang === 'zh-TW' ? '世界時間' : lang === 'fr' ? 'Heure' : lang === 'ru' ? 'Время' : 'Time', href: getLangPath('/time') },
-  { label: lang === 'zh-CN' ? '汇率' : lang === 'zh-TW' ? '匯率' : lang === 'fr' ? 'Devise' : lang === 'ru' ? 'Валюты' : 'Currency', href: getLangPath('/currency') },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '世界时间'
+        : lang === 'zh-TW'
+          ? '世界時間'
+          : lang === 'fr'
+            ? 'Heure'
+            : lang === 'ru'
+              ? 'Время'
+              : 'Time',
+    href: getLangPath('/time'),
+  },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '汇率'
+        : lang === 'zh-TW'
+          ? '匯率'
+          : lang === 'fr'
+            ? 'Devise'
+            : lang === 'ru'
+              ? 'Валюты'
+              : 'Currency',
+    href: getLangPath('/currency'),
+  },
   { label: 'Tool Hub', href: 'https://tools.alexander.xin', external: true },
   { label: 'Cook', href: 'https://cook.alexander.xin', external: true },
   { label: 'NetQ', href: 'https://netq.alexander.xin', external: true },
 ];
 
 const moreLinks = [
-  { label: lang === 'zh-CN' ? 'Linux 指令' : lang === 'zh-TW' ? 'Linux 指令' : 'Linux Commands', href: 'https://linux-command.alexander.xin', external: true },
-  { label: lang === 'zh-CN' ? '单位换算' : lang === 'zh-TW' ? '單位換算' : lang === 'fr' ? 'Unités' : lang === 'ru' ? 'Единицы' : 'Units', href: getLangPath('/units') },
-  { label: lang === 'zh-CN' ? 'QR 生成' : lang === 'zh-TW' ? 'QR 生成' : 'QR', href: getLangPath('/qr') },
-  { label: lang === 'zh-CN' ? '网站地图' : lang === 'zh-TW' ? '網站地圖' : 'Sitemap', href: getLangPath('/sitemap') },
-  { label: 'GitHub', href: 'https://github.com/AlexanderJ-Carter', external: true },
+  {
+    label:
+      lang === 'zh-CN'
+        ? 'Linux 指令'
+        : lang === 'zh-TW'
+          ? 'Linux 指令'
+          : 'Linux Commands',
+    href: 'https://linux-command.alexander.xin',
+    external: true,
+  },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '单位换算'
+        : lang === 'zh-TW'
+          ? '單位換算'
+          : lang === 'fr'
+            ? 'Unités'
+            : lang === 'ru'
+              ? 'Единицы'
+              : 'Units',
+    href: getLangPath('/units'),
+  },
+  {
+    label: lang === 'zh-CN' ? 'QR 生成' : lang === 'zh-TW' ? 'QR 生成' : 'QR',
+    href: getLangPath('/qr'),
+  },
+  {
+    label:
+      lang === 'zh-CN' ? '网站地图' : lang === 'zh-TW' ? '網站地圖' : 'Sitemap',
+    href: getLangPath('/sitemap'),
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/AlexanderJ-Carter',
+    external: true,
+  },
 ];
 
 const legalLinks = [
-  { label: lang === 'zh-CN' ? '隐私政策' : lang === 'zh-TW' ? '隱私政策' : lang === 'fr' ? 'Confidentialité' : lang === 'ru' ? 'Конфиденциальность' : 'Privacy', href: getLangPath('/privacy') },
-  { label: lang === 'zh-CN' ? '使用条款' : lang === 'zh-TW' ? '使用條款' : lang === 'fr' ? 'Conditions' : lang === 'ru' ? 'Условия' : 'Terms', href: getLangPath('/terms') },
-  { label: lang === 'zh-CN' ? '无障碍' : lang === 'zh-TW' ? '無障礙' : lang === 'fr' ? 'Accessibilité' : lang === 'ru' ? 'Доступность' : 'Accessibility', href: getLangPath('/accessibility') },
-  { label: lang === 'zh-CN' ? '安全政策' : lang === 'zh-TW' ? '安全政策' : lang === 'fr' ? 'Sécurité' : lang === 'ru' ? 'Безопасность' : 'Security', href: getLangPath('/security/policy') },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '隐私政策'
+        : lang === 'zh-TW'
+          ? '隱私政策'
+          : lang === 'fr'
+            ? 'Confidentialité'
+            : lang === 'ru'
+              ? 'Конфиденциальность'
+              : 'Privacy',
+    href: getLangPath('/privacy'),
+  },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '使用条款'
+        : lang === 'zh-TW'
+          ? '使用條款'
+          : lang === 'fr'
+            ? 'Conditions'
+            : lang === 'ru'
+              ? 'Условия'
+              : 'Terms',
+    href: getLangPath('/terms'),
+  },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '无障碍'
+        : lang === 'zh-TW'
+          ? '無障礙'
+          : lang === 'fr'
+            ? 'Accessibilité'
+            : lang === 'ru'
+              ? 'Доступность'
+              : 'Accessibility',
+    href: getLangPath('/accessibility'),
+  },
+  {
+    label:
+      lang === 'zh-CN'
+        ? '安全政策'
+        : lang === 'zh-TW'
+          ? '安全政策'
+          : lang === 'fr'
+            ? 'Sécurité'
+            : lang === 'ru'
+              ? 'Безопасность'
+              : 'Security',
+    href: getLangPath('/security/policy'),
+  },
 ];
 ---
 
 <footer class="mt-24 bg-[rgb(var(--color-bg-secondary))]">
-  <div class="h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"></div>
+  <div
+    class="h-px bg-gradient-to-r from-transparent via-primary-500/50 to-transparent"
+  >
+  </div>
 
   <div class="container mx-auto px-4 lg:px-8 py-12">
     <div class="grid lg:grid-cols-[1.2fr_2fr] gap-8 items-start">
       <div class="glass-card rounded-2xl p-6">
         <a href={getLangPath('/')} class="inline-flex items-center gap-3 mb-3">
-          <img src="/img/branding/logo.png" alt="" class="w-10 h-10 rounded-xl dark:hidden" loading="lazy" decoding="async" />
-          <img src="/img/branding/logo-dark.png" alt="" class="w-10 h-10 rounded-xl hidden dark:block" loading="lazy" decoding="async" />
-          <span class="font-heading font-bold text-[rgb(var(--color-text-primary))]">Alexander Carter</span>
+          <img
+            src="/img/branding/logo.png"
+            alt=""
+            class="w-10 h-10 rounded-xl dark:hidden"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src="/img/branding/logo-dark.png"
+            alt=""
+            class="w-10 h-10 rounded-xl hidden dark:block"
+            loading="lazy"
+            decoding="async"
+          />
+          <span
+            class="font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >Alexander Carter</span
+          >
         </a>
-        <h3 class="text-lg font-semibold text-[rgb(var(--color-text-primary))]">{t.title}</h3>
-        <p class="text-sm text-[rgb(var(--color-text-secondary))] mt-2">{t.desc}</p>
-        <a href="mailto:contact-us@alexander.xin" class="inline-flex mt-4 text-sm text-primary-500 hover:text-primary-600">
+        <h3 class="text-lg font-semibold text-[rgb(var(--color-text-primary))]">
+          {t.title}
+        </h3>
+        <p class="text-sm text-[rgb(var(--color-text-secondary))] mt-2">
+          {t.desc}
+        </p>
+        <a
+          href="mailto:contact-us@alexander.xin"
+          class="inline-flex mt-4 text-sm text-primary-500 hover:text-primary-600"
+        >
           {t.contact}: contact-us@alexander.xin
         </a>
       </div>
 
       <div class="space-y-5">
         <section class="glass-card rounded-2xl p-5">
-          <h4 class="text-xs uppercase tracking-wider text-[rgb(var(--color-text-tertiary))] mb-3">{t.nav}</h4>
+          <h4
+            class="text-xs uppercase tracking-wider text-[rgb(var(--color-text-tertiary))] mb-3"
+          >
+            {t.nav}
+          </h4>
           <div class="flex flex-wrap gap-2.5">
-            {mainLinks.map((l) => (
-              <a href={l.href} class="footer-pill">{l.label}</a>
-            ))}
+            {
+              mainLinks.map((l) => (
+                <a href={l.href} class="footer-pill">
+                  {l.label}
+                </a>
+              ))
+            }
           </div>
         </section>
 
         <section class="glass-card rounded-2xl p-5">
-          <h4 class="text-xs uppercase tracking-wider text-[rgb(var(--color-text-tertiary))] mb-3">{t.tools}</h4>
+          <h4
+            class="text-xs uppercase tracking-wider text-[rgb(var(--color-text-tertiary))] mb-3"
+          >
+            {t.tools}
+          </h4>
           <div class="flex flex-wrap gap-2.5">
-            {featuredTools.map((l) => (
-              <a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener noreferrer' : undefined} class="footer-pill">
-                {l.label}
-              </a>
-            ))}
+            {
+              featuredTools.map((l) => (
+                <a
+                  href={l.href}
+                  target={l.external ? '_blank' : undefined}
+                  rel={l.external ? 'noopener noreferrer' : undefined}
+                  class="footer-pill"
+                >
+                  {l.label}
+                </a>
+              ))
+            }
           </div>
         </section>
 
         <details class="glass-card rounded-2xl p-5">
-          <summary class="cursor-pointer select-none text-sm font-semibold text-[rgb(var(--color-text-primary))]">{t.more}</summary>
+          <summary
+            class="cursor-pointer select-none text-sm font-semibold text-[rgb(var(--color-text-primary))]"
+            >{t.more}</summary
+          >
           <div class="mt-4 flex flex-wrap gap-2.5">
-            {moreLinks.map((l) => (
-              <a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener noreferrer' : undefined} class="footer-pill subdued">
-                {l.label}
-              </a>
-            ))}
+            {
+              moreLinks.map((l) => (
+                <a
+                  href={l.href}
+                  target={l.external ? '_blank' : undefined}
+                  rel={l.external ? 'noopener noreferrer' : undefined}
+                  class="footer-pill subdued"
+                >
+                  {l.label}
+                </a>
+              ))
+            }
           </div>
         </details>
 
         <details class="glass-card rounded-2xl p-5">
-          <summary class="cursor-pointer select-none text-sm font-semibold text-[rgb(var(--color-text-primary))]">{t.legal}</summary>
+          <summary
+            class="cursor-pointer select-none text-sm font-semibold text-[rgb(var(--color-text-primary))]"
+            >{t.legal}</summary
+          >
           <div class="mt-4 flex flex-wrap gap-2.5">
-            {legalLinks.map((l) => (
-              <a href={l.href} class="footer-pill subdued">{l.label}</a>
-            ))}
+            {
+              legalLinks.map((l) => (
+                <a href={l.href} class="footer-pill subdued">
+                  {l.label}
+                </a>
+              ))
+            }
           </div>
         </details>
       </div>
     </div>
 
-    <div class="pt-8 mt-8 border-t border-[rgb(var(--color-border))] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-      <p class="text-xs text-[rgb(var(--color-text-tertiary))]">© {currentYear} Alexander James Carter</p>
+    <div
+      class="pt-8 mt-8 border-t border-[rgb(var(--color-border))] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+    >
+      <p class="text-xs text-[rgb(var(--color-text-tertiary))]">
+        © {currentYear} Alexander James Carter
+      </p>
       <div class="flex items-center gap-2">
-        <a href={getLangPath('/license')} class="footer-chip">CC BY-NC-ND 4.0</a>
-        <a href="https://github.com/AlexanderJ-Carter" target="_blank" rel="noopener noreferrer" class="footer-chip">GitHub</a>
+        <a href={getLangPath('/license')} class="footer-chip">CC BY-NC-ND 4.0</a
+        >
+        <a
+          href="https://github.com/AlexanderJ-Carter"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-chip">GitHub</a
+        >
       </div>
     </div>
   </div>

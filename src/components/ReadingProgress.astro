@@ -15,7 +15,8 @@
     id="reading-progress-bar"
     class="h-full bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600 transition-all duration-150"
     style="width: 0%"
-  ></div>
+  >
+  </div>
 </div>
 
 <script>
@@ -33,12 +34,14 @@
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const scrollableHeight = documentHeight - windowHeight;
 
-    const isLongPage = scrollableHeight >= MIN_SCROLLABLE_VIEWPORTS * windowHeight;
+    const isLongPage =
+      scrollableHeight >= MIN_SCROLLABLE_VIEWPORTS * windowHeight;
     if (isLongPage) {
       container.style.visibility = '';
       container.setAttribute('data-visible', '');
       container.setAttribute('aria-hidden', 'false');
-      const progress = scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0;
+      const progress =
+        scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0;
       progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
     } else {
       container.style.visibility = 'hidden';

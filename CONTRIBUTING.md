@@ -37,11 +37,13 @@ Open [http://localhost:4321](http://localhost:4321) in your browser.
 ### Making Changes
 
 1. Create a new branch for your changes:
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
 2. Make your changes and test them locally:
+
 ```bash
 npm run build      # Build the site
 npx astro check    # Type checking
@@ -49,6 +51,7 @@ npx prettier --write .  # Format code
 ```
 
 3. Ensure all checks pass:
+
 ```bash
 npm audit          # Security audit
 npx astro check    # Type safety
@@ -56,11 +59,13 @@ npx prettier --check .  # Code formatting
 ```
 
 4. Commit your changes with a clear message:
+
 ```bash
 git commit -m "feat: describe your changes"
 ```
 
 Use conventional commit prefixes:
+
 - `feat:` new feature
 - `fix:` bug fix
 - `docs:` documentation
@@ -124,6 +129,7 @@ Use the template pattern for i18n:
 ---
 import SomeTemplate from '../components/templates/SomeTemplate.astro';
 ---
+
 <SomeTemplate lang="zh-CN" />
 ```
 
@@ -212,6 +218,7 @@ By contributing, you agree that your contributions will be licensed under the sa
 ## Questions?
 
 Feel free to:
+
 - Open a discussion
 - Check existing issues for similar questions
 - Review the project documentation

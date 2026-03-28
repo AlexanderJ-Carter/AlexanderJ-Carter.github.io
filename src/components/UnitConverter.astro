@@ -76,7 +76,10 @@ const unitText = {
 const t = unitText[lang as keyof typeof unitText] || unitText['zh-CN'];
 ---
 
-<div id="unit-converter" class="converter-widget glass-card rounded-2xl p-6 shadow-xl max-w-md">
+<div
+  id="unit-converter"
+  class="converter-widget glass-card rounded-2xl p-6 shadow-xl max-w-md"
+>
   <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
     <span class="text-2xl">📊</span>
     {t.title}
@@ -84,19 +87,34 @@ const t = unitText[lang as keyof typeof unitText] || unitText['zh-CN'];
 
   <!-- 转换类型选择 -->
   <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
-    <button class="type-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-primary-500 text-white" data-type="length">
+    <button
+      class="type-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-primary-500 text-white"
+      data-type="length"
+    >
       {t.length}
     </button>
-    <button class="type-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-[rgb(var(--color-bg-accent))]" data-type="weight">
+    <button
+      class="type-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-[rgb(var(--color-bg-accent))]"
+      data-type="weight"
+    >
       {t.weight}
     </button>
-    <button class="type-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-[rgb(var(--color-bg-accent))]" data-type="temperature">
+    <button
+      class="type-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-[rgb(var(--color-bg-accent))]"
+      data-type="temperature"
+    >
       {t.temperature}
     </button>
-    <button class="type-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-[rgb(var(--color-bg-accent))]" data-type="area">
+    <button
+      class="type-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-[rgb(var(--color-bg-accent))]"
+      data-type="area"
+    >
       {t.area}
     </button>
-    <button class="type-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-[rgb(var(--color-bg-accent))]" data-type="volume">
+    <button
+      class="type-btn px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all bg-[rgb(var(--color-bg-accent))]"
+      data-type="volume"
+    >
       {t.volume}
     </button>
   </div>
@@ -114,7 +132,10 @@ const t = unitText[lang as keyof typeof unitText] || unitText['zh-CN'];
           placeholder="0"
           class="flex-1 px-4 py-3 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-lg text-lg font-mono"
         />
-        <select id="from-unit" class="px-4 py-3 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-lg min-w-[100px]">
+        <select
+          id="from-unit"
+          class="px-4 py-3 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-lg min-w-[100px]"
+        >
           <!-- 单位选项将通过 JS 填充 -->
         </select>
       </div>
@@ -122,9 +143,23 @@ const t = unitText[lang as keyof typeof unitText] || unitText['zh-CN'];
 
     <!-- 交换按钮 -->
     <div class="flex justify-center">
-      <button id="swap-btn" type="button" class="p-3 bg-primary-500/10 hover:bg-primary-500/20 rounded-full transition-all hover:rotate-180" style="transition: transform 0.5s">
-        <svg class="w-6 h-6 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+      <button
+        id="swap-btn"
+        type="button"
+        class="p-3 bg-primary-500/10 hover:bg-primary-500/20 rounded-full transition-all hover:rotate-180"
+        style="transition: transform 0.5s"
+      >
+        <svg
+          class="w-6 h-6 text-primary-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
         </svg>
       </button>
     </div>
@@ -139,7 +174,10 @@ const t = unitText[lang as keyof typeof unitText] || unitText['zh-CN'];
           readonly
           class="flex-1 px-4 py-3 bg-primary-500/10 border border-primary-500/30 rounded-lg text-lg font-mono font-bold text-primary-600 dark:text-primary-400"
         />
-        <select id="to-unit" class="px-4 py-3 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-lg min-w-[100px]">
+        <select
+          id="to-unit"
+          class="px-4 py-3 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-lg min-w-[100px]"
+        >
           <!-- 单位选项将通过 JS 填充 -->
         </select>
       </div>
@@ -147,22 +185,29 @@ const t = unitText[lang as keyof typeof unitText] || unitText['zh-CN'];
   </div>
 
   <!-- 转换公式显示 -->
-  <div id="formula-display" class="mt-6 p-4 bg-[rgb(var(--color-bg-accent))] rounded-lg text-sm text-center text-[rgb(var(--color-text-secondary))]">
+  <div
+    id="formula-display"
+    class="mt-6 p-4 bg-[rgb(var(--color-bg-accent))] rounded-lg text-sm text-center text-[rgb(var(--color-text-secondary))]"
+  >
     <!-- 公式将通过 JS 显示 -->
   </div>
 </div>
 
 <style>
   .converter-widget {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(14, 165, 233, 0.05) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(16, 185, 129, 0.05) 0%,
+      rgba(14, 165, 233, 0.05) 100%
+    );
   }
 
   .type-btn.active {
     @apply bg-primary-500 text-white;
   }
 
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"]::-webkit-outer-spin-button {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
@@ -257,12 +302,12 @@ const t = unitText[lang as keyof typeof unitText] || unitText['zh-CN'];
 
     // 先转换为摄氏度
     if (from === 'c') celsius = value;
-    else if (from === 'f') celsius = (value - 32) * 5/9;
+    else if (from === 'f') celsius = ((value - 32) * 5) / 9;
     else if (from === 'k') celsius = value - 273.15;
 
     // 从摄氏度转换为目标单位
     if (to === 'c') return celsius;
-    else if (to === 'f') return celsius * 9/5 + 32;
+    else if (to === 'f') return (celsius * 9) / 5 + 32;
     else if (to === 'k') return celsius + 273.15;
   }
 
@@ -284,8 +329,8 @@ const t = unitText[lang as keyof typeof unitText] || unitText['zh-CN'];
     if (type === 'temperature') {
       result = convertTemperature(value, from, to);
     } else {
-      const fromFactor = units[type].units.find(u => u.id === from).factor;
-      const toFactor = units[type].units.find(u => u.id === to).factor;
+      const fromFactor = units[type].units.find((u) => u.id === from).factor;
+      const toFactor = units[type].units.find((u) => u.id === to).factor;
       result = (value * fromFactor) / toFactor;
     }
 
@@ -293,15 +338,17 @@ const t = unitText[lang as keyof typeof unitText] || unitText['zh-CN'];
     toValue.value = result.toFixed(6).replace(/\.?0+$/, '');
 
     // 显示公式
-    const fromName = units[type].units.find(u => u.id === from).name;
-    const toName = units[type].units.find(u => u.id === to).name;
+    const fromName = units[type].units.find((u) => u.id === from).name;
+    const toName = units[type].units.find((u) => u.id === to).name;
     formulaDisplay.textContent = `${value} ${fromName} = ${toValue.value} ${toName}`;
   }
 
   // 切换类型
-  typeBtns.forEach(btn => {
+  typeBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      typeBtns.forEach(b => b.classList.remove('bg-primary-500', 'text-white'));
+      typeBtns.forEach((b) =>
+        b.classList.remove('bg-primary-500', 'text-white')
+      );
       btn.classList.add('bg-primary-500', 'text-white');
 
       currentType = btn.dataset.type;

@@ -2,13 +2,27 @@
 // Page Loader Component — multilingual, language detected at runtime from <html lang>
 ---
 
-<div id="page-loader" class="fixed inset-0 z-[100] bg-[rgb(var(--color-bg-primary))] flex items-center justify-center transition-opacity duration-500 ease-out" aria-hidden="true">
+<div
+  id="page-loader"
+  class="fixed inset-0 z-[100] bg-[rgb(var(--color-bg-primary))] flex items-center justify-center transition-opacity duration-500 ease-out"
+  aria-hidden="true"
+>
   <div class="text-center">
     <div class="relative w-16 h-16 mx-auto mb-3">
-      <div class="absolute inset-0 border-[3px] border-primary-500/20 rounded-full"></div>
-      <div class="absolute inset-0 border-[3px] border-transparent border-t-primary-500 rounded-full animate-spin"></div>
+      <div
+        class="absolute inset-0 border-[3px] border-primary-500/20 rounded-full"
+      >
+      </div>
+      <div
+        class="absolute inset-0 border-[3px] border-transparent border-t-primary-500 rounded-full animate-spin"
+      >
+      </div>
     </div>
-    <p id="page-loader-text" class="text-[rgb(var(--color-text-tertiary))] text-sm font-medium tracking-wide"></p>
+    <p
+      id="page-loader-text"
+      class="text-[rgb(var(--color-text-tertiary))] text-sm font-medium tracking-wide"
+    >
+    </p>
   </div>
 </div>
 
@@ -21,8 +35,8 @@
         'zh-CN': '加载中',
         'zh-TW': '載入中',
         'en-GB': 'Loading',
-        'fr': 'Chargement',
-        'ru': 'Загрузка',
+        fr: 'Chargement',
+        ru: 'Загрузка',
       };
       loaderText.textContent = msgs[lang] || msgs['zh-CN'];
     }
@@ -53,7 +67,9 @@
 
 <style>
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
   .animate-spin {
     animation: spin 1s linear infinite;

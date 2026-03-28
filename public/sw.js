@@ -44,7 +44,8 @@ self.addEventListener('install', (event) => {
   console.log('📦 Service Worker 安装中...');
 
   event.waitUntil(
-    caches.open(CACHE_NAME)
+    caches
+      .open(CACHE_NAME)
       .then((cache) => {
         console.log('✅ 预缓存静态资源');
         return cache.addAll(PRECACHE_URLS);
@@ -58,16 +59,19 @@ self.addEventListener('activate', (event) => {
   console.log('🔄 Service Worker 激活中...');
 
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME && name !== RUNTIME_CACHE)
-          .map((name) => {
-            console.log('🗑️ 删除旧缓存:', name);
-            return caches.delete(name);
-          })
-      );
-    }).then(() => self.clients.claim())
+    caches
+      .keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames
+            .filter((name) => name !== CACHE_NAME && name !== RUNTIME_CACHE)
+            .map((name) => {
+              console.log('🗑️ 删除旧缓存:', name);
+              return caches.delete(name);
+            })
+        );
+      })
+      .then(() => self.clients.claim())
   );
 });
 

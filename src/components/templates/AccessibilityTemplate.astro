@@ -297,26 +297,73 @@ const content = accessibilityData[lang as Lang] || accessibilityData['en-GB'];
       <!-- Legal nav -->
       <nav
         class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[rgb(var(--color-text-secondary))] mb-10"
-        aria-label={lang === 'zh-CN' || lang === 'zh-TW' ? '法律与政策导航' : 'Legal & policy navigation'}
+        aria-label={lang === 'zh-CN' || lang === 'zh-TW'
+          ? '法律与政策导航'
+          : 'Legal & policy navigation'}
       >
-        <a href={getLangPath('/privacy')} class="link-underline hover:text-primary-500">
-          {lang === 'zh-CN' ? '隐私政策' : lang === 'zh-TW' ? '隱私權政策' : 'Privacy'}
+        <a
+          href={getLangPath('/privacy')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '隐私政策'
+              : lang === 'zh-TW'
+                ? '隱私權政策'
+                : 'Privacy'
+          }
         </a>
         <span aria-hidden="true">·</span>
-        <a href={getLangPath('/terms')} class="link-underline hover:text-primary-500">
-          {lang === 'zh-CN' ? '服务条款' : lang === 'zh-TW' ? '服務條款' : 'Terms'}
+        <a
+          href={getLangPath('/terms')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '服务条款'
+              : lang === 'zh-TW'
+                ? '服務條款'
+                : 'Terms'
+          }
         </a>
         <span aria-hidden="true">·</span>
-        <a href={getLangPath('/license')} class="link-underline hover:text-primary-500">
-          {lang === 'zh-CN' ? '许可证' : lang === 'zh-TW' ? '許可證' : 'License'}
+        <a
+          href={getLangPath('/license')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '许可证'
+              : lang === 'zh-TW'
+                ? '許可證'
+                : 'License'
+          }
         </a>
         <span aria-hidden="true">·</span>
-        <a href={getLangPath('/accessibility')} class="link-underline hover:text-primary-500">
-          {lang === 'zh-CN' ? '无障碍' : lang === 'zh-TW' ? '無障礙' : 'Accessibility'}
+        <a
+          href={getLangPath('/accessibility')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '无障碍'
+              : lang === 'zh-TW'
+                ? '無障礙'
+                : 'Accessibility'
+          }
         </a>
         <span aria-hidden="true">·</span>
-        <a href={getLangPath('/security/policy')} class="link-underline hover:text-primary-500">
-          {lang === 'zh-CN' ? '安全政策' : lang === 'zh-TW' ? '安全政策' : 'Security'}
+        <a
+          href={getLangPath('/security/policy')}
+          class="link-underline hover:text-primary-500"
+        >
+          {
+            lang === 'zh-CN'
+              ? '安全政策'
+              : lang === 'zh-TW'
+                ? '安全政策'
+                : 'Security'
+          }
         </a>
       </nav>
 
@@ -359,17 +406,37 @@ const content = accessibilityData[lang as Lang] || accessibilityData['en-GB'];
 
         <h3>{content.shortcutsTitle}</h3>
         <div class="flex flex-wrap gap-3 not-prose">
-          <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm">Tab</kbd>
-          <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm">Shift + Tab</kbd>
-          <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm">Ctrl/Cmd + K</kbd>
-          <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm">/</kbd>
+          <kbd
+            class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm"
+            >Tab</kbd
+          >
+          <kbd
+            class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm"
+            >Shift + Tab</kbd
+          >
+          <kbd
+            class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm"
+            >Ctrl/Cmd + K</kbd
+          >
+          <kbd
+            class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm"
+            >/</kbd
+          >
         </div>
 
         <div class="flex flex-wrap gap-3 not-prose mt-4">
-          <button id="acc-contrast-toggle" type="button" class="px-4 py-2 rounded-lg bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium">
+          <button
+            id="acc-contrast-toggle"
+            type="button"
+            class="px-4 py-2 rounded-lg bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium"
+          >
             {content.contrastBtn}
           </button>
-          <button id="acc-motion-toggle" type="button" class="px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]">
+          <button
+            id="acc-motion-toggle"
+            type="button"
+            class="px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]"
+          >
             {content.motionBtn}
           </button>
         </div>
@@ -407,7 +474,11 @@ const content = accessibilityData[lang as Lang] || accessibilityData['en-GB'];
       }
     }
     ensureStyle();
-    contrastBtn?.addEventListener('click', () => html.classList.toggle('acc-high-contrast'));
-    motionBtn?.addEventListener('click', () => html.classList.toggle('acc-reduced-motion'));
+    contrastBtn?.addEventListener('click', () =>
+      html.classList.toggle('acc-high-contrast')
+    );
+    motionBtn?.addEventListener('click', () =>
+      html.classList.toggle('acc-reduced-motion')
+    );
   })();
 </script>

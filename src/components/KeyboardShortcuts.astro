@@ -6,15 +6,56 @@
 const { lang = 'zh-CN' } = Astro.props;
 
 const shortcuts = [
-  { key: 'h', label: lang === 'zh-CN' ? '首页' : lang === 'zh-TW' ? '首頁' : 'Home', url: '/' },
-  { key: 'g', label: lang === 'zh-CN' ? '画廊' : lang === 'zh-TW' ? '畫廊' : 'Gallery', url: '/gallery' },
-  { key: 'p', label: lang === 'zh-CN' ? '项目' : lang === 'zh-TW' ? '專案' : 'Projects', url: '/projects' },
-  { key: 'a', label: lang === 'zh-CN' ? '关于' : lang === 'zh-TW' ? '關於' : 'About', url: '/about' },
-  { key: 'c', label: lang === 'zh-CN' ? '联系' : lang === 'zh-TW' ? '聯繫' : 'Contact', url: '/contact' },
-  { key: 't', label: lang === 'zh-CN' ? '时间' : lang === 'zh-TW' ? '時間' : 'Time', url: '/time' },
-  { key: '/', label: lang === 'zh-CN' ? '搜索' : lang === 'zh-TW' ? '搜尋' : 'Search', action: 'search' },
-  { key: 'd', label: lang === 'zh-CN' ? '切换主题' : lang === 'zh-TW' ? '切換主題' : 'Toggle theme', action: 'theme' },
-  { key: '?', label: lang === 'zh-CN' ? '帮助' : lang === 'zh-TW' ? '幫助' : 'Help', action: 'help' },
+  {
+    key: 'h',
+    label: lang === 'zh-CN' ? '首页' : lang === 'zh-TW' ? '首頁' : 'Home',
+    url: '/',
+  },
+  {
+    key: 'g',
+    label: lang === 'zh-CN' ? '画廊' : lang === 'zh-TW' ? '畫廊' : 'Gallery',
+    url: '/gallery',
+  },
+  {
+    key: 'p',
+    label: lang === 'zh-CN' ? '项目' : lang === 'zh-TW' ? '專案' : 'Projects',
+    url: '/projects',
+  },
+  {
+    key: 'a',
+    label: lang === 'zh-CN' ? '关于' : lang === 'zh-TW' ? '關於' : 'About',
+    url: '/about',
+  },
+  {
+    key: 'c',
+    label: lang === 'zh-CN' ? '联系' : lang === 'zh-TW' ? '聯繫' : 'Contact',
+    url: '/contact',
+  },
+  {
+    key: 't',
+    label: lang === 'zh-CN' ? '时间' : lang === 'zh-TW' ? '時間' : 'Time',
+    url: '/time',
+  },
+  {
+    key: '/',
+    label: lang === 'zh-CN' ? '搜索' : lang === 'zh-TW' ? '搜尋' : 'Search',
+    action: 'search',
+  },
+  {
+    key: 'd',
+    label:
+      lang === 'zh-CN'
+        ? '切换主题'
+        : lang === 'zh-TW'
+          ? '切換主題'
+          : 'Toggle theme',
+    action: 'theme',
+  },
+  {
+    key: '?',
+    label: lang === 'zh-CN' ? '帮助' : lang === 'zh-TW' ? '幫助' : 'Help',
+    action: 'help',
+  },
 ];
 
 function getLangPath(path: string): string {
@@ -25,32 +66,76 @@ function getLangPath(path: string): string {
 ---
 
 <!-- Keyboard Shortcuts Modal -->
-<div id="shortcuts-modal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
-  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="shortcuts-backdrop"></div>
+<div
+  id="shortcuts-modal"
+  class="fixed inset-0 z-[100] hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="shortcuts-title"
+>
+  <div
+    class="absolute inset-0 bg-black/50 backdrop-blur-sm"
+    id="shortcuts-backdrop"
+  >
+  </div>
   <div class="absolute inset-0 flex items-center justify-center p-4">
-    <div class="glass-card rounded-2xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto">
+    <div
+      class="glass-card rounded-2xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto"
+    >
       <div class="flex items-center justify-between mb-4">
         <h2 id="shortcuts-title" class="text-xl font-heading font-bold">
-          ⌨️ {lang === 'zh-CN' ? '键盘快捷键' : lang === 'zh-TW' ? '鍵盤快速鍵' : 'Keyboard Shortcuts'}
+          ⌨️ {
+            lang === 'zh-CN'
+              ? '键盘快捷键'
+              : lang === 'zh-TW'
+                ? '鍵盤快速鍵'
+                : 'Keyboard Shortcuts'
+          }
         </h2>
-        <button id="close-shortcuts" type="button" class="p-2 hover:bg-[rgb(var(--color-bg-accent))] rounded-lg transition-colors" aria-label="Close">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <button
+          id="close-shortcuts"
+          type="button"
+          class="p-2 hover:bg-[rgb(var(--color-bg-accent))] rounded-lg transition-colors"
+          aria-label="Close"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
       <div class="space-y-2">
-        {shortcuts.map((shortcut) => (
-          <div class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] transition-colors">
-            <span class="text-[rgb(var(--color-text-secondary))]">{shortcut.label}</span>
-            <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm font-mono min-w-[2rem] text-center">
-              {shortcut.key}
-            </kbd>
-          </div>
-        ))}
+        {
+          shortcuts.map((shortcut) => (
+            <div class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] transition-colors">
+              <span class="text-[rgb(var(--color-text-secondary))]">
+                {shortcut.label}
+              </span>
+              <kbd class="px-2 py-1 rounded bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-sm font-mono min-w-[2rem] text-center">
+                {shortcut.key}
+              </kbd>
+            </div>
+          ))
+        }
       </div>
-      <p class="mt-4 text-xs text-[rgb(var(--color-text-tertiary))] text-center">
-        {lang === 'zh-CN' ? '按 ? 显示/隐藏此帮助' : lang === 'zh-TW' ? '按 ? 顯示/隱藏此幫助' : 'Press ? to toggle this help'}
+      <p
+        class="mt-4 text-xs text-[rgb(var(--color-text-tertiary))] text-center"
+      >
+        {
+          lang === 'zh-CN'
+            ? '按 ? 显示/隐藏此帮助'
+            : lang === 'zh-TW'
+              ? '按 ? 顯示/隱藏此幫助'
+              : 'Press ? to toggle this help'
+        }
       </p>
     </div>
   </div>
@@ -64,8 +149,18 @@ function getLangPath(path: string): string {
   aria-label={lang === 'zh-CN' ? '键盘快捷键' : 'Keyboard shortcuts'}
   title={lang === 'zh-CN' ? '键盘快捷键 (?)' : 'Keyboard shortcuts (?)'}
 >
-  <svg class="w-5 h-5 text-[rgb(var(--color-text-secondary))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  <svg
+    class="w-5 h-5 text-[rgb(var(--color-text-secondary))]"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+    ></path>
   </svg>
 </button>
 
@@ -101,7 +196,11 @@ function getLangPath(path: string): string {
   // Global keyboard shortcuts
   document.addEventListener('keydown', (e) => {
     // Ignore if typing in input/textarea
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) {
+    if (
+      e.target.tagName === 'INPUT' ||
+      e.target.tagName === 'TEXTAREA' ||
+      e.target.isContentEditable
+    ) {
       return;
     }
 
@@ -122,7 +221,7 @@ function getLangPath(path: string): string {
 
     // Find matching shortcut
     // @ts-ignore - shortcuts is defined in define:vars
-    const shortcut = shortcuts.find(s => s.key === key);
+    const shortcut = shortcuts.find((s) => s.key === key);
     if (shortcut) {
       e.preventDefault();
 

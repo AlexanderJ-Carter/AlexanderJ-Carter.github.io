@@ -17,10 +17,10 @@ const OUTPUT_DIR = './public/img/gallery-optimized';
 
 // 响应式图片尺寸
 const SIZES = [
-  { width: 400, suffix: '-sm' },   // 移动端
-  { width: 800, suffix: '-md' },   // 平板
-  { width: 1200, suffix: '-lg' },  // 桌面
-  { width: 1920, suffix: '-xl' },  // 大屏
+  { width: 400, suffix: '-sm' }, // 移动端
+  { width: 800, suffix: '-md' }, // 平板
+  { width: 1200, suffix: '-lg' }, // 桌面
+  { width: 1920, suffix: '-xl' }, // 大屏
 ];
 
 async function optimizeImages() {
@@ -32,7 +32,9 @@ async function optimizeImages() {
   }
 
   const files = await readdir(INPUT_DIR);
-  const jpgFiles = files.filter(f => f.endsWith('.jpg') || f.endsWith('.jpeg'));
+  const jpgFiles = files.filter(
+    (f) => f.endsWith('.jpg') || f.endsWith('.jpeg')
+  );
 
   console.log(`找到 ${jpgFiles.length} 张图片需要优化\n`);
 
@@ -45,9 +47,7 @@ async function optimizeImages() {
 
     // 生成原始尺寸的 WebP（质量 85%）
     const outputPath = join(OUTPUT_DIR, `${name}.webp`);
-    await sharp(inputPath)
-      .webp({ quality: 85, effort: 6 })
-      .toFile(outputPath);
+    await sharp(inputPath).webp({ quality: 85, effort: 6 }).toFile(outputPath);
 
     console.log(`  ✅ ${name}.webp`);
 

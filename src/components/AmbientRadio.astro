@@ -47,20 +47,35 @@ const text = {
 const labels = text[lang as keyof typeof text] || text['en-GB'];
 
 const stations = [
-  { name: 'SomaFM Groove Salad', url: 'https://ice2.somafm.com/groovesalad-128-mp3' },
-  { name: 'SomaFM Drone Zone', url: 'https://ice2.somafm.com/dronezone-128-mp3' },
-  { name: 'SomaFM Space Station', url: 'https://ice2.somafm.com/spacestation-128-mp3' },
+  {
+    name: 'SomaFM Groove Salad',
+    url: 'https://ice2.somafm.com/groovesalad-128-mp3',
+  },
+  {
+    name: 'SomaFM Drone Zone',
+    url: 'https://ice2.somafm.com/dronezone-128-mp3',
+  },
+  {
+    name: 'SomaFM Space Station',
+    url: 'https://ice2.somafm.com/spacestation-128-mp3',
+  },
 ];
 ---
 
 <section class="py-16 bg-[rgb(var(--color-bg-secondary))] reveal">
   <div class="container mx-auto px-4 lg:px-8">
-    <div class="max-w-3xl mx-auto glass-card rounded-2xl p-6 md:p-8 border border-primary-500/20">
+    <div
+      class="max-w-3xl mx-auto glass-card rounded-2xl p-6 md:p-8 border border-primary-500/20"
+    >
       <div class="flex items-center gap-3 mb-3">
         <span class="text-2xl" aria-hidden="true">📻</span>
-        <h2 class="text-2xl md:text-3xl font-heading font-bold">{labels.title}</h2>
+        <h2 class="text-2xl md:text-3xl font-heading font-bold">
+          {labels.title}
+        </h2>
       </div>
-      <p class="text-[rgb(var(--color-text-secondary))] mb-5">{labels.subtitle}</p>
+      <p class="text-[rgb(var(--color-text-secondary))] mb-5">
+        {labels.subtitle}
+      </p>
 
       <div class="grid sm:grid-cols-[1fr_auto] gap-3 items-center">
         <label for="ambient-station" class="sr-only">{labels.choose}</label>
@@ -79,13 +94,22 @@ const stations = [
         </button>
       </div>
 
-      <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-4">{labels.note}</p>
+      <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-4">
+        {labels.note}
+      </p>
       <audio id="ambient-audio" preload="none"></audio>
     </div>
   </div>
 </section>
 
-<script define:vars={{ stations: JSON.stringify(stations), playText: labels.play, pauseText: labels.pause }} is:inline>
+<script
+  define:vars={{
+    stations: JSON.stringify(stations),
+    playText: labels.play,
+    pauseText: labels.pause,
+  }}
+  is:inline
+>
   (function () {
     const stationEl = document.getElementById('ambient-station');
     const btn = document.getElementById('ambient-toggle');
