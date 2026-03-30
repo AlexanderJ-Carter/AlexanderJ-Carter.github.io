@@ -11,23 +11,26 @@ function getLangPath(path: string) {
   return `/${prefix}${path}`;
 }
 
-const timelineData: Record<Lang, {
-  title: string;
-  description: string;
-  tag: string;
-  headerTitle: string;
-  headerDesc: string;
-  back: string;
-  presentLabel: string;
-  events: Array<{
-    year: number | string;
+const timelineData: Record<
+  Lang,
+  {
     title: string;
     description: string;
-    icon: string;
-    color: string;
-    tags?: string[];
-  }>;
-}> = {
+    tag: string;
+    headerTitle: string;
+    headerDesc: string;
+    back: string;
+    presentLabel: string;
+    events: Array<{
+      year: number | string;
+      title: string;
+      description: string;
+      icon: string;
+      color: string;
+      tags?: string[];
+    }>;
+  }
+> = {
   'zh-CN': {
     title: '时间轴',
     description: '我的学习与成长历程',
@@ -40,7 +43,8 @@ const timelineData: Record<Lang, {
       {
         year: '现在',
         title: '持续学习与探索',
-        description: '在电子信息专业继续深造，维护个人网站，在摄影和开发之间寻找平衡。',
+        description:
+          '在电子信息专业继续深造，维护个人网站，在摄影和开发之间寻找平衡。',
         icon: '🚀',
         color: 'from-purple-500 to-pink-500',
         tags: ['在读', '开发', '摄影'],
@@ -48,7 +52,8 @@ const timelineData: Record<Lang, {
       {
         year: 2025,
         title: '网站全面重设计',
-        description: '使用 Astro 框架与 Tailwind CSS 完全重构个人网站，引入多语言支持与无障碍优化。',
+        description:
+          '使用 Astro 框架与 Tailwind CSS 完全重构个人网站，引入多语言支持与无障碍优化。',
         icon: '🎨',
         color: 'from-blue-500 to-purple-500',
         tags: ['Astro', 'Tailwind', 'i18n'],
@@ -56,7 +61,8 @@ const timelineData: Record<Lang, {
       {
         year: 2024,
         title: '深入 Web 开发',
-        description: '系统学习前端框架、数据库与后端基础，完成多个个人项目并开始写技术博客。',
+        description:
+          '系统学习前端框架、数据库与后端基础，完成多个个人项目并开始写技术博客。',
         icon: '📚',
         color: 'from-green-500 to-blue-500',
         tags: ['React', 'Node.js', '博客'],
@@ -64,7 +70,8 @@ const timelineData: Record<Lang, {
       {
         year: 2023,
         title: '摄影与创作',
-        description: '认真拍摄并整理作品集，开始在网站发布摄影作品，在图像与代码之间找到共鸣。',
+        description:
+          '认真拍摄并整理作品集，开始在网站发布摄影作品，在图像与代码之间找到共鸣。',
         icon: '📷',
         color: 'from-amber-500 to-orange-500',
         tags: ['摄影', '创作', '画廊'],
@@ -72,7 +79,8 @@ const timelineData: Record<Lang, {
       {
         year: 2022,
         title: '编程之旅起步',
-        description: '第一次真正接触编程，从 HTML/CSS 入手，创建了人生中第一个网页。',
+        description:
+          '第一次真正接触编程，从 HTML/CSS 入手，创建了人生中第一个网页。',
         icon: '💻',
         color: 'from-orange-500 to-red-500',
         tags: ['HTML', 'CSS', '起点'],
@@ -91,7 +99,8 @@ const timelineData: Record<Lang, {
       {
         year: '現在',
         title: '持續學習與探索',
-        description: '在電子資訊專業繼續深造，維護個人網站，在攝影和開發之間尋找平衡。',
+        description:
+          '在電子資訊專業繼續深造，維護個人網站，在攝影和開發之間尋找平衡。',
         icon: '🚀',
         color: 'from-purple-500 to-pink-500',
         tags: ['在讀', '開發', '攝影'],
@@ -99,7 +108,8 @@ const timelineData: Record<Lang, {
       {
         year: 2025,
         title: '網站全面重設計',
-        description: '使用 Astro 框架與 Tailwind CSS 完全重構個人網站，引入多語言支援與無障礙優化。',
+        description:
+          '使用 Astro 框架與 Tailwind CSS 完全重構個人網站，引入多語言支援與無障礙優化。',
         icon: '🎨',
         color: 'from-blue-500 to-purple-500',
         tags: ['Astro', 'Tailwind', 'i18n'],
@@ -107,7 +117,8 @@ const timelineData: Record<Lang, {
       {
         year: 2024,
         title: '深入 Web 開發',
-        description: '系統學習前端框架、資料庫與後端基礎，完成多個個人專案並開始寫技術部落格。',
+        description:
+          '系統學習前端框架、資料庫與後端基礎，完成多個個人專案並開始寫技術部落格。',
         icon: '📚',
         color: 'from-green-500 to-blue-500',
         tags: ['React', 'Node.js', '部落格'],
@@ -115,7 +126,8 @@ const timelineData: Record<Lang, {
       {
         year: 2023,
         title: '攝影與創作',
-        description: '認真拍攝並整理作品集，開始在網站發布攝影作品，在圖像與程式碼之間找到共鳴。',
+        description:
+          '認真拍攝並整理作品集，開始在網站發布攝影作品，在圖像與程式碼之間找到共鳴。',
         icon: '📷',
         color: 'from-amber-500 to-orange-500',
         tags: ['攝影', '創作', '畫廊'],
@@ -123,7 +135,8 @@ const timelineData: Record<Lang, {
       {
         year: 2022,
         title: '程式設計之旅起步',
-        description: '第一次真正接觸程式設計，從 HTML/CSS 入手，創建了人生中第一個網頁。',
+        description:
+          '第一次真正接觸程式設計，從 HTML/CSS 入手，創建了人生中第一個網頁。',
         icon: '💻',
         color: 'from-orange-500 to-red-500',
         tags: ['HTML', 'CSS', '起點'],
@@ -142,7 +155,8 @@ const timelineData: Record<Lang, {
       {
         year: 'Now',
         title: 'Continuous learning & exploration',
-        description: 'Studying electronics at university, maintaining this site, finding balance between photography and development.',
+        description:
+          'Studying electronics at university, maintaining this site, finding balance between photography and development.',
         icon: '🚀',
         color: 'from-purple-500 to-pink-500',
         tags: ['Studying', 'Dev', 'Photography'],
@@ -150,7 +164,8 @@ const timelineData: Record<Lang, {
       {
         year: 2025,
         title: 'Full website redesign',
-        description: 'Completely rebuilt the site with Astro and Tailwind CSS, adding multilingual support and accessibility improvements.',
+        description:
+          'Completely rebuilt the site with Astro and Tailwind CSS, adding multilingual support and accessibility improvements.',
         icon: '🎨',
         color: 'from-blue-500 to-purple-500',
         tags: ['Astro', 'Tailwind', 'i18n'],
@@ -158,7 +173,8 @@ const timelineData: Record<Lang, {
       {
         year: 2024,
         title: 'Deep dive into web dev',
-        description: 'Systematically learned frontend frameworks, databases, and backend fundamentals; shipped several personal projects and started a tech blog.',
+        description:
+          'Systematically learned frontend frameworks, databases, and backend fundamentals; shipped several personal projects and started a tech blog.',
         icon: '📚',
         color: 'from-green-500 to-blue-500',
         tags: ['React', 'Node.js', 'Blog'],
@@ -166,7 +182,8 @@ const timelineData: Record<Lang, {
       {
         year: 2023,
         title: 'Photography & creative work',
-        description: 'Took photography seriously, built a portfolio, and started publishing work online — finding a bridge between images and code.',
+        description:
+          'Took photography seriously, built a portfolio, and started publishing work online — finding a bridge between images and code.',
         icon: '📷',
         color: 'from-amber-500 to-orange-500',
         tags: ['Photography', 'Creative', 'Gallery'],
@@ -174,7 +191,8 @@ const timelineData: Record<Lang, {
       {
         year: 2022,
         title: 'First steps in programming',
-        description: 'First real contact with programming — started with HTML and CSS, and built my very first webpage.',
+        description:
+          'First real contact with programming — started with HTML and CSS, and built my very first webpage.',
         icon: '💻',
         color: 'from-orange-500 to-red-500',
         tags: ['HTML', 'CSS', 'Beginning'],
@@ -183,7 +201,7 @@ const timelineData: Record<Lang, {
   },
   fr: {
     title: 'Chronologie',
-    description: 'Mon parcours d\'apprentissage et de croissance',
+    description: "Mon parcours d'apprentissage et de croissance",
     tag: 'Mon parcours',
     headerTitle: 'Parcours',
     headerDesc: 'Chaque étape importante et tournant décisif',
@@ -193,7 +211,8 @@ const timelineData: Record<Lang, {
       {
         year: 'Maintenant',
         title: 'Apprentissage continu',
-        description: 'Études en électronique, maintenance du site, équilibre entre photographie et développement.',
+        description:
+          'Études en électronique, maintenance du site, équilibre entre photographie et développement.',
         icon: '🚀',
         color: 'from-purple-500 to-pink-500',
         tags: ['Études', 'Dev', 'Photo'],
@@ -201,7 +220,8 @@ const timelineData: Record<Lang, {
       {
         year: 2025,
         title: 'Refonte complète du site',
-        description: 'Site entièrement reconstruit avec Astro et Tailwind CSS, support multilingue et améliorations d\'accessibilité.',
+        description:
+          "Site entièrement reconstruit avec Astro et Tailwind CSS, support multilingue et améliorations d'accessibilité.",
         icon: '🎨',
         color: 'from-blue-500 to-purple-500',
         tags: ['Astro', 'Tailwind', 'i18n'],
@@ -209,7 +229,8 @@ const timelineData: Record<Lang, {
       {
         year: 2024,
         title: 'Plongée dans le dev web',
-        description: 'Apprentissage des frameworks frontend, bases de données et backend ; plusieurs projets et début d\'un blog tech.',
+        description:
+          "Apprentissage des frameworks frontend, bases de données et backend ; plusieurs projets et début d'un blog tech.",
         icon: '📚',
         color: 'from-green-500 to-blue-500',
         tags: ['React', 'Node.js', 'Blog'],
@@ -217,7 +238,8 @@ const timelineData: Record<Lang, {
       {
         year: 2023,
         title: 'Photographie et création',
-        description: 'Prise de vue sérieuse, portfolio constitué, publication de travaux en ligne — pont entre image et code.',
+        description:
+          'Prise de vue sérieuse, portfolio constitué, publication de travaux en ligne — pont entre image et code.',
         icon: '📷',
         color: 'from-amber-500 to-orange-500',
         tags: ['Photo', 'Créatif', 'Galerie'],
@@ -225,7 +247,8 @@ const timelineData: Record<Lang, {
       {
         year: 2022,
         title: 'Premiers pas en programmation',
-        description: 'Premier vrai contact avec la programmation — HTML et CSS, puis première page web.',
+        description:
+          'Premier vrai contact avec la programmation — HTML et CSS, puis première page web.',
         icon: '💻',
         color: 'from-orange-500 to-red-500',
         tags: ['HTML', 'CSS', 'Début'],
@@ -244,7 +267,8 @@ const timelineData: Record<Lang, {
       {
         year: 'Сейчас',
         title: 'Непрерывное обучение',
-        description: 'Учёба по направлению электроники, поддержка сайта, баланс между фотографией и разработкой.',
+        description:
+          'Учёба по направлению электроники, поддержка сайта, баланс между фотографией и разработкой.',
         icon: '🚀',
         color: 'from-purple-500 to-pink-500',
         tags: ['Учёба', 'Разработка', 'Фото'],
@@ -252,7 +276,8 @@ const timelineData: Record<Lang, {
       {
         year: 2025,
         title: 'Полный редизайн сайта',
-        description: 'Сайт полностью пересобран на Astro и Tailwind CSS, добавлена мультиязычность и улучшена доступность.',
+        description:
+          'Сайт полностью пересобран на Astro и Tailwind CSS, добавлена мультиязычность и улучшена доступность.',
         icon: '🎨',
         color: 'from-blue-500 to-purple-500',
         tags: ['Astro', 'Tailwind', 'i18n'],
@@ -260,7 +285,8 @@ const timelineData: Record<Lang, {
       {
         year: 2024,
         title: 'Погружение в веб-разработку',
-        description: 'Систематически изучил фреймворки, базы данных и бэкенд; сделал несколько проектов и завёл технический блог.',
+        description:
+          'Систематически изучил фреймворки, базы данных и бэкенд; сделал несколько проектов и завёл технический блог.',
         icon: '📚',
         color: 'from-green-500 to-blue-500',
         tags: ['React', 'Node.js', 'Блог'],
@@ -268,7 +294,8 @@ const timelineData: Record<Lang, {
       {
         year: 2023,
         title: 'Фотография и творчество',
-        description: 'Серьёзно занялся фотографией, собрал портфолио и начал публиковать работы — мост между изображением и кодом.',
+        description:
+          'Серьёзно занялся фотографией, собрал портфолио и начал публиковать работы — мост между изображением и кодом.',
         icon: '📷',
         color: 'from-amber-500 to-orange-500',
         tags: ['Фото', 'Творчество', 'Галерея'],
@@ -276,7 +303,8 @@ const timelineData: Record<Lang, {
       {
         year: 2022,
         title: 'Первые шаги в программировании',
-        description: 'Первый настоящий контакт с программированием — HTML и CSS, затем первая веб-страница.',
+        description:
+          'Первый настоящий контакт с программированием — HTML и CSS, затем первая веб-страница.',
         icon: '💻',
         color: 'from-orange-500 to-red-500',
         tags: ['HTML', 'CSS', 'Начало'],
@@ -291,20 +319,35 @@ const content = timelineData[lang as Lang] || timelineData['en-GB'];
 <BaseLayout title={content.title} description={content.description}>
   <!-- Hero -->
   <section class="relative py-20 md:py-28 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient opacity-50" aria-hidden="true"></div>
+    <div
+      class="absolute inset-0 bg-mesh-gradient opacity-50"
+      aria-hidden="true"
+    >
+    </div>
     <div class="aurora" aria-hidden="true"></div>
-    <div class="absolute inset-0 opacity-80" style="background: var(--hero-spotlight);" aria-hidden="true"></div>
+    <div
+      class="absolute inset-0 opacity-80"
+      style="background: var(--hero-spotlight);"
+      aria-hidden="true"
+    >
+    </div>
 
     <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-5xl">
       <header class="text-center mb-16">
-        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium mb-5">
+        <span
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium mb-5"
+        >
           <span aria-hidden="true">📅</span>
           {content.tag}
         </span>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight">
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight"
+        >
           {content.headerTitle}
         </h1>
-        <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-xl mx-auto">
+        <p
+          class="text-lg text-[rgb(var(--color-text-secondary))] max-w-xl mx-auto"
+        >
           {content.headerDesc}
         </p>
       </header>
@@ -315,45 +358,107 @@ const content = timelineData[lang as Lang] || timelineData['en-GB'];
         <div
           class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-500/10 via-primary-500/40 to-primary-500/10"
           aria-hidden="true"
-        ></div>
+        >
+        </div>
         <!-- Scroll progress overlay (desktop) -->
         <div
           class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 w-[3px] rounded-full bg-gradient-to-b from-primary-500 via-accent-500 to-primary-500 origin-top"
           id="timeline-progress"
           style="height: 0%; transition: height 0.15s ease-out;"
           aria-hidden="true"
-        ></div>
+        >
+        </div>
 
         <!-- Left gutter line (mobile) -->
         <div
           class="md:hidden absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary-500/10 via-primary-500/40 to-primary-500/10"
           aria-hidden="true"
-        ></div>
+        >
+        </div>
         <!-- Scroll progress overlay (mobile) -->
         <div
           class="md:hidden absolute left-6 top-0 w-[3px] rounded-full bg-gradient-to-b from-primary-500 via-accent-500 to-primary-500 origin-top -translate-x-[1px]"
           id="timeline-progress-mobile"
           style="height: 0%; transition: height 0.15s ease-out;"
           aria-hidden="true"
-        ></div>
+        >
+        </div>
 
         <div class="space-y-10 md:space-y-14">
-          {content.events.map((event, index) => {
-            const isLeft = index % 2 === 0;
-            return (
-              <li class="relative">
-                <!-- Desktop: alternating layout -->
-                <div class={`hidden md:flex items-center gap-0 ${isLeft ? 'flex-row-reverse' : 'flex-row'}`}>
-                  <!-- Card half -->
-                  <div class="w-[calc(50%-2rem)] reveal">
-                    <article class={`glass-card p-6 lg:p-8 group hover:-translate-y-1 transition-transform duration-300 ${isLeft ? 'ml-auto' : 'mr-auto'}`}>
-                      <div class={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-gradient-to-r ${event.color} text-white mb-3`}>
+          {
+            content.events.map((event, index) => {
+              const isLeft = index % 2 === 0;
+              return (
+                <li class="relative">
+                  {/* Desktop: alternating layout */}
+                  <div
+                    class={`hidden md:flex items-center gap-0 ${isLeft ? 'flex-row-reverse' : 'flex-row'}`}
+                  >
+                    {/* Card half */}
+                    <div class="w-[calc(50%-2rem)] reveal">
+                      <article
+                        class={`glass-card p-6 lg:p-8 group hover:-translate-y-1 transition-transform duration-300 ${isLeft ? 'ml-auto' : 'mr-auto'}`}
+                      >
+                        <div
+                          class={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-gradient-to-r ${event.color} text-white mb-3`}
+                        >
+                          {event.year}
+                        </div>
+                        <h2 class="font-heading font-bold text-lg text-[rgb(var(--color-text-primary))] mb-2 group-hover:text-primary-500 transition-colors">
+                          {event.title}
+                        </h2>
+                        <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4">
+                          {event.description}
+                        </p>
+                        {event.tags && (
+                          <div class="flex flex-wrap gap-1.5">
+                            {event.tags.map((tag) => (
+                              <span class="text-xs px-2 py-0.5 rounded-full bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-secondary))] border border-[rgb(var(--color-border))]">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </article>
+                    </div>
+
+                    {/* Center icon */}
+                    <div class="flex-shrink-0 w-16 flex justify-center z-10">
+                      <div
+                        class={`w-14 h-14 rounded-full bg-gradient-to-br ${event.color} flex items-center justify-center text-2xl shadow-lg ring-4 ring-[rgb(var(--color-bg-primary))]`}
+                        aria-hidden="true"
+                      >
+                        {event.icon}
+                      </div>
+                    </div>
+
+                    {/* Spacer half */}
+                    <div class="w-[calc(50%-2rem)]" />
+                  </div>
+
+                  {/* Mobile: left-aligned single column */}
+                  <div class="md:hidden flex items-start gap-4 pl-3">
+                    {/* Icon on left rail */}
+                    <div class="flex-shrink-0 relative">
+                      <div
+                        class={`w-10 h-10 rounded-full bg-gradient-to-br ${event.color} flex items-center justify-center text-lg shadow-md ring-2 ring-[rgb(var(--color-bg-primary))]`}
+                        aria-hidden="true"
+                      >
+                        {event.icon}
+                      </div>
+                    </div>
+
+                    {/* Card */}
+                    <article class="flex-1 glass-card p-5 reveal group hover:-translate-y-0.5 transition-transform duration-300">
+                      <div
+                        class={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-gradient-to-r ${event.color} text-white mb-2`}
+                      >
                         {event.year}
                       </div>
-                      <h2 class="font-heading font-bold text-lg text-[rgb(var(--color-text-primary))] mb-2 group-hover:text-primary-500 transition-colors">
+                      <h2 class="font-heading font-bold text-base text-[rgb(var(--color-text-primary))] mb-1.5 group-hover:text-primary-500 transition-colors">
                         {event.title}
                       </h2>
-                      <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4">
+                      <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed mb-3">
                         {event.description}
                       </p>
                       {event.tags && (
@@ -367,57 +472,17 @@ const content = timelineData[lang as Lang] || timelineData['en-GB'];
                       )}
                     </article>
                   </div>
-
-                  <!-- Center icon -->
-                  <div class="flex-shrink-0 w-16 flex justify-center z-10">
-                    <div class={`w-14 h-14 rounded-full bg-gradient-to-br ${event.color} flex items-center justify-center text-2xl shadow-lg ring-4 ring-[rgb(var(--color-bg-primary))]`} aria-hidden="true">
-                      {event.icon}
-                    </div>
-                  </div>
-
-                  <!-- Spacer half -->
-                  <div class="w-[calc(50%-2rem)]"></div>
-                </div>
-
-                <!-- Mobile: left-aligned single column -->
-                <div class="md:hidden flex items-start gap-4 pl-3">
-                  <!-- Icon on left rail -->
-                  <div class="flex-shrink-0 relative">
-                    <div class={`w-10 h-10 rounded-full bg-gradient-to-br ${event.color} flex items-center justify-center text-lg shadow-md ring-2 ring-[rgb(var(--color-bg-primary))]`} aria-hidden="true">
-                      {event.icon}
-                    </div>
-                  </div>
-
-                  <!-- Card -->
-                  <article class="flex-1 glass-card p-5 reveal group hover:-translate-y-0.5 transition-transform duration-300">
-                    <div class={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-gradient-to-r ${event.color} text-white mb-2`}>
-                      {event.year}
-                    </div>
-                    <h2 class="font-heading font-bold text-base text-[rgb(var(--color-text-primary))] mb-1.5 group-hover:text-primary-500 transition-colors">
-                      {event.title}
-                    </h2>
-                    <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed mb-3">
-                      {event.description}
-                    </p>
-                    {event.tags && (
-                      <div class="flex flex-wrap gap-1.5">
-                        {event.tags.map((tag) => (
-                          <span class="text-xs px-2 py-0.5 rounded-full bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-secondary))] border border-[rgb(var(--color-border))]">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </article>
-                </div>
-              </li>
-            );
-          })}
+                </li>
+              );
+            })
+          }
         </div>
       </ol>
 
       <!-- Back link -->
-      <div class="mt-16 pt-10 border-t border-[rgb(var(--color-border))] reveal">
+      <div
+        class="mt-16 pt-10 border-t border-[rgb(var(--color-border))] reveal"
+      >
         <a
           href={getLangPath('/')}
           class="link-underline text-primary-500 hover:text-primary-600 font-medium text-sm inline-flex items-center gap-1"

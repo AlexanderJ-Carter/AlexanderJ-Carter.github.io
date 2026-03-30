@@ -10,7 +10,8 @@ const t: Record<Lang, Record<string, string>> = {
     title: '个人项目',
     subtitle: '生活向的小项目与站点页面',
     badge: '🛠 Projects',
-    intro: '这里是偏生活化、好用导向的小项目：记录、工具、页面体验，持续慢慢打磨。',
+    intro:
+      '这里是偏生活化、好用导向的小项目：记录、工具、页面体验，持续慢慢打磨。',
     filterAll: '全部',
     filterWeb: 'Web',
     filterHardware: '生活',
@@ -25,7 +26,8 @@ const t: Record<Lang, Record<string, string>> = {
     title: '個人專案',
     subtitle: '生活向的小專案與站點頁面',
     badge: '🛠 Projects',
-    intro: '這裡是偏生活化、好用導向的小專案：記錄、工具、頁面體驗，持續慢慢打磨。',
+    intro:
+      '這裡是偏生活化、好用導向的小專案：記錄、工具、頁面體驗，持續慢慢打磨。',
     filterAll: '全部',
     filterWeb: 'Web',
     filterHardware: '生活',
@@ -40,7 +42,8 @@ const t: Record<Lang, Record<string, string>> = {
     title: 'Projects',
     subtitle: 'Lifestyle pages and small projects',
     badge: '🛠 Projects',
-    intro: 'A collection of practical, lifestyle-focused pages and small projects, built for daily use and better UX.',
+    intro:
+      'A collection of practical, lifestyle-focused pages and small projects, built for daily use and better UX.',
     filterAll: 'All',
     filterWeb: 'Web',
     filterHardware: 'Lifestyle',
@@ -55,7 +58,8 @@ const t: Record<Lang, Record<string, string>> = {
     title: 'Projets',
     subtitle: 'Pages lifestyle et petits projets',
     badge: '🛠 Projets',
-    intro: 'Une collection de pages pratiques et de petits projets orientés usage quotidien.',
+    intro:
+      'Une collection de pages pratiques et de petits projets orientés usage quotidien.',
     filterAll: 'Tous',
     filterWeb: 'Web',
     filterHardware: 'Lifestyle',
@@ -70,7 +74,8 @@ const t: Record<Lang, Record<string, string>> = {
     title: 'Проекты',
     subtitle: 'Лайфстайл-страницы и небольшие проекты',
     badge: '🛠 Проекты',
-    intro: 'Подборка практичных, жизненных страниц и небольших проектов для повседневного использования.',
+    intro:
+      'Подборка практичных, жизненных страниц и небольших проектов для повседневного использования.',
     filterAll: 'Все',
     filterWeb: 'Web',
     filterHardware: 'Lifestyle',
@@ -91,7 +96,8 @@ const projectsData: Record<Lang, any[]> = {
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
       status: 'wip',
-      github: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+      github:
+        'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
     },
     {
@@ -138,7 +144,8 @@ const projectsData: Record<Lang, any[]> = {
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
       status: 'wip',
-      github: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+      github:
+        'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
     },
     {
@@ -185,7 +192,8 @@ const projectsData: Record<Lang, any[]> = {
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
       status: 'wip',
-      github: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+      github:
+        'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
     },
     {
@@ -228,11 +236,12 @@ const projectsData: Record<Lang, any[]> = {
   fr: [
     {
       title: 'Site personnel',
-      desc: "Le site sur lequel vous vous trouvez. Un site statique Astro + Tailwind CSS + TypeScript, multilingue, hébergé sur GitHub Pages.",
+      desc: 'Le site sur lequel vous vous trouvez. Un site statique Astro + Tailwind CSS + TypeScript, multilingue, hébergé sur GitHub Pages.',
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
       status: 'wip',
-      github: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+      github:
+        'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
     },
     {
@@ -270,7 +279,8 @@ const projectsData: Record<Lang, any[]> = {
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
       status: 'wip',
-      github: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+      github:
+        'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
     },
     {
@@ -315,15 +325,22 @@ function getLangPath(path: string): string {
 
 <BaseLayout title={text.title} description={text.subtitle}>
   <section class="relative py-16 md:py-24 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient opacity-40" aria-hidden="true"></div>
+    <div
+      class="absolute inset-0 bg-mesh-gradient opacity-40"
+      aria-hidden="true"
+    >
+    </div>
     <div class="container mx-auto px-4 lg:px-8 relative z-10">
-
       <!-- Header -->
       <div class="text-center mb-12 max-w-2xl mx-auto">
-        <span class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4">
+        <span
+          class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
+        >
           {text.badge}
         </span>
-        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight">
+        <h1
+          class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight"
+        >
           {text.title}
         </h1>
         <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
@@ -332,120 +349,205 @@ function getLangPath(path: string): string {
       </div>
 
       <!-- Filter buttons -->
-      <div class="flex flex-wrap justify-center gap-2 mb-10" id="project-filters">
-        {[
-          { key: 'all', label: text.filterAll },
-          { key: 'web', label: text.filterWeb },
-          { key: 'tools', label: text.filterTools },
-        ].map(({ key, label }) => (
-          <button
-            type="button"
-            data-filter={key}
-            class={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 ${
-              key === 'all'
-                ? 'bg-primary-500 text-white border-transparent'
-                : 'bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-secondary))] border-[rgb(var(--color-border))] hover:border-primary-500 hover:text-primary-500'
-            }`}
-          >
-            {label}
-          </button>
-        ))}
+      <div
+        class="flex flex-wrap justify-center gap-2 mb-10"
+        id="project-filters"
+      >
+        {
+          [
+            { key: 'all', label: text.filterAll },
+            { key: 'web', label: text.filterWeb },
+            { key: 'tools', label: text.filterTools },
+          ].map(({ key, label }) => (
+            <button
+              type="button"
+              data-filter={key}
+              class={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 ${
+                key === 'all'
+                  ? 'bg-primary-500 text-white border-transparent'
+                  : 'bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-secondary))] border-[rgb(var(--color-border))] hover:border-primary-500 hover:text-primary-500'
+              }`}
+            >
+              {label}
+            </button>
+          ))
+        }
       </div>
 
       <!-- Projects grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12" id="projects-grid">
-        {projects.map((project: any) => (
-          <article
-            class="glass-card card-hover p-6 rounded-2xl flex flex-col gap-4 reveal hover:border-primary-500/30 transition-all duration-300"
-            data-category={project.category}
-          >
-            <!-- Status badge -->
-            <div class="flex items-center justify-between">
-              <span class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
-                project.status === 'done'
-                  ? 'bg-green-500/10 text-green-600 dark:text-green-400'
-                  : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
-              }`}>
-                <span class={`w-1.5 h-1.5 rounded-full ${project.status === 'done' ? 'bg-green-500' : 'bg-amber-500 animate-pulse'}`}></span>
-                {project.status === 'done' ? text.statusDone : text.statusWip}
-              </span>
-              <span class="text-xs text-[rgb(var(--color-text-tertiary))] uppercase tracking-wide">
-                {project.category}
-              </span>
-            </div>
-
-            <!-- Title + description -->
-            <div class="flex-1">
-              <h2 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
-                {project.title}
-              </h2>
-              <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
-                {project.desc}
-              </p>
-            </div>
-
-            <!-- Tech tags -->
-            <div class="flex flex-wrap gap-1.5">
-              {project.tags.map((tag: string) => (
-                <span class="px-2 py-0.5 rounded-md bg-primary-500/10 text-primary-600 dark:text-primary-400 text-xs font-medium">
-                  {tag}
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
+        id="projects-grid"
+      >
+        {
+          projects.map((project: any) => (
+            <article
+              class="glass-card card-hover p-6 rounded-2xl flex flex-col gap-4 reveal hover:border-primary-500/30 transition-all duration-300"
+              data-category={project.category}
+            >
+              {/* Status badge */}
+              <div class="flex items-center justify-between">
+                <span
+                  class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
+                    project.status === 'done'
+                      ? 'bg-green-500/10 text-green-600 dark:text-green-400'
+                      : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
+                  }`}
+                >
+                  <span
+                    class={`w-1.5 h-1.5 rounded-full ${project.status === 'done' ? 'bg-green-500' : 'bg-amber-500 animate-pulse'}`}
+                  />
+                  {project.status === 'done' ? text.statusDone : text.statusWip}
                 </span>
-              ))}
-            </div>
-
-            <!-- Links -->
-            {(project.github || project.demo) && (
-              <div class="flex items-center gap-3 pt-1 border-t border-[rgb(var(--color-border))]">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center gap-1.5 text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors link-underline"
-                  >
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                    </svg>
-                    {text.viewSource}
-                  </a>
-                )}
-                {project.demo && (
-                  <a
-                    href={project.demo.startsWith('http') ? project.demo : getLangPath(project.demo)}
-                    target={project.demo.startsWith('http') ? '_blank' : undefined}
-                    rel={project.demo.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    class="inline-flex items-center gap-1.5 text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors link-underline"
-                  >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                    {text.viewDemo}
-                  </a>
-                )}
+                <span class="text-xs text-[rgb(var(--color-text-tertiary))] uppercase tracking-wide">
+                  {project.category}
+                </span>
               </div>
-            )}
-          </article>
-        ))}
+
+              {/* Title + description */}
+              <div class="flex-1">
+                <h2 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+                  {project.title}
+                </h2>
+                <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+                  {project.desc}
+                </p>
+              </div>
+
+              {/* Tech tags */}
+              <div class="flex flex-wrap gap-1.5">
+                {project.tags.map((tag: string) => (
+                  <span class="px-2 py-0.5 rounded-md bg-primary-500/10 text-primary-600 dark:text-primary-400 text-xs font-medium">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Links */}
+              {(project.github || project.demo) && (
+                <div class="flex items-center gap-3 pt-1 border-t border-[rgb(var(--color-border))]">
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1.5 text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors link-underline"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                      </svg>
+                      {text.viewSource}
+                    </a>
+                  )}
+                  {project.demo && (
+                    <a
+                      href={
+                        project.demo.startsWith('http')
+                          ? project.demo
+                          : getLangPath(project.demo)
+                      }
+                      target={
+                        project.demo.startsWith('http') ? '_blank' : undefined
+                      }
+                      rel={
+                        project.demo.startsWith('http')
+                          ? 'noopener noreferrer'
+                          : undefined
+                      }
+                      class="inline-flex items-center gap-1.5 text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors link-underline"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                      {text.viewDemo}
+                    </a>
+                  )}
+                </div>
+              )}
+            </article>
+          ))
+        }
       </div>
 
       <div class="glass-card p-6 rounded-2xl mb-10">
-        <h2 class="text-xl font-heading font-bold mb-3 text-[rgb(var(--color-text-primary))]">
-          {lang === 'zh-CN' ? '有趣项目推荐' : lang === 'zh-TW' ? '有趣專案推薦' : lang === 'fr' ? 'Projets amusants' : lang === 'ru' ? 'Интересные проекты' : 'Fun Project Picks'}
+        <h2
+          class="text-xl font-heading font-bold mb-3 text-[rgb(var(--color-text-primary))]"
+        >
+          {
+            lang === 'zh-CN'
+              ? '有趣项目推荐'
+              : lang === 'zh-TW'
+                ? '有趣專案推薦'
+                : lang === 'fr'
+                  ? 'Projets amusants'
+                  : lang === 'ru'
+                    ? 'Интересные проекты'
+                    : 'Fun Project Picks'
+          }
         </h2>
         <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
-          {lang === 'zh-CN' ? '一些值得体验的交互项目，用来找灵感和炫技。' : lang === 'zh-TW' ? '一些值得體驗的互動專案，用來找靈感和炫技。' : lang === 'fr' ? 'Quelques projets interactifs inspirants.' : lang === 'ru' ? 'Несколько вдохновляющих интерактивных проектов.' : 'A few inspiring interactive projects to explore.'}
+          {
+            lang === 'zh-CN'
+              ? '一些值得体验的交互项目，用来找灵感和炫技。'
+              : lang === 'zh-TW'
+                ? '一些值得體驗的互動專案，用來找靈感和炫技。'
+                : lang === 'fr'
+                  ? 'Quelques projets interactifs inspirants.'
+                  : lang === 'ru'
+                    ? 'Несколько вдохновляющих интерактивных проектов.'
+                    : 'A few inspiring interactive projects to explore.'
+          }
         </p>
         <div class="grid md:grid-cols-3 gap-3">
-          {[
-            { name: 'SceneryStack', href: 'https://scenerystack.org/', desc: 'Accessible interactive framework' },
-            { name: 'Excalidraw', href: 'https://github.com/excalidraw/excalidraw', desc: 'Whiteboard with great UX' },
-            { name: 'Browser Brawl', href: 'https://github.com/RichardHruby/browser-brawl', desc: 'Realtime AI-vs-AI browser arena' },
-          ].map((item) => (
-            <a href={item.href} target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] hover:border-primary-500/50 transition-colors">
-              <div class="font-semibold text-[rgb(var(--color-text-primary))]">{item.name}</div>
-              <div class="text-xs mt-1 text-[rgb(var(--color-text-tertiary))]">{item.desc}</div>
-            </a>
-          ))}
+          {
+            [
+              {
+                name: 'SceneryStack',
+                href: 'https://scenerystack.org/',
+                desc: 'Accessible interactive framework',
+              },
+              {
+                name: 'Excalidraw',
+                href: 'https://github.com/excalidraw/excalidraw',
+                desc: 'Whiteboard with great UX',
+              },
+              {
+                name: 'Browser Brawl',
+                href: 'https://github.com/RichardHruby/browser-brawl',
+                desc: 'Realtime AI-vs-AI browser arena',
+              },
+            ].map((item) => (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] hover:border-primary-500/50 transition-colors"
+              >
+                <div class="font-semibold text-[rgb(var(--color-text-primary))]">
+                  {item.name}
+                </div>
+                <div class="text-xs mt-1 text-[rgb(var(--color-text-tertiary))]">
+                  {item.desc}
+                </div>
+              </a>
+            ))
+          }
         </div>
       </div>
 
@@ -480,10 +582,22 @@ function getLangPath(path: string): string {
       filters.querySelectorAll('[data-filter]').forEach(function (b) {
         if (b.getAttribute('data-filter') === active) {
           b.classList.add('bg-primary-500', 'text-white', 'border-transparent');
-          b.classList.remove('bg-[rgb(var(--color-bg-secondary))]', 'text-[rgb(var(--color-text-secondary))]', 'border-[rgb(var(--color-border))]');
+          b.classList.remove(
+            'bg-[rgb(var(--color-bg-secondary))]',
+            'text-[rgb(var(--color-text-secondary))]',
+            'border-[rgb(var(--color-border))]'
+          );
         } else {
-          b.classList.remove('bg-primary-500', 'text-white', 'border-transparent');
-          b.classList.add('bg-[rgb(var(--color-bg-secondary))]', 'text-[rgb(var(--color-text-secondary))]', 'border-[rgb(var(--color-border))]');
+          b.classList.remove(
+            'bg-primary-500',
+            'text-white',
+            'border-transparent'
+          );
+          b.classList.add(
+            'bg-[rgb(var(--color-bg-secondary))]',
+            'text-[rgb(var(--color-text-secondary))]',
+            'border-[rgb(var(--color-border))]'
+          );
         }
       });
 

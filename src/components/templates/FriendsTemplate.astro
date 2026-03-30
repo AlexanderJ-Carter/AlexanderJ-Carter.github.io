@@ -46,7 +46,8 @@ const t: Record<Lang, Record<string, string>> = {
     title: 'Friends',
     subtitle: 'People & Sites I Enjoy',
     badge: '🔗 Friends',
-    intro: 'Here are some websites I enjoy and my friends\' homepages. Link exchanges welcome.',
+    intro:
+      "Here are some websites I enjoy and my friends' homepages. Link exchanges welcome.",
     apply: 'Apply for Link Exchange',
     applyDesc: 'Send email to',
     requirements: 'Requirements',
@@ -62,9 +63,10 @@ const t: Record<Lang, Record<string, string>> = {
   },
   fr: {
     title: 'Amis',
-    subtitle: 'Gens et sites que j\'apprécie',
+    subtitle: "Gens et sites que j'apprécie",
     badge: '🔗 Amis',
-    intro: 'Voici quelques sites Web que j\'apprécie et les pages d\'accueil de mes amis. Échanges de liens bienvenus.',
+    intro:
+      "Voici quelques sites Web que j'apprécie et les pages d'accueil de mes amis. Échanges de liens bienvenus.",
     apply: 'Demander un échange de lien',
     applyDesc: 'Envoyer un email à',
     requirements: 'Conditions',
@@ -82,7 +84,8 @@ const t: Record<Lang, Record<string, string>> = {
     title: 'Друзья',
     subtitle: 'Люди и сайты, которые мне нравятся',
     badge: '🔗 Друзья',
-    intro: 'Здесь представлены сайты, которые мне нравятся, и домашние страницы моих друзей. Обмен ссылками приветствуется.',
+    intro:
+      'Здесь представлены сайты, которые мне нравятся, и домашние страницы моих друзей. Обмен ссылками приветствуется.',
     apply: 'Подать заявку на обмен ссылками',
     applyDesc: 'Отправить письмо на',
     requirements: 'Требования',
@@ -108,8 +111,8 @@ const friendsData = [
       'zh-CN': '这是我的个人网站',
       'zh-TW': '這是我的個人網站',
       'en-GB': 'This is my personal website',
-      'fr': 'C\'est mon site personnel',
-      'ru': 'Это мой личный сайт',
+      fr: "C'est mon site personnel",
+      ru: 'Это мой личный сайт',
     },
     tags: ['Developer', 'Photographer'],
   },
@@ -152,15 +155,22 @@ function getLangPath(path: string): string {
 
 <BaseLayout title={text.title} description={text.subtitle}>
   <section class="relative py-16 md:py-24 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient opacity-40" aria-hidden="true"></div>
+    <div
+      class="absolute inset-0 bg-mesh-gradient opacity-40"
+      aria-hidden="true"
+    >
+    </div>
     <div class="container mx-auto px-4 lg:px-8 relative z-10">
-
       <!-- Header -->
       <div class="text-center mb-12 max-w-2xl mx-auto">
-        <span class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4">
+        <span
+          class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
+        >
           {text.badge}
         </span>
-        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight">
+        <h1
+          class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight"
+        >
           {text.title}
         </h1>
         <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
@@ -170,75 +180,112 @@ function getLangPath(path: string): string {
 
       <!-- Friends Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {friendsData.map((friend) => (
-          <a
-            href={friend.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="glass-card card-hover p-6 rounded-2xl flex flex-col items-center text-center gap-4 reveal group"
-          >
-            <!-- Avatar -->
-            <div class="relative">
-              <img
-                src={friend.avatar}
-                alt={friend.name}
-                class="w-20 h-20 rounded-full object-cover ring-4 ring-primary-500/20 group-hover:ring-primary-500/40 transition-all duration-300"
-                loading="lazy"
-              />
-              <span class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-[rgb(var(--color-bg-primary))]"></span>
-            </div>
+        {
+          friendsData.map((friend) => (
+            <a
+              href={friend.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="glass-card card-hover p-6 rounded-2xl flex flex-col items-center text-center gap-4 reveal group"
+            >
+              {/* Avatar */}
+              <div class="relative">
+                <img
+                  src={friend.avatar}
+                  alt={friend.name}
+                  class="w-20 h-20 rounded-full object-cover ring-4 ring-primary-500/20 group-hover:ring-primary-500/40 transition-all duration-300"
+                  loading="lazy"
+                />
+                <span class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-[rgb(var(--color-bg-primary))]" />
+              </div>
 
-            <!-- Info -->
-            <div>
-              <h2 class="text-lg font-heading font-bold text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors">
-                {friend.name}
-              </h2>
-              <p class="text-sm text-[rgb(var(--color-text-secondary))] mt-1 line-clamp-2">
-                {friend.desc[lang as Lang] || friend.desc['en-GB'] || text.noDesc}
-              </p>
-            </div>
+              {/* Info */}
+              <div>
+                <h2 class="text-lg font-heading font-bold text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors">
+                  {friend.name}
+                </h2>
+                <p class="text-sm text-[rgb(var(--color-text-secondary))] mt-1 line-clamp-2">
+                  {friend.desc[lang as Lang] ||
+                    friend.desc['en-GB'] ||
+                    text.noDesc}
+                </p>
+              </div>
 
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-1.5 justify-center">
-              {friend.tags.map((tag) => (
-                <span class="px-2 py-0.5 rounded-md bg-accent-500/10 text-accent-600 dark:text-accent-400 text-xs font-medium">
-                  {tag === 'Placeholder' ? text.placeholderTag : tag}
-                </span>
-              ))}
-            </div>
+              {/* Tags */}
+              <div class="flex flex-wrap gap-1.5 justify-center">
+                {friend.tags.map((tag) => (
+                  <span class="px-2 py-0.5 rounded-md bg-accent-500/10 text-accent-600 dark:text-accent-400 text-xs font-medium">
+                    {tag === 'Placeholder' ? text.placeholderTag : tag}
+                  </span>
+                ))}
+              </div>
 
-            <!-- Visit indicator -->
-            <span class="text-xs text-[rgb(var(--color-text-tertiary))] group-hover:text-primary-500 transition-colors flex items-center gap-1">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-              {lang === 'zh-CN' ? '访问' : lang === 'zh-TW' ? '訪問' : 'Visit'}
-            </span>
-          </a>
-        ))}
+              {/* Visit indicator */}
+              <span class="text-xs text-[rgb(var(--color-text-tertiary))] group-hover:text-primary-500 transition-colors flex items-center gap-1">
+                <svg
+                  class="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+                {lang === 'zh-CN'
+                  ? '访问'
+                  : lang === 'zh-TW'
+                    ? '訪問'
+                    : 'Visit'}
+              </span>
+            </a>
+          ))
+        }
 
         <!-- Add Friend Card -->
         <a
           href="mailto:security@alexander.xin?subject=Friend Link Request"
           class="glass-card card-hover p-6 rounded-2xl flex flex-col items-center justify-center text-center gap-4 reveal group border-2 border-dashed border-[rgb(var(--color-border))] hover:border-primary-500/50 transition-colors min-h-[240px]"
         >
-          <div class="w-16 h-16 rounded-full bg-primary-500/10 flex items-center justify-center group-hover:bg-primary-500/20 transition-colors">
-            <svg class="w-8 h-8 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          <div
+            class="w-16 h-16 rounded-full bg-primary-500/10 flex items-center justify-center group-hover:bg-primary-500/20 transition-colors"
+          >
+            <svg
+              class="w-8 h-8 text-primary-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 4v16m8-8H4"></path>
             </svg>
           </div>
-          <span class="font-medium text-[rgb(var(--color-text-secondary))] group-hover:text-primary-500 transition-colors">
+          <span
+            class="font-medium text-[rgb(var(--color-text-secondary))] group-hover:text-primary-500 transition-colors"
+          >
             {text.apply}
           </span>
         </a>
       </div>
 
       <!-- Partner spotlight -->
-      <div class="glass-card p-6 rounded-2xl max-w-xl mx-auto mb-12 border border-primary-500/30">
-        <h3 class="font-heading font-bold text-lg mb-2 text-[rgb(var(--color-text-primary))]">
+      <div
+        class="glass-card p-6 rounded-2xl max-w-xl mx-auto mb-12 border border-primary-500/30"
+      >
+        <h3
+          class="font-heading font-bold text-lg mb-2 text-[rgb(var(--color-text-primary))]"
+        >
           📢 {text.adTitle}
         </h3>
-        <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">{text.adDesc}</p>
+        <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+          {text.adDesc}
+        </p>
         <a
           href="mailto:security@alexander.xin?subject=Partner%20Spotlight"
           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium transition-colors"
@@ -249,7 +296,9 @@ function getLangPath(path: string): string {
 
       <!-- Requirements -->
       <div class="glass-card p-6 rounded-2xl max-w-xl mx-auto mb-12">
-        <h3 class="font-heading font-bold text-lg mb-4 text-[rgb(var(--color-text-primary))]">
+        <h3
+          class="font-heading font-bold text-lg mb-4 text-[rgb(var(--color-text-primary))]"
+        >
           📋 {text.requirements}
         </h3>
         <ul class="space-y-2 text-sm text-[rgb(var(--color-text-secondary))]">
@@ -267,7 +316,11 @@ function getLangPath(path: string): string {
           </li>
         </ul>
         <p class="mt-4 text-sm text-[rgb(var(--color-text-tertiary))]">
-          {text.applyDesc} <a href="mailto:security@alexander.xin" class="text-primary-500 hover:underline">security@alexander.xin</a>
+          {text.applyDesc}
+          <a
+            href="mailto:security@alexander.xin"
+            class="text-primary-500 hover:underline">security@alexander.xin</a
+          >
         </p>
       </div>
 
