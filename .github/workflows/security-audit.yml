@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'npm'
 
       - name: Install dependencies
@@ -38,7 +38,7 @@ jobs:
 
       - name: Upload audit report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: npm-audit-report
           path: npm-audit-report.json
