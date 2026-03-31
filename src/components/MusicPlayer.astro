@@ -838,6 +838,12 @@
 </script>
 
 <style>
+  .music-mini, .music-panel {
+    display: none !important;
+  }
+  .music-mini:not(.hidden), .music-panel:not(.hidden) {
+    display: flex !important;
+  }
   .music-range {
     -webkit-appearance: none;
     appearance: none;
@@ -892,12 +898,14 @@
     font-weight: 600;
   }
   .music-panel {
+    position: fixed !important;
     bottom: auto !important;
     right: auto !important;
     left: 24px;
     top: 80px;
   }
   .music-mini {
+    position: fixed !important;
     bottom: auto !important;
     right: auto !important;
     left: 24px;
