@@ -161,7 +161,11 @@
         class="music-btn p-2 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-secondary))] transition-colors"
         aria-label="关闭"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
           ><path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -172,768 +176,778 @@
     </div>
   </div>
 
-<div class="p-4 overflow-y-auto flex-1">
-  <div class="text-center mb-4">
-    <div
-      id="music-cover"
-      class="w-28 h-28 mx-auto rounded-2xl flex items-center justify-center text-5xl mb-3"
-      style="background: linear-gradient(135deg, rgb(14 165 233 / 0.25), rgb(217 70 239 / 0.25));"
-    >
-      🎹
-    </div>
-    <h4
-      id="music-title"
-      class="font-semibold text-[rgb(var(--color-text-primary))] truncate px-2"
-    >
-      选择一首歌曲
-    </h4>
-    <p
-      id="music-artist"
-      class="text-sm text-[rgb(var(--color-text-secondary))] mt-0.5"
-    >
-      -
-    </p>
-  </div>
-  <div class="mb-4">
-    <div class="grid grid-cols-2 gap-2">
-      <button type="button" id="music-mode-local" class="music-mode-btn active"
-        >本地歌单</button
+  <div class="p-4 overflow-y-auto flex-1">
+    <div class="text-center mb-4">
+      <div
+        id="music-cover"
+        class="w-28 h-28 mx-auto rounded-2xl flex items-center justify-center text-5xl mb-3"
+        style="background: linear-gradient(135deg, rgb(14 165 233 / 0.25), rgb(217 70 239 / 0.25));"
       >
-      <button type="button" id="music-mode-radio" class="music-mode-btn"
-        >氛围电台</button
+        🎹
+      </div>
+      <h4
+        id="music-title"
+        class="font-semibold text-[rgb(var(--color-text-primary))] truncate px-2"
       >
-    </div>
-  </div>
-
-  <div id="music-radio-wrap" class="mb-4 hidden">
-    <div class="flex items-center gap-2 mb-2">
-      <select
-        id="music-radio-station"
-        class="flex-1 rounded-xl border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm text-[rgb(var(--color-text-primary))] outline-none"
-      >
-        <option value="https://ice2.somafm.com/groovesalad-128-mp3"
-          >SomaFM Groove Salad</option
-        >
-        <option value="https://ice2.somafm.com/dronezone-128-mp3"
-          >SomaFM Drone Zone</option
-        >
-        <option value="https://ice2.somafm.com/spacestation-128-mp3"
-          >SomaFM Space Station</option
-        >
-      </select>
-      <button type="button" id="music-radio-apply" class="music-mode-btn !px-3"
-        >切台</button
-      >
-    </div>
-    <p class="text-xs text-[rgb(var(--color-text-tertiary))]">
-      电台与本地歌曲共用同一个播放器控制区。
-    </p>
-  </div>
-
-  <div class="mb-4">
-    <div
-      class="flex justify-between text-xs text-[rgb(var(--color-text-tertiary))] mb-1"
-    >
-      <span id="music-current">0:00</span>
-      <span id="music-duration">0:00</span>
-    </div>
-    <input
-      type="range"
-      id="music-progress"
-      class="music-range w-full h-2 rounded-full cursor-pointer"
-      min="0"
-      max="100"
-      value="0"
-      aria-label="播放进度"
-    />
-  </div>
-
-  <div class="flex items-center gap-2 mb-4">
-    <svg
-      class="w-4 h-4 text-[rgb(var(--color-text-tertiary))] flex-shrink-0"
-      fill="currentColor"
-      viewBox="0 0 20 20"
-    >
-      <path
-        d="M10 3.75a.75.75 0 00-1.264-.546L5.203 6H2.667a.75.75 0 00-.75.75v6.5c0 .414.336.75.75.75h2.536l3.533 2.796A.75.75 0 0010 16.25V3.75z"
-      ></path>
-    </svg>
-    <input
-      type="range"
-      id="music-volume"
-      class="music-range flex-1 h-1.5 rounded-full cursor-pointer"
-      min="0"
-      max="100"
-      value="50"
-      aria-label="音量"
-    />
-  </div>
-
-  <div class="flex items-center justify-center gap-2 mb-4">
-    <button
-      type="button"
-      id="music-prev"
-      class="music-btn p-2.5 rounded-xl hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-primary))] transition-colors"
-      aria-label="上一首"
-    >
-      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-        ><path
-          d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z"
-        ></path></svg
-      >
-    </button>
-    <button
-      type="button"
-      id="music-play"
-      class="music-btn p-4 rounded-2xl text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
-      style="background: linear-gradient(135deg, rgb(14 165 233), rgb(217 70 239));"
-      aria-label="播放/暂停"
-    >
-      <svg class="play-icon w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-        ><path
-          d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"
-        ></path></svg
-      >
-      <svg
-        class="pause-icon w-6 h-6 hidden"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        ><path
-          d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"
-        ></path></svg
-      ></button
-    >
-    <button
-      type="button"
-      id="music-next"
-      class="music-btn p-2.5 rounded-xl hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-primary))] transition-colors"
-      aria-label="下一首"
-    >
-      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-        ><path
-          d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z"
-        ></path></svg
-      >
-    </button>
-  </div>
-  <div id="music-playlist-wrap">
-    <h5
-      class="text-xs font-semibold text-[rgb(var(--color-text-tertiary))] uppercase tracking-wider mb-2"
-    >
-      播放列表
-    </h5>
-    <div id="music-playlist-container" class="space-y-1">
+        选择一首歌曲
+      </h4>
       <p
-        id="music-playlist-placeholder"
-        class="text-sm text-[rgb(var(--color-text-tertiary))] py-4 text-center"
+        id="music-artist"
+        class="text-sm text-[rgb(var(--color-text-secondary))] mt-0.5"
       >
-        加载中…
+        -
       </p>
     </div>
+    <div class="mb-4">
+      <div class="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          id="music-mode-local"
+          class="music-mode-btn active">本地歌单</button
+        >
+        <button type="button" id="music-mode-radio" class="music-mode-btn"
+          >氛围电台</button
+        >
+      </div>
+    </div>
+
+    <div id="music-radio-wrap" class="mb-4 hidden">
+      <div class="flex items-center gap-2 mb-2">
+        <select
+          id="music-radio-station"
+          class="flex-1 rounded-xl border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm text-[rgb(var(--color-text-primary))] outline-none"
+        >
+          <option value="https://ice2.somafm.com/groovesalad-128-mp3"
+            >SomaFM Groove Salad</option
+          >
+          <option value="https://ice2.somafm.com/dronezone-128-mp3"
+            >SomaFM Drone Zone</option
+          >
+          <option value="https://ice2.somafm.com/spacestation-128-mp3"
+            >SomaFM Space Station</option
+          >
+        </select>
+        <button
+          type="button"
+          id="music-radio-apply"
+          class="music-mode-btn !px-3">切台</button
+        >
+      </div>
+      <p class="text-xs text-[rgb(var(--color-text-tertiary))]">
+        电台与本地歌曲共用同一个播放器控制区。
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <div
+        class="flex justify-between text-xs text-[rgb(var(--color-text-tertiary))] mb-1"
+      >
+        <span id="music-current">0:00</span>
+        <span id="music-duration">0:00</span>
+      </div>
+      <input
+        type="range"
+        id="music-progress"
+        class="music-range w-full h-2 rounded-full cursor-pointer"
+        min="0"
+        max="100"
+        value="0"
+        aria-label="播放进度"
+      />
+    </div>
+
+    <div class="flex items-center gap-2 mb-4">
+      <svg
+        class="w-4 h-4 text-[rgb(var(--color-text-tertiary))] flex-shrink-0"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M10 3.75a.75.75 0 00-1.264-.546L5.203 6H2.667a.75.75 0 00-.75.75v6.5c0 .414.336.75.75.75h2.536l3.533 2.796A.75.75 0 0010 16.25V3.75z"
+        ></path>
+      </svg>
+      <input
+        type="range"
+        id="music-volume"
+        class="music-range flex-1 h-1.5 rounded-full cursor-pointer"
+        min="0"
+        max="100"
+        value="50"
+        aria-label="音量"
+      />
+    </div>
+
+    <div class="flex items-center justify-center gap-2 mb-4">
+      <button
+        type="button"
+        id="music-prev"
+        class="music-btn p-2.5 rounded-xl hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-primary))] transition-colors"
+        aria-label="上一首"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+          ><path
+            d="M8.445 14.832A1 1 0 0010 14v-2.798l5.445 3.63A1 1 0 0017 14V6a1 1 0 00-1.555-.832L10 8.798V6a1 1 0 00-1.555-.832l-6 4a1 1 0 000 1.664l6 4z"
+          ></path></svg
+        >
+      </button>
+      <button
+        type="button"
+        id="music-play"
+        class="music-btn p-4 rounded-2xl text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+        style="background: linear-gradient(135deg, rgb(14 165 233), rgb(217 70 239));"
+        aria-label="播放/暂停"
+      >
+        <svg class="play-icon w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+          ><path
+            d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"
+          ></path></svg
+        >
+        <svg
+          class="pause-icon w-6 h-6 hidden"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          ><path
+            d="M5.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75A.75.75 0 007.25 3h-1.5zM12.75 3a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75h-1.5z"
+          ></path></svg
+        ></button
+      >
+      <button
+        type="button"
+        id="music-next"
+        class="music-btn p-2.5 rounded-xl hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-primary))] transition-colors"
+        aria-label="下一首"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+          ><path
+            d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z"
+          ></path></svg
+        >
+      </button>
+    </div>
+    <div id="music-playlist-wrap">
+      <h5
+        class="text-xs font-semibold text-[rgb(var(--color-text-tertiary))] uppercase tracking-wider mb-2"
+      >
+        播放列表
+      </h5>
+      <div id="music-playlist-container" class="space-y-1">
+        <p
+          id="music-playlist-placeholder"
+          class="text-sm text-[rgb(var(--color-text-tertiary))] py-4 text-center"
+        >
+          加载中…
+        </p>
+      </div>
+    </div>
   </div>
-</div>
 
-<audio id="music-audio" preload="metadata"></audio>
+  <audio id="music-audio" preload="metadata"></audio>
 
-<script>
-  // @ts-nocheck
-  const STORAGE_KEY = 'music-player';
-  const MANIFEST_URL = '/music/manifest.json';
-  const defaultMiniPos = { x: 24, y: 24 };
+  <script>
+    // @ts-nocheck
+    const STORAGE_KEY = 'music-player';
+    const MANIFEST_URL = '/music/manifest.json';
+    const defaultMiniPos = { x: 24, y: 24 };
 
-  const audio = document.getElementById('music-audio');
-  const fab = document.getElementById('music-fab');
-  const mini = document.getElementById('music-mini');
-  const panel = document.getElementById('music-panel');
-  const miniDrag = document.getElementById('music-mini-drag');
-  const panelDrag = document.getElementById('music-panel-drag');
-  const progress = document.getElementById('music-progress');
-  const miniProgress = document.getElementById('music-mini-progress');
-  const volume = document.getElementById('music-volume');
-  const playlistContainer = document.getElementById('music-playlist-container');
-  const playlistPlaceholder = document.getElementById(
-    'music-playlist-placeholder'
-  );
-  const radioWrap = document.getElementById('music-radio-wrap');
-  const playlistWrap = document.getElementById('music-playlist-wrap');
-  const radioStation = document.getElementById('music-radio-station');
-  const radioApply = document.getElementById('music-radio-apply');
-  const modeLocal = document.getElementById('music-mode-local');
-  const modeRadio = document.getElementById('music-mode-radio');
+    const audio = document.getElementById('music-audio');
+    const fab = document.getElementById('music-fab');
+    const mini = document.getElementById('music-mini');
+    const panel = document.getElementById('music-panel');
+    const miniDrag = document.getElementById('music-mini-drag');
+    const panelDrag = document.getElementById('music-panel-drag');
+    const progress = document.getElementById('music-progress');
+    const miniProgress = document.getElementById('music-mini-progress');
+    const volume = document.getElementById('music-volume');
+    const playlistContainer = document.getElementById(
+      'music-playlist-container'
+    );
+    const playlistPlaceholder = document.getElementById(
+      'music-playlist-placeholder'
+    );
+    const radioWrap = document.getElementById('music-radio-wrap');
+    const playlistWrap = document.getElementById('music-playlist-wrap');
+    const radioStation = document.getElementById('music-radio-station');
+    const radioApply = document.getElementById('music-radio-apply');
+    const modeLocal = document.getElementById('music-mode-local');
+    const modeRadio = document.getElementById('music-mode-radio');
 
-  let musicData = [];
-  let playbackMode = 'local';
-  let currentTrack = 0;
-  let isPlaying = false;
-  let panelPos = { x: 24, y: 80 };
-  let miniPos = { x: defaultMiniPos.x, y: defaultMiniPos.y };
-  let dragTarget = null;
-  let dragOffset = { x: 0, y: 0 };
+    let musicData = [];
+    let playbackMode = 'local';
+    let currentTrack = 0;
+    let isPlaying = false;
+    let panelPos = { x: 24, y: 80 };
+    let miniPos = { x: defaultMiniPos.x, y: defaultMiniPos.y };
+    let dragTarget = null;
+    let dragOffset = { x: 0, y: 0 };
 
-  function getSelectedStationName() {
-    if (!radioStation) return 'Ambient Radio';
-    const opt = radioStation.options[radioStation.selectedIndex];
-    return opt?.textContent || 'Ambient Radio';
-  }
-
-  function setMode(mode) {
-    playbackMode = mode === 'radio' ? 'radio' : 'local';
-    const isRadio = playbackMode === 'radio';
-    radioWrap?.classList.toggle('hidden', !isRadio);
-    playlistWrap?.classList.toggle('hidden', isRadio);
-    modeLocal?.classList.toggle('active', !isRadio);
-    modeRadio?.classList.toggle('active', isRadio);
-    if (isRadio) {
-      const titleEl = document.getElementById('music-title');
-      const artistEl = document.getElementById('music-artist');
-      const miniTitle = document.getElementById('music-mini-title');
-      const name = getSelectedStationName();
-      if (titleEl) titleEl.textContent = '📻 ' + name;
-      if (miniTitle) miniTitle.textContent = '📻 ' + name;
-      if (artistEl) artistEl.textContent = 'Live Stream';
-    } else if (musicData.length > 0) {
-      loadTrack(currentTrack);
+    function getSelectedStationName() {
+      if (!radioStation) return 'Ambient Radio';
+      const opt = radioStation.options[radioStation.selectedIndex];
+      return opt?.textContent || 'Ambient Radio';
     }
-  }
 
-  function saveState() {
-    try {
-      sessionStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({
-          miniPos,
-          panelPos,
-          volume: volume?.value ?? 50,
-        })
-      );
-    } catch (_) {}
-  }
-
-  function loadState() {
-    try {
-      const raw = sessionStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const s = JSON.parse(raw);
-        if (s.miniPos) miniPos = s.miniPos;
-        if (s.panelPos) panelPos = s.panelPos;
-        if (s.volume != null && volume) volume.value = String(s.volume);
+    function setMode(mode) {
+      playbackMode = mode === 'radio' ? 'radio' : 'local';
+      const isRadio = playbackMode === 'radio';
+      radioWrap?.classList.toggle('hidden', !isRadio);
+      playlistWrap?.classList.toggle('hidden', isRadio);
+      modeLocal?.classList.toggle('active', !isRadio);
+      modeRadio?.classList.toggle('active', isRadio);
+      if (isRadio) {
+        const titleEl = document.getElementById('music-title');
+        const artistEl = document.getElementById('music-artist');
+        const miniTitle = document.getElementById('music-mini-title');
+        const name = getSelectedStationName();
+        if (titleEl) titleEl.textContent = '📻 ' + name;
+        if (miniTitle) miniTitle.textContent = '📻 ' + name;
+        if (artistEl) artistEl.textContent = 'Live Stream';
+      } else if (musicData.length > 0) {
+        loadTrack(currentTrack);
       }
-    } catch (_) {}
-  }
-
-  function applyMiniPos() {
-    if (mini) {
-      mini.style.left = miniPos.x + 'px';
-      mini.style.top = miniPos.y + 'px';
     }
-  }
 
-  function applyPanelPos() {
-    if (panel) {
-      panel.style.left = panelPos.x + 'px';
-      panel.style.top = panelPos.y + 'px';
+    function saveState() {
+      try {
+        sessionStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({
+            miniPos,
+            panelPos,
+            volume: volume?.value ?? 50,
+          })
+        );
+      } catch (_) {}
     }
-  }
 
-  function showFab() {
-    fab?.classList.remove('hidden');
-    mini?.classList.add('hidden');
-    panel?.classList.add('hidden');
-  }
-
-  function showMini() {
-    fab?.classList.add('hidden');
-    panel?.classList.add('hidden');
-    mini?.classList.remove('hidden');
-    applyMiniPos();
-  }
-
-  function showPanel() {
-    fab?.classList.add('hidden');
-    mini?.classList.add('hidden');
-    panel?.classList.remove('hidden');
-    applyPanelPos();
-  }
-
-  function formatTime(sec) {
-    if (!Number.isFinite(sec) || sec < 0) return '0:00';
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60);
-    return m + ':' + String(s).padStart(2, '0');
-  }
-
-  function setProgressStyle(el, percent) {
-    if (!el) return;
-    const p = Math.min(100, Math.max(0, percent));
-    el.style.setProperty('--progress', p + '%');
-  }
-
-  function setEmptyState() {
-    const titleEl = document.getElementById('music-title');
-    const artistEl = document.getElementById('music-artist');
-    const coverEl = document.getElementById('music-cover');
-    const miniTitle = document.getElementById('music-mini-title');
-    const miniCover = document.getElementById('music-mini-cover');
-    if (titleEl) titleEl.textContent = '暂无歌曲';
-    if (artistEl) {
-      artistEl.textContent = '-';
-      artistEl.classList.remove('text-red-500');
+    function loadState() {
+      try {
+        const raw = sessionStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const s = JSON.parse(raw);
+          if (s.miniPos) miniPos = s.miniPos;
+          if (s.panelPos) panelPos = s.panelPos;
+          if (s.volume != null && volume) volume.value = String(s.volume);
+        }
+      } catch (_) {}
     }
-    if (coverEl) coverEl.textContent = '🎵';
-    if (miniTitle) miniTitle.textContent = '暂无歌曲';
-    if (miniCover) miniCover.textContent = '🎵';
-    if (playlistPlaceholder) {
-      playlistPlaceholder.textContent =
-        '暂无歌曲，可在 public/music 下添加音频后重新构建';
-      playlistPlaceholder.classList.remove('hidden');
+
+    function applyMiniPos() {
+      if (mini) {
+        mini.style.left = miniPos.x + 'px';
+        mini.style.top = miniPos.y + 'px';
+      }
     }
-    if (playlistContainer) {
-      const list = playlistContainer.querySelector('.music-playlist-list');
-      if (list) list.remove();
+
+    function applyPanelPos() {
+      if (panel) {
+        panel.style.left = panelPos.x + 'px';
+        panel.style.top = panelPos.y + 'px';
+      }
     }
-  }
 
-  function renderPlaylist() {
-    if (!playlistContainer || !playlistPlaceholder) return;
-    playlistPlaceholder.classList.add('hidden');
-    const list = playlistContainer.querySelector('.music-playlist-list');
-    if (list) list.remove();
-    if (musicData.length === 0) {
-      playlistPlaceholder.textContent = '暂无歌曲';
-      playlistPlaceholder.classList.remove('hidden');
-      return;
+    function showFab() {
+      fab?.classList.remove('hidden');
+      mini?.classList.add('hidden');
+      panel?.classList.add('hidden');
     }
-    const wrap = document.createElement('div');
-    wrap.className = 'music-playlist-list space-y-1';
-    musicData.forEach((track, index) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className =
-        'music-track w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 transition-colors hover:bg-[rgb(var(--color-bg-accent))] border border-transparent';
-      btn.dataset.index = String(index);
-      btn.innerHTML = `<span class="text-xl w-8 h-8 flex items-center justify-center rounded-lg flex-shrink-0" style="background: rgb(var(--color-bg-accent));">${escapeHtml(track.cover)}</span><div class="flex-1 min-w-0"><div class="text-sm font-medium truncate text-[rgb(var(--color-text-primary))]">${escapeHtml(track.title)}</div><div class="text-xs text-[rgb(var(--color-text-tertiary))] truncate">${escapeHtml(track.artist)}</div></div>`;
-      btn.addEventListener('click', async () => {
-        loadTrack(index);
-        try {
-          await audio.play();
-        } catch (_) {}
-      });
-      wrap.appendChild(btn);
-    });
-    playlistContainer.appendChild(wrap);
-  }
 
-  function escapeHtml(s) {
-    const div = document.createElement('div');
-    div.textContent = s;
-    return div.innerHTML;
-  }
-
-  function loadTrack(index) {
-    if (playbackMode === 'radio') return;
-    if (index < 0 || index >= musicData.length) return;
-    const t = musicData[index];
-    currentTrack = index;
-    audio.src = t.file;
-    audio.load();
-
-    const titleEl = document.getElementById('music-title');
-    const artistEl = document.getElementById('music-artist');
-    const coverEl = document.getElementById('music-cover');
-    const miniTitle = document.getElementById('music-mini-title');
-    const miniCover = document.getElementById('music-mini-cover');
-    if (titleEl) titleEl.textContent = t.title;
-    if (artistEl) {
-      artistEl.textContent = t.artist;
-      artistEl.classList.remove('text-red-500');
-    }
-    if (coverEl) coverEl.textContent = t.cover;
-    if (miniTitle) miniTitle.textContent = t.title;
-    if (miniCover) miniCover.textContent = t.cover;
-
-    document.querySelectorAll('.music-track').forEach((tr, i) => {
-      tr.classList.toggle('!bg-primary-500/10', i === index);
-      tr.classList.toggle('border-primary-500', i === index);
-    });
-  }
-
-  function updateTimeDisplay() {
-    const cur = formatTime(audio.currentTime);
-    const dur = formatTime(audio.duration);
-    const curEl = document.getElementById('music-current');
-    const durEl = document.getElementById('music-duration');
-    const miniTime = document.getElementById('music-mini-time');
-    if (curEl) curEl.textContent = cur;
-    if (durEl) durEl.textContent = dur;
-    if (miniTime) miniTime.textContent = cur + ' / ' + dur;
-  }
-
-  function updatePlayPause() {
-    const playIcons = document.querySelectorAll('.play-icon');
-    const pauseIcons = document.querySelectorAll('.pause-icon');
-    playIcons.forEach((el) => el.classList.toggle('hidden', isPlaying));
-    pauseIcons.forEach((el) => el.classList.toggle('hidden', !isPlaying));
-  }
-
-  fab?.addEventListener('click', () => showPanel());
-  document
-    .getElementById('music-panel-close')
-    ?.addEventListener('click', () => showFab());
-  document
-    .getElementById('music-panel-minimize')
-    ?.addEventListener('click', () => {
-      showMini();
-      saveState();
-    });
-  document
-    .getElementById('music-mini-expand')
-    ?.addEventListener('click', () => {
-      showPanel();
-      saveState();
-    });
-
-  miniDrag?.addEventListener('mousedown', (e) => {
-    if (e.button !== 0) return;
-    dragTarget = 'mini';
-    dragOffset = { x: e.clientX - miniPos.x, y: e.clientY - miniPos.y };
-  });
-  panelDrag?.addEventListener('mousedown', (e) => {
-    if (e.button !== 0) return;
-    dragTarget = 'panel';
-    dragOffset = { x: e.clientX - panelPos.x, y: e.clientY - panelPos.y };
-  });
-
-  document.addEventListener('mousemove', (e) => {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    if (dragTarget === 'mini') {
-      const minW = 280;
-      miniPos.x = Math.max(0, Math.min(w - minW, e.clientX - dragOffset.x));
-      miniPos.y = Math.max(0, Math.min(h - 80, e.clientY - dragOffset.y));
+    function showMini() {
+      fab?.classList.add('hidden');
+      panel?.classList.add('hidden');
+      mini?.classList.remove('hidden');
       applyMiniPos();
-    } else if (dragTarget === 'panel') {
-      const pw = 320;
-      panelPos.x = Math.max(0, Math.min(w - pw, e.clientX - dragOffset.x));
-      panelPos.y = Math.max(0, Math.min(h - 200, e.clientY - dragOffset.y));
+    }
+
+    function showPanel() {
+      fab?.classList.add('hidden');
+      mini?.classList.add('hidden');
+      panel?.classList.remove('hidden');
       applyPanelPos();
     }
-  });
-  document.addEventListener('mouseup', () => {
-    if (dragTarget) {
-      saveState();
-      dragTarget = null;
-    }
-  });
 
-  function playBtnClick(handler) {
-    document.getElementById('music-play')?.addEventListener('click', handler);
+    function formatTime(sec) {
+      if (!Number.isFinite(sec) || sec < 0) return '0:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return m + ':' + String(s).padStart(2, '0');
+    }
+
+    function setProgressStyle(el, percent) {
+      if (!el) return;
+      const p = Math.min(100, Math.max(0, percent));
+      el.style.setProperty('--progress', p + '%');
+    }
+
+    function setEmptyState() {
+      const titleEl = document.getElementById('music-title');
+      const artistEl = document.getElementById('music-artist');
+      const coverEl = document.getElementById('music-cover');
+      const miniTitle = document.getElementById('music-mini-title');
+      const miniCover = document.getElementById('music-mini-cover');
+      if (titleEl) titleEl.textContent = '暂无歌曲';
+      if (artistEl) {
+        artistEl.textContent = '-';
+        artistEl.classList.remove('text-red-500');
+      }
+      if (coverEl) coverEl.textContent = '🎵';
+      if (miniTitle) miniTitle.textContent = '暂无歌曲';
+      if (miniCover) miniCover.textContent = '🎵';
+      if (playlistPlaceholder) {
+        playlistPlaceholder.textContent =
+          '暂无歌曲，可在 public/music 下添加音频后重新构建';
+        playlistPlaceholder.classList.remove('hidden');
+      }
+      if (playlistContainer) {
+        const list = playlistContainer.querySelector('.music-playlist-list');
+        if (list) list.remove();
+      }
+    }
+
+    function renderPlaylist() {
+      if (!playlistContainer || !playlistPlaceholder) return;
+      playlistPlaceholder.classList.add('hidden');
+      const list = playlistContainer.querySelector('.music-playlist-list');
+      if (list) list.remove();
+      if (musicData.length === 0) {
+        playlistPlaceholder.textContent = '暂无歌曲';
+        playlistPlaceholder.classList.remove('hidden');
+        return;
+      }
+      const wrap = document.createElement('div');
+      wrap.className = 'music-playlist-list space-y-1';
+      musicData.forEach((track, index) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className =
+          'music-track w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 transition-colors hover:bg-[rgb(var(--color-bg-accent))] border border-transparent';
+        btn.dataset.index = String(index);
+        btn.innerHTML = `<span class="text-xl w-8 h-8 flex items-center justify-center rounded-lg flex-shrink-0" style="background: rgb(var(--color-bg-accent));">${escapeHtml(track.cover)}</span><div class="flex-1 min-w-0"><div class="text-sm font-medium truncate text-[rgb(var(--color-text-primary))]">${escapeHtml(track.title)}</div><div class="text-xs text-[rgb(var(--color-text-tertiary))] truncate">${escapeHtml(track.artist)}</div></div>`;
+        btn.addEventListener('click', async () => {
+          loadTrack(index);
+          try {
+            await audio.play();
+          } catch (_) {}
+        });
+        wrap.appendChild(btn);
+      });
+      playlistContainer.appendChild(wrap);
+    }
+
+    function escapeHtml(s) {
+      const div = document.createElement('div');
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    function loadTrack(index) {
+      if (playbackMode === 'radio') return;
+      if (index < 0 || index >= musicData.length) return;
+      const t = musicData[index];
+      currentTrack = index;
+      audio.src = t.file;
+      audio.load();
+
+      const titleEl = document.getElementById('music-title');
+      const artistEl = document.getElementById('music-artist');
+      const coverEl = document.getElementById('music-cover');
+      const miniTitle = document.getElementById('music-mini-title');
+      const miniCover = document.getElementById('music-mini-cover');
+      if (titleEl) titleEl.textContent = t.title;
+      if (artistEl) {
+        artistEl.textContent = t.artist;
+        artistEl.classList.remove('text-red-500');
+      }
+      if (coverEl) coverEl.textContent = t.cover;
+      if (miniTitle) miniTitle.textContent = t.title;
+      if (miniCover) miniCover.textContent = t.cover;
+
+      document.querySelectorAll('.music-track').forEach((tr, i) => {
+        tr.classList.toggle('!bg-primary-500/10', i === index);
+        tr.classList.toggle('border-primary-500', i === index);
+      });
+    }
+
+    function updateTimeDisplay() {
+      const cur = formatTime(audio.currentTime);
+      const dur = formatTime(audio.duration);
+      const curEl = document.getElementById('music-current');
+      const durEl = document.getElementById('music-duration');
+      const miniTime = document.getElementById('music-mini-time');
+      if (curEl) curEl.textContent = cur;
+      if (durEl) durEl.textContent = dur;
+      if (miniTime) miniTime.textContent = cur + ' / ' + dur;
+    }
+
+    function updatePlayPause() {
+      const playIcons = document.querySelectorAll('.play-icon');
+      const pauseIcons = document.querySelectorAll('.pause-icon');
+      playIcons.forEach((el) => el.classList.toggle('hidden', isPlaying));
+      pauseIcons.forEach((el) => el.classList.toggle('hidden', !isPlaying));
+    }
+
+    fab?.addEventListener('click', () => showPanel());
     document
-      .getElementById('music-mini-play')
-      ?.addEventListener('click', handler);
-  }
-  playBtnClick(async () => {
-    try {
-      if (isPlaying) {
-        audio.pause();
-      } else {
-        if (playbackMode === 'radio') {
-          if (!radioStation) return;
-          if (audio.src !== radioStation.value) {
-            audio.src = radioStation.value;
-            audio.load();
-          }
-          const titleEl = document.getElementById('music-title');
-          const miniTitle = document.getElementById('music-mini-title');
-          const artistEl = document.getElementById('music-artist');
-          const name = getSelectedStationName();
-          if (titleEl) titleEl.textContent = '📻 ' + name;
-          if (miniTitle) miniTitle.textContent = '📻 ' + name;
-          if (artistEl) artistEl.textContent = 'Live Stream';
+      .getElementById('music-panel-close')
+      ?.addEventListener('click', () => showFab());
+    document
+      .getElementById('music-panel-minimize')
+      ?.addEventListener('click', () => {
+        showMini();
+        saveState();
+      });
+    document
+      .getElementById('music-mini-expand')
+      ?.addEventListener('click', () => {
+        showPanel();
+        saveState();
+      });
+
+    miniDrag?.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      dragTarget = 'mini';
+      dragOffset = { x: e.clientX - miniPos.x, y: e.clientY - miniPos.y };
+    });
+    panelDrag?.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      dragTarget = 'panel';
+      dragOffset = { x: e.clientX - panelPos.x, y: e.clientY - panelPos.y };
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      if (dragTarget === 'mini') {
+        const minW = 280;
+        miniPos.x = Math.max(0, Math.min(w - minW, e.clientX - dragOffset.x));
+        miniPos.y = Math.max(0, Math.min(h - 80, e.clientY - dragOffset.y));
+        applyMiniPos();
+      } else if (dragTarget === 'panel') {
+        const pw = 320;
+        panelPos.x = Math.max(0, Math.min(w - pw, e.clientX - dragOffset.x));
+        panelPos.y = Math.max(0, Math.min(h - 200, e.clientY - dragOffset.y));
+        applyPanelPos();
+      }
+    });
+    document.addEventListener('mouseup', () => {
+      if (dragTarget) {
+        saveState();
+        dragTarget = null;
+      }
+    });
+
+    function playBtnClick(handler) {
+      document.getElementById('music-play')?.addEventListener('click', handler);
+      document
+        .getElementById('music-mini-play')
+        ?.addEventListener('click', handler);
+    }
+    playBtnClick(async () => {
+      try {
+        if (isPlaying) {
+          audio.pause();
         } else {
-          if (musicData.length === 0) return;
-          if (!audio.src || audio.src === window.location.href) loadTrack(0);
+          if (playbackMode === 'radio') {
+            if (!radioStation) return;
+            if (audio.src !== radioStation.value) {
+              audio.src = radioStation.value;
+              audio.load();
+            }
+            const titleEl = document.getElementById('music-title');
+            const miniTitle = document.getElementById('music-mini-title');
+            const artistEl = document.getElementById('music-artist');
+            const name = getSelectedStationName();
+            if (titleEl) titleEl.textContent = '📻 ' + name;
+            if (miniTitle) miniTitle.textContent = '📻 ' + name;
+            if (artistEl) artistEl.textContent = 'Live Stream';
+          } else {
+            if (musicData.length === 0) return;
+            if (!audio.src || audio.src === window.location.href) loadTrack(0);
+          }
+          await audio.play();
         }
-        await audio.play();
+      } catch (err) {
+        if (err?.name === 'NotAllowedError') {
+          console.warn('请先与页面交互后再播放');
+        }
       }
-    } catch (err) {
-      if (err?.name === 'NotAllowedError') {
-        console.warn('请先与页面交互后再播放');
-      }
-    }
-  });
+    });
 
-  audio.addEventListener('play', () => {
-    isPlaying = true;
-    updatePlayPause();
-  });
-  audio.addEventListener('pause', () => {
-    isPlaying = false;
-    updatePlayPause();
-  });
+    audio.addEventListener('play', () => {
+      isPlaying = true;
+      updatePlayPause();
+    });
+    audio.addEventListener('pause', () => {
+      isPlaying = false;
+      updatePlayPause();
+    });
 
-  audio.addEventListener('timeupdate', () => {
-    if (audio.duration) {
-      const p = (audio.currentTime / audio.duration) * 100;
-      if (progress) {
-        progress.value = p;
-        setProgressStyle(progress, p);
-      }
-      if (miniProgress) {
-        miniProgress.value = p;
-        setProgressStyle(miniProgress, p);
-      }
-      updateTimeDisplay();
-    }
-  });
-
-  function seekBar(inputEl) {
-    if (!inputEl) return;
-    inputEl.addEventListener('input', () => {
+    audio.addEventListener('timeupdate', () => {
       if (audio.duration) {
-        const t = (parseFloat(inputEl.value) / 100) * audio.duration;
-        audio.currentTime = t;
-        setProgressStyle(inputEl, parseFloat(inputEl.value));
+        const p = (audio.currentTime / audio.duration) * 100;
+        if (progress) {
+          progress.value = p;
+          setProgressStyle(progress, p);
+        }
+        if (miniProgress) {
+          miniProgress.value = p;
+          setProgressStyle(miniProgress, p);
+        }
+        updateTimeDisplay();
       }
     });
-  }
-  seekBar(progress);
-  seekBar(miniProgress);
 
-  if (volume) {
-    volume.addEventListener('input', () => {
-      audio.volume = parseFloat(volume.value) / 100;
-      saveState();
-    });
-  }
-
-  audio.addEventListener('loadedmetadata', () => {
-    updateTimeDisplay();
-    if (progress) setProgressStyle(progress, 0);
-    if (miniProgress) setProgressStyle(miniProgress, 0);
-  });
-  audio.addEventListener('ended', async () => {
-    if (playbackMode === 'radio') return;
-    if (musicData.length === 0) return;
-    currentTrack = (currentTrack + 1) % musicData.length;
-    loadTrack(currentTrack);
-    try {
-      await audio.play();
-    } catch (_) {}
-  });
-  audio.addEventListener('error', () => {
-    const artistEl = document.getElementById('music-artist');
-    if (artistEl) {
-      artistEl.textContent = '加载失败';
-      artistEl.classList.add('text-red-500');
+    function seekBar(inputEl) {
+      if (!inputEl) return;
+      inputEl.addEventListener('input', () => {
+        if (audio.duration) {
+          const t = (parseFloat(inputEl.value) / 100) * audio.duration;
+          audio.currentTime = t;
+          setProgressStyle(inputEl, parseFloat(inputEl.value));
+        }
+      });
     }
-  });
+    seekBar(progress);
+    seekBar(miniProgress);
 
-  function prevNext(delta) {
-    if (playbackMode === 'radio') return;
-    if (musicData.length === 0) return;
-    currentTrack = (currentTrack + delta + musicData.length) % musicData.length;
-    loadTrack(currentTrack);
-    if (isPlaying) audio.play().catch(() => {});
-  }
-  document
-    .getElementById('music-prev')
-    ?.addEventListener('click', () => prevNext(-1));
-  document
-    .getElementById('music-next')
-    ?.addEventListener('click', () => prevNext(1));
-  document
-    .getElementById('music-mini-prev')
-    ?.addEventListener('click', () => prevNext(-1));
-  document
-    .getElementById('music-mini-next')
-    ?.addEventListener('click', () => prevNext(1));
-  modeLocal?.addEventListener('click', () => setMode('local'));
-  modeRadio?.addEventListener('click', () => setMode('radio'));
-  radioApply?.addEventListener('click', async () => {
-    if (!radioStation) return;
-    audio.src = radioStation.value;
-    audio.load();
-    if (isPlaying) {
+    if (volume) {
+      volume.addEventListener('input', () => {
+        audio.volume = parseFloat(volume.value) / 100;
+        saveState();
+      });
+    }
+
+    audio.addEventListener('loadedmetadata', () => {
+      updateTimeDisplay();
+      if (progress) setProgressStyle(progress, 0);
+      if (miniProgress) setProgressStyle(miniProgress, 0);
+    });
+    audio.addEventListener('ended', async () => {
+      if (playbackMode === 'radio') return;
+      if (musicData.length === 0) return;
+      currentTrack = (currentTrack + 1) % musicData.length;
+      loadTrack(currentTrack);
       try {
         await audio.play();
       } catch (_) {}
-    }
-    if (playbackMode === 'radio') setMode('radio');
-  });
-
-  loadState();
-  applyMiniPos();
-  applyPanelPos();
-  audio.volume = volume ? parseFloat(volume.value) / 100 : 0.5;
-
-  // 从 manifest 加载歌单（构建时由 scripts/generate-music-manifest.js 生成）
-  fetch(MANIFEST_URL)
-    .then((r) => (r.ok ? r.json() : Promise.reject(new Error('Not ok'))))
-    .then((data) => (data && data.tracks ? data.tracks : []))
-    .then((tracks) => {
-      musicData = Array.isArray(tracks) ? tracks : [];
-      renderPlaylist();
-      if (musicData.length > 0) loadTrack(0);
-      else setEmptyState();
-    })
-    .catch(() => {
-      musicData = [];
-      setEmptyState();
     });
-  setMode('local');
+    audio.addEventListener('error', () => {
+      const artistEl = document.getElementById('music-artist');
+      if (artistEl) {
+        artistEl.textContent = '加载失败';
+        artistEl.classList.add('text-red-500');
+      }
+    });
 
-  // 触摸拖拽支持（与鼠标共用同一套位置逻辑）
-  function getClientPos(e) {
-    if (e.touches && e.touches.length)
-      return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    return { x: e.clientX, y: e.clientY };
-  }
-  function addTouchDrag(dragEl, targetName) {
-    if (!dragEl) return;
-    dragEl.addEventListener(
-      'touchstart',
+    function prevNext(delta) {
+      if (playbackMode === 'radio') return;
+      if (musicData.length === 0) return;
+      currentTrack =
+        (currentTrack + delta + musicData.length) % musicData.length;
+      loadTrack(currentTrack);
+      if (isPlaying) audio.play().catch(() => {});
+    }
+    document
+      .getElementById('music-prev')
+      ?.addEventListener('click', () => prevNext(-1));
+    document
+      .getElementById('music-next')
+      ?.addEventListener('click', () => prevNext(1));
+    document
+      .getElementById('music-mini-prev')
+      ?.addEventListener('click', () => prevNext(-1));
+    document
+      .getElementById('music-mini-next')
+      ?.addEventListener('click', () => prevNext(1));
+    modeLocal?.addEventListener('click', () => setMode('local'));
+    modeRadio?.addEventListener('click', () => setMode('radio'));
+    radioApply?.addEventListener('click', async () => {
+      if (!radioStation) return;
+      audio.src = radioStation.value;
+      audio.load();
+      if (isPlaying) {
+        try {
+          await audio.play();
+        } catch (_) {}
+      }
+      if (playbackMode === 'radio') setMode('radio');
+    });
+
+    loadState();
+    applyMiniPos();
+    applyPanelPos();
+    audio.volume = volume ? parseFloat(volume.value) / 100 : 0.5;
+
+    // 从 manifest 加载歌单（构建时由 scripts/generate-music-manifest.js 生成）
+    fetch(MANIFEST_URL)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('Not ok'))))
+      .then((data) => (data && data.tracks ? data.tracks : []))
+      .then((tracks) => {
+        musicData = Array.isArray(tracks) ? tracks : [];
+        renderPlaylist();
+        if (musicData.length > 0) loadTrack(0);
+        else setEmptyState();
+      })
+      .catch(() => {
+        musicData = [];
+        setEmptyState();
+      });
+    setMode('local');
+
+    // 触摸拖拽支持（与鼠标共用同一套位置逻辑）
+    function getClientPos(e) {
+      if (e.touches && e.touches.length)
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      return { x: e.clientX, y: e.clientY };
+    }
+    function addTouchDrag(dragEl, targetName) {
+      if (!dragEl) return;
+      dragEl.addEventListener(
+        'touchstart',
+        (e) => {
+          if (e.touches.length !== 1) return;
+          const pos = getClientPos(e);
+          dragTarget = targetName;
+          dragOffset = {
+            x: pos.x - (targetName === 'mini' ? miniPos.x : panelPos.x),
+            y: pos.y - (targetName === 'mini' ? miniPos.y : panelPos.y),
+          };
+        },
+        { passive: true }
+      );
+    }
+    document.addEventListener(
+      'touchmove',
       (e) => {
-        if (e.touches.length !== 1) return;
-        const pos = getClientPos(e);
-        dragTarget = targetName;
-        dragOffset = {
-          x: pos.x - (targetName === 'mini' ? miniPos.x : panelPos.x),
-          y: pos.y - (targetName === 'mini' ? miniPos.y : panelPos.y),
-        };
+        if (dragTarget && e.touches.length === 1) {
+          const pos = getClientPos(e);
+          const w = window.innerWidth;
+          const h = window.innerHeight;
+          if (dragTarget === 'mini') {
+            const minW = 280;
+            miniPos.x = Math.max(0, Math.min(w - minW, pos.x - dragOffset.x));
+            miniPos.y = Math.max(0, Math.min(h - 80, pos.y - dragOffset.y));
+            applyMiniPos();
+          } else if (dragTarget === 'panel') {
+            const pw = 320;
+            panelPos.x = Math.max(0, Math.min(w - pw, pos.x - dragOffset.x));
+            panelPos.y = Math.max(0, Math.min(h - 200, pos.y - dragOffset.y));
+            applyPanelPos();
+          }
+        }
       },
       { passive: true }
     );
-  }
-  document.addEventListener(
-    'touchmove',
-    (e) => {
-      if (dragTarget && e.touches.length === 1) {
-        const pos = getClientPos(e);
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        if (dragTarget === 'mini') {
-          const minW = 280;
-          miniPos.x = Math.max(0, Math.min(w - minW, pos.x - dragOffset.x));
-          miniPos.y = Math.max(0, Math.min(h - 80, pos.y - dragOffset.y));
-          applyMiniPos();
-        } else if (dragTarget === 'panel') {
-          const pw = 320;
-          panelPos.x = Math.max(0, Math.min(w - pw, pos.x - dragOffset.x));
-          panelPos.y = Math.max(0, Math.min(h - 200, pos.y - dragOffset.y));
-          applyPanelPos();
-        }
+    document.addEventListener('touchend', () => {
+      if (dragTarget) {
+        saveState();
+        dragTarget = null;
       }
-    },
-    { passive: true }
-  );
-  document.addEventListener('touchend', () => {
-    if (dragTarget) {
-      saveState();
-      dragTarget = null;
-    }
-  });
-  addTouchDrag(miniDrag, 'mini');
-  addTouchDrag(panelDrag, 'panel');
-</script>
+    });
+    addTouchDrag(miniDrag, 'mini');
+    addTouchDrag(panelDrag, 'panel');
+  </script>
 
-<style>
-  .music-mini, .music-panel {
-    display: none !important;
-  }
-  .music-mini:not(.hidden), .music-panel:not(.hidden) {
-    display: flex !important;
-  }
-  .music-range {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 8px;
-    border-radius: 9999px;
-    background: rgb(var(--color-border));
-    --progress: 0%;
-    background: linear-gradient(
-      to right,
-      rgb(14 165 233) 0%,
-      rgb(217 70 239) var(--progress),
-      rgb(var(--color-border)) var(--progress)
-    );
-  }
-  .music-range::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgb(var(--color-border));
-  }
-  .music-range::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    border: 1px solid rgb(var(--color-border));
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
-  .music-btn {
-    outline: none;
-  }
-  .music-btn:focus-visible {
-    box-shadow: 0 0 0 2px rgb(14 165 233);
-  }
-  .music-mode-btn {
-    border: 1px solid rgb(var(--color-border));
-    background: rgb(var(--color-bg-primary));
-    border-radius: 0.75rem;
-    padding: 0.45rem 0.6rem;
-    font-size: 0.78rem;
-    color: rgb(var(--color-text-secondary));
-  }
-  .music-mode-btn.active {
-    color: rgb(14 165 233);
-    border-color: rgb(14 165 233 / 0.45);
-    background: rgb(14 165 233 / 0.12);
-    font-weight: 600;
-  }
-  .music-panel {
-    position: fixed !important;
-    bottom: auto !important;
-    right: auto !important;
-    left: 24px;
-    top: 80px;
-  }
-  .music-mini {
-    position: fixed !important;
-    bottom: auto !important;
-    right: auto !important;
-    left: 24px;
-    top: 24px;
-  }
-
-  /* 悬浮按钮与面板的定位：桌面右下，移动端留出 safe-area 并与其它浮动按钮错开 */
-  .music-fab {
-    right: 1rem;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
-  }
-  @media (min-width: 768px) {
-    .music-fab {
-      right: 1.5rem;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+  <style>
+    .music-mini,
+    .music-panel {
+      display: none !important;
     }
-  }
-  @media (max-width: 640px) {
-    .music-fab {
-      width: 3rem;
-      height: 3rem;
+    .music-mini:not(.hidden),
+    .music-panel:not(.hidden) {
+      display: flex !important;
+    }
+    .music-range {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      border-radius: 9999px;
+      background: rgb(var(--color-border));
+      --progress: 0%;
+      background: linear-gradient(
+        to right,
+        rgb(14 165 233) 0%,
+        rgb(217 70 239) var(--progress),
+        rgb(var(--color-border)) var(--progress)
+      );
+    }
+    .music-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgb(var(--color-border));
+    }
+    .music-range::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+      border: 1px solid rgb(var(--color-border));
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    .music-btn {
+      outline: none;
+    }
+    .music-btn:focus-visible {
+      box-shadow: 0 0 0 2px rgb(14 165 233);
+    }
+    .music-mode-btn {
+      border: 1px solid rgb(var(--color-border));
+      background: rgb(var(--color-bg-primary));
+      border-radius: 0.75rem;
+      padding: 0.45rem 0.6rem;
+      font-size: 0.78rem;
+      color: rgb(var(--color-text-secondary));
+    }
+    .music-mode-btn.active {
+      color: rgb(14 165 233);
+      border-color: rgb(14 165 233 / 0.45);
+      background: rgb(14 165 233 / 0.12);
+      font-weight: 600;
     }
     .music-panel {
-      width: min(320px, calc(100vw - 2rem));
-      max-height: 80vh;
+      position: fixed !important;
+      bottom: auto !important;
+      right: auto !important;
+      left: 24px;
+      top: 80px;
     }
     .music-mini {
-      min-width: 260px;
-      max-width: min(320px, calc(100vw - 2rem));
+      position: fixed !important;
+      bottom: auto !important;
+      right: auto !important;
+      left: 24px;
+      top: 24px;
     }
-  }
-</style>
+
+    /* 悬浮按钮与面板的定位：桌面右下，移动端留出 safe-area 并与其它浮动按钮错开 */
+    .music-fab {
+      right: 1rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
+    }
+    @media (min-width: 768px) {
+      .music-fab {
+        right: 1.5rem;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+      }
+    }
+    @media (max-width: 640px) {
+      .music-fab {
+        width: 3rem;
+        height: 3rem;
+      }
+      .music-panel {
+        width: min(320px, calc(100vw - 2rem));
+        max-height: 80vh;
+      }
+      .music-mini {
+        min-width: 260px;
+        max-width: min(320px, calc(100vw - 2rem));
+      }
+    }
+  </style>
+</div>
