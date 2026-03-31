@@ -89,7 +89,7 @@ self.addEventListener('fetch', (event) => {
   let strategy = 'networkFirst';
   let maxAge = 24 * 60 * 60 * 1000;
 
-  for (const [type, config] of Object.entries(CACHE_STRATEGIES)) {
+  for (const [, config] of Object.entries(CACHE_STRATEGIES)) {
     if (config.match.test(url.pathname)) {
       strategy = config.strategy;
       maxAge = config.maxAge;
@@ -141,7 +141,7 @@ async function cacheFirst(request, maxAge) {
  * 网络优先策略
  * 适用于需要更新的资源（如 HTML、API）
  */
-async function networkFirst(request, maxAge) {
+async function networkFirst(request, _maxAge) {
   try {
     const response = await fetch(request);
     if (response.ok) {

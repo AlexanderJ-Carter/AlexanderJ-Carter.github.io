@@ -164,11 +164,24 @@ function getLangPath(path: string): string {
   </svg>
 </button>
 
-<script is:inline define:vars={{ lang, shortcuts, getLangPath }}>
+<script is:inline define:vars={{ lang, getLangPath }}>
   const modal = document.getElementById('shortcuts-modal');
   const backdrop = document.getElementById('shortcuts-backdrop');
   const closeBtn = document.getElementById('close-shortcuts');
   const hintBtn = document.getElementById('shortcuts-hint');
+
+  /** @type {{ key: string; action?: string; url?: string }[]} */
+  const shortcuts = [
+    { key: 'h', url: '/' },
+    { key: 'g', url: '/gallery' },
+    { key: 'p', url: '/projects' },
+    { key: 'a', url: '/about' },
+    { key: 'c', url: '/contact' },
+    { key: 't', url: '/time' },
+    { key: '/', action: 'search' },
+    { key: 'd', action: 'theme' },
+    { key: '?', action: 'help' },
+  ];
 
   function showModal() {
     modal?.classList.remove('hidden');
@@ -220,7 +233,6 @@ function getLangPath(path: string): string {
     }
 
     // Find matching shortcut
-    // @ts-ignore - shortcuts is defined in define:vars
     const shortcut = shortcuts.find((s) => s.key === key);
     if (shortcut) {
       e.preventDefault();
