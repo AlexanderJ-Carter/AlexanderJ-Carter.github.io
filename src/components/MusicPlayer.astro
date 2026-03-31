@@ -155,21 +155,21 @@
             d="M20 12H4"></path></svg
         ></button
       >
+      <button
+        type="button"
+        id="music-panel-close"
+        class="music-btn p-2 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-secondary))] transition-colors"
+        aria-label="关闭"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path></svg
+        ></button
+      >
     </div>
-    <button
-      type="button"
-      id="music-panel-close"
-      class="music-btn p-2 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-secondary))] transition-colors"
-      aria-label="关闭"
-    >
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-        ><path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"></path></svg
-      ></button
-    >
   </div>
 
 <div class="p-4 overflow-y-auto flex-1">
@@ -316,21 +316,20 @@
       >
     </button>
   </div>
-</div>
-
-<div id="music-playlist-wrap">
-  <h5
-    class="text-xs font-semibold text-[rgb(var(--color-text-tertiary))] uppercase tracking-wider mb-2"
-  >
-    播放列表
-  </h5>
-  <div id="music-playlist-container" class="space-y-1">
-    <p
-      id="music-playlist-placeholder"
-      class="text-sm text-[rgb(var(--color-text-tertiary))] py-4 text-center"
+  <div id="music-playlist-wrap">
+    <h5
+      class="text-xs font-semibold text-[rgb(var(--color-text-tertiary))] uppercase tracking-wider mb-2"
     >
-      加载中…
-    </p>
+      播放列表
+    </h5>
+    <div id="music-playlist-container" class="space-y-1">
+      <p
+        id="music-playlist-placeholder"
+        class="text-sm text-[rgb(var(--color-text-tertiary))] py-4 text-center"
+      >
+        加载中…
+      </p>
+    </div>
   </div>
 </div>
 
