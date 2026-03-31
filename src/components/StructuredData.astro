@@ -4,17 +4,17 @@ interface Props {
 }
 
 const { description } = Astro.props;
+
+const structuredData = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Alexander James Carter',
+  url: 'https://alexander.xin',
+  image: 'https://alexander.xin/img/profile/about-me.jpg',
+  sameAs: ['https://github.com/AlexanderJ-Carter'],
+  description,
+  jobTitle: 'Developer & Designer',
+});
 ---
 
-<script type="application/ld+json" is:inline>
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Alexander James Carter",
-    "url": "https://alexander.xin",
-    "image": "https://alexander.xin/img/profile/about-me.jpg",
-    "sameAs": ["https://github.com/AlexanderJ-Carter"],
-    "description": description,
-    "jobTitle": "Developer & Designer"
-  }
-</script>
+<script type="application/ld+json" is:inline set:html={structuredData}></script>

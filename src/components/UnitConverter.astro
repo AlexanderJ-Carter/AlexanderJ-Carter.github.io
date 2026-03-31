@@ -287,7 +287,7 @@ const t = unitText[lang as keyof typeof unitText] || unitText['zh-CN'];
     fromUnit.innerHTML = '';
     toUnitSelect.innerHTML = '';
 
-    unitList.forEach((unit, index) => {
+    unitList.forEach((unit) => {
       fromUnit.innerHTML += `<option value="${unit.id}">${unit.name}</option>`;
       toUnitSelect.innerHTML += `<option value="${unit.id}">${unit.name}</option>`;
     });

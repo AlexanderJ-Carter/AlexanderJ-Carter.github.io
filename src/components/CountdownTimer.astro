@@ -349,7 +349,7 @@ const t =
 
     // 播放提示音
     const audioContext = new (
-      window.AudioContext || window.webkitAudioContext
+      window.AudioContext || /** @type {any} */ (window).webkitAudioContext
     )();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
