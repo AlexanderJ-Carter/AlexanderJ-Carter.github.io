@@ -107,18 +107,17 @@
       ></button
     >
   </div>
-</div>
-
-<div class="px-3 pb-2">
-  <input
-    type="range"
-    id="music-mini-progress"
-    class="music-range w-full h-1.5 rounded-full cursor-pointer"
-    min="0"
-    max="100"
-    value="0"
-    aria-label="播放进度"
-  />
+  <div class="px-3 pb-2">
+    <input
+      type="range"
+      id="music-mini-progress"
+      class="music-range w-full h-1.5 rounded-full cursor-pointer"
+      min="0"
+      max="100"
+      value="0"
+      aria-label="播放进度"
+    />
+  </div>
 </div>
 
 <!-- 完整面板：可拖拽标题栏、可最小化 -->
@@ -172,7 +171,6 @@
       ></button
     >
   </div>
-</div>
 
 <div class="p-4 overflow-y-auto flex-1">
   <div class="text-center mb-4">
@@ -334,6 +332,7 @@
       加载中…
     </p>
   </div>
+</div>
 </div>
 
 <audio id="music-audio" preload="metadata"></audio>
@@ -729,15 +728,6 @@
       artistEl.textContent = '加载失败';
       artistEl.classList.add('text-red-500');
     }
-  });
-
-  document.querySelectorAll('.music-track').forEach((tr, index) => {
-    tr.addEventListener('click', async () => {
-      loadTrack(index);
-      try {
-        await audio.play();
-      } catch (_) {}
-    });
   });
 
   function prevNext(delta) {
