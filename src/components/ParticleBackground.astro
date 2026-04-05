@@ -6,16 +6,20 @@ interface Props {
   interactive?: boolean;
 }
 
-const { 
-  particleCount = 80, 
-  color = '#0ea5e9', 
+const {
+  particleCount = 80,
+  color = '#0ea5e9',
   speed = 1,
-  interactive = true 
+  interactive = true,
 } = Astro.props;
 ---
 
-<div class="particle-container absolute inset-0 overflow-hidden" aria-hidden="true">
-  <canvas id="particle-canvas" class="w-full h-full pointer-events-none"></canvas>
+<div
+  class="particle-container absolute inset-0 overflow-hidden"
+  aria-hidden="true"
+>
+  <canvas id="particle-canvas" class="w-full h-full pointer-events-none"
+  ></canvas>
 </div>
 
 <style>
@@ -28,7 +32,7 @@ const {
     z-index: 0;
     pointer-events: none;
   }
-  
+
   /* 尊重用户的减少动画偏好 */
   @media (prefers-reduced-motion: reduce) {
     .particle-container {
@@ -49,10 +53,12 @@ const {
       this.speed = speed || 1;
       this.interactive = interactive !== false;
       this.animationId = null;
-      
+
       // 检查用户是否偏好减少动画
-      this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
+      this.prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
       if (this.prefersReducedMotion) {
         // 用户偏好减少动画，仅绘制静态粒子
         this.resize();
@@ -60,20 +66,20 @@ const {
         this.drawStatic();
         return;
       }
-      
+
       this.resize();
       this.init();
       this.animate();
-      
+
       window.addEventListener('resize', () => this.resize());
-      
+
       // 修复Bug 1: 将事件监听器绑定到document，而不是被pointer-events-none阻止的容器
       if (this.interactive) {
         document.addEventListener('mousemove', (e) => {
           const rect = this.canvas.getBoundingClientRect();
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
-          
+
           // 检查鼠标是否在canvas区域内
           if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
             this.mouse.x = x;
@@ -84,27 +90,29 @@ const {
           }
         });
       }
-      
+
       // 监听减少动画偏好变化
-      window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
-        this.prefersReducedMotion = e.matches;
-        if (e.matches) {
-          if (this.animationId) {
-            cancelAnimationFrame(this.animationId);
-            this.animationId = null;
+      window
+        .matchMedia('(prefers-reduced-motion: reduce)')
+        .addEventListener('change', (e) => {
+          this.prefersReducedMotion = e.matches;
+          if (e.matches) {
+            if (this.animationId) {
+              cancelAnimationFrame(this.animationId);
+              this.animationId = null;
+            }
+            this.drawStatic();
+          } else {
+            this.animate();
           }
-          this.drawStatic();
-        } else {
-          this.animate();
-        }
-      });
+        });
     }
-    
+
     resize() {
       this.canvas.width = this.canvas.offsetWidth;
       this.canvas.height = this.canvas.offsetHeight;
     }
-    
+
     init() {
       this.particles = [];
       for (let i = 0; i < this.particleCount; i++) {
@@ -116,11 +124,11 @@ const {
         this.particles.push({ x, y, size, vx, vy, baseX: x, baseY: y });
       }
     }
-    
+
     drawStatic() {
       if (!this.ctx) return;
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      
+
       this.particles.forEach((p) => {
         this.ctx.beginPath();
         this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -129,48 +137,48 @@ const {
         this.ctx.fill();
       });
     }
-    
+
     animate() {
       if (this.prefersReducedMotion) return;
-      
+
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      
+
       this.particles.forEach((p, i) => {
         // Mouse interaction
         if (this.interactive && this.mouse.x !== null) {
           const dx = this.mouse.x - p.x;
           const dy = this.mouse.y - p.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          
+
           if (dist < this.mouse.radius) {
             const force = (this.mouse.radius - dist) / this.mouse.radius;
             p.x -= dx * force * 0.03;
             p.y -= dy * force * 0.03;
           }
         }
-        
+
         // Movement
         p.x += p.vx;
         p.y += p.vy;
-        
+
         // Boundary check
         if (p.x < 0 || p.x > this.canvas.width) p.vx *= -1;
         if (p.y < 0 || p.y > this.canvas.height) p.vy *= -1;
-        
+
         // Draw particle
         this.ctx.beginPath();
         this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         this.ctx.fillStyle = this.color;
         this.ctx.globalAlpha = 0.6;
         this.ctx.fill();
-        
+
         // Draw connections
         for (let j = i + 1; j < this.particles.length; j++) {
           const p2 = this.particles[j];
           const dx = p.x - p2.x;
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          
+
           if (dist < 120) {
             this.ctx.beginPath();
             this.ctx.moveTo(p.x, p.y);
@@ -182,11 +190,11 @@ const {
           }
         }
       });
-      
+
       this.animationId = requestAnimationFrame(() => this.animate());
     }
   }
-  
+
   document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
