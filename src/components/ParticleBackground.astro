@@ -14,8 +14,8 @@ const {
 } = Astro.props;
 ---
 
-<div class="particle-container absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-  <canvas id="particle-canvas" class="w-full h-full"></canvas>
+<div class="particle-container absolute inset-0 overflow-hidden" aria-hidden="true">
+  <canvas id="particle-canvas" class="w-full h-full pointer-events-none"></canvas>
 </div>
 
 <style>
@@ -26,6 +26,14 @@ const {
     width: 100%;
     height: 100%;
     z-index: 0;
+    pointer-events: none;
+  }
+  
+  /* 尊重用户的减少动画偏好 */
+  @media (prefers-reduced-motion: reduce) {
+    .particle-container {
+      display: none;
+    }
   }
 </style>
 
@@ -40,6 +48,18 @@ const {
       this.color = color || '#0ea5e9';
       this.speed = speed || 1;
       this.interactive = interactive !== false;
+      this.animationId = null;
+      
+      // 检查用户是否偏好减少动画
+      this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (this.prefersReducedMotion) {
+        // 用户偏好减少动画，仅绘制静态粒子
+        this.resize();
+        this.init();
+        this.drawStatic();
+        return;
+      }
       
       this.resize();
       this.init();
@@ -47,18 +67,37 @@ const {
       
       window.addEventListener('resize', () => this.resize());
       
+      // 修复Bug 1: 将事件监听器绑定到document，而不是被pointer-events-none阻止的容器
       if (this.interactive) {
-        canvas.parentElement.addEventListener('mousemove', (e) => {
-          const rect = canvas.getBoundingClientRect();
-          this.mouse.x = e.clientX - rect.left;
-          this.mouse.y = e.clientY - rect.top;
-        });
-        
-        canvas.parentElement.addEventListener('mouseleave', () => {
-          this.mouse.x = null;
-          this.mouse.y = null;
+        document.addEventListener('mousemove', (e) => {
+          const rect = this.canvas.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          // 检查鼠标是否在canvas区域内
+          if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+            this.mouse.x = x;
+            this.mouse.y = y;
+          } else {
+            this.mouse.x = null;
+            this.mouse.y = null;
+          }
         });
       }
+      
+      // 监听减少动画偏好变化
+      window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
+        this.prefersReducedMotion = e.matches;
+        if (e.matches) {
+          if (this.animationId) {
+            cancelAnimationFrame(this.animationId);
+            this.animationId = null;
+          }
+          this.drawStatic();
+        } else {
+          this.animate();
+        }
+      });
     }
     
     resize() {
@@ -78,7 +117,22 @@ const {
       }
     }
     
+    drawStatic() {
+      if (!this.ctx) return;
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      
+      this.particles.forEach((p) => {
+        this.ctx.beginPath();
+        this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        this.ctx.fillStyle = this.color;
+        this.ctx.globalAlpha = 0.4;
+        this.ctx.fill();
+      });
+    }
+    
     animate() {
+      if (this.prefersReducedMotion) return;
+      
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       
       this.particles.forEach((p, i) => {
@@ -129,7 +183,7 @@ const {
         }
       });
       
-      requestAnimationFrame(() => this.animate());
+      this.animationId = requestAnimationFrame(() => this.animate());
     }
   }
   
