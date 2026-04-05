@@ -1,7 +1,7 @@
 {
   "name": "alexander-portfolio",
   "type": "module",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "license": "MIT",
   "overrides": {
     "lodash": ">=4.17.22"
@@ -13,7 +13,8 @@
     "optimize-images": "node scripts/optimize-images.js",
     "build": "node scripts/generate-music-manifest.js && astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint . --ext .js,.ts,.astro"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.1.0",
@@ -27,6 +28,11 @@
     "prettier": "^3.3.0",
     "prettier-plugin-astro": "^0.14.0",
     "sharp": "^0.34.5",
-    "typescript": "^5.5.0"
+    "typescript": "^5.5.0",
+    "eslint": "^9.0.0",
+    "@eslint/js": "^9.0.0",
+    "eslint-plugin-astro": "^1.0.0",
+    "typescript-eslint": "^8.0.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0"
   }
 }

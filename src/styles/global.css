@@ -989,3 +989,317 @@ select:valid:not(:placeholder-shown) {
 .dark .form-message.success {
   color: rgb(86 180 104);
 }
+
+/* ========================================
+   CSS Scroll-Driven Animations (2026)
+   Modern scroll animations without JavaScript
+   ======================================== */
+
+/* Scroll-Driven Fade In Animation */
+@supports (animation-timeline: view()) {
+  .scroll-fade-in {
+    animation: scrollFadeIn linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  
+  @keyframes scrollFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Scroll-Driven Scale Animation */
+  .scroll-scale-in {
+    animation: scrollScaleIn linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 50%;
+  }
+  
+  @keyframes scrollScaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Scroll-Driven Slide from Left */
+  .scroll-slide-left {
+    animation: scrollSlideLeft linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  
+  @keyframes scrollSlideLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-80px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Scroll-Driven Slide from Right */
+  .scroll-slide-right {
+    animation: scrollSlideRight linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  
+  @keyframes scrollSlideRight {
+    from {
+      opacity: 0;
+      transform: translateX(80px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Scroll-Driven Parallax */
+  .scroll-parallax {
+    animation: scrollParallax linear;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+  
+  @keyframes scrollParallax {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-30px);
+    }
+  }
+  
+  /* Scroll Progress Indicator */
+  .scroll-progress {
+    animation: scrollProgress linear;
+    animation-timeline: scroll();
+  }
+  
+  @keyframes scrollProgress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  
+  /* Scroll-Driven Reveal */
+  .scroll-reveal {
+    animation: scrollReveal linear;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+  
+  @keyframes scrollReveal {
+    0% {
+      opacity: 0;
+      clip-path: inset(100% 0 0 0);
+    }
+    30% {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
+    70% {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
+    100% {
+      opacity: 0;
+      clip-path: inset(0 0 100% 0);
+    }
+  }
+}
+
+/* Fallback for browsers without scroll-timeline support */
+@supports not (animation-timeline: view()) {
+  .scroll-fade-in,
+  .scroll-scale-in,
+  .scroll-slide-left,
+  .scroll-slide-right {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ========================================
+   Magnetic Button Effect (CSS + JS hybrid)
+   ======================================== */
+.btn-magnetic {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.btn-magnetic:hover {
+  transform: translate(var(--magnet-x, 0), var(--magnet-y, 0));
+}
+
+/* ========================================
+   3D Card Tilt Effect
+   ======================================== */
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.3s ease;
+}
+
+.card-3d:hover {
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+}
+
+.card-3d-content {
+  transform: translateZ(30px);
+}
+
+/* ========================================
+   Liquid Glass Effect
+   ======================================== */
+.liquid-glass {
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  animation: liquidShine 3s ease-in-out infinite;
+}
+
+@keyframes liquidShine {
+  0%, 100% {
+    transform: rotate(45deg) translateX(-100%);
+  }
+  50% {
+    transform: rotate(45deg) translateX(100%);
+  }
+}
+
+/* ========================================
+   Glitch Effect (Cyberpunk theme)
+   ======================================== */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch-1 2s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  color: #ff6b6b;
+}
+
+.glitch::after {
+  animation: glitch-2 3s infinite linear alternate-reverse;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  color: #4ecdc4;
+}
+
+@keyframes glitch-1 {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  60% { transform: translateX(-1px); }
+  80% { transform: translateX(1px); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(2px); }
+  40% { transform: translateX(-2px); }
+  60% { transform: translateX(1px); }
+  80% { transform: translateX(-1px); }
+}
+
+/* ========================================
+   Bento Grid System
+   ======================================== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(120px, auto);
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bento-item-large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.bento-item-wide {
+  grid-column: span 2;
+}
+
+.bento-item-tall {
+  grid-row: span 2;
+}
+
+.bento-item-full {
+  grid-column: span 4;
+}
+
+@media (max-width: 1024px) {
+  .bento-item-large,
+  .bento-item-wide {
+    grid-column: span 2;
+  }
+  .bento-item-full {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .bento-item-large,
+  .bento-item-wide,
+  .bento-item-tall,
+  .bento-item-full {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}

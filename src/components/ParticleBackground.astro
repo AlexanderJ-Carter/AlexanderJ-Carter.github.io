@@ -1,0 +1,142 @@
+---
+interface Props {
+  particleCount?: number;
+  color?: string;
+  speed?: number;
+  interactive?: boolean;
+}
+
+const { 
+  particleCount = 80, 
+  color = '#0ea5e9', 
+  speed = 1,
+  interactive = true 
+} = Astro.props;
+---
+
+<div class="particle-container absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+  <canvas id="particle-canvas" class="w-full h-full"></canvas>
+</div>
+
+<style>
+  .particle-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+</style>
+
+<script define:vars={{ particleCount, color, speed, interactive }}>
+  class ParticleSystem {
+    constructor(canvas) {
+      this.canvas = canvas;
+      this.ctx = canvas.getContext('2d');
+      this.particles = [];
+      this.mouse = { x: null, y: null, radius: 150 };
+      this.particleCount = particleCount || 80;
+      this.color = color || '#0ea5e9';
+      this.speed = speed || 1;
+      this.interactive = interactive !== false;
+      
+      this.resize();
+      this.init();
+      this.animate();
+      
+      window.addEventListener('resize', () => this.resize());
+      
+      if (this.interactive) {
+        canvas.parentElement.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          this.mouse.x = e.clientX - rect.left;
+          this.mouse.y = e.clientY - rect.top;
+        });
+        
+        canvas.parentElement.addEventListener('mouseleave', () => {
+          this.mouse.x = null;
+          this.mouse.y = null;
+        });
+      }
+    }
+    
+    resize() {
+      this.canvas.width = this.canvas.offsetWidth;
+      this.canvas.height = this.canvas.offsetHeight;
+    }
+    
+    init() {
+      this.particles = [];
+      for (let i = 0; i < this.particleCount; i++) {
+        const size = Math.random() * 3 + 1;
+        const x = Math.random() * this.canvas.width;
+        const y = Math.random() * this.canvas.height;
+        const vx = (Math.random() - 0.5) * this.speed;
+        const vy = (Math.random() - 0.5) * this.speed;
+        this.particles.push({ x, y, size, vx, vy, baseX: x, baseY: y });
+      }
+    }
+    
+    animate() {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      
+      this.particles.forEach((p, i) => {
+        // Mouse interaction
+        if (this.interactive && this.mouse.x !== null) {
+          const dx = this.mouse.x - p.x;
+          const dy = this.mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < this.mouse.radius) {
+            const force = (this.mouse.radius - dist) / this.mouse.radius;
+            p.x -= dx * force * 0.03;
+            p.y -= dy * force * 0.03;
+          }
+        }
+        
+        // Movement
+        p.x += p.vx;
+        p.y += p.vy;
+        
+        // Boundary check
+        if (p.x < 0 || p.x > this.canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > this.canvas.height) p.vy *= -1;
+        
+        // Draw particle
+        this.ctx.beginPath();
+        this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        this.ctx.fillStyle = this.color;
+        this.ctx.globalAlpha = 0.6;
+        this.ctx.fill();
+        
+        // Draw connections
+        for (let j = i + 1; j < this.particles.length; j++) {
+          const p2 = this.particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < 120) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(p.x, p.y);
+            this.ctx.lineTo(p2.x, p2.y);
+            this.ctx.strokeStyle = this.color;
+            this.ctx.globalAlpha = 0.2 * (1 - dist / 120);
+            this.ctx.lineWidth = 0.5;
+            this.ctx.stroke();
+          }
+        }
+      });
+      
+      requestAnimationFrame(() => this.animate());
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('particle-canvas');
+    if (canvas) {
+      new ParticleSystem(canvas);
+    }
+  });
+</script>
