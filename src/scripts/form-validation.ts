@@ -80,7 +80,7 @@ class FormValidator {
     if (!rules) return true;
 
     const value = field.value.trim();
-    let errors: string[] = [];
+    const errors: string[] = [];
 
     // Required validation
     if (rules.required && !value) {
@@ -222,7 +222,7 @@ class FormValidator {
 
     if (this.isFormValid()) {
       // Form is valid - you can submit here
-      console.log('Form is valid, ready to submit');
+      console.warn('Form is valid, ready to submit');
       // window.showToast({ message: '表单验证通过！', type: 'success' });
     } else {
       // Form is invalid

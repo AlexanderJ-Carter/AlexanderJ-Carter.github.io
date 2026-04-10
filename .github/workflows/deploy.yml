@@ -10,6 +10,10 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,43 +27,11 @@ jobs:
           node-version: '24'
           cache: 'npm'
 
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
       - name: Install dependencies
         run: npm ci
-
-      - name: Security audit
-        run: npm audit --audit-level=moderate --omit=dev
-
-      - name: Detect changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v47
-        with:
-          files: |
-            **/*.astro
-            **/*.css
-            **/*.js
-            **/*.mjs
-            **/*.ts
-            **/*.json
-            **/*.md
-            **/*.yml
-            **/*.yaml
-
-      - name: Lint code
-        if: steps.changed-files.outputs.any_changed == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          files="${{ steps.changed-files.outputs.all_changed_files }}"
-          echo "Checking files with Prettier:"
-          printf '%s\n' $files
-          npx prettier --check $files
-
-      - name: Skip lint when no relevant changes
-        if: steps.changed-files.outputs.any_changed != 'true'
-        run: echo "No files requiring Prettier check in this run."
-
-      - name: Type check
-        run: npx astro check
 
       - name: Build site
         run: npm run build

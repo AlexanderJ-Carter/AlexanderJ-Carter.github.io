@@ -60,11 +60,13 @@ const t = translations[lang] || translations['zh-CN'];
 <!-- Search Modal -->
 <div id="search-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
   <div class="flex items-start justify-center min-h-screen px-4 pt-20 pb-20">
-    <div
+    <button
+      type="button"
       class="fixed inset-0 bg-[rgb(var(--color-bg-primary))] bg-opacity-90 backdrop-blur-sm"
       onclick="closeSearchModal()"
+      aria-label="Close search"
     >
-    </div>
+    </button>
     <div class="relative glass-card rounded-2xl p-6 max-w-2xl w-full mt-8">
       <div class="flex items-center gap-4 mb-6">
         <svg

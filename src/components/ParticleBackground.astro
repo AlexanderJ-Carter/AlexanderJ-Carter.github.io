@@ -41,7 +41,7 @@ const {
   }
 </style>
 
-<script define:vars={{ particleCount, color, speed, interactive }}>
+<script is:inline define:vars={{ particleCount, color, speed, interactive }}>
   class ParticleSystem {
     constructor(canvas) {
       this.canvas = canvas;

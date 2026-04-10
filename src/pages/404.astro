@@ -86,13 +86,15 @@ const t404 = translations[lang] || translations['zh-CN'];
 
         <!-- Animated Icon -->
         <div class="mb-8">
-          <div
+          <button
+            type="button"
             id="error-icon"
             class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-5xl cursor-pointer hover:scale-110 transition-transform"
             onclick="rotateIcon()"
+            aria-label="Rotate error icon"
           >
             🔍
-          </div>
+          </button>
         </div>
 
         <!-- Message -->
