@@ -15,7 +15,8 @@ const timeData: Record<Lang, any> = {
     title: '世界时间',
     tag: '世界时区 · 标准时间',
     headerTitle: '世界时间',
-    headerDesc: '一目了然的本地时间与常用时区，支持一键复制与 API 调用。',
+    headerDesc:
+      '一目了然的本地时间与常用时区，支持一键复制；开发者接口作为附加说明。',
     beijingLabel: '北京时间',
     beijingTz: 'UTC+8',
     yourTime: '你的本地时间',
@@ -27,12 +28,12 @@ const timeData: Record<Lang, any> = {
     tokyo: '东京',
     sydney: '悉尼',
     utc: 'UTC',
-    apiTitle: '开发者 API',
+    apiTitle: '可选开发者接口',
     apiDesc:
-      '获取标准时间的简单 API，可部署在 Cloudflare Worker 或通过隧道暴露本地服务。',
+      '这是给前端调试、监控或小工具复用的 JSON 时间接口。普通访客只看上面的时钟即可；如果只提供当前时间，用 Cloudflare Worker 就够了，Tunnel 只适合暴露已有本地服务。',
     apiExample: 'GET https://api.alexander.xin/time/now',
     apiReturns: '返回 JSON：iso, timestamp, timezone, datetime',
-    apiSetup: '部署说明（Worker / Tunnel）',
+    apiSetup: '接口说明',
     relatedTitle: '更多小工具',
     calendar: '日历',
     currency: '汇率',
@@ -46,7 +47,8 @@ const timeData: Record<Lang, any> = {
     title: '世界時間',
     tag: '世界時區 · 標準時間',
     headerTitle: '世界時間',
-    headerDesc: '一目了然的本地時間與常用時區，支援一鍵複製與 API 呼叫。',
+    headerDesc:
+      '一目了然的本地時間與常用時區，支援一鍵複製；開發者接口作為附加說明。',
     beijingLabel: '北京時間',
     beijingTz: 'UTC+8',
     yourTime: '你的本地時間',
@@ -58,12 +60,12 @@ const timeData: Record<Lang, any> = {
     tokyo: '東京',
     sydney: '雪梨',
     utc: 'UTC',
-    apiTitle: '開發者 API',
+    apiTitle: '可選開發者接口',
     apiDesc:
-      '獲取標準時間的簡單 API，可部署在 Cloudflare Worker 或透過隧道暴露本地服務。',
+      '這是給前端調試、監控或小工具複用的 JSON 時間接口。普通訪客只看上面的時鐘即可；如果只提供目前時間，用 Cloudflare Worker 就夠了，Tunnel 只適合暴露已有本地服務。',
     apiExample: 'GET https://api.alexander.xin/time/now',
     apiReturns: '回傳 JSON：iso, timestamp, timezone, datetime',
-    apiSetup: '部署說明（Worker / Tunnel）',
+    apiSetup: '接口說明',
     relatedTitle: '更多小工具',
     calendar: '日曆',
     currency: '匯率',
@@ -78,7 +80,7 @@ const timeData: Record<Lang, any> = {
     tag: 'World clocks · Standard time',
     headerTitle: 'World Time',
     headerDesc:
-      'Clear local and major time zones at a glance, with copy and API.',
+      'Clear local and major time zones at a glance, with copy actions and an optional developer endpoint.',
     beijingLabel: 'Beijing',
     beijingTz: 'UTC+8',
     yourTime: 'Your local time',
@@ -90,12 +92,12 @@ const timeData: Record<Lang, any> = {
     tokyo: 'Tokyo',
     sydney: 'Sydney',
     utc: 'UTC',
-    apiTitle: 'Developer API',
+    apiTitle: 'Optional Developer Endpoint',
     apiDesc:
-      'Simple API for standard time. Deploy via Cloudflare Worker or Tunnel.',
+      'A small JSON time endpoint for frontend debugging, monitoring or utility reuse. Regular visitors can ignore it; use a Cloudflare Worker for current time, and Tunnel only when exposing an existing local service.',
     apiExample: 'GET https://api.alexander.xin/time/now',
     apiReturns: 'Returns JSON: iso, timestamp, timezone, datetime',
-    apiSetup: 'Setup (Worker / Tunnel)',
+    apiSetup: 'Endpoint notes',
     relatedTitle: 'More tools',
     calendar: 'Calendar',
     currency: 'Currency',
@@ -109,7 +111,8 @@ const timeData: Record<Lang, any> = {
     title: 'Heure mondiale',
     tag: 'Horloges mondiales · Heure standard',
     headerTitle: 'Heure mondiale',
-    headerDesc: 'Heure locale et fuseaux courants, copie et API.',
+    headerDesc:
+      'Heure locale et fuseaux courants, copie et point d’accès développeur optionnel.',
     beijingLabel: 'Pékin',
     beijingTz: 'UTC+8',
     yourTime: 'Votre heure locale',
@@ -121,12 +124,12 @@ const timeData: Record<Lang, any> = {
     tokyo: 'Tokyo',
     sydney: 'Sydney',
     utc: 'UTC',
-    apiTitle: 'API Développeur',
+    apiTitle: 'Point d’accès développeur optionnel',
     apiDesc:
-      "API simple pour l'heure standard. Déploiement via Cloudflare Worker ou Tunnel.",
+      'Petit endpoint JSON pour debug frontend, monitoring ou réutilisation dans des outils. Un visiteur peut l’ignorer ; Worker suffit pour l’heure courante, Tunnel sert surtout à exposer un service local existant.',
     apiExample: 'GET https://api.alexander.xin/time/now',
     apiReturns: 'JSON : iso, timestamp, timezone, datetime',
-    apiSetup: 'Guide (Worker / Tunnel)',
+    apiSetup: 'Notes endpoint',
     relatedTitle: "Plus d'outils",
     calendar: 'Calendrier',
     currency: 'Taux de change',
@@ -140,7 +143,8 @@ const timeData: Record<Lang, any> = {
     title: 'Мировое время',
     tag: 'Мировые часы · Стандартное время',
     headerTitle: 'Мировое время',
-    headerDesc: 'Местное и основные часовые пояса, копирование и API.',
+    headerDesc:
+      'Местное и основные часовые пояса, копирование и необязательный endpoint для разработчиков.',
     beijingLabel: 'Пекин',
     beijingTz: 'UTC+8',
     yourTime: 'Ваше местное время',
@@ -152,12 +156,12 @@ const timeData: Record<Lang, any> = {
     tokyo: 'Токио',
     sydney: 'Сидней',
     utc: 'UTC',
-    apiTitle: 'API для разработчиков',
+    apiTitle: 'Необязательный endpoint',
     apiDesc:
-      'Простой API стандартного времени. Деплой через Cloudflare Worker или Tunnel.',
+      'Небольшой JSON endpoint времени для отладки фронтенда, мониторинга или повторного использования в утилитах. Обычным посетителям он не нужен; Worker достаточно для текущего времени, Tunnel нужен только для существующего локального сервиса.',
     apiExample: 'GET https://api.alexander.xin/time/now',
     apiReturns: 'JSON: iso, timestamp, timezone, datetime',
-    apiSetup: 'Инструкция (Worker / Tunnel)',
+    apiSetup: 'Заметки endpoint',
     relatedTitle: 'Ещё инструменты',
     calendar: 'Календарь',
     currency: 'Курс валют',
@@ -745,7 +749,7 @@ const relatedTools = [
             '!bg-primary-500/20'
           );
         }, 2000);
-      } catch (_) {}
+      } catch {}
     });
   }
 

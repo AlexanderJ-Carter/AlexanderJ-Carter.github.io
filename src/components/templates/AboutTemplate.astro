@@ -337,10 +337,152 @@ const languagesData: Record<Lang, any[]> = {
   ],
 };
 
+const focusData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '当前关注',
+    subtitle: '我会把学习拆成可交付的小块：做出来、写清楚、再迭代。',
+    items: [
+      {
+        icon: '🧭',
+        title: '工程基础',
+        desc: '持续补强计算机系统、算法、数字电路和工程实践，把课堂知识落到可运行的项目里。',
+      },
+      {
+        icon: '🧱',
+        title: '静态站体验',
+        desc: '用 Astro 做轻量页面，关注加载性能、无障碍、多语言和无客户端 JS 的默认体验。',
+      },
+      {
+        icon: '🔍',
+        title: '观察与表达',
+        desc: '通过摄影、阅读和写作训练观察力，让技术内容也能有清晰的叙事和审美秩序。',
+      },
+    ],
+    principlesTitle: '做事原则',
+    principles: [
+      '先可用，再漂亮',
+      '少收集数据，多保护隐私',
+      '复杂问题写清楚再动手',
+    ],
+  },
+  'zh-TW': {
+    title: '目前關注',
+    subtitle: '我會把學習拆成可交付的小塊：做出來、寫清楚、再迭代。',
+    items: [
+      {
+        icon: '🧭',
+        title: '工程基礎',
+        desc: '持續補強計算機系統、演算法、數位電路和工程實踐，把課堂知識落到可運行的專案裡。',
+      },
+      {
+        icon: '🧱',
+        title: '靜態站體驗',
+        desc: '用 Astro 做輕量頁面，關注載入效能、無障礙、多語言和無客戶端 JS 的預設體驗。',
+      },
+      {
+        icon: '🔍',
+        title: '觀察與表達',
+        desc: '通過攝影、閱讀和寫作訓練觀察力，讓技術內容也能有清晰的敘事和審美秩序。',
+      },
+    ],
+    principlesTitle: '做事原則',
+    principles: [
+      '先可用，再漂亮',
+      '少收集資料，多保護隱私',
+      '複雜問題寫清楚再動手',
+    ],
+  },
+  'en-GB': {
+    title: 'Current Focus',
+    subtitle:
+      'I break learning into shippable pieces: make it work, explain it clearly, then iterate.',
+    items: [
+      {
+        icon: '🧭',
+        title: 'Engineering Foundations',
+        desc: 'Strengthening systems, algorithms, digital circuits and practical engineering by turning coursework into runnable projects.',
+      },
+      {
+        icon: '🧱',
+        title: 'Static Site UX',
+        desc: 'Building lightweight Astro pages with performance, accessibility, multilingual content and zero-client-JS defaults in mind.',
+      },
+      {
+        icon: '🔍',
+        title: 'Observation & Expression',
+        desc: 'Using photography, reading and writing to train observation, so technical work can also carry clear narrative and visual order.',
+      },
+    ],
+    principlesTitle: 'Working Principles',
+    principles: [
+      'Usable first, polished second',
+      'Collect less data, protect more privacy',
+      'Write complex problems down before touching code',
+    ],
+  },
+  fr: {
+    title: 'Priorités actuelles',
+    subtitle:
+      "Je découpe l'apprentissage en petits livrables : faire fonctionner, expliquer clairement, puis itérer.",
+    items: [
+      {
+        icon: '🧭',
+        title: 'Bases d’ingénierie',
+        desc: 'Renforcer systèmes, algorithmes, circuits numériques et pratique en transformant les cours en projets exécutables.',
+      },
+      {
+        icon: '🧱',
+        title: 'UX de site statique',
+        desc: 'Créer des pages Astro légères avec performance, accessibilité, multilingue et zéro JS client par défaut.',
+      },
+      {
+        icon: '🔍',
+        title: 'Observation et expression',
+        desc: 'Photographie, lecture et écriture entraînent le regard, pour donner aussi aux sujets techniques une narration claire.',
+      },
+    ],
+    principlesTitle: 'Principes de travail',
+    principles: [
+      'Utilisable d’abord, élégant ensuite',
+      'Moins de collecte, plus de confidentialité',
+      'Écrire le problème avant de coder',
+    ],
+  },
+  ru: {
+    title: 'Текущий фокус',
+    subtitle:
+      'Я делю обучение на небольшие результаты: сделать, ясно объяснить и затем улучшить.',
+    items: [
+      {
+        icon: '🧭',
+        title: 'Инженерная база',
+        desc: 'Укрепляю системы, алгоритмы, цифровые схемы и практику, превращая учебные темы в запускаемые проекты.',
+      },
+      {
+        icon: '🧱',
+        title: 'UX статического сайта',
+        desc: 'Делаю лёгкие страницы на Astro с упором на скорость, доступность, многоязычность и минимум клиентского JS.',
+      },
+      {
+        icon: '🔍',
+        title: 'Наблюдение и выражение',
+        desc: 'Фотография, чтение и письмо помогают тренировать взгляд, чтобы технические материалы были ясными и выразительными.',
+      },
+    ],
+    principlesTitle: 'Принципы работы',
+    principles: [
+      'Сначала полезно, затем красиво',
+      'Меньше сбора данных, больше приватности',
+      'Сначала описать сложность, потом писать код',
+    ],
+  },
+};
+
 const skills = skillsData[lang as Lang] || skillsData['en-GB'];
 const education = educationData[lang as Lang] || educationData['en-GB'];
 const interests = interestsData[lang as Lang] || interestsData['en-GB'];
 const languagesList = languagesData[lang as Lang] || languagesData['en-GB'];
+const focus = focusData[lang as Lang] || focusData['en-GB'];
 ---
 
 <BaseLayout
@@ -468,6 +610,72 @@ const languagesList = languagesData[lang as Lang] || languagesData['en-GB'];
               {lang === 'zh-CN' ? 'Developer' : '开发'}
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Current Focus Section -->
+      <div
+        class="glass-card p-8 md:p-12 mb-12"
+        data-aos="fade-up"
+        data-aos-delay="75"
+      >
+        <div
+          class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8"
+        >
+          <div>
+            <h2
+              class="text-3xl font-display font-bold mb-3 flex items-center gap-3"
+            >
+              <span class="text-4xl">🧭</span>
+              {focus.title}
+            </h2>
+            <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl">
+              {focus.subtitle}
+            </p>
+          </div>
+          <div
+            class="rounded-xl bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] p-4 min-w-[220px]"
+          >
+            <p class="font-semibold text-[rgb(var(--color-text-primary))] mb-2">
+              {focus.principlesTitle}
+            </p>
+            <ul
+              class="space-y-2 text-sm text-[rgb(var(--color-text-secondary))]"
+            >
+              {
+                focus.principles.map((principle: string) => (
+                  <li class="flex items-start gap-2">
+                    <span
+                      class="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary-500 flex-shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span>{principle}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          {
+            focus.items.map((item: any) => (
+              <article class="p-5 rounded-xl bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))]">
+                <div
+                  class="w-11 h-11 rounded-lg bg-primary-500/10 flex items-center justify-center text-2xl mb-4"
+                  aria-hidden="true"
+                >
+                  {item.icon}
+                </div>
+                <h3 class="font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+                  {item.title}
+                </h3>
+                <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+                  {item.desc}
+                </p>
+              </article>
+            ))
+          }
         </div>
       </div>
 

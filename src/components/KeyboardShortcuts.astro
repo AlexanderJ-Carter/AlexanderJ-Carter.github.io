@@ -164,7 +164,7 @@ function getLangPath(path: string): string {
   </svg>
 </button>
 
-<script is:inline define:vars={{ lang, getLangPath }}>
+<script is:inline define:vars={{ getLangPath }}>
   const modal = document.getElementById('shortcuts-modal');
   const backdrop = document.getElementById('shortcuts-backdrop');
   const closeBtn = document.getElementById('close-shortcuts');
@@ -240,10 +240,7 @@ function getLangPath(path: string): string {
       if (shortcut.action === 'theme') {
         document.getElementById('theme-toggle')?.click();
       } else if (shortcut.action === 'search') {
-        const searchInput = document.querySelector('#site-search input');
-        if (searchInput) {
-          searchInput.focus();
-        }
+        document.getElementById('quick-search-btn')?.click();
       } else if (shortcut.action === 'help') {
         if (modal?.classList.contains('hidden')) {
           showModal();

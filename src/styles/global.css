@@ -64,6 +64,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
   }
 
   /* 跳过导航：键盘聚焦时显示 */
@@ -95,9 +96,17 @@
     background: rgb(56 189 248 / 0.35);
   }
 
-  *:focus-visible {
+  :where(
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    [tabindex]:not([tabindex='-1'])
+  ):focus-visible {
     outline: 2px solid rgb(14 165 233);
-    outline-offset: 2px;
+    outline-offset: 3px;
   }
 
   /* 移动端点击高亮去除，改用 focus-visible */
@@ -139,6 +148,28 @@
   }
   .dark .glass-card:hover {
     border-color: rgba(56, 189, 248, 0.2);
+  }
+
+  .surface-panel {
+    background: rgb(var(--color-bg-secondary) / 0.72);
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 1rem;
+  }
+
+  .section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 9999px;
+    background: rgb(14 165 233 / 0.1);
+    color: rgb(2 132 199);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .dark .section-kicker {
+    color: rgb(56 189 248);
   }
 
   /* 正文可读性：行高与段落间距 */
@@ -548,8 +579,19 @@
     transform: translateY(0);
   }
 
-  /* Smooth transitions for interactive elements */
-  * {
+  /* Smooth transitions only where interaction actually happens */
+  :where(
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    .glass-card,
+    .card-hover,
+    .link-underline,
+    [role='button']
+  ) {
     transition-property:
       color, background-color, border-color, text-decoration-color, fill,
       stroke, opacity, box-shadow, transform, filter, backdrop-filter;
@@ -1002,7 +1044,7 @@ select:valid:not(:placeholder-shown) {
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
   }
-  
+
   @keyframes scrollFadeIn {
     from {
       opacity: 0;
@@ -1013,14 +1055,14 @@ select:valid:not(:placeholder-shown) {
       transform: translateY(0);
     }
   }
-  
+
   /* Scroll-Driven Scale Animation */
   .scroll-scale-in {
     animation: scrollScaleIn linear;
     animation-timeline: view();
     animation-range: entry 0% cover 50%;
   }
-  
+
   @keyframes scrollScaleIn {
     from {
       opacity: 0;
@@ -1031,14 +1073,14 @@ select:valid:not(:placeholder-shown) {
       transform: scale(1);
     }
   }
-  
+
   /* Scroll-Driven Slide from Left */
   .scroll-slide-left {
     animation: scrollSlideLeft linear;
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
   }
-  
+
   @keyframes scrollSlideLeft {
     from {
       opacity: 0;
@@ -1049,14 +1091,14 @@ select:valid:not(:placeholder-shown) {
       transform: translateX(0);
     }
   }
-  
+
   /* Scroll-Driven Slide from Right */
   .scroll-slide-right {
     animation: scrollSlideRight linear;
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
   }
-  
+
   @keyframes scrollSlideRight {
     from {
       opacity: 0;
@@ -1067,14 +1109,14 @@ select:valid:not(:placeholder-shown) {
       transform: translateX(0);
     }
   }
-  
+
   /* Scroll-Driven Parallax */
   .scroll-parallax {
     animation: scrollParallax linear;
     animation-timeline: view();
     animation-range: cover 0% cover 100%;
   }
-  
+
   @keyframes scrollParallax {
     from {
       transform: translateY(0);
@@ -1083,13 +1125,13 @@ select:valid:not(:placeholder-shown) {
       transform: translateY(-30px);
     }
   }
-  
+
   /* Scroll Progress Indicator */
   .scroll-progress {
     animation: scrollProgress linear;
     animation-timeline: scroll();
   }
-  
+
   @keyframes scrollProgress {
     from {
       transform: scaleX(0);
@@ -1098,14 +1140,14 @@ select:valid:not(:placeholder-shown) {
       transform: scaleX(1);
     }
   }
-  
+
   /* Scroll-Driven Reveal */
   .scroll-reveal {
     animation: scrollReveal linear;
     animation-timeline: view();
     animation-range: entry 0% exit 100%;
   }
-  
+
   @keyframes scrollReveal {
     0% {
       opacity: 0;
@@ -1192,7 +1234,8 @@ select:valid:not(:placeholder-shown) {
 }
 
 @keyframes liquidShine {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(45deg) translateX(-100%);
   }
   50% {
@@ -1230,19 +1273,41 @@ select:valid:not(:placeholder-shown) {
 }
 
 @keyframes glitch-1 {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-2px); }
-  40% { transform: translateX(2px); }
-  60% { transform: translateX(-1px); }
-  80% { transform: translateX(1px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(2px);
+  }
+  60% {
+    transform: translateX(-1px);
+  }
+  80% {
+    transform: translateX(1px);
+  }
 }
 
 @keyframes glitch-2 {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(2px); }
-  40% { transform: translateX(-2px); }
-  60% { transform: translateX(1px); }
-  80% { transform: translateX(-1px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(2px);
+  }
+  40% {
+    transform: translateX(-2px);
+  }
+  60% {
+    transform: translateX(1px);
+  }
+  80% {
+    transform: translateX(-1px);
+  }
 }
 
 /* ========================================

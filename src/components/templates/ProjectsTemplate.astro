@@ -313,8 +313,325 @@ const projectsData: Record<Lang, any[]> = {
   ],
 };
 
+const extraProjectsData: Record<Lang, any[]> = {
+  'zh-CN': [
+    {
+      title: '画廊灯箱与筛选',
+      desc: '为摄影页补充分类筛选、来源筛选、图片加载骨架和键盘可操作的灯箱浏览体验。',
+      tags: ['Gallery', 'A11y', 'UX'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/gallery',
+    },
+    {
+      title: '彩蛋实验室',
+      desc: '把随机语录、翻牌记忆、打字小测和呼吸节奏器组合成轻量的互动角落。',
+      tags: ['Interaction', 'Game', 'Vanilla JS'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/fun',
+    },
+    {
+      title: '站点信任页面',
+      desc: '整理隐私、条款、许可证、无障碍与安全披露页面，让个人站也有清晰边界。',
+      tags: ['Security', 'Policy', 'Docs'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/security/policy',
+    },
+  ],
+  'zh-TW': [
+    {
+      title: '畫廊燈箱與篩選',
+      desc: '為攝影頁補充分類篩選、來源篩選、圖片載入骨架和鍵盤可操作的燈箱瀏覽體驗。',
+      tags: ['Gallery', 'A11y', 'UX'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/gallery',
+    },
+    {
+      title: '彩蛋實驗室',
+      desc: '把隨機語錄、翻牌記憶、打字小測和呼吸節奏器組合成輕量的互動角落。',
+      tags: ['Interaction', 'Game', 'Vanilla JS'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/fun',
+    },
+    {
+      title: '站點信任頁面',
+      desc: '整理隱私、條款、許可證、無障礙與安全披露頁面，讓個人站也有清晰邊界。',
+      tags: ['Security', 'Policy', 'Docs'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/security/policy',
+    },
+  ],
+  'en-GB': [
+    {
+      title: 'Gallery Lightbox & Filters',
+      desc: 'Category filters, source filters, image skeletons and a keyboard-friendly lightbox for the photography page.',
+      tags: ['Gallery', 'A11y', 'UX'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/gallery',
+    },
+    {
+      title: 'Easter Egg Lab',
+      desc: 'A lightweight interaction corner with random quotes, memory match, a typing test and a breathing rhythm widget.',
+      tags: ['Interaction', 'Game', 'Vanilla JS'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/fun',
+    },
+    {
+      title: 'Trust Pages',
+      desc: 'Privacy, terms, licence, accessibility and vulnerability disclosure pages give the personal site clearer boundaries.',
+      tags: ['Security', 'Policy', 'Docs'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/security/policy',
+    },
+  ],
+  fr: [
+    {
+      title: 'Galerie avec lightbox et filtres',
+      desc: 'Filtres par catégorie et source, squelettes de chargement et lightbox utilisable au clavier.',
+      tags: ['Gallery', 'A11y', 'UX'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/gallery',
+    },
+    {
+      title: 'Laboratoire Easter Egg',
+      desc: 'Un coin interactif léger avec citations, jeu de mémoire, test de frappe et rythme respiratoire.',
+      tags: ['Interaction', 'Game', 'Vanilla JS'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/fun',
+    },
+    {
+      title: 'Pages de confiance',
+      desc: 'Confidentialité, conditions, licence, accessibilité et divulgation de vulnérabilités clarifient le cadre du site.',
+      tags: ['Security', 'Policy', 'Docs'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/security/policy',
+    },
+  ],
+  ru: [
+    {
+      title: 'Галерея: лайтбокс и фильтры',
+      desc: 'Фильтры по категориям и источникам, скелетоны загрузки и лайтбокс с поддержкой клавиатуры.',
+      tags: ['Gallery', 'A11y', 'UX'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/gallery',
+    },
+    {
+      title: 'Лаборатория пасхалок',
+      desc: 'Лёгкий интерактивный уголок: цитаты, игра памяти, тест набора и дыхательный ритм.',
+      tags: ['Interaction', 'Game', 'Vanilla JS'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/fun',
+    },
+    {
+      title: 'Страницы доверия',
+      desc: 'Конфиденциальность, условия, лицензия, доступность и политика уязвимостей задают ясные границы сайта.',
+      tags: ['Security', 'Policy', 'Docs'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/security/policy',
+    },
+  ],
+};
+
+const projectPrinciplesData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '我选择项目的方式',
+    intro:
+      '这个列表会优先收录能被真实使用、能长期维护、能解释清楚取舍的小项目。',
+    items: [
+      {
+        icon: '⚡',
+        title: '轻量优先',
+        desc: '能静态生成就不引入后端，能用原生能力就不堆依赖。',
+      },
+      {
+        icon: '🔐',
+        title: '隐私友好',
+        desc: '减少第三方脚本，尽量让工具在浏览器本地完成。',
+      },
+      {
+        icon: '♿',
+        title: '可访问',
+        desc: '按钮、表单、筛选和弹窗都保留键盘路径与可见焦点。',
+      },
+    ],
+  },
+  'zh-TW': {
+    title: '我選擇專案的方式',
+    intro:
+      '這個列表會優先收錄能被真實使用、能長期維護、能解釋清楚取捨的小專案。',
+    items: [
+      {
+        icon: '⚡',
+        title: '輕量優先',
+        desc: '能靜態生成就不引入後端，能用原生能力就不堆依賴。',
+      },
+      {
+        icon: '🔐',
+        title: '隱私友好',
+        desc: '減少第三方腳本，盡量讓工具在瀏覽器本地完成。',
+      },
+      {
+        icon: '♿',
+        title: '可訪問',
+        desc: '按鈕、表單、篩選和彈窗都保留鍵盤路徑與可見焦點。',
+      },
+    ],
+  },
+  'en-GB': {
+    title: 'How I Pick Projects',
+    intro:
+      'This list prioritises small projects that can be used for real, maintained over time and explained with clear tradeoffs.',
+    items: [
+      {
+        icon: '⚡',
+        title: 'Lightweight first',
+        desc: 'Prefer static output over backends, and native browser APIs over extra dependencies.',
+      },
+      {
+        icon: '🔐',
+        title: 'Privacy-friendly',
+        desc: 'Reduce third-party scripts and keep utility workflows inside the browser where possible.',
+      },
+      {
+        icon: '♿',
+        title: 'Accessible by default',
+        desc: 'Buttons, forms, filters and dialogs keep keyboard paths and visible focus states.',
+      },
+    ],
+  },
+  fr: {
+    title: 'Comment je choisis les projets',
+    intro:
+      'La liste privilégie les petits projets réellement utiles, maintenables et capables d’expliquer leurs compromis.',
+    items: [
+      {
+        icon: '⚡',
+        title: 'Léger d’abord',
+        desc: 'Préférer le statique aux backends, et les API natives aux dépendances superflues.',
+      },
+      {
+        icon: '🔐',
+        title: 'Respect de la vie privée',
+        desc: 'Réduire les scripts tiers et garder les outils dans le navigateur quand c’est possible.',
+      },
+      {
+        icon: '♿',
+        title: 'Accessible par défaut',
+        desc: 'Boutons, formulaires, filtres et dialogues gardent clavier et focus visible.',
+      },
+    ],
+  },
+  ru: {
+    title: 'Как я выбираю проекты',
+    intro:
+      'В списке важнее небольшие проекты, которыми можно пользоваться, которые можно поддерживать и понятно объяснять.',
+    items: [
+      {
+        icon: '⚡',
+        title: 'Сначала лёгкость',
+        desc: 'Статика вместо бэкенда, нативные API браузера вместо лишних зависимостей.',
+      },
+      {
+        icon: '🔐',
+        title: 'Приватность',
+        desc: 'Меньше сторонних скриптов, больше локальной работы в браузере.',
+      },
+      {
+        icon: '♿',
+        title: 'Доступность',
+        desc: 'Кнопки, формы, фильтры и окна сохраняют клавиатуру и видимый фокус.',
+      },
+    ],
+  },
+};
+
+const externalProjects = [
+  {
+    title: 'MyCook',
+    github: 'https://github.com/AlexanderJ-Carter/MyCook',
+    demo: 'https://cook.alexander.xin',
+    tags: ['Recipes', 'Docs', 'Web'],
+    desc: {
+      'zh-CN':
+        '面向日常做饭的菜谱站，把“今天吃什么、步骤怎么做、材料怎么查”整理成更可执行的入口。',
+      'zh-TW':
+        '面向日常做飯的菜譜站，把「今天吃什麼、步驟怎麼做、材料怎麼查」整理成更可執行的入口。',
+      'en-GB':
+        'A recipe site shaped around daily cooking: what to eat, how to follow steps, and how to find ingredients quickly.',
+      fr: 'Un site de recettes pensé pour le quotidien : choisir, suivre les étapes et retrouver les ingrédients.',
+      ru: 'Сайт рецептов для повседневной готовки: что приготовить, как пройти шаги и как найти ингредиенты.',
+    },
+  },
+  {
+    title: 'Linux Command',
+    github: 'https://github.com/AlexanderJ-Carter/linux-command',
+    demo: 'https://linux-command.alexander.xin',
+    tags: ['Linux', 'CLI', 'Reference'],
+    desc: {
+      'zh-CN':
+        '把常用 Linux 命令整理成速查型页面，适合在排查、部署和学习时快速回忆参数与用法。',
+      'zh-TW':
+        '把常用 Linux 命令整理成速查型頁面，適合在排查、部署和學習時快速回憶參數與用法。',
+      'en-GB':
+        'A quick-reference site for common Linux commands, useful during debugging, deployment and learning.',
+      fr: 'Référence rapide pour les commandes Linux courantes, utile en diagnostic, déploiement et apprentissage.',
+      ru: 'Быстрый справочник по Linux-командам для диагностики, деплоя и обучения.',
+    },
+  },
+  {
+    title: 'NetQ',
+    github: 'https://github.com/AlexanderJ-Carter/netq',
+    demo: 'https://netq.alexander.xin',
+    tags: ['Network', 'CLI', 'Troubleshooting'],
+    desc: {
+      'zh-CN':
+        '交互式网络排查 CLI：把 DNS、连通性、HTTP、路由等检查步骤组织成一条更清晰的排查路径。',
+      'zh-TW':
+        '互動式網路排查 CLI：把 DNS、連通性、HTTP、路由等檢查步驟組織成一條更清晰的排查路徑。',
+      'en-GB':
+        'An interactive network troubleshooting CLI that organises DNS, reachability, HTTP and routing checks into a clearer flow.',
+      fr: 'CLI de diagnostic réseau qui organise DNS, connectivité, HTTP et routage en flux lisible.',
+      ru: 'Интерактивный CLI для сетевой диагностики: DNS, доступность, HTTP и маршруты в понятном потоке.',
+    },
+  },
+];
+
 const text = t[lang as Lang] || t['en-GB'];
-const projects = projectsData[lang as Lang] || projectsData['en-GB'];
+const projects = [
+  ...(projectsData[lang as Lang] || projectsData['en-GB']),
+  ...(extraProjectsData[lang as Lang] || extraProjectsData['en-GB']),
+];
+const projectPrinciples =
+  projectPrinciplesData[lang as Lang] || projectPrinciplesData['en-GB'];
 
 function getLangPath(path: string): string {
   if (lang === 'zh-CN') return path;
@@ -347,6 +664,84 @@ function getLangPath(path: string): string {
           {text.intro}
         </p>
       </div>
+
+      <section class="mb-12">
+        <div class="max-w-2xl mb-5">
+          <h2
+            class="text-2xl md:text-3xl font-heading font-bold text-[rgb(var(--color-text-primary))] mb-2"
+          >
+            {
+              lang === 'zh-CN'
+                ? '真实仓库与外部项目'
+                : lang === 'zh-TW'
+                  ? '真實倉庫與外部專案'
+                  : lang === 'fr'
+                    ? 'Dépôts et projets externes'
+                    : lang === 'ru'
+                      ? 'Репозитории и внешние проекты'
+                      : 'Real Repositories & External Projects'
+            }
+          </h2>
+          <p
+            class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed"
+          >
+            {
+              lang === 'zh-CN'
+                ? '这部分来自我的 GitHub 仓库和已上线的子站，优先展示真实可访问、能解释清楚用途的项目。'
+                : lang === 'zh-TW'
+                  ? '這部分來自我的 GitHub 倉庫和已上線的子站，優先展示真實可訪問、能解釋清楚用途的專案。'
+                  : lang === 'fr'
+                    ? 'Ces éléments viennent de mes dépôts GitHub et sous-sites publics, avec priorité aux projets réellement accessibles et explicables.'
+                    : lang === 'ru'
+                      ? 'Этот блок взят из моих репозиториев GitHub и опубликованных под-сайтов: только реальные и понятные проекты.'
+                      : 'This section is grounded in my GitHub repositories and public sub-sites, prioritising projects that are reachable and explainable.'
+            }
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {
+            externalProjects.map((project) => (
+              <article class="glass-card card-hover rounded-2xl p-6 flex flex-col min-h-[17rem]">
+                <div class="flex-1">
+                  <h3 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))] mb-3">
+                    {project.title}
+                  </h3>
+                  <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+                    {project.desc[lang as Lang] || project.desc['en-GB']}
+                  </p>
+                </div>
+                <div class="flex flex-wrap gap-1.5 mt-5">
+                  {project.tags.map((tag) => (
+                    <span class="px-2 py-0.5 rounded-md bg-primary-500/10 text-primary-600 dark:text-primary-400 text-xs font-medium">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div class="flex flex-wrap items-center gap-3 mt-5 pt-4 border-t border-[rgb(var(--color-border))]">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-link"
+                  >
+                    {text.viewSource}
+                  </a>
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="project-link"
+                    >
+                      {text.viewDemo}
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
 
       <!-- Filter buttons -->
       <div
@@ -485,67 +880,33 @@ function getLangPath(path: string): string {
         }
       </div>
 
-      <div class="glass-card p-6 rounded-2xl mb-10">
-        <h2
-          class="text-xl font-heading font-bold mb-3 text-[rgb(var(--color-text-primary))]"
-        >
+      <div class="glass-card p-6 md:p-8 rounded-2xl mb-10">
+        <div class="max-w-2xl mb-6">
+          <h2
+            class="text-xl md:text-2xl font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]"
+          >
+            {projectPrinciples.title}
+          </h2>
+          <p
+            class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed"
+          >
+            {projectPrinciples.intro}
+          </p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-4">
           {
-            lang === 'zh-CN'
-              ? '有趣项目推荐'
-              : lang === 'zh-TW'
-                ? '有趣專案推薦'
-                : lang === 'fr'
-                  ? 'Projets amusants'
-                  : lang === 'ru'
-                    ? 'Интересные проекты'
-                    : 'Fun Project Picks'
-          }
-        </h2>
-        <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
-          {
-            lang === 'zh-CN'
-              ? '一些值得体验的交互项目，用来找灵感和炫技。'
-              : lang === 'zh-TW'
-                ? '一些值得體驗的互動專案，用來找靈感和炫技。'
-                : lang === 'fr'
-                  ? 'Quelques projets interactifs inspirants.'
-                  : lang === 'ru'
-                    ? 'Несколько вдохновляющих интерактивных проектов.'
-                    : 'A few inspiring interactive projects to explore.'
-          }
-        </p>
-        <div class="grid md:grid-cols-3 gap-3">
-          {
-            [
-              {
-                name: 'SceneryStack',
-                href: 'https://scenerystack.org/',
-                desc: 'Accessible interactive framework',
-              },
-              {
-                name: 'Excalidraw',
-                href: 'https://github.com/excalidraw/excalidraw',
-                desc: 'Whiteboard with great UX',
-              },
-              {
-                name: 'Browser Brawl',
-                href: 'https://github.com/RichardHruby/browser-brawl',
-                desc: 'Realtime AI-vs-AI browser arena',
-              },
-            ].map((item) => (
-              <a
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] hover:border-primary-500/50 transition-colors"
-              >
-                <div class="font-semibold text-[rgb(var(--color-text-primary))]">
-                  {item.name}
+            projectPrinciples.items.map((item: any) => (
+              <article class="rounded-xl bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] p-4">
+                <div class="text-2xl mb-3" aria-hidden="true">
+                  {item.icon}
                 </div>
-                <div class="text-xs mt-1 text-[rgb(var(--color-text-tertiary))]">
+                <h3 class="font-semibold text-[rgb(var(--color-text-primary))] mb-1">
+                  {item.title}
+                </h3>
+                <p class="text-xs text-[rgb(var(--color-text-secondary))] leading-relaxed">
                   {item.desc}
-                </div>
-              </a>
+                </p>
+              </article>
             ))
           }
         </div>
@@ -613,3 +974,23 @@ function getLangPath(path: string): string {
     });
   })();
 </script>
+
+<style>
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    border: 1px solid rgb(var(--color-border));
+    color: rgb(var(--color-text-secondary));
+    padding: 0.42rem 0.75rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    transition: all 0.18s ease;
+  }
+
+  .project-link:hover {
+    border-color: rgb(14 165 233 / 0.5);
+    color: rgb(14 165 233);
+    background: rgb(14 165 233 / 0.08);
+  }
+</style>

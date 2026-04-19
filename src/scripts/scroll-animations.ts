@@ -28,7 +28,11 @@ const revealElements = document.querySelectorAll<HTMLElement>(
   '.reveal, .reveal-left, .reveal-right, .stagger'
 );
 
-revealElements.forEach((el) => observer.observe(el));
+if (reducedMotion) {
+  revealElements.forEach((el) => el.classList.add('active'));
+} else if (revealElements.length > 0) {
+  revealElements.forEach((el) => observer.observe(el));
+}
 
 // Parallax effect on scroll
 let ticking = false;
@@ -58,7 +62,9 @@ function requestParallaxUpdate(): void {
   }
 }
 
-window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+if (!reducedMotion && parallaxElements.length > 0) {
+  window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
+}
 
 // 3D Card tilt effect
 if (!reducedMotion && !coarsePointer) {

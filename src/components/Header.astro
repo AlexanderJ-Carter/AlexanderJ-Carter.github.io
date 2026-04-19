@@ -50,15 +50,15 @@ const mainNavItems: NavItem[] = [
   {
     label:
       lang === 'zh-CN'
-        ? '创意'
+        ? '内容'
         : lang === 'zh-TW'
-          ? '創意'
+          ? '內容'
           : lang === 'fr'
-            ? 'Créatif'
+            ? 'Contenu'
             : lang === 'ru'
-              ? 'Творчество'
-              : 'Creative',
-    icon: '✨',
+              ? 'Контент'
+              : 'Content',
+    icon: '✦',
     submenu: [
       {
         href: getLangPath('/gallery'),
@@ -100,54 +100,6 @@ const mainNavItems: NavItem[] = [
                   : "Things I've built",
       },
       {
-        href: getLangPath('/fun'),
-        label:
-          lang === 'zh-CN'
-            ? '彩蛋'
-            : lang === 'zh-TW'
-              ? '彩蛋'
-              : lang === 'fr'
-                ? 'Easter Eggs'
-                : lang === 'ru'
-                  ? 'Пасхалки'
-                  : 'Easter Eggs',
-        icon: '🥚',
-        desc:
-          lang === 'zh-CN'
-            ? '好玩的小惊喜'
-            : lang === 'zh-TW'
-              ? '好玩的小驚喜'
-              : lang === 'fr'
-                ? 'Surprises'
-                : lang === 'ru'
-                  ? 'Сюрпризы'
-                  : 'Fun & surprises',
-      },
-      {
-        href: getLangPath('/friends'),
-        label:
-          lang === 'zh-CN'
-            ? '友链'
-            : lang === 'zh-TW'
-              ? '友鏈'
-              : lang === 'fr'
-                ? 'Amis'
-                : lang === 'ru'
-                  ? 'Друзья'
-                  : 'Friends',
-        icon: '🔗',
-        desc:
-          lang === 'zh-CN'
-            ? '朋友的网站'
-            : lang === 'zh-TW'
-              ? '朋友的網站'
-              : lang === 'fr'
-                ? 'Sites amis'
-                : lang === 'ru'
-                  ? 'Сайты друзей'
-                  : "Friends' sites",
-      },
-      {
         href: getLangPath('/reading'),
         label:
           lang === 'zh-CN'
@@ -170,6 +122,30 @@ const mainNavItems: NavItem[] = [
                 : lang === 'ru'
                   ? 'Рекомендуемые книги'
                   : 'Recommended books',
+      },
+      {
+        href: getLangPath('/notes'),
+        label:
+          lang === 'zh-CN'
+            ? '札记'
+            : lang === 'zh-TW'
+              ? '札記'
+              : lang === 'fr'
+                ? 'Notes'
+                : lang === 'ru'
+                  ? 'Заметки'
+                  : 'Notes',
+        icon: '✎',
+        desc:
+          lang === 'zh-CN'
+            ? '长期思考'
+            : lang === 'zh-TW'
+              ? '長期思考'
+              : lang === 'fr'
+                ? 'Réflexions longues'
+                : lang === 'ru'
+                  ? 'Долгие заметки'
+                  : 'Long-form notes',
       },
     ],
   },
@@ -274,30 +250,6 @@ const mainNavItems: NavItem[] = [
                   : "What I'm doing now",
       },
       {
-        href: getLangPath('/uses'),
-        label:
-          lang === 'zh-CN'
-            ? '本站'
-            : lang === 'zh-TW'
-              ? '本站'
-              : lang === 'fr'
-                ? 'Le site'
-                : lang === 'ru'
-                  ? 'О сайте'
-                  : 'About site',
-        icon: '🌐',
-        desc:
-          lang === 'zh-CN'
-            ? '关于本站'
-            : lang === 'zh-TW'
-              ? '關於本站'
-              : lang === 'fr'
-                ? 'À propos du site'
-                : lang === 'ru'
-                  ? 'О сайте'
-                  : 'About this site',
-      },
-      {
         href: getLangPath('/units'),
         label:
           lang === 'zh-CN'
@@ -345,113 +297,134 @@ const mainNavItems: NavItem[] = [
                   ? 'Ссылка в QR'
                   : 'URL to QR code',
       },
-      {
-        href: 'https://tools.alexander.xin',
-        label:
-          lang === 'zh-CN'
-            ? '工具中台'
-            : lang === 'zh-TW'
-              ? '工具中台'
-              : lang === 'fr'
-                ? 'Hub Outils'
-                : lang === 'ru'
-                  ? 'Хаб инструментов'
-                  : 'Tool Hub',
-        icon: '🧰',
-        desc:
-          lang === 'zh-CN'
-            ? '更多在线工具'
-            : lang === 'zh-TW'
-              ? '更多線上工具'
-              : lang === 'fr'
-                ? 'Plus d’outils'
-                : lang === 'ru'
-                  ? 'Больше инструментов'
-                  : 'More online tools',
-        external: true,
-      },
-      {
-        href: 'https://linux-command.alexander.xin',
-        label:
-          lang === 'zh-CN'
-            ? 'Linux 指令'
-            : lang === 'zh-TW'
-              ? 'Linux 指令'
-              : lang === 'fr'
-                ? 'Commandes Linux'
-                : lang === 'ru'
-                  ? 'Linux команды'
-                  : 'Linux Commands',
-        icon: '🐧',
-        desc:
-          lang === 'zh-CN'
-            ? '快速查询命令'
-            : lang === 'zh-TW'
-              ? '快速查詢命令'
-              : lang === 'fr'
-                ? 'Recherche rapide'
-                : lang === 'ru'
-                  ? 'Быстрый поиск команд'
-                  : 'Quick command lookup',
-        external: true,
-      },
-      {
-        href: 'https://cook.alexander.xin',
-        label:
-          lang === 'zh-CN'
-            ? '做饭菜谱'
-            : lang === 'zh-TW'
-              ? '做飯菜譜'
-              : lang === 'fr'
-                ? 'Recettes'
-                : lang === 'ru'
-                  ? 'Рецепты'
-                  : 'Cooking',
-        icon: '🍳',
-        desc:
-          lang === 'zh-CN'
-            ? '程序员友好的菜谱站'
-            : lang === 'zh-TW'
-              ? '程式設計師友善菜譜站'
-              : lang === 'fr'
-                ? 'Recettes pratiques'
-                : lang === 'ru'
-                  ? 'Удобный сайт рецептов'
-                  : 'Developer-friendly recipes',
-        external: true,
-      },
-      {
-        href: 'https://netq.alexander.xin',
-        label:
-          lang === 'zh-CN'
-            ? 'NetQ 排查'
-            : lang === 'zh-TW'
-              ? 'NetQ 排查'
-              : lang === 'fr'
-                ? 'NetQ CLI'
-                : lang === 'ru'
-                  ? 'NetQ CLI'
-                  : 'NetQ CLI',
-        icon: '🧪',
-        desc:
-          lang === 'zh-CN'
-            ? '交互式网络排查 CLI'
-            : lang === 'zh-TW'
-              ? '互動式網路排查 CLI'
-              : lang === 'fr'
-                ? 'CLI de diagnostic réseau'
-                : lang === 'ru'
-                  ? 'CLI для сетевой диагностики'
-                  : 'Interactive network troubleshooting CLI',
-        external: true,
-      },
     ],
   },
   {
-    href: 'https://blog.alexander.xin',
-    label: t('nav.blog'),
-    icon: '📝',
-    external: true,
+    label:
+      lang === 'zh-CN'
+        ? '更多'
+        : lang === 'zh-TW'
+          ? '更多'
+          : lang === 'fr'
+            ? 'Plus'
+            : lang === 'ru'
+              ? 'Ещё'
+              : 'More',
+    icon: '⋯',
+    submenu: [
+      {
+        href: 'https://blog.alexander.xin',
+        label: t('nav.blog'),
+        icon: '📝',
+        desc:
+          lang === 'zh-CN'
+            ? '独立博客'
+            : lang === 'zh-TW'
+              ? '獨立部落格'
+              : lang === 'fr'
+                ? 'Blog externe'
+                : lang === 'ru'
+                  ? 'Внешний блог'
+                  : 'External blog',
+        external: true,
+      },
+      {
+        href: getLangPath('/uses'),
+        label:
+          lang === 'zh-CN'
+            ? '本站'
+            : lang === 'zh-TW'
+              ? '本站'
+              : lang === 'fr'
+                ? 'Le site'
+                : lang === 'ru'
+                  ? 'О сайте'
+                  : 'About site',
+        icon: '🌐',
+        desc:
+          lang === 'zh-CN'
+            ? '技术栈与边界'
+            : lang === 'zh-TW'
+              ? '技術棧與邊界'
+              : lang === 'fr'
+                ? 'Stack et limites'
+                : lang === 'ru'
+                  ? 'Стек и границы'
+                  : 'Stack and boundaries',
+      },
+      {
+        href: getLangPath('/friends'),
+        label:
+          lang === 'zh-CN'
+            ? '参考'
+            : lang === 'zh-TW'
+              ? '參考'
+              : lang === 'fr'
+                ? 'Références'
+                : lang === 'ru'
+                  ? 'Ссылки'
+                  : 'References',
+        icon: '🔗',
+        desc:
+          lang === 'zh-CN'
+            ? '工具与资料链接'
+            : lang === 'zh-TW'
+              ? '工具與資料連結'
+              : lang === 'fr'
+                ? 'Outils et ressources'
+                : lang === 'ru'
+                  ? 'Инструменты и ресурсы'
+                  : 'Tools and resources',
+      },
+      {
+        href: getLangPath('/fun'),
+        label:
+          lang === 'zh-CN'
+            ? '彩蛋'
+            : lang === 'zh-TW'
+              ? '彩蛋'
+              : lang === 'fr'
+                ? 'Easter Eggs'
+                : lang === 'ru'
+                  ? 'Пасхалки'
+                  : 'Easter Eggs',
+        icon: '🥚',
+        desc:
+          lang === 'zh-CN'
+            ? '互动实验'
+            : lang === 'zh-TW'
+              ? '互動實驗'
+              : lang === 'fr'
+                ? 'Expériences'
+                : lang === 'ru'
+                  ? 'Эксперименты'
+                  : 'Interaction lab',
+      },
+      {
+        href: getLangPath('/sitemap'),
+        label:
+          lang === 'zh-CN'
+            ? '地图'
+            : lang === 'zh-TW'
+              ? '地圖'
+              : lang === 'fr'
+                ? 'Plan'
+                : lang === 'ru'
+                  ? 'Карта'
+                  : 'Sitemap',
+        icon: '🗺',
+        desc:
+          lang === 'zh-CN'
+            ? '全部页面'
+            : lang === 'zh-TW'
+              ? '全部頁面'
+              : lang === 'fr'
+                ? 'Toutes les pages'
+                : lang === 'ru'
+                  ? 'Все страницы'
+                  : 'All pages',
+      },
+    ],
   },
   { href: getLangPath('/about'), label: t('nav.about'), icon: '👤' },
   { href: getLangPath('/contact'), label: t('nav.contact'), icon: '✉️' },
@@ -472,13 +445,17 @@ const mainNavItems: NavItem[] = [
         class="flex items-center gap-3 group"
       >
         <img
-          src="/img/branding/logo.png"
+          src="/img/branding/logo-96.webp"
           alt="Logo"
+          width="40"
+          height="40"
           class="w-10 h-10 rounded-full transform group-hover:scale-110 transition-transform duration-300 dark:hidden"
         />
         <img
-          src="/img/branding/logo-dark.png"
+          src="/img/branding/logo-dark-96.webp"
           alt="Logo"
+          width="40"
+          height="40"
           class="w-10 h-10 rounded-full transform group-hover:scale-110 transition-transform duration-300 hidden dark:block"
         />
         <span
@@ -726,7 +703,11 @@ const mainNavItems: NavItem[] = [
         mainNavItems.map((item) =>
           item.submenu ? (
             <div>
-              <button class="mobile-submenu-toggle w-full text-left py-3 px-4 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors duration-200 flex items-center justify-between font-medium">
+              <button
+                type="button"
+                aria-expanded="false"
+                class="mobile-submenu-toggle w-full text-left py-3 px-4 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors duration-200 flex items-center justify-between font-medium"
+              >
                 <span class="flex items-center gap-2">
                   <span>{item.icon}</span>
                   {item.label}
@@ -1007,8 +988,10 @@ const mainNavItems: NavItem[] = [
       if (!btn) return;
       const submenu = btn.nextElementSibling;
       const arrow = btn.querySelector('.submenu-arrow');
+      const isOpening = submenu?.classList.contains('hidden') ?? false;
       submenu?.classList.toggle('hidden');
       arrow?.classList.toggle('rotate-180');
+      btn.setAttribute('aria-expanded', String(isOpening));
     });
   });
 
@@ -1048,6 +1031,13 @@ const mainNavItems: NavItem[] = [
     }
 
     if (header) {
+      if (header.contains(document.activeElement)) {
+        header.classList.remove('nav-hidden');
+        lastScrollY = scrollTop;
+        headerScrollTicking = false;
+        return;
+      }
+
       if (scrollTop > lastScrollY + scrollThreshold) {
         header.classList.add('nav-hidden');
       } else if (scrollTop < lastScrollY - scrollThreshold || scrollTop < 10) {

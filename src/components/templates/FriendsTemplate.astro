@@ -7,140 +7,200 @@ type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 const t: Record<Lang, Record<string, string>> = {
   'zh-CN': {
-    title: '友情链接',
-    subtitle: '我的朋友们',
-    badge: '🔗 Friends',
-    intro: '这里是一些我喜欢的网站和朋友们的主页，欢迎互链。',
-    apply: '申请友链',
-    applyDesc: '发送邮件至',
-    requirements: '友链要求',
-    req1: '网站内容健康、积极向上',
-    req2: '网站能够正常访问',
-    req3: '优先考虑技术博客或创意作品集',
+    title: '参考链接',
+    subtitle: '常用工具、AI 产品与基础设施入口',
+    badge: 'Reference Links',
+    intro:
+      '这里不再放陌生人的友链，也不做广告位。保留的是我会实际使用、查文档或做项目时经常打开的官方入口。',
+    ai: 'AI 与写作',
+    infra: '工程与部署',
+    mine: '我的外部站点',
+    visit: '打开',
+    noteTitle: '为什么这样放',
+    note: '个人网站的外链应该帮访客理解“我使用什么、信任什么、项目在哪里”，而不是把页面变成随机交换链接的集合。',
     back: '返回首页',
-    noDesc: '这个人很懒，什么都没写',
-    adTitle: '合作展示位',
-    adDesc: '这里可展示你的品牌、产品或活动，欢迎联系合作。',
-    adCta: '咨询合作',
-    placeholderTag: '待加入',
   },
   'zh-TW': {
-    title: '友情連結',
-    subtitle: '我的朋友們',
-    badge: '🔗 Friends',
-    intro: '這裡是一些我喜歡的網站和朋友們的主頁，歡迎互鏈。',
-    apply: '申請友鏈',
-    applyDesc: '發送郵件至',
-    requirements: '友鏈要求',
-    req1: '網站內容健康、積極向上',
-    req2: '網站能夠正常訪問',
-    req3: '優先考慮技術部落格或創意作品集',
+    title: '參考連結',
+    subtitle: '常用工具、AI 產品與基礎設施入口',
+    badge: 'Reference Links',
+    intro:
+      '這裡不再放陌生人的友鏈，也不做廣告位。保留的是我會實際使用、查文件或做專案時經常打開的官方入口。',
+    ai: 'AI 與寫作',
+    infra: '工程與部署',
+    mine: '我的外部站點',
+    visit: '打開',
+    noteTitle: '為什麼這樣放',
+    note: '個人網站的外鏈應該幫訪客理解「我使用什麼、信任什麼、專案在哪裡」，而不是把頁面變成隨機交換連結的集合。',
     back: '返回首頁',
-    noDesc: '這個人很懶，什麼都沒寫',
-    adTitle: '合作展示位',
-    adDesc: '這裡可展示你的品牌、產品或活動，歡迎聯繫合作。',
-    adCta: '諮詢合作',
-    placeholderTag: '待加入',
   },
   'en-GB': {
-    title: 'Friends',
-    subtitle: 'People & Sites I Enjoy',
-    badge: '🔗 Friends',
+    title: 'Reference Links',
+    subtitle: 'Tools, AI products and infrastructure I actually use',
+    badge: 'Reference Links',
     intro:
-      "Here are some websites I enjoy and my friends' homepages. Link exchanges welcome.",
-    apply: 'Apply for Link Exchange',
-    applyDesc: 'Send email to',
-    requirements: 'Requirements',
-    req1: 'Website content must be healthy and positive',
-    req2: 'Website must be accessible',
-    req3: 'Tech blogs or creative portfolios preferred',
+      'This is no longer a generic link-exchange page. It keeps official resources I use when writing, building, debugging and deploying.',
+    ai: 'AI & Writing',
+    infra: 'Engineering & Deploy',
+    mine: 'My External Sites',
+    visit: 'Open',
+    noteTitle: 'Why This Shape',
+    note: 'External links on a personal site should explain what I use, what I trust and where the related projects live. They should not become a random directory.',
     back: 'Back to home',
-    noDesc: 'No description provided',
-    adTitle: 'Partner Spotlight',
-    adDesc: 'A reserved slot for your brand, product, or campaign.',
-    adCta: 'Enquire now',
-    placeholderTag: 'Coming soon',
   },
   fr: {
-    title: 'Amis',
-    subtitle: "Gens et sites que j'apprécie",
-    badge: '🔗 Amis',
+    title: 'Références',
+    subtitle: 'Outils, IA et infrastructure que j’utilise réellement',
+    badge: 'Reference Links',
     intro:
-      "Voici quelques sites Web que j'apprécie et les pages d'accueil de mes amis. Échanges de liens bienvenus.",
-    apply: 'Demander un échange de lien',
-    applyDesc: 'Envoyer un email à',
-    requirements: 'Conditions',
-    req1: 'Le contenu du site doit être sain et positif',
-    req2: 'Le site doit être accessible',
-    req3: 'Blogs techniques ou portfolios créatifs préférés',
+      'Cette page n’est plus un échange de liens. Elle garde les ressources officielles que j’ouvre pour écrire, construire, déboguer et déployer.',
+    ai: 'IA et écriture',
+    infra: 'Ingénierie et déploiement',
+    mine: 'Mes sites externes',
+    visit: 'Ouvrir',
+    noteTitle: 'Pourquoi cette forme',
+    note: 'Les liens externes d’un site personnel doivent expliquer ce que j’utilise, ce en quoi j’ai confiance et où vivent les projets associés.',
     back: "Retour à l'accueil",
-    noDesc: 'Aucune description fournie',
-    adTitle: 'Espace partenaire',
-    adDesc: 'Un emplacement pour votre marque, produit ou campagne.',
-    adCta: 'Nous contacter',
-    placeholderTag: 'Bientôt',
   },
   ru: {
-    title: 'Друзья',
-    subtitle: 'Люди и сайты, которые мне нравятся',
-    badge: '🔗 Друзья',
+    title: 'Ссылки',
+    subtitle: 'Инструменты, AI-продукты и инфраструктура, которыми я пользуюсь',
+    badge: 'Reference Links',
     intro:
-      'Здесь представлены сайты, которые мне нравятся, и домашние страницы моих друзей. Обмен ссылками приветствуется.',
-    apply: 'Подать заявку на обмен ссылками',
-    applyDesc: 'Отправить письмо на',
-    requirements: 'Требования',
-    req1: 'Содержание сайта должно быть здоровым и позитивным',
-    req2: 'Сайт должен быть доступен',
-    req3: 'Предпочитаются технические блоги или креативные портфолио',
+      'Это больше не страница случайного обмена ссылками. Здесь официальные ресурсы, которые я открываю для письма, разработки, отладки и деплоя.',
+    ai: 'AI и письмо',
+    infra: 'Инженерия и деплой',
+    mine: 'Мои внешние сайты',
+    visit: 'Открыть',
+    noteTitle: 'Почему так',
+    note: 'Внешние ссылки на личном сайте должны объяснять, чем я пользуюсь, чему доверяю и где живут связанные проекты.',
     back: 'На главную',
-    noDesc: 'Описание не предоставлено',
-    adTitle: 'Партнерский слот',
-    adDesc: 'Место для вашего бренда, продукта или кампании.',
-    adCta: 'Связаться',
-    placeholderTag: 'Скоро',
   },
 };
 
-// 友链数据 - 可以根据实际情况修改
-const friendsData = [
+const sections = [
   {
-    name: 'Alexander James Carter',
-    url: 'https://alexander.xin',
-    avatar: '/img/branding/logo.png',
-    desc: {
-      'zh-CN': '这是我的个人网站',
-      'zh-TW': '這是我的個人網站',
-      'en-GB': 'This is my personal website',
-      fr: "C'est mon site personnel",
-      ru: 'Это мой личный сайт',
-    },
-    tags: ['Developer', 'Photographer'],
+    key: 'ai',
+    links: [
+      {
+        name: 'OpenAI',
+        url: 'https://openai.com/',
+        desc: {
+          'zh-CN': '模型、研究与产品入口。',
+          'zh-TW': '模型、研究與產品入口。',
+          'en-GB': 'Models, research and product entry points.',
+          fr: 'Modèles, recherche et produits.',
+          ru: 'Модели, исследования и продукты.',
+        },
+        tags: ['AI', 'Models'],
+      },
+      {
+        name: 'Claude',
+        url: 'https://claude.ai/',
+        desc: {
+          'zh-CN': '日常写作、阅读与代码协作入口。',
+          'zh-TW': '日常寫作、閱讀與程式協作入口。',
+          'en-GB': 'Daily writing, reading and coding assistant.',
+          fr: 'Assistant pour écrire, lire et coder.',
+          ru: 'Помощник для письма, чтения и кода.',
+        },
+        tags: ['AI', 'Writing'],
+      },
+      {
+        name: 'Anthropic',
+        url: 'https://www.anthropic.com/',
+        desc: {
+          'zh-CN': 'Claude 背后的研究与公司信息。',
+          'zh-TW': 'Claude 背後的研究與公司資訊。',
+          'en-GB': 'Research and company information behind Claude.',
+          fr: 'Recherche et informations derrière Claude.',
+          ru: 'Исследования и компания за Claude.',
+        },
+        tags: ['Research'],
+      },
+    ],
   },
   {
-    name: 'Your Site Here',
-    url: 'mailto:security@alexander.xin?subject=Friend%20Link%20Request',
-    avatar: '/img/branding/logo.png',
-    desc: {
-      'zh-CN': '这里是预留友链位，欢迎互链申请。',
-      'zh-TW': '這裡是預留友鏈位，歡迎互鏈申請。',
-      'en-GB': 'Reserved friend-link slot. Link exchange welcome.',
-      fr: 'Espace réservé. Échange de liens bienvenu.',
-      ru: 'Резервный слот для обмена ссылками.',
-    },
-    tags: ['Placeholder'],
+    key: 'infra',
+    links: [
+      {
+        name: 'GitHub',
+        url: 'https://github.com/AlexanderJ-Carter',
+        desc: {
+          'zh-CN': '公开仓库、项目源码与维护记录。',
+          'zh-TW': '公開倉庫、專案原始碼與維護記錄。',
+          'en-GB': 'Public repositories, source code and maintenance history.',
+          fr: 'Dépôts publics, code source et historique.',
+          ru: 'Публичные репозитории, исходный код и история.',
+        },
+        tags: ['Code'],
+      },
+      {
+        name: 'Cloudflare',
+        url: 'https://www.cloudflare.com/',
+        desc: {
+          'zh-CN': '站点部署、边缘网络、Workers 与隧道相关入口。',
+          'zh-TW': '站點部署、邊緣網路、Workers 與隧道相關入口。',
+          'en-GB': 'Site delivery, edge network, Workers and Tunnel.',
+          fr: 'Déploiement, réseau edge, Workers et Tunnel.',
+          ru: 'Доставка сайта, edge-сеть, Workers и Tunnel.',
+        },
+        tags: ['Edge', 'Deploy'],
+      },
+      {
+        name: 'Astro',
+        url: 'https://astro.build/',
+        desc: {
+          'zh-CN': '本站静态生成和内容页面的基础框架。',
+          'zh-TW': '本站靜態生成和內容頁面的基礎框架。',
+          'en-GB': 'The static-site framework behind this site.',
+          fr: 'Le framework statique derrière ce site.',
+          ru: 'Статический фреймворк этого сайта.',
+        },
+        tags: ['SSG'],
+      },
+    ],
   },
   {
-    name: 'Creative / Dev Partner',
-    url: 'mailto:security@alexander.xin?subject=Partnership%20Inquiry',
-    avatar: '/img/branding/logo-dark.png',
-    desc: {
-      'zh-CN': '招募中：创作者、开发者、个人站长。',
-      'zh-TW': '招募中：創作者、開發者、個人站長。',
-      'en-GB': 'Open for creators, developers, and indie web owners.',
-      fr: 'Ouvert aux créateurs, développeurs et indépendants.',
-      ru: 'Открыто для авторов, разработчиков и владельцев сайтов.',
-    },
-    tags: ['Sponsor', 'Collab'],
+    key: 'mine',
+    links: [
+      {
+        name: 'MyCook',
+        url: 'https://cook.alexander.xin',
+        desc: {
+          'zh-CN': '把做饭步骤整理成更容易检索和执行的菜谱站。',
+          'zh-TW': '把做飯步驟整理成更容易檢索和執行的菜譜站。',
+          'en-GB': 'A recipe site shaped for lookup and execution.',
+          fr: 'Site de recettes pensé pour chercher et exécuter.',
+          ru: 'Сайт рецептов для поиска и выполнения.',
+        },
+        tags: ['Food', 'Docs'],
+      },
+      {
+        name: 'Linux Command',
+        url: 'https://linux-command.alexander.xin',
+        desc: {
+          'zh-CN': '常用 Linux 指令的速查入口。',
+          'zh-TW': '常用 Linux 指令的速查入口。',
+          'en-GB': 'Quick lookup for common Linux commands.',
+          fr: 'Recherche rapide de commandes Linux.',
+          ru: 'Быстрый поиск команд Linux.',
+        },
+        tags: ['CLI'],
+      },
+      {
+        name: 'NetQ',
+        url: 'https://netq.alexander.xin',
+        desc: {
+          'zh-CN': '交互式网络排查 CLI 与命令思路整理。',
+          'zh-TW': '互動式網路排查 CLI 與命令思路整理。',
+          'en-GB': 'Interactive network troubleshooting CLI and command flow.',
+          fr: 'CLI de diagnostic réseau et logique de commandes.',
+          ru: 'CLI диагностики сети и поток команд.',
+        },
+        tags: ['Network'],
+      },
+    ],
   },
 ];
 
@@ -156,16 +216,14 @@ function getLangPath(path: string): string {
 <BaseLayout title={text.title} description={text.subtitle}>
   <section class="relative py-16 md:py-24 overflow-hidden">
     <div
-      class="absolute inset-0 bg-mesh-gradient opacity-40"
+      class="absolute inset-0 bg-mesh-gradient opacity-35"
       aria-hidden="true"
     >
     </div>
     <div class="container mx-auto px-4 lg:px-8 relative z-10">
-      <!-- Header -->
-      <div class="text-center mb-12 max-w-2xl mx-auto">
-        <span
-          class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
-        >
+      <header class="max-w-3xl mb-12">
+        <span class="section-kicker mb-5">
+          <span aria-hidden="true">🔗</span>
           {text.badge}
         </span>
         <h1
@@ -173,159 +231,102 @@ function getLangPath(path: string): string {
         >
           {text.title}
         </h1>
-        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
+        <p
+          class="text-lg text-[rgb(var(--color-text-secondary))] leading-relaxed"
+        >
           {text.intro}
         </p>
-      </div>
+      </header>
 
-      <!-- Friends Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {
-          friendsData.map((friend) => (
-            <a
-              href={friend.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="glass-card card-hover p-6 rounded-2xl flex flex-col items-center text-center gap-4 reveal group"
-            >
-              {/* Avatar */}
-              <div class="relative">
-                <img
-                  src={friend.avatar}
-                  alt={friend.name}
-                  class="w-20 h-20 rounded-full object-cover ring-4 ring-primary-500/20 group-hover:ring-primary-500/40 transition-all duration-300"
-                  loading="lazy"
-                />
-                <span class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-[rgb(var(--color-bg-primary))]" />
-              </div>
-
-              {/* Info */}
-              <div>
-                <h2 class="text-lg font-heading font-bold text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors">
-                  {friend.name}
+      <div class="grid gap-8 lg:grid-cols-[1fr_18rem] items-start">
+        <div class="space-y-10">
+          {
+            sections.map((section) => (
+              <section>
+                <h2 class="text-2xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">
+                  {text[section.key]}
                 </h2>
-                <p class="text-sm text-[rgb(var(--color-text-secondary))] mt-1 line-clamp-2">
-                  {friend.desc[lang as Lang] ||
-                    friend.desc['en-GB'] ||
-                    text.noDesc}
-                </p>
-              </div>
+                <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                  {section.links.map((link) => (
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="glass-card card-hover rounded-2xl p-5 flex flex-col min-h-[13rem] group"
+                    >
+                      <div class="flex items-start justify-between gap-4 mb-4">
+                        <h3 class="text-lg font-heading font-bold text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors">
+                          {link.name}
+                        </h3>
+                        <svg
+                          class="w-4 h-4 mt-1 text-[rgb(var(--color-text-tertiary))] group-hover:text-primary-500 flex-shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed flex-1">
+                        {link.desc[lang as Lang] || link.desc['en-GB']}
+                      </p>
+                      <div class="mt-5 flex items-center justify-between gap-3">
+                        <div class="flex flex-wrap gap-1.5">
+                          {link.tags.map((tag) => (
+                            <span class="px-2 py-0.5 rounded-md bg-primary-500/10 text-primary-600 dark:text-primary-400 text-xs font-medium">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <span class="text-xs font-semibold text-primary-500">
+                          {text.visit}
+                        </span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </section>
+            ))
+          }
+        </div>
 
-              {/* Tags */}
-              <div class="flex flex-wrap gap-1.5 justify-center">
-                {friend.tags.map((tag) => (
-                  <span class="px-2 py-0.5 rounded-md bg-accent-500/10 text-accent-600 dark:text-accent-400 text-xs font-medium">
-                    {tag === 'Placeholder' ? text.placeholderTag : tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Visit indicator */}
-              <span class="text-xs text-[rgb(var(--color-text-tertiary))] group-hover:text-primary-500 transition-colors flex items-center gap-1">
-                <svg
-                  class="w-3.5 h-3.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-                {lang === 'zh-CN'
-                  ? '访问'
-                  : lang === 'zh-TW'
-                    ? '訪問'
-                    : 'Visit'}
-              </span>
-            </a>
-          ))
-        }
-
-        <!-- Add Friend Card -->
-        <a
-          href="mailto:security@alexander.xin?subject=Friend Link Request"
-          class="glass-card card-hover p-6 rounded-2xl flex flex-col items-center justify-center text-center gap-4 reveal group border-2 border-dashed border-[rgb(var(--color-border))] hover:border-primary-500/50 transition-colors min-h-[240px]"
-        >
-          <div
-            class="w-16 h-16 rounded-full bg-primary-500/10 flex items-center justify-center group-hover:bg-primary-500/20 transition-colors"
+        <aside class="lg:sticky lg:top-28 glass-card rounded-2xl p-5">
+          <h2
+            class="font-heading font-bold text-[rgb(var(--color-text-primary))] mb-3"
           >
-            <svg
-              class="w-8 h-8 text-primary-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 4v16m8-8H4"></path>
-            </svg>
-          </div>
-          <span
-            class="font-medium text-[rgb(var(--color-text-secondary))] group-hover:text-primary-500 transition-colors"
+            {text.noteTitle}
+          </h2>
+          <p
+            class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed"
           >
-            {text.apply}
-          </span>
-        </a>
-      </div>
-
-      <!-- Partner spotlight -->
-      <div
-        class="glass-card p-6 rounded-2xl max-w-xl mx-auto mb-12 border border-primary-500/30"
-      >
-        <h3
-          class="font-heading font-bold text-lg mb-2 text-[rgb(var(--color-text-primary))]"
-        >
-          📢 {text.adTitle}
-        </h3>
-        <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
-          {text.adDesc}
-        </p>
-        <a
-          href="mailto:security@alexander.xin?subject=Partner%20Spotlight"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium transition-colors"
-        >
-          {text.adCta}
-        </a>
-      </div>
-
-      <!-- Requirements -->
-      <div class="glass-card p-6 rounded-2xl max-w-xl mx-auto mb-12">
-        <h3
-          class="font-heading font-bold text-lg mb-4 text-[rgb(var(--color-text-primary))]"
-        >
-          📋 {text.requirements}
-        </h3>
-        <ul class="space-y-2 text-sm text-[rgb(var(--color-text-secondary))]">
-          <li class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-            {text.req1}
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-            {text.req2}
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
-            {text.req3}
-          </li>
-        </ul>
-        <p class="mt-4 text-sm text-[rgb(var(--color-text-tertiary))]">
-          {text.applyDesc}
+            {text.note}
+          </p>
           <a
-            href="mailto:security@alexander.xin"
-            class="text-primary-500 hover:underline">security@alexander.xin</a
+            href={getLangPath('/projects')}
+            class="mt-5 inline-flex text-sm font-medium text-primary-500 hover:text-primary-600"
           >
-        </p>
+            {
+              lang === 'zh-CN'
+                ? '看项目页'
+                : lang === 'zh-TW'
+                  ? '看專案頁'
+                  : lang === 'fr'
+                    ? 'Voir les projets'
+                    : lang === 'ru'
+                      ? 'К проектам'
+                      : 'View projects'
+            }
+          </a>
+        </aside>
       </div>
 
-      <!-- Back link -->
-      <div class="text-center">
+      <div class="text-center mt-14">
         <a
           href={getLangPath('/')}
           class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1"

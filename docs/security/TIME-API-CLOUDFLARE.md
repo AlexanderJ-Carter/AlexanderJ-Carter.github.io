@@ -1,12 +1,12 @@
 # 时间 API 与 Cloudflare 部署说明
 
-本站时间页面展示的 API 为：`GET https://api.alexander.xin/time/now`。下面提供两种部署方式：**Cloudflare Workers**（推荐，无需隧道）和 **Cloudflare Tunnel**（暴露本地服务）。
+本站时间页面展示的 API 为：`GET https://api.alexander.xin/time/now`。它不是普通访客必须使用的功能，而是给前端调试、监控、小工具复用或外部调用准备的 JSON 时间接口。下面提供两种部署方式：**Cloudflare Workers**（推荐，无需隧道）和 **Cloudflare Tunnel**（仅在需要暴露已有本地服务时使用）。
 
 ---
 
 ## 方式一：Cloudflare Workers（推荐）
 
-无需隧道，在 Cloudflare 控制台创建 Worker，绑定自定义域名 `api.alexander.xin` 即可。
+无需隧道，在 Cloudflare 控制台创建 Worker，绑定自定义域名 `api.alexander.xin` 即可。只做“当前时间”接口时优先选这种方式。
 
 ### 1. 创建 Worker
 
@@ -73,7 +73,7 @@ export default {
 
 ## 方式二：Cloudflare Tunnel（暴露本地服务）
 
-若你希望 API 跑在自己电脑或服务器上的本地程序（如 Node/Express），可用 Cloudflare Tunnel 把本地端口暴露到公网。
+若你已经有跑在自己电脑或服务器上的本地程序（如 Node/Express），并且需要临时或长期暴露到公网，可用 Cloudflare Tunnel 把本地端口映射出去。仅提供当前时间时不建议为了它单独使用 Tunnel。
 
 ### 1. 安装 cloudflared
 
