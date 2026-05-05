@@ -27,8 +27,16 @@ const SIZES = [
 
 // 输出格式配置
 const FORMATS = [
-  { format: 'avif', options: { quality: 65, effort: 6 }, description: 'AVIF (最新格式，体积最小)' },
-  { format: 'webp', options: { quality: 85, effort: 6 }, description: 'WebP (兼容性好)' },
+  {
+    format: 'avif',
+    options: { quality: 65, effort: 6 },
+    description: 'AVIF (最新格式，体积最小)',
+  },
+  {
+    format: 'webp',
+    options: { quality: 85, effort: 6 },
+    description: 'WebP (兼容性好)',
+  },
 ];
 
 async function optimizeImages() {

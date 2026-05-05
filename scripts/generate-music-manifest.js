@@ -114,10 +114,10 @@ function scanDir(dir, basePath = '') {
 
 function main() {
   const localTracks = scanDir(MUSIC_DIR);
-  
+
   // 合并本地文件 + 在线直播流
   const tracks = [...localTracks, ...LIVE_STREAMS];
-  
+
   const manifest = {
     generatedAt: new Date().toISOString(),
     totalTracks: tracks.length,
@@ -125,7 +125,7 @@ function main() {
     liveStreams: LIVE_STREAMS.length,
     tracks,
   };
-  
+
   fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2), 'utf8');
   console.log(
     `[music-manifest] 已生成 ${tracks.length} 首歌曲 (${localTracks.length} 本地 + ${LIVE_STREAMS.length} 直播) -> public/music/manifest.json`
@@ -134,7 +134,9 @@ function main() {
   LIVE_STREAMS.forEach((s) => {
     console.log(`   ${s.cover} ${s.title} - ${s.description}`);
   });
-  console.log('\n💡 提示: 可从 https://pixabay.com/music 下载更多免费音乐到 public/music/ 目录');
+  console.log(
+    '\n💡 提示: 可从 https://pixabay.com/music 下载更多免费音乐到 public/music/ 目录'
+  );
 }
 
 main();
