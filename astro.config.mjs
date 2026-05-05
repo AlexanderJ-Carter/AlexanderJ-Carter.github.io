@@ -25,12 +25,20 @@ export default defineConfig({
     locales: ['zh-CN', 'zh-TW', 'en-GB', 'fr', 'ru'],
     routing: {
       prefixDefaultLocale: false,
-      redirectToDefaultLocale: true,
     },
   },
   output: 'static',
   build: {
     inlineStylesheets: 'auto',
+  },
+  // Astro 6.x 图片优化配置
+  image: {
+    // 优先使用 AVIF 格式（比 WebP 小 50%，比 JPEG 小 70%）
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+    },
+    domains: [],
+    remotePatterns: [{ protocol: 'https' }],
   },
   vite: {
     build: {
@@ -40,6 +48,12 @@ export default defineConfig({
         output: {
           assetFileNames: 'assets/[hash][extname]',
           chunkFileNames: 'chunks/[hash].js',
+          // 模块预加载优化
+          manualChunks: (id) => {
+            if (id.includes('tailwindcss')) {
+              return 'vendor-tailwind';
+            }
+          },
         },
       },
     },

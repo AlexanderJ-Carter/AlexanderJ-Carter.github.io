@@ -1,5 +1,6 @@
 /**
  * 扫描 public/music 目录，生成 manifest.json 供音乐播放器使用。
+ * 支持本地文件 + 在线直播流（Jazz24、WRTI 古典/爵士等）。
  * 新增歌曲文件后无需改代码，构建时会自动识别。
  * 运行：node scripts/generate-music-manifest.js（或在 build 前自动执行）
  */
@@ -20,6 +21,34 @@ const AUDIO_EXT = new Set([
   '.aac',
 ]);
 
+/** 在线直播流预设（高质量免费音乐电台） */
+const LIVE_STREAMS = [
+  {
+    file: 'https://live.amperwave.net/direct/ppm-jazz24mp3-ibc1',
+    title: 'Jazz24 爵士电台',
+    artist: 'Jazz24 (Seattle)',
+    cover: '🎷',
+    type: 'live',
+    description: '24小时爵士音乐直播',
+  },
+  {
+    file: 'https://wrti-live.streamguys1.com/classical-mp3',
+    title: 'WRTI 古典音乐',
+    artist: 'WRTI Philadelphia',
+    cover: '🎻',
+    type: 'live',
+    description: '古典音乐直播',
+  },
+  {
+    file: 'https://wrti-live.streamguys1.com/jazz-mp3',
+    title: 'WRTI 爵士音乐',
+    artist: 'WRTI Philadelphia',
+    cover: '🎺',
+    type: 'live',
+    description: '爵士音乐直播',
+  },
+];
+
 /** 根据文件夹名返回默认封面 emoji */
 function coverForFolder(dirName) {
   const lower = (dirName || '').toLowerCase();
@@ -28,6 +57,9 @@ function coverForFolder(dirName) {
   if (lower.includes('traditional') || lower.includes('folk')) return '🌙';
   if (lower.includes('jazz')) return '🎷';
   if (lower.includes('rock') || lower.includes('pop')) return '🎸';
+  if (lower.includes('ambient')) return '🌊';
+  if (lower.includes('cinematic')) return '🎬';
+  if (lower.includes('nature')) return '🌿';
   return '🎵';
 }
 
@@ -67,6 +99,7 @@ function scanDir(dir, basePath = '') {
       title: filenameToTitle(baseName),
       artist: '未知',
       cover: coverForFolder(folderName),
+      type: 'local',
     });
   }
 
@@ -80,15 +113,28 @@ function scanDir(dir, basePath = '') {
 }
 
 function main() {
-  const tracks = scanDir(MUSIC_DIR);
+  const localTracks = scanDir(MUSIC_DIR);
+  
+  // 合并本地文件 + 在线直播流
+  const tracks = [...localTracks, ...LIVE_STREAMS];
+  
   const manifest = {
     generatedAt: new Date().toISOString(),
+    totalTracks: tracks.length,
+    localTracks: localTracks.length,
+    liveStreams: LIVE_STREAMS.length,
     tracks,
   };
+  
   fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2), 'utf8');
   console.log(
-    `[music-manifest] 已生成 ${tracks.length} 首歌曲 -> public/music/manifest.json`
+    `[music-manifest] 已生成 ${tracks.length} 首歌曲 (${localTracks.length} 本地 + ${LIVE_STREAMS.length} 直播) -> public/music/manifest.json`
   );
+  console.log('\n📻 在线直播流:');
+  LIVE_STREAMS.forEach((s) => {
+    console.log(`   ${s.cover} ${s.title} - ${s.description}`);
+  });
+  console.log('\n💡 提示: 可从 https://pixabay.com/music 下载更多免费音乐到 public/music/ 目录');
 }
 
 main();

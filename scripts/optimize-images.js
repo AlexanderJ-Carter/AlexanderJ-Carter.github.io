@@ -2,9 +2,11 @@
 
 /**
  * 图片优化脚本
- * 将 JPG 转换为 WebP，并生成多种尺寸
+ * 将 JPG 转换为 WebP 和 AVIF，并生成多种尺寸
  *
- * 使用前请安装: npm install --save-dev sharp imagemin imagemin-webp
+ * AVIF 比 WebP 小 50%，比 JPEG 小 70%
+ *
+ * 使用前请安装: npm install --save-dev sharp
  */
 
 import sharp from 'sharp';
@@ -23,6 +25,12 @@ const SIZES = [
   { width: 1920, suffix: '-xl' }, // 大屏
 ];
 
+// 输出格式配置
+const FORMATS = [
+  { format: 'avif', options: { quality: 65, effort: 6 }, description: 'AVIF (最新格式，体积最小)' },
+  { format: 'webp', options: { quality: 85, effort: 6 }, description: 'WebP (兼容性好)' },
+];
+
 async function optimizeImages() {
   console.log('🖼️  开始图片优化...\n');
 
@@ -33,7 +41,7 @@ async function optimizeImages() {
 
   const files = await readdir(INPUT_DIR);
   const jpgFiles = files.filter(
-    (f) => f.endsWith('.jpg') || f.endsWith('.jpeg')
+    (f) => f.endsWith('.jpg') || f.endsWith('.jpeg') || f.endsWith('.png')
   );
 
   console.log(`找到 ${jpgFiles.length} 张图片需要优化\n`);
@@ -45,28 +53,36 @@ async function optimizeImages() {
 
     console.log(`处理: ${file} (${stats.width}x${stats.height})`);
 
-    // 生成原始尺寸的 WebP（质量 85%）
-    const outputPath = join(OUTPUT_DIR, `${name}.webp`);
-    await sharp(inputPath).webp({ quality: 85, effort: 6 }).toFile(outputPath);
-
-    console.log(`  ✅ ${name}.webp`);
+    // 生成多种格式
+    for (const { format, options, description } of FORMATS) {
+      const outputPath = join(OUTPUT_DIR, `${name}.${format}`);
+      await sharp(inputPath)[format](options).toFile(outputPath);
+      console.log(`  ✅ ${name}.${format} - ${description}`);
+    }
 
     // 生成响应式尺寸
     for (const size of SIZES) {
       if (stats.width >= size.width) {
-        const sizePath = join(OUTPUT_DIR, `${name}${size.suffix}.webp`);
-        await sharp(inputPath)
-          .resize(size.width, null, { withoutEnlargement: true })
-          .webp({ quality: 85, effort: 6 })
-          .toFile(sizePath);
-
-        console.log(`  ✅ ${name}${size.suffix}.webp (${size.width}px)`);
+        for (const { format, options } of FORMATS) {
+          const sizePath = join(OUTPUT_DIR, `${name}${size.suffix}.${format}`);
+          await sharp(inputPath)
+            .resize(size.width, null, { withoutEnlargement: true })
+            [format](options)
+            .toFile(sizePath);
+        }
+        console.log(`  ✅ ${name}${size.suffix}.[avif/webp] (${size.width}px)`);
       }
     }
   }
 
   console.log('\n✨ 优化完成！');
   console.log(`输出目录: ${OUTPUT_DIR}`);
+  console.log('\n💡 使用示例:');
+  console.log('<picture>');
+  console.log('  <source srcset="image.avif" type="image/avif">');
+  console.log('  <source srcset="image.webp" type="image/webp">');
+  console.log('  <img src="image.jpg" alt="Fallback" loading="lazy">');
+  console.log('</picture>');
 }
 
 optimizeImages().catch(console.error);

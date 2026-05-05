@@ -1,29 +1,60 @@
 {
-  "generatedAt": "2026-04-19T05:58:48.568Z",
+  "generatedAt": "2026-05-05T06:23:08.692Z",
+  "totalTracks": 7,
+  "localTracks": 4,
+  "liveStreams": 3,
   "tracks": [
     {
       "file": "/music/classical/castle-in-sky.flac",
       "title": "Castle In Sky",
       "artist": "未知",
-      "cover": "🏰"
+      "cover": "🏰",
+      "type": "local"
     },
     {
       "file": "/music/piano/kiss-the-rain.ogg",
       "title": "Kiss The Rain",
       "artist": "未知",
-      "cover": "🎹"
+      "cover": "🎹",
+      "type": "local"
     },
     {
       "file": "/music/piano/winter-memory.flac",
       "title": "Winter Memory",
       "artist": "未知",
-      "cover": "🎹"
+      "cover": "🎹",
+      "type": "local"
     },
     {
       "file": "/music/traditional/colorful-clouds-chasing-moon.ogg",
       "title": "Colorful Clouds Chasing Moon",
       "artist": "未知",
-      "cover": "🌙"
+      "cover": "🌙",
+      "type": "local"
+    },
+    {
+      "file": "https://live.amperwave.net/direct/ppm-jazz24mp3-ibc1",
+      "title": "Jazz24 爵士电台",
+      "artist": "Jazz24 (Seattle)",
+      "cover": "🎷",
+      "type": "live",
+      "description": "24小时爵士音乐直播"
+    },
+    {
+      "file": "https://wrti-live.streamguys1.com/classical-mp3",
+      "title": "WRTI 古典音乐",
+      "artist": "WRTI Philadelphia",
+      "cover": "🎻",
+      "type": "live",
+      "description": "古典音乐直播"
+    },
+    {
+      "file": "https://wrti-live.streamguys1.com/jazz-mp3",
+      "title": "WRTI 爵士音乐",
+      "artist": "WRTI Philadelphia",
+      "cover": "🎺",
+      "type": "live",
+      "description": "爵士音乐直播"
     }
   ]
 }
