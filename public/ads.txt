@@ -1,4 +1,5 @@
-# This site does not sell ad space or use third-party advertising.
-# Personal, non-commercial portfolio — no ads.
-# https://alexander.xin
-# Last updated: 2026-02-04
+# ads.txt for alexander.xin
+# https://iabtechlab.com/ads-txt/
+# Last updated: 2026-06-01
+
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

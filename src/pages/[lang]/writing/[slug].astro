@@ -1,0 +1,44 @@
+---
+import { getCollection, render } from 'astro:content';
+import WritingPostTemplate from '../../../components/templates/WritingPostTemplate.astro';
+
+const langMap: Record<string, string> = {
+  'zh-TW': 'zh-TW',
+  en: 'en-GB',
+  fr: 'fr',
+  ru: 'ru',
+};
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writing');
+  const paths = [];
+
+  for (const [urlLang, dataLang] of Object.entries(langMap)) {
+    const langPosts = posts.filter((post) => post.data.lang === dataLang);
+    for (const post of langPosts) {
+      paths.push({
+        params: { lang: urlLang, slug: post.id },
+        props: { post, lang: dataLang },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { post, lang } = Astro.props;
+const { Content } = await render(post);
+---
+
+<WritingPostTemplate
+  lang={lang}
+  title={post.data.title}
+  description={post.data.description}
+  pubDate={post.data.pubDate}
+  updatedDate={post.data.updatedDate}
+  category={post.data.category}
+  tags={post.data.tags}
+  timeToRead={post.data.timeToRead}
+>
+  <Content />
+</WritingPostTemplate>

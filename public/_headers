@@ -3,7 +3,7 @@
 
 /*
   # Content Security Policy - 允许内联脚本和样式，限制外部资源
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.open-meteo.com https://open.er-api.com https://api.github.com https://api.qrserver.com; frame-src https://challenges.cloudflare.com; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://partner.googleadservices.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.open-meteo.com https://open.er-api.com https://api.github.com https://api.qrserver.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com; frame-src https://challenges.cloudflare.com https://googleads.g.doubleclick.net https://td.doubleclick.net; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'
   
   # 防止MIME类型嗅探
   X-Content-Type-Options: nosniff

@@ -100,52 +100,28 @@ const mainNavItems: NavItem[] = [
                   : "Things I've built",
       },
       {
-        href: getLangPath('/reading'),
+        href: getLangPath('/writing'),
         label:
           lang === 'zh-CN'
-            ? '阅读'
+            ? '写作'
             : lang === 'zh-TW'
-              ? '閱讀'
+              ? '寫作'
               : lang === 'fr'
-                ? 'Lecture'
+                ? 'Écrits'
                 : lang === 'ru'
-                  ? 'Чтение'
-                  : 'Reading',
-        icon: '📚',
+                  ? 'Статьи'
+                  : 'Writing',
+        icon: '✍️',
         desc:
           lang === 'zh-CN'
-            ? '推荐书单'
+            ? '工程与设计长文'
             : lang === 'zh-TW'
-              ? '推薦書單'
+              ? '工程與設計長文'
               : lang === 'fr'
-                ? 'Livres recommandés'
+                ? 'Articles techniques'
                 : lang === 'ru'
-                  ? 'Рекомендуемые книги'
-                  : 'Recommended books',
-      },
-      {
-        href: getLangPath('/notes'),
-        label:
-          lang === 'zh-CN'
-            ? '札记'
-            : lang === 'zh-TW'
-              ? '札記'
-              : lang === 'fr'
-                ? 'Notes'
-                : lang === 'ru'
-                  ? 'Заметки'
-                  : 'Notes',
-        icon: '✎',
-        desc:
-          lang === 'zh-CN'
-            ? '长期思考'
-            : lang === 'zh-TW'
-              ? '長期思考'
-              : lang === 'fr'
-                ? 'Réflexions longues'
-                : lang === 'ru'
-                  ? 'Долгие заметки'
-                  : 'Long-form notes',
+                  ? 'Технические статьи'
+                  : 'Long-form articles',
       },
     ],
   },
@@ -375,30 +351,6 @@ const mainNavItems: NavItem[] = [
                 : lang === 'ru'
                   ? 'Инструменты и ресурсы'
                   : 'Tools and resources',
-      },
-      {
-        href: getLangPath('/fun'),
-        label:
-          lang === 'zh-CN'
-            ? '彩蛋'
-            : lang === 'zh-TW'
-              ? '彩蛋'
-              : lang === 'fr'
-                ? 'Easter Eggs'
-                : lang === 'ru'
-                  ? 'Пасхалки'
-                  : 'Easter Eggs',
-        icon: '🥚',
-        desc:
-          lang === 'zh-CN'
-            ? '互动实验'
-            : lang === 'zh-TW'
-              ? '互動實驗'
-              : lang === 'fr'
-                ? 'Expériences'
-                : lang === 'ru'
-                  ? 'Эксперименты'
-                  : 'Interaction lab',
       },
       {
         href: getLangPath('/sitemap'),

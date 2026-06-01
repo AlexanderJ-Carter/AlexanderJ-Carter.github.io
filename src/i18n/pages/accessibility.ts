@@ -1,0 +1,244 @@
+import type { Lang } from '../types';
+
+export const accessibilityData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '无障碍声明',
+    back: '返回首页',
+    headerTitle: '无障碍声明',
+    headerDesc: '致力于为所有用户提供可访问的Web体验',
+    commitmentTitle: '我们的承诺',
+    commitmentDesc:
+      'alexander.xin 致力于确保我们的网站对所有人都是无障碍的,包括残障人士。我们不断努力改进我们网站的可访问性和可用性,并遵循相关的无障碍标准和最佳实践。',
+    featuresTitle: '无障碍功能',
+    featuresDesc: '我们的网站包含以下无障碍功能:',
+    features: [
+      {
+        icon: '⌨️',
+        title: '键盘导航',
+        desc: '所有功能都可以通过键盘访问,无需使用鼠标',
+      },
+      {
+        icon: '👁️',
+        title: '高对比度',
+        desc: '提供高对比度模式,确保文本清晰易读',
+      },
+      {
+        icon: '📱',
+        title: '响应式设计',
+        desc: '适配各种屏幕尺寸和设备,支持缩放',
+      },
+      {
+        icon: '🗣️',
+        title: '屏幕阅读器',
+        desc: '优化了ARIA标签,支持主流屏幕阅读器',
+      },
+    ],
+    standardsTitle: '一致性标准',
+    standardsDesc:
+      '本网站努力符合万维网联盟(W3C)发布的Web内容无障碍指南(WCAG) 2.1 AA级标准。',
+    feedbackTitle: '反馈与联系',
+    feedbackDesc:
+      '如果您在使用本网站时遇到任何无障碍问题,或者对我们的无障碍功能有任何建议,请联系我们。我们将尽力解决您的问题。',
+    actionTitle: '可操作指南',
+    actionDesc: '以下是快速提升可访问体验的建议与开关：',
+    guide1: '键盘导航：使用 Tab / Shift+Tab 在可交互元素间移动',
+    guide2: '快速搜索：使用 Ctrl/Cmd + K 打开全局搜索',
+    guide3: '跳过导航：页面开头可使用“跳到主内容”链接',
+    shortcutsTitle: '常用快捷键',
+    contrastBtn: '切换高对比度预览',
+    motionBtn: '切换减少动画预览',
+  },
+  'zh-TW': {
+    title: '無障礙聲明',
+    back: '返回首頁',
+    headerTitle: '無障礙聲明',
+    headerDesc: '致力於為所有用戶提供可訪問的Web體驗',
+    commitmentTitle: '我們的承諾',
+    commitmentDesc:
+      'alexander.xin 致力於確保我們的網站對所有人都是無障礙的,包括殘障人士。我們不斷努力改進我們網站的可訪問性和可用性,並遵循相關的無障礙標準和最佳實踐。',
+    featuresTitle: '無障礙功能',
+    featuresDesc: '我們的網站包含以下無障礙功能:',
+    features: [
+      {
+        icon: '⌨️',
+        title: '鍵盤導航',
+        desc: '所有功能都可以通過鍵盤訪問,無需使用滑鼠',
+      },
+      {
+        icon: '👁️',
+        title: '高對比度',
+        desc: '提供高對比度模式,確保文本清晰易讀',
+      },
+      {
+        icon: '📱',
+        title: '響應式設計',
+        desc: '適配各種螢幕尺寸和設備,支持縮放',
+      },
+      {
+        icon: '🗣️',
+        title: '螢幕閱讀器',
+        desc: '優化了ARIA標籤,支持主流螢幕閱讀器',
+      },
+    ],
+    standardsTitle: '一致性標準',
+    standardsDesc:
+      '本網站努力符合萬維網聯盟(W3C)發布的Web內容無障礙指南(WCAG) 2.1 AA級標準。',
+    feedbackTitle: '反饋與聯繫',
+    feedbackDesc:
+      '如果您在使用本網站時遇到任何無障礙問題,或者對我們的無障礙功能有任何建議,請聯繫我們。我們將盡力解決您的問題。',
+    actionTitle: '可操作指南',
+    actionDesc: '以下是快速提升可訪問體驗的建議與開關：',
+    guide1: '鍵盤導覽：使用 Tab / Shift+Tab 在互動元素間移動',
+    guide2: '快速搜尋：使用 Ctrl/Cmd + K 開啟全域搜尋',
+    guide3: '跳過導覽：頁面開頭可使用「跳到主內容」連結',
+    shortcutsTitle: '常用快捷鍵',
+    contrastBtn: '切換高對比預覽',
+    motionBtn: '切換減少動畫預覽',
+  },
+  'en-GB': {
+    title: 'Accessibility Statement',
+    back: 'Back to Home',
+    headerTitle: 'Accessibility Statement',
+    headerDesc:
+      'Committed to providing an accessible Web experience for all users',
+    commitmentTitle: 'Our Commitment',
+    commitmentDesc:
+      'alexander.xin is committed to ensuring that our website is accessible to everyone, including people with disabilities. We continuously strive to improve the accessibility and usability of our website and follow relevant accessibility standards and best practices.',
+    featuresTitle: 'Accessibility Features',
+    featuresDesc: 'Our website includes the following accessibility features:',
+    features: [
+      {
+        icon: '⌨️',
+        title: 'Keyboard Navigation',
+        desc: 'All functions are accessible via keyboard without using a mouse',
+      },
+      {
+        icon: '👁️',
+        title: 'High Contrast',
+        desc: 'Provides high contrast mode to ensure text is clear and readable',
+      },
+      {
+        icon: '📱',
+        title: 'Responsive Design',
+        desc: 'Adapts to various screen sizes and devices, supports zooming',
+      },
+      {
+        icon: '🗣️',
+        title: 'Screen Readers',
+        desc: 'Optimized ARIA labels, supports mainstream screen readers',
+      },
+    ],
+    standardsTitle: 'Conformance Standards',
+    standardsDesc:
+      'This website strives to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA published by the World Wide Web Consortium (W3C).',
+    feedbackTitle: 'Feedback and Contact',
+    feedbackDesc:
+      'If you encounter any accessibility issues while using this website, or have any suggestions for our accessibility features, please contact us. We will do our best to resolve your issues.',
+    actionTitle: 'Actionable Guide',
+    actionDesc: 'Use these quick tips and controls for better accessibility:',
+    guide1: 'Keyboard navigation: use Tab / Shift+Tab to move between controls',
+    guide2: 'Quick search: use Ctrl/Cmd + K to open global search',
+    guide3: 'Skip navigation: use the "Skip to main content" link at page top',
+    shortcutsTitle: 'Common Shortcuts',
+    contrastBtn: 'Toggle high contrast preview',
+    motionBtn: 'Toggle reduced motion preview',
+  },
+  fr: {
+    title: "Déclaration d'accessibilité",
+    back: "Retour à l'accueil",
+    headerTitle: "Déclaration d'accessibilité",
+    headerDesc:
+      'Engagé à fournir une expérience Web accessible à tous les utilisateurs',
+    commitmentTitle: 'Notre Engagement',
+    commitmentDesc:
+      "alexander.xin s'engage à garantir que notre site web est accessible à tous, y compris aux personnes handicapées. Nous nous efforçons continuellement d'améliorer l'accessibilité et la convivialité de notre site web et de suivre les normes d'accessibilité et les meilleures pratiques pertinentes.",
+    featuresTitle: "Fonctionnalités d'accessibilité",
+    featuresDesc:
+      "Notre site web comprend les fonctionnalités d'accessibilité suivantes :",
+    features: [
+      {
+        icon: '⌨️',
+        title: 'Navigation au clavier',
+        desc: 'Toutes les fonctions sont accessibles via le clavier sans utiliser de souris',
+      },
+      {
+        icon: '👁️',
+        title: 'Contraste élevé',
+        desc: 'Fournit un mode contraste élevé pour assurer que le texte est clair et lisible',
+      },
+      {
+        icon: '📱',
+        title: 'Design réactif',
+        desc: "S'adapte à diverses tailles d'écran et appareils, prend en charge le zoom",
+      },
+      {
+        icon: '🗣️',
+        title: "Lecteurs d'écran",
+        desc: "Étiquettes ARIA optimisées, prend en charge les principaux lecteurs d'écran",
+      },
+    ],
+    standardsTitle: 'Normes de conformité',
+    standardsDesc:
+      "Ce site web s'efforce de se conformer aux directives pour l'accessibilité du contenu Web (WCAG) 2.1 niveau AA publiées par le World Wide Web Consortium (W3C).",
+    feedbackTitle: 'Commentaires et contact',
+    feedbackDesc:
+      "Si vous rencontrez des problèmes d'accessibilité lors de l'utilisation de ce site web, ou si vous avez des suggestions pour nos fonctionnalités d'accessibilité, veuillez nous contacter. Nous ferons de notre mieux pour résoudre vos problèmes.",
+    actionTitle: 'Guide pratique',
+    actionDesc: 'Astuces et options rapides pour une meilleure accessibilité :',
+    guide1: 'Navigation clavier : utilisez Tab / Shift+Tab',
+    guide2: 'Recherche rapide : Ctrl/Cmd + K',
+    guide3: 'Lien de saut : utilisez "Passer au contenu principal"',
+    shortcutsTitle: 'Raccourcis utiles',
+    contrastBtn: 'Activer le contraste élevé',
+    motionBtn: 'Activer la réduction des animations',
+  },
+  ru: {
+    title: 'Заявление о доступности',
+    back: 'На главную',
+    headerTitle: 'Заявление о доступности',
+    headerDesc:
+      'Стремимся обеспечить доступный веб-опыт для всех пользователей',
+    commitmentTitle: 'Наше обязательство',
+    commitmentDesc:
+      'alexander.xin стремится обеспечить доступность нашего веб-сайта для всех, включая людей с ограниченными возможностями. Мы постоянно стремимся улучшать доступность и удобство использования нашего веб-сайта и следовать соответствующим стандартам доступности и лучшим практикам.',
+    featuresTitle: 'Функции доступности',
+    featuresDesc: 'Наш веб-сайт включает следующие функции доступности:',
+    features: [
+      {
+        icon: '⌨️',
+        title: 'Клавиатурная навигация',
+        desc: 'Все функции доступны с клавиатуры без использования мыши',
+      },
+      {
+        icon: '👁️',
+        title: 'Высокая контрастность',
+        desc: 'Обеспечивает режим высокой контрастности для четкости и читаемости текста',
+      },
+      {
+        icon: '📱',
+        title: 'Адаптивный дизайн',
+        desc: 'Адаптируется к различным размерам экранов и устройствам, поддерживает масштабирование',
+      },
+      {
+        icon: '🗣️',
+        title: 'Скринридеры',
+        desc: 'Оптимизированные ARIA-метки, поддержка основных скринридеров',
+      },
+    ],
+    standardsTitle: 'Стандарты соответствия',
+    standardsDesc:
+      'Этот веб-сайт стремится соответствовать Руководству по обеспечению доступности веб-контента (WCAG) 2.1 уровня AA, опубликованному Консорциумом Всемирной паутины (W3C).',
+    feedbackTitle: 'Обратная связь и контакты',
+    feedbackDesc:
+      'Если вы столкнулись с какими-либо проблемами доступности при использовании этого веб-сайта или у вас есть предложения по нашим функциям доступности, пожалуйста, свяжитесь с нами. Мы сделаем все возможное, чтобы решить ваши проблемы.',
+    actionTitle: 'Практическое руководство',
+    actionDesc: 'Быстрые советы и переключатели для удобства:',
+    guide1: 'Клавиатура: Tab / Shift+Tab для навигации',
+    guide2: 'Быстрый поиск: Ctrl/Cmd + K',
+    guide3: 'Пропуск навигации: ссылка "Skip to main content" сверху',
+    shortcutsTitle: 'Полезные сочетания',
+    contrastBtn: 'Переключить высокий контраст',
+    motionBtn: 'Переключить уменьшение анимации',
+  },
+};
+

@@ -10,35 +10,35 @@ function getLangPath(path: string) {
 
 const i18n = {
   'zh-CN': {
-    desc: '个人网站、项目、札记与工具的入口。页脚只保留真正有用的路径。',
+    desc: '个人网站、项目、写作与工具的入口。页脚只保留真正有用的路径。',
     explore: '站内',
     projects: '我的项目',
     policy: '说明',
     contact: '联系',
   },
   'zh-TW': {
-    desc: '個人網站、專案、札記與工具的入口。頁腳只保留真正有用的路徑。',
+    desc: '個人網站、專案、寫作與工具的入口。頁腳只保留真正有用的路徑。',
     explore: '站內',
     projects: '我的專案',
     policy: '說明',
     contact: '聯繫',
   },
   'en-GB': {
-    desc: 'A compact entrance to the site, projects, notes and utilities.',
+    desc: 'A compact entrance to the site, projects, writing and utilities.',
     explore: 'Explore',
     projects: 'My Projects',
     policy: 'Notes',
     contact: 'Contact',
   },
   fr: {
-    desc: 'Entrée compacte vers le site, les projets, les notes et les outils.',
+    desc: 'Entrée compacte vers le site, les projets, les écrits et les outils.',
     explore: 'Explorer',
     projects: 'Mes projets',
     policy: 'Notes',
     contact: 'Contact',
   },
   ru: {
-    desc: 'Компактный вход к сайту, проектам, заметкам и инструментам.',
+    desc: 'Компактный вход к сайту, проектам, статьям и инструментам.',
     explore: 'Сайт',
     projects: 'Проекты',
     policy: 'Сведения',
@@ -69,13 +69,15 @@ const exploreLinks = [
   {
     label:
       lang === 'zh-CN'
-        ? '札记'
+        ? '写作'
         : lang === 'zh-TW'
-          ? '札記'
-          : lang === 'ru'
-            ? 'Заметки'
-            : 'Notes',
-    href: getLangPath('/notes'),
+          ? '寫作'
+          : lang === 'fr'
+            ? 'Écrits'
+            : lang === 'ru'
+              ? 'Статьи'
+              : 'Writing',
+    href: getLangPath('/writing'),
   },
   {
     label:
@@ -244,9 +246,47 @@ const policyLinks = [
     <div
       class="mt-10 pt-6 border-t border-[rgb(var(--color-border))] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
     >
-      <p class="text-xs text-[rgb(var(--color-text-tertiary))]">
-        © {currentYear} Alexander James Carter
-      </p>
+      <div class="flex items-center gap-4">
+        <p class="text-xs text-[rgb(var(--color-text-tertiary))]">
+          © {currentYear} Alexander James Carter
+        </p>
+        <a
+          href={getLangPath('/about')}
+          class="inline-flex items-center gap-1.5 text-xs font-medium text-primary-500 hover:text-primary-600 transition-colors"
+          aria-label={lang === 'zh-CN'
+            ? '支持本站'
+            : lang === 'zh-TW'
+              ? '支持本站'
+              : lang === 'fr'
+                ? 'Soutenir'
+                : lang === 'ru'
+                  ? 'Поддержать'
+                  : 'Support'}
+        >
+          <svg
+            class="w-4 h-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+            ></path>
+          </svg>
+          {
+            lang === 'zh-CN'
+              ? '支持本站'
+              : lang === 'zh-TW'
+                ? '支持本站'
+                : lang === 'fr'
+                  ? 'Soutenir'
+                  : lang === 'ru'
+                    ? 'Поддержать'
+                    : 'Support'
+          }
+        </a>
+      </div>
       <a href={getLangPath('/license')} class="footer-chip">CC BY-NC-ND 4.0</a>
     </div>
   </div>

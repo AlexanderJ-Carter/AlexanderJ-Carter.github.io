@@ -118,6 +118,9 @@ const fullTitle =
 
     <!-- Structured Data -->
     <StructuredData description={description} />
+
+    <!-- Cloudflare Web Analytics (privacy-friendly, no cookies) -->
+    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_CLOUDFLARE_ANALYTICS_TOKEN"}'></script>
   </head>
   <body class="antialiased">
     <a href="#main-content" class="skip-link"

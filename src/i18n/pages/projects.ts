@@ -1,11 +1,6 @@
----
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import RelatedTools from '../RelatedTools.astro';
+import type { Lang } from '../types';
 
-const { lang } = Astro.props;
-type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
-
-const t: Record<Lang, Record<string, string>> = {
+export const t: Record<Lang, Record<string, string>> = {
   'zh-CN': {
     title: '个人项目',
     subtitle: '生活向的小项目与站点页面',
@@ -88,7 +83,7 @@ const t: Record<Lang, Record<string, string>> = {
   },
 };
 
-const projectsData: Record<Lang, any[]> = {
+export const projectsData: Record<Lang, any[]> = {
   'zh-CN': [
     {
       title: '个人主页',
@@ -119,13 +114,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
-      title: '写作频道',
-      desc: '关于工程、设计、摄影与工具实践的长文，基于 Content Collections 构建。',
-      tags: ['Writing', 'Astro', 'Content'],
+      title: '阅读清单页面',
+      desc: '整理长期书单、正在读和推荐阅读，页面更偏轻量和可持续更新。',
+      tags: ['Reading', 'List', 'Lifestyle'],
       category: 'web',
-      status: 'done',
+      status: 'wip',
       github: null,
-      demo: '/writing',
+      demo: '/reading',
     },
     {
       title: '汇率转换小工具',
@@ -167,13 +162,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
-      title: '寫作頻道',
-      desc: '關於工程、設計、攝影與工具實踐的長文，基於 Content Collections 構建。',
-      tags: ['Writing', 'Astro', 'Content'],
+      title: '閱讀清單頁面',
+      desc: '整理長期書單、正在讀和推薦閱讀，頁面更偏輕量和可持續更新。',
+      tags: ['Reading', 'List', 'Lifestyle'],
       category: 'web',
-      status: 'done',
+      status: 'wip',
       github: null,
-      demo: '/writing',
+      demo: '/reading',
     },
     {
       title: '匯率換算小工具',
@@ -215,13 +210,13 @@ const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
-      title: 'Writing Channel',
-      desc: 'Long-form articles on engineering, design, photography and tools, built with Content Collections.',
-      tags: ['Writing', 'Astro', 'Content'],
+      title: 'Reading List Page',
+      desc: 'A lightweight page for long-term reading lists, current picks and curated recommendations.',
+      tags: ['Reading', 'List', 'Lifestyle'],
       category: 'web',
-      status: 'done',
+      status: 'wip',
       github: null,
-      demo: '/writing',
+      demo: '/reading',
     },
     {
       title: 'Currency Converter',
@@ -313,7 +308,7 @@ const projectsData: Record<Lang, any[]> = {
   ],
 };
 
-const extraProjectsData: Record<Lang, any[]> = {
+export const extraProjectsData: Record<Lang, any[]> = {
   'zh-CN': [
     {
       title: '画廊灯箱与筛选',
@@ -323,6 +318,15 @@ const extraProjectsData: Record<Lang, any[]> = {
       status: 'done',
       github: null,
       demo: '/gallery',
+    },
+    {
+      title: '彩蛋实验室',
+      desc: '把随机语录、翻牌记忆、打字小测和呼吸节奏器组合成轻量的互动角落。',
+      tags: ['Interaction', 'Game', 'Vanilla JS'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/fun',
     },
     {
       title: '站点信任页面',
@@ -345,6 +349,15 @@ const extraProjectsData: Record<Lang, any[]> = {
       demo: '/gallery',
     },
     {
+      title: '彩蛋實驗室',
+      desc: '把隨機語錄、翻牌記憶、打字小測和呼吸節奏器組合成輕量的互動角落。',
+      tags: ['Interaction', 'Game', 'Vanilla JS'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/fun',
+    },
+    {
       title: '站點信任頁面',
       desc: '整理隱私、條款、許可證、無障礙與安全披露頁面，讓個人站也有清晰邊界。',
       tags: ['Security', 'Policy', 'Docs'],
@@ -363,6 +376,15 @@ const extraProjectsData: Record<Lang, any[]> = {
       status: 'done',
       github: null,
       demo: '/gallery',
+    },
+    {
+      title: 'Easter Egg Lab',
+      desc: 'A lightweight interaction corner with random quotes, memory match, a typing test and a breathing rhythm widget.',
+      tags: ['Interaction', 'Game', 'Vanilla JS'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/fun',
     },
     {
       title: 'Trust Pages',
@@ -385,6 +407,15 @@ const extraProjectsData: Record<Lang, any[]> = {
       demo: '/gallery',
     },
     {
+      title: 'Laboratoire Easter Egg',
+      desc: 'Un coin interactif léger avec citations, jeu de mémoire, test de frappe et rythme respiratoire.',
+      tags: ['Interaction', 'Game', 'Vanilla JS'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/fun',
+    },
+    {
       title: 'Pages de confiance',
       desc: 'Confidentialité, conditions, licence, accessibilité et divulgation de vulnérabilités clarifient le cadre du site.',
       tags: ['Security', 'Policy', 'Docs'],
@@ -405,6 +436,15 @@ const extraProjectsData: Record<Lang, any[]> = {
       demo: '/gallery',
     },
     {
+      title: 'Лаборатория пасхалок',
+      desc: 'Лёгкий интерактивный уголок: цитаты, игра памяти, тест набора и дыхательный ритм.',
+      tags: ['Interaction', 'Game', 'Vanilla JS'],
+      category: 'tools',
+      status: 'done',
+      github: null,
+      demo: '/fun',
+    },
+    {
       title: 'Страницы доверия',
       desc: 'Конфиденциальность, условия, лицензия, доступность и политика уязвимостей задают ясные границы сайта.',
       tags: ['Security', 'Policy', 'Docs'],
@@ -416,7 +456,7 @@ const extraProjectsData: Record<Lang, any[]> = {
   ],
 };
 
-const projectPrinciplesData: Record<Lang, any> = {
+export const projectPrinciplesData: Record<Lang, any> = {
   'zh-CN': {
     title: '我选择项目的方式',
     intro:
@@ -529,7 +569,7 @@ const projectPrinciplesData: Record<Lang, any> = {
   },
 };
 
-const externalProjects = [
+export const externalProjects = [
   {
     title: 'MyCook',
     github: 'https://github.com/AlexanderJ-Carter/MyCook',
@@ -580,372 +620,3 @@ const externalProjects = [
   },
 ];
 
-const text = t[lang as Lang] || t['en-GB'];
-const projects = [
-  ...(projectsData[lang as Lang] || projectsData['en-GB']),
-  ...(extraProjectsData[lang as Lang] || extraProjectsData['en-GB']),
-];
-const projectPrinciples =
-  projectPrinciplesData[lang as Lang] || projectPrinciplesData['en-GB'];
-
-function getLangPath(path: string): string {
-  if (lang === 'zh-CN') return path;
-  const prefix = (lang as string) === 'en-GB' ? 'en' : lang;
-  return `/${prefix}${path}`;
-}
----
-
-<BaseLayout title={text.title} description={text.subtitle}>
-  <section class="relative py-16 md:py-24 overflow-hidden">
-    <div
-      class="absolute inset-0 bg-mesh-gradient opacity-40"
-      aria-hidden="true"
-    >
-    </div>
-    <div class="container mx-auto px-4 lg:px-8 relative z-10">
-      <!-- Header -->
-      <div class="text-center mb-12 max-w-2xl mx-auto">
-        <span
-          class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
-        >
-          {text.badge}
-        </span>
-        <h1
-          class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight"
-        >
-          {text.title}
-        </h1>
-        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-          {text.intro}
-        </p>
-      </div>
-
-      <section class="mb-12">
-        <div class="max-w-2xl mb-5">
-          <h2
-            class="text-2xl md:text-3xl font-heading font-bold text-[rgb(var(--color-text-primary))] mb-2"
-          >
-            {
-              lang === 'zh-CN'
-                ? '真实仓库与外部项目'
-                : lang === 'zh-TW'
-                  ? '真實倉庫與外部專案'
-                  : lang === 'fr'
-                    ? 'Dépôts et projets externes'
-                    : lang === 'ru'
-                      ? 'Репозитории и внешние проекты'
-                      : 'Real Repositories & External Projects'
-            }
-          </h2>
-          <p
-            class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed"
-          >
-            {
-              lang === 'zh-CN'
-                ? '这部分来自我的 GitHub 仓库和已上线的子站，优先展示真实可访问、能解释清楚用途的项目。'
-                : lang === 'zh-TW'
-                  ? '這部分來自我的 GitHub 倉庫和已上線的子站，優先展示真實可訪問、能解釋清楚用途的專案。'
-                  : lang === 'fr'
-                    ? 'Ces éléments viennent de mes dépôts GitHub et sous-sites publics, avec priorité aux projets réellement accessibles et explicables.'
-                    : lang === 'ru'
-                      ? 'Этот блок взят из моих репозиториев GitHub и опубликованных под-сайтов: только реальные и понятные проекты.'
-                      : 'This section is grounded in my GitHub repositories and public sub-sites, prioritising projects that are reachable and explainable.'
-            }
-          </p>
-        </div>
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-          {
-            externalProjects.map((project) => (
-              <article class="glass-card card-hover rounded-2xl p-6 flex flex-col min-h-[17rem]">
-                <div class="flex-1">
-                  <h3 class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))] mb-3">
-                    {project.title}
-                  </h3>
-                  <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
-                    {project.desc[lang as Lang] || project.desc['en-GB']}
-                  </p>
-                </div>
-                <div class="flex flex-wrap gap-1.5 mt-5">
-                  {project.tags.map((tag) => (
-                    <span class="px-2 py-0.5 rounded-md bg-primary-500/10 text-primary-600 dark:text-primary-400 text-xs font-medium">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div class="flex flex-wrap items-center gap-3 mt-5 pt-4 border-t border-[rgb(var(--color-border))]">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="project-link"
-                  >
-                    {text.viewSource}
-                  </a>
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="project-link"
-                    >
-                      {text.viewDemo}
-                    </a>
-                  )}
-                </div>
-              </article>
-            ))
-          }
-        </div>
-      </section>
-
-      <!-- Filter buttons -->
-      <div
-        class="flex flex-wrap justify-center gap-2 mb-10"
-        id="project-filters"
-      >
-        {
-          [
-            { key: 'all', label: text.filterAll },
-            { key: 'web', label: text.filterWeb },
-            { key: 'tools', label: text.filterTools },
-          ].map(({ key, label }) => (
-            <button
-              type="button"
-              data-filter={key}
-              class={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 ${
-                key === 'all'
-                  ? 'bg-primary-500 text-white border-transparent'
-                  : 'bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-secondary))] border-[rgb(var(--color-border))] hover:border-primary-500 hover:text-primary-500'
-              }`}
-            >
-              {label}
-            </button>
-          ))
-        }
-      </div>
-
-      <!-- Projects grid -->
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
-        id="projects-grid"
-      >
-        {
-          projects.map((project: any) => (
-            <article
-              class="glass-card card-hover p-6 rounded-2xl flex flex-col gap-4 reveal hover:border-primary-500/30 transition-all duration-300"
-              data-category={project.category}
-            >
-              {/* Status badge */}
-              <div class="flex items-center justify-between">
-                <span
-                  class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
-                    project.status === 'done'
-                      ? 'bg-green-500/10 text-green-600 dark:text-green-400'
-                      : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
-                  }`}
-                >
-                  <span
-                    class={`w-1.5 h-1.5 rounded-full ${project.status === 'done' ? 'bg-green-500' : 'bg-amber-500 animate-pulse'}`}
-                  />
-                  {project.status === 'done' ? text.statusDone : text.statusWip}
-                </span>
-                <span class="text-xs text-[rgb(var(--color-text-tertiary))] uppercase tracking-wide">
-                  {project.category}
-                </span>
-              </div>
-
-              {/* Title + description */}
-              <div class="flex-1">
-                <h2 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
-                  {project.title}
-                </h2>
-                <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
-                  {project.desc}
-                </p>
-              </div>
-
-              {/* Tech tags */}
-              <div class="flex flex-wrap gap-1.5">
-                {project.tags.map((tag: string) => (
-                  <span class="px-2 py-0.5 rounded-md bg-primary-500/10 text-primary-600 dark:text-primary-400 text-xs font-medium">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Links */}
-              {(project.github || project.demo) && (
-                <div class="flex items-center gap-3 pt-1 border-t border-[rgb(var(--color-border))]">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center gap-1.5 text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors link-underline"
-                    >
-                      <svg
-                        class="w-4 h-4"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                      </svg>
-                      {text.viewSource}
-                    </a>
-                  )}
-                  {project.demo && (
-                    <a
-                      href={
-                        project.demo.startsWith('http')
-                          ? project.demo
-                          : getLangPath(project.demo)
-                      }
-                      target={
-                        project.demo.startsWith('http') ? '_blank' : undefined
-                      }
-                      rel={
-                        project.demo.startsWith('http')
-                          ? 'noopener noreferrer'
-                          : undefined
-                      }
-                      class="inline-flex items-center gap-1.5 text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors link-underline"
-                    >
-                      <svg
-                        class="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        />
-                      </svg>
-                      {text.viewDemo}
-                    </a>
-                  )}
-                </div>
-              )}
-            </article>
-          ))
-        }
-      </div>
-
-      <div class="glass-card p-6 md:p-8 rounded-2xl mb-10">
-        <div class="max-w-2xl mb-6">
-          <h2
-            class="text-xl md:text-2xl font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]"
-          >
-            {projectPrinciples.title}
-          </h2>
-          <p
-            class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed"
-          >
-            {projectPrinciples.intro}
-          </p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-4">
-          {
-            projectPrinciples.items.map((item: any) => (
-              <article class="rounded-xl bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] p-4">
-                <div class="text-2xl mb-3" aria-hidden="true">
-                  {item.icon}
-                </div>
-                <h3 class="font-semibold text-[rgb(var(--color-text-primary))] mb-1">
-                  {item.title}
-                </h3>
-                <p class="text-xs text-[rgb(var(--color-text-secondary))] leading-relaxed">
-                  {item.desc}
-                </p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-
-      <!-- Back link -->
-      <div class="text-center">
-        <a
-          href={getLangPath('/')}
-          class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1"
-        >
-          ← {text.back}
-        </a>
-      </div>
-
-      <RelatedTools lang={lang} current="projects" />
-    </div>
-  </section>
-</BaseLayout>
-
-<script is:inline>
-  (function () {
-    const filters = document.getElementById('project-filters');
-    const grid = document.getElementById('projects-grid');
-    if (!filters || !grid) return;
-
-    filters.addEventListener('click', function (e) {
-      const btn = e.target.closest('[data-filter]');
-      if (!btn) return;
-
-      const active = btn.getAttribute('data-filter');
-
-      // Update button styles
-      filters.querySelectorAll('[data-filter]').forEach(function (b) {
-        if (b.getAttribute('data-filter') === active) {
-          b.classList.add('bg-primary-500', 'text-white', 'border-transparent');
-          b.classList.remove(
-            'bg-[rgb(var(--color-bg-secondary))]',
-            'text-[rgb(var(--color-text-secondary))]',
-            'border-[rgb(var(--color-border))]'
-          );
-        } else {
-          b.classList.remove(
-            'bg-primary-500',
-            'text-white',
-            'border-transparent'
-          );
-          b.classList.add(
-            'bg-[rgb(var(--color-bg-secondary))]',
-            'text-[rgb(var(--color-text-secondary))]',
-            'border-[rgb(var(--color-border))]'
-          );
-        }
-      });
-
-      // Filter project cards
-      grid.querySelectorAll('[data-category]').forEach(function (card) {
-        const cat = card.getAttribute('data-category');
-        if (active === 'all' || cat === active) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  })();
-</script>
-
-<style>
-  .project-link {
-    display: inline-flex;
-    align-items: center;
-    border-radius: 9999px;
-    border: 1px solid rgb(var(--color-border));
-    color: rgb(var(--color-text-secondary));
-    padding: 0.42rem 0.75rem;
-    font-size: 0.82rem;
-    font-weight: 700;
-    transition: all 0.18s ease;
-  }
-
-  .project-link:hover {
-    border-color: rgb(14 165 233 / 0.5);
-    color: rgb(14 165 233);
-    background: rgb(14 165 233 / 0.08);
-  }
-</style>

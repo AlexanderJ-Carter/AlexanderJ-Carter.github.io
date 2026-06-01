@@ -1,0 +1,16 @@
+---
+import WritingListTemplate from '../../../components/templates/WritingListTemplate.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'zh-TW' }, props: { lang: 'zh-TW' } },
+    { params: { lang: 'en' }, props: { lang: 'en-GB' } },
+    { params: { lang: 'fr' }, props: { lang: 'fr' } },
+    { params: { lang: 'ru' }, props: { lang: 'ru' } },
+  ];
+}
+
+const { lang } = Astro.props;
+---
+
+<WritingListTemplate lang={lang} />

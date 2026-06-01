@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import type { Lang } from '../../i18n/types';
+
+const { lang = 'zh-CN' } = Astro.props;
+
+function getLangPath(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+
+const i18n = {
+  'zh-CN': {
+    title: '写作',
+    description: '关于个人网站、工程学习、性能优化和设计思考的长期文章。',
+    badge: 'Writing · Long-form',
+    intro: '这里记录了一些不会很快过期的思考。它们从具体问题出发，试图给出值得回看的答案。',
+    readMore: '阅读全文',
+    allPosts: '全部文章',
+    categories: '分类',
+    tags: '标签',
+    publishedOn: '发布于',
+    minRead: '分钟阅读',
+    noPosts: '暂无文章',
+    backToHome: '返回首页',
+  },
+  'zh-TW': {
+    title: '寫作',
+    description: '關於個人網站、工程學習、性能優化和設計思考的長期文章。',
+    badge: 'Writing · Long-form',
+    intro: '這裡記錄了一些不會很快過期的思考。它們從具體問題出發，試圖給出值得回看的答案。',
+    readMore: '閱讀全文',
+    allPosts: '全部文章',
+    categories: '分類',
+    tags: '標籤',
+    publishedOn: '發布於',
+    minRead: '分鐘閱讀',
+    noPosts: '暫無文章',
+    backToHome: '返回首頁',
+  },
+  'en-GB': {
+    title: 'Writing',
+    description: 'Long-form articles about personal websites, engineering, performance and design.',
+    badge: 'Writing · Long-form',
+    intro: 'Thoughts that should age slowly, starting from concrete problems and aiming for reusable answers.',
+    readMore: 'Read article',
+    allPosts: 'All Posts',
+    categories: 'Categories',
+    tags: 'Tags',
+    publishedOn: 'Published on',
+    minRead: 'min read',
+    noPosts: 'No posts yet',
+    backToHome: 'Back to Home',
+  },
+  fr: {
+    title: 'Écrits',
+    description: 'Articles sur les sites personnels, l\'ingénierie et le design.',
+    badge: 'Writing · Long-form',
+    intro: 'Des idées qui vieillissent lentement, partant de problèmes concrets.',
+    readMore: 'Lire l\'article',
+    allPosts: 'Tous les articles',
+    categories: 'Catégories',
+    tags: 'Tags',
+    publishedOn: 'Publié le',
+    minRead: 'min de lecture',
+    noPosts: 'Pas encore d\'articles',
+    backToHome: "Retour à l'accueil",
+  },
+  ru: {
+    title: 'Статьи',
+    description: 'Статьи о личных сайтах, инженерии и дизайне.',
+    badge: 'Writing · Long-form',
+    intro: 'Мысли, которые стареют медленно.',
+    readMore: 'Читать',
+    allPosts: 'Все статьи',
+    categories: 'Категории',
+    tags: 'Теги',
+    publishedOn: 'Опубликовано',
+    minRead: 'мин чтения',
+    noPosts: 'Пока нет статей',
+    backToHome: 'На главную',
+  },
+};
+
+const t = i18n[lang as Lang] || i18n['zh-CN'];
+
+const allPosts = await getCollection('writing');
+const posts = allPosts
+  .filter((post) => post.data.lang === (lang as string) || (lang === 'zh-CN' && !post.data.lang))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const categories = [...new Set(posts.map((p) => p.data.category))];
+---
+
+<BaseLayout title={`${t.title} - Alexander Carter`} description={t.description}>
+  <section class="pt-32 pb-16 min-h-screen">
+    <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+      <a
+        href={getLangPath('/')}
+        class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        <span>{t.backToHome}</span>
+      </a>
+
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6">
+          ✍️
+        </div>
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-3">{t.title}</h1>
+        <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-4">{t.badge}</p>
+        <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">{t.intro}</p>
+      </div>
+
+      {categories.length > 0 && (
+        <div class="flex flex-wrap justify-center gap-2 mb-10">
+          {categories.map((cat) => (
+            <span class="px-3 py-1 rounded-full text-xs font-medium bg-primary-500/10 text-primary-500">
+              {cat}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {posts.length === 0 ? (
+        <div class="text-center py-20">
+          <p class="text-[rgb(var(--color-text-secondary))]">{t.noPosts}</p>
+        </div>
+      ) : (
+        <div class="space-y-6">
+          {posts.map((post) => (
+            <article class="glass-card rounded-2xl p-6 md:p-8 hover:shadow-lg transition-shadow">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-500/10 text-primary-500">
+                  {post.data.category}
+                </span>
+                <time class="text-xs text-[rgb(var(--color-text-tertiary))]" datetime={post.data.pubDate.toISOString()}>
+                  {t.publishedOn} {post.data.pubDate.toLocaleDateString(lang === 'zh-CN' ? 'zh-CN' : lang === 'zh-TW' ? 'zh-TW' : lang === 'fr' ? 'fr-FR' : lang === 'ru' ? 'ru-RU' : 'en-GB')}
+                </time>
+                {post.data.timeToRead && (
+                  <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
+                    {post.data.timeToRead}
+                  </span>
+                )}
+              </div>
+              <h2 class="text-xl md:text-2xl font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+                {post.data.title}
+              </h2>
+              <p class="text-[rgb(var(--color-text-secondary))] mb-4 leading-relaxed">
+                {post.data.description}
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex flex-wrap gap-1.5">
+                  {post.data.tags.map((tag) => (
+                    <span class="text-xs px-2 py-0.5 rounded bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-tertiary))]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={getLangPath(`/writing/${post.id}`)}
+                  class="text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors"
+                >
+                  {t.readMore} &rarr;
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

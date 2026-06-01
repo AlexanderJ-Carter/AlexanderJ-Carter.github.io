@@ -1,0 +1,288 @@
+import type { Lang } from '../types';
+
+export const termsData: Record<Lang, any> = {
+  'zh-CN': {
+    title: '服务条款',
+    back: '返回首页',
+    headerTitle: '服务条款',
+    lastUpdated: '最后更新：2026年2月4日',
+    sections: [
+      {
+        title: '1. 条款接受',
+        content:
+          '欢迎访问 alexander.xin。通过访问和使用本网站,您同意遵守以下服务条款。如果您不同意这些条款,请不要使用本网站。',
+      },
+      {
+        title: '2. 网站用途',
+        content: '本网站是一个个人作品展示平台,用于:',
+        list: [
+          '展示摄影作品和创意项目',
+          '分享技术知识和经验',
+          '提供个人信息和联系方式',
+        ],
+      },
+      {
+        title: '3. 用户行为',
+        content: '使用本网站时,您同意:',
+        list: [
+          '不进行任何破坏网站安全或运行的行为',
+          '不滥用网站资源或进行恶意攻击',
+          '尊重知识产权和他人权利',
+        ],
+      },
+      {
+        title: '4. 免责声明',
+        content:
+          '本网站按"原样"提供。作者不对网站的可用性、准确性或完整性做出任何保证。使用本网站的风险由您自行承担。',
+      },
+      {
+        title: '5. 条款修改',
+        content:
+          '作者保留随时修改这些条款的权利。修改后的条款将在发布时生效。继续使用本网站即表示您接受修改后的条款。',
+      },
+      {
+        title: '6. 知识产权',
+        content:
+          '本网站上的内容（除另有标注或来自第三方的部分外）的著作权及其他知识产权归本网站作者所有。您对内容的使用须遵守 NOTICE 文件及本站许可证页面的规定；未经许可不得用于商业用途或创作演绎作品。',
+      },
+      {
+        title: '7. 商标与第三方声明',
+        content:
+          '本网站提及的产品名称、公司名称、服务名称、标识等（包括但不限于 GitHub、Cloudflare、Google、Astro、Creative Commons、WCAG 等）可能为各自权利人的商标或注册商标。此处使用仅为说明与识别目的，不构成任何授权、背书或赞助关系。本网站与上述权利人无关联，亦未获其官方认可。',
+      },
+      {
+        title: '8. 责任限制',
+        content:
+          '在法律允许的最大范围内，作者对因访问、使用或无法使用本网站而产生的任何直接、间接、附带、后果性或惩罚性损害不承担责任，包括但不限于数据丢失、业务中断或利润损失。',
+      },
+    ],
+  },
+  'zh-TW': {
+    title: '服務條款',
+    back: '返回首頁',
+    headerTitle: '服務條款',
+    lastUpdated: '最後更新：2026年2月4日',
+    sections: [
+      {
+        title: '1. 條款接受',
+        content:
+          '歡迎訪問 alexander.xin。通過訪問和使用本網站,您同意遵守以下服務條款。如果您不同意這些條款,請不要使用本網站。',
+      },
+      {
+        title: '2. 網站用途',
+        content: '本網站是一個個人作品展示平台,用於:',
+        list: [
+          '展示攝影作品和創意項目',
+          '分享技術知識和經驗',
+          '提供個人信息和聯繫方式',
+        ],
+      },
+      {
+        title: '3. 用戶行為',
+        content: '使用本網站時,您同意:',
+        list: [
+          '不進行任何破壞網站安全或運行的行為',
+          '不濫用網站資源或進行惡意攻擊',
+          '尊重知識產權和他人權利',
+        ],
+      },
+      {
+        title: '4. 免責聲明',
+        content:
+          '本網站按"原樣"提供。作者不對網站的可用性、準確性或完整性做出任何保證。使用本網站的風險由您自行承擔。',
+      },
+      {
+        title: '5. 條款修改',
+        content:
+          '作者保留隨時修改這些條款的權利。修改後的條款將在發布時生效。繼續使用本網站即表示您接受修改後的條款。',
+      },
+      {
+        title: '6. 知識產權',
+        content:
+          '本網站上的內容（除另有標註或來自第三方的部分外）的著作權及其他知識產權歸本網站作者所有。您對內容的使用須遵守 NOTICE 檔案及本站許可證頁面的規定；未經許可不得用於商業用途或創作演繹作品。',
+      },
+      {
+        title: '7. 商標與第三方聲明',
+        content:
+          '本網站提及的產品名稱、公司名稱、服務名稱、標識等（包括但不限於 GitHub、Cloudflare、Google、Astro、Creative Commons、WCAG 等）可能為各自權利人的商標或註冊商標。此處使用僅為說明與識別目的，不構成任何授權、背書或贊助關係。本網站與上述權利人無關聯，亦未獲其官方認可。',
+      },
+      {
+        title: '8. 責任限制',
+        content:
+          '在法律允許的最大範圍內，作者對因存取、使用或無法使用本網站而產生的任何直接、間接、附帶、後果性或懲罰性損害不承擔責任，包括但不限於資料遺失、業務中斷或利潤損失。',
+      },
+    ],
+  },
+  'en-GB': {
+    title: 'Terms of Service',
+    back: 'Back to Home',
+    headerTitle: 'Terms of Service',
+    lastUpdated: 'Last Updated: 4 February 2026',
+    sections: [
+      {
+        title: '1. Acceptance of Terms',
+        content:
+          'Welcome to alexander.xin. By accessing and using this website, you agree to comply with the following terms of service. If you do not agree to these terms, please do not use this website.',
+      },
+      {
+        title: '2. Website Purpose',
+        content: 'This website is a personal portfolio platform used for:',
+        list: [
+          'Showcasing photography and creative projects',
+          'Sharing technical knowledge and experience',
+          'Providing personal information and contact details',
+        ],
+      },
+      {
+        title: '3. User Conduct',
+        content: 'When using this website, you agree:',
+        list: [
+          'Not to engage in any behavior that compromises website security or operation',
+          'Not to misuse website resources or conduct malicious attacks',
+          'To respect intellectual property and the rights of others',
+        ],
+      },
+      {
+        title: '4. Disclaimer',
+        content:
+          'This website is provided "as is". The author makes no warranties regarding the availability, accuracy, or completeness of the website. Use of this website is at your own risk.',
+      },
+      {
+        title: '5. Modification of Terms',
+        content:
+          'The author reserves the right to modify these terms at any time. Modified terms will be effective upon posting. Continued use of this website constitutes your acceptance of the modified terms.',
+      },
+      {
+        title: '6. Intellectual Property',
+        content:
+          'Unless otherwise marked or attributed to third parties, all content on this website is owned by the author. Your use of content must comply with the NOTICE file and the license page on this site; commercial use or creation of derivative works without permission is not permitted.',
+      },
+      {
+        title: '7. Trademarks and Third-Party Marks',
+        content:
+          'Product names, company names, service names, and logos mentioned on this website (including but not limited to GitHub, Cloudflare, Google, Astro, Creative Commons, WCAG) may be trademarks or registered trademarks of their respective owners. Their use here is for identification and reference only and does not imply endorsement, sponsorship, or affiliation. This website is not affiliated with, endorsed by, or sponsored by these rights holders.',
+      },
+      {
+        title: '8. Limitation of Liability',
+        content:
+          'To the maximum extent permitted by law, the author shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from access to, use of, or inability to use this website, including but not limited to loss of data, business interruption, or loss of profits.',
+      },
+    ],
+  },
+  fr: {
+    title: "Conditions d'utilisation",
+    back: "Retour à l'accueil",
+    headerTitle: "Conditions d'utilisation",
+    lastUpdated: 'Dernière mise à jour : 4 février 2026',
+    sections: [
+      {
+        title: '1. Acceptation des conditions',
+        content:
+          "Bienvenue sur alexander.xin. En accédant et en utilisant ce site web, vous acceptez de vous conformer aux conditions d'utilisation suivantes. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser ce site web.",
+      },
+      {
+        title: '2. Objectif du site web',
+        content:
+          'Ce site web est une plateforme de portfolio personnel utilisée pour :',
+        list: [
+          'Présenter des photographies et des projets créatifs',
+          "Partager des connaissances techniques et de l'expérience",
+          'Fournir des informations personnelles et des coordonnées',
+        ],
+      },
+      {
+        title: "3. Conduite de l'utilisateur",
+        content: 'En utilisant ce site web, vous acceptez :',
+        list: [
+          'De ne pas vous engager dans un comportement qui compromet la sécurité ou le fonctionnement du site web',
+          'De ne pas abuser des ressources du site web ou de mener des attaques malveillantes',
+          "De respecter la propriété intellectuelle et les droits d'autrui",
+        ],
+      },
+      {
+        title: '4. Avis de non-responsabilité',
+        content:
+          "Ce site web est fourni \"tel quel\". L'auteur ne donne aucune garantie concernant la disponibilité, l'exactitude ou l'exhaustivité du site web. L'utilisation de ce site web est à vos propres risques.",
+      },
+      {
+        title: '5. Modification des conditions',
+        content:
+          "L'auteur se réserve le droit de modifier ces conditions à tout moment. Les conditions modifiées entreront en vigueur dès leur publication. L'utilisation continue de ce site web constitue votre acceptation des conditions modifiées.",
+      },
+      {
+        title: '6. Propriété intellectuelle',
+        content:
+          "Sauf indication contraire ou attribution à des tiers, tout le contenu de ce site web est la propriété de l'auteur. Votre utilisation du contenu doit respecter le fichier NOTICE et la page de licence de ce site ; l'utilisation commerciale ou la création d'œuvres dérivées sans autorisation n'est pas autorisée.",
+      },
+      {
+        title: '7. Marques et marques tierces',
+        content:
+          "Les noms de produits, d'entreprises, de services et les logos mentionnés sur ce site (notamment GitHub, Cloudflare, Google, Astro, Creative Commons, WCAG) peuvent être des marques déposées de leurs propriétaires respectifs. Leur utilisation ici est à des fins d'identification et de référence uniquement et n'implique aucune approbation, parrainage ou affiliation. Ce site n'est pas affilié à, approuvé par ou parrainé par ces titulaires de droits.",
+      },
+      {
+        title: '8. Limitation de responsabilité',
+        content:
+          "Dans la mesure maximale permise par la loi, l'auteur ne pourra être tenu responsable des dommages directs, indirects, accessoires, consécutifs ou punitifs résultant de l'accès, de l'utilisation ou de l'impossibilité d'utiliser ce site, y compris la perte de données, l'interruption d'activité ou la perte de profits.",
+      },
+    ],
+  },
+  ru: {
+    title: 'Условия использования',
+    back: 'На главную',
+    headerTitle: 'Условия использования',
+    lastUpdated: 'Последнее обновление: 4 февраля 2026 г.',
+    sections: [
+      {
+        title: '1. Принятие условий',
+        content:
+          'Добро пожаловать на alexander.xin. Получая доступ и используя этот веб-сайт, вы соглашаетесь соблюдать следующие условия использования. Если вы не согласны с этими условиями, пожалуйста, не используйте этот веб-сайт.',
+      },
+      {
+        title: '2. Цель веб-сайта',
+        content:
+          'Этот веб-сайт является платформой личного портфолио, используемой для:',
+        list: [
+          'Демонстрации фотографий и творческих проектов',
+          'Обмена техническими знаниями и опытом',
+          'Предоставления личной информации и контактных данных',
+        ],
+      },
+      {
+        title: '3. Поведение пользователя',
+        content: 'Используя этот веб-сайт, вы соглашаетесь:',
+        list: [
+          'Не участвовать в поведении, которое ставит под угрозу безопасность или работу веб-сайта',
+          'Не злоупотреблять ресурсами веб-сайта и не проводить вредоносные атаки',
+          'Уважать интеллектуальную собственность и права других',
+        ],
+      },
+      {
+        title: '4. Отказ от ответственности',
+        content:
+          'Этот веб-сайт предоставляется "как есть". Автор не дает никаких гарантий относительно доступности, точности или полноты веб-сайта. Использование этого веб-сайта осуществляется на ваш страх и риск.',
+      },
+      {
+        title: '5. Изменение условий',
+        content:
+          'Автор оставляет за собой право изменять эти условия в любое время. Измененные условия вступают в силу после публикации. Продолжение использования этого веб-сайта означает ваше согласие с измененными условиями.',
+      },
+      {
+        title: '6. Интеллектуальная собственность',
+        content:
+          'Если иное не указано или не приписано третьим лицам, весь контент на этом веб-сайте принадлежит автору. Ваше использование контента должно соответствовать файлу NOTICE и странице лицензии на этом сайте; коммерческое использование или создание производных произведений без разрешения не допускается.',
+      },
+      {
+        title: '7. Товарные знаки и знаки третьих лиц',
+        content:
+          'Упоминаемые на этом веб-сайте названия продуктов, компаний, сервисов и логотипы (включая, но не ограничиваясь GitHub, Cloudflare, Google, Astro, Creative Commons, WCAG) могут быть товарными знаками или зарегистрированными товарными знаками их соответствующих владельцев. Их использование здесь только в целях идентификации и справки и не подразумевает одобрения, спонсорства или связи. Этот веб-сайт не связан с указанными правообладателями и не одобрен и не спонсируется ими.',
+      },
+      {
+        title: '8. Ограничение ответственности',
+        content:
+          'В максимальной степени, разрешенной законом, автор не несет ответственности за любые прямые, косвенные, случайные, последующие или штрафные убытки, возникающие в результате доступа, использования или невозможности использования этого веб-сайта, включая потерю данных, перерыв в работе или потерю прибыли.',
+      },
+    ],
+  },
+};
+
+export default termsData;

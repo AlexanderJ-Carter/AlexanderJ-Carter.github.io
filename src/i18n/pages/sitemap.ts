@@ -1,11 +1,6 @@
----
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Lang } from '../types';
 
-const { lang } = Astro.props;
-
-type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
-
-const sitemapData: Record<Lang, any> = {
+export const sitemapData: Record<Lang, any> = {
   'zh-CN': {
     title: '网站地图',
     description: '完整的网站结构导航和页面地图',
@@ -42,10 +37,10 @@ const sitemapData: Record<Lang, any> = {
         icon: '🛠️',
       },
       {
-        name: '写作',
-        href: '/writing',
-        desc: '关于工程、设计与摄影的长文',
-        icon: '✍️',
+        name: '彩蛋',
+        href: '/fun',
+        desc: '好玩的小惊喜与互动',
+        icon: '🥚',
       },
       {
         name: '时间轴',
@@ -58,6 +53,18 @@ const sitemapData: Record<Lang, any> = {
         href: '/friends',
         desc: '朋友的网站和友链申请',
         icon: '🔗',
+      },
+      {
+        name: '阅读清单',
+        href: '/reading',
+        desc: '推荐书籍与阅读资源',
+        icon: '📚',
+      },
+      {
+        name: '札记',
+        href: '/notes',
+        desc: '关于个人网站、工程学习与视觉观察的长文',
+        icon: '✎',
       },
     ],
     toolPages: [
@@ -189,10 +196,10 @@ const sitemapData: Record<Lang, any> = {
         icon: '🛠️',
       },
       {
-        name: '寫作',
-        href: '/zh-TW/writing',
-        desc: '關於工程、設計與攝影的長文',
-        icon: '✍️',
+        name: '彩蛋',
+        href: '/zh-TW/fun',
+        desc: '好玩的小驚喜與互動',
+        icon: '🥚',
       },
       {
         name: '時間軸',
@@ -205,6 +212,18 @@ const sitemapData: Record<Lang, any> = {
         href: '/zh-TW/friends',
         desc: '朋友的網站和友鏈申請',
         icon: '🔗',
+      },
+      {
+        name: '閱讀清單',
+        href: '/zh-TW/reading',
+        desc: '推薦書籍與閱讀資源',
+        icon: '📚',
+      },
+      {
+        name: '札記',
+        href: '/zh-TW/notes',
+        desc: '關於個人網站、工程學習與視覺觀察的長文',
+        icon: '✎',
       },
     ],
     toolPages: [
@@ -341,10 +360,10 @@ const sitemapData: Record<Lang, any> = {
         icon: '🛠️',
       },
       {
-        name: 'Writing',
-        href: '/en/writing',
-        desc: 'Long-form articles on engineering, design and photography',
-        icon: '✍️',
+        name: 'Easter Eggs',
+        href: '/en/fun',
+        desc: 'Fun surprises and interactions',
+        icon: '🥚',
       },
       {
         name: 'Timeline',
@@ -357,6 +376,18 @@ const sitemapData: Record<Lang, any> = {
         href: '/en/friends',
         desc: "Friends' websites and link exchange",
         icon: '🔗',
+      },
+      {
+        name: 'Reading List',
+        href: '/en/reading',
+        desc: 'Recommended books and resources',
+        icon: '📚',
+      },
+      {
+        name: 'Notes',
+        href: '/en/notes',
+        desc: 'Long-form notes on personal sites, engineering and observation',
+        icon: '✎',
       },
     ],
     toolPages: [
@@ -493,10 +524,10 @@ const sitemapData: Record<Lang, any> = {
         icon: '🛠️',
       },
       {
-        name: 'Écrits',
-        href: '/fr/writing',
-        desc: 'Articles longs sur l’ingénierie, le design et la photo',
-        icon: '✍️',
+        name: 'Easter Eggs',
+        href: '/fr/fun',
+        desc: 'Surprises et interactions amusantes',
+        icon: '🥚',
       },
       {
         name: 'Chronologie',
@@ -509,6 +540,18 @@ const sitemapData: Record<Lang, any> = {
         href: '/fr/friends',
         desc: "Sites d'amis et échange de liens",
         icon: '🔗',
+      },
+      {
+        name: 'Liste de lecture',
+        href: '/fr/reading',
+        desc: 'Livres et ressources recommandés',
+        icon: '📚',
+      },
+      {
+        name: 'Notes',
+        href: '/fr/notes',
+        desc: 'Notes longues sur le site, l’ingénierie et l’observation',
+        icon: '✎',
       },
     ],
     toolPages: [
@@ -645,10 +688,10 @@ const sitemapData: Record<Lang, any> = {
         icon: '🛠️',
       },
       {
-        name: 'Статьи',
-        href: '/ru/writing',
-        desc: 'Длинные тексты об инженерии, дизайне и фотографии',
-        icon: '✍️',
+        name: 'Пасхалки',
+        href: '/ru/fun',
+        desc: 'Весёлые сюрпризы и интерактив',
+        icon: '🥚',
       },
       {
         name: 'Хронология',
@@ -661,6 +704,18 @@ const sitemapData: Record<Lang, any> = {
         href: '/ru/friends',
         desc: 'Сайты друзей и обмен ссылками',
         icon: '🔗',
+      },
+      {
+        name: 'Список чтения',
+        href: '/ru/reading',
+        desc: 'Рекомендуемые книги и ресурсы',
+        icon: '📚',
+      },
+      {
+        name: 'Заметки',
+        href: '/ru/notes',
+        desc: 'Длинные заметки о сайте, инженерии и наблюдении',
+        icon: '✎',
       },
     ],
     toolPages: [
@@ -763,258 +818,3 @@ const sitemapData: Record<Lang, any> = {
   },
 };
 
-const content = sitemapData[lang as Lang] || sitemapData['en-GB'];
----
-
-<BaseLayout title={content.title} description={content.description}>
-  <!-- Hero Section -->
-  <section
-    class="relative py-24 bg-gradient-to-br from-primary-500/20 via-accent-500/20 to-primary-500/20 overflow-hidden"
-  >
-    <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
-    <div class="container mx-auto px-4 lg:px-8 relative z-10">
-      <div class="text-center max-w-3xl mx-auto">
-        <div
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
-        >
-          <span class="text-2xl">🗺️</span>
-          <span class="text-sm font-medium text-white/90"
-            >{content.headerTitle}</span
-          >
-        </div>
-        <h1
-          class="text-5xl md:text-7xl font-display font-bold mb-8 gradient-text animate-fade-in"
-        >
-          {content.headerTitle}
-        </h1>
-        <p
-          class="text-xl text-[rgb(var(--color-text-secondary))] mb-12 max-w-2xl mx-auto leading-relaxed"
-        >
-          {content.headerDesc}
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sitemap Content -->
-  <section class="py-20">
-    <div class="container mx-auto px-4 lg:px-8">
-      <div
-        class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-      >
-        <!-- Main Pages -->
-        <div
-          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
-        >
-          <h2
-            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
-          >
-            <span
-              class="p-2 rounded-lg bg-primary-500/10 text-primary-500 group-hover:scale-110 transition-transform"
-              >📑</span
-            >
-            {content.mainPagesTitle}
-          </h2>
-          <ul class="space-y-4">
-            {
-              content.mainPages.map((page: any) => (
-                <li>
-                  <a
-                    href={page.href}
-                    target={
-                      String(page.href).startsWith('http')
-                        ? '_blank'
-                        : undefined
-                    }
-                    rel={
-                      String(page.href).startsWith('http')
-                        ? 'noopener noreferrer'
-                        : undefined
-                    }
-                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
-                  >
-                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
-                      {page.icon}
-                    </span>
-                    <div>
-                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-primary-500 transition-colors">
-                        {page.name}
-                      </div>
-                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                        {page.desc}
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <!-- Tools -->
-        <div
-          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
-        >
-          <h2
-            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
-          >
-            <span
-              class="p-2 rounded-lg bg-accent-500/10 text-accent-500 group-hover:scale-110 transition-transform"
-              >🛠️</span
-            >
-            {content.toolPagesTitle}
-          </h2>
-          <ul class="space-y-4">
-            {
-              content.toolPages.map((page: any) => (
-                <li>
-                  <a
-                    href={page.href}
-                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
-                  >
-                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
-                      {page.icon}
-                    </span>
-                    <div>
-                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-accent-500 transition-colors">
-                        {page.name}
-                      </div>
-                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                        {page.desc}
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <!-- Policies -->
-        <div
-          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
-        >
-          <h2
-            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
-          >
-            <span
-              class="p-2 rounded-lg bg-green-500/10 text-green-500 group-hover:scale-110 transition-transform"
-              >⚖️</span
-            >
-            {content.policyPagesTitle}
-          </h2>
-          <ul class="space-y-4">
-            {
-              content.policyPages.map((page: any) => (
-                <li>
-                  <a
-                    href={page.href}
-                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
-                  >
-                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
-                      {page.icon}
-                    </span>
-                    <div>
-                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-green-500 transition-colors">
-                        {page.name}
-                      </div>
-                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                        {page.desc}
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <!-- External Links -->
-        <div
-          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
-        >
-          <h2
-            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
-          >
-            <span
-              class="p-2 rounded-lg bg-purple-500/10 text-purple-500 group-hover:scale-110 transition-transform"
-              >🔗</span
-            >
-            {content.externalLinksTitle}
-          </h2>
-          <ul class="space-y-4">
-            {
-              content.externalLinks.map((link: any) => (
-                <li>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
-                  >
-                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
-                      {link.icon}
-                    </span>
-                    <div>
-                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-purple-500 transition-colors flex items-center gap-2">
-                        {link.name}
-                        <svg
-                          class="w-4 h-4 opacity-50"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          />
-                        </svg>
-                      </div>
-                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                        {link.desc}
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <!-- Languages -->
-        <div
-          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group md:col-span-2 lg:col-span-2"
-        >
-          <h2
-            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
-          >
-            <span
-              class="p-2 rounded-lg bg-orange-500/10 text-orange-500 group-hover:scale-110 transition-transform"
-              >🌍</span
-            >
-            {content.languagesTitle}
-          </h2>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {
-              content.languages.map((language: any) => (
-                <a
-                  href={language.href}
-                  class="flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/lang text-center"
-                >
-                  <span class="text-4xl group-hover/lang:scale-110 transition-transform filter drop-shadow-lg">
-                    {language.flag}
-                  </span>
-                  <span class="font-medium text-[rgb(var(--color-text-primary))] group-hover/lang:text-orange-500 transition-colors">
-                    {language.name}
-                  </span>
-                </a>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</BaseLayout>
