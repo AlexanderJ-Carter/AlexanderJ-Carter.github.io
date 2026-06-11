@@ -2,14 +2,13 @@
 import { getCollection, render } from 'astro:content';
 import WritingPostTemplate from '../../../components/templates/WritingPostTemplate.astro';
 
-const langMap: Record<string, string> = {
-  'zh-TW': 'zh-TW',
-  en: 'en-GB',
-  fr: 'fr',
-  ru: 'ru',
-};
-
 export async function getStaticPaths() {
+  const langMap: Record<string, string> = {
+    'zh-TW': 'zh-TW',
+    en: 'en-GB',
+    fr: 'fr',
+    ru: 'ru',
+  };
   const posts = await getCollection('writing');
   const paths = [];
 

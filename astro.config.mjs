@@ -31,7 +31,7 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
-  // Astro 6.x 图片优化配置
+  // 图片优化配置
   image: {
     // 优先使用 AVIF 格式（比 WebP 小 50%，比 JPEG 小 70%）
     service: {
