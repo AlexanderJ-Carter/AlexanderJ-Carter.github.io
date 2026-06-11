@@ -1,0 +1,362 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RelatedTools from '../RelatedTools.astro';
+
+const { lang } = Astro.props;
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+
+const text: Record<Lang, any> = {
+  'zh-CN': {
+    title: '读读看看',
+    subtitle: '那些让我停下来想一想的书和文章',
+    badge: 'Reading List',
+    intro: '不是书评，也不是推荐榜。只是记录那些读完之后，会隔一段时间再翻出来的东西。',
+    currently: '正在读',
+    finished: '读完了',
+    back: '返回首页',
+  },
+  'zh-TW': {
+    title: '讀讀看看',
+    subtitle: '那些讓我停下來想一想的書和文章',
+    badge: 'Reading List',
+    intro: '不是書評，也不是推薦榜。只是記錄那些讀完之後，會隔一段時間再翻出來的東西。',
+    currently: '正在讀',
+    finished: '讀完了',
+    back: '返回首頁',
+  },
+  'en-GB': {
+    title: 'Read & Revisit',
+    subtitle: 'Books and words that made me pause',
+    badge: 'Reading List',
+    intro: 'Not reviews or rankings. Just the things I find myself reaching for again after some time has passed.',
+    currently: 'Currently reading',
+    finished: 'Finished',
+    back: 'Back to home',
+  },
+  fr: {
+    title: 'Lire et Relire',
+    subtitle: 'Des livres et des mots qui m\'ont fait marquer une pause',
+    badge: 'Reading List',
+    intro: 'Pas des critiques ou des classements. Juste ce que je me surprends à reprendre après un certain temps.',
+    currently: 'En cours',
+    finished: 'Terminé',
+    back: "Retour à l'accueil",
+  },
+  ru: {
+    title: 'Читать и Перечитывать',
+    subtitle: 'Книги и слова, заставившие меня остановиться',
+    badge: 'Reading List',
+    intro: 'Не рецензии и не рейтинги. Просто то, к чему я снова и снова возвращаюсь.',
+    currently: 'Читаю',
+    finished: 'Прочитано',
+    back: 'На главную',
+  },
+};
+
+const books = {
+  'zh-CN': [
+    {
+      title: '设计中的设计',
+      author: '原研哉',
+      quote: '设计不是一种技能，而是捕捉事物本质的感觉能力和洞察力。',
+      thought: '第一次读的时候觉得是在讲设计，后来发现其实是在讲"怎么看东西"。原研哉把"空白"当成一种设计语言，这让我重新理解了摄影里留白的意义。每隔一段时间翻几页，每次都能看到不一样的东西。',
+      tags: ['设计', '思考'],
+      status: 'finished',
+    },
+    {
+      title: '小王子',
+      author: '圣埃克苏佩里',
+      quote: '真正重要的东西，用眼睛是看不见的。',
+      thought: '小时候读觉得是童话，现在读觉得是哲学。每次重读都会注意到之前忽略的细节——比如那只狐狸说的"驯服"，其实是在讲关系里的耐心。',
+      tags: ['文学', '哲学'],
+      status: 'finished',
+    },
+    {
+      title: '摄影的艺术',
+      author: 'Bruce Barnbaum',
+      quote: '摄影不是记录你看到了什么，而是表达你感受到了什么。',
+      thought: '这本书不教你参数和构图法则，它教你"看"。Barnbaum 说好的照片不是拍出来的，是"等"出来的。这句话改变了我拍照的方式。',
+      tags: ['摄影'],
+      status: 'reading',
+    },
+    {
+      title: '当下的力量',
+      author: '埃克哈特·托利',
+      quote: '你所认为的"我"，其实只是大脑制造的一个声音。',
+      thought: '很难读，但值得。它让我意识到大部分焦虑都来自对未来的想象，而不是当下正在发生的事。现在每次觉得慌，就会提醒自己回到呼吸。',
+      tags: ['心理', '生活'],
+      status: 'finished',
+    },
+    {
+      title: '月亮与六便士',
+      author: '毛姆',
+      quote: '我用尽了全力，过着平凡的一生。',
+      thought: '读完之后想了很久：到底什么才算"值得过的人生"？思特里克兰德为了画画抛下一切，你说他自私还是勇敢？这本书没有答案，但它会让你问自己一些重要的问题。',
+      tags: ['文学'],
+      status: 'finished',
+    },
+    {
+      title: '活着',
+      author: '余华',
+      quote: '人是为了活着本身而活着的，而不是为了活着之外的任何事物而活着。',
+      thought: '一口气读完，然后沉默了很久。余华写苦难的方式很平静，但正是这种平静让人更难受。它让我明白"活着"本身就已经是一件需要勇气的事。',
+      tags: ['文学'],
+      status: 'finished',
+    },
+  ],
+  'zh-TW': [
+    {
+      title: '設計中的設計',
+      author: '原研哉',
+      quote: '設計不是一種技能，而是捕捉事物本質的感覺能力和洞察力。',
+      thought: '第一次讀的時候覺得是在講設計，後來發現其實是在講「怎麼看東西」。原研哉把「空白」當成一種設計語言，這讓我重新理解了攝影裡留白的意義。',
+      tags: ['設計', '思考'],
+      status: 'finished',
+    },
+    {
+      title: '小王子',
+      author: '聖修伯里',
+      quote: '真正重要的東西，用眼睛是看不見的。',
+      thought: '小時候讀覺得是童話，現在讀覺得是哲學。每次重讀都會注意到之前忽略的細節——比如那隻狐狸說的「馴服」，其實是在講關係裡的耐心。',
+      tags: ['文學', '哲學'],
+      status: 'finished',
+    },
+    {
+      title: '攝影的藝術',
+      author: 'Bruce Barnbaum',
+      quote: '攝影不是記錄你看到了什麼，而是表達你感受到了什麼。',
+      thought: '這本書不教你參數和構圖法則，它教你「看」。Barnbaum 說好的照片不是拍出來的，是「等」出來的。這句話改變了我拍照的方式。',
+      tags: ['攝影'],
+      status: 'reading',
+    },
+    {
+      title: '當下的力量',
+      author: '埃克哈特·托利',
+      quote: '你所認為的「我」，其實只是大腦製造的一個聲音。',
+      thought: '很難讀，但值得。它讓我意識到大部分焦慮都來自對未來的想像，而不是當下正在發生的事。現在每次覺得慌，就會提醒自己回到呼吸。',
+      tags: ['心理', '生活'],
+      status: 'finished',
+    },
+    {
+      title: '月亮與六便士',
+      author: '毛姆',
+      quote: '我用盡了全力，過著平凡的一生。',
+      thought: '讀完之後想了很久：到底什麼才算「值得過的人生」？斯特里克蘭德為了畫畫拋下一切，你說他自私還是勇敢？這本書沒有答案，但它會讓你問自己一些重要的問題。',
+      tags: ['文學'],
+      status: 'finished',
+    },
+    {
+      title: '活著',
+      author: '余華',
+      quote: '人是為了活著本身而活著的，而不是為了活著之外的任何事物而活著。',
+      thought: '一口氣讀完，然後沉默了很久。餘華寫苦難的方式很平靜，但正是這種平靜讓人更難受。它讓我明白「活著」本身就已經是一件需要勇氣的事。',
+      tags: ['文學'],
+      status: 'finished',
+    },
+  ],
+  'en-GB': [
+    {
+      title: 'Designing Design',
+      author: 'Kenya Hara',
+      quote: 'Design is not a skill but a sense and insight that captures the essence of things.',
+      thought: 'I first read this as a design book. Now I think of it as a book about how to look at things. Hara treats "emptiness" as a design language, which changed how I think about negative space in photography.',
+      tags: ['Design', 'Thinking'],
+      status: 'finished',
+    },
+    {
+      title: 'The Little Prince',
+      author: 'Antoine de Saint-Exupéry',
+      quote: 'What is essential is invisible to the eye.',
+      thought: 'Read it as a child as a fairy tale, read it now as philosophy. Every re-read reveals something new — like the fox\'s idea of "taming", which is really about patience in relationships.',
+      tags: ['Literature', 'Philosophy'],
+      status: 'finished',
+    },
+    {
+      title: 'The Art of Photography',
+      author: 'Bruce Barnbaum',
+      quote: 'Photography is not about recording what you see, but expressing what you feel.',
+      thought: 'This book doesn\'t teach you settings or composition rules. It teaches you how to see. Barnbaum says good photos aren\'t taken — they\'re waited for. That changed how I approach my camera.',
+      tags: ['Photography'],
+      status: 'reading',
+    },
+    {
+      title: 'The Power of Now',
+      author: 'Eckhart Tolle',
+      quote: 'What you think of as "me" is just a voice manufactured by your brain.',
+      thought: 'Hard to read, but worth it. It made me realise most anxiety comes from imagining the future, not from what\'s actually happening. Now when I feel panicked, I remind myself to come back to my breath.',
+      tags: ['Psychology', 'Life'],
+      status: 'finished',
+    },
+    {
+      title: 'The Moon and Sixpence',
+      author: 'W. Somerset Maugham',
+      quote: 'I have done my best with an ordinary life.',
+      thought: 'After finishing, I sat with the question for days: what makes a life "worth living"? Strickland gave up everything for painting — was he selfish or brave? The book has no answers, but it asks you the right questions.',
+      tags: ['Literature'],
+      status: 'finished',
+    },
+    {
+      title: 'To Live',
+      author: 'Yu Hua',
+      quote: 'You live for the sake of living itself, not for anything beyond it.',
+      thought: 'Read it in one sitting, then sat in silence for a long time. Yu Hua writes about suffering with such calmness, and that calmness is what makes it devastating. It taught me that "just living" already takes courage.',
+      tags: ['Literature'],
+      status: 'finished',
+    },
+  ],
+  fr: [
+    {
+      title: 'Designing Design',
+      author: 'Kenya Hara',
+      quote: 'Le design n\'est pas une compétence, mais un sens qui capture l\'essence des choses.',
+      thought: 'Je l\'ai lu d\'abord comme un livre de design. Maintenant, je le vois comme un livre sur la façon de regarder les choses.',
+      tags: ['Design', 'Réflexion'],
+      status: 'finished',
+    },
+    {
+      title: 'Le Petit Prince',
+      author: 'Antoine de Saint-Exupéry',
+      quote: 'L\'essentiel est invisible pour les yeux.',
+      thought: 'Lu enfant comme un conte, relu maintenant comme de la philosophie. Chaque relecture révèle quelque chose de nouveau.',
+      tags: ['Littérature', 'Philosophie'],
+      status: 'finished',
+    },
+    {
+      title: 'L\'Art de la photographie',
+      author: 'Bruce Barnbaum',
+      quote: 'La photographie, ce n\'est pas enregistrer ce que vous voyez, mais exprimer ce que vous ressentez.',
+      thought: 'Ce livre ne vous enseigne pas les paramètres. Il vous apprend à voir.',
+      tags: ['Photo'],
+      status: 'reading',
+    },
+    {
+      title: 'Le Pouvoir du moment présent',
+      author: 'Eckhart Tolle',
+      quote: 'Ce que vous considérez comme "moi" n\'est qu\'une voix fabriquée par votre cerveau.',
+      thought: 'Difficile à lire, mais ça en vaut la peine. Ça m\'a fait réaliser que l\'anxiété vient de l\'imagination du futur.',
+      tags: ['Psychologie', 'Vie'],
+      status: 'finished',
+    },
+  ],
+  ru: [
+    {
+      title: 'Дизайн дизайна',
+      author: 'Кэндзи Хара',
+      quote: 'Дизайн — это не навык, а чувство и проницательность, схватывающие суть вещей.',
+      thought: 'Сначала читал как книгу о дизайне. Теперь вижу в ней книгу о том, как смотреть на вещи.',
+      tags: ['Дизайн', 'Мысли'],
+      status: 'finished',
+    },
+    {
+      title: 'Маленький принц',
+      author: 'Антуан де Сент-Экзюпери',
+      quote: 'Самое главное看不见.',
+      thought: 'В детстве читал как сказку, сейчас читаю как философию.',
+      tags: ['Литература', 'Философия'],
+      status: 'finished',
+    },
+    {
+      title: 'Искусство фотографии',
+      author: 'Bruce Barnbaum',
+      quote: 'Фотография — это не запись того, что вы видите, а выражение того, что вы чувствуете.',
+      thought: 'Эта книга учит не настройкам, а тому, как действительно смотреть.',
+      tags: ['Фото'],
+      status: 'reading',
+    },
+    {
+      title: 'Сила настоящего',
+      author: 'Экхарт Толле',
+      quote: 'То, что вы считаете "я" — это просто голос, созданный вашим мозгом.',
+      thought: 'Тяжёлая книга, но стоит прочтения. Заставила понять, что тревога — это чаще всего воображение будущего.',
+      tags: ['Психология', 'Жизнь'],
+      status: 'finished',
+    },
+  ],
+};
+
+const currentText = text[lang as Lang] || text['en-GB'];
+const currentBooks = books[lang as Lang] || books['en-GB'];
+
+function getLangPath(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = (lang as string) === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+---
+
+<BaseLayout title={`${currentText.title} — Alexander Carter`} description={currentText.subtitle}>
+  <section class="relative py-16 md:py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-mesh-gradient opacity-30" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-4xl">
+
+      <header class="max-w-2xl mb-14">
+        <span class="section-kicker mb-5">
+          <span aria-hidden="true">📚</span>
+          {currentText.badge}
+        </span>
+        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight">
+          {currentText.title}
+        </h1>
+        <p class="text-lg text-[rgb(var(--color-text-secondary))] leading-relaxed">
+          {currentText.intro}
+        </p>
+      </header>
+
+      <div class="space-y-10">
+        {currentBooks.map((book: any) => (
+          <article class="glass-card rounded-2xl p-7 md:p-9 group hover:border-primary-500/20 transition-all duration-300">
+            <div class="flex flex-col md:flex-row md:items-start gap-6">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
+                    book.status === 'reading'
+                      ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
+                      : 'bg-green-500/10 text-green-600 dark:text-green-400'
+                  }`}>
+                    <span class={`w-1.5 h-1.5 rounded-full ${book.status === 'reading' ? 'bg-amber-500 animate-pulse' : 'bg-green-500'}`}></span>
+                    {book.status === 'reading' ? currentText.currently : currentText.finished}
+                  </span>
+                  <div class="flex gap-1.5">
+                    {book.tags.map((tag: string) => (
+                      <span class="text-xs px-2 py-0.5 rounded-md bg-primary-500/10 text-primary-600 dark:text-primary-400 font-medium">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <h2 class="text-2xl font-heading font-bold text-[rgb(var(--color-text-primary))] mb-1">
+                  {book.title}
+                </h2>
+                <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-5">
+                  {book.author}
+                </p>
+
+                <blockquote class="relative pl-5 border-l-2 border-primary-500/40 mb-5">
+                  <p class="text-lg italic text-[rgb(var(--color-text-primary))] leading-relaxed font-serif">
+                    "{book.quote}"
+                  </p>
+                </blockquote>
+
+                <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed text-[15px]">
+                  {book.thought}
+                </p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-14 pt-10 border-t border-[rgb(var(--color-border))] text-center">
+        <a
+          href={getLangPath('/')}
+          class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1"
+        >
+          ← {currentText.back}
+        </a>
+      </div>
+
+      <RelatedTools lang={lang} current="reading-list" />
+    </div>
+  </section>
+</BaseLayout>

@@ -123,6 +123,21 @@ const mainNavItems: NavItem[] = [
                   ? 'Технические статьи'
                   : 'Long-form articles',
       },
+      {
+        href: getLangPath('/reading-list'),
+        label: t('nav.reading'),
+        icon: '📚',
+        desc:
+          lang === 'zh-CN'
+            ? '值得反复翻阅的书和文章'
+            : lang === 'zh-TW'
+              ? '值得反覆翻閱的書和文章'
+              : lang === 'fr'
+                ? 'Livres et articles à relire'
+                : lang === 'ru'
+                  ? 'Книги и статьи для перечитывания'
+                  : 'Books and articles worth revisiting',
+      },
     ],
   },
   {

@@ -1,0 +1,22 @@
+---
+import ReadingListTemplate from '../../components/templates/ReadingListTemplate.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'zh-TW' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'ru' } },
+  ];
+}
+
+const { lang } = Astro.params;
+const langMap: Record<string, string> = {
+  'zh-TW': 'zh-TW',
+  'en': 'en-GB',
+  'fr': 'fr',
+  'ru': 'ru',
+};
+---
+
+<ReadingListTemplate lang={langMap[lang as string] || 'zh-CN'} />

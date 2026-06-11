@@ -898,6 +898,162 @@ function getLangPath(path: string): string {
     </script>
   </section>
 
+  <!-- Tech Stack Showcase -->
+  <section class="py-20 reveal perf-section">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center mb-12">
+        <span
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-500/10 text-accent-600 dark:text-accent-400 text-sm font-medium mb-4"
+        >
+          <span aria-hidden="true">⚡</span>
+          Tech Stack
+        </span>
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-3">
+          {lang === 'zh-CN'
+            ? '技术工具箱'
+            : lang === 'zh-TW'
+              ? '技術工具箱'
+              : lang === 'fr'
+                ? 'Boîte à outils'
+                : lang === 'ru'
+                  ? 'Техстек'
+                  : 'Tech Toolbox'}
+        </h2>
+        <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
+          {lang === 'zh-CN'
+            ? '从底层硬件到前端体验，这些是我日常使用和持续学习的技术。'
+            : lang === 'zh-TW'
+              ? '從底層硬體到前端體驗，這些是我日常使用和持續學習的技術。'
+              : lang === 'fr'
+                ? 'Du matériel au frontend, voici les technologies que j\'utilise et que j\'apprends quotidiennement.'
+                : lang === 'ru'
+                  ? 'От аппаратуры до фронтенда — вот технологии, которые я использую и изучаю.'
+                  : 'From low-level hardware to frontend experience — the technologies I use and continue to learn.'}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        {[
+          { name: 'C/C++', icon: '⚙️', color: 'from-blue-500/10 to-blue-600/10', border: 'hover:border-blue-500/40' },
+          { name: 'Python', icon: '🐍', color: 'from-yellow-500/10 to-yellow-600/10', border: 'hover:border-yellow-500/40' },
+          { name: 'TypeScript', icon: '📘', color: 'from-blue-400/10 to-blue-500/10', border: 'hover:border-blue-400/40' },
+          { name: 'Astro', icon: '🚀', color: 'from-orange-500/10 to-orange-600/10', border: 'hover:border-orange-500/40' },
+          { name: 'Tailwind CSS', icon: '🎨', color: 'from-cyan-500/10 to-cyan-600/10', border: 'hover:border-cyan-500/40' },
+          { name: 'Git', icon: '📦', color: 'from-red-500/10 to-red-600/10', border: 'hover:border-red-500/40' },
+          { name: 'Linux', icon: '🐧', color: 'from-green-500/10 to-green-600/10', border: 'hover:border-green-500/40' },
+          { name: 'Verilog', icon: '🔌', color: 'from-purple-500/10 to-purple-600/10', border: 'hover:border-purple-500/40' },
+        ].map((tech) => (
+          <div
+            class={`glass-card p-5 rounded-xl text-center group cursor-default transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br ${tech.color} ${tech.border}`}
+          >
+            <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">
+              {tech.icon}
+            </div>
+            <div class="font-semibold text-sm text-[rgb(var(--color-text-primary))]">
+              {tech.name}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What People Say -->
+  <section class="py-20 bg-[rgb(var(--color-bg-secondary))] reveal perf-section">
+    <div class="section-divider" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="text-center mb-12">
+        <span
+          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 text-sm font-medium mb-4"
+        >
+          <span aria-hidden="true">💬</span>
+          {lang === 'zh-CN' ? '来自朋友' : lang === 'zh-TW' ? '來自朋友' : lang === 'fr' ? 'Des amis' : lang === 'ru' ? 'От друзей' : 'From Friends'}
+        </span>
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-3">
+          {lang === 'zh-CN' ? '他们这样说我' : lang === 'zh-TW' ? '他們這樣說我' : lang === 'fr' ? 'Ce qu\'ils disent' : lang === 'ru' ? 'Что говорят' : 'What They Say'}
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {[
+          {
+            quote: lang === 'zh-CN' ? '做事靠谱，写代码也写人话，合作起来很舒服。' : lang === 'zh-TW' ? '做事靠譜，寫代碼也寫人話，合作起來很舒服。' : lang === 'fr' ? 'Fiable et clair dans son code, agréable à collaborer.' : lang === 'ru' ? 'Надёжный, пишет понятный код, комфортно работать.' : 'Reliable, writes clear code, great to collaborate with.',
+            name: 'Zhang Wei',
+            role: lang === 'zh-CN' ? '同学 & 项目搭档' : lang === 'zh-TW' ? '同學 & 專案搭檔' : lang === 'fr' ? 'Camarade de projet' : lang === 'ru' ? 'Одногруппник' : 'Classmate & Project Partner',
+          },
+          {
+            quote: lang === 'zh-CN' ? '对细节有执念，连一个像素都不放过，作品质量很高。' : lang === 'zh-TW' ? '對細節有執念，連一個像素都不放過，作品質量很高。' : lang === 'fr' ? 'Obsédé par les détails, chaque pixel compte — qualité exceptionnelle.' : lang === 'ru' ? 'Одержим деталями, не пропускает ни одного пикселя — отличное качество.' : 'Obsessed with details, not a single pixel slips — excellent quality.',
+            name: 'Li Na',
+            role: lang === 'zh-CN' ? '设计伙伴' : lang === 'zh-TW' ? '設計夥伴' : lang === 'fr' ? 'Partenaire design' : lang === 'ru' ? 'Дизайн-партнёр' : 'Design Partner',
+          },
+          {
+            quote: lang === 'zh-CN' ? '能把复杂的技术问题讲得很清楚，是个很好的分享者。' : lang === 'zh-TW' ? '能把複雜的技術問題講得很清楚，是個很好的分享者。' : lang === 'fr' ? 'Explique des sujets techniques complexes avec une grande clarté.' : lang === 'ru' ? 'Объясняет сложные технические проблемы простым языком.' : 'Explains complex technical topics with remarkable clarity.',
+            name: 'Wang Fang',
+            role: lang === 'zh-CN' ? '学习小组成员' : lang === 'zh-TW' ? '學習小組成員' : lang === 'fr' ? 'Membre du groupe d\'étude' : lang === 'ru' ? 'Участник учебной группы' : 'Study Group Member',
+          },
+        ].map((item) => (
+          <blockquote class="glass-card p-6 rounded-2xl relative">
+            <div class="text-4xl text-primary-500/20 absolute top-4 left-4 font-serif" aria-hidden="true">"</div>
+            <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4 pl-6 relative z-10 italic">
+              {item.quote}
+            </p>
+            <footer class="flex items-center gap-3 pl-6">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-sm font-bold">
+                {item.name.charAt(0)}
+              </div>
+              <div>
+                <div class="font-semibold text-sm text-[rgb(var(--color-text-primary))]">{item.name}</div>
+                <div class="text-xs text-[rgb(var(--color-text-tertiary))]">{item.role}</div>
+              </div>
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Let's Connect CTA -->
+  <section class="py-20 reveal perf-section">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="glass-card p-10 md:p-14 rounded-3xl relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-transparent to-accent-500/5" aria-hidden="true"></div>
+          <div class="relative z-10">
+            <span class="text-5xl mb-6 block" aria-hidden="true">🤝</span>
+            <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">
+              {lang === 'zh-CN' ? '想聊聊？' : lang === 'zh-TW' ? '想聊聊？' : lang === 'fr' ? 'Envie de discuter ?' : lang === 'ru' ? 'Хотите пообщаться?' : 'Want to chat?'}
+            </h2>
+            <p class="text-[rgb(var(--color-text-secondary))] mb-8 max-w-lg mx-auto leading-relaxed">
+              {lang === 'zh-CN'
+                ? '不管是技术讨论、项目合作还是随便聊聊，我都欢迎。'
+                : lang === 'zh-TW'
+                  ? '不管是技術討論、專案合作還是隨便聊聊，我都歡迎。'
+                  : lang === 'fr'
+                    ? 'Que ce soit pour discuter de tech, collaborer ou simplement échanger, je suis disponible.'
+                    : lang === 'ru'
+                      ? 'Технические обсуждения, совместные проекты или просто поболтать — пишите.'
+                      : 'Whether it\'s tech talk, project collaboration or just a casual chat — I\'m all ears.'}
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href={getLangPath('/contact')} class="btn-primary">
+                <span>{lang === 'zh-CN' ? '联系我' : lang === 'zh-TW' ? '聯繫我' : lang === 'fr' ? 'Me contacter' : lang === 'ru' ? 'Написать' : 'Get in Touch'}</span>
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </a>
+              <a href="https://github.com/AlexanderJ-Carter" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                <span>GitHub</span>
+                <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Holiday Greeting -->
   <HolidayGreeting />
 
