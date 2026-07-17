@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../PageHero.astro';
 
 const { lang } = Astro.props;
 
@@ -48,6 +49,15 @@ const timelineData: Record<
         icon: '🚀',
         color: 'from-purple-500 to-pink-500',
         tags: ['在读', '开发', '摄影'],
+      },
+      {
+        year: 2026,
+        title: '摄影编辑室焕新',
+        description:
+          '以真实影像为第一印象，统一字体与页眉页脚，收敛装饰动效；首页与内容页按“一件事一节”重排，并预留广告与验证开关。',
+        icon: '',
+        color: '',
+        tags: ['设计系统', 'Astro', '体验'],
       },
       {
         year: 2025,
@@ -106,6 +116,15 @@ const timelineData: Record<
         tags: ['在讀', '開發', '攝影'],
       },
       {
+        year: 2026,
+        title: '攝影編輯室煥新',
+        description:
+          '以真實影像為第一印象，統一字體與頁眉頁腳，收斂裝飾動效；首頁與內容頁按「一件事一節」重排。',
+        icon: '',
+        color: '',
+        tags: ['設計系統', 'Astro', '體驗'],
+      },
+      {
         year: 2025,
         title: '網站全面重設計',
         description:
@@ -160,6 +179,15 @@ const timelineData: Record<
         icon: '🚀',
         color: 'from-purple-500 to-pink-500',
         tags: ['Studying', 'Dev', 'Photography'],
+      },
+      {
+        year: 2026,
+        title: 'Editorial photography refresh',
+        description:
+          'Real photographs lead the first impression; type, header and footer unify; decorative motion is quieted; pages follow one job per section.',
+        icon: '',
+        color: '',
+        tags: ['Design system', 'Astro', 'UX'],
       },
       {
         year: 2025,
@@ -218,6 +246,15 @@ const timelineData: Record<
         tags: ['Études', 'Dev', 'Photo'],
       },
       {
+        year: 2026,
+        title: 'Rafraîchissement éditorial',
+        description:
+          'La photo réelle mène la première impression ; typo, en-tête et pied unifiés ; motion plus calme ; une intention par section.',
+        icon: '',
+        color: '',
+        tags: ['Design system', 'Astro', 'UX'],
+      },
+      {
         year: 2025,
         title: 'Refonte complète du site',
         description:
@@ -274,6 +311,15 @@ const timelineData: Record<
         tags: ['Учёба', 'Разработка', 'Фото'],
       },
       {
+        year: 2026,
+        title: 'Редакционное обновление',
+        description:
+          'Реальные фотографии ведут первый экран; шрифты, шапка и подвал едины; декорации тише; у каждой секции одна задача.',
+        icon: '',
+        color: '',
+        tags: ['Дизайн-система', 'Astro', 'UX'],
+      },
+      {
         year: 2025,
         title: 'Полный редизайн сайта',
         description:
@@ -317,172 +363,51 @@ const content = timelineData[lang as Lang] || timelineData['en-GB'];
 ---
 
 <BaseLayout title={content.title} description={content.description}>
-  <!-- Hero -->
-  <section class="relative py-20 md:py-28 overflow-hidden">
-    <div
-      class="absolute inset-0 bg-mesh-gradient opacity-50"
-      aria-hidden="true"
-    >
-    </div>
-    <div class="aurora" aria-hidden="true"></div>
-    <div
-      class="absolute inset-0 opacity-80"
-      style="background: var(--hero-spotlight);"
-      aria-hidden="true"
-    >
-    </div>
+  <PageHero
+    kicker={content.tag}
+    title={content.headerTitle}
+    description={content.headerDesc}
+    narrow={false}
+  />
 
-    <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-5xl">
-      <header class="text-center mb-16">
-        <span
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium mb-5"
-        >
-          <span aria-hidden="true">📅</span>
-          {content.tag}
-        </span>
-        <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight"
-        >
-          {content.headerTitle}
-        </h1>
-        <p
-          class="text-lg text-[rgb(var(--color-text-secondary))] max-w-xl mx-auto"
-        >
-          {content.headerDesc}
-        </p>
-      </header>
-
-      <!-- Timeline -->
-      <ol class="relative" id="timeline-ol" aria-label={content.headerTitle}>
-        <!-- Central vertical line (desktop only) -->
-        <div
-          class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary-500/10 via-primary-500/40 to-primary-500/10"
-          aria-hidden="true"
-        >
-        </div>
-        <!-- Scroll progress overlay (desktop) -->
-        <div
-          class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 w-[3px] rounded-full bg-gradient-to-b from-primary-500 via-accent-500 to-primary-500 origin-top"
-          id="timeline-progress"
-          style="height: 0%; transition: height 0.15s ease-out;"
-          aria-hidden="true"
-        >
-        </div>
-
-        <!-- Left gutter line (mobile) -->
-        <div
-          class="md:hidden absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-primary-500/10 via-primary-500/40 to-primary-500/10"
-          aria-hidden="true"
-        >
-        </div>
-        <!-- Scroll progress overlay (mobile) -->
-        <div
-          class="md:hidden absolute left-6 top-0 w-[3px] rounded-full bg-gradient-to-b from-primary-500 via-accent-500 to-primary-500 origin-top -translate-x-[1px]"
-          id="timeline-progress-mobile"
-          style="height: 0%; transition: height 0.15s ease-out;"
-          aria-hidden="true"
-        >
-        </div>
-
-        <div class="space-y-10 md:space-y-14">
-          {
-            content.events.map((event, index) => {
-              const isLeft = index % 2 === 0;
-              return (
-                <li class="relative">
-                  {/* Desktop: alternating layout */}
-                  <div
-                    class={`hidden md:flex items-center gap-0 ${isLeft ? 'flex-row-reverse' : 'flex-row'}`}
-                  >
-                    {/* Card half */}
-                    <div class="w-[calc(50%-2rem)] reveal">
-                      <article
-                        class={`glass-card p-6 lg:p-8 group hover:-translate-y-1 transition-transform duration-300 ${isLeft ? 'ml-auto' : 'mr-auto'}`}
-                      >
-                        <div
-                          class={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-gradient-to-r ${event.color} text-white mb-3`}
-                        >
-                          {event.year}
-                        </div>
-                        <h2 class="font-heading font-bold text-lg text-[rgb(var(--color-text-primary))] mb-2 group-hover:text-primary-500 transition-colors">
-                          {event.title}
-                        </h2>
-                        <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4">
-                          {event.description}
-                        </p>
-                        {event.tags && (
-                          <div class="flex flex-wrap gap-1.5">
-                            {event.tags.map((tag) => (
-                              <span class="text-xs px-2 py-0.5 rounded-full bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-secondary))] border border-[rgb(var(--color-border))]">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </article>
-                    </div>
-
-                    {/* Center icon */}
-                    <div class="flex-shrink-0 w-16 flex justify-center z-10">
-                      <div
-                        class={`w-14 h-14 rounded-full bg-gradient-to-br ${event.color} flex items-center justify-center text-2xl shadow-lg ring-4 ring-[rgb(var(--color-bg-primary))]`}
-                        aria-hidden="true"
-                      >
-                        {event.icon}
-                      </div>
-                    </div>
-
-                    {/* Spacer half */}
-                    <div class="w-[calc(50%-2rem)]" />
-                  </div>
-
-                  {/* Mobile: left-aligned single column */}
-                  <div class="md:hidden flex items-start gap-4 pl-3">
-                    {/* Icon on left rail */}
-                    <div class="flex-shrink-0 relative">
-                      <div
-                        class={`w-10 h-10 rounded-full bg-gradient-to-br ${event.color} flex items-center justify-center text-lg shadow-md ring-2 ring-[rgb(var(--color-bg-primary))]`}
-                        aria-hidden="true"
-                      >
-                        {event.icon}
-                      </div>
-                    </div>
-
-                    {/* Card */}
-                    <article class="flex-1 glass-card p-5 reveal group hover:-translate-y-0.5 transition-transform duration-300">
-                      <div
-                        class={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full bg-gradient-to-r ${event.color} text-white mb-2`}
-                      >
-                        {event.year}
-                      </div>
-                      <h2 class="font-heading font-bold text-base text-[rgb(var(--color-text-primary))] mb-1.5 group-hover:text-primary-500 transition-colors">
-                        {event.title}
-                      </h2>
-                      <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed mb-3">
-                        {event.description}
-                      </p>
-                      {event.tags && (
-                        <div class="flex flex-wrap gap-1.5">
-                          {event.tags.map((tag) => (
-                            <span class="text-xs px-2 py-0.5 rounded-full bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-secondary))] border border-[rgb(var(--color-border))]">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </article>
-                  </div>
-                </li>
-              );
-            })
-          }
-        </div>
+  <section class="pb-20 md:pb-28">
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
+      <ol
+        class="relative border-l border-[rgb(var(--color-border))] ml-3 md:ml-4"
+        id="timeline-ol"
+        aria-label={content.headerTitle}
+      >
+        {
+          content.events.map((event) => (
+            <li class="relative pl-8 md:pl-10 pb-12 last:pb-0">
+              <span
+                class="absolute left-0 top-1.5 -translate-x-1/2 w-2 h-2 rounded-full bg-[rgb(var(--color-text-tertiary))] ring-4 ring-[rgb(var(--color-bg-primary))]"
+                aria-hidden="true"
+              />
+              <p class="font-heading text-sm tracking-wide text-[rgb(var(--color-text-tertiary))] mb-2">
+                {event.year}
+              </p>
+              <h2 class="font-heading font-bold text-lg text-[rgb(var(--color-text-primary))] mb-2">
+                {event.title}
+              </h2>
+              <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed mb-3">
+                {event.description}
+              </p>
+              {event.tags && (
+                <div class="flex flex-wrap gap-2">
+                  {event.tags.map((tag) => (
+                    <span class="text-xs text-[rgb(var(--color-text-tertiary))] border border-[rgb(var(--color-border))] px-2 py-0.5">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </li>
+          ))
+        }
       </ol>
 
-      <!-- Back link -->
-      <div
-        class="mt-16 pt-10 border-t border-[rgb(var(--color-border))] reveal"
-      >
+      <div class="mt-16 pt-10 border-t border-[rgb(var(--color-border))]">
         <a
           href={getLangPath('/')}
           class="link-underline text-primary-500 hover:text-primary-600 font-medium text-sm inline-flex items-center gap-1"
@@ -493,27 +418,3 @@ const content = timelineData[lang as Lang] || timelineData['en-GB'];
     </div>
   </section>
 </BaseLayout>
-
-<script is:inline>
-  (function () {
-    const ol = document.getElementById('timeline-ol');
-    const bar = document.getElementById('timeline-progress');
-    const barMobile = document.getElementById('timeline-progress-mobile');
-    if (!ol) return;
-
-    function update() {
-      const rect = ol.getBoundingClientRect();
-      const olTop = rect.top + window.scrollY;
-      const olHeight = rect.height;
-      if (olHeight <= 0) return;
-
-      const scrolled = window.scrollY + window.innerHeight * 0.5 - olTop;
-      const pct = Math.max(0, Math.min(100, (scrolled / olHeight) * 100));
-      if (bar) bar.style.height = pct + '%';
-      if (barMobile) barMobile.style.height = pct + '%';
-    }
-
-    window.addEventListener('scroll', update, { passive: true });
-    update();
-  })();
-</script>

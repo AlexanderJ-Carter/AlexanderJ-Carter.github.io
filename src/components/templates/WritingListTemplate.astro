@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdSlot from '../AdSlot.astro';
+import PageHero from '../PageHero.astro';
 import { getCollection } from 'astro:content';
 import type { Lang } from '../../i18n/types';
 
@@ -95,31 +97,21 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
 ---
 
 <BaseLayout title={`${t.title} - Alexander Carter`} description={t.description}>
-  <section class="pt-32 pb-16 min-h-screen">
-    <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
-      <a
-        href={getLangPath('/')}
-        class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-        </svg>
-        <span>{t.backToHome}</span>
-      </a>
+  <PageHero
+    kicker="Writing"
+    title={t.title}
+    description={t.intro}
+    backHref={getLangPath('/')}
+    backLabel={t.backToHome}
+    narrow={false}
+  />
 
-      <div class="text-center mb-12">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6">
-          ✍️
-        </div>
-        <h1 class="text-4xl md:text-5xl font-heading font-bold mb-3">{t.title}</h1>
-        <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-4">{t.badge}</p>
-        <p class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">{t.intro}</p>
-      </div>
-
+  <section class="pb-20 min-h-[40vh]">
+    <div class="page-shell-wide">
       {categories.length > 0 && (
-        <div class="flex flex-wrap justify-center gap-2 mb-10">
+        <div class="flex flex-wrap gap-2 mb-10">
           {categories.map((cat) => (
-            <span class="px-3 py-1 rounded-full text-xs font-medium bg-primary-500/10 text-primary-500">
+            <span class="px-3 py-1 text-xs font-heading tracking-wide border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))]">
               {cat}
             </span>
           ))}
@@ -127,15 +119,16 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
       )}
 
       {posts.length === 0 ? (
-        <div class="text-center py-20">
+        <div class="py-20">
           <p class="text-[rgb(var(--color-text-secondary))]">{t.noPosts}</p>
         </div>
       ) : (
-        <div class="space-y-6">
+        <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
           {posts.map((post) => (
-            <article class="glass-card rounded-2xl p-6 md:p-8 hover:shadow-lg transition-shadow">
-              <div class="flex items-center gap-3 mb-3">
-                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-500/10 text-primary-500">
+            <li>
+              <article class="py-8">
+              <div class="flex flex-wrap items-center gap-3 mb-3">
+                <span class="text-xs font-heading tracking-wide text-primary-600 dark:text-primary-400">
                   {post.data.category}
                 </span>
                 <time class="text-xs text-[rgb(var(--color-text-tertiary))]" datetime={post.data.pubDate.toISOString()}>
@@ -147,31 +140,36 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
                   </span>
                 )}
               </div>
-              <h2 class="text-xl md:text-2xl font-bold mb-2 text-[rgb(var(--color-text-primary))]">
-                {post.data.title}
+              <h2 class="text-xl md:text-2xl font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+                <a href={getLangPath(`/writing/${post.id}`)} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                  {post.data.title}
+                </a>
               </h2>
               <p class="text-[rgb(var(--color-text-secondary))] mb-4 leading-relaxed">
                 {post.data.description}
               </p>
-              <div class="flex items-center justify-between">
+              <div class="flex items-center justify-between gap-4">
                 <div class="flex flex-wrap gap-1.5">
                   {post.data.tags.map((tag) => (
-                    <span class="text-xs px-2 py-0.5 rounded bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-tertiary))]">
-                      {tag}
+                    <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
+                      #{tag}
                     </span>
                   ))}
                 </div>
                 <a
                   href={getLangPath(`/writing/${post.id}`)}
-                  class="text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors"
+                  class="text-sm font-heading font-semibold text-primary-600 dark:text-primary-400 hover:gap-2 inline-flex items-center gap-1 transition-all"
                 >
-                  {t.readMore} &rarr;
+                  {t.readMore} →
                 </a>
               </div>
-            </article>
+              </article>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
+
+      <AdSlot slot="article" format="horizontal" />
     </div>
   </section>
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl } from '../i18n/ui';
+import SiteFilings from './SiteFilings.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const currentYear = new Date().getFullYear();
@@ -10,178 +11,139 @@ function getLangPath(path: string) {
 
 const i18n = {
   'zh-CN': {
-    desc: '个人网站、项目、写作与工具的入口。页脚只保留真正有用的路径。',
-    explore: '站内',
-    projects: '我的项目',
-    policy: '说明',
+    desc: '摄影、写作与开源工程的长期角落。',
+    nav: '导航',
+    legal: '说明',
     contact: '联系',
+    support: '支持本站',
+    gallery: '画廊',
+    writing: '写作',
+    projects: '项目',
+    about: '关于',
+    tools: '工具',
+    fun: '彩蛋',
+    privacy: '隐私',
+    terms: '条款',
+    license: '许可证',
+    accessibility: '无障碍',
+    security: '安全',
+    sitemap: '地图',
   },
   'zh-TW': {
-    desc: '個人網站、專案、寫作與工具的入口。頁腳只保留真正有用的路徑。',
-    explore: '站內',
-    projects: '我的專案',
-    policy: '說明',
+    desc: '攝影、寫作與開源工程的長期角落。',
+    nav: '導航',
+    legal: '說明',
     contact: '聯繫',
+    support: '支持本站',
+    gallery: '畫廊',
+    writing: '寫作',
+    projects: '專案',
+    about: '關於',
+    tools: '工具',
+    fun: '彩蛋',
+    privacy: '隱私',
+    terms: '條款',
+    license: '許可證',
+    accessibility: '無障礙',
+    security: '安全',
+    sitemap: '地圖',
   },
   'en-GB': {
-    desc: 'A compact entrance to the site, projects, writing and utilities.',
-    explore: 'Explore',
-    projects: 'My Projects',
-    policy: 'Notes',
+    desc: 'A long-running corner for photography, writing and open-source making.',
+    nav: 'Navigate',
+    legal: 'Notes',
     contact: 'Contact',
+    support: 'Support',
+    gallery: 'Gallery',
+    writing: 'Writing',
+    projects: 'Projects',
+    about: 'About',
+    tools: 'Tools',
+    fun: 'Play',
+    privacy: 'Privacy',
+    terms: 'Terms',
+    license: 'Licence',
+    accessibility: 'Accessibility',
+    security: 'Security',
+    sitemap: 'Sitemap',
   },
   fr: {
-    desc: 'Entrée compacte vers le site, les projets, les écrits et les outils.',
-    explore: 'Explorer',
-    projects: 'Mes projets',
-    policy: 'Notes',
+    desc: 'Un coin durable pour la photo, l’écriture et l’open source.',
+    nav: 'Naviguer',
+    legal: 'Notes',
     contact: 'Contact',
+    support: 'Soutenir',
+    gallery: 'Galerie',
+    writing: 'Écrits',
+    projects: 'Projets',
+    about: 'À propos',
+    tools: 'Outils',
+    fun: 'Surprises',
+    privacy: 'Confidentialité',
+    terms: 'Conditions',
+    license: 'Licence',
+    accessibility: 'Accessibilité',
+    security: 'Sécurité',
+    sitemap: 'Plan',
   },
   ru: {
-    desc: 'Компактный вход к сайту, проектам, статьям и инструментам.',
-    explore: 'Сайт',
-    projects: 'Проекты',
-    policy: 'Сведения',
+    desc: 'Долгоживущий угол для фото, текстов и open source.',
+    nav: 'Навигация',
+    legal: 'Сведения',
     contact: 'Контакты',
+    support: 'Поддержать',
+    gallery: 'Галерея',
+    writing: 'Статьи',
+    projects: 'Проекты',
+    about: 'Обо мне',
+    tools: 'Инструменты',
+    fun: 'Пасхалки',
+    privacy: 'Приватность',
+    terms: 'Условия',
+    license: 'Лицензия',
+    accessibility: 'Доступность',
+    security: 'Безопасность',
+    sitemap: 'Карта',
   },
 };
 
 const t = i18n[lang as keyof typeof i18n] || i18n['zh-CN'];
 
-const exploreLinks = [
-  {
-    label: lang === 'zh-CN' ? '首页' : lang === 'zh-TW' ? '首頁' : 'Home',
-    href: getLangPath('/'),
-  },
-  {
-    label:
-      lang === 'zh-CN'
-        ? '项目'
-        : lang === 'zh-TW'
-          ? '專案'
-          : lang === 'fr'
-            ? 'Projets'
-            : lang === 'ru'
-              ? 'Проекты'
-              : 'Projects',
-    href: getLangPath('/projects'),
-  },
-  {
-    label:
-      lang === 'zh-CN'
-        ? '写作'
-        : lang === 'zh-TW'
-          ? '寫作'
-          : lang === 'fr'
-            ? 'Écrits'
-            : lang === 'ru'
-              ? 'Статьи'
-              : 'Writing',
-    href: getLangPath('/writing'),
-  },
-  {
-    label:
-      lang === 'zh-CN'
-        ? '画廊'
-        : lang === 'zh-TW'
-          ? '畫廊'
-          : lang === 'fr'
-            ? 'Galerie'
-            : lang === 'ru'
-              ? 'Галерея'
-              : 'Gallery',
-    href: getLangPath('/gallery'),
-  },
-  {
-    label:
-      lang === 'zh-CN'
-        ? '参考'
-        : lang === 'zh-TW'
-          ? '參考'
-          : lang === 'fr'
-            ? 'Références'
-            : lang === 'ru'
-              ? 'Ссылки'
-              : 'References',
-    href: getLangPath('/friends'),
-  },
+const primary = [
+  { label: t.gallery, href: getLangPath('/gallery') },
+  { label: t.writing, href: getLangPath('/writing') },
+  { label: t.projects, href: getLangPath('/projects') },
+  { label: t.about, href: getLangPath('/about') },
+  { label: t.tools, href: getLangPath('/tools') },
+  { label: t.fun, href: getLangPath('/fun') },
 ];
 
-const projectLinks = [
-  { label: 'MyCook', href: 'https://cook.alexander.xin' },
-  { label: 'Linux Command', href: 'https://linux-command.alexander.xin' },
-  { label: 'NetQ', href: 'https://netq.alexander.xin' },
-  { label: 'Tool Hub', href: 'https://tools.alexander.xin' },
-  { label: 'GitHub', href: 'https://github.com/AlexanderJ-Carter' },
-];
-
-const policyLinks = [
-  {
-    label:
-      lang === 'zh-CN'
-        ? '隐私'
-        : lang === 'zh-TW'
-          ? '隱私'
-          : lang === 'fr'
-            ? 'Confidentialité'
-            : lang === 'ru'
-              ? 'Приватность'
-              : 'Privacy',
-    href: getLangPath('/privacy'),
-  },
-  {
-    label:
-      lang === 'zh-CN'
-        ? '条款'
-        : lang === 'zh-TW'
-          ? '條款'
-          : lang === 'fr'
-            ? 'Conditions'
-            : lang === 'ru'
-              ? 'Условия'
-              : 'Terms',
-    href: getLangPath('/terms'),
-  },
-  {
-    label:
-      lang === 'zh-CN'
-        ? '安全'
-        : lang === 'zh-TW'
-          ? '安全'
-          : lang === 'fr'
-            ? 'Sécurité'
-            : lang === 'ru'
-              ? 'Безопасность'
-              : 'Security',
-    href: getLangPath('/security/policy'),
-  },
-  {
-    label:
-      lang === 'zh-CN'
-        ? '网站地图'
-        : lang === 'zh-TW'
-          ? '網站地圖'
-          : lang === 'fr'
-            ? 'Plan du site'
-            : lang === 'ru'
-              ? 'Карта сайта'
-              : 'Sitemap',
-    href: getLangPath('/sitemap'),
-  },
+const legal = [
+  { label: t.privacy, href: getLangPath('/privacy') },
+  { label: t.terms, href: getLangPath('/terms') },
+  { label: t.license, href: getLangPath('/license') },
+  { label: t.accessibility, href: getLangPath('/accessibility') },
+  { label: t.security, href: getLangPath('/security/policy') },
+  { label: t.sitemap, href: getLangPath('/sitemap') },
 ];
 ---
 
-<footer class="mt-24 border-t border-[rgb(var(--color-border))]">
-  <div class="container mx-auto px-4 lg:px-8 py-10">
-    <div class="grid gap-8 lg:grid-cols-[1.1fr_2fr] items-start">
+<footer class="mt-24 border-t border-[rgb(var(--color-border))] relative">
+  <div
+    class="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary-500/40 to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="container mx-auto px-4 lg:px-8 py-12 md:py-14">
+    <div class="grid gap-10 lg:grid-cols-[1.2fr_1fr] items-start">
       <div>
-        <a href={getLangPath('/')} class="inline-flex items-center gap-3">
+        <a href={getLangPath('/')} class="inline-flex items-center gap-3 group">
           <img
             src="/img/branding/logo-96.webp"
             alt=""
             width="40"
             height="40"
-            class="w-10 h-10 rounded-xl dark:hidden"
+            class="w-10 h-10 rounded-sm dark:hidden"
             loading="lazy"
             decoding="async"
           />
@@ -190,141 +152,109 @@ const policyLinks = [
             alt=""
             width="40"
             height="40"
-            class="w-10 h-10 rounded-xl hidden dark:block"
+            class="w-10 h-10 rounded-sm hidden dark:block"
             loading="lazy"
             decoding="async"
           />
           <span
-            class="font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            class="font-heading font-bold tracking-tight group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
           >
             Alexander Carter
           </span>
         </a>
         <p
-          class="mt-4 max-w-sm text-sm leading-relaxed text-[rgb(var(--color-text-secondary))]"
+          class="mt-4 max-w-md text-sm leading-relaxed text-[rgb(var(--color-text-secondary))]"
         >
           {t.desc}
         </p>
         <a
           href="mailto:contact-us@alexander.xin"
-          class="mt-4 inline-flex text-sm font-medium text-primary-500 hover:text-primary-600"
+          class="mt-4 inline-flex text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
         >
           {t.contact}: contact-us@alexander.xin
         </a>
       </div>
 
-      <div class="grid gap-6 sm:grid-cols-3">
-        <nav aria-label={t.explore}>
-          <h2 class="footer-heading">{t.explore}</h2>
-          <div class="footer-list">
-            {exploreLinks.map((link) => <a href={link.href}>{link.label}</a>)}
-          </div>
-        </nav>
-
-        <nav aria-label={t.projects}>
-          <h2 class="footer-heading">{t.projects}</h2>
-          <div class="footer-list">
-            {
-              projectLinks.map((link) => (
-                <a href={link.href} target="_blank" rel="noopener noreferrer">
+      <nav aria-label={t.nav} class="lg:justify-self-end">
+        <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm font-heading">
+          {
+            primary.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                >
                   {link.label}
                 </a>
-              ))
-            }
-          </div>
-        </nav>
-
-        <nav aria-label={t.policy}>
-          <h2 class="footer-heading">{t.policy}</h2>
-          <div class="footer-list">
-            {policyLinks.map((link) => <a href={link.href}>{link.label}</a>)}
-          </div>
-        </nav>
-      </div>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
     </div>
 
-    <div
-      class="mt-10 pt-6 border-t border-[rgb(var(--color-border))] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
-    >
-      <div class="flex items-center gap-4">
-        <p class="text-xs text-[rgb(var(--color-text-tertiary))]">
-          © {currentYear} Alexander James Carter
-        </p>
-        <a
-          href={getLangPath('/about')}
-          class="inline-flex items-center gap-1.5 text-xs font-medium text-primary-500 hover:text-primary-600 transition-colors"
-          aria-label={lang === 'zh-CN'
-            ? '支持本站'
-            : lang === 'zh-TW'
-              ? '支持本站'
-              : lang === 'fr'
-                ? 'Soutenir'
-                : lang === 'ru'
-                  ? 'Поддержать'
-                  : 'Support'}
-        >
-          <svg
-            class="w-4 h-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
+    <div class="mt-10 pt-6 border-t border-[rgb(var(--color-border))] flex flex-col gap-4">
+      <div
+        class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <p class="text-xs text-[rgb(var(--color-text-tertiary))]">
+            © {currentYear} Alexander James Carter
+          </p>
+          <a
+            href={getLangPath('/support')}
+            class="text-xs font-medium text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
           >
-            <path
-              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-            ></path>
-          </svg>
-          {
-            lang === 'zh-CN'
-              ? '支持本站'
-              : lang === 'zh-TW'
-                ? '支持本站'
-                : lang === 'fr'
-                  ? 'Soutenir'
-                  : lang === 'ru'
-                    ? 'Поддержать'
-                    : 'Support'
-          }
-        </a>
+            {t.support}
+          </a>
+          <a href={getLangPath('/license')} class="footer-chip">CC BY-NC-ND 4.0</a>
+          <a href={getLangPath('/accessibility')} class="footer-chip">
+            {t.accessibility}
+          </a>
+        </div>
+
+        <nav aria-label={t.legal}>
+          <ul
+            class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[rgb(var(--color-text-tertiary))]"
+          >
+            {
+              legal.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="hover:text-[rgb(var(--color-text-secondary))] transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
       </div>
-      <a href={getLangPath('/license')} class="footer-chip">CC BY-NC-ND 4.0</a>
+
+      <SiteFilings />
     </div>
   </div>
 </footer>
 
 <style>
-  .footer-heading {
-    margin-bottom: 0.8rem;
-    color: rgb(var(--color-text-tertiary));
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .footer-list {
-    display: grid;
-    gap: 0.55rem;
-  }
-
-  .footer-list a {
-    width: fit-content;
-    color: rgb(var(--color-text-secondary));
-    font-size: 0.9rem;
-    line-height: 1.3;
-  }
-
-  .footer-list a:hover {
-    color: rgb(14 165 233);
-  }
-
   .footer-chip {
     width: fit-content;
     border: 1px solid rgb(var(--color-border));
-    border-radius: 0.65rem;
-    background: rgb(var(--color-bg-secondary));
+    border-radius: 0.125rem;
+    background: transparent;
+    color: rgb(var(--color-text-tertiary));
+    padding: 0.25rem 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.03em;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .footer-chip:hover {
     color: rgb(var(--color-text-secondary));
-    padding: 0.35rem 0.65rem;
-    font-size: 0.75rem;
+    border-color: rgb(var(--color-accent) / 0.4);
   }
 </style>

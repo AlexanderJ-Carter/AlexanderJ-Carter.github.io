@@ -1,1050 +1,175 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../PageHero.astro';
+import { sitemapCopy } from '../../i18n/pages/sitemap';
+import { resolveLang, getLangPath } from '../../i18n/types';
 
-const { lang } = Astro.props;
+const lang = resolveLang(Astro.props.lang);
+const t = sitemapCopy[lang];
+const home = getLangPath(lang, '/');
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
-
-const sitemapData: Record<Lang, any> = {
-  'zh-CN': {
-    title: '网站地图',
-    description: '完整的网站结构导航和页面地图',
-    headerTitle: '网站地图',
-    headerDesc: '探索网站的所有角落',
-    mainPagesTitle: '主要页面',
-    toolPagesTitle: '实用工具',
-    policyPagesTitle: '政策条款',
-    externalLinksTitle: '外部链接',
-    languagesTitle: '语言版本',
-    mainPages: [
-      {
-        name: '网站首页',
-        href: '/',
-        desc: '探索创意，分享生活的起点',
-        icon: '🏠',
-      },
-      {
-        name: '关于我',
-        href: '/about',
-        desc: '了解我的故事和理念',
-        icon: '👤',
-      },
-      {
-        name: '作品画廊',
-        href: '/gallery',
-        desc: '完整的摄影作品展示空间',
-        icon: '🖼️',
-      },
-      {
-        name: '项目',
-        href: '/projects',
-        desc: '我的开发项目与作品集',
-        icon: '🛠️',
-      },
-      {
-        name: '写作',
-        href: '/writing',
-        desc: '关于工程、设计与摄影的长文',
-        icon: '✍️',
-      },
-      {
-        name: '读读看看',
-        href: '/reading-list',
-        desc: '值得反复翻阅的书和文章',
-        icon: '📚',
-      },
-      {
-        name: '时间轴',
-        href: '/timeline',
-        desc: '我的学习和成长之路',
-        icon: '📅',
-      },
-      {
-        name: '友情链接',
-        href: '/friends',
-        desc: '朋友的网站和友链申请',
-        icon: '🔗',
-      },
-    ],
-    toolPages: [
-      {
-        name: '货币转换',
-        href: '/currency',
-        desc: '实时汇率转换工具',
-        icon: '💱',
-      },
-      { name: '世界时间', href: '/time', desc: '世界时间显示工具', icon: '🕐' },
-      {
-        name: '工具中台',
-        href: 'https://tools.alexander.xin',
-        desc: '更多免费工具集合',
-        icon: '🧰',
-      },
-      {
-        name: 'Linux 指令查询',
-        href: 'https://linux-command.alexander.xin',
-        desc: 'Linux 命令速查',
-        icon: '🐧',
-      },
-    ],
-    policyPages: [
-      {
-        name: '隐私政策',
-        href: '/privacy',
-        desc: '数据保护和隐私说明',
-        icon: '🔒',
-      },
-      {
-        name: '服务条款',
-        href: '/terms',
-        desc: '网站使用规则和协议',
-        icon: '📄',
-      },
-      {
-        name: '许可证',
-        href: '/license',
-        desc: '版权许可和使用说明',
-        icon: '📜',
-      },
-      {
-        name: '无障碍',
-        href: '/accessibility',
-        desc: '无障碍访问说明',
-        icon: '♿',
-      },
-      {
-        name: '安全政策',
-        href: '/security/policy',
-        desc: '安全漏洞披露与报告指南',
-        icon: '🛡️',
-      },
-      {
-        name: '安全致谢',
-        href: '/security/acknowledgments',
-        desc: '感谢安全研究人员',
-        icon: '🙏',
-      },
-    ],
-    externalLinks: [
-      {
-        name: '个人博客',
-        href: 'https://blog.alexander.xin',
-        desc: '最新文章分享和思考记录',
-        icon: '📝',
-      },
-      {
-        name: 'GitHub',
-        href: 'https://github.com/AlexanderJ-Carter',
-        desc: '开源项目和代码仓库',
-        icon: '💻',
-      },
-      {
-        name: 'MyCook',
-        href: 'https://cook.alexander.xin',
-        desc: '做饭菜谱与分类导航',
-        icon: '🍳',
-      },
-      {
-        name: 'NetQ',
-        href: 'https://netq.alexander.xin',
-        desc: '交互式网络排查 CLI',
-        icon: '🧪',
-      },
-    ],
-    languages: [
-      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
-      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-GB', name: 'English', flag: '🇬🇧', href: '/en/' },
-      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
-      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
-    ],
-  },
-  'zh-TW': {
-    title: '網站地圖',
-    description: '完整的網站結構導航和頁面地圖',
-    headerTitle: '網站地圖',
-    headerDesc: '探索網站的所有角落',
-    mainPagesTitle: '主要頁面',
-    toolPagesTitle: '實用工具',
-    policyPagesTitle: '政策條款',
-    externalLinksTitle: '外部連結',
-    languagesTitle: '語言版本',
-    mainPages: [
-      {
-        name: '網站首頁',
-        href: '/zh-TW/',
-        desc: '探索創意，分享生活的起點',
-        icon: '🏠',
-      },
-      {
-        name: '關於我',
-        href: '/zh-TW/about',
-        desc: '了解我的故事和理念',
-        icon: '👤',
-      },
-      {
-        name: '作品畫廊',
-        href: '/zh-TW/gallery',
-        desc: '完整的攝影作品展示空間',
-        icon: '🖼️',
-      },
-      {
-        name: '專案',
-        href: '/zh-TW/projects',
-        desc: '我的開發專案與作品集',
-        icon: '🛠️',
-      },
-      {
-        name: '寫作',
-        href: '/zh-TW/writing',
-        desc: '關於工程、設計與攝影的長文',
-        icon: '✍️',
-      },
-      {
-        name: '讀讀看看',
-        href: '/zh-TW/reading-list',
-        desc: '值得反覆翻閱的書和文章',
-        icon: '📚',
-      },
-      {
-        name: '時間軸',
-        href: '/zh-TW/timeline',
-        desc: '我的學習和成長之路',
-        icon: '📅',
-      },
-      {
-        name: '友情連結',
-        href: '/zh-TW/friends',
-        desc: '朋友的網站和友鏈申請',
-        icon: '🔗',
-      },
-    ],
-    toolPages: [
-      {
-        name: '貨幣轉換',
-        href: '/zh-TW/currency',
-        desc: '即時匯率轉換工具',
-        icon: '💱',
-      },
-      {
-        name: '世界時間',
-        href: '/zh-TW/time',
-        desc: '世界時間顯示工具',
-        icon: '🕐',
-      },
-      {
-        name: '工具中台',
-        href: 'https://tools.alexander.xin',
-        desc: '更多免費工具集合',
-        icon: '🧰',
-      },
-      {
-        name: 'Linux 指令查詢',
-        href: 'https://linux-command.alexander.xin',
-        desc: 'Linux 命令速查',
-        icon: '🐧',
-      },
-    ],
-    policyPages: [
-      {
-        name: '隱私政策',
-        href: '/zh-TW/privacy',
-        desc: '資料保護和隱私說明',
-        icon: '🔒',
-      },
-      {
-        name: '服務條款',
-        href: '/zh-TW/terms',
-        desc: '網站使用規則和協議',
-        icon: '📄',
-      },
-      {
-        name: '許可證',
-        href: '/zh-TW/license',
-        desc: '版權許可和使用說明',
-        icon: '📜',
-      },
-      {
-        name: '無障礙',
-        href: '/zh-TW/accessibility',
-        desc: '無障礙訪問說明',
-        icon: '♿',
-      },
-      {
-        name: '安全政策',
-        href: '/zh-TW/security/policy',
-        desc: '安全漏洞披露與報告指南',
-        icon: '🛡️',
-      },
-      {
-        name: '安全致謝',
-        href: '/zh-TW/security/acknowledgments',
-        desc: '感謝安全研究人員',
-        icon: '🙏',
-      },
-    ],
-    externalLinks: [
-      {
-        name: '個人部落格',
-        href: 'https://blog.alexander.xin',
-        desc: '最新文章分享和思考記錄',
-        icon: '📝',
-      },
-      {
-        name: 'GitHub',
-        href: 'https://github.com/AlexanderJ-Carter',
-        desc: '開源專案和程式碼倉庫',
-        icon: '💻',
-      },
-      {
-        name: 'MyCook',
-        href: 'https://cook.alexander.xin',
-        desc: '做飯菜譜與分類導航',
-        icon: '🍳',
-      },
-      {
-        name: 'NetQ',
-        href: 'https://netq.alexander.xin',
-        desc: '互動式網路排查 CLI',
-        icon: '🧪',
-      },
-    ],
-    languages: [
-      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
-      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-GB', name: 'English', flag: '🇬🇧', href: '/en/' },
-      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
-      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
-    ],
-  },
-  'en-GB': {
-    title: 'Sitemap',
-    description: 'Complete site structure and navigation map',
-    headerTitle: 'Sitemap',
-    headerDesc: 'Explore every corner of the website',
-    mainPagesTitle: 'Main Pages',
-    toolPagesTitle: 'Tools',
-    policyPagesTitle: 'Policies',
-    externalLinksTitle: 'External Links',
-    languagesTitle: 'Languages',
-    mainPages: [
-      {
-        name: 'Home',
-        href: '/en/',
-        desc: 'Explore creativity, share life',
-        icon: '🏠',
-      },
-      {
-        name: 'About',
-        href: '/en/about',
-        desc: 'Learn about my story and philosophy',
-        icon: '👤',
-      },
-      {
-        name: 'Gallery',
-        href: '/en/gallery',
-        desc: 'Complete photography gallery',
-        icon: '🖼️',
-      },
-      {
-        name: 'Projects',
-        href: '/en/projects',
-        desc: 'My development projects and portfolio',
-        icon: '🛠️',
-      },
-      {
-        name: 'Writing',
-        href: '/en/writing',
-        desc: 'Long-form articles on engineering, design and photography',
-        icon: '✍️',
-      },
-      {
-        name: 'Reading List',
-        href: '/en/reading-list',
-        desc: 'Books and articles worth revisiting',
-        icon: '📚',
-      },
-      {
-        name: 'Timeline',
-        href: '/en/timeline',
-        desc: 'My learning and growth journey',
-        icon: '📅',
-      },
-      {
-        name: 'Friends',
-        href: '/en/friends',
-        desc: "Friends' websites and link exchange",
-        icon: '🔗',
-      },
-    ],
-    toolPages: [
-      {
-        name: 'Currency',
-        href: '/en/currency',
-        desc: 'Real-time currency converter',
-        icon: '💱',
-      },
-      {
-        name: 'World Time',
-        href: '/en/time',
-        desc: 'World time display tool',
-        icon: '🕐',
-      },
-      {
-        name: 'Tool Hub',
-        href: 'https://tools.alexander.xin',
-        desc: 'More free utility tools',
-        icon: '🧰',
-      },
-      {
-        name: 'Linux Commands',
-        href: 'https://linux-command.alexander.xin',
-        desc: 'Quick Linux command lookup',
-        icon: '🐧',
-      },
-    ],
-    policyPages: [
-      {
-        name: 'Privacy',
-        href: '/en/privacy',
-        desc: 'Data protection and privacy',
-        icon: '🔒',
-      },
-      {
-        name: 'Terms',
-        href: '/en/terms',
-        desc: 'Terms of service',
-        icon: '📄',
-      },
-      {
-        name: 'License',
-        href: '/en/license',
-        desc: 'License information',
-        icon: '📜',
-      },
-      {
-        name: 'Accessibility',
-        href: '/en/accessibility',
-        desc: 'Accessibility information',
-        icon: '♿',
-      },
-      {
-        name: 'Security Policy',
-        href: '/en/security/policy',
-        desc: 'Vulnerability disclosure and reporting',
-        icon: '🛡️',
-      },
-      {
-        name: 'Acknowledgments',
-        href: '/en/security/acknowledgments',
-        desc: 'Thanks to security researchers',
-        icon: '🙏',
-      },
-    ],
-    externalLinks: [
-      {
-        name: 'Blog',
-        href: 'https://blog.alexander.xin',
-        desc: 'Latest articles and thoughts',
-        icon: '📝',
-      },
-      {
-        name: 'GitHub',
-        href: 'https://github.com/AlexanderJ-Carter',
-        desc: 'Open source projects',
-        icon: '💻',
-      },
-      {
-        name: 'MyCook',
-        href: 'https://cook.alexander.xin',
-        desc: 'Recipe knowledge base and quick navigation',
-        icon: '🍳',
-      },
-      {
-        name: 'NetQ',
-        href: 'https://netq.alexander.xin',
-        desc: 'Interactive network troubleshooting CLI',
-        icon: '🧪',
-      },
-    ],
-    languages: [
-      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
-      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-GB', name: 'English', flag: '🇬🇧', href: '/en/' },
-      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
-      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
-    ],
-  },
-  fr: {
-    title: 'Plan du site',
-    description: 'Structure complète du site et plan de navigation',
-    headerTitle: 'Plan du site',
-    headerDesc: 'Explorez tous les coins du site web',
-    mainPagesTitle: 'Pages principales',
-    toolPagesTitle: 'Outils',
-    policyPagesTitle: 'Politiques',
-    externalLinksTitle: 'Liens externes',
-    languagesTitle: 'Langues',
-    mainPages: [
-      {
-        name: 'Accueil',
-        href: '/fr/',
-        desc: 'Explorez la créativité, partagez la vie',
-        icon: '🏠',
-      },
-      {
-        name: 'À propos',
-        href: '/fr/about',
-        desc: 'Découvrez mon histoire et ma philosophie',
-        icon: '👤',
-      },
-      {
-        name: 'Galerie',
-        href: '/fr/gallery',
-        desc: 'Galerie de photographie complète',
-        icon: '🖼️',
-      },
-      {
-        name: 'Projets',
-        href: '/fr/projects',
-        desc: 'Mes projets de développement et portfolio',
-        icon: '🛠️',
-      },
-      {
-        name: 'Écrits',
-        href: '/fr/writing',
-        desc: "Articles longs sur l'ingénierie, le design et la photo",
-        icon: '✍️',
-      },
-      {
-        name: 'Lectures',
-        href: '/fr/reading-list',
-        desc: 'Livres et articles à relire',
-        icon: '📚',
-      },
-      {
-        name: 'Chronologie',
-        href: '/fr/timeline',
-        desc: "Mon parcours d'apprentissage et de croissance",
-        icon: '📅',
-      },
-      {
-        name: 'Amis',
-        href: '/fr/friends',
-        desc: "Sites d'amis et échange de liens",
-        icon: '🔗',
-      },
-    ],
-    toolPages: [
-      {
-        name: 'Devise',
-        href: '/fr/currency',
-        desc: 'Convertisseur de devises en temps réel',
-        icon: '💱',
-      },
-      {
-        name: 'Heure mondiale',
-        href: '/fr/time',
-        desc: "Outil d'affichage de l'heure mondiale",
-        icon: '🕐',
-      },
-      {
-        name: 'Hub Outils',
-        href: 'https://tools.alexander.xin',
-        desc: 'Plus d’outils gratuits',
-        icon: '🧰',
-      },
-      {
-        name: 'Commandes Linux',
-        href: 'https://linux-command.alexander.xin',
-        desc: 'Recherche rapide Linux',
-        icon: '🐧',
-      },
-    ],
-    policyPages: [
-      {
-        name: 'Confidentialité',
-        href: '/fr/privacy',
-        desc: 'Protection des données et confidentialité',
-        icon: '🔒',
-      },
-      {
-        name: 'Conditions',
-        href: '/fr/terms',
-        desc: "Conditions d'utilisation",
-        icon: '📄',
-      },
-      {
-        name: 'Licence',
-        href: '/fr/license',
-        desc: 'Informations sur la licence',
-        icon: '📜',
-      },
-      {
-        name: 'Accessibilité',
-        href: '/fr/accessibility',
-        desc: "Informations sur l'accessibilité",
-        icon: '♿',
-      },
-      {
-        name: 'Politique de sécurité',
-        href: '/fr/security/policy',
-        desc: 'Divulgation et signalement des vulnérabilités',
-        icon: '🛡️',
-      },
-      {
-        name: 'Remerciements',
-        href: '/fr/security/acknowledgments',
-        desc: 'Merci aux chercheurs en sécurité',
-        icon: '🙏',
-      },
-    ],
-    externalLinks: [
-      {
-        name: 'Blog',
-        href: 'https://blog.alexander.xin',
-        desc: 'Derniers articles et réflexions',
-        icon: '📝',
-      },
-      {
-        name: 'GitHub',
-        href: 'https://github.com/AlexanderJ-Carter',
-        desc: 'Projets open source',
-        icon: '💻',
-      },
-      {
-        name: 'MyCook',
-        href: 'https://cook.alexander.xin',
-        desc: 'Recettes et navigation rapide',
-        icon: '🍳',
-      },
-      {
-        name: 'NetQ',
-        href: 'https://netq.alexander.xin',
-        desc: 'CLI interactif de diagnostic réseau',
-        icon: '🧪',
-      },
-    ],
-    languages: [
-      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
-      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-GB', name: 'English', flag: '🇬🇧', href: '/en/' },
-      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
-      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
-    ],
-  },
-  ru: {
-    title: 'Карта сайта',
-    description: 'Полная структура сайта и карта навигации',
-    headerTitle: 'Карта сайта',
-    headerDesc: 'Исследуйте каждый уголок сайта',
-    mainPagesTitle: 'Основные страницы',
-    toolPagesTitle: 'Инструменты',
-    policyPagesTitle: 'Политики',
-    externalLinksTitle: 'Внешние ссылки',
-    languagesTitle: 'Языки',
-    mainPages: [
-      {
-        name: 'Главная',
-        href: '/ru/',
-        desc: 'Исследуйте творчество, делитесь жизнью',
-        icon: '🏠',
-      },
-      {
-        name: 'Обо мне',
-        href: '/ru/about',
-        desc: 'Узнайте о моей истории и философии',
-        icon: '👤',
-      },
-      {
-        name: 'Галерея',
-        href: '/ru/gallery',
-        desc: 'Полная галерея фотографий',
-        icon: '🖼️',
-      },
-      {
-        name: 'Проекты',
-        href: '/ru/projects',
-        desc: 'Мои проекты и портфолио',
-        icon: '🛠️',
-      },
-      {
-        name: 'Статьи',
-        href: '/ru/writing',
-        desc: 'Длинные тексты об инженерии, дизайне и фотографии',
-        icon: '✍️',
-      },
-      {
-        name: 'Чтение',
-        href: '/ru/reading-list',
-        desc: 'Книги и статьи для перечитывания',
-        icon: '📚',
-      },
-      {
-        name: 'Хронология',
-        href: '/ru/timeline',
-        desc: 'Мой путь обучения и роста',
-        icon: '📅',
-      },
-      {
-        name: 'Друзья',
-        href: '/ru/friends',
-        desc: 'Сайты друзей и обмен ссылками',
-        icon: '🔗',
-      },
-    ],
-    toolPages: [
-      {
-        name: 'Валюта',
-        href: '/ru/currency',
-        desc: 'Конвертер валют в реальном времени',
-        icon: '💱',
-      },
-      {
-        name: 'Мировое время',
-        href: '/ru/time',
-        desc: 'Инструмент отображения мирового времени',
-        icon: '🕐',
-      },
-      {
-        name: 'Хаб инструментов',
-        href: 'https://tools.alexander.xin',
-        desc: 'Больше бесплатных инструментов',
-        icon: '🧰',
-      },
-      {
-        name: 'Linux команды',
-        href: 'https://linux-command.alexander.xin',
-        desc: 'Быстрый поиск команд',
-        icon: '🐧',
-      },
-    ],
-    policyPages: [
-      {
-        name: 'Конфиденциальность',
-        href: '/ru/privacy',
-        desc: 'Защита данных и конфиденциальность',
-        icon: '🔒',
-      },
-      {
-        name: 'Условия',
-        href: '/ru/terms',
-        desc: 'Условия использования',
-        icon: '📄',
-      },
-      {
-        name: 'Лицензия',
-        href: '/ru/license',
-        desc: 'Информация о лицензии',
-        icon: '📜',
-      },
-      {
-        name: 'Доступность',
-        href: '/ru/accessibility',
-        desc: 'Информация о доступности',
-        icon: '♿',
-      },
-      {
-        name: 'Политика безопасности',
-        href: '/ru/security/policy',
-        desc: 'Раскрытие и отчётность по уязвимостям',
-        icon: '🛡️',
-      },
-      {
-        name: 'Благодарности',
-        href: '/ru/security/acknowledgments',
-        desc: 'Благодарим исследователей безопасности',
-        icon: '🙏',
-      },
-    ],
-    externalLinks: [
-      {
-        name: 'Блог',
-        href: 'https://blog.alexander.xin',
-        desc: 'Последние статьи и мысли',
-        icon: '📝',
-      },
-      {
-        name: 'GitHub',
-        href: 'https://github.com/AlexanderJ-Carter',
-        desc: 'Проекты с открытым исходным кодом',
-        icon: '💻',
-      },
-      {
-        name: 'MyCook',
-        href: 'https://cook.alexander.xin',
-        desc: 'Рецепты и быстрая навигация',
-        icon: '🍳',
-      },
-      {
-        name: 'NetQ',
-        href: 'https://netq.alexander.xin',
-        desc: 'Экспериментальные страницы и прототипы',
-        icon: '🧪',
-      },
-    ],
-    languages: [
-      { code: 'zh-CN', name: '中文 (简体)', flag: '🇨🇳', href: '/' },
-      { code: 'zh-TW', name: '中文 (繁體)', flag: '🇹🇼', href: '/zh-TW/' },
-      { code: 'en-GB', name: 'English', flag: '🇬🇧', href: '/en/' },
-      { code: 'fr', name: 'Français', flag: '🇫🇷', href: '/fr/' },
-      { code: 'ru', name: 'Русский', flag: '🇷🇺', href: '/ru/' },
-    ],
-  },
-};
-
-const content = sitemapData[lang as Lang] || sitemapData['en-GB'];
+function resolveHref(path: string, external?: boolean) {
+  if (external || path.startsWith('http')) return path;
+  return getLangPath(lang, path);
+}
 ---
 
-<BaseLayout title={content.title} description={content.description}>
-  <!-- Hero Section -->
-  <section
-    class="relative py-24 bg-gradient-to-br from-primary-500/20 via-accent-500/20 to-primary-500/20 overflow-hidden"
-  >
-    <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
-    <div class="container mx-auto px-4 lg:px-8 relative z-10">
-      <div class="text-center max-w-3xl mx-auto">
-        <div
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
-        >
-          <span class="text-2xl">🗺️</span>
-          <span class="text-sm font-medium text-white/90"
-            >{content.headerTitle}</span
-          >
-        </div>
-        <h1
-          class="text-5xl md:text-7xl font-display font-bold mb-8 gradient-text animate-fade-in"
-        >
-          {content.headerTitle}
-        </h1>
-        <p
-          class="text-xl text-[rgb(var(--color-text-secondary))] mb-12 max-w-2xl mx-auto leading-relaxed"
-        >
-          {content.headerDesc}
-        </p>
-      </div>
+<BaseLayout title={`${t.title} — Alexander Carter`} description={t.description}>
+  <PageHero
+    kicker={t.kicker}
+    title={t.headerTitle}
+    description={t.headerDesc}
+    backHref={home}
+    backLabel={t.back}
+    narrow={false}
+  />
+
+  <section class="pb-8 md:pb-10">
+    <div class="page-shell-wide">
+      <nav aria-label={t.tocLabel}>
+        <ol class="flex flex-wrap gap-x-6 gap-y-2 border-y border-[rgb(var(--color-border))] py-4">
+          {
+            t.sections.map((section) => (
+              <li>
+                <a
+                  href={`#${section.id}`}
+                  class="group inline-flex items-baseline gap-2 text-sm text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] transition-colors"
+                >
+                  <span class="meta-mono text-[rgb(var(--color-accent))]">
+                    {section.index}
+                  </span>
+                  <span class="font-heading font-semibold">{section.title}</span>
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a
+              href="#languages"
+              class="group inline-flex items-baseline gap-2 text-sm text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] transition-colors"
+            >
+              <span class="meta-mono text-[rgb(var(--color-accent))]">05</span>
+              <span class="font-heading font-semibold">{t.languagesTitle}</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
     </div>
   </section>
 
-  <!-- Sitemap Content -->
-  <section class="py-20">
-    <div class="container mx-auto px-4 lg:px-8">
-      <div
-        class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-      >
-        <!-- Main Pages -->
-        <div
-          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
-        >
-          <h2
-            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
-          >
-            <span
-              class="p-2 rounded-lg bg-primary-500/10 text-primary-500 group-hover:scale-110 transition-transform"
-              >📑</span
-            >
-            {content.mainPagesTitle}
-          </h2>
-          <ul class="space-y-4">
-            {
-              content.mainPages.map((page: any) => (
-                <li>
-                  <a
-                    href={page.href}
-                    target={
-                      String(page.href).startsWith('http')
-                        ? '_blank'
-                        : undefined
-                    }
-                    rel={
-                      String(page.href).startsWith('http')
-                        ? 'noopener noreferrer'
-                        : undefined
-                    }
-                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
-                  >
-                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
-                      {page.icon}
-                    </span>
-                    <div>
-                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-primary-500 transition-colors">
-                        {page.name}
-                      </div>
-                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                        {page.desc}
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+  <section class="pb-20 md:pb-28">
+    <div class="page-shell-wide space-y-16 md:space-y-20">
+      {
+        t.sections.map((section) => (
+          <article id={section.id} class="scroll-mt-28">
+            <header class="mb-6 md:mb-8 grid gap-3 md:grid-cols-[5rem_1fr] md:items-end">
+              <p
+                class="font-heading text-4xl md:text-5xl font-bold tabular-nums tracking-tight text-[rgb(var(--color-accent))]/80"
+                aria-hidden="true"
+              >
+                {section.index}
+              </p>
+              <div>
+                <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight text-[rgb(var(--color-text-primary))]">
+                  {section.title}
+                </h2>
+                <p class="mt-1 text-[rgb(var(--color-text-secondary))]">
+                  {section.lead}
+                </p>
+              </div>
+            </header>
 
-        <!-- Tools -->
-        <div
-          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
-        >
-          <h2
-            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
-          >
-            <span
-              class="p-2 rounded-lg bg-accent-500/10 text-accent-500 group-hover:scale-110 transition-transform"
-              >🛠️</span
-            >
-            {content.toolPagesTitle}
-          </h2>
-          <ul class="space-y-4">
-            {
-              content.toolPages.map((page: any) => (
-                <li>
-                  <a
-                    href={page.href}
-                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
-                  >
-                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
-                      {page.icon}
-                    </span>
-                    <div>
-                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-accent-500 transition-colors">
-                        {page.name}
-                      </div>
-                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                        {page.desc}
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <!-- Policies -->
-        <div
-          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
-        >
-          <h2
-            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
-          >
-            <span
-              class="p-2 rounded-lg bg-green-500/10 text-green-500 group-hover:scale-110 transition-transform"
-              >⚖️</span
-            >
-            {content.policyPagesTitle}
-          </h2>
-          <ul class="space-y-4">
-            {
-              content.policyPages.map((page: any) => (
-                <li>
-                  <a
-                    href={page.href}
-                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
-                  >
-                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
-                      {page.icon}
-                    </span>
-                    <div>
-                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-green-500 transition-colors">
-                        {page.name}
-                      </div>
-                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                        {page.desc}
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <!-- External Links -->
-        <div
-          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group"
-        >
-          <h2
-            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
-          >
-            <span
-              class="p-2 rounded-lg bg-purple-500/10 text-purple-500 group-hover:scale-110 transition-transform"
-              >🔗</span
-            >
-            {content.externalLinksTitle}
-          </h2>
-          <ul class="space-y-4">
-            {
-              content.externalLinks.map((link: any) => (
-                <li>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex items-start gap-4 p-3 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/link"
-                  >
-                    <span class="text-2xl group-hover/link:scale-110 transition-transform">
-                      {link.icon}
-                    </span>
-                    <div>
-                      <div class="font-bold text-[rgb(var(--color-text-primary))] group-hover/link:text-purple-500 transition-colors flex items-center gap-2">
+            <ul class="border-t border-[rgb(var(--color-border))]">
+              {section.links.map((link, i) => {
+                const href = resolveHref(link.path, link.external);
+                const n = String(i + 1).padStart(2, '0');
+                return (
+                  <li class="border-b border-[rgb(var(--color-border))]">
+                    <a
+                      href={href}
+                      target={link.external ? '_blank' : undefined}
+                      rel={link.external ? 'noopener noreferrer' : undefined}
+                      class="list-row group grid grid-cols-[2.5rem_1fr_auto] sm:grid-cols-[2.5rem_minmax(0,14rem)_1fr_auto] gap-x-3 sm:gap-x-6 items-baseline py-3.5 px-1 hover:pl-2"
+                    >
+                      <span class="meta-mono text-[rgb(var(--color-text-tertiary))] group-hover:text-[rgb(var(--color-accent))] transition-colors">
+                        {n}
+                      </span>
+                      <span class="font-heading font-semibold text-[rgb(var(--color-text-primary))] group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                         {link.name}
-                        <svg
-                          class="w-4 h-4 opacity-50"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                          />
-                        </svg>
-                      </div>
-                      <div class="text-sm text-[rgb(var(--color-text-secondary))]">
+                      </span>
+                      <span class="hidden sm:block text-sm text-[rgb(var(--color-text-tertiary))] truncate">
                         {link.desc}
-                      </div>
-                    </div>
+                      </span>
+                      <span
+                        class="meta-mono text-[rgb(var(--color-text-tertiary))] opacity-0 group-hover:opacity-100 transition-opacity"
+                        aria-hidden="true"
+                      >
+                        {link.external ? '↗' : '→'}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </article>
+        ))
+      }
+
+      <article id="languages" class="scroll-mt-28">
+        <header class="mb-6 md:mb-8 grid gap-3 md:grid-cols-[5rem_1fr] md:items-end">
+          <p
+            class="font-heading text-4xl md:text-5xl font-bold tabular-nums tracking-tight text-[rgb(var(--color-accent))]/80"
+            aria-hidden="true"
+          >
+            05
+          </p>
+          <div>
+            <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight">
+              {t.languagesTitle}
+            </h2>
+            <p class="mt-1 text-[rgb(var(--color-text-secondary))]">
+              {t.languagesLead}
+            </p>
+          </div>
+        </header>
+
+        <ul class="border-t border-[rgb(var(--color-border))]">
+          {
+            t.languages.map((language, i) => {
+              const n = String(i + 1).padStart(2, '0');
+              const current = language.code === lang;
+              return (
+                <li class="border-b border-[rgb(var(--color-border))]">
+                  <a
+                    href={language.path}
+                    aria-current={current ? 'page' : undefined}
+                    class:list={[
+                      'list-row group grid grid-cols-[2.5rem_1fr_auto] gap-x-3 sm:gap-x-6 items-baseline py-3.5 px-1 hover:pl-2',
+                      current && 'sitemap-lang-current',
+                    ]}
+                  >
+                    <span class="meta-mono text-[rgb(var(--color-text-tertiary))]">
+                      {n}
+                    </span>
+                    <span class="font-heading font-semibold text-[rgb(var(--color-text-primary))]">
+                      {language.name}
+                    </span>
+                    <span class="meta-mono text-[rgb(var(--color-text-tertiary))]">
+                      {language.code}
+                    </span>
                   </a>
                 </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <!-- Languages -->
-        <div
-          class="glass-card p-8 rounded-2xl hover:shadow-xl transition-all duration-300 group md:col-span-2 lg:col-span-2"
-        >
-          <h2
-            class="text-2xl font-bold mb-6 flex items-center gap-3 text-[rgb(var(--color-text-primary))]"
-          >
-            <span
-              class="p-2 rounded-lg bg-orange-500/10 text-orange-500 group-hover:scale-110 transition-transform"
-              >🌍</span
-            >
-            {content.languagesTitle}
-          </h2>
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {
-              content.languages.map((language: any) => (
-                <a
-                  href={language.href}
-                  class="flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-[rgb(var(--color-bg-tertiary))] transition-colors group/lang text-center"
-                >
-                  <span class="text-4xl group-hover/lang:scale-110 transition-transform filter drop-shadow-lg">
-                    {language.flag}
-                  </span>
-                  <span class="font-medium text-[rgb(var(--color-text-primary))] group-hover/lang:text-orange-500 transition-colors">
-                    {language.name}
-                  </span>
-                </a>
-              ))
-            }
-          </div>
-        </div>
-      </div>
+              );
+            })
+          }
+        </ul>
+      </article>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .sitemap-lang-current {
+    background: rgb(var(--color-bg-secondary) / 0.55);
+  }
+</style>

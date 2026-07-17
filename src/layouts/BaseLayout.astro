@@ -1,9 +1,11 @@
 ---
 import '../styles/global.css';
 import { getLangFromUrl, useTranslations } from '../i18n/ui';
+import { skipVerify } from '../config/site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ThemeScript from '../components/ThemeScript.astro';
+import AdsScript from '../components/AdsScript.astro';
 import BackToTop from '../components/BackToTop.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import QuickActions from '../components/QuickActions.astro';
@@ -12,6 +14,9 @@ import Toast from '../components/Toast.astro';
 import KeyboardShortcuts from '../components/KeyboardShortcuts.astro';
 import ServiceWorkerRegister from '../components/ServiceWorkerRegister.astro';
 import StructuredData from '../components/StructuredData.astro';
+import MusicPlayer from '../components/MusicPlayer.astro';
+import HolidayGreeting from '../components/HolidayGreeting.astro';
+import SiteNotice from '../components/SiteNotice.astro';
 
 interface Props {
   title?: string;
@@ -37,6 +42,8 @@ const {
   mainClass = '',
 } = Astro.props;
 
+const needsVerify = protectedPage && !skipVerify;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const fullTitle =
   title === t('site.title') ? title : `${title} | ${t('site.title')}`;
@@ -52,18 +59,15 @@ const fullTitle =
     <link rel="manifest" href="/manifest.json" />
     <link rel="author" href="/humans.txt" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#0ea5e9" />
+    <meta name="theme-color" content="#3d7382" />
 
-    <!-- Primary Meta Tags -->
     <title>{fullTitle}</title>
     <meta name="title" content={fullTitle} />
     <meta name="description" content={description} />
     <meta name="author" content="Alexander James Carter" />
 
-    <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Alternate Language URLs -->
     <link rel="alternate" hreflang="zh-CN" href={new URL('/', Astro.site)} />
     <link
       rel="alternate"
@@ -75,14 +79,15 @@ const fullTitle =
     <link rel="alternate" hreflang="ru" href={new URL('/ru/', Astro.site)} />
     <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site)} />
 
-    <script is:inline define:vars={{ protectedPage }}>
+    <script is:inline define:vars={{ needsVerify }}>
       (function () {
-        if (!protectedPage) return;
+        if (!needsVerify) return;
         try {
           const isVerified = sessionStorage.getItem('is_verified');
           if (isVerified !== 'true') {
             const currentPath = window.location.pathname;
-            window.location.href = `/verify?redirect=${encodeURIComponent(currentPath)}`;
+            window.location.href =
+              `/verify?redirect=${encodeURIComponent(currentPath)}`;
           }
         } catch (e) {
           console.error('Auth check failed', e);
@@ -90,7 +95,6 @@ const fullTitle =
       })();
     </script>
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={fullTitle} />
@@ -98,35 +102,35 @@ const fullTitle =
     <meta property="og:image" content={new URL(image, Astro.site)} />
     <meta property="og:locale" content={lang} />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(image, Astro.site)} />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Theme Script (no flash) -->
     <ThemeScript />
-
-    <!-- Structured Data -->
     <StructuredData description={description} />
+    <AdsScript />
 
-    <!-- Cloudflare Web Analytics (privacy-friendly, no cookies) -->
-    <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "YOUR_CLOUDFLARE_ANALYTICS_TOKEN"}'></script>
+    <script
+      is:inline
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "YOUR_CLOUDFLARE_ANALYTICS_TOKEN"}'></script>
   </head>
-  <body class="antialiased">
+  <body class="antialiased font-sans">
     <a href="#main-content" class="skip-link"
       >{lang === 'zh-CN' ? '跳到主内容' : 'Skip to main content'}</a
     >
     {showHeader && <Header />}
+    <SiteNotice />
 
     <main id="main-content" tabindex="-1" class={mainClass}>
       <slot />
@@ -134,6 +138,8 @@ const fullTitle =
 
     {showFooter && <Footer />}
 
+    <MusicPlayer />
+    <HolidayGreeting />
     <BackToTop />
     <CookieConsent />
     <Toast />
@@ -141,10 +147,8 @@ const fullTitle =
     <ReadingProgress />
     <KeyboardShortcuts lang={lang} />
 
-    <!-- Scroll Animations -->
     <script src="../scripts/scroll-animations.ts"></script>
 
-    <!-- Konami Code Easter Egg -->
     <script is:inline>
       (function () {
         const initKonami = function () {

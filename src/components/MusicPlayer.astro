@@ -6,17 +6,30 @@
 <button
   id="music-fab"
   type="button"
-  class="music-fab fixed z-[45] w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))]"
-  style="background: linear-gradient(135deg, rgb(14 165 233), rgb(217 70 239)); color: white;"
+  class="music-fab fixed z-[45] w-12 h-12 rounded-sm shadow-md border border-[rgb(var(--color-border))] flex items-center justify-center transition-all duration-300 hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))]"
   aria-label="打开音乐播放器"
 >
-  <span class="text-2xl" id="music-fab-icon">🎵</span>
+  <svg
+    id="music-fab-icon"
+    class="w-5 h-5"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="1.75"
+      d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zm12-2a3 3 0 11-6 0 3 3 0 016 0z"
+    ></path>
+  </svg>
 </button>
 
 <!-- 迷你条：可拖拽、可展开 -->
 <div
   id="music-mini"
-  class="music-mini fixed z-[46] hidden rounded-2xl shadow-xl border border-[rgb(var(--color-border))] overflow-hidden transition-all duration-300"
+  class="music-mini fixed z-[46] hidden rounded-sm shadow-xl border border-[rgb(var(--color-border))] overflow-hidden transition-all duration-300"
   style="background: rgb(var(--color-bg-secondary)); min-width: 280px; max-width: 320px;"
 >
   <div
@@ -26,7 +39,7 @@
     <div
       id="music-mini-cover"
       class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-      style="background: linear-gradient(135deg, rgb(14 165 233 / 0.3), rgb(217 70 239 / 0.3));"
+      style="background: rgb(var(--color-accent) / 0.15);"
     >
       🎹
     </div>
@@ -61,7 +74,7 @@
         type="button"
         id="music-mini-play"
         class="music-btn p-2 rounded-xl text-white transition-transform hover:scale-105"
-        style="background: linear-gradient(135deg, rgb(14 165 233), rgb(217 70 239));"
+        style="background: linear-gradient(135deg, rgb(var(--color-accent)), rgb(var(--color-accent)));"
         aria-label="播放/暂停"
       >
         <svg class="play-icon w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -181,7 +194,7 @@
       <div
         id="music-cover"
         class="w-28 h-28 mx-auto rounded-2xl flex items-center justify-center text-5xl mb-3"
-        style="background: linear-gradient(135deg, rgb(14 165 233 / 0.25), rgb(217 70 239 / 0.25));"
+        style="background: linear-gradient(135deg, rgb(var(--color-accent) / 0.25), rgb(var(--color-accent) / 0.2));"
       >
         🎹
       </div>
@@ -294,7 +307,7 @@
         type="button"
         id="music-play"
         class="music-btn p-4 rounded-2xl text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
-        style="background: linear-gradient(135deg, rgb(14 165 233), rgb(217 70 239));"
+        style="background: linear-gradient(135deg, rgb(var(--color-accent)), rgb(var(--color-accent)));"
         aria-label="播放/暂停"
       >
         <svg class="play-icon w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -865,8 +878,8 @@
       --progress: 0%;
       background: linear-gradient(
         to right,
-        rgb(14 165 233) 0%,
-        rgb(217 70 239) var(--progress),
+        rgb(var(--color-accent)) 0%,
+        rgb(var(--color-accent)) var(--progress),
         rgb(var(--color-border)) var(--progress)
       );
     }
@@ -893,7 +906,7 @@
       outline: none;
     }
     .music-btn:focus-visible {
-      box-shadow: 0 0 0 2px rgb(14 165 233);
+      box-shadow: 0 0 0 2px rgb(var(--color-accent));
     }
     .music-mode-btn {
       border: 1px solid rgb(var(--color-border));
@@ -904,9 +917,9 @@
       color: rgb(var(--color-text-secondary));
     }
     .music-mode-btn.active {
-      color: rgb(14 165 233);
-      border-color: rgb(14 165 233 / 0.45);
-      background: rgb(14 165 233 / 0.12);
+      color: rgb(var(--color-accent));
+      border-color: rgb(var(--color-accent) / 0.45);
+      background: rgb(var(--color-accent) / 0.12);
       font-weight: 600;
     }
     .music-panel {

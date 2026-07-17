@@ -1,769 +1,225 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { useTranslations } from '../../i18n/ui';
-import Typewriter from '../Typewriter.astro';
-import StatsCounter from '../StatsCounter.astro';
-import MusicPlayer from '../MusicPlayer.astro';
-import HolidayGreeting from '../HolidayGreeting.astro';
+import AdSlot from '../AdSlot.astro';
 import PoemHistory from '../PoemHistory.astro';
+import { getCollection } from 'astro:content';
+import { homeCopy } from '../../i18n/pages/home';
+import { getLangPath, resolveLang } from '../../i18n/types';
 
-const { lang } = Astro.props;
-const t = useTranslations(lang);
+const { lang: langProp } = Astro.props;
+const lang = resolveLang(langProp);
+const copy = homeCopy[lang];
+const lp = (path: string) => getLangPath(lang, path);
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+const posts = (await getCollection('writing'))
+  .filter(
+    (post) =>
+      post.data.lang === lang || (lang === 'zh-CN' && !post.data.lang)
+  )
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
-// Data for different languages
-const typewriterData: Record<Lang, string[]> = {
-  'zh-CN': [
-    '摄影爱好者 📸',
-    '代码创作者 💻',
-    '设计探索者 🎨',
-    '音乐聆听者 🎵',
-    '终身学习者 📚',
-  ],
-  'zh-TW': [
-    '攝影愛好者 📸',
-    '代碼創作者 💻',
-    '設計探索者 🎨',
-    '音樂聆聽者 🎵',
-    '終身學習者 📚',
-  ],
-  'en-GB': [
-    'Photography Enthusiast 📸',
-    'Code Creator 💻',
-    'Design Explorer 🎨',
-    'Music Lover 🎵',
-    'Lifelong Learner 📚',
-  ],
-  fr: [
-    'Passionné de Photographie 📸',
-    'Créateur de Code 💻',
-    'Explorateur de Design 🎨',
-    'Amateur de Musique 🎵',
-    'Apprenant à Vie 📚',
-  ],
-  ru: [
-    'Любитель Фотографии 📸',
-    'Создатель Кода 💻',
-    'Исследователь Дизайна 🎨',
-    'Любитель Музыки 🎵',
-    'Вечный Студент 📚',
-  ],
-};
+const dateLocale =
+  lang === 'zh-CN'
+    ? 'zh-CN'
+    : lang === 'zh-TW'
+      ? 'zh-TW'
+      : lang === 'fr'
+        ? 'fr-FR'
+        : lang === 'ru'
+          ? 'ru-RU'
+          : 'en-GB';
 
-const statsData: Record<Lang, any[]> = {
-  'zh-CN': [
-    { end: 1200, suffix: '+', label: '创作作品', icon: '📸', duration: 2000 },
-    { end: 5, suffix: '+', label: '专业领域', icon: '🎯', duration: 2000 },
-    { end: 100, suffix: '%', label: '用心投入', icon: '❤️', duration: 2000 },
-    { end: 365, suffix: '天', label: '持续创作', icon: '⏰', duration: 2000 },
-  ],
-  'zh-TW': [
-    { end: 1200, suffix: '+', label: '創作作品', icon: '📸', duration: 2000 },
-    { end: 5, suffix: '+', label: '專業領域', icon: '🎯', duration: 2000 },
-    { end: 100, suffix: '%', label: '用心投入', icon: '❤️', duration: 2000 },
-    { end: 365, suffix: '天', label: '持續創作', icon: '⏰', duration: 2000 },
-  ],
-  'en-GB': [
-    {
-      end: 1200,
-      suffix: '+',
-      label: 'Works Created',
-      icon: '📸',
-      duration: 2000,
-    },
-    { end: 5, suffix: '+', label: 'Pro Fields', icon: '🎯', duration: 2000 },
-    { end: 100, suffix: '%', label: 'Dedication', icon: '❤️', duration: 2000 },
-    {
-      end: 365,
-      suffix: ' Days',
-      label: 'Continuous Creation',
-      icon: '⏰',
-      duration: 2000,
-    },
-  ],
-  fr: [
-    {
-      end: 1200,
-      suffix: '+',
-      label: 'Œuvres Créées',
-      icon: '📸',
-      duration: 2000,
-    },
-    { end: 5, suffix: '+', label: 'Domaines Pro', icon: '🎯', duration: 2000 },
-    { end: 100, suffix: '%', label: 'Dévouement', icon: '❤️', duration: 2000 },
-    {
-      end: 365,
-      suffix: ' Jours',
-      label: 'Création Continue',
-      icon: '⏰',
-      duration: 2000,
-    },
-  ],
-  ru: [
-    {
-      end: 1200,
-      suffix: '+',
-      label: 'Работ Создано',
-      icon: '📸',
-      duration: 2000,
-    },
-    { end: 5, suffix: '+', label: 'Проф. Области', icon: '🎯', duration: 2000 },
-    { end: 100, suffix: '%', label: 'Преданность', icon: '❤️', duration: 2000 },
-    {
-      end: 365,
-      suffix: ' Дней',
-      label: 'Непрерывное Творчество',
-      icon: '⏰',
-      duration: 2000,
-    },
-  ],
-};
-
-const featuredWorksData: Record<Lang, any> = {
-  'zh-CN': {
-    title: '精选作品',
-    subtitle: '探索我的最新创作',
-    viewAll: '查看全部',
-    items: [
-      {
-        title: '山间晨雾',
-        category: '风景',
-        image: '/img/gallery-optimized/landscape-01-md.webp',
-      },
-      {
-        title: '雨后花瓣',
-        category: '自然',
-        image: '/img/gallery-optimized/nature-flower-01-md.webp',
-      },
-      {
-        title: '精致甜点',
-        category: '美食',
-        image: '/img/gallery-optimized/food-01-md.webp',
-      },
-    ],
-  },
-  'zh-TW': {
-    title: '精選作品',
-    subtitle: '探索我的最新創作',
-    viewAll: '查看全部',
-    items: [
-      {
-        title: '山間晨霧',
-        category: '風景',
-        image: '/img/gallery-optimized/landscape-01-md.webp',
-      },
-      {
-        title: '雨後花瓣',
-        category: '自然',
-        image: '/img/gallery-optimized/nature-flower-01-md.webp',
-      },
-      {
-        title: '精緻甜點',
-        category: '美食',
-        image: '/img/gallery-optimized/food-01-md.webp',
-      },
-    ],
-  },
-  'en-GB': {
-    title: 'Featured Works',
-    subtitle: 'Explore my latest creations',
-    viewAll: 'View All',
-    items: [
-      {
-        title: 'Morning Mist',
-        category: 'Landscape',
-        image: '/img/gallery-optimized/landscape-01-md.webp',
-      },
-      {
-        title: 'Rain Petals',
-        category: 'Nature',
-        image: '/img/gallery-optimized/nature-flower-01-md.webp',
-      },
-      {
-        title: 'Exquisite Dessert',
-        category: 'Food',
-        image: '/img/gallery-optimized/food-01-md.webp',
-      },
-    ],
-  },
-  fr: {
-    title: 'Œuvres en Vedette',
-    subtitle: 'Explorez mes dernières créations',
-    viewAll: 'Voir Tout',
-    items: [
-      {
-        title: 'Brume Matinale',
-        category: 'Paysage',
-        image: '/img/gallery-optimized/landscape-01-md.webp',
-      },
-      {
-        title: 'Pétales de Pluie',
-        category: 'Nature',
-        image: '/img/gallery-optimized/nature-flower-01-md.webp',
-      },
-      {
-        title: 'Dessert Exquis',
-        category: 'Nourriture',
-        image: '/img/gallery-optimized/food-01-md.webp',
-      },
-    ],
-  },
-  ru: {
-    title: 'Избранные Работы',
-    subtitle: 'Изучите мои последние творения',
-    viewAll: 'Посмотреть Все',
-    items: [
-      {
-        title: 'Утренний Туман',
-        category: 'Пейзаж',
-        image: '/img/gallery-optimized/landscape-01-md.webp',
-      },
-      {
-        title: 'Лепестки Дождя',
-        category: 'Природа',
-        image: '/img/gallery-optimized/nature-flower-01-md.webp',
-      },
-      {
-        title: 'Изысканный Десерт',
-        category: 'Еда',
-        image: '/img/gallery-optimized/food-01-md.webp',
-      },
-    ],
-  },
-};
-
-const introData: Record<Lang, any> = {
-  'zh-CN': {
-    lead: '在光影与代码之间，我寻找那些能触动心弦的瞬间。',
-    paragraphs: [
-      '每一张照片都是一段静默的旅程，像是从流逝中截取的呼吸。',
-      '我用镜头记录光线的温度；用代码整理思绪的秩序。愿这些碎片，能在你的眼里汇成一条小小的河流。',
-      '欢迎驻足，和我一起在这些影像与文字之间，发现平凡里的温柔。',
-    ],
-  },
-  'zh-TW': {
-    lead: '在光影與代碼之間，我尋找那些能觸動心弦的瞬間。',
-    paragraphs: [
-      '每一張照片都是一段靜默的旅程，像是從流逝中截取的呼吸。',
-      '我用鏡頭記錄光線的溫度；用代碼整理思緒的秩序。願這些碎片，能在你的眼裡匯成一條小小的河流。',
-      '歡迎駐足，和我一起在這些影像與文字之間，發現平凡裡的溫柔。',
-    ],
-  },
-  'en-GB': {
-    lead: 'Between light and code, I search for moments that touch the heart.',
-    paragraphs: [
-      'Each photograph is a quiet journey, a breath caught from the passing of time.',
-      'I capture the warmth of light with a lens and the order of thought with code. May these fragments become a small river in your eyes.',
-      'Stay a while — wander these images and words with me, and find tenderness in the ordinary.',
-    ],
-  },
-  fr: {
-    lead: 'Entre lumière et code, je cherche des instants qui touchent le cœur.',
-    paragraphs: [
-      'Chaque photographie est un voyage silencieux, une respiration prise au passage du temps.',
-      "J'explore la chaleur de la lumière avec l'objectif et l'ordre de la pensée avec le code. Que ces fragments forment une petite rivière dans vos yeux.",
-      "Prenez un moment — parcourez ces images et ces mots avec moi, et découvrez la tendresse dans l'ordinaire.",
-    ],
-  },
-  ru: {
-    lead: 'Между светом и кодом я ищу мгновения, которые трогают сердце.',
-    paragraphs: [
-      'Каждая фотография — тихое путешествие, вздох, вырванный у течения времени.',
-      'Я ловлю тепло света объективом и упорядочиваю мысли кодом. Пусть эти фрагменты сложатся в маленькую реку в ваших глазах.',
-      'Останьтесь ненадолго — пройдитесь по этим образам и словам со мной и найдите нежность в обыденном.',
-    ],
-  },
-};
-
-const focusData: Record<Lang, any> = {
-  'zh-CN': {
-    title: '最近在打磨',
-    subtitle:
-      '这里更像一张工作台：代码、照片、工具和一点生活记录会慢慢长出来。',
-    viewMore: '继续看看',
-    items: [
-      {
-        icon: '🧪',
-        title: '小工具实验',
-        desc: '把常用的时间、单位、汇率、二维码能力做成轻量页面，优先考虑访问速度、隐私和键盘可用性。',
-        href: '/projects',
-      },
-      {
-        icon: '📷',
-        title: '影像整理',
-        desc: '给旅行、日常和食物照片补上分类、标题与说明，让画廊不只是图片堆叠，而是能被慢慢浏览的记录。',
-        href: '/gallery',
-      },
-      {
-        icon: '✍️',
-        title: '写作',
-        desc: '记录工程实践、设计取舍与摄影观察的长文，优先质量而非数量。',
-        href: '/writing',
-      },
-    ],
-  },
-  'zh-TW': {
-    title: '最近在打磨',
-    subtitle:
-      '這裡更像一張工作台：代碼、照片、工具和一點生活記錄會慢慢長出來。',
-    viewMore: '繼續看看',
-    items: [
-      {
-        icon: '🧪',
-        title: '小工具實驗',
-        desc: '把常用的時間、單位、匯率、二維碼能力做成輕量頁面，優先考慮訪問速度、隱私和鍵盤可用性。',
-        href: '/projects',
-      },
-      {
-        icon: '📷',
-        title: '影像整理',
-        desc: '給旅行、日常和食物照片補上分類、標題與說明，讓畫廊不只是圖片堆疊，而是能被慢慢瀏覽的記錄。',
-        href: '/gallery',
-      },
-      {
-        icon: '✍️',
-        title: '寫作',
-        desc: '記錄工程實踐、設計取捨與攝影觀察的長文，優先質量而非數量。',
-        href: '/writing',
-      },
-    ],
-  },
-  'en-GB': {
-    title: 'Currently Shaping',
-    subtitle:
-      'This site is a working desk: code, photographs, small tools and life notes keep growing here.',
-    viewMore: 'Explore',
-    items: [
-      {
-        icon: '🧪',
-        title: 'Utility Experiments',
-        desc: 'Time, units, currency and QR workflows are being turned into lightweight pages with speed, privacy and keyboard access in mind.',
-        href: '/projects',
-      },
-      {
-        icon: '📷',
-        title: 'Image Curation',
-        desc: 'Travel, daily-life and food photos are gaining clearer categories, titles and notes so the gallery feels browsable, not dumped.',
-        href: '/gallery',
-      },
-      {
-        icon: '✍️',
-        title: 'Writing',
-        desc: 'Long-form pieces on engineering practice, design trade-offs and photography—quality over quantity.',
-        href: '/writing',
-      },
-    ],
-  },
-  fr: {
-    title: 'En cours de façonnage',
-    subtitle:
-      'Ce site est un bureau vivant : code, photos, petits outils et notes de vie y grandissent peu à peu.',
-    viewMore: 'Explorer',
-    items: [
-      {
-        icon: '🧪',
-        title: 'Expériences utilitaires',
-        desc: 'Heure, unités, devises et QR codes deviennent des pages légères, pensées pour la vitesse, la confidentialité et le clavier.',
-        href: '/projects',
-      },
-      {
-        icon: '📷',
-        title: 'Curation photo',
-        desc: 'Photos de voyage, de quotidien et de cuisine gagnent des catégories, titres et notes pour une galerie plus lisible.',
-        href: '/gallery',
-      },
-      {
-        icon: '✍️',
-        title: 'Écrits',
-        desc: 'Articles longs sur l’ingénierie, le design et la photo—la qualité avant la quantité.',
-        href: '/writing',
-      },
-    ],
-  },
-  ru: {
-    title: 'Сейчас в работе',
-    subtitle:
-      'Этот сайт как рабочий стол: код, фотографии, маленькие инструменты и заметки постепенно растут здесь.',
-    viewMore: 'Посмотреть',
-    items: [
-      {
-        icon: '🧪',
-        title: 'Эксперименты с инструментами',
-        desc: 'Время, единицы, валюты и QR-коды превращаются в лёгкие страницы с упором на скорость, приватность и клавиатуру.',
-        href: '/projects',
-      },
-      {
-        icon: '📷',
-        title: 'Кураторство изображений',
-        desc: 'Фото путешествий, повседневности и еды получают категории, названия и заметки, чтобы галерею было интересно просматривать.',
-        href: '/gallery',
-      },
-      {
-        icon: '✍️',
-        title: 'Статьи',
-        desc: 'Длинные тексты об инженерии, дизайне и фотографии — качество важнее количества.',
-        href: '/writing',
-      },
-    ],
-  },
-};
-
-const quoteData: Record<Lang, any[]> = {
-  'zh-CN': [
-    {
-      text: '设计不仅仅是外观和感觉。设计就是它是如何工作的。',
-      author: 'Steve Jobs',
-    },
-    {
-      text: '完美不是无可增添，而是无可删减。',
-      author: 'Antoine de Saint-Exupéry',
-    },
-    { text: '简单是终极的复杂。', author: 'Leonardo da Vinci' },
-    { text: '每张照片都是一张时间的证书。', author: 'Susan Sontag' },
-    { text: '想象力比知识更重要。', author: 'Albert Einstein' },
-    { text: '光是我们感知的方式，也是我们表达的媒介。', author: 'Ansel Adams' },
-  ],
-  'zh-TW': [
-    {
-      text: '設計不僅僅是外觀和感覺。設計就是它是如何工作的。',
-      author: 'Steve Jobs',
-    },
-    {
-      text: '完美不是無可增添，而是無可刪減。',
-      author: 'Antoine de Saint-Exupéry',
-    },
-    { text: '簡單是終極的複雜。', author: 'Leonardo da Vinci' },
-    { text: '每張照片都是一張時間的證書。', author: 'Susan Sontag' },
-    { text: '想像力比知識更重要。', author: 'Albert Einstein' },
-    { text: '光是我們感知的方式，也是我們表達的媒介。', author: 'Ansel Adams' },
-  ],
-  'en-GB': [
-    {
-      text: 'Design is not just what it looks like and feels like. Design is how it works.',
-      author: 'Steve Jobs',
-    },
-    {
-      text: 'Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away.',
-      author: 'Antoine de Saint-Exupéry',
-    },
-    {
-      text: 'Simplicity is the ultimate sophistication.',
-      author: 'Leonardo da Vinci',
-    },
-    {
-      text: 'A photograph is a certificate of presence.',
-      author: 'Roland Barthes',
-    },
-    {
-      text: 'Imagination is more important than knowledge.',
-      author: 'Albert Einstein',
-    },
-    {
-      text: 'Light makes photography. Embrace light. Admire it. Love it. But above all, know light.',
-      author: 'George Eastman',
-    },
-  ],
-  fr: [
-    {
-      text: "Le design n'est pas seulement ce à quoi il ressemble et ce qu'il ressent. Le design est comment cela fonctionne.",
-      author: 'Steve Jobs',
-    },
-    {
-      text: "La perfection est atteinte, non pas lorsqu'il n'y a plus rien à ajouter, mais lorsqu'il n'y a plus rien à enlever.",
-      author: 'Antoine de Saint-Exupéry',
-    },
-    {
-      text: 'La simplicité est la sophistication suprême.',
-      author: 'Léonard de Vinci',
-    },
-    {
-      text: "Une photographie, c'est un certificat de présence.",
-      author: 'Roland Barthes',
-    },
-    {
-      text: "L'imagination est plus importante que le savoir.",
-      author: 'Albert Einstein',
-    },
-  ],
-  ru: [
-    {
-      text: 'Дизайн — это не только то, как это выглядит и чувствуется. Дизайн — это то, как это работает.',
-      author: 'Steve Jobs',
-    },
-    {
-      text: 'Совершенство достигается не тогда, когда нечего добавить, а тогда, когда нечего убрать.',
-      author: 'Антуан де Сент-Экзюпери',
-    },
-    {
-      text: 'Простота — это высшая степень изощрённости.',
-      author: 'Леонардо да Винчи',
-    },
-    { text: 'Воображение важнее знания.', author: 'Альберт Эйнштейн' },
-    { text: 'Фотография — это сертификат присутствия.', author: 'Ролан Барт' },
-  ],
-};
-
-const typewriterTexts = typewriterData[lang as Lang] || typewriterData['en-GB'];
-const stats = statsData[lang as Lang] || statsData['en-GB'];
-const featured = featuredWorksData[lang as Lang] || featuredWorksData['en-GB'];
-const quotes = quoteData[lang as Lang] || quoteData['en-GB'];
-const intro = introData[lang as Lang] || introData['en-GB'];
-const focus = focusData[lang as Lang] || focusData['en-GB'];
-
-// Language path helper (consistent with Header/Footer)
-function getLangPath(path: string): string {
-  if (lang === 'zh-CN') return path;
-  const prefix = (lang as string) === 'en-GB' ? 'en' : lang;
-  return `/${prefix}${path}`;
-}
+const heroImage = '/img/gallery-optimized/landscape-01-xl.webp';
 ---
 
-<BaseLayout>
-  <!-- Music Player -->
-  <MusicPlayer />
-
-  <!-- Hero Section -->
+<BaseLayout mainClass="!p-0">
+  <!-- Hero: one composition -->
   <section
-    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+    class="relative min-h-[100svh] flex items-end md:items-center overflow-hidden"
   >
-    <!-- Animated Mesh Gradient + Spotlight -->
-    <div class="absolute inset-0 bg-mesh-gradient"></div>
-    <div class="aurora" aria-hidden="true"></div>
+    <div class="absolute inset-0" aria-hidden="true">
+      <img
+        src={heroImage}
+        alt=""
+        width="1920"
+        height="1080"
+        class="hero-photo h-full w-full object-cover"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/25"
+      >
+      </div>
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-black/20"
+      >
+      </div>
+      <div
+        class="absolute inset-0"
+        style="background: radial-gradient(ellipse 70% 60% at 50% 55%, transparent 30%, rgb(0 0 0 / 0.45) 100%);"
+      >
+      </div>
+      <div class="hero-grain"></div>
+      <div class="hero-sweep"></div>
+    </div>
+
+    <div class="viewfinder-corners" aria-hidden="true">
+      <span class="tl"></span>
+      <span class="tr"></span>
+      <span class="bl"></span>
+      <span class="br"></span>
+    </div>
+
     <div
-      class="absolute inset-0 pointer-events-none opacity-100"
-      style="background: var(--hero-spotlight);"
-      aria-hidden="true"
+      class="relative z-10 w-full container mx-auto px-4 lg:px-8 pb-20 pt-28 md:pb-28 md:pt-32"
     >
-    </div>
-    <!-- Subtle hero glow border -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden">
-      <div
-        class="absolute inset-0 border-[1px] border-white/10 dark:border-white/5 rounded-none"
-        aria-hidden="true"
-      >
-      </div>
-      <div
-        class="absolute -inset-[1px] bg-gradient-to-r from-primary-500/20 via-accent-500/20 to-primary-500/20 blur-2xl opacity-40 animate-gradient bg-300% bg-[length:200%_200%]"
-        aria-hidden="true"
-      >
-      </div>
-    </div>
-
-    <!-- Particles Effect -->
-    <div class="absolute inset-0 opacity-30">
-      <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;">
-      </div>
-      <div class="particle" style="left: 80%; top: 30%; animation-delay: 2s;">
-      </div>
-      <div class="particle" style="left: 50%; top: 50%; animation-delay: 4s;">
-      </div>
-      <div class="particle" style="left: 20%; top: 70%; animation-delay: 1s;">
-      </div>
-      <div class="particle" style="left: 90%; top: 60%; animation-delay: 3s;">
-      </div>
-    </div>
-
-    <!-- Floating Tech Stack Orbit -->
-    <div class="tech-orbit hidden lg:block" aria-hidden="true">
-      <div class="orbit-ring orbit-ring-1">
-        <span class="orbit-icon" style="--angle: 0deg; --delay: 0s;">C++</span>
-        <span class="orbit-icon" style="--angle: 120deg; --delay: -4s;">Py</span
+      <div class="max-w-3xl">
+        <p class="meta-mono !text-white/55 mb-4 animate-fade-in">
+          Frame 01 · Beijing · Available light
+        </p>
+        <p
+          class="font-heading text-sm md:text-base tracking-[0.22em] uppercase text-white/70 mb-5 animate-fade-in"
         >
-        <span class="orbit-icon" style="--angle: 240deg; --delay: -8s;">JS</span
-        >
-      </div>
-      <div class="orbit-ring orbit-ring-2">
-        <span class="orbit-icon" style="--angle: 60deg; --delay: -2s;"
-          >Astro</span
-        >
-        <span class="orbit-icon" style="--angle: 180deg; --delay: -6s;"
-          >CSS</span
-        >
-        <span class="orbit-icon" style="--angle: 300deg; --delay: -10s;"
-          >Git</span
-        >
-      </div>
-    </div>
-
-    <!-- Content -->
-    <div class="relative z-10 container mx-auto px-4 lg:px-8 text-center">
-      <div class="max-w-4xl mx-auto">
-        <!-- Greeting Badge -->
-        <div
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 fade-in"
-        >
-          <span class="relative flex h-3 w-3">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"
-            ></span>
-            <span
-              class="relative inline-flex rounded-full h-3 w-3 bg-primary-500"
-            ></span>
-          </span>
-          <span class="text-sm font-medium">{t('hero.greeting')}</span>
-        </div>
-
-        <!-- Name with Gradient -->
+          Photography · Writing · Making
+        </p>
         <h1
-          class="text-5xl md:text-7xl lg:text-8xl font-heading font-bold tracking-tight mb-6 fade-in-delay-1"
+          class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 text-balance animate-fade-in-up drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)]"
         >
-          <span class="gradient-text"> {t('hero.name')} </span>
+          {copy.brand}
         </h1>
-
-        <!-- Typewriter Effect -->
-        <div
-          class="text-2xl md:text-4xl font-semibold mb-4 fade-in-delay-2 text-balance min-h-[3rem] flex items-center justify-center"
-        >
-          <Typewriter texts={typewriterTexts} speed={100} />
-        </div>
-
         <p
-          class="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] mb-8 fade-in-delay-3 text-balance max-w-2xl mx-auto"
+          class="text-lg md:text-xl text-white/85 max-w-xl mb-10 leading-relaxed animate-fade-in-up"
+          style="animation-delay: 80ms"
         >
-          {t('hero.subtitle')}
+          {copy.tagline}
         </p>
-        <p
-          class="text-[rgb(var(--color-text-secondary))] max-w-xl mx-auto mb-10 fade-in-delay-4 lead font-medium"
-        >
-          {intro.lead}
-        </p>
-
-        <!-- CTA Buttons -->
         <div
-          class="flex flex-col sm:flex-row gap-4 justify-center fade-in-delay-4"
+          class="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in-up"
+          style="animation-delay: 140ms"
         >
-          <a href={getLangPath('/gallery')} class="btn-primary glow-on-hover">
-            <span>{t('hero.cta.primary')}</span>
-            <svg
-              class="w-5 h-5 ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              ></path>
-            </svg>
+          <a
+            href={lp('/gallery')}
+            class="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-stone-900 font-heading font-semibold tracking-wide hover:bg-white/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white shadow-[0_12px_40px_-12px_rgba(0,0,0,0.5)]"
+          >
+            {copy.ctaGallery}
           </a>
-          <a href={getLangPath('/about')} class="btn-secondary">
-            <span>{t('hero.cta.secondary')}</span>
-            <svg
-              class="w-5 h-5 ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
+          <a
+            href={lp('/writing')}
+            class="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/45 bg-white/5 backdrop-blur-[2px] text-white font-heading font-semibold tracking-wide hover:bg-white/12 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            {copy.ctaWriting}
           </a>
         </div>
       </div>
     </div>
 
-    <!-- Scroll Indicator -->
-    <div
-      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+    <a
+      href="#featured"
+      class="hero-scroll-hint hover:text-white/80 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
     >
-      <svg
-        class="w-6 h-6 text-[rgb(var(--color-text-secondary))]"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-      </svg>
-    </div>
+      <span>{copy.scrollHint}</span>
+      <i></i>
+    </a>
   </section>
 
-  <!-- Stats Section -->
-  <section
-    class="py-20 bg-[rgb(var(--color-bg-secondary))] reveal relative perf-section"
-  >
-    <div class="section-divider" aria-hidden="true"></div>
+  <!-- Featured works -->
+  <section id="featured" class="py-20 md:py-28 reveal">
     <div class="container mx-auto px-4 lg:px-8">
-      <StatsCounter stats={stats} />
-    </div>
-  </section>
-
-  <!-- Intro / About snippet -->
-  <section class="py-16 reveal perf-section">
-    <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
-      <div
-        class="prose prose-lg dark:prose-invert max-w-none text-[rgb(var(--color-text-secondary))]"
-      >
-        {intro.paragraphs.map((p: string) => <p class="mb-4 last:mb-0">{p}</p>)}
-      </div>
-    </div>
-  </section>
-
-  <!-- Current Focus Section -->
-  <section class="py-20 reveal perf-section">
-    <div class="container mx-auto px-4 lg:px-8">
-      <div class="max-w-3xl mb-10">
-        <span
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
-        >
-          <span aria-hidden="true">✦</span>
-          Focus
-        </span>
-        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-3">
-          {focus.title}
+      <div class="max-w-2xl mb-12">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3">
+          {copy.featuredTitle}
         </h2>
-        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-          {focus.subtitle}
+        <p class="text-[rgb(var(--color-text-secondary))] text-lg">
+          {copy.featuredSubtitle}
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-10">
         {
-          focus.items.map((item: any) => (
+          copy.featured.map((item, i) => (
             <a
-              href={getLangPath(item.href)}
-              class="group glass-card p-6 rounded-2xl border border-[rgb(var(--color-border))] hover:border-primary-500/40 transition-all duration-300 hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+              href={lp('/gallery')}
+              class={`group relative block overflow-hidden aspect-[4/5] md:aspect-[3/4] media-zoom ${i === 0 ? 'md:aspect-[3/4]' : ''}`}
             >
-              <div class="flex items-center justify-between gap-4 mb-5">
-                <span
-                  class="w-12 h-12 rounded-xl bg-primary-500/10 text-2xl flex items-center justify-center"
-                  aria-hidden="true"
-                >
-                  {item.icon}
-                </span>
-                <svg
-                  class="w-5 h-5 text-[rgb(var(--color-text-tertiary))] group-hover:text-primary-500 group-hover:translate-x-1 transition-all"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
+              <img
+                src={item.image}
+                alt={item.title}
+                class="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity" />
+              <div class="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+                <p class="text-white/70 text-xs tracking-[0.18em] uppercase mb-1">
+                  {item.category}
+                </p>
+                <h3 class="font-heading text-white text-xl font-semibold">
+                  {item.title}
+                </h3>
               </div>
-              <h3 class="font-heading font-bold text-lg mb-2 text-[rgb(var(--color-text-primary))]">
+            </a>
+          ))
+        }
+      </div>
+
+      <a
+        href={lp('/gallery')}
+        class="inline-flex items-center gap-2 font-heading font-semibold text-primary-600 dark:text-primary-400 hover:gap-3 transition-all"
+      >
+        {copy.featuredViewAll}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="container mx-auto px-4 lg:px-8">
+    <AdSlot slot="home" format="horizontal" />
+  </div>
+
+  <!-- Studio note -->
+  <section class="py-20 md:py-24 reveal">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-2xl">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-5">
+          {copy.studioTitle}
+        </h2>
+        <p class="text-lg text-[rgb(var(--color-text-secondary))] leading-relaxed">
+          {copy.studioBody}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Focus -->
+  <section class="py-20 md:py-24 bg-[rgb(var(--color-bg-secondary))] reveal">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-2xl mb-12">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3">
+          {copy.focusTitle}
+        </h2>
+        <p class="text-[rgb(var(--color-text-secondary))] text-lg">
+          {copy.focusSubtitle}
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+        {
+          copy.focus.map((item) => (
+            <a
+              href={lp(item.href)}
+              class="group block border-t border-[rgb(var(--color-border))] pt-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
+            >
+              <h3 class="font-heading text-xl font-semibold mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                 {item.title}
               </h3>
-              <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4">
+              <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4">
                 {item.desc}
               </p>
-              <span class="text-sm font-medium text-primary-500">
-                {focus.viewMore}
+              <span class="text-sm font-heading font-semibold text-primary-600 dark:text-primary-400 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                {copy.focusViewMore}
+                <span aria-hidden="true">→</span>
               </span>
             </a>
           ))
@@ -772,573 +228,115 @@ function getLangPath(path: string): string {
     </div>
   </section>
 
-  <!-- Featured Works Section -->
-  <section
-    class="py-20 reveal bg-[rgb(var(--color-bg-secondary))] perf-section"
-  >
-    <div class="section-divider" aria-hidden="true"></div>
+  <!-- Writing -->
+  <section class="py-20 md:py-28 reveal">
     <div class="container mx-auto px-4 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">
-          {featured.title}
-        </h2>
-        <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
-          {featured.subtitle}
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-        {
-          featured.items.map((item: any) => (
-            <a
-              href={getLangPath('/gallery')}
-              class="group block relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer card-3d hover:shadow-2xl hover:shadow-primary-500/10 dark:hover:shadow-primary-500/20"
-            >
-              <div class="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse" />
-              <img
-                src={item.image}
-                alt={item.title}
-                class="object-cover w-full h-full transform transition-transform duration-500 group-hover:scale-110 relative z-10"
-                loading="lazy"
-                decoding="async"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col justify-end p-6">
-                <span class="text-primary-400 text-sm font-medium mb-1 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                  {item.category}
-                </span>
-                <h3 class="text-white text-xl font-bold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
-                  {item.title}
-                </h3>
-              </div>
-              <div
-                class="absolute inset-0 rounded-2xl ring-2 ring-transparent group-hover:ring-primary-400/50 transition-all duration-300 z-30 pointer-events-none"
-                aria-hidden="true"
-              />
-            </a>
-          ))
-        }
-      </div>
-
-      <div class="text-center">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+        <div class="max-w-2xl">
+          <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3">
+            {copy.writingTitle}
+          </h2>
+          <p class="text-[rgb(var(--color-text-secondary))] text-lg">
+            {copy.writingSubtitle}
+          </p>
+        </div>
         <a
-          href={getLangPath('/gallery')}
-          class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium transition-colors group"
+          href={lp('/writing')}
+          class="font-heading font-semibold text-primary-600 dark:text-primary-400 shrink-0"
         >
-          {featured.viewAll}
-          <svg
-            class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
+          {copy.writingViewAll} →
         </a>
       </div>
-    </div>
-  </section>
 
-  <!-- Quote Section -->
-  <section
-    class="py-20 bg-[rgb(var(--color-bg-primary))] relative overflow-hidden perf-section"
-  >
-    <div class="section-divider" aria-hidden="true"></div>
-    <div
-      class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none"
-    >
-      <svg
-        class="absolute top-10 left-10 w-32 h-32"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z"
-        ></path>
-      </svg>
-    </div>
-    <div class="container mx-auto px-4 relative z-10">
-      <blockquote
-        class="quote-block max-w-3xl mx-auto text-left"
-        id="home-quote"
-        data-quotes={JSON.stringify(quotes)}
-      >
-        <p
-          id="quote-text"
-          class="text-2xl md:text-4xl font-serif italic mb-6 leading-relaxed text-[rgb(var(--color-text-primary))]"
-        >
-          "{quotes[0].text}"
-        </p>
-        <footer
-          class="text-lg text-[rgb(var(--color-text-secondary))] font-medium not-italic"
-        >
-          — <span id="quote-author">{quotes[0].author}</span>
-        </footer>
-      </blockquote>
-    </div>
-    <script is:inline>
-      (function () {
-        const el = document.getElementById('home-quote');
-        if (!el) return;
-        try {
-          const quotesRaw = el.getAttribute('data-quotes');
-          if (!quotesRaw) return;
-          const all = JSON.parse(quotesRaw);
-          if (!Array.isArray(all) || all.length < 2) return;
-          const pick = all[Math.floor(Math.random() * all.length)];
-          const textEl = document.getElementById('quote-text');
-          const authorEl = document.getElementById('quote-author');
-          if (textEl) textEl.textContent = '\u201C' + pick.text + '\u201D';
-          if (authorEl) authorEl.textContent = pick.author;
-        } catch {}
-      })();
-    </script>
-  </section>
-
-  <!-- Tech Stack Showcase -->
-  <section class="py-20 reveal perf-section">
-    <div class="container mx-auto px-4 lg:px-8">
-      <div class="text-center mb-12">
-        <span
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent-500/10 text-accent-600 dark:text-accent-400 text-sm font-medium mb-4"
-        >
-          <span aria-hidden="true">⚡</span>
-          Tech Stack
-        </span>
-        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-3">
-          {
-            lang === 'zh-CN'
-              ? '技术工具箱'
-              : lang === 'zh-TW'
-                ? '技術工具箱'
-                : lang === 'fr'
-                  ? 'Boîte à outils'
-                  : lang === 'ru'
-                    ? 'Техстек'
-                    : 'Tech Toolbox'
-          }
-        </h2>
-        <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
-          {
-            lang === 'zh-CN'
-              ? '从底层硬件到前端体验，这些是我日常使用和持续学习的技术。'
-              : lang === 'zh-TW'
-                ? '從底層硬體到前端體驗，這些是我日常使用和持續學習的技術。'
-                : lang === 'fr'
-                  ? "Du matériel au frontend, voici les technologies que j'utilise et que j'apprends quotidiennement."
-                  : lang === 'ru'
-                    ? 'От аппаратуры до фронтенда — вот технологии, которые я использую и изучаю.'
-                    : 'From low-level hardware to frontend experience — the technologies I use and continue to learn.'
-          }
-        </p>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-        {
-          [
-            {
-              name: 'C/C++',
-              icon: '⚙️',
-              color: 'from-blue-500/10 to-blue-600/10',
-              border: 'hover:border-blue-500/40',
-            },
-            {
-              name: 'Python',
-              icon: '🐍',
-              color: 'from-yellow-500/10 to-yellow-600/10',
-              border: 'hover:border-yellow-500/40',
-            },
-            {
-              name: 'TypeScript',
-              icon: '📘',
-              color: 'from-blue-400/10 to-blue-500/10',
-              border: 'hover:border-blue-400/40',
-            },
-            {
-              name: 'Astro',
-              icon: '🚀',
-              color: 'from-orange-500/10 to-orange-600/10',
-              border: 'hover:border-orange-500/40',
-            },
-            {
-              name: 'Tailwind CSS',
-              icon: '🎨',
-              color: 'from-cyan-500/10 to-cyan-600/10',
-              border: 'hover:border-cyan-500/40',
-            },
-            {
-              name: 'Git',
-              icon: '📦',
-              color: 'from-red-500/10 to-red-600/10',
-              border: 'hover:border-red-500/40',
-            },
-            {
-              name: 'Linux',
-              icon: '🐧',
-              color: 'from-green-500/10 to-green-600/10',
-              border: 'hover:border-green-500/40',
-            },
-            {
-              name: 'Verilog',
-              icon: '🔌',
-              color: 'from-purple-500/10 to-purple-600/10',
-              border: 'hover:border-purple-500/40',
-            },
-          ].map((tech) => (
-            <div
-              class={`glass-card p-5 rounded-xl text-center group cursor-default transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br ${tech.color} ${tech.border}`}
-            >
-              <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">
-                {tech.icon}
-              </div>
-              <div class="font-semibold text-sm text-[rgb(var(--color-text-primary))]">
-                {tech.name}
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- What People Say -->
-  <section
-    class="py-20 bg-[rgb(var(--color-bg-secondary))] reveal perf-section"
-  >
-    <div class="section-divider" aria-hidden="true"></div>
-    <div class="container mx-auto px-4 lg:px-8">
-      <div class="text-center mb-12">
-        <span
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 text-sm font-medium mb-4"
-        >
-          <span aria-hidden="true">💬</span>
-          {
-            lang === 'zh-CN'
-              ? '来自朋友'
-              : lang === 'zh-TW'
-                ? '來自朋友'
-                : lang === 'fr'
-                  ? 'Des amis'
-                  : lang === 'ru'
-                    ? 'От друзей'
-                    : 'From Friends'
-          }
-        </span>
-        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-3">
-          {
-            lang === 'zh-CN'
-              ? '他们这样说我'
-              : lang === 'zh-TW'
-                ? '他們這樣說我'
-                : lang === 'fr'
-                  ? "Ce qu'ils disent"
-                  : lang === 'ru'
-                    ? 'Что говорят'
-                    : 'What They Say'
-          }
-        </h2>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        {
-          [
-            {
-              quote:
-                lang === 'zh-CN'
-                  ? '做事靠谱，写代码也写人话，合作起来很舒服。'
-                  : lang === 'zh-TW'
-                    ? '做事靠譜，寫代碼也寫人話，合作起來很舒服。'
-                    : lang === 'fr'
-                      ? 'Fiable et clair dans son code, agréable à collaborer.'
-                      : lang === 'ru'
-                        ? 'Надёжный, пишет понятный код, комфортно работать.'
-                        : 'Reliable, writes clear code, great to collaborate with.',
-              name: 'Zhang Wei',
-              role:
-                lang === 'zh-CN'
-                  ? '同学 & 项目搭档'
-                  : lang === 'zh-TW'
-                    ? '同學 & 專案搭檔'
-                    : lang === 'fr'
-                      ? 'Camarade de projet'
-                      : lang === 'ru'
-                        ? 'Одногруппник'
-                        : 'Classmate & Project Partner',
-            },
-            {
-              quote:
-                lang === 'zh-CN'
-                  ? '对细节有执念，连一个像素都不放过，作品质量很高。'
-                  : lang === 'zh-TW'
-                    ? '對細節有執念，連一個像素都不放過，作品質量很高。'
-                    : lang === 'fr'
-                      ? 'Obsédé par les détails, chaque pixel compte — qualité exceptionnelle.'
-                      : lang === 'ru'
-                        ? 'Одержим деталями, не пропускает ни одного пикселя — отличное качество.'
-                        : 'Obsessed with details, not a single pixel slips — excellent quality.',
-              name: 'Li Na',
-              role:
-                lang === 'zh-CN'
-                  ? '设计伙伴'
-                  : lang === 'zh-TW'
-                    ? '設計夥伴'
-                    : lang === 'fr'
-                      ? 'Partenaire design'
-                      : lang === 'ru'
-                        ? 'Дизайн-партнёр'
-                        : 'Design Partner',
-            },
-            {
-              quote:
-                lang === 'zh-CN'
-                  ? '能把复杂的技术问题讲得很清楚，是个很好的分享者。'
-                  : lang === 'zh-TW'
-                    ? '能把複雜的技術問題講得很清楚，是個很好的分享者。'
-                    : lang === 'fr'
-                      ? 'Explique des sujets techniques complexes avec une grande clarté.'
-                      : lang === 'ru'
-                        ? 'Объясняет сложные технические проблемы простым языком.'
-                        : 'Explains complex technical topics with remarkable clarity.',
-              name: 'Wang Fang',
-              role:
-                lang === 'zh-CN'
-                  ? '学习小组成员'
-                  : lang === 'zh-TW'
-                    ? '學習小組成員'
-                    : lang === 'fr'
-                      ? "Membre du groupe d'étude"
-                      : lang === 'ru'
-                        ? 'Участник учебной группы'
-                        : 'Study Group Member',
-            },
-          ].map((item) => (
-            <blockquote class="glass-card p-6 rounded-2xl relative">
-              <div
-                class="text-4xl text-primary-500/20 absolute top-4 left-4 font-serif"
-                aria-hidden="true"
-              >
-                "
-              </div>
-              <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4 pl-6 relative z-10 italic">
-                {item.quote}
-              </p>
-              <footer class="flex items-center gap-3 pl-6">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center text-white text-sm font-bold">
-                  {item.name.charAt(0)}
-                </div>
-                <div>
-                  <div class="font-semibold text-sm text-[rgb(var(--color-text-primary))]">
-                    {item.name}
+      {
+        posts.length === 0 ? (
+          <p class="text-[rgb(var(--color-text-secondary))]">{copy.writingEmpty}</p>
+        ) : (
+          <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+            {posts.map((post) => (
+              <li>
+                <a
+                  href={lp(`/writing/${post.id}`)}
+                  class="group list-row flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 py-6 px-1 -mx-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                >
+                  <time
+                    datetime={post.data.pubDate.toISOString()}
+                    class="text-sm text-[rgb(var(--color-text-tertiary))] font-heading tracking-wide sm:w-28 shrink-0"
+                  >
+                    {post.data.pubDate.toLocaleDateString(dateLocale, {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </time>
+                  <div class="min-w-0">
+                    <h3 class="font-heading text-xl font-semibold group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors mb-1">
+                      {post.data.title}
+                    </h3>
+                    {post.data.description && (
+                      <p class="text-[rgb(var(--color-text-secondary))] line-clamp-2">
+                        {post.data.description}
+                      </p>
+                    )}
                   </div>
-                  <div class="text-xs text-[rgb(var(--color-text-tertiary))]">
-                    {item.role}
-                  </div>
-                </div>
-              </footer>
-            </blockquote>
-          ))
-        }
-      </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
     </div>
   </section>
 
-  <!-- Let's Connect CTA -->
-  <section class="py-20 reveal perf-section">
+  <!-- Daily poem / on this day -->
+  <PoemHistory lang={lang} />
+
+  <!-- Connect -->
+  <section class="py-20 md:py-24 bg-[rgb(var(--color-bg-secondary))] reveal">
     <div class="container mx-auto px-4 lg:px-8">
-      <div class="max-w-3xl mx-auto text-center">
-        <div
-          class="glass-card p-10 md:p-14 rounded-3xl relative overflow-hidden"
-        >
-          <div
-            class="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-transparent to-accent-500/5"
-            aria-hidden="true"
+      <div class="max-w-2xl">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-4">
+          {copy.connectTitle}
+        </h2>
+        <p class="text-[rgb(var(--color-text-secondary))] text-lg mb-8">
+          {copy.connectSubtitle}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href={lp('/contact')} class="btn-primary">{copy.connectCta}</a>
+          <a
+            href="https://github.com/AlexanderJ-Carter"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-secondary"
           >
-          </div>
-          <div class="relative z-10">
-            <span class="text-5xl mb-6 block" aria-hidden="true">🤝</span>
-            <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">
-              {
-                lang === 'zh-CN'
-                  ? '想聊聊？'
-                  : lang === 'zh-TW'
-                    ? '想聊聊？'
-                    : lang === 'fr'
-                      ? 'Envie de discuter ?'
-                      : lang === 'ru'
-                        ? 'Хотите пообщаться?'
-                        : 'Want to chat?'
-              }
-            </h2>
-            <p
-              class="text-[rgb(var(--color-text-secondary))] mb-8 max-w-lg mx-auto leading-relaxed"
-            >
-              {
-                lang === 'zh-CN'
-                  ? '不管是技术讨论、项目合作还是随便聊聊，我都欢迎。'
-                  : lang === 'zh-TW'
-                    ? '不管是技術討論、專案合作還是隨便聊聊，我都歡迎。'
-                    : lang === 'fr'
-                      ? 'Que ce soit pour discuter de tech, collaborer ou simplement échanger, je suis disponible.'
-                      : lang === 'ru'
-                        ? 'Технические обсуждения, совместные проекты или просто поболтать — пишите.'
-                        : "Whether it's tech talk, project collaboration or just a casual chat — I'm all ears."
-              }
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={getLangPath('/contact')} class="btn-primary">
-                <span
-                  >{
-                    lang === 'zh-CN'
-                      ? '联系我'
-                      : lang === 'zh-TW'
-                        ? '聯繫我'
-                        : lang === 'fr'
-                          ? 'Me contacter'
-                          : lang === 'ru'
-                            ? 'Написать'
-                            : 'Get in Touch'
-                  }</span
-                >
-                <svg
-                  class="w-5 h-5 ml-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                href="https://github.com/AlexanderJ-Carter"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-secondary"
-              >
-                <span>GitHub</span>
-                <svg
-                  class="w-5 h-5 ml-2"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                  ></path>
-                </svg>
-              </a>
-            </div>
-          </div>
+            GitHub
+          </a>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Holiday Greeting -->
-  <HolidayGreeting />
-
-  <!-- Poem History Section -->
-  <PoemHistory lang={lang} />
 </BaseLayout>
 
 <style>
-  .perf-section {
-    content-visibility: auto;
-    contain-intrinsic-size: 900px;
+  .hero-photo {
+    transform: scale(1.04);
+    animation: hero-kenburns 28s ease-out forwards;
+    filter: saturate(1.05) contrast(1.04);
   }
 
-  /* Tech Stack Orbit */
-  .tech-orbit {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 5;
-  }
-
-  .orbit-ring {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border: 1px dashed rgba(14, 165, 233, 0.12);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .orbit-ring-1 {
-    width: min(700px, 90vw);
-    height: min(700px, 90vw);
-    animation: orbit-spin 30s linear infinite;
-  }
-
-  .orbit-ring-2 {
-    width: min(500px, 65vw);
-    height: min(500px, 65vw);
-    animation: orbit-spin 24s linear infinite reverse;
-  }
-
-  .orbit-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 44px;
-    height: 44px;
-    margin: -22px 0 0 -22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: rgb(var(--color-text-tertiary));
-    background: var(--glass-bg);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgb(0 0 0 / 0.06);
-    /* Position on the ring using angle custom property */
-    transform: rotate(var(--angle)) translateX(calc(min(350px, 45vw)))
-      rotate(calc(-1 * var(--angle)));
-    animation: orbit-counter-spin 30s linear infinite;
-    animation-delay: var(--delay);
-  }
-
-  .orbit-ring-2 .orbit-icon {
-    transform: rotate(var(--angle)) translateX(calc(min(250px, 32.5vw)))
-      rotate(calc(-1 * var(--angle)));
-    animation-direction: reverse;
-    animation-duration: 24s;
-  }
-
-  @keyframes orbit-spin {
+  @keyframes hero-kenburns {
     from {
-      transform: translate(-50%, -50%) rotate(0deg);
+      transform: scale(1.08);
     }
     to {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-
-  @keyframes orbit-counter-spin {
-    from {
-      transform: rotate(var(--angle)) translateX(calc(min(350px, 45vw)))
-        rotate(calc(-1 * var(--angle) - 0deg));
-    }
-    to {
-      transform: rotate(var(--angle)) translateX(calc(min(350px, 45vw)))
-        rotate(calc(-1 * var(--angle) - 360deg));
+      transform: scale(1);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .orbit-ring,
-    .orbit-icon {
-      animation: none !important;
+    .hero-photo {
+      animation: none;
+      transform: none;
     }
   }
 </style>

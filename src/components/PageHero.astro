@@ -1,0 +1,83 @@
+---
+/**
+ * Editorial page hero: kicker + title + description.
+ * One job — establish page identity without badges or mesh.
+ */
+interface Props {
+  kicker?: string;
+  title: string;
+  description?: string;
+  note?: string;
+  backHref?: string;
+  backLabel?: string;
+  /** Extra classes on the outer section */
+  class?: string;
+  /** Constrain content width */
+  narrow?: boolean;
+}
+
+const {
+  kicker,
+  title,
+  description,
+  note,
+  backHref,
+  backLabel,
+  class: className = '',
+  narrow = true,
+} = Astro.props;
+---
+
+<header class:list={['pt-28 md:pt-32 pb-10 md:pb-14', className]}>
+  <div class:list={[narrow ? 'page-shell' : 'page-shell-wide']}>
+    {
+      backHref && backLabel && (
+        <a
+          href={backHref}
+          class="inline-flex items-center gap-2 text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-6"
+        >
+          <svg
+            class="w-4 h-4 shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
+          </svg>
+          <span>{backLabel}</span>
+        </a>
+      )
+    }
+    {
+      kicker && (
+        <p class="font-heading text-sm tracking-[0.2em] uppercase text-[rgb(var(--color-text-tertiary))] mb-4">
+          {kicker}
+        </p>
+      )
+    }
+    <h1
+      class="font-heading text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[rgb(var(--color-text-primary))] mb-4 text-balance"
+    >
+      {title}
+    </h1>
+    {
+      description && (
+        <p class="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] leading-relaxed text-pretty">
+          {description}
+        </p>
+      )
+    }
+    {
+      note && (
+        <p class="mt-3 text-sm text-[rgb(var(--color-text-tertiary))]">{note}</p>
+      )
+    }
+    <slot />
+  </div>
+</header>

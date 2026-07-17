@@ -1,0 +1,1083 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../PageHero.astro';
+import PomodoroTimer from '../PomodoroTimer.astro';
+import WeatherWidget from '../WeatherWidget.astro';
+import Calculator from '../Calculator.astro';
+import PasswordGenerator from '../PasswordGenerator.astro';
+import ColorPicker from '../ColorPicker.astro';
+import CountdownTimer from '../CountdownTimer.astro';
+import AmbientRadio from '../AmbientRadio.astro';
+import { getLangPath, resolveLang } from '../../i18n/types';
+
+const lang = resolveLang(Astro.props.lang);
+type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+const lp = (path: string) => getLangPath(lang, path);
+
+const t: Record<Lang, Record<string, string>> = {
+  'zh-CN': {
+    title: '彩蛋',
+    subtitle: '发现一些好玩的小惊喜',
+    randomQuote: '随机一言',
+    randomQuoteDesc: '点击刷新，获取一句随机语录',
+    refresh: '换一句',
+    randomWork: '随机作品',
+    randomWorkDesc: '随机展示一张画廊作品，点击可前往画廊',
+    viewGallery: '前往画廊',
+    konamiTitle: 'Konami 彩蛋',
+    konamiDesc:
+      '在任意页面使用键盘输入：上 上 下 下 左 右 左 右 B A，试试看会发生什么？',
+    konamiHint: '（方向键 ↑↑↓↓←→←→ 然后 B A）',
+    typingTitle: '打字速度小测',
+    typingDesc: '在下方输入框中尽可能快地打出给出的句子',
+    start: '开始',
+    again: '再来一次',
+    yourTime: '你的用时',
+    seconds: '秒',
+    placeholder: '在此输入...',
+    sentence: '用镜头记录世界，用代码创造未来。',
+    taskTitle: '随机任务卡',
+    taskDesc: '给自己一个 5~15 分钟的小挑战，立刻开做。',
+    taskBtn: '抽一个任务',
+    breathingTitle: '呼吸节奏器',
+    breathingDesc: '跟随节奏呼吸：吸气 4 秒，停顿 4 秒，呼气 4 秒，停顿 4 秒。',
+    breathingStart: '开始呼吸',
+    breathingStop: '停止',
+  },
+  'zh-TW': {
+    title: '彩蛋',
+    subtitle: '發現一些好玩的小驚喜',
+    randomQuote: '隨機一言',
+    randomQuoteDesc: '點擊刷新，獲取一句隨機語錄',
+    refresh: '換一句',
+    randomWork: '隨機作品',
+    randomWorkDesc: '隨機展示一張畫廊作品，點擊可前往畫廊',
+    viewGallery: '前往畫廊',
+    konamiTitle: 'Konami 彩蛋',
+    konamiDesc:
+      '在任意頁面使用鍵盤輸入：上 上 下 下 左 右 左 右 B A，試試看會發生什麼？',
+    konamiHint: '（方向鍵 ↑↑↓↓←→←→ 然後 B A）',
+    typingTitle: '打字速度小測',
+    typingDesc: '在下方輸入框中盡可能快地打出給出的句子',
+    start: '開始',
+    again: '再來一次',
+    yourTime: '你的用時',
+    seconds: '秒',
+    placeholder: '在此輸入...',
+    sentence: '用鏡頭記錄世界，用代碼創造未來。',
+    taskTitle: '隨機任務卡',
+    taskDesc: '給自己一個 5~15 分鐘的小挑戰，立刻開始。',
+    taskBtn: '抽一個任務',
+    breathingTitle: '呼吸節奏器',
+    breathingDesc: '跟隨節奏呼吸：吸氣 4 秒，停頓 4 秒，呼氣 4 秒，停頓 4 秒。',
+    breathingStart: '開始呼吸',
+    breathingStop: '停止',
+  },
+  'en-GB': {
+    title: 'Easter Eggs',
+    subtitle: 'Discover some fun little surprises',
+    randomQuote: 'Random Quote',
+    randomQuoteDesc: 'Click refresh to get a random quote',
+    refresh: 'Refresh',
+    randomWork: 'Random Work',
+    randomWorkDesc:
+      'A random piece from the gallery. Click to visit the gallery.',
+    viewGallery: 'Go to Gallery',
+    konamiTitle: 'Konami Code',
+    konamiDesc:
+      'On any page, press: Up Up Down Down Left Right Left Right B A. See what happens!',
+    konamiHint: '(Arrow keys ↑↑↓↓←→←→ then B A)',
+    typingTitle: 'Typing Speed Test',
+    typingDesc: 'Type the sentence below as fast as you can in the input box.',
+    start: 'Start',
+    again: 'Try Again',
+    yourTime: 'Your time',
+    seconds: 's',
+    placeholder: 'Type here...',
+    sentence: 'Capture the world with a lens, create the future with code.',
+    taskTitle: 'Random Task Card',
+    taskDesc: 'Pick a 5-15 minute mini challenge and do it now.',
+    taskBtn: 'Draw a task',
+    breathingTitle: 'Breathing Rhythm',
+    breathingDesc: 'Follow the rhythm: inhale 4s, hold 4s, exhale 4s, hold 4s.',
+    breathingStart: 'Start breathing',
+    breathingStop: 'Stop',
+  },
+  fr: {
+    title: 'Easter Eggs',
+    subtitle: 'Découvrez des surprises amusantes',
+    randomQuote: 'Citation aléatoire',
+    randomQuoteDesc: 'Cliquez pour une nouvelle citation',
+    refresh: 'Rafraîchir',
+    randomWork: 'Œuvre aléatoire',
+    randomWorkDesc: 'Une œuvre aléatoire de la galerie. Cliquez pour visiter.',
+    viewGallery: 'Voir la galerie',
+    konamiTitle: 'Code Konami',
+    konamiDesc:
+      "Sur n'importe quelle page : Haut Haut Bas Bas Gauche Droite Gauche Droite B A.",
+    konamiHint: '(Touches fléchées puis B A)',
+    typingTitle: 'Test de vitesse',
+    typingDesc: 'Tapez la phrase ci-dessous le plus vite possible.',
+    start: 'Commencer',
+    again: 'Réessayer',
+    yourTime: 'Votre temps',
+    seconds: 's',
+    placeholder: 'Tapez ici...',
+    sentence:
+      'Capturez le monde avec un objectif, créez le futur avec le code.',
+    taskTitle: 'Carte de mission aléatoire',
+    taskDesc: 'Choisissez un mini défi de 5 à 15 minutes et lancez-vous.',
+    taskBtn: 'Tirer une mission',
+    breathingTitle: 'Rythme respiratoire',
+    breathingDesc:
+      'Suivez le rythme : inspirez 4s, retenez 4s, expirez 4s, retenez 4s.',
+    breathingStart: 'Démarrer',
+    breathingStop: 'Arrêter',
+  },
+  ru: {
+    title: 'Пасхалки',
+    subtitle: 'Найдите весёлые сюрпризы',
+    randomQuote: 'Случайная цитата',
+    randomQuoteDesc: 'Нажмите, чтобы получить новую цитату',
+    refresh: 'Обновить',
+    randomWork: 'Случайная работа',
+    randomWorkDesc: 'Случайная работа из галереи. Нажмите, чтобы перейти.',
+    viewGallery: 'В галерею',
+    konamiTitle: 'Код Konami',
+    konamiDesc:
+      'На любой странице: Вверх Вверх Вниз Вниз Влево Вправо Влево Вправо B A.',
+    konamiHint: '(Стрелки затем B A)',
+    typingTitle: 'Тест скорости набора',
+    typingDesc: 'Введите предложение ниже как можно быстрее.',
+    start: 'Начать',
+    again: 'Ещё раз',
+    yourTime: 'Ваше время',
+    seconds: 'с',
+    placeholder: 'Введите здесь...',
+    sentence: 'Запечатлей мир объективом, создай будущее кодом.',
+    taskTitle: 'Случайная задача',
+    taskDesc: 'Выберите мини-задачу на 5-15 минут и начните сразу.',
+    taskBtn: 'Выбрать задачу',
+    breathingTitle: 'Ритм дыхания',
+    breathingDesc: 'Следуйте ритму: вдох 4с, пауза 4с, выдох 4с, пауза 4с.',
+    breathingStart: 'Начать',
+    breathingStop: 'Стоп',
+  },
+};
+
+const text = t[lang as Lang] || t['zh-CN'];
+
+const memoryText: Record<Lang, Record<string, string>> = {
+  'zh-CN': {
+    title: '记忆翻牌',
+    desc: '翻转卡片，找到所有配对的图案。尽量用最少的步数完成！',
+    moves: '步数',
+    matched: '已配对',
+    reset: '重新开始',
+    complete: '全部找到！',
+  },
+  'zh-TW': {
+    title: '記憶翻牌',
+    desc: '翻轉卡片，找到所有配對的圖案。盡量用最少的步數完成！',
+    moves: '步數',
+    matched: '已配對',
+    reset: '重新開始',
+    complete: '全部找到！',
+  },
+  'en-GB': {
+    title: 'Memory Match',
+    desc: 'Flip the cards and find all matching pairs. Try to do it in the fewest moves!',
+    moves: 'Moves',
+    matched: 'Matched',
+    reset: 'Play Again',
+    complete: 'All matched!',
+  },
+  fr: {
+    title: 'Jeu de mémoire',
+    desc: 'Retournez les cartes et trouvez les paires. Essayez en un minimum de coups !',
+    moves: 'Coups',
+    matched: 'Paires',
+    reset: 'Rejouer',
+    complete: 'Tout trouvé !',
+  },
+  ru: {
+    title: 'Найди пару',
+    desc: 'Переворачивайте карточки и находите пары. Постарайтесь сделать это за минимум ходов!',
+    moves: 'Ходы',
+    matched: 'Пары',
+    reset: 'Заново',
+    complete: 'Все найдено!',
+  },
+};
+const mem = memoryText[lang as Lang] || memoryText['en-GB'];
+const microTasks: Record<Lang, string[]> = {
+  'zh-CN': [
+    '整理桌面 5 分钟',
+    '写下 3 条今日目标',
+    '喝一杯水并站立拉伸',
+    '删除 5 个无用文件',
+    '阅读 1 页书并记一句话',
+  ],
+  'zh-TW': [
+    '整理桌面 5 分鐘',
+    '寫下 3 條今日目標',
+    '喝一杯水並站立伸展',
+    '刪除 5 個無用檔案',
+    '閱讀 1 頁書並記一句話',
+  ],
+  'en-GB': [
+    'Tidy your desk for 5 minutes',
+    'Write 3 goals for today',
+    'Drink water and do a quick stretch',
+    'Delete 5 useless files',
+    'Read one page and keep one quote',
+  ],
+  fr: [
+    'Rangez votre bureau 5 minutes',
+    "Notez 3 objectifs d'aujourd'hui",
+    'Buvez de l’eau et étirez-vous',
+    'Supprimez 5 fichiers inutiles',
+    'Lisez une page et retenez une phrase',
+  ],
+  ru: [
+    'Уберите стол 5 минут',
+    'Запишите 3 цели на сегодня',
+    'Выпейте воду и потянитесь',
+    'Удалите 5 ненужных файлов',
+    'Прочитайте 1 страницу и запишите мысль',
+  ],
+};
+
+// 随机一言数据（中英混合，前端随机取）
+const quotes = [
+  {
+    zh: '在光影与代码之间，寻找触动心弦的瞬间。',
+    en: 'Between light and code, find the moment that touches the heart.',
+  },
+  {
+    zh: '设计不仅仅是外观，更是如何运作。',
+    en: 'Design is not just what it looks like. Design is how it works.',
+  },
+  { zh: '保持饥饿，保持愚蠢。', en: 'Stay hungry, stay foolish.' },
+  { zh: '代码如诗，简洁即美。', en: 'Code is poetry. Simplicity is beauty.' },
+  {
+    zh: '每一张照片都是时间的切片。',
+    en: 'Every photograph is a slice of time.',
+  },
+  { zh: '创造源于约束。', en: 'Creativity comes from constraint.' },
+  { zh: '细节成就完美。', en: 'Details make perfection.' },
+  { zh: '做一件事，并把它做好。', en: 'Do one thing and do it well.' },
+  { zh: '学习是终身的事业。', en: 'Learning is a lifelong journey.' },
+  {
+    zh: '简单是可靠的先决条件。',
+    en: 'Simplicity is a prerequisite for reliability.',
+  },
+];
+
+// 画廊图片列表（用于随机展示）
+const galleryImages = [
+  {
+    src: '/img/gallery-optimized/landscape-01-md.webp',
+    zh: '山间晨雾',
+    en: 'Mountain Morning Mist',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-02-md.webp',
+    zh: '海岸日落',
+    en: 'Coastal Sunset',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-03-md.webp',
+    zh: '城市天际线',
+    en: 'City Skyline',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-04-md.webp',
+    zh: '星空银河',
+    en: 'Starry Milky Way',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-05-md.webp',
+    zh: '山谷云海',
+    en: 'Valley Cloud Sea',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-06-md.webp',
+    zh: '湖光山色',
+    en: 'Lake and Mountains',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-07-md.webp',
+    zh: '雪域高原',
+    en: 'Snow-Capped Plateau',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-08-md.webp',
+    zh: '森林晨曦',
+    en: 'Forest at Dawn',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-09-md.webp',
+    zh: '沙漠星空',
+    en: 'Desert Starscape',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-10-md.webp',
+    zh: '梯田晨光',
+    en: 'Terraced Fields at Sunrise',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-11-sm.webp',
+    zh: '雪山倒影',
+    en: 'Snow Peak Reflection',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-12-sm.webp',
+    zh: '海边礁石',
+    en: 'Rocky Shoreline',
+  },
+  {
+    src: '/img/gallery-optimized/landscape-13-md.webp',
+    zh: '秋日枫林',
+    en: 'Autumn Maple Forest',
+  },
+  {
+    src: '/img/gallery-optimized/nature-flower-01-md.webp',
+    zh: '雨后花瓣',
+    en: 'Petals After Rain',
+  },
+  {
+    src: '/img/gallery-optimized/nature-flower-02-md.webp',
+    zh: '野花烂漫',
+    en: 'Wildflowers in Bloom',
+  },
+  {
+    src: '/img/gallery-optimized/food-01-md.webp',
+    zh: '精致甜点',
+    en: 'Artisan Dessert',
+  },
+  {
+    src: '/img/gallery-optimized/food-02-md.webp',
+    zh: '午后咖啡',
+    en: 'Afternoon Coffee',
+  },
+  {
+    src: '/img/gallery-optimized/food-03-md.webp',
+    zh: '家常美味',
+    en: 'Homestyle Dish',
+  },
+];
+
+// 服务端随机选一张图（构建时固定，刷新页面会变）
+const randomIndex = Math.floor(Math.random() * galleryImages.length);
+const randomImage = galleryImages[randomIndex];
+const imageTitle =
+  lang === 'zh-CN' || lang === 'zh-TW' ? randomImage.zh : randomImage.en;
+const galleryPath =
+  lang === 'zh-CN' ? '/gallery' : `/${lang === 'en-GB' ? 'en' : lang}/gallery`;
+---
+
+<BaseLayout title={text.title} description={text.subtitle}>
+  <PageHero
+    kicker="Play"
+    title={text.title}
+    description={
+      lang === 'zh-CN'
+        ? '小游戏、每日灵感与隐藏惊喜——玩一玩再走。'
+        : lang === 'zh-TW'
+          ? '小遊戲、每日靈感與隱藏驚喜——玩一玩再走。'
+          : lang === 'fr'
+            ? 'Mini-jeux, inspiration du jour et surprises.'
+            : lang === 'ru'
+              ? 'Мини-игры, вдохновение дня и сюрпризы.'
+              : 'Mini games, daily inspiration and hidden surprises.'
+    }
+    backHref={lp('/')}
+    backLabel={
+      lang === 'zh-CN'
+        ? '返回首页'
+        : lang === 'zh-TW'
+          ? '返回首頁'
+          : lang === 'fr'
+            ? "Retour à l'accueil"
+            : lang === 'ru'
+              ? 'На главную'
+              : 'Back to home'
+    }
+  />
+
+  <section class="pb-20 md:pb-28">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <!-- 随机一言 -->
+        <article
+          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-primary-500"
+        >
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">💬</span>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.randomQuote}
+            </h2>
+          </div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+            {text.randomQuoteDesc}
+          </p>
+          <div
+            id="quote-box"
+            class="min-h-[88px] p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))]/80 border border-[rgb(var(--color-border))] mb-4 transition-colors duration-200"
+          >
+            <p
+              id="quote-text"
+              class="text-base md:text-lg font-medium text-[rgb(var(--color-text-primary))] leading-relaxed"
+            >
+              —
+            </p>
+            <p
+              id="quote-lang"
+              class="text-sm text-[rgb(var(--color-text-tertiary))] mt-2"
+            >
+            </p>
+          </div>
+          <button
+            type="button"
+            id="quote-refresh"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              ></path>
+            </svg>
+            {text.refresh}
+          </button>
+        </article>
+
+        <!-- 随机作品 -->
+        <article
+          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-accent-500"
+        >
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">🖼️</span>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.randomWork}
+            </h2>
+          </div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+            {text.randomWorkDesc}
+          </p>
+          <a
+            href={galleryPath}
+            class="block group relative overflow-hidden rounded-xl aspect-[4/3] mb-4 ring-2 ring-transparent hover:ring-primary-500/30 transition-all duration-300"
+          >
+            <img
+              src={randomImage.src}
+              alt={imageTitle}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4"
+            >
+              <span class="text-white font-medium">{imageTitle}</span>
+            </div>
+          </a>
+          <a
+            href={galleryPath}
+            class="link-underline inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 font-medium text-sm"
+          >
+            {text.viewGallery}
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg
+            >
+          </a>
+        </article>
+      </div>
+
+      <!-- Konami + 打字 两栏或堆叠 -->
+      <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-6">
+        <article class="glass-card p-6 md:p-8 rounded-2xl reveal">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">🎮</span>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.konamiTitle}
+            </h2>
+          </div>
+          <p class="text-[rgb(var(--color-text-secondary))] text-sm mb-2">
+            {text.konamiDesc}
+          </p>
+          <p class="text-xs text-[rgb(var(--color-text-tertiary))] font-mono">
+            {text.konamiHint}
+          </p>
+        </article>
+
+        <article class="glass-card p-6 md:p-8 rounded-2xl reveal">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">⌨️</span>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.typingTitle}
+            </h2>
+          </div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+            {text.typingDesc}
+          </p>
+          <p
+            id="typing-sentence"
+            class="text-base font-medium text-[rgb(var(--color-text-primary))] mb-3 p-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
+          >
+            {text.sentence}
+          </p>
+          <div class="flex flex-wrap gap-3 items-center">
+            <input
+              type="text"
+              id="typing-input"
+              placeholder={text.placeholder}
+              class="flex-1 min-w-[180px] px-4 py-2.5 rounded-xl border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none text-sm"
+              disabled
+            />
+            <button
+              type="button"
+              id="typing-start"
+              class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold text-sm hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+            >
+              {text.start}
+            </button>
+          </div>
+          <div
+            id="typing-result"
+            class="hidden mt-4 p-3 rounded-xl bg-primary-500/10 border border-primary-500/30"
+          >
+            <p
+              class="font-semibold text-primary-600 dark:text-primary-400 text-sm"
+            >
+              🎉 {text.yourTime}: <span id="typing-time">0</span>
+              {text.seconds}
+            </p>
+            <button
+              type="button"
+              id="typing-again"
+              class="mt-2 text-sm text-primary-500 hover:underline focus-visible:ring-2 focus-visible:ring-primary-500 rounded"
+            >
+              {text.again}
+            </button>
+          </div>
+        </article>
+      </div>
+
+      <!-- Memory Match Game -->
+      <div class="max-w-5xl mx-auto mt-6">
+        <article
+          class="glass-card p-6 md:p-8 rounded-2xl reveal border-t-4 border-t-green-500"
+        >
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">🃏</span>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {mem.title}
+            </h2>
+          </div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+            {mem.desc}
+          </p>
+          <div class="flex items-center gap-6 mb-4 text-sm font-medium">
+            <span class="text-[rgb(var(--color-text-secondary))]"
+              >{mem.moves}: <span
+                id="mem-moves"
+                class="text-primary-500 font-bold">0</span
+              ></span
+            >
+            <span class="text-[rgb(var(--color-text-secondary))]"
+              >{mem.matched}: <span
+                id="mem-matched"
+                class="text-green-500 font-bold">0</span
+              >/6</span
+            >
+          </div>
+          <div
+            id="mem-board"
+            class="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-4"
+            role="group"
+            aria-label={mem.title}
+          >
+            <!-- Cards inserted by JS -->
+          </div>
+          <div id="mem-complete" class="hidden text-center py-4">
+            <p class="text-lg font-bold text-green-500 mb-2">
+              🎉 {mem.complete}
+            </p>
+          </div>
+          <button
+            type="button"
+            id="mem-reset"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500/15 hover:bg-green-500/25 text-green-600 dark:text-green-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              ></path>
+            </svg>
+            {mem.reset}
+          </button>
+        </article>
+      </div>
+
+      <!-- Extra mini widgets -->
+      <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-6">
+        <article
+          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-cyan-500"
+        >
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">🎯</span>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.taskTitle}
+            </h2>
+          </div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+            {text.taskDesc}
+          </p>
+          <div
+            id="task-result"
+            class="p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] min-h-[72px] text-[rgb(var(--color-text-primary))] font-medium mb-4"
+          >
+          </div>
+          <button
+            type="button"
+            id="task-draw"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-600 dark:text-cyan-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+          >
+            {text.taskBtn}
+          </button>
+        </article>
+
+        <article
+          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-violet-500"
+        >
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl" aria-hidden="true">🫁</span>
+            <h2
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
+            >
+              {text.breathingTitle}
+            </h2>
+          </div>
+          <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
+            {text.breathingDesc}
+          </p>
+          <div class="flex items-center gap-5">
+            <div id="breath-circle" class="breath-circle">
+              <span id="breath-phase">Ready</span>
+            </div>
+            <div class="flex flex-col gap-2">
+              <button
+                type="button"
+                id="breath-start"
+                class="px-4 py-2 rounded-lg bg-violet-500/15 hover:bg-violet-500/25 text-violet-600 dark:text-violet-400 font-medium"
+              >
+                {text.breathingStart}
+              </button>
+              <button
+                type="button"
+                id="breath-stop"
+                class="px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]"
+              >
+                {text.breathingStop}
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
+        <PomodoroTimer lang={lang} />
+        <WeatherWidget lang={lang} variant="card" />
+        <Calculator lang={lang} />
+        <PasswordGenerator lang={lang} />
+        <ColorPicker lang={lang} />
+        <CountdownTimer lang={lang} />
+      </div>
+
+      <div class="max-w-5xl mx-auto mt-10">
+        <AmbientRadio lang={lang} />
+      </div>
+    </div>
+  </section>
+
+  <script
+    define:vars={{
+      quotes: JSON.stringify(quotes),
+      lang,
+      microTasks: JSON.stringify(
+        microTasks[lang as Lang] || microTasks['en-GB']
+      ),
+    }}
+    is:inline
+  >
+    (function () {
+      const quoteText = document.getElementById('quote-text');
+      const quoteLang = document.getElementById('quote-lang');
+      const quoteRefresh = document.getElementById('quote-refresh');
+      const quoteBox = document.getElementById('quote-box');
+
+      function pickQuote() {
+        const list = typeof quotes === 'string' ? JSON.parse(quotes) : quotes;
+        const i = Math.floor(Math.random() * list.length);
+        const q = list[i];
+        const useZh = lang === 'zh-CN' || lang === 'zh-TW';
+        if (quoteText) quoteText.textContent = useZh ? q.zh : q.en;
+        if (quoteLang)
+          quoteLang.textContent = useZh ? '— ' + q.en : '— ' + q.zh;
+        if (quoteBox) quoteBox.classList.add('animate-pulse');
+        setTimeout(() => quoteBox?.classList.remove('animate-pulse'), 300);
+      }
+
+      pickQuote();
+      quoteRefresh?.addEventListener('click', pickQuote);
+
+      // Typing game
+      const sentenceEl = document.getElementById('typing-sentence');
+      const inputEl = document.getElementById('typing-input');
+      const startBtn = document.getElementById('typing-start');
+      const resultEl = document.getElementById('typing-result');
+      const timeEl = document.getElementById('typing-time');
+      const againBtn = document.getElementById('typing-again');
+
+      if (!sentenceEl || !inputEl || !startBtn) return;
+
+      const sentence = sentenceEl.textContent || '';
+      let startTime = 0;
+
+      startBtn.addEventListener('click', () => {
+        inputEl.disabled = false;
+        inputEl.value = '';
+        inputEl.focus();
+        resultEl?.classList.add('hidden');
+        startTime = Date.now();
+      });
+
+      inputEl.addEventListener('input', () => {
+        if (inputEl.value === sentence) {
+          inputEl.disabled = true;
+          const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
+          if (timeEl) timeEl.textContent = elapsed;
+          resultEl?.classList.remove('hidden');
+        }
+      });
+
+      againBtn?.addEventListener('click', () => {
+        startBtn?.click();
+      });
+
+      // Random task card
+      const tasks =
+        typeof microTasks === 'string' ? JSON.parse(microTasks) : microTasks;
+      const taskResult = document.getElementById('task-result');
+      const taskDraw = document.getElementById('task-draw');
+      function drawTask() {
+        if (!Array.isArray(tasks) || tasks.length === 0 || !taskResult) return;
+        const i = Math.floor(Math.random() * tasks.length);
+        taskResult.textContent = tasks[i];
+      }
+      drawTask();
+      taskDraw?.addEventListener('click', drawTask);
+
+      // Breathing rhythm
+      const circle = document.getElementById('breath-circle');
+      const phaseEl = document.getElementById('breath-phase');
+      const startBreath = document.getElementById('breath-start');
+      const stopBreath = document.getElementById('breath-stop');
+      const phases = [
+        { key: 'inhale', zh: '吸气 4s', en: 'Inhale 4s' },
+        { key: 'hold', zh: '停顿 4s', en: 'Hold 4s' },
+        { key: 'exhale', zh: '呼气 4s', en: 'Exhale 4s' },
+        { key: 'hold2', zh: '停顿 4s', en: 'Hold 4s' },
+      ];
+      let timer = null;
+      let idx = 0;
+      function setPhase() {
+        if (!phaseEl || !circle) return;
+        const isZh = lang === 'zh-CN' || lang === 'zh-TW';
+        const p = phases[idx];
+        phaseEl.textContent = isZh ? p.zh : p.en;
+        circle.classList.remove('inhale', 'hold', 'exhale');
+        if (p.key === 'inhale') circle.classList.add('inhale');
+        if (p.key === 'exhale') circle.classList.add('exhale');
+        if (p.key === 'hold' || p.key === 'hold2') circle.classList.add('hold');
+        idx = (idx + 1) % phases.length;
+      }
+      function stopRhythm() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+        if (phaseEl) phaseEl.textContent = 'Ready';
+        circle?.classList.remove('inhale', 'hold', 'exhale');
+      }
+      startBreath?.addEventListener('click', () => {
+        if (timer) return;
+        setPhase();
+        timer = setInterval(setPhase, 4000);
+      });
+      stopBreath?.addEventListener('click', stopRhythm);
+    })();
+  </script>
+
+  <!-- Memory Match Game Script -->
+  <script is:inline>
+    (function () {
+      var board = document.getElementById('mem-board');
+      var movesEl = document.getElementById('mem-moves');
+      var matchedEl = document.getElementById('mem-matched');
+      var completeEl = document.getElementById('mem-complete');
+      var resetBtn = document.getElementById('mem-reset');
+      if (!board) return;
+
+      var emojis = ['🌸', '🌊', '🏔️', '🌙', '🔥', '🍃'];
+      var cards = [];
+      var flipped = [];
+      var matched = 0;
+      var moves = 0;
+      var locked = false;
+
+      function shuffle(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = tmp;
+        }
+        return arr;
+      }
+
+      function createCard(emoji, idx) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'mem-card';
+        btn.setAttribute('data-emoji', emoji);
+        btn.setAttribute('data-index', idx);
+        btn.setAttribute('aria-label', 'Card ' + (idx + 1));
+        btn.innerHTML =
+          '<span class="mem-card-back">?</span><span class="mem-card-front">' +
+          emoji +
+          '</span>';
+        btn.addEventListener('click', function () {
+          flipCard(btn);
+        });
+        return btn;
+      }
+
+      function init() {
+        board.innerHTML = '';
+        cards = [];
+        flipped = [];
+        matched = 0;
+        moves = 0;
+        locked = false;
+        if (movesEl) movesEl.textContent = '0';
+        if (matchedEl) matchedEl.textContent = '0';
+        if (completeEl) completeEl.classList.add('hidden');
+
+        var deck = shuffle(emojis.concat(emojis));
+        for (var i = 0; i < deck.length; i++) {
+          var card = createCard(deck[i], i);
+          cards.push(card);
+          board.appendChild(card);
+        }
+      }
+
+      function flipCard(btn) {
+        if (locked) return;
+        if (
+          btn.classList.contains('flipped') ||
+          btn.classList.contains('mem-matched')
+        )
+          return;
+        if (flipped.length >= 2) return;
+
+        btn.classList.add('flipped');
+        flipped.push(btn);
+
+        if (flipped.length === 2) {
+          moves++;
+          if (movesEl) movesEl.textContent = moves;
+          locked = true;
+
+          var a = flipped[0].getAttribute('data-emoji');
+          var b = flipped[1].getAttribute('data-emoji');
+
+          if (a === b) {
+            flipped[0].classList.add('mem-matched');
+            flipped[1].classList.add('mem-matched');
+            matched++;
+            if (matchedEl) matchedEl.textContent = matched;
+            flipped = [];
+            locked = false;
+
+            if (matched === emojis.length) {
+              setTimeout(function () {
+                if (completeEl) completeEl.classList.remove('hidden');
+              }, 400);
+            }
+          } else {
+            setTimeout(function () {
+              flipped[0].classList.remove('flipped');
+              flipped[1].classList.remove('flipped');
+              flipped = [];
+              locked = false;
+            }, 800);
+          }
+        }
+      }
+
+      resetBtn?.addEventListener('click', init);
+      init();
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .mem-card {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    perspective: 600px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    outline: none;
+  }
+
+  .mem-card:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+    border-radius: 0.75rem;
+  }
+
+  .mem-card-back,
+  .mem-card-front {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    backface-visibility: hidden;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .mem-card-back {
+    background: linear-gradient(
+      135deg,
+      rgb(var(--color-accent) / 0.15),
+      rgb(217 70 239 / 0.15)
+    );
+    border: 1px solid var(--glass-border);
+    color: rgb(var(--color-text-tertiary));
+    transform: rotateY(0deg);
+  }
+
+  .mem-card-front {
+    background: rgb(var(--color-bg-secondary));
+    border: 2px solid rgb(var(--color-accent) / 0.3);
+    transform: rotateY(180deg);
+  }
+
+  .mem-card.flipped .mem-card-back,
+  .mem-card.mem-matched .mem-card-back {
+    transform: rotateY(-180deg);
+  }
+
+  .mem-card.flipped .mem-card-front,
+  .mem-card.mem-matched .mem-card-front {
+    transform: rotateY(0deg);
+  }
+
+  .mem-card.mem-matched {
+    pointer-events: none;
+  }
+
+  .mem-card.mem-matched .mem-card-front {
+    border-color: rgb(34 197 94 / 0.5);
+    background: rgb(34 197 94 / 0.08);
+  }
+
+  .breath-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(139 92 246 / 0.12);
+    border: 2px solid rgb(139 92 246 / 0.3);
+    color: rgb(var(--color-text-primary));
+    font-size: 0.78rem;
+    font-weight: 700;
+    transition:
+      transform 1s ease,
+      background-color 0.6s ease,
+      border-color 0.6s ease;
+    text-align: center;
+    padding: 0.4rem;
+  }
+  .breath-circle.inhale {
+    transform: scale(1.18);
+    background: rgb(16 185 129 / 0.16);
+    border-color: rgb(16 185 129 / 0.45);
+  }
+  .breath-circle.exhale {
+    transform: scale(0.9);
+    background: rgb(59 130 246 / 0.16);
+    border-color: rgb(59 130 246 / 0.45);
+  }
+  .breath-circle.hold {
+    transform: scale(1.02);
+    background: rgb(139 92 246 / 0.16);
+    border-color: rgb(139 92 246 / 0.45);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .breath-circle {
+      transition: none;
+    }
+  }
+</style>

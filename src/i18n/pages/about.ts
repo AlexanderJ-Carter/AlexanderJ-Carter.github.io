@@ -1,509 +1,690 @@
 import type { Lang } from '../types';
 
-export interface SkillItem {
-  name: string;
-  level: number;
-  icon: string;
-  category: string;
-}
+export type AboutLink = {
+  label: string;
+  href: string;
+  note: string;
+  external?: boolean;
+};
 
-export interface EducationItem {
-  year: string;
+export type AboutProject = {
+  name: string;
+  role: string;
+  desc: string;
+  href: string;
+};
+
+export type AboutCopy = {
+  kicker: string;
   title: string;
-  institution: string;
-  degree: string;
-  description: string;
-  icon: string;
-  highlights: string[];
-}
-
-export interface InterestItem {
-  name: string;
-  icon: string;
-  description: string;
-}
-
-export interface LanguageItem {
-  name: string;
-  level: number;
-  proficiency: string;
-}
-
-export interface FocusData {
-  title: string;
+  motto: string;
   subtitle: string;
-  items: { icon: string; title: string; desc: string }[];
-  principlesTitle: string;
-  principles: string[];
-}
-
-export const skillsData: Record<Lang, SkillItem[]> = {
-  'zh-CN': [
-    { name: 'C/C++', level: 95, icon: '⚙️', category: '编程' },
-    { name: 'Python', level: 90, icon: '🐍', category: '编程' },
-    { name: 'Java', level: 70, icon: '☕', category: '编程' },
-    { name: 'HTML/CSS/JS', level: 85, icon: '🌐', category: 'Web开发' },
-    { name: 'Verilog', level: 80, icon: '🔌', category: '硬件' },
-    { name: 'MATLAB', level: 80, icon: '📊', category: '工具' },
-    { name: '摄影', level: 88, icon: '📷', category: '创意' },
-    { name: 'UI/UX设计', level: 75, icon: '🎨', category: '创意' },
-  ],
-  'zh-TW': [
-    { name: 'C/C++', level: 95, icon: '⚙️', category: '程式設計' },
-    { name: 'Python', level: 90, icon: '🐍', category: '程式設計' },
-    { name: 'Java', level: 70, icon: '☕', category: '程式設計' },
-    { name: 'HTML/CSS/JS', level: 85, icon: '🌐', category: 'Web開發' },
-    { name: 'Verilog', level: 80, icon: '🔌', category: '硬體' },
-    { name: 'MATLAB', level: 80, icon: '📊', category: '工具' },
-    { name: '攝影', level: 88, icon: '📷', category: '創意' },
-    { name: 'UI/UX設計', level: 75, icon: '🎨', category: '創意' },
-  ],
-  'en-GB': [
-    { name: 'C/C++', level: 95, icon: '⚙️', category: 'Programming' },
-    { name: 'Python', level: 90, icon: '🐍', category: 'Programming' },
-    { name: 'Java', level: 70, icon: '☕', category: 'Programming' },
-    { name: 'HTML/CSS/JS', level: 85, icon: '🌐', category: 'Web Dev' },
-    { name: 'Verilog', level: 80, icon: '🔌', category: 'Hardware' },
-    { name: 'MATLAB', level: 80, icon: '📊', category: 'Tools' },
-    { name: 'Photography', level: 88, icon: '📷', category: 'Creative' },
-    { name: 'UI/UX Design', level: 75, icon: '🎨', category: 'Creative' },
-  ],
-  fr: [
-    { name: 'C/C++', level: 95, icon: '⚙️', category: 'Programmation' },
-    { name: 'Python', level: 90, icon: '🐍', category: 'Programmation' },
-    { name: 'Java', level: 70, icon: '☕', category: 'Programmation' },
-    { name: 'HTML/CSS/JS', level: 85, icon: '🌐', category: 'Dév Web' },
-    { name: 'Verilog', level: 80, icon: '🔌', category: 'Matériel' },
-    { name: 'MATLAB', level: 80, icon: '📊', category: 'Outils' },
-    { name: 'Photographie', level: 88, icon: '📷', category: 'Créatif' },
-    { name: 'Design UI/UX', level: 75, icon: '🎨', category: 'Créatif' },
-  ],
-  ru: [
-    { name: 'C/C++', level: 95, icon: '⚙️', category: 'Программирование' },
-    { name: 'Python', level: 90, icon: '🐍', category: 'Программирование' },
-    { name: 'Java', level: 70, icon: '☕', category: 'Программирование' },
-    { name: 'HTML/CSS/JS', level: 85, icon: '🌐', category: 'Веб-разработка' },
-    {
-      name: 'Verilog',
-      level: 80,
-      icon: '🔌',
-      category: 'Аппаратное обеспечение',
-    },
-    { name: 'MATLAB', level: 80, icon: '📊', category: 'Инструменты' },
-    { name: 'Фотография', level: 88, icon: '📷', category: 'Творчество' },
-    { name: 'UI/UX Дизайн', level: 75, icon: '🎨', category: 'Творчество' },
-  ],
+  meta: string[];
+  introTitle: string;
+  paragraphs: string[];
+  researchTitle: string;
+  researchLead: string;
+  researchBody: string;
+  collabLabel: string;
+  collabHref: string;
+  platformLabel: string;
+  platformHref: string;
+  pubTitle: string;
+  pubYear: string;
+  pubName: string;
+  pubVenue: string;
+  pubAbs: string;
+  pubPdf: string;
+  nowTitle: string;
+  nowItems: string[];
+  workTitle: string;
+  workIntro: string;
+  projects: AboutProject[];
+  stackTitle: string;
+  stackGroups: { title: string; items: string[] }[];
+  langsTitle: string;
+  langs: { name: string; level: string }[];
+  connectTitle: string;
+  connectIntro: string;
+  links: AboutLink[];
+  back: string;
 };
 
-export const educationData: Record<Lang, EducationItem[]> = {
-  'zh-CN': [
-    {
-      year: '2023 - 至今',
-      title: '本科在读',
-      institution: '重点大学',
-      degree: '电子信息相关专业',
-      description:
-        '学习电子信息、计算机科学相关知识，培养工程实践能力，探索技术与艺术的结合。',
-      icon: '🎓',
-      highlights: ['专业学习', '实践项目', '技能提升'],
-    },
-    {
-      year: '2017 - 2023',
-      title: '中学教育',
-      institution: '重点中学',
-      degree: '高中毕业',
-      description:
-        '打下坚实的理科基础，培养了对科技和创意的兴趣，为后续学习奠定基础。',
-      icon: '📚',
-      highlights: ['理科学习', '综合发展', '兴趣培养'],
-    },
-  ],
-  'zh-TW': [
-    {
-      year: '2023 - 至今',
-      title: '本科在讀',
-      institution: '重點大學',
-      degree: '電子資訊相關專業',
-      description:
-        '學習電子資訊、計算機科學相關知識，培養工程實踐能力，探索技術與藝術的結合。',
-      icon: '🎓',
-      highlights: ['專業學習', '實踐項目', '技能提升'],
-    },
-    {
-      year: '2017 - 2023',
-      title: '中學教育',
-      institution: '重點中學',
-      degree: '高中畢業',
-      description:
-        '打下堅實的理科基礎，培養了對科技和創意的興趣，為後續學習奠定基礎。',
-      icon: '📚',
-      highlights: ['理科學習', '綜合發展', '興趣培養'],
-    },
-  ],
-  'en-GB': [
-    {
-      year: '2023 - Present',
-      title: 'Undergraduate Studies',
-      institution: 'Key University',
-      degree: 'Electronics & Information Technology',
-      description:
-        'Studying electronic information technology and computer science, developing engineering and practical skills, exploring the intersection of technology and art.',
-      icon: '🎓',
-      highlights: [
-        'Professional Learning',
-        'Practical Projects',
-        'Skill Development',
-      ],
-    },
-    {
-      year: '2017 - 2023',
-      title: 'High School Education',
-      institution: 'Key High School',
-      degree: 'High School Diploma',
-      description:
-        'Built strong foundation in science and mathematics, developed passion for technology and creativity, laying groundwork for future studies.',
-      icon: '📚',
-      highlights: [
-        'Science Studies',
-        'Comprehensive Development',
-        'Interest Cultivation',
-      ],
-    },
-  ],
-  fr: [
-    {
-      year: '2023 - Présent',
-      title: 'Études de Premier Cycle',
-      institution: 'Université Clé',
-      degree: "Électronique et Technologie de l'Information",
-      description:
-        "Étude de la technologie de l'information électronique et de l'informatique, développement des compétences en ingénierie et pratiques, exploration de l'intersection de la technologie et de l'art.",
-      icon: '🎓',
-      highlights: [
-        'Apprentissage Professionnel',
-        'Projets Pratiques',
-        'Développement des Compétences',
-      ],
-    },
-    {
-      year: '2017 - 2023',
-      title: 'Enseignement Secondaire',
-      institution: 'Lycée Clé',
-      degree: "Diplôme d'Études Secondaires",
-      description:
-        'Solide base en sciences et mathématiques, passion développée pour la technologie et la créativité, posant les bases pour les études futures.',
-      icon: '📚',
-      highlights: [
-        'Études Scientifiques',
-        'Développement Global',
-        'Culture des Intérêts',
-      ],
-    },
-  ],
-  ru: [
-    {
-      year: '2023 - Настоящее время',
-      title: 'Бакалавриат',
-      institution: 'Ключевой Университет',
-      degree: 'Электроника и Информационные Технологии',
-      description:
-        'Изучение электронных информационных технологий и компьютерных наук, развитие инженерных и практических навыков, исследование пересечения технологий и искусства.',
-      icon: '🎓',
-      highlights: [
-        'Профессиональное Обучение',
-        'Практические Проекты',
-        'Развитие Навыков',
-      ],
-    },
-    {
-      year: '2017 - 2023',
-      title: 'Среднее Образование',
-      institution: 'Ключевая Средняя Школа',
-      degree: 'Аттестат о Среднем Образовании',
-      description:
-        'Прочный фундамент в науке и математике, развитая страсть к технологиям и творчеству, закладывающая основу для будущих исследований.',
-      icon: '📚',
-      highlights: [
-        'Научные Исследования',
-        'Всестороннее Развитие',
-        'Развитие Интересов',
-      ],
-    },
-  ],
+const projectsShared = {
+  agentsociety: {
+    href: 'https://github.com/tsinghua-fib-lab/AgentSociety',
+  },
+  skills: {
+    href: 'https://github.com/AlexanderJ-Carter/AgentSociety2-Agent-Skills',
+  },
+  site: {
+    href: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
+  },
+  mips: {
+    href: 'https://github.com/AlexanderJ-Carter/MIPS-Pipeline-Verilog',
+  },
+  netq: {
+    href: 'https://github.com/AlexanderJ-Carter/netq',
+  },
+  cook: {
+    href: 'https://cook.alexander.xin',
+  },
 };
 
-export const interestsData: Record<Lang, InterestItem[]> = {
-  'zh-CN': [
-    { name: '摄影创作', icon: '📸', description: '风景、人像、美食摄影' },
-    { name: '阅读写作', icon: '📖', description: '技术博客、文学作品' },
-    { name: '音乐欣赏', icon: '🎵', description: '古典音乐、钢琴曲' },
-    { name: '户外运动', icon: '🏃', description: '徒步、骑行、探索' },
-    { name: '开源贡献', icon: '💻', description: '参与开源项目' },
-    { name: '创意设计', icon: '🎨', description: 'UI/UX、平面设计' },
-  ],
-  'zh-TW': [
-    { name: '攝影創作', icon: '📸', description: '風景、人像、美食攝影' },
-    { name: '閱讀寫作', icon: '📖', description: '技術部落格、文學作品' },
-    { name: '音樂欣賞', icon: '🎵', description: '古典音樂、鋼琴曲' },
-    { name: '戶外運動', icon: '🏃', description: '徒步、騎行、探索' },
-    { name: '開源貢獻', icon: '💻', description: '參與開源項目' },
-    { name: '創意設計', icon: '🎨', description: 'UI/UX、平面設計' },
-  ],
-  'en-GB': [
-    {
-      name: 'Photography',
-      icon: '📸',
-      description: 'Landscape, portrait, food photography',
-    },
-    {
-      name: 'Reading & Writing',
-      icon: '📖',
-      description: 'Tech blogs, literature',
-    },
-    { name: 'Music', icon: '🎵', description: 'Classical music, piano' },
-    {
-      name: 'Outdoor Activities',
-      icon: '🏃',
-      description: 'Hiking, cycling, exploring',
-    },
-    {
-      name: 'Open Source',
-      icon: '💻',
-      description: 'Contributing to open source',
-    },
-    {
-      name: 'Creative Design',
-      icon: '🎨',
-      description: 'UI/UX, graphic design',
-    },
-  ],
-  fr: [
-    {
-      name: 'Photographie',
-      icon: '📸',
-      description: 'Paysage, portrait, photographie culinaire',
-    },
-    {
-      name: 'Lecture et Écriture',
-      icon: '📖',
-      description: 'Blogs techniques, littérature',
-    },
-    { name: 'Musique', icon: '🎵', description: 'Musique classique, piano' },
-    {
-      name: 'Activités de Plein Air',
-      icon: '🏃',
-      description: 'Randonnée, cyclisme, exploration',
-    },
-    {
-      name: 'Open Source',
-      icon: '💻',
-      description: "Contribution à l'open source",
-    },
-    {
-      name: 'Design Créatif',
-      icon: '🎨',
-      description: 'UI/UX, design graphique',
-    },
-  ],
-  ru: [
-    {
-      name: 'Фотография',
-      icon: '📸',
-      description: 'Пейзаж, портрет, фуд-фотография',
-    },
-    {
-      name: 'Чтение и Письмо',
-      icon: '📖',
-      description: 'Технические блоги, литература',
-    },
-    {
-      name: 'Музыка',
-      icon: '🎵',
-      description: 'Классическая музыка, фортепиано',
-    },
-    {
-      name: 'Активный Отдых',
-      icon: '🏃',
-      description: 'Пешие прогулки, велоспорт, исследования',
-    },
-    {
-      name: 'Open Source',
-      icon: '💻',
-      description: 'Вклад в открытый исходный код',
-    },
-    {
-      name: 'Креативный Дизайн',
-      icon: '🎨',
-      description: 'UI/UX, графический дизайн',
-    },
-  ],
-};
-
-export const languagesData: Record<Lang, LanguageItem[]> = {
-  'zh-CN': [
-    { name: '汉语', level: 100, proficiency: '母语' },
-    { name: '英语', level: 85, proficiency: '流利' },
-    { name: '意大利语', level: 30, proficiency: '初级学习中' },
-  ],
-  'zh-TW': [
-    { name: '漢語', level: 100, proficiency: '母語' },
-    { name: '英語', level: 85, proficiency: '流利' },
-    { name: '義大利語', level: 30, proficiency: '初級學習中' },
-  ],
-  'en-GB': [
-    { name: 'Chinese', level: 100, proficiency: 'Native' },
-    { name: 'English', level: 85, proficiency: 'Fluent' },
-    { name: 'Italian', level: 30, proficiency: 'Beginner' },
-  ],
-  fr: [
-    { name: 'Chinois', level: 100, proficiency: 'Langue maternelle' },
-    { name: 'Anglais', level: 85, proficiency: 'Courant' },
-    { name: 'Italien', level: 30, proficiency: 'Débutant' },
-  ],
-  ru: [
-    { name: 'Китайский', level: 100, proficiency: 'Родной' },
-    { name: 'Английский', level: 85, proficiency: 'Свободный' },
-    { name: 'Итальянский', level: 30, proficiency: 'Начинающий' },
-  ],
-};
-
-export const focusData: Record<Lang, FocusData> = {
+export const aboutCopy: Record<Lang, AboutCopy> = {
   'zh-CN': {
-    title: '当前关注',
-    subtitle: '我会把学习拆成可交付的小块：做出来、写清楚、再迭代。',
-    items: [
+    kicker: 'About',
+    title: '关于',
+    motto: '日子不必很耀眼，但要很喜欢。',
+    subtitle: '学生开发者 · LLM 智能体与可执行社会科学',
+    meta: ['北京', '在校生', '开发者'],
+    introTitle: '个人简介',
+    paragraphs: [
+      '你好，我是 Alexander James Carter。北京在读本科生，专业方向电子信息科学与技术；平时把软件、电子、Linux 与 Verilog 放在同一条实践线上。',
+      '我更在意把研究想法做成可运行、可审计的系统：从社会智能体仿真，到静态站点与小工具。技术之外，摄影与写作帮我训练观察——记录光影，也整理取舍。',
+      '这个站点是长期维护的个人角落：公开笔记、开源工程与一点点生活实验。清爽、稳定、长期主义。',
+    ],
+    researchTitle: '研究',
+    researchLead: 'LLM 驱动的社会智能体 · 可执行社会科学',
+    researchBody:
+      '主线协作清华 FIB Lab 的 AgentSociety / AgentSociety 2：扩展与配置、CI 与安全、文档、Windows 兼容，以及面向「社会人」仿真的技能库——让假设变成可跑的工作流，而不是只停留在幻灯片里。',
+    collabLabel: 'AgentSociety 仓库',
+    collabHref: 'https://github.com/tsinghua-fib-lab/AgentSociety',
+    platformLabel: 'AgentSociety 2 平台',
+    platformHref: 'https://agentsociety2.fiblab.net/',
+    pubTitle: '论文',
+    pubYear: '2026',
+    pubName:
+      'AgentSociety 2: An Integrated Research Environment for Executable Social Science',
+    pubVenue: 'arXiv preprint',
+    pubAbs: 'https://arxiv.org/abs/2607.11895',
+    pubPdf: 'https://arxiv.org/pdf/2607.11895',
+    nowTitle: '此刻',
+    nowItems: [
+      'AgentSociety 2 工程与社会人仿真技能',
+      '软件、电子、Linux、Verilog 笔记与实践',
+      '慢一点，但一直向前',
+    ],
+    workTitle: '精选项目',
+    workIntro: '与 GitHub 主页对齐的几条主线；完整列表见仓库与项目页。',
+    projects: [
       {
-        icon: '🧭',
-        title: '工程基础',
-        desc: '持续补强计算机系统、算法、数字电路和工程实践，把课堂知识落到可运行的项目里。',
+        name: 'AgentSociety',
+        role: '贡献者 / 合作作者',
+        desc: '面向可执行社会科学的 LLM 原生集成研究环境。',
+        href: projectsShared.agentsociety.href,
       },
       {
-        icon: '🧱',
-        title: '静态站体验',
-        desc: '用 Astro 做轻量页面，关注加载性能、无障碍、多语言和无客户端 JS 的默认体验。',
+        name: 'AgentSociety2-Agent-Skills',
+        role: '作者',
+        desc: '为「真实社会人」仿真准备的技能库：节律、关系、规范与经济约束。',
+        href: projectsShared.skills.href,
       },
       {
-        icon: '🔍',
-        title: '观察与表达',
-        desc: '通过摄影、阅读和写作训练观察力，让技术内容也能有清晰的叙事和审美秩序。',
+        name: '本站 alexander.xin',
+        role: '作者',
+        desc: '多语言个人站：摄影、写作、工具与长期记录。',
+        href: projectsShared.site.href,
+      },
+      {
+        name: 'MIPS-Pipeline-Verilog',
+        role: '作者',
+        desc: '可综合的 MIPS 五级流水线，含转发与冒险检测。',
+        href: projectsShared.mips.href,
+      },
+      {
+        name: 'NetQ',
+        role: '作者',
+        desc: '选单式网络排查 CLI，把常用操作收成可读结果页。',
+        href: projectsShared.netq.href,
+      },
+      {
+        name: 'MyCook',
+        role: '作者',
+        desc: '菜谱静态站：烹饪方式与食材双索引，VitePress 构建。',
+        href: projectsShared.cook.href,
       },
     ],
-    principlesTitle: '做事原则',
-    principles: [
-      '先可用，再漂亮',
-      '少收集数据，多保护隐私',
-      '复杂问题写清楚再动手',
+    stackTitle: '技术栈',
+    stackGroups: [
+      {
+        title: '语言与系统',
+        items: ['C/C++', 'Python', 'JavaScript / TypeScript', 'Go', 'Bash'],
+      },
+      {
+        title: '硬件与工具',
+        items: ['Verilog', 'Linux', 'Git', 'LaTeX', 'MATLAB'],
+      },
+      {
+        title: 'Web 与创意',
+        items: ['Astro', 'HTML / CSS', '摄影', 'UI / UX'],
+      },
     ],
+    langsTitle: '语言',
+    langs: [
+      { name: '汉语', level: '母语' },
+      { name: '英语', level: '流利' },
+      { name: '意大利语', level: '初级' },
+    ],
+    connectTitle: '联系',
+    connectIntro: '欢迎交流研究、项目或有趣想法。',
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        note: '@AlexanderJ-Carter',
+        external: true,
+      },
+      {
+        label: 'ORCID',
+        href: 'https://orcid.org/0009-0007-0343-4129',
+        note: '0009-0007-0343-4129',
+        external: true,
+      },
+      {
+        label: 'Email',
+        href: 'mailto:contact-us@alexander.xin',
+        note: 'contact-us@alexander.xin',
+      },
+      {
+        label: '联系页',
+        href: '/contact',
+        note: '表单与更多方式',
+      },
+    ],
+    back: '返回首页',
   },
   'zh-TW': {
-    title: '目前關注',
-    subtitle: '我會把學習拆成可交付的小塊：做出來、寫清楚、再迭代。',
-    items: [
+    kicker: 'About',
+    title: '關於',
+    motto: '日子不必很耀眼，但要很喜歡。',
+    subtitle: '學生開發者 · LLM 智能體與可執行社會科學',
+    meta: ['北京', '在校生', '開發者'],
+    introTitle: '個人簡介',
+    paragraphs: [
+      '你好，我是 Alexander James Carter。北京在讀本科生，專業方向電子信息科學與技術；平時把軟體、電子、Linux 與 Verilog 放在同一條實踐線上。',
+      '我更在意把研究想法做成可運行、可稽核的系統：從社會智能體仿真，到靜態站點與小工具。技術之外，攝影與寫作幫我訓練觀察。',
+      '這個站點是長期維護的個人角落：公開筆記、開源工程與一點生活實驗。清爽、穩定、長期主義。',
+    ],
+    researchTitle: '研究',
+    researchLead: 'LLM 驅動的社會智能體 · 可執行社會科學',
+    researchBody:
+      '主線協作清華 FIB Lab 的 AgentSociety / AgentSociety 2：擴展與配置、CI 與安全、文件、Windows 相容，以及面向「社會人」仿真的技能庫。',
+    collabLabel: 'AgentSociety 倉庫',
+    collabHref: 'https://github.com/tsinghua-fib-lab/AgentSociety',
+    platformLabel: 'AgentSociety 2 平台',
+    platformHref: 'https://agentsociety2.fiblab.net/',
+    pubTitle: '論文',
+    pubYear: '2026',
+    pubName:
+      'AgentSociety 2: An Integrated Research Environment for Executable Social Science',
+    pubVenue: 'arXiv preprint',
+    pubAbs: 'https://arxiv.org/abs/2607.11895',
+    pubPdf: 'https://arxiv.org/pdf/2607.11895',
+    nowTitle: '此刻',
+    nowItems: [
+      'AgentSociety 2 工程與社會人仿真技能',
+      '軟體、電子、Linux、Verilog 筆記與實踐',
+      '慢一點，但一直向前',
+    ],
+    workTitle: '精選專案',
+    workIntro: '與 GitHub 主頁對齊的幾條主線；完整列表見倉庫與專案頁。',
+    projects: [
       {
-        icon: '🧭',
-        title: '工程基礎',
-        desc: '持續補強計算機系統、演算法、數位電路和工程實踐，把課堂知識落到可運行的專案裡。',
+        name: 'AgentSociety',
+        role: '貢獻者 / 合作作者',
+        desc: '面向可執行社會科學的 LLM 原生整合研究環境。',
+        href: projectsShared.agentsociety.href,
       },
       {
-        icon: '🧱',
-        title: '靜態站體驗',
-        desc: '用 Astro 做輕量頁面，關注載入效能、無障礙、多語言和無客戶端 JS 的預設體驗。',
+        name: 'AgentSociety2-Agent-Skills',
+        role: '作者',
+        desc: '為「真實社會人」仿真準備的技能庫。',
+        href: projectsShared.skills.href,
       },
       {
-        icon: '🔍',
-        title: '觀察與表達',
-        desc: '通過攝影、閱讀和寫作訓練觀察力，讓技術內容也能有清晰的敘事和審美秩序。',
+        name: '本站 alexander.xin',
+        role: '作者',
+        desc: '多語言個人站：攝影、寫作、工具與長期記錄。',
+        href: projectsShared.site.href,
+      },
+      {
+        name: 'MIPS-Pipeline-Verilog',
+        role: '作者',
+        desc: '可綜合的 MIPS 五級流水線，含轉發與冒險檢測。',
+        href: projectsShared.mips.href,
+      },
+      {
+        name: 'NetQ',
+        role: '作者',
+        desc: '選單式網路排查 CLI。',
+        href: projectsShared.netq.href,
+      },
+      {
+        name: 'MyCook',
+        role: '作者',
+        desc: '菜譜靜態站，VitePress 構建。',
+        href: projectsShared.cook.href,
       },
     ],
-    principlesTitle: '做事原則',
-    principles: [
-      '先可用，再漂亮',
-      '少收集資料，多保護隱私',
-      '複雜問題寫清楚再動手',
+    stackTitle: '技術棧',
+    stackGroups: [
+      {
+        title: '語言與系統',
+        items: ['C/C++', 'Python', 'JavaScript / TypeScript', 'Go', 'Bash'],
+      },
+      {
+        title: '硬體與工具',
+        items: ['Verilog', 'Linux', 'Git', 'LaTeX', 'MATLAB'],
+      },
+      {
+        title: 'Web 與創意',
+        items: ['Astro', 'HTML / CSS', '攝影', 'UI / UX'],
+      },
     ],
+    langsTitle: '語言',
+    langs: [
+      { name: '漢語', level: '母語' },
+      { name: '英語', level: '流利' },
+      { name: '義大利語', level: '初級' },
+    ],
+    connectTitle: '聯繫',
+    connectIntro: '歡迎交流研究、專案或有趣想法。',
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        note: '@AlexanderJ-Carter',
+        external: true,
+      },
+      {
+        label: 'ORCID',
+        href: 'https://orcid.org/0009-0007-0343-4129',
+        note: '0009-0007-0343-4129',
+        external: true,
+      },
+      {
+        label: 'Email',
+        href: 'mailto:contact-us@alexander.xin',
+        note: 'contact-us@alexander.xin',
+      },
+      {
+        label: '聯繫頁',
+        href: '/contact',
+        note: '表單與更多方式',
+      },
+    ],
+    back: '返回首頁',
   },
   'en-GB': {
-    title: 'Current Focus',
-    subtitle:
-      'I break learning into shippable pieces: make it work, explain it clearly, then iterate.',
-    items: [
+    kicker: 'About',
+    title: 'About',
+    motto: 'Warm, not perfect.',
+    subtitle: 'Student developer · LLM agents & executable social science',
+    meta: ['Beijing', 'Student', 'Developer'],
+    introTitle: 'Profile',
+    paragraphs: [
+      'I am Alexander James Carter, an undergraduate in Beijing studying Electronic Information Science and Technology. Software, electronics, Linux and Verilog sit on the same practice line.',
+      'I care about turning research ideas into runnable, auditable systems — from socially grounded agent simulations to static sites and small tools. Photography and writing train how I look and explain.',
+      'This site is a long-running corner for public notes, open-source engineering and small life experiments. Neat, steady, long-term.',
+    ],
+    researchTitle: 'Research',
+    researchLead: 'LLM-driven social agents · executable social science',
+    researchBody:
+      'Primary collaboration: Tsinghua FIB Lab’s AgentSociety / AgentSociety 2 — extensions & config, CI / security, docs, Windows compatibility, and skills for socially grounded agents. Hypotheses should become runnable workflows, not slide decks.',
+    collabLabel: 'AgentSociety repo',
+    collabHref: 'https://github.com/tsinghua-fib-lab/AgentSociety',
+    platformLabel: 'AgentSociety 2 platform',
+    platformHref: 'https://agentsociety2.fiblab.net/',
+    pubTitle: 'Publication',
+    pubYear: '2026',
+    pubName:
+      'AgentSociety 2: An Integrated Research Environment for Executable Social Science',
+    pubVenue: 'arXiv preprint',
+    pubAbs: 'https://arxiv.org/abs/2607.11895',
+    pubPdf: 'https://arxiv.org/pdf/2607.11895',
+    nowTitle: 'Now',
+    nowItems: [
+      'AgentSociety 2 engineering and social-agent skills',
+      'Notes on software, electronics, Linux and Verilog',
+      'Learning in public — slowly, but consistently',
+    ],
+    workTitle: 'Selected work',
+    workIntro:
+      'Aligned with the GitHub profile; full lists live in the repos and Projects page.',
+    projects: [
       {
-        icon: '🧭',
-        title: 'Engineering Foundations',
-        desc: 'Strengthening systems, algorithms, digital circuits and practical engineering by turning coursework into runnable projects.',
+        name: 'AgentSociety',
+        role: 'Contributor & co-author',
+        desc: 'LLM-native integrated research environment for executable social science.',
+        href: projectsShared.agentsociety.href,
       },
       {
-        icon: '🧱',
-        title: 'Static Site UX',
-        desc: 'Building lightweight Astro pages with performance, accessibility, multilingual content and zero-client-JS defaults in mind.',
+        name: 'AgentSociety2-Agent-Skills',
+        role: 'Author',
+        desc: 'Theory-grounded skills for socially grounded agents.',
+        href: projectsShared.skills.href,
       },
       {
-        icon: '🔍',
-        title: 'Observation & Expression',
-        desc: 'Using photography, reading and writing to train observation, so technical work can also carry clear narrative and visual order.',
+        name: 'alexander.xin',
+        role: 'Author',
+        desc: 'Multilingual personal site for photography, writing and tools.',
+        href: projectsShared.site.href,
+      },
+      {
+        name: 'MIPS-Pipeline-Verilog',
+        role: 'Author',
+        desc: 'Synthesizable five-stage MIPS pipeline with forwarding and hazard detection.',
+        href: projectsShared.mips.href,
+      },
+      {
+        name: 'NetQ',
+        role: 'Author',
+        desc: 'Menu-driven network troubleshooting CLI with readable result pages.',
+        href: projectsShared.netq.href,
+      },
+      {
+        name: 'MyCook',
+        role: 'Author',
+        desc: 'Static recipe site indexed by method and ingredient.',
+        href: projectsShared.cook.href,
       },
     ],
-    principlesTitle: 'Working Principles',
-    principles: [
-      'Usable first, polished second',
-      'Collect less data, protect more privacy',
-      'Write complex problems down before touching code',
+    stackTitle: 'Stack',
+    stackGroups: [
+      {
+        title: 'Languages & systems',
+        items: ['C/C++', 'Python', 'JavaScript / TypeScript', 'Go', 'Bash'],
+      },
+      {
+        title: 'Hardware & tools',
+        items: ['Verilog', 'Linux', 'Git', 'LaTeX', 'MATLAB'],
+      },
+      {
+        title: 'Web & craft',
+        items: ['Astro', 'HTML / CSS', 'Photography', 'UI / UX'],
+      },
     ],
+    langsTitle: 'Languages',
+    langs: [
+      { name: 'Chinese', level: 'Native' },
+      { name: 'English', level: 'Fluent' },
+      { name: 'Italian', level: 'Beginner' },
+    ],
+    connectTitle: 'Connect',
+    connectIntro: 'Happy to talk about research, projects or ideas.',
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        note: '@AlexanderJ-Carter',
+        external: true,
+      },
+      {
+        label: 'ORCID',
+        href: 'https://orcid.org/0009-0007-0343-4129',
+        note: '0009-0007-0343-4129',
+        external: true,
+      },
+      {
+        label: 'Email',
+        href: 'mailto:contact-us@alexander.xin',
+        note: 'contact-us@alexander.xin',
+      },
+      {
+        label: 'Contact page',
+        href: '/contact',
+        note: 'Form and more',
+      },
+    ],
+    back: 'Back to home',
   },
   fr: {
-    title: 'Priorités actuelles',
+    kicker: 'About',
+    title: 'À propos',
+    motto: 'Chaleureux, pas parfait.',
     subtitle:
-      "Je découpe l'apprentissage en petits livrables : faire fonctionner, expliquer clairement, puis itérer.",
-    items: [
+      'Étudiant développeur · agents LLM & sciences sociales exécutables',
+    meta: ['Pékin', 'Étudiant', 'Développeur'],
+    introTitle: 'Profil',
+    paragraphs: [
+      'Je suis Alexander James Carter, étudiant à Pékin en sciences et technologies de l’information électronique. Logiciel, électronique, Linux et Verilog forment une même ligne de pratique.',
+      'Je cherche à transformer des idées de recherche en systèmes exécutables et auditables — des simulations d’agents sociaux aux sites statiques et petits outils.',
+      'Ce site est un coin personnel durable : notes publiques, ingénierie open source et petites expériences de vie.',
+    ],
+    researchTitle: 'Recherche',
+    researchLead:
+      'Agents sociaux pilotés par LLM · sciences sociales exécutables',
+    researchBody:
+      'Collaboration principale : AgentSociety / AgentSociety 2 au FIB Lab de Tsinghua — extensions, CI / sécurité, docs, compatibilité Windows, et compétences pour agents socialement ancrés.',
+    collabLabel: 'Dépôt AgentSociety',
+    collabHref: 'https://github.com/tsinghua-fib-lab/AgentSociety',
+    platformLabel: 'Plateforme AgentSociety 2',
+    platformHref: 'https://agentsociety2.fiblab.net/',
+    pubTitle: 'Publication',
+    pubYear: '2026',
+    pubName:
+      'AgentSociety 2: An Integrated Research Environment for Executable Social Science',
+    pubVenue: 'arXiv preprint',
+    pubAbs: 'https://arxiv.org/abs/2607.11895',
+    pubPdf: 'https://arxiv.org/pdf/2607.11895',
+    nowTitle: 'Maintenant',
+    nowItems: [
+      'Ingénierie AgentSociety 2 et compétences d’agents sociaux',
+      'Notes sur logiciel, électronique, Linux et Verilog',
+      'Apprendre en public — lentement, mais constamment',
+    ],
+    workTitle: 'Travaux sélectionnés',
+    workIntro: 'Aligné sur le profil GitHub ; listes complètes dans les dépôts.',
+    projects: [
       {
-        icon: '🧭',
-        title: "Bases d'ingénierie",
-        desc: 'Renforcer systèmes, algorithmes, circuits numériques et pratique en transformant les cours en projets exécutables.',
+        name: 'AgentSociety',
+        role: 'Contributeur & co-auteur',
+        desc: 'Environnement de recherche intégré natif LLM pour les sciences sociales exécutables.',
+        href: projectsShared.agentsociety.href,
       },
       {
-        icon: '🧱',
-        title: 'UX de site statique',
-        desc: 'Créer des pages Astro légères avec performance, accessibilité, multilingue et zéro JS client par défaut.',
+        name: 'AgentSociety2-Agent-Skills',
+        role: 'Auteur',
+        desc: 'Compétences théoriques pour agents socialement ancrés.',
+        href: projectsShared.skills.href,
       },
       {
-        icon: '🔍',
-        title: 'Observation et expression',
-        desc: 'Photographie, lecture et écriture entraînent le regard, pour donner aussi aux sujets techniques une narration claire.',
+        name: 'alexander.xin',
+        role: 'Auteur',
+        desc: 'Site personnel multilingue : photo, écriture et outils.',
+        href: projectsShared.site.href,
+      },
+      {
+        name: 'MIPS-Pipeline-Verilog',
+        role: 'Auteur',
+        desc: 'Pipeline MIPS à cinq étages synthétisable.',
+        href: projectsShared.mips.href,
+      },
+      {
+        name: 'NetQ',
+        role: 'Auteur',
+        desc: 'CLI de diagnostic réseau à menus.',
+        href: projectsShared.netq.href,
+      },
+      {
+        name: 'MyCook',
+        role: 'Auteur',
+        desc: 'Site de recettes statique.',
+        href: projectsShared.cook.href,
       },
     ],
-    principlesTitle: 'Principes de travail',
-    principles: [
-      "Utilisable d'abord, élégant ensuite",
-      'Moins de collecte, plus de confidentialité',
-      'Écrire le problème avant de coder',
+    stackTitle: 'Stack',
+    stackGroups: [
+      {
+        title: 'Langages & systèmes',
+        items: ['C/C++', 'Python', 'JavaScript / TypeScript', 'Go', 'Bash'],
+      },
+      {
+        title: 'Matériel & outils',
+        items: ['Verilog', 'Linux', 'Git', 'LaTeX', 'MATLAB'],
+      },
+      {
+        title: 'Web & craft',
+        items: ['Astro', 'HTML / CSS', 'Photographie', 'UI / UX'],
+      },
     ],
+    langsTitle: 'Langues',
+    langs: [
+      { name: 'Chinois', level: 'Natif' },
+      { name: 'Anglais', level: 'Courant' },
+      { name: 'Italien', level: 'Débutant' },
+    ],
+    connectTitle: 'Contact',
+    connectIntro:
+      'Ouvert aux échanges sur la recherche, les projets ou les idées.',
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        note: '@AlexanderJ-Carter',
+        external: true,
+      },
+      {
+        label: 'ORCID',
+        href: 'https://orcid.org/0009-0007-0343-4129',
+        note: '0009-0007-0343-4129',
+        external: true,
+      },
+      {
+        label: 'Email',
+        href: 'mailto:contact-us@alexander.xin',
+        note: 'contact-us@alexander.xin',
+      },
+      {
+        label: 'Page contact',
+        href: '/contact',
+        note: 'Formulaire et plus',
+      },
+    ],
+    back: "Retour à l'accueil",
   },
   ru: {
-    title: 'Текущий фокус',
+    kicker: 'About',
+    title: 'Обо мне',
+    motto: 'Тёпло, не идеально.',
     subtitle:
-      'Я делю обучение на небольшие результаты: сделать, ясно объяснить и затем улучшить.',
-    items: [
+      'Студент-разработчик · LLM-агенты и исполнимая социальная наука',
+    meta: ['Пекин', 'Студент', 'Разработчик'],
+    introTitle: 'Профиль',
+    paragraphs: [
+      'Я Alexander James Carter, студент в Пекине по направлению электронных информационных наук и технологий. ПО, электроника, Linux и Verilog — одна линия практики.',
+      'Мне важно превращать исследовательские идеи в исполняемые и проверяемые системы — от симуляций социальных агентов до статических сайтов и небольших инструментов.',
+      'Этот сайт — долгоживущий угол: публичные заметки, open-source инженерия и небольшие жизненные эксперименты.',
+    ],
+    researchTitle: 'Исследования',
+    researchLead: 'Социальные агенты на LLM · исполнимая социальная наука',
+    researchBody:
+      'Основное сотрудничество: AgentSociety / AgentSociety 2 в FIB Lab (Tsinghua) — расширения, CI / безопасность, документация, совместимость с Windows и навыки для социально укоренённых агентов.',
+    collabLabel: 'Репозиторий AgentSociety',
+    collabHref: 'https://github.com/tsinghua-fib-lab/AgentSociety',
+    platformLabel: 'Платформа AgentSociety 2',
+    platformHref: 'https://agentsociety2.fiblab.net/',
+    pubTitle: 'Публикация',
+    pubYear: '2026',
+    pubName:
+      'AgentSociety 2: An Integrated Research Environment for Executable Social Science',
+    pubVenue: 'arXiv preprint',
+    pubAbs: 'https://arxiv.org/abs/2607.11895',
+    pubPdf: 'https://arxiv.org/pdf/2607.11895',
+    nowTitle: 'Сейчас',
+    nowItems: [
+      'Инженерия AgentSociety 2 и навыки социальных агентов',
+      'Заметки по ПО, электронике, Linux и Verilog',
+      'Учиться публично — медленно, но постоянно',
+    ],
+    workTitle: 'Избранные проекты',
+    workIntro: 'Согласовано с GitHub-профилем; полные списки — в репозиториях.',
+    projects: [
       {
-        icon: '🧭',
-        title: 'Инженерная база',
-        desc: 'Укрепляю системы, алгоритмы, цифровые схемы и практику, превращая учебные темы в запускаемые проекты.',
+        name: 'AgentSociety',
+        role: 'Участник и соавтор',
+        desc: 'LLM-нативная среда для исполнимой социальной науки.',
+        href: projectsShared.agentsociety.href,
       },
       {
-        icon: '🧱',
-        title: 'UX статического сайта',
-        desc: 'Делаю лёгкие страницы на Astro с упором на скорость, доступность, многоязычность и минимум клиентского JS.',
+        name: 'AgentSociety2-Agent-Skills',
+        role: 'Автор',
+        desc: 'Навыки для социально укоренённых агентов.',
+        href: projectsShared.skills.href,
       },
       {
-        icon: '🔍',
-        title: 'Наблюдение и выражение',
-        desc: 'Фотография, чтение и письмо помогают тренировать взгляд, чтобы технические материалы были ясными и выразительными.',
+        name: 'alexander.xin',
+        role: 'Автор',
+        desc: 'Многоязычный личный сайт: фото, тексты и инструменты.',
+        href: projectsShared.site.href,
+      },
+      {
+        name: 'MIPS-Pipeline-Verilog',
+        role: 'Автор',
+        desc: 'Синтезируемый пятиступенчатый конвейер MIPS.',
+        href: projectsShared.mips.href,
+      },
+      {
+        name: 'NetQ',
+        role: 'Автор',
+        desc: 'Меню-ориентированный CLI для сетевой диагностики.',
+        href: projectsShared.netq.href,
+      },
+      {
+        name: 'MyCook',
+        role: 'Автор',
+        desc: 'Статический сайт рецептов.',
+        href: projectsShared.cook.href,
       },
     ],
-    principlesTitle: 'Принципы работы',
-    principles: [
-      'Сначала полезно, затем красиво',
-      'Меньше сбора данных, больше приватности',
-      'Сначала описать сложность, потом писать код',
+    stackTitle: 'Стек',
+    stackGroups: [
+      {
+        title: 'Языки и системы',
+        items: ['C/C++', 'Python', 'JavaScript / TypeScript', 'Go', 'Bash'],
+      },
+      {
+        title: 'Железо и инструменты',
+        items: ['Verilog', 'Linux', 'Git', 'LaTeX', 'MATLAB'],
+      },
+      {
+        title: 'Web и творчество',
+        items: ['Astro', 'HTML / CSS', 'Фотография', 'UI / UX'],
+      },
     ],
+    langsTitle: 'Языки',
+    langs: [
+      { name: 'Китайский', level: 'Родной' },
+      { name: 'Английский', level: 'Свободный' },
+      { name: 'Итальянский', level: 'Начальный' },
+    ],
+    connectTitle: 'Связь',
+    connectIntro: 'Открыт к разговору об исследованиях, проектах и идеях.',
+    links: [
+      {
+        label: 'GitHub',
+        href: 'https://github.com/AlexanderJ-Carter',
+        note: '@AlexanderJ-Carter',
+        external: true,
+      },
+      {
+        label: 'ORCID',
+        href: 'https://orcid.org/0009-0007-0343-4129',
+        note: '0009-0007-0343-4129',
+        external: true,
+      },
+      {
+        label: 'Email',
+        href: 'mailto:contact-us@alexander.xin',
+        note: 'contact-us@alexander.xin',
+      },
+      {
+        label: 'Страница контакта',
+        href: '/contact',
+        note: 'Форма и другое',
+      },
+    ],
+    back: 'На главную',
   },
 };

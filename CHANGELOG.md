@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- Editorial redesign: photography-first homepage, Syne + Source Serif 4 / Noto Serif SC type system, cooler paper palette, teal accent (replacing purple).
+- Header navigation without emoji; quieter glass surfaces and editorial buttons.
+- Gallery / Writing / About / Projects page headers aligned to the new visual language.
+- Homepage content extracted to `src/i18n/pages/home.ts`; removed decorative particle / orbit / stats clutter from the home path.
+- Pinned Astro to `~5.18.2` to avoid Astro 6 “0 pages built” regression.
+- Full-site template pass: shared `PageHero`, content/tools/legal pages strip mesh badges and heavy cards; `/tools` becomes an editorial index; RelatedTools without emoji.
+- Chrome polish: flattened Header (Gallery/Writing/Projects/About/More), quieter Footer/BackToTop/Cookie/QuickActions/Share/Shortcuts FABs; editorial 404; nested nav active states.
+- Local verify skip (`import.meta.env.DEV` / `PUBLIC_SKIP_VERIFY`), AdSense reserved slots (`AdSlot` + `.env.example`), micro-interactions, content enrichment; removed unused widget components and stale `docs/archive` reports.
+- Reading list rewritten as deep notes: three reading routes, longer reflective `thought` + practice `takeaway` per book, and curated essay links (Hara / Barnbaum / Sontag / CSAPP / Meadows et al.).
+- About page rebuilt from GitHub profile: readable bio (fixed prose bold contrast), research / AgentSociety 2 publication, selected work, stack chips; removed skill-radar and percent bars.
+- Restored playful utilities: sitewide MusicPlayer + holiday greeting, homepage daily poem / on-this-day, `/fun` corner with pomodoro & weather; entry in More / Tools.
+- Studio craft pass: paper/film grain + vignette, warmer ink dark mode, premium hero (viewfinder, grain, light sweep), slim footer; `/fun` adds calculator, password, color picker, countdown, ambient radio.
+- AdSense slots stay mounted as code reservations only — no visible placeholder when client/slot env is empty.
+- Legal chrome: footer/More link licence + accessibility; reserved ICP/公安备案 via env (hidden when empty); site notice banner/modal via `src/config/notice.ts` (`enabled: false` by default).
+- Cyanotype studio palette, magazine sitemap index, support page (Afdian), Now weather with Beijing fallback, blank-frame 404; removed stale docs (`archive` / design / performance / superpowers) and unused widget components.
+- Service Worker no longer precaches non-existent `/css/global.css` (Astro hashed `/_astro` assets).
+
 ## [3.0.1] - 2026-03-19
 
 ### Added

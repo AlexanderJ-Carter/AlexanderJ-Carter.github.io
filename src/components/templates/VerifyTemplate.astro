@@ -1,201 +1,200 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../PageHero.astro';
+import { skipVerify, turnstileSiteKey, isDev } from '../../config/site';
+import { resolveLang } from '../../i18n/types';
 
-const { lang } = Astro.props;
+const lang = resolveLang(Astro.props.lang);
 
-type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
-
-const verifyData: Record<Lang, any> = {
+const copy = {
   'zh-CN': {
     title: '安全验证',
-    headerTitle: '🔐 安全验证',
-    headerDesc: '请完成以下验证以访问受保护的内容',
-    verifying: '正在验证您的访问权限...',
-    verifyDesc: '请稍候，我们正在确认您的身份。这通常只需要几秒钟。',
-    manualVerify: '如果验证没有自动开始，请点击下方按钮：',
-    verifyButton: '开始验证',
+    desc: '完成验证后即可访问受保护页面。',
+    verifying: '正在确认你是真人访客',
+    verifyDesc: '通常只需几秒。完成后会自动跳转。',
     helpTitle: '为什么需要验证？',
     helpDesc:
-      '为了保护网站内容的安全，防止恶意爬虫和攻击，我们需要确认您是真实用户。感谢您的理解与配合。',
-    footer: '安全验证由 Cloudflare Turnstile 提供支持',
+      '用于降低恶意爬取与滥用风险。验证由 Cloudflare Turnstile 提供，不收集额外账号信息。',
+    footer: 'Powered by Cloudflare Turnstile',
+    skipTitle: '本地开发模式',
+    skipDesc: '当前已跳过人机验证。点击下方按钮继续访问。',
+    skipButton: '跳过并继续',
+    forceHint: '正式环境仍会要求验证。需要强制测试时可设 PUBLIC_FORCE_VERIFY=true。',
   },
   'zh-TW': {
     title: '安全驗證',
-    headerTitle: '🔐 安全驗證',
-    headerDesc: '請完成以下驗證以存取受保護的內容',
-    verifying: '正在驗證您的存取權限...',
-    verifyDesc: '請稍候，我們正在確認您的身分。這通常只需要幾秒鐘。',
-    manualVerify: '如果驗證沒有自動開始，請點擊下方按鈕：',
-    verifyButton: '開始驗證',
+    desc: '完成驗證後即可存取受保護頁面。',
+    verifying: '正在確認你是真人訪客',
+    verifyDesc: '通常只需幾秒。完成後會自動跳轉。',
     helpTitle: '為什麼需要驗證？',
     helpDesc:
-      '為了保護網站內容的安全，防止惡意爬蟲和攻擊，我們需要確認您是真實用戶。感謝您的理解與配合。',
-    footer: '安全驗證由 Cloudflare Turnstile 提供支援',
+      '用於降低惡意爬取與濫用風險。驗證由 Cloudflare Turnstile 提供，不收集額外帳號資訊。',
+    footer: 'Powered by Cloudflare Turnstile',
+    skipTitle: '本地開發模式',
+    skipDesc: '目前已跳過真人驗證。點擊下方按鈕繼續訪問。',
+    skipButton: '跳過並繼續',
+    forceHint: '正式環境仍會要求驗證。需要強制測試時可設 PUBLIC_FORCE_VERIFY=true。',
   },
   'en-GB': {
-    title: 'Security Verification',
-    headerTitle: '🔐 Security Verification',
-    headerDesc:
-      'Please complete the verification below to access protected content',
-    verifying: 'Verifying your access...',
-    verifyDesc:
-      'Please wait while we confirm your identity. This usually takes just a few seconds.',
-    manualVerify:
-      'If verification does not start automatically, please click the button below:',
-    verifyButton: 'Start Verification',
-    helpTitle: 'Why is verification needed?',
+    title: 'Security check',
+    desc: 'Complete verification to open protected pages.',
+    verifying: 'Confirming you are a real visitor',
+    verifyDesc: 'This usually takes a few seconds, then we redirect you.',
+    helpTitle: 'Why this step?',
     helpDesc:
-      'To protect website content and prevent malicious crawlers and attacks, we need to confirm you are a real user. Thank you for your understanding and cooperation.',
-    footer: 'Security verification powered by Cloudflare Turnstile',
+      'It reduces scraping and abuse. Verification is provided by Cloudflare Turnstile and does not create an account.',
+    footer: 'Powered by Cloudflare Turnstile',
+    skipTitle: 'Local development',
+    skipDesc: 'Human verification is skipped here. Continue to your destination.',
+    skipButton: 'Skip and continue',
+    forceHint:
+      'Production still requires Turnstile. Set PUBLIC_FORCE_VERIFY=true to test the gate in dev.',
   },
   fr: {
-    title: 'Vérification de sécurité',
-    headerTitle: '🔐 Vérification de sécurité',
-    headerDesc:
-      'Veuillez compléter la vérification ci-dessous pour accéder au contenu protégé',
-    verifying: 'Vérification de votre accès...',
-    verifyDesc:
-      'Veuillez patienter pendant que nous confirmons votre identité. Cela ne prend généralement que quelques secondes.',
-    manualVerify:
-      'Si la vérification ne démarre pas automatiquement, veuillez cliquer sur le bouton ci-dessous :',
-    verifyButton: 'Démarrer la vérification',
-    helpTitle: 'Pourquoi la vérification est-elle nécessaire ?',
+    title: 'Vérification',
+    desc: 'Terminez la vérification pour ouvrir les pages protégées.',
+    verifying: 'Confirmation que vous êtes un visiteur réel',
+    verifyDesc: 'Cela prend généralement quelques secondes, puis redirection.',
+    helpTitle: 'Pourquoi cette étape ?',
     helpDesc:
-      'Pour protéger le contenu du site web et empêcher les robots malveillants et les attaques, nous devons confirmer que vous êtes un utilisateur réel. Merci de votre compréhension et de votre coopération.',
-    footer: 'Vérification de sécurité propulsée par Cloudflare Turnstile',
+      'Elle réduit le scraping et les abus. La vérification est fournie par Cloudflare Turnstile.',
+    footer: 'Propulsé par Cloudflare Turnstile',
+    skipTitle: 'Développement local',
+    skipDesc: 'La vérification est désactivée ici. Continuez vers la destination.',
+    skipButton: 'Passer et continuer',
+    forceHint:
+      'La production exige encore Turnstile. Définissez PUBLIC_FORCE_VERIFY=true pour tester.',
   },
   ru: {
-    title: 'Проверка безопасности',
-    headerTitle: '🔐 Проверка безопасности',
-    headerDesc:
-      'Пожалуйста, пройдите проверку ниже, чтобы получить доступ к защищенному контенту',
-    verifying: 'Проверка вашего доступа...',
-    verifyDesc:
-      'Пожалуйста, подождите, пока мы подтвердим вашу личность. Обычно это занимает всего несколько секунд.',
-    manualVerify:
-      'Если проверка не начинается автоматически, нажмите кнопку ниже:',
-    verifyButton: 'Начать проверку',
-    helpTitle: 'Зачем нужна проверка?',
+    title: 'Проверка',
+    desc: 'Пройдите проверку, чтобы открыть защищённые страницы.',
+    verifying: 'Подтверждаем, что вы реальный посетитель',
+    verifyDesc: 'Обычно несколько секунд — затем перенаправление.',
+    helpTitle: 'Зачем это?',
     helpDesc:
-      'Для защиты контента сайта и предотвращения вредоносных сканеров и атак нам необходимо подтвердить, что вы реальный пользователь. Спасибо за понимание и сотрудничество.',
-    footer: 'Проверка безопасности при поддержке Cloudflare Turnstile',
+      'Снижает скрейпинг и злоупотребления. Проверку обеспечивает Cloudflare Turnstile.',
+    footer: 'При поддержке Cloudflare Turnstile',
+    skipTitle: 'Локальная разработка',
+    skipDesc: 'Проверка здесь отключена. Продолжите к целевой странице.',
+    skipButton: 'Пропустить и продолжить',
+    forceHint:
+      'В продакшене Turnstile обязателен. PUBLIC_FORCE_VERIFY=true — чтобы тестировать в dev.',
   },
-};
+} as const;
 
-const content = verifyData[lang as Lang] || verifyData['en-GB'];
+const content = copy[lang] || copy['en-GB'];
 ---
 
 <BaseLayout
   title={`${content.title} - Alexander Carter`}
-  showHeader={false}
-  showFooter={false}
+  description={content.desc}
+  showHeader={true}
+  showFooter={true}
 >
-  <!-- Hero Section -->
-  <section class="pt-32 pb-16 bg-mesh-gradient">
-    <div class="container mx-auto px-4 lg:px-8 text-center">
-      <h1
-        class="text-5xl md:text-6xl font-display font-bold mb-6 gradient-text"
-      >
-        {content.headerTitle}
-      </h1>
-      <p
-        class="text-xl text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
-      >
-        {content.headerDesc}
-      </p>
-    </div>
-  </section>
+  <PageHero kicker="Verify" title={content.title} description={content.desc} />
 
-  <!-- Auth Section -->
-  <section
-    class="py-16 container mx-auto px-4 lg:px-8 flex justify-center items-center min-h-[60vh]"
-  >
-    <div class="max-w-md w-full">
-      <!-- Cloudflare Turnstile Verification -->
+  <section class="pb-24">
+    <div class="page-shell">
       <div
-        class="glass-card p-8 mb-8 flex flex-col items-center justify-center min-h-[360px] relative overflow-hidden"
+        class="border border-[rgb(var(--color-border))] p-8 md:p-10 flex flex-col items-center text-center"
       >
-        <!-- Background Decoration -->
-        <div
-          class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-accent-500/5 pointer-events-none"
-        >
-        </div>
-
-        <div class="relative z-10 flex flex-col items-center w-full">
-          <div
-            class="w-16 h-16 mb-6 rounded-full bg-[rgb(var(--color-bg-secondary))] flex items-center justify-center shadow-inner"
-          >
-            <svg
-              class="w-8 h-8 text-primary-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-              ></path>
-            </svg>
-          </div>
-
-          <h3
-            class="text-xl font-bold mb-2 text-[rgb(var(--color-text-primary))]"
-          >
-            {content.verifying}
-          </h3>
-          <p class="text-center text-[rgb(var(--color-text-secondary))] mb-8">
-            {content.verifyDesc}
-          </p>
-
-          <!-- Turnstile Widget Container -->
-          <script
-            is:inline
-            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-            async
-            defer></script>
-          <div
-            class="cf-turnstile"
-            data-sitekey="0x4AAAAAABdh_m4Oroh5Egsy"
-            data-callback="onTurnstileSuccess"
-            data-theme="auto"
-          >
-          </div>
-
-          <div class="mt-6 text-xs text-[rgb(var(--color-text-tertiary))]">
-            {content.footer}
-          </div>
-        </div>
+        {
+          skipVerify ? (
+            <>
+              <p class="font-heading text-sm tracking-[0.18em] uppercase text-primary-600 dark:text-primary-400 mb-3">
+                {isDev ? 'DEV' : 'SKIP'}
+              </p>
+              <h2 class="font-heading text-2xl font-bold mb-3">
+                {content.skipTitle}
+              </h2>
+              <p class="text-[rgb(var(--color-text-secondary))] mb-8 max-w-md">
+                {content.skipDesc}
+              </p>
+              <button type="button" id="verify-skip-btn" class="btn-primary">
+                {content.skipButton}
+              </button>
+              <p class="mt-6 text-xs text-[rgb(var(--color-text-tertiary))] max-w-sm">
+                {content.forceHint}
+              </p>
+            </>
+          ) : (
+            <>
+              <div
+                class="w-14 h-14 mb-6 border border-[rgb(var(--color-border))] flex items-center justify-center text-primary-600 dark:text-primary-400"
+                aria-hidden="true"
+              >
+                <svg
+                  class="w-7 h-7"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.75"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  />
+                </svg>
+              </div>
+              <h2 class="font-heading text-xl font-bold mb-2">
+                {content.verifying}
+              </h2>
+              <p class="text-[rgb(var(--color-text-secondary))] mb-8 max-w-sm">
+                {content.verifyDesc}
+              </p>
+              <script
+                is:inline
+                src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                async
+                defer></script>
+              <div
+                class="cf-turnstile"
+                data-sitekey={turnstileSiteKey}
+                data-callback="onTurnstileSuccess"
+                data-theme="auto"
+              />
+              <p class="mt-6 text-xs text-[rgb(var(--color-text-tertiary))]">
+                {content.footer}
+              </p>
+            </>
+          )
+        }
       </div>
 
-      <!-- Help Text -->
-      <div class="text-center">
-        <p class="text-sm text-[rgb(var(--color-text-secondary))]">
-          {content.helpTitle}
-          <br />
-          <span class="opacity-75">
-            {content.helpDesc}
-          </span>
+      <aside class="mt-10 border-t border-[rgb(var(--color-border))] pt-8">
+        <h3 class="font-heading font-semibold mb-2">{content.helpTitle}</h3>
+        <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+          {content.helpDesc}
         </p>
-      </div>
+      </aside>
     </div>
   </section>
 </BaseLayout>
 
 <script is:inline>
-  // Turnstile callback
-  window.onTurnstileSuccess = function (token) {
-    console.log('Verification successful', token);
-
-    // Set verification status
-    sessionStorage.setItem('is_verified', 'true');
-
-    // Get redirect URL from query params
+  function completeVerification() {
+    try {
+      sessionStorage.setItem('is_verified', 'true');
+    } catch (_) {}
     const urlParams = new URLSearchParams(window.location.search);
     const returnUrl = urlParams.get('redirect') || '/';
-
-    // Redirect
     window.location.href = returnUrl;
+  }
+
+  window.onTurnstileSuccess = function () {
+    completeVerification();
   };
+
+  document
+    .getElementById('verify-skip-btn')
+    ?.addEventListener('click', completeVerification);
+
+  // If we landed on /verify while skip is on, auto-continue after a short beat
+  if (document.getElementById('verify-skip-btn')) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('redirect')) {
+      setTimeout(completeVerification, 400);
+    }
+  }
 </script>

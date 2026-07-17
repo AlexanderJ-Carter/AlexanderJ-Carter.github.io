@@ -80,11 +80,11 @@ function getLangPath(path: string): string {
   </div>
   <div class="absolute inset-0 flex items-center justify-center p-4">
     <div
-      class="glass-card rounded-2xl p-6 max-w-md w-full max-h-[80vh] overflow-y-auto"
+      class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] rounded-sm p-6 max-w-md w-full max-h-[80vh] overflow-y-auto"
     >
       <div class="flex items-center justify-between mb-4">
         <h2 id="shortcuts-title" class="text-xl font-heading font-bold">
-          ⌨️ {
+          {
             lang === 'zh-CN'
               ? '键盘快捷键'
               : lang === 'zh-TW'
@@ -95,7 +95,7 @@ function getLangPath(path: string): string {
         <button
           id="close-shortcuts"
           type="button"
-          class="p-2 hover:bg-[rgb(var(--color-bg-accent))] rounded-lg transition-colors"
+          class="p-2 min-w-11 min-h-11 hover:bg-[rgb(var(--color-bg-accent))] rounded-sm transition-colors focus-visible:ring-2 focus-visible:ring-primary-500"
           aria-label="Close"
         >
           <svg
@@ -145,7 +145,7 @@ function getLangPath(path: string): string {
 <button
   id="shortcuts-hint"
   type="button"
-  class="shortcuts-hint fixed z-40 p-3 rounded-full glass-card hover:scale-110 transition-transform opacity-60 hover:opacity-100"
+  class="shortcuts-hint fixed z-40 w-11 h-11 min-w-[44px] min-h-[44px] rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] hover:border-primary-500/50 opacity-70 hover:opacity-100 transition-opacity flex items-center justify-center focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
   aria-label={lang === 'zh-CN' ? '键盘快捷键' : 'Keyboard shortcuts'}
   title={lang === 'zh-CN' ? '键盘快捷键 (?)' : 'Keyboard shortcuts (?)'}
 >
@@ -253,15 +253,12 @@ function getLangPath(path: string): string {
     }
   });
 
-  // Show hint button on first visit
+  // Quiet first-visit affordance — no bounce carnival
   if (!localStorage.getItem('shortcuts-hint-seen')) {
     setTimeout(() => {
-      hintBtn?.classList.add('animate-bounce');
-      setTimeout(() => {
-        hintBtn?.classList.remove('animate-bounce');
-      }, 3000);
+      hintBtn?.classList.add('opacity-100');
       localStorage.setItem('shortcuts-hint-seen', 'true');
-    }, 5000);
+    }, 4000);
   }
 </script>
 

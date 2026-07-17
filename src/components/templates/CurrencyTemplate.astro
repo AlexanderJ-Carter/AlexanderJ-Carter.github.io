@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RelatedTools from '../RelatedTools.astro';
+import PageHero from '../PageHero.astro';
 
 const { lang } = Astro.props;
 
@@ -319,29 +320,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
 ---
 
 <BaseLayout title={`${content.title} - Alexander Carter`}>
-  <!-- Hero Section -->
-  <section class="relative pt-28 pb-16 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true"></div>
-    <div
-      class="absolute inset-0 opacity-100"
-      style="background: var(--hero-spotlight);"
-      aria-hidden="true"
-    >
-    </div>
-    <div class="section-divider" aria-hidden="true"></div>
-    <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
-      <h1
-        class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight"
-      >
-        {content.headerTitle}
-      </h1>
-      <p
-        class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
-      >
-        {content.headerDesc}
-      </p>
-    </div>
-  </section>
+  <PageHero title={content.title} description={content.headerDesc} />
 
   <!-- Currency Rates Section -->
   <section class="py-16 container mx-auto px-4 lg:px-8">
@@ -351,8 +330,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
         class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6"
       >
         <div>
-          <h2 class="text-3xl font-bold mb-2 flex items-center gap-3">
-            <span class="text-4xl">💹</span>
+          <h2 class="text-3xl font-bold mb-2">
             {content.mainRatesTitle}
           </h2>
           <p class="text-[rgb(var(--color-text-secondary))] mb-1">
@@ -386,7 +364,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
         </div>
         <button
           id="refresh-rates"
-          class="px-6 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
+          class="px-6 py-3 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] font-semibold hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-2"
         >
           <svg
             id="refresh-icon"
@@ -410,7 +388,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
         id="rates-grid"
       >
         <!-- Rates will be inserted here -->
-        <div class="glass-card p-6 animate-pulse">
+        <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 animate-pulse rounded-xl">
           <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4">
           </div>
           <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
@@ -429,9 +407,9 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
 
     <!-- Converter -->
     <div class="max-w-3xl mx-auto mb-16">
-      <div class="glass-card p-8 md:p-10">
+      <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 md:p-10 rounded-xl">
         <div class="mb-6">
-          <h3 class="text-3xl font-bold mb-2">{content.converterTitle}</h3>
+          <h3 class="text-2xl font-heading font-bold mb-2">{content.converterTitle.replace(/^💰\s*/, '')}</h3>
           <p class="text-[rgb(var(--color-text-secondary))]">
             {content.converterDesc}
           </p>
@@ -539,7 +517,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
           <button
             type="button"
             id="convert-btn"
-            class="w-full py-4 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-xl hover:shadow-xl hover:scale-[1.02] transition-all duration-300 font-bold text-lg flex items-center justify-center gap-2"
+            class="w-full py-4 border border-[rgb(var(--color-text-primary))] bg-[rgb(var(--color-text-primary))] text-[rgb(var(--color-bg-primary))] rounded-lg hover:opacity-90 transition-opacity font-bold text-lg flex items-center justify-center gap-2"
           >
             <svg
               class="w-6 h-6"
@@ -557,14 +535,14 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
             {content.convert}
           </button>
           <div
-            class="mt-6 p-8 bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20 rounded-xl text-center border-2 border-primary-200 dark:border-primary-800"
+            class="mt-6 p-8 bg-[rgb(var(--color-bg-secondary))] rounded-xl text-center border border-[rgb(var(--color-border))]"
           >
             <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-3">
               {content.result}
             </p>
             <p
               id="conversion-result"
-              class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent"
+              class="text-4xl md:text-5xl font-bold text-[rgb(var(--color-text-primary))]"
             >
               --
             </p>
@@ -580,8 +558,8 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
 
     <!-- Tips Section -->
     <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-8">
-        <h3 class="text-3xl font-bold mb-2">{content.tipsTitle}</h3>
+      <div class="mb-8">
+        <h3 class="text-2xl font-heading font-bold mb-2">{content.tipsTitle.replace(/^💡\s*/, '')}</h3>
         <p class="text-[rgb(var(--color-text-secondary))]">
           {content.tipsDesc}
         </p>
@@ -589,7 +567,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {
           content.tips.map((tip: any) => (
-            <div class="glass-card p-6 hover:shadow-lg transition-all duration-300 group">
+            <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl">
               <div class="flex items-start gap-4">
                 <div class="text-4xl flex-shrink-0 group-hover:scale-110 transition-transform">
                   {tip.icon}
@@ -712,16 +690,16 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
 
             const card = document.createElement('div');
             card.className =
-              'glass-card p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer group';
+              'border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl hover:bg-[rgb(var(--color-bg-secondary))] transition-colors cursor-pointer group';
             card.innerHTML = `
                             <div class="flex justify-between items-start mb-3">
                                 <div>
-                                    <span class="text-2xl font-bold text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors">${currency}</span>
+                                    <span class="text-2xl font-bold text-[rgb(var(--color-text-primary))]">${currency}</span>
                                     <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-1">1 ${currency}</p>
                                 </div>
                                 <span class="text-3xl opacity-50 group-hover:opacity-100 transition-opacity">${symbol}</span>
                             </div>
-                            <div class="text-3xl font-bold bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent">
+                            <div class="text-3xl font-bold text-[rgb(var(--color-text-primary))]">
                                 ¥${inverseRate}
                             </div>
                         `;
@@ -813,7 +791,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
 
       if (data.result === 'success' && data.rates && data.rates[to]) {
         const rate = data.rates[to];
-        currentRateDisplay.textContent = `💹 ${content.currentRate}: 1 ${from} = ${rate.toFixed(4)} ${to}`;
+        currentRateDisplay.textContent = `${content.currentRate}: 1 ${from} = ${rate.toFixed(4)} ${to}`;
       }
     } catch (error) {
       currentRateDisplay.textContent = '';

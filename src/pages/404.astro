@@ -1,526 +1,260 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getLangFromUrl } from '../i18n/ui';
+import { getLangPath, type Lang } from '../i18n/types';
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url) as Lang;
+const home = getLangPath(lang, '/');
+const requested = Astro.url.pathname;
 
-const translations = {
+const copy: Record<
+  Lang,
+  {
+    title: string;
+    kicker: string;
+    frame: string;
+    message: string;
+    pathLabel: string;
+    home: string;
+    gallery: string;
+    writing: string;
+    sitemap: string;
+    support: string;
+  }
+> = {
   'zh-CN': {
-    title: '页面未找到',
+    title: '这格是空的',
+    kicker: 'Frame 404',
+    frame: 'NEG · EMPTY',
     message:
-      '抱歉,您访问的页面似乎不存在了。可能是链接错误,或者页面已经被移动。',
-    suggestions: '您可以尝试:',
-    home: '返回首页',
-    back: '返回上一页',
-    tip: '小提示: 也许这个页面正在与宇宙中的某个平行世界相连... 🌌',
+      '取景框里没有对上的画面。地址可能写错了，或这页已经从册子里抽走。',
+    pathLabel: '请求路径',
+    home: '回首页',
+    gallery: '画廊',
+    writing: '写作',
+    sitemap: '目录',
+    support: '支持本站',
   },
   'zh-TW': {
-    title: '頁面未找到',
+    title: '這格是空的',
+    kicker: 'Frame 404',
+    frame: 'NEG · EMPTY',
     message:
-      '抱歉,您訪問的頁面似乎不存在了。可能是鏈接錯誤,或者頁面已經被移動。',
-    suggestions: '您可以嘗試:',
-    home: '返回首頁',
-    back: '返回上一頁',
-    tip: '小提示: 也許這個頁面正在與宇宙中的某個平行世界相連... 🌌',
+      '取景框裡沒有對上的畫面。位址可能寫錯了，或這頁已經從冊子裡抽走。',
+    pathLabel: '請求路徑',
+    home: '回首頁',
+    gallery: '畫廊',
+    writing: '寫作',
+    sitemap: '目錄',
+    support: '支持本站',
   },
   'en-GB': {
-    title: 'Page Not Found',
+    title: 'Blank frame',
+    kicker: 'Frame 404',
+    frame: 'NEG · EMPTY',
     message:
-      'Sorry, the page you are looking for does not exist. It may have been moved or the link is incorrect.',
-    suggestions: 'You can try:',
-    home: 'Go Home',
-    back: 'Go Back',
-    tip: 'Fun fact: This page might be connected to a parallel universe... 🌌',
+      'Nothing exposed at this address. The link may be wrong, or the page has left the book.',
+    pathLabel: 'Requested path',
+    home: 'Home',
+    gallery: 'Gallery',
+    writing: 'Writing',
+    sitemap: 'Contents',
+    support: 'Support',
   },
   fr: {
-    title: 'Page non trouvée',
+    title: 'Cadre vide',
+    kicker: 'Frame 404',
+    frame: 'NEG · EMPTY',
     message:
-      "Désolé, la page que vous recherchez n'existe pas. Elle a peut-être été déplacée ou le lien est incorrect.",
-    suggestions: 'Vous pouvez essayer:',
+      'Rien n’est exposé à cette adresse. Le lien est peut-être faux, ou la page a quitté le cahier.',
+    pathLabel: 'Chemin demandé',
     home: 'Accueil',
-    back: 'Retour',
-    tip: 'Fait amusant: Cette page pourrait être connectée à un univers parallèle... 🌌',
+    gallery: 'Galerie',
+    writing: 'Écrits',
+    sitemap: 'Sommaire',
+    support: 'Soutenir',
   },
   ru: {
-    title: 'Страница не найдена',
+    title: 'Пустой кадр',
+    kicker: 'Frame 404',
+    frame: 'NEG · EMPTY',
     message:
-      'Извините, страница, которую вы ищете, не существует. Возможно, она была перемещена или ссылка неверна.',
-    suggestions: 'Вы можете попробовать:',
-    home: 'На главную',
-    back: 'Назад',
-    tip: 'Интересный факт: Эта страница может быть связана с параллельной вселенной... 🌌',
+      'По этому адресу нет кадра. Ссылка могла устареть, или страница выпала из тетради.',
+    pathLabel: 'Запрошенный путь',
+    home: 'Главная',
+    gallery: 'Галерея',
+    writing: 'Статьи',
+    sitemap: 'Оглавление',
+    support: 'Поддержать',
   },
 };
 
-const t404 = translations[lang] || translations['zh-CN'];
+const t = copy[lang] || copy['zh-CN'];
+
+const exits = [
+  { href: home, label: t.home, n: '01' },
+  { href: getLangPath(lang, '/gallery'), label: t.gallery, n: '02' },
+  { href: getLangPath(lang, '/writing'), label: t.writing, n: '03' },
+  { href: getLangPath(lang, '/sitemap'), label: t.sitemap, n: '04' },
+  { href: getLangPath(lang, '/support'), label: t.support, n: '05' },
+];
 ---
 
-<BaseLayout title={`${t404.title} - 404`} showHeader={false} showFooter={false}>
-  <section
-    class="relative min-h-screen flex items-center justify-center overflow-hidden"
-  >
-    <!-- Animated Background -->
-    <div class="absolute inset-0 bg-mesh-gradient"></div>
-
-    <!-- Floating Elements -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-      <div class="particle" style="left: 30%; animation-delay: 2s;"></div>
-      <div class="particle" style="left: 50%; animation-delay: 4s;"></div>
-      <div class="particle" style="left: 70%; animation-delay: 1s;"></div>
-      <div class="particle" style="left: 90%; animation-delay: 3s;"></div>
-    </div>
-
-    <!-- Content -->
-    <div class="relative z-10 container mx-auto px-4 lg:px-8 text-center">
-      <div class="max-w-3xl mx-auto">
-        <!-- 404 Number with Animation -->
-        <div class="mb-8">
-          <h1
-            id="error-404"
-            class="text-9xl md:text-[12rem] font-display font-bold gradient-text"
-          >
-            404
-          </h1>
-        </div>
-
-        <!-- Animated Icon -->
-        <div class="mb-8">
-          <button
-            type="button"
-            id="error-icon"
-            class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-5xl cursor-pointer hover:scale-110 transition-transform"
-            onclick="rotateIcon()"
-            aria-label="Rotate error icon"
-          >
-            🔍
-          </button>
-        </div>
-
-        <!-- Message -->
-        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">
-          {t404.title}
-        </h2>
-
-        <p
-          class="text-lg md:text-xl text-[rgb(var(--color-text-secondary))] mb-8 max-w-xl mx-auto"
-        >
-          {t404.message}
-        </p>
-
-        <!-- Interactive Game -->
-        <div class="glass-card p-8 mb-8 max-w-md mx-auto">
-          <h3 class="text-xl font-bold mb-4">
-            {
-              lang === 'zh-CN'
-                ? '🎮 小游戏：找到隐藏的数字'
-                : lang === 'zh-TW'
-                  ? '🎮 小遊戲：找到隱藏的數字'
-                  : '🎮 Mini Game: Find the Hidden Number'
-            }
-          </h3>
-          <div id="number-game" class="space-y-4">
-            <div class="grid grid-cols-5 gap-2 mb-4">
-              {
-                Array.from({ length: 25 }).map((_, i) => (
-                  <button
-                    type="button"
-                    class="number-cell w-12 h-12 flex items-center justify-center rounded-lg bg-[rgb(var(--color-bg-secondary))] cursor-pointer hover:bg-[rgb(var(--color-bg-accent))] focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors"
-                    data-number={i + 1}
-                    aria-label={
-                      lang === 'zh-CN'
-                        ? `方块 ${i + 1}`
-                        : lang === 'zh-TW'
-                          ? `方塊 ${i + 1}`
-                          : `Cell ${i + 1}`
-                    }
-                  >
-                    ?
-                  </button>
-                ))
-              }
+<BaseLayout title={`404 · ${t.title}`} description={t.message}>
+  <section class="not-found relative min-h-[78vh] flex items-center overflow-hidden">
+    <div class="page-shell-wide py-24 md:py-32 w-full relative z-10">
+      <div class="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16 items-center">
+        <!-- Blank negative / viewfinder -->
+        <div class="not-found-plate relative aspect-[4/3] max-w-xl mx-auto lg:mx-0 w-full">
+          <div class="viewfinder-corners" aria-hidden="true">
+            <span class="tl"></span>
+            <span class="tr"></span>
+            <span class="bl"></span>
+            <span class="br"></span>
+          </div>
+          <div class="not-found-plate__inner absolute inset-4 md:inset-5 flex flex-col justify-between border border-[rgb(var(--color-border))]">
+            <div class="flex items-center justify-between px-4 py-3 border-b border-[rgb(var(--color-border))]">
+              <span class="meta-mono">{t.frame}</span>
+              <span class="meta-mono text-[rgb(var(--color-accent))]">ISO —</span>
             </div>
-            <p class="text-sm text-[rgb(var(--color-text-secondary))]">
-              {
-                lang === 'zh-CN'
-                  ? '点击方块找到数字 404！'
-                  : lang === 'zh-TW'
-                    ? '點擊方塊找到數字 404！'
-                    : 'Click the squares to find the number 404!'
-              }
-            </p>
-            <div
-              id="game-result"
-              class="hidden"
-              role="status"
-              aria-live="polite"
-            >
-              <p class="text-green-500 font-bold text-lg">
-                {
-                  lang === 'zh-CN'
-                    ? '🎉 找到了！'
-                    : lang === 'zh-TW'
-                      ? '🎉 找到了！'
-                      : '🎉 Found it!'
-                }
+            <div class="flex-1 flex items-center justify-center px-4">
+              <p
+                class="not-found-num font-heading font-bold tracking-tighter text-[rgb(var(--color-text-primary))] select-none"
+                aria-hidden="true"
+              >
+                404
               </p>
             </div>
+            <div class="flex items-center justify-between px-4 py-3 border-t border-[rgb(var(--color-border))]">
+              <span class="meta-mono">F/—</span>
+              <span class="meta-mono not-found-blink">● REC</span>
+              <span class="meta-mono">1/—</span>
+            </div>
           </div>
         </div>
 
-        <!-- Suggestions -->
-        <div class="glass-card p-8 mb-8 max-w-2xl mx-auto">
-          <h3 class="text-xl font-bold mb-4">{t404.suggestions}</h3>
-          <div class="grid md:grid-cols-2 gap-4 text-left">
-            <a
-              href={lang === 'zh-CN' ? '/' : `/${lang}/`}
-              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
-            >
-              <span class="text-2xl group-hover:scale-110 transition-transform"
-                >🏠</span
-              >
-              <div>
-                <div class="font-semibold mb-1">
-                  {
-                    lang === 'zh-CN'
-                      ? '返回首页'
-                      : lang === 'zh-TW'
-                        ? '返回首頁'
-                        : 'Go Home'
-                  }
-                </div>
-                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                  {
-                    lang === 'zh-CN'
-                      ? '从主页重新开始浏览'
-                      : lang === 'zh-TW'
-                        ? '從主頁重新開始瀏覽'
-                        : 'Start browsing from the homepage'
-                  }
-                </div>
-              </div>
-            </a>
-
-            <a
-              href={lang === 'zh-CN' ? '/gallery' : `/${lang}/gallery`}
-              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
-            >
-              <span class="text-2xl group-hover:scale-110 transition-transform"
-                >🖼️</span
-              >
-              <div>
-                <div class="font-semibold mb-1">
-                  {
-                    lang === 'zh-CN'
-                      ? '浏览作品集'
-                      : lang === 'zh-TW'
-                        ? '瀏覽作品集'
-                        : 'Browse Gallery'
-                  }
-                </div>
-                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                  {
-                    lang === 'zh-CN'
-                      ? '查看摄影作品和项目'
-                      : lang === 'zh-TW'
-                        ? '查看攝影作品和項目'
-                        : 'View photography and projects'
-                  }
-                </div>
-              </div>
-            </a>
-
-            <a
-              href={lang === 'zh-CN' ? '/about' : `/${lang}/about`}
-              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
-            >
-              <span class="text-2xl group-hover:scale-110 transition-transform"
-                >👤</span
-              >
-              <div>
-                <div class="font-semibold mb-1">
-                  {
-                    lang === 'zh-CN'
-                      ? '了解更多'
-                      : lang === 'zh-TW'
-                        ? '了解更多'
-                        : 'Learn More'
-                  }
-                </div>
-                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                  {
-                    lang === 'zh-CN'
-                      ? '访问关于页面'
-                      : lang === 'zh-TW'
-                        ? '訪問關於頁面'
-                        : 'Visit the about page'
-                  }
-                </div>
-              </div>
-            </a>
-
-            <a
-              href={lang === 'zh-CN' ? '/contact' : `/${lang}/contact`}
-              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
-            >
-              <span class="text-2xl group-hover:scale-110 transition-transform"
-                >📧</span
-              >
-              <div>
-                <div class="font-semibold mb-1">
-                  {
-                    lang === 'zh-CN'
-                      ? '联系我们'
-                      : lang === 'zh-TW'
-                        ? '聯繫我們'
-                        : 'Contact Us'
-                  }
-                </div>
-                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                  {
-                    lang === 'zh-CN'
-                      ? '报告错误或寻求帮助'
-                      : lang === 'zh-TW'
-                        ? '報告錯誤或尋求幫助'
-                        : 'Report an error or get help'
-                  }
-                </div>
-              </div>
-            </a>
-
-            <a
-              href={lang === 'zh-CN' ? '/timeline' : `/${lang}/timeline`}
-              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
-            >
-              <span class="text-2xl group-hover:scale-110 transition-transform"
-                >📅</span
-              >
-              <div>
-                <div class="font-semibold mb-1">
-                  {
-                    lang === 'zh-CN'
-                      ? '时间轴'
-                      : lang === 'zh-TW'
-                        ? '時間軸'
-                        : lang === 'fr'
-                          ? 'Chronologie'
-                          : lang === 'ru'
-                            ? 'Хронология'
-                            : 'Timeline'
-                  }
-                </div>
-                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                  {
-                    lang === 'zh-CN'
-                      ? '成长与学习记录'
-                      : lang === 'zh-TW'
-                        ? '成長與學習記錄'
-                        : 'Growth and learning journey'
-                  }
-                </div>
-              </div>
-            </a>
-
-            <a
-              href={lang === 'zh-CN' ? '/sitemap' : `/${lang}/sitemap`}
-              class="flex items-start gap-3 p-3 bg-[rgb(var(--color-bg-accent))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] active:scale-[0.99] transition-all duration-200 group"
-            >
-              <span class="text-2xl group-hover:scale-110 transition-transform"
-                >🗺️</span
-              >
-              <div>
-                <div class="font-semibold mb-1">
-                  {
-                    lang === 'zh-CN'
-                      ? '网站地图'
-                      : lang === 'zh-TW'
-                        ? '網站地圖'
-                        : lang === 'fr'
-                          ? 'Plan du site'
-                          : lang === 'ru'
-                            ? 'Карта сайта'
-                            : 'Sitemap'
-                  }
-                </div>
-                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                  {
-                    lang === 'zh-CN'
-                      ? '查看全站导航'
-                      : lang === 'zh-TW'
-                        ? '查看全站導航'
-                        : 'View full site navigation'
-                  }
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href={lang === 'zh-CN' ? '/' : `/${lang}/`}
-            class="btn-primary inline-flex items-center gap-2"
+        <!-- Copy + exits -->
+        <div>
+          <p class="meta-mono mb-3 text-[rgb(var(--color-accent))]">{t.kicker}</p>
+          <h1
+            class="font-heading text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[rgb(var(--color-text-primary))] mb-5 text-balance"
           >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              ></path>
-            </svg>
-            {t404.home}
-          </a>
-
-          <button
-            type="button"
-            onclick="history.back()"
-            class="btn-secondary inline-flex items-center gap-2"
+            {t.title}
+          </h1>
+          <p
+            class="text-lg text-[rgb(var(--color-text-secondary))] leading-relaxed mb-6 max-w-md"
           >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            {t404.back}
-          </button>
-        </div>
+            {t.message}
+          </p>
 
-        <!-- Fun Element -->
-        <div class="mt-12 text-sm text-[rgb(var(--color-text-tertiary))]">
-          <p>{t404.tip}</p>
+          {
+            requested && requested !== '/404' && (
+              <p class="mb-8 text-sm text-[rgb(var(--color-text-tertiary))]">
+                <span class="meta-mono mr-2">{t.pathLabel}</span>
+                <code class="font-mono text-[rgb(var(--color-text-secondary))] break-all">
+                  {requested}
+                </code>
+              </p>
+            )
+          }
+
+          <ul class="border-t border-[rgb(var(--color-border))] max-w-md">
+            {
+              exits.map((item) => (
+                <li class="border-b border-[rgb(var(--color-border))]">
+                  <a
+                    href={item.href}
+                    class="list-row group flex items-baseline gap-4 py-3.5 px-1 hover:pl-2"
+                  >
+                    <span class="meta-mono text-[rgb(var(--color-text-tertiary))] group-hover:text-[rgb(var(--color-accent))] transition-colors">
+                      {item.n}
+                    </span>
+                    <span class="font-heading font-semibold text-[rgb(var(--color-text-primary))] group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors flex-1">
+                      {item.label}
+                    </span>
+                    <span
+                      class="meta-mono text-[rgb(var(--color-text-tertiary))] opacity-0 group-hover:opacity-100 transition-opacity"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
 
-<script is:inline>
-  // Animate 404 number
-  const error404 = document.getElementById('error-404');
-  if (error404) {
-    let rotation = 0;
-    setInterval(() => {
-      rotation += 5;
-      error404.style.transform = `rotate(${rotation}deg) scale(${1 + Math.sin((rotation * Math.PI) / 180) * 0.1})`;
-    }, 100);
-  }
-
-  // Rotate icon on click
-  function rotateIcon() {
-    const icon = document.getElementById('error-icon');
-    if (icon) {
-      icon.style.transform = 'rotate(360deg) scale(1.2)';
-      setTimeout(() => {
-        icon.style.transform = '';
-      }, 500);
-    }
-  }
-
-  // Number game
-  const cells = document.querySelectorAll('.number-cell');
-  const targetNumber = 404;
-  let found = false;
-
-  cells.forEach((cell) => {
-    cell.addEventListener('click', (e) => {
-      if (found) return;
-
-      const target = e.currentTarget;
-      if (!target) return;
-
-      const number = Math.floor(Math.random() * 500) + 1;
-      target.textContent = number;
-      target.classList.add('bg-primary-500/20');
-
-      if (number === targetNumber) {
-        found = true;
-        const result = document.getElementById('game-result');
-        if (result) {
-          result.classList.remove('hidden');
-          target.classList.add('bg-green-500', 'text-white', 'animate-pulse');
-        }
-        // Confetti effect
-        for (let i = 0; i < 20; i++) {
-          setTimeout(() => {
-            const confetti = document.createElement('div');
-            confetti.textContent = ['🎉', '🎊', '✨', '⭐'][
-              Math.floor(Math.random() * 4)
-            ];
-            confetti.className = 'fixed text-2xl pointer-events-none';
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.top = Math.random() * 100 + '%';
-            confetti.style.animation = 'confetti-fall 2s ease-out forwards';
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 2000);
-          }, i * 50);
-        }
-      }
-    });
-  });
-
-  // Make function global
-  window.rotateIcon = rotateIcon;
-</script>
-
 <style>
-  @keyframes pulse-slow {
+  .not-found-plate {
+    background: linear-gradient(
+      165deg,
+      rgb(var(--color-bg-primary)) 0%,
+      rgb(var(--color-bg-secondary) / 0.85) 100%
+    );
+  }
+
+  .not-found-plate .viewfinder-corners {
+    inset: 0.65rem;
+    z-index: 2;
+  }
+
+  .not-found-plate .viewfinder-corners span {
+    border-color: rgb(var(--color-text-primary) / 0.55);
+  }
+
+  .dark .not-found-plate .viewfinder-corners span {
+    border-color: rgb(var(--color-text-primary) / 0.45);
+  }
+
+  .not-found-plate__inner {
+    background: rgb(var(--color-bg-secondary) / 0.4);
+  }
+
+  .not-found-num {
+    font-size: clamp(4.5rem, 18vw, 9rem);
+    line-height: 0.85;
+    letter-spacing: -0.06em;
+    opacity: 0.92;
+    animation: not-found-breathe 5.5s ease-in-out infinite;
+  }
+
+  .not-found-blink {
+    color: rgb(var(--color-accent));
+    animation: not-found-rec 1.6s steps(1, end) infinite;
+  }
+
+  @keyframes not-found-breathe {
     0%,
     100% {
-      opacity: 1;
+      opacity: 0.72;
+      transform: scale(1);
     }
     50% {
-      opacity: 0.7;
+      opacity: 1;
+      transform: scale(1.015);
     }
   }
 
-  @keyframes bounce-slow {
+  @keyframes not-found-rec {
     0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-  }
-
-  @keyframes confetti-fall {
-    0% {
-      transform: translateY(0) rotate(0deg);
+    49% {
       opacity: 1;
     }
+    50%,
     100% {
-      transform: translateY(100vh) rotate(720deg);
-      opacity: 0;
+      opacity: 0.25;
     }
   }
 
-  .animate-pulse-slow {
-    animation: pulse-slow 3s ease-in-out infinite;
-  }
-
-  .animate-bounce-slow {
-    animation: bounce-slow 2s ease-in-out infinite;
-  }
-
-  #error-404 {
-    transition: transform 0.1s ease-out;
-  }
-
-  .number-cell {
-    transition: all 0.3s ease;
+  @media (prefers-reduced-motion: reduce) {
+    .not-found-num,
+    .not-found-blink {
+      animation: none !important;
+    }
   }
 </style>

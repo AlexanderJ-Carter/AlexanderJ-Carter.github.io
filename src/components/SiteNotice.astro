@@ -1,0 +1,458 @@
+---
+/**
+ * Site notice — editorial modal / banner.
+ * Controlled by src/config/notice.ts (enabled: false = render nothing).
+ */
+import { getLangFromUrl } from '../i18n/ui';
+import { resolveLang, getLangPath } from '../i18n/types';
+import { siteNotice, resolveNotice } from '../config/notice';
+
+const lang = resolveLang(getLangFromUrl(Astro.url));
+const active = siteNotice.enabled && Boolean(siteNotice.id);
+const copy = resolveNotice(lang);
+const storageKey = `site-notice-dismissed:${siteNotice.id}`;
+const rawHref = siteNotice.href?.trim() || '';
+const noticeHref =
+  rawHref && rawHref.startsWith('/') && !rawHref.startsWith('//')
+    ? getLangPath(lang, rawHref)
+    : rawHref;
+const hasCta = Boolean(noticeHref && copy.cta);
+const dismissible = siteNotice.dismissible !== false;
+
+const kicker =
+  lang === 'zh-CN' || lang === 'zh-TW'
+    ? 'Notice'
+    : lang === 'fr'
+      ? 'Annonce'
+      : lang === 'ru'
+        ? 'Notice'
+        : 'Notice';
+---
+
+{
+  active ? (
+    siteNotice.variant === 'modal' ? (
+      <div
+        id="site-notice"
+        class="site-notice site-notice--modal hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="site-notice-title"
+        data-storage-key={storageKey}
+        data-variant="modal"
+      >
+        <button
+          type="button"
+          class="site-notice__backdrop"
+          aria-label={copy.dismiss || 'Close'}
+          data-notice-dismiss
+        />
+        <div class="site-notice__panel" role="document">
+          <div class="site-notice__accent" aria-hidden="true" />
+          {dismissible && (
+            <button
+              type="button"
+              class="site-notice__x"
+              data-notice-dismiss
+              aria-label={copy.dismiss || 'Close'}
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          )}
+          <p class="site-notice__kicker">{kicker}</p>
+          <h2 id="site-notice-title" class="site-notice__title">
+            {copy.title}
+          </h2>
+          <p class="site-notice__body">{copy.body}</p>
+          <div class="site-notice__actions">
+            {hasCta && (
+              <a href={noticeHref} class="site-notice__cta">
+                <span>{copy.cta}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            )}
+            {dismissible && (
+              <button
+                type="button"
+                class="site-notice__dismiss"
+                data-notice-dismiss
+              >
+                {copy.dismiss || 'OK'}
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    ) : (
+      <div
+        id="site-notice"
+        class="site-notice site-notice--banner hidden"
+        role="region"
+        aria-label={copy.title}
+        data-storage-key={storageKey}
+        data-variant="banner"
+      >
+        <div class="site-notice__inner">
+          <div class="min-w-0 flex-1">
+            <p class="site-notice__kicker">{kicker}</p>
+            <p class="site-notice__title site-notice__title--inline">
+              {copy.title}
+              <span class="site-notice__dot" aria-hidden="true">
+                ·
+              </span>
+              <span class="site-notice__body site-notice__body--inline">
+                {copy.body}
+              </span>
+            </p>
+          </div>
+          <div class="site-notice__actions">
+            {hasCta && (
+              <a href={noticeHref} class="site-notice__cta site-notice__cta--sm">
+                <span>{copy.cta}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            )}
+            {dismissible && (
+              <button
+                type="button"
+                class="site-notice__x"
+                data-notice-dismiss
+                aria-label={copy.dismiss || 'Dismiss'}
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  ) : null
+}
+
+{
+  active && (
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('site-notice');
+        if (!el) return;
+        var key = el.getAttribute('data-storage-key') || '';
+        try {
+          if (key && localStorage.getItem(key) === '1') return;
+        } catch (_) {}
+
+        requestAnimationFrame(function () {
+          el.classList.remove('hidden');
+          el.classList.add('is-open');
+        });
+
+        if (el.getAttribute('data-variant') === 'modal') {
+          document.documentElement.style.overflow = 'hidden';
+        }
+
+        function dismiss() {
+          el.classList.remove('is-open');
+          el.classList.add('is-closing');
+          setTimeout(function () {
+            try {
+              if (key) localStorage.setItem(key, '1');
+            } catch (_) {}
+            el.classList.add('hidden');
+            el.classList.remove('is-closing');
+            document.documentElement.style.overflow = '';
+          }, 220);
+        }
+
+        el.querySelectorAll('[data-notice-dismiss]').forEach(function (btn) {
+          btn.addEventListener('click', dismiss);
+        });
+
+        document.addEventListener('keydown', function onKey(e) {
+          if (e.key === 'Escape' && el.classList.contains('is-open')) {
+            dismiss();
+            document.removeEventListener('keydown', onKey);
+          }
+        });
+      })();
+    </script>
+  )
+}
+
+<style>
+  .site-notice--banner {
+    position: relative;
+    z-index: 40;
+    border-bottom: 1px solid rgb(var(--color-border));
+    background: linear-gradient(
+      180deg,
+      rgb(var(--color-bg-secondary)) 0%,
+      rgb(var(--color-bg-primary)) 100%
+    );
+  }
+
+  .site-notice__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.85rem 1.5rem;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 0.9rem 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    .site-notice__inner {
+      padding-inline: 2rem;
+    }
+  }
+
+  .site-notice__kicker {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+    margin-bottom: 0.35rem;
+  }
+
+  .site-notice__title {
+    font-family: theme('fontFamily.heading');
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(var(--color-text-primary));
+    line-height: 1.2;
+  }
+
+  .site-notice__title--inline {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .site-notice__dot {
+    margin-inline: 0.4rem;
+    color: rgb(var(--color-text-tertiary));
+    font-weight: 400;
+  }
+
+  .site-notice__body {
+    color: rgb(var(--color-text-secondary));
+    line-height: 1.65;
+  }
+
+  .site-notice__body--inline {
+    font-family: theme('fontFamily.sans');
+    font-size: 0.85rem;
+    font-weight: 400;
+  }
+
+  .site-notice__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .site-notice__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: theme('fontFamily.heading');
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: rgb(var(--color-text-primary));
+    border-bottom: 1px solid rgb(var(--color-accent) / 0.55);
+    padding-bottom: 0.1rem;
+    transition:
+      color 0.2s ease,
+      gap 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .site-notice__cta:hover {
+    color: rgb(var(--color-accent));
+    gap: 0.55rem;
+    border-color: rgb(var(--color-accent));
+  }
+
+  .dark .site-notice__cta:hover {
+    color: rgb(var(--color-accent));
+    border-color: rgb(var(--color-accent));
+  }
+
+  .site-notice__cta--sm {
+    font-size: 0.8125rem;
+  }
+
+  .site-notice__dismiss {
+    font-size: 0.8125rem;
+    color: rgb(var(--color-text-tertiary));
+    transition: color 0.15s ease;
+  }
+
+  .site-notice__dismiss:hover {
+    color: rgb(var(--color-text-secondary));
+  }
+
+  .site-notice__x {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    color: rgb(var(--color-text-tertiary));
+    border-radius: 0.125rem;
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .site-notice__x:hover {
+    color: rgb(var(--color-text-primary));
+    background: rgb(var(--color-bg-secondary));
+  }
+
+  /* ── Modal ─────────────────────────────────────────────────────────────── */
+  .site-notice--modal {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    opacity: 0;
+    transition: opacity 0.28s ease;
+  }
+
+  .site-notice--modal.hidden {
+    display: none;
+  }
+
+  .site-notice--modal.is-open {
+    opacity: 1;
+  }
+
+  .site-notice--modal.is-closing {
+    opacity: 0;
+  }
+
+  .site-notice__backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    cursor: pointer;
+    background: rgb(10 12 16 / 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .site-notice__panel {
+    position: relative;
+    z-index: 1;
+    width: min(26rem, 100%);
+    padding: 2rem 1.75rem 1.75rem;
+    border: 1px solid rgb(var(--color-border));
+    background:
+      linear-gradient(
+        165deg,
+        rgb(var(--color-bg-primary)) 0%,
+        rgb(var(--color-bg-secondary) / 0.85) 100%
+      );
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.04) inset,
+      0 24px 64px -28px rgb(0 0 0 / 0.55);
+    transform: translateY(12px) scale(0.98);
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .site-notice--modal.is-open .site-notice__panel {
+    transform: translateY(0) scale(1);
+  }
+
+  .site-notice--modal.is-closing .site-notice__panel {
+    transform: translateY(8px) scale(0.985);
+  }
+
+  .site-notice__accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(var(--color-accent) / 0.85) 35%,
+      rgb(var(--color-accent) / 0.25) 70%,
+      transparent 100%
+    );
+  }
+
+  .site-notice--modal .site-notice__x {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+  }
+
+  .site-notice--modal .site-notice__kicker {
+    margin-bottom: 0.75rem;
+  }
+
+  .site-notice--modal .site-notice__title {
+    font-size: 1.65rem;
+    margin-bottom: 0.85rem;
+    text-wrap: balance;
+  }
+
+  .site-notice--modal .site-notice__body {
+    font-size: 0.95rem;
+    margin-bottom: 1.75rem;
+    text-wrap: pretty;
+  }
+
+  .site-notice--modal .site-notice__actions {
+    justify-content: flex-start;
+    gap: 1.25rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgb(var(--color-border));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-notice--modal,
+    .site-notice__panel {
+      transition: none !important;
+    }
+
+    .site-notice--modal.is-open .site-notice__panel,
+    .site-notice--modal.is-closing .site-notice__panel {
+      transform: none;
+    }
+  }
+</style>

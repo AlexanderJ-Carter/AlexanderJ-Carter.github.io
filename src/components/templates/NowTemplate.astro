@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../PageHero.astro';
 import RelatedTools from '../RelatedTools.astro';
+import WeatherWidget from '../WeatherWidget.astro';
 
 const { lang } = Astro.props;
 type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
@@ -23,8 +25,9 @@ const t: Record<Lang, Record<string, string>> = {
     q4: '做饭菜谱',
     q5: 'Linux 指令',
     q6: 'NetQ 网络排查',
-    note: '这个页面不再记录“我在做什么”，而是给你一个即时可用的时间与工具面板。',
+    note: '这个页面不再记录“我在做什么”，而是给你一个即时可用的时间、天气与工具面板。',
     back: '返回首页',
+    weatherNote: '允许定位则用当地天气；否则默认北京（Open-Meteo）。',
   },
   'zh-TW': {
     title: 'Now · 即時面板',
@@ -43,8 +46,9 @@ const t: Record<Lang, Record<string, string>> = {
     q4: '做飯菜譜',
     q5: 'Linux 指令',
     q6: 'NetQ 網路排查',
-    note: '這個頁面不再記錄「我在做什麼」，而是給你一個即時可用的時間與工具面板。',
+    note: '這個頁面不再記錄「我在做什麼」，而是給你一個即時可用的時間、天氣與工具面板。',
     back: '返回首頁',
+    weatherNote: '允許定位則用當地天氣；否則預設北京（Open-Meteo）。',
   },
   'en-GB': {
     title: 'Now · Live Panel',
@@ -63,8 +67,9 @@ const t: Record<Lang, Record<string, string>> = {
     q4: 'Cooking',
     q5: 'Linux Commands',
     q6: 'NetQ Lab',
-    note: 'This page is now visitor-focused: live time and useful entry points.',
+    note: 'Visitor-focused: live time, weather, and useful entry points.',
     back: 'Back to home',
+    weatherNote: 'Uses your location when allowed; otherwise Beijing (Open-Meteo).',
   },
   fr: {
     title: 'Now · Panneau en direct',
@@ -83,8 +88,9 @@ const t: Record<Lang, Record<string, string>> = {
     q4: 'Recettes',
     q5: 'Commandes Linux',
     q6: 'NetQ Lab',
-    note: 'Cette page est orientée visiteur : heure en direct et accès utiles.',
+    note: 'Orientée visiteur : heure, météo et accès utiles.',
     back: "Retour à l'accueil",
+    weatherNote: 'Position si autorisée ; sinon Pékin (Open-Meteo).',
   },
   ru: {
     title: 'Now · Живая панель',
@@ -103,8 +109,9 @@ const t: Record<Lang, Record<string, string>> = {
     q4: 'Рецепты',
     q5: 'Linux команды',
     q6: 'NetQ Lab',
-    note: 'Эта страница теперь про удобство посетителя: время и быстрые входы.',
+    note: 'Для посетителя: время, погода и быстрые входы.',
     back: 'На главную',
+    weatherNote: 'Геолокация при разрешении; иначе Пекин (Open-Meteo).',
   },
 };
 
@@ -118,47 +125,46 @@ function getLangPath(path: string): string {
 ---
 
 <BaseLayout title={text.title} description={text.subtitle}>
-  <section class="relative py-16 md:py-24 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
-    <div class="container mx-auto px-4 lg:px-8 relative z-10 max-w-4xl">
-      <div class="text-center mb-10">
-        <span
-          class="inline-block px-4 py-2 rounded-full bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-4"
-        >
-          {text.badge}
-        </span>
-        <h1
-          class="text-4xl md:text-5xl font-heading font-bold mb-4 gradient-text tracking-tight"
-        >
-          {text.title}
-        </h1>
-        <p class="text-[rgb(var(--color-text-secondary))]">{text.subtitle}</p>
+  <PageHero
+    kicker="Now"
+    title={text.title}
+    description={text.subtitle}
+    narrow={false}
+  />
+
+  <section class="pb-20 md:pb-28">
+    <div class="container mx-auto px-4 lg:px-8 max-w-4xl">
+      <div class="mb-4">
+        <WeatherWidget lang={lang} variant="panel" ambient={true} />
+        <p class="mt-2 text-xs text-[rgb(var(--color-text-tertiary))]">
+          {text.weatherNote}
+        </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
-        <article class="glass-card p-6 rounded-2xl">
+      <div class="grid md:grid-cols-2 gap-4">
+        <article class="border border-[rgb(var(--color-border))] p-6">
           <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">
             {text.localTime}
           </p>
           <p
             id="now-local"
-            class="text-2xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums"
+            class="text-2xl font-heading font-bold text-[rgb(var(--color-text-primary))] tabular-nums"
           >
             --:--:--
           </p>
         </article>
-        <article class="glass-card p-6 rounded-2xl">
+        <article class="border border-[rgb(var(--color-border))] p-6">
           <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">
             {text.utcTime}
           </p>
           <p
             id="now-utc"
-            class="text-2xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums"
+            class="text-2xl font-heading font-bold text-[rgb(var(--color-text-primary))] tabular-nums"
           >
             --:--:--
           </p>
         </article>
-        <article class="glass-card p-6 rounded-2xl">
+        <article class="border border-[rgb(var(--color-border))] p-6">
           <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">
             {text.timezone}
           </p>
@@ -169,21 +175,21 @@ function getLangPath(path: string): string {
             -
           </p>
         </article>
-        <article class="glass-card p-6 rounded-2xl">
+        <article class="border border-[rgb(var(--color-border))] p-6">
           <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-2">
             {text.unix}
           </p>
           <div class="flex items-center gap-3">
             <p
               id="now-unix"
-              class="text-xl font-bold text-[rgb(var(--color-text-primary))] tabular-nums flex-1"
+              class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))] tabular-nums flex-1"
             >
               -
             </p>
             <button
               id="copy-unix"
               type="button"
-              class="px-3 py-1.5 rounded-lg text-sm bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400"
+              class="px-3 py-1.5 border border-[rgb(var(--color-border))] text-sm text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:border-[rgb(var(--color-text-tertiary))] transition-colors"
             >
               {text.copy}
             </button>
@@ -191,38 +197,36 @@ function getLangPath(path: string): string {
         </article>
       </div>
 
-      <div class="glass-card p-6 rounded-2xl mt-6">
-        <h2
-          class="text-xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]"
-        >
+      <div class="border border-[rgb(var(--color-border))] p-6 mt-4">
+        <h2 class="text-xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">
           {text.quick}
         </h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          <a href={getLangPath('/time')} class="quick-link">🕐 {text.q1}</a>
-          <a href={getLangPath('/currency')} class="quick-link">💱 {text.q2}</a>
+          <a href={getLangPath('/time')} class="quick-link">{text.q1}</a>
+          <a href={getLangPath('/currency')} class="quick-link">{text.q2}</a>
           <a
             href="https://tools.alexander.xin"
             target="_blank"
             rel="noopener noreferrer"
-            class="quick-link">🧰 {text.q3}</a
+            class="quick-link">{text.q3}</a
           >
           <a
             href="https://cook.alexander.xin"
             target="_blank"
             rel="noopener noreferrer"
-            class="quick-link">🍳 {text.q4}</a
+            class="quick-link">{text.q4}</a
           >
           <a
             href="https://linux-command.alexander.xin"
             target="_blank"
             rel="noopener noreferrer"
-            class="quick-link">🐧 {text.q5}</a
+            class="quick-link">{text.q5}</a
           >
           <a
             href="https://netq.alexander.xin"
             target="_blank"
             rel="noopener noreferrer"
-            class="quick-link">🧪 {text.q6}</a
+            class="quick-link">{text.q6}</a
           >
         </div>
       </div>
@@ -231,7 +235,7 @@ function getLangPath(path: string): string {
         {text.note}
       </p>
 
-      <div class="mt-8">
+      <div class="mt-8 pt-8 border-t border-[rgb(var(--color-border))]">
         <a
           href={getLangPath('/')}
           class="link-underline text-primary-500 hover:text-primary-600 font-medium inline-flex items-center gap-1"
@@ -302,27 +306,21 @@ function getLangPath(path: string): string {
   .quick-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
     padding: 0.75rem 0.875rem;
-    border-radius: 0.75rem;
     border: 1px solid rgb(var(--color-border));
-    background: rgb(var(--color-bg-secondary));
     color: rgb(var(--color-text-primary));
-    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
   }
 
   .quick-link:hover {
-    border-color: rgb(var(--color-primary));
-    background: rgb(var(--color-bg-tertiary));
-    transform: translateY(-1px);
+    border-color: rgb(var(--color-accent) / 0.55);
+    color: rgb(var(--color-accent));
   }
 
   @media (prefers-reduced-motion: reduce) {
     .quick-link {
       transition: none;
-    }
-    .quick-link:hover {
-      transform: none;
     }
   }
 </style>

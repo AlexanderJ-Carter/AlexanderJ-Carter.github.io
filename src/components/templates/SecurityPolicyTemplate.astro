@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../PageHero.astro';
 
 const { lang } = Astro.props;
 
@@ -652,85 +653,72 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
   title={`${t.title} | Alexander James Carter`}
   description={t.description}
 >
-  <section class="pt-32 pb-16 min-h-screen">
-    <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
-      <!-- Back Button -->
-      <a
-        href={getLangPath('/')}
-        class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
+  <div class="container mx-auto px-4 lg:px-8 max-w-3xl pt-28 md:pt-32">
+    <a
+      href={getLangPath('/')}
+      class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
+    >
+      <svg
+        class="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
       >
-        <svg
-          class="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-        </svg>
-        <span
-          >{
-            lang === 'zh-CN'
-              ? '返回首页'
-              : lang === 'zh-TW'
-                ? '返回首頁'
-                : lang === 'fr'
-                  ? "Retour à l'accueil"
-                  : lang === 'ru'
-                    ? 'На главную'
-                    : 'Back to home'
-          }</span
-        >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      <span
+        >{
+          lang === 'zh-CN'
+            ? '返回首页'
+            : lang === 'zh-TW'
+              ? '返回首頁'
+              : lang === 'fr'
+                ? "Retour à l'accueil"
+                : lang === 'ru'
+                  ? 'На главную'
+                  : 'Back to home'
+        }</span
+      >
+    </a>
+  </div>
+
+  <PageHero
+    class="!pt-0"
+    title={t.title}
+    description={t.headerDesc}
+    note={`${t.lastUpdatedLabel}${t.lastUpdated}`}
+    narrow={false}
+  >
+    <div class="mt-6 flex flex-wrap gap-3 text-xs sm:text-sm">
+      <a
+        href="/.well-known/security.txt"
+        class="px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] hover:border-[rgb(var(--color-text-primary))] transition-colors"
+      >
+        security.txt
       </a>
+      <a
+        href="/security/pgp-key.asc"
+        class="px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] hover:border-[rgb(var(--color-text-primary))] transition-colors"
+      >
+        PGP Key
+      </a>
+      <a
+        href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/.github/SECURITY.md"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] hover:border-[rgb(var(--color-text-primary))] transition-colors"
+      >
+        GitHub SECURITY.md
+      </a>
+    </div>
+  </PageHero>
 
-      <!-- Header -->
-      <div class="text-center mb-8">
-        <div
-          class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white text-2xl mb-6"
-        >
-          🛡️
-        </div>
-        <h1
-          class="text-4xl md:text-5xl font-heading font-bold mb-3 gradient-text"
-        >
-          {t.title}
-        </h1>
-        <p class="text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto">
-          {t.headerDesc}
-        </p>
-        <p class="text-sm text-[rgb(var(--color-text-tertiary))] mt-3">
-          {t.lastUpdatedLabel}{t.lastUpdated}
-        </p>
-
-        <div
-          class="mt-6 flex flex-wrap justify-center gap-3 text-xs sm:text-sm"
-        >
-          <a
-            href="/.well-known/security.txt"
-            class="px-3 py-1.5 rounded-full border border-[rgb(var(--color-border))] hover:border-primary-500 hover:text-primary-500 transition-colors"
-          >
-            security.txt
-          </a>
-          <a
-            href="/security/pgp-key.asc"
-            class="px-3 py-1.5 rounded-full border border-[rgb(var(--color-border))] hover:border-primary-500 hover:text-primary-500 transition-colors"
-          >
-            PGP Key
-          </a>
-          <a
-            href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/.github/SECURITY.md"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="px-3 py-1.5 rounded-full border border-[rgb(var(--color-border))] hover:border-primary-500 hover:text-primary-500 transition-colors"
-          >
-            GitHub SECURITY.md
-          </a>
-        </div>
-      </div>
-
+  <section class="pb-16 min-h-screen">
+    <div class="container mx-auto px-4 lg:px-8 max-w-6xl">
       <!-- Legal nav -->
       <nav
         class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm text-[rgb(var(--color-text-secondary))] mb-10"

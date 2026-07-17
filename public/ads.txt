@@ -1,5 +1,7 @@
 # ads.txt for alexander.xin
 # https://iabtechlab.com/ads-txt/
-# Last updated: 2026-06-01
+# Replace pub-000... with your AdSense publisher id when approved.
+# Keep this file in sync with PUBLIC_ADSENSE_CLIENT.
+# Last updated: 2026-07-17
 
 google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

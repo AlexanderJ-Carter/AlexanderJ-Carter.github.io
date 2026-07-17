@@ -7,6 +7,25 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue?style=flat-square)](LICENSE)
 [![Content License](https://img.shields.io/badge/Content-CC%20BY--NC--ND%204.0-lightgrey?style=flat-square)](NOTICE)
 
+## 本地开发
+
+```bash
+npm install
+npm run dev
+```
+
+人机验证在 `astro dev` 下默认跳过（About / Contact）。如需强制开启：
+
+```bash
+PUBLIC_FORCE_VERIFY=true npm run dev
+```
+
+广告位默认关闭。复制 `.env.example` 为 `.env` 后填写 `PUBLIC_ADSENSE_CLIENT` 与对应 slot id 即可启用。
+
+ICP / 公安备案同样通过 `.env` 预留（`PUBLIC_ICP_NUMBER`、`PUBLIC_POLICE_BEIAN_*`）；未填写时页脚不显示任何备案占位。
+
+站点通知横幅/弹窗在 `src/config/notice.ts` 配置，默认 `enabled: false`。
+
 ## 访问入口
 
 - 主站: [alexander.xin](https://alexander.xin)

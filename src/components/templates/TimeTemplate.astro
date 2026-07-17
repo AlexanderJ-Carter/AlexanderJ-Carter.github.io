@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../PageHero.astro';
 
 const { lang } = Astro.props;
 
@@ -218,68 +219,21 @@ const relatedTools = [
 ---
 
 <BaseLayout title={`${content.title} - Alexander Carter`}>
-  <!-- Hero：时钟氛围 + 实时指示 -->
-  <section class="relative pt-28 pb-20 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true"></div>
-    <div
-      class="absolute inset-0 opacity-90"
-      style="background: var(--hero-spotlight);"
-      aria-hidden="true"
-    >
-    </div>
-    <!-- 装饰：同心圆模拟表盘 -->
-    <div
-      class="absolute right-1/4 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full border border-primary-500/10 pointer-events-none"
-      aria-hidden="true"
-    >
-    </div>
-    <div
-      class="absolute right-1/4 top-1/2 -translate-y-1/2 w-48 h-48 rounded-full border border-primary-500/15 pointer-events-none"
-      aria-hidden="true"
-    >
-    </div>
-    <div
-      class="absolute right-1/4 top-1/2 -translate-y-1/2 w-32 h-32 rounded-full border border-primary-500/20 pointer-events-none"
-      aria-hidden="true"
-    >
-    </div>
-    <div class="section-divider" aria-hidden="true"></div>
-    <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
-      <div
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm font-medium mb-5"
-      >
-        <span
-          class="time-live-dot inline-block w-2 h-2 rounded-full bg-primary-500 animate-pulse"
-          aria-hidden="true"></span>
-        <span>{content.tag}</span>
-      </div>
-      <h1
-        class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight"
-      >
-        {content.headerTitle}
-      </h1>
-      <p
-        class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto leading-relaxed"
-      >
-        {content.headerDesc}
-      </p>
-    </div>
-  </section>
+  <PageHero
+    kicker={content.tag}
+    title={content.headerTitle}
+    description={content.headerDesc}
+    narrow={false}
+  />
 
-  <!-- Main content -->
   <section class="py-12 md:py-16 container mx-auto px-4 lg:px-8">
     <div class="grid gap-8 lg:grid-cols-5 max-w-6xl mx-auto">
       <!-- Left: Main clock + Your time -->
       <div class="lg:col-span-3 space-y-6">
         <!-- Beijing / Primary clock -->
         <div
-          class="glass-card p-8 md:p-10 relative overflow-hidden rounded-2xl reveal"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 md:p-10 rounded-xl reveal"
         >
-          <div
-            class="absolute top-0 right-0 w-40 h-40 bg-primary-500/10 rounded-full -translate-y-1/2 translate-x-1/2"
-            aria-hidden="true"
-          >
-          </div>
           <div class="relative flex flex-col md:flex-row md:items-start gap-6">
             <!-- 指针式钟表（北京时间） -->
             <div class="flex-shrink-0 mx-auto md:mx-0">
@@ -449,7 +403,7 @@ const relatedTools = [
               >
                 <div
                   id="main-clock-tick"
-                  class="h-full bg-gradient-to-r from-primary-500 to-accent-500 rounded-full transition-all duration-100"
+                  class="h-full bg-[rgb(var(--color-text-primary))] rounded-full transition-all duration-100"
                   style="width: 0%"
                 >
                 </div>
@@ -460,7 +414,7 @@ const relatedTools = [
 
         <!-- Your local time -->
         <div
-          class="glass-card p-6 rounded-2xl border border-[rgb(var(--color-border))]/60 reveal"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl reveal"
         >
           <div class="flex flex-wrap items-center justify-between gap-4">
             <p
@@ -508,7 +462,7 @@ const relatedTools = [
 
       <!-- Right: World clocks + API -->
       <div class="lg:col-span-2 space-y-6">
-        <div class="glass-card p-6 rounded-2xl reveal">
+        <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl reveal">
           <h2
             class="text-lg font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]"
           >
@@ -544,11 +498,11 @@ const relatedTools = [
         </div>
 
         <div
-          class="glass-card p-6 rounded-2xl border border-primary-500/20 bg-primary-500/5 dark:bg-primary-500/10 reveal"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl reveal"
         >
           <div class="flex items-center justify-between gap-2 mb-2">
             <h3
-              class="text-base font-heading font-bold text-primary-600 dark:text-primary-400"
+              class="text-base font-heading font-bold text-[rgb(var(--color-text-primary))]"
             >
               {content.apiTitle}
             </h3>

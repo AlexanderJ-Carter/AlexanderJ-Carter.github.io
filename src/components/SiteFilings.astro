@@ -1,0 +1,55 @@
+---
+/**
+ * ICP / 公安备案 links. Renders nothing until numbers are set in env.
+ */
+import { icpFiling, policeFiling, hasFilings } from '../config/site';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+{
+  hasFilings ? (
+    <p
+      class:list={[
+        'flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.7rem] leading-relaxed text-[rgb(var(--color-text-tertiary))]',
+        className,
+      ]}
+    >
+      {icpFiling.number && (
+        <a
+          href={icpFiling.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-[rgb(var(--color-text-secondary))] transition-colors"
+        >
+          {icpFiling.number}
+        </a>
+      )}
+      {policeFiling.number && (
+        <a
+          href={policeFiling.href || undefined}
+          target={policeFiling.href ? '_blank' : undefined}
+          rel={policeFiling.href ? 'noopener noreferrer' : undefined}
+          class="inline-flex items-center gap-1.5 hover:text-[rgb(var(--color-text-secondary))] transition-colors"
+        >
+          {policeFiling.href && (
+            <img
+              src="https://www.beian.gov.cn/img/new/gongan.png"
+              alt=""
+              width="14"
+              height="14"
+              class="opacity-70"
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+          <span>{policeFiling.number}</span>
+        </a>
+      )}
+    </p>
+  ) : null
+}

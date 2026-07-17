@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RelatedTools from '../RelatedTools.astro';
+import PageHero from '../PageHero.astro';
 
 const { lang } = Astro.props;
 
@@ -66,36 +67,14 @@ const content = t[lang as Lang] || t['en-GB'];
 ---
 
 <BaseLayout title={`${content.title} - Alexander Carter`}>
-  <section class="relative pt-28 pb-16 overflow-hidden">
-    <div class="absolute inset-0 bg-mesh-gradient" aria-hidden="true"></div>
-    <div
-      class="absolute inset-0 opacity-100"
-      style="background: var(--hero-spotlight);"
-      aria-hidden="true"
-    >
-    </div>
-    <div class="section-divider" aria-hidden="true"></div>
-    <div class="container mx-auto px-4 lg:px-8 relative z-10 text-center">
-      <p
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 dark:bg-white/5 border border-white/20 dark:border-white/10 text-sm font-medium mb-4"
-      >
-        📱 {content.tag}
-      </p>
-      <h1
-        class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 gradient-text tracking-tight"
-      >
-        {content.headerTitle}
-      </h1>
-      <p
-        class="text-lg text-[rgb(var(--color-text-secondary))] max-w-2xl mx-auto"
-      >
-        {content.headerDesc}
-      </p>
-    </div>
-  </section>
+  <PageHero
+    kicker={content.tag}
+    title={content.headerTitle}
+    description={content.headerDesc}
+  />
 
   <section class="py-12 container mx-auto px-4 lg:px-8 max-w-xl">
-    <div class="glass-card p-8 rounded-2xl reveal">
+    <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 rounded-xl reveal">
       <label
         class="block text-sm font-medium text-[rgb(var(--color-text-primary))] mb-2"
         for="qr-input"

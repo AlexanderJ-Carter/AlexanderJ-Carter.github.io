@@ -1,0 +1,56 @@
+---
+/**
+ * Reserved AdSense unit. Renders nothing until PUBLIC_ADSENSE_CLIENT + slot are set.
+ * Keep the component mounted in templates as a layout reservation only.
+ */
+import {
+  adsEnabled,
+  adsenseClient,
+  adSlots,
+  type AdSlotId,
+} from '../config/site';
+
+interface Props {
+  slot: AdSlotId;
+  /** Optional layout hint for CSS */
+  format?: 'horizontal' | 'rectangle' | 'auto';
+  class?: string;
+}
+
+const { slot, format = 'auto', class: className = '' } = Astro.props;
+
+const slotId = adSlots[slot];
+const active = adsEnabled && Boolean(slotId);
+---
+
+{
+  active ? (
+    <aside
+      class:list={['ad-slot', `ad-slot--${format}`, className]}
+      aria-label="Advertisement"
+      data-ad-slot={slot}
+    >
+      <ins
+        class="adsbygoogle"
+        style="display:block"
+        data-ad-client={adsenseClient}
+        data-ad-slot={slotId}
+        data-ad-format={format === 'auto' ? 'auto' : undefined}
+        data-full-width-responsive={format === 'horizontal' ? 'true' : undefined}
+      />
+      <script is:inline>
+        try {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (_) {}
+      </script>
+    </aside>
+  ) : null
+}
+
+<style>
+  .ad-slot {
+    margin-block: 2rem;
+    width: 100%;
+    min-height: 1px;
+  }
+</style>

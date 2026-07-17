@@ -40,7 +40,7 @@ const t = translations[lang] || translations['zh-CN'];
     type="button"
     id="quick-search-btn"
     aria-label={t.search}
-    class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-500 to-accent-500 text-white shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 flex items-center justify-center group focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))]"
+    class="relative w-11 h-11 min-w-[44px] min-h-[44px] rounded-sm bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] text-primary-600 dark:text-primary-400 transition-colors duration-200 flex items-center justify-center group hover:border-primary-500 hover:text-primary-700 dark:hover:text-primary-300 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))]"
   >
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
@@ -50,7 +50,7 @@ const t = translations[lang] || translations['zh-CN'];
         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
     </svg>
     <span
-      class="absolute right-full mr-3 px-3 py-1 bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-primary))] rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap"
+      class="absolute right-full mr-3 px-3 py-1 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] rounded-sm text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none"
     >
       {t.search}
     </span>
@@ -62,12 +62,14 @@ const t = translations[lang] || translations['zh-CN'];
   <div class="flex items-start justify-center min-h-screen px-4 pt-20 pb-20">
     <button
       type="button"
-      class="fixed inset-0 bg-[rgb(var(--color-bg-primary))] bg-opacity-90 backdrop-blur-sm"
+      class="fixed inset-0 bg-[rgb(var(--color-bg-primary))]/80"
       onclick="closeSearchModal()"
       aria-label="Close search"
     >
     </button>
-    <div class="relative glass-card rounded-2xl p-6 max-w-2xl w-full mt-8">
+    <div
+      class="relative rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 max-w-2xl w-full mt-8"
+    >
       <div class="flex items-center gap-4 mb-6">
         <svg
           class="w-6 h-6 text-[rgb(var(--color-text-secondary))]"
@@ -98,7 +100,7 @@ const t = translations[lang] || translations['zh-CN'];
         />
         <button
           onclick="closeSearchModal()"
-          class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+          class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-sm transition-colors"
         >
           <svg
             class="w-5 h-5"
@@ -469,7 +471,7 @@ const t = translations[lang] || translations['zh-CN'];
     searchResults.innerHTML = results
       .map(
         (page) => `
-      <a href="${page.url}" onclick="closeSearchModal()" class="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/10 hover:text-primary-500 transition-colors group">
+      <a href="${page.url}" onclick="closeSearchModal()" class="flex items-center justify-between gap-3 p-3.5 rounded-sm border border-transparent bg-[rgb(var(--color-bg-secondary))] hover:border-primary-500/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors group">
         <div class="font-medium text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 text-sm leading-tight">${page.title}</div>
         <svg class="w-4 h-4 text-[rgb(var(--color-text-tertiary))] group-hover:text-primary-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
@@ -517,12 +519,6 @@ const t = translations[lang] || translations['zh-CN'];
   @media (max-width: 640px) {
     #quick-actions {
       bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
-    }
-    #quick-search-btn {
-      width: 2.75rem;
-      height: 2.75rem;
-      min-width: 44px;
-      min-height: 44px;
     }
   }
 </style>

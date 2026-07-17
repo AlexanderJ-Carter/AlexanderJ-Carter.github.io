@@ -12,389 +12,179 @@ function getLangPath(path: string) {
   return `/${prefix}${path}`;
 }
 
-// Check if a link is active
+// Check if a link is active (exact or nested path)
 function isActivePath(href: string | undefined): boolean {
   if (!href) return false;
-  // Remove language prefix for comparison
-  const normalizedCurrent = currentPath.replace(/^\/(zh-TW|en|fr|ru)\//, '/');
-  const normalizedHref = href.replace(/^\/(zh-TW|en|fr|ru)\//, '/');
-  return (
-    normalizedCurrent === normalizedHref ||
-    (normalizedHref === '/' &&
-      (normalizedCurrent === '/' || normalizedCurrent === `/${lang}/`))
-  );
+  const strip = (p: string) =>
+    p.replace(/^\/(zh-TW|en|fr|ru)(?=\/|$)/, '').replace(/\/$/, '') || '/';
+  const current = strip(currentPath);
+  const target = strip(href);
+  if (target === '/') return current === '/';
+  return current === target || current.startsWith(`${target}/`);
+}
+
+function l(zh: string, tw: string, fr: string, ru: string, en: string): string {
+  if (lang === 'zh-CN') return zh;
+  if (lang === 'zh-TW') return tw;
+  if (lang === 'fr') return fr;
+  if (lang === 'ru') return ru;
+  return en;
 }
 
 interface SubMenuItem {
   href: string;
   label: string;
-  icon: string;
-  desc: string;
+  desc?: string;
   external?: boolean;
 }
 
 interface NavItem {
   href?: string;
   label: string;
-  icon: string;
   external?: boolean;
+  mobileOnly?: boolean;
   submenu?: SubMenuItem[];
 }
 
+function isSubmenuActive(submenu: SubMenuItem[]): boolean {
+  return submenu.some((item) => isActivePath(item.href));
+}
+
+const homeHref =
+  lang === 'zh-CN' ? '/' : lang === 'en-GB' ? '/en/' : `/${lang}/`;
+
+const moreSubmenu: SubMenuItem[] = [
+  {
+    href: getLangPath('/fun'),
+    label: l('彩蛋', '彩蛋', 'Surprises', 'Пасхалки', 'Play'),
+    desc: l(
+      '诗词灵感、小游戏与番茄钟',
+      '詩詞靈感、小遊戲與番茄鐘',
+      'Citations, mini-jeux et pomodoro',
+      'Цитаты, мини-игры и помодоро',
+      'Quotes, mini games and pomodoro'
+    ),
+  },
+  {
+    href: getLangPath('/tools'),
+    label: l('工具', '工具', 'Outils', 'Инструменты', 'Tools'),
+    desc: l(
+      '站内实用页与外部入口',
+      '站內實用頁與外部入口',
+      'Pages utiles et liens externes',
+      'Полезные страницы и внешние ссылки',
+      'On-site utilities and external links'
+    ),
+  },
+  {
+    href: getLangPath('/now'),
+    label: 'Now',
+    desc: l(
+      '本地时间与快捷入口',
+      '本地時間與快捷入口',
+      'Heure locale et raccourcis',
+      'Локальное время и быстрые ссылки',
+      'Local time and quick links'
+    ),
+  },
+  {
+    href: getLangPath('/uses'),
+    label: l('本站', '本站', 'Le site', 'О сайте', 'Uses'),
+    desc: l(
+      '技术栈与边界',
+      '技術棧與邊界',
+      'Stack et limites',
+      'Стек и границы',
+      'Stack and boundaries'
+    ),
+  },
+  {
+    href: getLangPath('/friends'),
+    label: l('参考', '參考', 'Références', 'Ссылки', 'References'),
+    desc: l(
+      '工具与资料链接',
+      '工具與資料連結',
+      'Outils et ressources',
+      'Инструменты и ресурсы',
+      'Tools and resources'
+    ),
+  },
+  {
+    href: getLangPath('/reading-list'),
+    label: t('nav.reading'),
+    desc: l(
+      '值得反复翻阅的书和文章',
+      '值得反覆翻閱的書和文章',
+      'Livres et articles à relire',
+      'Книги и статьи для перечитывания',
+      'Books and articles worth revisiting'
+    ),
+  },
+  {
+    href: getLangPath('/contact'),
+    label: t('nav.contact'),
+    desc: l('取得联系', '取得聯繫', 'Me contacter', 'Связаться', 'Get in touch'),
+  },
+  {
+    href: getLangPath('/license'),
+    label: l('许可证', '許可證', 'Licence', 'Лицензия', 'Licence'),
+    desc: l(
+      '内容 CC 与源代码许可',
+      '內容 CC 與源代碼許可',
+      'Contenu CC et licence du code',
+      'CC для контента и лицензия кода',
+      'Content CC and source-code licence'
+    ),
+  },
+  {
+    href: getLangPath('/accessibility'),
+    label: l('无障碍', '無障礙', 'Accessibilité', 'Доступность', 'Accessibility'),
+    desc: l(
+      '键盘、对比度与辅助功能',
+      '鍵盤、對比度與輔助功能',
+      'Clavier, contraste et aides',
+      'Клавиатура, контраст и доступность',
+      'Keyboard, contrast and assistive use'
+    ),
+  },
+  {
+    href: getLangPath('/sitemap'),
+    label: l('地图', '地圖', 'Plan', 'Карта', 'Sitemap'),
+    desc: l(
+      '全部页面',
+      '全部頁面',
+      'Toutes les pages',
+      'Все страницы',
+      'All pages'
+    ),
+  },
+  {
+    href: 'https://blog.alexander.xin',
+    label: t('nav.blog'),
+    desc: l(
+      '独立博客',
+      '獨立部落格',
+      'Blog externe',
+      'Внешний блог',
+      'External blog'
+    ),
+    external: true,
+  },
+];
+
 const mainNavItems: NavItem[] = [
+  { href: homeHref, label: t('nav.home'), mobileOnly: true },
+  { href: getLangPath('/gallery'), label: t('nav.gallery') },
   {
-    href: lang === 'zh-CN' ? '/' : lang === 'en-GB' ? '/en/' : `/${lang}/`,
-    label: t('nav.home'),
-    icon: '🏠',
+    href: getLangPath('/writing'),
+    label: l('写作', '寫作', 'Écrits', 'Статьи', 'Writing'),
   },
   {
-    label:
-      lang === 'zh-CN'
-        ? '内容'
-        : lang === 'zh-TW'
-          ? '內容'
-          : lang === 'fr'
-            ? 'Contenu'
-            : lang === 'ru'
-              ? 'Контент'
-              : 'Content',
-    icon: '✦',
-    submenu: [
-      {
-        href: getLangPath('/gallery'),
-        label: t('nav.gallery'),
-        icon: '🎨',
-        desc:
-          lang === 'zh-CN'
-            ? '作品展示'
-            : lang === 'zh-TW'
-              ? '作品展示'
-              : lang === 'fr'
-                ? 'Galerie'
-                : lang === 'ru'
-                  ? 'Галерея'
-                  : 'Gallery',
-      },
-      {
-        href: getLangPath('/projects'),
-        label:
-          lang === 'zh-CN'
-            ? '项目'
-            : lang === 'zh-TW'
-              ? '專案'
-              : lang === 'fr'
-                ? 'Projets'
-                : lang === 'ru'
-                  ? 'Проекты'
-                  : 'Projects',
-        icon: '🛠',
-        desc:
-          lang === 'zh-CN'
-            ? '我构建的作品'
-            : lang === 'zh-TW'
-              ? '我構建的作品'
-              : lang === 'fr'
-                ? "Ce que j'ai construit"
-                : lang === 'ru'
-                  ? 'То, что я создал'
-                  : "Things I've built",
-      },
-      {
-        href: getLangPath('/writing'),
-        label:
-          lang === 'zh-CN'
-            ? '写作'
-            : lang === 'zh-TW'
-              ? '寫作'
-              : lang === 'fr'
-                ? 'Écrits'
-                : lang === 'ru'
-                  ? 'Статьи'
-                  : 'Writing',
-        icon: '✍️',
-        desc:
-          lang === 'zh-CN'
-            ? '工程与设计长文'
-            : lang === 'zh-TW'
-              ? '工程與設計長文'
-              : lang === 'fr'
-                ? 'Articles techniques'
-                : lang === 'ru'
-                  ? 'Технические статьи'
-                  : 'Long-form articles',
-      },
-      {
-        href: getLangPath('/reading-list'),
-        label: t('nav.reading'),
-        icon: '📚',
-        desc:
-          lang === 'zh-CN'
-            ? '值得反复翻阅的书和文章'
-            : lang === 'zh-TW'
-              ? '值得反覆翻閱的書和文章'
-              : lang === 'fr'
-                ? 'Livres et articles à relire'
-                : lang === 'ru'
-                  ? 'Книги и статьи для перечитывания'
-                  : 'Books and articles worth revisiting',
-      },
-    ],
+    href: getLangPath('/projects'),
+    label: l('项目', '專案', 'Projets', 'Проекты', 'Projects'),
   },
-  {
-    label:
-      lang === 'zh-CN'
-        ? '工具'
-        : lang === 'zh-TW'
-          ? '工具'
-          : lang === 'fr'
-            ? 'Outils'
-            : lang === 'ru'
-              ? 'Инструменты'
-              : 'Tools',
-    icon: '⚙️',
-    submenu: [
-      {
-        href: getLangPath('/calendar'),
-        label:
-          lang === 'zh-CN'
-            ? '日历'
-            : lang === 'zh-TW'
-              ? '日曆'
-              : lang === 'fr'
-                ? 'Calendrier'
-                : lang === 'ru'
-                  ? 'Календарь'
-                  : 'Calendar',
-        icon: '📅',
-        desc:
-          lang === 'zh-CN'
-            ? '智能日历'
-            : lang === 'zh-TW'
-              ? '智能日曆'
-              : lang === 'fr'
-                ? 'Calendrier intelligent'
-                : lang === 'ru'
-                  ? 'Умный календарь'
-                  : 'Smart Calendar',
-      },
-      {
-        href: getLangPath('/currency'),
-        label:
-          lang === 'zh-CN'
-            ? '汇率'
-            : lang === 'zh-TW'
-              ? '匯率'
-              : lang === 'fr'
-                ? 'Taux de change'
-                : lang === 'ru'
-                  ? 'Курс валют'
-                  : 'Exchange',
-        icon: '💱',
-        desc:
-          lang === 'zh-CN'
-            ? '汇率转换'
-            : lang === 'zh-TW'
-              ? '匯率轉換'
-              : lang === 'fr'
-                ? 'Convertisseur de devises'
-                : lang === 'ru'
-                  ? 'Конвертер валют'
-                  : 'Currency',
-      },
-      {
-        href: getLangPath('/time'),
-        label:
-          lang === 'zh-CN'
-            ? '时间'
-            : lang === 'zh-TW'
-              ? '時間'
-              : lang === 'fr'
-                ? 'Heure'
-                : lang === 'ru'
-                  ? 'Время'
-                  : 'Time',
-        icon: '🕐',
-        desc:
-          lang === 'zh-CN'
-            ? '世界时间'
-            : lang === 'zh-TW'
-              ? '世界時間'
-              : lang === 'fr'
-                ? 'Heure mondiale'
-                : lang === 'ru'
-                  ? 'Мировое время'
-                  : 'World Time',
-      },
-      {
-        href: getLangPath('/now'),
-        label: 'Now',
-        icon: '📍',
-        desc:
-          lang === 'zh-CN'
-            ? '此刻在做什么'
-            : lang === 'zh-TW'
-              ? '此刻在做什麼'
-              : lang === 'fr'
-                ? 'Ce que je fais'
-                : lang === 'ru'
-                  ? 'Чем занимаюсь'
-                  : "What I'm doing now",
-      },
-      {
-        href: getLangPath('/units'),
-        label:
-          lang === 'zh-CN'
-            ? '单位换算'
-            : lang === 'zh-TW'
-              ? '單位換算'
-              : lang === 'fr'
-                ? 'Unités'
-                : lang === 'ru'
-                  ? 'Единицы'
-                  : 'Units',
-        icon: '📐',
-        desc:
-          lang === 'zh-CN'
-            ? '温度·长度·重量'
-            : lang === 'zh-TW'
-              ? '溫度·長度·重量'
-              : lang === 'fr'
-                ? 'Température, longueur, poids'
-                : lang === 'ru'
-                  ? 'Температура, длина, вес'
-                  : 'Temperature, length, weight',
-      },
-      {
-        href: getLangPath('/qr'),
-        label:
-          lang === 'zh-CN'
-            ? 'QR 生成'
-            : lang === 'zh-TW'
-              ? 'QR 生成'
-              : lang === 'fr'
-                ? 'QR Code'
-                : lang === 'ru'
-                  ? 'QR-код'
-                  : 'QR Code',
-        icon: '📱',
-        desc:
-          lang === 'zh-CN'
-            ? '链接转二维码'
-            : lang === 'zh-TW'
-              ? '連結轉二維碼'
-              : lang === 'fr'
-                ? 'Lien en QR'
-                : lang === 'ru'
-                  ? 'Ссылка в QR'
-                  : 'URL to QR code',
-      },
-    ],
-  },
-  {
-    label:
-      lang === 'zh-CN'
-        ? '更多'
-        : lang === 'zh-TW'
-          ? '更多'
-          : lang === 'fr'
-            ? 'Plus'
-            : lang === 'ru'
-              ? 'Ещё'
-              : 'More',
-    icon: '⋯',
-    submenu: [
-      {
-        href: 'https://blog.alexander.xin',
-        label: t('nav.blog'),
-        icon: '📝',
-        desc:
-          lang === 'zh-CN'
-            ? '独立博客'
-            : lang === 'zh-TW'
-              ? '獨立部落格'
-              : lang === 'fr'
-                ? 'Blog externe'
-                : lang === 'ru'
-                  ? 'Внешний блог'
-                  : 'External blog',
-        external: true,
-      },
-      {
-        href: getLangPath('/uses'),
-        label:
-          lang === 'zh-CN'
-            ? '本站'
-            : lang === 'zh-TW'
-              ? '本站'
-              : lang === 'fr'
-                ? 'Le site'
-                : lang === 'ru'
-                  ? 'О сайте'
-                  : 'About site',
-        icon: '🌐',
-        desc:
-          lang === 'zh-CN'
-            ? '技术栈与边界'
-            : lang === 'zh-TW'
-              ? '技術棧與邊界'
-              : lang === 'fr'
-                ? 'Stack et limites'
-                : lang === 'ru'
-                  ? 'Стек и границы'
-                  : 'Stack and boundaries',
-      },
-      {
-        href: getLangPath('/friends'),
-        label:
-          lang === 'zh-CN'
-            ? '参考'
-            : lang === 'zh-TW'
-              ? '參考'
-              : lang === 'fr'
-                ? 'Références'
-                : lang === 'ru'
-                  ? 'Ссылки'
-                  : 'References',
-        icon: '🔗',
-        desc:
-          lang === 'zh-CN'
-            ? '工具与资料链接'
-            : lang === 'zh-TW'
-              ? '工具與資料連結'
-              : lang === 'fr'
-                ? 'Outils et ressources'
-                : lang === 'ru'
-                  ? 'Инструменты и ресурсы'
-                  : 'Tools and resources',
-      },
-      {
-        href: getLangPath('/sitemap'),
-        label:
-          lang === 'zh-CN'
-            ? '地图'
-            : lang === 'zh-TW'
-              ? '地圖'
-              : lang === 'fr'
-                ? 'Plan'
-                : lang === 'ru'
-                  ? 'Карта'
-                  : 'Sitemap',
-        icon: '🗺',
-        desc:
-          lang === 'zh-CN'
-            ? '全部页面'
-            : lang === 'zh-TW'
-              ? '全部頁面'
-              : lang === 'fr'
-                ? 'Toutes les pages'
-                : lang === 'ru'
-                  ? 'Все страницы'
-                  : 'All pages',
-      },
-    ],
-  },
-  { href: getLangPath('/about'), label: t('nav.about'), icon: '👤' },
-  { href: getLangPath('/contact'), label: t('nav.contact'), icon: '✉️' },
+  { href: getLangPath('/about'), label: t('nav.about') },
+  { label: l('更多', '更多', 'Plus', 'Ещё', 'More'), submenu: moreSubmenu },
 ];
 ---
 
@@ -404,7 +194,7 @@ const mainNavItems: NavItem[] = [
 >
   <div class="scroll-indicator" id="scroll-indicator"></div>
 
-  <nav class="container mx-auto px-4 lg:px-8 py-4">
+  <nav class="relative z-50 container mx-auto px-4 lg:px-8 py-4">
     <div class="flex items-center justify-between">
       <!-- Logo -->
       <a
@@ -416,14 +206,14 @@ const mainNavItems: NavItem[] = [
           alt="Logo"
           width="40"
           height="40"
-          class="w-10 h-10 rounded-full transform group-hover:scale-110 transition-transform duration-300 dark:hidden"
+          class="w-10 h-10 rounded-full opacity-90 group-hover:opacity-100 transition-opacity duration-200 dark:hidden"
         />
         <img
           src="/img/branding/logo-dark-96.webp"
           alt="Logo"
           width="40"
           height="40"
-          class="w-10 h-10 rounded-full transform group-hover:scale-110 transition-transform duration-300 hidden dark:block"
+          class="w-10 h-10 rounded-full opacity-90 group-hover:opacity-100 transition-opacity duration-200 hidden dark:block"
         />
         <span
           class="font-heading font-bold text-xl hidden sm:block text-[rgb(var(--color-text-primary))] tracking-tight"
@@ -433,91 +223,105 @@ const mainNavItems: NavItem[] = [
       </a>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-2">
+      <div class="hidden md:flex items-center gap-1">
         {
-          mainNavItems.map((item) =>
-            item.submenu ? (
-              <div class="relative group submenu-group">
-                <button
-                  type="button"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  class="submenu-btn flex items-center gap-2 px-3 py-2 rounded-lg text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] font-medium transition-all duration-200 group focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-                >
-                  <span>{item.icon}</span>
-                  <span>{item.label}</span>
-                  <svg
-                    class="submenu-chevron w-3.5 h-3.5 transition-transform duration-200"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
+          mainNavItems
+            .filter((item) => !item.mobileOnly)
+            .map((item) =>
+              item.submenu ? (
+                <div class="relative group submenu-group">
+                  <button
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    class:list={[
+                      'submenu-btn group relative inline-flex items-center gap-1.5 px-3 py-2 font-heading font-medium text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2',
+                      isSubmenuActive(item.submenu)
+                        ? 'text-primary-500'
+                        : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]',
+                    ]}
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2.5"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-                <div class="submenu-panel absolute left-0 mt-0 w-56 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-xl shadow-xl opacity-0 invisible scale-95 origin-top-left group-hover:opacity-100 group-hover:visible group-hover:scale-100 group-hover:mt-2 transition-all duration-200 ease-out z-50">
-                  {item.submenu.map((subitem, idx) => (
-                    <a
-                      href={subitem.href}
-                      class:list={[
-                        `flex items-center gap-3 px-4 py-3 transition-colors duration-150 ${idx === 0 ? 'rounded-t-xl' : ''} ${idx === item.submenu!.length - 1 ? 'rounded-b-xl' : ''}`,
-                        isActivePath(subitem.href)
-                          ? 'bg-primary-500/15 border-l-2 border-l-primary-500'
-                          : 'hover:bg-primary-500/10 active:bg-primary-500/15',
-                      ]}
-                      target={subitem.external ? '_blank' : undefined}
-                      rel={subitem.external ? 'noopener noreferrer' : undefined}
-                      aria-current={
-                        isActivePath(subitem.href) ? 'page' : undefined
-                      }
+                    <span>{item.label}</span>
+                    <svg
+                      class="submenu-chevron w-3 h-3 shrink-0 transition-transform duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
-                      <span class="text-2xl">{subitem.icon}</span>
-                      <div>
-                        <div
-                          class:list={[
-                            'font-semibold',
-                            isActivePath(subitem.href)
-                              ? 'text-primary-500'
-                              : 'text-[rgb(var(--color-text-primary))]',
-                          ]}
-                        >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                    <span
+                      class:list={[
+                        'nav-underline absolute bottom-0 left-3 right-3 h-px bg-primary-500 origin-left transition-transform duration-200',
+                        isSubmenuActive(item.submenu)
+                          ? 'scale-x-100'
+                          : 'scale-x-0 group-hover:scale-x-100',
+                      ]}
+                      aria-hidden="true"
+                    />
+                  </button>
+                  <div class="submenu-panel absolute left-0 mt-0 min-w-[15rem] bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-sm opacity-0 invisible scale-95 origin-top-left group-hover:opacity-100 group-hover:visible group-hover:scale-100 group-hover:mt-1.5 transition-all duration-200 ease-out z-50 py-1">
+                    {item.submenu.map((subitem) => (
+                      <a
+                        href={subitem.href}
+                        class:list={[
+                          'block px-4 py-2.5 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500',
+                          isActivePath(subitem.href)
+                            ? 'text-primary-500'
+                            : 'text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-accent))]',
+                        ]}
+                        target={subitem.external ? '_blank' : undefined}
+                        rel={
+                          subitem.external ? 'noopener noreferrer' : undefined
+                        }
+                        aria-current={
+                          isActivePath(subitem.href) ? 'page' : undefined
+                        }
+                      >
+                        <div class="font-heading text-sm font-medium">
                           {subitem.label}
                         </div>
-                        <div class="text-xs text-[rgb(var(--color-text-secondary))]">
-                          {subitem.desc}
-                        </div>
-                      </div>
-                    </a>
-                  ))}
+                        {subitem.desc && (
+                          <div class="mt-0.5 text-xs leading-snug text-[rgb(var(--color-text-secondary))]">
+                            {subitem.desc}
+                          </div>
+                        )}
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <a
-                href={item.href}
-                class:list={[
-                  'flex items-center gap-2 px-3 py-2 rounded-lg font-medium transition-all duration-200 relative group focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2',
-                  isActivePath(item.href)
-                    ? 'text-primary-500 bg-primary-500/10'
-                    : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))]',
-                ]}
-                target={item.external ? '_blank' : undefined}
-                rel={item.external ? 'noopener noreferrer' : undefined}
-                aria-current={isActivePath(item.href) ? 'page' : undefined}
-              >
-                <span>{item.icon}</span>
-                <span>{item.label}</span>
-                <span
-                  class={`absolute bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 transition-all duration-300 ${isActivePath(item.href) ? 'w-full' : 'w-0 group-hover:w-full'}`}
-                />
-              </a>
+              ) : (
+                <a
+                  href={item.href}
+                  class:list={[
+                    'nav-link group relative inline-flex px-3 py-2 font-heading font-medium text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2',
+                    isActivePath(item.href)
+                      ? 'text-primary-500'
+                      : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]',
+                  ]}
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noopener noreferrer' : undefined}
+                  aria-current={isActivePath(item.href) ? 'page' : undefined}
+                >
+                  <span>{item.label}</span>
+                  <span
+                    class:list={[
+                      'nav-underline absolute bottom-0 left-3 right-3 h-px bg-primary-500 origin-left transition-transform duration-200',
+                      isActivePath(item.href)
+                        ? 'scale-x-100'
+                        : 'scale-x-0 group-hover:scale-x-100',
+                    ]}
+                    aria-hidden="true"
+                  />
+                </a>
+              )
             )
-          )
         }
       </div>
 
@@ -528,7 +332,7 @@ const mainNavItems: NavItem[] = [
           id="theme-toggle"
           type="button"
           aria-label={t('theme.toggle')}
-          class="p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200"
+          class="inline-flex items-center justify-center min-w-11 min-h-11 rounded-sm text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200"
         >
           <svg
             class="w-6 h-6 sun-icon"
@@ -566,7 +370,7 @@ const mainNavItems: NavItem[] = [
             aria-expanded="false"
             aria-controls="lang-menu"
             id="lang-switcher-btn"
-            class="p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200 flex items-center gap-2"
+            class="inline-flex items-center justify-center gap-2 min-w-11 min-h-11 px-2 rounded-sm text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200"
           >
             <svg
               class="w-5 h-5 text-[rgb(var(--color-text-secondary))]"
@@ -589,7 +393,7 @@ const mainNavItems: NavItem[] = [
           <div
             id="lang-menu"
             role="menu"
-            class="lang-panel absolute right-0 mt-2 w-40 glass-card opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 rounded-xl overflow-hidden shadow-xl z-50 py-1"
+            class="lang-panel absolute right-0 mt-1.5 w-40 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-1"
           >
             {
               Object.entries(languages).map(([code, name]) => (
@@ -602,10 +406,9 @@ const mainNavItems: NavItem[] = [
                         : `/${code}/`
                   }
                   role="menuitem"
-                  class="flex items-center justify-between px-4 py-2.5 text-sm text-[rgb(var(--color-text-secondary))] hover:bg-primary-500/10 hover:text-primary-500 transition-colors"
+                  class="flex items-center justify-between px-4 py-2.5 text-sm text-[rgb(var(--color-text-secondary))] hover:bg-[rgb(var(--color-bg-accent))] hover:text-[rgb(var(--color-text-primary))] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500"
                   class:list={{
-                    'font-semibold !text-primary-500 bg-primary-500/8':
-                      code === lang,
+                    'font-medium text-primary-500': code === lang,
                   }}
                   aria-current={code === lang ? 'true' : undefined}
                 >
@@ -629,7 +432,7 @@ const mainNavItems: NavItem[] = [
           aria-label={lang === 'zh-CN' ? '打开菜单' : 'Toggle menu'}
           aria-expanded="false"
           aria-controls="mobile-menu"
-          class="md:hidden p-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200"
+          class="md:hidden inline-flex items-center justify-center min-w-11 min-h-11 rounded-sm text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200"
         >
           <svg
             class="w-6 h-6 hamburger"
@@ -658,14 +461,23 @@ const mainNavItems: NavItem[] = [
         </button>
       </div>
     </div>
+  </nav>
 
-    <!-- Mobile Menu -->
-    <div
-      id="mobile-menu"
-      class="md:hidden hidden mt-4 pb-4 space-y-1"
-      role="navigation"
-      aria-label={lang === 'zh-CN' ? '主导航' : 'Main navigation'}
-    >
+  <div
+    id="mobile-menu-backdrop"
+    class="mobile-backdrop fixed inset-0 z-40 bg-black/20 hidden md:hidden"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden absolute left-0 right-0 top-full z-50 border-t border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))]"
+    role="navigation"
+    aria-label={lang === 'zh-CN' ? '主导航' : 'Main navigation'}
+  >
+    <div class="px-4 lg:px-8 py-2">
       {
         mainNavItems.map((item) =>
           item.submenu ? (
@@ -673,35 +485,48 @@ const mainNavItems: NavItem[] = [
               <button
                 type="button"
                 aria-expanded="false"
-                class="mobile-submenu-toggle w-full text-left py-3 px-4 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors duration-200 flex items-center justify-between font-medium"
+                class="mobile-submenu-toggle w-full text-left py-3.5 px-4 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] rounded-sm transition-colors duration-200 flex items-center justify-between font-heading font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset"
               >
-                <span class="flex items-center gap-2">
-                  <span>{item.icon}</span>
-                  {item.label}
-                </span>
+                <span>{item.label}</span>
                 <svg
-                  class="w-4 h-4 submenu-arrow"
+                  class="w-4 h-4 submenu-arrow shrink-0 transition-transform duration-200"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
-                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                    d="M19 9l-7 7-7-7"
                   />
                 </svg>
               </button>
-              <div class="mobile-submenu hidden pl-4 space-y-1 bg-[rgb(var(--color-bg-accent))] rounded-lg my-1">
+              <div class="mobile-submenu hidden pl-4 border-l border-[rgb(var(--color-border))] ml-4 mb-1">
                 {item.submenu.map((subitem) => (
                   <a
                     href={subitem.href}
-                    class="block py-2 px-3 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-primary-500/10 rounded transition-colors text-sm"
+                    class:list={[
+                      'block py-3.5 px-3 text-sm transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset',
+                      isActivePath(subitem.href)
+                        ? 'text-primary-500 font-medium'
+                        : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]',
+                    ]}
                     target={subitem.external ? '_blank' : undefined}
-                    rel={subitem.external ? 'noopener noreferrer' : undefined}
+                    rel={
+                      subitem.external ? 'noopener noreferrer' : undefined
+                    }
+                    aria-current={
+                      isActivePath(subitem.href) ? 'page' : undefined
+                    }
                   >
-                    <span>{subitem.icon}</span> {subitem.label}
+                    <span class="font-heading">{subitem.label}</span>
+                    {subitem.desc && (
+                      <span class="mt-0.5 block text-xs text-[rgb(var(--color-text-secondary))]">
+                        {subitem.desc}
+                      </span>
+                    )}
                   </a>
                 ))}
               </div>
@@ -709,17 +534,23 @@ const mainNavItems: NavItem[] = [
           ) : (
             <a
               href={item.href}
-              class="block py-3 px-4 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors duration-200 flex items-center gap-2 font-medium"
+              class:list={[
+                'block py-3.5 px-4 rounded-sm transition-colors duration-200 font-heading font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset',
+                isActivePath(item.href)
+                  ? 'text-primary-500'
+                  : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]',
+              ]}
               target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+              aria-current={isActivePath(item.href) ? 'page' : undefined}
             >
-              <span>{item.icon}</span>
               {item.label}
             </a>
           )
         )
       }
     </div>
-  </nav>
+  </div>
 </header>
 
 <style>
@@ -728,13 +559,24 @@ const mainNavItems: NavItem[] = [
     bottom: 0;
     left: 0;
     height: 2px;
-    background: linear-gradient(90deg, #0ea5e9, #d946ef);
+    background: theme('colors.primary.500');
     width: 0%;
     transition: width 0.15s ease-out;
   }
 
   #header.nav-hidden {
     transform: translateY(-100%);
+  }
+
+  #header.nav-scrolled {
+    box-shadow: 0 1px 0 rgb(var(--color-border));
+  }
+
+  #header {
+    transition:
+      transform 0.28s ease,
+      box-shadow 0.28s ease,
+      background-color 0.28s ease;
   }
 
   .dark .sun-icon {
@@ -745,12 +587,11 @@ const mainNavItems: NavItem[] = [
     display: block;
   }
 
-  /* Keyboard/click-opened submenus */
   .submenu-group[data-open] .submenu-panel {
     opacity: 1 !important;
     visibility: visible !important;
     transform: scale(1) !important;
-    margin-top: 0.5rem !important;
+    margin-top: 0.375rem !important;
   }
 
   .submenu-group[data-open] .submenu-chevron {
@@ -762,14 +603,16 @@ const mainNavItems: NavItem[] = [
     visibility: visible !important;
   }
 
-  /* Active nav link */
   .nav-link-active {
-    color: rgb(14 165 233) !important;
-    background-color: rgb(14 165 233 / 0.08) !important;
+    color: theme('colors.primary.500') !important;
   }
 
-  .nav-link-active .active-indicator {
-    width: 100% !important;
+  .nav-link-active .nav-underline {
+    transform: scaleX(1) !important;
+  }
+
+  .mobile-backdrop.is-visible {
+    display: block;
   }
 </style>
 
@@ -898,6 +741,7 @@ const mainNavItems: NavItem[] = [
     if (e.key === 'Escape') {
       closeAllSubmenus();
       closeLangMenu();
+      if (mobileMenu?.classList.contains('menu-open')) closeMobileMenu();
     }
   });
 
@@ -918,34 +762,56 @@ const mainNavItems: NavItem[] = [
   // ── Mobile menu toggle ───────────────────────────────────────────────────────
   const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mobileBackdrop = document.getElementById('mobile-menu-backdrop');
   const hamburger = mobileMenuToggle?.querySelector('.hamburger');
   const close = mobileMenuToggle?.querySelector('.close');
+
+  function showMobileBackdrop() {
+    mobileBackdrop?.classList.remove('hidden');
+    mobileBackdrop?.classList.add('is-visible');
+    mobileBackdrop?.setAttribute('aria-hidden', 'false');
+  }
+
+  function hideMobileBackdrop() {
+    mobileBackdrop?.classList.add('hidden');
+    mobileBackdrop?.classList.remove('is-visible');
+    mobileBackdrop?.setAttribute('aria-hidden', 'true');
+  }
+
+  function closeMobileMenu() {
+    mobileMenu?.classList.remove('menu-open');
+    mobileMenu?.classList.add('menu-closing');
+    hamburger?.classList.remove('rotating');
+    hideMobileBackdrop();
+    hamburger?.classList.remove('hidden');
+    close?.classList.add('hidden');
+    mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+
+    setTimeout(() => {
+      mobileMenu?.classList.add('hidden');
+      mobileMenu?.classList.remove('menu-closing');
+    }, 300);
+  }
 
   mobileMenuToggle?.addEventListener('click', () => {
     const isOpen = mobileMenu?.classList.contains('menu-open');
 
     if (isOpen) {
-      // Close menu with animation
-      mobileMenu?.classList.remove('menu-open');
-      mobileMenu?.classList.add('menu-closing');
-      hamburger?.classList.remove('rotating');
-
-      // Remove animation classes after animation completes
-      setTimeout(() => {
-        mobileMenu?.classList.add('hidden');
-        mobileMenu?.classList.remove('menu-closing');
-      }, 300);
-    } else {
-      // Open menu with animation
-      mobileMenu?.classList.remove('hidden');
-      mobileMenu?.classList.add('menu-open');
-      hamburger?.classList.add('rotating');
+      closeMobileMenu();
+      return;
     }
 
-    hamburger?.classList.toggle('hidden');
-    close?.classList.toggle('hidden');
-    const menuOpen = mobileMenu?.classList.contains('menu-open') || false;
-    mobileMenuToggle?.setAttribute('aria-expanded', String(menuOpen));
+    mobileMenu?.classList.remove('hidden');
+    mobileMenu?.classList.add('menu-open');
+    hamburger?.classList.add('rotating');
+    hamburger?.classList.add('hidden');
+    close?.classList.remove('hidden');
+    showMobileBackdrop();
+    mobileMenuToggle?.setAttribute('aria-expanded', 'true');
+  });
+
+  mobileBackdrop?.addEventListener('click', () => {
+    if (mobileMenu?.classList.contains('menu-open')) closeMobileMenu();
   });
 
   // Mobile submenu toggle
@@ -965,17 +831,8 @@ const mainNavItems: NavItem[] = [
   // Close mobile menu on link click
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      mobileMenu?.classList.add('menu-closing');
-      mobileMenu?.classList.remove('menu-open');
-      hamburger?.classList.remove('rotating');
-
-      setTimeout(() => {
-        mobileMenu?.classList.add('hidden');
-        mobileMenu?.classList.remove('menu-closing');
-        hamburger?.classList.remove('hidden');
-        close?.classList.add('hidden');
-        mobileMenuToggle?.setAttribute('aria-expanded', 'false');
-      }, 300);
+      if (!mobileMenu?.classList.contains('menu-open')) return;
+      closeMobileMenu();
     });
   });
 
@@ -991,13 +848,13 @@ const mainNavItems: NavItem[] = [
 
     if (indicator) indicator.style.width = `${scrollPercent}%`;
 
-    if (scrollTop > 10) {
-      header?.classList.add('shadow-lg');
-    } else {
-      header?.classList.remove('shadow-lg');
-    }
-
     if (header) {
+      if (scrollTop > 24) {
+        header.classList.add('nav-scrolled');
+      } else {
+        header.classList.remove('nav-scrolled');
+      }
+
       if (header.contains(document.activeElement)) {
         header.classList.remove('nav-hidden');
         lastScrollY = scrollTop;

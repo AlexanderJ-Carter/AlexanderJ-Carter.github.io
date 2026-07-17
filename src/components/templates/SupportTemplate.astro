@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../PageHero.astro';
+import { supportCopy } from '../../i18n/pages/support';
+import { resolveLang, getLangPath } from '../../i18n/types';
+import { afdianUrl, githubRepoUrl } from '../../config/site';
+
+const lang = resolveLang(Astro.props.lang);
+const t = supportCopy[lang];
+const home = getLangPath(lang, '/');
+const contact = getLangPath(lang, '/contact');
+---
+
+<BaseLayout title={`${t.title} — Alexander Carter`} description={t.description}>
+  <PageHero
+    kicker={t.kicker}
+    title={t.headerTitle}
+    description={t.headerDesc}
+    backHref={home}
+    backLabel={t.back}
+  />
+
+  <section class="pb-16 md:pb-20">
+    <div class="page-shell space-y-12">
+      <article class="border-t border-[rgb(var(--color-border))] pt-8">
+        <h2 class="font-heading text-xl md:text-2xl font-bold tracking-tight mb-3">
+          {t.whyTitle}
+        </h2>
+        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed max-w-2xl">
+          {t.whyBody}
+        </p>
+      </article>
+
+      <article class="border border-[rgb(var(--color-border))] p-6 md:p-8 surface-panel">
+        <p class="meta-mono mb-2">{t.paidTitle}</p>
+        <h2 class="font-heading text-2xl font-bold tracking-tight mb-3">
+          {t.paidCta}
+        </h2>
+        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-2 max-w-xl">
+          {t.paidLead}
+        </p>
+        <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-6 max-w-xl">
+          {t.paidNote}
+        </p>
+        <a
+          href={afdianUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary"
+        >
+          {t.paidCta}
+          <span aria-hidden="true">↗</span>
+        </a>
+        <p class="mt-4 text-xs text-[rgb(var(--color-text-tertiary))] break-all">
+          {afdianUrl}
+        </p>
+      </article>
+
+      <article class="border-t border-[rgb(var(--color-border))] pt-8">
+        <h2 class="font-heading text-xl md:text-2xl font-bold tracking-tight mb-2">
+          {t.freeTitle}
+        </h2>
+        <p class="text-[rgb(var(--color-text-secondary))] mb-6">{t.freeLead}</p>
+        <ul class="space-y-0 divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+          <li>
+            <a
+              href={githubRepoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="list-row flex items-baseline justify-between gap-4 py-4 px-1 hover:pl-2"
+            >
+              <span class="font-heading font-semibold text-[rgb(var(--color-text-primary))]">
+                {t.freeStar}
+              </span>
+              <span class="meta-mono shrink-0">GitHub ↗</span>
+            </a>
+          </li>
+          <li>
+            <p class="list-row flex items-baseline justify-between gap-4 py-4 px-1 text-[rgb(var(--color-text-primary))]">
+              <span class="font-heading font-semibold">{t.freeShare}</span>
+            </p>
+          </li>
+          <li>
+            <a
+              href={contact}
+              class="list-row flex items-baseline justify-between gap-4 py-4 px-1 hover:pl-2"
+            >
+              <span class="font-heading font-semibold text-[rgb(var(--color-text-primary))]">
+                {t.freeFeedback}
+              </span>
+              <span class="meta-mono shrink-0">→</span>
+            </a>
+          </li>
+        </ul>
+      </article>
+
+      <p class="text-sm text-[rgb(var(--color-text-tertiary))] leading-relaxed max-w-2xl">
+        {t.honesty}
+      </p>
+    </div>
+  </section>
+</BaseLayout>

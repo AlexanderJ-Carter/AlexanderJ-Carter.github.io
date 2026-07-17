@@ -54,7 +54,7 @@ const { duration = 4000 } = Astro.props;
     const icon = iconMap[type] || iconMap.info;
 
     toast.innerHTML = `
-      <div class="flex items-center gap-3 px-4 py-3 rounded-lg backdrop-blur-md ${bgClass} shadow-lg animate-slide-in">
+      <div class="flex items-center gap-3 px-4 py-3 rounded-sm ${bgClass} animate-slide-in">
         <div class="flex-shrink-0">${icon}</div>
         <div class="flex-1 text-sm font-medium">${message}</div>
         <button class="toast-close flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity">

@@ -1,7 +1,36 @@
 ---
+import { onThisDayEvents, pickOnThisDay } from '../data/on-this-day';
+
 // 诗词和历史上的今天组件
 const lang = Astro.props.lang || 'zh-CN';
 const isZh = lang === 'zh-CN' || lang === 'zh-TW';
+
+const now = new Date();
+const monthNum = now.getMonth() + 1;
+const dayNum = now.getDate();
+const historyEvent = pickOnThisDay(monthNum, dayNum);
+const historyText = historyEvent
+  ? isZh
+    ? historyEvent.zh
+    : historyEvent.en
+  : isZh
+    ? '今天暂无收录事件'
+    : 'No curated event for today';
+const historyDateLabel = isZh
+  ? `${historyEvent?.year ? historyEvent.year + '年 · ' : ''}${monthNum}月${dayNum}日`
+  : `${monthNum}/${dayNum}${historyEvent?.year ? ' · ' + historyEvent.year : ''}`;
+
+const dayPool = onThisDayEvents.filter(
+  (e) => e.month === monthNum && e.day === dayNum
+);
+const historyPoolJson = JSON.stringify(
+  (dayPool.length > 0 ? dayPool : historyEvent ? [historyEvent] : []).map(
+    (e) => ({
+      year: e.year,
+      text: isZh ? e.zh : e.en,
+    })
+  )
+);
 
 // Curated quotes for non-Chinese visitors (grouped by language for variety)
 const internationalQuotes: Record<
@@ -115,8 +144,13 @@ const historyTitle = isZh
       : 'On This Day';
 
 const poemLoadingText = isZh ? '载入诗词中...' : '...';
-const historyLoadingText = isZh ? '载入中...' : '...';
-const historyEventLoadingText = isZh ? '正在获取历史事件...' : '...';
+const historyShuffleLabel = isZh
+  ? '换一条'
+  : lang === 'fr'
+    ? 'Une autre'
+    : lang === 'ru'
+      ? 'Другая'
+      : 'Another';
 
 // Pass quotes to client script as JSON
 const intlQuotesJson = JSON.stringify(
@@ -125,15 +159,14 @@ const intlQuotesJson = JSON.stringify(
 ---
 
 <section
-  class="py-20 bg-gradient-to-br from-primary-500/10 via-accent-500/10 to-primary-500/10 relative overflow-hidden"
+  class="py-20 md:py-28 relative overflow-hidden border-y border-[rgb(var(--color-border))]"
 >
-  <div class="absolute inset-0 bg-mesh-gradient opacity-50"></div>
   <div class="container mx-auto px-4 lg:px-8 relative z-10">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+    <div class="mb-12 max-w-2xl">
+      <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3">
         {sectionTitle}
       </h2>
-      <p class="text-[rgb(var(--color-text-secondary))]">
+      <p class="text-[rgb(var(--color-text-secondary))] text-lg">
         {sectionSubtitle}
       </p>
     </div>
@@ -202,10 +235,10 @@ const intlQuotesJson = JSON.stringify(
       <div class="glass-card p-8 h-full">
         <div class="flex items-center justify-center mb-6">
           <div
-            class="w-16 h-16 rounded-full bg-accent-500/10 flex items-center justify-center"
+            class="w-16 h-16 rounded-full bg-primary-500/10 flex items-center justify-center"
           >
             <svg
-              class="w-8 h-8 text-accent-500"
+              class="w-8 h-8 text-primary-500"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -218,7 +251,7 @@ const intlQuotesJson = JSON.stringify(
             </svg>
           </div>
         </div>
-        <h3 class="text-2xl font-bold text-center mb-6">
+        <h3 class="font-heading text-2xl font-bold text-center mb-6">
           {historyTitle}
         </h3>
         <div
@@ -226,13 +259,28 @@ const intlQuotesJson = JSON.stringify(
           class="text-center min-h-[120px] flex flex-col justify-center"
         >
           <div
+            id="history-date"
             class="history-date text-lg font-semibold mb-3 text-[rgb(var(--color-text-primary))]"
           >
-            {historyLoadingText}
+            {historyDateLabel}
           </div>
-          <div class="history-event text-[rgb(var(--color-text-secondary))]">
-            {historyEventLoadingText}
+          <div
+            id="history-event"
+            class="history-event text-[rgb(var(--color-text-secondary))] leading-relaxed"
+          >
+            {historyText}
           </div>
+          {
+            dayPool.length > 1 && (
+              <button
+                type="button"
+                id="history-shuffle"
+                class="mt-5 mx-auto text-sm font-heading text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
+              >
+                {historyShuffleLabel}
+              </button>
+            )
+          }
         </div>
       </div>
     </div>
@@ -301,129 +349,22 @@ const intlQuotesJson = JSON.stringify(
       }
     }
 
-    // 加载历史上的今天
-    function getTodayInHistory() {
-      const historyEl = document.querySelector('#history-today');
-      if (!historyEl) return;
-
-      const now = new Date();
-      const monthNum = now.getMonth() + 1;
-      const dayNum = now.getDate();
-
-      const docLang = (document.documentElement.lang || 'zh-CN').toLowerCase();
-      const apiLang = docLang.startsWith('en')
-        ? 'en'
-        : docLang.startsWith('ja')
-          ? 'ja'
-          : docLang.startsWith('it')
-            ? 'it'
-            : docLang.startsWith('fr')
-              ? 'fr'
-              : docLang.startsWith('ru')
-                ? 'ru'
-                : 'zh';
-
-      const endpoint = (l) =>
-        `https://${l}.wikipedia.org/api/rest_v1/feed/onthisday/events/${monthNum}/${dayNum}`;
-
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 6000);
-
-      function render(items) {
-        if (!historyEl) return;
-        if (!Array.isArray(items) || items.length === 0) {
-          const msg = isZh ? '今天暂无事件数据' : 'No events available today';
-          historyEl.innerHTML = `<div class="history-event">${msg}</div>`;
-          return;
-        }
-        const item = items[Math.floor(Math.random() * items.length)];
-        const year = item.year || '';
-        const text =
-          item.text ||
-          (item.pages && item.pages[0] && item.pages[0].displaytitle) ||
-          (isZh ? '历史事件' : 'Historical event');
-        const dateLabel = isZh
-          ? `${year ? year + '年 ' : ''}${monthNum}/${dayNum}`
-          : `${monthNum}/${dayNum}${year ? ' · ' + year : ''}`;
-
-        historyEl.innerHTML = `
-          <div class="history-date text-lg font-semibold mb-3 text-[rgb(var(--color-text-primary))]">${dateLabel}</div>
-          <div class="history-event text-[rgb(var(--color-text-secondary))]">${text}</div>
-        `;
-
-        historyEl.style.opacity = '0';
-        setTimeout(() => {
-          if (historyEl) {
-            historyEl.style.transition = 'opacity 0.8s ease';
-            historyEl.style.opacity = '1';
-          }
-        }, 300);
-      }
-
-      // 尝试从缓存获取
-      const cacheKey = `history:${apiLang}:${monthNum}-${dayNum}`;
-      try {
-        const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-        if (cached && Date.now() - cached.ts < 6 * 60 * 60 * 1000) {
-          render(cached.events);
-          return;
-        }
-      } catch {}
-
-      // 从Wikipedia获取
-      fetch(endpoint(apiLang), {
-        signal: controller.signal,
-        headers: { accept: 'application/json' },
-      })
-        .then((r) =>
-          r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))
-        )
-        .then((data) => {
-          render(data && data.events);
-          try {
-            localStorage.setItem(
-              cacheKey,
-              JSON.stringify({
-                ts: Date.now(),
-                events: (data && data.events) || [],
-              })
-            );
-          } catch {}
-        })
-        .catch(() => {
-          // 回退到英文
-          fetch(endpoint('en'), {
-            headers: { accept: 'application/json' },
-          })
-            .then((r) =>
-              r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))
-            )
-            .then((data) => {
-              render(data && data.events);
-              try {
-                localStorage.setItem(
-                  cacheKey,
-                  JSON.stringify({
-                    ts: Date.now(),
-                    events: (data && data.events) || [],
-                  })
-                );
-              } catch {}
-            })
-            .catch((error) => {
-              console.error('Error fetching historical event:', error);
-              if (historyEl) {
-                const errMsg = isZh
-                  ? '历史数据获取失败'
-                  : 'Failed to load historical data';
-                historyEl.innerHTML = `<div class="history-event">${errMsg}</div>`;
-              }
-            })
-            .finally(() => clearTimeout(timeoutId));
-        });
+    // 历史上的今天：本地精选，可换一条
+    var pool = window.__historyPool || [];
+    var shuffleBtn = document.getElementById('history-shuffle');
+    var dateEl = document.getElementById('history-date');
+    var eventEl = document.getElementById('history-event');
+    if (shuffleBtn && pool.length > 1 && dateEl && eventEl) {
+      shuffleBtn.addEventListener('click', function () {
+        var item = pool[Math.floor(Math.random() * pool.length)];
+        var month = new Date().getMonth() + 1;
+        var day = new Date().getDate();
+        dateEl.textContent = isZh
+          ? (item.year ? item.year + '年 · ' : '') + month + '月' + day + '日'
+          : month + '/' + day + (item.year ? ' · ' + item.year : '');
+        eventEl.textContent = item.text;
+      });
     }
-
-    getTodayInHistory();
   }
 
   if (document.readyState === 'loading') {
@@ -446,8 +387,11 @@ const intlQuotesJson = JSON.stringify(
 {
   !isZh && (
     <script is:inline define:vars={{ intlQuotesJson }}>
-      // Set global quotes array SYNCHRONOUSLY before main init
       window.__intlQuotes = JSON.parse(intlQuotesJson || '[]');
     </script>
   )
 }
+
+<script is:inline define:vars={{ historyPoolJson }}>
+  window.__historyPool = JSON.parse(historyPoolJson || '[]');
+</script>
