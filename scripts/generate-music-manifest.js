@@ -126,7 +126,11 @@ function main() {
     tracks,
   };
 
-  fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2), 'utf8');
+  fs.writeFileSync(
+    MANIFEST_PATH,
+    `${JSON.stringify(manifest, null, 2)}\n`,
+    'utf8'
+  );
   console.log(
     `[music-manifest] 已生成 ${tracks.length} 首歌曲 (${localTracks.length} 本地 + ${LIVE_STREAMS.length} 直播) -> public/music/manifest.json`
   );
