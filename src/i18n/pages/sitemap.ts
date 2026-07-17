@@ -307,7 +307,8 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
     description: 'An index of every entrance on this site',
     kicker: 'Index',
     headerTitle: 'Contents',
-    headerDesc: 'A table of contents for the studio — find the section you need.',
+    headerDesc:
+      'A table of contents for the studio — find the section you need.',
     back: 'Back to home',
     tocLabel: 'Sections',
     sections: [
@@ -320,12 +321,24 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           { name: 'Home', path: '/', desc: 'Photo hero and featured entries' },
           { name: 'Gallery', path: '/gallery', desc: 'Photographs' },
           { name: 'Writing', path: '/writing', desc: 'Long-form notes' },
-          { name: 'Reading', path: '/reading-list', desc: 'Deep notes and routes' },
-          { name: 'Projects', path: '/projects', desc: 'Open source and tools' },
+          {
+            name: 'Reading',
+            path: '/reading-list',
+            desc: 'Deep notes and routes',
+          },
+          {
+            name: 'Projects',
+            path: '/projects',
+            desc: 'Open source and tools',
+          },
           { name: 'About', path: '/about', desc: 'Profile, research, contact' },
           { name: 'Timeline', path: '/timeline', desc: 'Milestones' },
           { name: 'References', path: '/friends', desc: 'Links and resources' },
-          { name: 'Support', path: '/support', desc: 'Afdian and free ways to help' },
+          {
+            name: 'Support',
+            path: '/support',
+            desc: 'Afdian and free ways to help',
+          },
         ],
       },
       {
@@ -339,7 +352,11 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           { name: 'World time', path: '/time', desc: 'Time zones' },
           { name: 'Calendar', path: '/calendar', desc: 'Month view' },
           { name: 'Currency', path: '/currency', desc: 'FX reference' },
-          { name: 'Units', path: '/units', desc: 'Temperature, length, weight' },
+          {
+            name: 'Units',
+            path: '/units',
+            desc: 'Temperature, length, weight',
+          },
           { name: 'QR', path: '/qr', desc: 'URL to QR' },
           { name: 'Play', path: '/fun', desc: 'Quotes and mini tools' },
           { name: 'Uses', path: '/uses', desc: 'Stack and boundaries' },
@@ -463,7 +480,11 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           { name: 'À propos', path: '/about', desc: 'Profil et recherche' },
           { name: 'Chronologie', path: '/timeline', desc: 'Jalons' },
           { name: 'Références', path: '/friends', desc: 'Liens' },
-          { name: 'Soutenir', path: '/support', desc: 'Afdian et aides gratuites' },
+          {
+            name: 'Soutenir',
+            path: '/support',
+            desc: 'Afdian et aides gratuites',
+          },
         ],
       },
       {
@@ -597,7 +618,11 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           { name: 'Обо мне', path: '/about', desc: 'Профиль и исследования' },
           { name: 'Хронология', path: '/timeline', desc: 'Вехи' },
           { name: 'Ссылки', path: '/friends', desc: 'Ресурсы' },
-          { name: 'Поддержка', path: '/support', desc: 'Afdian и бесплатная помощь' },
+          {
+            name: 'Поддержка',
+            path: '/support',
+            desc: 'Afdian и бесплатная помощь',
+          },
         ],
       },
       {

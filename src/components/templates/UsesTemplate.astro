@@ -270,13 +270,17 @@ const siteGuide = siteGuideData[lang as Lang] || siteGuideData['en-GB'];
 
   <section class="pb-20 md:pb-28">
     <div class="container mx-auto px-4 lg:px-8 max-w-2xl">
-      <p class="text-[rgb(var(--color-text-secondary))] text-sm mb-10 leading-relaxed">
+      <p
+        class="text-[rgb(var(--color-text-secondary))] text-sm mb-10 leading-relaxed"
+      >
         {text.intro}
       </p>
 
       <div class="space-y-0 border-t border-[rgb(var(--color-border))]">
         <section class="py-8 border-b border-[rgb(var(--color-border))]">
-          <h2 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+          <h2
+            class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]"
+          >
             {text.builtWith}
           </h2>
           <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-4">
@@ -296,7 +300,9 @@ const siteGuide = siteGuideData[lang as Lang] || siteGuideData['en-GB'];
         </section>
 
         <section class="py-8 border-b border-[rgb(var(--color-border))]">
-          <h2 class="text-lg font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">
+          <h2
+            class="text-lg font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+          >
             {text.features}
           </h2>
           <ul class="space-y-3">
@@ -311,22 +317,32 @@ const siteGuide = siteGuideData[lang as Lang] || siteGuideData['en-GB'];
         </section>
 
         <section class="py-8 border-b border-[rgb(var(--color-border))]">
-          <h2 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+          <h2
+            class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]"
+          >
             {text.perf}
           </h2>
-          <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+          <p
+            class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed"
+          >
             {text.perfDesc}
           </p>
         </section>
 
         <section class="py-8 border-b border-[rgb(var(--color-border))]">
-          <h2 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+          <h2
+            class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]"
+          >
             {siteGuide.title}
           </h2>
-          <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed mb-5">
+          <p
+            class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed mb-5"
+          >
             {siteGuide.intro}
           </p>
-          <div class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+          <div
+            class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]"
+          >
             {
               siteGuide.sections.map((section: any) => (
                 <a
@@ -351,7 +367,9 @@ const siteGuide = siteGuideData[lang as Lang] || siteGuideData['en-GB'];
         </section>
 
         <section class="py-8 border-b border-[rgb(var(--color-border))]">
-          <h2 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+          <h2
+            class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]"
+          >
             {text.source}
           </h2>
           <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-3">

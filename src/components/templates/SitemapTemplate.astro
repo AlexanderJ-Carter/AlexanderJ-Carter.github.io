@@ -27,7 +27,9 @@ function resolveHref(path: string, external?: boolean) {
   <section class="pb-8 md:pb-10">
     <div class="page-shell-wide">
       <nav aria-label={t.tocLabel}>
-        <ol class="flex flex-wrap gap-x-6 gap-y-2 border-y border-[rgb(var(--color-border))] py-4">
+        <ol
+          class="flex flex-wrap gap-x-6 gap-y-2 border-y border-[rgb(var(--color-border))] py-4"
+        >
           {
             t.sections.map((section) => (
               <li>
@@ -38,7 +40,9 @@ function resolveHref(path: string, external?: boolean) {
                   <span class="meta-mono text-[rgb(var(--color-accent))]">
                     {section.index}
                   </span>
-                  <span class="font-heading font-semibold">{section.title}</span>
+                  <span class="font-heading font-semibold">
+                    {section.title}
+                  </span>
                 </a>
               </li>
             ))
@@ -116,7 +120,9 @@ function resolveHref(path: string, external?: boolean) {
       }
 
       <article id="languages" class="scroll-mt-28">
-        <header class="mb-6 md:mb-8 grid gap-3 md:grid-cols-[5rem_1fr] md:items-end">
+        <header
+          class="mb-6 md:mb-8 grid gap-3 md:grid-cols-[5rem_1fr] md:items-end"
+        >
           <p
             class="font-heading text-4xl md:text-5xl font-bold tabular-nums tracking-tight text-[rgb(var(--color-accent))]/80"
             aria-hidden="true"
@@ -124,7 +130,9 @@ function resolveHref(path: string, external?: boolean) {
             05
           </p>
           <div>
-            <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight">
+            <h2
+              class="font-heading text-2xl md:text-3xl font-bold tracking-tight"
+            >
               {t.languagesTitle}
             </h2>
             <p class="mt-1 text-[rgb(var(--color-text-secondary))]">

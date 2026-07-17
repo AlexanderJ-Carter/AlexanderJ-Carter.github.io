@@ -76,7 +76,11 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: '工程实践',
         desc: '把一次性脚本变成可演进的系统：命名、边界、测试、重构，以及团队里如何说清楚取舍。',
-        picks: ['Refactoring', 'Design Patterns（按需）', 'A Philosophy of Software Design'],
+        picks: [
+          'Refactoring',
+          'Design Patterns（按需）',
+          'A Philosophy of Software Design',
+        ],
         why: '真正难的不是多写一行，而是让半年后的自己还能改。工程书用来校准“什么算好的复杂度”。',
       },
       {
@@ -90,7 +94,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: '设计中的设计',
         author: '原研哉',
-        quote: '理解一件事，不是能把它定义清楚，而是能把自以为已知的东西重新变成未知。',
+        quote:
+          '理解一件事，不是能把它定义清楚，而是能把自以为已知的东西重新变成未知。',
         thought:
           '原研哉区分了“简洁（simplicity）”与“空（emptiness）”：前者删减是为了把功能说清楚；后者留空是为了邀请使用者自己填入意义。MUJI 的产品像一只空容器——不替你决定怎么用。这对摄影的启发是：画面里的留白不是“少拍一点”，而是给观看者留出进入的路径。他也谈“exformation”：不是继续堆信息，而是让人意识到自己知道得很少，从而重新产生好奇。我后来改站点首页时，刻意减少装饰与口号，就是在练习这种“空”。',
         takeaway: '删减之前先问：我是在澄清功能，还是在为他人腾出空间？',
@@ -100,7 +105,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: '摄影的艺术',
         author: 'Bruce Barnbaum',
-        quote: '拍照真正开始于可视化：在按下快门前后，你已经在脑子里看见最终的画面。',
+        quote:
+          '拍照真正开始于可视化：在按下快门前后，你已经在脑子里看见最终的画面。',
         thought:
           'Barnbaum 把 visualization 拆成可操作的步骤：摄影式地看（looking）与看见（seeing）不同；构图；预想最终成品；再制定曝光与后期策略。他强调眼与相机的差异——相机没有你的选择性注意，也不会自动忽略干扰。对我而言，最有用的一课是：好照片常常是“等”出来的，而不是“扫”出来的。参数与器材是手段；表达意图才是主线。每次外拍前，我会先问自己：这张图最终希望别人感觉到什么？',
         takeaway: '站在取景器后，先想打印/发布后的那一帧，再决定技术路径。',
@@ -110,7 +116,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: '论摄影',
         author: '苏珊·桑塔格',
-        quote: '照片教给我们一种新的视觉语法，也改写了什么值得被看、我们有权观看什么。',
+        quote:
+          '照片教给我们一种新的视觉语法，也改写了什么值得被看、我们有权观看什么。',
         thought:
           '桑塔格提醒：摄影像柏拉图洞穴里的影像——它给人“占有世界”的幻觉，却往往只提供表面知识。照片能唤起道德感，却很难单独构成伦理或政治理解；理解需要叙事与时间中的功能，而快照把世界切成彼此无关的碎片。她也指出拍摄与介入的张力：想记录的人难以同时介入，介入者又难以忠实记录。对我这个既拍风景也写站点的人，这句话很刺：画廊里的美是否在稀释真实的复杂性？我开始更谨慎地写图说，并接受“有些事不适合只靠一张图讲完”。',
         takeaway: '拍下来不等于理解；说明与上下文，是照片的伦理补丁。',
@@ -229,7 +236,11 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: '工程實踐',
         desc: '把一次性腳本變成可演進的系統：命名、邊界、測試與重構。',
-        picks: ['Refactoring', 'Design Patterns（按需）', 'A Philosophy of Software Design'],
+        picks: [
+          'Refactoring',
+          'Design Patterns（按需）',
+          'A Philosophy of Software Design',
+        ],
         why: '真正難的是讓半年後的自己還能改。',
       },
       {
@@ -243,7 +254,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: '設計中的設計',
         author: '原研哉',
-        quote: '理解一件事，不是能把它定義清楚，而是能把自以為已知的東西重新變成未知。',
+        quote:
+          '理解一件事，不是能把它定義清楚，而是能把自以為已知的東西重新變成未知。',
         thought:
           '原研哉區分「簡潔」與「空」：前者澄清功能，後者邀請使用者填入意義。這改變我對攝影留白與網站首屏的想法——少一些裝飾，多留進入的路徑。',
         takeaway: '刪減之前先問：澄清功能，還是為他人騰出空間？',
@@ -294,7 +306,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
         title: '小王子',
         author: '聖修伯里',
         quote: '真正重要的東西，用眼睛是看不見的。',
-        thought: '「馴服」講的是儀式與耐心——攝影與網站都需要可重複的陪伴，而不只是一次性驚艷。',
+        thought:
+          '「馴服」講的是儀式與耐心——攝影與網站都需要可重複的陪伴，而不只是一次性驚艷。',
         takeaway: '關係需要耐心，作品也是。',
         tags: ['文學', '關係'],
         status: 'finished',
@@ -366,7 +379,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
     booksTitle: 'Deep notes',
     booksIntro: 'Beyond quotes: the sentences I still use.',
     essaysTitle: 'Further reading',
-    essaysIntro: 'Public essays and primary sources that put the books back into a wider conversation.',
+    essaysIntro:
+      'Public essays and primary sources that put the books back into a wider conversation.',
     takeawayLabel: 'Takeaway',
     back: 'Back to home',
     paths: [
@@ -379,13 +393,22 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: 'Engineering practice',
         desc: 'Turn one-off scripts into systems you can evolve: boundaries, tests, refactoring and clear trade-offs.',
-        picks: ['Refactoring', 'Design Patterns (as needed)', 'A Philosophy of Software Design'],
+        picks: [
+          'Refactoring',
+          'Design Patterns (as needed)',
+          'A Philosophy of Software Design',
+        ],
         why: 'The hard part is change six months later, not the first commit.',
       },
       {
         title: 'Observation & expression',
         desc: 'Photography, emptiness in design, systems thinking and critical reading — what you notice, omit and explain.',
-        picks: ['The Art of Photography', 'Designing Design', 'On Photography', 'Thinking in Systems'],
+        picks: [
+          'The Art of Photography',
+          'Designing Design',
+          'On Photography',
+          'Thinking in Systems',
+        ],
         why: 'Technical work still has to be understood by humans.',
       },
     ],
@@ -397,7 +420,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
           'To understand something is not to define it, but to make the seemingly known unknown again.',
         thought:
           'Hara separates simplicity from emptiness: simplicity clarifies function; emptiness invites the user to complete meaning. MUJI products behave like empty vessels. That reframed negative space in my photographs and the first viewport of this site — fewer ornaments, more room to enter. His “exformation” idea — awakening curiosity by revealing how little we know — is the opposite of packing a page with badges.',
-        takeaway: 'Before cutting, ask: clarifying function, or making space for someone else?',
+        takeaway:
+          'Before cutting, ask: clarifying function, or making space for someone else?',
         tags: ['Design', 'Perception'],
         status: 'finished',
       },
@@ -408,7 +432,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
           'Making a photograph begins with visualisation — seeing the final image before or as you expose.',
         thought:
           'Barnbaum’s visualisation steps separate looking from seeing, then composition, envisioning the print, and planning exposure and process. Cameras lack selective attention. The practical lesson: strong frames are often waited for, not swept. Gear serves intent. Before a shoot I ask what feeling the finished picture should carry.',
-        takeaway: 'Imagine the final frame first, then choose the technical path.',
+        takeaway:
+          'Imagine the final frame first, then choose the technical path.',
         tags: ['Photography', 'Method'],
         status: 'reading',
       },
@@ -419,7 +444,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
           'Photographs teach a new visual grammar — and rewrite what is worth looking at.',
         thought:
           'Sontag’s warning: images offer appropriation and a bargain-basement sense of knowledge. They can stir conscience yet rarely deliver ethical understanding alone, because understanding needs narrative over time. Recording and intervening pull in opposite directions. For a photographer who also ships a public site, captions and context are ethical patches, not decoration.',
-        takeaway: 'Capturing is not understanding; context is part of the ethics.',
+        takeaway:
+          'Capturing is not understanding; context is part of the ethics.',
         tags: ['Photography', 'Critique'],
         status: 'finished',
       },
@@ -430,7 +456,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
           'People often find leverage points — then push them the wrong way.',
         thought:
           'Meadows ranks interventions from parameters (weak) to paradigms (strong). Tweaking colours is easy; changing information flows, rules and goals is harder and more powerful. Useful when maintaining this site: do not only tune UI knobs — ask whether information reaches the right person and whether incentives match the real goal.',
-        takeaway: 'Before another UI tweak, look for higher leverage: information, rules, goals.',
+        takeaway:
+          'Before another UI tweak, look for higher leverage: information, rules, goals.',
         tags: ['Systems'],
         status: 'finished',
       },
@@ -441,7 +468,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
           'Learn systems by how they affect your programs — then study how to build them.',
         thought:
           'CSAPP spans representation, machine code, memory, linking, exceptional control flow, virtual memory and concurrency from an application programmer’s seat. It demystifies “weird” bugs and performance cliffs. I read it with my own slow paths and crash logs, not as a memorisation drill.',
-        takeaway: 'Most correctness and performance mysteries map to a system layer.',
+        takeaway:
+          'Most correctness and performance mysteries map to a system layer.',
         tags: ['Computing', 'Foundations'],
         status: 'reading',
       },
@@ -471,7 +499,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
         quote: 'I have done my best with an ordinary life.',
         thought:
           'Sixpence versus moon: the book forces a recurring audit of where time goes — studies, photographs, site craft. The answer changes; asking on a schedule still matters.',
-        takeaway: 'Are you optimising for sixpence, or still willing to look up?',
+        takeaway:
+          'Are you optimising for sixpence, or still willing to look up?',
         tags: ['Literature', 'Choice'],
         status: 'finished',
       },
@@ -537,13 +566,22 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: 'Pratique d’ingénierie',
         desc: 'Maintenabilité, tests, refactoring, compromis clairs.',
-        picks: ['Refactoring', 'Design Patterns', 'A Philosophy of Software Design'],
+        picks: [
+          'Refactoring',
+          'Design Patterns',
+          'A Philosophy of Software Design',
+        ],
         why: 'Le difficile, c’est dans six mois.',
       },
       {
         title: 'Observation et expression',
         desc: 'Photo, vide du design, pensée systémique, lecture critique.',
-        picks: ['The Art of Photography', 'Designing Design', 'On Photography', 'Thinking in Systems'],
+        picks: [
+          'The Art of Photography',
+          'Designing Design',
+          'On Photography',
+          'Thinking in Systems',
+        ],
         why: 'Le technique doit rester compréhensible.',
       },
     ],
@@ -551,7 +589,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: 'Designing Design',
         author: 'Kenya Hara',
-        quote: 'Comprendre, c’est rendre à nouveau inconnu ce que l’on croit savoir.',
+        quote:
+          'Comprendre, c’est rendre à nouveau inconnu ce que l’on croit savoir.',
         thought:
           'Simplicité vs vide : clarifier la fonction, ou inviter l’usage. Cela a changé mon rapport au vide dans la photo et sur ce site.',
         takeaway: 'Avant de couper : clarifier, ou ouvrir un espace ?',
@@ -592,8 +631,7 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
         title: 'CSAPP',
         author: 'Bryant / O’Hallaron',
         quote: 'D’abord l’effet des systèmes sur vos programmes.',
-        thought:
-          'Démystifie bugs et perfs. À lire avec ses propres crashs.',
+        thought: 'Démystifie bugs et perfs. À lire avec ses propres crashs.',
         takeaway: 'Chaque mystère mappe une couche.',
         tags: ['Informatique'],
         status: 'reading',
@@ -669,13 +707,22 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: 'Инженерная практика',
         desc: 'Поддерживаемость, тесты, рефакторинг, ясные компромиссы.',
-        picks: ['Refactoring', 'Design Patterns', 'A Philosophy of Software Design'],
+        picks: [
+          'Refactoring',
+          'Design Patterns',
+          'A Philosophy of Software Design',
+        ],
         why: 'Сложно через полгода, не в первый коммит.',
       },
       {
         title: 'Наблюдение и выражение',
         desc: 'Фото, пустота в дизайне, системное мышление, критика.',
-        picks: ['The Art of Photography', 'Designing Design', 'On Photography', 'Thinking in Systems'],
+        picks: [
+          'The Art of Photography',
+          'Designing Design',
+          'On Photography',
+          'Thinking in Systems',
+        ],
         why: 'Технику всё равно должны понять люди.',
       },
     ],
@@ -683,7 +730,8 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
       {
         title: 'Дизайн дизайна',
         author: 'Кэндзи Хара',
-        quote: 'Понять — значит снова сделать неизвестным то, что казалось известным.',
+        quote:
+          'Понять — значит снова сделать неизвестным то, что казалось известным.',
         thought:
           'Простота проясняет функцию; пустота приглашает смысл. Это изменило мой взгляд на воздух в кадре и на первом экране сайта.',
         takeaway: 'Сначала спросить: уточняю функцию или освобождаю место?',
@@ -724,8 +772,7 @@ export const readingCopy: Record<Lang, ReadingCopy> = {
         title: 'CSAPP',
         author: 'Bryant / O’Hallaron',
         quote: 'Сначала — как системы влияют на программы.',
-        thought:
-          'Снимает мистику багов и тормозов. Читать со своими логами.',
+        thought: 'Снимает мистику багов и тормозов. Читать со своими логами.',
         takeaway: 'Загадка почти всегда на каком-то слое системы.',
         tags: ['CS'],
         status: 'reading',

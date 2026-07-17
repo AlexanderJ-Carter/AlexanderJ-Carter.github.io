@@ -107,4 +107,3 @@ export const calendarData: Record<Lang, any> = {
     delete: 'Удалить',
   },
 };
-

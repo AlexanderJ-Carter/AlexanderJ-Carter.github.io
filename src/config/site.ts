@@ -13,8 +13,7 @@ export const isDev = Boolean(env.DEV);
 
 /** Skip Turnstile gate on protected pages (About / Contact). */
 export const skipVerify =
-  truthy(env.PUBLIC_SKIP_VERIFY) ||
-  (isDev && !truthy(env.PUBLIC_FORCE_VERIFY));
+  truthy(env.PUBLIC_SKIP_VERIFY) || (isDev && !truthy(env.PUBLIC_FORCE_VERIFY));
 
 /** Cloudflare Turnstile site key. Empty in skip mode. */
 export const turnstileSiteKey: string =

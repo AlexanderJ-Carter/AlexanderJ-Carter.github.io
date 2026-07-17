@@ -610,7 +610,9 @@ function getLangPath(path: string): string {
         >
           {text.title}
         </h1>
-        <p class="text-[rgb(var(--color-text-secondary))] text-lg leading-relaxed">
+        <p
+          class="text-[rgb(var(--color-text-secondary))] text-lg leading-relaxed"
+        >
           {text.intro}
         </p>
       </div>
@@ -941,7 +943,9 @@ function getLangPath(path: string): string {
     padding: 0.42rem 0.75rem;
     font-size: 0.82rem;
     font-weight: 600;
-    transition: border-color 0.18s ease, color 0.18s ease;
+    transition:
+      border-color 0.18s ease,
+      color 0.18s ease;
   }
 
   .project-link:hover {

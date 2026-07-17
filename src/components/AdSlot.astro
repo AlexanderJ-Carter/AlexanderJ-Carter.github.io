@@ -21,31 +21,28 @@ const { slot, format = 'auto', class: className = '' } = Astro.props;
 
 const slotId = adSlots[slot];
 const active = adsEnabled && Boolean(slotId);
+
+if (!active) return;
+
+const pushScript =
+  'try{var s={};(window.adsbygoogle=window.adsbygoogle||[]).push(s)}catch(e){}';
 ---
 
-{
-  active ? (
-    <aside
-      class:list={['ad-slot', `ad-slot--${format}`, className]}
-      aria-label="Advertisement"
-      data-ad-slot={slot}
-    >
-      <ins
-        class="adsbygoogle"
-        style="display:block"
-        data-ad-client={adsenseClient}
-        data-ad-slot={slotId}
-        data-ad-format={format === 'auto' ? 'auto' : undefined}
-        data-full-width-responsive={format === 'horizontal' ? 'true' : undefined}
-      />
-      <script is:inline>
-        try {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (_) {}
-      </script>
-    </aside>
-  ) : null
-}
+<aside
+  class:list={['ad-slot', `ad-slot--${format}`, className]}
+  aria-label="Advertisement"
+  data-ad-slot={slot}
+>
+  <ins
+    class="adsbygoogle"
+    style="display:block"
+    data-ad-client={adsenseClient}
+    data-ad-slot={slotId}
+    data-ad-format={format === 'auto' ? 'auto' : undefined}
+    data-full-width-responsive={format === 'horizontal' ? 'true' : undefined}
+  ></ins>
+  <script is:inline set:html={pushScript} />
+</aside>
 
 <style>
   .ad-slot {

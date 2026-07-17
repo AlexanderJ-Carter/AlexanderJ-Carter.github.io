@@ -14,7 +14,16 @@ interface Props {
   timeToRead?: string;
 }
 
-const { lang = 'zh-CN', title, description, pubDate, updatedDate, category, tags, timeToRead } = Astro.props;
+const {
+  lang = 'zh-CN',
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  category,
+  tags,
+  timeToRead,
+} = Astro.props;
 
 function getLangPath(path: string): string {
   if (lang === 'zh-CN') return path;
@@ -51,7 +60,7 @@ const i18n = {
     shareText: 'Share',
   },
   fr: {
-    backToList: "Retour aux écrits",
+    backToList: 'Retour aux écrits',
     publishedOn: 'Publié le',
     updatedOn: 'Mis à jour le',
     minRead: 'min de lecture',
@@ -73,8 +82,21 @@ const i18n = {
 const t = i18n[lang as Lang] || i18n['zh-CN'];
 
 const formatDate = (date: Date) => {
-  const locale = lang === 'zh-CN' ? 'zh-CN' : lang === 'zh-TW' ? 'zh-TW' : lang === 'fr' ? 'fr-FR' : lang === 'ru' ? 'ru-RU' : 'en-GB';
-  return date.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' });
+  const locale =
+    lang === 'zh-CN'
+      ? 'zh-CN'
+      : lang === 'zh-TW'
+        ? 'zh-TW'
+        : lang === 'fr'
+          ? 'fr-FR'
+          : lang === 'ru'
+            ? 'ru-RU'
+            : 'en-GB';
+  return date.toLocaleDateString(locale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 };
 ---
 
@@ -85,51 +107,76 @@ const formatDate = (date: Date) => {
         href={getLangPath('/writing')}
         class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
         </svg>
         <span>{t.backToList}</span>
       </a>
 
       <header class="mb-10">
         <div class="flex items-center gap-3 mb-4">
-          <span class="text-xs font-heading tracking-[0.15em] uppercase text-[rgb(var(--color-text-tertiary))]">
+          <span
+            class="text-xs font-heading tracking-[0.15em] uppercase text-[rgb(var(--color-text-tertiary))]"
+          >
             {category}
           </span>
-          {timeToRead && (
-            <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
-              {timeToRead}
-            </span>
-          )}
+          {
+            timeToRead && (
+              <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
+                {timeToRead}
+              </span>
+            )
+          }
         </div>
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]">
+        <h1
+          class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]"
+        >
           {title}
         </h1>
         <p class="text-lg text-[rgb(var(--color-text-secondary))] mb-4">
           {description}
         </p>
-        <div class="flex items-center gap-4 text-sm text-[rgb(var(--color-text-tertiary))]">
+        <div
+          class="flex items-center gap-4 text-sm text-[rgb(var(--color-text-tertiary))]"
+        >
           <time datetime={pubDate.toISOString()}>
-            {t.publishedOn} {formatDate(pubDate)}
+            {t.publishedOn}
+            {formatDate(pubDate)}
           </time>
-          {updatedDate && (
-            <time datetime={updatedDate.toISOString()}>
-              {t.updatedOn} {formatDate(updatedDate)}
-            </time>
-          )}
+          {
+            updatedDate && (
+              <time datetime={updatedDate.toISOString()}>
+                {t.updatedOn} {formatDate(updatedDate)}
+              </time>
+            )
+          }
         </div>
-        {tags.length > 0 && (
-          <div class="flex flex-wrap gap-2 mt-4">
-            {tags.map((tag) => (
-              <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )}
+        {
+          tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mt-4">
+              {tags.map((tag) => (
+                <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )
+        }
       </header>
 
-      <div class="prose prose-lg dark:prose-invert max-w-none mb-12" id="article-content">
+      <div
+        class="prose prose-lg dark:prose-invert max-w-none mb-12"
+        id="article-content"
+      >
         <slot />
       </div>
 
@@ -159,7 +206,8 @@ const formatDate = (date: Date) => {
   #article-content :global(p) {
     @apply text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4;
   }
-  #article-content :global(ul), #article-content :global(ol) {
+  #article-content :global(ul),
+  #article-content :global(ol) {
     @apply ml-6 mb-4 space-y-2 text-[rgb(var(--color-text-secondary))];
   }
   #article-content :global(ul) {

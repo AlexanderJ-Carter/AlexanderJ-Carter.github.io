@@ -2,7 +2,13 @@
   "ci": {
     "collect": {
       "staticDistDir": "./dist",
-      "numberOfRuns": 3
+      "numberOfRuns": 1,
+      "url": [
+        "http://localhost/",
+        "http://localhost/about/",
+        "http://localhost/gallery/",
+        "http://localhost/writing/"
+      ]
     },
     "assert": {
       "preset": "lighthouse:recommended",

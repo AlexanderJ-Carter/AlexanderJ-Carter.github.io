@@ -27,34 +27,111 @@ const kicker =
       : lang === 'ru'
         ? 'Notice'
         : 'Notice';
+
+if (!active) return;
 ---
 
 {
-  active ? (
-    siteNotice.variant === 'modal' ? (
-      <div
-        id="site-notice"
-        class="site-notice site-notice--modal hidden"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="site-notice-title"
-        data-storage-key={storageKey}
-        data-variant="modal"
-      >
-        <button
-          type="button"
-          class="site-notice__backdrop"
-          aria-label={copy.dismiss || 'Close'}
-          data-notice-dismiss
-        />
-        <div class="site-notice__panel" role="document">
-          <div class="site-notice__accent" aria-hidden="true" />
+  siteNotice.variant === 'modal' ? (
+    <div
+      id="site-notice"
+      class="site-notice site-notice--modal hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="site-notice-title"
+      data-storage-key={storageKey}
+      data-variant="modal"
+    >
+      <button
+        type="button"
+        class="site-notice__backdrop"
+        aria-label={copy.dismiss || 'Close'}
+        data-notice-dismiss
+      />
+      <div class="site-notice__panel" role="document">
+        <div class="site-notice__accent" aria-hidden="true" />
+        {dismissible && (
+          <button
+            type="button"
+            class="site-notice__x"
+            data-notice-dismiss
+            aria-label={copy.dismiss || 'Close'}
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        )}
+        <p class="site-notice__kicker">{kicker}</p>
+        <h2 id="site-notice-title" class="site-notice__title">
+          {copy.title}
+        </h2>
+        <p class="site-notice__body">{copy.body}</p>
+        <div class="site-notice__actions">
+          {hasCta && (
+            <a href={noticeHref} class="site-notice__cta">
+              <span>{copy.cta}</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          )}
+          {dismissible && (
+            <button
+              type="button"
+              class="site-notice__dismiss"
+              data-notice-dismiss
+            >
+              {copy.dismiss || 'OK'}
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div
+      id="site-notice"
+      class="site-notice site-notice--banner hidden"
+      role="region"
+      aria-label={copy.title}
+      data-storage-key={storageKey}
+      data-variant="banner"
+    >
+      <div class="site-notice__inner">
+        <div class="min-w-0 flex-1">
+          <p class="site-notice__kicker">{kicker}</p>
+          <p class="site-notice__title site-notice__title--inline">
+            {copy.title}
+            <span class="site-notice__dot" aria-hidden="true">
+              ·
+            </span>
+            <span class="site-notice__body site-notice__body--inline">
+              {copy.body}
+            </span>
+          </p>
+        </div>
+        <div class="site-notice__actions">
+          {hasCta && (
+            <a href={noticeHref} class="site-notice__cta site-notice__cta--sm">
+              <span>{copy.cta}</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          )}
           {dismissible && (
             <button
               type="button"
               class="site-notice__x"
               data-notice-dismiss
-              aria-label={copy.dismiss || 'Close'}
+              aria-label={copy.dismiss || 'Dismiss'}
             >
               <svg
                 class="w-4 h-4"
@@ -72,136 +149,55 @@ const kicker =
               </svg>
             </button>
           )}
-          <p class="site-notice__kicker">{kicker}</p>
-          <h2 id="site-notice-title" class="site-notice__title">
-            {copy.title}
-          </h2>
-          <p class="site-notice__body">{copy.body}</p>
-          <div class="site-notice__actions">
-            {hasCta && (
-              <a href={noticeHref} class="site-notice__cta">
-                <span>{copy.cta}</span>
-                <span aria-hidden="true">→</span>
-              </a>
-            )}
-            {dismissible && (
-              <button
-                type="button"
-                class="site-notice__dismiss"
-                data-notice-dismiss
-              >
-                {copy.dismiss || 'OK'}
-              </button>
-            )}
-          </div>
         </div>
       </div>
-    ) : (
-      <div
-        id="site-notice"
-        class="site-notice site-notice--banner hidden"
-        role="region"
-        aria-label={copy.title}
-        data-storage-key={storageKey}
-        data-variant="banner"
-      >
-        <div class="site-notice__inner">
-          <div class="min-w-0 flex-1">
-            <p class="site-notice__kicker">{kicker}</p>
-            <p class="site-notice__title site-notice__title--inline">
-              {copy.title}
-              <span class="site-notice__dot" aria-hidden="true">
-                ·
-              </span>
-              <span class="site-notice__body site-notice__body--inline">
-                {copy.body}
-              </span>
-            </p>
-          </div>
-          <div class="site-notice__actions">
-            {hasCta && (
-              <a href={noticeHref} class="site-notice__cta site-notice__cta--sm">
-                <span>{copy.cta}</span>
-                <span aria-hidden="true">→</span>
-              </a>
-            )}
-            {dismissible && (
-              <button
-                type="button"
-                class="site-notice__x"
-                data-notice-dismiss
-                aria-label={copy.dismiss || 'Dismiss'}
-              >
-                <svg
-                  class="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    )
-  ) : null
-}
-
-{
-  active && (
-    <script is:inline>
-      (function () {
-        var el = document.getElementById('site-notice');
-        if (!el) return;
-        var key = el.getAttribute('data-storage-key') || '';
-        try {
-          if (key && localStorage.getItem(key) === '1') return;
-        } catch (_) {}
-
-        requestAnimationFrame(function () {
-          el.classList.remove('hidden');
-          el.classList.add('is-open');
-        });
-
-        if (el.getAttribute('data-variant') === 'modal') {
-          document.documentElement.style.overflow = 'hidden';
-        }
-
-        function dismiss() {
-          el.classList.remove('is-open');
-          el.classList.add('is-closing');
-          setTimeout(function () {
-            try {
-              if (key) localStorage.setItem(key, '1');
-            } catch (_) {}
-            el.classList.add('hidden');
-            el.classList.remove('is-closing');
-            document.documentElement.style.overflow = '';
-          }, 220);
-        }
-
-        el.querySelectorAll('[data-notice-dismiss]').forEach(function (btn) {
-          btn.addEventListener('click', dismiss);
-        });
-
-        document.addEventListener('keydown', function onKey(e) {
-          if (e.key === 'Escape' && el.classList.contains('is-open')) {
-            dismiss();
-            document.removeEventListener('keydown', onKey);
-          }
-        });
-      })();
-    </script>
+    </div>
   )
 }
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('site-notice');
+    if (!el) return;
+    var key = el.getAttribute('data-storage-key') || '';
+    try {
+      if (key && localStorage.getItem(key) === '1') return;
+    } catch (_) {}
+
+    requestAnimationFrame(function () {
+      el.classList.remove('hidden');
+      el.classList.add('is-open');
+    });
+
+    if (el.getAttribute('data-variant') === 'modal') {
+      document.documentElement.style.overflow = 'hidden';
+    }
+
+    function dismiss() {
+      el.classList.remove('is-open');
+      el.classList.add('is-closing');
+      setTimeout(function () {
+        try {
+          if (key) localStorage.setItem(key, '1');
+        } catch (_) {}
+        el.classList.add('hidden');
+        el.classList.remove('is-closing');
+        document.documentElement.style.overflow = '';
+      }, 220);
+    }
+
+    el.querySelectorAll('[data-notice-dismiss]').forEach(function (btn) {
+      btn.addEventListener('click', dismiss);
+    });
+
+    document.addEventListener('keydown', function onKey(e) {
+      if (e.key === 'Escape' && el.classList.contains('is-open')) {
+        dismiss();
+        document.removeEventListener('keydown', onKey);
+      }
+    });
+  })();
+</script>
 
 <style>
   .site-notice--banner {
@@ -233,7 +229,8 @@ const kicker =
   }
 
   .site-notice__kicker {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.65rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -379,12 +376,11 @@ const kicker =
     width: min(26rem, 100%);
     padding: 2rem 1.75rem 1.75rem;
     border: 1px solid rgb(var(--color-border));
-    background:
-      linear-gradient(
-        165deg,
-        rgb(var(--color-bg-primary)) 0%,
-        rgb(var(--color-bg-secondary) / 0.85) 100%
-      );
+    background: linear-gradient(
+      165deg,
+      rgb(var(--color-bg-primary)) 0%,
+      rgb(var(--color-bg-secondary) / 0.85) 100%
+    );
     box-shadow:
       0 1px 0 rgb(255 255 255 / 0.04) inset,
       0 24px 64px -28px rgb(0 0 0 / 0.55);

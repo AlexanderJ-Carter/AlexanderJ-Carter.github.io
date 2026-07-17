@@ -112,4 +112,3 @@ export const siteGuideData: Record<Lang, any> = {
     ],
   },
 };
-

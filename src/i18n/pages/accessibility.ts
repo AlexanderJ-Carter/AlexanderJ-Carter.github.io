@@ -241,4 +241,3 @@ export const accessibilityData: Record<Lang, any> = {
     motionBtn: 'Переключить уменьшение анимации',
   },
 };
-

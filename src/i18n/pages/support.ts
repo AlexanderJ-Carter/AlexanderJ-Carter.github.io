@@ -80,7 +80,8 @@ export const supportCopy: Record<Lang, SupportCopy> = {
     paidTitle: 'Afdian',
     paidLead:
       'WeChat and Alipay work well. The lowest tier is roughly a coffee — voluntary, cancel anytime.',
-    paidNote: 'You will leave this site to pay on Afdian; we never collect card details here.',
+    paidNote:
+      'You will leave this site to pay on Afdian; we never collect card details here.',
     paidCta: 'Support on Afdian',
     freeTitle: 'Free ways to help',
     freeLead: 'These matter just as much.',
@@ -92,7 +93,8 @@ export const supportCopy: Record<Lang, SupportCopy> = {
   },
   fr: {
     title: 'Soutenir',
-    description: 'Un café pour l’entretien du site — ou un coup de main gratuit',
+    description:
+      'Un café pour l’entretien du site — ou un coup de main gratuit',
     kicker: 'Support',
     headerTitle: 'Soutenir ce site',
     headerDesc:

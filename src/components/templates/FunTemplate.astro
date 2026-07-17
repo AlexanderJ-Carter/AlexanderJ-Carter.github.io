@@ -381,29 +381,25 @@ const galleryPath =
   <PageHero
     kicker="Play"
     title={text.title}
-    description={
-      lang === 'zh-CN'
-        ? '小游戏、每日灵感与隐藏惊喜——玩一玩再走。'
-        : lang === 'zh-TW'
-          ? '小遊戲、每日靈感與隱藏驚喜——玩一玩再走。'
-          : lang === 'fr'
-            ? 'Mini-jeux, inspiration du jour et surprises.'
-            : lang === 'ru'
-              ? 'Мини-игры, вдохновение дня и сюрпризы.'
-              : 'Mini games, daily inspiration and hidden surprises.'
-    }
+    description={lang === 'zh-CN'
+      ? '小游戏、每日灵感与隐藏惊喜——玩一玩再走。'
+      : lang === 'zh-TW'
+        ? '小遊戲、每日靈感與隱藏驚喜——玩一玩再走。'
+        : lang === 'fr'
+          ? 'Mini-jeux, inspiration du jour et surprises.'
+          : lang === 'ru'
+            ? 'Мини-игры, вдохновение дня и сюрпризы.'
+            : 'Mini games, daily inspiration and hidden surprises.'}
     backHref={lp('/')}
-    backLabel={
-      lang === 'zh-CN'
-        ? '返回首页'
-        : lang === 'zh-TW'
-          ? '返回首頁'
-          : lang === 'fr'
-            ? "Retour à l'accueil"
-            : lang === 'ru'
-              ? 'На главную'
-              : 'Back to home'
-    }
+    backLabel={lang === 'zh-CN'
+      ? '返回首页'
+      : lang === 'zh-TW'
+        ? '返回首頁'
+        : lang === 'fr'
+          ? "Retour à l'accueil"
+          : lang === 'ru'
+            ? 'На главную'
+            : 'Back to home'}
   />
 
   <section class="pb-20 md:pb-28">

@@ -6,7 +6,14 @@
 const CACHE_NAME = 'alexander-site-v2';
 const RUNTIME_CACHE = 'alexander-runtime-v2';
 
-const PRECACHE_URLS = ['/', '/gallery/', '/projects/', '/about/', '/contact/', '/manifest.json'];
+const PRECACHE_URLS = [
+  '/',
+  '/gallery/',
+  '/projects/',
+  '/about/',
+  '/contact/',
+  '/manifest.json',
+];
 
 const CACHE_STRATEGIES = {
   image: {

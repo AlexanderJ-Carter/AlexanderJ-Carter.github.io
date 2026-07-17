@@ -19,7 +19,8 @@ const copy = {
     skipTitle: '本地开发模式',
     skipDesc: '当前已跳过人机验证。点击下方按钮继续访问。',
     skipButton: '跳过并继续',
-    forceHint: '正式环境仍会要求验证。需要强制测试时可设 PUBLIC_FORCE_VERIFY=true。',
+    forceHint:
+      '正式环境仍会要求验证。需要强制测试时可设 PUBLIC_FORCE_VERIFY=true。',
   },
   'zh-TW': {
     title: '安全驗證',
@@ -33,7 +34,8 @@ const copy = {
     skipTitle: '本地開發模式',
     skipDesc: '目前已跳過真人驗證。點擊下方按鈕繼續訪問。',
     skipButton: '跳過並繼續',
-    forceHint: '正式環境仍會要求驗證。需要強制測試時可設 PUBLIC_FORCE_VERIFY=true。',
+    forceHint:
+      '正式環境仍會要求驗證。需要強制測試時可設 PUBLIC_FORCE_VERIFY=true。',
   },
   'en-GB': {
     title: 'Security check',
@@ -45,7 +47,8 @@ const copy = {
       'It reduces scraping and abuse. Verification is provided by Cloudflare Turnstile and does not create an account.',
     footer: 'Powered by Cloudflare Turnstile',
     skipTitle: 'Local development',
-    skipDesc: 'Human verification is skipped here. Continue to your destination.',
+    skipDesc:
+      'Human verification is skipped here. Continue to your destination.',
     skipButton: 'Skip and continue',
     forceHint:
       'Production still requires Turnstile. Set PUBLIC_FORCE_VERIFY=true to test the gate in dev.',
@@ -60,7 +63,8 @@ const copy = {
       'Elle réduit le scraping et les abus. La vérification est fournie par Cloudflare Turnstile.',
     footer: 'Propulsé par Cloudflare Turnstile',
     skipTitle: 'Développement local',
-    skipDesc: 'La vérification est désactivée ici. Continuez vers la destination.',
+    skipDesc:
+      'La vérification est désactivée ici. Continuez vers la destination.',
     skipButton: 'Passer et continuer',
     forceHint:
       'La production exige encore Turnstile. Définissez PUBLIC_FORCE_VERIFY=true pour tester.',
@@ -147,7 +151,8 @@ const content = copy[lang] || copy['en-GB'];
                 is:inline
                 src="https://challenges.cloudflare.com/turnstile/v0/api.js"
                 async
-                defer></script>
+                defer
+              />
               <div
                 class="cf-turnstile"
                 data-sitekey={turnstileSiteKey}
@@ -164,7 +169,9 @@ const content = copy[lang] || copy['en-GB'];
 
       <aside class="mt-10 border-t border-[rgb(var(--color-border))] pt-8">
         <h3 class="font-heading font-semibold mb-2">{content.helpTitle}</h3>
-        <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+        <p
+          class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed"
+        >
           {content.helpDesc}
         </p>
       </aside>

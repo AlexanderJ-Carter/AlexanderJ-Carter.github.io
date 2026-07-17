@@ -18,7 +18,8 @@ const i18n = {
     title: '写作',
     description: '关于个人网站、工程学习、性能优化和设计思考的长期文章。',
     badge: 'Writing · Long-form',
-    intro: '这里记录了一些不会很快过期的思考。它们从具体问题出发，试图给出值得回看的答案。',
+    intro:
+      '这里记录了一些不会很快过期的思考。它们从具体问题出发，试图给出值得回看的答案。',
     readMore: '阅读全文',
     allPosts: '全部文章',
     categories: '分类',
@@ -32,7 +33,8 @@ const i18n = {
     title: '寫作',
     description: '關於個人網站、工程學習、性能優化和設計思考的長期文章。',
     badge: 'Writing · Long-form',
-    intro: '這裡記錄了一些不會很快過期的思考。它們從具體問題出發，試圖給出值得回看的答案。',
+    intro:
+      '這裡記錄了一些不會很快過期的思考。它們從具體問題出發，試圖給出值得回看的答案。',
     readMore: '閱讀全文',
     allPosts: '全部文章',
     categories: '分類',
@@ -44,9 +46,11 @@ const i18n = {
   },
   'en-GB': {
     title: 'Writing',
-    description: 'Long-form articles about personal websites, engineering, performance and design.',
+    description:
+      'Long-form articles about personal websites, engineering, performance and design.',
     badge: 'Writing · Long-form',
-    intro: 'Thoughts that should age slowly, starting from concrete problems and aiming for reusable answers.',
+    intro:
+      'Thoughts that should age slowly, starting from concrete problems and aiming for reusable answers.',
     readMore: 'Read article',
     allPosts: 'All Posts',
     categories: 'Categories',
@@ -58,16 +62,18 @@ const i18n = {
   },
   fr: {
     title: 'Écrits',
-    description: 'Articles sur les sites personnels, l\'ingénierie et le design.',
+    description:
+      "Articles sur les sites personnels, l'ingénierie et le design.",
     badge: 'Writing · Long-form',
-    intro: 'Des idées qui vieillissent lentement, partant de problèmes concrets.',
-    readMore: 'Lire l\'article',
+    intro:
+      'Des idées qui vieillissent lentement, partant de problèmes concrets.',
+    readMore: "Lire l'article",
     allPosts: 'Tous les articles',
     categories: 'Catégories',
     tags: 'Tags',
     publishedOn: 'Publié le',
     minRead: 'min de lecture',
-    noPosts: 'Pas encore d\'articles',
+    noPosts: "Pas encore d'articles",
     backToHome: "Retour à l'accueil",
   },
   ru: {
@@ -90,7 +96,11 @@ const t = i18n[lang as Lang] || i18n['zh-CN'];
 
 const allPosts = await getCollection('writing');
 const posts = allPosts
-  .filter((post) => post.data.lang === (lang as string) || (lang === 'zh-CN' && !post.data.lang))
+  .filter(
+    (post) =>
+      post.data.lang === (lang as string) ||
+      (lang === 'zh-CN' && !post.data.lang)
+  )
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const categories = [...new Set(posts.map((p) => p.data.category))];
@@ -108,66 +118,87 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
 
   <section class="pb-20 min-h-[40vh]">
     <div class="page-shell-wide">
-      {categories.length > 0 && (
-        <div class="flex flex-wrap gap-2 mb-10">
-          {categories.map((cat) => (
-            <span class="px-3 py-1 text-xs font-heading tracking-wide border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))]">
-              {cat}
-            </span>
-          ))}
-        </div>
-      )}
+      {
+        categories.length > 0 && (
+          <div class="flex flex-wrap gap-2 mb-10">
+            {categories.map((cat) => (
+              <span class="px-3 py-1 text-xs font-heading tracking-wide border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))]">
+                {cat}
+              </span>
+            ))}
+          </div>
+        )
+      }
 
-      {posts.length === 0 ? (
-        <div class="py-20">
-          <p class="text-[rgb(var(--color-text-secondary))]">{t.noPosts}</p>
-        </div>
-      ) : (
-        <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
-          {posts.map((post) => (
-            <li>
-              <article class="py-8">
-              <div class="flex flex-wrap items-center gap-3 mb-3">
-                <span class="text-xs font-heading tracking-wide text-primary-600 dark:text-primary-400">
-                  {post.data.category}
-                </span>
-                <time class="text-xs text-[rgb(var(--color-text-tertiary))]" datetime={post.data.pubDate.toISOString()}>
-                  {t.publishedOn} {post.data.pubDate.toLocaleDateString(lang === 'zh-CN' ? 'zh-CN' : lang === 'zh-TW' ? 'zh-TW' : lang === 'fr' ? 'fr-FR' : lang === 'ru' ? 'ru-RU' : 'en-GB')}
-                </time>
-                {post.data.timeToRead && (
-                  <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
-                    {post.data.timeToRead}
-                  </span>
-                )}
-              </div>
-              <h2 class="text-xl md:text-2xl font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
-                <a href={getLangPath(`/writing/${post.id}`)} class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                  {post.data.title}
-                </a>
-              </h2>
-              <p class="text-[rgb(var(--color-text-secondary))] mb-4 leading-relaxed">
-                {post.data.description}
-              </p>
-              <div class="flex items-center justify-between gap-4">
-                <div class="flex flex-wrap gap-1.5">
-                  {post.data.tags.map((tag) => (
-                    <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
-                      #{tag}
+      {
+        posts.length === 0 ? (
+          <div class="py-20">
+            <p class="text-[rgb(var(--color-text-secondary))]">{t.noPosts}</p>
+          </div>
+        ) : (
+          <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+            {posts.map((post) => (
+              <li>
+                <article class="py-8">
+                  <div class="flex flex-wrap items-center gap-3 mb-3">
+                    <span class="text-xs font-heading tracking-wide text-primary-600 dark:text-primary-400">
+                      {post.data.category}
                     </span>
-                  ))}
-                </div>
-                <a
-                  href={getLangPath(`/writing/${post.id}`)}
-                  class="text-sm font-heading font-semibold text-primary-600 dark:text-primary-400 hover:gap-2 inline-flex items-center gap-1 transition-all"
-                >
-                  {t.readMore} →
-                </a>
-              </div>
-              </article>
-            </li>
-          ))}
-        </ul>
-      )}
+                    <time
+                      class="text-xs text-[rgb(var(--color-text-tertiary))]"
+                      datetime={post.data.pubDate.toISOString()}
+                    >
+                      {t.publishedOn}{' '}
+                      {post.data.pubDate.toLocaleDateString(
+                        lang === 'zh-CN'
+                          ? 'zh-CN'
+                          : lang === 'zh-TW'
+                            ? 'zh-TW'
+                            : lang === 'fr'
+                              ? 'fr-FR'
+                              : lang === 'ru'
+                                ? 'ru-RU'
+                                : 'en-GB'
+                      )}
+                    </time>
+                    {post.data.timeToRead && (
+                      <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
+                        {post.data.timeToRead}
+                      </span>
+                    )}
+                  </div>
+                  <h2 class="text-xl md:text-2xl font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+                    <a
+                      href={getLangPath(`/writing/${post.id}`)}
+                      class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                    >
+                      {post.data.title}
+                    </a>
+                  </h2>
+                  <p class="text-[rgb(var(--color-text-secondary))] mb-4 leading-relaxed">
+                    {post.data.description}
+                  </p>
+                  <div class="flex items-center justify-between gap-4">
+                    <div class="flex flex-wrap gap-1.5">
+                      {post.data.tags.map((tag) => (
+                        <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                    <a
+                      href={getLangPath(`/writing/${post.id}`)}
+                      class="text-sm font-heading font-semibold text-primary-600 dark:text-primary-400 hover:gap-2 inline-flex items-center gap-1 transition-all"
+                    >
+                      {t.readMore} →
+                    </a>
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        )
+      }
 
       <AdSlot slot="article" format="horizontal" />
     </div>

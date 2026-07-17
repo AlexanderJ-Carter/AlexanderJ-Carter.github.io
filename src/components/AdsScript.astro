@@ -3,15 +3,12 @@
  * Loads the AdSense bootstrap script once when a publisher id is configured.
  */
 import { adsEnabled, adsenseClient } from '../config/site';
+
+if (!adsEnabled) return;
 ---
 
-{
-  adsEnabled && (
-    <script
-      is:inline
-      async
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
-      crossorigin="anonymous"
-    />
-  )
-}
+<script
+  is:inline
+  async
+  src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+  crossorigin="anonymous"></script>

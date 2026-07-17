@@ -50,7 +50,11 @@ export default [
       ...jsxA11y.configs.recommended.rules,
       '@typescript-eslint/no-unused-vars': [
         'warn',
-        { argsIgnorePattern: '^_' },
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
       ],
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
@@ -66,9 +70,19 @@ export default [
     },
   },
   {
+    files: ['src/i18n/pages/**/*.ts'],
+    rules: {
+      // Translation blobs are intentionally loosely typed dictionaries.
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  {
     files: ['scripts/**/*.js'],
     languageOptions: {
       globals: nodeGlobals,
+    },
+    rules: {
+      'no-console': 'off',
     },
   },
   {

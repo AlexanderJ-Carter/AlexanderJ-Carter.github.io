@@ -270,4 +270,3 @@ export const securityAcknowledgmentsData: Record<Lang, any> = {
     },
   },
 };
-

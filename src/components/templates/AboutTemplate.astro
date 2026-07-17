@@ -35,12 +35,17 @@ function resolveHref(href: string) {
 
   <section class="pb-8">
     <div class="page-shell">
-      <ul class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[rgb(var(--color-text-secondary))]">
+      <ul
+        class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[rgb(var(--color-text-secondary))]"
+      >
         {
           t.meta.map((item, i) => (
             <li class="inline-flex items-center gap-3">
               {i > 0 && (
-                <span aria-hidden="true" class="text-[rgb(var(--color-text-tertiary))]">
+                <span
+                  aria-hidden="true"
+                  class="text-[rgb(var(--color-text-tertiary))]"
+                >
                   ·
                 </span>
               )}
@@ -56,10 +61,14 @@ function resolveHref(href: string) {
   <section class="pb-16 md:pb-20">
     <div class="page-shell">
       <article class="about-panel">
-        <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-6">
+        <h2
+          class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-6"
+        >
           {t.introTitle}
         </h2>
-        <div class="space-y-5 text-[15px] md:text-base leading-relaxed text-[rgb(var(--color-text-secondary))]">
+        <div
+          class="space-y-5 text-[15px] md:text-base leading-relaxed text-[rgb(var(--color-text-secondary))]"
+        >
           {t.paragraphs.map((p) => <p>{p}</p>)}
         </div>
       </article>
@@ -71,13 +80,19 @@ function resolveHref(href: string) {
     <div class="page-shell py-16 md:py-20">
       <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
         <div>
-          <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3">
+          <h2
+            class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3"
+          >
             {t.researchTitle}
           </h2>
-          <p class="font-heading text-lg text-primary-600 dark:text-primary-400 mb-4">
+          <p
+            class="font-heading text-lg text-primary-600 dark:text-primary-400 mb-4"
+          >
             {t.researchLead}
           </p>
-          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-6">
+          <p
+            class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-6"
+          >
             {t.researchBody}
           </p>
           <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-heading">
@@ -100,13 +115,19 @@ function resolveHref(href: string) {
           </div>
 
           <div class="mt-10 pt-8 border-t border-[rgb(var(--color-border))]">
-            <h3 class="font-heading text-sm tracking-[0.14em] uppercase text-[rgb(var(--color-text-tertiary))] mb-4">
+            <h3
+              class="font-heading text-sm tracking-[0.14em] uppercase text-[rgb(var(--color-text-tertiary))] mb-4"
+            >
               {t.pubTitle}
             </h3>
-            <p class="text-xs text-[rgb(var(--color-text-tertiary))] mb-2 font-heading">
+            <p
+              class="text-xs text-[rgb(var(--color-text-tertiary))] mb-2 font-heading"
+            >
               {t.pubYear} · {t.pubVenue}
             </p>
-            <p class="font-heading font-semibold text-[rgb(var(--color-text-primary))] mb-3 leading-snug">
+            <p
+              class="font-heading font-semibold text-[rgb(var(--color-text-primary))] mb-3 leading-snug"
+            >
               {t.pubName}
             </p>
             <div class="flex gap-4 text-sm">
@@ -155,14 +176,20 @@ function resolveHref(href: string) {
   <!-- Projects -->
   <section class="pb-16 md:pb-20">
     <div class="page-shell">
-      <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3">
+      <h2
+        class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3"
+      >
         {t.workTitle}
       </h2>
-      <p class="text-[rgb(var(--color-text-secondary))] mb-10 leading-relaxed max-w-2xl">
+      <p
+        class="text-[rgb(var(--color-text-secondary))] mb-10 leading-relaxed max-w-2xl"
+      >
         {t.workIntro}
       </p>
 
-      <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+      <ul
+        class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]"
+      >
         {
           t.projects.map((project) => (
             <li>
@@ -198,7 +225,9 @@ function resolveHref(href: string) {
     <div class="page-shell py-16 md:py-20">
       <div class="grid gap-12 lg:grid-cols-2">
         <div>
-          <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-8">
+          <h2
+            class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-8"
+          >
             {t.stackTitle}
           </h2>
           <div class="space-y-8">
@@ -220,10 +249,14 @@ function resolveHref(href: string) {
         </div>
 
         <div>
-          <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-8">
+          <h2
+            class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-8"
+          >
             {t.langsTitle}
           </h2>
-          <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+          <ul
+            class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]"
+          >
             {
               t.langs.map((item) => (
                 <li class="flex items-baseline justify-between gap-4 py-4">
@@ -243,14 +276,18 @@ function resolveHref(href: string) {
   <!-- Connect -->
   <section class="pb-20 md:pb-28">
     <div class="page-shell">
-      <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3">
+      <h2
+        class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3"
+      >
         {t.connectTitle}
       </h2>
       <p class="text-[rgb(var(--color-text-secondary))] mb-10 leading-relaxed">
         {t.connectIntro}
       </p>
 
-      <ul class="grid sm:grid-cols-2 gap-px bg-[rgb(var(--color-border))] border border-[rgb(var(--color-border))]">
+      <ul
+        class="grid sm:grid-cols-2 gap-px bg-[rgb(var(--color-border))] border border-[rgb(var(--color-border))]"
+      >
         {
           t.links.map((link) => (
             <li class="bg-[rgb(var(--color-bg-primary))]">
@@ -276,12 +313,11 @@ function resolveHref(href: string) {
 <style>
   .about-panel {
     border: 1px solid rgb(var(--color-border));
-    background:
-      linear-gradient(
-        165deg,
-        rgb(var(--color-bg-primary)) 0%,
-        rgb(var(--color-bg-secondary) / 0.55) 100%
-      );
+    background: linear-gradient(
+      165deg,
+      rgb(var(--color-bg-primary)) 0%,
+      rgb(var(--color-bg-secondary) / 0.55) 100%
+    );
     padding: 2rem;
     box-shadow: 0 1px 0 rgb(var(--color-border) / 0.5);
   }

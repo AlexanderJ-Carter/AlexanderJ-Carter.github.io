@@ -16,10 +16,7 @@ function statusLabel(status: string) {
 }
 ---
 
-<BaseLayout
-  title={`${t.title} — Alexander Carter`}
-  description={t.subtitle}
->
+<BaseLayout title={`${t.title} — Alexander Carter`} description={t.subtitle}>
   <PageHero
     kicker={t.kicker}
     title={t.title}
@@ -30,18 +27,24 @@ function statusLabel(status: string) {
 
   <section class="pb-16 md:pb-20">
     <div class="page-shell">
-      <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3">
+      <h2
+        class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3"
+      >
         {t.pathsTitle}
       </h2>
       <p class="text-[rgb(var(--color-text-secondary))] mb-10 leading-relaxed">
         {t.pathsIntro}
       </p>
 
-      <div class="space-y-0 border-y border-[rgb(var(--color-border))] divide-y divide-[rgb(var(--color-border))]">
+      <div
+        class="space-y-0 border-y border-[rgb(var(--color-border))] divide-y divide-[rgb(var(--color-border))]"
+      >
         {
           t.paths.map((path) => (
             <article class="py-8">
-              <h3 class="font-heading text-xl font-semibold mb-2">{path.title}</h3>
+              <h3 class="font-heading text-xl font-semibold mb-2">
+                {path.title}
+              </h3>
               <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4">
                 {path.desc}
               </p>
@@ -62,14 +65,18 @@ function statusLabel(status: string) {
 
   <section class="pb-16 md:pb-20 bg-[rgb(var(--color-bg-secondary))]">
     <div class="page-shell py-16 md:py-20">
-      <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3">
+      <h2
+        class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3"
+      >
         {t.booksTitle}
       </h2>
       <p class="text-[rgb(var(--color-text-secondary))] mb-10 leading-relaxed">
         {t.booksIntro}
       </p>
 
-      <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+      <ul
+        class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]"
+      >
         {
           t.books.map((book) => (
             <li>
@@ -120,14 +127,18 @@ function statusLabel(status: string) {
 
   <section class="pb-20 md:pb-28">
     <div class="page-shell pt-4">
-      <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3">
+      <h2
+        class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3"
+      >
         {t.essaysTitle}
       </h2>
       <p class="text-[rgb(var(--color-text-secondary))] mb-10 leading-relaxed">
         {t.essaysIntro}
       </p>
 
-      <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+      <ul
+        class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]"
+      >
         {
           t.essays.map((essay) => (
             <li>

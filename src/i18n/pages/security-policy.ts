@@ -633,4 +633,3 @@ export const securityPolicyData: Record<Lang, any> = {
     },
   },
 };
-

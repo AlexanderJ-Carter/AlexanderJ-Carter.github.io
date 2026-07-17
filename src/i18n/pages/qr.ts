@@ -55,4 +55,3 @@ export const t: Record<Lang, any> = {
     back: 'На главную',
   },
 };
-

@@ -18,11 +18,12 @@
     --shadow-md: 0 8px 24px -12px rgb(26 28 30 / 0.1);
     --shadow-lg: 0 18px 40px -20px rgb(26 28 30 / 0.14);
     --shadow-xl: 0 28px 60px -24px rgb(26 28 30 / 0.18);
-    --ink-glow: radial-gradient(
-      ellipse 75% 55% at 50% -8%,
-      rgb(61 115 130 / 0.09),
-      transparent 58%
-    ),
+    --ink-glow:
+      radial-gradient(
+        ellipse 75% 55% at 50% -8%,
+        rgb(61 115 130 / 0.09),
+        transparent 58%
+      ),
       radial-gradient(
         ellipse 50% 40% at 100% 100%,
         rgb(26 28 30 / 0.03),
@@ -57,11 +58,12 @@
     --shadow-md: 0 10px 28px -12px rgb(0 0 0 / 0.45);
     --shadow-lg: 0 22px 48px -18px rgb(0 0 0 / 0.55);
     --shadow-xl: 0 32px 64px -20px rgb(0 0 0 / 0.6);
-    --ink-glow: radial-gradient(
-      ellipse 75% 55% at 50% -8%,
-      rgb(122 168 180 / 0.1),
-      transparent 58%
-    ),
+    --ink-glow:
+      radial-gradient(
+        ellipse 75% 55% at 50% -8%,
+        rgb(122 168 180 / 0.1),
+        transparent 58%
+      ),
       radial-gradient(
         ellipse 45% 35% at 0% 100%,
         rgb(0 0 0 / 0.35),
@@ -1453,7 +1455,9 @@ select:valid:not(:placeholder-shown) {
 }
 
 .list-row {
-  transition: background-color 0.2s ease, padding-left 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    padding-left 0.2s ease;
 }
 .list-row:hover {
   background-color: rgb(var(--color-bg-secondary) / 0.55);
@@ -1524,12 +1528,11 @@ select:valid:not(:placeholder-shown) {
 /* ── Studio craft surfaces ────────────────────────────────────────────────── */
 .surface-panel {
   border: 1px solid rgb(var(--color-border));
-  background:
-    linear-gradient(
-      165deg,
-      rgb(var(--color-bg-primary)) 0%,
-      rgb(var(--color-bg-secondary) / 0.65) 100%
-    );
+  background: linear-gradient(
+    165deg,
+    rgb(var(--color-bg-primary)) 0%,
+    rgb(var(--color-bg-secondary) / 0.65) 100%
+  );
   box-shadow: var(--shadow-md);
 }
 

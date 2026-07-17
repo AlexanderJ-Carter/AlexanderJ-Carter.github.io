@@ -26,8 +26,7 @@ const copy: Record<
     title: '这格是空的',
     kicker: 'Frame 404',
     frame: 'NEG · EMPTY',
-    message:
-      '取景框里没有对上的画面。地址可能写错了，或这页已经从册子里抽走。',
+    message: '取景框里没有对上的画面。地址可能写错了，或这页已经从册子里抽走。',
     pathLabel: '请求路径',
     home: '回首页',
     gallery: '画廊',
@@ -39,8 +38,7 @@ const copy: Record<
     title: '這格是空的',
     kicker: 'Frame 404',
     frame: 'NEG · EMPTY',
-    message:
-      '取景框裡沒有對上的畫面。位址可能寫錯了，或這頁已經從冊子裡抽走。',
+    message: '取景框裡沒有對上的畫面。位址可能寫錯了，或這頁已經從冊子裡抽走。',
     pathLabel: '請求路徑',
     home: '回首頁',
     gallery: '畫廊',
@@ -101,21 +99,33 @@ const exits = [
 ---
 
 <BaseLayout title={`404 · ${t.title}`} description={t.message}>
-  <section class="not-found relative min-h-[78vh] flex items-center overflow-hidden">
+  <section
+    class="not-found relative min-h-[78vh] flex items-center overflow-hidden"
+  >
     <div class="page-shell-wide py-24 md:py-32 w-full relative z-10">
-      <div class="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16 items-center">
+      <div
+        class="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16 items-center"
+      >
         <!-- Blank negative / viewfinder -->
-        <div class="not-found-plate relative aspect-[4/3] max-w-xl mx-auto lg:mx-0 w-full">
+        <div
+          class="not-found-plate relative aspect-[4/3] max-w-xl mx-auto lg:mx-0 w-full"
+        >
           <div class="viewfinder-corners" aria-hidden="true">
             <span class="tl"></span>
             <span class="tr"></span>
             <span class="bl"></span>
             <span class="br"></span>
           </div>
-          <div class="not-found-plate__inner absolute inset-4 md:inset-5 flex flex-col justify-between border border-[rgb(var(--color-border))]">
-            <div class="flex items-center justify-between px-4 py-3 border-b border-[rgb(var(--color-border))]">
+          <div
+            class="not-found-plate__inner absolute inset-4 md:inset-5 flex flex-col justify-between border border-[rgb(var(--color-border))]"
+          >
+            <div
+              class="flex items-center justify-between px-4 py-3 border-b border-[rgb(var(--color-border))]"
+            >
               <span class="meta-mono">{t.frame}</span>
-              <span class="meta-mono text-[rgb(var(--color-accent))]">ISO —</span>
+              <span class="meta-mono text-[rgb(var(--color-accent))]"
+                >ISO —</span
+              >
             </div>
             <div class="flex-1 flex items-center justify-center px-4">
               <p
@@ -125,7 +135,9 @@ const exits = [
                 404
               </p>
             </div>
-            <div class="flex items-center justify-between px-4 py-3 border-t border-[rgb(var(--color-border))]">
+            <div
+              class="flex items-center justify-between px-4 py-3 border-t border-[rgb(var(--color-border))]"
+            >
               <span class="meta-mono">F/—</span>
               <span class="meta-mono not-found-blink">● REC</span>
               <span class="meta-mono">1/—</span>
@@ -135,7 +147,9 @@ const exits = [
 
         <!-- Copy + exits -->
         <div>
-          <p class="meta-mono mb-3 text-[rgb(var(--color-accent))]">{t.kicker}</p>
+          <p class="meta-mono mb-3 text-[rgb(var(--color-accent))]">
+            {t.kicker}
+          </p>
           <h1
             class="font-heading text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[rgb(var(--color-text-primary))] mb-5 text-balance"
           >

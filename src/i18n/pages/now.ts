@@ -102,4 +102,3 @@ export const t: Record<Lang, Record<string, string>> = {
     back: 'На главную',
   },
 };
-

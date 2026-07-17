@@ -13,8 +13,7 @@ const lp = (path: string) => getLangPath(lang, path);
 
 const posts = (await getCollection('writing'))
   .filter(
-    (post) =>
-      post.data.lang === lang || (lang === 'zh-CN' && !post.data.lang)
+    (post) => post.data.lang === lang || (lang === 'zh-CN' && !post.data.lang)
   )
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
@@ -128,7 +127,9 @@ const heroImage = '/img/gallery-optimized/landscape-01-xl.webp';
   <section id="featured" class="py-20 md:py-28 reveal">
     <div class="container mx-auto px-4 lg:px-8">
       <div class="max-w-2xl mb-12">
-        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3">
+        <h2
+          class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3"
+        >
           {copy.featuredTitle}
         </h2>
         <p class="text-[rgb(var(--color-text-secondary))] text-lg">
@@ -182,10 +183,14 @@ const heroImage = '/img/gallery-optimized/landscape-01-xl.webp';
   <section class="py-20 md:py-24 reveal">
     <div class="container mx-auto px-4 lg:px-8">
       <div class="max-w-2xl">
-        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-5">
+        <h2
+          class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-5"
+        >
           {copy.studioTitle}
         </h2>
-        <p class="text-lg text-[rgb(var(--color-text-secondary))] leading-relaxed">
+        <p
+          class="text-lg text-[rgb(var(--color-text-secondary))] leading-relaxed"
+        >
           {copy.studioBody}
         </p>
       </div>
@@ -196,7 +201,9 @@ const heroImage = '/img/gallery-optimized/landscape-01-xl.webp';
   <section class="py-20 md:py-24 bg-[rgb(var(--color-bg-secondary))] reveal">
     <div class="container mx-auto px-4 lg:px-8">
       <div class="max-w-2xl mb-12">
-        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3">
+        <h2
+          class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3"
+        >
           {copy.focusTitle}
         </h2>
         <p class="text-[rgb(var(--color-text-secondary))] text-lg">
@@ -231,9 +238,13 @@ const heroImage = '/img/gallery-optimized/landscape-01-xl.webp';
   <!-- Writing -->
   <section class="py-20 md:py-28 reveal">
     <div class="container mx-auto px-4 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+      <div
+        class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12"
+      >
         <div class="max-w-2xl">
-          <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3">
+          <h2
+            class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3"
+          >
             {copy.writingTitle}
           </h2>
           <p class="text-[rgb(var(--color-text-secondary))] text-lg">
@@ -250,7 +261,9 @@ const heroImage = '/img/gallery-optimized/landscape-01-xl.webp';
 
       {
         posts.length === 0 ? (
-          <p class="text-[rgb(var(--color-text-secondary))]">{copy.writingEmpty}</p>
+          <p class="text-[rgb(var(--color-text-secondary))]">
+            {copy.writingEmpty}
+          </p>
         ) : (
           <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
             {posts.map((post) => (
@@ -295,7 +308,9 @@ const heroImage = '/img/gallery-optimized/landscape-01-xl.webp';
   <section class="py-20 md:py-24 bg-[rgb(var(--color-bg-secondary))] reveal">
     <div class="container mx-auto px-4 lg:px-8">
       <div class="max-w-2xl">
-        <h2 class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-4">
+        <h2
+          class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-4"
+        >
           {copy.connectTitle}
         </h2>
         <p class="text-[rgb(var(--color-text-secondary))] text-lg mb-8">

@@ -73,10 +73,10 @@ async function optimizeImages() {
       if (stats.width >= size.width) {
         for (const { format, options } of FORMATS) {
           const sizePath = join(OUTPUT_DIR, `${name}${size.suffix}.${format}`);
-          await sharp(inputPath)
-            .resize(size.width, null, { withoutEnlargement: true })
-            [format](options)
-            .toFile(sizePath);
+          const image = sharp(inputPath).resize(size.width, null, {
+            withoutEnlargement: true,
+          });
+          await image[format](options).toFile(sizePath);
         }
         console.log(`  ✅ ${name}${size.suffix}.[avif/webp] (${size.width}px)`);
       }

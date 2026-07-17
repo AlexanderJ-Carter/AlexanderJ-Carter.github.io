@@ -150,7 +150,9 @@ export function pickOnThisDay(
   month: number,
   day: number
 ): OnThisDayEvent | null {
-  const exact = onThisDayEvents.filter((e) => e.month === month && e.day === day);
+  const exact = onThisDayEvents.filter(
+    (e) => e.month === month && e.day === day
+  );
   if (exact.length > 0) {
     return exact[Math.floor(Math.random() * exact.length)]!;
   }

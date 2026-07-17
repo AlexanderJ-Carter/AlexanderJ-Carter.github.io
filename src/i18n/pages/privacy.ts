@@ -57,9 +57,18 @@ export const privacyData: Record<Lang, PrivacyPageData> = {
         title: '3. 第三方服务',
         content: '本网站使用以下第三方服务:',
         list: [
-          { title: 'Cloudflare Web Analytics', desc: '用于网站流量分析。该服务不使用 Cookie，不收集个人身份信息，符合隐私友好原则' },
-          { title: 'Cloudflare CDN', desc: '用于全球加速和安全防护（DDoS 防护、SSL 加密）' },
-          { title: 'Google AdSense', desc: '用于展示广告。Google 可能会使用 Cookie 和类似技术来展示基于您过往访问本站或其他网站的个性化广告。您可以通过 Google 广告设置管理您的广告偏好' },
+          {
+            title: 'Cloudflare Web Analytics',
+            desc: '用于网站流量分析。该服务不使用 Cookie，不收集个人身份信息，符合隐私友好原则',
+          },
+          {
+            title: 'Cloudflare CDN',
+            desc: '用于全球加速和安全防护（DDoS 防护、SSL 加密）',
+          },
+          {
+            title: 'Google AdSense',
+            desc: '用于展示广告。Google 可能会使用 Cookie 和类似技术来展示基于您过往访问本站或其他网站的个性化广告。您可以通过 Google 广告设置管理您的广告偏好',
+          },
         ],
       },
       {
@@ -67,9 +76,18 @@ export const privacyData: Record<Lang, PrivacyPageData> = {
         content:
           '本网站部分页面可能展示由 Google AdSense 提供的广告。这些广告可能使用 Cookie 来根据用户的访问历史提供个性化内容。您可以选择停用个性化广告，方法如下：',
         list: [
-          { title: 'Google 广告设置', desc: '访问 https://adssettings.google.com 管理您的广告个性化偏好' },
-          { title: '网络广告倡议（NAI）', desc: '访问 https://optout.networkadvertising.org 选择退出参与公司的个性化广告' },
-          { title: '浏览器设置', desc: '在浏览器设置中禁用第三方 Cookie 或使用广告拦截器' },
+          {
+            title: 'Google 广告设置',
+            desc: '访问 https://adssettings.google.com 管理您的广告个性化偏好',
+          },
+          {
+            title: '网络广告倡议（NAI）',
+            desc: '访问 https://optout.networkadvertising.org 选择退出参与公司的个性化广告',
+          },
+          {
+            title: '浏览器设置',
+            desc: '在浏览器设置中禁用第三方 Cookie 或使用广告拦截器',
+          },
         ],
       },
       {
@@ -121,9 +139,18 @@ export const privacyData: Record<Lang, PrivacyPageData> = {
         title: '3. 第三方服務',
         content: '本網站使用以下第三方服務:',
         list: [
-          { title: 'Cloudflare Web Analytics', desc: '用於網站流量分析。該服務不使用 Cookie，不收集個人身份資訊，符合隱私友好原則' },
-          { title: 'Cloudflare CDN', desc: '用於全球加速和安全防護（DDoS 防護、SSL 加密）' },
-          { title: 'Google AdSense', desc: '用於展示廣告。Google 可能會使用 Cookie 和類似技術來展示基於您過往訪問本站或其他網站的個人化廣告。您可以透過 Google 廣告設定管理您的廣告偏好' },
+          {
+            title: 'Cloudflare Web Analytics',
+            desc: '用於網站流量分析。該服務不使用 Cookie，不收集個人身份資訊，符合隱私友好原則',
+          },
+          {
+            title: 'Cloudflare CDN',
+            desc: '用於全球加速和安全防護（DDoS 防護、SSL 加密）',
+          },
+          {
+            title: 'Google AdSense',
+            desc: '用於展示廣告。Google 可能會使用 Cookie 和類似技術來展示基於您過往訪問本站或其他網站的個人化廣告。您可以透過 Google 廣告設定管理您的廣告偏好',
+          },
         ],
       },
       {
@@ -131,9 +158,18 @@ export const privacyData: Record<Lang, PrivacyPageData> = {
         content:
           '本網站部分頁面可能展示由 Google AdSense 提供的廣告。這些廣告可能使用 Cookie 來根據用戶的訪問歷史提供個人化內容。您可以選擇停用個人化廣告，方法如下：',
         list: [
-          { title: 'Google 廣告設定', desc: '訪問 https://adssettings.google.com 管理您的廣告個人化偏好' },
-          { title: '網絡廣告倡議（NAI）', desc: '訪問 https://optout.networkadvertising.org 選擇退出參與公司的個人化廣告' },
-          { title: '瀏覽器設定', desc: '在瀏覽器設定中禁用第三方 Cookie 或使用廣告攔截器' },
+          {
+            title: 'Google 廣告設定',
+            desc: '訪問 https://adssettings.google.com 管理您的廣告個人化偏好',
+          },
+          {
+            title: '網絡廣告倡議（NAI）',
+            desc: '訪問 https://optout.networkadvertising.org 選擇退出參與公司的個人化廣告',
+          },
+          {
+            title: '瀏覽器設定',
+            desc: '在瀏覽器設定中禁用第三方 Cookie 或使用廣告攔截器',
+          },
         ],
       },
       {
@@ -233,7 +269,7 @@ export const privacyData: Record<Lang, PrivacyPageData> = {
       {
         title: '6. Third-Party and Trademark Notice',
         content:
-          'The above third-party services have their own privacy policies and terms; this website does not control their data practices. Please refer to each provider\'s official documentation. Product or service names mentioned (e.g. Google, Cloudflare) may be trademarks or registered trademarks of their respective owners; use here is for reference only and does not imply endorsement.',
+          "The above third-party services have their own privacy policies and terms; this website does not control their data practices. Please refer to each provider's official documentation. Product or service names mentioned (e.g. Google, Cloudflare) may be trademarks or registered trademarks of their respective owners; use here is for reference only and does not imply endorsement.",
       },
     ],
   },
@@ -301,19 +337,19 @@ export const privacyData: Record<Lang, PrivacyPageData> = {
       {
         title: '4. Publicité et Cookies',
         content:
-          "Certaines pages de ce site web peuvent afficher des publicités fournies par Google AdSense. Ces publicités peuvent utiliser des cookies pour diffuser du contenu personnalisé basé sur votre historique de navigation. Vous pouvez désactiver la publicité personnalisée en :",
+          'Certaines pages de ce site web peuvent afficher des publicités fournies par Google AdSense. Ces publicités peuvent utiliser des cookies pour diffuser du contenu personnalisé basé sur votre historique de navigation. Vous pouvez désactiver la publicité personnalisée en :',
         list: [
           {
             title: 'Paramètres de publicité Google',
             desc: 'Visitez https://adssettings.google.com pour gérer vos préférences de personnalisation des annonces',
           },
           {
-            title: "Network Advertising Initiative (NAI)",
+            title: 'Network Advertising Initiative (NAI)',
             desc: 'Visitez https://optout.networkadvertising.org pour refuser les publicités personnalisées des entreprises participantes',
           },
           {
             title: 'Paramètres du navigateur',
-            desc: "Désactivez les cookies tiers dans les paramètres de votre navigateur ou utilisez un bloqueur de publicités",
+            desc: 'Désactivez les cookies tiers dans les paramètres de votre navigateur ou utilisez un bloqueur de publicités',
           },
         ],
       },
@@ -374,8 +410,7 @@ export const privacyData: Record<Lang, PrivacyPageData> = {
       },
       {
         title: '3. Сторонние сервисы',
-        content:
-          'Этот веб-сайт использует следующие сторонние сервисы:',
+        content: 'Этот веб-сайт использует следующие сторонние сервисы:',
         list: [
           {
             title: 'Cloudflare Web Analytics',

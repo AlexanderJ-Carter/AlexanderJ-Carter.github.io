@@ -96,16 +96,29 @@ const copy = {
   'en-GB': {
     kicker: 'Tools',
     title: 'Useful tools',
-    description: 'Lightweight, local-first, no login. Everyday utilities in one place.',
+    description:
+      'Lightweight, local-first, no login. Everyday utilities in one place.',
     onsite: 'On this site',
     external: 'External sites',
     tips: 'Notes',
     tipBody:
       'On-site tools prefer local browser computation. External sites open in a new tab.',
     items: [
-      { href: '/time', title: 'World time', desc: 'Time zones and copy helpers' },
-      { href: '/calendar', title: 'Calendar', desc: 'Month view and date browsing' },
-      { href: '/currency', title: 'Currency', desc: 'Major FX reference rates' },
+      {
+        href: '/time',
+        title: 'World time',
+        desc: 'Time zones and copy helpers',
+      },
+      {
+        href: '/calendar',
+        title: 'Calendar',
+        desc: 'Month view and date browsing',
+      },
+      {
+        href: '/currency',
+        title: 'Currency',
+        desc: 'Major FX reference rates',
+      },
       { href: '/units', title: 'Units', desc: 'Temperature, length, weight' },
       { href: '/qr', title: 'QR code', desc: 'URL to QR' },
       { href: '/now', title: 'Now', desc: 'Local time and quick links' },
@@ -137,7 +150,8 @@ const copy = {
   fr: {
     kicker: 'Tools',
     title: 'Outils utiles',
-    description: 'Légers, locaux d’abord, sans connexion. Les utilitaires du quotidien.',
+    description:
+      'Légers, locaux d’abord, sans connexion. Les utilitaires du quotidien.',
     onsite: 'Sur ce site',
     external: 'Sites externes',
     tips: 'Notes',
@@ -150,7 +164,11 @@ const copy = {
       { href: '/units', title: 'Unités', desc: 'Température, longueur, poids' },
       { href: '/qr', title: 'QR', desc: 'Lien en QR' },
       { href: '/now', title: 'Now', desc: 'Heure locale et raccourcis' },
-      { href: '/fun', title: 'Surprises', desc: 'Citations, mini-jeux et pomodoro' },
+      {
+        href: '/fun',
+        title: 'Surprises',
+        desc: 'Citations, mini-jeux et pomodoro',
+      },
     ],
     externalItems: [
       {
@@ -178,14 +196,19 @@ const copy = {
   ru: {
     kicker: 'Tools',
     title: 'Инструменты',
-    description: 'Лёгкие, локальные, без входа. Повседневные утилиты в одном месте.',
+    description:
+      'Лёгкие, локальные, без входа. Повседневные утилиты в одном месте.',
     onsite: 'На сайте',
     external: 'Внешние сайты',
     tips: 'Заметки',
     tipBody:
       'Инструменты сайта считают локально в браузере. Внешние сайты открываются в новой вкладке.',
     items: [
-      { href: '/time', title: 'Мировое время', desc: 'Часовые пояса и копирование' },
+      {
+        href: '/time',
+        title: 'Мировое время',
+        desc: 'Часовые пояса и копирование',
+      },
       { href: '/calendar', title: 'Календарь', desc: 'Месячный вид' },
       { href: '/currency', title: 'Валюты', desc: 'Ориентировочные курсы' },
       { href: '/units', title: 'Единицы', desc: 'Температура, длина, вес' },
@@ -231,7 +254,9 @@ const t = copy[lang] || copy['zh-CN'];
       >
         {t.onsite}
       </h2>
-      <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))] mb-14">
+      <ul
+        class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))] mb-14"
+      >
         {
           t.items.map((item) => (
             <li>
@@ -256,7 +281,9 @@ const t = copy[lang] || copy['zh-CN'];
       >
         {t.external}
       </h2>
-      <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))] mb-14">
+      <ul
+        class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))] mb-14"
+      >
         {
           t.externalItems.map((item) => (
             <li>
@@ -280,7 +307,9 @@ const t = copy[lang] || copy['zh-CN'];
 
       <aside class="border border-[rgb(var(--color-border))] p-6">
         <h2 class="font-heading font-semibold mb-2">{t.tips}</h2>
-        <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+        <p
+          class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed"
+        >
           {t.tipBody}
         </p>
       </aside>

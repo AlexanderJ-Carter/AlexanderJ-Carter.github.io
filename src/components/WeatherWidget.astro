@@ -151,10 +151,7 @@ const rootClass =
 
   <div class="border-t border-[rgb(var(--color-border))] pt-4">
     <p class="meta-mono mb-3">{t.forecast}</p>
-    <div
-      class="grid grid-cols-4 sm:grid-cols-7 gap-2"
-      data-weather-forecast
-    >
+    <div class="grid grid-cols-4 sm:grid-cols-7 gap-2" data-weather-forecast>
     </div>
   </div>
 </section>
@@ -199,7 +196,8 @@ const rootClass =
 
     function descFor(code, lang) {
       const row = CODE_MAP[code] || { sky: 'cloud', zh: '—', en: '—' };
-      if (lang === 'zh-CN' || lang === 'zh-TW') return { ...row, label: row.zh };
+      if (lang === 'zh-CN' || lang === 'zh-TW')
+        return { ...row, label: row.zh };
       return { ...row, label: row.en };
     }
 
@@ -248,7 +246,11 @@ const rootClass =
               label: null,
             }),
           () => resolve(null),
-          { enableHighAccuracy: false, timeout: 8000, maximumAge: 30 * 60 * 1000 }
+          {
+            enableHighAccuracy: false,
+            timeout: 8000,
+            maximumAge: 30 * 60 * 1000,
+          }
         );
       });
     }
@@ -316,13 +318,7 @@ const rootClass =
         const pos = await getPosition();
         const coords = pos || DEFAULT;
         const data = await fetchForecast(coords.lat, coords.lon);
-        paint(
-          root,
-          data,
-          pos ? null : DEFAULT.label,
-          lang,
-          ambient
-        );
+        paint(root, data, pos ? null : DEFAULT.label, lang, ambient);
       } catch (err) {
         console.error(err);
         try {

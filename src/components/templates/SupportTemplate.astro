@@ -23,20 +23,28 @@ const contact = getLangPath(lang, '/contact');
   <section class="pb-16 md:pb-20">
     <div class="page-shell space-y-12">
       <article class="border-t border-[rgb(var(--color-border))] pt-8">
-        <h2 class="font-heading text-xl md:text-2xl font-bold tracking-tight mb-3">
+        <h2
+          class="font-heading text-xl md:text-2xl font-bold tracking-tight mb-3"
+        >
           {t.whyTitle}
         </h2>
-        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed max-w-2xl">
+        <p
+          class="text-[rgb(var(--color-text-secondary))] leading-relaxed max-w-2xl"
+        >
           {t.whyBody}
         </p>
       </article>
 
-      <article class="border border-[rgb(var(--color-border))] p-6 md:p-8 surface-panel">
+      <article
+        class="border border-[rgb(var(--color-border))] p-6 md:p-8 surface-panel"
+      >
         <p class="meta-mono mb-2">{t.paidTitle}</p>
         <h2 class="font-heading text-2xl font-bold tracking-tight mb-3">
           {t.paidCta}
         </h2>
-        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-2 max-w-xl">
+        <p
+          class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-2 max-w-xl"
+        >
           {t.paidLead}
         </p>
         <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-6 max-w-xl">
@@ -51,17 +59,23 @@ const contact = getLangPath(lang, '/contact');
           {t.paidCta}
           <span aria-hidden="true">↗</span>
         </a>
-        <p class="mt-4 text-xs text-[rgb(var(--color-text-tertiary))] break-all">
+        <p
+          class="mt-4 text-xs text-[rgb(var(--color-text-tertiary))] break-all"
+        >
           {afdianUrl}
         </p>
       </article>
 
       <article class="border-t border-[rgb(var(--color-border))] pt-8">
-        <h2 class="font-heading text-xl md:text-2xl font-bold tracking-tight mb-2">
+        <h2
+          class="font-heading text-xl md:text-2xl font-bold tracking-tight mb-2"
+        >
           {t.freeTitle}
         </h2>
         <p class="text-[rgb(var(--color-text-secondary))] mb-6">{t.freeLead}</p>
-        <ul class="space-y-0 divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+        <ul
+          class="space-y-0 divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]"
+        >
           <li>
             <a
               href={githubRepoUrl}
@@ -69,14 +83,18 @@ const contact = getLangPath(lang, '/contact');
               rel="noopener noreferrer"
               class="list-row flex items-baseline justify-between gap-4 py-4 px-1 hover:pl-2"
             >
-              <span class="font-heading font-semibold text-[rgb(var(--color-text-primary))]">
+              <span
+                class="font-heading font-semibold text-[rgb(var(--color-text-primary))]"
+              >
                 {t.freeStar}
               </span>
               <span class="meta-mono shrink-0">GitHub ↗</span>
             </a>
           </li>
           <li>
-            <p class="list-row flex items-baseline justify-between gap-4 py-4 px-1 text-[rgb(var(--color-text-primary))]">
+            <p
+              class="list-row flex items-baseline justify-between gap-4 py-4 px-1 text-[rgb(var(--color-text-primary))]"
+            >
               <span class="font-heading font-semibold">{t.freeShare}</span>
             </p>
           </li>
@@ -85,7 +103,9 @@ const contact = getLangPath(lang, '/contact');
               href={contact}
               class="list-row flex items-baseline justify-between gap-4 py-4 px-1 hover:pl-2"
             >
-              <span class="font-heading font-semibold text-[rgb(var(--color-text-primary))]">
+              <span
+                class="font-heading font-semibold text-[rgb(var(--color-text-primary))]"
+              >
                 {t.freeFeedback}
               </span>
               <span class="meta-mono shrink-0">→</span>
@@ -94,7 +114,9 @@ const contact = getLangPath(lang, '/contact');
         </ul>
       </article>
 
-      <p class="text-sm text-[rgb(var(--color-text-tertiary))] leading-relaxed max-w-2xl">
+      <p
+        class="text-sm text-[rgb(var(--color-text-tertiary))] leading-relaxed max-w-2xl"
+      >
         {t.honesty}
       </p>
     </div>

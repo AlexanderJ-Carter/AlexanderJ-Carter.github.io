@@ -197,7 +197,8 @@ export const ui = {
     'about.skills': 'Skills',
     'about.experience': 'Experience',
     'about.contact': 'Contact',
-    'about.subtitle': 'Student developer · LLM agents & executable social science',
+    'about.subtitle':
+      'Student developer · LLM agents & executable social science',
     'about.age': '20 years old',
     'about.location': 'Beijing',
     'about.status': 'Student',

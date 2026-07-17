@@ -388,7 +388,9 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
         id="rates-grid"
       >
         <!-- Rates will be inserted here -->
-        <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 animate-pulse rounded-xl">
+        <div
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 animate-pulse rounded-xl"
+        >
           <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4">
           </div>
           <div class="h-8 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
@@ -407,9 +409,13 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
 
     <!-- Converter -->
     <div class="max-w-3xl mx-auto mb-16">
-      <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 md:p-10 rounded-xl">
+      <div
+        class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 md:p-10 rounded-xl"
+      >
         <div class="mb-6">
-          <h3 class="text-2xl font-heading font-bold mb-2">{content.converterTitle.replace(/^💰\s*/, '')}</h3>
+          <h3 class="text-2xl font-heading font-bold mb-2">
+            {content.converterTitle.replace(/^💰\s*/, '')}
+          </h3>
           <p class="text-[rgb(var(--color-text-secondary))]">
             {content.converterDesc}
           </p>
@@ -559,7 +565,9 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
     <!-- Tips Section -->
     <div class="max-w-4xl mx-auto">
       <div class="mb-8">
-        <h3 class="text-2xl font-heading font-bold mb-2">{content.tipsTitle.replace(/^💡\s*/, '')}</h3>
+        <h3 class="text-2xl font-heading font-bold mb-2">
+          {content.tipsTitle.replace(/^💡\s*/, '')}
+        </h3>
         <p class="text-[rgb(var(--color-text-secondary))]">
           {content.tipsDesc}
         </p>
@@ -793,7 +801,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
         const rate = data.rates[to];
         currentRateDisplay.textContent = `${content.currentRate}: 1 ${from} = ${rate.toFixed(4)} ${to}`;
       }
-    } catch (error) {
+    } catch {
       currentRateDisplay.textContent = '';
     }
   }

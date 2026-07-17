@@ -126,7 +126,9 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Calendar Display -->
       <div class="lg:col-span-2">
-        <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 rounded-xl">
+        <div
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 rounded-xl"
+        >
           <!-- Month Navigation -->
           <div class="flex flex-wrap items-center justify-between gap-2 mb-8">
             <button
@@ -181,7 +183,9 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
       <!-- Sidebar -->
       <div class="space-y-8">
         <!-- Today's Info -->
-        <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl">
+        <div
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl"
+        >
           <h3 class="text-xl font-bold mb-4">{content.today}</h3>
           <div id="todayInfo" class="text-[rgb(var(--color-text-secondary))]">
             <!-- Today info inserted by JS -->
@@ -195,7 +199,9 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
         </div>
 
         <!-- Upcoming Events -->
-        <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl">
+        <div
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl"
+        >
           <h3 class="text-xl font-bold mb-4">{content.upcomingEvents}</h3>
           <div id="upcomingEvents" class="space-y-4">
             <p class="text-[rgb(var(--color-text-secondary))] text-sm">
@@ -214,7 +220,9 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
     id="eventModal"
     class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50"
   >
-    <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 max-w-md w-full mx-4 rounded-xl">
+    <div
+      class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 max-w-md w-full mx-4 rounded-xl"
+    >
       <h3 class="text-2xl font-bold mb-6">{content.addEvent}</h3>
       <form id="eventForm" class="space-y-4">
         <div>

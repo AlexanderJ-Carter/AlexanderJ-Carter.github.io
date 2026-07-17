@@ -475,7 +475,8 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
       'Apprendre en public — lentement, mais constamment',
     ],
     workTitle: 'Travaux sélectionnés',
-    workIntro: 'Aligné sur le profil GitHub ; listes complètes dans les dépôts.',
+    workIntro:
+      'Aligné sur le profil GitHub ; listes complètes dans les dépôts.',
     projects: [
       {
         name: 'AgentSociety',
@@ -568,8 +569,7 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     kicker: 'About',
     title: 'Обо мне',
     motto: 'Тёпло, не идеально.',
-    subtitle:
-      'Студент-разработчик · LLM-агенты и исполнимая социальная наука',
+    subtitle: 'Студент-разработчик · LLM-агенты и исполнимая социальная наука',
     meta: ['Пекин', 'Студент', 'Разработчик'],
     introTitle: 'Профиль',
     paragraphs: [

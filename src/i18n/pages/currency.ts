@@ -308,4 +308,3 @@ export const currencyData: Record<Lang, any> = {
     ],
   },
 };
-
