@@ -223,7 +223,7 @@ const content = licenseData[lang as Lang] || licenseData['en-GB'];
 ---
 
 <BaseLayout
-  title={`${content.title} | Alexander James Carter`}
+  title={content.title}
   description={content.description}
 >
   <div class="container mx-auto px-4 lg:px-8 max-w-3xl pt-28 md:pt-32">
@@ -249,6 +249,7 @@ const content = licenseData[lang as Lang] || licenseData['en-GB'];
 
   <PageHero
     class="!pt-0"
+    folio="Folio Legal"
     title={content.headerTitle}
     description={content.headerDesc}
   />
@@ -330,7 +331,7 @@ const content = licenseData[lang as Lang] || licenseData['en-GB'];
 
       <!-- License Badge Card -->
       <div
-        class="glass-card rounded-3xl p-8 md:p-12 mb-12 text-center relative overflow-hidden"
+        class="glass-card p-8 md:p-12 mb-12 text-center relative overflow-hidden"
       >
         <div
           class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary-500 to-accent-500"
@@ -422,7 +423,7 @@ const content = licenseData[lang as Lang] || licenseData['en-GB'];
           </div>
           {
             content.contentExtraNote && (
-              <p class="mt-6 text-sm text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20 rounded-xl px-4 py-3 max-w-2xl mx-auto border border-amber-200 dark:border-amber-800">
+              <p class="mt-6 text-sm text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20 rounded-sm px-4 py-3 max-w-2xl mx-auto border border-amber-200 dark:border-amber-800">
                 ⚠️ {content.contentExtraNote}
               </p>
             )
@@ -498,7 +499,7 @@ const content = licenseData[lang as Lang] || licenseData['en-GB'];
             href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/LICENSE"
             target="_blank"
             rel="noopener noreferrer"
-            class="rounded-xl border border-[rgb(var(--color-border))] p-4 hover:border-primary-500/50 transition-colors"
+            class="rounded-sm border border-[rgb(var(--color-border))] p-4 hover:border-primary-500/50 transition-colors"
           >
             <p
               class="text-xs uppercase tracking-wide text-[rgb(var(--color-text-tertiary))] mb-1"
@@ -527,7 +528,7 @@ const content = licenseData[lang as Lang] || licenseData['en-GB'];
             href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/NOTICE"
             target="_blank"
             rel="noopener noreferrer"
-            class="rounded-xl border border-[rgb(var(--color-border))] p-4 hover:border-primary-500/50 transition-colors"
+            class="rounded-sm border border-[rgb(var(--color-border))] p-4 hover:border-primary-500/50 transition-colors"
           >
             <p
               class="text-xs uppercase tracking-wide text-[rgb(var(--color-text-tertiary))] mb-1"
@@ -558,7 +559,7 @@ const content = licenseData[lang as Lang] || licenseData['en-GB'];
       <div class="grid md:grid-cols-2 gap-8 mb-12">
         <!-- Rights -->
         <div
-          class="bg-green-50 dark:bg-green-900/10 rounded-2xl p-8 border border-green-100 dark:border-green-800/30"
+          class="bg-green-50 dark:bg-green-900/10 rounded-sm p-8 border border-green-100 dark:border-green-800/30"
         >
           <h3
             class="text-xl font-bold mb-6 flex items-center gap-3 text-green-700 dark:text-green-400"
@@ -602,7 +603,7 @@ const content = licenseData[lang as Lang] || licenseData['en-GB'];
 
         <!-- Conditions -->
         <div
-          class="bg-orange-50 dark:bg-orange-900/10 rounded-2xl p-8 border border-orange-100 dark:border-orange-800/30"
+          class="bg-orange-50 dark:bg-orange-900/10 rounded-sm p-8 border border-orange-100 dark:border-orange-800/30"
         >
           <h3
             class="text-xl font-bold mb-6 flex items-center gap-3 text-orange-700 dark:text-orange-400"

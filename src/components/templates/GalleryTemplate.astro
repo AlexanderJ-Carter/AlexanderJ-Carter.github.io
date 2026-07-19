@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { useTranslations } from '../../i18n/ui';
+import { gallerySrcFallback, gallerySrcSet } from '../../i18n/types';
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
@@ -247,6 +248,31 @@ const galleryItemsData: Record<Lang, any[]> = {
       image:
         'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
     },
+    // Nature guest frames (Unsplash)
+    {
+      id: 27,
+      category: 'nature',
+      title: '雾中的湖',
+      description: '外来帧 · 水面把天空压成一层灰蓝',
+      image:
+        'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&q=80',
+    },
+    {
+      id: 28,
+      category: 'nature',
+      title: '雨后枝叶',
+      description: '外来帧 · 水珠把细节放大',
+      image:
+        'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80',
+    },
+    {
+      id: 29,
+      category: 'nature',
+      title: '金色麦浪',
+      description: '外来帧 · 侧光把纹理抬起来',
+      image:
+        'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
+    },
   ],
   'zh-TW': [
     // Landscape photos
@@ -444,6 +470,30 @@ const galleryItemsData: Record<Lang, any[]> = {
       image:
         'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
     },
+    {
+      id: 27,
+      category: 'nature',
+      title: '霧中的湖',
+      description: '外來幀 · 水面把天空壓成一層灰藍',
+      image:
+        'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&q=80',
+    },
+    {
+      id: 28,
+      category: 'nature',
+      title: '雨後枝葉',
+      description: '外來幀 · 水珠把細節放大',
+      image:
+        'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80',
+    },
+    {
+      id: 29,
+      category: 'nature',
+      title: '金色麥浪',
+      description: '外來幀 · 側光把紋理抬起來',
+      image:
+        'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
+    },
   ],
   'en-GB': [
     {
@@ -637,6 +687,30 @@ const galleryItemsData: Record<Lang, any[]> = {
       description: 'Ordinary corners, life stories',
       image:
         'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
+    },
+    {
+      id: 27,
+      category: 'nature',
+      title: 'Lake in Mist',
+      description: 'Guest frame · water flattens the sky to blue-grey',
+      image:
+        'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&q=80',
+    },
+    {
+      id: 28,
+      category: 'nature',
+      title: 'After Rain',
+      description: 'Guest frame · droplets amplify detail',
+      image:
+        'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80',
+    },
+    {
+      id: 29,
+      category: 'nature',
+      title: 'Golden Field',
+      description: 'Guest frame · side light lifts the texture',
+      image:
+        'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
     },
   ],
   fr: [
@@ -832,6 +906,30 @@ const galleryItemsData: Record<Lang, any[]> = {
       image:
         'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
     },
+    {
+      id: 27,
+      category: 'nature',
+      title: 'Lac dans la Brume',
+      description: 'Cadre invité · l’eau aplatit le ciel en bleu-gris',
+      image:
+        'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&q=80',
+    },
+    {
+      id: 28,
+      category: 'nature',
+      title: 'Après la Pluie',
+      description: 'Cadre invité · les gouttes amplifient le détail',
+      image:
+        'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80',
+    },
+    {
+      id: 29,
+      category: 'nature',
+      title: 'Champ Doré',
+      description: 'Cadre invité · la lumière latérale relève la texture',
+      image:
+        'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
+    },
   ],
   ru: [
     {
@@ -1026,6 +1124,30 @@ const galleryItemsData: Record<Lang, any[]> = {
       image:
         'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80',
     },
+    {
+      id: 27,
+      category: 'nature',
+      title: 'Озеро в тумане',
+      description: 'Гостевой кадр · вода сжимает небо в серо-синее',
+      image:
+        'https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&q=80',
+    },
+    {
+      id: 28,
+      category: 'nature',
+      title: 'После дождя',
+      description: 'Гостевой кадр · капли усиливают деталь',
+      image:
+        'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80',
+    },
+    {
+      id: 29,
+      category: 'nature',
+      title: 'Золотое поле',
+      description: 'Гостевой кадр · боковой свет поднимает фактуру',
+      image:
+        'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
+    },
   ],
 };
 
@@ -1087,6 +1209,7 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
   <section class="relative pt-28 pb-16">
     <div class="container mx-auto px-4 lg:px-8">
       <div class="max-w-2xl mb-4">
+        <p class="folio-mark mb-3">Contact Sheet</p>
         <p
           class="font-heading text-sm tracking-[0.2em] uppercase text-[rgb(var(--color-text-tertiary))] mb-4"
         >
@@ -1248,7 +1371,7 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
           return (
             <button
               type="button"
-              class="gallery-item card-hover group relative overflow-hidden rounded-2xl shadow-lg aspect-[4/3] cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 border-0 p-0 transition-all duration-300"
+              class="gallery-item contact-sheet card-hover group relative overflow-hidden aspect-[4/3] cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 border-0 p-0 transition-all duration-300"
               class:list={{
                 'md:col-span-2': index === 0,
               }}
@@ -1262,34 +1385,34 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
                 lang === 'zh-CN' ? `查看：${item.title}` : `View: ${item.title}`
               }
             >
+              <span class="contact-sheet-frame">
+                {String(index + 1).padStart(2, '0')}
+              </span>
               <div
                 class="gallery-skeleton absolute inset-0"
                 aria-hidden="true"
               />
               <img
-                src={item.image}
+                src={gallerySrcFallback(item.image)}
+                srcset={gallerySrcSet(item.image)}
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 alt={`${item.title} - ${item.description}`}
-                class="gallery-image absolute inset-0 w-full h-full object-cover opacity-0 transform group-hover:scale-105 transition-all duration-500 ease-out"
+                class="gallery-image absolute inset-0 w-full h-full object-cover opacity-0 transform group-hover:scale-105 group-focus-within:scale-105 transition-all duration-500 ease-out"
                 loading={index < 6 ? 'eager' : 'lazy'}
                 decoding="async"
                 referrerpolicy="no-referrer"
                 fetchpriority={index < 3 ? 'high' : 'low'}
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 md:p-6">
-                <span class="inline-flex items-center gap-2 text-white/90 text-xs font-medium mb-2">
-                  {item.category === 'landscape' && '🏔️ '}
-                  {item.category === 'nature' && '🌿 '}
-                  {item.category === 'food' && '🍽️ '}
-                  {item.category === 'architecture' && '🏛️ '}
-                  {item.category === 'street' && '🌃 '}
+              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 md:p-6">
+                <span class="inline-flex items-center gap-2 text-white/90 text-xs font-medium mb-2 meta-mono">
                   {catLabel}
                 </span>
-                <span class="inline-flex items-center w-fit mb-2 px-2 py-0.5 rounded bg-black/35 text-white/90 text-[11px]">
+                <span class="inline-flex items-center w-fit mb-2 px-2 py-0.5 rounded-sm bg-black/35 text-white/90 text-[11px]">
                   {item.image.startsWith('http')
                     ? sourceUi.remoteTag
                     : sourceUi.localTag}
                 </span>
-                <h3 class="text-white text-lg md:text-xl font-bold">
+                <h3 class="text-white text-lg md:text-xl font-heading font-bold">
                   {item.title}
                 </h3>
                 <p class="text-gray-200 text-sm mt-1 line-clamp-2">
@@ -1339,7 +1462,7 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     <button
       type="button"
       id="lightbox-close"
-      class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
+      class="absolute top-4 right-4 z-10 w-10 h-10 rounded-sm bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
       aria-label={lang === 'zh-CN' ? '关闭' : 'Close'}
     >
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -1353,7 +1476,7 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     <button
       type="button"
       id="lightbox-prev"
-      class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
+      class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-sm bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
       aria-label={lang === 'zh-CN' ? '上一张' : 'Previous'}
     >
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -1367,7 +1490,7 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     <button
       type="button"
       id="lightbox-next"
-      class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
+      class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-sm bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
       aria-label={lang === 'zh-CN' ? '下一张' : 'Next'}
     >
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -1458,11 +1581,14 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     if (totalCountEl) totalCountEl.textContent = String(visible.length);
   }
 
+  let lightboxTrigger: HTMLElement | null = null;
+
   function openLightbox(index: number) {
     const visible = getVisibleItems();
     const item = visible[index];
     if (!item || !lightbox || !lightboxImage || !lightboxTitle || !lightboxDesc)
       return;
+    lightboxTrigger = document.activeElement as HTMLElement;
     const img = item.getAttribute('data-image');
     const title = item.getAttribute('data-title');
     const desc = item.getAttribute('data-description');
@@ -1483,6 +1609,8 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
       lightbox.classList.remove('flex');
     }
     document.body.style.overflow = '';
+    lightboxTrigger?.focus();
+    lightboxTrigger = null;
   }
 
   function showLightboxPrev() {
@@ -1533,6 +1661,21 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') showLightboxPrev();
     if (e.key === 'ArrowRight') showLightboxNext();
+    if (e.key === 'Tab' && lightbox) {
+      const focusable = lightbox.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
   });
 
   filterBtns.forEach((btn) => {

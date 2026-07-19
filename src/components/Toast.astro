@@ -37,10 +37,13 @@ const { duration = 4000 } = Astro.props;
 
     // Style based on type
     const styleMap = {
-      success: 'bg-emerald-500/90 text-white',
-      error: 'bg-red-500/90 text-white',
-      warning: 'bg-amber-500/90 text-white',
-      info: 'bg-blue-500/90 text-white',
+      success:
+        'bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] border border-[rgb(var(--color-border))] border-l-2 border-l-emerald-600',
+      error:
+        'bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] border border-[rgb(var(--color-border))] border-l-2 border-l-red-600',
+      warning:
+        'bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] border border-[rgb(var(--color-border))] border-l-2 border-l-amber-600',
+      info: 'bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] border border-[rgb(var(--color-border))] border-l-2 border-l-primary-600',
     };
 
     const iconMap = {

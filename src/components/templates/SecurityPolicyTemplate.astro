@@ -650,7 +650,7 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
 ---
 
 <BaseLayout
-  title={`${t.title} | Alexander James Carter`}
+  title={t.title}
   description={t.description}
 >
   <div class="container mx-auto px-4 lg:px-8 max-w-3xl pt-28 md:pt-32">
@@ -688,6 +688,7 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
 
   <PageHero
     class="!pt-0"
+    folio="Folio Security"
     title={t.title}
     description={t.headerDesc}
     note={`${t.lastUpdatedLabel}${t.lastUpdated}`}
@@ -696,13 +697,13 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
     <div class="mt-6 flex flex-wrap gap-3 text-xs sm:text-sm">
       <a
         href="/.well-known/security.txt"
-        class="px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] hover:border-[rgb(var(--color-text-primary))] transition-colors"
+        class="px-3 py-1.5 rounded-sm border border-[rgb(var(--color-border))] hover:border-[rgb(var(--color-text-primary))] transition-colors"
       >
         security.txt
       </a>
       <a
         href="/security/pgp-key.asc"
-        class="px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] hover:border-[rgb(var(--color-text-primary))] transition-colors"
+        class="px-3 py-1.5 rounded-sm border border-[rgb(var(--color-border))] hover:border-[rgb(var(--color-text-primary))] transition-colors"
       >
         PGP Key
       </a>
@@ -710,7 +711,7 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
         href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/.github/SECURITY.md"
         target="_blank"
         rel="noopener noreferrer"
-        class="px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] hover:border-[rgb(var(--color-text-primary))] transition-colors"
+        class="px-3 py-1.5 rounded-sm border border-[rgb(var(--color-border))] hover:border-[rgb(var(--color-text-primary))] transition-colors"
       >
         GitHub SECURITY.md
       </a>
@@ -795,7 +796,7 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- Sidebar Navigation -->
         <div class="lg:w-1/4">
-          <div class="sticky top-24 glass-card p-6 rounded-xl">
+          <div class="sticky top-24 glass-card p-6">
             <h5
               class="font-heading font-bold mb-4 text-sm uppercase tracking-wide text-[rgb(var(--color-text-tertiary))]"
             >
@@ -844,21 +845,21 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
         <!-- Main Content -->
         <div class="lg:w-3/4 space-y-8">
           <!-- 1. Overview -->
-          <section id="overview" class="glass-card p-8 rounded-2xl">
+          <section id="overview" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span class="text-primary-500">🛡️</span>
+              <span class="text-primary-500">️</span>
               {t.sections.overview.title}
             </h2>
             <p class="text-[rgb(var(--color-text-secondary))] mb-6">
               {t.sections.overview.content}
             </p>
             <div
-              class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-100 dark:border-blue-800"
+              class="bg-blue-50 dark:bg-blue-900/20 rounded-sm p-6 border border-blue-100 dark:border-blue-800"
             >
               <h5
                 class="font-bold text-blue-800 dark:text-blue-300 mb-3 flex items-center gap-2"
               >
-                👍 {t.sections.overview.commitmentTitle}
+                {t.sections.overview.commitmentTitle}
               </h5>
               <ul
                 class="list-disc list-inside space-y-2 text-blue-700 dark:text-blue-200"
@@ -873,9 +874,8 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
           </section>
 
           <!-- 2. Scope -->
-          <section id="scope" class="glass-card p-8 rounded-2xl">
+          <section id="scope" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span class="text-primary-500">🌐</span>
               {t.sections.scope.title}
             </h2>
             <p class="mb-4 text-[rgb(var(--color-text-secondary))]">
@@ -895,12 +895,12 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
             </ul>
 
             <div
-              class="bg-yellow-50 dark:bg-yellow-900/20 rounded-xl p-6 border border-yellow-100 dark:border-yellow-800"
+              class="bg-yellow-50 dark:bg-yellow-900/20 rounded-sm p-6 border border-yellow-100 dark:border-yellow-800"
             >
               <h5
                 class="font-bold text-yellow-800 dark:text-yellow-300 mb-3 flex items-center gap-2"
               >
-                ⚠️ {t.sections.scope.excludeTitle}
+                ️ {t.sections.scope.excludeTitle}
               </h5>
               <ul
                 class="list-disc list-inside space-y-2 text-yellow-700 dark:text-yellow-200"
@@ -915,9 +915,8 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
           </section>
 
           <!-- 3. Guidelines -->
-          <section id="guidelines" class="glass-card p-8 rounded-2xl">
+          <section id="guidelines" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span class="text-primary-500">📋</span>
               {t.sections.guidelines.title}
             </h2>
             <p class="mb-6 text-[rgb(var(--color-text-secondary))]">
@@ -957,15 +956,14 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
           </section>
 
           <!-- 4. Process -->
-          <section id="process" class="glass-card p-8 rounded-2xl">
+          <section id="process" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span class="text-primary-500">🔄</span>
               {t.sections.process.title}
             </h2>
             <div class="grid md:grid-cols-2 gap-4">
               {
                 t.sections.process.steps.map((item: any) => (
-                  <div class="bg-[rgb(var(--color-bg-secondary))] p-4 rounded-xl border border-[rgb(var(--color-border))]">
+                  <div class="bg-[rgb(var(--color-bg-secondary))] p-4 rounded-sm border border-[rgb(var(--color-border))]">
                     <h5 class="font-bold mb-1 flex items-center gap-2">
                       <span class="bg-primary-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">
                         {item.step}
@@ -982,9 +980,9 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
           </section>
 
           <!-- 5. Legal -->
-          <section id="legal" class="glass-card p-8 rounded-2xl">
+          <section id="legal" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span class="text-primary-500">⚖️</span>
+              <span class="text-primary-500">️</span>
               {t.sections.legal.title}
             </h2>
             <p class="mb-4 text-[rgb(var(--color-text-secondary))]">
@@ -1001,7 +999,7 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
             </ul>
 
             <div
-              class="bg-[rgb(var(--color-bg-secondary))] rounded-xl p-4 flex gap-3 items-start border border-[rgb(var(--color-border))]"
+              class="bg-[rgb(var(--color-bg-secondary))] rounded-sm p-4 flex gap-3 items-start border border-[rgb(var(--color-border))]"
             >
               <span class="text-primary-500 mt-1">ℹ️</span>
               <p class="text-sm text-[rgb(var(--color-text-secondary))]">
@@ -1011,15 +1009,14 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
           </section>
 
           <!-- 6. Restrictions -->
-          <section id="restrictions" class="glass-card p-8 rounded-2xl">
+          <section id="restrictions" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span class="text-primary-500">🚫</span>
               {t.sections.restrictions.title}
             </h2>
             <div class="grid md:grid-cols-2 gap-8">
               <div>
                 <h4 class="font-bold mb-3 text-green-600 dark:text-green-400">
-                  ✅ {t.sections.restrictions.allowedTitle}
+                  {t.sections.restrictions.allowedTitle}
                 </h4>
                 <ul
                   class="list-disc list-inside space-y-2 text-[rgb(var(--color-text-secondary))]"
@@ -1033,7 +1030,7 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
               </div>
               <div>
                 <h4 class="font-bold mb-3 text-red-600 dark:text-red-400">
-                  ❌ {t.sections.restrictions.forbiddenTitle}
+                  {t.sections.restrictions.forbiddenTitle}
                 </h4>
                 <ul
                   class="list-disc list-inside space-y-2 text-[rgb(var(--color-text-secondary))]"
@@ -1049,9 +1046,8 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
           </section>
 
           <!-- 7. Contact -->
-          <section id="contact" class="glass-card p-8 rounded-2xl">
+          <section id="contact" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span class="text-primary-500">📧</span>
               {t.sections.contact.title}
             </h2>
             <div class="grid md:grid-cols-2 gap-8 mb-6">
@@ -1094,9 +1090,8 @@ const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
             </div>
 
             <div
-              class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex gap-3 items-start"
+              class="bg-blue-50 dark:bg-blue-900/20 rounded-sm p-4 flex gap-3 items-start"
             >
-              <span class="text-blue-500 mt-1">💡</span>
               <p class="text-sm text-blue-700 dark:text-blue-200">
                 {t.sections.contact.note}
               </p>

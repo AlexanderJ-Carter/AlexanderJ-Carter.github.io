@@ -4,43 +4,43 @@ const { lang = 'zh-CN' } = Astro.props;
 const text = {
   'zh-CN': {
     title: '氛围电台',
-    subtitle: '免费外部音乐源，无需 API Key',
+    subtitle: '挑一个频道，放点背景音乐。',
     choose: '选择电台',
     play: '播放',
     pause: '暂停',
-    note: '提示：首次播放受浏览器自动播放策略限制，需点击触发。',
+    note: '点一下播放即可开始收听。',
   },
   'zh-TW': {
     title: '氛圍電台',
-    subtitle: '免費外部音樂源，無需 API Key',
+    subtitle: '挑一個頻道，放點背景音樂。',
     choose: '選擇電台',
     play: '播放',
     pause: '暫停',
-    note: '提示：首次播放受瀏覽器策略限制，需點擊觸發。',
+    note: '點一下播放即可開始收聽。',
   },
   'en-GB': {
     title: 'Ambient Radio',
-    subtitle: 'Free external music streams, no API key',
+    subtitle: 'Pick a station for some background music.',
     choose: 'Choose station',
     play: 'Play',
     pause: 'Pause',
-    note: 'Tip: first playback requires a user click due to autoplay rules.',
+    note: 'Tap play to start listening.',
   },
   fr: {
     title: 'Radio Ambiante',
-    subtitle: 'Flux musicaux gratuits, sans clé API',
+    subtitle: 'Choisissez une station pour un fond sonore.',
     choose: 'Choisir une station',
     play: 'Lecture',
     pause: 'Pause',
-    note: 'Astuce : le premier lancement nécessite un clic utilisateur.',
+    note: 'Appuyez sur lecture pour commencer.',
   },
   ru: {
     title: 'Атмосферное радио',
-    subtitle: 'Бесплатные внешние потоки, без API ключа',
+    subtitle: 'Выберите станцию для фоновой музыки.',
     choose: 'Выбрать станцию',
     play: 'Play',
     pause: 'Pause',
-    note: 'Подсказка: первый запуск требует клика пользователя.',
+    note: 'Нажмите Play, чтобы начать.',
   },
 };
 
@@ -59,16 +59,27 @@ const stations = [
     name: 'SomaFM Space Station',
     url: 'https://ice2.somafm.com/spacestation-128-mp3',
   },
+  {
+    name: 'SomaFM Lush',
+    url: 'https://ice2.somafm.com/lush-128-mp3',
+  },
+  {
+    name: 'SomaFM Deep Space One',
+    url: 'https://ice2.somafm.com/deepspaceone-128-mp3',
+  },
+  {
+    name: 'SomaFM Indie Pop Rocks',
+    url: 'https://ice2.somafm.com/indiepop-128-mp3',
+  },
 ];
 ---
 
 <section class="py-16 bg-[rgb(var(--color-bg-secondary))] reveal">
   <div class="container mx-auto px-4 lg:px-8">
     <div
-      class="max-w-3xl mx-auto glass-card rounded-2xl p-6 md:p-8 border border-primary-500/20"
+      class="max-w-3xl mx-auto glass-card p-6 md:p-8 border border-primary-500/20"
     >
       <div class="flex items-center gap-3 mb-3">
-        <span class="text-2xl" aria-hidden="true">📻</span>
         <h2 class="text-2xl md:text-3xl font-heading font-bold">
           {labels.title}
         </h2>
@@ -81,14 +92,14 @@ const stations = [
         <label for="ambient-station" class="sr-only">{labels.choose}</label>
         <select
           id="ambient-station"
-          class="rounded-xl border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-4 py-2.5 text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
+          class="rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-4 py-2.5 text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
         >
           {stations.map((s) => <option value={s.url}>{s.name}</option>)}
         </select>
         <button
           id="ambient-toggle"
           type="button"
-          class="rounded-xl px-5 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold hover:opacity-90 transition-opacity"
+          class="rounded-sm px-5 py-2.5 bg-primary-600 text-white font-semibold hover:bg-primary-700 transition-colors"
         >
           {labels.play}
         </button>

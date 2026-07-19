@@ -118,8 +118,8 @@ const calendarData: Record<Lang, any> = {
 const content = calendarData[lang as Lang] || calendarData['en-GB'];
 ---
 
-<BaseLayout title={`${content.title} - Alexander Carter`}>
-  <PageHero title={content.title} description={content.headerDesc} />
+<BaseLayout title={content.title}>
+  <PageHero folio="Folio Calendar" kicker="Tools" title={content.title} description={content.headerDesc} />
 
   <!-- Calendar Section -->
   <section class="py-16 container mx-auto px-4 lg:px-8">
@@ -127,14 +127,14 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
       <!-- Calendar Display -->
       <div class="lg:col-span-2">
         <div
-          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 rounded-xl"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 rounded-sm"
         >
           <!-- Month Navigation -->
           <div class="flex flex-wrap items-center justify-between gap-2 mb-8">
             <button
               type="button"
               onclick="prevMonth()"
-              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-sm transition-colors"
               aria-label={content.prevMonth}
             >
               {content.prevMonth}
@@ -148,14 +148,14 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
             <button
               type="button"
               onclick="goToToday()"
-              class="px-3 py-1.5 rounded-lg bg-primary-500/15 text-primary-600 dark:text-primary-400 hover:bg-primary-500/25 text-sm font-medium transition-colors"
+              class="px-3 py-1.5 rounded-sm bg-primary-500/15 text-primary-600 dark:text-primary-400 hover:bg-primary-500/25 text-sm font-medium transition-colors"
             >
               {content.goToToday}
             </button>
             <button
               type="button"
               onclick="nextMonth()"
-              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-lg transition-colors"
+              class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-sm transition-colors"
               aria-label={content.nextMonth}
             >
               {content.nextMonth}
@@ -184,7 +184,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
       <div class="space-y-8">
         <!-- Today's Info -->
         <div
-          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-sm"
         >
           <h3 class="text-xl font-bold mb-4">{content.today}</h3>
           <div id="todayInfo" class="text-[rgb(var(--color-text-secondary))]">
@@ -192,7 +192,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
           </div>
           <button
             onclick="openAddEventModal()"
-            class="mt-4 w-full py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+            class="mt-4 w-full py-2 bg-primary-500 text-white rounded-sm hover:bg-primary-600 transition-colors"
           >
             {content.addEvent}
           </button>
@@ -200,7 +200,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
 
         <!-- Upcoming Events -->
         <div
-          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-sm"
         >
           <h3 class="text-xl font-bold mb-4">{content.upcomingEvents}</h3>
           <div id="upcomingEvents" class="space-y-4">
@@ -221,7 +221,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
     class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50"
   >
     <div
-      class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 max-w-md w-full mx-4 rounded-xl"
+      class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 max-w-md w-full mx-4 rounded-sm"
     >
       <h3 class="text-2xl font-bold mb-6">{content.addEvent}</h3>
       <form id="eventForm" class="space-y-4">
@@ -233,7 +233,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
             type="text"
             name="title"
             required
-            class="w-full px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
+            class="w-full px-4 py-2 rounded-sm bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
           />
         </div>
         <div>
@@ -244,7 +244,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
             type="datetime-local"
             name="time"
             required
-            class="w-full px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
+            class="w-full px-4 py-2 rounded-sm bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
           />
         </div>
         <div>
@@ -254,20 +254,20 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
           <textarea
             name="description"
             rows="3"
-            class="w-full px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
+            class="w-full px-4 py-2 rounded-sm bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
           ></textarea>
         </div>
         <div class="flex justify-end gap-4 mt-6">
           <button
             type="button"
             onclick="closeEventModal()"
-            class="px-4 py-2 rounded-lg hover:bg-[rgb(var(--color-bg-secondary))]"
+            class="px-4 py-2 rounded-sm hover:bg-[rgb(var(--color-bg-secondary))]"
           >
             {content.cancel}
           </button>
           <button
             type="submit"
-            class="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600"
+            class="px-4 py-2 bg-primary-500 text-white rounded-sm hover:bg-primary-600"
           >
             {content.save}
           </button>
@@ -333,7 +333,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
     for (let i = 0; i < firstDay; i++) {
       const emptyDay = document.createElement('div');
       emptyDay.className =
-        'h-24 bg-[rgb(var(--color-bg-secondary))] rounded-lg opacity-50';
+        'h-24 bg-[rgb(var(--color-bg-secondary))] rounded-sm opacity-50';
       calendarGrid.appendChild(emptyDay);
     }
 
@@ -350,7 +350,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
       const holidayKey = `${month}-${i}`;
       const holidayName = holidays[holidayKey];
 
-      dayElement.className = `h-24 p-2 rounded-lg border border-[rgb(var(--color-border))] hover:border-primary-500 transition-colors relative flex flex-col justify-between ${isToday ? 'bg-primary-500/10 border-primary-500' : 'bg-[rgb(var(--color-bg-secondary))]'}`;
+      dayElement.className = `h-24 p-2 rounded-sm border border-[rgb(var(--color-border))] hover:border-primary-500 transition-colors relative flex flex-col justify-between ${isToday ? 'bg-primary-500/10 border-primary-500' : 'bg-[rgb(var(--color-bg-secondary))]'}`;
 
       let holidayHtml = '';
       if (holidayName) {

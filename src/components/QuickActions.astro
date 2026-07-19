@@ -40,7 +40,7 @@ const t = translations[lang] || translations['zh-CN'];
     type="button"
     id="quick-search-btn"
     aria-label={t.search}
-    class="relative w-11 h-11 min-w-[44px] min-h-[44px] rounded-sm bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] text-primary-600 dark:text-primary-400 transition-colors duration-200 flex items-center justify-center group hover:border-primary-500 hover:text-primary-700 dark:hover:text-primary-300 focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))]"
+    class="studio-dock-btn relative shadow-sm group focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))]"
   >
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
@@ -58,24 +58,34 @@ const t = translations[lang] || translations['zh-CN'];
 </div>
 
 <!-- Search Modal -->
-<div id="search-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+<div
+  id="search-modal"
+  class="hidden fixed inset-0 z-50 overflow-y-auto"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="search-modal-title"
+>
   <div class="flex items-start justify-center min-h-screen px-4 pt-20 pb-20">
     <button
       type="button"
       class="fixed inset-0 bg-[rgb(var(--color-bg-primary))]/80"
       onclick="closeSearchModal()"
-      aria-label="Close search"
+      aria-label={lang === 'zh-CN' ? '关闭搜索' : 'Close search'}
     >
     </button>
     <div
       class="relative rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 max-w-2xl w-full mt-8"
     >
+      <h2 id="search-modal-title" class="sr-only">
+        {lang === 'zh-CN' ? '站点搜索' : 'Site search'}
+      </h2>
       <div class="flex items-center gap-4 mb-6">
         <svg
           class="w-6 h-6 text-[rgb(var(--color-text-secondary))]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
+          aria-hidden="true"
         >
           <path
             stroke-linecap="round"
@@ -84,7 +94,7 @@ const t = translations[lang] || translations['zh-CN'];
             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
         </svg>
         <input
-          type="text"
+          type="search"
           id="search-input"
           placeholder={lang === 'zh-CN'
             ? '搜索页面…'
@@ -96,11 +106,13 @@ const t = translations[lang] || translations['zh-CN'];
                   ? 'Поиск страниц…'
                   : 'Search pages…'}
           class="flex-1 bg-transparent border-none outline-none text-base text-[rgb(var(--color-text-primary))] placeholder-[rgb(var(--color-text-tertiary))]"
-          autofocus
+          autocomplete="off"
         />
         <button
+          type="button"
           onclick="closeSearchModal()"
           class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-sm transition-colors"
+          aria-label={lang === 'zh-CN' ? '关闭' : 'Close'}
         >
           <svg
             class="w-5 h-5"
@@ -503,22 +515,17 @@ const t = translations[lang] || translations['zh-CN'];
 </script>
 
 <style>
-  /* 搜索按钮：左侧固定，与右侧音乐/分享/回到顶部错开，移动端留足触控区域 */
+  /* Studio dock: search sits above music FAB on the right rail */
   #quick-actions {
-    left: 1rem;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
+    right: 1rem;
+    left: auto;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 4.75rem);
   }
 
   @media (min-width: 768px) {
     #quick-actions {
-      left: 1.5rem;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
-    }
-  }
-
-  @media (max-width: 640px) {
-    #quick-actions {
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+      right: 1.5rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 5rem);
     }
   }
 </style>

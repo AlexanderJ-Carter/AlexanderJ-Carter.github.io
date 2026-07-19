@@ -4,7 +4,7 @@ export const t: Record<Lang, Record<string, string>> = {
   'zh-CN': {
     title: '个人项目',
     subtitle: '生活向的小项目与站点页面',
-    badge: '🛠 Projects',
+    badge: 'Projects',
     intro:
       '这里是偏生活化、好用导向的小项目：记录、工具、页面体验，持续慢慢打磨。',
     filterAll: '全部',
@@ -20,7 +20,7 @@ export const t: Record<Lang, Record<string, string>> = {
   'zh-TW': {
     title: '個人專案',
     subtitle: '生活向的小專案與站點頁面',
-    badge: '🛠 Projects',
+    badge: 'Projects',
     intro:
       '這裡是偏生活化、好用導向的小專案：記錄、工具、頁面體驗，持續慢慢打磨。',
     filterAll: '全部',
@@ -36,7 +36,7 @@ export const t: Record<Lang, Record<string, string>> = {
   'en-GB': {
     title: 'Projects',
     subtitle: 'Lifestyle pages and small projects',
-    badge: '🛠 Projects',
+    badge: 'Projects',
     intro:
       'A collection of practical, lifestyle-focused pages and small projects, built for daily use and better UX.',
     filterAll: 'All',
@@ -52,7 +52,7 @@ export const t: Record<Lang, Record<string, string>> = {
   fr: {
     title: 'Projets',
     subtitle: 'Pages lifestyle et petits projets',
-    badge: '🛠 Projets',
+    badge: 'Projets',
     intro:
       'Une collection de pages pratiques et de petits projets orientés usage quotidien.',
     filterAll: 'Tous',
@@ -68,7 +68,7 @@ export const t: Record<Lang, Record<string, string>> = {
   ru: {
     title: 'Проекты',
     subtitle: 'Лайфстайл-страницы и небольшие проекты',
-    badge: '🛠 Проекты',
+    badge: 'Проекты',
     intro:
       'Подборка практичных, жизненных страниц и небольших проектов для повседневного использования.',
     filterAll: 'Все',

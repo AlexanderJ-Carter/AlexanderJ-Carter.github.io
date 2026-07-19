@@ -8,6 +8,8 @@ import PasswordGenerator from '../PasswordGenerator.astro';
 import ColorPicker from '../ColorPicker.astro';
 import CountdownTimer from '../CountdownTimer.astro';
 import AmbientRadio from '../AmbientRadio.astro';
+import ExposureTriangle from '../ExposureTriangle.astro';
+import DailyFrame from '../DailyFrame.astro';
 import { getLangPath, resolveLang } from '../../i18n/types';
 
 const lang = resolveLang(Astro.props.lang);
@@ -379,6 +381,7 @@ const galleryPath =
 
 <BaseLayout title={text.title} description={text.subtitle}>
   <PageHero
+    folio="Folio Play"
     kicker="Play"
     title={text.title}
     description={lang === 'zh-CN'
@@ -407,10 +410,9 @@ const galleryPath =
       <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
         <!-- 随机一言 -->
         <article
-          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-primary-500"
+          class="glass-card p-6 md:p-8 reveal"
         >
           <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl" aria-hidden="true">💬</span>
             <h2
               class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
             >
@@ -422,7 +424,7 @@ const galleryPath =
           </p>
           <div
             id="quote-box"
-            class="min-h-[88px] p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))]/80 border border-[rgb(var(--color-border))] mb-4 transition-colors duration-200"
+            class="min-h-[88px] p-4 rounded-sm bg-[rgb(var(--color-bg-secondary))]/80 border border-[rgb(var(--color-border))] mb-4 transition-colors duration-200"
           >
             <p
               id="quote-text"
@@ -439,7 +441,7 @@ const galleryPath =
           <button
             type="button"
             id="quote-refresh"
-            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-sm bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
           >
             <svg
               class="w-5 h-5"
@@ -461,10 +463,9 @@ const galleryPath =
 
         <!-- 随机作品 -->
         <article
-          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-accent-500"
+          class="glass-card p-6 md:p-8 reveal"
         >
           <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl" aria-hidden="true">🖼️</span>
             <h2
               class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
             >
@@ -476,7 +477,7 @@ const galleryPath =
           </p>
           <a
             href={galleryPath}
-            class="block group relative overflow-hidden rounded-xl aspect-[4/3] mb-4 ring-2 ring-transparent hover:ring-primary-500/30 transition-all duration-300"
+            class="block group relative overflow-hidden rounded-sm aspect-[4/3] mb-4 ring-2 ring-transparent hover:ring-primary-500/30 transition-all duration-300"
           >
             <img
               src={randomImage.src}
@@ -513,9 +514,8 @@ const galleryPath =
 
       <!-- Konami + 打字 两栏或堆叠 -->
       <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-6">
-        <article class="glass-card p-6 md:p-8 rounded-2xl reveal">
+        <article class="glass-card p-6 md:p-8 reveal">
           <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl" aria-hidden="true">🎮</span>
             <h2
               class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
             >
@@ -530,9 +530,8 @@ const galleryPath =
           </p>
         </article>
 
-        <article class="glass-card p-6 md:p-8 rounded-2xl reveal">
+        <article class="glass-card p-6 md:p-8 reveal">
           <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl" aria-hidden="true">⌨️</span>
             <h2
               class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
             >
@@ -544,7 +543,7 @@ const galleryPath =
           </p>
           <p
             id="typing-sentence"
-            class="text-base font-medium text-[rgb(var(--color-text-primary))] mb-3 p-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
+            class="text-base font-medium text-[rgb(var(--color-text-primary))] mb-3 p-3 rounded-sm bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))]"
           >
             {text.sentence}
           </p>
@@ -553,25 +552,25 @@ const galleryPath =
               type="text"
               id="typing-input"
               placeholder={text.placeholder}
-              class="flex-1 min-w-[180px] px-4 py-2.5 rounded-xl border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none text-sm"
+              class="flex-1 min-w-[180px] px-4 py-2.5 rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none text-sm"
               disabled
             />
             <button
               type="button"
               id="typing-start"
-              class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-primary-500 to-accent-500 text-white font-semibold text-sm hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+              class="px-5 py-2.5 rounded-sm bg-primary-600 text-white font-semibold text-sm hover:bg-primary-700 transition-opacity focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
             >
               {text.start}
             </button>
           </div>
           <div
             id="typing-result"
-            class="hidden mt-4 p-3 rounded-xl bg-primary-500/10 border border-primary-500/30"
+            class="hidden mt-4 p-3 rounded-sm bg-primary-500/10 border border-primary-500/30"
           >
             <p
               class="font-semibold text-primary-600 dark:text-primary-400 text-sm"
             >
-              🎉 {text.yourTime}: <span id="typing-time">0</span>
+              {text.yourTime}: <span id="typing-time">0</span>
               {text.seconds}
             </p>
             <button
@@ -588,10 +587,9 @@ const galleryPath =
       <!-- Memory Match Game -->
       <div class="max-w-5xl mx-auto mt-6">
         <article
-          class="glass-card p-6 md:p-8 rounded-2xl reveal border-t-4 border-t-green-500"
+          class="glass-card p-6 md:p-8 reveal"
         >
           <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl" aria-hidden="true">🃏</span>
             <h2
               class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
             >
@@ -625,13 +623,13 @@ const galleryPath =
           </div>
           <div id="mem-complete" class="hidden text-center py-4">
             <p class="text-lg font-bold text-green-500 mb-2">
-              🎉 {mem.complete}
+              {mem.complete}
             </p>
           </div>
           <button
             type="button"
             id="mem-reset"
-            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500/15 hover:bg-green-500/25 text-green-600 dark:text-green-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-sm bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
           >
             <svg
               class="w-5 h-5"
@@ -655,10 +653,9 @@ const galleryPath =
       <!-- Extra mini widgets -->
       <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-6">
         <article
-          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-cyan-500"
+          class="glass-card p-6 md:p-8 reveal"
         >
           <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl" aria-hidden="true">🎯</span>
             <h2
               class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
             >
@@ -670,23 +667,22 @@ const galleryPath =
           </p>
           <div
             id="task-result"
-            class="p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] min-h-[72px] text-[rgb(var(--color-text-primary))] font-medium mb-4"
+            class="p-4 rounded-sm bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] min-h-[72px] text-[rgb(var(--color-text-primary))] font-medium mb-4"
           >
           </div>
           <button
             type="button"
             id="task-draw"
-            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-600 dark:text-cyan-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-sm bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
           >
             {text.taskBtn}
           </button>
         </article>
 
         <article
-          class="glass-card p-6 md:p-8 rounded-2xl reveal border-l-4 border-l-violet-500"
+          class="glass-card p-6 md:p-8 reveal"
         >
           <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl" aria-hidden="true">🫁</span>
             <h2
               class="text-xl font-heading font-bold text-[rgb(var(--color-text-primary))]"
             >
@@ -704,14 +700,14 @@ const galleryPath =
               <button
                 type="button"
                 id="breath-start"
-                class="px-4 py-2 rounded-lg bg-violet-500/15 hover:bg-violet-500/25 text-violet-600 dark:text-violet-400 font-medium"
+                class="px-4 py-2 rounded-sm bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium"
               >
                 {text.breathingStart}
               </button>
               <button
                 type="button"
                 id="breath-stop"
-                class="px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]"
+                class="px-4 py-2 rounded-sm bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]"
               >
                 {text.breathingStop}
               </button>
@@ -721,6 +717,8 @@ const galleryPath =
       </div>
 
       <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
+        <DailyFrame lang={lang} />
+        <ExposureTriangle lang={lang} />
         <PomodoroTimer lang={lang} />
         <WeatherWidget lang={lang} variant="card" />
         <Calculator lang={lang} />
@@ -864,7 +862,7 @@ const galleryPath =
       var resetBtn = document.getElementById('mem-reset');
       if (!board) return;
 
-      var emojis = ['🌸', '🌊', '🏔️', '🌙', '🔥', '🍃'];
+      var emojis = ['A', 'B', 'C', 'D', 'E', 'F'];
       var cards = [];
       var flipped = [];
       var matched = 0;

@@ -177,49 +177,50 @@ const timeData: Record<Lang, any> = {
 const content = timeData[lang as Lang] || timeData['en-GB'];
 
 const worldZones = [
-  { id: 'utc', label: content.utc, tz: 'UTC', utc: 'UTC+0', icon: '🌐' },
+  { id: 'utc', label: content.utc, tz: 'UTC', utc: 'UTC+0', icon: 'UTC' },
   {
     id: 'london',
     label: content.london,
     tz: 'Europe/London',
     utc: 'UTC+0',
-    icon: '🇬🇧',
+    icon: 'LON',
   },
   {
     id: 'ny',
     label: content.newYork,
     tz: 'America/New_York',
     utc: 'UTC−5',
-    icon: '🇺🇸',
+    icon: 'NYC',
   },
   {
     id: 'tokyo',
     label: content.tokyo,
     tz: 'Asia/Tokyo',
     utc: 'UTC+9',
-    icon: '🇯🇵',
+    icon: 'TYO',
   },
   {
     id: 'sydney',
     label: content.sydney,
     tz: 'Australia/Sydney',
     utc: 'UTC+11',
-    icon: '🇦🇺',
+    icon: 'SYD',
   },
 ];
 
 const relatedTools = [
-  { href: getLangPath('/calendar'), label: content.calendar, icon: '📅' },
-  { href: getLangPath('/currency'), label: content.currency, icon: '💱' },
-  { href: getLangPath('/now'), label: content.now, icon: '📍' },
-  { href: getLangPath('/uses'), label: content.uses, icon: '🛠' },
-  { href: getLangPath('/units'), label: content.units, icon: '📐' },
-  { href: getLangPath('/qr'), label: content.qr, icon: '📱' },
+  { href: getLangPath('/calendar'), label: content.calendar, icon: 'Cal' },
+  { href: getLangPath('/currency'), label: content.currency, icon: 'FX' },
+  { href: getLangPath('/now'), label: content.now, icon: 'Now' },
+  { href: getLangPath('/uses'), label: content.uses, icon: '◇' },
+  { href: getLangPath('/units'), label: content.units, icon: 'Unit' },
+  { href: getLangPath('/qr'), label: content.qr, icon: 'QR' },
 ];
 ---
 
-<BaseLayout title={`${content.title} - Alexander Carter`}>
+<BaseLayout title={content.title}>
   <PageHero
+    folio="Folio Clock"
     kicker={content.tag}
     title={content.headerTitle}
     description={content.headerDesc}
@@ -232,7 +233,7 @@ const relatedTools = [
       <div class="lg:col-span-3 space-y-6">
         <!-- Beijing / Primary clock -->
         <div
-          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 md:p-10 rounded-xl reveal"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 md:p-10 rounded-sm reveal"
         >
           <div class="relative flex flex-col md:flex-row md:items-start gap-6">
             <!-- 指针式钟表（北京时间） -->
@@ -352,7 +353,7 @@ const relatedTools = [
                 <button
                   type="button"
                   id="copy-main"
-                  class="time-copy-btn inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/15 border border-[rgb(var(--color-border))] hover:border-primary-500/40 text-sm font-medium text-[rgb(var(--color-text-primary))] transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+                  class="time-copy-btn inline-flex items-center gap-2 px-4 py-2 rounded-sm bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/15 border border-[rgb(var(--color-border))] hover:border-primary-500/40 text-sm font-medium text-[rgb(var(--color-text-primary))] transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
                   data-copy-label={content.copy}
                   data-copied-label={content.copied}
                 >
@@ -414,19 +415,19 @@ const relatedTools = [
 
         <!-- Your local time -->
         <div
-          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl reveal"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-sm reveal"
         >
           <div class="flex flex-wrap items-center justify-between gap-4">
             <p
               class="text-sm font-medium text-[rgb(var(--color-text-secondary))] flex items-center gap-2"
             >
-              <span aria-hidden="true">📍</span>
+              <span aria-hidden="true"></span>
               {content.yourTime}
             </p>
             <button
               type="button"
               id="copy-local"
-              class="time-copy-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/15 border border-[rgb(var(--color-border))] hover:border-primary-500/40 text-xs font-medium text-[rgb(var(--color-text-primary))] transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+              class="time-copy-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/15 border border-[rgb(var(--color-border))] hover:border-primary-500/40 text-xs font-medium text-[rgb(var(--color-text-primary))] transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
               data-copy-label={content.copy}
               data-copied-label={content.copied}
             >
@@ -463,7 +464,7 @@ const relatedTools = [
       <!-- Right: World clocks + API -->
       <div class="lg:col-span-2 space-y-6">
         <div
-          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl reveal"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-sm reveal"
         >
           <h2
             class="text-lg font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]"
@@ -473,9 +474,9 @@ const relatedTools = [
           <ul class="space-y-2" aria-label={content.worldClocks}>
             {
               worldZones.map((z) => (
-                <li class="flex items-center justify-between gap-3 py-2.5 px-3 rounded-xl hover:bg-[rgb(var(--color-bg-accent))]/50 transition-colors">
+                <li class="flex items-center justify-between gap-3 py-2.5 px-3 rounded-sm hover:bg-[rgb(var(--color-bg-accent))]/50 transition-colors">
                   <div class="flex items-center gap-3 min-w-0">
-                    <span class="text-lg shrink-0" aria-hidden="true">
+                    <span class="meta-mono text-xs tracking-wider text-primary-600 dark:text-primary-400 shrink-0" aria-hidden="true">
                       {z.icon}
                     </span>
                     <div class="min-w-0">
@@ -500,7 +501,7 @@ const relatedTools = [
         </div>
 
         <div
-          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl reveal"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-sm reveal"
         >
           <div class="flex items-center justify-between gap-2 mb-2">
             <h3
@@ -511,7 +512,7 @@ const relatedTools = [
             <button
               type="button"
               id="copy-api-url"
-              class="time-copy-btn inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-primary-500/10 hover:bg-primary-500/20 text-primary-600 dark:text-primary-400 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+              class="time-copy-btn inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm bg-primary-500/10 hover:bg-primary-500/20 text-primary-600 dark:text-primary-400 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
               data-copy-value="https://api.alexander.xin/time/now"
               data-copy-label={content.copy}
               data-copied-label={content.copied}
@@ -535,7 +536,7 @@ const relatedTools = [
             {content.apiDesc}
           </p>
           <code
-            class="block p-3 rounded-xl bg-[rgb(var(--color-bg-primary))]/80 dark:bg-black/20 text-xs font-mono break-all border border-[rgb(var(--color-border))] mb-2"
+            class="block p-3 rounded-sm bg-[rgb(var(--color-bg-primary))]/80 dark:bg-black/20 text-xs font-mono break-all border border-[rgb(var(--color-border))] mb-2"
           >
             {content.apiExample}
           </code>
@@ -564,9 +565,9 @@ const relatedTools = [
           relatedTools.map((tool) => (
             <a
               href={tool.href}
-              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/10 border border-[rgb(var(--color-border))] hover:border-primary-500/30 text-[rgb(var(--color-text-primary))] font-medium transition-colors active:scale-[0.98]"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-sm bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/10 border border-[rgb(var(--color-border))] hover:border-primary-500/30 text-[rgb(var(--color-text-primary))] font-medium transition-colors active:scale-[0.98]"
             >
-              <span aria-hidden="true">{tool.icon}</span>
+              <span class="meta-mono text-xs tracking-wider text-primary-600 dark:text-primary-400" aria-hidden="true">{tool.icon}</span>
               {tool.label}
             </a>
           ))

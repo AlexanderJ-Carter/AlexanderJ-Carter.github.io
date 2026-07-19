@@ -6,7 +6,7 @@
 <button
   id="music-fab"
   type="button"
-  class="music-fab fixed z-[45] w-12 h-12 rounded-sm shadow-md border border-[rgb(var(--color-border))] flex items-center justify-center transition-all duration-300 hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))]"
+  class="music-fab studio-dock-btn fixed z-[45] shadow-sm transition-all duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))]"
   aria-label="打开音乐播放器"
 >
   <svg
@@ -38,17 +38,16 @@
   >
     <div
       id="music-mini-cover"
-      class="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
-      style="background: rgb(var(--color-accent) / 0.15);"
+      class="cyanotype-sleeve w-10 h-10 flex-shrink-0"
+      aria-hidden="true"
     >
-      🎹
     </div>
     <div class="flex-1 min-w-0">
       <div
         id="music-mini-title"
         class="text-sm font-medium truncate text-[rgb(var(--color-text-primary))]"
       >
-        选择一首歌曲
+        点一首开始听
       </div>
       <div
         id="music-mini-time"
@@ -73,8 +72,8 @@
       <button
         type="button"
         id="music-mini-play"
-        class="music-btn p-2 rounded-xl text-white transition-transform hover:scale-105"
-        style="background: linear-gradient(135deg, rgb(var(--color-accent)), rgb(var(--color-accent)));"
+        class="music-btn p-2 rounded-sm text-white transition-transform hover:scale-105"
+        style="background: rgb(var(--color-accent));"
         aria-label="播放/暂停"
       >
         <svg class="play-icon w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -136,7 +135,7 @@
 <!-- 完整面板：可拖拽标题栏、可最小化 -->
 <div
   id="music-panel"
-  class="music-panel fixed z-[46] hidden rounded-2xl shadow-2xl border border-[rgb(var(--color-border))] overflow-hidden flex flex-col transition-all duration-300"
+  class="music-panel fixed z-[46] hidden rounded-sm shadow-2xl border border-[rgb(var(--color-border))] overflow-hidden flex flex-col transition-all duration-300"
   style="background: rgb(var(--color-bg-secondary)); width: 320px; max-height: 85vh;"
 >
   <div
@@ -144,8 +143,8 @@
     class="flex items-center justify-between px-4 py-3 cursor-grab active:cursor-grabbing select-none border-b border-[rgb(var(--color-border))]"
   >
     <div class="flex items-center gap-2">
-      <span class="text-lg">🎵</span>
-      <span class="font-semibold text-[rgb(var(--color-text-primary))]"
+      <span class="folio-mark !text-[rgb(var(--color-text-tertiary))]">Audio</span>
+      <span class="font-heading font-semibold text-[rgb(var(--color-text-primary))]"
         >音乐</span
       >
     </div>
@@ -193,16 +192,15 @@
     <div class="text-center mb-4">
       <div
         id="music-cover"
-        class="w-28 h-28 mx-auto rounded-2xl flex items-center justify-center text-5xl mb-3"
-        style="background: linear-gradient(135deg, rgb(var(--color-accent) / 0.25), rgb(var(--color-accent) / 0.2));"
+        class="cyanotype-sleeve w-28 h-28 mx-auto mb-3"
+        aria-hidden="true"
       >
-        🎹
       </div>
       <h4
         id="music-title"
         class="font-semibold text-[rgb(var(--color-text-primary))] truncate px-2"
       >
-        选择一首歌曲
+        点一首开始听
       </h4>
       <p
         id="music-artist"
@@ -216,10 +214,10 @@
         <button
           type="button"
           id="music-mode-local"
-          class="music-mode-btn active">本地歌单</button
+          class="music-mode-btn active">我的音乐</button
         >
         <button type="button" id="music-mode-radio" class="music-mode-btn"
-          >氛围电台</button
+          >在线电台</button
         >
       </div>
     </div>
@@ -228,7 +226,8 @@
       <div class="flex items-center gap-2 mb-2">
         <select
           id="music-radio-station"
-          class="flex-1 rounded-xl border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm text-[rgb(var(--color-text-primary))] outline-none"
+          class="flex-1 rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm text-[rgb(var(--color-text-primary))] outline-none"
+          aria-label="选择电台"
         >
           <option value="https://ice2.somafm.com/groovesalad-128-mp3"
             >SomaFM Groove Salad</option
@@ -239,15 +238,24 @@
           <option value="https://ice2.somafm.com/spacestation-128-mp3"
             >SomaFM Space Station</option
           >
+          <option value="https://ice2.somafm.com/lush-128-mp3"
+            >SomaFM Lush</option
+          >
+          <option value="https://ice2.somafm.com/deepspaceone-128-mp3"
+            >SomaFM Deep Space One</option
+          >
+          <option value="https://ice2.somafm.com/indiepop-128-mp3"
+            >SomaFM Indie Pop Rocks</option
+          >
         </select>
         <button
           type="button"
           id="music-radio-apply"
-          class="music-mode-btn !px-3">切台</button
+          class="music-mode-btn !px-3">收听</button
         >
       </div>
       <p class="text-xs text-[rgb(var(--color-text-tertiary))]">
-        电台与本地歌曲共用同一个播放器控制区。
+        选好电台后，点下方播放即可。
       </p>
     </div>
 
@@ -306,8 +314,8 @@
       <button
         type="button"
         id="music-play"
-        class="music-btn p-4 rounded-2xl text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
-        style="background: linear-gradient(135deg, rgb(var(--color-accent)), rgb(var(--color-accent)));"
+        class="music-btn p-4 rounded-sm text-white shadow-md transition-transform hover:scale-105 active:scale-95"
+        style="background: rgb(var(--color-accent));"
         aria-label="播放/暂停"
       >
         <svg class="play-icon w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -410,10 +418,14 @@
         const titleEl = document.getElementById('music-title');
         const artistEl = document.getElementById('music-artist');
         const miniTitle = document.getElementById('music-mini-title');
+        const coverEl = document.getElementById('music-cover');
+        const miniCover = document.getElementById('music-mini-cover');
         const name = getSelectedStationName();
-        if (titleEl) titleEl.textContent = '📻 ' + name;
-        if (miniTitle) miniTitle.textContent = '📻 ' + name;
-        if (artistEl) artistEl.textContent = 'Live Stream';
+        if (titleEl) titleEl.textContent = name;
+        if (miniTitle) miniTitle.textContent = name;
+        if (artistEl) artistEl.textContent = '正在直播';
+        applyCyanotypeSleeve(coverEl, radioStation?.value || name);
+        applyCyanotypeSleeve(miniCover, radioStation?.value || name);
       } else if (musicData.length > 0) {
         loadTrack(currentTrack);
       }
@@ -491,23 +503,53 @@
       el.style.setProperty('--progress', p + '%');
     }
 
+    function hashSeed(input) {
+      let h = 2166136261;
+      const s = String(input || 'folio');
+      for (let i = 0; i < s.length; i++) {
+        h ^= s.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return h >>> 0;
+    }
+
+    function applyCyanotypeSleeve(el, seedKey) {
+      if (!el) return;
+      const h = hashSeed(seedKey);
+      const cx = 18 + (h % 64);
+      const cy = 16 + ((h >>> 8) % 60);
+      const angle = 90 + ((h >>> 16) % 90);
+      el.textContent = '';
+      el.classList.add('cyanotype-sleeve');
+      el.style.setProperty('--cx', cx + '%');
+      el.style.setProperty('--cy', cy + '%');
+      el.style.setProperty('--angle', angle + 'deg');
+    }
+
+    function sleeveMarkup(seedKey) {
+      const h = hashSeed(seedKey);
+      const cx = 18 + (h % 64);
+      const cy = 16 + ((h >>> 8) % 60);
+      const angle = 90 + ((h >>> 16) % 90);
+      return `<span class="cyanotype-sleeve w-8 h-8 flex-shrink-0" style="--cx:${cx}%;--cy:${cy}%;--angle:${angle}deg" aria-hidden="true"></span>`;
+    }
+
     function setEmptyState() {
       const titleEl = document.getElementById('music-title');
       const artistEl = document.getElementById('music-artist');
       const coverEl = document.getElementById('music-cover');
       const miniTitle = document.getElementById('music-mini-title');
       const miniCover = document.getElementById('music-mini-cover');
-      if (titleEl) titleEl.textContent = '暂无歌曲';
+      if (titleEl) titleEl.textContent = '暂无可播放曲目';
       if (artistEl) {
-        artistEl.textContent = '-';
+        artistEl.textContent = '稍后再来看看';
         artistEl.classList.remove('text-red-500');
       }
-      if (coverEl) coverEl.textContent = '🎵';
-      if (miniTitle) miniTitle.textContent = '暂无歌曲';
-      if (miniCover) miniCover.textContent = '🎵';
+      applyCyanotypeSleeve(coverEl, 'empty');
+      if (miniTitle) miniTitle.textContent = '暂无可播放曲目';
+      applyCyanotypeSleeve(miniCover, 'empty');
       if (playlistPlaceholder) {
-        playlistPlaceholder.textContent =
-          '暂无歌曲，可在 public/music 下添加音频后重新构建';
+        playlistPlaceholder.textContent = '暂时没有可播放的曲目';
         playlistPlaceholder.classList.remove('hidden');
       }
       if (playlistContainer) {
@@ -522,7 +564,7 @@
       const list = playlistContainer.querySelector('.music-playlist-list');
       if (list) list.remove();
       if (musicData.length === 0) {
-        playlistPlaceholder.textContent = '暂无歌曲';
+        playlistPlaceholder.textContent = '暂时没有可播放的曲目';
         playlistPlaceholder.classList.remove('hidden');
         return;
       }
@@ -532,9 +574,10 @@
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className =
-          'music-track w-full text-left px-3 py-2.5 rounded-xl flex items-center gap-3 transition-colors hover:bg-[rgb(var(--color-bg-accent))] border border-transparent';
+          'music-track w-full text-left px-3 py-2.5 rounded-sm flex items-center gap-3 transition-colors hover:bg-[rgb(var(--color-bg-accent))] border border-transparent';
         btn.dataset.index = String(index);
-        btn.innerHTML = `<span class="text-xl w-8 h-8 flex items-center justify-center rounded-lg flex-shrink-0" style="background: rgb(var(--color-bg-accent));">${escapeHtml(track.cover)}</span><div class="flex-1 min-w-0"><div class="text-sm font-medium truncate text-[rgb(var(--color-text-primary))]">${escapeHtml(track.title)}</div><div class="text-xs text-[rgb(var(--color-text-tertiary))] truncate">${escapeHtml(track.artist)}</div></div>`;
+        const seed = track.file || track.title || String(index);
+        btn.innerHTML = `${sleeveMarkup(seed)}<div class="flex-1 min-w-0"><div class="text-sm font-medium truncate text-[rgb(var(--color-text-primary))]">${escapeHtml(track.title)}</div><div class="text-xs text-[rgb(var(--color-text-tertiary))] truncate">${escapeHtml(track.artist)}</div></div>`;
         btn.addEventListener('click', async () => {
           loadTrack(index);
           try {
@@ -570,9 +613,9 @@
         artistEl.textContent = t.artist;
         artistEl.classList.remove('text-red-500');
       }
-      if (coverEl) coverEl.textContent = t.cover;
+      applyCyanotypeSleeve(coverEl, t.file || t.title);
       if (miniTitle) miniTitle.textContent = t.title;
-      if (miniCover) miniCover.textContent = t.cover;
+      applyCyanotypeSleeve(miniCover, t.file || t.title);
 
       document.querySelectorAll('.music-track').forEach((tr, i) => {
         tr.classList.toggle('!bg-primary-500/10', i === index);
@@ -671,7 +714,7 @@
             const name = getSelectedStationName();
             if (titleEl) titleEl.textContent = '📻 ' + name;
             if (miniTitle) miniTitle.textContent = '📻 ' + name;
-            if (artistEl) artistEl.textContent = 'Live Stream';
+            if (artistEl) artistEl.textContent = '正在直播';
           } else {
             if (musicData.length === 0) return;
             if (!audio.src || audio.src === window.location.href) loadTrack(0);
@@ -788,23 +831,34 @@
     loadState();
     applyMiniPos();
     applyPanelPos();
-    audio.volume = volume ? parseFloat(volume.value) / 100 : 0.5;
+    if (audio) audio.volume = volume ? parseFloat(volume.value) / 100 : 0.5;
 
-    // 从 manifest 加载歌单（构建时由 scripts/generate-music-manifest.js 生成）
-    fetch(MANIFEST_URL)
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('Not ok'))))
-      .then((data) => (data && data.tracks ? data.tracks : []))
-      .then((tracks) => {
-        musicData = Array.isArray(tracks) ? tracks : [];
-        renderPlaylist();
-        if (musicData.length > 0) loadTrack(0);
-        else setEmptyState();
-      })
-      .catch(() => {
-        musicData = [];
-        setEmptyState();
-      });
-    setMode('local');
+    let playlistReady = null;
+    function ensurePlaylist() {
+      if (!playlistReady) {
+        playlistReady = fetch(MANIFEST_URL)
+          .then((r) => (r.ok ? r.json() : Promise.reject(new Error('Not ok'))))
+          .then((data) => (data && data.tracks ? data.tracks : []))
+          .then((tracks) => {
+            musicData = Array.isArray(tracks) ? tracks : [];
+            renderPlaylist();
+            if (musicData.length > 0) loadTrack(0);
+            else setEmptyState();
+            setMode('local');
+          })
+          .catch(() => {
+            musicData = [];
+            setEmptyState();
+          });
+      }
+      return playlistReady;
+    }
+
+    const openPanel = showPanel;
+    showPanel = async function () {
+      await ensurePlaylist();
+      openPanel();
+    };
 
     // 触摸拖拽支持（与鼠标共用同一套位置逻辑）
     function getClientPos(e) {
@@ -911,7 +965,7 @@
     .music-mode-btn {
       border: 1px solid rgb(var(--color-border));
       background: rgb(var(--color-bg-primary));
-      border-radius: 0.75rem;
+      border-radius: 0.125rem;
       padding: 0.45rem 0.6rem;
       font-size: 0.78rem;
       color: rgb(var(--color-text-secondary));
@@ -937,7 +991,7 @@
       top: 24px;
     }
 
-    /* 悬浮按钮与面板的定位：桌面右下，移动端留出 safe-area 并与其它浮动按钮错开 */
+    /* Studio dock stack (right rail): music at base */
     .music-fab {
       right: 1rem;
       bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
@@ -949,10 +1003,6 @@
       }
     }
     @media (max-width: 640px) {
-      .music-fab {
-        width: 3rem;
-        height: 3rem;
-      }
       .music-panel {
         width: min(320px, calc(100vw - 2rem));
         max-height: 80vh;

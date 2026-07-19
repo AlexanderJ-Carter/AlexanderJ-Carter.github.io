@@ -106,8 +106,9 @@ const posts = allPosts
 const categories = [...new Set(posts.map((p) => p.data.category))];
 ---
 
-<BaseLayout title={`${t.title} - Alexander Carter`} description={t.description}>
+<BaseLayout title={t.title} description={t.description}>
   <PageHero
+    folio="Folio III"
     kicker="Writing"
     title={t.title}
     description={t.intro}
@@ -137,15 +138,18 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
           </div>
         ) : (
           <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
-            {posts.map((post) => (
+            {posts.map((post, i) => (
               <li>
                 <article class="py-8">
                   <div class="flex flex-wrap items-center gap-3 mb-3">
+                    <span class="folio-mark">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
                     <span class="text-xs font-heading tracking-wide text-primary-600 dark:text-primary-400">
                       {post.data.category}
                     </span>
                     <time
-                      class="text-xs text-[rgb(var(--color-text-tertiary))]"
+                      class="meta-mono text-xs text-[rgb(var(--color-text-tertiary))]"
                       datetime={post.data.pubDate.toISOString()}
                     >
                       {t.publishedOn}{' '}

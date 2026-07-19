@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Darkroom Folio pass: cooler cyanotype paper tokens; contact-sheet / folio-mark / cyanotype-sleeve signatures; Studio Dock (Music + Search + BackToTop) on one right rail.
+- Sub-page polish: folio marks across About/Contact/Now/Uses/Friends/Reading/Support/Sitemap/Tools/Verify/Security/Time/Currency/Calendar/Units/QR; Fun widgets and tool pages drop emoji/card walls for paper panels.
+- Chrome polish: PoemHistory / HolidayGreeting / Toast / AmbientRadio aligned to editorial paper language; footer copy without heart emoji.
+- Quality pass: page-aware hreflang; async font load with fewer weights; MusicPlayer lazy-loads playlist; gallery/home `srcset`/`sizes`; writing `BlogPosting` JSON-LD + article OG; CSP `media-src` for radio; search/cookie dialog semantics; lightbox focus restore + trap; remove placeholder CF beacon & duplicate scroll bar.
+- Fun studio toys: Exposure Triangle + Daily Frame (local and Unsplash guest stills); expanded SomaFM live stations in MusicPlayer / AmbientRadio / music manifest.
+- Homepage hero effect budget reduced; Featured/Writing use contact-sheet frames and folio numbers.
+- Gallery contact-sheet grid (no category emoji); Music covers are CSS cyanotype sleeves (no emoji); Fun/legal widgets use paper panels.
+- Removed unused aurora / glitch / particle / liquid-glass / bento CSS; cleared purple/pink accent leftovers and Projects emoji badges.
+- Synced `AGENT.md` visual system to Darkroom Folio / cyanotype tokens.
 - Editorial redesign: photography-first homepage, Syne + Source Serif 4 / Noto Serif SC type system, cooler paper palette, teal accent (replacing purple).
 - Header navigation without emoji; quieter glass surfaces and editorial buttons.
 - Gallery / Writing / About / Projects page headers aligned to the new visual language.

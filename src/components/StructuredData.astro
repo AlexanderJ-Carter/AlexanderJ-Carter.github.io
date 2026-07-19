@@ -1,11 +1,12 @@
 ---
 interface Props {
   description: string;
+  extra?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { description } = Astro.props;
+const { description, extra } = Astro.props;
 
-const structuredData = JSON.stringify({
+const person = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Alexander James Carter',
@@ -14,7 +15,20 @@ const structuredData = JSON.stringify({
   sameAs: ['https://github.com/AlexanderJ-Carter'],
   description,
   jobTitle: 'Developer & Designer',
-});
+};
+
+const graph = extra
+  ? [person, ...(Array.isArray(extra) ? extra : [extra])]
+  : [person];
+
+const structuredData = JSON.stringify(
+  graph.length === 1
+    ? graph[0]
+    : {
+        '@context': 'https://schema.org',
+        '@graph': graph.map(({ ['@context']: _c, ...rest }) => rest),
+      }
+);
 ---
 
 <script type="application/ld+json" is:inline set:html={structuredData}></script>

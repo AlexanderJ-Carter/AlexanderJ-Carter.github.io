@@ -25,22 +25,22 @@ const accessibilityData: Record<Lang, any> = {
     featuresDesc: '我们的网站包含以下无障碍功能:',
     features: [
       {
-        icon: '⌨️',
+        icon: '01',
         title: '键盘导航',
         desc: '所有功能都可以通过键盘访问,无需使用鼠标',
       },
       {
-        icon: '👁️',
+        icon: '02',
         title: '高对比度',
         desc: '提供高对比度模式,确保文本清晰易读',
       },
       {
-        icon: '📱',
+        icon: '03',
         title: '响应式设计',
         desc: '适配各种屏幕尺寸和设备,支持缩放',
       },
       {
-        icon: '🗣️',
+        icon: '04',
         title: '屏幕阅读器',
         desc: '优化了ARIA标签,支持主流屏幕阅读器',
       },
@@ -72,22 +72,22 @@ const accessibilityData: Record<Lang, any> = {
     featuresDesc: '我們的網站包含以下無障礙功能:',
     features: [
       {
-        icon: '⌨️',
+        icon: '01',
         title: '鍵盤導航',
         desc: '所有功能都可以通過鍵盤訪問,無需使用滑鼠',
       },
       {
-        icon: '👁️',
+        icon: '02',
         title: '高對比度',
         desc: '提供高對比度模式,確保文本清晰易讀',
       },
       {
-        icon: '📱',
+        icon: '03',
         title: '響應式設計',
         desc: '適配各種螢幕尺寸和設備,支持縮放',
       },
       {
-        icon: '🗣️',
+        icon: '04',
         title: '螢幕閱讀器',
         desc: '優化了ARIA標籤,支持主流螢幕閱讀器',
       },
@@ -120,22 +120,22 @@ const accessibilityData: Record<Lang, any> = {
     featuresDesc: 'Our website includes the following accessibility features:',
     features: [
       {
-        icon: '⌨️',
+        icon: '01',
         title: 'Keyboard Navigation',
         desc: 'All functions are accessible via keyboard without using a mouse',
       },
       {
-        icon: '👁️',
+        icon: '02',
         title: 'High Contrast',
         desc: 'Provides high contrast mode to ensure text is clear and readable',
       },
       {
-        icon: '📱',
+        icon: '03',
         title: 'Responsive Design',
         desc: 'Adapts to various screen sizes and devices, supports zooming',
       },
       {
-        icon: '🗣️',
+        icon: '04',
         title: 'Screen Readers',
         desc: 'Optimized ARIA labels, supports mainstream screen readers',
       },
@@ -169,22 +169,22 @@ const accessibilityData: Record<Lang, any> = {
       "Notre site web comprend les fonctionnalités d'accessibilité suivantes :",
     features: [
       {
-        icon: '⌨️',
+        icon: '01',
         title: 'Navigation au clavier',
         desc: 'Toutes les fonctions sont accessibles via le clavier sans utiliser de souris',
       },
       {
-        icon: '👁️',
+        icon: '02',
         title: 'Contraste élevé',
         desc: 'Fournit un mode contraste élevé pour assurer que le texte est clair et lisible',
       },
       {
-        icon: '📱',
+        icon: '03',
         title: 'Design réactif',
         desc: "S'adapte à diverses tailles d'écran et appareils, prend en charge le zoom",
       },
       {
-        icon: '🗣️',
+        icon: '04',
         title: "Lecteurs d'écran",
         desc: "Étiquettes ARIA optimisées, prend en charge les principaux lecteurs d'écran",
       },
@@ -217,22 +217,22 @@ const accessibilityData: Record<Lang, any> = {
     featuresDesc: 'Наш веб-сайт включает следующие функции доступности:',
     features: [
       {
-        icon: '⌨️',
+        icon: '01',
         title: 'Клавиатурная навигация',
         desc: 'Все функции доступны с клавиатуры без использования мыши',
       },
       {
-        icon: '👁️',
+        icon: '02',
         title: 'Высокая контрастность',
         desc: 'Обеспечивает режим высокой контрастности для четкости и читаемости текста',
       },
       {
-        icon: '📱',
+        icon: '03',
         title: 'Адаптивный дизайн',
         desc: 'Адаптируется к различным размерам экранов и устройствам, поддерживает масштабирование',
       },
       {
-        icon: '🗣️',
+        icon: '04',
         title: 'Скринридеры',
         desc: 'Оптимизированные ARIA-метки, поддержка основных скринридеров',
       },
@@ -257,7 +257,7 @@ const accessibilityData: Record<Lang, any> = {
 const content = accessibilityData[lang as Lang] || accessibilityData['en-GB'];
 ---
 
-<BaseLayout title={`${content.title} - Alexander Carter`}>
+<BaseLayout title={content.title}>
   <div class="container mx-auto px-4 lg:px-8 max-w-3xl pt-28 md:pt-32">
     <a
       href={getLangPath('/')}
@@ -281,6 +281,7 @@ const content = accessibilityData[lang as Lang] || accessibilityData['en-GB'];
 
   <PageHero
     class="!pt-0"
+    folio="Folio Access"
     title={content.headerTitle}
     description={content.headerDesc}
   />
@@ -373,9 +374,9 @@ const content = accessibilityData[lang as Lang] || accessibilityData['en-GB'];
         <div class="grid md:grid-cols-2 gap-4 my-6">
           {
             content.features.map((feature: any) => (
-              <div class="p-4 bg-primary-500/10 rounded-lg">
+              <div class="p-4 bg-primary-500/10 rounded-sm">
                 <div class="flex items-center gap-3 mb-2">
-                  <span class="text-2xl">{feature.icon}</span>
+                  <span class="meta-mono text-sm tracking-widest text-primary-600 dark:text-primary-400">{feature.icon}</span>
                   <h3 class="text-lg font-bold mb-0">{feature.title}</h3>
                 </div>
                 <p class="text-sm mb-0">{feature.desc}</p>
@@ -421,14 +422,14 @@ const content = accessibilityData[lang as Lang] || accessibilityData['en-GB'];
           <button
             id="acc-contrast-toggle"
             type="button"
-            class="px-4 py-2 rounded-lg bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium"
+            class="px-4 py-2 rounded-sm bg-primary-500/15 hover:bg-primary-500/25 text-primary-600 dark:text-primary-400 font-medium"
           >
             {content.contrastBtn}
           </button>
           <button
             id="acc-motion-toggle"
             type="button"
-            class="px-4 py-2 rounded-lg bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]"
+            class="px-4 py-2 rounded-sm bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]"
           >
             {content.motionBtn}
           </button>

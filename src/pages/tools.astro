@@ -27,7 +27,7 @@ const copy = {
       { href: '/units', title: '单位换算', desc: '温度、长度、重量' },
       { href: '/qr', title: 'QR 生成', desc: '链接转二维码' },
       { href: '/now', title: 'Now', desc: '本地时间与快捷入口' },
-      { href: '/fun', title: '彩蛋', desc: '诗词灵感、小游戏与番茄钟' },
+      { href: '/fun', title: '彩蛋', desc: '今日一帧、曝光三角、小游戏与电台' },
     ],
     externalItems: [
       {
@@ -68,7 +68,7 @@ const copy = {
       { href: '/units', title: '單位換算', desc: '溫度、長度、重量' },
       { href: '/qr', title: 'QR 生成', desc: '連結轉二維碼' },
       { href: '/now', title: 'Now', desc: '本地時間與快捷入口' },
-      { href: '/fun', title: '彩蛋', desc: '詩詞靈感、小遊戲與番茄鐘' },
+      { href: '/fun', title: '彩蛋', desc: '今日一幀、曝光三角、小遊戲與電台' },
     ],
     externalItems: [
       {
@@ -122,7 +122,11 @@ const copy = {
       { href: '/units', title: 'Units', desc: 'Temperature, length, weight' },
       { href: '/qr', title: 'QR code', desc: 'URL to QR' },
       { href: '/now', title: 'Now', desc: 'Local time and quick links' },
-      { href: '/fun', title: 'Play', desc: 'Quotes, mini games and pomodoro' },
+      {
+        href: '/fun',
+        title: 'Play',
+        desc: 'Daily frame, exposure triangle, games and radio',
+      },
     ],
     externalItems: [
       {
@@ -167,7 +171,7 @@ const copy = {
       {
         href: '/fun',
         title: 'Surprises',
-        desc: 'Citations, mini-jeux et pomodoro',
+        desc: 'Cadre du jour, triangle d’exposition, jeux et radio',
       },
     ],
     externalItems: [
@@ -214,7 +218,11 @@ const copy = {
       { href: '/units', title: 'Единицы', desc: 'Температура, длина, вес' },
       { href: '/qr', title: 'QR', desc: 'Ссылка в QR' },
       { href: '/now', title: 'Now', desc: 'Локальное время и быстрые ссылки' },
-      { href: '/fun', title: 'Пасхалки', desc: 'Цитаты, мини-игры и помодоро' },
+      {
+        href: '/fun',
+        title: 'Пасхалки',
+        desc: 'Кадр дня, треугольник экспозиции, игры и радио',
+      },
     ],
     externalItems: [
       {
@@ -245,7 +253,7 @@ const t = copy[lang] || copy['zh-CN'];
 ---
 
 <BaseLayout title={t.title} description={t.description}>
-  <PageHero kicker={t.kicker} title={t.title} description={t.description} />
+  <PageHero folio="Folio Tools" kicker={t.kicker} title={t.title} description={t.description} />
 
   <section class="pb-20">
     <div class="container mx-auto px-4 lg:px-8 max-w-3xl">

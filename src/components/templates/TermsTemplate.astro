@@ -310,7 +310,7 @@ const tocTitle =
           : 'Contents';
 ---
 
-<BaseLayout title={`${content.title} - Alexander Carter`} showFooter={false}>
+<BaseLayout title={content.title} showFooter={false}>
   <div class="container mx-auto px-4 lg:px-8 max-w-3xl pt-28 md:pt-32">
     <a
       href={getLangPath('/')}
@@ -334,6 +334,7 @@ const tocTitle =
 
   <PageHero
     class="!pt-0"
+    folio="Folio Legal"
     title={content.headerTitle}
     note={content.lastUpdated}
   />
@@ -415,7 +416,7 @@ const tocTitle =
 
       <div class="flex flex-col lg:flex-row gap-8">
         <aside class="lg:w-1/4">
-          <div class="sticky top-24 glass-card p-5 rounded-xl">
+          <div class="sticky top-24 glass-card p-5">
             <h2
               class="text-sm uppercase tracking-wide font-semibold text-[rgb(var(--color-text-tertiary))] mb-3"
             >

@@ -269,29 +269,39 @@ src/pages/security/acknowledgments.astro  # 安全致谢页面
 
 ### 6.1 整体风格
 
-- **关键词**: 干净、现代、略带实验性
-- **核心原则**: 不喧宾夺主，核心仍是内容
-- **响应式**: 移动端优先，确保小屏体验良好
+- **关键词**: Darkroom Folio（暗房对开本）、摄影优先、编辑式排版
+- **核心原则**: 品牌与摄影画面优先；子页读成对开本而非组件墙
+- **响应式**: 移动端优先；右下角 Studio Dock 统一浮动控件
 
 ### 6.2 视觉系统
 
-**颜色**:
+**命题**: Cyanotype / Darkroom Folio — 冷石色纸面 + 蓝晒青墨
 
-- Primary: `#0ea5e9` (Sky Blue)
-- Accent: `#d946ef` (Fuchsia)
+**颜色** (CSS variables in `src/styles/global.css`):
+
+- Light paper: cool stone (`240 242 241`)
+- Dark ink: warm charcoal (`15 17 19`)
+- Accent: cyanotype teal `#3d7382` / `primary-500`
+- 禁止 purple / pink 装饰渐变
 
 **字体**:
 
-- Sans: Inter (主要文本)
-- Display: Playfair Display (装饰标题)
-- Heading: Syne (标题)
+- Body: Source Serif 4 + Noto Serif SC
+- Display / Heading: Syne
+- Meta: `.meta-mono` 系统等宽
 
-**效果**:
+**签名元素**:
 
-- 玻璃态卡片 (Glass morphism)
-- 渐变背景 + Aurora 极光效果
-- 3D 卡片悬浮效果
-- 粒子动画
+- Contact Sheet：细边框、帧号、胶片接触印样节奏
+- Folio Numbers：杂志式页码 / Plate 标记
+- Cyanotype Sleeves：Music 封面用确定性 CSS 几何蓝晒（无 emoji）
+- Studio Dock：Music / Search / BackToTop 同一右栏视觉语言
+
+**效果**（克制）:
+
+- 纸质颗粒 + 轻微 vignette
+- 纸质面板（`.glass-card` 仅作兼容别名）
+- 已删除 aurora / glitch / particle / liquid-glass / bento 遗留特效
 
 ### 6.3 动效原则
 
@@ -308,16 +318,16 @@ src/pages/security/acknowledgments.astro  # 安全致谢页面
 
 ### 7.1 主要页面
 
-| 页面   | 路径        | 说明                                 |
-| ------ | ----------- | ------------------------------------ |
-| 首页   | `/`         | Hero、统计、精选作品、名言、节日问候 |
-| 画廊   | `/gallery`  | 摄影作品展示，支持分类筛选           |
-| 关于   | `/about`    | 个人简介、技能、经历                 |
-| 联系   | `/contact`  | 联系方式                             |
-| 时间线 | `/timeline` | 个人成长时间线                       |
-| 项目   | `/projects` | 项目展示                             |
-| Now    | `/now`      | 当前状态（/uses 风格）               |
-| Uses   | `/uses`     | 使用的工具和设备                     |
+| 页面   | 路径        | 说明                                            |
+| ------ | ----------- | ----------------------------------------------- |
+| 首页   | `/`         | 全幅摄影 Hero、Featured、Studio、Focus、Writing |
+| 画廊   | `/gallery`  | 接触印样网格 + 灯箱，支持分类筛选               |
+| 关于   | `/about`    | 个人简介、研究与作品                            |
+| 联系   | `/contact`  | 联系方式                                        |
+| 时间线 | `/timeline` | 个人成长时间线                                  |
+| 项目   | `/projects` | 项目展示                                        |
+| Now    | `/now`      | 当前状态（/uses 风格）                          |
+| Uses   | `/uses`     | 使用的工具和设备                                |
 
 ### 7.2 工具页面
 

@@ -100,7 +100,30 @@ const formatDate = (date: Date) => {
 };
 ---
 
-<BaseLayout title={`${title} - Alexander Carter`} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  publishedTime={pubDate.toISOString()}
+  modifiedTime={(updatedDate ?? pubDate).toISOString()}
+  jsonLd={{
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    datePublished: pubDate.toISOString(),
+    dateModified: (updatedDate ?? pubDate).toISOString(),
+    author: {
+      '@type': 'Person',
+      name: 'Alexander James Carter',
+      url: 'https://alexander.xin',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': Astro.url.href,
+    },
+    inLanguage: lang,
+  }}
+>
   <article class="pt-32 pb-16 min-h-screen">
     <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
       <a
@@ -123,6 +146,7 @@ const formatDate = (date: Date) => {
       </a>
 
       <header class="mb-10">
+        <p class="folio-mark mb-3">Essay</p>
         <div class="flex items-center gap-3 mb-4">
           <span
             class="text-xs font-heading tracking-[0.15em] uppercase text-[rgb(var(--color-text-tertiary))]"

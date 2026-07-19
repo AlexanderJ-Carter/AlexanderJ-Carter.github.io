@@ -4,8 +4,8 @@
   "description": "Explore creativity, share life, capture moments. A personal portfolio website.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#667eea",
+  "theme_color": "#3d7382",
+  "background_color": "#f0f2f1",
   "orientation": "portrait-primary",
   "icons": [
     {

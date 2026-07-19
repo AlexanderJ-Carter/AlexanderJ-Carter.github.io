@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-17T14:04:03.445Z",
-  "totalTracks": 7,
+  "generatedAt": "2026-07-19T10:58:10.112Z",
+  "totalTracks": 13,
   "localTracks": 4,
-  "liveStreams": 3,
+  "liveStreams": 9,
   "tracks": [
     {
       "file": "/music/classical/castle-in-sky.flac",
@@ -36,25 +36,73 @@
       "file": "https://live.amperwave.net/direct/ppm-jazz24mp3-ibc1",
       "title": "Jazz24 爵士电台",
       "artist": "Jazz24 (Seattle)",
-      "cover": "🎷",
+      "cover": "",
       "type": "live",
-      "description": "24小时爵士音乐直播"
+      "description": "24小时爵士"
     },
     {
       "file": "https://wrti-live.streamguys1.com/classical-mp3",
       "title": "WRTI 古典音乐",
       "artist": "WRTI Philadelphia",
-      "cover": "🎻",
+      "cover": "",
       "type": "live",
-      "description": "古典音乐直播"
+      "description": "古典直播"
     },
     {
       "file": "https://wrti-live.streamguys1.com/jazz-mp3",
       "title": "WRTI 爵士音乐",
       "artist": "WRTI Philadelphia",
-      "cover": "🎺",
+      "cover": "",
       "type": "live",
-      "description": "爵士音乐直播"
+      "description": "爵士直播"
+    },
+    {
+      "file": "https://ice2.somafm.com/groovesalad-128-mp3",
+      "title": "SomaFM Groove Salad",
+      "artist": "SomaFM",
+      "cover": "",
+      "type": "live",
+      "description": "轻松氛围"
+    },
+    {
+      "file": "https://ice2.somafm.com/dronezone-128-mp3",
+      "title": "SomaFM Drone Zone",
+      "artist": "SomaFM",
+      "cover": "",
+      "type": "live",
+      "description": "空灵感"
+    },
+    {
+      "file": "https://ice2.somafm.com/spacestation-128-mp3",
+      "title": "SomaFM Space Station",
+      "artist": "SomaFM",
+      "cover": "",
+      "type": "live",
+      "description": "太空氛围"
+    },
+    {
+      "file": "https://ice2.somafm.com/lush-128-mp3",
+      "title": "SomaFM Lush",
+      "artist": "SomaFM",
+      "cover": "",
+      "type": "live",
+      "description": "柔和人声"
+    },
+    {
+      "file": "https://ice2.somafm.com/deepspaceone-128-mp3",
+      "title": "SomaFM Deep Space One",
+      "artist": "SomaFM",
+      "cover": "",
+      "type": "live",
+      "description": "深空氛围"
+    },
+    {
+      "file": "https://ice2.somafm.com/indiepop-128-mp3",
+      "title": "SomaFM Indie Pop Rocks",
+      "artist": "SomaFM",
+      "cover": "",
+      "type": "live",
+      "description": "独立流行"
     }
   ]
 }

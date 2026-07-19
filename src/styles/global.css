@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    /* Light — darkroom paper (stone, not cream) + cyanotype ink */
-    --color-bg-primary: 245 244 241;
-    --color-bg-secondary: 236 235 231;
-    --color-bg-accent: 226 225 220;
-    --color-text-primary: 26 28 30;
-    --color-text-secondary: 64 68 72;
-    --color-text-tertiary: 112 118 124;
-    --color-border: 208 206 201;
+    /* Light — cool darkroom stone + cyanotype ink (Darkroom Folio) */
+    --color-bg-primary: 240 242 241;
+    --color-bg-secondary: 230 233 232;
+    --color-bg-accent: 218 222 221;
+    --color-text-primary: 22 26 28;
+    --color-text-secondary: 58 64 68;
+    --color-text-tertiary: 104 112 118;
+    --color-border: 198 204 202;
     --color-accent: 61 115 130;
 
     --shadow-sm: 0 1px 2px 0 rgb(26 28 30 / 0.04);
@@ -30,8 +30,8 @@
         transparent 55%
       );
 
-    --glass-bg: rgba(245, 244, 241, 0.82);
-    --glass-border: rgba(26, 28, 30, 0.08);
+    --glass-bg: rgba(240, 242, 241, 0.88);
+    --glass-border: rgba(22, 26, 28, 0.08);
 
     --hero-spotlight: radial-gradient(
       ellipse 80% 60% at 50% 0%,
@@ -207,8 +207,9 @@
 @layer components {
   /* Paper panel — keep .glass-card name for legacy call sites */
   .glass-card {
-    background: rgb(var(--color-bg-secondary) / 0.55);
+    background: rgb(var(--color-bg-secondary) / 0.7);
     border: 1px solid rgb(var(--color-border));
+    border-left: 2px solid rgb(var(--color-accent) / 0.35);
     border-radius: 0.125rem;
     box-shadow: none;
     backdrop-filter: none;
@@ -217,14 +218,109 @@
       background-color 0.2s ease;
   }
   .glass-card:hover {
-    border-color: rgb(var(--color-accent) / 0.4);
-    background: rgb(var(--color-bg-secondary) / 0.72);
+    border-color: rgb(var(--color-accent) / 0.45);
+    border-left-color: rgb(var(--color-accent) / 0.7);
+    background: rgb(var(--color-bg-secondary) / 0.85);
   }
 
   .surface-panel {
     background: rgb(var(--color-bg-secondary) / 0.65);
     border: 1px solid rgb(var(--color-border));
     border-radius: 0.125rem;
+  }
+
+  /* Contact sheet — film proof frame */
+  .contact-sheet {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 0.125rem;
+    background: rgb(var(--color-bg-primary));
+    box-shadow: inset 0 0 0 3px rgb(var(--color-bg-primary));
+  }
+  .contact-sheet-frame {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    z-index: 2;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: rgb(255 255 255 / 0.75);
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.45);
+    pointer-events: none;
+  }
+  .dark .contact-sheet {
+    box-shadow: inset 0 0 0 3px rgb(var(--color-bg-secondary));
+  }
+
+  /* Folio page mark */
+  .folio-mark {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .folio-mark::before {
+    content: '— ';
+  }
+
+  /* Cyanotype album sleeve (Music covers) */
+  .cyanotype-sleeve {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.125rem;
+    background-color: rgb(var(--color-accent) / 0.18);
+    background-image:
+      radial-gradient(
+        circle at var(--cx, 30%) var(--cy, 28%),
+        rgb(var(--color-accent) / 0.55),
+        transparent 55%
+      ),
+      repeating-linear-gradient(
+        var(--angle, 135deg),
+        rgb(var(--color-accent) / 0.12) 0 2px,
+        transparent 2px 7px
+      ),
+      linear-gradient(
+        160deg,
+        rgb(var(--color-accent) / 0.35),
+        rgb(22 26 28 / 0.55)
+      );
+  }
+  .cyanotype-sleeve::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.25;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 96px 96px;
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+  }
+
+  /* Studio dock — unified right-rail chrome */
+  .studio-dock-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 0.125rem;
+    border: 1px solid rgb(var(--color-border));
+    background: rgb(var(--color-bg-primary));
+    color: rgb(var(--color-text-primary));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .studio-dock-btn:hover {
+    border-color: rgb(var(--color-accent) / 0.55);
+    color: rgb(var(--color-accent));
   }
 
   .section-kicker {
@@ -347,31 +443,6 @@
     border-bottom: 1px solid rgb(var(--color-border));
   }
 
-  /* Bento Grid */
-  .bento-grid {
-    @apply grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
-    @apply auto-rows-[200px];
-  }
-
-  .bento-item {
-    @apply rounded-2xl overflow-hidden;
-    @apply transform transition-all duration-500;
-    @apply hover:scale-[1.02] hover:shadow-2xl;
-    @apply relative cursor-pointer;
-  }
-
-  .bento-large {
-    @apply md:col-span-2 md:row-span-2;
-  }
-
-  .bento-tall {
-    @apply row-span-2;
-  }
-
-  .bento-wide {
-    @apply md:col-span-2;
-  }
-
   /* Fade in animations */
   .fade-in {
     animation: fadeInUp 0.8s ease-out forwards;
@@ -431,99 +502,6 @@
       transparent 70%
     );
     animation: none;
-  }
-
-  /* Aurora Borealis Effect */
-  .aurora {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .aurora::before,
-  .aurora::after {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 60%;
-    top: -10%;
-    left: -25%;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.35;
-    mix-blend-mode: screen;
-  }
-
-  .aurora::before {
-    background: linear-gradient(
-      135deg,
-      hsla(200, 100%, 60%, 0.4),
-      hsla(260, 80%, 60%, 0.3),
-      hsla(320, 80%, 60%, 0.2),
-      transparent
-    );
-    animation: aurora-drift 12s ease-in-out infinite alternate;
-  }
-
-  .aurora::after {
-    background: linear-gradient(
-      225deg,
-      hsla(170, 100%, 50%, 0.3),
-      hsla(220, 90%, 55%, 0.25),
-      hsla(280, 80%, 60%, 0.15),
-      transparent
-    );
-    animation: aurora-drift 16s ease-in-out infinite alternate-reverse;
-    animation-delay: -4s;
-  }
-
-  .dark .aurora::before,
-  .dark .aurora::after {
-    opacity: 0.2;
-  }
-
-  @keyframes aurora-drift {
-    0% {
-      transform: translateX(-15%) translateY(0%) rotate(-5deg) scale(1);
-    }
-    33% {
-      transform: translateX(5%) translateY(-8%) rotate(2deg) scale(1.05);
-    }
-    66% {
-      transform: translateX(-5%) translateY(5%) rotate(-3deg) scale(0.98);
-    }
-    100% {
-      transform: translateX(10%) translateY(-3%) rotate(4deg) scale(1.02);
-    }
-  }
-
-  /* Particle Animation */
-  .particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    animation: float-particle 6s ease-in-out infinite;
-  }
-
-  @keyframes float-particle {
-    0%,
-    100% {
-      transform: translateY(0) translateX(0);
-      opacity: 0;
-    }
-    10% {
-      opacity: 1;
-    }
-    90% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-100vh) translateX(20px);
-      opacity: 0;
-    }
   }
 
   /* Scroll Indicator */
@@ -1279,167 +1257,6 @@ select:valid:not(:placeholder-shown) {
 
 .card-3d-content {
   transform: translateZ(30px);
-}
-
-/* ========================================
-   Liquid Glass Effect
-   ======================================== */
-.liquid-glass {
-  position: relative;
-  overflow: hidden;
-}
-
-.liquid-glass::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.1) 50%,
-    transparent 70%
-  );
-  transform: rotate(45deg);
-  animation: liquidShine 3s ease-in-out infinite;
-}
-
-@keyframes liquidShine {
-  0%,
-  100% {
-    transform: rotate(45deg) translateX(-100%);
-  }
-  50% {
-    transform: rotate(45deg) translateX(100%);
-  }
-}
-
-/* ========================================
-   Glitch Effect (Cyberpunk theme)
-   ======================================== */
-.glitch {
-  position: relative;
-}
-
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.glitch::before {
-  animation: glitch-1 2s infinite linear alternate-reverse;
-  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-  color: #ff6b6b;
-}
-
-.glitch::after {
-  animation: glitch-2 3s infinite linear alternate-reverse;
-  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-  color: #4ecdc4;
-}
-
-@keyframes glitch-1 {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  20% {
-    transform: translateX(-2px);
-  }
-  40% {
-    transform: translateX(2px);
-  }
-  60% {
-    transform: translateX(-1px);
-  }
-  80% {
-    transform: translateX(1px);
-  }
-}
-
-@keyframes glitch-2 {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  20% {
-    transform: translateX(2px);
-  }
-  40% {
-    transform: translateX(-2px);
-  }
-  60% {
-    transform: translateX(1px);
-  }
-  80% {
-    transform: translateX(-1px);
-  }
-}
-
-/* ========================================
-   Bento Grid System
-   ======================================== */
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(120px, auto);
-  gap: 1rem;
-}
-
-@media (max-width: 1024px) {
-  .bento-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .bento-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.bento-item-large {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
-.bento-item-wide {
-  grid-column: span 2;
-}
-
-.bento-item-tall {
-  grid-row: span 2;
-}
-
-.bento-item-full {
-  grid-column: span 4;
-}
-
-@media (max-width: 1024px) {
-  .bento-item-large,
-  .bento-item-wide {
-    grid-column: span 2;
-  }
-  .bento-item-full {
-    grid-column: span 2;
-  }
-}
-
-@media (max-width: 640px) {
-  .bento-item-large,
-  .bento-item-wide,
-  .bento-item-tall,
-  .bento-item-full {
-    grid-column: span 1;
-    grid-row: span 1;
-  }
 }
 
 /* ── Editorial micro-interactions ─────────────────────────────────────────── */

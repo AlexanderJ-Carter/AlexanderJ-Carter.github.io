@@ -35,7 +35,7 @@ export const timelineData: Record<
         description:
           '在电子信息专业继续深造，维护个人网站，在摄影和开发之间寻找平衡。',
         icon: '🚀',
-        color: 'from-purple-500 to-pink-500',
+        color: 'from-primary-600 to-primary-400',
         tags: ['在读', '开发', '摄影'],
       },
       {
@@ -44,7 +44,7 @@ export const timelineData: Record<
         description:
           '使用 Astro 框架与 Tailwind CSS 完全重构个人网站，引入多语言支持与无障碍优化。',
         icon: '🎨',
-        color: 'from-blue-500 to-purple-500',
+        color: 'from-primary-700 to-primary-500',
         tags: ['Astro', 'Tailwind', 'i18n'],
       },
       {
@@ -91,7 +91,7 @@ export const timelineData: Record<
         description:
           '在電子資訊專業繼續深造，維護個人網站，在攝影和開發之間尋找平衡。',
         icon: '🚀',
-        color: 'from-purple-500 to-pink-500',
+        color: 'from-primary-600 to-primary-400',
         tags: ['在讀', '開發', '攝影'],
       },
       {
@@ -100,7 +100,7 @@ export const timelineData: Record<
         description:
           '使用 Astro 框架與 Tailwind CSS 完全重構個人網站，引入多語言支援與無障礙優化。',
         icon: '🎨',
-        color: 'from-blue-500 to-purple-500',
+        color: 'from-primary-700 to-primary-500',
         tags: ['Astro', 'Tailwind', 'i18n'],
       },
       {
@@ -147,7 +147,7 @@ export const timelineData: Record<
         description:
           'Studying electronics at university, maintaining this site, finding balance between photography and development.',
         icon: '🚀',
-        color: 'from-purple-500 to-pink-500',
+        color: 'from-primary-600 to-primary-400',
         tags: ['Studying', 'Dev', 'Photography'],
       },
       {
@@ -156,7 +156,7 @@ export const timelineData: Record<
         description:
           'Completely rebuilt the site with Astro and Tailwind CSS, adding multilingual support and accessibility improvements.',
         icon: '🎨',
-        color: 'from-blue-500 to-purple-500',
+        color: 'from-primary-700 to-primary-500',
         tags: ['Astro', 'Tailwind', 'i18n'],
       },
       {
@@ -203,7 +203,7 @@ export const timelineData: Record<
         description:
           'Études en électronique, maintenance du site, équilibre entre photographie et développement.',
         icon: '🚀',
-        color: 'from-purple-500 to-pink-500',
+        color: 'from-primary-600 to-primary-400',
         tags: ['Études', 'Dev', 'Photo'],
       },
       {
@@ -212,7 +212,7 @@ export const timelineData: Record<
         description:
           "Site entièrement reconstruit avec Astro et Tailwind CSS, support multilingue et améliorations d'accessibilité.",
         icon: '🎨',
-        color: 'from-blue-500 to-purple-500',
+        color: 'from-primary-700 to-primary-500',
         tags: ['Astro', 'Tailwind', 'i18n'],
       },
       {
@@ -259,7 +259,7 @@ export const timelineData: Record<
         description:
           'Учёба по направлению электроники, поддержка сайта, баланс между фотографией и разработкой.',
         icon: '🚀',
-        color: 'from-purple-500 to-pink-500',
+        color: 'from-primary-600 to-primary-400',
         tags: ['Учёба', 'Разработка', 'Фото'],
       },
       {
@@ -268,7 +268,7 @@ export const timelineData: Record<
         description:
           'Сайт полностью пересобран на Astro и Tailwind CSS, добавлена мультиязычность и улучшена доступность.',
         icon: '🎨',
-        color: 'from-blue-500 to-purple-500',
+        color: 'from-primary-700 to-primary-500',
         tags: ['Astro', 'Tailwind', 'i18n'],
       },
       {

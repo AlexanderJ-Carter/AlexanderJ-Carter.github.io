@@ -66,8 +66,9 @@ const t: Record<Lang, any> = {
 const content = t[lang as Lang] || t['en-GB'];
 ---
 
-<BaseLayout title={`${content.title} - Alexander Carter`}>
+<BaseLayout title={content.title}>
   <PageHero
+    folio="Folio QR"
     kicker={content.tag}
     title={content.headerTitle}
     description={content.headerDesc}
@@ -75,7 +76,7 @@ const content = t[lang as Lang] || t['en-GB'];
 
   <section class="py-12 container mx-auto px-4 lg:px-8 max-w-xl">
     <div
-      class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 rounded-xl reveal"
+      class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 rounded-sm reveal"
     >
       <label
         class="block text-sm font-medium text-[rgb(var(--color-text-primary))] mb-2"
@@ -86,12 +87,12 @@ const content = t[lang as Lang] || t['en-GB'];
       <input
         type="text"
         id="qr-input"
-        class="w-full px-4 py-3 rounded-xl bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none mb-4"
+        class="w-full px-4 py-3 rounded-sm bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none mb-4"
         placeholder={content.placeholder}
         value="https://alexander.xin"
       />
       <div
-        class="flex justify-center p-6 bg-white dark:bg-gray-800 rounded-xl border border-[rgb(var(--color-border))]"
+        class="flex justify-center p-6 bg-white dark:bg-gray-800 rounded-sm border border-[rgb(var(--color-border))]"
       >
         <img
           id="qr-image"

@@ -1,0 +1,204 @@
+---
+/**
+ * Exposure triangle calculator — aperture / shutter / ISO equivalents.
+ */
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'zh-CN' } = Astro.props;
+
+const copy = {
+  'zh-CN': {
+    folio: 'Plate EV',
+    title: '曝光三角',
+    subtitle: '调光圈、快门、ISO，看等效曝光怎么变。',
+    aperture: '光圈',
+    shutter: '快门',
+    iso: '感光度',
+    ev: '曝光值',
+    tip: '提示',
+    tipBody: '光圈开大一档，快门大约要快一倍，才能保持相近亮度。',
+  },
+  'zh-TW': {
+    folio: 'Plate EV',
+    title: '曝光三角',
+    subtitle: '調光圈、快門、ISO，看等效曝光怎麼變。',
+    aperture: '光圈',
+    shutter: '快門',
+    iso: '感光度',
+    ev: '曝光值',
+    tip: '提示',
+    tipBody: '光圈開大一檔，快門大約要快一倍，才能保持相近亮度。',
+  },
+  'en-GB': {
+    folio: 'Plate EV',
+    title: 'Exposure Triangle',
+    subtitle: 'Tweak aperture, shutter and ISO to see equivalent exposure.',
+    aperture: 'Aperture',
+    shutter: 'Shutter',
+    iso: 'ISO',
+    ev: 'Exposure value',
+    tip: 'Tip',
+    tipBody:
+      'Open one stop of aperture, and you usually need a shutter about twice as fast for a similar look.',
+  },
+  fr: {
+    folio: 'Plate EV',
+    title: "Triangle d'exposition",
+    subtitle: 'Ajustez ouverture, vitesse et ISO pour voir l’équivalent.',
+    aperture: 'Ouverture',
+    shutter: 'Vitesse',
+    iso: 'ISO',
+    ev: "Valeur d'exposition",
+    tip: 'Astuce',
+    tipBody:
+      'Ouvrez d’un cran : il faut souvent une vitesse environ deux fois plus rapide.',
+  },
+  ru: {
+    folio: 'Plate EV',
+    title: 'Треугольник экспозиции',
+    subtitle: 'Крутите диафрагму, выдержку и ISO — смотрите эквивалент.',
+    aperture: 'Диафрагма',
+    shutter: 'Выдержка',
+    iso: 'ISO',
+    ev: 'EV',
+    tip: 'Подсказка',
+    tipBody:
+      'Открыли диафрагму на ступень — выдержку обычно нужно ускорить примерно вдвое.',
+  },
+} as const;
+
+const t = copy[lang as keyof typeof copy] || copy['en-GB'];
+
+const apertures = ['1.4', '2', '2.8', '4', '5.6', '8', '11', '16', '22'];
+const shutters = [
+  { v: 1 / 4000, label: '1/4000' },
+  { v: 1 / 2000, label: '1/2000' },
+  { v: 1 / 1000, label: '1/1000' },
+  { v: 1 / 500, label: '1/500' },
+  { v: 1 / 250, label: '1/250' },
+  { v: 1 / 125, label: '1/125' },
+  { v: 1 / 60, label: '1/60' },
+  { v: 1 / 30, label: '1/30' },
+  { v: 1 / 15, label: '1/15' },
+  { v: 1 / 8, label: '1/8' },
+  { v: 1 / 4, label: '1/4' },
+  { v: 0.5, label: '1/2' },
+  { v: 1, label: '1″' },
+  { v: 2, label: '2″' },
+];
+const isos = ['100', '200', '400', '800', '1600', '3200', '6400'];
+---
+
+<article class="glass-card p-6 reveal" id="exposure-triangle">
+  <p class="folio-mark mb-2">{t.folio}</p>
+  <h2 class="font-heading text-xl font-bold mb-1">{t.title}</h2>
+  <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-5">
+    {t.subtitle}
+  </p>
+
+  <div class="space-y-4">
+    <label class="block">
+      <span class="meta-mono text-xs text-[rgb(var(--color-text-tertiary))]"
+        >{t.aperture}</span
+      >
+      <select
+        id="ev-aperture"
+        class="mt-1 w-full rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm"
+      >
+        {
+          apertures.map((a) => (
+            <option value={a} selected={a === '5.6'}>
+              f/{a}
+            </option>
+          ))
+        }
+      </select>
+    </label>
+
+    <label class="block">
+      <span class="meta-mono text-xs text-[rgb(var(--color-text-tertiary))]"
+        >{t.shutter}</span
+      >
+      <select
+        id="ev-shutter"
+        class="mt-1 w-full rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm"
+      >
+        {
+          shutters.map((s) => (
+            <option value={s.v} selected={s.label === '1/125'}>
+              {s.label}
+            </option>
+          ))
+        }
+      </select>
+    </label>
+
+    <label class="block">
+      <span class="meta-mono text-xs text-[rgb(var(--color-text-tertiary))]"
+        >{t.iso}</span
+      >
+      <select
+        id="ev-iso"
+        class="mt-1 w-full rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm"
+      >
+        {
+          isos.map((i) => (
+            <option value={i} selected={i === '100'}>
+              ISO {i}
+            </option>
+          ))
+        }
+      </select>
+    </label>
+  </div>
+
+  <div
+    class="mt-5 border-t border-[rgb(var(--color-border))] pt-4 flex items-baseline justify-between gap-3"
+  >
+    <span class="meta-mono text-xs text-[rgb(var(--color-text-tertiary))]"
+      >{t.ev}</span
+    >
+    <span
+      id="ev-value"
+      class="font-heading text-3xl font-bold text-primary-600 dark:text-primary-400 tabular-nums"
+      >—</span
+    >
+  </div>
+  <p class="mt-3 text-xs text-[rgb(var(--color-text-tertiary))] leading-relaxed">
+    <span class="font-heading font-semibold text-[rgb(var(--color-text-secondary))]"
+      >{t.tip}</span
+    >
+    {' '}{t.tipBody}
+  </p>
+</article>
+
+<script is:inline>
+  (function () {
+    const aperture = document.getElementById('ev-aperture');
+    const shutter = document.getElementById('ev-shutter');
+    const iso = document.getElementById('ev-iso');
+    const out = document.getElementById('ev-value');
+    if (!aperture || !shutter || !iso || !out) return;
+
+    function calc() {
+      const N = parseFloat(aperture.value);
+      const t = parseFloat(shutter.value);
+      const S = parseFloat(iso.value);
+      if (!(N > 0 && t > 0 && S > 0)) {
+        out.textContent = '—';
+        return;
+      }
+      // EV100 = log2(N^2 / t); then shift by ISO
+      const ev100 = Math.log2((N * N) / t);
+      const ev = ev100 - Math.log2(S / 100);
+      out.textContent = (Math.round(ev * 10) / 10).toFixed(1);
+    }
+
+    aperture.addEventListener('change', calc);
+    shutter.addEventListener('change', calc);
+    iso.addEventListener('change', calc);
+    calc();
+  })();
+</script>

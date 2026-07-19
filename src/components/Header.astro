@@ -204,9 +204,9 @@ const mainNavItems: NavItem[] = [
   class="fixed top-0 left-0 right-0 z-50 nav-glass transition-all duration-300"
   id="header"
 >
-  <div class="scroll-indicator" id="scroll-indicator"></div>
+  <div class="scroll-indicator" id="scroll-indicator" hidden aria-hidden="true"></div>
 
-  <nav class="relative z-50 container mx-auto px-4 lg:px-8 py-4">
+  <nav class="relative z-50 container mx-auto px-4 lg:px-8 py-4" aria-label={lang === 'zh-CN' ? '主导航' : 'Main'}>
     <div class="flex items-center justify-between">
       <!-- Logo -->
       <a
@@ -215,14 +215,14 @@ const mainNavItems: NavItem[] = [
       >
         <img
           src="/img/branding/logo-96.webp"
-          alt="Logo"
+          alt={lang === 'zh-CN' ? '站点标志' : 'Site logo'}
           width="40"
           height="40"
           class="w-10 h-10 rounded-full opacity-90 group-hover:opacity-100 transition-opacity duration-200 dark:hidden"
         />
         <img
           src="/img/branding/logo-dark-96.webp"
-          alt="Logo"
+          alt={lang === 'zh-CN' ? '站点标志' : 'Site logo'}
           width="40"
           height="40"
           class="w-10 h-10 rounded-full opacity-90 group-hover:opacity-100 transition-opacity duration-200 hidden dark:block"
@@ -850,13 +850,7 @@ const mainNavItems: NavItem[] = [
   let headerScrollTicking = false;
   function updateHeaderOnScroll() {
     const header = document.getElementById('header');
-    const indicator = document.getElementById('scroll-indicator');
     const scrollTop = window.scrollY;
-    const docHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-
-    if (indicator) indicator.style.width = `${scrollPercent}%`;
 
     if (header) {
       if (scrollTop > 24) {

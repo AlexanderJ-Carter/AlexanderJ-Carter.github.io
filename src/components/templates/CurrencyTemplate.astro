@@ -47,22 +47,22 @@ const currencyData: Record<Lang, any> = {
     tipsDesc: '实用建议，助您更好地管理外汇',
     tips: [
       {
-        icon: '🏦',
+        icon: '',
         title: '银行牌价差异',
         desc: '各银行现钞买入价和现汇买入价通常不同，现钞价会略低，建议提前对比。',
       },
       {
-        icon: '⏰',
+        icon: '',
         title: '最佳兑换时机',
         desc: '汇率波动较大时，可分批兑换降低风险。出国前1-2周关注汇率走势为佳。',
       },
       {
-        icon: '📱',
+        icon: '',
         title: '手机银行方便快捷',
         desc: '使用手机银行结售汇通常手续费更低，且可以7×24小时操作，到账快。',
       },
       {
-        icon: '💳',
+        icon: '',
         title: '境外消费建议',
         desc: '信用卡境外消费通常按当日汇率结算，小额高频消费可能产生额外手续费。',
       },
@@ -107,22 +107,22 @@ const currencyData: Record<Lang, any> = {
     tipsDesc: '實用建議，助您更好地管理外匯',
     tips: [
       {
-        icon: '🏦',
+        icon: '',
         title: '銀行牌價差異',
         desc: '各銀行現鈔買入價和現匯買入價通常不同，現鈔價會略低，建議提前比價。',
       },
       {
-        icon: '⏰',
+        icon: '',
         title: '最佳兌換時機',
         desc: '匯率波動較大時，可分批兌換降低風險。出國前1-2週關注匯率走勢為佳。',
       },
       {
-        icon: '📱',
+        icon: '',
         title: '手機銀行方便快捷',
         desc: '使用手機銀行結售匯通常手續費更低，且可以7×24小時操作，到帳快。',
       },
       {
-        icon: '💳',
+        icon: '',
         title: '境外消費建議',
         desc: '信用卡境外消費通常按當日匯率結算，小額高頻消費可能產生額外手續費。',
       },
@@ -168,22 +168,22 @@ const currencyData: Record<Lang, any> = {
     tipsDesc: 'Practical advice to help you manage foreign exchange better',
     tips: [
       {
-        icon: '🏦',
+        icon: '',
         title: 'Bank Rate Differences',
         desc: 'Cash buying rates and transfer buying rates differ. Cash rates are usually lower.',
       },
       {
-        icon: '⏰',
+        icon: '',
         title: 'Best Time to Exchange',
         desc: 'Monitor rates 1-2 weeks before travel. Split large exchanges to reduce risk.',
       },
       {
-        icon: '📱',
+        icon: '',
         title: 'Mobile Banking Benefits',
         desc: 'Lower fees and 24/7 availability. Most transactions complete instantly.',
       },
       {
-        icon: '💳',
+        icon: '',
         title: 'Overseas Spending',
         desc: 'Credit cards use daily rates. Watch for fees on small frequent transactions.',
       },
@@ -230,22 +230,22 @@ const currencyData: Record<Lang, any> = {
     tipsDesc: 'Conseils pratiques pour mieux gérer vos devises',
     tips: [
       {
-        icon: '🏦',
+        icon: '',
         title: 'Différences bancaires',
         desc: "Les taux d'achat en espèces et virements diffèrent. Les espèces sont généralement plus bas.",
       },
       {
-        icon: '⏰',
+        icon: '',
         title: 'Meilleur moment pour échanger',
         desc: 'Surveillez les taux 1-2 semaines avant le voyage. Divisez les gros montants.',
       },
       {
-        icon: '📱',
+        icon: '',
         title: 'Avantages bancaires mobiles',
         desc: 'Frais réduits et disponibilité 24h/24. La plupart des transactions sont instantanées.',
       },
       {
-        icon: '💳',
+        icon: '',
         title: "Dépenses à l'étranger",
         desc: 'Les cartes utilisent les taux quotidiens. Attention aux frais sur petites transactions.',
       },
@@ -293,22 +293,22 @@ const currencyData: Record<Lang, any> = {
     tipsDesc: 'Практические советы для лучшего управления валютой',
     tips: [
       {
-        icon: '🏦',
+        icon: '',
         title: 'Разница банковских курсов',
         desc: 'Курсы покупки наличных и переводов различаются. Наличные обычно ниже.',
       },
       {
-        icon: '⏰',
+        icon: '',
         title: 'Лучшее время обмена',
         desc: 'Следите за курсами за 1-2 недели до поездки. Разделяйте крупные суммы.',
       },
       {
-        icon: '📱',
+        icon: '',
         title: 'Преимущества мобильного банка',
         desc: 'Более низкие комиссии и доступность 24/7. Большинство операций мгновенны.',
       },
       {
-        icon: '💳',
+        icon: '',
         title: 'Траты за границей',
         desc: 'Карты используют дневные курсы. Остерегайтесь комиссий за мелкие операции.',
       },
@@ -319,8 +319,8 @@ const currencyData: Record<Lang, any> = {
 const content = currencyData[lang as Lang] || currencyData['en-GB'];
 ---
 
-<BaseLayout title={`${content.title} - Alexander Carter`}>
-  <PageHero title={content.title} description={content.headerDesc} />
+<BaseLayout title={content.title}>
+  <PageHero folio="Folio FX" kicker="Tools" title={content.title} description={content.headerDesc} />
 
   <!-- Currency Rates Section -->
   <section class="py-16 container mx-auto px-4 lg:px-8">
@@ -364,7 +364,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
         </div>
         <button
           id="refresh-rates"
-          class="px-6 py-3 rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] font-semibold hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-2"
+          class="px-6 py-3 rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] text-[rgb(var(--color-text-primary))] font-semibold hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-2"
         >
           <svg
             id="refresh-icon"
@@ -389,7 +389,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
       >
         <!-- Rates will be inserted here -->
         <div
-          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 animate-pulse rounded-xl"
+          class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 animate-pulse rounded-sm"
         >
           <div class="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4">
           </div>
@@ -410,7 +410,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
     <!-- Converter -->
     <div class="max-w-3xl mx-auto mb-16">
       <div
-        class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 md:p-10 rounded-xl"
+        class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-8 md:p-10 rounded-sm"
       >
         <div class="mb-6">
           <h3 class="text-2xl font-heading font-bold mb-2">
@@ -433,7 +433,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
               min="0"
               step="0.01"
               placeholder="100"
-              class="w-full px-4 py-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] text-lg focus:border-primary-500 focus:outline-none transition-colors"
+              class="w-full px-4 py-3 rounded-sm bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] text-lg focus:border-primary-500 focus:outline-none transition-colors"
             />
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -444,7 +444,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
               >
               <select
                 id="from-currency"
-                class="w-full px-4 py-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none transition-colors"
+                class="w-full px-4 py-3 rounded-sm bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none transition-colors"
               >
                 <option value="CNY" selected>CNY - 人民币 ¥</option>
                 <option value="USD">USD - 美元 $</option>
@@ -464,7 +464,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
               >
               <select
                 id="to-currency"
-                class="w-full px-4 py-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none transition-colors"
+                class="w-full px-4 py-3 rounded-sm bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-primary-500 focus:outline-none transition-colors"
               >
                 <option value="USD" selected>USD - 美元 $</option>
                 <option value="EUR">EUR - 欧元 €</option>
@@ -500,7 +500,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
               placeholder={content.customRatePlaceholder}
               step="0.0001"
               min="0"
-              class="w-full px-4 py-3 rounded-lg bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-accent-500 focus:outline-none transition-colors"
+              class="w-full px-4 py-3 rounded-sm bg-[rgb(var(--color-bg-secondary))] border-2 border-[rgb(var(--color-border))] text-[rgb(var(--color-text-primary))] focus:border-accent-500 focus:outline-none transition-colors"
             />
             <p
               class="text-xs text-[rgb(var(--color-text-tertiary))] mt-1 flex items-center gap-1"
@@ -523,7 +523,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
           <button
             type="button"
             id="convert-btn"
-            class="w-full py-4 border border-[rgb(var(--color-text-primary))] bg-[rgb(var(--color-text-primary))] text-[rgb(var(--color-bg-primary))] rounded-lg hover:opacity-90 transition-opacity font-bold text-lg flex items-center justify-center gap-2"
+            class="w-full py-4 border border-[rgb(var(--color-text-primary))] bg-[rgb(var(--color-text-primary))] text-[rgb(var(--color-bg-primary))] rounded-sm hover:opacity-90 transition-opacity font-bold text-lg flex items-center justify-center gap-2"
           >
             <svg
               class="w-6 h-6"
@@ -541,7 +541,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
             {content.convert}
           </button>
           <div
-            class="mt-6 p-8 bg-[rgb(var(--color-bg-secondary))] rounded-xl text-center border border-[rgb(var(--color-border))]"
+            class="mt-6 p-8 bg-[rgb(var(--color-bg-secondary))] rounded-sm text-center border border-[rgb(var(--color-border))]"
           >
             <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-3">
               {content.result}
@@ -574,20 +574,16 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {
-          content.tips.map((tip: any) => (
-            <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl">
-              <div class="flex items-start gap-4">
-                <div class="text-4xl flex-shrink-0 group-hover:scale-110 transition-transform">
-                  {tip.icon}
-                </div>
-                <div>
-                  <h4 class="text-lg font-bold mb-2 text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 transition-colors">
+          content.tips.map((tip: any, i: number) => (
+            <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-sm">
+              <p class="folio-mark mb-3">{String(i + 1).padStart(2, '0')}</p>
+              <div>
+                  <h4 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
                     {tip.title}
                   </h4>
                   <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
                     {tip.desc}
                   </p>
-                </div>
               </div>
             </div>
           ))
@@ -698,7 +694,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
 
             const card = document.createElement('div');
             card.className =
-              'border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-xl hover:bg-[rgb(var(--color-bg-secondary))] transition-colors cursor-pointer group';
+              'border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-sm hover:bg-[rgb(var(--color-bg-secondary))] transition-colors cursor-pointer group';
             card.innerHTML = `
                             <div class="flex justify-between items-start mb-3">
                                 <div>

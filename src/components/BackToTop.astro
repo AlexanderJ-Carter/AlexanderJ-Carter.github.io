@@ -16,7 +16,7 @@ const ariaLabel = ariaLabels[lang] ?? 'Back to top';
   id="back-to-top"
   type="button"
   aria-label={ariaLabel}
-  class="fixed z-40 w-11 h-11 min-w-[44px] min-h-[44px] rounded-sm bg-primary-600 text-white border border-primary-600 opacity-0 invisible translate-y-4 transition-[opacity,transform,visibility] duration-300 ease-out focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))] hover:bg-primary-700 active:bg-primary-800"
+  class="studio-dock-btn fixed z-40 shadow-sm !bg-primary-600 !text-white !border-primary-600 opacity-0 invisible translate-y-4 transition-[opacity,transform,visibility] duration-300 ease-out focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))] hover:!bg-primary-700 active:!bg-primary-800"
 >
   <svg
     class="w-5 h-5 mx-auto"
@@ -75,16 +75,23 @@ const ariaLabel = ariaLabels[lang] ?? 'Back to top';
     transition-delay: 0s;
   }
 
-  /* Right stack: above music FAB (~bottom-6) and share (~bottom-20) */
+  /* Studio dock: above search + music */
   #back-to-top {
-    right: 1.5rem;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 10rem);
+    right: 1rem;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 8.25rem);
+  }
+
+  @media (min-width: 768px) {
+    #back-to-top {
+      right: 1.5rem;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 8.5rem);
+    }
   }
 
   @media (max-width: 640px) {
     #back-to-top {
       right: 1rem;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 9rem);
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 8.25rem);
     }
   }
 

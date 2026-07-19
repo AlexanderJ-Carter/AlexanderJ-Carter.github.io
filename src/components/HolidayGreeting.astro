@@ -21,16 +21,14 @@
     >
 
     <div
-      class="inline-block align-bottom glass-card rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-fade-in-up"
+      class="inline-block align-bottom glass-card text-left overflow-hidden transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full animate-fade-in-up"
     >
       <!-- Modal Header -->
       <div class="p-6 pb-4 text-center">
-        <div id="holiday-icon" class="text-6xl mb-4 animate-bounce-slow">
-          🎉
-        </div>
+        <p id="holiday-icon" class="folio-mark mb-4"></p>
         <h2
           id="holiday-title"
-          class="text-3xl font-display font-bold mb-2 gradient-text"
+          class="text-3xl font-display font-bold mb-2 font-heading"
         >
           节日快乐!
         </h2>
@@ -47,21 +45,21 @@
 
         <div id="holiday-wishes" class="space-y-3 mb-6">
           <div
-            class="flex items-center gap-3 p-3 rounded-lg bg-[rgb(var(--color-bg-accent))] hover:scale-105 transition-transform"
+            class="flex items-center gap-3 p-3 rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-secondary))]"
           >
-            <span class="text-2xl">❤️</span>
+            <span class="folio-mark !mb-0">01</span>
             <span class="font-medium">身体健康</span>
           </div>
           <div
-            class="flex items-center gap-3 p-3 rounded-lg bg-[rgb(var(--color-bg-accent))] hover:scale-105 transition-transform"
+            class="flex items-center gap-3 p-3 rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-secondary))]"
           >
-            <span class="text-2xl">⭐</span>
+            <span class="folio-mark !mb-0">02</span>
             <span class="font-medium">万事如意</span>
           </div>
           <div
-            class="flex items-center gap-3 p-3 rounded-lg bg-[rgb(var(--color-bg-accent))] hover:scale-105 transition-transform"
+            class="flex items-center gap-3 p-3 rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-secondary))]"
           >
-            <span class="text-2xl">😊</span>
+            <span class="folio-mark !mb-0">03</span>
             <span class="font-medium">阖家欢乐</span>
           </div>
         </div>
@@ -71,16 +69,16 @@
       <div class="px-6 pb-6 flex gap-3">
         <button
           id="accept-greeting-btn"
-          class="flex-1 px-4 py-3 bg-gradient-to-r from-primary-500 to-accent-500 text-white rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+          class="flex-1 px-4 py-3 bg-primary-600 text-white rounded-sm font-semibold hover:bg-primary-700 transition-colors flex items-center justify-center gap-2"
         >
-          <span>💌</span>
+          <span></span>
           <span>收下祝福</span>
         </button>
         <button
           id="hide-today-btn"
-          class="flex-1 px-4 py-3 bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-primary))] rounded-lg font-semibold hover:bg-[rgb(var(--color-bg-accent))] transition-all duration-300 flex items-center justify-center gap-2"
+          class="flex-1 px-4 py-3 bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-primary))] rounded-sm font-semibold hover:bg-[rgb(var(--color-bg-accent))] transition-all duration-300 flex items-center justify-center gap-2"
         >
-          <span>📅</span>
+          <span></span>
           <span>今日不再提醒</span>
         </button>
       </div>
@@ -125,13 +123,13 @@
     {
       name: '新年',
       dates: ['01-01'],
-      icon: '🎊',
+      icon: 'NYE',
       title: '新年快乐!',
       message: '祝您在新的一年里:',
       wishes: [
-        { icon: '🎯', text: '目标达成' },
-        { icon: '💪', text: '身体健康' },
-        { icon: '🌟', text: '万事如意' },
+        { icon: '', text: '目标达成' },
+        { icon: '', text: '身体健康' },
+        { icon: '', text: '万事如意' },
       ],
     },
     {
@@ -157,49 +155,49 @@
         '02-09',
         '02-10',
       ], // 农历春节通常在这些日期间
-      icon: '🧧',
+      icon: 'CNY',
       title: '春节快乐!',
       message: '在这个喜庆的日子里,祝您:',
       wishes: [
-        { icon: '🎆', text: '新春大吉' },
-        { icon: '💰', text: '财源广进' },
-        { icon: '🏮', text: '阖家团圆' },
+        { icon: '', text: '新春大吉' },
+        { icon: '', text: '财源广进' },
+        { icon: '', text: '阖家团圆' },
       ],
     },
     {
       name: '情人节',
       dates: ['02-14'],
-      icon: '💝',
+      icon: 'VAL',
       title: '情人节快乐!',
       message: '愿爱与温暖常伴您左右:',
       wishes: [
-        { icon: '💕', text: '爱情甜蜜' },
-        { icon: '🌹', text: '浪漫相伴' },
-        { icon: '💑', text: '幸福长久' },
+        { icon: '', text: '爱情甜蜜' },
+        { icon: '', text: '浪漫相伴' },
+        { icon: '', text: '幸福长久' },
       ],
     },
     {
       name: '劳动节',
       dates: ['05-01'],
-      icon: '⚒️',
+      icon: 'MAY',
       title: '劳动节快乐!',
       message: '感谢您的辛勤付出,祝您:',
       wishes: [
-        { icon: '🏖️', text: '假期愉快' },
-        { icon: '😌', text: '休息充足' },
-        { icon: '💼', text: '工作顺利' },
+        { icon: '', text: '假期愉快' },
+        { icon: '', text: '休息充足' },
+        { icon: '', text: '工作顺利' },
       ],
     },
     {
       name: '儿童节',
       dates: ['06-01'],
-      icon: '🎈',
+      icon: 'JUN',
       title: '儿童节快乐!',
       message: '愿您永葆童心:',
       wishes: [
-        { icon: '🎁', text: '快乐无忧' },
-        { icon: '🎨', text: '创意无限' },
-        { icon: '🌈', text: '梦想成真' },
+        { icon: '', text: '快乐无忧' },
+        { icon: '', text: '创意无限' },
+        { icon: '', text: '梦想成真' },
       ],
     },
     {
@@ -214,37 +212,37 @@
         '10-03',
         '10-04',
       ], // 农历八月十五,日期会变
-      icon: '🥮',
+      icon: 'MOON',
       title: '中秋节快乐!',
       message: '月圆人团圆,祝您:',
       wishes: [
-        { icon: '🌕', text: '花好月圆' },
-        { icon: '👨‍👩‍👧‍👦', text: '阖家团圆' },
-        { icon: '🎑', text: '心想事成' },
+        { icon: '', text: '花好月圆' },
+        { icon: '', text: '阖家团圆' },
+        { icon: '', text: '心想事成' },
       ],
     },
     {
       name: '国庆节',
       dates: ['10-01', '10-02', '10-03', '10-04', '10-05', '10-06', '10-07'],
-      icon: '🇨🇳',
+      icon: 'OCT',
       title: '国庆节快乐!',
       message: '祝祖国繁荣昌盛,祝您:',
       wishes: [
-        { icon: '🎊', text: '节日快乐' },
-        { icon: '✈️', text: '旅途愉快' },
-        { icon: '🌟', text: '前程似锦' },
+        { icon: '', text: '节日快乐' },
+        { icon: '', text: '旅途愉快' },
+        { icon: '', text: '前程似锦' },
       ],
     },
     {
       name: '圣诞节',
       dates: ['12-24', '12-25'],
-      icon: '🎄',
+      icon: 'XMS',
       title: '圣诞快乐!',
       message: '在这个温馨的节日里,祝您:',
       wishes: [
-        { icon: '🎅', text: '礼物多多' },
-        { icon: '❄️', text: '温暖常在' },
-        { icon: '⭐', text: '梦想成真' },
+        { icon: '', text: '礼物多多' },
+        { icon: '', text: '温暖常在' },
+        { icon: '', text: '梦想成真' },
       ],
     },
   ];
@@ -296,9 +294,9 @@
     if (wishesContainer) {
       wishesContainer.innerHTML = holiday.wishes
         .map(
-          (wish) => `
-        <div class="flex items-center gap-3 p-3 rounded-lg bg-[rgb(var(--color-bg-accent))] hover:scale-105 transition-transform">
-          <span class="text-2xl">${wish.icon}</span>
+          (wish, i) => `
+        <div class="flex items-center gap-3 p-3 rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-secondary))]">
+          <span class="folio-mark !mb-0">${String(i + 1).padStart(2, '0')}</span>
           <span class="font-medium">${wish.text}</span>
         </div>
       `

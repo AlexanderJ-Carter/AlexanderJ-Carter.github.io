@@ -73,10 +73,9 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
 
 <div
   id="color-picker"
-  class="color-widget glass-card rounded-2xl p-6 shadow-xl max-w-md"
+  class="color-widget glass-card p-6 max-w-md"
 >
   <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
-    <span class="text-2xl">🎨</span>
     {t.title}
   </h3>
 
@@ -160,7 +159,7 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
       <button
         id="generate-palette"
         type="button"
-        class="px-4 py-1.5 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded text-sm font-medium transition-all"
+        class="px-4 py-1.5 bg-primary-600 hover:bg-primary-700 text-white rounded-sm text-sm font-medium transition-all"
       >
         {t.generate}
       </button>

@@ -289,7 +289,7 @@ const t =
 ---
 
 <BaseLayout
-  title={`${t.title} | Alexander James Carter`}
+  title={t.title}
   description={t.description}
 >
   <div class="container mx-auto px-4 lg:px-8 max-w-3xl pt-28 md:pt-32">
@@ -327,6 +327,7 @@ const t =
 
   <PageHero
     class="!pt-0"
+    folio="Folio Thanks"
     title={t.title}
     description={t.headerDesc}
     note={`${t.lastUpdatedLabel}${t.lastUpdated}`}
@@ -411,7 +412,7 @@ const t =
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- Sidebar Navigation -->
         <div class="lg:w-1/4">
-          <div class="sticky top-24 glass-card p-6 rounded-xl">
+          <div class="sticky top-24 glass-card p-6">
             <h5
               class="font-heading font-bold mb-4 text-sm uppercase tracking-wide text-[rgb(var(--color-text-tertiary))]"
             >
@@ -445,9 +446,9 @@ const t =
         <!-- Main Content -->
         <div class="lg:w-3/4 space-y-8">
           <!-- 1. Overview -->
-          <section id="overview" class="glass-card p-8 rounded-2xl">
+          <section id="overview" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span class="text-primary-500">🛡️</span>
+              <span class="text-primary-500">️</span>
               {t.sections.overview.title}
             </h2>
             <p class="mb-4 text-[rgb(var(--color-text-secondary))]">
@@ -459,9 +460,9 @@ const t =
               {t.sections.overview.list.map((item: string) => <li>{item}</li>)}
             </ul>
             <div
-              class="bg-red-50 dark:bg-red-900/20 rounded-xl p-4 flex gap-3 items-center border border-red-100 dark:border-red-800"
+              class="bg-red-50 dark:bg-red-900/20 rounded-sm p-4 flex gap-3 items-center border border-red-100 dark:border-red-800"
             >
-              <span class="text-red-500 text-xl">❤️</span>
+              <span class="text-red-500 text-xl">️</span>
               <p class="text-red-700 dark:text-red-200 font-medium">
                 {t.sections.overview.note}
               </p>
@@ -469,21 +470,19 @@ const t =
           </section>
 
           <!-- 2. Reports -->
-          <section id="reports" class="glass-card p-8 rounded-2xl">
+          <section id="reports" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span class="text-primary-500">📋</span>
               {t.sections.reports.title}
             </h2>
 
             <!-- Empty State -->
             <div
-              class="bg-blue-50 dark:bg-blue-900/10 rounded-xl p-8 text-center border border-blue-100 dark:border-blue-800"
+              class="bg-blue-50 dark:bg-blue-900/10 rounded-sm p-8 text-center border border-blue-100 dark:border-blue-800"
             >
               <div
                 class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4"
               >
-                <span class="text-green-500 text-2xl">✓</span>
-              </div>
+                </div>
               <h4
                 class="text-xl font-bold text-[rgb(var(--color-text-primary))] mb-2"
               >
@@ -496,9 +495,8 @@ const t =
           </section>
 
           <!-- 3. Contact -->
-          <section id="contact" class="glass-card p-8 rounded-2xl">
+          <section id="contact" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
-              <span class="text-primary-500">📧</span>
               {t.sections.contact.title}
             </h2>
             <p class="mb-6 text-[rgb(var(--color-text-secondary))]">
@@ -507,10 +505,10 @@ const t =
 
             <div class="grid md:grid-cols-2 gap-6 mb-6">
               <div
-                class="bg-[rgb(var(--color-bg-secondary))] p-6 rounded-xl border border-[rgb(var(--color-border))]"
+                class="bg-[rgb(var(--color-bg-secondary))] p-6 rounded-sm border border-[rgb(var(--color-border))]"
               >
                 <h5 class="font-bold mb-3 flex items-center gap-2">
-                  <span class="text-primary-500">✉️</span>
+                  <span class="text-primary-500">️</span>
                   {t.sections.contact.emailTitle}
                 </h5>
                 <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-4">
@@ -518,16 +516,15 @@ const t =
                 </p>
                 <a
                   href="mailto:contact-us@alexander.xin"
-                  class="inline-flex items-center justify-center w-full px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+                  class="inline-flex items-center justify-center w-full px-4 py-2 bg-primary-500 text-white rounded-sm hover:bg-primary-600 transition-colors"
                 >
                   contact-us@alexander.xin
                 </a>
               </div>
               <div
-                class="bg-[rgb(var(--color-bg-secondary))] p-6 rounded-xl border border-[rgb(var(--color-border))]"
+                class="bg-[rgb(var(--color-bg-secondary))] p-6 rounded-sm border border-[rgb(var(--color-border))]"
               >
                 <h5 class="font-bold mb-3 flex items-center gap-2">
-                  <span class="text-green-500">🔒</span>
                   {t.sections.contact.encryptedTitle}
                 </h5>
                 <p class="text-sm text-[rgb(var(--color-text-tertiary))] mb-4">
@@ -536,7 +533,7 @@ const t =
                 <a
                   href="/security/pgp-key.asc"
                   target="_blank"
-                  class="inline-flex items-center justify-center w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+                  class="inline-flex items-center justify-center w-full px-4 py-2 bg-green-500 text-white rounded-sm hover:bg-green-600 transition-colors"
                 >
                   {t.sections.contact.downloadKey}
                 </a>
@@ -544,7 +541,7 @@ const t =
             </div>
 
             <div
-              class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex gap-3 items-center border border-blue-100 dark:border-blue-800"
+              class="bg-blue-50 dark:bg-blue-900/20 rounded-sm p-4 flex gap-3 items-center border border-blue-100 dark:border-blue-800"
             >
               <span class="text-blue-500">⏱️</span>
               <p class="text-sm text-blue-700 dark:text-blue-200">
@@ -554,9 +551,8 @@ const t =
           </section>
 
           <!-- 4. Policy -->
-          <section id="policy" class="glass-card p-8 rounded-2xl">
+          <section id="policy" class="glass-card p-8">
             <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
-              <span class="text-primary-500">📄</span>
               {t.sections.policy.title}
             </h2>
             <p class="mb-6 text-[rgb(var(--color-text-secondary))]">
@@ -565,16 +561,16 @@ const t =
             <div class="flex flex-wrap gap-4">
               <a
                 href={`${pathPrefix}/security/policy`}
-                class="px-6 py-2 border border-primary-500 text-primary-500 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors flex items-center gap-2"
+                class="px-6 py-2 border border-primary-500 text-primary-500 rounded-sm hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors flex items-center gap-2"
               >
-                <span>🛡️</span>
+                <span>️</span>
                 {t.sections.policy.securityPolicy}
               </a>
               <a
                 href="/.well-known/security.txt"
-                class="px-6 py-2 border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] rounded-lg hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-2"
+                class="px-6 py-2 border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] rounded-sm hover:bg-[rgb(var(--color-bg-secondary))] transition-colors flex items-center gap-2"
               >
-                <span>📝</span>
+                <span></span>
                 {t.sections.policy.securityTxt}
               </a>
             </div>

@@ -90,12 +90,12 @@ const content = copy[lang] || copy['en-GB'];
 ---
 
 <BaseLayout
-  title={`${content.title} - Alexander Carter`}
+  title={content.title}
   description={content.desc}
   showHeader={true}
   showFooter={true}
 >
-  <PageHero kicker="Verify" title={content.title} description={content.desc} />
+  <PageHero folio="Folio Gate" kicker="Verify" title={content.title} description={content.desc} />
 
   <section class="pb-24">
     <div class="page-shell">

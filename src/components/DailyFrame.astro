@@ -1,0 +1,295 @@
+---
+/**
+ * Daily Frame — one curated still per day (local + Unsplash).
+ * Day index is resolved on the client so SSG builds stay fresh for visitors.
+ */
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'zh-CN' } = Astro.props;
+
+type Frame = {
+  image: string;
+  title: { 'zh-CN': string; 'zh-TW': string; 'en-GB': string; fr: string; ru: string };
+  note: { 'zh-CN': string; 'zh-TW': string; 'en-GB': string; fr: string; ru: string };
+  credit?: string;
+};
+
+const frames: Frame[] = [
+  {
+    image: '/img/gallery-optimized/landscape-01-lg.webp',
+    title: {
+      'zh-CN': '晨光山脊',
+      'zh-TW': '晨光山脊',
+      'en-GB': 'Morning ridge',
+      fr: 'Crête du matin',
+      ru: 'Утренний хребет',
+    },
+    note: {
+      'zh-CN': '可用光，偏冷色温。',
+      'zh-TW': '可用光，偏冷色溫。',
+      'en-GB': 'Available light, cooler balance.',
+      fr: 'Lumière disponible, balance froide.',
+      ru: 'Доступный свет, холодный баланс.',
+    },
+  },
+  {
+    image: '/img/gallery-optimized/nature-flower-01-lg.webp',
+    title: {
+      'zh-CN': '近处的花',
+      'zh-TW': '近處的花',
+      'en-GB': 'Close flower',
+      fr: 'Fleur de près',
+      ru: 'Цветок крупно',
+    },
+    note: {
+      'zh-CN': '浅景深，背景让它安静下来。',
+      'zh-TW': '淺景深，背景讓它安靜下來。',
+      'en-GB': 'Shallow depth — let the background go quiet.',
+      fr: 'Faible profondeur — laisser le fond se taire.',
+      ru: 'Малая ГРИП — фон пусть затихнет.',
+    },
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80',
+    title: {
+      'zh-CN': '云上的峰',
+      'zh-TW': '雲上的峰',
+      'en-GB': 'Peak above cloud',
+      fr: 'Sommet au-dessus des nuages',
+      ru: 'Вершина над облаками',
+    },
+    note: {
+      'zh-CN': '外来帧 · 大场景里留一点呼吸。',
+      'zh-TW': '外來幀 · 大場景裡留一點呼吸。',
+      'en-GB': 'Guest frame · leave air in a big scene.',
+      fr: 'Cadre invité · laisser de l’air dans le grand format.',
+      ru: 'Гостевой кадр · оставьте воздух в большом кадре.',
+    },
+    credit: 'Unsplash',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80',
+    title: {
+      'zh-CN': '林间小路',
+      'zh-TW': '林間小路',
+      'en-GB': 'Forest path',
+      fr: 'Sentier forestier',
+      ru: 'Лесная тропа',
+    },
+    note: {
+      'zh-CN': '外来帧 · 引导线把视线送进去。',
+      'zh-TW': '外來幀 · 引導線把視線送進去。',
+      'en-GB': 'Guest frame · a leading line to walk into.',
+      fr: 'Cadre invité · une ligne qui invite à entrer.',
+      ru: 'Гостевой кадр · линия ведёт внутрь.',
+    },
+    credit: 'Unsplash',
+  },
+  {
+    image: '/img/gallery-optimized/food-01-lg.webp',
+    title: {
+      'zh-CN': '桌上的光',
+      'zh-TW': '桌上的光',
+      'en-GB': 'Light on the table',
+      fr: 'Lumière sur la table',
+      ru: 'Свет на столе',
+    },
+    note: {
+      'zh-CN': '侧光比顶光更有味道。',
+      'zh-TW': '側光比頂光更有味道。',
+      'en-GB': 'Side light often tastes better than overhead.',
+      fr: 'La lumière latérale a souvent plus de goût.',
+      ru: 'Боковой свет часто вкуснее верхнего.',
+    },
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=1200&q=80',
+    title: {
+      'zh-CN': '海岸线',
+      'zh-TW': '海岸線',
+      'en-GB': 'Coastline',
+      fr: 'Littoral',
+      ru: 'Береговая линия',
+    },
+    note: {
+      'zh-CN': '外来帧 · 地平线放低一点，天会更大。',
+      'zh-TW': '外來幀 · 地平線放低一點，天會更大。',
+      'en-GB': 'Guest frame · lower the horizon, grow the sky.',
+      fr: 'Cadre invité · baissez l’horizon, agrandissez le ciel.',
+      ru: 'Гостевой кадр · ниже горизонт — больше небо.',
+    },
+    credit: 'Unsplash',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80',
+    title: {
+      'zh-CN': '树冠里的光斑',
+      'zh-TW': '樹冠裡的光斑',
+      'en-GB': 'Speckles in the canopy',
+      fr: 'Taches dans la canopée',
+      ru: 'Блики в кронах',
+    },
+    note: {
+      'zh-CN': '外来帧 · 逆光时注意高光别烧穿。',
+      'zh-TW': '外來幀 · 逆光時注意高光別燒穿。',
+      'en-GB': 'Guest frame · watch the highlights in backlight.',
+      fr: 'Cadre invité · surveillez les hautes lumières à contre-jour.',
+      ru: 'Гостевой кадр · следите за светами в контровом.',
+    },
+    credit: 'Unsplash',
+  },
+  {
+    image: '/img/gallery-optimized/landscape-03-lg.webp',
+    title: {
+      'zh-CN': '远处的雾',
+      'zh-TW': '遠處的霧',
+      'en-GB': 'Distant mist',
+      fr: 'Brume au loin',
+      ru: 'Далёкий туман',
+    },
+    note: {
+      'zh-CN': '雾把层次压软，适合安静的构图。',
+      'zh-TW': '霧把層次壓軟，適合安靜的構圖。',
+      'en-GB': 'Mist softens layers — good for a quiet frame.',
+      fr: 'La brume adoucit les plans — bon pour un cadre calme.',
+      ru: 'Туман смягчает планы — хорошо для тихого кадра.',
+    },
+  },
+];
+
+const frame = frames[0];
+const L = (lang in frame.title ? lang : 'en-GB') as keyof Frame['title'];
+
+const ui = {
+  'zh-CN': {
+    folio: 'Plate Daily',
+    title: '今日一帧',
+    subtitle: '每天换一张，本地与外来帧轮着来。',
+    credit: '来源',
+  },
+  'zh-TW': {
+    folio: 'Plate Daily',
+    title: '今日一幀',
+    subtitle: '每天換一張，本地與外來幀輪著來。',
+    credit: '來源',
+  },
+  'en-GB': {
+    folio: 'Plate Daily',
+    title: 'Frame of the day',
+    subtitle: 'One still a day — local and guest frames take turns.',
+    credit: 'Credit',
+  },
+  fr: {
+    folio: 'Plate Daily',
+    title: 'Cadre du jour',
+    subtitle: 'Une image par jour — locaux et invités à tour de rôle.',
+    credit: 'Crédit',
+  },
+  ru: {
+    folio: 'Plate Daily',
+    title: 'Кадр дня',
+    subtitle: 'Один кадр в день — свои и гостевые по очереди.',
+    credit: 'Источник',
+  },
+} as const;
+
+const t = ui[lang as keyof typeof ui] || ui['en-GB'];
+const framesJson = JSON.stringify(frames);
+---
+
+<article
+  class="glass-card p-0 overflow-hidden reveal md:col-span-2"
+  data-daily-frame
+  data-lang={L}
+  data-credit-label={t.credit}
+>
+  <script is:inline type="application/json" data-daily-frames set:html={framesJson} />
+  <div class="grid md:grid-cols-2 gap-0">
+    <div class="contact-sheet relative aspect-[4/3] md:aspect-auto md:min-h-[280px]">
+      <span class="contact-sheet-frame">01</span>
+      <img
+        data-daily-img
+        src={frame.image}
+        alt={frame.title[L]}
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+        decoding="async"
+        referrerpolicy="no-referrer"
+      />
+    </div>
+    <div class="p-6 md:p-8 flex flex-col justify-center">
+      <p class="folio-mark mb-2">{t.folio}</p>
+      <h2 class="font-heading text-xl md:text-2xl font-bold mb-2">{t.title}</h2>
+      <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-5">
+        {t.subtitle}
+      </p>
+      <h3 class="font-heading text-lg font-semibold mb-2" data-daily-title>
+        {frame.title[L]}
+      </h3>
+      <p
+        class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4"
+        data-daily-note
+      >
+        {frame.note[L]}
+      </p>
+      <p
+        class="meta-mono text-xs text-[rgb(var(--color-text-tertiary))] hidden"
+        data-daily-credit
+      ></p>
+    </div>
+  </div>
+</article>
+
+<script>
+  function applyDailyFrame(root: HTMLElement) {
+    const payload = root.querySelector('[data-daily-frames]');
+    if (!payload?.textContent) return;
+
+    type FrameRow = {
+      image: string;
+      title: Record<string, string>;
+      note: Record<string, string>;
+      credit?: string;
+    };
+
+    const frames = JSON.parse(payload.textContent) as FrameRow[];
+    if (!frames.length) return;
+
+    const lang = root.dataset.lang || 'en-GB';
+    const creditLabel = root.dataset.creditLabel || 'Credit';
+    const dayMs = 86400000;
+    const utcDay = Math.floor(Date.now() / dayMs);
+    const frame = frames[utcDay % frames.length];
+    const title = frame.title[lang] || frame.title['en-GB'] || '';
+    const note = frame.note[lang] || frame.note['en-GB'] || '';
+
+    const img = root.querySelector<HTMLImageElement>('[data-daily-img]');
+    const titleEl = root.querySelector('[data-daily-title]');
+    const noteEl = root.querySelector('[data-daily-note]');
+    const creditEl = root.querySelector('[data-daily-credit]');
+
+    if (img) {
+      img.src = frame.image;
+      img.alt = title;
+    }
+    if (titleEl) titleEl.textContent = title;
+    if (noteEl) noteEl.textContent = note;
+    if (creditEl) {
+      if (frame.credit) {
+        creditEl.textContent = `${creditLabel} · ${frame.credit}`;
+        creditEl.classList.remove('hidden');
+      } else {
+        creditEl.textContent = '';
+        creditEl.classList.add('hidden');
+      }
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-daily-frame]').forEach(applyDailyFrame);
+</script>
