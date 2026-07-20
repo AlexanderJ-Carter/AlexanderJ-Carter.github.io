@@ -1,13 +1,12 @@
 ---
 import WritingListTemplate from '../../../components/templates/WritingListTemplate.astro';
+import { getLangStaticPaths, resolveRouteLang } from '../../../i18n/routing';
 
 export function getStaticPaths() {
-  return [
-    { params: { lang: 'zh-TW' }, props: { lang: 'zh-TW' } },
-    { params: { lang: 'en' }, props: { lang: 'en-GB' } },
-    { params: { lang: 'fr' }, props: { lang: 'fr' } },
-    { params: { lang: 'ru' }, props: { lang: 'ru' } },
-  ];
+  return getLangStaticPaths().map(({ params }) => ({
+    params,
+    props: { lang: resolveRouteLang(params.lang) },
+  }));
 }
 
 const { lang } = Astro.props;

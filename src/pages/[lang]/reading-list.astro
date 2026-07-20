@@ -1,22 +1,13 @@
 ---
 import ReadingListTemplate from '../../components/templates/ReadingListTemplate.astro';
+import { getLangStaticPaths, resolveRouteLang } from '../../i18n/routing';
 
 export function getStaticPaths() {
-  return [
-    { params: { lang: 'zh-TW' } },
-    { params: { lang: 'en' } },
-    { params: { lang: 'fr' } },
-    { params: { lang: 'ru' } },
-  ];
+  return getLangStaticPaths();
 }
 
-const { lang } = Astro.params;
-const langMap: Record<string, string> = {
-  'zh-TW': 'zh-TW',
-  en: 'en-GB',
-  fr: 'fr',
-  ru: 'ru',
-};
+const { lang: urlLang } = Astro.params;
+const lang = resolveRouteLang(urlLang);
 ---
 
-<ReadingListTemplate lang={langMap[lang as string] || 'zh-CN'} />
+<ReadingListTemplate lang={lang} />

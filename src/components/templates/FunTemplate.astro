@@ -1,15 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../PageHero.astro';
-import PomodoroTimer from '../PomodoroTimer.astro';
-import WeatherWidget from '../WeatherWidget.astro';
-import Calculator from '../Calculator.astro';
-import PasswordGenerator from '../PasswordGenerator.astro';
-import ColorPicker from '../ColorPicker.astro';
-import CountdownTimer from '../CountdownTimer.astro';
-import AmbientRadio from '../AmbientRadio.astro';
-import ExposureTriangle from '../ExposureTriangle.astro';
-import DailyFrame from '../DailyFrame.astro';
+import PageHero from '../chrome/PageHero.astro';
+import PomodoroTimer from '../widgets/PomodoroTimer.astro';
+import WeatherWidget from '../widgets/WeatherWidget.astro';
+import Calculator from '../widgets/Calculator.astro';
+import PasswordGenerator from '../widgets/PasswordGenerator.astro';
+import ColorPicker from '../widgets/ColorPicker.astro';
+import CountdownTimer from '../widgets/CountdownTimer.astro';
+import AmbientRadio from '../widgets/AmbientRadio.astro';
+import ExposureTriangle from '../widgets/ExposureTriangle.astro';
+import DailyFrame from '../widgets/DailyFrame.astro';
 import { getLangPath, resolveLang } from '../../i18n/types';
 
 const lang = resolveLang(Astro.props.lang);

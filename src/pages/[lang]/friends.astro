@@ -1,15 +1,13 @@
 ---
 import FriendsTemplate from '../../components/templates/FriendsTemplate.astro';
-import { languages } from '../../i18n/ui';
+import { getLangStaticPaths, resolveRouteLang } from '../../i18n/routing';
 
 export function getStaticPaths() {
-  const paths = Object.keys(languages).map((lang) => ({ params: { lang } }));
-  paths.push({ params: { lang: 'en' } });
-  return paths;
+  return getLangStaticPaths();
 }
 
 const { lang: urlLang } = Astro.params;
-const lang = urlLang === 'en' ? 'en-GB' : urlLang;
+const lang = resolveRouteLang(urlLang);
 ---
 
 <FriendsTemplate lang={lang} />

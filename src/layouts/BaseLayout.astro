@@ -1,26 +1,28 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import { getLangFromUrl, useTranslations } from '../i18n/ui';
 import {
   getHreflangAlternates,
+  getLangPath,
   toOgLocale,
 } from '../i18n/types';
 import { skipVerify } from '../config/site';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import ThemeScript from '../components/ThemeScript.astro';
-import AdsScript from '../components/AdsScript.astro';
-import BackToTop from '../components/BackToTop.astro';
-import CookieConsent from '../components/CookieConsent.astro';
-import QuickActions from '../components/QuickActions.astro';
-import ReadingProgress from '../components/ReadingProgress.astro';
-import Toast from '../components/Toast.astro';
-import KeyboardShortcuts from '../components/KeyboardShortcuts.astro';
-import ServiceWorkerRegister from '../components/ServiceWorkerRegister.astro';
-import StructuredData from '../components/StructuredData.astro';
-import MusicPlayer from '../components/MusicPlayer.astro';
-import HolidayGreeting from '../components/HolidayGreeting.astro';
-import SiteNotice from '../components/SiteNotice.astro';
+import Header from '../components/chrome/Header.astro';
+import Footer from '../components/chrome/Footer.astro';
+import ThemeScript from '../components/chrome/ThemeScript.astro';
+import AdsScript from '../components/chrome/AdsScript.astro';
+import BackToTop from '../components/chrome/BackToTop.astro';
+import CookieConsent from '../components/chrome/CookieConsent.astro';
+import QuickActions from '../components/chrome/QuickActions.astro';
+import ReadingProgress from '../components/chrome/ReadingProgress.astro';
+import Toast from '../components/chrome/Toast.astro';
+import KeyboardShortcuts from '../components/chrome/KeyboardShortcuts.astro';
+import ServiceWorkerRegister from '../components/chrome/ServiceWorkerRegister.astro';
+import StructuredData from '../components/chrome/StructuredData.astro';
+import MusicPlayer from '../components/chrome/MusicPlayer.astro';
+import HolidayGreeting from '../components/chrome/HolidayGreeting.astro';
+import SiteNotice from '../components/chrome/SiteNotice.astro';
 
 interface Props {
   title?: string;
@@ -70,6 +72,19 @@ const hreflangs = getHreflangAlternates(
 
 const fontCss =
   'https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@400;600&display=swap';
+
+const skipLabel =
+  lang === 'zh-CN'
+    ? '跳到主内容'
+    : lang === 'zh-TW'
+      ? '跳到主內容'
+      : lang === 'fr'
+        ? 'Aller au contenu'
+        : lang === 'ru'
+          ? 'К основному содержимому'
+          : 'Skip to main content';
+
+const rssHref = getLangPath(lang, '/rss.xml');
 ---
 
 <!DOCTYPE html>
@@ -90,6 +105,13 @@ const fontCss =
     <meta name="author" content="Alexander James Carter" />
 
     <link rel="canonical" href={canonicalURL} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS"
+      href={rssHref}
+    />
+    <ClientRouter />
 
     {
       hreflangs.map(({ hreflang, href }) => (
@@ -153,9 +175,7 @@ const fontCss =
     <AdsScript />
   </head>
   <body class="antialiased font-sans">
-    <a href="#main-content" class="skip-link"
-      >{lang === 'zh-CN' ? '跳到主内容' : 'Skip to main content'}</a
-    >
+    <a href="#main-content" class="skip-link">{skipLabel}</a>
     {showHeader && <Header />}
     <SiteNotice />
 

@@ -1,5 +1,5 @@
 ---
-import AccessibilityTemplate from '../../components/templates/AccessibilityTemplate.astro';
+import ToolsTemplate from '../../components/templates/ToolsTemplate.astro';
 import { getLangStaticPaths, resolveRouteLang } from '../../i18n/routing';
 
 export function getStaticPaths() {
@@ -10,4 +10,4 @@ const { lang: urlLang } = Astro.params;
 const lang = resolveRouteLang(urlLang);
 ---
 
-<AccessibilityTemplate lang={lang} />
+<ToolsTemplate lang={lang} />

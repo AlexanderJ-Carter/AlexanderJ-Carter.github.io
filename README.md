@@ -26,6 +26,8 @@ ICP / 公安备案同样通过 `.env` 预留（`PUBLIC_ICP_NUMBER`、`PUBLIC_POL
 
 站点通知横幅/弹窗在 `src/config/notice.ts` 配置，默认 `enabled: false`。
 
+目录与约定见 [docs/architecture.md](./docs/architecture.md)。写作 RSS：`/rss.xml`。
+
 ## 访问入口
 
 - 主站: [alexander.xin](https://alexander.xin)

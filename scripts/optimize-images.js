@@ -14,7 +14,9 @@ import { readdir, mkdir } from 'fs/promises';
 import { join, parse } from 'path';
 import { existsSync } from 'fs';
 
-const INPUT_DIR = './public/img/gallery';
+const INPUT_DIR = existsSync('./assets/gallery-source')
+  ? './assets/gallery-source'
+  : './public/img/gallery';
 const OUTPUT_DIR = './public/img/gallery-optimized';
 
 // 响应式图片尺寸

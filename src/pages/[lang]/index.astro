@@ -1,19 +1,13 @@
 ---
 import HomeTemplate from '../../components/templates/HomeTemplate.astro';
-import { languages } from '../../i18n/ui';
+import { getLangStaticPaths, resolveRouteLang } from '../../i18n/routing';
 
 export function getStaticPaths() {
-  const paths = Object.keys(languages).map((lang) => ({
-    params: { lang },
-  }));
-  // Add 'en' route to support /en/ URL
-  paths.push({ params: { lang: 'en' } });
-  return paths;
+  return getLangStaticPaths();
 }
 
 const { lang: urlLang } = Astro.params;
-// Map 'en' to 'en-GB' for internal logic
-const lang = urlLang === 'en' ? 'en-GB' : urlLang;
+const lang = resolveRouteLang(urlLang);
 ---
 
 <HomeTemplate lang={lang} />

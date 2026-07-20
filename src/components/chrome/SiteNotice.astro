@@ -3,9 +3,9 @@
  * Site notice — editorial modal / banner.
  * Controlled by src/config/notice.ts (enabled: false = render nothing).
  */
-import { getLangFromUrl } from '../i18n/ui';
-import { resolveLang, getLangPath } from '../i18n/types';
-import { siteNotice, resolveNotice } from '../config/notice';
+import { getLangFromUrl } from '../../i18n/ui';
+import { resolveLang, getLangPath } from '../../i18n/types';
+import { siteNotice, resolveNotice } from '../../config/notice';
 
 const lang = resolveLang(getLangFromUrl(Astro.url));
 const active = siteNotice.enabled && Boolean(siteNotice.id);

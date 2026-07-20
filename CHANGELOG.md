@@ -34,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Legal chrome: footer/More link licence + accessibility; reserved ICP/公安备案 via env (hidden when empty); site notice banner/modal via `src/config/notice.ts` (`enabled: false` by default).
 - Cyanotype studio palette, magazine sitemap index, support page (Afdian), Now weather with Beijing fallback, blank-frame 404; removed stale docs (`archive` / design / performance / superpowers) and unused widget components.
 - Service Worker no longer precaches non-existent `/css/global.css` (Astro hashed `/_astro` assets).
+- Structure pass: `components/{chrome,widgets,templates}`, shared `i18n/routing` (no duplicate `/zh-CN`/`/en-GB` trees), multilingual `/tools`, RSS feeds, View Transitions; gallery source JPGs untracked.
 
 ## [3.0.1] - 2026-03-19
 
