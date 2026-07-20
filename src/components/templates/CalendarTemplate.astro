@@ -119,7 +119,12 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
 ---
 
 <BaseLayout title={content.title}>
-  <PageHero folio="Folio Calendar" kicker="Tools" title={content.title} description={content.headerDesc} />
+  <PageHero
+    folio="Folio Calendar"
+    kicker="Tools"
+    title={content.title}
+    description={content.headerDesc}
+  />
 
   <!-- Calendar Section -->
   <section class="py-16 container mx-auto px-4 lg:px-8">

@@ -204,9 +204,13 @@ const mainNavItems: NavItem[] = [
   class="fixed top-0 left-0 right-0 z-50 nav-glass transition-all duration-300"
   id="header"
 >
-  <div class="scroll-indicator" id="scroll-indicator" hidden aria-hidden="true"></div>
+  <div class="scroll-indicator" id="scroll-indicator" hidden aria-hidden="true">
+  </div>
 
-  <nav class="relative z-50 container mx-auto px-4 lg:px-8 py-4" aria-label={lang === 'zh-CN' ? '主导航' : 'Main'}>
+  <nav
+    class="relative z-50 container mx-auto px-4 lg:px-8 py-4"
+    aria-label={lang === 'zh-CN' ? '主导航' : 'Main'}
+  >
     <div class="flex items-center justify-between">
       <!-- Logo -->
       <a
