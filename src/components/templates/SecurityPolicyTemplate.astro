@@ -649,10 +649,7 @@ const securityPolicyData: Record<Lang, any> = {
 const t = securityPolicyData[lang as Lang] || securityPolicyData['en-GB'];
 ---
 
-<BaseLayout
-  title={t.title}
-  description={t.description}
->
+<BaseLayout title={t.title} description={t.description}>
   <div class="container mx-auto px-4 lg:px-8 max-w-3xl pt-28 md:pt-32">
     <a
       href={getLangPath('/')}

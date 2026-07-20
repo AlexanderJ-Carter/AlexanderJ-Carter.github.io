@@ -222,10 +222,7 @@ const licenseData: Record<Lang, any> = {
 const content = licenseData[lang as Lang] || licenseData['en-GB'];
 ---
 
-<BaseLayout
-  title={content.title}
-  description={content.description}
->
+<BaseLayout title={content.title} description={content.description}>
   <div class="container mx-auto px-4 lg:px-8 max-w-3xl pt-28 md:pt-32">
     <a
       href={getLangPath('/')}

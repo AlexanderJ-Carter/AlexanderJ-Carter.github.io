@@ -320,7 +320,12 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
 ---
 
 <BaseLayout title={content.title}>
-  <PageHero folio="Folio FX" kicker="Tools" title={content.title} description={content.headerDesc} />
+  <PageHero
+    folio="Folio FX"
+    kicker="Tools"
+    title={content.title}
+    description={content.headerDesc}
+  />
 
   <!-- Currency Rates Section -->
   <section class="py-16 container mx-auto px-4 lg:px-8">
@@ -578,12 +583,12 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
             <div class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-sm">
               <p class="folio-mark mb-3">{String(i + 1).padStart(2, '0')}</p>
               <div>
-                  <h4 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
-                    {tip.title}
-                  </h4>
-                  <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
-                    {tip.desc}
-                  </p>
+                <h4 class="text-lg font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
+                  {tip.title}
+                </h4>
+                <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+                  {tip.desc}
+                </p>
               </div>
             </div>
           ))

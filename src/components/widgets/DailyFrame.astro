@@ -11,8 +11,20 @@ const { lang = 'zh-CN' } = Astro.props;
 
 type Frame = {
   image: string;
-  title: { 'zh-CN': string; 'zh-TW': string; 'en-GB': string; fr: string; ru: string };
-  note: { 'zh-CN': string; 'zh-TW': string; 'en-GB': string; fr: string; ru: string };
+  title: {
+    'zh-CN': string;
+    'zh-TW': string;
+    'en-GB': string;
+    fr: string;
+    ru: string;
+  };
+  note: {
+    'zh-CN': string;
+    'zh-TW': string;
+    'en-GB': string;
+    fr: string;
+    ru: string;
+  };
   credit?: string;
 };
 
@@ -209,9 +221,16 @@ const framesJson = JSON.stringify(frames);
   data-lang={L}
   data-credit-label={t.credit}
 >
-  <script is:inline type="application/json" data-daily-frames set:html={framesJson} />
+  <script
+    is:inline
+    type="application/json"
+    data-daily-frames
+    set:html={framesJson}
+  />
   <div class="grid md:grid-cols-2 gap-0">
-    <div class="contact-sheet relative aspect-[4/3] md:aspect-auto md:min-h-[280px]">
+    <div
+      class="contact-sheet relative aspect-[4/3] md:aspect-auto md:min-h-[280px]"
+    >
       <span class="contact-sheet-frame">01</span>
       <img
         data-daily-img
@@ -241,7 +260,8 @@ const framesJson = JSON.stringify(frames);
       <p
         class="meta-mono text-xs text-[rgb(var(--color-text-tertiary))] hidden"
         data-daily-credit
-      ></p>
+      >
+      </p>
     </div>
   </div>
 </article>
@@ -291,5 +311,7 @@ const framesJson = JSON.stringify(frames);
     }
   }
 
-  document.querySelectorAll<HTMLElement>('[data-daily-frame]').forEach(applyDailyFrame);
+  document
+    .querySelectorAll<HTMLElement>('[data-daily-frame]')
+    .forEach(applyDailyFrame);
 </script>

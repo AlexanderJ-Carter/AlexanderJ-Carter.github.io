@@ -41,10 +41,7 @@ const calcText = {
 const t = calcText[lang as keyof typeof calcText] || calcText['zh-CN'];
 ---
 
-<div
-  id="calculator"
-  class="calculator-widget glass-card p-6 max-w-xs"
->
+<div id="calculator" class="calculator-widget glass-card p-6 max-w-xs">
   <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
     {t.title}
   </h3>

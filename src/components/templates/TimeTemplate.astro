@@ -476,7 +476,10 @@ const relatedTools = [
               worldZones.map((z) => (
                 <li class="flex items-center justify-between gap-3 py-2.5 px-3 rounded-sm hover:bg-[rgb(var(--color-bg-accent))]/50 transition-colors">
                   <div class="flex items-center gap-3 min-w-0">
-                    <span class="meta-mono text-xs tracking-wider text-primary-600 dark:text-primary-400 shrink-0" aria-hidden="true">
+                    <span
+                      class="meta-mono text-xs tracking-wider text-primary-600 dark:text-primary-400 shrink-0"
+                      aria-hidden="true"
+                    >
                       {z.icon}
                     </span>
                     <div class="min-w-0">
@@ -567,7 +570,12 @@ const relatedTools = [
               href={tool.href}
               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-sm bg-[rgb(var(--color-bg-secondary))] hover:bg-primary-500/10 border border-[rgb(var(--color-border))] hover:border-primary-500/30 text-[rgb(var(--color-text-primary))] font-medium transition-colors active:scale-[0.98]"
             >
-              <span class="meta-mono text-xs tracking-wider text-primary-600 dark:text-primary-400" aria-hidden="true">{tool.icon}</span>
+              <span
+                class="meta-mono text-xs tracking-wider text-primary-600 dark:text-primary-400"
+                aria-hidden="true"
+              >
+                {tool.icon}
+              </span>
               {tool.label}
             </a>
           ))
