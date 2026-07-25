@@ -13,13 +13,13 @@ Make `https://alexander.xin` discoverable by AI agents per isitagentready checks
 
 ## Delivered
 
-| Check | Delivery | Live now? |
-|-------|----------|-----------|
-| Link headers | Worker sets `Link` on `/` | Yes |
-| Markdown negotiation | Worker HTML→MD + `x-markdown-tokens` | Yes |
-| MCP endpoint | Worker `/mcp` Streamable HTTP | Yes |
-| DNS-AID | SVCB `_index._agents` + `_mcp._agents` (AD=true) | Yes |
-| API Catalog / skills / auth.md / OAuth well-known / WebMCP / server-card | Static files in `public/` | After GitHub Pages deploy |
+| Check                                                                    | Delivery                                         | Live now?                 |
+| ------------------------------------------------------------------------ | ------------------------------------------------ | ------------------------- |
+| Link headers                                                             | Worker sets `Link` on `/`                        | Yes                       |
+| Markdown negotiation                                                     | Worker HTML→MD + `x-markdown-tokens`             | Yes                       |
+| MCP endpoint                                                             | Worker `/mcp` Streamable HTTP                    | Yes                       |
+| DNS-AID                                                                  | SVCB `_index._agents` + `_mcp._agents` (AD=true) | Yes                       |
+| API Catalog / skills / auth.md / OAuth well-known / WebMCP / server-card | Static files in `public/`                        | After GitHub Pages deploy |
 
 ## Auth stance
 

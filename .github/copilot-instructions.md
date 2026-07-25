@@ -2,7 +2,7 @@
 
 ## Project Context
 
-This is a personal portfolio website built with **Astro v5**, **Tailwind CSS**, and **TypeScript**. It uses a static site generation (SSG) approach and is deployed via GitHub Pages.
+This is a personal portfolio website built with **Astro v7**, **Tailwind CSS**, and **TypeScript**. It uses a static site generation (SSG) approach and is deployed via GitHub Pages.
 
 ## Architecture & Patterns
 

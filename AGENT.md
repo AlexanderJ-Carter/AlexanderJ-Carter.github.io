@@ -26,7 +26,7 @@
 | ---------- | ---------------------------------------- |
 | **类型**   | 个人作品集与工具站点                     |
 | **主题**   | 摄影 / 代码 / 设计 / 生活记录            |
-| **技术栈** | Astro v5 + TypeScript + Tailwind CSS     |
+| **技术栈** | Astro v7 + TypeScript + Tailwind CSS     |
 | **部署**   | GitHub Pages（静态资源）+ Cloudflare CDN |
 | **域名**   | https://alexander.xin                    |
 

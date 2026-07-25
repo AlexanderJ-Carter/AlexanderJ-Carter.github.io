@@ -1,12 +1,10 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://alexander.xin',
   integrations: [
-    tailwind(),
     sitemap({
       i18n: {
         defaultLocale: 'zh-CN',
@@ -28,12 +26,12 @@ export default defineConfig({
     },
   },
   output: 'static',
+  // Prefer previous HTML whitespace behavior after Astro 6+/7 compressHTML changes.
+  compressHTML: true,
   build: {
     inlineStylesheets: 'auto',
   },
-  // 图片优化配置
   image: {
-    // 优先使用 AVIF 格式（比 WebP 小 50%，比 JPEG 小 70%）
     service: {
       entrypoint: 'astro/assets/services/sharp',
     },
@@ -48,7 +46,6 @@ export default defineConfig({
         output: {
           assetFileNames: 'assets/[hash][extname]',
           chunkFileNames: 'chunks/[hash].js',
-          // 模块预加载优化
           manualChunks: (id) => {
             if (id.includes('tailwindcss')) {
               return 'vendor-tailwind';
@@ -59,7 +56,7 @@ export default defineConfig({
     },
   },
   server: {
-    host: true, // 允许通过局域网 / Tailscale IP 访问（如 http://100.x.x.x:4321）
+    host: true,
     port: 4321,
   },
 });

@@ -5,7 +5,7 @@
 
 ## 1. 项目定位
 
-- 技术栈: Astro v5 + Tailwind CSS + TypeScript
+- 技术栈: Astro v7 + Tailwind CSS + TypeScript
 - 架构: 静态站点 (SSG)，默认零客户端 JS
 - 部署: GitHub Pages + Cloudflare
 - 默认语言: zh-CN (根路径 `/`)
