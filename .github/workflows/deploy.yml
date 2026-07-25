@@ -52,17 +52,24 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+  purge-cache:
+    needs: deploy
+    if: always() && needs.deploy.result != 'cancelled'
+    runs-on: ubuntu-latest
+    steps:
       - name: Purge Cloudflare cache
         env:
           CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CF_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
         run: |
-          if [ -n "$CF_API_TOKEN" ] && [ -n "$CF_ZONE_ID" ]; then
-            curl -fsS -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
-              -H "Authorization: Bearer ${CF_API_TOKEN}" \
-              -H "Content-Type: application/json" \
-              --data '{"purge_everything":true}'
-            echo "Cloudflare cache purged."
-          else
+          if [ -z "$CF_API_TOKEN" ] || [ -z "$CF_ZONE_ID" ]; then
             echo "Cloudflare purge skipped (CLOUDFLARE_API_TOKEN / CLOUDFLARE_ZONE_ID not set)."
+            exit 0
           fi
+          response=$(curl -sS -w "\nHTTP_CODE:%{http_code}" -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}')
+          echo "$response"
+          echo "$response" | grep -q 'HTTP_CODE:200' || exit 1
+          echo "Cloudflare cache purged."
