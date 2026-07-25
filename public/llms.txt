@@ -1,0 +1,28 @@
+# alexander.xin
+
+> Personal site of Alexander James Carter — writing, projects, tools, and public time API.
+
+## Quick links
+
+- [Home](https://alexander.xin/)
+- [Auth for agents](https://alexander.xin/auth.md)
+- [API catalog](https://alexander.xin/.well-known/api-catalog)
+- [MCP server card](https://alexander.xin/.well-known/mcp/server-card.json)
+- [Agent skills index](https://alexander.xin/.well-known/agent-skills/index.json)
+- [Security contact](https://alexander.xin/.well-known/security.txt)
+- [Sitemap](https://alexander.xin/sitemap-index.xml)
+
+## Public API
+
+- Time: `GET https://api.alexander.xin/time/now`
+- OpenAPI: https://alexander.xin/api/openapi-time.json
+
+## Languages
+
+Default locale is zh-CN at `/`. Other locales: `/zh-TW/`, `/en/`, `/fr/`, `/ru/`.
+
+## Notes for agents
+
+- Site content and the Time API are public; no OAuth bearer token is required.
+- Prefer Markdown negotiation (`Accept: text/markdown`) when available.
+- Human verification (`/verify`) gates some personal pages for browsers only.

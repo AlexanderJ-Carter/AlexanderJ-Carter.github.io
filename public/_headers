@@ -39,3 +39,37 @@
 
 /security/pgp-key.asc
   Content-Type: text/plain; charset=utf-8
+
+# Agent discovery (also enforced by workers/agent-gateway when routed)
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </.well-known/mcp/server-card.json>; rel="service-desc", </.well-known/agent-skills/index.json>; rel="describedby", </llms.txt>; rel="describedby", </auth.md>; rel="describedby"
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json; charset=utf-8
+
+/.well-known/mcp/server-card.json
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/agent-skills/index.json
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/oauth-protected-resource
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/oauth-authorization-server
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/jwks.json
+  Content-Type: application/json; charset=utf-8
+
+/oauth/authorize
+  Content-Type: application/json; charset=utf-8
+
+/oauth/token
+  Content-Type: application/json; charset=utf-8
+
+/auth.md
+  Content-Type: text/markdown; charset=utf-8
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8

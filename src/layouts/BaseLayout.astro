@@ -23,6 +23,7 @@ import StructuredData from '../components/chrome/StructuredData.astro';
 import MusicPlayer from '../components/chrome/MusicPlayer.astro';
 import HolidayGreeting from '../components/chrome/HolidayGreeting.astro';
 import SiteNotice from '../components/chrome/SiteNotice.astro';
+import WebMcp from '../components/chrome/WebMcp.astro';
 
 interface Props {
   title?: string;
@@ -251,6 +252,7 @@ const rssHref = getLangPath(lang, '/rss.xml');
         }
       })();
     </script>
+    <WebMcp />
     <ServiceWorkerRegister lang={lang} />
   </body>
 </html>

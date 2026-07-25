@@ -1,0 +1,26 @@
+{
+  "issuer": "https://alexander.xin",
+  "authorization_endpoint": "https://alexander.xin/oauth/authorize",
+  "token_endpoint": "https://alexander.xin/oauth/token",
+  "jwks_uri": "https://alexander.xin/.well-known/jwks.json",
+  "grant_types_supported": [],
+  "response_types_supported": [],
+  "token_endpoint_auth_methods_supported": [
+    "none"
+  ],
+  "code_challenge_methods_supported": [],
+  "service_documentation": "https://alexander.xin/auth.md",
+  "agent_auth": {
+    "skill": "https://alexander.xin/auth.md",
+    "register_uri": "https://alexander.xin/auth.md",
+    "identity_types_supported": [
+      "anonymous"
+    ],
+    "anonymous": {
+      "credential_types_supported": [
+        "none"
+      ],
+      "claim_uri": "https://alexander.xin/auth.md"
+    }
+  }
+}

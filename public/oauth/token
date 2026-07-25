@@ -1,0 +1,4 @@
+{
+  "error": "unsupported_grant_type",
+  "error_description": "alexander.xin does not issue OAuth credentials. Public resources require no bearer token. See https://alexander.xin/auth.md"
+}

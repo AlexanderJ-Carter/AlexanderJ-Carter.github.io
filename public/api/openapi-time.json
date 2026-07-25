@@ -1,0 +1,52 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Alexander.xin Time API",
+    "version": "1.0.0",
+    "description": "Public JSON clock for Asia/Shanghai. No authentication required."
+  },
+  "servers": [
+    {
+      "url": "https://api.alexander.xin"
+    }
+  ],
+  "paths": {
+    "/time/now": {
+      "get": {
+        "summary": "Current time",
+        "operationId": "getTimeNow",
+        "responses": {
+          "200": {
+            "description": "Current timestamp payload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["iso", "timestamp", "timezone", "datetime"],
+                  "properties": {
+                    "iso": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "timestamp": {
+                      "type": "integer",
+                      "description": "Unix epoch seconds"
+                    },
+                    "timezone": {
+                      "type": "string",
+                      "example": "Asia/Shanghai"
+                    },
+                    "datetime": {
+                      "type": "string",
+                      "description": "Local wall time string for Asia/Shanghai"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "site-overview",
+      "type": "skill-md",
+      "description": "Orient an agent to alexander.xin — public personal site structure, discovery endpoints, Time API, and MCP tools.",
+      "url": "/.well-known/agent-skills/site-overview/SKILL.md",
+      "digest": "sha256:e46c59d0322ac18c290e756f993741a49b7b2664f501fb9411db342266bdfe05"
+    }
+  ]
+}

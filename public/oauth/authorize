@@ -1,0 +1,4 @@
+{
+  "error": "unauthorized_client",
+  "error_description": "alexander.xin does not issue OAuth credentials. Public site content, the Time API, and MCP require no bearer token. See https://alexander.xin/auth.md"
+}

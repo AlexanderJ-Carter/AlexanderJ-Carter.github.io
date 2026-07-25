@@ -1,0 +1,12 @@
+{
+  "resource": "https://alexander.xin/",
+  "authorization_servers": [
+    "https://alexander.xin"
+  ],
+  "scopes_supported": [],
+  "bearer_methods_supported": [
+    "header"
+  ],
+  "resource_documentation": "https://alexander.xin/auth.md",
+  "resource_signing_alg_values_supported": []
+}

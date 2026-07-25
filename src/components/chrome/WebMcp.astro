@@ -1,0 +1,157 @@
+---
+/**
+ * Registers WebMCP tools for browser agents (navigator/document.modelContext).
+ * No-ops when the WebMCP API is unavailable.
+ */
+---
+
+<script is:inline>
+  (function () {
+    function getModelContext() {
+      if (typeof navigator !== 'undefined' && navigator.modelContext) {
+        return navigator.modelContext;
+      }
+      if (typeof document !== 'undefined' && document.modelContext) {
+        return document.modelContext;
+      }
+      return null;
+    }
+
+    async function registerTools() {
+      const ctx = getModelContext();
+      if (!ctx || typeof ctx.registerTool !== 'function') return;
+
+      const controller = new AbortController();
+      window.__alexanderWebMcpAbort = controller;
+
+      await ctx.registerTool(
+        {
+          name: 'get_site_info',
+          description:
+            'Return canonical site metadata for alexander.xin (title, language, URL, discovery endpoints).',
+          inputSchema: {
+            type: 'object',
+            additionalProperties: false,
+            properties: {},
+          },
+          async execute() {
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: JSON.stringify(
+                    {
+                      name: 'alexander.xin',
+                      title: document.title,
+                      url: location.href,
+                      language: document.documentElement.lang || 'zh-CN',
+                      discovery: {
+                        llmsTxt: 'https://alexander.xin/llms.txt',
+                        authMd: 'https://alexander.xin/auth.md',
+                        apiCatalog: 'https://alexander.xin/.well-known/api-catalog',
+                        mcpServerCard:
+                          'https://alexander.xin/.well-known/mcp/server-card.json',
+                        agentSkills:
+                          'https://alexander.xin/.well-known/agent-skills/index.json',
+                      },
+                    },
+                    null,
+                    2
+                  ),
+                },
+              ],
+            };
+          },
+        },
+        { signal: controller.signal }
+      );
+
+      await ctx.registerTool(
+        {
+          name: 'navigate_site',
+          description:
+            'Navigate this tab to a same-origin path on alexander.xin (for example /en/ or /auth.md).',
+          inputSchema: {
+            type: 'object',
+            additionalProperties: false,
+            required: ['path'],
+            properties: {
+              path: {
+                type: 'string',
+                description: 'Absolute path beginning with /',
+              },
+            },
+          },
+          async execute(args) {
+            const path = String(args.path || '');
+            if (!path.startsWith('/')) {
+              return {
+                content: [
+                  {
+                    type: 'text',
+                    text: 'path must start with /',
+                  },
+                ],
+                isError: true,
+              };
+            }
+            const url = new URL(path, location.origin);
+            if (url.origin !== location.origin) {
+              return {
+                content: [
+                  {
+                    type: 'text',
+                    text: 'refusing cross-origin navigation',
+                  },
+                ],
+                isError: true,
+              };
+            }
+            location.assign(url.pathname + url.search + url.hash);
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: `navigating to ${url.pathname}`,
+                },
+              ],
+            };
+          },
+        },
+        { signal: controller.signal }
+      );
+
+      await ctx.registerTool(
+        {
+          name: 'get_page_markdown_hint',
+          description:
+            'Explain how to fetch the current page as Markdown via Accept: text/markdown.',
+          inputSchema: {
+            type: 'object',
+            additionalProperties: false,
+            properties: {},
+          },
+          async execute() {
+            return {
+              content: [
+                {
+                  type: 'text',
+                  text: `Fetch ${location.href} with header Accept: text/markdown. Expect Content-Type: text/markdown when the edge converter is active.`,
+                },
+              ],
+            };
+          },
+        },
+        { signal: controller.signal }
+      );
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        registerTools().catch(function () {});
+      });
+    } else {
+      registerTools().catch(function () {});
+    }
+  })();
+</script>

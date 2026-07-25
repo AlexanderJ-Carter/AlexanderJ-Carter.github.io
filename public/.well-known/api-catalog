@@ -1,0 +1,43 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://api.alexander.xin/time/now",
+      "service-desc": [
+        {
+          "href": "https://alexander.xin/api/openapi-time.json",
+          "type": "application/json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://alexander.xin/llms.txt",
+          "type": "text/plain"
+        },
+        {
+          "href": "https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/docs/security/TIME-API-CLOUDFLARE.md",
+          "type": "text/markdown"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://api.alexander.xin/time/now"
+        }
+      ]
+    },
+    {
+      "anchor": "https://alexander.xin/mcp",
+      "service-desc": [
+        {
+          "href": "https://alexander.xin/.well-known/mcp/server-card.json",
+          "type": "application/json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://alexander.xin/llms.txt",
+          "type": "text/plain"
+        }
+      ]
+    }
+  ]
+}

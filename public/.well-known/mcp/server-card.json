@@ -1,0 +1,16 @@
+{
+  "serverInfo": {
+    "name": "alexander.xin",
+    "version": "1.0.0"
+  },
+  "description": "Public MCP tools for Alexander James Carter's personal site: site metadata and Asia/Shanghai time.",
+  "url": "https://alexander.xin/mcp",
+  "transport": {
+    "type": "streamable-http"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  }
+}
