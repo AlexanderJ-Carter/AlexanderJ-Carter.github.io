@@ -1,12 +1,12 @@
 ---
-title: "Même un site statique a besoin de données : choisir une analyse respectueuse de la vie privée"
+title: 'Même un site statique a besoin de données : choisir une analyse respectueuse de la vie privée'
 description: "Un site personnel n'a pas besoin du profilage complet de GA4. Voici comment j'arbitre entre « voir le trafic » et « ne pas suivre les visiteurs »."
-category: "Pratique technique"
+category: 'Pratique technique'
 pubDate: 2026-06-08
 updatedDate: 2026-07-25
 lang: fr
-tags: ["vie privée", "analyse", "site statique"]
-timeToRead: "12 min"
+tags: ['vie privée', 'analyse', 'site statique']
+timeToRead: '12 min'
 ---
 
 Tôt ou tard, presque tout site personnel se pose la même question : d'où viennent les visiteurs ? Quels articles sont lus ? Est-ce que je suis le seul à rafraîchir la page d'accueil ?

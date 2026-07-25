@@ -1,12 +1,12 @@
 ---
 title: "L'accessibilité n'est pas un bonus : clavier, contraste et focus"
 description: "Voir n'est pas utiliser. Un site personnel doit aussi tenir la route avec Tab, un lecteur d'écran et les utilisateurs qui détestent les animations clignotantes."
-category: "Réflexion design"
+category: 'Réflexion design'
 pubDate: 2026-07-14
 updatedDate: 2026-07-25
 lang: fr
-tags: ["accessibilité", "a11y", "expérience"]
-timeToRead: "13 min"
+tags: ['accessibilité', 'a11y', 'expérience']
+timeToRead: '13 min'
 ---
 
 L'accessibilité finit souvent en bas de la liste « quand j'aurai le temps ». Sur un site personnel, encore plus : peu de visiteurs, pages simples, « les gens normaux cliquent bien ». Mais « normal » n'est jamais un seul état corporel — poignet blessé temporairement, écran au soleil, presbytie, utilisateur qui ne veut que le clavier : plus fréquent qu'on ne croit.

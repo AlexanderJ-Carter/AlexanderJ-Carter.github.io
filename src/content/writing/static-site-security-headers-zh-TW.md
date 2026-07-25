@@ -1,12 +1,12 @@
 ---
-title: "靜態站安全標頭實戰：_headers、CSP 與取捨"
-description: "靜態站也能認真做安全標頭。本文寫 Cloudflare / Pages 風格的 _headers、CSP 過嚴時的痛，以及本站如何取捨。"
-category: "技術實踐"
+title: '靜態站安全標頭實戰：_headers、CSP 與取捨'
+description: '靜態站也能認真做安全標頭。本文寫 Cloudflare / Pages 風格的 _headers、CSP 過嚴時的痛，以及本站如何取捨。'
+category: '技術實踐'
 pubDate: 2026-07-06
 updatedDate: 2026-07-25
 lang: zh-TW
-tags: ["安全", "CSP", "Cloudflare"]
-timeToRead: "13 min"
+tags: ['安全', 'CSP', 'Cloudflare']
+timeToRead: '13 min'
 ---
 
 靜態站沒有伺服器裡的工作階段邏輯，不代表瀏覽器側可以放飛。點擊劫持、MIME 嗅探、失控的第三方腳本，一樣能搞砸個人站。好消息是：在 GitHub Pages + Cloudflare 一類架構裡，用 `_headers`（或平台等價設定）就能把基線安全標頭鋪到全站。

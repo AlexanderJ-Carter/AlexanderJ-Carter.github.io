@@ -1,12 +1,12 @@
 ---
-title: "本站技術架構：GitHub Pages + Cloudflare 怎麼跑"
-description: "一條從 Markdown 到全球邊緣的路徑。說明本站為何靜態產生、如何部署，以及邊界在哪裡。"
-category: "技術實踐"
+title: '本站技術架構：GitHub Pages + Cloudflare 怎麼跑'
+description: '一條從 Markdown 到全球邊緣的路徑。說明本站為何靜態產生、如何部署，以及邊界在哪裡。'
+category: '技術實踐'
 pubDate: 2026-07-10
 updatedDate: 2026-07-25
 lang: zh-TW
-tags: ["架構", "GitHub Pages", "Cloudflare"]
-timeToRead: "12 min"
+tags: ['架構', 'GitHub Pages', 'Cloudflare']
+timeToRead: '12 min'
 ---
 
 有人問「你的站後端用什麼」。短答：多數時候沒有傳統後端。長答是這篇文章——從內容到建置，再到 GitHub Pages 與 Cloudflare 如何疊在一起。

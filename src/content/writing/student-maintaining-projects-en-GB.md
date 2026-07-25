@@ -1,12 +1,12 @@
 ---
-title: "How Student Developers Maintain Personal Projects Long-Term"
-description: "Enthusiasm fades; exams arrive. Projects that survive rely on scoped work, documentation, and repeatable release rhythm."
-category: "Engineering"
+title: 'How Student Developers Maintain Personal Projects Long-Term'
+description: 'Enthusiasm fades; exams arrive. Projects that survive rely on scoped work, documentation, and repeatable release rhythm.'
+category: 'Engineering'
 pubDate: 2026-07-02
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["open source", "students", "maintenance"]
-timeToRead: "14 min"
+tags: ['open source', 'students', 'maintenance']
+timeToRead: '14 min'
 ---
 
 Student developers rarely lack ideas. What runs out is **a reason to open the editor next week**. Coursework, internships, and sleep take turns interrupting rhythm; GitHub fills with repositories whose READMEs stop halfway.

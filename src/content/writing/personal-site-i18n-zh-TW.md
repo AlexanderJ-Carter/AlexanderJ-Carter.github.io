@@ -1,12 +1,12 @@
 ---
-title: "個人站多語言：路由、hreflang 與文案分層"
-description: "五種語言不是五種複製貼上。本文整理本站在 URL、範本與翻譯檔案上的分層方式。"
-category: "工程實踐"
+title: '個人站多語言：路由、hreflang 與文案分層'
+description: '五種語言不是五種複製貼上。本文整理本站在 URL、範本與翻譯檔案上的分層方式。'
+category: '工程實踐'
 pubDate: 2026-06-28
 updatedDate: 2026-07-25
 lang: zh-TW
-tags: ["i18n", "多語言", "Astro"]
-timeToRead: "13 min"
+tags: ['i18n', '多語言', 'Astro']
+timeToRead: '13 min'
 ---
 
 本站預設語言是簡體中文，根路徑 `/`；另有繁中、英式英語（`/en/`）、法語、俄語。多語言一開始很誘人——「國際範兒」——很快就會變成：同一句導覽要改五個檔案，一篇長文卻只存在一種語言，搜尋引擎還可能把重複頁判得含糊。

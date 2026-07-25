@@ -1,12 +1,12 @@
 ---
-title: "Theme Toggle Without Flash: Small Detail, Large Experience"
-description: "Dark mode that flashes white then black feels unfinished. How this site decides theme before the first paint."
-category: "Engineering"
+title: 'Theme Toggle Without Flash: Small Detail, Large Experience'
+description: 'Dark mode that flashes white then black feels unfinished. How this site decides theme before the first paint.'
+category: 'Engineering'
 pubDate: 2026-07-23
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["theming", "dark mode", "UX"]
-timeToRead: "11 min"
+tags: ['theming', 'dark mode', 'UX']
+timeToRead: '11 min'
 ---
 
 Dark mode is standard on personal sites, but implementation quality varies: some switch smoothly; others flash white on every refresh then snap dark, like a fluorescent tube warming up. The latter is often script timing; to visitors it feels like unfinished work.

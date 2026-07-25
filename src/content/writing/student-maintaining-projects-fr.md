@@ -1,12 +1,12 @@
 ---
-title: "Comment un étudiant développeur maintient un projet personnel sur la durée"
+title: 'Comment un étudiant développeur maintient un projet personnel sur la durée'
 description: "L'enthousiasme retombe, les examens arrivent. Ce qui reste tient à un périmètre maîtrisé, à la documentation et à un rythme de publication reproductible."
 category: "Pratique d'ingénierie"
 pubDate: 2026-07-02
 updatedDate: 2026-07-25
 lang: fr
-tags: ["open source", "étudiant", "maintenance"]
-timeToRead: "14 min"
+tags: ['open source', 'étudiant', 'maintenance']
+timeToRead: '14 min'
 ---
 
 Les étudiants développeurs n'ont pas de pénurie d'idées ; ils manquent surtout de **raisons d'ouvrir l'éditeur la semaine prochaine**. Cours, stages et sommeil découpent le rythme ; GitHub regorge de dépôts dont le README s'arrête à mi-chemin.

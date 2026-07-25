@@ -1,12 +1,12 @@
 ---
-title: "Distance in Street Photography: Looking, Shooting, and Putting the Camera Down"
-description: "Everyone on the street is a potential frame — not everyone should be kept. On distance, courtesy, and when I do not shoot."
-category: "Photography"
+title: 'Distance in Street Photography: Looking, Shooting, and Putting the Camera Down'
+description: 'Everyone on the street is a potential frame — not everyone should be kept. On distance, courtesy, and when I do not shoot.'
+category: 'Photography'
 pubDate: 2026-07-24
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["photography", "street photography", "ethics"]
-timeToRead: "12 min"
+tags: ['photography', 'street photography', 'ethics']
+timeToRead: '12 min'
 ---
 
 Street photography is seductive: the city performs; you only need to be present. That is also why boundaries blur fastest — a "decisive moment" for the photographer can be an intrusion for the subject.

@@ -1,12 +1,12 @@
 ---
-title: "Lumière, composition, instant : comment je choisis une photo qui « reste »"
-description: "Le disque dur déborde de photos « correctes ». Celles qui restent réunissent souvent lumière, structure et une trace humaine fugace."
-category: "Photographie"
+title: 'Lumière, composition, instant : comment je choisis une photo qui « reste »'
+description: 'Le disque dur déborde de photos « correctes ». Celles qui restent réunissent souvent lumière, structure et une trace humaine fugace.'
+category: 'Photographie'
 pubDate: 2026-07-20
 updatedDate: 2026-07-25
 lang: fr
-tags: ["photographie", "sélection", "composition"]
-timeToRead: "12 min"
+tags: ['photographie', 'sélection', 'composition']
+timeToRead: '12 min'
 ---
 
 Le rafale et le stockage bon marché ont rendu « shooter » facile et « garder » difficile. Après import, cocher fatigue souvent plus que déclencher : composition droite mais lumière plate, belle lumière mais histoire vide, histoire là mais flou sur la frame décisive.

@@ -1,12 +1,12 @@
 ---
-title: "Minimal Web Design Is Not About Removing Things: Structure, Tracking, and Space"
-description: "After decoration goes, spacing and type must be more precise. Constraints I actually use on this site."
-category: "Design Thinking"
+title: 'Minimal Web Design Is Not About Removing Things: Structure, Tracking, and Space'
+description: 'After decoration goes, spacing and type must be more precise. Constraints I actually use on this site.'
+category: 'Design Thinking'
 pubDate: 2026-06-18
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["design", "minimalism", "typography"]
-timeToRead: "13 min"
+tags: ['design', 'minimalism', 'typography']
+timeToRead: '13 min'
 ---
 
 "Minimal" is easily mistaken for empty: white background, one slogan, one button, brand complete. Visitors leave remembering "there was almost nothing".

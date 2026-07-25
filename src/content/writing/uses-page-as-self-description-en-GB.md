@@ -1,12 +1,12 @@
 ---
-title: "The Uses Page: Writing Your Stack as Readable Self-Description"
-description: "A Uses page is not gear flex. Explain what you use and why — visitors and future-you benefit."
-category: "Design Thinking"
+title: 'The Uses Page: Writing Your Stack as Readable Self-Description'
+description: 'A Uses page is not gear flex. Explain what you use and why — visitors and future-you benefit.'
+category: 'Design Thinking'
 pubDate: 2026-07-19
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["Uses", "workflow", "personal sites"]
-timeToRead: "10 min"
+tags: ['Uses', 'workflow', 'personal sites']
+timeToRead: '10 min'
 ---
 
 `/uses` pages are common on independent sites: editors, keyboards, cameras, hosts in a list. Done badly they read like uncensored receipts; done well like short engineering culture — how you work and what complexity you accept.

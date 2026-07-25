@@ -1,12 +1,12 @@
 ---
-title: "用途頁 Uses：把工具棧寫成可讀的自我說明"
-description: "Uses 頁不是裝備炫耀。寫清楚用什麼、為什麼，訪客與未來的自己都會感謝你。"
-category: "設計思考"
+title: '用途頁 Uses：把工具棧寫成可讀的自我說明'
+description: 'Uses 頁不是裝備炫耀。寫清楚用什麼、為什麼，訪客與未來的自己都會感謝你。'
+category: '設計思考'
 pubDate: 2026-07-19
 updatedDate: 2026-07-25
 lang: zh-TW
-tags: ["Uses", "工作流", "個人站"]
-timeToRead: "10 min"
+tags: ['Uses', '工作流', '個人站']
+timeToRead: '10 min'
 ---
 
 `/uses` 這類頁面在獨立站點圈很常見：編輯器、鍵盤、相機、主機商列成清單。做得差時像未打碼的購物小票；做得好時像一份簡短的工程文化說明——你如何工作，以及你願意維護什麼複雜度。

@@ -1,12 +1,12 @@
 ---
-title: "静态站的 CI：每次推送都先证明自己还能构建"
-description: "个人站也值得一条短流水线：安装、检查、构建。写我如何用自动化减少「只有我电脑能过」。"
-category: "工程实践"
+title: '静态站的 CI：每次推送都先证明自己还能构建'
+description: '个人站也值得一条短流水线：安装、检查、构建。写我如何用自动化减少「只有我电脑能过」。'
+category: '工程实践'
 pubDate: 2026-07-21
 updatedDate: 2026-07-25
 lang: zh-CN
-tags: ["CI", "GitHub Actions", "质量"]
-timeToRead: "11 min"
+tags: ['CI', 'GitHub Actions', '质量']
+timeToRead: '11 min'
 ---
 
 个人项目最常见的事故不是架构崩塌，而是：本地改了一点 i18n，忘了跑构建，推上去 Pages 挂了，自己还在地铁里。CI 不能让你更有创意，但能让你更早丢脸——在合并之前。

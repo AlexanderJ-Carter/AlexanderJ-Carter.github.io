@@ -1,12 +1,12 @@
 ---
-title: "Accessibility Is Not a Bonus: Keyboard, Contrast, and Focus"
-description: "Visible is not the same as usable. A personal site should survive Tab, screen readers, and users who hate flashing animation."
-category: "Design Thinking"
+title: 'Accessibility Is Not a Bonus: Keyboard, Contrast, and Focus'
+description: 'Visible is not the same as usable. A personal site should survive Tab, screen readers, and users who hate flashing animation.'
+category: 'Design Thinking'
 pubDate: 2026-07-14
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["accessibility", "a11y", "UX"]
-timeToRead: "13 min"
+tags: ['accessibility', 'a11y', 'UX']
+timeToRead: '13 min'
 ---
 
 Accessibility often lands on the "when we have time" list. Personal sites feel exempt: few visitors, simple pages, "normal people can click". But "normal" is not one body state — a sprained wrist, phone in bright sun, ageing eyes, keyboard-only users are more common than assumed.

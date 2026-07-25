@@ -1,12 +1,12 @@
 ---
-title: "Photographie à la lumière naturelle : direction, moment de la journée et erreurs courantes"
+title: 'Photographie à la lumière naturelle : direction, moment de la journée et erreurs courantes'
 description: "Pas besoin d'attendre les projecteurs d'un studio. Apprendre à lire fenêtre et ciel améliore les photos plus vite qu'un changement de boîtier."
-category: "Photographie"
+category: 'Photographie'
 pubDate: 2026-06-12
 updatedDate: 2026-07-25
 lang: fr
-tags: ["photographie", "lumière", "lumière naturelle"]
-timeToRead: "14 min"
+tags: ['photographie', 'lumière', 'lumière naturelle']
+timeToRead: '14 min'
 ---
 
 Beaucoup assimilent le progrès photo au changement d'objectif ou au passage au plein format. Le vrai tournant, chez moi, c'est souvent autre chose : **savez-vous lire la lumière ?**

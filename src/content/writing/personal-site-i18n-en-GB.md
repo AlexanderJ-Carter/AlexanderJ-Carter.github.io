@@ -1,12 +1,12 @@
 ---
-title: "Multilingual Personal Sites: Routes, hreflang, and Copy Layers"
-description: "Five languages are not five copy-pastes. How this site layers URLs, templates, and translation files."
-category: "Engineering"
+title: 'Multilingual Personal Sites: Routes, hreflang, and Copy Layers'
+description: 'Five languages are not five copy-pastes. How this site layers URLs, templates, and translation files.'
+category: 'Engineering'
 pubDate: 2026-06-28
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["i18n", "multilingual", "Astro"]
-timeToRead: "13 min"
+tags: ['i18n', 'multilingual', 'Astro']
+timeToRead: '13 min'
 ---
 
 The default language here is Simplified Chinese at `/`; there is also Traditional Chinese, British English (`/en/`), French, and Russian. Multilingual work is tempting at first — "international" — then quickly becomes: the same nav string in five files, long articles existing in only one language, and search engines unsure which duplicate is canonical.

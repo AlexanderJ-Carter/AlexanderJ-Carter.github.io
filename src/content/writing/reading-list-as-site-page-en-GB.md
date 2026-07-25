@@ -1,12 +1,12 @@
 ---
-title: "Why a Reading List Deserves Its Own Page on Your Site"
-description: "A book list is not showing off — it is a decision log you can revisit. How I organise routes, notes, and what happens after finishing."
-category: "Design Thinking"
+title: 'Why a Reading List Deserves Its Own Page on Your Site'
+description: 'A book list is not showing off — it is a decision log you can revisit. How I organise routes, notes, and what happens after finishing.'
+category: 'Design Thinking'
 pubDate: 2026-07-22
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["reading", "information architecture", "personal sites"]
-timeToRead: "12 min"
+tags: ['reading', 'information architecture', 'personal sites']
+timeToRead: '12 min'
 ---
 
 Many people post "currently reading" on social feeds; a few days later it is gone. I wanted one page that could grow slowly: clear routes, findable notes, permission to remove books that expired.

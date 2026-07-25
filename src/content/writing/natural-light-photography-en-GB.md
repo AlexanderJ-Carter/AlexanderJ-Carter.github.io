@@ -1,12 +1,12 @@
 ---
-title: "Natural Light Photography: Direction, Time of Day, and Common Mistakes"
-description: "You do not need studio lights. Learning to read windows and sky improves photos faster than swapping bodies."
-category: "Photography"
+title: 'Natural Light Photography: Direction, Time of Day, and Common Mistakes'
+description: 'You do not need studio lights. Learning to read windows and sky improves photos faster than swapping bodies.'
+category: 'Photography'
 pubDate: 2026-06-12
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["photography", "light", "natural light"]
-timeToRead: "14 min"
+tags: ['photography', 'light', 'natural light']
+timeToRead: '14 min'
 ---
 
 Many people equate photographic progress with new lenses or moving to full frame. The divide I see more often is simpler: **can you read light?**

@@ -1,12 +1,12 @@
 ---
-title: "用途页 Uses：把工具栈写成可读的自我说明"
-description: "Uses 页不是装备炫耀。写清楚用什么、为什么，访客与未来的自己都会感谢你。"
-category: "设计思考"
+title: '用途页 Uses：把工具栈写成可读的自我说明'
+description: 'Uses 页不是装备炫耀。写清楚用什么、为什么，访客与未来的自己都会感谢你。'
+category: '设计思考'
 pubDate: 2026-07-19
 updatedDate: 2026-07-25
 lang: zh-CN
-tags: ["Uses", "工作流", "个人站"]
-timeToRead: "10 min"
+tags: ['Uses', '工作流', '个人站']
+timeToRead: '10 min'
 ---
 
 `/uses` 这类页面在独立站点圈很常见：编辑器、键盘、相机、主机商列成清单。做得差时像未打码的购物小票；做得好时像一份简短的工程文化说明——你如何工作，以及你愿意维护什么复杂度。

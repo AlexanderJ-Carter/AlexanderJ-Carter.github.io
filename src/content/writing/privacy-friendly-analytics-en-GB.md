@@ -1,12 +1,12 @@
 ---
-title: "Static Sites Still Need Numbers: Choosing Privacy-Friendly Analytics"
+title: 'Static Sites Still Need Numbers: Choosing Privacy-Friendly Analytics'
 description: "A personal site does not need GA4's full portrait. This piece records how I balance seeing traffic and not tracking visitors."
-category: "Technical Practice"
+category: 'Technical Practice'
 pubDate: 2026-06-08
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["privacy", "analytics", "static sites"]
-timeToRead: "12 min"
+tags: ['privacy', 'analytics', 'static sites']
+timeToRead: '12 min'
 ---
 
 Every personal site reaches the same question sooner or later: where do visitors come from? Which posts actually get read? Is anyone here besides me refreshing the homepage?

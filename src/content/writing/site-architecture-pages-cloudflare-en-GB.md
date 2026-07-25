@@ -1,12 +1,12 @@
 ---
-title: "Site Architecture: How GitHub Pages and Cloudflare Run Together"
-description: "A path from Markdown to the global edge. Why this site is statically generated, how it deploys, and where the boundaries lie."
-category: "Technical Practice"
+title: 'Site Architecture: How GitHub Pages and Cloudflare Run Together'
+description: 'A path from Markdown to the global edge. Why this site is statically generated, how it deploys, and where the boundaries lie.'
+category: 'Technical Practice'
 pubDate: 2026-07-10
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["architecture", "GitHub Pages", "Cloudflare"]
-timeToRead: "12 min"
+tags: ['architecture', 'GitHub Pages', 'Cloudflare']
+timeToRead: '12 min'
 ---
 
 People ask what backend powers alexander.xin. Short answer: usually no traditional backend. Long answer is this piece — from content to build to how GitHub Pages and Cloudflare stack.

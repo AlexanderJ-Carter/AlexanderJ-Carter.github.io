@@ -1,12 +1,12 @@
 ---
-title: "静态站安全头实战：_headers、CSP 与取舍"
-description: "静态站也能认真做安全头。本文写 Cloudflare / Pages 风格的 _headers、CSP 过严时的痛，以及本站如何取舍。"
-category: "技术实践"
+title: '静态站安全头实战：_headers、CSP 与取舍'
+description: '静态站也能认真做安全头。本文写 Cloudflare / Pages 风格的 _headers、CSP 过严时的痛，以及本站如何取舍。'
+category: '技术实践'
 pubDate: 2026-07-06
 updatedDate: 2026-07-25
 lang: zh-CN
-tags: ["安全", "CSP", "Cloudflare"]
-timeToRead: "13 min"
+tags: ['安全', 'CSP', 'Cloudflare']
+timeToRead: '13 min'
 ---
 
 静态站没有服务器里的会话逻辑，不代表浏览器侧可以放飞。点击劫持、MIME 嗅探、失控的第三方脚本，一样能搞砸个人站。好消息是：在 GitHub Pages + Cloudflare 一类架构里，用 `_headers`（或平台等价配置）就能把基线安全头铺到全站。

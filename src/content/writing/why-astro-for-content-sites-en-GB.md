@@ -1,12 +1,12 @@
 ---
-title: "Why Content Sites Suit Astro: Zero JS and Core Web Vitals"
-description: "A personal site is for reading first. Astro ships no framework runtime by default — which matches content-site performance goals."
-category: "Technical Practice"
+title: 'Why Content Sites Suit Astro: Zero JS and Core Web Vitals'
+description: 'A personal site is for reading first. Astro ships no framework runtime by default — which matches content-site performance goals.'
+category: 'Technical Practice'
 pubDate: 2026-06-22
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["Astro", "performance", "Core Web Vitals"]
-timeToRead: "12 min"
+tags: ['Astro', 'performance', 'Core Web Vitals']
+timeToRead: '12 min'
 ---
 
 The core deliverable of a content site is words and images in HTML, not a client-side state tree. Many frameworks assume "the app must run in the browser"; Astro assumes "the page is a document first, interactivity islands on demand". For personal writing, galleries, and documentation, the second assumption is usually less work — and makes green Core Web Vitals easier.

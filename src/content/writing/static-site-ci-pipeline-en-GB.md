@@ -1,12 +1,12 @@
 ---
-title: "CI for Static Sites: Every Push Proves It Still Builds"
+title: 'CI for Static Sites: Every Push Proves It Still Builds'
 description: "Personal sites deserve a short pipeline: install, check, build. How automation reduces 'only my machine passes'."
-category: "Engineering"
+category: 'Engineering'
 pubDate: 2026-07-21
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["CI", "GitHub Actions", "quality"]
-timeToRead: "11 min"
+tags: ['CI', 'GitHub Actions', 'quality']
+timeToRead: '11 min'
 ---
 
 The most common personal-project accident is not architecture collapse but: tweak i18n locally, forget build, push, Pages broken, you are on the tube. CI will not make you more creative; it makes you fail earlier — before merge.

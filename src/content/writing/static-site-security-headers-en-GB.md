@@ -1,12 +1,12 @@
 ---
-title: "Security Headers on Static Sites: _headers, CSP, and Trade-offs"
-description: "Static sites can take security headers seriously. Cloudflare/Pages-style _headers, the pain of strict CSP, and how this site balances them."
-category: "Technical Practice"
+title: 'Security Headers on Static Sites: _headers, CSP, and Trade-offs'
+description: 'Static sites can take security headers seriously. Cloudflare/Pages-style _headers, the pain of strict CSP, and how this site balances them.'
+category: 'Technical Practice'
 pubDate: 2026-07-06
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["security", "CSP", "Cloudflare"]
-timeToRead: "13 min"
+tags: ['security', 'CSP', 'Cloudflare']
+timeToRead: '13 min'
 ---
 
 No server-side session logic on a static site does not mean the browser side can be ignored. Clickjacking, MIME sniffing, and runaway third-party scripts can still wreck a personal site. Good news: on GitHub Pages plus Cloudflare-style setups, `_headers` (or platform equivalents) can spread baseline security headers sitewide.

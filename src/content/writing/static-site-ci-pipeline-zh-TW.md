@@ -1,12 +1,12 @@
 ---
-title: "靜態站的 CI：每次推送都先證明自己還能建置"
-description: "個人站也值得一條短流水線：安裝、檢查、建置。寫我如何用自動化減少「只有我電腦能過」。"
-category: "工程實踐"
+title: '靜態站的 CI：每次推送都先證明自己還能建置'
+description: '個人站也值得一條短流水線：安裝、檢查、建置。寫我如何用自動化減少「只有我電腦能過」。'
+category: '工程實踐'
 pubDate: 2026-07-21
 updatedDate: 2026-07-25
 lang: zh-TW
-tags: ["CI", "GitHub Actions", "品質"]
-timeToRead: "11 min"
+tags: ['CI', 'GitHub Actions', '品質']
+timeToRead: '11 min'
 ---
 
 個人專案最常見的事故不是架構崩塌，而是：本地改了一點 i18n，忘了跑建置，推上去 Pages 掛了，自己還在地鐵裡。CI 不能讓你更有創意，但能讓你更早丟臉——在合併之前。

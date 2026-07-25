@@ -1,12 +1,12 @@
 ---
-title: "为什么内容站更适合 Astro：零 JS 与 Core Web Vitals"
-description: "个人站首先是给人读的。Astro 默认不发框架运行时，这恰好对准内容站的性能目标。"
-category: "技术实践"
+title: '为什么内容站更适合 Astro：零 JS 与 Core Web Vitals'
+description: '个人站首先是给人读的。Astro 默认不发框架运行时，这恰好对准内容站的性能目标。'
+category: '技术实践'
 pubDate: 2026-06-22
 updatedDate: 2026-07-25
 lang: zh-CN
-tags: ["Astro", "性能", "Core Web Vitals"]
-timeToRead: "12 min"
+tags: ['Astro', '性能', 'Core Web Vitals']
+timeToRead: '12 min'
 ---
 
 内容站的核心交付物是 HTML 里的字与图，不是客户端状态树。很多框架默认假设「应用要在浏览器里跑起来」；Astro 默认假设「页面先是文档，交互按需岛屿化」。对个人写作、画廊、文档型站点，后一种假设通常更省事，也更容易把 Core Web Vitals 做绿。

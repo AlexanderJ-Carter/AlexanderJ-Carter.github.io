@@ -1,12 +1,12 @@
 ---
-title: "Light, Composition, Moment: How I Choose Photos That Stay"
+title: 'Light, Composition, Moment: How I Choose Photos That Stay'
 description: "Drives fill with 'fine' images. What remains usually satisfies light, structure, and a fleeting human trace."
-category: "Photography"
+category: 'Photography'
 pubDate: 2026-07-20
 updatedDate: 2026-07-25
 lang: en-GB
-tags: ["photography", "culling", "composition"]
-timeToRead: "12 min"
+tags: ['photography', 'culling', 'composition']
+timeToRead: '12 min'
 ---
 
 Burst mode and cheap storage made shooting cheap and keeping hard. After import, selecting hurts more than the shutter: straight composition but flat light; beautiful light but empty story; story present but blurred on the decisive frame.

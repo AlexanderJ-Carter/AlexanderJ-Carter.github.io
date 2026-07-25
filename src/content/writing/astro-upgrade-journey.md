@@ -1,12 +1,12 @@
 ---
-title: "从 Astro 5 升级到 Astro 6：踩坑、回退与最终方案"
-description: "一次真实的框架升级记录——包括 Content Collections 迁移噩梦和 Windows 上的神秘构建失败。"
-category: "技术实践"
+title: '从 Astro 5 升级到 Astro 6：踩坑、回退与最终方案'
+description: '一次真实的框架升级记录——包括 Content Collections 迁移噩梦和 Windows 上的神秘构建失败。'
+category: '技术实践'
 pubDate: 2026-05-30
 updatedDate: 2026-06-01
 lang: zh-CN
-tags: ["Astro", "升级", "静态站点"]
-timeToRead: "12 min"
+tags: ['Astro', '升级', '静态站点']
+timeToRead: '12 min'
 ---
 
 这篇文章写在升级完成的第三天。记忆还新鲜，痛苦还真实。如果你也在考虑从 Astro 5 升级到 Astro 6，希望这篇记录能让你少走一些弯路。
@@ -98,11 +98,11 @@ export const collections = { writing };
 ```typescript
 // 旧
 const posts = await getCollection('writing');
-posts.map(post => post.slug);
+posts.map((post) => post.slug);
 
 // 新
 const posts = await getCollection('writing');
-posts.map(post => post.id);
+posts.map((post) => post.id);
 ```
 
 这个改动影响了动态路由页面 `[...slug].astro` 里的 `getStaticPaths` 函数。
@@ -125,6 +125,7 @@ const { Content } = await render(post);
 ### 第三步：页面路由适配
 
 我的网站有两组路由：
+
 - `/writing/` 和 `/writing/[slug]`（根路径，中文）
 - `/[lang]/writing/` 和 `/[lang]/writing/[slug]`（其他语言）
 
@@ -168,7 +169,7 @@ const writing = defineCollection({
 但实际上更简单的做法是使用相对路径，并确保 base 是相对于项目根目录的：
 
 ```typescript
-loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/writing' })
+loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/writing' });
 ```
 
 问题最终确认是 glob loader 在 Windows 上处理相对路径时的一个已知 bug。workaround 是在 `base` 参数中使用 `fileURLToPath`。
@@ -208,11 +209,11 @@ loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/writing' })
 
 ### 构建时间对比
 
-| 步骤 | Astro 5 | Astro 6 |
-|------|---------|---------|
-| 首次构建 | 12.3s | 8.7s |
-| 增量构建 | 4.1s | 3.2s |
-| 内容变更 | 6.8s | 4.5s |
+| 步骤     | Astro 5 | Astro 6 |
+| -------- | ------- | ------- |
+| 首次构建 | 12.3s   | 8.7s    |
+| 增量构建 | 4.1s    | 3.2s    |
+| 内容变更 | 6.8s    | 4.5s    |
 
 构建时间有可感知的改善，尤其是在内容变更后的增量构建。
 

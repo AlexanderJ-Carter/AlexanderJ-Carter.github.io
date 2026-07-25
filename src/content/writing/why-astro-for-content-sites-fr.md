@@ -1,12 +1,12 @@
 ---
-title: "Pourquoi Astro convient aux sites de contenu : zéro JS et Core Web Vitals"
+title: 'Pourquoi Astro convient aux sites de contenu : zéro JS et Core Web Vitals'
 description: "Un site personnel, c'est d'abord pour être lu. Astro n'envoie pas de runtime de framework par défaut — ce qui colle aux objectifs de performance d'un site de contenu."
-category: "Pratique technique"
+category: 'Pratique technique'
 pubDate: 2026-06-22
 updatedDate: 2026-07-25
 lang: fr
-tags: ["Astro", "performance", "Core Web Vitals"]
-timeToRead: "12 min"
+tags: ['Astro', 'performance', 'Core Web Vitals']
+timeToRead: '12 min'
 ---
 
 La livraison centrale d'un site de contenu, ce sont les mots et les images dans le HTML — pas un arbre d'état côté client. Beaucoup de frameworks supposent par défaut qu'« l'application doit tourner dans le navigateur » ; Astro suppose que « la page est d'abord un document, l'interactivité en îlots à la demande ». Pour l'écriture personnelle, les galeries et la documentation, cette seconde hypothèse est en général plus simple — et plus facile à mettre au vert sur les Core Web Vitals.
