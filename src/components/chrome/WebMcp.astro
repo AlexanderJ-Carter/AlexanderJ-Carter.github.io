@@ -1,7 +1,7 @@
 ---
 /**
- * Registers WebMCP tools for browser agents (navigator/document.modelContext).
- * No-ops when the WebMCP API is unavailable.
+ * Registers WebMCP tools for browser agents.
+ * Supports registerTool (spec) and provideContext (scanner/Chrome variants).
  */
 ---
 
@@ -17,14 +17,8 @@
       return null;
     }
 
-    async function registerTools() {
-      const ctx = getModelContext();
-      if (!ctx || typeof ctx.registerTool !== 'function') return;
-
-      const controller = new AbortController();
-      window.__alexanderWebMcpAbort = controller;
-
-      await ctx.registerTool(
+    function tools() {
+      return [
         {
           name: 'get_site_info',
           description:
@@ -64,10 +58,6 @@
             };
           },
         },
-        { signal: controller.signal }
-      );
-
-      await ctx.registerTool(
         {
           name: 'navigate_site',
           description:
@@ -87,12 +77,7 @@
             const path = String(args.path || '');
             if (!path.startsWith('/')) {
               return {
-                content: [
-                  {
-                    type: 'text',
-                    text: 'path must start with /',
-                  },
-                ],
+                content: [{ type: 'text', text: 'path must start with /' }],
                 isError: true,
               };
             }
@@ -100,10 +85,7 @@
             if (url.origin !== location.origin) {
               return {
                 content: [
-                  {
-                    type: 'text',
-                    text: 'refusing cross-origin navigation',
-                  },
+                  { type: 'text', text: 'refusing cross-origin navigation' },
                 ],
                 isError: true,
               };
@@ -111,18 +93,11 @@
             location.assign(url.pathname + url.search + url.hash);
             return {
               content: [
-                {
-                  type: 'text',
-                  text: `navigating to ${url.pathname}`,
-                },
+                { type: 'text', text: 'navigating to ' + url.pathname },
               ],
             };
           },
         },
-        { signal: controller.signal }
-      );
-
-      await ctx.registerTool(
         {
           name: 'get_page_markdown_hint',
           description:
@@ -137,14 +112,35 @@
               content: [
                 {
                   type: 'text',
-                  text: `Fetch ${location.href} with header Accept: text/markdown. Expect Content-Type: text/markdown when the edge converter is active.`,
+                  text:
+                    'Fetch ' +
+                    location.href +
+                    ' with header Accept: text/markdown. Expect Content-Type: text/markdown when the edge converter is active.',
                 },
               ],
             };
           },
         },
-        { signal: controller.signal }
-      );
+      ];
+    }
+
+    async function registerTools() {
+      const ctx = getModelContext();
+      if (!ctx) return;
+
+      const list = tools();
+      const controller = new AbortController();
+      window.__alexanderWebMcpAbort = controller;
+
+      if (typeof ctx.provideContext === 'function') {
+        await ctx.provideContext({ tools: list });
+        return;
+      }
+
+      if (typeof ctx.registerTool !== 'function') return;
+      for (const tool of list) {
+        await ctx.registerTool(tool, { signal: controller.signal });
+      }
     }
 
     if (document.readyState === 'loading') {

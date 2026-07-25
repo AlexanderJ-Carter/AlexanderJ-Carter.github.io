@@ -19,7 +19,7 @@
     "start": "astro dev",
     "generate-music": "node scripts/generate-music-manifest.js",
     "optimize-images": "node scripts/optimize-images.js",
-    "build": "node scripts/generate-music-manifest.js && astro check && astro build",
+    "build": "node scripts/generate-music-manifest.js && astro check && astro build && node scripts/ensure-well-known.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
