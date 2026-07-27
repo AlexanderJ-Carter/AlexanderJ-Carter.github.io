@@ -9,12 +9,18 @@ function getLangPath(path: string) {
   return lang === 'zh-CN' ? path : `/${lang === 'en-GB' ? 'en' : lang}${path}`;
 }
 
+function hostOf(href: string): string {
+  return new URL(href).hostname.replace(/^www\./, '');
+}
+
 const i18n = {
   'zh-CN': {
     desc: '摄影、写作与开源工程的长期角落。',
-    nav: '导航',
+    browse: '逛逛',
+    elsewhere: '站外目录',
+    elsewhereLead: '独立子站与仓库，按索引翻即可。',
     legal: '说明',
-    contact: '联系',
+    contact: '写信',
     support: '支持本站',
     gallery: '画廊',
     writing: '写作',
@@ -28,12 +34,16 @@ const i18n = {
     accessibility: '无障碍',
     security: '安全',
     sitemap: '地图',
+    blog: '博客',
+    tagline: 'Static folio · Asia/Shanghai',
   },
   'zh-TW': {
     desc: '攝影、寫作與開源工程的長期角落。',
-    nav: '導航',
+    browse: '逛逛',
+    elsewhere: '站外目錄',
+    elsewhereLead: '獨立子站與倉庫，按索引翻即可。',
     legal: '說明',
-    contact: '聯繫',
+    contact: '寫信',
     support: '支持本站',
     gallery: '畫廊',
     writing: '寫作',
@@ -47,12 +57,16 @@ const i18n = {
     accessibility: '無障礙',
     security: '安全',
     sitemap: '地圖',
+    blog: '部落格',
+    tagline: 'Static folio · Asia/Shanghai',
   },
   'en-GB': {
     desc: 'A long-running corner for photography, writing and open-source making.',
-    nav: 'Navigate',
+    browse: 'Browse',
+    elsewhere: 'Elsewhere index',
+    elsewhereLead: 'Independent sites and the repo — flip by number.',
     legal: 'Notes',
-    contact: 'Contact',
+    contact: 'Write',
     support: 'Support',
     gallery: 'Gallery',
     writing: 'Writing',
@@ -66,12 +80,16 @@ const i18n = {
     accessibility: 'Accessibility',
     security: 'Security',
     sitemap: 'Sitemap',
+    blog: 'Blog',
+    tagline: 'Static folio · Asia/Shanghai',
   },
   fr: {
     desc: 'Un coin durable pour la photo, l’écriture et l’open source.',
-    nav: 'Naviguer',
+    browse: 'Parcourir',
+    elsewhere: 'Index extérieur',
+    elsewhereLead: 'Sites indépendants et dépôt — par numéro.',
     legal: 'Notes',
-    contact: 'Contact',
+    contact: 'Écrire',
     support: 'Soutenir',
     gallery: 'Galerie',
     writing: 'Écrits',
@@ -85,12 +103,16 @@ const i18n = {
     accessibility: 'Accessibilité',
     security: 'Sécurité',
     sitemap: 'Plan',
+    blog: 'Blog',
+    tagline: 'Static folio · Asia/Shanghai',
   },
   ru: {
     desc: 'Долгоживущий угол для фото, текстов и open source.',
-    nav: 'Навигация',
+    browse: 'Разделы',
+    elsewhere: 'Внешний индекс',
+    elsewhereLead: 'Независимые сайты и репозиторий — по номеру.',
     legal: 'Сведения',
-    contact: 'Контакты',
+    contact: 'Написать',
     support: 'Поддержать',
     gallery: 'Галерея',
     writing: 'Статьи',
@@ -104,18 +126,29 @@ const i18n = {
     accessibility: 'Доступность',
     security: 'Безопасность',
     sitemap: 'Карта',
+    blog: 'Блог',
+    tagline: 'Static folio · Asia/Shanghai',
   },
 };
 
 const t = i18n[lang as keyof typeof i18n] || i18n['zh-CN'];
 
-const primary = [
+const browse = [
   { label: t.gallery, href: getLangPath('/gallery') },
   { label: t.writing, href: getLangPath('/writing') },
   { label: t.projects, href: getLangPath('/projects') },
   { label: t.about, href: getLangPath('/about') },
   { label: t.tools, href: getLangPath('/tools') },
   { label: t.fun, href: getLangPath('/fun') },
+];
+
+const elsewhere = [
+  { label: t.blog, href: 'https://blog.alexander.xin' },
+  { label: 'MyCook', href: 'https://cook.alexander.xin' },
+  { label: 'Linux Command', href: 'https://linux-command.alexander.xin' },
+  { label: 'NetQ', href: 'https://netq.alexander.xin' },
+  { label: 'Git Lab', href: 'https://lab.alexander.xin' },
+  { label: 'GitHub', href: 'https://github.com/AlexanderJ-Carter' },
 ];
 
 const legal = [
@@ -134,55 +167,120 @@ const legal = [
     aria-hidden="true"
   >
   </div>
-  <div class="container mx-auto px-4 lg:px-8 py-12 md:py-14">
-    <div class="grid gap-10 lg:grid-cols-[1.2fr_1fr] items-start">
-      <div>
-        <a href={getLangPath('/')} class="inline-flex items-center gap-3 group">
-          <img
-            src="/img/branding/logo-96.webp"
-            alt=""
-            width="40"
-            height="40"
-            class="w-10 h-10 rounded-sm dark:hidden"
-            loading="lazy"
-            decoding="async"
-          />
-          <img
-            src="/img/branding/logo-dark-96.webp"
-            alt=""
-            width="40"
-            height="40"
-            class="w-10 h-10 rounded-sm hidden dark:block"
-            loading="lazy"
-            decoding="async"
-          />
+
+  <div class="container mx-auto px-4 lg:px-8 py-14 md:py-16 space-y-12">
+    <!-- Brand band -->
+    <div
+      class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 pb-10 border-b border-[rgb(var(--color-border))]"
+    >
+      <div class="max-w-xl">
+        <a
+          href={getLangPath('/')}
+          class="inline-flex items-center gap-3 group mb-4"
+        >
           <span
-            class="font-heading font-bold tracking-tight group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+            class="relative shrink-0 w-10 h-10 rounded-sm overflow-hidden ring-1 ring-[rgb(var(--color-border))] group-hover:ring-[rgb(var(--color-accent)_/_0.5)] transition"
           >
-            Alexander Carter
+            <img
+              src="/img/branding/logo-96.webp"
+              alt=""
+              width="40"
+              height="40"
+              class="w-full h-full object-cover dark:hidden"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/img/branding/logo-dark-96.webp"
+              alt=""
+              width="40"
+              height="40"
+              class="w-full h-full object-cover hidden dark:block"
+              loading="lazy"
+              decoding="async"
+            />
+          </span>
+          <span>
+            <span
+              class="block font-heading font-bold text-lg tracking-tight group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors"
+            >
+              Alexander Carter
+            </span>
+            <span
+              class="meta-mono !text-[10px] !tracking-[0.14em] text-[rgb(var(--color-text-tertiary))]"
+            >
+              Photography · Writing · Making
+            </span>
           </span>
         </a>
         <p
-          class="mt-4 max-w-md text-sm leading-relaxed text-[rgb(var(--color-text-secondary))]"
+          class="text-sm leading-relaxed text-[rgb(var(--color-text-secondary))]"
         >
           {t.desc}
         </p>
-        <a
-          href="mailto:contact-us@alexander.xin"
-          class="mt-4 inline-flex text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
-        >
-          {t.contact}: contact-us@alexander.xin
-        </a>
       </div>
 
-      <nav aria-label={t.nav} class="lg:justify-self-end">
-        <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm font-heading">
+      <a
+        href="mailto:contact-us@alexander.xin"
+        class="inline-flex items-center gap-3 border border-[rgb(var(--color-border))] px-5 py-3 hover:border-[rgb(var(--color-accent)_/_0.55)] hover:bg-[rgb(var(--color-bg-secondary))] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+      >
+        <span
+          class="meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))]"
+          >{t.contact}</span
+        >
+        <span
+          class="font-heading text-sm font-semibold text-primary-600 dark:text-primary-400"
+        >
+          contact-us@alexander.xin
+        </span>
+      </a>
+    </div>
+
+    <!-- Browse + Notes -->
+    <div class="grid gap-10 lg:grid-cols-2">
+      <nav aria-label={t.browse}>
+        <p class="folio-mark mb-4">{t.browse}</p>
+        <ul class="flex flex-wrap gap-x-1 gap-y-2">
           {
-            primary.map((link) => (
-              <li>
+            browse.map((link, i) => (
+              <li class="inline-flex items-center text-sm font-heading">
+                {i > 0 && (
+                  <span
+                    class="mx-2 text-[rgb(var(--color-text-tertiary))]"
+                    aria-hidden="true"
+                  >
+                    ·
+                  </span>
+                )}
                 <a
                   href={link.href}
-                  class="text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  class="text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 transition-colors underline-offset-4 hover:underline"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <nav aria-label={t.legal}>
+        <p class="folio-mark mb-4">{t.legal}</p>
+        <ul class="flex flex-wrap gap-x-1 gap-y-2">
+          {
+            legal.map((link, i) => (
+              <li class="inline-flex items-center text-sm">
+                {i > 0 && (
+                  <span
+                    class="mx-2 text-[rgb(var(--color-text-tertiary))]"
+                    aria-hidden="true"
+                  >
+                    ·
+                  </span>
+                )}
+                <a
+                  href={link.href}
+                  class="text-[rgb(var(--color-text-tertiary))] hover:text-[rgb(var(--color-text-secondary))] transition-colors"
                 >
                   {link.label}
                 </a>
@@ -193,8 +291,52 @@ const legal = [
       </nav>
     </div>
 
+    <!-- Elsewhere directory -->
+    <section aria-labelledby="footer-elsewhere-title">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
+        <div>
+          <p class="folio-mark mb-2">Plate · Out</p>
+          <h2
+            id="footer-elsewhere-title"
+            class="font-heading text-xl md:text-2xl font-bold tracking-tight"
+          >
+            {t.elsewhere}
+          </h2>
+          <p
+            class="mt-1 text-sm text-[rgb(var(--color-text-secondary))] max-w-md"
+          >
+            {t.elsewhereLead}
+          </p>
+        </div>
+      </div>
+
+      <div class="folio-directory">
+        {
+          elsewhere.map((link, i) => (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="folio-directory-row"
+            >
+              <span class="fd-index">{String(i + 1).padStart(2, '0')}</span>
+              <span class="min-w-0">
+                <span class="fd-title">{link.label}</span>
+                <span class="fd-host fd-host-mobile">{hostOf(link.href)}</span>
+              </span>
+              <span class="fd-host fd-host-desktop">{hostOf(link.href)}</span>
+              <span class="fd-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Copyright bar -->
     <div
-      class="mt-10 pt-6 border-t border-[rgb(var(--color-border))] flex flex-col gap-4"
+      class="pt-6 border-t border-[rgb(var(--color-border))] flex flex-col gap-4"
     >
       <div
         class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
@@ -216,27 +358,10 @@ const legal = [
             {t.accessibility}
           </a>
         </div>
-
-        <nav aria-label={t.legal}>
-          <ul
-            class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[rgb(var(--color-text-tertiary))]"
-          >
-            {
-              legal.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class="hover:text-[rgb(var(--color-text-secondary))] transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </nav>
+        <p class="meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))]">
+          {t.tagline}
+        </p>
       </div>
-
       <SiteFilings />
     </div>
   </div>

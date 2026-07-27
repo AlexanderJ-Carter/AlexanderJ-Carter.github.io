@@ -186,131 +186,219 @@ const heroSrc = gallerySrcFallback(heroImage);
     <AdSlot slot="home" format="horizontal" />
   </div>
 
-  <!-- Studio note -->
-  <section class="py-20 md:py-24 reveal">
+  <!-- Studio + paths -->
+  <section
+    class="py-20 md:py-24 border-y border-[rgb(var(--color-border))] reveal"
+  >
     <div class="container mx-auto px-4 lg:px-8">
-      <div class="max-w-2xl">
-        <p class="folio-mark mb-3">Plate 02</p>
-        <h2
-          class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-5"
+      <div class="grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16 items-end">
+        <div class="max-w-2xl">
+          <p class="folio-mark mb-3">Plate 02</p>
+          <h2
+            class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-5"
+          >
+            {copy.studioTitle}
+          </h2>
+          <p
+            class="text-lg text-[rgb(var(--color-text-secondary))] leading-relaxed mb-8"
+          >
+            {copy.studioBody}
+          </p>
+          <a href={lp('/about')} class="btn-primary">{copy.studioCta}</a>
+        </div>
+        <aside
+          class="border-l-2 border-[rgb(var(--color-accent)_/_0.45)] pl-6 py-1"
         >
-          {copy.studioTitle}
-        </h2>
-        <p
-          class="text-lg text-[rgb(var(--color-text-secondary))] leading-relaxed"
-        >
-          {copy.studioBody}
-        </p>
+          <p
+            class="meta-mono !text-[10px] mb-3 text-[rgb(var(--color-text-tertiary))]"
+          >
+            {copy.pathsLabel}
+          </p>
+          <ul class="space-y-4">
+            {
+              copy.paths.map((item) => (
+                <li>
+                  <a
+                    href={lp(item.href)}
+                    class="group flex items-baseline justify-between gap-4 border-b border-[rgb(var(--color-border))] pb-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
+                  >
+                    <span class="font-heading font-semibold group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                      {item.title}
+                    </span>
+                    <span
+                      class="text-sm text-[rgb(var(--color-text-tertiary))] group-hover:translate-x-0.5 transition-transform"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </aside>
       </div>
     </div>
   </section>
 
-  <!-- Focus -->
+  <!-- Elsewhere -->
   <section class="py-20 md:py-24 bg-[rgb(var(--color-bg-secondary))] reveal">
     <div class="container mx-auto px-4 lg:px-8">
-      <div class="max-w-2xl mb-12">
-        <p class="folio-mark mb-3">Plate 03</p>
-        <h2
-          class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3"
-        >
-          {copy.focusTitle}
-        </h2>
-        <p class="text-[rgb(var(--color-text-secondary))] text-lg">
-          {copy.focusSubtitle}
-        </p>
+      <div
+        class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10"
+      >
+        <div class="max-w-2xl">
+          <p class="folio-mark mb-3">Plate 03</p>
+          <h2
+            class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-2"
+          >
+            {copy.elsewhereTitle}
+          </h2>
+          <p class="text-[rgb(var(--color-text-secondary))] text-lg">
+            {copy.elsewhereSubtitle}
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-x-5 gap-y-2 shrink-0">
+          <a
+            href={lp('/tools')}
+            class="font-heading font-semibold text-primary-600 dark:text-primary-400"
+          >
+            {copy.elsewhereTools} →
+          </a>
+          <a
+            href={lp('/projects')}
+            class="font-heading font-semibold text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+          >
+            {copy.elsewhereProjects} →
+          </a>
+        </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+      <div class="folio-directory shadow-[var(--shadow-sm)]">
         {
-          copy.focus.map((item) => (
-            <a
-              href={lp(item.href)}
-              class="group block border-t border-[rgb(var(--color-border))] pt-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary-500"
-            >
-              <h3 class="font-heading text-xl font-semibold mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                {item.title}
-              </h3>
-              <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4">
-                {item.desc}
-              </p>
-              <span class="text-sm font-heading font-semibold text-primary-600 dark:text-primary-400 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                {copy.focusViewMore}
-                <span aria-hidden="true">→</span>
-              </span>
-            </a>
-          ))
+          copy.elsewhere.map((item, i) => {
+            const host = new URL(item.href).hostname.replace(/^www\./, '');
+            return (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="folio-directory-row !items-start sm:!items-baseline"
+              >
+                <span class="fd-index pt-0.5">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span class="min-w-0">
+                  <span class="fd-title !text-lg md:!text-xl">{item.title}</span>
+                  <span class="fd-host fd-host-mobile">{host}</span>
+                  <p class="mt-1.5 text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed max-w-xl">
+                    {item.desc}
+                  </p>
+                </span>
+                <span class="fd-host fd-host-desktop pt-1">{host}</span>
+                <span class="fd-arrow pt-1" aria-hidden="true">
+                  ↗
+                </span>
+              </a>
+            );
+          })
         }
       </div>
     </div>
   </section>
 
-  <!-- Writing -->
+  <!-- Writing + reading -->
   <section class="py-20 md:py-28 reveal">
     <div class="container mx-auto px-4 lg:px-8">
-      <div
-        class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12"
-      >
-        <div class="max-w-2xl">
-          <p class="folio-mark mb-3">Plate 04</p>
-          <h2
-            class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3"
+      <div class="grid lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-16">
+        <div>
+          <div
+            class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12"
           >
-            {copy.writingTitle}
-          </h2>
-          <p class="text-[rgb(var(--color-text-secondary))] text-lg">
-            {copy.writingSubtitle}
-          </p>
-        </div>
-        <a
-          href={lp('/writing')}
-          class="font-heading font-semibold text-primary-600 dark:text-primary-400 shrink-0"
-        >
-          {copy.writingViewAll} →
-        </a>
-      </div>
+            <div class="max-w-2xl">
+              <p class="folio-mark mb-3">Plate 04</p>
+              <h2
+                class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3"
+              >
+                {copy.writingTitle}
+              </h2>
+              <p class="text-[rgb(var(--color-text-secondary))] text-lg">
+                {copy.writingSubtitle}
+              </p>
+            </div>
+            <a
+              href={lp('/writing')}
+              class="font-heading font-semibold text-primary-600 dark:text-primary-400 shrink-0"
+            >
+              {copy.writingViewAll} →
+            </a>
+          </div>
 
-      {
-        posts.length === 0 ? (
-          <p class="text-[rgb(var(--color-text-secondary))]">
-            {copy.writingEmpty}
-          </p>
-        ) : (
-          <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
-            {posts.map((post, i) => (
-              <li>
-                <a
-                  href={lp(`/writing/${post.id}`)}
-                  class="group list-row flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 py-6 px-1 -mx-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
-                >
-                  <span class="folio-mark sm:w-14 shrink-0">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <time
-                    datetime={post.data.pubDate.toISOString()}
-                    class="meta-mono text-sm text-[rgb(var(--color-text-tertiary))] sm:w-28 shrink-0"
-                  >
-                    {post.data.pubDate.toLocaleDateString(dateLocale, {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </time>
-                  <div class="min-w-0">
-                    <h3 class="font-heading text-xl font-semibold group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors mb-1">
-                      {post.data.title}
-                    </h3>
-                    {post.data.description && (
-                      <p class="text-[rgb(var(--color-text-secondary))] line-clamp-2">
-                        {post.data.description}
-                      </p>
-                    )}
-                  </div>
-                </a>
-              </li>
-            ))}
-          </ul>
-        )
-      }
+          {
+            posts.length === 0 ? (
+              <p class="text-[rgb(var(--color-text-secondary))]">
+                {copy.writingEmpty}
+              </p>
+            ) : (
+              <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+                {posts.map((post, i) => (
+                  <li>
+                    <a
+                      href={lp(`/writing/${post.id}`)}
+                      class="group list-row flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-8 py-6 px-1 -mx-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                    >
+                      <span class="folio-mark sm:w-14 shrink-0">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <time
+                        datetime={post.data.pubDate.toISOString()}
+                        class="meta-mono text-sm text-[rgb(var(--color-text-tertiary))] sm:w-28 shrink-0"
+                      >
+                        {post.data.pubDate.toLocaleDateString(dateLocale, {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })}
+                      </time>
+                      <div class="min-w-0">
+                        <h3 class="font-heading text-xl font-semibold group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors mb-1">
+                          {post.data.title}
+                        </h3>
+                        {post.data.description && (
+                          <p class="text-[rgb(var(--color-text-secondary))] line-clamp-2">
+                            {post.data.description}
+                          </p>
+                        )}
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </div>
+
+        <aside class="lg:pt-14">
+          <div
+            class="border border-[rgb(var(--color-border))] p-6 md:p-8 bg-[rgb(var(--color-bg-primary))]"
+          >
+            <p class="folio-mark mb-3">Shelf</p>
+            <h3
+              class="font-heading text-2xl font-bold tracking-tight mb-3"
+            >
+              {copy.readingTitle}
+            </h3>
+            <p
+              class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-6"
+            >
+              {copy.readingBody}
+            </p>
+            <a href={lp('/reading-list')} class="btn-secondary">
+              {copy.readingCta}
+            </a>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 
@@ -330,15 +418,23 @@ const heroSrc = gallerySrcFallback(heroImage);
         <p class="text-[rgb(var(--color-text-secondary))] text-lg mb-8">
           {copy.connectSubtitle}
         </p>
-        <div class="flex flex-col sm:flex-row gap-3">
+        <div class="flex flex-col sm:flex-row flex-wrap gap-3">
           <a href={lp('/contact')} class="btn-primary">{copy.connectCta}</a>
+          <a
+            href="https://blog.alexander.xin"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-secondary"
+          >
+            {copy.connectBlog} ↗
+          </a>
           <a
             href="https://github.com/AlexanderJ-Carter"
             target="_blank"
             rel="noopener noreferrer"
             class="btn-secondary"
           >
-            GitHub
+            {copy.connectGithub} ↗
           </a>
         </div>
       </div>

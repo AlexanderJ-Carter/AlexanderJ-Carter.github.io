@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../chrome/PageHero.astro';
 import { aboutCopy } from '../../i18n/pages/about';
 import { resolveLang, getLangPath } from '../../i18n/types';
 
@@ -15,323 +14,297 @@ function resolveHref(href: string) {
 ---
 
 <BaseLayout title={t.title} description={t.subtitle} protectedPage={true}>
-  <PageHero
-    folio="Folio I"
-    kicker={t.kicker}
-    title="Alexander James Carter"
-    description={t.subtitle}
-    backHref={lp('/')}
-    backLabel={t.back}
-  >
-    <p
-      class="mt-6 max-w-2xl font-serif text-xl md:text-2xl italic text-[rgb(var(--color-text-primary))] leading-snug"
-    >
-      “{t.motto}”
-    </p>
-  </PageHero>
-
-  <section class="pb-8">
-    <div class="page-shell">
-      <ul
-        class="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[rgb(var(--color-text-secondary))]"
+  <header class="pt-28 md:pt-32 pb-10 md:pb-12 border-b border-[rgb(var(--color-border))]">
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
+      <a
+        href={lp('/')}
+        class="inline-flex items-center gap-2 text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 transition-colors mb-8"
       >
+        <svg
+          class="w-4 h-4 shrink-0"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        {t.back}
+      </a>
+
+      <p class="folio-mark mb-3">Folio I</p>
+      <p
+        class="font-heading text-sm tracking-[0.2em] uppercase text-[rgb(var(--color-text-tertiary))] mb-4"
+      >
+        {t.kicker}
+      </p>
+      <h1
+        class="font-heading text-4xl sm:text-5xl font-bold tracking-tight mb-4"
+      >
+        Alexander James Carter
+      </h1>
+      <p
+        class="text-lg text-[rgb(var(--color-text-secondary))] leading-relaxed mb-6"
+      >
+        {t.subtitle}
+      </p>
+      <ul class="flex flex-wrap items-center gap-x-1 text-sm mb-8">
         {
           t.meta.map((item, i) => (
-            <li class="inline-flex items-center gap-3">
+            <li class="inline-flex items-center text-[rgb(var(--color-text-secondary))]">
               {i > 0 && (
-                <span
-                  aria-hidden="true"
-                  class="text-[rgb(var(--color-text-tertiary))]"
-                >
+                <span class="mx-2.5 text-[rgb(var(--color-text-tertiary))]" aria-hidden="true">
                   ·
                 </span>
               )}
-              <span>{item}</span>
+              <span class="font-heading">{item}</span>
             </li>
           ))
         }
       </ul>
+      <p
+        class="font-serif text-xl italic text-[rgb(var(--color-text-primary))] border-l-2 border-[rgb(var(--color-accent)_/_0.55)] pl-5 mb-8"
+      >
+        “{t.motto}”
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href={lp('/contact')} class="btn-primary">{t.ctaContact}</a>
+        <a
+          href={t.profileHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-secondary"
+        >
+          {t.profileLabel} ↗
+        </a>
+        <a
+          href="https://github.com/AlexanderJ-Carter"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-secondary"
+        >
+          {t.ctaGithub} ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Intro -->
+  <section class="py-14 md:py-16">
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
+      <p class="folio-mark mb-3">01</p>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-5">
+        {t.introTitle}
+      </h2>
+      {
+        t.paragraphs.map((p) => (
+          <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed text-base md:text-lg">
+            {p}
+          </p>
+        ))
+      }
     </div>
   </section>
 
-  <!-- Intro -->
-  <section class="pb-16 md:pb-20">
-    <div class="page-shell">
-      <article class="about-panel">
-        <h2
-          class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-6"
-        >
-          {t.introTitle}
-        </h2>
-        <div
-          class="space-y-5 text-[15px] md:text-base leading-relaxed text-[rgb(var(--color-text-secondary))]"
-        >
-          {t.paragraphs.map((p) => <p>{p}</p>)}
+  <!-- Research -->
+  <section class="py-14 md:py-16 bg-[rgb(var(--color-bg-secondary))]">
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
+      <p class="folio-mark mb-3">02</p>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3">
+        {t.researchTitle}
+      </h2>
+      <p
+        class="font-heading text-lg text-primary-600 dark:text-primary-400 mb-4"
+      >
+        {t.researchLead}
+      </p>
+      <p
+        class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-8"
+      >
+        {t.researchBody}
+      </p>
+      <ul class="space-y-2 text-sm font-heading mb-10">
+        <li>
+          <a
+            href={t.collabHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
+          >
+            {t.collabLabel} ↗
+          </a>
+        </li>
+        <li>
+          <a
+            href={t.platformHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
+          >
+            {t.platformLabel} ↗
+          </a>
+        </li>
+        <li>
+          <a
+            href={t.relatedPaperHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
+          >
+            {t.relatedPaperLabel} ↗
+          </a>
+        </li>
+      </ul>
+
+      <article
+        class="border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 md:p-8"
+      >
+        <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+          <div>
+            <p class="folio-mark mb-2">{t.pubTitle}</p>
+            <p class="meta-mono text-[rgb(var(--color-text-tertiary))]">
+              {t.pubYear} · {t.pubVenue}
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <a
+              href={t.pubAbs}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="pub-chip">abs ↗</a
+            >
+            <a
+              href={t.pubPdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="pub-chip">pdf ↗</a
+            >
+          </div>
         </div>
+        <h3 class="font-heading text-xl font-semibold leading-snug">
+          {t.pubName}
+        </h3>
       </article>
     </div>
   </section>
 
-  <!-- Research + Now -->
-  <section class="pb-16 md:pb-20 bg-[rgb(var(--color-bg-secondary))]">
-    <div class="page-shell py-16 md:py-20">
-      <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
-        <div>
-          <h2
-            class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3"
-          >
-            {t.researchTitle}
-          </h2>
-          <p
-            class="font-heading text-lg text-primary-600 dark:text-primary-400 mb-4"
-          >
-            {t.researchLead}
-          </p>
-          <p
-            class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-6"
-          >
-            {t.researchBody}
-          </p>
-          <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-heading">
-            <a
-              href={t.collabHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
-            >
-              {t.collabLabel}
-            </a>
-            <a
-              href={t.platformHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
-            >
-              {t.platformLabel}
-            </a>
-          </div>
-
-          <div class="mt-10 pt-8 border-t border-[rgb(var(--color-border))]">
-            <h3
-              class="font-heading text-sm tracking-[0.14em] uppercase text-[rgb(var(--color-text-tertiary))] mb-4"
-            >
-              {t.pubTitle}
-            </h3>
-            <p
-              class="text-xs text-[rgb(var(--color-text-tertiary))] mb-2 font-heading"
-            >
-              {t.pubYear} · {t.pubVenue}
-            </p>
-            <p
-              class="font-heading font-semibold text-[rgb(var(--color-text-primary))] mb-3 leading-snug"
-            >
-              {t.pubName}
-            </p>
-            <div class="flex gap-4 text-sm">
-              <a
-                href={t.pubAbs}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
-              >
-                abs
-              </a>
-              <a
-                href={t.pubPdf}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
-              >
-                pdf
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <aside class="about-panel h-fit">
-          <h2 class="font-heading text-xl font-bold tracking-tight mb-5">
-            {t.nowTitle}
-          </h2>
-          <ul class="space-y-4">
-            {
-              t.nowItems.map((item) => (
-                <li class="flex gap-3 text-sm leading-relaxed text-[rgb(var(--color-text-secondary))]">
-                  <span
-                    class="mt-2 h-1.5 w-1.5 rounded-full bg-primary-500 shrink-0"
-                    aria-hidden="true"
-                  />
-                  <span>{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section class="pb-16 md:pb-20">
-    <div class="page-shell">
-      <h2
-        class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3"
-      >
+  <!-- Projects + Now -->
+  <section class="py-14 md:py-16">
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
+      <p class="folio-mark mb-3">03</p>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3">
         {t.workTitle}
       </h2>
-      <p
-        class="text-[rgb(var(--color-text-secondary))] mb-10 leading-relaxed max-w-2xl"
-      >
+      <p class="text-[rgb(var(--color-text-secondary))] mb-8 leading-relaxed">
         {t.workIntro}
       </p>
 
-      <ul
-        class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]"
-      >
+      <div class="folio-directory mb-14">
         {
-          t.projects.map((project) => (
-            <li>
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="group block py-6 list-row focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
-              >
-                <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-8">
-                  <div class="sm:min-w-[14rem]">
-                    <h3 class="font-heading text-lg font-semibold group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                      {project.name}
-                    </h3>
-                    <p class="text-xs uppercase tracking-wide text-[rgb(var(--color-text-tertiary))] font-heading mt-1">
-                      {project.role}
-                    </p>
-                  </div>
-                  <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed flex-1">
-                    {project.desc}
-                  </p>
-                </div>
-              </a>
+          t.projects.map((project, i) => (
+            <a
+              href={project.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="folio-directory-row !items-start sm:!items-baseline"
+            >
+              <span class="fd-index pt-0.5">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span class="min-w-0">
+                <span class="fd-title">{project.name}</span>
+                <span class="fd-host fd-host-mobile">{project.role}</span>
+                <p class="mt-1.5 text-sm text-[rgb(var(--color-text-secondary))]">
+                  {project.desc}
+                </p>
+              </span>
+              <span class="fd-host fd-host-desktop pt-1">{project.role}</span>
+              <span class="fd-arrow pt-1" aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          ))
+        }
+      </div>
+
+      <p class="folio-mark mb-3">04</p>
+      <h2 class="font-heading text-2xl font-bold tracking-tight mb-5">
+        {t.nowTitle}
+      </h2>
+      <ol class="border-y border-[rgb(var(--color-border))]">
+        {
+          t.nowItems.map((item, i) => (
+            <li class="flex gap-4 py-4 border-b border-[rgb(var(--color-border))] last:border-0">
+              <span class="meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))] pt-1">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+                {item}
+              </span>
             </li>
           ))
         }
-      </ul>
+      </ol>
     </div>
   </section>
 
-  <!-- Stack + Languages -->
-  <section class="pb-16 md:pb-20 bg-[rgb(var(--color-bg-secondary))]">
-    <div class="page-shell py-16 md:py-20">
-      <div class="grid gap-12 lg:grid-cols-2">
-        <div>
-          <h2
-            class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-8"
-          >
-            {t.stackTitle}
-          </h2>
-          <div class="space-y-8">
-            {
-              t.stackGroups.map((group) => (
-                <div>
-                  <h3 class="font-heading text-sm tracking-[0.14em] uppercase text-[rgb(var(--color-text-tertiary))] mb-3">
-                    {group.title}
-                  </h3>
-                  <ul class="flex flex-wrap gap-2">
-                    {group.items.map((item) => (
-                      <li class="about-chip">{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-
-        <div>
-          <h2
-            class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-8"
-          >
-            {t.langsTitle}
-          </h2>
-          <ul
-            class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]"
-          >
-            {
-              t.langs.map((item) => (
-                <li class="flex items-baseline justify-between gap-4 py-4">
-                  <span class="font-heading font-semibold">{item.name}</span>
-                  <span class="text-sm text-[rgb(var(--color-text-tertiary))]">
-                    {item.level}
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Connect -->
-  <section class="pb-20 md:pb-28">
-    <div class="page-shell">
-      <h2
-        class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3"
-      >
+  <!-- Contact -->
+  <section class="py-14 md:py-16 bg-[rgb(var(--color-bg-secondary))]">
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
+      <p class="folio-mark mb-3">05</p>
+      <h2 class="font-heading text-2xl md:text-3xl font-bold tracking-tight mb-3">
         {t.connectTitle}
       </h2>
-      <p class="text-[rgb(var(--color-text-secondary))] mb-10 leading-relaxed">
+      <p class="text-[rgb(var(--color-text-secondary))] mb-8 leading-relaxed">
         {t.connectIntro}
       </p>
-
-      <ul
-        class="grid sm:grid-cols-2 gap-px bg-[rgb(var(--color-border))] border border-[rgb(var(--color-border))]"
-      >
+      <div class="folio-directory">
         {
-          t.links.map((link) => (
-            <li class="bg-[rgb(var(--color-bg-primary))]">
-              <a
-                href={resolveHref(link.href)}
-                target={link.external ? '_blank' : undefined}
-                rel={link.external ? 'noopener noreferrer' : undefined}
-                class="block p-5 list-row focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
-              >
-                <div class="font-heading font-semibold mb-1">{link.label}</div>
-                <div class="text-sm text-[rgb(var(--color-text-secondary))]">
-                  {link.note}
-                </div>
-              </a>
-            </li>
+          t.links.map((link, i) => (
+            <a
+              href={resolveHref(link.href)}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
+              class="folio-directory-row"
+            >
+              <span class="fd-index">{String(i + 1).padStart(2, '0')}</span>
+              <span class="min-w-0">
+                <span class="fd-title">{link.label}</span>
+                <span class="fd-host fd-host-mobile">{link.note}</span>
+              </span>
+              <span class="fd-host fd-host-desktop">{link.note}</span>
+              <span class="fd-arrow" aria-hidden="true">
+                {link.external || link.href.startsWith('mailto:') ? '↗' : '→'}
+              </span>
+            </a>
           ))
         }
-      </ul>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .about-panel {
+  .pub-chip {
+    width: fit-content;
     border: 1px solid rgb(var(--color-border));
-    background: linear-gradient(
-      165deg,
-      rgb(var(--color-bg-primary)) 0%,
-      rgb(var(--color-bg-secondary) / 0.55) 100%
-    );
-    padding: 2rem;
-    box-shadow: 0 1px 0 rgb(var(--color-border) / 0.5);
-  }
-
-  @media (min-width: 768px) {
-    .about-panel {
-      padding: 2.75rem 3rem;
-    }
-  }
-
-  .about-chip {
-    border: 1px solid rgb(var(--color-border));
-    background: rgb(var(--color-bg-primary));
+    border-radius: 0.125rem;
     color: rgb(var(--color-text-secondary));
-    font-size: 0.8125rem;
-    line-height: 1.2;
-    padding: 0.4rem 0.7rem;
-    font-family: theme('fontFamily.heading');
+    padding: 0.35rem 0.65rem;
+    font-size: 0.7rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+      monospace;
+    letter-spacing: 0.04em;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+  .pub-chip:hover {
+    color: rgb(var(--color-accent));
+    border-color: rgb(var(--color-accent) / 0.45);
   }
 </style>

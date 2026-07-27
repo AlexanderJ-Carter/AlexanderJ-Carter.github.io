@@ -1,3 +1,6 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
 export type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 export const SUPPORTED_LANGS: Lang[] = ['zh-CN', 'zh-TW', 'en-GB', 'fr', 'ru'];
@@ -62,27 +65,41 @@ export function getHreflangAlternates(
 /** Responsive srcset for gallery-optimized assets (*-{sm,md,lg,xl}.webp). */
 export function gallerySrcSet(basePath: string): string | undefined {
   if (!basePath.includes('/gallery-optimized/')) return undefined;
-  if (basePath.includes('-sm.') || basePath.includes('-md.') || basePath.includes('-lg.') || basePath.includes('-xl.')) {
-    // Already a sized variant — derive stem
-  }
   const match = basePath.match(
     /^(.*\/gallery-optimized\/.+?)(?:-(?:sm|md|lg|xl))?(\.webp)$/i
   );
   if (!match) return undefined;
   const stem = match[1];
   const ext = match[2];
-  return [
-    `${stem}-sm${ext} 480w`,
-    `${stem}-md${ext} 800w`,
-    `${stem}-lg${ext} 1200w`,
-    `${stem}-xl${ext} 1920w`,
-  ].join(', ');
+  const candidates: Array<[string, number]> = [
+    ['sm', 480],
+    ['md', 800],
+    ['lg', 1200],
+    ['xl', 1920],
+  ];
+  const parts = candidates
+    .filter(([suffix]) => publicAssetExists(`${stem}-${suffix}${ext}`))
+    .map(([suffix, width]) => `${stem}-${suffix}${ext} ${width}w`);
+  return parts.length > 0 ? parts.join(', ') : undefined;
 }
 
+/** Prefer md variant when present; otherwise sm, then unsized base, then input. */
 export function gallerySrcFallback(basePath: string): string {
   const match = basePath.match(
     /^(.*\/gallery-optimized\/.+?)(?:-(?:sm|md|lg|xl))?(\.webp)$/i
   );
   if (!match) return basePath;
-  return `${match[1]}-md${match[2]}`;
+  const stem = match[1];
+  const ext = match[2];
+  for (const suffix of ['md', 'sm', ''] as const) {
+    const candidate =
+      suffix === '' ? `${stem}${ext}` : `${stem}-${suffix}${ext}`;
+    if (publicAssetExists(candidate)) return candidate;
+  }
+  return `${stem}-md${ext}`;
+}
+
+function publicAssetExists(urlPath: string): boolean {
+  const relative = urlPath.startsWith('/') ? urlPath.slice(1) : urlPath;
+  return existsSync(join(process.cwd(), 'public', relative));
 }

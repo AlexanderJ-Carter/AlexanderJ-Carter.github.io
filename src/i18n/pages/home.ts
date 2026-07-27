@@ -6,7 +6,12 @@ export type HomeFeaturedItem = {
   image: string;
 };
 
-export type HomeFocusItem = {
+export type HomePathItem = {
+  title: string;
+  href: string;
+};
+
+export type HomeElsewhereItem = {
   title: string;
   desc: string;
   href: string;
@@ -22,20 +27,76 @@ export type HomeCopy = {
   featuredSubtitle: string;
   featuredViewAll: string;
   featured: HomeFeaturedItem[];
-  focusTitle: string;
-  focusSubtitle: string;
-  focusViewMore: string;
-  focus: HomeFocusItem[];
+  studioTitle: string;
+  studioBody: string;
+  studioCta: string;
+  pathsLabel: string;
+  paths: HomePathItem[];
+  elsewhereTitle: string;
+  elsewhereSubtitle: string;
+  elsewhereTools: string;
+  elsewhereProjects: string;
+  elsewhereProjectsDesc: string;
+  elsewhere: HomeElsewhereItem[];
   writingTitle: string;
   writingSubtitle: string;
   writingViewAll: string;
   writingEmpty: string;
-  studioTitle: string;
-  studioBody: string;
+  readingTitle: string;
+  readingBody: string;
+  readingCta: string;
   connectTitle: string;
   connectSubtitle: string;
   connectCta: string;
+  connectBlog: string;
+  connectGithub: string;
 };
+
+const featuredShared: HomeFeaturedItem[] = [
+  {
+    title: '山间晨雾',
+    category: '风景',
+    image: '/img/gallery-optimized/landscape-01-md.webp',
+  },
+  {
+    title: '雨后花瓣',
+    category: '自然',
+    image: '/img/gallery-optimized/nature-flower-01-md.webp',
+  },
+  {
+    title: '精致甜点',
+    category: '美食',
+    image: '/img/gallery-optimized/food-01-md.webp',
+  },
+];
+
+const elsewhereShared: HomeElsewhereItem[] = [
+  {
+    title: 'Blog',
+    desc: '独立长文与工程笔记',
+    href: 'https://blog.alexander.xin',
+  },
+  {
+    title: 'MyCook',
+    desc: '做饭菜谱',
+    href: 'https://cook.alexander.xin',
+  },
+  {
+    title: 'Linux Command',
+    desc: '常用 Linux 指令速查',
+    href: 'https://linux-command.alexander.xin',
+  },
+  {
+    title: 'NetQ',
+    desc: '网络排查小实验室',
+    href: 'https://netq.alexander.xin',
+  },
+  {
+    title: 'Git Lab',
+    desc: 'Git 协作练习',
+    href: 'https://lab.alexander.xin',
+  },
+];
 
 export const homeCopy: Record<Lang, HomeCopy> = {
   'zh-CN': {
@@ -47,53 +108,35 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     featuredTitle: '精选作品',
     featuredSubtitle: '几张值得先看的影像。',
     featuredViewAll: '查看全部作品',
-    featured: [
-      {
-        title: '山间晨雾',
-        category: '风景',
-        image: '/img/gallery-optimized/landscape-01-md.webp',
-      },
-      {
-        title: '雨后花瓣',
-        category: '自然',
-        image: '/img/gallery-optimized/nature-flower-01-md.webp',
-      },
-      {
-        title: '精致甜点',
-        category: '美食',
-        image: '/img/gallery-optimized/food-01-md.webp',
-      },
+    featured: featuredShared,
+    studioTitle: '这是一间慢慢长出来的工作室',
+    studioBody:
+      '摄影记录光线的温度，写作整理实践里的取舍，小工具解决日常小摩擦。页面保持静态、隐私友好，并尽量让键盘与屏幕阅读器也能顺利走完路径。',
+    studioCta: '关于我',
+    pathsLabel: '正在打磨',
+    paths: [
+      { title: '影像整理', href: '/gallery' },
+      { title: '写作与深读', href: '/writing' },
+      { title: '小工具索引', href: '/tools' },
     ],
-    focusTitle: '最近在打磨',
-    focusSubtitle: '代码、影像与长文，慢慢长出来。',
-    focusViewMore: '继续看看',
-    focus: [
-      {
-        title: '影像整理',
-        desc: '给旅行与日常照片补上分类与说明，让画廊可以慢慢翻。',
-        href: '/gallery',
-      },
-      {
-        title: '写作',
-        desc: '工程实践、设计取舍与摄影观察——质量优先于数量。',
-        href: '/writing',
-      },
-      {
-        title: '小工具',
-        desc: '时间、单位、汇率与二维码：轻量、隐私友好、键盘可达。',
-        href: '/projects',
-      },
-    ],
+    elsewhereTitle: '站外角落',
+    elsewhereSubtitle: '独立子站与博客——只放目前可访问的入口。',
+    elsewhereTools: '工具索引',
+    elsewhereProjects: '全部项目',
+    elsewhereProjectsDesc: '开源与自研一览（含演示链接）',
+    elsewhere: elsewhereShared,
     writingTitle: '近期写作',
     writingSubtitle: '不会很快过期的思考。',
     writingViewAll: '全部文章',
     writingEmpty: '暂无文章',
-    studioTitle: '这是一间慢慢长出来的工作室',
-    studioBody:
-      '摄影记录光线的温度，写作整理实践里的取舍，小工具解决日常小摩擦。页面保持静态、隐私友好，并尽量让键盘与屏幕阅读器也能顺利走完路径。',
+    readingTitle: '读读看看',
+    readingBody: '值得反复翻阅的书与文章——深读笔记与实践 takeaway。',
+    readingCta: '打开阅读清单',
     connectTitle: '想聊聊？',
     connectSubtitle: '技术讨论、项目合作或随便聊聊，都欢迎。',
     connectCta: '联系我',
+    connectBlog: '博客',
+    connectGithub: 'GitHub',
   },
   'zh-TW': {
     brand: 'Alexander Carter',
@@ -121,36 +164,60 @@ export const homeCopy: Record<Lang, HomeCopy> = {
         image: '/img/gallery-optimized/food-01-md.webp',
       },
     ],
-    focusTitle: '最近在打磨',
-    focusSubtitle: '代碼、影像與長文，慢慢長出來。',
-    focusViewMore: '繼續看看',
-    focus: [
+    studioTitle: '這是一間慢慢長出來的工作室',
+    studioBody:
+      '攝影記錄光線的溫度，寫作整理實踐裡的取捨，小工具解決日常小摩擦。頁面保持靜態、隱私友好，並盡量讓鍵盤與螢幕閱讀器也能順利走完路徑。',
+    studioCta: '關於我',
+    pathsLabel: '正在打磨',
+    paths: [
+      { title: '影像整理', href: '/gallery' },
+      { title: '寫作與深讀', href: '/writing' },
+      { title: '小工具索引', href: '/tools' },
+    ],
+    elsewhereTitle: '站外角落',
+    elsewhereSubtitle: '獨立子站與部落格——只放目前可訪問的入口。',
+    elsewhereTools: '工具索引',
+    elsewhereProjects: '全部專案',
+    elsewhereProjectsDesc: '開源與自研一覽（含演示連結）',
+    elsewhere: [
       {
-        title: '影像整理',
-        desc: '給旅行與日常照片補上分類與說明，讓畫廊可以慢慢翻。',
-        href: '/gallery',
+        title: 'Blog',
+        desc: '獨立長文與工程筆記',
+        href: 'https://blog.alexander.xin',
       },
       {
-        title: '寫作',
-        desc: '工程實踐、設計取捨與攝影觀察——質量優先於數量。',
-        href: '/writing',
+        title: 'MyCook',
+        desc: '做飯菜譜',
+        href: 'https://cook.alexander.xin',
       },
       {
-        title: '小工具',
-        desc: '時間、單位、匯率與二維碼：輕量、隱私友好、鍵盤可達。',
-        href: '/projects',
+        title: 'Linux Command',
+        desc: '常用 Linux 指令速查',
+        href: 'https://linux-command.alexander.xin',
+      },
+      {
+        title: 'NetQ',
+        desc: '網路排查小實驗室',
+        href: 'https://netq.alexander.xin',
+      },
+      {
+        title: 'Git Lab',
+        desc: 'Git 協作練習',
+        href: 'https://lab.alexander.xin',
       },
     ],
     writingTitle: '近期寫作',
     writingSubtitle: '不會很快過期的思考。',
     writingViewAll: '全部文章',
     writingEmpty: '暫無文章',
-    studioTitle: '這是一間慢慢長出來的工作室',
-    studioBody:
-      '攝影記錄光線的溫度，寫作整理實踐裡的取捨，小工具解決日常小摩擦。頁面保持靜態、隱私友好，並盡量讓鍵盤與螢幕閱讀器也能順利走完路徑。',
+    readingTitle: '讀讀看看',
+    readingBody: '值得反覆翻閱的書與文章——深讀筆記與實踐 takeaway。',
+    readingCta: '打開閱讀清單',
     connectTitle: '想聊聊？',
     connectSubtitle: '技術討論、專案合作或隨便聊聊，都歡迎。',
     connectCta: '聯繫我',
+    connectBlog: '部落格',
+    connectGithub: 'GitHub',
   },
   'en-GB': {
     brand: 'Alexander Carter',
@@ -178,36 +245,61 @@ export const homeCopy: Record<Lang, HomeCopy> = {
         image: '/img/gallery-optimized/food-01-md.webp',
       },
     ],
-    focusTitle: 'Currently shaping',
-    focusSubtitle: 'Code, images and long-form notes, growing slowly.',
-    focusViewMore: 'Explore',
-    focus: [
+    studioTitle: 'A studio that grows slowly',
+    studioBody:
+      'Photographs keep the warmth of light. Writing keeps the trade-offs of practice. Small tools remove everyday friction. The site stays static and privacy-friendly, with keyboard and screen-reader paths intact.',
+    studioCta: 'About me',
+    pathsLabel: 'Currently shaping',
+    paths: [
+      { title: 'Image curation', href: '/gallery' },
+      { title: 'Writing & deep reading', href: '/writing' },
+      { title: 'Tool index', href: '/tools' },
+    ],
+    elsewhereTitle: 'Elsewhere',
+    elsewhereSubtitle: 'Independent sites and the blog — live links only.',
+    elsewhereTools: 'Tool index',
+    elsewhereProjects: 'All projects',
+    elsewhereProjectsDesc: 'Open-source and personal demos in one place',
+    elsewhere: [
       {
-        title: 'Image curation',
-        desc: 'Travel and daily photos with clearer categories and notes.',
-        href: '/gallery',
+        title: 'Blog',
+        desc: 'Long-form notes and engineering essays',
+        href: 'https://blog.alexander.xin',
       },
       {
-        title: 'Writing',
-        desc: 'Engineering practice, design trade-offs and photography.',
-        href: '/writing',
+        title: 'MyCook',
+        desc: 'Cooking recipes',
+        href: 'https://cook.alexander.xin',
       },
       {
-        title: 'Small utilities',
-        desc: 'Time, units, currency and QR — light, private, keyboard-first.',
-        href: '/projects',
+        title: 'Linux Command',
+        desc: 'Quick Linux command reference',
+        href: 'https://linux-command.alexander.xin',
+      },
+      {
+        title: 'NetQ',
+        desc: 'Network troubleshooting lab',
+        href: 'https://netq.alexander.xin',
+      },
+      {
+        title: 'Git Lab',
+        desc: 'Git collaboration practice',
+        href: 'https://lab.alexander.xin',
       },
     ],
     writingTitle: 'Recent writing',
     writingSubtitle: 'Thoughts that should age slowly.',
     writingViewAll: 'All articles',
     writingEmpty: 'No posts yet',
-    studioTitle: 'A studio that grows slowly',
-    studioBody:
-      'Photographs keep the warmth of light. Writing keeps the trade-offs of practice. Small tools remove everyday friction. The site stays static and privacy-friendly, with keyboard and screen-reader paths intact.',
+    readingTitle: 'Reading list',
+    readingBody:
+      'Books and essays worth revisiting — deep notes and practical takeaways.',
+    readingCta: 'Open reading list',
     connectTitle: 'Want to chat?',
     connectSubtitle: 'Tech talk, collaboration, or a casual note — welcome.',
     connectCta: 'Get in touch',
+    connectBlog: 'Blog',
+    connectGithub: 'GitHub',
   },
   fr: {
     brand: 'Alexander Carter',
@@ -235,36 +327,61 @@ export const homeCopy: Record<Lang, HomeCopy> = {
         image: '/img/gallery-optimized/food-01-md.webp',
       },
     ],
-    focusTitle: 'En cours',
-    focusSubtitle: 'Code, images et textes longs, qui grandissent lentement.',
-    focusViewMore: 'Explorer',
-    focus: [
+    studioTitle: 'Un atelier qui grandit lentement',
+    studioBody:
+      'La photo garde la chaleur de la lumière. L’écriture garde les compromis de la pratique. Les petits outils retirent les frottements du quotidien. Le site reste statique, respectueux de la vie privée, et praticable au clavier.',
+    studioCta: 'À propos',
+    pathsLabel: 'En cours',
+    paths: [
+      { title: 'Curation photo', href: '/gallery' },
+      { title: 'Écrits et lectures', href: '/writing' },
+      { title: 'Index des outils', href: '/tools' },
+    ],
+    elsewhereTitle: 'Ailleurs',
+    elsewhereSubtitle: 'Sites indépendants et blog — liens actifs seulement.',
+    elsewhereTools: 'Index des outils',
+    elsewhereProjects: 'Tous les projets',
+    elsewhereProjectsDesc: 'Open source et démos personnelles',
+    elsewhere: [
       {
-        title: 'Curation photo',
-        desc: 'Voyages et quotidien avec catégories et notes plus claires.',
-        href: '/gallery',
+        title: 'Blog',
+        desc: 'Essais longs et notes d’ingénierie',
+        href: 'https://blog.alexander.xin',
       },
       {
-        title: 'Écrits',
-        desc: 'Ingénierie, design et photographie.',
-        href: '/writing',
+        title: 'MyCook',
+        desc: 'Recettes',
+        href: 'https://cook.alexander.xin',
       },
       {
-        title: 'Petits outils',
-        desc: 'Heure, unités, devises et QR — légers et accessibles.',
-        href: '/projects',
+        title: 'Linux Command',
+        desc: 'Référence des commandes Linux',
+        href: 'https://linux-command.alexander.xin',
+      },
+      {
+        title: 'NetQ',
+        desc: 'Labo réseau',
+        href: 'https://netq.alexander.xin',
+      },
+      {
+        title: 'Git Lab',
+        desc: 'Pratique Git collaborative',
+        href: 'https://lab.alexander.xin',
       },
     ],
     writingTitle: 'Écrits récents',
     writingSubtitle: 'Des idées qui vieillissent lentement.',
     writingViewAll: 'Tous les articles',
     writingEmpty: 'Pas encore d’articles',
-    studioTitle: 'Un atelier qui grandit lentement',
-    studioBody:
-      'La photo garde la chaleur de la lumière. L’écriture garde les compromis de la pratique. Les petits outils retirent les frottements du quotidien. Le site reste statique, respectueux de la vie privée, et praticable au clavier.',
+    readingTitle: 'Liste de lecture',
+    readingBody:
+      'Livres et essais à relire — notes profondes et takeaways pratiques.',
+    readingCta: 'Ouvrir la liste',
     connectTitle: 'Envie d’échanger ?',
     connectSubtitle: 'Tech, collaboration ou message simple — bienvenu.',
     connectCta: 'Me contacter',
+    connectBlog: 'Blog',
+    connectGithub: 'GitHub',
   },
   ru: {
     brand: 'Alexander Carter',
@@ -292,35 +409,60 @@ export const homeCopy: Record<Lang, HomeCopy> = {
         image: '/img/gallery-optimized/food-01-md.webp',
       },
     ],
-    focusTitle: 'Сейчас в работе',
-    focusSubtitle: 'Код, изображения и длинные тексты — понемногу.',
-    focusViewMore: 'Смотреть',
-    focus: [
+    studioTitle: 'Студия, которая растёт медленно',
+    studioBody:
+      'Фотографии хранят тепло света. Тексты — компромиссы практики. Маленькие инструменты снимают повседневное трение. Сайт остаётся статичным и бережным к приватности, с удобными путями для клавиатуры.',
+    studioCta: 'Обо мне',
+    pathsLabel: 'Сейчас в работе',
+    paths: [
+      { title: 'Кураторство', href: '/gallery' },
+      { title: 'Статьи и чтение', href: '/writing' },
+      { title: 'Индекс утилит', href: '/tools' },
+    ],
+    elsewhereTitle: 'Снаружи',
+    elsewhereSubtitle: 'Независимые сайты и блог — только рабочие ссылки.',
+    elsewhereTools: 'Индекс утилит',
+    elsewhereProjects: 'Все проекты',
+    elsewhereProjectsDesc: 'Open source и личные демо',
+    elsewhere: [
       {
-        title: 'Кураторство',
-        desc: 'Путешествия и будни с понятными категориями и заметками.',
-        href: '/gallery',
+        title: 'Blog',
+        desc: 'Длинные тексты и инженерные заметки',
+        href: 'https://blog.alexander.xin',
       },
       {
-        title: 'Статьи',
-        desc: 'Инженерия, дизайн и фотография.',
-        href: '/writing',
+        title: 'MyCook',
+        desc: 'Рецепты',
+        href: 'https://cook.alexander.xin',
       },
       {
-        title: 'Утилиты',
-        desc: 'Время, единицы, валюты и QR — легко и с клавиатуры.',
-        href: '/projects',
+        title: 'Linux Command',
+        desc: 'Справочник команд Linux',
+        href: 'https://linux-command.alexander.xin',
+      },
+      {
+        title: 'NetQ',
+        desc: 'Сетевая лаборатория',
+        href: 'https://netq.alexander.xin',
+      },
+      {
+        title: 'Git Lab',
+        desc: 'Практика Git',
+        href: 'https://lab.alexander.xin',
       },
     ],
     writingTitle: 'Недавние статьи',
     writingSubtitle: 'Мысли, которые стареют медленно.',
     writingViewAll: 'Все статьи',
     writingEmpty: 'Пока нет статей',
-    studioTitle: 'Студия, которая растёт медленно',
-    studioBody:
-      'Фотографии хранят тепло света. Тексты — компромиссы практики. Маленькие инструменты снимают повседневное трение. Сайт остаётся статичным и бережным к приватности, с удобными путями для клавиатуры.',
+    readingTitle: 'Список чтения',
+    readingBody:
+      'Книги и эссе, к которым возвращаешься — глубокие заметки и takeaway.',
+    readingCta: 'Открыть список',
     connectTitle: 'Написать?',
     connectSubtitle: 'Техника, совместная работа или просто сообщение.',
     connectCta: 'Связаться',
+    connectBlog: 'Блог',
+    connectGithub: 'GitHub',
   },
 };

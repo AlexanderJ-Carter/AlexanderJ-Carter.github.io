@@ -32,10 +32,12 @@ function l(zh: string, tw: string, fr: string, ru: string, en: string): string {
 }
 
 interface SubMenuItem {
-  href: string;
+  href?: string;
   label: string;
   desc?: string;
   external?: boolean;
+  /** Non-interactive group label inside a submenu */
+  heading?: boolean;
 }
 
 interface NavItem {
@@ -47,7 +49,7 @@ interface NavItem {
 }
 
 function isSubmenuActive(submenu: SubMenuItem[]): boolean {
-  return submenu.some((item) => isActivePath(item.href));
+  return submenu.some((item) => !item.heading && isActivePath(item.href));
 }
 
 const homeHref =
@@ -55,15 +57,8 @@ const homeHref =
 
 const moreSubmenu: SubMenuItem[] = [
   {
-    href: getLangPath('/fun'),
-    label: l('彩蛋', '彩蛋', 'Surprises', 'Пасхалки', 'Play'),
-    desc: l(
-      '诗词灵感、小游戏与番茄钟',
-      '詩詞靈感、小遊戲與番茄鐘',
-      'Citations, mini-jeux et pomodoro',
-      'Цитаты, мини-игры и помодоро',
-      'Quotes, mini games and pomodoro'
-    ),
+    heading: true,
+    label: l('工作台', '工作台', 'Atelier', 'Верстак', 'Workbench'),
   },
   {
     href: getLangPath('/tools'),
@@ -85,6 +80,28 @@ const moreSubmenu: SubMenuItem[] = [
       'Heure locale et raccourcis',
       'Локальное время и быстрые ссылки',
       'Local time and quick links'
+    ),
+  },
+  {
+    href: getLangPath('/fun'),
+    label: l('彩蛋', '彩蛋', 'Surprises', 'Пасхалки', 'Play'),
+    desc: l(
+      '诗词灵感、小游戏与番茄钟',
+      '詩詞靈感、小遊戲與番茄鐘',
+      'Citations, mini-jeux et pomodoro',
+      'Цитаты, мини-игры и помодоро',
+      'Quotes, mini games and pomodoro'
+    ),
+  },
+  {
+    href: getLangPath('/reading-list'),
+    label: t('nav.reading'),
+    desc: l(
+      '值得反复翻阅的书和文章',
+      '值得反覆翻閱的書和文章',
+      'Livres et articles à relire',
+      'Книги и статьи для перечитывания',
+      'Books and articles worth revisiting'
     ),
   },
   {
@@ -110,17 +127,6 @@ const moreSubmenu: SubMenuItem[] = [
     ),
   },
   {
-    href: getLangPath('/reading-list'),
-    label: t('nav.reading'),
-    desc: l(
-      '值得反复翻阅的书和文章',
-      '值得反覆翻閱的書和文章',
-      'Livres et articles à relire',
-      'Книги и статьи для перечитывания',
-      'Books and articles worth revisiting'
-    ),
-  },
-  {
     href: getLangPath('/contact'),
     label: t('nav.contact'),
     desc: l(
@@ -130,6 +136,56 @@ const moreSubmenu: SubMenuItem[] = [
       'Связаться',
       'Get in touch'
     ),
+  },
+  {
+    heading: true,
+    label: l('站外', '站外', 'Ailleurs', 'Снаружи', 'Elsewhere'),
+  },
+  {
+    href: 'https://blog.alexander.xin',
+    label: t('nav.blog'),
+    desc: l(
+      '独立博客',
+      '獨立部落格',
+      'Blog externe',
+      'Внешний блог',
+      'External blog'
+    ),
+    external: true,
+  },
+  {
+    href: 'https://cook.alexander.xin',
+    label: 'MyCook',
+    desc: l('做饭菜谱', '做飯菜譜', 'Recettes', 'Рецепты', 'Recipes'),
+    external: true,
+  },
+  {
+    href: 'https://linux-command.alexander.xin',
+    label: 'Linux Command',
+    desc: l(
+      '指令速查',
+      '指令速查',
+      'Commandes Linux',
+      'Команды Linux',
+      'Linux command reference'
+    ),
+    external: true,
+  },
+  {
+    href: 'https://netq.alexander.xin',
+    label: 'NetQ',
+    desc: l(
+      '网络排查',
+      '網路排查',
+      'Réseau',
+      'Сеть',
+      'Network lab'
+    ),
+    external: true,
+  },
+  {
+    heading: true,
+    label: l('说明', '說明', 'Notes', 'Сведения', 'Notes'),
   },
   {
     href: getLangPath('/license'),
@@ -170,18 +226,6 @@ const moreSubmenu: SubMenuItem[] = [
       'All pages'
     ),
   },
-  {
-    href: 'https://blog.alexander.xin',
-    label: t('nav.blog'),
-    desc: l(
-      '独立博客',
-      '獨立部落格',
-      'Blog externe',
-      'Внешний блог',
-      'External blog'
-    ),
-    external: true,
-  },
 ];
 
 const mainNavItems: NavItem[] = [
@@ -215,26 +259,37 @@ const mainNavItems: NavItem[] = [
       <!-- Logo -->
       <a
         href={lang === 'zh-CN' ? '/' : lang === 'en-GB' ? '/en/' : `/${lang}/`}
-        class="flex items-center gap-3 group"
+        class="flex items-center gap-3 group min-w-0"
       >
-        <img
-          src="/img/branding/logo-96.webp"
-          alt={lang === 'zh-CN' ? '站点标志' : 'Site logo'}
-          width="40"
-          height="40"
-          class="w-10 h-10 rounded-full opacity-90 group-hover:opacity-100 transition-opacity duration-200 dark:hidden"
-        />
-        <img
-          src="/img/branding/logo-dark-96.webp"
-          alt={lang === 'zh-CN' ? '站点标志' : 'Site logo'}
-          width="40"
-          height="40"
-          class="w-10 h-10 rounded-full opacity-90 group-hover:opacity-100 transition-opacity duration-200 hidden dark:block"
-        />
         <span
-          class="font-heading font-bold text-xl hidden sm:block text-[rgb(var(--color-text-primary))] tracking-tight"
+          class="relative shrink-0 w-9 h-9 rounded-sm overflow-hidden ring-1 ring-[rgb(var(--color-border))] group-hover:ring-[rgb(var(--color-accent)_/_0.5)] transition-[box-shadow,opacity] duration-200"
         >
-          Alexander Carter
+          <img
+            src="/img/branding/logo-96.webp"
+            alt={lang === 'zh-CN' ? '站点标志' : 'Site logo'}
+            width="36"
+            height="36"
+            class="w-full h-full object-cover dark:hidden"
+          />
+          <img
+            src="/img/branding/logo-dark-96.webp"
+            alt={lang === 'zh-CN' ? '站点标志' : 'Site logo'}
+            width="36"
+            height="36"
+            class="w-full h-full object-cover hidden dark:block"
+          />
+        </span>
+        <span class="min-w-0 hidden sm:block">
+          <span
+            class="block font-heading font-bold text-[15px] tracking-tight leading-none text-[rgb(var(--color-text-primary))]"
+          >
+            Alexander Carter
+          </span>
+          <span
+            class="hidden md:block meta-mono !text-[10px] !tracking-[0.14em] mt-1 text-[rgb(var(--color-text-tertiary))]"
+          >
+            Photography · Writing · Making
+          </span>
         </span>
       </a>
 
@@ -282,34 +337,43 @@ const mainNavItems: NavItem[] = [
                       aria-hidden="true"
                     />
                   </button>
-                  <div class="submenu-panel absolute left-0 mt-0 min-w-[15rem] bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-sm opacity-0 invisible scale-95 origin-top-left group-hover:opacity-100 group-hover:visible group-hover:scale-100 group-hover:mt-1.5 transition-all duration-200 ease-out z-50 py-1">
-                    {item.submenu.map((subitem) => (
-                      <a
-                        href={subitem.href}
-                        class:list={[
-                          'block px-4 py-2.5 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500',
-                          isActivePath(subitem.href)
-                            ? 'text-primary-500'
-                            : 'text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-accent))]',
-                        ]}
-                        target={subitem.external ? '_blank' : undefined}
-                        rel={
-                          subitem.external ? 'noopener noreferrer' : undefined
-                        }
-                        aria-current={
-                          isActivePath(subitem.href) ? 'page' : undefined
-                        }
-                      >
-                        <div class="font-heading text-sm font-medium">
+                  <div class="submenu-panel absolute left-0 mt-0 min-w-[16rem] max-h-[min(70vh,32rem)] overflow-y-auto bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-sm opacity-0 invisible scale-95 origin-top-left group-hover:opacity-100 group-hover:visible group-hover:scale-100 group-hover:mt-1.5 transition-all duration-200 ease-out z-50 py-1">
+                    {item.submenu.map((subitem) =>
+                      subitem.heading ? (
+                        <p class="px-4 pt-3 pb-1 meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))] first:pt-2">
                           {subitem.label}
-                        </div>
-                        {subitem.desc && (
-                          <div class="mt-0.5 text-xs leading-snug text-[rgb(var(--color-text-secondary))]">
-                            {subitem.desc}
+                        </p>
+                      ) : (
+                        <a
+                          href={subitem.href}
+                          class:list={[
+                            'block px-4 py-2.5 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500',
+                            isActivePath(subitem.href)
+                              ? 'text-primary-500'
+                              : 'text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-accent))]',
+                          ]}
+                          target={subitem.external ? '_blank' : undefined}
+                          rel={
+                            subitem.external
+                              ? 'noopener noreferrer'
+                              : undefined
+                          }
+                          aria-current={
+                            isActivePath(subitem.href) ? 'page' : undefined
+                          }
+                        >
+                          <div class="font-heading text-sm font-medium">
+                            {subitem.label}
+                            {subitem.external ? ' ↗' : ''}
                           </div>
-                        )}
-                      </a>
-                    ))}
+                          {subitem.desc && (
+                            <div class="mt-0.5 text-xs leading-snug text-[rgb(var(--color-text-secondary))]">
+                              {subitem.desc}
+                            </div>
+                          )}
+                        </a>
+                      )
+                    )}
                   </div>
                 </div>
               ) : (
@@ -520,29 +584,40 @@ const mainNavItems: NavItem[] = [
                 </svg>
               </button>
               <div class="mobile-submenu hidden pl-4 border-l border-[rgb(var(--color-border))] ml-4 mb-1">
-                {item.submenu.map((subitem) => (
-                  <a
-                    href={subitem.href}
-                    class:list={[
-                      'block py-3.5 px-3 text-sm transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset',
-                      isActivePath(subitem.href)
-                        ? 'text-primary-500 font-medium'
-                        : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]',
-                    ]}
-                    target={subitem.external ? '_blank' : undefined}
-                    rel={subitem.external ? 'noopener noreferrer' : undefined}
-                    aria-current={
-                      isActivePath(subitem.href) ? 'page' : undefined
-                    }
-                  >
-                    <span class="font-heading">{subitem.label}</span>
-                    {subitem.desc && (
-                      <span class="mt-0.5 block text-xs text-[rgb(var(--color-text-secondary))]">
-                        {subitem.desc}
+                {item.submenu.map((subitem) =>
+                  subitem.heading ? (
+                    <p class="px-3 pt-3 pb-1 meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))]">
+                      {subitem.label}
+                    </p>
+                  ) : (
+                    <a
+                      href={subitem.href}
+                      class:list={[
+                        'block py-3 px-3 text-sm transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset',
+                        isActivePath(subitem.href)
+                          ? 'text-primary-500 font-medium'
+                          : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]',
+                      ]}
+                      target={subitem.external ? '_blank' : undefined}
+                      rel={
+                        subitem.external ? 'noopener noreferrer' : undefined
+                      }
+                      aria-current={
+                        isActivePath(subitem.href) ? 'page' : undefined
+                      }
+                    >
+                      <span class="font-heading">
+                        {subitem.label}
+                        {subitem.external ? ' ↗' : ''}
                       </span>
-                    )}
-                  </a>
-                ))}
+                      {subitem.desc && (
+                        <span class="mt-0.5 block text-xs text-[rgb(var(--color-text-secondary))]">
+                          {subitem.desc}
+                        </span>
+                      )}
+                    </a>
+                  )
+                )}
               </div>
             </div>
           ) : (

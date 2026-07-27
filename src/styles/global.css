@@ -1280,6 +1280,126 @@ select:valid:not(:placeholder-shown) {
   background-color: rgb(var(--color-bg-secondary) / 0.55);
 }
 
+/* Folio directory — editorial external / footer indexes */
+.folio-directory {
+  border: 1px solid rgb(var(--color-border));
+  background: rgb(var(--color-bg-primary));
+}
+
+.folio-directory-row {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  gap: 0.75rem 1rem;
+  align-items: baseline;
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid rgb(var(--color-border));
+  color: inherit;
+  text-decoration: none;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    padding-left 0.18s ease;
+}
+
+.folio-directory-row:last-child {
+  border-bottom: none;
+}
+
+.folio-directory-row:hover,
+.folio-directory-row:focus-visible {
+  background: rgb(var(--color-bg-secondary) / 0.7);
+  padding-left: 1.35rem;
+}
+
+.folio-directory-row:focus-visible {
+  outline: 2px solid rgb(var(--color-accent));
+  outline-offset: -2px;
+}
+
+.folio-directory-row .fd-index {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: rgb(var(--color-text-tertiary));
+}
+
+.folio-directory-row .fd-title {
+  font-family: theme('fontFamily.heading');
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: rgb(var(--color-text-primary));
+  transition: color 0.15s ease;
+}
+
+.folio-directory-row:hover .fd-title,
+.folio-directory-row:focus-visible .fd-title {
+  color: rgb(var(--color-accent));
+}
+
+.folio-directory-row .fd-host {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: rgb(var(--color-text-tertiary));
+}
+
+.folio-directory-row .fd-arrow {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  color: rgb(var(--color-text-tertiary));
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.folio-directory-row:hover .fd-arrow,
+.folio-directory-row:focus-visible .fd-arrow {
+  color: rgb(var(--color-accent));
+  transform: translate(2px, -2px);
+}
+
+@media (min-width: 640px) {
+  .folio-directory-row {
+    grid-template-columns: 2.75rem minmax(0, 1fr) minmax(10rem, 14rem) auto;
+  }
+
+  .folio-directory-row .fd-host {
+    display: block;
+    margin-top: 0;
+    text-align: right;
+  }
+
+  .folio-directory-row .fd-host-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .folio-directory-row .fd-host-desktop {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folio-directory-row,
+  .folio-directory-row .fd-arrow,
+  .folio-directory-row .fd-title {
+    transition: none;
+  }
+
+  .folio-directory-row:hover,
+  .folio-directory-row:focus-visible {
+    padding-left: 1.1rem;
+  }
+
+  .folio-directory-row:hover .fd-arrow,
+  .folio-directory-row:focus-visible .fd-arrow {
+    transform: none;
+  }
+}
+
 .ink-rule {
   height: 1px;
   width: 100%;
