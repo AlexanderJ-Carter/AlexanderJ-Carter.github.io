@@ -7,34 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0] - 2026-07-30
+
+### Added
+
+- Free-tier agent discovery: Link / catalog / MCP / DNS-AID / WebMCP, served via Worker with hardened `.well-known` publish.
+- Magazine-style `/sitemap`, Afdian `/support`, and Now-page weather (Open-Meteo, Beijing fallback).
+- Expanded original writing posts with locale versions; deeper reading-list notes and curated essay links.
+- Fun studio toys: Exposure Triangle, Daily Frame; SomaFM stations in MusicPlayer / AmbientRadio.
+- Sitewide MusicPlayer, holiday greeting, homepage poem / on-this-day; multilingual `/tools`, RSS feeds, View Transitions.
+- Legal chrome: licence + accessibility links; optional ICP/备案 via env; site notice config; AdSense reserved slots.
+
 ### Changed
 
-- Darkroom Folio pass: cooler cyanotype paper tokens; contact-sheet / folio-mark / cyanotype-sleeve signatures; Studio Dock (Music + Search + BackToTop) on one right rail.
-- Sub-page polish: folio marks across About/Contact/Now/Uses/Friends/Reading/Support/Sitemap/Tools/Verify/Security/Time/Currency/Calendar/Units/QR; Fun widgets and tool pages drop emoji/card walls for paper panels.
-- Chrome polish: PoemHistory / HolidayGreeting / Toast / AmbientRadio aligned to editorial paper language; footer copy without heart emoji.
-- Quality pass: page-aware hreflang; async font load with fewer weights; MusicPlayer lazy-loads playlist; gallery/home `srcset`/`sizes`; writing `BlogPosting` JSON-LD + article OG; CSP `media-src` for radio; search/cookie dialog semantics; lightbox focus restore + trap; remove placeholder CF beacon & duplicate scroll bar.
-- Fun studio toys: Exposure Triangle + Daily Frame (local and Unsplash guest stills); expanded SomaFM live stations in MusicPlayer / AmbientRadio / music manifest.
-- Homepage hero effect budget reduced; Featured/Writing use contact-sheet frames and folio numbers.
-- Gallery contact-sheet grid (no category emoji); Music covers are CSS cyanotype sleeves (no emoji); Fun/legal widgets use paper panels.
-- Removed unused aurora / glitch / particle / liquid-glass / bento CSS; cleared purple/pink accent leftovers and Projects emoji badges.
-- Synced `AGENT.md` visual system to Darkroom Folio / cyanotype tokens.
-- Editorial redesign: photography-first homepage, Syne + Source Serif 4 / Noto Serif SC type system, cooler paper palette, teal accent (replacing purple).
-- Header navigation without emoji; quieter glass surfaces and editorial buttons.
-- Gallery / Writing / About / Projects page headers aligned to the new visual language.
-- Homepage content extracted to `src/i18n/pages/home.ts`; removed decorative particle / orbit / stats clutter from the home path.
-- Pinned Astro to `~5.18.2` to avoid Astro 6 “0 pages built” regression.
-- Full-site template pass: shared `PageHero`, content/tools/legal pages strip mesh badges and heavy cards; `/tools` becomes an editorial index; RelatedTools without emoji.
-- Chrome polish: flattened Header (Gallery/Writing/Projects/About/More), quieter Footer/BackToTop/Cookie/QuickActions/Share/Shortcuts FABs; editorial 404; nested nav active states.
-- Local verify skip (`import.meta.env.DEV` / `PUBLIC_SKIP_VERIFY`), AdSense reserved slots (`AdSlot` + `.env.example`), micro-interactions, content enrichment; removed unused widget components and stale `docs/archive` reports.
-- Reading list rewritten as deep notes: three reading routes, longer reflective `thought` + practice `takeaway` per book, and curated essay links (Hara / Barnbaum / Sontag / CSAPP / Meadows et al.).
-- About page rebuilt from GitHub profile: readable bio (fixed prose bold contrast), research / AgentSociety 2 publication, selected work, stack chips; removed skill-radar and percent bars.
-- Restored playful utilities: sitewide MusicPlayer + holiday greeting, homepage daily poem / on-this-day, `/fun` corner with pomodoro & weather; entry in More / Tools.
-- Studio craft pass: paper/film grain + vignette, warmer ink dark mode, premium hero (viewfinder, grain, light sweep), slim footer; `/fun` adds calculator, password, color picker, countdown, ambient radio.
-- AdSense slots stay mounted as code reservations only — no visible placeholder when client/slot env is empty.
-- Legal chrome: footer/More link licence + accessibility; reserved ICP/公安备案 via env (hidden when empty); site notice banner/modal via `src/config/notice.ts` (`enabled: false` by default).
-- Cyanotype studio palette, magazine sitemap index, support page (Afdian), Now weather with Beijing fallback, blank-frame 404; removed stale docs (`archive` / design / performance / superpowers) and unused widget components.
-- Service Worker no longer precaches non-existent `/css/global.css` (Astro hashed `/_astro` assets).
-- Structure pass: `components/{chrome,widgets,templates}`, shared `i18n/routing` (no duplicate `/zh-CN`/`/en-GB` trees), multilingual `/tools`, RSS feeds, View Transitions; gallery source JPGs untracked.
+- Upgraded runtime to Astro 7; cleared npm audit / CI quality issues; Cloudflare cache purge after GitHub Pages deploy.
+- Darkroom Folio visual system: cyanotype paper tokens, contact-sheet / folio-mark language, Studio Dock rail.
+- Structure pass: `components/{chrome,widgets,templates}`, shared `i18n/routing` (no duplicate `/zh-CN`/`/en-GB` trees).
+- About page focused on AgentSociety research and selected work; homepage / chrome editorial polish.
+- Gallery contact-sheet grid; music covers as cyanotype sleeves; quieter header/footer and blank-frame 404.
+- Source license set to BSD-3-Clause; gallery source JPGs untracked (optimized assets remain).
+
+### Fixed
+
+- Service Worker no longer precaches missing `/css/global.css`.
+- Prettier Code Quality gate failures after template moves; MusicPlayer layout / positioning bugs.
+- Real AdSense publisher id in `ads.txt`; dependency audit and CI Action deprecations.
+
+### Removed
+
+- Unused aurora / glitch / particle / liquid-glass CSS and dead widget components.
+- Stale docs under archive / design / performance / superpowers.
 
 ## [3.0.1] - 2026-03-19
 
