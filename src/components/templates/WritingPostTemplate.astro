@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../chrome/AdSlot.astro';
+import CopyPermalink from '../widgets/CopyPermalink.astro';
 import type { Lang } from '../../i18n/types';
 
 interface Props {
@@ -33,48 +34,33 @@ function getLangPath(path: string): string {
 
 const i18n = {
   'zh-CN': {
-    backToList: '返回写作列表',
+    backToList: '返回写作',
     publishedOn: '发布于',
     updatedOn: '更新于',
-    minRead: '分钟阅读',
-    tags: '标签',
-    relatedPosts: '相关文章',
     shareText: '分享',
   },
   'zh-TW': {
-    backToList: '返回寫作列表',
+    backToList: '返回寫作',
     publishedOn: '發布於',
     updatedOn: '更新於',
-    minRead: '分鐘閱讀',
-    tags: '標籤',
-    relatedPosts: '相關文章',
     shareText: '分享',
   },
   'en-GB': {
     backToList: 'Back to Writing',
-    publishedOn: 'Published on',
-    updatedOn: 'Updated on',
-    minRead: 'min read',
-    tags: 'Tags',
-    relatedPosts: 'Related Posts',
+    publishedOn: 'Published',
+    updatedOn: 'Updated',
     shareText: 'Share',
   },
   fr: {
     backToList: 'Retour aux écrits',
-    publishedOn: 'Publié le',
-    updatedOn: 'Mis à jour le',
-    minRead: 'min de lecture',
-    tags: 'Tags',
-    relatedPosts: 'Articles associés',
+    publishedOn: 'Publié',
+    updatedOn: 'Mis à jour',
     shareText: 'Partager',
   },
   ru: {
-    backToList: 'Назад к статьям',
+    backToList: 'К статьям',
     publishedOn: 'Опубликовано',
     updatedOn: 'Обновлено',
-    minRead: 'мин чтения',
-    tags: 'Теги',
-    relatedPosts: 'Похожие статьи',
     shareText: 'Поделиться',
   },
 };
@@ -124,54 +110,15 @@ const formatDate = (date: Date) => {
     inLanguage: lang,
   }}
 >
-  <article class="pt-32 pb-16 min-h-screen">
-    <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
-      <a
-        href={getLangPath('/writing')}
-        class="inline-flex items-center gap-2 text-[rgb(var(--color-text-secondary))] hover:text-primary-500 transition-colors mb-8"
-      >
-        <svg
-          class="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-        </svg>
-        <span>{t.backToList}</span>
-      </a>
-
-      <header class="mb-10">
-        <p class="folio-mark mb-3">Essay</p>
-        <div class="flex items-center gap-3 mb-4">
-          <span
-            class="text-xs font-heading tracking-[0.15em] uppercase text-[rgb(var(--color-text-tertiary))]"
-          >
-            {category}
-          </span>
-          {
-            timeToRead && (
-              <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
-                {timeToRead}
-              </span>
-            )
-          }
-        </div>
-        <h1
-          class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4 text-[rgb(var(--color-text-primary))]"
-        >
-          {title}
-        </h1>
-        <p class="text-lg text-[rgb(var(--color-text-secondary))] mb-4">
-          {description}
-        </p>
-        <div
-          class="flex items-center gap-4 text-sm text-[rgb(var(--color-text-tertiary))]"
-        >
+  <article class="essay">
+    <header class="essay-head">
+      <div class="essay-head__wash" aria-hidden="true"></div>
+      <div class="container mx-auto px-4 lg:px-8 max-w-3xl relative">
+        <a href={getLangPath('/writing')} class="essay-back">{t.backToList}</a>
+        <p class="essay-kicker">{category}</p>
+        <h1 class="essay-title">{title}</h1>
+        <p class="essay-deck">{description}</p>
+        <div class="essay-byline">
           <time datetime={pubDate.toISOString()}>
             {t.publishedOn}
             {formatDate(pubDate)}
@@ -183,37 +130,37 @@ const formatDate = (date: Date) => {
               </time>
             )
           }
+          {timeToRead && <span>{timeToRead}</span>}
+          <CopyPermalink />
         </div>
         {
           tags.length > 0 && (
-            <div class="flex flex-wrap gap-2 mt-4">
+            <p class="essay-tags">
               {tags.map((tag) => (
-                <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
-                  #{tag}
-                </span>
+                <span>#{tag}</span>
               ))}
-            </div>
+            </p>
           )
         }
-      </header>
+      </div>
+    </header>
 
-      <div
-        class="prose prose-lg dark:prose-invert max-w-none mb-12"
-        id="article-content"
-      >
+    <div class="essay-rule" aria-hidden="true"></div>
+
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
+      <div class="essay-prose" id="article-content">
         <slot />
       </div>
 
       <AdSlot slot="article" format="horizontal" />
 
-      <footer class="border-t border-[rgb(var(--color-border))] pt-8 mt-8">
-        <div class="flex items-center justify-between">
-          <a
-            href={getLangPath('/writing')}
-            class="text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors"
-          >
-            &larr; {t.backToList}
-          </a>
+      <footer class="essay-foot">
+        <a href={getLangPath('/writing')} class="essay-foot__back">
+          ← {t.backToList}
+        </a>
+        <div class="essay-foot__share">
+          <span>{t.shareText}</span>
+          <CopyPermalink />
         </div>
       </footer>
     </div>
@@ -221,44 +168,258 @@ const formatDate = (date: Date) => {
 </BaseLayout>
 
 <style>
-  #article-content :global(h2) {
-    @apply text-2xl font-heading font-bold mt-10 mb-4 text-[rgb(var(--color-text-primary))];
+  .essay {
+    padding-bottom: 5rem;
   }
-  #article-content :global(h3) {
-    @apply text-xl font-heading font-semibold mt-8 mb-3 text-[rgb(var(--color-text-primary))];
+
+  .essay-head {
+    position: relative;
+    padding: 7.5rem 0 2.75rem;
+    overflow: hidden;
   }
-  #article-content :global(p) {
-    @apply text-[rgb(var(--color-text-secondary))] leading-relaxed mb-4;
+  .essay-head__wash {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      55% 45% at 80% 10%,
+      rgb(var(--color-accent) / 0.07),
+      transparent 70%
+    );
+    pointer-events: none;
   }
-  #article-content :global(ul),
-  #article-content :global(ol) {
-    @apply ml-6 mb-4 space-y-2 text-[rgb(var(--color-text-secondary))];
+
+  .essay-back {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 0.88rem;
+    color: rgb(var(--color-text-tertiary));
+    transition: color 0.18s ease;
   }
-  #article-content :global(ul) {
-    @apply list-disc;
+  .essay-back:hover {
+    color: rgb(var(--color-accent));
   }
-  #article-content :global(ol) {
-    @apply list-decimal;
+
+  .essay-kicker {
+    font-family: theme('fontFamily.heading');
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(var(--color-accent));
+    margin-bottom: 1rem;
   }
-  #article-content :global(code) {
-    @apply px-1.5 py-0.5 rounded bg-[rgb(var(--color-bg-accent))] text-sm font-mono;
+
+  .essay-title {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    margin-bottom: 1.15rem;
+    text-wrap: balance;
   }
-  #article-content :global(pre) {
-    @apply p-4 rounded-xl bg-[rgb(var(--color-bg-secondary))] overflow-x-auto mb-4;
+
+  .essay-deck {
+    font-size: 1.2rem;
+    line-height: 1.65;
+    color: rgb(var(--color-text-secondary));
+    max-width: 38rem;
+    margin-bottom: 1.5rem;
   }
-  #article-content :global(pre code) {
-    @apply bg-transparent p-0;
+
+  .essay-byline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem 1.1rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: rgb(var(--color-text-tertiary));
   }
-  #article-content :global(blockquote) {
-    @apply border-l-4 border-primary-500 pl-4 italic text-[rgb(var(--color-text-secondary))] my-4;
+
+  .essay-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1rem;
+    margin-top: 1rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    color: rgb(var(--color-text-tertiary));
   }
-  #article-content :global(strong) {
-    @apply font-semibold text-[rgb(var(--color-text-primary))];
+
+  .essay-rule {
+    height: 1px;
+    margin: 0 auto 2.75rem;
+    max-width: 48rem;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--color-border)),
+      transparent
+    );
   }
-  #article-content :global(a) {
-    @apply text-primary-500 hover:text-primary-600 underline;
+
+  .essay-prose {
+    font-size: 1.085rem;
+    line-height: 1.85;
+    color: rgb(var(--color-text-secondary));
   }
-  #article-content :global(hr) {
-    @apply border-t border-[rgb(var(--color-border))] my-8;
+
+  .essay-prose :global(> :first-child) {
+    margin-top: 0;
+  }
+
+  .essay-prose :global(h2) {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(var(--color-text-primary));
+    margin: 2.85rem 0 1rem;
+  }
+
+  .essay-prose :global(h3) {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.2rem;
+    font-weight: 650;
+    color: rgb(var(--color-text-primary));
+    margin: 2.1rem 0 0.75rem;
+  }
+
+  .essay-prose :global(p) {
+    margin-bottom: 1.25rem;
+  }
+
+  .essay-prose :global(p:first-of-type) {
+    font-size: 1.2rem;
+    line-height: 1.75;
+    color: rgb(var(--color-text-primary) / 0.9);
+  }
+
+  .essay-prose :global(ul),
+  .essay-prose :global(ol) {
+    margin: 0 0 1.35rem 1.15rem;
+  }
+  .essay-prose :global(li) {
+    margin-bottom: 0.45rem;
+  }
+  .essay-prose :global(ul) {
+    list-style: disc;
+  }
+  .essay-prose :global(ol) {
+    list-style: decimal;
+  }
+
+  .essay-prose :global(a) {
+    color: rgb(var(--color-accent));
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  .essay-prose :global(strong) {
+    color: rgb(var(--color-text-primary));
+    font-weight: 600;
+  }
+
+  .essay-prose :global(blockquote) {
+    margin: 2rem 0;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    border-left: 2px solid rgb(var(--color-accent) / 0.55);
+    font-family:
+      theme('fontFamily.serif'), ui-serif, Georgia, 'Noto Serif SC', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: rgb(var(--color-text-primary) / 0.82);
+  }
+  .essay-prose :global(blockquote p) {
+    margin-bottom: 0.5rem;
+  }
+  .essay-prose :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .essay-prose :global(code) {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.88em;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.2rem;
+    background: rgb(var(--color-bg-secondary) / 0.8);
+    color: rgb(var(--color-text-primary));
+  }
+
+  .essay-prose :global(pre) {
+    margin: 1.6rem 0;
+    padding: 1.15rem 1.2rem;
+    border-radius: 0.35rem;
+    background: rgb(var(--color-bg-secondary));
+    overflow-x: auto;
+  }
+  .essay-prose :global(pre code) {
+    background: transparent;
+    padding: 0;
+    font-size: 0.84rem;
+    line-height: 1.65;
+  }
+
+  .essay-prose :global(hr) {
+    border: 0;
+    height: 1px;
+    margin: 2.75rem auto;
+    max-width: 8rem;
+    background: rgb(var(--color-border));
+  }
+
+  .essay-prose :global(img) {
+    margin: 1.75rem 0;
+    border-radius: 0.25rem;
+  }
+
+  .essay-prose :global(table) {
+    width: 100%;
+    margin: 1.5rem 0;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  .essay-prose :global(th),
+  .essay-prose :global(td) {
+    border-bottom: 1px solid rgb(var(--color-border) / 0.7);
+    padding: 0.6rem 0.4rem;
+    text-align: left;
+  }
+  .essay-prose :global(th) {
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+    color: rgb(var(--color-text-primary));
+  }
+
+  .essay-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(var(--color-border) / 0.55);
+  }
+  .essay-foot__back {
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+    color: rgb(var(--color-accent));
+  }
+  .essay-foot__share {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
   }
 </style>

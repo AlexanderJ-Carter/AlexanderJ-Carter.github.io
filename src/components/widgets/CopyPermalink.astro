@@ -1,0 +1,75 @@
+---
+/**
+ * One-click copy of the current page URL — essay / dossier chrome.
+ */
+import { getLangFromUrl } from '../../i18n/ui';
+
+interface Props {
+  class?: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const { class: className = '' } = Astro.props;
+
+const copyLabel =
+  lang === 'zh-CN'
+    ? '复制链接'
+    : lang === 'zh-TW'
+      ? '複製連結'
+      : lang === 'fr'
+        ? 'Copier le lien'
+        : lang === 'ru'
+          ? 'Копировать ссылку'
+          : 'Copy link';
+
+const copiedLabel =
+  lang === 'zh-CN'
+    ? '已复制'
+    : lang === 'zh-TW'
+      ? '已複製'
+      : lang === 'fr'
+        ? 'Copié'
+        : lang === 'ru'
+          ? 'Скопировано'
+          : 'Copied';
+---
+
+<button
+  type="button"
+  class:list={['copy-permalink', className]}
+  data-copy-permalink
+  data-label-copy={copyLabel}
+  data-label-copied={copiedLabel}
+  aria-live="polite"
+>
+  <span data-copy-permalink-label>{copyLabel}</span>
+</button>
+
+<script>
+  function bind(btn: HTMLButtonElement) {
+    if (btn.dataset.bound === '1') return;
+    btn.dataset.bound = '1';
+    const label = btn.querySelector('[data-copy-permalink-label]');
+    const copyText = btn.dataset.labelCopy ?? 'Copy link';
+    const copiedText = btn.dataset.labelCopied ?? 'Copied';
+
+    btn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(window.location.href);
+      if (label) label.textContent = copiedText;
+      btn.classList.add('is-copied');
+      window.setTimeout(() => {
+        if (label) label.textContent = copyText;
+        btn.classList.remove('is-copied');
+      }, 1600);
+    });
+  }
+
+  function boot() {
+    document
+      .querySelectorAll<HTMLButtonElement>('[data-copy-permalink]')
+      .forEach(bind);
+  }
+
+  boot();
+  document.addEventListener('astro:page-load', boot);
+</script>

@@ -243,7 +243,8 @@
     top: 0.5rem;
     left: 0.5rem;
     z-index: 2;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.65rem;
     letter-spacing: 0.12em;
     color: rgb(255 255 255 / 0.75);
@@ -256,7 +257,8 @@
 
   /* Folio page mark */
   .folio-mark {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.7rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -1278,6 +1280,181 @@ select:valid:not(:placeholder-shown) {
 }
 .list-row:hover {
   background-color: rgb(var(--color-bg-secondary) / 0.55);
+}
+
+/* Shared film sprocket edge */
+.film-edge {
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgb(var(--color-text-primary)) 0 10px,
+    transparent 10px 16px
+  );
+  opacity: 0.12;
+}
+
+/* EXIF exposure meter — live Asia/Shanghai chrome */
+.exif-meter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgb(var(--color-border));
+  border-radius: 0.125rem;
+  background: rgb(var(--color-bg-primary) / 0.72);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--color-text-secondary));
+  text-decoration: none;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+.exif-meter:hover,
+.exif-meter:focus-visible {
+  color: rgb(var(--color-accent));
+  border-color: rgb(var(--color-accent) / 0.45);
+  background: rgb(var(--color-bg-secondary) / 0.85);
+}
+.exif-meter--on-dark {
+  border-color: rgb(255 255 255 / 0.28);
+  background: rgb(0 0 0 / 0.28);
+  color: rgb(255 255 255 / 0.72);
+  backdrop-filter: blur(4px);
+}
+.exif-meter--on-dark:hover,
+.exif-meter--on-dark:focus-visible {
+  color: white;
+  border-color: rgb(255 255 255 / 0.55);
+  background: rgb(0 0 0 / 0.4);
+}
+.exif-meter__rec {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background: rgb(var(--color-accent));
+  box-shadow: 0 0 0 0 rgb(var(--color-accent) / 0.45);
+  animation: exif-rec-pulse 2.2s ease-out infinite;
+}
+.exif-meter--on-dark .exif-meter__rec {
+  background: rgb(248 113 113);
+  box-shadow: 0 0 0 0 rgb(248 113 113 / 0.45);
+}
+.exif-meter__sep {
+  opacity: 0.45;
+}
+.exif-meter__time {
+  font-variant-numeric: tabular-nums;
+  color: inherit;
+}
+
+@keyframes exif-rec-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(var(--color-accent) / 0.4);
+    opacity: 1;
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgb(var(--color-accent) / 0);
+    opacity: 0.85;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(var(--color-accent) / 0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exif-meter__rec {
+    animation: none;
+  }
+}
+
+/* Darkroom method — three working principles */
+.principle-grid {
+  display: grid;
+  gap: 1.75rem 2.5rem;
+  border: 0;
+  background: transparent;
+}
+.principle-item {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 0.75rem 1rem;
+  padding: 0;
+  border-bottom: 0;
+}
+.principle-item:last-child {
+  border-bottom: none;
+}
+.principle-item__idx {
+  font-family: theme('fontFamily.heading');
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: rgb(var(--color-accent) / 0.55);
+  padding-top: 0.1rem;
+}
+.principle-item__title {
+  font-family: theme('fontFamily.heading');
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  color: rgb(var(--color-text-primary));
+  margin-bottom: 0.4rem;
+}
+.principle-item__body {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: rgb(var(--color-text-secondary));
+}
+@media (min-width: 768px) {
+  .principle-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .principle-item {
+    border-bottom: none;
+    border-right: 0;
+    padding: 0;
+  }
+  .principle-item:last-child {
+    border-right: none;
+  }
+}
+
+/* Copy permalink chip */
+.copy-permalink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid rgb(var(--color-border));
+  border-radius: 0.125rem;
+  background: transparent;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(var(--color-text-tertiary));
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+.copy-permalink:hover,
+.copy-permalink:focus-visible {
+  color: rgb(var(--color-accent));
+  border-color: rgb(var(--color-accent) / 0.45);
+  background: rgb(var(--color-bg-secondary) / 0.55);
+}
+.copy-permalink.is-copied {
+  color: rgb(var(--color-accent));
+  border-color: rgb(var(--color-accent) / 0.5);
 }
 
 /* Folio directory — editorial external / footer indexes */

@@ -1206,9 +1206,9 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
 ---
 
 <BaseLayout title={t('gallery.title')}>
-  <section class="relative pt-28 pb-16">
+  <section class="relative pt-28 pb-10">
     <div class="container mx-auto px-4 lg:px-8">
-      <div class="max-w-2xl mb-4">
+      <div class="max-w-2xl">
         <p class="folio-mark mb-3">Contact Sheet</p>
         <p
           class="font-heading text-sm tracking-[0.2em] uppercase text-[rgb(var(--color-text-tertiary))] mb-4"
@@ -1225,93 +1225,66 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
         >
           {
             lang === 'zh-CN'
-              ? '探索摄影作品集，记录生活中的美好瞬间'
+              ? '冲印衬纸上的联系单——点开任一相框放大观片。'
               : lang === 'zh-TW'
-                ? '探索攝影作品集，記錄生活中的美好瞬間'
+                ? '沖印襯紙上的聯繫單——點開任一相框放大觀片。'
                 : lang === 'fr'
-                  ? 'Explorez ma collection, capturant les beaux moments de la vie'
+                  ? 'Planche-contact sur passe-partout — ouvrez un cadre pour agrandir.'
                   : lang === 'ru'
-                    ? 'Исследуйте коллекцию фотографий, запечатлевая прекрасные моменты жизни'
-                    : 'Explore my photography portfolio, capturing beautiful moments in life'
+                    ? 'Контактный лист на паспарту — откройте рамку для просмотра.'
+                    : 'A contact sheet on print mats — open any frame to view larger.'
           }
         </p>
-        <p class="mt-3 text-sm text-[rgb(var(--color-text-tertiary))]">
-          {
-            lang === 'zh-CN'
-              ? '点击作品可放大查看 · 使用分类快速筛选'
-              : lang === 'zh-TW'
-                ? '點擊作品可放大查看 · 使用分類快速篩選'
-                : lang === 'fr'
-                  ? 'Cliquez pour agrandir · Filtrez par catégorie'
-                  : lang === 'ru'
-                    ? 'Нажмите для увеличения · Фильтр по категориям'
-                    : 'Click to enlarge · Filter by category'
-          }
-        </p>
+        <div class="mt-8 film-edge max-w-md opacity-80" aria-hidden="true">
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Performance Preload -->
   {
     galleryItems
       .slice(0, 3)
       .map((item) => <link rel="preload" as="image" href={item.image} />)
   }
-  <section class="py-16 container mx-auto px-4 lg:px-8">
-    <!-- 统计与筛选：紧凑胶囊 + 带图标 -->
-    <div
-      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-10"
-    >
-      <div class="flex flex-wrap gap-3" id="gallery-stats">
-        <span
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] text-sm"
-        >
-          <strong id="total-count" class="text-[rgb(var(--color-text-primary))]"
-            >{galleryItems.length}</strong
-          >
-          <span class="text-[rgb(var(--color-text-secondary))]">
+
+  <section class="pb-20 md:pb-28 container mx-auto px-4 lg:px-8">
+    <div class="gallery-toolbar mb-10">
+      <div class="gallery-toolbar__stats" id="gallery-stats">
+        <span class="gallery-stat">
+          <strong id="total-count">{galleryItems.length}</strong>
+          <span>
             {
               lang === 'zh-CN'
-                ? '件作品'
+                ? '帧'
                 : lang === 'zh-TW'
-                  ? '件作品'
+                  ? '幀'
                   : lang === 'fr'
-                    ? 'œuvres'
+                    ? 'frames'
                     : lang === 'ru'
-                      ? 'работ'
-                      : 'works'
+                      ? 'кадров'
+                      : 'frames'
             }
           </span>
         </span>
-        <span
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] text-sm text-[rgb(var(--color-text-secondary))]"
-        >
-          {galleryItems.filter((i) => i.category === 'landscape').length}
+        <span class="gallery-stat meta-mono !tracking-[0.08em]">
+          L {galleryItems.filter((i) => i.category === 'landscape').length}
         </span>
-        <span
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] text-sm text-[rgb(var(--color-text-secondary))]"
-        >
-          {galleryItems.filter((i) => i.category === 'nature').length}
+        <span class="gallery-stat meta-mono !tracking-[0.08em]">
+          N {galleryItems.filter((i) => i.category === 'nature').length}
         </span>
-        <span
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] text-sm text-[rgb(var(--color-text-secondary))]"
-        >
-          {galleryItems.filter((i) => i.category === 'food').length}
+        <span class="gallery-stat meta-mono !tracking-[0.08em]">
+          F {galleryItems.filter((i) => i.category === 'food').length}
         </span>
-        <span
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] text-sm text-[rgb(var(--color-text-secondary))]"
-        >
-          {galleryItems.filter((i) => i.category === 'architecture').length}
+        <span class="gallery-stat meta-mono !tracking-[0.08em]">
+          A {galleryItems.filter((i) => i.category === 'architecture').length}
         </span>
-        <span
-          class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[rgb(var(--color-border))] text-sm text-[rgb(var(--color-text-secondary))]"
-        >
-          {galleryItems.filter((i) => i.category === 'street').length}
+        <span class="gallery-stat meta-mono !tracking-[0.08em]">
+          S {galleryItems.filter((i) => i.category === 'street').length}
         </span>
       </div>
+
       <div
-        class="flex flex-wrap gap-2"
+        class="gallery-filters"
         id="filter-tabs"
         role="tablist"
         aria-label={lang === 'zh-CN' ? '按分类筛选' : 'Filter by category'}
@@ -1323,13 +1296,10 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
               role="tab"
               aria-selected={cat.id === 'all'}
               tabindex={cat.id === 'all' ? 0 : -1}
-              class="gallery-filter-btn px-4 py-2 rounded-lg font-medium text-sm border transition-colors focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-              class:list={{
-                'border-[rgb(var(--color-text-primary))] bg-[rgb(var(--color-bg-secondary))] text-[rgb(var(--color-text-primary))]':
-                  cat.id === 'all',
-                'border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:border-[rgb(var(--color-text-tertiary))]':
-                  cat.id !== 'all',
-              }}
+              class:list={[
+                'gallery-filter-btn',
+                cat.id === 'all' && 'is-active',
+              ]}
               data-filter={cat.id}
             >
               {cat.label}
@@ -1337,113 +1307,76 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
           ))
         }
       </div>
-      <div
-        class="border border-[rgb(var(--color-border))] rounded-lg p-3 text-xs sm:text-sm max-w-sm"
-      >
-        <p class="font-semibold text-[rgb(var(--color-text-primary))] mb-1">
-          {sourceUi.title}
+
+      <div class="gallery-source">
+        <p class="folio-mark mb-2">{sourceUi.title}</p>
+        <p
+          class="text-xs text-[rgb(var(--color-text-secondary))] mb-3 leading-relaxed"
+        >
+          {sourceUi.note}
         </p>
-        <p class="text-[rgb(var(--color-text-secondary))]">{sourceUi.note}</p>
-        <div class="mt-3">
-          <label for="source-filter" class="sr-only">{sourceUi.title}</label>
-          <select
-            id="source-filter"
-            class="w-full rounded-lg border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm text-[rgb(var(--color-text-primary))] focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none"
-          >
-            <option value="all">{sourceUi.all}</option>
-            <option value="local">{sourceUi.local}</option>
-            <option value="remote">{sourceUi.remote}</option>
-          </select>
-        </div>
+        <label for="source-filter" class="sr-only">{sourceUi.title}</label>
+        <select id="source-filter" class="gallery-source__select">
+          <option value="all">{sourceUi.all}</option>
+          <option value="local">{sourceUi.local}</option>
+          <option value="remote">{sourceUi.remote}</option>
+        </select>
       </div>
     </div>
 
-    <!-- 画廊网格：首张大图 featured，卡片可点击灯箱 -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
-      id="gallery-grid"
-    >
+    <div class="gallery-sheet" id="gallery-grid">
       {
         galleryItems.map((item, index) => {
           const catLabel =
             categories.find((c) => c.id === item.category)?.label ??
             item.category;
+          const frameNo = String(index + 1).padStart(2, '0');
+          const isRemote = item.image.startsWith('http');
           return (
             <button
               type="button"
-              class="gallery-item contact-sheet card-hover group relative overflow-hidden aspect-[4/3] cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 border-0 p-0 transition-all duration-300"
-              class:list={{
-                'md:col-span-2': index === 0,
-              }}
+              class:list={[
+                'shot gallery-item group',
+                index === 0 && 'shot--lead',
+              ]}
               data-category={item.category}
-              data-source={item.image.startsWith('http') ? 'remote' : 'local'}
+              data-source={isRemote ? 'remote' : 'local'}
               data-gallery-index={index}
               data-image={item.image}
               data-title={item.title}
               data-description={item.description}
+              data-category-label={catLabel}
               aria-label={
                 lang === 'zh-CN' ? `查看：${item.title}` : `View: ${item.title}`
               }
             >
-              <span class="contact-sheet-frame">
-                {String(index + 1).padStart(2, '0')}
+              <span class="shot__media">
+                <span class="gallery-skeleton" aria-hidden="true" />
+                <img
+                  src={gallerySrcFallback(item.image)}
+                  srcset={gallerySrcSet(item.image)}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  alt={`${item.title} - ${item.description}`}
+                  class="gallery-image"
+                  loading={index < 6 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  referrerpolicy="no-referrer"
+                  fetchpriority={index < 3 ? 'high' : 'low'}
+                />
+                <span class="shot__no" aria-hidden="true">
+                  {frameNo}
+                </span>
               </span>
-              <div
-                class="gallery-skeleton absolute inset-0"
-                aria-hidden="true"
-              />
-              <img
-                src={gallerySrcFallback(item.image)}
-                srcset={gallerySrcSet(item.image)}
-                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                alt={`${item.title} - ${item.description}`}
-                class="gallery-image absolute inset-0 w-full h-full object-cover opacity-0 transform group-hover:scale-105 group-focus-within:scale-105 transition-all duration-500 ease-out"
-                loading={index < 6 ? 'eager' : 'lazy'}
-                decoding="async"
-                referrerpolicy="no-referrer"
-                fetchpriority={index < 3 ? 'high' : 'low'}
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 md:p-6">
-                <span class="inline-flex items-center gap-2 text-white/90 text-xs font-medium mb-2 meta-mono">
-                  {catLabel}
+              <span class="shot__copy">
+                <span class="shot__meta">
+                  <span>{catLabel}</span>
+                  <span>
+                    {isRemote ? sourceUi.remoteTag : sourceUi.localTag}
+                  </span>
                 </span>
-                <span class="inline-flex items-center w-fit mb-2 px-2 py-0.5 rounded-sm bg-black/35 text-white/90 text-[11px]">
-                  {item.image.startsWith('http')
-                    ? sourceUi.remoteTag
-                    : sourceUi.localTag}
-                </span>
-                <h3 class="text-white text-lg md:text-xl font-heading font-bold">
-                  {item.title}
-                </h3>
-                <p class="text-gray-200 text-sm mt-1 line-clamp-2">
-                  {item.description}
-                </p>
-                <span class="mt-3 inline-flex items-center gap-1.5 text-sm text-white/80 font-medium">
-                  <svg
-                    class="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                    />
-                  </svg>
-                  {lang === 'zh-CN'
-                    ? '放大查看'
-                    : lang === 'zh-TW'
-                      ? '放大查看'
-                      : lang === 'fr'
-                        ? 'Agrandir'
-                        : lang === 'ru'
-                          ? 'Увеличить'
-                          : 'View larger'}
-                </span>
-              </div>
+                <span class="shot__title">{item.title}</span>
+                <span class="shot__desc">{item.description}</span>
+              </span>
             </button>
           );
         })
@@ -1451,21 +1384,21 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     </div>
   </section>
 
-  <!-- Lightbox 灯箱 -->
   <div
     id="gallery-lightbox"
     role="dialog"
     aria-modal="true"
     aria-label={lang === 'zh-CN' ? '作品大图' : 'Image viewer'}
-    class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
+    class="gallery-lightbox fixed inset-0 z-[100] hidden"
   >
+    <div class="gallery-lightbox__veil" data-lightbox-dismiss></div>
     <button
       type="button"
       id="lightbox-close"
-      class="absolute top-4 right-4 z-10 w-10 h-10 rounded-sm bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
+      class="gallery-lightbox__ctrl gallery-lightbox__close"
       aria-label={lang === 'zh-CN' ? '关闭' : 'Close'}
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
         ><path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -1476,10 +1409,10 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     <button
       type="button"
       id="lightbox-prev"
-      class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-sm bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
+      class="gallery-lightbox__ctrl gallery-lightbox__nav gallery-lightbox__prev"
       aria-label={lang === 'zh-CN' ? '上一张' : 'Previous'}
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
         ><path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -1490,10 +1423,10 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     <button
       type="button"
       id="lightbox-next"
-      class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-sm bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-white"
+      class="gallery-lightbox__ctrl gallery-lightbox__nav gallery-lightbox__next"
       aria-label={lang === 'zh-CN' ? '下一张' : 'Next'}
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
         ><path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -1501,18 +1434,30 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
           d="M9 5l7 7-7 7"></path></svg
       >
     </button>
-    <div
-      class="relative max-w-5xl max-h-[85vh] w-full flex flex-col items-center"
-    >
-      <img
-        id="lightbox-image"
-        src=""
-        alt=""
-        class="max-w-full max-h-[70vh] w-auto object-contain rounded-lg shadow-2xl"
-      />
-      <div class="mt-4 text-center text-white px-4">
-        <h2 id="lightbox-title" class="text-xl font-bold">Selected image</h2>
-        <p id="lightbox-desc" class="text-white/80 text-sm mt-1"></p>
+
+    <div class="gallery-lightbox__stage">
+      <div class="lightbox-mat">
+        <p class="lightbox-mat__index meta-mono" id="lightbox-index">01 / 01</p>
+        <div class="lightbox-mat__window">
+          <img id="lightbox-image" src="" alt="" />
+        </div>
+        <div class="lightbox-mat__caption">
+          <p
+            id="lightbox-cat"
+            class="meta-mono !text-[10px] text-white/55 mb-2"
+          >
+          </p>
+          <h2
+            id="lightbox-title"
+            class="font-heading text-xl md:text-2xl font-bold text-white"
+          >
+          </h2>
+          <p
+            id="lightbox-desc"
+            class="text-white/75 text-sm mt-2 leading-relaxed"
+          >
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -1531,6 +1476,8 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
   ) as HTMLImageElement;
   const lightboxTitle = document.getElementById('lightbox-title');
   const lightboxDesc = document.getElementById('lightbox-desc');
+  const lightboxCat = document.getElementById('lightbox-cat');
+  const lightboxIndex = document.getElementById('lightbox-index');
   const lightboxClose = document.getElementById('lightbox-close');
   const lightboxPrev = document.getElementById('lightbox-prev');
   const lightboxNext = document.getElementById('lightbox-next');
@@ -1576,9 +1523,29 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     galleryItems.forEach((item) => {
       const show = visible.includes(item);
       (item as HTMLElement).style.display = show ? '' : 'none';
-      if (show) item.classList.add('gallery-reveal');
+      if (show) {
+        item.classList.remove('gallery-reveal');
+        void (item as HTMLElement).offsetWidth;
+        item.classList.add('gallery-reveal');
+      }
     });
     if (totalCountEl) totalCountEl.textContent = String(visible.length);
+  }
+
+  function fillLightbox(item: Element, index: number, total: number) {
+    const img = item.getAttribute('data-image');
+    const title = item.getAttribute('data-title');
+    const desc = item.getAttribute('data-description');
+    const cat = item.getAttribute('data-category-label');
+    if (img) lightboxImage.src = img;
+    lightboxImage.alt = title || '';
+    if (lightboxTitle) lightboxTitle.textContent = title || '';
+    if (lightboxDesc) lightboxDesc.textContent = desc || '';
+    if (lightboxCat) lightboxCat.textContent = cat || '';
+    if (lightboxIndex) {
+      lightboxIndex.textContent = `${String(index + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+    }
+    currentLightboxIndex = index;
   }
 
   let lightboxTrigger: HTMLElement | null = null;
@@ -1589,16 +1556,9 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     if (!item || !lightbox || !lightboxImage || !lightboxTitle || !lightboxDesc)
       return;
     lightboxTrigger = document.activeElement as HTMLElement;
-    const img = item.getAttribute('data-image');
-    const title = item.getAttribute('data-title');
-    const desc = item.getAttribute('data-description');
-    if (img) lightboxImage.src = img;
-    lightboxImage.alt = title || '';
-    if (lightboxTitle) lightboxTitle.textContent = title || '';
-    if (lightboxDesc) lightboxDesc.textContent = desc || '';
-    currentLightboxIndex = index;
+    fillLightbox(item, index, visible.length);
     lightbox.classList.remove('hidden');
-    lightbox.classList.add('flex');
+    lightbox.classList.add('is-open');
     document.body.style.overflow = 'hidden';
     lightboxClose?.focus();
   }
@@ -1606,7 +1566,7 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
   function closeLightbox() {
     if (lightbox) {
       lightbox.classList.add('hidden');
-      lightbox.classList.remove('flex');
+      lightbox.classList.remove('is-open');
     }
     document.body.style.overflow = '';
     lightboxTrigger?.focus();
@@ -1616,30 +1576,15 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
   function showLightboxPrev() {
     const visible = getVisibleItems();
     if (visible.length === 0) return;
-    currentLightboxIndex =
-      (currentLightboxIndex - 1 + visible.length) % visible.length;
-    const item = visible[currentLightboxIndex];
-    const img = item.getAttribute('data-image');
-    const title = item.getAttribute('data-title');
-    const desc = item.getAttribute('data-description');
-    if (lightboxImage && img) lightboxImage.src = img;
-    if (lightboxImage) lightboxImage.alt = title || '';
-    if (lightboxTitle) lightboxTitle.textContent = title || '';
-    if (lightboxDesc) lightboxDesc.textContent = desc || '';
+    const next = (currentLightboxIndex - 1 + visible.length) % visible.length;
+    fillLightbox(visible[next], next, visible.length);
   }
 
   function showLightboxNext() {
     const visible = getVisibleItems();
     if (visible.length === 0) return;
-    currentLightboxIndex = (currentLightboxIndex + 1) % visible.length;
-    const item = visible[currentLightboxIndex];
-    const img = item.getAttribute('data-image');
-    const title = item.getAttribute('data-title');
-    const desc = item.getAttribute('data-description');
-    if (lightboxImage && img) lightboxImage.src = img;
-    if (lightboxImage) lightboxImage.alt = title || '';
-    if (lightboxTitle) lightboxTitle.textContent = title || '';
-    if (lightboxDesc) lightboxDesc.textContent = desc || '';
+    const next = (currentLightboxIndex + 1) % visible.length;
+    fillLightbox(visible[next], next, visible.length);
   }
 
   galleryItems.forEach((item) => {
@@ -1653,11 +1598,12 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
   lightboxClose?.addEventListener('click', closeLightbox);
   lightboxPrev?.addEventListener('click', showLightboxPrev);
   lightboxNext?.addEventListener('click', showLightboxNext);
-  lightbox?.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
+  lightbox
+    ?.querySelector('[data-lightbox-dismiss]')
+    ?.addEventListener('click', closeLightbox);
+
   document.addEventListener('keydown', (e) => {
-    if (!lightbox?.classList.contains('flex')) return;
+    if (!lightbox?.classList.contains('is-open')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') showLightboxPrev();
     if (e.key === 'ArrowRight') showLightboxNext();
@@ -1687,30 +1633,10 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
         const isActive = b.getAttribute('data-filter') === filterValue;
         b.setAttribute('aria-selected', String(isActive));
         (b as HTMLElement).tabIndex = isActive ? 0 : -1;
-        b.classList.remove(
-          'border-[rgb(var(--color-text-primary))]',
-          'bg-[rgb(var(--color-bg-secondary))]',
-          'text-[rgb(var(--color-text-primary))]'
-        );
-        b.classList.add(
-          'border-[rgb(var(--color-border))]',
-          'text-[rgb(var(--color-text-secondary))]'
-        );
+        b.classList.toggle('is-active', isActive);
       });
-      btn.classList.remove(
-        'border-[rgb(var(--color-border))]',
-        'text-[rgb(var(--color-text-secondary))]'
-      );
-      btn.classList.add(
-        'border-[rgb(var(--color-text-primary))]',
-        'bg-[rgb(var(--color-bg-secondary))]',
-        'text-[rgb(var(--color-text-primary))]'
-      );
 
-      let visibleCount = 0;
       applyFilters();
-      visibleCount = getVisibleItems().length;
-      if (totalCountEl) totalCountEl.textContent = String(visibleCount);
     });
   });
 
@@ -1721,40 +1647,246 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
 </script>
 
 <style>
-  .gallery-item .gallery-skeleton {
+  /* Toolbar — open, not boxed */
+  .gallery-toolbar {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgb(var(--color-border) / 0.5);
+  }
+  @media (min-width: 1024px) {
+    .gallery-toolbar {
+      grid-template-columns: auto 1fr minmax(11rem, 14rem);
+      align-items: end;
+      gap: 2rem;
+    }
+  }
+  .gallery-toolbar__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    align-items: baseline;
+  }
+  .gallery-stat {
+    font-size: 0.85rem;
+    color: rgb(var(--color-text-secondary));
+  }
+  .gallery-stat strong {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: rgb(var(--color-text-primary));
+    margin-right: 0.25rem;
+  }
+  .gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 0.25rem;
+  }
+  .gallery-filter-btn {
+    padding: 0.4rem 0.7rem;
+    font-family: theme('fontFamily.heading');
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgb(var(--color-text-tertiary));
+    border-radius: 999px;
+    transition:
+      color 0.18s ease,
+      background-color 0.18s ease;
+  }
+  .gallery-filter-btn:hover,
+  .gallery-filter-btn:focus-visible {
+    color: rgb(var(--color-text-primary));
+    background: rgb(var(--color-bg-secondary) / 0.7);
+  }
+  .gallery-filter-btn.is-active {
+    color: rgb(var(--color-accent));
+    background: rgb(var(--color-accent) / 0.1);
+  }
+  .gallery-filter-btn:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+  }
+  .gallery-source {
+    padding: 0;
+  }
+  .gallery-source__select {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid rgb(var(--color-border));
+    border-radius: 0;
+    background: transparent;
+    color: rgb(var(--color-text-primary));
+    padding: 0.45rem 0;
+    font-size: 0.85rem;
+  }
+
+  /* Magazine sheet */
+  .gallery-sheet {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.25rem 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .gallery-sheet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2.75rem 1.75rem;
+    }
+  }
+  @media (min-width: 1100px) {
+    .gallery-sheet {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 3rem 2rem;
+    }
+  }
+
+  .shot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 0;
+  }
+  .shot--lead {
+    grid-column: 1 / -1;
+  }
+  @media (min-width: 768px) {
+    .shot--lead {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1.5rem 2rem;
+      align-items: end;
+    }
+  }
+  .shot:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
+  }
+
+  .shot__media {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: rgb(var(--color-bg-secondary));
+    border-radius: 0.2rem;
+  }
+  .shot--lead .shot__media {
+    aspect-ratio: 16 / 10;
+  }
+  @media (min-width: 768px) {
+    .shot--lead .shot__media {
+      aspect-ratio: auto;
+      min-height: 22rem;
+    }
+  }
+
+  .shot .gallery-skeleton {
+    position: absolute;
+    inset: 0;
     background: linear-gradient(
       90deg,
-      rgba(148, 163, 184, 0.18) 0%,
-      rgba(226, 232, 240, 0.35) 50%,
-      rgba(148, 163, 184, 0.18) 100%
+      rgb(var(--color-border) / 0.25) 0%,
+      rgb(var(--color-bg-secondary)) 50%,
+      rgb(var(--color-border) / 0.25) 100%
     );
     background-size: 200% 100%;
     animation: galleryShimmer 1.3s linear infinite;
-    opacity: 1;
+    z-index: 1;
     transition: opacity 0.35s ease;
   }
-
-  .dark .gallery-item .gallery-skeleton {
-    background: linear-gradient(
-      90deg,
-      rgba(51, 65, 85, 0.5) 0%,
-      rgba(71, 85, 105, 0.7) 50%,
-      rgba(51, 65, 85, 0.5) 100%
-    );
+  .shot .gallery-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    filter: blur(8px) saturate(0.9);
+    transform: scale(1.04);
+    transition:
+      opacity 0.5s ease,
+      filter 0.6s ease,
+      transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   }
-
-  .gallery-item .gallery-image {
-    filter: blur(6px);
-  }
-
-  .gallery-item.is-loaded .gallery-skeleton {
+  .shot.is-loaded .gallery-skeleton {
     opacity: 0;
     pointer-events: none;
   }
-
-  .gallery-item.is-loaded .gallery-image {
+  .shot.is-loaded .gallery-image {
     opacity: 1;
-    filter: blur(0);
+    filter: blur(0) saturate(1.04);
+    transform: scale(1);
+  }
+  .shot:hover.is-loaded .gallery-image,
+  .shot:focus-visible.is-loaded .gallery-image {
+    transform: scale(1.04);
+  }
+
+  .shot__no {
+    position: absolute;
+    left: 0.85rem;
+    bottom: 0.85rem;
+    z-index: 2;
+    font-family: theme('fontFamily.heading');
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: white;
+    text-shadow: 0 1px 8px rgb(0 0 0 / 0.45);
+    opacity: 0.85;
+  }
+
+  .shot__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0 0.1rem;
+  }
+  .shot__meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .shot__meta span:first-child {
+    color: rgb(var(--color-accent));
+  }
+  .shot__title {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: rgb(var(--color-text-primary));
+    transition: color 0.18s ease;
+  }
+  .shot:hover .shot__title,
+  .shot:focus-visible .shot__title {
+    color: rgb(var(--color-accent));
+  }
+  .shot--lead .shot__title {
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+  }
+  .shot__desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgb(var(--color-text-secondary));
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   @keyframes galleryShimmer {
@@ -1767,22 +1899,107 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
   }
 
   .gallery-reveal {
-    animation: galleryReveal 0.4s ease-out forwards;
+    animation: galleryReveal 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
-
   @keyframes galleryReveal {
     from {
       opacity: 0;
-      transform: scale(0.96);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
-      transform: scale(1);
+      transform: translateY(0);
     }
   }
 
-  #gallery-lightbox.flex {
-    animation: lightboxIn 0.2s ease-out;
+  /* Lightbox — soft darkroom */
+  .gallery-lightbox {
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .gallery-lightbox.is-open {
+    display: flex;
+    animation: lightboxIn 0.28s ease-out;
+  }
+  .gallery-lightbox__veil {
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0.88);
+    backdrop-filter: blur(8px);
+  }
+  .gallery-lightbox__stage {
+    position: relative;
+    z-index: 1;
+    width: min(56rem, 100%);
+    max-height: 90vh;
+  }
+  .lightbox-mat {
+    padding: 0;
+    background: transparent;
+    border: 0;
+  }
+  .lightbox-mat__index {
+    color: rgb(255 255 255 / 0.45);
+    margin-bottom: 0.85rem;
+    letter-spacing: 0.14em;
+  }
+  .lightbox-mat__window {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40vh;
+    max-height: 68vh;
+    overflow: hidden;
+  }
+  .lightbox-mat__window img {
+    max-width: 100%;
+    max-height: 68vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0.2rem;
+  }
+  .lightbox-mat__caption {
+    margin-top: 1.15rem;
+  }
+  .gallery-lightbox__ctrl {
+    position: absolute;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 0;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.1);
+    color: white;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+  }
+  .gallery-lightbox__ctrl:hover,
+  .gallery-lightbox__ctrl:focus-visible {
+    background: rgb(255 255 255 / 0.2);
+  }
+  .gallery-lightbox__ctrl:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+  .gallery-lightbox__close {
+    top: 1rem;
+    right: 1rem;
+  }
+  .gallery-lightbox__nav {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .gallery-lightbox__prev {
+    left: 0.75rem;
+  }
+  .gallery-lightbox__next {
+    right: 0.75rem;
   }
 
   @keyframes lightboxIn {
@@ -1795,13 +2012,16 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .gallery-item .gallery-image,
-    .gallery-item .gallery-skeleton,
+    .shot .gallery-image,
+    .gallery-filter-btn,
     .gallery-reveal,
-    #gallery-lightbox.flex {
+    .gallery-lightbox.is-open {
       animation: none !important;
       transition: none !important;
-      transform: none !important;
+    }
+    .shot:hover.is-loaded .gallery-image,
+    .shot:focus-visible.is-loaded .gallery-image {
+      transform: none;
     }
   }
 </style>

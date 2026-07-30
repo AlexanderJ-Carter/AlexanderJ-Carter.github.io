@@ -32,6 +32,15 @@ export type HomeCopy = {
   studioCta: string;
   pathsLabel: string;
   paths: HomePathItem[];
+  researchKicker: string;
+  researchTitle: string;
+  researchBody: string;
+  researchCta: string;
+  methodKicker: string;
+  methodTitle: string;
+  methodLead: string;
+  method: { title: string; body: string }[];
+  sheetCaption: string;
   elsewhereTitle: string;
   elsewhereSubtitle: string;
   elsewhereTools: string;
@@ -119,6 +128,29 @@ export const homeCopy: Record<Lang, HomeCopy> = {
       { title: '写作与深读', href: '/writing' },
       { title: '小工具索引', href: '/tools' },
     ],
+    researchKicker: 'Research',
+    researchTitle: 'AgentSociety',
+    researchBody:
+      '清华 FIB Lab 协作：LLM 社会智能体与可执行社会科学。扩展、CI、文档与社会人仿真技能。',
+    researchCta: '研究档案',
+    methodKicker: 'Method',
+    methodTitle: '暗房三法则',
+    methodLead: '站点如何取舍的工作隐喻——曝光、对焦、冲印。',
+    method: [
+      {
+        title: 'Expose · 曝光',
+        body: '只放真实可访问的内容与链接；坏链不进索引。',
+      },
+      {
+        title: 'Focus · 对焦',
+        body: '一页一件事。导航分组，正文不堆看板。',
+      },
+      {
+        title: 'Print · 冲印',
+        body: '静态生成、可离线翻阅；隐私默认，键盘可达。',
+      },
+    ],
+    sheetCaption: 'Contact sheet · 3 frames',
     elsewhereTitle: '站外角落',
     elsewhereSubtitle: '独立子站与博客——只放目前可访问的入口。',
     elsewhereTools: '工具索引',
@@ -174,6 +206,29 @@ export const homeCopy: Record<Lang, HomeCopy> = {
       { title: '寫作與深讀', href: '/writing' },
       { title: '小工具索引', href: '/tools' },
     ],
+    researchKicker: 'Research',
+    researchTitle: 'AgentSociety',
+    researchBody:
+      '清華 FIB Lab 協作：LLM 社會智能體與可執行社會科學。擴展、CI、文件與社會人仿真技能。',
+    researchCta: '研究檔案',
+    methodKicker: 'Method',
+    methodTitle: '暗房三法則',
+    methodLead: '站點如何取捨的工作隱喻——曝光、對焦、沖印。',
+    method: [
+      {
+        title: 'Expose · 曝光',
+        body: '只放真實可訪問的內容與連結；壞鏈不進索引。',
+      },
+      {
+        title: 'Focus · 對焦',
+        body: '一頁一件事。導航分組，正文不堆看板。',
+      },
+      {
+        title: 'Print · 沖印',
+        body: '靜態生成、可離線翻閱；隱私預設，鍵盤可達。',
+      },
+    ],
+    sheetCaption: 'Contact sheet · 3 frames',
     elsewhereTitle: '站外角落',
     elsewhereSubtitle: '獨立子站與部落格——只放目前可訪問的入口。',
     elsewhereTools: '工具索引',
@@ -255,6 +310,29 @@ export const homeCopy: Record<Lang, HomeCopy> = {
       { title: 'Writing & deep reading', href: '/writing' },
       { title: 'Tool index', href: '/tools' },
     ],
+    researchKicker: 'Research',
+    researchTitle: 'AgentSociety',
+    researchBody:
+      'Tsinghua FIB Lab collaboration: LLM social agents and executable social science — extensions, CI, docs, and socially grounded agent skills.',
+    researchCta: 'Research dossier',
+    methodKicker: 'Method',
+    methodTitle: 'Darkroom rules',
+    methodLead: 'How this folio decides what to keep — expose, focus, print.',
+    method: [
+      {
+        title: 'Expose',
+        body: 'Only live content and working links. Broken URLs stay out.',
+      },
+      {
+        title: 'Focus',
+        body: 'One job per page. Grouped navigation — no dashboard clutter.',
+      },
+      {
+        title: 'Print',
+        body: 'Static generation you can revisit offline. Privacy by default.',
+      },
+    ],
+    sheetCaption: 'Contact sheet · 3 frames',
     elsewhereTitle: 'Elsewhere',
     elsewhereSubtitle: 'Independent sites and the blog — live links only.',
     elsewhereTools: 'Tool index',
@@ -337,6 +415,29 @@ export const homeCopy: Record<Lang, HomeCopy> = {
       { title: 'Écrits et lectures', href: '/writing' },
       { title: 'Index des outils', href: '/tools' },
     ],
+    researchKicker: 'Research',
+    researchTitle: 'AgentSociety',
+    researchBody:
+      'Collaboration FIB Lab (Tsinghua) : agents sociaux LLM et sciences sociales exécutables — extensions, CI, docs et compétences d’agents.',
+    researchCta: 'Dossier recherche',
+    methodKicker: 'Method',
+    methodTitle: 'Règles de chambre noire',
+    methodLead: 'Comment ce folio décide — exposer, faire le point, tirer.',
+    method: [
+      {
+        title: 'Expose',
+        body: 'Uniquement du contenu vivant et des liens qui marchent.',
+      },
+      {
+        title: 'Focus',
+        body: 'Une tâche par page. Navigation groupée, sans tableau de bord.',
+      },
+      {
+        title: 'Print',
+        body: 'Génération statique, relisible hors ligne. Vie privée par défaut.',
+      },
+    ],
+    sheetCaption: 'Planche-contact · 3 frames',
     elsewhereTitle: 'Ailleurs',
     elsewhereSubtitle: 'Sites indépendants et blog — liens actifs seulement.',
     elsewhereTools: 'Index des outils',
@@ -419,6 +520,29 @@ export const homeCopy: Record<Lang, HomeCopy> = {
       { title: 'Статьи и чтение', href: '/writing' },
       { title: 'Индекс утилит', href: '/tools' },
     ],
+    researchKicker: 'Research',
+    researchTitle: 'AgentSociety',
+    researchBody:
+      'Сотрудничество с FIB Lab (Tsinghua): LLM-агенты и исполнимая социальная наука — расширения, CI, документация и навыки агентов.',
+    researchCta: 'Досье исследований',
+    methodKicker: 'Method',
+    methodTitle: 'Правила тёмной комнаты',
+    methodLead: 'Как folio решает, что оставить — экспозиция, фокус, печать.',
+    method: [
+      {
+        title: 'Expose',
+        body: 'Только живой контент и рабочие ссылки. Битые URL — вне индекса.',
+      },
+      {
+        title: 'Focus',
+        body: 'Одна задача на страницу. Навигация по группам, без дашборда.',
+      },
+      {
+        title: 'Print',
+        body: 'Статическая сборка, можно читать офлайн. Приватность по умолчанию.',
+      },
+    ],
+    sheetCaption: 'Контактный лист · 3 кадра',
     elsewhereTitle: 'Снаружи',
     elsewhereSubtitle: 'Независимые сайты и блог — только рабочие ссылки.',
     elsewhereTools: 'Индекс утилит',

@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../chrome/AdSlot.astro';
 import PoemHistory from '../widgets/PoemHistory.astro';
+import ExposureMeter from '../widgets/ExposureMeter.astro';
 import { getCollection } from 'astro:content';
 import { homeCopy } from '../../i18n/pages/home';
 import {
@@ -74,9 +75,9 @@ const heroSrc = gallerySrcFallback(heroImage);
       class="relative z-10 w-full container mx-auto px-4 lg:px-8 pb-20 pt-28 md:pb-28 md:pt-32"
     >
       <div class="max-w-3xl">
-        <p class="meta-mono !text-white/55 mb-4 animate-fade-in">
-          Frame 01 · Beijing · Available light
-        </p>
+        <div class="mb-5 animate-fade-in">
+          <ExposureMeter variant="on-dark" />
+        </div>
         <p
           class="font-heading text-sm md:text-base tracking-[0.22em] uppercase text-white/70 mb-5 animate-fade-in"
         >
@@ -137,6 +138,11 @@ const heroSrc = gallerySrcFallback(heroImage);
             {copy.featuredSubtitle}
           </p>
         </div>
+        <p
+          class="meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))] hidden sm:block shrink-0 pb-1"
+        >
+          {copy.sheetCaption}
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-10">
@@ -241,6 +247,63 @@ const heroSrc = gallerySrcFallback(heroImage);
     </div>
   </section>
 
+  <!-- Darkroom method -->
+  <section class="py-16 md:py-20 reveal">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="max-w-2xl mb-10">
+        <p class="folio-mark mb-3">{copy.methodKicker}</p>
+        <h2
+          class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-3"
+        >
+          {copy.methodTitle}
+        </h2>
+        <p class="text-[rgb(var(--color-text-secondary))] text-lg">
+          {copy.methodLead}
+        </p>
+      </div>
+      <div class="principle-grid shadow-[var(--shadow-sm)]">
+        {
+          copy.method.map((item, i) => (
+            <article class="principle-item">
+              <span class="principle-item__idx">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3 class="principle-item__title">{item.title}</h3>
+                <p class="principle-item__body">{item.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Research dossier strip -->
+  <section class="py-16 md:py-20 reveal">
+    <div class="container mx-auto px-4 lg:px-8">
+      <div class="film-edge mb-10" aria-hidden="true"></div>
+      <div class="grid lg:grid-cols-[1fr_auto] gap-8 lg:gap-12 items-end py-2">
+        <div class="max-w-2xl">
+          <p class="folio-mark mb-3">{copy.researchKicker}</p>
+          <h2
+            class="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-4"
+          >
+            {copy.researchTitle}
+          </h2>
+          <p
+            class="text-[rgb(var(--color-text-secondary))] text-lg leading-relaxed"
+          >
+            {copy.researchBody}
+          </p>
+        </div>
+        <a href={lp('/about')} class="btn-primary shrink-0">
+          {copy.researchCta} →
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Elsewhere -->
   <section class="py-20 md:py-24 bg-[rgb(var(--color-bg-secondary))] reveal">
     <div class="container mx-auto px-4 lg:px-8">
@@ -289,7 +352,9 @@ const heroSrc = gallerySrcFallback(heroImage);
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <span class="min-w-0">
-                  <span class="fd-title !text-lg md:!text-xl">{item.title}</span>
+                  <span class="fd-title !text-lg md:!text-xl">
+                    {item.title}
+                  </span>
                   <span class="fd-host fd-host-mobile">{host}</span>
                   <p class="mt-1.5 text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed max-w-xl">
                     {item.desc}
@@ -379,13 +444,9 @@ const heroSrc = gallerySrcFallback(heroImage);
         </div>
 
         <aside class="lg:pt-14">
-          <div
-            class="border border-[rgb(var(--color-border))] p-6 md:p-8 bg-[rgb(var(--color-bg-primary))]"
-          >
+          <div class="lg:pl-2">
             <p class="folio-mark mb-3">Shelf</p>
-            <h3
-              class="font-heading text-2xl font-bold tracking-tight mb-3"
-            >
+            <h3 class="font-heading text-2xl font-bold tracking-tight mb-3">
               {copy.readingTitle}
             </h3>
             <p

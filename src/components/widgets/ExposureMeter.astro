@@ -1,0 +1,88 @@
+---
+/**
+ * Live EXIF-style clock for Asia/Shanghai — Folio chrome micro-widget.
+ */
+import { getLangFromUrl } from '../../i18n/ui';
+import { getLangPath } from '../../i18n/types';
+
+interface Props {
+  /** Visual tone */
+  variant?: 'ink' | 'on-dark';
+  /** Link target; defaults to /now */
+  href?: string;
+  class?: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const {
+  variant = 'ink',
+  href = getLangPath(lang, '/now'),
+  class: className = '',
+} = Astro.props;
+
+const label =
+  lang === 'zh-CN'
+    ? '北京时间曝光表，打开 Now'
+    : lang === 'zh-TW'
+      ? '北京時間曝光表，打開 Now'
+      : lang === 'fr'
+        ? 'Posemètre heure de Beijing — ouvrir Now'
+        : lang === 'ru'
+          ? 'Экспонометр времени Пекина — открыть Now'
+          : 'Beijing exposure meter — open Now';
+---
+
+<a
+  href={href}
+  class:list={['exif-meter', `exif-meter--${variant}`, className]}
+  aria-label={label}
+  data-exposure-meter
+>
+  <span class="exif-meter__rec" aria-hidden="true"></span>
+  <span class="exif-meter__time" data-exif-time>−−:−−:−−</span>
+  <span class="exif-meter__sep" aria-hidden="true">·</span>
+  <span>Asia/Shanghai</span>
+  <span class="exif-meter__sep" aria-hidden="true">·</span>
+  <span data-exif-day>—</span>
+</a>
+
+<script>
+  function formatMeter(now: Date) {
+    const time = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Shanghai',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    }).format(now);
+    const day = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Shanghai',
+      weekday: 'short',
+      day: '2-digit',
+      month: 'short',
+    }).format(now);
+    return { time, day };
+  }
+
+  function tickRoot(root: Element) {
+    const { time, day } = formatMeter(new Date());
+    const timeEl = root.querySelector('[data-exif-time]');
+    const dayEl = root.querySelector('[data-exif-day]');
+    if (timeEl) timeEl.textContent = time;
+    if (dayEl) dayEl.textContent = day;
+  }
+
+  function boot() {
+    document.querySelectorAll('[data-exposure-meter]').forEach(tickRoot);
+  }
+
+  boot();
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    window.setInterval(boot, 1000);
+  } else {
+    window.setInterval(boot, 60_000);
+  }
+
+  document.addEventListener('astro:page-load', boot);
+</script>

@@ -174,13 +174,7 @@ const moreSubmenu: SubMenuItem[] = [
   {
     href: 'https://netq.alexander.xin',
     label: 'NetQ',
-    desc: l(
-      '网络排查',
-      '網路排查',
-      'Réseau',
-      'Сеть',
-      'Network lab'
-    ),
+    desc: l('网络排查', '網路排查', 'Réseau', 'Сеть', 'Network lab'),
     external: true,
   },
   {
@@ -245,25 +239,28 @@ const mainNavItems: NavItem[] = [
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 z-50 nav-glass transition-all duration-300"
+  class="fixed top-0 left-0 right-0 z-50 nav-glass site-header"
   id="header"
 >
-  <div class="scroll-indicator" id="scroll-indicator" hidden aria-hidden="true">
+  <div
+    class="nav-progress"
+    id="scroll-indicator"
+    role="progressbar"
+    aria-hidden="true"
+  >
   </div>
+  <div class="nav-film-edge" aria-hidden="true"></div>
 
   <nav
-    class="relative z-50 container mx-auto px-4 lg:px-8 py-4"
+    class="relative z-50 container mx-auto px-4 lg:px-8"
     aria-label={lang === 'zh-CN' ? '主导航' : 'Main'}
   >
-    <div class="flex items-center justify-between">
-      <!-- Logo -->
+    <div class="flex items-center justify-between gap-4 min-h-[4.25rem]">
       <a
         href={lang === 'zh-CN' ? '/' : lang === 'en-GB' ? '/en/' : `/${lang}/`}
-        class="flex items-center gap-3 group min-w-0"
+        class="nav-brand group flex items-center gap-3 min-w-0"
       >
-        <span
-          class="relative shrink-0 w-9 h-9 rounded-sm overflow-hidden ring-1 ring-[rgb(var(--color-border))] group-hover:ring-[rgb(var(--color-accent)_/_0.5)] transition-[box-shadow,opacity] duration-200"
-        >
+        <span class="nav-brand__mark">
           <img
             src="/img/branding/logo-96.webp"
             alt={lang === 'zh-CN' ? '站点标志' : 'Site logo'}
@@ -280,41 +277,34 @@ const mainNavItems: NavItem[] = [
           />
         </span>
         <span class="min-w-0 hidden sm:block">
-          <span
-            class="block font-heading font-bold text-[15px] tracking-tight leading-none text-[rgb(var(--color-text-primary))]"
-          >
-            Alexander Carter
-          </span>
-          <span
-            class="hidden md:block meta-mono !text-[10px] !tracking-[0.14em] mt-1 text-[rgb(var(--color-text-tertiary))]"
-          >
-            Photography · Writing · Making
-          </span>
+          <span class="nav-brand__title">Alexander Carter</span>
+          <span class="nav-brand__sub">Photography · Writing · Making</span>
         </span>
       </a>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-1">
+      <div class="nav-rail hidden md:flex items-center" role="list">
         {
           mainNavItems
             .filter((item) => !item.mobileOnly)
-            .map((item) =>
-              item.submenu ? (
-                <div class="relative group submenu-group">
+            .map((item, i) => {
+              const idx = String(i + 1).padStart(2, '0');
+              return item.submenu ? (
+                <div class="relative submenu-group" role="listitem">
                   <button
                     type="button"
                     aria-haspopup="true"
                     aria-expanded="false"
                     class:list={[
-                      'submenu-btn group relative inline-flex items-center gap-1.5 px-3 py-2 font-heading font-medium text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2',
-                      isSubmenuActive(item.submenu)
-                        ? 'text-primary-500'
-                        : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]',
+                      'nav-item submenu-btn',
+                      isSubmenuActive(item.submenu) && 'is-active',
                     ]}
                   >
-                    <span>{item.label}</span>
+                    <span class="nav-item__idx" aria-hidden="true">
+                      {idx}
+                    </span>
+                    <span class="nav-item__label">{item.label}</span>
                     <svg
-                      class="submenu-chevron w-3 h-3 shrink-0 transition-transform duration-200"
+                      class="submenu-chevron nav-item__chev"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -327,50 +317,44 @@ const mainNavItems: NavItem[] = [
                         d="M19 9l-7 7-7-7"
                       />
                     </svg>
-                    <span
-                      class:list={[
-                        'nav-underline absolute bottom-0 left-3 right-3 h-px bg-primary-500 origin-left transition-transform duration-200',
-                        isSubmenuActive(item.submenu)
-                          ? 'scale-x-100'
-                          : 'scale-x-0 group-hover:scale-x-100',
-                      ]}
-                      aria-hidden="true"
-                    />
+                    <span class="nav-item__ink" aria-hidden="true" />
                   </button>
-                  <div class="submenu-panel absolute left-0 mt-0 min-w-[16rem] max-h-[min(70vh,32rem)] overflow-y-auto bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-sm opacity-0 invisible scale-95 origin-top-left group-hover:opacity-100 group-hover:visible group-hover:scale-100 group-hover:mt-1.5 transition-all duration-200 ease-out z-50 py-1">
-                    {item.submenu.map((subitem) =>
+                  <div class="submenu-panel">
+                    <div class="submenu-panel__edge" aria-hidden="true" />
+                    <p class="submenu-panel__kicker">Index · More</p>
+                    {item.submenu.map((subitem, si) =>
                       subitem.heading ? (
-                        <p class="px-4 pt-3 pb-1 meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))] first:pt-2">
-                          {subitem.label}
-                        </p>
+                        <p class="submenu-heading">{subitem.label}</p>
                       ) : (
                         <a
                           href={subitem.href}
                           class:list={[
-                            'block px-4 py-2.5 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500',
-                            isActivePath(subitem.href)
-                              ? 'text-primary-500'
-                              : 'text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-accent))]',
+                            'submenu-link',
+                            isActivePath(subitem.href) && 'is-active',
                           ]}
+                          style={`--stagger:${si * 28}ms`}
                           target={subitem.external ? '_blank' : undefined}
                           rel={
-                            subitem.external
-                              ? 'noopener noreferrer'
-                              : undefined
+                            subitem.external ? 'noopener noreferrer' : undefined
                           }
                           aria-current={
                             isActivePath(subitem.href) ? 'page' : undefined
                           }
                         >
-                          <div class="font-heading text-sm font-medium">
-                            {subitem.label}
-                            {subitem.external ? ' ↗' : ''}
-                          </div>
-                          {subitem.desc && (
-                            <div class="mt-0.5 text-xs leading-snug text-[rgb(var(--color-text-secondary))]">
-                              {subitem.desc}
-                            </div>
-                          )}
+                          <span class="submenu-link__idx" aria-hidden="true">
+                            {String(si + 1).padStart(2, '0')}
+                          </span>
+                          <span class="submenu-link__body">
+                            <span class="submenu-link__title">
+                              {subitem.label}
+                              {subitem.external ? ' ↗' : ''}
+                            </span>
+                            {subitem.desc && (
+                              <span class="submenu-link__desc">
+                                {subitem.desc}
+                              </span>
+                            )}
+                          </span>
                         </a>
                       )
                     )}
@@ -379,43 +363,35 @@ const mainNavItems: NavItem[] = [
               ) : (
                 <a
                   href={item.href}
+                  role="listitem"
                   class:list={[
-                    'nav-link group relative inline-flex px-3 py-2 font-heading font-medium text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2',
-                    isActivePath(item.href)
-                      ? 'text-primary-500'
-                      : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]',
+                    'nav-item',
+                    isActivePath(item.href) && 'is-active',
                   ]}
                   target={item.external ? '_blank' : undefined}
                   rel={item.external ? 'noopener noreferrer' : undefined}
                   aria-current={isActivePath(item.href) ? 'page' : undefined}
                 >
-                  <span>{item.label}</span>
-                  <span
-                    class:list={[
-                      'nav-underline absolute bottom-0 left-3 right-3 h-px bg-primary-500 origin-left transition-transform duration-200',
-                      isActivePath(item.href)
-                        ? 'scale-x-100'
-                        : 'scale-x-0 group-hover:scale-x-100',
-                    ]}
-                    aria-hidden="true"
-                  />
+                  <span class="nav-item__idx" aria-hidden="true">
+                    {idx}
+                  </span>
+                  <span class="nav-item__label">{item.label}</span>
+                  <span class="nav-item__ink" aria-hidden="true" />
                 </a>
-              )
-            )
+              );
+            })
         }
       </div>
 
-      <!-- Right Side Actions -->
-      <div class="flex items-center gap-4">
-        <!-- Theme Toggle -->
+      <div class="nav-actions flex items-center gap-1 sm:gap-2">
         <button
           id="theme-toggle"
           type="button"
           aria-label={t('theme.toggle')}
-          class="inline-flex items-center justify-center min-w-11 min-h-11 rounded-sm text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200"
+          class="nav-icon-btn"
         >
           <svg
-            class="w-6 h-6 sun-icon"
+            class="w-5 h-5 sun-icon"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -428,7 +404,7 @@ const mainNavItems: NavItem[] = [
             ></path>
           </svg>
           <svg
-            class="w-6 h-6 moon-icon hidden"
+            class="w-5 h-5 moon-icon hidden"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -442,18 +418,18 @@ const mainNavItems: NavItem[] = [
           </svg>
         </button>
 
-        <!-- Language Switcher -->
-        <div class="relative group lang-group" id="lang-switcher">
+        <div class="relative lang-group" id="lang-switcher">
           <button
             type="button"
             aria-haspopup="true"
             aria-expanded="false"
             aria-controls="lang-menu"
             id="lang-switcher-btn"
-            class="inline-flex items-center justify-center gap-2 min-w-11 min-h-11 px-2 rounded-sm text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200"
+            class="nav-icon-btn gap-1.5 px-2.5"
           >
             <svg
-              class="w-5 h-5 text-[rgb(var(--color-text-secondary))]"
+              width="18"
+              height="18"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -465,16 +441,11 @@ const mainNavItems: NavItem[] = [
                 d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
               ></path>
             </svg>
-            <span
-              class="text-sm font-medium hidden sm:block text-[rgb(var(--color-text-secondary))]"
-              >{languages[lang]}</span
-            >
+            <span class="text-xs font-heading font-semibold hidden sm:block">
+              {languages[lang]}
+            </span>
           </button>
-          <div
-            id="lang-menu"
-            role="menu"
-            class="lang-panel absolute right-0 mt-1.5 w-40 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 py-1"
-          >
+          <div id="lang-menu" role="menu" class="lang-panel">
             {
               Object.entries(languages).map(([code, name]) => (
                 <a
@@ -486,18 +457,15 @@ const mainNavItems: NavItem[] = [
                         : `/${code}/`
                   }
                   role="menuitem"
-                  class="flex items-center justify-between px-4 py-2.5 text-sm text-[rgb(var(--color-text-secondary))] hover:bg-[rgb(var(--color-bg-accent))] hover:text-[rgb(var(--color-text-primary))] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500"
-                  class:list={{
-                    'font-medium text-primary-500': code === lang,
-                  }}
+                  class:list={[
+                    'lang-panel__item',
+                    code === lang && 'is-active',
+                  ]}
                   aria-current={code === lang ? 'true' : undefined}
                 >
                   <span>{name}</span>
                   {code === lang && (
-                    <span
-                      class="w-1.5 h-1.5 rounded-full bg-primary-500 flex-shrink-0"
-                      aria-hidden="true"
-                    />
+                    <span class="lang-panel__dot" aria-hidden="true" />
                   )}
                 </a>
               ))
@@ -505,39 +473,17 @@ const mainNavItems: NavItem[] = [
           </div>
         </div>
 
-        <!-- Mobile Menu Toggle -->
         <button
           id="mobile-menu-toggle"
           type="button"
           aria-label={lang === 'zh-CN' ? '打开菜单' : 'Toggle menu'}
           aria-expanded="false"
           aria-controls="mobile-menu"
-          class="md:hidden inline-flex items-center justify-center min-w-11 min-h-11 rounded-sm text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] hover:bg-[rgb(var(--color-bg-secondary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 transition-colors duration-200"
+          class="nav-icon-btn md:hidden burger-btn"
         >
-          <svg
-            class="w-6 h-6 hamburger"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-          <svg
-            class="w-6 h-6 close hidden"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+          <span class="burger" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </span>
         </button>
       </div>
     </div>
@@ -545,31 +491,40 @@ const mainNavItems: NavItem[] = [
 
   <div
     id="mobile-menu-backdrop"
-    class="mobile-backdrop fixed inset-0 z-40 bg-black/20 hidden md:hidden"
+    class="mobile-backdrop fixed inset-0 z-40 hidden md:hidden"
     aria-hidden="true"
   >
   </div>
 
-  <!-- Mobile Menu -->
   <div
     id="mobile-menu"
-    class="md:hidden hidden absolute left-0 right-0 top-full z-50 border-t border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))]"
+    class="mobile-drawer md:hidden hidden absolute left-0 right-0 top-full z-50"
     role="navigation"
     aria-label={lang === 'zh-CN' ? '主导航' : 'Main navigation'}
   >
-    <div class="px-4 lg:px-8 py-2">
+    <div class="mobile-drawer__inner">
+      <div class="mobile-drawer__head">
+        <p class="folio-mark mb-1">Index</p>
+        <p
+          class="meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))]"
+        >
+          {l('页面目录', '頁面目錄', 'Sommaire', 'Оглавление', 'Site index')}
+        </p>
+      </div>
       {
-        mainNavItems.map((item) =>
-          item.submenu ? (
-            <div>
+        mainNavItems.map((item, i) => {
+          const idx = String(i + 1).padStart(2, '0');
+          return item.submenu ? (
+            <div class="mobile-block" style={`--stagger:${i * 40}ms`}>
               <button
                 type="button"
                 aria-expanded="false"
-                class="mobile-submenu-toggle w-full text-left py-3.5 px-4 text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))] rounded-sm transition-colors duration-200 flex items-center justify-between font-heading font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset"
+                class="mobile-submenu-toggle mobile-row"
               >
-                <span>{item.label}</span>
+                <span class="mobile-row__idx">{idx}</span>
+                <span class="mobile-row__label">{item.label}</span>
                 <svg
-                  class="w-4 h-4 submenu-arrow shrink-0 transition-transform duration-200"
+                  class="w-4 h-4 submenu-arrow shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -583,37 +538,29 @@ const mainNavItems: NavItem[] = [
                   />
                 </svg>
               </button>
-              <div class="mobile-submenu hidden pl-4 border-l border-[rgb(var(--color-border))] ml-4 mb-1">
+              <div class="mobile-submenu hidden">
                 {item.submenu.map((subitem) =>
                   subitem.heading ? (
-                    <p class="px-3 pt-3 pb-1 meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))]">
-                      {subitem.label}
-                    </p>
+                    <p class="mobile-subhead">{subitem.label}</p>
                   ) : (
                     <a
                       href={subitem.href}
                       class:list={[
-                        'block py-3 px-3 text-sm transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset',
-                        isActivePath(subitem.href)
-                          ? 'text-primary-500 font-medium'
-                          : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]',
+                        'mobile-sublink',
+                        isActivePath(subitem.href) && 'is-active',
                       ]}
                       target={subitem.external ? '_blank' : undefined}
-                      rel={
-                        subitem.external ? 'noopener noreferrer' : undefined
-                      }
+                      rel={subitem.external ? 'noopener noreferrer' : undefined}
                       aria-current={
                         isActivePath(subitem.href) ? 'page' : undefined
                       }
                     >
-                      <span class="font-heading">
+                      <span class="font-heading font-medium">
                         {subitem.label}
                         {subitem.external ? ' ↗' : ''}
                       </span>
                       {subitem.desc && (
-                        <span class="mt-0.5 block text-xs text-[rgb(var(--color-text-secondary))]">
-                          {subitem.desc}
-                        </span>
+                        <span class="mobile-sublink__desc">{subitem.desc}</span>
                       )}
                     </a>
                   )
@@ -624,33 +571,64 @@ const mainNavItems: NavItem[] = [
             <a
               href={item.href}
               class:list={[
-                'block py-3.5 px-4 rounded-sm transition-colors duration-200 font-heading font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset',
-                isActivePath(item.href)
-                  ? 'text-primary-500'
-                  : 'text-[rgb(var(--color-text-secondary))] hover:text-[rgb(var(--color-text-primary))]',
+                'mobile-row mobile-block',
+                isActivePath(item.href) && 'is-active',
               ]}
+              style={`--stagger:${i * 40}ms`}
               target={item.external ? '_blank' : undefined}
               rel={item.external ? 'noopener noreferrer' : undefined}
               aria-current={isActivePath(item.href) ? 'page' : undefined}
             >
-              {item.label}
+              <span class="mobile-row__idx">{idx}</span>
+              <span class="mobile-row__label">{item.label}</span>
+              <span class="mobile-row__arrow" aria-hidden="true">
+                →
+              </span>
             </a>
-          )
-        )
+          );
+        })
       }
     </div>
   </div>
 </header>
 
 <style>
-  .scroll-indicator {
+  .site-header {
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.3s ease,
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .nav-progress {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     height: 2px;
-    background: theme('colors.primary.500');
     width: 0%;
-    transition: width 0.15s ease-out;
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-accent)),
+      rgb(var(--color-accent) / 0.35)
+    );
+    z-index: 60;
+    transition: width 0.08s linear;
+    pointer-events: none;
+  }
+
+  .nav-film-edge {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 3px;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      90deg,
+      rgb(var(--color-text-primary)) 0 8px,
+      transparent 8px 14px
+    );
+    opacity: 0.07;
   }
 
   #header.nav-hidden {
@@ -658,50 +636,537 @@ const mainNavItems: NavItem[] = [
   }
 
   #header.nav-scrolled {
+    background: rgb(var(--color-bg-primary) / 0.97);
     box-shadow: 0 1px 0 rgb(var(--color-border));
   }
 
-  #header {
+  /* Brand */
+  .nav-brand__mark {
+    position: relative;
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+    overflow: hidden;
+    border-radius: 0.125rem;
+    box-shadow: inset 0 0 0 1px rgb(var(--color-border));
     transition:
-      transform 0.28s ease,
-      box-shadow 0.28s ease,
-      background-color 0.28s ease;
+      box-shadow 0.25s ease,
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-brand:hover .nav-brand__mark,
+  .nav-brand:focus-visible .nav-brand__mark {
+    transform: translateY(-1px) scale(1.04);
+    box-shadow: inset 0 0 0 1px rgb(var(--color-accent) / 0.55);
+  }
+  .nav-brand__title {
+    display: block;
+    font-family: theme('fontFamily.heading');
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: rgb(var(--color-text-primary));
+    transition: color 0.2s ease;
+  }
+  .nav-brand:hover .nav-brand__title {
+    color: rgb(var(--color-accent));
+  }
+  .nav-brand__sub {
+    display: none;
+    margin-top: 0.3rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  @media (min-width: 768px) {
+    .nav-brand__sub {
+      display: block;
+    }
+  }
+
+  /* Desktop rail */
+  .nav-rail {
+    gap: 0.1rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .nav-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 0.8rem;
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    color: rgb(var(--color-text-secondary));
+    border-radius: 0.1rem;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-item:hover,
+  .nav-item:focus-visible {
+    color: rgb(var(--color-text-primary));
+    background: rgb(var(--color-bg-primary) / 0.7);
+    transform: translateY(-1px);
+  }
+  .nav-item:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+  }
+  .nav-item.is-active,
+  .nav-item.nav-link-active {
+    color: rgb(var(--color-accent));
+  }
+  .nav-item__idx {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: rgb(var(--color-text-tertiary));
+    transition: color 0.2s ease;
+  }
+  .nav-item:hover .nav-item__idx,
+  .nav-item.is-active .nav-item__idx,
+  .nav-item.nav-link-active .nav-item__idx {
+    color: rgb(var(--color-accent));
+  }
+  .nav-item__chev {
+    width: 0.7rem;
+    height: 0.7rem;
+    opacity: 0.6;
+    transition: transform 0.25s ease;
+  }
+  .nav-item__ink {
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.28rem;
+    height: 1.5px;
+    background: rgb(var(--color-accent));
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-item:hover .nav-item__ink,
+  .nav-item:focus-visible .nav-item__ink,
+  .nav-item.is-active .nav-item__ink,
+  .nav-item.nav-link-active .nav-item__ink {
+    transform: scaleX(1);
+  }
+
+  /* Submenu panel */
+  .submenu-panel {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 0.35rem);
+    z-index: 60;
+    min-width: 18rem;
+    max-height: min(70vh, 34rem);
+    overflow-y: auto;
+    padding: 0.55rem 0 0.4rem;
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 0.125rem;
+    background: rgb(var(--color-bg-primary));
+    box-shadow:
+      0 18px 40px -24px rgb(0 0 0 / 0.35),
+      inset 3px 0 0 rgb(var(--color-accent) / 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top left;
+    transition:
+      opacity 0.22s ease,
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.22s ease;
+  }
+  .submenu-panel__edge {
+    height: 3px;
+    margin: 0 0.75rem 0.55rem;
+    background: repeating-linear-gradient(
+      90deg,
+      rgb(var(--color-text-primary)) 0 7px,
+      transparent 7px 12px
+    );
+    opacity: 0.1;
+  }
+  .submenu-panel__kicker {
+    padding: 0 1rem 0.45rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .submenu-heading {
+    padding: 0.7rem 1rem 0.25rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .submenu-link {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0.55rem;
+    align-items: start;
+    padding: 0.55rem 1rem;
+    color: inherit;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .submenu-group[data-open] .submenu-panel,
+  .submenu-group:hover .submenu-panel,
+  .submenu-group:focus-within .submenu-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+  .submenu-group[data-open] .submenu-link,
+  .submenu-group:hover .submenu-link,
+  .submenu-group:focus-within .submenu-link {
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+      opacity 0.28s ease var(--stagger, 0ms),
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1) var(--stagger, 0ms),
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .submenu-group[data-open] .submenu-chevron,
+  .submenu-group:hover .submenu-chevron {
+    transform: rotate(180deg);
+  }
+  .submenu-link:hover,
+  .submenu-link:focus-visible,
+  .submenu-link.is-active {
+    background: rgb(var(--color-bg-secondary) / 0.75);
+  }
+  .submenu-link.is-active .submenu-link__title {
+    color: rgb(var(--color-accent));
+  }
+  .submenu-link__idx {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    color: rgb(var(--color-text-tertiary));
+    padding-top: 0.15rem;
+  }
+  .submenu-link__title {
+    display: block;
+    font-family: theme('fontFamily.heading');
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgb(var(--color-text-primary));
+  }
+  .submenu-link__desc {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    color: rgb(var(--color-text-secondary));
+  }
+
+  /* Icon buttons */
+  .nav-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border-radius: 0.125rem;
+    color: rgb(var(--color-text-secondary));
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      transform 0.25s ease;
+  }
+  .nav-icon-btn:hover,
+  .nav-icon-btn:focus-visible {
+    color: rgb(var(--color-text-primary));
+    background: rgb(var(--color-bg-secondary));
+    transform: translateY(-1px);
+  }
+  .nav-icon-btn:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
   }
 
   .dark .sun-icon {
     display: none;
   }
-
   .dark .moon-icon {
     display: block;
   }
 
-  .submenu-group[data-open] .submenu-panel {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: scale(1) !important;
-    margin-top: 0.375rem !important;
+  /* Language */
+  .lang-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.35rem);
+    z-index: 60;
+    width: 10.5rem;
+    padding: 0.3rem 0;
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 0.125rem;
+    background: rgb(var(--color-bg-primary));
+    box-shadow: 0 16px 36px -22px rgb(0 0 0 / 0.35);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0.2s ease;
+  }
+  .lang-group[data-open] .lang-panel,
+  .lang-group:hover .lang-panel,
+  .lang-group:focus-within .lang-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .lang-panel__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.82rem;
+    color: rgb(var(--color-text-secondary));
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+  }
+  .lang-panel__item:hover,
+  .lang-panel__item:focus-visible,
+  .lang-panel__item.is-active {
+    color: rgb(var(--color-text-primary));
+    background: rgb(var(--color-bg-secondary) / 0.8);
+  }
+  .lang-panel__item.is-active {
+    color: rgb(var(--color-accent));
+    font-weight: 600;
+  }
+  .lang-panel__dot {
+    width: 0.35rem;
+    height: 0.35rem;
+    border-radius: 9999px;
+    background: rgb(var(--color-accent));
   }
 
-  .submenu-group[data-open] .submenu-chevron {
-    transform: rotate(180deg);
+  /* Burger */
+  .burger {
+    position: relative;
+    width: 1.15rem;
+    height: 0.85rem;
+    display: block;
+  }
+  .burger i {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: currentColor;
+    border-radius: 1px;
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.2s ease,
+      top 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .burger i:nth-child(1) {
+    top: 0;
+  }
+  .burger i:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .burger i:nth-child(3) {
+    bottom: 0;
+  }
+  .burger-btn[aria-expanded='true'] .burger i:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .burger-btn[aria-expanded='true'] .burger i:nth-child(2) {
+    opacity: 0;
+  }
+  .burger-btn[aria-expanded='true'] .burger i:nth-child(3) {
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%) rotate(-45deg);
   }
 
-  .lang-group[data-open] .lang-panel {
-    opacity: 1 !important;
-    visibility: visible !important;
+  /* Mobile drawer */
+  .mobile-backdrop {
+    background: rgb(0 0 0 / 0.28);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.28s ease;
   }
-
-  .nav-link-active {
-    color: theme('colors.primary.500') !important;
-  }
-
-  .nav-link-active .nav-underline {
-    transform: scaleX(1) !important;
-  }
-
   .mobile-backdrop.is-visible {
     display: block;
+    opacity: 1;
+  }
+
+  .mobile-drawer {
+    border-top: 1px solid rgb(var(--color-border));
+    background: rgb(var(--color-bg-primary));
+    max-height: min(78vh, 36rem);
+    overflow-y: auto;
+    box-shadow: 0 24px 48px -28px rgb(0 0 0 / 0.4);
+  }
+  .mobile-drawer__inner {
+    padding: 0.75rem 1rem 1.25rem;
+  }
+  .mobile-drawer__head {
+    padding: 0.5rem 0.65rem 0.85rem;
+    border-bottom: 1px solid rgb(var(--color-border));
+    margin-bottom: 0.35rem;
+  }
+  .mobile-block {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  #mobile-menu.menu-open .mobile-block {
+    animation: nav-rise 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--stagger, 0ms);
+  }
+  .mobile-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.9rem 0.65rem;
+    text-align: left;
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+    color: rgb(var(--color-text-secondary));
+    border-radius: 0.125rem;
+    transition:
+      color 0.18s ease,
+      background-color 0.18s ease,
+      padding-left 0.22s ease;
+  }
+  .mobile-row:hover,
+  .mobile-row:focus-visible,
+  .mobile-row.is-active {
+    color: rgb(var(--color-text-primary));
+    background: rgb(var(--color-bg-secondary) / 0.55);
+  }
+  .mobile-row.is-active {
+    color: rgb(var(--color-accent));
+  }
+  .mobile-row:hover,
+  .mobile-row:focus-visible {
+    padding-left: 0.9rem;
+  }
+  .mobile-row__idx {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: rgb(var(--color-text-tertiary));
+    width: 1.5rem;
+  }
+  .mobile-row__label {
+    flex: 1;
+    font-size: 1.05rem;
+  }
+  .mobile-row__arrow,
+  .submenu-arrow {
+    color: rgb(var(--color-text-tertiary));
+    transition:
+      transform 0.25s ease,
+      color 0.2s ease;
+  }
+  .mobile-row:hover .mobile-row__arrow {
+    color: rgb(var(--color-accent));
+    transform: translateX(2px);
+  }
+  .mobile-submenu {
+    margin: 0 0.5rem 0.4rem 2.2rem;
+    padding-left: 0.75rem;
+    border-left: 1px solid rgb(var(--color-border));
+  }
+  .mobile-subhead {
+    padding: 0.55rem 0.4rem 0.2rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .mobile-sublink {
+    display: block;
+    padding: 0.55rem 0.4rem;
+    border-radius: 0.125rem;
+    color: rgb(var(--color-text-secondary));
+  }
+  .mobile-sublink.is-active,
+  .mobile-sublink:hover {
+    color: rgb(var(--color-accent));
+    background: rgb(var(--color-bg-secondary) / 0.45);
+  }
+  .mobile-sublink__desc {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.72rem;
+    color: rgb(var(--color-text-tertiary));
+  }
+
+  @keyframes nav-rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header,
+    .nav-item,
+    .nav-item__ink,
+    .nav-brand__mark,
+    .submenu-panel,
+    .submenu-link,
+    .lang-panel,
+    .burger i,
+    .mobile-row,
+    .nav-icon-btn {
+      transition: none !important;
+      animation: none !important;
+    }
+    .nav-item:hover,
+    .nav-icon-btn:hover {
+      transform: none;
+    }
+    #mobile-menu.menu-open .mobile-block {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
   }
 </style>
 
@@ -852,8 +1317,7 @@ const mainNavItems: NavItem[] = [
   const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileBackdrop = document.getElementById('mobile-menu-backdrop');
-  const hamburger = mobileMenuToggle?.querySelector('.hamburger');
-  const close = mobileMenuToggle?.querySelector('.close');
+  let mobileCloseTimer;
 
   function showMobileBackdrop() {
     mobileBackdrop?.classList.remove('hidden');
@@ -870,13 +1334,11 @@ const mainNavItems: NavItem[] = [
   function closeMobileMenu() {
     mobileMenu?.classList.remove('menu-open');
     mobileMenu?.classList.add('menu-closing');
-    hamburger?.classList.remove('rotating');
     hideMobileBackdrop();
-    hamburger?.classList.remove('hidden');
-    close?.classList.add('hidden');
     mobileMenuToggle?.setAttribute('aria-expanded', 'false');
-
-    setTimeout(() => {
+    document.documentElement.style.overflow = '';
+    clearTimeout(mobileCloseTimer);
+    mobileCloseTimer = setTimeout(() => {
       mobileMenu?.classList.add('hidden');
       mobileMenu?.classList.remove('menu-closing');
     }, 300);
@@ -890,13 +1352,11 @@ const mainNavItems: NavItem[] = [
       return;
     }
 
-    mobileMenu?.classList.remove('hidden');
+    mobileMenu?.classList.remove('hidden', 'menu-closing');
     mobileMenu?.classList.add('menu-open');
-    hamburger?.classList.add('rotating');
-    hamburger?.classList.add('hidden');
-    close?.classList.remove('hidden');
     showMobileBackdrop();
     mobileMenuToggle?.setAttribute('aria-expanded', 'true');
+    document.documentElement.style.overflow = 'hidden';
   });
 
   mobileBackdrop?.addEventListener('click', () => {
@@ -927,9 +1387,15 @@ const mainNavItems: NavItem[] = [
 
   // ── Scroll progress + hide-on-scroll (rAF throttled) ───────────────────────
   let headerScrollTicking = false;
+  const progressEl = document.getElementById('scroll-indicator');
+
   function updateHeaderOnScroll() {
     const header = document.getElementById('header');
     const scrollTop = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    if (progressEl && max > 0) {
+      progressEl.style.width = `${Math.min(100, (scrollTop / max) * 100)}%`;
+    }
 
     if (header) {
       if (scrollTop > 24) {
@@ -964,4 +1430,5 @@ const mainNavItems: NavItem[] = [
     },
     { passive: true }
   );
+  updateHeaderOnScroll();
 </script>

@@ -1,6 +1,7 @@
 ---
 import { getLangFromUrl } from '../../i18n/ui';
 import SiteFilings from './SiteFilings.astro';
+import ExposureMeter from '../widgets/ExposureMeter.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const currentYear = new Date().getFullYear();
@@ -36,6 +37,7 @@ const i18n = {
     sitemap: '地图',
     blog: '博客',
     tagline: 'Static folio · Asia/Shanghai',
+    colophon: '冲印于静态站点 · 不追踪访客',
   },
   'zh-TW': {
     desc: '攝影、寫作與開源工程的長期角落。',
@@ -59,6 +61,7 @@ const i18n = {
     sitemap: '地圖',
     blog: '部落格',
     tagline: 'Static folio · Asia/Shanghai',
+    colophon: '沖印於靜態站點 · 不追蹤訪客',
   },
   'en-GB': {
     desc: 'A long-running corner for photography, writing and open-source making.',
@@ -82,6 +85,7 @@ const i18n = {
     sitemap: 'Sitemap',
     blog: 'Blog',
     tagline: 'Static folio · Asia/Shanghai',
+    colophon: 'Printed as static pages · no visitor tracking',
   },
   fr: {
     desc: 'Un coin durable pour la photo, l’écriture et l’open source.',
@@ -105,6 +109,7 @@ const i18n = {
     sitemap: 'Plan',
     blog: 'Blog',
     tagline: 'Static folio · Asia/Shanghai',
+    colophon: 'Tiré en pages statiques · sans suivi des visiteurs',
   },
   ru: {
     desc: 'Долгоживущий угол для фото, текстов и open source.',
@@ -128,6 +133,7 @@ const i18n = {
     sitemap: 'Карта',
     blog: 'Блог',
     tagline: 'Static folio · Asia/Shanghai',
+    colophon: 'Напечатано статикой · без трекинга посетителей',
   },
 };
 
@@ -214,10 +220,11 @@ const legal = [
           </span>
         </a>
         <p
-          class="text-sm leading-relaxed text-[rgb(var(--color-text-secondary))]"
+          class="text-sm leading-relaxed text-[rgb(var(--color-text-secondary))] mb-5"
         >
           {t.desc}
         </p>
+        <ExposureMeter />
       </div>
 
       <a
@@ -293,7 +300,9 @@ const legal = [
 
     <!-- Elsewhere directory -->
     <section aria-labelledby="footer-elsewhere-title">
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
+      <div
+        class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5"
+      >
         <div>
           <p class="folio-mark mb-2">Plate · Out</p>
           <h2
@@ -358,10 +367,17 @@ const legal = [
             {t.accessibility}
           </a>
         </div>
-        <p class="meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))]">
+        <p
+          class="meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))]"
+        >
           {t.tagline}
         </p>
       </div>
+      <p
+        class="text-[0.7rem] tracking-wide text-[rgb(var(--color-text-tertiary))]"
+      >
+        {t.colophon}
+      </p>
       <SiteFilings />
     </div>
   </div>

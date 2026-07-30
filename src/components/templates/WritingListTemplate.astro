@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../chrome/AdSlot.astro';
-import PageHero from '../chrome/PageHero.astro';
 import { getCollection } from 'astro:content';
 import type { Lang } from '../../i18n/types';
 
@@ -17,83 +16,74 @@ const i18n = {
   'zh-CN': {
     title: '写作',
     description: '关于个人网站、工程学习、性能优化和设计思考的长期文章。',
-    badge: 'Writing · Long-form',
     intro:
-      '这里记录不会很快过期的思考：站点工程、性能与安全、摄影与光线、设计取舍，以及学生开发者如何把项目活过下一个学期。文章从具体问题出发，尽量给出值得回看的做法，而不是堆叠过时清单。',
-    readMore: '阅读全文',
-    allPosts: '全部文章',
+      '这里记录不会很快过期的思考：站点工程、性能与安全、摄影与光线、设计取舍，以及学生开发者如何把项目活过下一个学期。',
+    readMore: '继续阅读',
     categories: '分类',
-    tags: '标签',
-    publishedOn: '发布于',
-    minRead: '分钟阅读',
     noPosts: '暂无文章',
     backToHome: '返回首页',
+    countLabel: '篇长文',
   },
   'zh-TW': {
     title: '寫作',
     description: '關於個人網站、工程學習、性能優化和設計思考的長期文章。',
-    badge: 'Writing · Long-form',
     intro:
-      '這裡記錄不會很快過期的思考：站點工程、效能與安全、攝影與光線、設計取捨，以及學生開發者如何把專案活過下一個學期。文章從具體問題出發，盡量給出值得回看的做法。',
-    readMore: '閱讀全文',
-    allPosts: '全部文章',
+      '這裡記錄不會很快過期的思考：站點工程、效能與安全、攝影與光線、設計取捨，以及學生開發者如何把專案活過下一個學期。',
+    readMore: '繼續閱讀',
     categories: '分類',
-    tags: '標籤',
-    publishedOn: '發布於',
-    minRead: '分鐘閱讀',
     noPosts: '暫無文章',
     backToHome: '返回首頁',
+    countLabel: '篇長文',
   },
   'en-GB': {
     title: 'Writing',
     description:
       'Long-form articles about personal websites, engineering, performance and design.',
-    badge: 'Writing · Long-form',
     intro:
-      'Notes that should age slowly: site engineering, performance and security, light and photography, design trade-offs, and how a student maintainer keeps a project alive past the next term. Each piece starts from a concrete problem and aims for reusable practice.',
-    readMore: 'Read article',
-    allPosts: 'All Posts',
-    categories: 'Categories',
-    tags: 'Tags',
-    publishedOn: 'Published on',
-    minRead: 'min read',
+      'Notes that should age slowly: site engineering, performance and security, light and photography, design trade-offs — and keeping a project alive past the next term.',
+    readMore: 'Continue reading',
+    categories: 'Topics',
     noPosts: 'No posts yet',
     backToHome: 'Back to Home',
+    countLabel: 'essays',
   },
   fr: {
     title: 'Écrits',
     description:
       "Articles sur les sites personnels, l'ingénierie et le design.",
-    badge: 'Writing · Long-form',
     intro:
-      'Des notes qui vieillissent lentement : ingénierie du site, performance et sécurité, lumière et photographie, arbitrages de design, et la façon dont un étudiant maintient un projet au-delà du prochain semestre.',
-    readMore: "Lire l'article",
-    allPosts: 'Tous les articles',
-    categories: 'Catégories',
-    tags: 'Tags',
-    publishedOn: 'Publié le',
-    minRead: 'min de lecture',
+      'Des notes qui vieillissent lentement : ingénierie, performance, lumière et photographie, arbitrages de design.',
+    readMore: 'Lire la suite',
+    categories: 'Sujets',
     noPosts: "Pas encore d'articles",
     backToHome: "Retour à l'accueil",
+    countLabel: 'essais',
   },
   ru: {
     title: 'Статьи',
     description: 'Статьи о личных сайтах, инженерии и дизайне.',
-    badge: 'Writing · Long-form',
     intro:
-      'Заметки, которые стареют медленно: инженерия сайта, производительность и безопасность, свет и фотография, дизайнерские компромиссы — и то, как студенту удержать проект дольше одного семестра.',
-    readMore: 'Читать',
-    allPosts: 'Все статьи',
-    categories: 'Категории',
-    tags: 'Теги',
-    publishedOn: 'Опубликовано',
-    minRead: 'мин чтения',
+      'Заметки, которые стареют медленно: инженерия, производительность, свет и фотография, дизайнерские компромиссы.',
+    readMore: 'Читать дальше',
+    categories: 'Темы',
     noPosts: 'Пока нет статей',
     backToHome: 'На главную',
+    countLabel: 'эссе',
   },
 };
 
 const t = i18n[lang as Lang] || i18n['zh-CN'];
+
+const dateLocale =
+  lang === 'zh-CN'
+    ? 'zh-CN'
+    : lang === 'zh-TW'
+      ? 'zh-TW'
+      : lang === 'fr'
+        ? 'fr-FR'
+        : lang === 'ru'
+          ? 'ru-RU'
+          : 'en-GB';
 
 const allPosts = await getCollection('writing');
 const posts = allPosts
@@ -105,103 +95,123 @@ const posts = allPosts
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const categories = [...new Set(posts.map((p) => p.data.category))];
+const [featured, ...rest] = posts;
 ---
 
 <BaseLayout title={t.title} description={t.description}>
-  <PageHero
-    folio="Folio III"
-    kicker="Writing"
-    title={t.title}
-    description={t.intro}
-    backHref={getLangPath('/')}
-    backLabel={t.backToHome}
-    narrow={false}
-  />
+  <header class="writing-hero">
+    <div class="writing-hero__wash" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 lg:px-8 max-w-5xl relative">
+      <a href={getLangPath('/')} class="writing-back">{t.backToHome}</a>
 
-  <section class="pb-20 min-h-[40vh]">
-    <div class="page-shell-wide">
+      <div class="writing-hero__grid">
+        <div>
+          <p class="writing-kicker">Writing</p>
+          <h1 class="writing-hero__title">{t.title}</h1>
+          <p class="writing-hero__lead">{t.intro}</p>
+        </div>
+        <p
+          class="writing-hero__count"
+          aria-label={`${posts.length} ${t.countLabel}`}
+        >
+          <span>{String(posts.length).padStart(2, '0')}</span>
+          <small>{t.countLabel}</small>
+        </p>
+      </div>
+
       {
         categories.length > 0 && (
-          <div class="flex flex-wrap gap-2 mb-10">
-            {categories.map((cat) => (
-              <span class="px-3 py-1 text-xs font-heading tracking-wide border border-[rgb(var(--color-border))] text-[rgb(var(--color-text-secondary))]">
-                {cat}
-              </span>
+          <p class="writing-topics">
+            <span>{t.categories}</span>
+            {categories.map((cat, i) => (
+              <>
+                {i > 0 && <i aria-hidden="true">/</i>}
+                <em>{cat}</em>
+              </>
             ))}
-          </div>
+          </p>
         )
       }
+    </div>
+  </header>
 
+  <section class="writing-stream pb-24">
+    <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
       {
         posts.length === 0 ? (
-          <div class="py-20">
-            <p class="text-[rgb(var(--color-text-secondary))]">{t.noPosts}</p>
-          </div>
+          <p class="text-[rgb(var(--color-text-secondary))] py-16">
+            {t.noPosts}
+          </p>
         ) : (
-          <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
-            {posts.map((post, i) => (
-              <li>
-                <article class="py-8">
-                  <div class="flex flex-wrap items-center gap-3 mb-3">
-                    <span class="folio-mark">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <span class="text-xs font-heading tracking-wide text-primary-600 dark:text-primary-400">
-                      {post.data.category}
-                    </span>
-                    <time
-                      class="meta-mono text-xs text-[rgb(var(--color-text-tertiary))]"
-                      datetime={post.data.pubDate.toISOString()}
-                    >
-                      {t.publishedOn}{' '}
-                      {post.data.pubDate.toLocaleDateString(
-                        lang === 'zh-CN'
-                          ? 'zh-CN'
-                          : lang === 'zh-TW'
-                            ? 'zh-TW'
-                            : lang === 'fr'
-                              ? 'fr-FR'
-                              : lang === 'ru'
-                                ? 'ru-RU'
-                                : 'en-GB'
-                      )}
+          <div class="space-y-16 md:space-y-20">
+            {featured && (
+              <a
+                href={getLangPath(`/writing/${featured.id}`)}
+                class="stream-feature group"
+              >
+                <span class="stream-feature__no" aria-hidden="true">
+                  01
+                </span>
+                <div class="stream-feature__copy">
+                  <p class="stream-meta">
+                    <span>{featured.data.category}</span>
+                    <time datetime={featured.data.pubDate.toISOString()}>
+                      {featured.data.pubDate.toLocaleDateString(dateLocale, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
                     </time>
-                    {post.data.timeToRead && (
-                      <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
-                        {post.data.timeToRead}
-                      </span>
+                    {featured.data.timeToRead && (
+                      <span>{featured.data.timeToRead}</span>
                     )}
-                  </div>
-                  <h2 class="text-xl md:text-2xl font-heading font-bold mb-2 text-[rgb(var(--color-text-primary))]">
-                    <a
-                      href={getLangPath(`/writing/${post.id}`)}
-                      class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                    >
-                      {post.data.title}
-                    </a>
-                  </h2>
-                  <p class="text-[rgb(var(--color-text-secondary))] mb-4 leading-relaxed">
-                    {post.data.description}
                   </p>
-                  <div class="flex items-center justify-between gap-4">
-                    <div class="flex flex-wrap gap-1.5">
-                      {post.data.tags.map((tag) => (
-                        <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
+                  <h2 class="stream-feature__title">{featured.data.title}</h2>
+                  <p class="stream-feature__desc">
+                    {featured.data.description}
+                  </p>
+                  <span class="stream-feature__cta">
+                    {t.readMore}
+                    <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </a>
+            )}
+
+            {rest.length > 0 && (
+              <ul class="stream-list">
+                {rest.map((post, i) => (
+                  <li>
                     <a
                       href={getLangPath(`/writing/${post.id}`)}
-                      class="text-sm font-heading font-semibold text-primary-600 dark:text-primary-400 hover:gap-2 inline-flex items-center gap-1 transition-all"
+                      class="stream-item group"
                     >
-                      {t.readMore} →
+                      <span class="stream-item__no" aria-hidden="true">
+                        {String(i + 2).padStart(2, '0')}
+                      </span>
+                      <div class="stream-item__main">
+                        <p class="stream-meta">
+                          <span>{post.data.category}</span>
+                          <time datetime={post.data.pubDate.toISOString()}>
+                            {post.data.pubDate.toLocaleDateString(dateLocale, {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </time>
+                          {post.data.timeToRead && (
+                            <span>{post.data.timeToRead}</span>
+                          )}
+                        </p>
+                        <h2 class="stream-item__title">{post.data.title}</h2>
+                        <p class="stream-item__desc">{post.data.description}</p>
+                      </div>
                     </a>
-                  </div>
-                </article>
-              </li>
-            ))}
-          </ul>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         )
       }
 
@@ -209,3 +219,274 @@ const categories = [...new Set(posts.map((p) => p.data.category))];
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .writing-hero {
+    position: relative;
+    padding: 7.5rem 0 3.5rem;
+    overflow: hidden;
+  }
+  .writing-hero__wash {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        60% 50% at 12% 18%,
+        rgb(var(--color-accent) / 0.08),
+        transparent 70%
+      ),
+      linear-gradient(
+        180deg,
+        rgb(var(--color-bg-secondary) / 0.45),
+        transparent 70%
+      );
+    pointer-events: none;
+  }
+  .writing-back {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 0.88rem;
+    color: rgb(var(--color-text-tertiary));
+    transition: color 0.18s ease;
+  }
+  .writing-back:hover {
+    color: rgb(var(--color-accent));
+  }
+  .writing-kicker {
+    font-family: theme('fontFamily.heading');
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+    margin-bottom: 1rem;
+  }
+  .writing-hero__grid {
+    display: grid;
+    gap: 2rem;
+    align-items: end;
+  }
+  @media (min-width: 900px) {
+    .writing-hero__grid {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 3rem;
+    }
+  }
+  .writing-hero__title {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin-bottom: 1.25rem;
+  }
+  .writing-hero__lead {
+    max-width: 36rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgb(var(--color-text-secondary));
+  }
+  .writing-hero__count {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  @media (min-width: 900px) {
+    .writing-hero__count {
+      align-items: flex-end;
+      text-align: right;
+    }
+  }
+  .writing-hero__count span {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    color: rgb(var(--color-accent) / 0.55);
+  }
+  .writing-hero__count small {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .writing-topics {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.45rem 0.55rem;
+    font-size: 0.92rem;
+    color: rgb(var(--color-text-secondary));
+  }
+  .writing-topics > span {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+    margin-right: 0.35rem;
+  }
+  .writing-topics i {
+    font-style: normal;
+    opacity: 0.35;
+  }
+  .writing-topics em {
+    font-style: normal;
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+  }
+
+  .writing-stream {
+    padding-top: 1rem;
+  }
+
+  .stream-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.85rem;
+    margin-bottom: 0.85rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .stream-meta span:first-child {
+    color: rgb(var(--color-accent));
+  }
+
+  .stream-feature {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  .stream-feature__no {
+    position: absolute;
+    top: -0.6rem;
+    right: 0;
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(5rem, 14vw, 9rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 0.8;
+    color: rgb(var(--color-text-primary) / 0.045);
+    pointer-events: none;
+    user-select: none;
+  }
+  .stream-feature__copy {
+    position: relative;
+    max-width: 42rem;
+  }
+  .stream-feature__title {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+    margin-bottom: 1rem;
+    transition: color 0.2s ease;
+  }
+  .stream-feature:hover .stream-feature__title,
+  .stream-feature:focus-visible .stream-feature__title {
+    color: rgb(var(--color-accent));
+  }
+  .stream-feature__desc {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgb(var(--color-text-secondary));
+    margin-bottom: 1.35rem;
+  }
+  .stream-feature__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: theme('fontFamily.heading');
+    font-weight: 700;
+    color: rgb(var(--color-accent));
+    transition: gap 0.2s ease;
+  }
+  .stream-feature:hover .stream-feature__cta {
+    gap: 0.7rem;
+  }
+  .stream-feature:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 6px;
+  }
+
+  .stream-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .stream-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 1rem 1.25rem;
+    padding: 1.6rem 0;
+    text-decoration: none;
+    color: inherit;
+    border-top: 1px solid rgb(var(--color-border) / 0.55);
+  }
+  .stream-list li:last-child .stream-item {
+    border-bottom: 1px solid rgb(var(--color-border) / 0.55);
+  }
+  .stream-item__no {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(var(--color-text-tertiary) / 0.7);
+    padding-top: 0.15rem;
+    transition:
+      color 0.2s ease,
+      transform 0.25s ease;
+  }
+  .stream-item:hover .stream-item__no,
+  .stream-item:focus-visible .stream-item__no {
+    color: rgb(var(--color-accent));
+    transform: translateX(2px);
+  }
+  .stream-item__title {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin-bottom: 0.45rem;
+    transition: color 0.18s ease;
+  }
+  .stream-item:hover .stream-item__title,
+  .stream-item:focus-visible .stream-item__title {
+    color: rgb(var(--color-accent));
+  }
+  .stream-item__desc {
+    max-width: 38rem;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: rgb(var(--color-text-secondary));
+  }
+  .stream-item:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stream-feature__cta,
+    .stream-item__no,
+    .stream-item__title,
+    .stream-feature__title {
+      transition: none;
+    }
+  }
+</style>

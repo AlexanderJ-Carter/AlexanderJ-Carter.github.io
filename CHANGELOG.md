@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.1] - 2026-07-30
+
+### Added
+
+- `ExposureMeter` chrome widget (live Asia/Shanghai clock → `/now`) and `CopyPermalink` on writing pages.
+- Home: Darkroom method principles (Expose / Focus / Print) and AgentSociety research strip.
+- About: reserved personal dossier slots (portrait / bio / background / education / interests / timeline).
+
+### Changed
+
+- Film-edge header nav with indexed items, progress rail, and quieter brand mark.
+- Gallery contact-sheet / lightbox mat polish; writing list & post templates aligned to folio chrome.
+- Footer / PageHero micro-polish for the same visual language.
+
 ## [3.2.0] - 2026-07-30
 
 ### Added

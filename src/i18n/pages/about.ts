@@ -14,6 +14,35 @@ export type AboutProject = {
   href: string;
 };
 
+export type AboutTimelineItem = {
+  when: string;
+  what: string;
+};
+
+/**
+ * Personal dossier fields. Leave strings/arrays empty to show reserved blanks.
+ * Fill later in each locale — template renders content only when non-empty.
+ */
+export type AboutPersonal = {
+  sectionTitle: string;
+  sectionLead: string;
+  reservedNote: string;
+  portraitLabel: string;
+  /** Public image path; empty = reserved frame */
+  portraitSrc: string;
+  portraitAlt: string;
+  bioLabel: string;
+  bio: string;
+  backgroundLabel: string;
+  background: string;
+  educationLabel: string;
+  education: string[];
+  interestsLabel: string;
+  interests: string[];
+  timelineLabel: string;
+  timeline: AboutTimelineItem[];
+};
+
 export type AboutCopy = {
   kicker: string;
   title: string;
@@ -22,6 +51,7 @@ export type AboutCopy = {
   meta: string[];
   introTitle: string;
   paragraphs: string[];
+  personal: AboutPersonal;
   researchTitle: string;
   researchLead: string;
   researchBody: string;
@@ -68,6 +98,29 @@ const urls = {
 const pubName =
   'AgentSociety 2: An Integrated Research Environment for Executable Social Science';
 
+/** Shared empty personal dossier — fill per locale later. */
+function personalSlots(
+  labels: Omit<
+    AboutPersonal,
+    | 'portraitSrc'
+    | 'bio'
+    | 'background'
+    | 'education'
+    | 'interests'
+    | 'timeline'
+  >
+): AboutPersonal {
+  return {
+    ...labels,
+    portraitSrc: '',
+    bio: '',
+    background: '',
+    education: [],
+    interests: [],
+    timeline: [],
+  };
+}
+
 export const aboutCopy: Record<Lang, AboutCopy> = {
   'zh-CN': {
     kicker: 'About',
@@ -75,10 +128,22 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     motto: '日子不必很耀眼，但要很喜欢。',
     subtitle: '学生开发者 · LLM Agent 与可执行社会科学',
     meta: ['北京', 'AgentSociety'],
-    introTitle: '简介',
+    introTitle: '主线',
     paragraphs: [
       'Alexander James Carter。北京。主线协作清华 FIB Lab 的 AgentSociety / AgentSociety 2：把 LLM 驱动的社会智能体与可执行社会科学做成可运行、可审计的研究工作流。',
     ],
+    personal: personalSlots({
+      sectionTitle: '个人介绍',
+      sectionLead: '以下栏位为个人档案预留，内容稍后补写。',
+      reservedNote: '待写入',
+      portraitLabel: '肖像',
+      portraitAlt: '个人肖像（预留）',
+      bioLabel: '简介',
+      backgroundLabel: '背景',
+      educationLabel: '教育',
+      interestsLabel: '关注',
+      timelineLabel: '经历',
+    }),
     researchTitle: '研究',
     researchLead: 'LLM 驱动的社会智能体 · 可执行社会科学',
     researchBody:
@@ -155,10 +220,22 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     motto: '日子不必很耀眼，但要很喜歡。',
     subtitle: '學生開發者 · LLM Agent 與可執行社會科學',
     meta: ['北京', 'AgentSociety'],
-    introTitle: '簡介',
+    introTitle: '主線',
     paragraphs: [
       'Alexander James Carter。北京。主線協作清華 FIB Lab 的 AgentSociety / AgentSociety 2：把 LLM 驅動的社會智能體與可執行社會科學做成可運行、可稽核的研究工作流。',
     ],
+    personal: personalSlots({
+      sectionTitle: '個人介紹',
+      sectionLead: '以下欄位為個人檔案預留，內容稍後補寫。',
+      reservedNote: '待寫入',
+      portraitLabel: '肖像',
+      portraitAlt: '個人肖像（預留）',
+      bioLabel: '簡介',
+      backgroundLabel: '背景',
+      educationLabel: '教育',
+      interestsLabel: '關注',
+      timelineLabel: '經歷',
+    }),
     researchTitle: '研究',
     researchLead: 'LLM 驅動的社會智能體 · 可執行社會科學',
     researchBody:
@@ -235,10 +312,23 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     motto: 'Warm, not perfect.',
     subtitle: 'Student developer · LLM agents & executable social science',
     meta: ['Beijing', 'AgentSociety'],
-    introTitle: 'Profile',
+    introTitle: 'Line of work',
     paragraphs: [
       'Alexander James Carter. Beijing. Primary collaboration: Tsinghua FIB Lab’s AgentSociety / AgentSociety 2 — LLM-driven social agents and executable social science as runnable, auditable research workflows.',
     ],
+    personal: personalSlots({
+      sectionTitle: 'Personal',
+      sectionLead:
+        'Slots reserved for a fuller personal dossier — empty for now.',
+      reservedNote: 'Reserved',
+      portraitLabel: 'Portrait',
+      portraitAlt: 'Portrait (reserved)',
+      bioLabel: 'Bio',
+      backgroundLabel: 'Background',
+      educationLabel: 'Education',
+      interestsLabel: 'Interests',
+      timelineLabel: 'Timeline',
+    }),
     researchTitle: 'Research',
     researchLead: 'LLM-driven social agents · executable social science',
     researchBody:
@@ -261,7 +351,8 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
       'Hypotheses → auditable simulations and research workflows',
     ],
     workTitle: 'AgentSociety',
-    workIntro: 'Matches the Featured section on the GitHub profile — AgentSociety only.',
+    workIntro:
+      'Matches the Featured section on the GitHub profile — AgentSociety only.',
     projects: [
       {
         name: 'AgentSociety',
@@ -316,10 +407,23 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     subtitle:
       'Étudiant développeur · agents LLM & sciences sociales exécutables',
     meta: ['Pékin', 'AgentSociety'],
-    introTitle: 'Profil',
+    introTitle: 'Ligne de travail',
     paragraphs: [
       'Alexander James Carter. Pékin. Collaboration principale : AgentSociety / AgentSociety 2 (FIB Lab, Tsinghua) — agents sociaux LLM et sciences sociales exécutables en workflows auditables.',
     ],
+    personal: personalSlots({
+      sectionTitle: 'Personnel',
+      sectionLead:
+        'Emplacements réservés pour un dossier personnel — vides pour l’instant.',
+      reservedNote: 'Réservé',
+      portraitLabel: 'Portrait',
+      portraitAlt: 'Portrait (réservé)',
+      bioLabel: 'Bio',
+      backgroundLabel: 'Parcours',
+      educationLabel: 'Formation',
+      interestsLabel: 'Intérêts',
+      timelineLabel: 'Chronologie',
+    }),
     researchTitle: 'Recherche',
     researchLead:
       'Agents sociaux pilotés par LLM · sciences sociales exécutables',
@@ -343,7 +447,8 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
       'Hypothèses → simulations auditables et workflows de recherche',
     ],
     workTitle: 'AgentSociety',
-    workIntro: 'Aligné sur Featured du profil GitHub — AgentSociety uniquement.',
+    workIntro:
+      'Aligné sur Featured du profil GitHub — AgentSociety uniquement.',
     projects: [
       {
         name: 'AgentSociety',
@@ -397,10 +502,22 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     motto: 'Тёпло, не идеально.',
     subtitle: 'Студент-разработчик · LLM-агенты и исполнимая социальная наука',
     meta: ['Пекин', 'AgentSociety'],
-    introTitle: 'Профиль',
+    introTitle: 'Основная линия',
     paragraphs: [
       'Alexander James Carter. Пекин. Основное сотрудничество: AgentSociety / AgentSociety 2 (FIB Lab, Tsinghua) — LLM-агенты и исполнимая социальная наука как исполняемые, проверяемые рабочие процессы.',
     ],
+    personal: personalSlots({
+      sectionTitle: 'Личное',
+      sectionLead: 'Слоты зарезервированы под личное досье — пока пустые.',
+      reservedNote: 'Зарезервировано',
+      portraitLabel: 'Портрет',
+      portraitAlt: 'Портрет (зарезервировано)',
+      bioLabel: 'Био',
+      backgroundLabel: 'Фон',
+      educationLabel: 'Образование',
+      interestsLabel: 'Интересы',
+      timelineLabel: 'Хронология',
+    }),
     researchTitle: 'Исследования',
     researchLead: 'Социальные агенты на LLM · исполнимая социальная наука',
     researchBody:
