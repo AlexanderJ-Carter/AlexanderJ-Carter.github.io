@@ -7,8 +7,8 @@ Control plane is unified; hosting stays distributed.
 | Layer | Owns | Examples |
 | --- | --- | --- |
 | GitHub | Source + static fronts | `alexander.xin`, cook, lab, netq, linux-command, yearly |
-| Cloudflare | DNS, CDN, Access, Workers, Tunnel | apex CDN, `api.alexander.xin/time`, Access apps |
-| SSH Cloud | Stateful services only | Pocket ID, Gitea, Portainer, PrivateBin, Shlink, it-tools, www mirror |
+| Cloudflare | DNS, CDN, Access, Workers, Tunnel | apex CDN, `api.alexander.xin/time`, Access apps, blog redirect |
+| SSH Cloud | Stateful services only | Pocket ID, Gitea, Portainer, PrivateBin, it-tools, www mirror |
 
 `www.alexander.xin` is the **server mirror** (better mainland reachability).  
 `alexander.xin` (apex) is **GitHub Pages**. Do not redirect one to the other.
@@ -37,7 +37,7 @@ Layers **coexist**; they do not replace each other.
        ├─ 主路径: Pocket ID（Passkey OIDC）
        └─ 应急: Email OTP IdP
   → 源站（第 2 层，按应用）
-       ├─ 仅 Access 即可: Ops Portal、Shlink admin、SSH（另需密钥）
+       ├─ 仅 Access 即可: Ops Portal、SSH（另需密钥）
        ├─ Access + 可选应用 OIDC: Portainer、Nginx UI
        └─ Access + 应用 OIDC: Gitea（Pocket ID SSO）
 ```
@@ -47,13 +47,12 @@ Layers **coexist**; they do not replace each other.
 | Domain | Layer 1 | Layer 2 | Notes |
 | --- | --- | --- | --- |
 | `alexander.xin` / `www` | — | — | Public SSG; no visitor login |
-| `blog.alexander.xin` | — | — | Ghost 已下线；备份 `~/backups/ghost-20260803/`；计划 Astro/Directus |
+| `blog.alexander.xin` | — | — | Worker `redirect-profile` → `/writing/`（公开读者）；MX/TXT 邮件保留 |
 | `id.alexander.xin` | — | Pocket ID | Must stay reachable without Access |
 | `ops.alexander.xin` | Access | — | 只读门户 |
 | `docker.alexander.xin` | Access | Portainer OIDC（可选） | Logout URL 应留空，勿触发 IdP end-session |
 | `nginxui.alexander.xin` | Access | Nginx UI OIDC | 本地用户名须匹配 `preferred_username`（`huanghaoyu`） |
-| `shlink.alexander.xin` | Access | API Key（预置） | 管理端 |
-| `ssh.alexander.xin` | Access | SSH 密钥/密码 | 浏览器页只能过 Access，主机身份仍要密钥（沙箱读不到本机 `~/.ssh`）；日常用本机 `ssh cloud`，浏览器仅应急 |
+| `ssh.alexander.xin` | Access | SSH 密钥/密码 | 浏览器页只能过 Access，主机身份仍要密钥；日常用本机 `ssh cloud`，浏览器仅应急 |
 | `git.alexander.xin` | Access | Gitea + Pocket ID OIDC | Dual layer on purpose |
 | Future `cms.*` | Access | Directus admin (+ optional OIDC) | Do not start on 1.6 GiB |
 
@@ -77,7 +76,6 @@ Layers **coexist**; they do not replace each other.
 | `portainer` | Docker UI | Access + optional in-app OIDC |
 | `nginx-ui` | Nginx admin | Access + in-app OIDC |
 | `privatebin` | Encrypted paste | Public |
-| `shlink` + `shlink-web-client` | Short links | Public jump; admin behind Access |
 | `it-tools` | Tool hub | Public via Tunnel |
 
 ## Edge control
@@ -86,7 +84,7 @@ Layers **coexist**; they do not replace each other.
 | --- | --- |
 | `www` Worker route | **Removed** so Tunnel/server mirror is origin |
 | `ops.alexander.xin` | Worker `ops-portal` 运维首页（工具卡片 + 探针）；UI 文件在 `www…/ops/`；Access Launcher 为备选入口 |
-| `shlink.alexander.xin` | Access-protected |
+| `blog.alexander.xin` | Worker `redirect-profile` 公开 302 → `alexander.xin/writing/`（MX/TXT 保留） |
 | `about` / `bio` / `time` aliases | Still Worker redirects (`redirect-profile` / `legacy-redirect`); Redirect Rules API not available on current token |
 | Pocket ID ↔ Access OIDC | **Live** (IdP `Pocket ID` + OTP break-glass) |
 
@@ -95,30 +93,27 @@ Layers **coexist**; they do not replace each other.
 | Item | Action | Backup |
 | --- | --- | --- |
 | Ghost + MySQL | Containers, images, live data removed | `~/backups/ghost-20260803/` |
-| `blog.alexander.xin` Tunnel ingress | Removed | — |
-| `blog.alexander.xin` web CNAME | Removed (MX/TXT mail records kept) | — |
+| Shlink + web client | Containers, images, compose, nginx sites, Tunnel ingress, DNS CNAME, Access app removed | `~/backups/shlink-20260803/` |
+| `link.alexander.xin` / `shlink.alexander.xin` | Tunnel + DNS + nginx sites removed | — |
+| Access app `Shlink` | Deleted | — |
 | Access app `*.newyear-eki.pages.dev` | Deleted | — |
 | AdGuard Home | Fully removed (compose + data + stack dir) | — |
 
-## Blog (post-Ghost) — decision
+## Blog
 
-**Do not restore Ghost.** Prefer zero extra RAM on the 1.6 GiB host.
+**博客 = Astro `/writing`。** 不恢复 Ghost；不上 Listmonk / Directus（内存不足时不做）。
 
-| Option | RAM | Authoring | Fit | Verdict |
-| --- | --- | --- | --- | --- |
-| **Astro `writing` as blog** | 0 (already on Pages/www) | Git + MD in `src/content/writing` | Native i18n, SSG, RSS already | **Primary** |
-| Directus + Postgres | ~640 MB caps in compose; needs ≥~600 MB free | Web CMS; build hook → Astro | Good later CMS; compose exists under `~/fleet/cms/` | **Backup** — compose only until RAM ↑ |
-| Decap / Sveltia on Git | 0 server | Browser UI → GitHub | Nice UX; still Git source of truth | Optional polish on primary |
-| Notion / external host | 0 here | External | Breaks i18n + brand control | Skip |
-| Listmonk | ~192 MB | Newsletters | Separate from blog | **Later** — not blocking “有博客可读” |
-
-**Primary path:** treat `/writing` as the blog; point `blog.alexander.xin` at the writing index (Worker redirect or Pages/www alias). Author workflow = Git. Optional later: Access on a private preview host for drafts.
-
-**Author “login”:** not Ghost Staff — use GitHub (repo write) and/or Access in front of any future CMS admin. Pocket ID remains IdP for Access/OIDC.
+| Item | Detail |
+| --- | --- |
+| 读者入口 | `https://blog.alexander.xin` → `https://alexander.xin/writing/`（Worker 302，公开） |
+| 同站路径 | `/writing/`（Pages + www 镜像） |
+| 写作 | Git + Markdown：`src/content/writing` |
+| 订阅 | 暂缓（Listmonk 等） |
+| 个人主页登录 | 不加 |
 
 ## Planned (memory-gated)
 
-Server has **1.6 GiB RAM**. Available often ~500–600 MB with current fleet.
+Server has **1.6 GiB RAM**. Available often ~800 MB+ after Shlink removal.
 
 - Directus (`cms.alexander.xin`) + Postgres: **do not start** until more RAM
 - Listmonk: same; compose only

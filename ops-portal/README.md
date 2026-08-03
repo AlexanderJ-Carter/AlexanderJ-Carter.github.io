@@ -12,7 +12,7 @@ Fleet ops home: tool cards + read-only status probes (behind Cloudflare Access).
 ## Deploy
 
 1. Prefer Cloudflare API multipart upload of `src/worker.js` as Worker `ops-portal` (local wrangler may be broken).
-2. Access app for `ops.alexander.xin`; keep visible in App Launcher. Hide infrequently used apps (SSH / Shlink) — reach them from this portal.
+2. Access app for `ops.alexander.xin`; keep visible in App Launcher. Hide infrequently used apps (SSH) — reach them from this portal.
 3. Pocket ID OIDC as primary IdP; OTP as break-glass.
 
 ## Endpoints

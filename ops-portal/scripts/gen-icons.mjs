@@ -53,10 +53,6 @@ const icons = {
   <path d="M54 78 L72 40 H84 L66 78 Z" fill="none" stroke="#e8c478" stroke-width="3" stroke-linejoin="round"/>
   <path d="M74 78 L88 52 H96 L82 78 Z" fill="none" stroke="#e8e2d4" stroke-width="3" stroke-linejoin="round" opacity="0.7"/>
 `),
-  shlink: frame(`
-  <path d="M52 48c0-8 6-14 14-14h8c8 0 14 6 14 14s-6 14-14 14H66" fill="none" stroke="#e8e2d4" stroke-width="3.5" stroke-linecap="round"/>
-  <path d="M76 80c0 8-6 14-14 14h-8c-8 0-14-6-14-14s6-14 14-14h8" fill="none" stroke="#e8c478" stroke-width="3.5" stroke-linecap="round"/>
-`),
   ssh: frame(`
   <rect x="30" y="36" width="68" height="52" rx="8" fill="none" stroke="#e8e2d4" stroke-width="3"/>
   <path d="M42 54l10 8-10 8" fill="none" stroke="#e8c478" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>

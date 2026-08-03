@@ -123,16 +123,6 @@
       "access": false
     },
     {
-      "id": "link",
-      "url": "https://link.alexander.xin",
-      "category": "service",
-      "host": "server-tunnel",
-      "visibility": "public",
-      "status": "live",
-      "label": "Short links",
-      "access": false
-    },
-    {
       "id": "time-api",
       "url": "https://api.alexander.xin/time",
       "category": "service",
@@ -218,13 +208,14 @@
     {
       "id": "blog",
       "url": "https://blog.alexander.xin",
+      "path": "/writing",
       "category": "content",
-      "host": "server-tunnel",
+      "host": "cloudflare-worker",
       "visibility": "public",
-      "status": "retired",
-      "label": "Ghost (retired)",
+      "status": "live",
+      "label": "Blog → Writing",
       "access": false,
-      "note": "Removed 2026-08-03; backup on server ~/backups/ghost-20260803"
+      "note": "Worker 302 → alexander.xin/writing/; Ghost retired; author via Git"
     }
   ]
 }
