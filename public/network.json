@@ -1,0 +1,230 @@
+{
+  "generated": "2026-08-03",
+  "identity": "https://id.alexander.xin",
+  "accessLauncher": "https://alexanderjcarter.cloudflareaccess.com",
+  "sites": [
+    {
+      "id": "apex",
+      "url": "https://alexander.xin",
+      "path": "/",
+      "category": "primary",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "Apex",
+      "access": false,
+      "repo": "AlexanderJ-Carter/AlexanderJ-Carter.github.io",
+      "note": "GitHub Pages + Cloudflare CDN (global)"
+    },
+    {
+      "id": "www",
+      "url": "https://www.alexander.xin",
+      "path": "/",
+      "category": "primary",
+      "host": "server-tunnel",
+      "visibility": "public",
+      "status": "live",
+      "label": "WWW",
+      "access": false,
+      "repo": "AlexanderJ-Carter/AlexanderJ-Carter.github.io",
+      "note": "SSH Cloud mirror for mainland access; not a redirect to apex"
+    },
+    {
+      "id": "next",
+      "url": "https://alexander.xin/next",
+      "path": "/next",
+      "category": "experiment",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "beta",
+      "label": "NEXUS",
+      "access": false
+    },
+    {
+      "id": "network",
+      "url": "https://alexander.xin/network",
+      "path": "/network",
+      "category": "primary",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "Network",
+      "access": false
+    },
+    {
+      "id": "cook",
+      "url": "https://cook.alexander.xin",
+      "category": "content",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "MyCook",
+      "access": false
+    },
+    {
+      "id": "lab",
+      "url": "https://lab.alexander.xin",
+      "category": "learning",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "Lab",
+      "access": false
+    },
+    {
+      "id": "linux-command",
+      "url": "https://linux-command.alexander.xin",
+      "category": "learning",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "Linux Command",
+      "access": false
+    },
+    {
+      "id": "netq",
+      "url": "https://netq.alexander.xin",
+      "category": "tools",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "NetQ",
+      "access": false
+    },
+    {
+      "id": "yearly",
+      "url": "https://yearly.alexander.xin",
+      "category": "content",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "Yearly",
+      "access": false
+    },
+    {
+      "id": "tools-hub",
+      "url": "https://tools.alexander.xin",
+      "category": "tools",
+      "host": "server-tunnel",
+      "visibility": "public",
+      "status": "live",
+      "label": "Tool Hub",
+      "access": false,
+      "note": "it-tools behind Tunnel; Bot Challenge may appear"
+    },
+    {
+      "id": "paste",
+      "url": "https://paste.alexander.xin",
+      "category": "service",
+      "host": "server-tunnel",
+      "visibility": "public",
+      "status": "live",
+      "label": "PrivateBin",
+      "access": false
+    },
+    {
+      "id": "link",
+      "url": "https://link.alexander.xin",
+      "category": "service",
+      "host": "server-tunnel",
+      "visibility": "public",
+      "status": "live",
+      "label": "Short links",
+      "access": false
+    },
+    {
+      "id": "time-api",
+      "url": "https://api.alexander.xin/time",
+      "category": "service",
+      "host": "cloudflare-worker",
+      "visibility": "public",
+      "status": "live",
+      "label": "Time API",
+      "access": false
+    },
+    {
+      "id": "identity",
+      "url": "https://id.alexander.xin",
+      "category": "ops",
+      "host": "server-tunnel",
+      "visibility": "public",
+      "status": "live",
+      "label": "Pocket ID",
+      "access": false,
+      "note": "Passkey OIDC IdP; no Access in front (is the IdP)"
+    },
+    {
+      "id": "ops",
+      "url": "https://ops.alexander.xin",
+      "category": "ops",
+      "host": "cloudflare-worker",
+      "visibility": "private",
+      "status": "live",
+      "label": "Ops Portal",
+      "access": true,
+      "note": "Read-only fleet status Worker behind Access"
+    },
+    {
+      "id": "git",
+      "url": "https://git.alexander.xin",
+      "category": "ops",
+      "host": "server-tunnel",
+      "visibility": "private",
+      "status": "live",
+      "label": "Gitea",
+      "access": true
+    },
+    {
+      "id": "docker",
+      "url": "https://docker.alexander.xin",
+      "category": "ops",
+      "host": "server-tunnel",
+      "visibility": "private",
+      "status": "live",
+      "label": "Portainer",
+      "access": true
+    },
+    {
+      "id": "nginxui",
+      "url": "https://nginxui.alexander.xin",
+      "category": "ops",
+      "host": "server-tunnel",
+      "visibility": "private",
+      "status": "live",
+      "label": "Nginx UI",
+      "access": true
+    },
+    {
+      "id": "ssh",
+      "url": "https://ssh.alexander.xin",
+      "category": "ops",
+      "host": "server-tunnel",
+      "visibility": "private",
+      "status": "live",
+      "label": "SSH",
+      "access": true
+    },
+    {
+      "id": "cms",
+      "url": "https://cms.alexander.xin",
+      "category": "ops",
+      "host": "server-tunnel",
+      "visibility": "private",
+      "status": "planned",
+      "label": "Directus",
+      "access": true,
+      "note": "Replaces Ghost; deploy when memory allows"
+    },
+    {
+      "id": "blog",
+      "url": "https://blog.alexander.xin",
+      "category": "content",
+      "host": "server-tunnel",
+      "visibility": "public",
+      "status": "retired",
+      "label": "Ghost (retired)",
+      "access": false,
+      "note": "Removed 2026-08-03; backup on server ~/backups/ghost-20260803"
+    }
+  ]
+}

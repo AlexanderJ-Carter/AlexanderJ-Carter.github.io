@@ -1,0 +1,318 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NextChrome from '../next/NextChrome.astro';
+import { getAdjacentRooms, getNextRoom } from '../../data/next-chain';
+import {
+  gallerySrcFallback,
+  gallerySrcSet,
+  getLangPath,
+  resolveLang,
+} from '../../i18n/types';
+
+const lang = resolveLang(Astro.props.lang);
+const room = getNextRoom(lang, 'exposure')!;
+const adj = getAdjacentRooms(lang, 'exposure');
+const lp = (path: string) => getLangPath(lang, path);
+
+const imgA = '/img/gallery-optimized/landscape-01-xl.webp';
+const imgB = '/img/gallery-optimized/landscape-03-xl.webp';
+
+const copy = {
+  'zh-CN': {
+    description: '关于等待光线的长笔记：曝光是时间的形状。',
+    kicker: 'Field notes',
+    headline: '等待光线时，世界会慢下来',
+    lede: '摄影教我一件事：好的画面很少是「抓到」的，更像是「等到」。代码也一样——接口会通，但情绪要靠曝光时间。',
+    s1Title: '快门之前',
+    s1: '站在风口，测光表还在跳。你以为自己在等云，其实在等自己安静下来。磷光残影（见信号场）像是一种提醒：动作留下痕迹，静止才显影。',
+    s2Title: '曝光是时间的形状',
+    s2: '1/1000 秒切开水珠；三十秒把车灯拖成河流。数值只是语法，真正的句子是：你愿意给这个瞬间多少耐心。写站点时我也用同一把尺子——少一点炫技堆砌，多一点可读的留白。',
+    s3Title: '钉在坐标上',
+    s3: '一张照片若只有美，会很快被滑走。坐标图里我把摄影、写作、工具摊开，是为了记住它们本是同一条链路：看 → 写 → 做 → 再听回声。',
+    figA: '可用光 · 风景',
+    figB: '长曝光气质 · 风景',
+    toSignal: '回看磷光信号场',
+    toAtlas: '把它钉上坐标图',
+    continue: room.continueHint,
+  },
+  'zh-TW': {
+    description: '關於等待光線的長筆記：曝光是時間的形狀。',
+    kicker: 'Field notes',
+    headline: '等待光線時，世界會慢下來',
+    lede: '攝影教我一件事：好的畫面很少是「抓到」的，更像是「等到」。程式也一樣——介面會通，但情緒要靠曝光時間。',
+    s1Title: '快門之前',
+    s1: '站在風口，測光表還在跳。你以為自己在等雲，其實在等自己安靜下來。磷光殘影（見信號場）像是一種提醒：動作留下痕跡，靜止才顯影。',
+    s2Title: '曝光是時間的形狀',
+    s2: '1/1000 秒切開水珠；三十秒把車燈拖成河流。數值只是語法，真正的句子是：你願意給這個瞬間多少耐心。寫站點時我也用同一把尺——少一點炫技堆砌，多一點可讀的留白。',
+    s3Title: '釘在座標上',
+    s3: '一張照片若只有美，會很快被滑走。座標圖裡我把攝影、寫作、工具攤開，是為了記住它們本是同一條鏈路：看 → 寫 → 做 → 再聽回聲。',
+    figA: '可用光 · 風景',
+    figB: '長曝光氣質 · 風景',
+    toSignal: '回看磷光信號場',
+    toAtlas: '把它釘上座標圖',
+    continue: room.continueHint,
+  },
+  'en-GB': {
+    description: 'A long note on waiting for light — exposure as the shape of time.',
+    kicker: 'Field notes',
+    headline: 'While you wait for light, the world slows',
+    lede: 'Photography taught me this: good frames are rarely caught; they are waited for. Code is similar — the interface can work, but feeling needs shutter time.',
+    s1Title: 'Before the shutter',
+    s1: 'In the wind, the meter still jumps. You think you are waiting for cloud; you are waiting to quiet down. The phosphor afterimage (see Signal) is a reminder: motion leaves a trail; stillness develops the image.',
+    s2Title: 'Exposure is the shape of time',
+    s2: '1/1000 cuts a droplet; thirty seconds drag headlights into rivers. Numbers are grammar. The sentence is how much patience you give the moment. I use the same ruler on this site — less spectacle stacked, more readable air.',
+    s3Title: 'Pinned on the map',
+    s3: 'Beauty alone scrolls away. In Atlas I spread photography, writing and tools to remember they are one chain: see → write → make → listen for the echo.',
+    figA: 'Available light · landscape',
+    figB: 'Long-exposure mood · landscape',
+    toSignal: 'Return to the phosphor field',
+    toAtlas: 'Pin it on the atlas',
+    continue: room.continueHint,
+  },
+  fr: {
+    description: 'Note longue sur l’attente de la lumière — l’exposition comme forme du temps.',
+    kicker: 'Field notes',
+    headline: 'En attendant la lumière, le monde ralentit',
+    lede: 'La photo m’a appris ceci : les bons cadres se guettent plus qu’ils ne se saisissent. Le code aussi — l’interface peut marcher, le sentiment demande du temps d’obturation.',
+    s1Title: 'Avant l’obturateur',
+    s1: 'Dans le vent, la cellule saute encore. Tu crois attendre le nuage ; tu attends de te taire. L’image rémanente phosphore (voir Signal) rappelle : le geste laisse une traînée ; le calme révèle.',
+    s2Title: 'L’exposition forme le temps',
+    s2: '1/1000 coupe une goutte ; trente secondes tirent les phares en rivières. Les chiffres sont une grammaire. La phrase est la patience offerte à l’instant. Même règle pour le site — moins d’empilement spectaculaire, plus d’air lisible.',
+    s3Title: 'Épinglé sur la carte',
+    s3: 'La seule beauté défile vite. Dans Atlas j’étale photo, écriture et outils pour rappeler une chaîne : voir → écrire → faire → écouter l’écho.',
+    figA: 'Lumière dispo · paysage',
+    figB: 'Ambiance pose longue · paysage',
+    toSignal: 'Revenir au champ phosphore',
+    toAtlas: 'Épingler sur l’atlas',
+    continue: room.continueHint,
+  },
+  ru: {
+    description: 'Длинная заметка об ожидании света — экспозиция как форма времени.',
+    kicker: 'Field notes',
+    headline: 'Пока ждёшь свет, мир замедляется',
+    lede: 'Фото научило: хорошие кадры реже ловят — их ждут. Так и в коде: интерфейс может работать, а чувство требует выдержки.',
+    s1Title: 'До затвора',
+    s1: 'На ветру экспонометр ещё прыгает. Кажется, ждёшь облако — на самом деле ждёшь тишины. Фосфорный след (см. Сигнал) напоминает: движение оставляет след, покой проявляет кадр.',
+    s2Title: 'Экспозиция — форма времени',
+    s2: '1/1000 режет каплю; тридцать секунд тянут фары в реки. Числа — грамматика. Предложение — сколько терпения ты даёшь мгновению. Тем же правилом мерю сайт — меньше зрелищной кучи, больше читаемого воздуха.',
+    s3Title: 'На карте',
+    s3: 'Одна красота быстро пролистывается. В Атласе я раскладываю фото, текст и инструменты, чтобы помнить цепь: видеть → писать → делать → слышать эхо.',
+    figA: 'Доступный свет · пейзаж',
+    figB: 'Длинная выдержка · пейзаж',
+    toSignal: 'Вернуться к фосфорному полю',
+    toAtlas: 'Закрепить на атласе',
+    continue: room.continueHint,
+  },
+}[lang];
+---
+
+<BaseLayout
+  title={room.title}
+  description={copy.description}
+  showHeader={false}
+  showFooter={true}
+  mainClass="!p-0 next-shell next-shell--exposure"
+>
+  <article class="exposure">
+    <NextChrome lang={lang} roomId="exposure" />
+
+    <header class="exposure__hero">
+      <p class="exposure__kicker">{copy.kicker}</p>
+      <h1>{copy.headline}</h1>
+      <p class="exposure__lede">{copy.lede}</p>
+    </header>
+
+    <figure class="exposure__bleed">
+      <img
+        src={gallerySrcFallback(imgA)}
+        srcset={gallerySrcSet(imgA)}
+        sizes="100vw"
+        alt=""
+        width="1920"
+        height="1080"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>{copy.figA}</figcaption>
+    </figure>
+
+    <div class="exposure__body">
+      <section>
+        <h2>{copy.s1Title}</h2>
+        <p>{copy.s1}</p>
+        <p>
+          <a href={lp('/next/signal')}>{copy.toSignal}</a>
+        </p>
+      </section>
+      <section>
+        <h2>{copy.s2Title}</h2>
+        <p>{copy.s2}</p>
+      </section>
+    </div>
+
+    <figure class="exposure__bleed exposure__bleed--tight">
+      <img
+        src={gallerySrcFallback(imgB)}
+        srcset={gallerySrcSet(imgB)}
+        sizes="100vw"
+        alt=""
+        width="1920"
+        height="1080"
+        loading="lazy"
+        decoding="async"
+      />
+      <figcaption>{copy.figB}</figcaption>
+    </figure>
+
+    <div class="exposure__body">
+      <section>
+        <h2>{copy.s3Title}</h2>
+        <p>{copy.s3}</p>
+        <p>
+          <a href={lp('/next/atlas')}>{copy.toAtlas}</a>
+        </p>
+      </section>
+    </div>
+
+    <p class="exposure__foot">
+      <a href={lp(adj.next.path)}>{copy.continue}</a>
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .next-shell--exposure {
+    --next-ink: 12 12 14;
+    --next-line: 196 48 42;
+    --next-bg: #f4f1ea;
+    --next-fg: #161616;
+    background: var(--next-bg);
+    color: var(--next-fg);
+    min-height: 100svh;
+  }
+
+  /* Avoid the banned cream+terracotta combo: cool paper + single vermillion accent only */
+  .next-shell--exposure {
+    --next-bg: #eceef2;
+    --next-fg: #12141a;
+  }
+
+  .exposure__hero {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 3.25rem 1.25rem 2rem;
+  }
+
+  .exposure__kicker {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgb(var(--next-line));
+    margin: 0 0 1rem;
+  }
+
+  .exposure__hero h1 {
+    font-family: 'Source Serif 4', 'Noto Serif SC', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    font-weight: 600;
+    line-height: 1.18;
+    margin: 0 0 1.1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .exposure__lede {
+    font-size: 1.12rem;
+    line-height: 1.7;
+    margin: 0;
+    opacity: 0.88;
+  }
+
+  .exposure__bleed {
+    margin: 0;
+    position: relative;
+  }
+
+  .exposure__bleed img {
+    display: block;
+    width: 100%;
+    height: min(62vh, 34rem);
+    object-fit: cover;
+    filter: grayscale(0.15) contrast(1.05);
+  }
+
+  .exposure__bleed--tight img {
+    height: min(48vh, 26rem);
+  }
+
+  .exposure__bleed figcaption {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.5rem;
+    background: color-mix(in oklab, #000 55%, transparent);
+    color: #f2f2f2;
+  }
+
+  .exposure__body {
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem;
+  }
+
+  .exposure__body section + section {
+    margin-top: 2.25rem;
+  }
+
+  .exposure__body h2 {
+    font-family: 'Source Serif 4', 'Noto Serif SC', Georgia, serif;
+    font-size: 1.45rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .exposure__body p {
+    margin: 0 0 1rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .exposure__body a {
+    color: rgb(var(--next-line));
+    text-underline-offset: 3px;
+  }
+
+  .exposure__body a:focus-visible {
+    outline: 2px solid rgb(var(--next-line));
+    outline-offset: 3px;
+  }
+
+  .exposure__foot {
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 3.5rem;
+  }
+
+  .exposure__foot a {
+    display: inline-block;
+    padding: 0.75rem 1rem;
+    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 50%, transparent);
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.95rem;
+  }
+
+  .exposure__foot a:hover,
+  .exposure__foot a:focus-visible {
+    outline: none;
+    border-color: rgb(var(--next-line));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .exposure__bleed img {
+      filter: none;
+    }
+  }
+</style>

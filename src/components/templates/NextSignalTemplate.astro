@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NextChrome from '../next/NextChrome.astro';
+import { getAdjacentRooms, getNextRoom } from '../../data/next-chain';
+import { getLangPath, resolveLang } from '../../i18n/types';
+
+const lang = resolveLang(Astro.props.lang);
+const room = getNextRoom(lang, 'signal')!;
+const adj = getAdjacentRooms(lang, 'signal');
+const lp = (path: string) => getLangPath(lang, path);
+
+const copy = {
+  'zh-CN': {
+    description: '磷光信号场：光标留下衰减光迹。',
+    line: '信号即曝光。移动，就是快门。',
+    hint: '移动指针或手指；偏好减少动效时显示静态场。',
+    staticNote: '静态磷光场（已尊重减少动效）。',
+  },
+  'zh-TW': {
+    description: '磷光信號場：游標留下衰減光跡。',
+    line: '信號即曝光。移動，就是快門。',
+    hint: '移動指標或手指；偏好減少動效時顯示靜態場。',
+    staticNote: '靜態磷光場（已尊重減少動效）。',
+  },
+  'en-GB': {
+    description: 'Phosphor signal field — the cursor leaves fading trails.',
+    line: 'Signal is exposure. Motion is the shutter.',
+    hint: 'Move pointer or finger; a static field shows if you prefer reduced motion.',
+    staticNote: 'Static phosphor field (reduced motion respected).',
+  },
+  fr: {
+    description: 'Champ signal phosphore — le curseur laisse des traînées.',
+    line: 'Le signal est l’exposition. Le geste est l’obturateur.',
+    hint: 'Bougez le pointeur ou le doigt ; champ statique si mouvement réduit.',
+    staticNote: 'Champ phosphore statique (mouvement réduit respecté).',
+  },
+  ru: {
+    description: 'Фосфорное поле сигнала — курсор оставляет следы.',
+    line: 'Сигнал — это экспозиция. Движение — затвор.',
+    hint: 'Двигайте указатель или палец; статичное поле при уменьшенной анимации.',
+    staticNote: 'Статичное фосфорное поле (учтено reduced motion).',
+  },
+}[lang];
+---
+
+<BaseLayout
+  title={room.title}
+  description={copy.description}
+  showHeader={false}
+  showFooter={false}
+  mainClass="!p-0 next-shell next-shell--signal"
+>
+  <div class="signal" data-signal>
+    <NextChrome lang={lang} roomId="signal" />
+
+    <canvas class="signal__canvas" data-signal-canvas aria-hidden="true"></canvas>
+    <div class="signal__static" data-signal-static hidden aria-hidden="true"></div>
+
+    <div class="signal__copy">
+      <p class="signal__id">01 · {room.id}</p>
+      <h1>{room.title}</h1>
+      <p class="signal__line">{copy.line}</p>
+      <p class="signal__hint" data-signal-hint>{copy.hint}</p>
+    </div>
+
+    <a class="signal__continue" href={lp(adj.next.path)}>{room.continueHint}</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .next-shell--signal {
+    --next-ink: 2 6 4;
+    --next-line: 88 255 160;
+    --next-bg: #020604;
+    --next-fg: #b8ffd0;
+    background: var(--next-bg);
+    color: var(--next-fg);
+    min-height: 100svh;
+  }
+
+  .signal {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+  }
+
+  .signal__canvas,
+  .signal__static {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .signal__static {
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(88, 255, 160, 0.18), transparent 45%),
+      radial-gradient(ellipse at 70% 75%, rgba(40, 180, 120, 0.12), transparent 50%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(88, 255, 160, 0.03) 2px,
+        rgba(88, 255, 160, 0.03) 3px
+      );
+  }
+
+  .signal__copy {
+    position: relative;
+    z-index: 1;
+    max-width: 36rem;
+    padding: 4rem 1.25rem 6rem;
+    margin: 0 auto;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .signal__id {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin: 0 0 1rem;
+  }
+
+  .signal h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    text-shadow: 0 0 24px rgba(88, 255, 160, 0.35);
+  }
+
+  .signal__line {
+    font-size: 1.1rem;
+    line-height: 1.55;
+    margin: 0 0 0.75rem;
+    opacity: 0.9;
+  }
+
+  .signal__hint {
+    font-size: 0.82rem;
+    opacity: 0.5;
+    margin: 0;
+  }
+
+  .signal__continue {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: fit-content;
+    margin: 0 auto 3rem;
+    padding: 0.7rem 1.1rem;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 45%, transparent);
+    font-size: 0.9rem;
+    background: color-mix(in oklab, #000 35%, transparent);
+    transition:
+      border-color 160ms ease,
+      box-shadow 160ms ease;
+  }
+
+  .signal__continue:hover,
+  .signal__continue:focus-visible {
+    outline: none;
+    border-color: rgb(var(--next-line));
+    box-shadow: 0 0 24px rgba(88, 255, 160, 0.25);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .signal h1 {
+      text-shadow: none;
+    }
+  }
+</style>
+
+<script>
+  function initSignal() {
+    const root = document.querySelector('[data-signal]');
+    if (!(root instanceof HTMLElement)) return;
+
+    const canvasEl = root.querySelector('[data-signal-canvas]');
+    const staticEl = root.querySelector('[data-signal-static]');
+    const hint = root.querySelector('[data-signal-hint]');
+    if (!(canvasEl instanceof HTMLCanvasElement) || !(staticEl instanceof HTMLElement))
+      return;
+
+    const surface: HTMLCanvasElement = canvasEl;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      surface.hidden = true;
+      staticEl.hidden = false;
+      if (hint instanceof HTMLElement) {
+        const note = {
+          'zh-CN': '静态磷光场（已尊重减少动效）。',
+          'zh-TW': '靜態磷光場（已尊重減少動效）。',
+          'en-GB': 'Static phosphor field (reduced motion respected).',
+          fr: 'Champ phosphore statique (mouvement réduit respecté).',
+          ru: 'Статичное фосфорное поле (учтено reduced motion).',
+        };
+        const pageLang = document.documentElement.lang || 'zh-CN';
+        hint.textContent =
+          note[pageLang as keyof typeof note] || note['en-GB'];
+      }
+      return;
+    }
+
+    const context = surface.getContext('2d');
+    if (!context) return;
+    const ctx: CanvasRenderingContext2D = context;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0;
+    let h = 0;
+    const points: { x: number; y: number; life: number }[] = [];
+    let raf = 0;
+
+    function resize() {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      surface.width = Math.floor(w * dpr);
+      surface.height = Math.floor(h * dpr);
+      surface.style.width = `${w}px`;
+      surface.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function add(x: number, y: number) {
+      points.push({ x, y, life: 1 });
+      if (points.length > 180) points.shift();
+    }
+
+    function frame() {
+      ctx.fillStyle = 'rgba(2, 6, 4, 0.18)';
+      ctx.fillRect(0, 0, w, h);
+
+      for (let i = points.length - 1; i >= 0; i--) {
+        const p = points[i];
+        p.life -= 0.016;
+        if (p.life <= 0) {
+          points.splice(i, 1);
+          continue;
+        }
+        const r = 8 + p.life * 22;
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r);
+        g.addColorStop(0, `rgba(160, 255, 190, ${0.55 * p.life})`);
+        g.addColorStop(0.45, `rgba(60, 220, 130, ${0.22 * p.life})`);
+        g.addColorStop(1, 'rgba(2, 6, 4, 0)');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.fillStyle = 'rgba(88, 255, 160, 0.02)';
+      for (let y = 0; y < h; y += 3) {
+        ctx.fillRect(0, y, w, 1);
+      }
+
+      raf = requestAnimationFrame(frame);
+    }
+
+    resize();
+    ctx.fillStyle = '#020604';
+    ctx.fillRect(0, 0, w, h);
+    frame();
+
+    const onMove = (e: PointerEvent) => add(e.clientX, e.clientY);
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('resize', resize);
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        cancelAnimationFrame(raf);
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('resize', resize);
+      },
+      { once: true }
+    );
+  }
+
+  initSignal();
+  document.addEventListener('astro:page-load', initSignal);
+</script>

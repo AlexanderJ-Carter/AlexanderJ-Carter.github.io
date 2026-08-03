@@ -1,0 +1,13 @@
+---
+import NextExposureTemplate from '../../../components/templates/NextExposureTemplate.astro';
+import { getLangStaticPaths, resolveRouteLang } from '../../../i18n/routing';
+
+export function getStaticPaths() {
+  return getLangStaticPaths();
+}
+
+const { lang: urlLang } = Astro.params;
+const lang = resolveRouteLang(urlLang);
+---
+
+<NextExposureTemplate lang={lang} />

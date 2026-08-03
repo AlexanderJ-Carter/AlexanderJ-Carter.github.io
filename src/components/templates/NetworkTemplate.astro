@@ -1,0 +1,265 @@
+---
+/**
+ * Public fleet directory — one composition listing live sites from the registry.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../chrome/PageHero.astro';
+import {
+  getNetworkDirectorySites,
+  type SiteEntry,
+} from '../../data/site-registry';
+import { resolveLang, getLangPath, type Lang } from '../../i18n/types';
+
+interface Props {
+  lang?: string;
+}
+
+const lang = resolveLang(Astro.props.lang);
+const lp = (path: string) => getLangPath(lang, path);
+const sites = getNetworkDirectorySites();
+
+const categoryOrder = [
+  'experiment',
+  'content',
+  'tools',
+  'learning',
+  'service',
+  'primary',
+] as const;
+
+const copy: Record<
+  Lang,
+  {
+    title: string;
+    description: string;
+    kicker: string;
+    lead: string;
+    hostLabel: string;
+    login: string;
+    next: string;
+    categories: Record<string, string>;
+    hosts: Record<string, string>;
+  }
+> = {
+  'zh-CN': {
+    title: '站群目录',
+    description: '公开子站与服务的统一目录——控制面统一，托管分散。',
+    kicker: 'Network',
+    lead: '同一身份下的公开节点。私有运维入口不在此列出。',
+    hostLabel: '托管',
+    login: '维护者入口',
+    next: '进入 NEXUS',
+    categories: {
+      experiment: '实验',
+      content: '内容',
+      tools: '工具',
+      learning: '学习',
+      service: '服务',
+      primary: '主站',
+    },
+    hosts: {
+      'github-pages': 'GitHub Pages',
+      'cloudflare-worker': 'Cloudflare Worker',
+      'server-tunnel': '服务器 Tunnel',
+      external: '外部',
+    },
+  },
+  'zh-TW': {
+    title: '站群目錄',
+    description: '公開子站與服務的統一目錄——控制面統一，託管分散。',
+    kicker: 'Network',
+    lead: '同一身份下的公開節點。私有運維入口不在此列出。',
+    hostLabel: '託管',
+    login: '維護者入口',
+    next: '進入 NEXUS',
+    categories: {
+      experiment: '實驗',
+      content: '內容',
+      tools: '工具',
+      learning: '學習',
+      service: '服務',
+      primary: '主站',
+    },
+    hosts: {
+      'github-pages': 'GitHub Pages',
+      'cloudflare-worker': 'Cloudflare Worker',
+      'server-tunnel': '伺服器 Tunnel',
+      external: '外部',
+    },
+  },
+  'en-GB': {
+    title: 'Network directory',
+    description:
+      'Unified directory of public sites and services — one control plane, distributed hosting.',
+    kicker: 'Network',
+    lead: 'Public nodes under one fleet map. Private ops tools are not listed here.',
+    hostLabel: 'Hosted on',
+    login: 'Maintainer entry',
+    next: 'Enter NEXUS',
+    categories: {
+      experiment: 'Experiments',
+      content: 'Content',
+      tools: 'Tools',
+      learning: 'Learning',
+      service: 'Services',
+      primary: 'Primary',
+    },
+    hosts: {
+      'github-pages': 'GitHub Pages',
+      'cloudflare-worker': 'Cloudflare Worker',
+      'server-tunnel': 'Server Tunnel',
+      external: 'External',
+    },
+  },
+  fr: {
+    title: 'Annuaire du réseau',
+    description:
+      'Annuaire unifié des sites et services publics — plan de contrôle unique, hébergement dispersé.',
+    kicker: 'Network',
+    lead: 'Nœuds publics d’une même flotte. Les outils ops privés ne sont pas listés ici.',
+    hostLabel: 'Hébergé sur',
+    login: 'Entrée mainteneur',
+    next: 'Entrer dans NEXUS',
+    categories: {
+      experiment: 'Expériences',
+      content: 'Contenu',
+      tools: 'Outils',
+      learning: 'Apprentissage',
+      service: 'Services',
+      primary: 'Principal',
+    },
+    hosts: {
+      'github-pages': 'GitHub Pages',
+      'cloudflare-worker': 'Cloudflare Worker',
+      'server-tunnel': 'Tunnel serveur',
+      external: 'Externe',
+    },
+  },
+  ru: {
+    title: 'Каталог сети',
+    description:
+      'Единый каталог публичных сайтов и сервисов — одна плоскость управления, разное размещение.',
+    kicker: 'Network',
+    lead: 'Публичные узлы одной сети. Приватные ops-инструменты здесь не перечислены.',
+    hostLabel: 'Хостинг',
+    login: 'Вход для сопровождения',
+    next: 'В NEXUS',
+    categories: {
+      experiment: 'Эксперименты',
+      content: 'Контент',
+      tools: 'Инструменты',
+      learning: 'Обучение',
+      service: 'Сервисы',
+      primary: 'Основное',
+    },
+    hosts: {
+      'github-pages': 'GitHub Pages',
+      'cloudflare-worker': 'Cloudflare Worker',
+      'server-tunnel': 'Server Tunnel',
+      external: 'Внешнее',
+    },
+  },
+};
+
+const t = copy[lang];
+
+function hrefFor(site: SiteEntry): string {
+  if (site.path) return lp(site.path);
+  return site.url;
+}
+
+function isExternal(site: SiteEntry): boolean {
+  return !site.path;
+}
+
+const grouped = categoryOrder
+  .map((cat) => ({
+    id: cat,
+    title: t.categories[cat] || cat,
+    items: sites.filter((s) => s.category === cat),
+  }))
+  .filter((g) => g.items.length > 0);
+---
+
+<BaseLayout title={t.title} description={t.description}>
+  <PageHero
+    folio="Folio Network"
+    kicker={t.kicker}
+    title={t.title}
+    description={t.lead}
+  />
+
+  <section class="pb-8">
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl flex flex-wrap gap-4">
+      <a
+        href={lp('/next')}
+        class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline underline-offset-4"
+      >
+        {t.next}
+      </a>
+      <a
+        href={lp('/login')}
+        class="text-sm font-medium text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 underline-offset-4 hover:underline"
+      >
+        {t.login}
+      </a>
+    </div>
+  </section>
+
+  <section class="pb-20">
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl space-y-14">
+      {
+        grouped.map((group) => (
+          <div>
+            <h2 class="font-heading text-sm tracking-[0.2em] uppercase text-[rgb(var(--color-text-tertiary))] mb-6">
+              {group.title}
+            </h2>
+            <ul class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))]">
+              {group.items.map((site) => {
+                const external = isExternal(site);
+                const href = hrefFor(site);
+                return (
+                  <li>
+                    <a
+                      href={href}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
+                      class="group flex flex-col gap-2 py-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+                    >
+                      <span class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <span class="font-heading text-lg font-semibold group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                          {site.labels[lang]}
+                        </span>
+                        {site.status === 'beta' && (
+                          <span class="text-xs tracking-wider uppercase text-[rgb(var(--color-text-tertiary))]">
+                            beta
+                          </span>
+                        )}
+                        {external && (
+                          <span
+                            class="text-xs text-[rgb(var(--color-text-tertiary))]"
+                            aria-hidden="true"
+                          >
+                            ↗
+                          </span>
+                        )}
+                      </span>
+                      <span class="text-[rgb(var(--color-text-secondary))]">
+                        {site.descriptions[lang]}
+                      </span>
+                      <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
+                        {t.hostLabel}: {t.hosts[site.host] || site.host}
+                        {' · '}
+                        {site.url.replace(/^https?:\/\//, '')}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,325 @@
+---
+import {
+  getAdjacentRooms,
+  getNextChrome,
+  getNextRoom,
+  getNextRooms,
+  type NextRoomId,
+} from '../../data/next-chain';
+import { getLangPath, resolveLang } from '../../i18n/types';
+
+interface Props {
+  lang?: string;
+  roomId?: NextRoomId;
+  /** When true, omit the bottom continue strip (hub uses its own). */
+  hideContinue?: boolean;
+}
+
+const lang = resolveLang(Astro.props.lang);
+const { roomId, hideContinue = false } = Astro.props;
+const chrome = getNextChrome(lang);
+const rooms = getNextRooms(lang);
+const lp = (path: string) => getLangPath(lang, path);
+
+const current = roomId ? getNextRoom(lang, roomId) : undefined;
+const adj = roomId ? getAdjacentRooms(lang, roomId) : undefined;
+---
+
+<header class="next-chrome sticky top-0 z-40">
+  <div class="next-chrome__bar">
+    <a class="next-chrome__brand" href={lp('/next')}>
+      <span class="next-chrome__mark">{chrome.brand}</span>
+      <span class="next-chrome__beta">{chrome.beta}</span>
+    </a>
+
+    {
+      current ? (
+        <p class="next-chrome__here">
+          <span class="sr-only">{chrome.roomsLabel}: </span>
+          {current.title}
+          {adj && (
+            <span class="next-chrome__progress" aria-hidden="true">
+              {String(adj.index + 1).padStart(2, '0')}/{String(adj.total).padStart(2, '0')}
+            </span>
+          )}
+        </p>
+      ) : (
+        <p class="next-chrome__here">{chrome.hub}</p>
+      )
+    }
+
+    <p class="next-chrome__energy" data-nexus-energy aria-live="polite">
+      <span data-nexus-energy-label>0</span>
+      <span aria-hidden="true">%</span>
+    </p>
+
+    <nav class="next-chrome__rooms" aria-label={chrome.roomsLabel}>
+      {
+        rooms.map((room) => (
+          <a
+            href={lp(room.path)}
+            class:list={[
+              'next-chrome__dot',
+              roomId === room.id && 'is-active',
+            ]}
+            data-nexus-room={room.id}
+            title={room.title}
+            aria-current={roomId === room.id ? 'page' : undefined}
+          >
+            <span class="sr-only">{room.title}</span>
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<script is:inline define:vars={{ roomId }}>
+  const KEY = 'nexus-state-v1';
+  const EVENT = 'nexus:state';
+
+  function empty() {
+    return {
+      v: 1,
+      visited: [],
+      energy: 0,
+      fragments: [],
+      lastRoom: null,
+      updatedAt: Date.now(),
+    };
+  }
+
+  function read() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (!raw) return empty();
+      const parsed = JSON.parse(raw);
+      if (parsed.v !== 1) return empty();
+      return { ...empty(), ...parsed };
+    } catch {
+      return empty();
+    }
+  }
+
+  function write(state) {
+    const next = { ...state, updatedAt: Date.now() };
+    localStorage.setItem(KEY, JSON.stringify(next));
+    window.dispatchEvent(new CustomEvent(EVENT, { detail: next }));
+    paint(next);
+  }
+
+  function paint(state) {
+    const label = document.querySelector('[data-nexus-energy-label]');
+    if (label) label.textContent = String(state.energy ?? 0);
+    document.querySelectorAll('[data-nexus-room]').forEach((el) => {
+      const id = el.getAttribute('data-nexus-room');
+      el.classList.toggle('is-visited', Boolean(id && state.visited?.includes(id)));
+    });
+  }
+
+  let state = read();
+  if (roomId) {
+    if (!state.visited.includes(roomId)) {
+      state.visited = [...state.visited, roomId];
+      state.energy = Math.min(100, state.energy + 20);
+    }
+    state.lastRoom = roomId;
+    write(state);
+  } else {
+    paint(state);
+  }
+
+  window.addEventListener('storage', (e) => {
+    if (e.key === KEY) paint(read());
+  });
+  window.addEventListener(EVENT, (e) => paint(e.detail || read()));
+</script>
+
+{
+  !hideContinue && adj && current && (
+    <nav class="next-continue" aria-label={chrome.roomsLabel}>
+      <a class="next-continue__prev" href={lp(adj.prev.path)}>
+        <span class="next-continue__label">{chrome.prev}</span>
+        <span class="next-continue__title">{adj.prev.title}</span>
+      </a>
+      <a class="next-continue__next" href={lp(adj.next.path)}>
+        <span class="next-continue__label">{chrome.next}</span>
+        <span class="next-continue__title">{current.continueHint}</span>
+      </a>
+    </nav>
+  )
+}
+
+<style>
+  .next-chrome {
+    backdrop-filter: blur(10px);
+    background: color-mix(in oklab, rgb(var(--next-ink, 6 8 10)) 72%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, rgb(var(--next-line, 120 200 160)) 28%, transparent);
+  }
+
+  .next-chrome__bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0.75rem 1rem;
+  }
+
+  .next-chrome__brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    text-decoration: none;
+    color: inherit;
+    flex-shrink: 0;
+  }
+
+  .next-chrome__mark {
+    font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    font-size: 0.75rem;
+  }
+
+  .next-chrome__beta {
+    font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    padding: 0.1rem 0.35rem;
+    border: 1px solid currentColor;
+    opacity: 0.75;
+  }
+
+  .next-chrome__here {
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+    font-size: 0.85rem;
+    opacity: 0.85;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .next-chrome__progress {
+    font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    opacity: 0.55;
+  }
+
+  .next-chrome__energy {
+    margin: 0;
+    font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .next-chrome__rooms {
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+  }
+
+  .next-chrome__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklab, currentColor 55%, transparent);
+    background: transparent;
+    transition:
+      transform 160ms ease,
+      background 160ms ease,
+      box-shadow 160ms ease;
+  }
+
+  .next-chrome__dot:hover,
+  .next-chrome__dot:focus-visible {
+    transform: scale(1.25);
+    outline: none;
+    box-shadow: 0 0 0 2px color-mix(in oklab, currentColor 35%, transparent);
+  }
+
+  .next-chrome__dot.is-active {
+    background: currentColor;
+  }
+
+  .next-chrome__dot.is-visited:not(.is-active) {
+    background: color-mix(in oklab, currentColor 45%, transparent);
+  }
+
+  .next-continue {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 2.5rem;
+  }
+
+  .next-continue__prev,
+  .next-continue__next {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.9rem 1rem;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid color-mix(in oklab, rgb(var(--next-line, 120 200 160)) 35%, transparent);
+    transition:
+      border-color 160ms ease,
+      background 160ms ease,
+      transform 160ms ease;
+  }
+
+  .next-continue__next {
+    text-align: right;
+  }
+
+  .next-continue__prev:hover,
+  .next-continue__next:hover,
+  .next-continue__prev:focus-visible,
+  .next-continue__next:focus-visible {
+    outline: none;
+    border-color: color-mix(in oklab, rgb(var(--next-line, 120 200 160)) 75%, transparent);
+    background: color-mix(in oklab, rgb(var(--next-line, 120 200 160)) 8%, transparent);
+    transform: translateY(-1px);
+  }
+
+  .next-continue__label {
+    font-family: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.55;
+  }
+
+  .next-continue__title {
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 640px) {
+    .next-continue {
+      grid-template-columns: 1fr;
+    }
+
+    .next-continue__next {
+      text-align: left;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .next-chrome__dot,
+    .next-continue__prev,
+    .next-continue__next {
+      transition: none;
+    }
+  }
+</style>

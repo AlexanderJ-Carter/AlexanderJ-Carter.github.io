@@ -1,9 +1,10 @@
 ---
 /**
- * Tools index — on-site utilities and external hubs.
+ * Tools index — on-site utilities and external hubs from site-registry.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../chrome/PageHero.astro';
+import { getExternalToolSites } from '../../data/site-registry';
 import { resolveLang, getLangPath } from '../../i18n/types';
 
 interface Props {
@@ -12,6 +13,11 @@ interface Props {
 
 const lang = resolveLang(Astro.props.lang);
 const lp = (path: string) => getLangPath(lang, path);
+const externalItems = getExternalToolSites().map((site) => ({
+  href: site.url,
+  title: site.labels[lang],
+  desc: site.descriptions[lang],
+}));
 
 const copy = {
   'zh-CN': {
@@ -32,28 +38,6 @@ const copy = {
       { href: '/now', title: 'Now', desc: '本地时间与快捷入口' },
       { href: '/fun', title: '彩蛋', desc: '今日一帧、曝光三角、小游戏与电台' },
     ],
-    externalItems: [
-      {
-        href: 'https://tools.alexander.xin',
-        title: 'Tool Hub',
-        desc: '更多在线工具合集',
-      },
-      {
-        href: 'https://linux-command.alexander.xin',
-        title: 'Linux Command',
-        desc: '常用 Linux 指令速查',
-      },
-      {
-        href: 'https://netq.alexander.xin',
-        title: 'NetQ',
-        desc: '网络排查小实验室',
-      },
-      {
-        href: 'https://cook.alexander.xin',
-        title: 'MyCook',
-        desc: '做饭菜谱',
-      },
-    ],
   },
   'zh-TW': {
     kicker: 'Tools',
@@ -72,28 +56,6 @@ const copy = {
       { href: '/qr', title: 'QR 生成', desc: '連結轉二維碼' },
       { href: '/now', title: 'Now', desc: '本地時間與快捷入口' },
       { href: '/fun', title: '彩蛋', desc: '今日一幀、曝光三角、小遊戲與電台' },
-    ],
-    externalItems: [
-      {
-        href: 'https://tools.alexander.xin',
-        title: 'Tool Hub',
-        desc: '更多線上工具合集',
-      },
-      {
-        href: 'https://linux-command.alexander.xin',
-        title: 'Linux Command',
-        desc: '常用 Linux 指令速查',
-      },
-      {
-        href: 'https://netq.alexander.xin',
-        title: 'NetQ',
-        desc: '網路排查小實驗室',
-      },
-      {
-        href: 'https://cook.alexander.xin',
-        title: 'MyCook',
-        desc: '做飯菜譜',
-      },
     ],
   },
   'en-GB': {
@@ -131,28 +93,6 @@ const copy = {
         desc: 'Daily frame, exposure triangle, games and radio',
       },
     ],
-    externalItems: [
-      {
-        href: 'https://tools.alexander.xin',
-        title: 'Tool Hub',
-        desc: 'Broader online tool collection',
-      },
-      {
-        href: 'https://linux-command.alexander.xin',
-        title: 'Linux Command',
-        desc: 'Quick Linux command reference',
-      },
-      {
-        href: 'https://netq.alexander.xin',
-        title: 'NetQ',
-        desc: 'Network troubleshooting lab',
-      },
-      {
-        href: 'https://cook.alexander.xin',
-        title: 'MyCook',
-        desc: 'Cooking recipes',
-      },
-    ],
   },
   fr: {
     kicker: 'Tools',
@@ -175,28 +115,6 @@ const copy = {
         href: '/fun',
         title: 'Surprises',
         desc: 'Cadre du jour, triangle d’exposition, jeux et radio',
-      },
-    ],
-    externalItems: [
-      {
-        href: 'https://tools.alexander.xin',
-        title: 'Tool Hub',
-        desc: 'Collection d’outils en ligne',
-      },
-      {
-        href: 'https://linux-command.alexander.xin',
-        title: 'Linux Command',
-        desc: 'Référence de commandes Linux',
-      },
-      {
-        href: 'https://netq.alexander.xin',
-        title: 'NetQ',
-        desc: 'Labo réseau',
-      },
-      {
-        href: 'https://cook.alexander.xin',
-        title: 'MyCook',
-        desc: 'Recettes',
       },
     ],
   },
@@ -225,28 +143,6 @@ const copy = {
         href: '/fun',
         title: 'Пасхалки',
         desc: 'Кадр дня, треугольник экспозиции, игры и радио',
-      },
-    ],
-    externalItems: [
-      {
-        href: 'https://tools.alexander.xin',
-        title: 'Tool Hub',
-        desc: 'Сборник онлайн-инструментов',
-      },
-      {
-        href: 'https://linux-command.alexander.xin',
-        title: 'Linux Command',
-        desc: 'Справка по командам Linux',
-      },
-      {
-        href: 'https://netq.alexander.xin',
-        title: 'NetQ',
-        desc: 'Лаборатория сети',
-      },
-      {
-        href: 'https://cook.alexander.xin',
-        title: 'MyCook',
-        desc: 'Рецепты',
       },
     ],
   },
@@ -301,7 +197,7 @@ const t = copy[lang] || copy['zh-CN'];
         class="divide-y divide-[rgb(var(--color-border))] border-y border-[rgb(var(--color-border))] mb-14"
       >
         {
-          t.externalItems.map((item) => (
+          externalItems.map((item) => (
             <li>
               <a
                 href={item.href}

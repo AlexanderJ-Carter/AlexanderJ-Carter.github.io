@@ -1,12 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../chrome/PageHero.astro';
+import { getSitemapElsewhereLinks } from '../../data/site-registry';
 import { sitemapCopy } from '../../i18n/pages/sitemap';
 import { resolveLang, getLangPath } from '../../i18n/types';
 
 const lang = resolveLang(Astro.props.lang);
 const t = sitemapCopy[lang];
 const home = getLangPath(lang, '/');
+const elsewhereLinks = getSitemapElsewhereLinks(lang);
+const sections = t.sections.map((section) =>
+  section.id === 'elsewhere'
+    ? { ...section, links: elsewhereLinks }
+    : section
+);
 
 function resolveHref(path: string, external?: boolean) {
   if (external || path.startsWith('http')) return path;
@@ -32,7 +39,7 @@ function resolveHref(path: string, external?: boolean) {
           class="flex flex-wrap gap-x-6 gap-y-2 border-y border-[rgb(var(--color-border))] py-4"
         >
           {
-            t.sections.map((section) => (
+            sections.map((section) => (
               <li>
                 <a
                   href={`#${section.id}`}
@@ -65,7 +72,7 @@ function resolveHref(path: string, external?: boolean) {
   <section class="pb-20 md:pb-28">
     <div class="page-shell-wide space-y-16 md:space-y-20">
       {
-        t.sections.map((section) => (
+        sections.map((section) => (
           <article id={section.id} class="scroll-mt-28">
             <header class="mb-6 md:mb-8 grid gap-3 md:grid-cols-[5rem_1fr] md:items-end">
               <p

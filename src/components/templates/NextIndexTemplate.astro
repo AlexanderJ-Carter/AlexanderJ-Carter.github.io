@@ -1,0 +1,371 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NextChrome from '../next/NextChrome.astro';
+import { getNextChrome, getNextRooms } from '../../data/next-chain';
+import { getNetworkDirectorySites } from '../../data/site-registry';
+import { getLangPath, resolveLang } from '../../i18n/types';
+
+const lang = resolveLang(Astro.props.lang);
+const rooms = getNextRooms(lang);
+const chrome = getNextChrome(lang);
+const lp = (path: string) => getLangPath(lang, path);
+const fleet = getNetworkDirectorySites()
+  .filter((s) =>
+    ['cook', 'lab', 'tools-hub', 'netq', 'linux-command', 'paste', 'link'].includes(
+      s.id
+    )
+  )
+  .slice(0, 7);
+
+const copy = {
+  'zh-CN': {
+    title: 'Next 实验区',
+    description: '主站旁的 beta 房间：炫技、叙事、星图与回声。',
+    kicker: 'NEXUS control',
+    headline: '四扇门，一条信号链',
+    lead: '房间之间共享能量状态；外圈连着真实站群节点。',
+    gitLab: '另一间实验室：Git / CI 教学',
+    gitLabHref: 'https://lab.alexander.xin',
+    fun: '或去彩蛋页玩小工具',
+    chain: '推荐顺序',
+    fleet: '站群节点',
+    network: '完整目录',
+    login: '维护者入口',
+  },
+  'zh-TW': {
+    title: 'Next 實驗區',
+    description: '主站旁的 beta 房間：炫技、敘事、星圖與回聲。',
+    kicker: 'NEXUS control',
+    headline: '四扇門，一條信號鏈',
+    lead: '房間之間共享能量狀態；外圈連著真實站群節點。',
+    gitLab: '另一間實驗室：Git / CI 教學',
+    gitLabHref: 'https://lab.alexander.xin',
+    fun: '或去彩蛋頁玩小工具',
+    chain: '推薦順序',
+    fleet: '站群節點',
+    network: '完整目錄',
+    login: '維護者入口',
+  },
+  'en-GB': {
+    title: 'Next lab',
+    description: 'Beta rooms beside the main site: spectacle, essay, atlas, echo.',
+    kicker: 'NEXUS control',
+    headline: 'Four doors, one signal chain',
+    lead: 'Rooms share energy state; the outer ring links real fleet nodes.',
+    gitLab: 'Another lab: Git / CI courses',
+    gitLabHref: 'https://lab.alexander.xin',
+    fun: 'Or play with easter-egg tools',
+    chain: 'Suggested order',
+    fleet: 'Fleet nodes',
+    network: 'Full directory',
+    login: 'Maintainer entry',
+  },
+  fr: {
+    title: 'Labo Next',
+    description: 'Salles beta à côté du site : spectacle, essai, atlas, écho.',
+    kicker: 'NEXUS control',
+    headline: 'Quatre portes, une chaîne',
+    lead: 'Les salles partagent l’énergie ; l’anneau externe relie la flotte réelle.',
+    gitLab: 'Autre labo : cours Git / CI',
+    gitLabHref: 'https://lab.alexander.xin',
+    fun: 'Ou les surprises /fun',
+    chain: 'Ordre suggéré',
+    fleet: 'Nœuds de flotte',
+    network: 'Annuaire complet',
+    login: 'Entrée mainteneur',
+  },
+  ru: {
+    title: 'Лаборатория Next',
+    description: 'Beta-комнаты рядом с сайтом: зрелище, эссе, атлас, эхо.',
+    kicker: 'NEXUS control',
+    headline: 'Четыре двери, одна цепь',
+    lead: 'Комнаты делят энергию; внешнее кольцо — реальные узлы сети.',
+    gitLab: 'Другая лаборатория: курсы Git / CI',
+    gitLabHref: 'https://lab.alexander.xin',
+    fun: 'Или пасхалки /fun',
+    chain: 'Рекомендуемый порядок',
+    fleet: 'Узлы флота',
+    network: 'Полный каталог',
+    login: 'Вход сопровождения',
+  },
+}[lang];
+---
+
+<BaseLayout
+  title={copy.title}
+  description={copy.description}
+  showHeader={false}
+  showFooter={true}
+  mainClass="!p-0 next-shell next-shell--hub"
+>
+  <div class="next-hub">
+    <NextChrome lang={lang} hideContinue />
+
+    <section class="next-hub__hero">
+      <p class="next-hub__kicker">{copy.kicker}</p>
+      <h1 class="next-hub__title">{copy.headline}</h1>
+      <p class="next-hub__lead">{copy.lead}</p>
+      <p class="next-hub__chain-label">{copy.chain}</p>
+      <ol class="next-hub__chain" aria-label={copy.chain}>
+        {
+          rooms.map((room, i) => (
+            <li>
+              <span class="next-hub__n">{String(i + 1).padStart(2, '0')}</span>
+              <span>{room.title}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="next-hub__grid" aria-label={chrome.roomsLabel}>
+      {
+        rooms.map((room, i) => (
+          <a class="next-hub__card" href={lp(room.path)} style={`--i:${i}`}>
+            <span class="next-hub__card-id">{room.id}</span>
+            <h2>{room.title}</h2>
+            <p>{room.tease}</p>
+          </a>
+        ))
+      }
+    </section>
+
+    <section class="next-hub__fleet" aria-label={copy.fleet}>
+      <p class="next-hub__fleet-label">{copy.fleet}</p>
+      <ul class="next-hub__fleet-list">
+        {
+          fleet.map((site) => (
+            <li>
+              <a
+                href={site.path ? lp(site.path) : site.url}
+                target={site.path ? undefined : '_blank'}
+                rel={site.path ? undefined : 'noopener noreferrer'}
+              >
+                {site.labels[lang]}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <aside class="next-hub__aside">
+      <a
+        class="next-hub__ext"
+        href={copy.gitLabHref}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {copy.gitLab}
+      </a>
+      <a class="next-hub__ext" href={lp('/fun')}>{copy.fun}</a>
+      <a class="next-hub__ext" href={lp('/network')}>{copy.network}</a>
+      <a class="next-hub__ext" href={lp('/login')}>{copy.login}</a>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  .next-shell--hub {
+    --next-ink: 8 10 14;
+    --next-line: 232 196 120;
+    --next-bg: #0b0d12;
+    --next-fg: #e8e2d4;
+    background: var(--next-bg);
+    color: var(--next-fg);
+    min-height: 100svh;
+  }
+
+  .next-hub__hero {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.25rem 1.5rem;
+  }
+
+  .next-hub__kicker {
+    font-family: ui-monospace, 'Cascadia Code', Menlo, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(var(--next-line));
+    margin: 0 0 1rem;
+  }
+
+  .next-hub__title {
+    font-family: 'Syne', 'Noto Serif SC', serif;
+    font-size: clamp(2.1rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+  }
+
+  .next-hub__lead {
+    margin: 0 0 1.75rem;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    opacity: 0.82;
+  }
+
+  .next-hub__chain-label {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin: 0 0 0.6rem;
+  }
+
+  .next-hub__chain {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.1rem;
+    font-size: 0.85rem;
+  }
+
+  .next-hub__n {
+    font-family: ui-monospace, Menlo, monospace;
+    opacity: 0.45;
+    margin-right: 0.35rem;
+  }
+
+  .next-hub__grid {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 1rem 1.25rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  @media (min-width: 900px) {
+    .next-hub__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .next-hub__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 1.25rem 1.15rem 1.4rem;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 28%, transparent);
+    background:
+      linear-gradient(
+        160deg,
+        color-mix(in oklab, rgb(var(--next-line)) 10%, transparent),
+        transparent 55%
+      );
+    min-height: 11rem;
+    transition:
+      transform 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease;
+    animation: next-card-in 520ms ease both;
+    animation-delay: calc(var(--i) * 70ms);
+  }
+
+  .next-hub__card:hover,
+  .next-hub__card:focus-visible {
+    outline: none;
+    transform: translateY(-3px);
+    border-color: color-mix(in oklab, rgb(var(--next-line)) 70%, transparent);
+    box-shadow: 0 12px 40px color-mix(in oklab, #000 45%, transparent);
+  }
+
+  .next-hub__card-id {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--next-line));
+  }
+
+  .next-hub__card h2 {
+    margin: 0;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  .next-hub__card p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    opacity: 0.75;
+    margin-top: auto;
+  }
+
+  .next-hub__fleet {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0.5rem 1.25rem 1.25rem;
+  }
+
+  .next-hub__fleet-label {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin: 0 0 0.7rem;
+  }
+
+  .next-hub__fleet-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.85rem;
+  }
+
+  .next-hub__fleet-list a {
+    font-size: 0.86rem;
+    color: color-mix(in oklab, var(--next-fg) 78%, rgb(var(--next-line)));
+    text-underline-offset: 3px;
+  }
+
+  .next-hub__aside {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 3.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+  }
+
+  .next-hub__ext {
+    font-size: 0.88rem;
+    color: color-mix(in oklab, var(--next-fg) 75%, rgb(var(--next-line)));
+    text-underline-offset: 3px;
+  }
+
+  .next-hub__ext:focus-visible {
+    outline: 2px solid rgb(var(--next-line));
+    outline-offset: 3px;
+  }
+
+  @keyframes next-card-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .next-hub__card {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ops Portal · alexander.xin</title>
+    <link rel="icon" href="https://www.alexander.xin/img/ops/ops-portal.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b0d12;
+        --fg: #e8e2d4;
+        --line: #e8c478;
+        --muted: #9a9486;
+        --ok: #7dcea0;
+        --bad: #e07a5f;
+        --card: #12161f;
+        --card-border: #2a3142;
+        --card-hover: #1a2233;
+        --focus: #e8c478;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        background:
+          radial-gradient(ellipse 70% 45% at 10% 0%, #1a2438, transparent 55%),
+          var(--bg);
+        color: var(--fg);
+        padding: 2.5rem 1.25rem 3rem;
+      }
+      main {
+        max-width: 56rem;
+        margin: 0 auto;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        margin-bottom: 0.55rem;
+      }
+      .brand img {
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 0.7rem;
+      }
+      h1 {
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        margin: 0;
+        letter-spacing: 0.01em;
+      }
+      .lead {
+        color: var(--muted);
+        margin: 0 0 1.75rem;
+        line-height: 1.55;
+        max-width: 40rem;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+        gap: 0.85rem;
+        margin-bottom: 2.25rem;
+      }
+      .card {
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+        padding: 1rem 1.05rem;
+        background: var(--card);
+        border: 1px solid var(--card-border);
+        border-radius: 0.85rem;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          background 0.18s ease,
+          border-color 0.18s ease,
+          transform 0.18s ease;
+      }
+      .card:hover,
+      .card:focus-visible {
+        background: var(--card-hover);
+        border-color: color-mix(in srgb, var(--line) 45%, var(--card-border));
+        outline: none;
+      }
+      .card:focus-visible {
+        box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);
+      }
+      .card:active {
+        transform: translateY(1px);
+      }
+      .card img {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.55rem;
+        flex-shrink: 0;
+      }
+      .card-body {
+        min-width: 0;
+      }
+      .card-title {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-weight: 600;
+        margin: 0 0 0.25rem;
+        color: var(--fg);
+      }
+      .badge {
+        font-size: 0.65rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--bg);
+        background: var(--line);
+        padding: 0.12rem 0.4rem;
+        border-radius: 999px;
+      }
+      .card-desc {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.86rem;
+        line-height: 1.4;
+      }
+      h2 {
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 0.75rem;
+      }
+      a {
+        color: var(--line);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 0.65rem 0.4rem;
+        border-bottom: 1px solid #242833;
+      }
+      th {
+        color: var(--muted);
+        font-weight: 500;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .ok {
+        color: var(--ok);
+      }
+      .bad {
+        color: var(--bad);
+      }
+      #meta {
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .card {
+          transition: none;
+        }
+        .card:active {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="brand">
+        <img src="https://www.alexander.xin/img/ops/ops-portal.svg" width="44" height="44" alt="" />
+        <h1>Ops Portal</h1>
+      </div>
+      <p class="lead">
+        站群运维首页。工具入口集中于此；认证由 Cloudflare Access 负责，本页不存密码。
+      </p>
+
+      <section aria-label="运维工具">
+        <div class="grid">
+          <a class="card" href="https://id.alexander.xin" target="_blank" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/pocket-id.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">Pocket ID</p>
+              <p class="card-desc">站群 IdP · Passkey / OIDC</p>
+            </div>
+          </a>
+          <a class="card" href="https://git.alexander.xin" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/gitea.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">Gitea</p>
+              <p class="card-desc">私有 Git 与仓库</p>
+            </div>
+          </a>
+          <a class="card" href="https://docker.alexander.xin" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/portainer.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">Portainer</p>
+              <p class="card-desc">容器与 Docker 管理</p>
+            </div>
+          </a>
+          <a class="card" href="https://nginxui.alexander.xin" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/nginx-ui.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">Nginx UI</p>
+              <p class="card-desc">反向代理与站点配置</p>
+            </div>
+          </a>
+          <a class="card" href="https://shlink.alexander.xin" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/shlink.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">Shlink</p>
+              <p class="card-desc">短链管理后台</p>
+            </div>
+          </a>
+          <a class="card" href="https://ssh.alexander.xin" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/ssh.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">SSH</p>
+              <p class="card-desc">应急浏览器终端；日常请用本机 <code>ssh cloud</code></p>
+            </div>
+          </a>
+          <a class="card" href="https://www.alexander.xin/network/" target="_blank" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/network.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">站群目录</p>
+              <p class="card-desc">公开 network 注册表（www 镜像）</p>
+            </div>
+          </a>
+          <a class="card" href="https://tools.alexander.xin" target="_blank" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/tools.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">Tools</p>
+              <p class="card-desc">IT Tools 工具箱</p>
+            </div>
+          </a>
+          <a class="card" href="https://paste.alexander.xin" target="_blank" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/paste.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">Paste</p>
+              <p class="card-desc">PrivateBin 加密粘贴</p>
+            </div>
+          </a>
+          <a class="card" href="https://www.alexander.xin" target="_blank" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/www.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">www</p>
+              <p class="card-desc">服务器镜像站点</p>
+            </div>
+          </a>
+          <a class="card" href="https://alexanderjcarter.cloudflareaccess.com" rel="noopener">
+            <img src="https://www.alexander.xin/img/ops/access.svg" alt="" width="40" height="40" />
+            <div class="card-body">
+              <p class="card-title">Access 启动台 <span class="badge">备选</span></p>
+              <p class="card-desc">Cloudflare App Launcher</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section aria-label="只读状态探针">
+        <h2>Status probes</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Status</th>
+              <th>HTTP</th>
+              <th>ms</th>
+              <th>URL</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <p id="meta">Loading…</p>
+      </section>
+    </main>
+    <script>
+      async function load() {
+        const res = await fetch('/api/status');
+        const data = await res.json();
+        const rows = document.getElementById('rows');
+        rows.innerHTML = data.probes
+          .map(
+            (p) => `<tr>
+            <td>${p.id}</td>
+            <td class="${p.ok ? 'ok' : 'bad'}">${p.ok ? 'ok' : 'down'}</td>
+            <td>${p.status}</td>
+            <td>${p.ms}</td>
+            <td><a href="${p.url}" target="_blank" rel="noopener">${p.url.replace(/^https?:\/\//, '')}</a></td>
+          </tr>`
+          )
+          .join('');
+        document.getElementById('meta').textContent =
+          'Generated ' + data.generatedAt;
+      }
+      load().catch((err) => {
+        document.getElementById('meta').textContent = String(err);
+      });
+    </script>
+  </body>
+</html>

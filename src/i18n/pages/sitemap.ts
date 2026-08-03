@@ -86,8 +86,21 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         ],
       },
       {
-        id: 'trust',
+        id: 'next',
         index: '03',
+        title: 'Next 实验',
+        lead: 'beta 房间：炫技、叙事、星图与回声。',
+        links: [
+          { name: '实验大厅', path: '/next', desc: '四扇门入口' },
+          { name: '信号场', path: '/next/signal', desc: '磷光光迹' },
+          { name: '曝光笔记', path: '/next/exposure', desc: '等待光线' },
+          { name: '坐标图', path: '/next/atlas', desc: '主题蓝图' },
+          { name: '回声台', path: '/next/echo', desc: '终端暗号' },
+        ],
+      },
+      {
+        id: 'trust',
+        index: '04',
         title: '信任与边界',
         lead: '版权、隐私与安全披露。',
         links: [
@@ -107,7 +120,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
       },
       {
         id: 'elsewhere',
-        index: '04',
+        index: '05',
         title: '站外',
         lead: '独立站点与仓库。',
         links: [
@@ -216,8 +229,21 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         ],
       },
       {
-        id: 'trust',
+        id: 'next',
         index: '03',
+        title: 'Next 實驗',
+        lead: 'beta 房間：炫技、敘事、星圖與回聲。',
+        links: [
+          { name: '實驗大廳', path: '/next', desc: '四扇門入口' },
+          { name: '信號場', path: '/next/signal', desc: '磷光光跡' },
+          { name: '曝光筆記', path: '/next/exposure', desc: '等待光線' },
+          { name: '座標圖', path: '/next/atlas', desc: '主題藍圖' },
+          { name: '回聲台', path: '/next/echo', desc: '終端暗號' },
+        ],
+      },
+      {
+        id: 'trust',
+        index: '04',
         title: '信任與邊界',
         lead: '版權、隱私與安全披露。',
         links: [
@@ -237,7 +263,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
       },
       {
         id: 'elsewhere',
-        index: '04',
+        index: '05',
         title: '站外',
         lead: '獨立站點與倉庫。',
         links: [
@@ -363,8 +389,21 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         ],
       },
       {
-        id: 'trust',
+        id: 'next',
         index: '03',
+        title: 'Next lab',
+        lead: 'Beta rooms: spectacle, essay, atlas, echo.',
+        links: [
+          { name: 'Lobby', path: '/next', desc: 'Four doors' },
+          { name: 'Signal', path: '/next/signal', desc: 'Phosphor trails' },
+          { name: 'Exposure', path: '/next/exposure', desc: 'Waiting for light' },
+          { name: 'Atlas', path: '/next/atlas', desc: 'Theme blueprint' },
+          { name: 'Echo', path: '/next/echo', desc: 'Terminal phrases' },
+        ],
+      },
+      {
+        id: 'trust',
+        index: '04',
         title: 'Trust',
         lead: 'Licence, privacy and security.',
         links: [
@@ -392,7 +431,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
       },
       {
         id: 'elsewhere',
-        index: '04',
+        index: '05',
         title: 'Elsewhere',
         lead: 'Sister sites and the repo.',
         links: [
@@ -505,8 +544,21 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         ],
       },
       {
-        id: 'trust',
+        id: 'next',
         index: '03',
+        title: 'Labo Next',
+        lead: 'Salles beta : spectacle, essai, atlas, écho.',
+        links: [
+          { name: 'Hall', path: '/next', desc: 'Quatre portes' },
+          { name: 'Signal', path: '/next/signal', desc: 'Traînées phosphore' },
+          { name: 'Exposition', path: '/next/exposure', desc: 'Attendre la lumière' },
+          { name: 'Atlas', path: '/next/atlas', desc: 'Plan bleu' },
+          { name: 'Écho', path: '/next/echo', desc: 'Terminal' },
+        ],
+      },
+      {
+        id: 'trust',
+        index: '04',
         title: 'Confiance',
         lead: 'Licence, confidentialité et sécurité.',
         links: [
@@ -530,7 +582,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
       },
       {
         id: 'elsewhere',
-        index: '04',
+        index: '05',
         title: 'Ailleurs',
         lead: 'Sites sœurs et dépôt.',
         links: [
@@ -643,8 +695,21 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         ],
       },
       {
-        id: 'trust',
+        id: 'next',
         index: '03',
+        title: 'Лаб Next',
+        lead: 'Beta-комнаты: зрелище, эссе, атлас, эхо.',
+        links: [
+          { name: 'Холл', path: '/next', desc: 'Четыре двери' },
+          { name: 'Сигнал', path: '/next/signal', desc: 'Фосфорный след' },
+          { name: 'Экспозиция', path: '/next/exposure', desc: 'Ожидание света' },
+          { name: 'Атлас', path: '/next/atlas', desc: 'Чертёж тем' },
+          { name: 'Эхо', path: '/next/echo', desc: 'Терминал' },
+        ],
+      },
+      {
+        id: 'trust',
+        index: '04',
         title: 'Доверие',
         lead: 'Лицензия, приватность и безопасность.',
         links: [
@@ -672,7 +737,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
       },
       {
         id: 'elsewhere',
-        index: '04',
+        index: '05',
         title: 'Снаружи',
         lead: 'Другие сайты и репозиторий.',
         links: [

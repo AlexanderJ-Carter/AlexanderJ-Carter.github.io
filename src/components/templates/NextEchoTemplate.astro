@@ -1,0 +1,539 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NextChrome from '../next/NextChrome.astro';
+import { getAdjacentRooms, getNextRoom, getNextRooms } from '../../data/next-chain';
+import { getNetworkDirectorySites } from '../../data/site-registry';
+import { getLangPath, resolveLang } from '../../i18n/types';
+
+const lang = resolveLang(Astro.props.lang);
+const room = getNextRoom(lang, 'echo')!;
+const adj = getAdjacentRooms(lang, 'echo');
+const rooms = getNextRooms(lang);
+const lp = (path: string) => getLangPath(lang, path);
+
+const routes = Object.fromEntries(
+  rooms.map((r) => [r.id, lp(r.path)])
+);
+
+const fleetRoutes = Object.fromEntries(
+  getNetworkDirectorySites()
+    .filter((s) =>
+      ['lab', 'cook', 'tools-hub', 'netq', 'paste', 'link', 'network'].includes(
+        s.id
+      )
+    )
+    .map((s) => [s.id === 'tools-hub' ? 'tools' : s.id, s.path ? lp(s.path) : s.url])
+);
+fleetRoutes.network = lp('/network');
+fleetRoutes.login = lp('/login');
+
+const copy = {
+  'zh-CN': {
+    description: '回声台：输入暗号，站点回话并指路。',
+    prompt: 'visitor@alexander.xin:~$',
+    welcome: [
+      'NEXT · ECHO 已上线。输入 help 查看指令。',
+      '试试 status / scan / open atlas / network',
+    ],
+    placeholder: '输入指令…',
+    helpTitle: '可用指令',
+    send: '执行',
+    continue: room.continueHint,
+  },
+  'zh-TW': {
+    description: '回聲台：輸入暗號，站點回話並指路。',
+    prompt: 'visitor@alexander.xin:~$',
+    welcome: [
+      'NEXT · ECHO 已上線。輸入 help 查看指令。',
+      '試試 status / scan / open atlas / network',
+    ],
+    placeholder: '輸入指令…',
+    helpTitle: '可用指令',
+    send: '執行',
+    continue: room.continueHint,
+  },
+  'en-GB': {
+    description: 'Echo terminal — type a passphrase; the site answers.',
+    prompt: 'visitor@alexander.xin:~$',
+    welcome: [
+      'NEXT · ECHO online. Type help for commands.',
+      'Try status / scan / open atlas / network',
+    ],
+    placeholder: 'Type a command…',
+    helpTitle: 'Commands',
+    send: 'Run',
+    continue: room.continueHint,
+  },
+  fr: {
+    description: 'Terminal Écho — tapez une phrase ; le site répond.',
+    prompt: 'visitor@alexander.xin:~$',
+    welcome: [
+      'NEXT · ÉCHO en ligne. Tapez help.',
+      'Essayez status / scan / open atlas / network',
+    ],
+    placeholder: 'Commande…',
+    helpTitle: 'Commandes',
+    send: 'Exécuter',
+    continue: room.continueHint,
+  },
+  ru: {
+    description: 'Терминал Эхо — введи фразу; сайт ответит.',
+    prompt: 'visitor@alexander.xin:~$',
+    welcome: [
+      'NEXT · ЭХО онлайн. Введите help.',
+      'Попробуйте status / scan / open atlas / network',
+    ],
+    placeholder: 'Команда…',
+    helpTitle: 'Команды',
+    send: 'Выполнить',
+    continue: room.continueHint,
+  },
+}[lang];
+
+const messages = {
+  'zh-CN': {
+    help: [
+      'help — 显示本帮助',
+      'status — 本地 NEXUS 能量与已访房间',
+      'scan — 列出站群节点',
+      'open <room|node> — 打开房间或节点',
+      'network / login / fun / lab — 快捷跳转',
+      'clear — 清屏',
+    ],
+    where: '你在 /next/echo。信号链：signal → exposure → atlas → echo。',
+    unknownRoom: '未知目标。试试 open signal 或 scan。',
+    fun: '前往彩蛋…',
+    lab: '打开 Git Lab…',
+    network: '打开站群目录…',
+    login: '打开维护者入口…',
+    cleared: '屏幕已清空。',
+    statusPrefix: 'NEXUS',
+    scanPrefix: '站群节点',
+  },
+  'zh-TW': {
+    help: [
+      'help — 顯示本說明',
+      'status — 本地 NEXUS 能量與已訪房間',
+      'scan — 列出站群節點',
+      'open <room|node> — 打開房間或節點',
+      'network / login / fun / lab — 快捷跳轉',
+      'clear — 清屏',
+    ],
+    where: '你在 /next/echo。信號鏈：signal → exposure → atlas → echo。',
+    unknownRoom: '未知目標。試試 open signal 或 scan。',
+    fun: '前往彩蛋…',
+    lab: '打開 Git Lab…',
+    network: '打開站群目錄…',
+    login: '打開維護者入口…',
+    cleared: '螢幕已清空。',
+    statusPrefix: 'NEXUS',
+    scanPrefix: '站群節點',
+  },
+  'en-GB': {
+    help: [
+      'help — show this help',
+      'status — local NEXUS energy and visited rooms',
+      'scan — list fleet nodes',
+      'open <room|node> — open a room or node',
+      'network / login / fun / lab — shortcuts',
+      'clear — clear screen',
+    ],
+    where: 'You are at /next/echo. Chain: signal → exposure → atlas → echo.',
+    unknownRoom: 'Unknown target. Try open signal or scan.',
+    fun: 'Heading to /fun…',
+    lab: 'Opening Git Lab…',
+    network: 'Opening network directory…',
+    login: 'Opening maintainer entry…',
+    cleared: 'Screen cleared.',
+    statusPrefix: 'NEXUS',
+    scanPrefix: 'Fleet nodes',
+  },
+  fr: {
+    help: [
+      'help — cette aide',
+      'status — énergie NEXUS locale',
+      'scan — nœuds de flotte',
+      'open <room|node> — ouvrir',
+      'network / login / fun / lab — raccourcis',
+      'clear — effacer',
+    ],
+    where: 'Vous êtes sur /next/echo. Chaîne : signal → exposure → atlas → echo.',
+    unknownRoom: 'Cible inconnue. Essayez open signal ou scan.',
+    fun: 'Vers /fun…',
+    lab: 'Ouverture Git Lab…',
+    network: 'Ouverture annuaire…',
+    login: 'Ouverture entrée mainteneur…',
+    cleared: 'Écran effacé.',
+    statusPrefix: 'NEXUS',
+    scanPrefix: 'Nœuds',
+  },
+  ru: {
+    help: [
+      'help — эта справка',
+      'status — локальная энергия NEXUS',
+      'scan — узлы флота',
+      'open <room|node> — открыть',
+      'network / login / fun / lab — ярлыки',
+      'clear — очистить',
+    ],
+    where: 'Вы на /next/echo. Цепь: signal → exposure → atlas → echo.',
+    unknownRoom: 'Неизвестная цель. Попробуйте open signal или scan.',
+    fun: 'К /fun…',
+    lab: 'Открываю Git Lab…',
+    network: 'Открываю каталог сети…',
+    login: 'Открываю вход сопровождения…',
+    cleared: 'Экран очищен.',
+    statusPrefix: 'NEXUS',
+    scanPrefix: 'Узлы',
+  },
+}[lang];
+---
+
+<BaseLayout
+  title={room.title}
+  description={copy.description}
+  showHeader={false}
+  showFooter={false}
+  mainClass="!p-0 next-shell next-shell--echo"
+>
+  <div
+    class="echo"
+    data-echo
+    data-routes={JSON.stringify(routes)}
+    data-fleet={JSON.stringify(fleetRoutes)}
+    data-fun={lp('/fun')}
+    data-hub={lp('/next')}
+    data-msgs={JSON.stringify(messages)}
+  >
+    <NextChrome lang={lang} roomId="echo" />
+
+    <div class="echo__stage">
+      <p class="echo__id">04 · echo</p>
+      <h1>{room.title}</h1>
+
+      <div
+        class="echo__screen"
+        data-echo-out
+        role="log"
+        aria-live="polite"
+        aria-relevant="additions"
+      >
+        {
+          copy.welcome.map((line) => (
+            <p class="echo__line echo__line--sys">{line}</p>
+          ))
+        }
+      </div>
+
+      <form class="echo__form" data-echo-form>
+        <label class="sr-only" for="echo-input">{copy.placeholder}</label>
+        <span class="echo__prompt" aria-hidden="true">{copy.prompt}</span>
+        <input
+          id="echo-input"
+          class="echo__input"
+          name="cmd"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder={copy.placeholder}
+        />
+        <button type="submit" class="echo__run">{copy.send}</button>
+      </form>
+
+      <p class="echo__help-title">{copy.helpTitle}</p>
+      <ul class="echo__help">
+        {messages.help.map((h) => <li>{h}</li>)}
+      </ul>
+
+      <a class="echo__continue" href={lp(adj.next.path)}>{copy.continue}</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .next-shell--echo {
+    --next-ink: 10 8 6;
+    --next-line: 255 176 72;
+    --next-bg: #100e0c;
+    --next-fg: #f0d9a8;
+    background: var(--next-bg);
+    color: var(--next-fg);
+    min-height: 100svh;
+  }
+
+  .echo__stage {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3rem;
+  }
+
+  .echo__id {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin: 0 0 0.5rem;
+  }
+
+  .echo__stage h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    margin: 0 0 1.25rem;
+  }
+
+  .echo__screen {
+    min-height: 12rem;
+    max-height: 40vh;
+    overflow: auto;
+    padding: 1rem;
+    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 35%, transparent);
+    background: color-mix(in oklab, #000 45%, transparent);
+    font-family: ui-monospace, 'Cascadia Code', Menlo, monospace;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin-bottom: 0.85rem;
+  }
+
+  .echo__line {
+    margin: 0 0 0.35rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .echo__line--sys {
+    opacity: 0.75;
+  }
+
+  .echo__line--in {
+    color: rgb(var(--next-line));
+  }
+
+  .echo__form {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .echo__prompt {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.72rem;
+    opacity: 0.55;
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .echo__prompt {
+      display: inline;
+    }
+  }
+
+  .echo__input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 40%, transparent);
+    color: inherit;
+    padding: 0.65rem 0.75rem;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.9rem;
+  }
+
+  .echo__input:focus-visible {
+    outline: 2px solid rgb(var(--next-line));
+    outline-offset: 2px;
+  }
+
+  .echo__run {
+    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 50%, transparent);
+    background: color-mix(in oklab, rgb(var(--next-line)) 12%, transparent);
+    color: inherit;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  .echo__run:hover,
+  .echo__run:focus-visible {
+    outline: none;
+    border-color: rgb(var(--next-line));
+  }
+
+  .echo__help-title {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin: 0 0 0.4rem;
+  }
+
+  .echo__help {
+    margin: 0 0 1.5rem;
+    padding-left: 1.1rem;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    opacity: 0.7;
+  }
+
+  .echo__continue {
+    display: inline-block;
+    padding: 0.65rem 0.9rem;
+    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 40%, transparent);
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.9rem;
+  }
+
+  .echo__continue:hover,
+  .echo__continue:focus-visible {
+    outline: none;
+    border-color: rgb(var(--next-line));
+  }
+</style>
+
+<script>
+  function initEcho() {
+    const root = document.querySelector('[data-echo]');
+    if (!(root instanceof HTMLElement)) return;
+    if (root.dataset.bound === '1') return;
+    root.dataset.bound = '1';
+
+    const out = root.querySelector('[data-echo-out]');
+    const form = root.querySelector('[data-echo-form]');
+    const input = root.querySelector('#echo-input');
+    if (
+      !(out instanceof HTMLElement) ||
+      !(form instanceof HTMLFormElement) ||
+      !(input instanceof HTMLInputElement)
+    )
+      return;
+
+    const routes = JSON.parse(root.dataset.routes || '{}') as Record<string, string>;
+    const fleet = JSON.parse(root.dataset.fleet || '{}') as Record<string, string>;
+    const funHref = root.dataset.fun || '/fun';
+    const rawMsgs = JSON.parse(root.dataset.msgs || '{}') as Record<string, unknown>;
+
+    const help = (rawMsgs.help as string[]) || [];
+    const where = String(rawMsgs.where || '');
+    const unknownRoom = String(rawMsgs.unknownRoom || '');
+    const funMsg = String(rawMsgs.fun || '');
+    const labMsg = String(rawMsgs.lab || '');
+    const networkMsg = String(rawMsgs.network || '');
+    const loginMsg = String(rawMsgs.login || '');
+    const cleared = String(rawMsgs.cleared || '');
+    const statusPrefix = String(rawMsgs.statusPrefix || 'NEXUS');
+    const scanPrefix = String(rawMsgs.scanPrefix || 'Fleet');
+
+    const append = (text: string, kind: 'sys' | 'in' | 'out' = 'out') => {
+      const p = document.createElement('p');
+      p.className = `echo__line echo__line--${kind}`;
+      p.textContent = text;
+      out.appendChild(p);
+      out.scrollTop = out.scrollHeight;
+    };
+
+    const readNexus = () => {
+      try {
+        const raw = localStorage.getItem('nexus-state-v1');
+        if (!raw) return { energy: 0, visited: [] as string[], fragments: [] as string[] };
+        const parsed = JSON.parse(raw);
+        return {
+          energy: Number(parsed.energy) || 0,
+          visited: Array.isArray(parsed.visited) ? parsed.visited : [],
+          fragments: Array.isArray(parsed.fragments) ? parsed.fragments : [],
+        };
+      } catch {
+        return { energy: 0, visited: [] as string[], fragments: [] as string[] };
+      }
+    };
+
+    const go = (href: string, external = false) => {
+      window.setTimeout(() => {
+        if (external || href.startsWith('http')) {
+          window.open(href, '_blank', 'noopener,noreferrer');
+        } else {
+          window.location.href = href;
+        }
+      }, 350);
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const raw = input.value.trim();
+      if (!raw) return;
+      append(`> ${raw}`, 'in');
+      input.value = '';
+
+      const lower = raw.toLowerCase();
+      const parts = lower.split(/\s+/);
+      const cmd = parts[0];
+
+      if (cmd === 'help') {
+        help.forEach((h) => append(h, 'sys'));
+        return;
+      }
+      if (cmd === 'where') {
+        append(where, 'out');
+        return;
+      }
+      if (cmd === 'status') {
+        const s = readNexus();
+        append(
+          `${statusPrefix} energy=${s.energy}% visited=[${s.visited.join(',') || 'none'}] fragments=${s.fragments.length}`,
+          'out'
+        );
+        return;
+      }
+      if (cmd === 'scan') {
+        append(`${scanPrefix}: ${Object.keys(fleet).join(', ')}`, 'out');
+        return;
+      }
+      if (cmd === 'clear') {
+        out.replaceChildren();
+        append(cleared, 'sys');
+        return;
+      }
+      if (cmd === 'fun') {
+        append(funMsg, 'out');
+        go(funHref);
+        return;
+      }
+      if (cmd === 'lab') {
+        append(labMsg, 'out');
+        go(fleet.lab || 'https://lab.alexander.xin', true);
+        return;
+      }
+      if (cmd === 'network') {
+        append(networkMsg, 'out');
+        go(fleet.network || '/network');
+        return;
+      }
+      if (cmd === 'login') {
+        append(loginMsg, 'out');
+        go(fleet.login || '/login');
+        return;
+      }
+      if (cmd === 'open' || cmd === 'trace') {
+        const target = parts[1];
+        const href = target
+          ? routes[target] || fleet[target]
+          : undefined;
+        if (!href) {
+          append(unknownRoom, 'out');
+          return;
+        }
+        append(`→ ${target}`, 'out');
+        go(href, href.startsWith('http'));
+        return;
+      }
+
+      const mirrored = [...raw].reverse().join('');
+      append(`↺ ${mirrored}`, 'out');
+      append('→ open atlas | status | scan', 'sys');
+    });
+  }
+
+  initEcho();
+  document.addEventListener('astro:page-load', initEcho);
+</script>
