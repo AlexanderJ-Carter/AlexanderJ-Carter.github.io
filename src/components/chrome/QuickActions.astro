@@ -42,7 +42,7 @@ const t = translations[lang] || translations['zh-CN'];
     aria-label={t.search}
     class="studio-dock-btn relative shadow-sm group focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))]"
   >
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -96,6 +96,15 @@ const t = translations[lang] || translations['zh-CN'];
         <input
           type="search"
           id="search-input"
+          aria-label={lang === 'zh-CN'
+            ? '搜索页面'
+            : lang === 'zh-TW'
+              ? '搜尋頁面'
+              : lang === 'fr'
+                ? 'Rechercher une page'
+                : lang === 'ru'
+                  ? 'Поиск страниц'
+                  : 'Search pages'}
           placeholder={lang === 'zh-CN'
             ? '搜索页面…'
             : lang === 'zh-TW'
@@ -111,7 +120,7 @@ const t = translations[lang] || translations['zh-CN'];
         <button
           type="button"
           onclick="closeSearchModal()"
-          class="p-2 hover:bg-[rgb(var(--color-bg-secondary))] rounded-sm transition-colors"
+          class="p-2 min-w-11 min-h-11 hover:bg-[rgb(var(--color-bg-secondary))] rounded-sm transition-colors"
           aria-label={lang === 'zh-CN' ? '关闭' : 'Close'}
         >
           <svg
@@ -119,6 +128,7 @@ const t = translations[lang] || translations['zh-CN'];
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"

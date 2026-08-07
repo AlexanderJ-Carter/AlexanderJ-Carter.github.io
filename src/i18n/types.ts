@@ -99,6 +99,22 @@ export function gallerySrcFallback(basePath: string): string {
   return `${stem}-md${ext}`;
 }
 
+/** Prefer lg (then xl/md) for lightbox / detail views. */
+export function galleryLightboxSrc(basePath: string): string {
+  const match = basePath.match(
+    /^(.*\/gallery-optimized\/.+?)(?:-(?:sm|md|lg|xl))?(\.webp)$/i
+  );
+  if (!match) return basePath;
+  const stem = match[1];
+  const ext = match[2];
+  for (const suffix of ['lg', 'xl', 'md', 'sm', ''] as const) {
+    const candidate =
+      suffix === '' ? `${stem}${ext}` : `${stem}-${suffix}${ext}`;
+    if (publicAssetExists(candidate)) return candidate;
+  }
+  return gallerySrcFallback(basePath);
+}
+
 function publicAssetExists(urlPath: string): boolean {
   const relative = urlPath.startsWith('/') ? urlPath.slice(1) : urlPath;
   return existsSync(join(process.cwd(), 'public', relative));

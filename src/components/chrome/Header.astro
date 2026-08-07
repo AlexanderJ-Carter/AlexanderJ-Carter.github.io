@@ -258,21 +258,24 @@ const mainNavItems: NavItem[] = [
       <a
         href={lang === 'zh-CN' ? '/' : lang === 'en-GB' ? '/en/' : `/${lang}/`}
         class="nav-brand group flex items-center gap-3 min-w-0"
+        aria-label="Alexander Carter"
       >
-        <span class="nav-brand__mark">
+        <span class="nav-brand__mark" aria-hidden="true">
           <img
             src="/img/branding/logo-96.webp"
-            alt={lang === 'zh-CN' ? '站点标志' : 'Site logo'}
+            alt=""
             width="36"
             height="36"
             class="w-full h-full object-cover dark:hidden"
+            decoding="async"
           />
           <img
             src="/img/branding/logo-dark-96.webp"
-            alt={lang === 'zh-CN' ? '站点标志' : 'Site logo'}
+            alt=""
             width="36"
             height="36"
             class="w-full h-full object-cover hidden dark:block"
+            decoding="async"
           />
         </span>
         <span class="min-w-0 hidden sm:block">
@@ -394,6 +397,7 @@ const mainNavItems: NavItem[] = [
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -407,6 +411,7 @@ const mainNavItems: NavItem[] = [
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -423,6 +428,13 @@ const mainNavItems: NavItem[] = [
             aria-haspopup="true"
             aria-expanded="false"
             aria-controls="lang-menu"
+            aria-label={l(
+              '切换语言',
+              '切換語言',
+              'Changer de langue',
+              'Сменить язык',
+              'Change language'
+            )}
             id="lang-switcher-btn"
             class="nav-icon-btn gap-1.5 px-2.5"
           >
@@ -432,6 +444,7 @@ const mainNavItems: NavItem[] = [
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
@@ -1175,22 +1188,27 @@ const mainNavItems: NavItem[] = [
 
   // ── Theme toggle ────────────────────────────────────────────────────────────
   const themeToggle = document.getElementById('theme-toggle');
+  const preferReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
   themeToggle?.addEventListener('click', () => {
     const html = document.documentElement;
 
-    // Start transition animation
+    if (preferReducedMotion) {
+      const isDark = html.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      return;
+    }
+
     html.classList.add('theme-transitioning');
 
-    // Toggle dark mode after fade-out begins
     setTimeout(() => {
       const isDark = html.classList.toggle('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
 
-      // Replace transitioning class with transition-in for fade-in effect
       html.classList.remove('theme-transitioning');
       html.classList.add('theme-transition-in');
 
-      // Remove transition-in class after animation completes
       setTimeout(() => {
         html.classList.remove('theme-transition-in');
       }, 250);
@@ -1330,17 +1348,33 @@ const mainNavItems: NavItem[] = [
     mobileBackdrop?.setAttribute('aria-hidden', 'true');
   }
 
+  const mobileMenuOpenLabel =
+    document.documentElement.lang === 'zh-CN' ||
+    document.documentElement.lang === 'zh-TW'
+      ? document.documentElement.lang === 'zh-TW'
+        ? '打開選單'
+        : '打开菜单'
+      : 'Open menu';
+  const mobileMenuCloseLabel =
+    document.documentElement.lang === 'zh-CN' ||
+    document.documentElement.lang === 'zh-TW'
+      ? document.documentElement.lang === 'zh-TW'
+        ? '關閉選單'
+        : '关闭菜单'
+      : 'Close menu';
+
   function closeMobileMenu() {
     mobileMenu?.classList.remove('menu-open');
     mobileMenu?.classList.add('menu-closing');
     hideMobileBackdrop();
     mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+    mobileMenuToggle?.setAttribute('aria-label', mobileMenuOpenLabel);
     document.documentElement.style.overflow = '';
     clearTimeout(mobileCloseTimer);
     mobileCloseTimer = setTimeout(() => {
       mobileMenu?.classList.add('hidden');
       mobileMenu?.classList.remove('menu-closing');
-    }, 300);
+    }, preferReducedMotion ? 0 : 300);
   }
 
   mobileMenuToggle?.addEventListener('click', () => {
@@ -1355,6 +1389,7 @@ const mainNavItems: NavItem[] = [
     mobileMenu?.classList.add('menu-open');
     showMobileBackdrop();
     mobileMenuToggle?.setAttribute('aria-expanded', 'true');
+    mobileMenuToggle?.setAttribute('aria-label', mobileMenuCloseLabel);
     document.documentElement.style.overflow = 'hidden';
   });
 

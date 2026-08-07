@@ -30,8 +30,23 @@
 /chunks/*
   Cache-Control: public, max-age=31536000, immutable
 
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/gallery-optimized/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/branding/*
+  Cache-Control: public, max-age=2592000
+
 /img/*
   Cache-Control: public, max-age=2592000
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/music/*
+  Cache-Control: public, max-age=86400
 
 # 安全文件
 /.well-known/security.txt

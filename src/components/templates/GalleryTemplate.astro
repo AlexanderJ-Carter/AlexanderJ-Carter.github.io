@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { useTranslations } from '../../i18n/ui';
-import { gallerySrcFallback, gallerySrcSet } from '../../i18n/types';
+import { gallerySrcFallback, gallerySrcSet, galleryLightboxSrc } from '../../i18n/types';
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
@@ -1342,7 +1342,7 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
               data-category={item.category}
               data-source={isRemote ? 'remote' : 'local'}
               data-gallery-index={index}
-              data-image={item.image}
+              data-image={galleryLightboxSrc(item.image)}
               data-title={item.title}
               data-description={item.description}
               data-category-label={catLabel}
@@ -1356,12 +1356,14 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
                   src={gallerySrcFallback(item.image)}
                   srcset={gallerySrcSet(item.image)}
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  alt={`${item.title} - ${item.description}`}
+                  alt=""
+                  width="800"
+                  height="600"
                   class="gallery-image"
                   loading={index < 6 ? 'eager' : 'lazy'}
                   decoding="async"
                   referrerpolicy="no-referrer"
-                  fetchpriority={index < 3 ? 'high' : 'low'}
+                  fetchpriority={index < 3 ? 'high' : 'auto'}
                 />
                 <span class="shot__no" aria-hidden="true">
                   {frameNo}
@@ -1388,7 +1390,8 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     id="gallery-lightbox"
     role="dialog"
     aria-modal="true"
-    aria-label={lang === 'zh-CN' ? '作品大图' : 'Image viewer'}
+    aria-labelledby="lightbox-title"
+    aria-describedby="lightbox-desc"
     class="gallery-lightbox fixed inset-0 z-[100] hidden"
   >
     <div class="gallery-lightbox__veil" data-lightbox-dismiss></div>
@@ -1638,6 +1641,24 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
 
       applyFilters();
     });
+
+    btn.addEventListener('keydown', (e: Event) => {
+      const ke = e as KeyboardEvent;
+      if (ke.key !== 'ArrowRight' && ke.key !== 'ArrowLeft' && ke.key !== 'Home' && ke.key !== 'End') {
+        return;
+      }
+      ke.preventDefault();
+      const tabs = Array.from(filterBtns) as HTMLElement[];
+      const i = tabs.indexOf(btn as HTMLElement);
+      if (i < 0) return;
+      let next = i;
+      if (ke.key === 'ArrowRight') next = (i + 1) % tabs.length;
+      else if (ke.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+      else if (ke.key === 'Home') next = 0;
+      else if (ke.key === 'End') next = tabs.length - 1;
+      tabs[next]?.focus();
+      tabs[next]?.click();
+    });
   });
 
   sourceFilterEl?.addEventListener('change', () => {
@@ -1685,7 +1706,8 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
     gap: 0.15rem 0.25rem;
   }
   .gallery-filter-btn {
-    padding: 0.4rem 0.7rem;
+    padding: 0.55rem 0.85rem;
+    min-height: 2.75rem;
     font-family: theme('fontFamily.heading');
     font-size: 0.85rem;
     font-weight: 600;

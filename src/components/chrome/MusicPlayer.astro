@@ -1,5 +1,64 @@
 ---
-// 歌单由 /music/manifest.json 在运行时加载，构建时由 scripts/generate-music-manifest.js 生成
+import { getLangFromUrl } from '../../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+
+function ml(
+  zh: string,
+  tw: string,
+  en: string,
+  fr: string,
+  ru: string
+): string {
+  if (lang === 'zh-CN') return zh;
+  if (lang === 'zh-TW') return tw;
+  if (lang === 'fr') return fr;
+  if (lang === 'ru') return ru;
+  return en;
+}
+
+const ui = {
+  openPlayer: ml(
+    '打开音乐播放器',
+    '打開音樂播放器',
+    'Open music player',
+    'Ouvrir le lecteur',
+    'Открыть плеер'
+  ),
+  prev: ml('上一首', '上一首', 'Previous track', 'Piste précédente', 'Предыдущий'),
+  playPause: ml(
+    '播放/暂停',
+    '播放/暫停',
+    'Play/Pause',
+    'Lecture/Pause',
+    'Воспроизведение/Пауза'
+  ),
+  next: ml('下一首', '下一首', 'Next track', 'Piste suivante', 'Следующий'),
+  expand: ml(
+    '展开播放器',
+    '展開播放器',
+    'Expand player',
+    'Agrandir le lecteur',
+    'Развернуть плеер'
+  ),
+  progress: ml(
+    '播放进度',
+    '播放進度',
+    'Playback progress',
+    'Progression',
+    'Прогресс'
+  ),
+  minimize: ml('最小化', '最小化', 'Minimize', 'Réduire', 'Свернуть'),
+  close: ml('关闭', '關閉', 'Close', 'Fermer', 'Закрыть'),
+  selectStation: ml(
+    '选择电台',
+    '選擇電台',
+    'Select station',
+    'Choisir une station',
+    'Выбрать станцию'
+  ),
+  volume: ml('音量', '音量', 'Volume', 'Volume', 'Громкость'),
+};
 ---
 
 <!-- 悬浮入口按钮：点击展开或显示迷你条 -->
@@ -7,7 +66,7 @@
   id="music-fab"
   type="button"
   class="music-fab studio-dock-btn fixed z-[45] shadow-sm transition-all duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--color-bg-primary))]"
-  aria-label="打开音乐播放器"
+  aria-label={ui.openPlayer}
 >
   <svg
     id="music-fab-icon"
@@ -61,7 +120,7 @@
         type="button"
         id="music-mini-prev"
         class="music-btn p-2 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-secondary))] transition-colors"
-        aria-label="上一首"
+        aria-label={ui.prev}
       >
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
           ><path
@@ -74,7 +133,7 @@
         id="music-mini-play"
         class="music-btn p-2 rounded-sm text-white transition-transform hover:scale-105"
         style="background: rgb(var(--color-accent));"
-        aria-label="播放/暂停"
+        aria-label={ui.playPause}
       >
         <svg class="play-icon w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
           ><path
@@ -95,7 +154,7 @@
       type="button"
       id="music-mini-next"
       class="music-btn p-2 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-secondary))] transition-colors"
-      aria-label="下一首"
+      aria-label={ui.next}
     >
       <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
         ><path
@@ -107,7 +166,7 @@
       type="button"
       id="music-mini-expand"
       class="music-btn p-2 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-secondary))] transition-colors"
-      aria-label="展开播放器"
+      aria-label={ui.expand}
     >
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
         ><path
@@ -127,7 +186,7 @@
       min="0"
       max="100"
       value="0"
-      aria-label="播放进度"
+      aria-label={ui.progress}
     />
   </div>
 </div>
@@ -156,7 +215,7 @@
         type="button"
         id="music-panel-minimize"
         class="music-btn p-2 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-secondary))] transition-colors"
-        aria-label="最小化"
+        aria-label={ui.minimize}
       >
         <svg
           class="w-4 h-4"
@@ -174,7 +233,7 @@
         type="button"
         id="music-panel-close"
         class="music-btn p-2 rounded-lg hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-secondary))] transition-colors"
-        aria-label="关闭"
+        aria-label={ui.close}
       >
         <svg
           class="w-4 h-4"
@@ -230,7 +289,7 @@
         <select
           id="music-radio-station"
           class="flex-1 rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-3 py-2 text-sm text-[rgb(var(--color-text-primary))] outline-none"
-          aria-label="选择电台"
+          aria-label={ui.selectStation}
         >
           <option value="https://ice2.somafm.com/groovesalad-128-mp3"
             >SomaFM Groove Salad</option
@@ -276,7 +335,7 @@
         min="0"
         max="100"
         value="0"
-        aria-label="播放进度"
+        aria-label={ui.progress}
       />
     </div>
 
@@ -297,7 +356,7 @@
         min="0"
         max="100"
         value="50"
-        aria-label="音量"
+        aria-label={ui.volume}
       />
     </div>
 
@@ -306,7 +365,7 @@
         type="button"
         id="music-prev"
         class="music-btn p-2.5 rounded-xl hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-primary))] transition-colors"
-        aria-label="上一首"
+        aria-label={ui.prev}
       >
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
           ><path
@@ -319,7 +378,7 @@
         id="music-play"
         class="music-btn p-4 rounded-sm text-white shadow-md transition-transform hover:scale-105 active:scale-95"
         style="background: rgb(var(--color-accent));"
-        aria-label="播放/暂停"
+        aria-label={ui.playPause}
       >
         <svg class="play-icon w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
           ><path
@@ -339,7 +398,7 @@
         type="button"
         id="music-next"
         class="music-btn p-2.5 rounded-xl hover:bg-[rgb(var(--color-bg-accent))] text-[rgb(var(--color-text-primary))] transition-colors"
-        aria-label="下一首"
+        aria-label={ui.next}
       >
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
           ><path
