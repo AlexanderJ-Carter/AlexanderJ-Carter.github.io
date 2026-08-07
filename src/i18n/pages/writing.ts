@@ -379,10 +379,7 @@ export function writingRssPath(lang: Lang): string {
   return getLangPath(lang, '/rss.xml');
 }
 
-export function writingRssAbsolute(
-  lang: Lang,
-  site = BLOG_ORIGIN
-): string {
+export function writingRssAbsolute(lang: Lang, site = BLOG_ORIGIN): string {
   return new URL(writingRssPath(lang), site).href;
 }
 

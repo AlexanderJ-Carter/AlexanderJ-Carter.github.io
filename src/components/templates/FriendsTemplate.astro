@@ -269,10 +269,14 @@ function getLangPath(path: string): string {
       }
 
       <aside class="surface-panel p-5 md:p-6 max-w-2xl">
-        <h2 class="font-heading font-bold text-[rgb(var(--color-text-primary))] mb-3">
+        <h2
+          class="font-heading font-bold text-[rgb(var(--color-text-primary))] mb-3"
+        >
           {text.noteTitle}
         </h2>
-        <p class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+        <p
+          class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed"
+        >
           {text.note}
         </p>
         <a
@@ -290,9 +294,7 @@ function getLangPath(path: string): string {
                     ? 'К проектам'
                     : 'View projects'
           }
-          <span aria-hidden="true" class="ml-1">
-            →
-          </span>
+          <span aria-hidden="true" class="ml-1"> → </span>
         </a>
       </aside>
 
