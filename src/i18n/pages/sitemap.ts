@@ -345,7 +345,11 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           { name: 'Subscribe', path: '/writing/subscribe', desc: 'RSS feeds' },
           { name: 'Archive', path: '/writing/archive', desc: 'Browse by year' },
           { name: 'Tags', path: '/writing/tags', desc: 'Browse by tag' },
-          { name: 'Topics', path: '/writing/categories', desc: 'Browse by topic' },
+          {
+            name: 'Topics',
+            path: '/writing/categories',
+            desc: 'Browse by topic',
+          },
           {
             name: 'Reading',
             path: '/reading-list',
@@ -395,7 +399,11 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         links: [
           { name: 'Lobby', path: '/next', desc: 'Four doors' },
           { name: 'Signal', path: '/next/signal', desc: 'Phosphor trails' },
-          { name: 'Exposure', path: '/next/exposure', desc: 'Waiting for light' },
+          {
+            name: 'Exposure',
+            path: '/next/exposure',
+            desc: 'Waiting for light',
+          },
           { name: 'Atlas', path: '/next/atlas', desc: 'Theme blueprint' },
           { name: 'Echo', path: '/next/echo', desc: 'Terminal phrases' },
         ],
@@ -548,7 +556,11 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         links: [
           { name: 'Hall', path: '/next', desc: 'Quatre portes' },
           { name: 'Signal', path: '/next/signal', desc: 'Traînées phosphore' },
-          { name: 'Exposition', path: '/next/exposure', desc: 'Attendre la lumière' },
+          {
+            name: 'Exposition',
+            path: '/next/exposure',
+            desc: 'Attendre la lumière',
+          },
           { name: 'Atlas', path: '/next/atlas', desc: 'Plan bleu' },
           { name: 'Écho', path: '/next/echo', desc: 'Terminal' },
         ],
@@ -697,7 +709,11 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         links: [
           { name: 'Холл', path: '/next', desc: 'Четыре двери' },
           { name: 'Сигнал', path: '/next/signal', desc: 'Фосфорный след' },
-          { name: 'Экспозиция', path: '/next/exposure', desc: 'Ожидание света' },
+          {
+            name: 'Экспозиция',
+            path: '/next/exposure',
+            desc: 'Ожидание света',
+          },
           { name: 'Атлас', path: '/next/atlas', desc: 'Чертёж тем' },
           { name: 'Эхо', path: '/next/echo', desc: 'Терминал' },
         ],

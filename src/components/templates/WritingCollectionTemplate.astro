@@ -3,10 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../chrome/AdSlot.astro';
 import type { Lang } from '../../i18n/types';
 import { writingCopy } from '../../i18n/pages/writing';
-import {
-  dateLocaleFor,
-  type WritingPost,
-} from '../../lib/writing';
+import { dateLocaleFor, type WritingPost } from '../../lib/writing';
 
 interface Props {
   lang?: Lang;
@@ -17,14 +14,7 @@ interface Props {
   crumb?: string;
 }
 
-const {
-  lang = 'zh-CN',
-  title,
-  description,
-  posts,
-  kind,
-  crumb,
-} = Astro.props;
+const { lang = 'zh-CN', title, description, posts, kind, crumb } = Astro.props;
 
 function lp(path: string): string {
   if (lang === 'zh-CN') return path;

@@ -283,7 +283,10 @@ export function writingRssPath(lang: Lang): string {
   return getLangPath(lang, '/rss.xml');
 }
 
-export function writingRssAbsolute(lang: Lang, site = 'https://alexander.xin'): string {
+export function writingRssAbsolute(
+  lang: Lang,
+  site = 'https://alexander.xin'
+): string {
   return new URL(writingRssPath(lang), site).href;
 }
 

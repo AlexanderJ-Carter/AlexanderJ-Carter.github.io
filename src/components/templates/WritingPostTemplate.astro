@@ -5,11 +5,7 @@ import CopyPermalink from '../widgets/CopyPermalink.astro';
 import { getCollection } from 'astro:content';
 import type { Lang } from '../../i18n/types';
 import { writingCopy } from '../../i18n/pages/writing';
-import {
-  dateLocaleFor,
-  relatedPosts,
-  taxonomySlug,
-} from '../../lib/writing';
+import { dateLocaleFor, relatedPosts, taxonomySlug } from '../../lib/writing';
 
 interface Props {
   lang?: string;

@@ -32,7 +32,10 @@ export async function getStaticPaths() {
 
 const { lang, name, slug } = Astro.props;
 const t = writingCopy[lang] ?? writingCopy['zh-CN'];
-const posts = postsByTagSlug(postsForLang(await getCollection('writing'), lang), slug);
+const posts = postsByTagSlug(
+  postsForLang(await getCollection('writing'), lang),
+  slug
+);
 ---
 
 <WritingCollectionTemplate

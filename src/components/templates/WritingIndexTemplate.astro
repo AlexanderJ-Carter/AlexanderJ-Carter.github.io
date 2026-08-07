@@ -42,7 +42,13 @@ const lead = kind === 'archive' ? t.archiveIntro : t.intro;
     <div class="container mx-auto px-4 lg:px-8 max-w-5xl relative">
       <a href={lp('/writing')} class="writing-back">{t.backToList}</a>
       <p class="writing-kicker">
-        {kind === 'archive' ? t.archive : kind === 'tags' ? t.tags : t.categories}
+        {
+          kind === 'archive'
+            ? t.archive
+            : kind === 'tags'
+              ? t.tags
+              : t.categories
+        }
       </p>
       <h1 class="writing-hero__title">{title}</h1>
       <p class="writing-hero__lead">{lead}</p>

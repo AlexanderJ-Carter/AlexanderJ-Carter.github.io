@@ -15,9 +15,7 @@ export function taxonomySlug(input: string): string {
 }
 
 export function matchesLang(post: WritingPost, lang: Lang): boolean {
-  return (
-    post.data.lang === lang || (lang === 'zh-CN' && !post.data.lang)
-  );
+  return post.data.lang === lang || (lang === 'zh-CN' && !post.data.lang);
 }
 
 export function postsForLang(posts: WritingPost[], lang: Lang): WritingPost[] {
@@ -33,8 +31,7 @@ export function uniqueTaxonomy(
   const counts = new Map<string, { name: string; count: number }>();
 
   for (const post of posts) {
-    const values =
-      field === 'category' ? [post.data.category] : post.data.tags;
+    const values = field === 'category' ? [post.data.category] : post.data.tags;
     for (const raw of values) {
       const name = raw.trim();
       if (!name) continue;

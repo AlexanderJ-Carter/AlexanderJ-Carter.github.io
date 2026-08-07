@@ -4,7 +4,11 @@ import WritingCollectionTemplate from '../../../../components/templates/WritingC
 import { writingCopy } from '../../../../i18n/pages/writing';
 import { getLangStaticPaths, resolveRouteLang } from '../../../../i18n/routing';
 import type { Lang } from '../../../../i18n/types';
-import { archiveYears, postsByYear, postsForLang } from '../../../../lib/writing';
+import {
+  archiveYears,
+  postsByYear,
+  postsForLang,
+} from '../../../../lib/writing';
 
 export async function getStaticPaths() {
   const all = await getCollection('writing');
@@ -29,7 +33,10 @@ export async function getStaticPaths() {
 
 const { lang, year } = Astro.props;
 const t = writingCopy[lang] ?? writingCopy['zh-CN'];
-const posts = postsByYear(postsForLang(await getCollection('writing'), lang), year);
+const posts = postsByYear(
+  postsForLang(await getCollection('writing'), lang),
+  year
+);
 ---
 
 <WritingCollectionTemplate
