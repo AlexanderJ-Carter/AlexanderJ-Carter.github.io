@@ -112,7 +112,8 @@ export const siteRegistry: SiteEntry[] = [
     descriptions: {
       'zh-CN': '同一套静态站的服务器镜像，经 Tunnel 暴露，利于国内访问。',
       'zh-TW': '同一套靜態站的伺服器鏡像，經 Tunnel 暴露，利於國內訪問。',
-      'en-GB': 'Same static site on the VPS via Tunnel for mainland reachability.',
+      'en-GB':
+        'Same static site on the VPS via Tunnel for mainland reachability.',
       fr: 'Même site statique sur le VPS via Tunnel pour la Chine.',
       ru: 'То же статическое зеркало на VPS через Tunnel.',
     },
@@ -289,8 +290,7 @@ export const siteRegistry: SiteEntry[] = [
     status: 'live',
     label: 'Contact card',
     repo: 'AlexanderJ-Carter/Contact',
-    note:
-      'Standalone Turnstile card; overlaps apex /contact — candidate to 301-merge or rename (e.g. card.)',
+    note: 'Standalone Turnstile card; overlaps apex /contact — candidate to 301-merge or rename (e.g. card.)',
     labels: {
       'zh-CN': '联系卡片',
       'zh-TW': '聯繫卡片',
@@ -299,8 +299,10 @@ export const siteRegistry: SiteEntry[] = [
       ru: 'Карточка контакта',
     },
     descriptions: {
-      'zh-CN': '独立联系页（Turnstile）；与主站 /contact 职责重叠，待确认合并或改名。',
-      'zh-TW': '獨立聯繫頁（Turnstile）；與主站 /contact 職責重疊，待確認合併或改名。',
+      'zh-CN':
+        '独立联系页（Turnstile）；与主站 /contact 职责重叠，待确认合并或改名。',
+      'zh-TW':
+        '獨立聯繫頁（Turnstile）；與主站 /contact 職責重疊，待確認合併或改名。',
       'en-GB':
         'Standalone contact card (Turnstile); overlaps /contact — merge or rename pending.',
       fr: 'Carte contact indépendante (Turnstile) ; chevauche /contact — fusion ou renommage à confirmer.',
@@ -315,8 +317,7 @@ export const siteRegistry: SiteEntry[] = [
     visibility: 'public',
     status: 'live',
     label: 'IT-Tools',
-    note:
-      'Tunnel → nginx-ui → it-tools :8080; distinct from apex /tools index; rename to it-tools. pending confirmation',
+    note: 'Tunnel → nginx-ui → it-tools :8080; distinct from apex /tools index; rename to it-tools. pending confirmation',
     labels: {
       'zh-CN': 'IT-Tools',
       'zh-TW': 'IT-Tools',
@@ -325,8 +326,10 @@ export const siteRegistry: SiteEntry[] = [
       ru: 'IT-Tools',
     },
     descriptions: {
-      'zh-CN': 'VPS 上的 IT-Tools；与主站 /tools 索引不同。候选子域 it-tools.。',
-      'zh-TW': 'VPS 上的 IT-Tools；與主站 /tools 索引不同。候選子域 it-tools.。',
+      'zh-CN':
+        'VPS 上的 IT-Tools；与主站 /tools 索引不同。候选子域 it-tools.。',
+      'zh-TW':
+        'VPS 上的 IT-Tools；與主站 /tools 索引不同。候選子域 it-tools.。',
       'en-GB':
         'IT-Tools on the VPS — not the apex /tools index. Candidate host: it-tools.',
       fr: 'IT-Tools sur le VPS — distinct de /tools. Hôte candidat : it-tools.',
@@ -495,9 +498,12 @@ export const siteRegistry: SiteEntry[] = [
     },
     note: 'Browser SSH is emergency-only; daily use local `ssh cloud`',
     descriptions: {
-      'zh-CN': 'Access 边缘门禁 + 主机 SSH 身份；日常用本机 ssh cloud，浏览器仅应急。',
-      'zh-TW': 'Access 邊緣門禁 + 主機 SSH 身份；日常用本機 ssh cloud，瀏覽器僅應急。',
-      'en-GB': 'Access edge gate + host SSH auth; prefer local `ssh cloud`, browser is emergency-only.',
+      'zh-CN':
+        'Access 边缘门禁 + 主机 SSH 身份；日常用本机 ssh cloud，浏览器仅应急。',
+      'zh-TW':
+        'Access 邊緣門禁 + 主機 SSH 身份；日常用本機 ssh cloud，瀏覽器僅應急。',
+      'en-GB':
+        'Access edge gate + host SSH auth; prefer local `ssh cloud`, browser is emergency-only.',
       fr: 'Porte Access + auth SSH hôte ; préférer `ssh cloud` local, navigateur en secours.',
       ru: 'Access на краю + SSH на хосте; обычно `ssh cloud`, браузер — запасной путь.',
     },
@@ -511,8 +517,7 @@ export const siteRegistry: SiteEntry[] = [
     status: 'live',
     label: 'RustDesk',
     access: true,
-    note:
-      'HTTP info + optional /ws behind Access; native clients use Tailscale 100.126.166.111',
+    note: 'HTTP info + optional /ws behind Access; native clients use Tailscale 100.126.166.111',
     labels: {
       'zh-CN': '远程（RustDesk）',
       'zh-TW': '遠端（RustDesk）',
@@ -521,9 +526,12 @@ export const siteRegistry: SiteEntry[] = [
       ru: 'Удалённо (RustDesk)',
     },
     descriptions: {
-      'zh-CN': '自建 RustDesk；网页入口经 Access，客户端走 Tailscale ID/Relay。',
-      'zh-TW': '自建 RustDesk；網頁入口經 Access，客戶端走 Tailscale ID/Relay。',
-      'en-GB': 'Self-hosted RustDesk; HTTP behind Access, clients via Tailscale ID/Relay.',
+      'zh-CN':
+        '自建 RustDesk；网页入口经 Access，客户端走 Tailscale ID/Relay。',
+      'zh-TW':
+        '自建 RustDesk；網頁入口經 Access，客戶端走 Tailscale ID/Relay。',
+      'en-GB':
+        'Self-hosted RustDesk; HTTP behind Access, clients via Tailscale ID/Relay.',
       fr: 'RustDesk auto-hébergé ; HTTP derrière Access, clients via Tailscale.',
       ru: 'Свой RustDesk; HTTP за Access, клиенты через Tailscale ID/Relay.',
     },
@@ -597,9 +605,12 @@ export const siteRegistry: SiteEntry[] = [
       ru: 'Блог (writing)',
     },
     descriptions: {
-      'zh-CN': '正式阅读与 RSS 在 blog.alexander.xin；与 www 同仓产物，apex /writing 301 过来。',
-      'zh-TW': '正式閱讀與 RSS 在 blog.alexander.xin；與 www 同倉產物，apex /writing 301 過來。',
-      'en-GB': 'Canonical reading and RSS on blog.alexander.xin; same build as www; apex /writing 301s here.',
+      'zh-CN':
+        '正式阅读与 RSS 在 blog.alexander.xin；与 www 同仓产物，apex /writing 301 过来。',
+      'zh-TW':
+        '正式閱讀與 RSS 在 blog.alexander.xin；與 www 同倉產物，apex /writing 301 過來。',
+      'en-GB':
+        'Canonical reading and RSS on blog.alexander.xin; same build as www; apex /writing 301s here.',
       fr: 'Lecture et RSS canoniques sur blog.alexander.xin ; même build que www ; apex /writing en 301.',
       ru: 'Каноническое чтение и RSS на blog.alexander.xin; тот же билд, что www; apex /writing → 301.',
     },
@@ -681,8 +692,7 @@ export const siteRegistry: SiteEntry[] = [
 export function getPublicSites(): SiteEntry[] {
   return siteRegistry.filter(
     (s) =>
-      s.visibility === 'public' &&
-      (s.status === 'live' || s.status === 'beta')
+      s.visibility === 'public' && (s.status === 'live' || s.status === 'beta')
   );
 }
 
@@ -753,11 +763,7 @@ export function getSitemapElsewhereLinks(lang: Lang): Array<{
     },
     {
       name:
-        lang === 'zh-CN'
-          ? '爱发电'
-          : lang === 'zh-TW'
-            ? '愛發電'
-            : 'Afdian',
+        lang === 'zh-CN' ? '爱发电' : lang === 'zh-TW' ? '愛發電' : 'Afdian',
       path: 'https://afdian.com/a/alexanderjc',
       desc:
         lang === 'en-GB'
