@@ -3,98 +3,31 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../chrome/AdSlot.astro';
 import { getCollection } from 'astro:content';
 import type { Lang } from '../../i18n/types';
+import { writingCopy, writingRssPath } from '../../i18n/pages/writing';
+import {
+  archiveYears,
+  dateLocaleFor,
+  postsForLang,
+  uniqueTaxonomy,
+} from '../../lib/writing';
 
-const { lang = 'zh-CN' } = Astro.props;
+const { lang = 'zh-CN' } = Astro.props as { lang?: Lang };
 
-function getLangPath(path: string): string {
+function lp(path: string): string {
   if (lang === 'zh-CN') return path;
   const prefix = lang === 'en-GB' ? 'en' : lang;
   return `/${prefix}${path}`;
 }
 
-const i18n = {
-  'zh-CN': {
-    title: '写作',
-    description: '关于个人网站、工程学习、性能优化和设计思考的长期文章。',
-    intro:
-      '这里记录不会很快过期的思考：站点工程、性能与安全、摄影与光线、设计取舍，以及学生开发者如何把项目活过下一个学期。',
-    readMore: '继续阅读',
-    categories: '分类',
-    noPosts: '暂无文章',
-    backToHome: '返回首页',
-    countLabel: '篇长文',
-  },
-  'zh-TW': {
-    title: '寫作',
-    description: '關於個人網站、工程學習、性能優化和設計思考的長期文章。',
-    intro:
-      '這裡記錄不會很快過期的思考：站點工程、效能與安全、攝影與光線、設計取捨，以及學生開發者如何把專案活過下一個學期。',
-    readMore: '繼續閱讀',
-    categories: '分類',
-    noPosts: '暫無文章',
-    backToHome: '返回首頁',
-    countLabel: '篇長文',
-  },
-  'en-GB': {
-    title: 'Writing',
-    description:
-      'Long-form articles about personal websites, engineering, performance and design.',
-    intro:
-      'Notes that should age slowly: site engineering, performance and security, light and photography, design trade-offs — and keeping a project alive past the next term.',
-    readMore: 'Continue reading',
-    categories: 'Topics',
-    noPosts: 'No posts yet',
-    backToHome: 'Back to Home',
-    countLabel: 'essays',
-  },
-  fr: {
-    title: 'Écrits',
-    description:
-      "Articles sur les sites personnels, l'ingénierie et le design.",
-    intro:
-      'Des notes qui vieillissent lentement : ingénierie, performance, lumière et photographie, arbitrages de design.',
-    readMore: 'Lire la suite',
-    categories: 'Sujets',
-    noPosts: "Pas encore d'articles",
-    backToHome: "Retour à l'accueil",
-    countLabel: 'essais',
-  },
-  ru: {
-    title: 'Статьи',
-    description: 'Статьи о личных сайтах, инженерии и дизайне.',
-    intro:
-      'Заметки, которые стареют медленно: инженерия, производительность, свет и фотография, дизайнерские компромиссы.',
-    readMore: 'Читать дальше',
-    categories: 'Темы',
-    noPosts: 'Пока нет статей',
-    backToHome: 'На главную',
-    countLabel: 'эссе',
-  },
-};
-
-const t = i18n[lang as Lang] || i18n['zh-CN'];
-
-const dateLocale =
-  lang === 'zh-CN'
-    ? 'zh-CN'
-    : lang === 'zh-TW'
-      ? 'zh-TW'
-      : lang === 'fr'
-        ? 'fr-FR'
-        : lang === 'ru'
-          ? 'ru-RU'
-          : 'en-GB';
+const t = writingCopy[lang] ?? writingCopy['zh-CN'];
+const dateLocale = dateLocaleFor(lang);
+const rssHref = writingRssPath(lang);
 
 const allPosts = await getCollection('writing');
-const posts = allPosts
-  .filter(
-    (post) =>
-      post.data.lang === (lang as string) ||
-      (lang === 'zh-CN' && !post.data.lang)
-  )
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const categories = [...new Set(posts.map((p) => p.data.category))];
+const posts = postsForLang(allPosts, lang);
+const categories = uniqueTaxonomy(posts, 'category');
+const tags = uniqueTaxonomy(posts, 'tags');
+const years = archiveYears(posts);
 const [featured, ...rest] = posts;
 ---
 
@@ -102,11 +35,11 @@ const [featured, ...rest] = posts;
   <header class="writing-hero">
     <div class="writing-hero__wash" aria-hidden="true"></div>
     <div class="container mx-auto px-4 lg:px-8 max-w-5xl relative">
-      <a href={getLangPath('/')} class="writing-back">{t.backToHome}</a>
+      <a href={lp('/')} class="writing-back">{t.backToHome}</a>
 
       <div class="writing-hero__grid">
         <div>
-          <p class="writing-kicker">Writing</p>
+          <p class="writing-kicker">Blog · Writing</p>
           <h1 class="writing-hero__title">{t.title}</h1>
           <p class="writing-hero__lead">{t.intro}</p>
         </div>
@@ -119,6 +52,17 @@ const [featured, ...rest] = posts;
         </p>
       </div>
 
+      <nav class="writing-tools" aria-label={t.browseBy}>
+        <a href={rssHref} class="writing-tools__rss">
+          <span aria-hidden="true">◎</span>
+          {t.rssCta}
+        </a>
+        <a href={lp('/writing/subscribe')}>{t.subscribe}</a>
+        <a href={lp('/writing/archive')}>{t.archive}</a>
+        <a href={lp('/writing/categories')}>{t.allCategories}</a>
+        <a href={lp('/writing/tags')}>{t.allTags}</a>
+      </nav>
+
       {
         categories.length > 0 && (
           <p class="writing-topics">
@@ -126,8 +70,38 @@ const [featured, ...rest] = posts;
             {categories.map((cat, i) => (
               <>
                 {i > 0 && <i aria-hidden="true">/</i>}
-                <em>{cat}</em>
+                <a href={lp(`/writing/categories/${cat.slug}`)}>{cat.name}</a>
               </>
+            ))}
+          </p>
+        )
+      }
+
+      {
+        tags.length > 0 && (
+          <p class="writing-topics writing-topics--tags">
+            <span>{t.tags}</span>
+            {tags.slice(0, 12).map((tag) => (
+              <a href={lp(`/writing/tags/${tag.slug}`)}>#{tag.name}</a>
+            ))}
+            {tags.length > 12 && (
+              <a href={lp('/writing/tags')} class="writing-topics__more">
+                +{tags.length - 12}
+              </a>
+            )}
+          </p>
+        )
+      }
+
+      {
+        years.length > 0 && (
+          <p class="writing-years">
+            <span>{t.archive}</span>
+            {years.map((y) => (
+              <a href={lp(`/writing/archive/${y.year}`)}>
+                {y.year}
+                <small>{y.count}</small>
+              </a>
             ))}
           </p>
         )
@@ -139,14 +113,15 @@ const [featured, ...rest] = posts;
     <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
       {
         posts.length === 0 ? (
-          <p class="text-[rgb(var(--color-text-secondary))] py-16">
-            {t.noPosts}
-          </p>
+          <div class="writing-empty">
+            <p>{t.noPosts}</p>
+            <p class="writing-empty__hint">{t.emptyHint}</p>
+          </div>
         ) : (
           <div class="space-y-16 md:space-y-20">
             {featured && (
               <a
-                href={getLangPath(`/writing/${featured.id}`)}
+                href={lp(`/writing/${featured.id}`)}
                 class="stream-feature group"
               >
                 <span class="stream-feature__no" aria-hidden="true">
@@ -183,7 +158,7 @@ const [featured, ...rest] = posts;
                 {rest.map((post, i) => (
                   <li>
                     <a
-                      href={getLangPath(`/writing/${post.id}`)}
+                      href={lp(`/writing/${post.id}`)}
                       class="stream-item group"
                     >
                       <span class="stream-item__no" aria-hidden="true">
@@ -249,8 +224,13 @@ const [featured, ...rest] = posts;
     color: rgb(var(--color-text-tertiary));
     transition: color 0.18s ease;
   }
-  .writing-back:hover {
+  .writing-back:hover,
+  .writing-back:focus-visible {
     color: rgb(var(--color-accent));
+  }
+  .writing-back:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
   }
   .writing-kicker {
     font-family: theme('fontFamily.heading');
@@ -313,8 +293,44 @@ const [featured, ...rest] = posts;
     text-transform: uppercase;
     color: rgb(var(--color-text-tertiary));
   }
+
+  .writing-tools {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.35rem;
+    align-items: center;
+  }
+  .writing-tools a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    font-family: theme('fontFamily.heading');
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgb(var(--color-text-secondary));
+    border-bottom: 1px solid rgb(var(--color-border) / 0.7);
+    transition:
+      color 0.18s ease,
+      border-color 0.18s ease;
+  }
+  .writing-tools a:hover,
+  .writing-tools a:focus-visible {
+    color: rgb(var(--color-accent));
+    border-color: rgb(var(--color-accent) / 0.55);
+  }
+  .writing-tools a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
+  .writing-tools__rss {
+    color: rgb(var(--color-accent)) !important;
+    border-bottom-color: rgb(var(--color-accent) / 0.45) !important;
+  }
+
   .writing-topics {
-    margin-top: 2.5rem;
+    margin-top: 1.75rem;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -322,7 +338,11 @@ const [featured, ...rest] = posts;
     font-size: 0.92rem;
     color: rgb(var(--color-text-secondary));
   }
-  .writing-topics > span {
+  .writing-topics--tags {
+    margin-top: 0.85rem;
+  }
+  .writing-topics > span,
+  .writing-years > span {
     font-family:
       ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.65rem;
@@ -335,10 +355,74 @@ const [featured, ...rest] = posts;
     font-style: normal;
     opacity: 0.35;
   }
-  .writing-topics em {
-    font-style: normal;
+  .writing-topics a {
     font-family: theme('fontFamily.heading');
     font-weight: 600;
+    color: inherit;
+    transition: color 0.18s ease;
+  }
+  .writing-topics a:hover,
+  .writing-topics a:focus-visible {
+    color: rgb(var(--color-accent));
+  }
+  .writing-topics a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
+  .writing-topics__more {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    font-size: 0.72rem !important;
+    font-weight: 500 !important;
+  }
+
+  .writing-years {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem 0.85rem;
+  }
+  .writing-years a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    font-family: theme('fontFamily.heading');
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+    color: rgb(var(--color-text-primary));
+    transition: color 0.18s ease;
+  }
+  .writing-years a small {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .writing-years a:hover,
+  .writing-years a:focus-visible {
+    color: rgb(var(--color-accent));
+  }
+  .writing-years a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
+
+  .writing-empty {
+    padding: 4rem 0;
+    max-width: 28rem;
+  }
+  .writing-empty p:first-child {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .writing-empty__hint {
+    color: rgb(var(--color-text-secondary));
+    line-height: 1.65;
   }
 
   .writing-stream {
@@ -485,7 +569,10 @@ const [featured, ...rest] = posts;
     .stream-feature__cta,
     .stream-item__no,
     .stream-item__title,
-    .stream-feature__title {
+    .stream-feature__title,
+    .writing-tools a,
+    .writing-topics a,
+    .writing-years a {
       transition: none;
     }
   }

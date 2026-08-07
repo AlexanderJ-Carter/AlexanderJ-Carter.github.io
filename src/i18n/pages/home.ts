@@ -81,11 +81,6 @@ const featuredShared: HomeFeaturedItem[] = [
 
 const elsewhereShared: HomeElsewhereItem[] = [
   {
-    title: 'Blog',
-    desc: '独立长文与工程笔记',
-    href: 'https://blog.alexander.xin',
-  },
-  {
     title: 'MyCook',
     desc: '做饭菜谱',
     href: 'https://cook.alexander.xin',
@@ -152,7 +147,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     ],
     sheetCaption: 'Contact sheet · 3 frames',
     elsewhereTitle: '站外角落',
-    elsewhereSubtitle: '独立子站与博客——只放目前可访问的入口。',
+    elsewhereSubtitle: '独立子站与仓库——只放目前可访问的入口。',
     elsewhereTools: '工具索引',
     elsewhereProjects: '全部项目',
     elsewhereProjectsDesc: '开源与自研一览（含演示链接）',
@@ -230,16 +225,11 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     ],
     sheetCaption: 'Contact sheet · 3 frames',
     elsewhereTitle: '站外角落',
-    elsewhereSubtitle: '獨立子站與部落格——只放目前可訪問的入口。',
+    elsewhereSubtitle: '獨立子站與倉庫——只放目前可訪問的入口。',
     elsewhereTools: '工具索引',
     elsewhereProjects: '全部專案',
     elsewhereProjectsDesc: '開源與自研一覽（含演示連結）',
     elsewhere: [
-      {
-        title: 'Blog',
-        desc: '獨立長文與工程筆記',
-        href: 'https://blog.alexander.xin',
-      },
       {
         title: 'MyCook',
         desc: '做飯菜譜',
@@ -334,16 +324,11 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     ],
     sheetCaption: 'Contact sheet · 3 frames',
     elsewhereTitle: 'Elsewhere',
-    elsewhereSubtitle: 'Independent sites and the blog — live links only.',
+    elsewhereSubtitle: 'Independent sites — live links only.',
     elsewhereTools: 'Tool index',
     elsewhereProjects: 'All projects',
     elsewhereProjectsDesc: 'Open-source and personal demos in one place',
     elsewhere: [
-      {
-        title: 'Blog',
-        desc: 'Long-form notes and engineering essays',
-        href: 'https://blog.alexander.xin',
-      },
       {
         title: 'MyCook',
         desc: 'Cooking recipes',
@@ -439,16 +424,11 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     ],
     sheetCaption: 'Planche-contact · 3 frames',
     elsewhereTitle: 'Ailleurs',
-    elsewhereSubtitle: 'Sites indépendants et blog — liens actifs seulement.',
+    elsewhereSubtitle: 'Sites indépendants — liens actifs seulement.',
     elsewhereTools: 'Index des outils',
     elsewhereProjects: 'Tous les projets',
     elsewhereProjectsDesc: 'Open source et démos personnelles',
     elsewhere: [
-      {
-        title: 'Blog',
-        desc: 'Essais longs et notes d’ingénierie',
-        href: 'https://blog.alexander.xin',
-      },
       {
         title: 'MyCook',
         desc: 'Recettes',
@@ -544,16 +524,11 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     ],
     sheetCaption: 'Контактный лист · 3 кадра',
     elsewhereTitle: 'Снаружи',
-    elsewhereSubtitle: 'Независимые сайты и блог — только рабочие ссылки.',
+    elsewhereSubtitle: 'Независимые сайты — только рабочие ссылки.',
     elsewhereTools: 'Индекс утилит',
     elsewhereProjects: 'Все проекты',
     elsewhereProjectsDesc: 'Open source и личные демо',
     elsewhere: [
-      {
-        title: 'Blog',
-        desc: 'Длинные тексты и инженерные заметки',
-        href: 'https://blog.alexander.xin',
-      },
       {
         title: 'MyCook',
         desc: 'Рецепты',

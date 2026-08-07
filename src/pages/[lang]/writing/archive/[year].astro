@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import WritingCollectionTemplate from '../../../../components/templates/WritingCollectionTemplate.astro';
+import { writingCopy } from '../../../../i18n/pages/writing';
+import { getLangStaticPaths, resolveRouteLang } from '../../../../i18n/routing';
+import type { Lang } from '../../../../i18n/types';
+import { archiveYears, postsByYear, postsForLang } from '../../../../lib/writing';
+
+export async function getStaticPaths() {
+  const all = await getCollection('writing');
+  const paths: Array<{
+    params: { lang: string; year: string };
+    props: { lang: Lang; year: number };
+  }> = [];
+
+  for (const { params } of getLangStaticPaths()) {
+    const lang = resolveRouteLang(params.lang);
+    const posts = postsForLang(all, lang);
+    for (const { year } of archiveYears(posts)) {
+      paths.push({
+        params: { lang: params.lang, year: String(year) },
+        props: { lang, year },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang, year } = Astro.props;
+const t = writingCopy[lang] ?? writingCopy['zh-CN'];
+const posts = postsByYear(postsForLang(await getCollection('writing'), lang), year);
+---
+
+<WritingCollectionTemplate
+  lang={lang}
+  kind="year"
+  title={lang.startsWith('zh') ? `${year}${t.yearLabel}` : String(year)}
+  description={t.archiveDescription}
+  posts={posts}
+  crumb={String(year)}
+/>

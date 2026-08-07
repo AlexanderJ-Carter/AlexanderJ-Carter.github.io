@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import WritingIndexTemplate from '../../../../components/templates/WritingIndexTemplate.astro';
+import { getLangStaticPaths, resolveRouteLang } from '../../../../i18n/routing';
+import { archiveYears, postsForLang } from '../../../../lib/writing';
+
+export function getStaticPaths() {
+  return getLangStaticPaths().map(({ params }) => ({
+    params,
+    props: { lang: resolveRouteLang(params.lang) },
+  }));
+}
+
+const { lang } = Astro.props;
+const posts = postsForLang(await getCollection('writing'), lang);
+const items = archiveYears(posts).map((y) => ({
+  name: String(y.year),
+  slug: String(y.year),
+  count: y.count,
+}));
+---
+
+<WritingIndexTemplate lang={lang} kind="archive" items={items} />

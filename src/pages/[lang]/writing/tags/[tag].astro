@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import WritingCollectionTemplate from '../../../../components/templates/WritingCollectionTemplate.astro';
+import { writingCopy } from '../../../../i18n/pages/writing';
+import { getLangStaticPaths, resolveRouteLang } from '../../../../i18n/routing';
+import type { Lang } from '../../../../i18n/types';
+import {
+  postsByTagSlug,
+  postsForLang,
+  uniqueTaxonomy,
+} from '../../../../lib/writing';
+
+export async function getStaticPaths() {
+  const all = await getCollection('writing');
+  const paths: Array<{
+    params: { lang: string; tag: string };
+    props: { lang: Lang; name: string; slug: string };
+  }> = [];
+
+  for (const { params } of getLangStaticPaths()) {
+    const lang = resolveRouteLang(params.lang);
+    for (const tag of uniqueTaxonomy(postsForLang(all, lang), 'tags')) {
+      paths.push({
+        params: { lang: params.lang, tag: tag.slug },
+        props: { lang, name: tag.name, slug: tag.slug },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { lang, name, slug } = Astro.props;
+const t = writingCopy[lang] ?? writingCopy['zh-CN'];
+const posts = postsByTagSlug(postsForLang(await getCollection('writing'), lang), slug);
+---
+
+<WritingCollectionTemplate
+  lang={lang}
+  kind="tag"
+  title={t.tagTitle(name)}
+  description={t.tagDescription(name)}
+  posts={posts}
+  crumb={name}
+/>

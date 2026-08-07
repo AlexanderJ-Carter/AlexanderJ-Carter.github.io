@@ -2,10 +2,18 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../chrome/AdSlot.astro';
 import CopyPermalink from '../widgets/CopyPermalink.astro';
+import { getCollection } from 'astro:content';
 import type { Lang } from '../../i18n/types';
+import { writingCopy } from '../../i18n/pages/writing';
+import {
+  dateLocaleFor,
+  relatedPosts,
+  taxonomySlug,
+} from '../../lib/writing';
 
 interface Props {
   lang?: string;
+  postId: string;
   title: string;
   description: string;
   pubDate: Date;
@@ -17,6 +25,7 @@ interface Props {
 
 const {
   lang = 'zh-CN',
+  postId,
   title,
   description,
   pubDate,
@@ -26,64 +35,31 @@ const {
   timeToRead,
 } = Astro.props;
 
-function getLangPath(path: string): string {
-  if (lang === 'zh-CN') return path;
-  const prefix = lang === 'en-GB' ? 'en' : lang;
+const resolvedLang = lang as Lang;
+
+function lp(path: string): string {
+  if (resolvedLang === 'zh-CN') return path;
+  const prefix = resolvedLang === 'en-GB' ? 'en' : resolvedLang;
   return `/${prefix}${path}`;
 }
 
-const i18n = {
-  'zh-CN': {
-    backToList: '返回写作',
-    publishedOn: '发布于',
-    updatedOn: '更新于',
-    shareText: '分享',
-  },
-  'zh-TW': {
-    backToList: '返回寫作',
-    publishedOn: '發布於',
-    updatedOn: '更新於',
-    shareText: '分享',
-  },
-  'en-GB': {
-    backToList: 'Back to Writing',
-    publishedOn: 'Published',
-    updatedOn: 'Updated',
-    shareText: 'Share',
-  },
-  fr: {
-    backToList: 'Retour aux écrits',
-    publishedOn: 'Publié',
-    updatedOn: 'Mis à jour',
-    shareText: 'Partager',
-  },
-  ru: {
-    backToList: 'К статьям',
-    publishedOn: 'Опубликовано',
-    updatedOn: 'Обновлено',
-    shareText: 'Поделиться',
-  },
-};
+const t = writingCopy[resolvedLang] ?? writingCopy['zh-CN'];
+const dateLocale = dateLocaleFor(resolvedLang);
 
-const t = i18n[lang as Lang] || i18n['zh-CN'];
-
-const formatDate = (date: Date) => {
-  const locale =
-    lang === 'zh-CN'
-      ? 'zh-CN'
-      : lang === 'zh-TW'
-        ? 'zh-TW'
-        : lang === 'fr'
-          ? 'fr-FR'
-          : lang === 'ru'
-            ? 'ru-RU'
-            : 'en-GB';
-  return date.toLocaleDateString(locale, {
+const formatDate = (date: Date) =>
+  date.toLocaleDateString(dateLocale, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
-};
+
+const allPosts = await getCollection('writing');
+const related = relatedPosts(allPosts, {
+  id: postId,
+  category,
+  tags,
+  lang: resolvedLang,
+});
 ---
 
 <BaseLayout
@@ -107,15 +83,19 @@ const formatDate = (date: Date) => {
       '@type': 'WebPage',
       '@id': Astro.url.href,
     },
-    inLanguage: lang,
+    inLanguage: resolvedLang,
   }}
 >
   <article class="essay">
     <header class="essay-head">
       <div class="essay-head__wash" aria-hidden="true"></div>
       <div class="container mx-auto px-4 lg:px-8 max-w-3xl relative">
-        <a href={getLangPath('/writing')} class="essay-back">{t.backToList}</a>
-        <p class="essay-kicker">{category}</p>
+        <a href={lp('/writing')} class="essay-back">{t.backToList}</a>
+        <p class="essay-kicker">
+          <a href={lp(`/writing/categories/${taxonomySlug(category)}`)}>
+            {category}
+          </a>
+        </p>
         <h1 class="essay-title">{title}</h1>
         <p class="essay-deck">{description}</p>
         <div class="essay-byline">
@@ -137,7 +117,7 @@ const formatDate = (date: Date) => {
           tags.length > 0 && (
             <p class="essay-tags">
               {tags.map((tag) => (
-                <span>#{tag}</span>
+                <a href={lp(`/writing/tags/${taxonomySlug(tag)}`)}>#{tag}</a>
               ))}
             </p>
           )
@@ -154,8 +134,26 @@ const formatDate = (date: Date) => {
 
       <AdSlot slot="article" format="horizontal" />
 
+      {
+        related.length > 0 && (
+          <aside class="essay-related" aria-labelledby="related-heading">
+            <h2 id="related-heading">{t.related}</h2>
+            <ul>
+              {related.map((post) => (
+                <li>
+                  <a href={lp(`/writing/${post.id}`)}>
+                    <span class="essay-related__cat">{post.data.category}</span>
+                    <span class="essay-related__title">{post.data.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )
+      }
+
       <footer class="essay-foot">
-        <a href={getLangPath('/writing')} class="essay-foot__back">
+        <a href={lp('/writing')} class="essay-foot__back">
           ← {t.backToList}
         </a>
         <div class="essay-foot__share">
@@ -195,8 +193,13 @@ const formatDate = (date: Date) => {
     color: rgb(var(--color-text-tertiary));
     transition: color 0.18s ease;
   }
-  .essay-back:hover {
+  .essay-back:hover,
+  .essay-back:focus-visible {
     color: rgb(var(--color-accent));
+  }
+  .essay-back:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
   }
 
   .essay-kicker {
@@ -206,6 +209,18 @@ const formatDate = (date: Date) => {
     text-transform: uppercase;
     color: rgb(var(--color-accent));
     margin-bottom: 1rem;
+  }
+  .essay-kicker a {
+    color: inherit;
+  }
+  .essay-kicker a:hover,
+  .essay-kicker a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+  .essay-kicker a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
   }
 
   .essay-title {
@@ -246,7 +261,18 @@ const formatDate = (date: Date) => {
     font-family:
       ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.7rem;
+  }
+  .essay-tags a {
     color: rgb(var(--color-text-tertiary));
+    transition: color 0.18s ease;
+  }
+  .essay-tags a:hover,
+  .essay-tags a:focus-visible {
+    color: rgb(var(--color-accent));
+  }
+  .essay-tags a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
   }
 
   .essay-rule {
@@ -396,6 +422,62 @@ const formatDate = (date: Date) => {
     color: rgb(var(--color-text-primary));
   }
 
+  .essay-related {
+    margin-top: 3.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgb(var(--color-border) / 0.55);
+  }
+  .essay-related h2 {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .essay-related ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .essay-related li a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.95rem 0;
+    border-top: 1px solid rgb(var(--color-border) / 0.4);
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.18s ease;
+  }
+  .essay-related li:last-child a {
+    border-bottom: 1px solid rgb(var(--color-border) / 0.4);
+  }
+  .essay-related li a:hover,
+  .essay-related li a:focus-visible {
+    color: rgb(var(--color-accent));
+  }
+  .essay-related li a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
+  }
+  .essay-related__cat {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .essay-related__title {
+    font-family: theme('fontFamily.heading');
+    font-weight: 650;
+    font-size: 1.05rem;
+    letter-spacing: -0.015em;
+  }
+
   .essay-foot {
     display: flex;
     flex-wrap: wrap;
@@ -411,6 +493,10 @@ const formatDate = (date: Date) => {
     font-weight: 600;
     color: rgb(var(--color-accent));
   }
+  .essay-foot__back:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
+  }
   .essay-foot__share {
     display: flex;
     align-items: center;
@@ -421,5 +507,13 @@ const formatDate = (date: Date) => {
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: rgb(var(--color-text-tertiary));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .essay-back,
+    .essay-tags a,
+    .essay-related li a {
+      transition: none;
+    }
   }
 </style>

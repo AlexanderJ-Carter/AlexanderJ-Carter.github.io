@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import WritingCollectionTemplate from '../../../components/templates/WritingCollectionTemplate.astro';
+import { writingCopy } from '../../../i18n/pages/writing';
+import { archiveYears, postsByYear, postsForLang } from '../../../lib/writing';
+
+export async function getStaticPaths() {
+  const posts = postsForLang(await getCollection('writing'), 'zh-CN');
+  return archiveYears(posts).map(({ year }) => ({
+    params: { year: String(year) },
+    props: { year },
+  }));
+}
+
+const { year } = Astro.props;
+const t = writingCopy['zh-CN'];
+const posts = postsByYear(
+  postsForLang(await getCollection('writing'), 'zh-CN'),
+  year
+);
+---
+
+<WritingCollectionTemplate
+  lang="zh-CN"
+  kind="year"
+  title={`${year}${t.yearLabel}`}
+  description={t.archiveDescription}
+  posts={posts}
+  crumb={String(year)}
+/>

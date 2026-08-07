@@ -31,6 +31,7 @@ const { Content } = await render(post);
 
 <WritingPostTemplate
   lang={lang}
+  postId={post.id}
   title={post.data.title}
   description={post.data.description}
   pubDate={post.data.pubDate}

@@ -225,9 +225,9 @@
       "host": "cloudflare-worker",
       "visibility": "public",
       "status": "live",
-      "label": "Blog → Writing",
+      "label": "Blog alias → Writing",
       "access": false,
-      "note": "Worker 302 → alexander.xin/writing/; Ghost retired; author via Git"
+      "note": "Worker 302 → alexander.xin/writing/; not a separate site; Ghost retired; author via Git"
     }
   ]
 }

@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Lang } from '../../i18n/types';
+import {
+  writingCopy,
+  writingFeedIndex,
+  writingRssAbsolute,
+  writingRssPath,
+} from '../../i18n/pages/writing';
+
+const { lang = 'zh-CN' } = Astro.props as { lang?: Lang };
+
+function lp(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+
+const t = writingCopy[lang] ?? writingCopy['zh-CN'];
+const currentFeed = writingRssPath(lang);
+const langLabels: Record<Lang, string> = {
+  'zh-CN': '简体中文',
+  'zh-TW': '繁體中文',
+  'en-GB': 'English',
+  fr: 'Français',
+  ru: 'Русский',
+};
+---
+
+<BaseLayout title={t.subscribePageTitle} description={t.subscribePageDescription}>
+  <header class="sub-hero">
+    <div class="sub-hero__wash" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl relative">
+      <a href={lp('/writing')} class="sub-back">{t.subscribeBack}</a>
+      <p class="sub-kicker">RSS</p>
+      <h1 class="sub-title">{t.subscribePageTitle}</h1>
+      <p class="sub-lead">{t.subscribeLead}</p>
+    </div>
+  </header>
+
+  <section class="pb-24">
+    <div class="container mx-auto px-4 lg:px-8 max-w-3xl space-y-12">
+      <div class="sub-block">
+        <h2>{t.subscribeRssTitle}</h2>
+        <p>{t.subscribeRssBody}</p>
+        <p class="sub-feed-label">{t.subscribeFeedLabel}</p>
+        <a href={currentFeed} class="sub-feed-primary">
+          {writingRssAbsolute(lang)}
+        </a>
+      </div>
+
+      <div class="sub-block">
+        <ul class="sub-feeds">
+          {
+            writingFeedIndex.map((feed) => (
+              <li>
+                <span>{langLabels[feed.lang]}</span>
+                <a href={feed.path}>{feed.path}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="sub-notes">
+        <p>{t.subscribeNoAccount}</p>
+        <p>{t.subscribeEmailLater}</p>
+      </div>
+
+      <p>
+        <a href={lp('/writing')} class="sub-back-link">← {t.subscribeBack}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .sub-hero {
+    position: relative;
+    padding: 7.5rem 0 2.75rem;
+    overflow: hidden;
+  }
+  .sub-hero__wash {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      50% 40% at 20% 20%,
+      rgb(var(--color-accent) / 0.08),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .sub-back {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 0.88rem;
+    color: rgb(var(--color-text-tertiary));
+    transition: color 0.18s ease;
+  }
+  .sub-back:hover,
+  .sub-back:focus-visible {
+    color: rgb(var(--color-accent));
+  }
+  .sub-back:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
+  }
+  .sub-kicker {
+    font-family: theme('fontFamily.heading');
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--color-accent));
+    margin-bottom: 0.85rem;
+  }
+  .sub-title {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(2.25rem, 6vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    margin-bottom: 1.15rem;
+  }
+  .sub-lead {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgb(var(--color-text-secondary));
+    max-width: 36rem;
+  }
+  .sub-block h2 {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.85rem;
+  }
+  .sub-block p {
+    color: rgb(var(--color-text-secondary));
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .sub-feed-label {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+    margin-bottom: 0.55rem !important;
+  }
+  .sub-feed-primary {
+    display: inline-block;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.92rem;
+    color: rgb(var(--color-accent));
+    word-break: break-all;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+  .sub-feed-primary:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
+  }
+  .sub-feeds {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .sub-feeds li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.25rem;
+    padding: 0.95rem 0;
+    border-top: 1px solid rgb(var(--color-border) / 0.55);
+  }
+  .sub-feeds li:last-child {
+    border-bottom: 1px solid rgb(var(--color-border) / 0.55);
+  }
+  .sub-feeds span {
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+  }
+  .sub-feeds a {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.85rem;
+    color: rgb(var(--color-accent));
+  }
+  .sub-feeds a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
+  .sub-notes {
+    padding-top: 0.5rem;
+    border-top: 1px solid rgb(var(--color-border) / 0.45);
+  }
+  .sub-notes p {
+    color: rgb(var(--color-text-secondary));
+    line-height: 1.7;
+    margin-bottom: 0.65rem;
+  }
+  .sub-back-link {
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+    color: rgb(var(--color-accent));
+  }
+  .sub-back-link:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sub-back {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import WritingIndexTemplate from '../../../components/templates/WritingIndexTemplate.astro';
+import { postsForLang, uniqueTaxonomy } from '../../../lib/writing';
+
+const posts = postsForLang(await getCollection('writing'), 'zh-CN');
+const items = uniqueTaxonomy(posts, 'category').map((c) => ({
+  name: c.name,
+  slug: c.slug,
+  count: c.count,
+}));
+---
+
+<WritingIndexTemplate lang="zh-CN" kind="categories" items={items} />

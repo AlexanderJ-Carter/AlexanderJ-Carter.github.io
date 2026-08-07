@@ -1,0 +1,15 @@
+---
+import WritingSubscribeTemplate from '../../../components/templates/WritingSubscribeTemplate.astro';
+import { getLangStaticPaths, resolveRouteLang } from '../../../i18n/routing';
+
+export function getStaticPaths() {
+  return getLangStaticPaths().map(({ params }) => ({
+    params,
+    props: { lang: resolveRouteLang(params.lang) },
+  }));
+}
+
+const { lang } = Astro.props;
+---
+
+<WritingSubscribeTemplate lang={lang} />

@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import WritingCollectionTemplate from '../../../components/templates/WritingCollectionTemplate.astro';
+import { writingCopy } from '../../../i18n/pages/writing';
+import {
+  postsByCategorySlug,
+  postsForLang,
+  uniqueTaxonomy,
+} from '../../../lib/writing';
+
+export async function getStaticPaths() {
+  const posts = postsForLang(await getCollection('writing'), 'zh-CN');
+  return uniqueTaxonomy(posts, 'category').map((cat) => ({
+    params: { category: cat.slug },
+    props: { name: cat.name, slug: cat.slug },
+  }));
+}
+
+const { name, slug } = Astro.props;
+const t = writingCopy['zh-CN'];
+const posts = postsByCategorySlug(
+  postsForLang(await getCollection('writing'), 'zh-CN'),
+  slug
+);
+---
+
+<WritingCollectionTemplate
+  lang="zh-CN"
+  kind="category"
+  title={t.categoryTitle(name)}
+  description={t.categoryDescription(name)}
+  posts={posts}
+  crumb={name}
+/>

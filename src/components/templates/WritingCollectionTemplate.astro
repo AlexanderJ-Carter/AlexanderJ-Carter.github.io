@@ -1,0 +1,294 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AdSlot from '../chrome/AdSlot.astro';
+import type { Lang } from '../../i18n/types';
+import { writingCopy } from '../../i18n/pages/writing';
+import {
+  dateLocaleFor,
+  type WritingPost,
+} from '../../lib/writing';
+
+interface Props {
+  lang?: Lang;
+  title: string;
+  description: string;
+  posts: WritingPost[];
+  kind: 'tag' | 'category' | 'year';
+  crumb?: string;
+}
+
+const {
+  lang = 'zh-CN',
+  title,
+  description,
+  posts,
+  kind,
+  crumb,
+} = Astro.props;
+
+function lp(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+
+const t = writingCopy[lang] ?? writingCopy['zh-CN'];
+const dateLocale = dateLocaleFor(lang);
+
+const parentHref =
+  kind === 'year'
+    ? lp('/writing/archive')
+    : kind === 'tag'
+      ? lp('/writing/tags')
+      : lp('/writing/categories');
+
+const parentLabel =
+  kind === 'year'
+    ? t.archiveTitle
+    : kind === 'tag'
+      ? t.allTags
+      : t.allCategories;
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="writing-hero writing-hero--compact">
+    <div class="writing-hero__wash" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 lg:px-8 max-w-5xl relative">
+      <p class="writing-crumbs">
+        <a href={lp('/writing')}>{t.backToList}</a>
+        <span aria-hidden="true">/</span>
+        <a href={parentHref}>{parentLabel}</a>
+        {
+          crumb && (
+            <>
+              <span aria-hidden="true">/</span>
+              <span>{crumb}</span>
+            </>
+          )
+        }
+      </p>
+      <p class="writing-kicker">
+        {kind === 'year' ? t.archive : kind === 'tag' ? t.tags : t.categories}
+      </p>
+      <h1 class="writing-hero__title writing-hero__title--sm">{title}</h1>
+      <p class="writing-hero__lead">{description}</p>
+      <p class="writing-hero__meta">
+        {posts.length}
+        {kind === 'year' ? ` ${t.postsInYear}` : ` ${t.countLabel}`}
+      </p>
+    </div>
+  </header>
+
+  <section class="writing-stream pb-24">
+    <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+      {
+        posts.length === 0 ? (
+          <div class="writing-empty">
+            <p>{t.noPosts}</p>
+            <p class="writing-empty__hint">{t.emptyHint}</p>
+            <a href={lp('/writing')} class="writing-empty__link">
+              ← {t.backToList}
+            </a>
+          </div>
+        ) : (
+          <ul class="stream-list">
+            {posts.map((post, i) => (
+              <li>
+                <a href={lp(`/writing/${post.id}`)} class="stream-item group">
+                  <span class="stream-item__no" aria-hidden="true">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div class="stream-item__main">
+                    <p class="stream-meta">
+                      <span>{post.data.category}</span>
+                      <time datetime={post.data.pubDate.toISOString()}>
+                        {post.data.pubDate.toLocaleDateString(dateLocale, {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })}
+                      </time>
+                      {post.data.timeToRead && (
+                        <span>{post.data.timeToRead}</span>
+                      )}
+                    </p>
+                    <h2 class="stream-item__title">{post.data.title}</h2>
+                    <p class="stream-item__desc">{post.data.description}</p>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      <AdSlot slot="article" format="horizontal" />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .writing-hero {
+    position: relative;
+    padding: 7.5rem 0 2.5rem;
+    overflow: hidden;
+  }
+  .writing-hero--compact .writing-hero__title--sm {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.1;
+  }
+  .writing-hero__wash {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      55% 45% at 88% 12%,
+      rgb(var(--color-accent) / 0.07),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .writing-crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.55rem;
+    align-items: center;
+    margin-bottom: 1.75rem;
+    font-size: 0.88rem;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .writing-crumbs a {
+    color: inherit;
+    transition: color 0.18s ease;
+  }
+  .writing-crumbs a:hover,
+  .writing-crumbs a:focus-visible {
+    color: rgb(var(--color-accent));
+  }
+  .writing-crumbs a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
+  .writing-kicker {
+    font-family: theme('fontFamily.heading');
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--color-accent));
+    margin-bottom: 0.85rem;
+  }
+  .writing-hero__title {
+    font-family: theme('fontFamily.heading');
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    margin-bottom: 1rem;
+  }
+  .writing-hero__lead {
+    max-width: 36rem;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgb(var(--color-text-secondary));
+  }
+  .writing-hero__meta {
+    margin-top: 1rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .writing-empty {
+    padding: 3rem 0;
+    max-width: 28rem;
+  }
+  .writing-empty p:first-child {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .writing-empty__hint {
+    color: rgb(var(--color-text-secondary));
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+  }
+  .writing-empty__link {
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+    color: rgb(var(--color-accent));
+  }
+  .stream-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.85rem;
+    margin-bottom: 0.85rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .stream-meta span:first-child {
+    color: rgb(var(--color-accent));
+  }
+  .stream-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .stream-item {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 1rem 1.25rem;
+    padding: 1.6rem 0;
+    text-decoration: none;
+    color: inherit;
+    border-top: 1px solid rgb(var(--color-border) / 0.55);
+  }
+  .stream-list li:last-child .stream-item {
+    border-bottom: 1px solid rgb(var(--color-border) / 0.55);
+  }
+  .stream-item__no {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgb(var(--color-text-tertiary) / 0.7);
+    padding-top: 0.15rem;
+    transition:
+      color 0.2s ease,
+      transform 0.25s ease;
+  }
+  .stream-item:hover .stream-item__no,
+  .stream-item:focus-visible .stream-item__no {
+    color: rgb(var(--color-accent));
+    transform: translateX(2px);
+  }
+  .stream-item__title {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin-bottom: 0.45rem;
+    transition: color 0.18s ease;
+  }
+  .stream-item:hover .stream-item__title,
+  .stream-item:focus-visible .stream-item__title {
+    color: rgb(var(--color-accent));
+  }
+  .stream-item__desc {
+    max-width: 38rem;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: rgb(var(--color-text-secondary));
+  }
+  .stream-item:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stream-item__no,
+    .stream-item__title {
+      transition: none;
+    }
+  }
+</style>

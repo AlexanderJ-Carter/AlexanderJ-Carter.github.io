@@ -142,18 +142,6 @@ const moreSubmenu: SubMenuItem[] = [
     label: l('站外', '站外', 'Ailleurs', 'Снаружи', 'Elsewhere'),
   },
   {
-    href: 'https://blog.alexander.xin',
-    label: t('nav.blog'),
-    desc: l(
-      '独立博客',
-      '獨立部落格',
-      'Blog externe',
-      'Внешний блог',
-      'External blog'
-    ),
-    external: true,
-  },
-  {
     href: 'https://cook.alexander.xin',
     label: 'MyCook',
     desc: l('做饭菜谱', '做飯菜譜', 'Recettes', 'Рецепты', 'Recipes'),
@@ -227,7 +215,7 @@ const mainNavItems: NavItem[] = [
   { href: getLangPath('/gallery'), label: t('nav.gallery') },
   {
     href: getLangPath('/writing'),
-    label: l('写作', '寫作', 'Écrits', 'Статьи', 'Writing'),
+    label: t('nav.blog'),
   },
   {
     href: getLangPath('/projects'),

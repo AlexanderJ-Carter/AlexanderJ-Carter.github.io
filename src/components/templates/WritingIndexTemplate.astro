@@ -1,0 +1,208 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { Lang } from '../../i18n/types';
+import { writingCopy } from '../../i18n/pages/writing';
+
+interface Props {
+  lang?: Lang;
+  kind: 'tags' | 'categories' | 'archive';
+  items: Array<{ name: string; slug: string; count: number; href?: string }>;
+}
+
+const { lang = 'zh-CN', kind, items } = Astro.props;
+
+function lp(path: string): string {
+  if (lang === 'zh-CN') return path;
+  const prefix = lang === 'en-GB' ? 'en' : lang;
+  return `/${prefix}${path}`;
+}
+
+const t = writingCopy[lang] ?? writingCopy['zh-CN'];
+
+const title =
+  kind === 'archive'
+    ? t.archiveTitle
+    : kind === 'tags'
+      ? t.allTags
+      : t.allCategories;
+
+const description =
+  kind === 'archive'
+    ? t.archiveDescription
+    : kind === 'tags'
+      ? t.allTags
+      : t.allCategories;
+
+const lead = kind === 'archive' ? t.archiveIntro : t.intro;
+---
+
+<BaseLayout title={title} description={description}>
+  <header class="writing-hero writing-hero--compact">
+    <div class="writing-hero__wash" aria-hidden="true"></div>
+    <div class="container mx-auto px-4 lg:px-8 max-w-5xl relative">
+      <a href={lp('/writing')} class="writing-back">{t.backToList}</a>
+      <p class="writing-kicker">
+        {kind === 'archive' ? t.archive : kind === 'tags' ? t.tags : t.categories}
+      </p>
+      <h1 class="writing-hero__title">{title}</h1>
+      <p class="writing-hero__lead">{lead}</p>
+    </div>
+  </header>
+
+  <section class="pb-24">
+    <div class="container mx-auto px-4 lg:px-8 max-w-5xl">
+      {
+        items.length === 0 ? (
+          <div class="writing-empty">
+            <p>{t.noPosts}</p>
+            <p class="writing-empty__hint">{t.emptyHint}</p>
+          </div>
+        ) : (
+          <ul class="tax-grid">
+            {items.map((item) => (
+              <li>
+                <a
+                  href={
+                    item.href ??
+                    lp(
+                      kind === 'archive'
+                        ? `/writing/archive/${item.slug}`
+                        : kind === 'tags'
+                          ? `/writing/tags/${item.slug}`
+                          : `/writing/categories/${item.slug}`
+                    )
+                  }
+                  class="tax-card"
+                >
+                  <span class="tax-card__name">{item.name}</span>
+                  <span class="tax-card__count">
+                    {item.count}
+                    {kind === 'archive' ? ` ${t.postsInYear}` : ''}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .writing-hero {
+    position: relative;
+    padding: 7.5rem 0 2.75rem;
+    overflow: hidden;
+  }
+  .writing-hero__wash {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgb(var(--color-bg-secondary) / 0.4),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .writing-back {
+    display: inline-block;
+    margin-bottom: 2rem;
+    font-size: 0.88rem;
+    color: rgb(var(--color-text-tertiary));
+    transition: color 0.18s ease;
+  }
+  .writing-back:hover,
+  .writing-back:focus-visible {
+    color: rgb(var(--color-accent));
+  }
+  .writing-back:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 4px;
+  }
+  .writing-kicker {
+    font-family: theme('fontFamily.heading');
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--color-accent));
+    margin-bottom: 0.85rem;
+  }
+  .writing-hero__title {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(2.25rem, 6vw, 3.75rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .writing-hero__lead {
+    max-width: 36rem;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgb(var(--color-text-secondary));
+  }
+  .writing-empty {
+    padding: 3rem 0;
+  }
+  .writing-empty p:first-child {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .writing-empty__hint {
+    color: rgb(var(--color-text-secondary));
+  }
+  .tax-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 0.75rem;
+  }
+  .tax-card {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.15rem;
+    text-decoration: none;
+    color: inherit;
+    border-top: 1px solid rgb(var(--color-border) / 0.65);
+    transition:
+      color 0.18s ease,
+      border-color 0.18s ease,
+      background-color 0.18s ease;
+  }
+  .tax-card:hover,
+  .tax-card:focus-visible {
+    color: rgb(var(--color-accent));
+    border-color: rgb(var(--color-accent) / 0.45);
+    background: rgb(var(--color-bg-secondary) / 0.35);
+  }
+  .tax-card:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
+  .tax-card__name {
+    font-family: theme('fontFamily.heading');
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.02em;
+  }
+  .tax-card__count {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: rgb(var(--color-text-tertiary));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tax-card,
+    .writing-back {
+      transition: none;
+    }
+  }
+</style>

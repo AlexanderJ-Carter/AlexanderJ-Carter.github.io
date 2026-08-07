@@ -31,7 +31,6 @@ export type SitemapCopy = {
 };
 
 const external = {
-  blog: 'https://blog.alexander.xin',
   github: 'https://github.com/AlexanderJ-Carter',
   cook: 'https://cook.alexander.xin',
   netq: 'https://netq.alexander.xin',
@@ -60,6 +59,10 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           { name: '首页', path: '/', desc: '摄影首屏与精选入口' },
           { name: '画廊', path: '/gallery', desc: '摄影作品' },
           { name: '写作', path: '/writing', desc: '工程、设计与观察' },
+          { name: '订阅', path: '/writing/subscribe', desc: 'RSS 订阅说明' },
+          { name: '归档', path: '/writing/archive', desc: '按年浏览' },
+          { name: '标签', path: '/writing/tags', desc: '按标签浏览' },
+          { name: '分类', path: '/writing/categories', desc: '按分类浏览' },
           { name: '读读看看', path: '/reading-list', desc: '深读笔记与路线' },
           { name: '项目', path: '/projects', desc: '开源与自研' },
           { name: '关于', path: '/about', desc: '简介、研究与联系' },
@@ -124,12 +127,6 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         title: '站外',
         lead: '独立站点与仓库。',
         links: [
-          {
-            name: '博客',
-            path: external.blog,
-            desc: 'blog.alexander.xin',
-            external: true,
-          },
           {
             name: 'GitHub',
             path: external.github,
@@ -203,6 +200,10 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           { name: '首頁', path: '/', desc: '攝影首屏與精選入口' },
           { name: '畫廊', path: '/gallery', desc: '攝影作品' },
           { name: '寫作', path: '/writing', desc: '工程、設計與觀察' },
+          { name: '訂閱', path: '/writing/subscribe', desc: 'RSS 訂閱說明' },
+          { name: '歸檔', path: '/writing/archive', desc: '按年瀏覽' },
+          { name: '標籤', path: '/writing/tags', desc: '按標籤瀏覽' },
+          { name: '分類', path: '/writing/categories', desc: '按分類瀏覽' },
           { name: '讀讀看看', path: '/reading-list', desc: '深讀筆記與路線' },
           { name: '專案', path: '/projects', desc: '開源與自研' },
           { name: '關於', path: '/about', desc: '簡介、研究與聯繫' },
@@ -267,12 +268,6 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         title: '站外',
         lead: '獨立站點與倉庫。',
         links: [
-          {
-            name: '部落格',
-            path: external.blog,
-            desc: 'blog.alexander.xin',
-            external: true,
-          },
           {
             name: 'GitHub',
             path: external.github,
@@ -347,6 +342,10 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           { name: 'Home', path: '/', desc: 'Photo hero and featured entries' },
           { name: 'Gallery', path: '/gallery', desc: 'Photographs' },
           { name: 'Writing', path: '/writing', desc: 'Long-form notes' },
+          { name: 'Subscribe', path: '/writing/subscribe', desc: 'RSS feeds' },
+          { name: 'Archive', path: '/writing/archive', desc: 'Browse by year' },
+          { name: 'Tags', path: '/writing/tags', desc: 'Browse by tag' },
+          { name: 'Topics', path: '/writing/categories', desc: 'Browse by topic' },
           {
             name: 'Reading',
             path: '/reading-list',
@@ -436,12 +435,6 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         lead: 'Sister sites and the repo.',
         links: [
           {
-            name: 'Blog',
-            path: external.blog,
-            desc: 'blog.alexander.xin',
-            external: true,
-          },
-          {
             name: 'GitHub',
             path: external.github,
             desc: '@AlexanderJ-Carter',
@@ -514,6 +507,10 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           { name: 'Accueil', path: '/', desc: 'Héro photo et entrées' },
           { name: 'Galerie', path: '/gallery', desc: 'Photographies' },
           { name: 'Écrits', path: '/writing', desc: 'Notes longues' },
+          { name: 'Abonnement', path: '/writing/subscribe', desc: 'Flux RSS' },
+          { name: 'Archives', path: '/writing/archive', desc: 'Par année' },
+          { name: 'Étiquettes', path: '/writing/tags', desc: 'Par étiquette' },
+          { name: 'Sujets', path: '/writing/categories', desc: 'Par sujet' },
           { name: 'Lecture', path: '/reading-list', desc: 'Notes et parcours' },
           { name: 'Projets', path: '/projects', desc: 'Open source et outils' },
           { name: 'À propos', path: '/about', desc: 'Profil et recherche' },
@@ -587,12 +584,6 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         lead: 'Sites sœurs et dépôt.',
         links: [
           {
-            name: 'Blog',
-            path: external.blog,
-            desc: 'blog.alexander.xin',
-            external: true,
-          },
-          {
             name: 'GitHub',
             path: external.github,
             desc: '@AlexanderJ-Carter',
@@ -665,6 +656,10 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           { name: 'Главная', path: '/', desc: 'Фото-герой и входы' },
           { name: 'Галерея', path: '/gallery', desc: 'Фотографии' },
           { name: 'Статьи', path: '/writing', desc: 'Длинные заметки' },
+          { name: 'Подписка', path: '/writing/subscribe', desc: 'RSS-ленты' },
+          { name: 'Архив', path: '/writing/archive', desc: 'По годам' },
+          { name: 'Теги', path: '/writing/tags', desc: 'По тегам' },
+          { name: 'Темы', path: '/writing/categories', desc: 'По темам' },
           { name: 'Чтение', path: '/reading-list', desc: 'Заметки и маршруты' },
           { name: 'Проекты', path: '/projects', desc: 'Open source' },
           { name: 'Обо мне', path: '/about', desc: 'Профиль и исследования' },
@@ -741,12 +736,6 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
         title: 'Снаружи',
         lead: 'Другие сайты и репозиторий.',
         links: [
-          {
-            name: 'Блог',
-            path: external.blog,
-            desc: 'blog.alexander.xin',
-            external: true,
-          },
           {
             name: 'GitHub',
             path: external.github,

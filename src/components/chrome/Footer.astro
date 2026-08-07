@@ -25,6 +25,7 @@ const i18n = {
     support: '支持本站',
     gallery: '画廊',
     writing: '写作',
+    subscribe: '订阅',
     projects: '项目',
     about: '关于',
     tools: '工具',
@@ -51,6 +52,7 @@ const i18n = {
     support: '支持本站',
     gallery: '畫廊',
     writing: '寫作',
+    subscribe: '訂閱',
     projects: '專案',
     about: '關於',
     tools: '工具',
@@ -77,6 +79,7 @@ const i18n = {
     support: 'Support',
     gallery: 'Gallery',
     writing: 'Writing',
+    subscribe: 'Subscribe',
     projects: 'Projects',
     about: 'About',
     tools: 'Tools',
@@ -103,6 +106,7 @@ const i18n = {
     support: 'Soutenir',
     gallery: 'Galerie',
     writing: 'Écrits',
+    subscribe: 'S’abonner',
     projects: 'Projets',
     about: 'À propos',
     tools: 'Outils',
@@ -129,6 +133,7 @@ const i18n = {
     support: 'Поддержать',
     gallery: 'Галерея',
     writing: 'Статьи',
+    subscribe: 'Подписка',
     projects: 'Проекты',
     about: 'Обо мне',
     tools: 'Инструменты',
@@ -152,6 +157,7 @@ const t = i18n[lang as keyof typeof i18n] || i18n['zh-CN'];
 const browse = [
   { label: t.gallery, href: getLangPath('/gallery') },
   { label: t.writing, href: getLangPath('/writing') },
+  { label: t.subscribe, href: getLangPath('/writing/subscribe') },
   { label: t.projects, href: getLangPath('/projects') },
   { label: t.about, href: getLangPath('/about') },
   { label: t.tools, href: getLangPath('/tools') },
@@ -161,7 +167,6 @@ const browse = [
 ];
 
 const elsewhere = [
-  { label: t.blog, href: 'https://blog.alexander.xin' },
   { label: 'MyCook', href: 'https://cook.alexander.xin' },
   { label: 'Linux Command', href: 'https://linux-command.alexander.xin' },
   { label: 'NetQ', href: 'https://netq.alexander.xin' },

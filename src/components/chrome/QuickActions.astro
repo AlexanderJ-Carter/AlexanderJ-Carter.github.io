@@ -232,7 +232,7 @@ const t = translations[lang] || translations['zh-CN'];
                 ? 'Статьи'
                 : 'Writing',
       url: p('/writing'),
-      keywords: 'writing,写作,文章,article,essay,écrits,статьи',
+      keywords: 'writing,写作,文章,article,essay,écrits,статьи,blog,博客,部落格,блог',
     },
     {
       title:
@@ -368,16 +368,16 @@ const t = translations[lang] || translations['zh-CN'];
     {
       title:
         lang === 'zh-CN'
-          ? '博客'
+          ? '订阅写作'
           : lang === 'zh-TW'
-            ? '部落格'
+            ? '訂閱寫作'
             : lang === 'fr'
-              ? 'Blog'
+              ? 'S’abonner'
               : lang === 'ru'
-                ? 'Блог'
-                : 'Blog',
-      url: 'https://blog.alexander.xin',
-      keywords: 'blog,博客,部落格,блог,write,writing',
+                ? 'Подписка'
+                : 'Subscribe',
+      url: p('/writing/subscribe'),
+      keywords: 'rss,subscribe,订阅,訂閱,feed,blog,博客',
     },
     {
       title:

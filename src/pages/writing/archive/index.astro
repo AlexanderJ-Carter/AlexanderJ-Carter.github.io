@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import WritingIndexTemplate from '../../../components/templates/WritingIndexTemplate.astro';
+import { archiveYears, postsForLang } from '../../../lib/writing';
+
+const posts = postsForLang(await getCollection('writing'), 'zh-CN');
+const items = archiveYears(posts).map((y) => ({
+  name: String(y.year),
+  slug: String(y.year),
+  count: y.count,
+}));
+---
+
+<WritingIndexTemplate lang="zh-CN" kind="archive" items={items} />
