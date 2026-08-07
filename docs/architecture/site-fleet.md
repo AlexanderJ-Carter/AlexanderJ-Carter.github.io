@@ -256,16 +256,33 @@ Zone `alexander.xin`：无 A/AAAA↔CNAME 冲突；隧道与公开站均为**橙
 - Web/Blog：静态资源 `expires 7d`；**404 返回站点 `404.html` 且状态码 404**（非 nginx 裸错）
 - Blog：`/` → `/writing/`（B2）；与 www **互不跳转**
 
-### 公开页健康抽查（2026-08-07，服务器 `curl -4`）
+### 公开页健康抽查（2026-08-07，`curl -sSI` / 服务器 `curl -4`）
 
 | 目标 | 结果 |
 | ---- | ---- |
-| apex `/` `/about` `/writing/` `/subscribe/` `/projects` `/gallery` `/tools` `/network` `/login` `/contact` `/security/policy` `/en/writing/` | **200** |
+| apex `/` `/about/` `/projects/` `/gallery/` `/tools/` `/network/` `/login/` `/contact/` `/security/policy/` | **200** |
+| apex `/writing*` `/en/writing*`（及 zh-TW/fr/ru） | **301** → `blog.alexander.xin` 同路径 |
+| apex `/subscribe` `/blog`（及语言前缀别名） | **301** → blog `/writing/subscribe/` 或 `/writing/` |
 | apex / www 故意 404 | **404**（站点页） |
-| www `/` `/writing/` `/security/policy` | **200**；与 apex **无互跳** |
-| blog `/`→写作页、`/writing/`、`/subscribe/`、`/en/writing/` | **200** |
+| www `/` `/writing/` `/security/policy/` | **200**；与 apex **无互跳**；www `/subscribe` `/blog` 站内 301→写作路径 |
+| blog `/` → `/writing/`；`/writing/` `/writing/subscribe/` `/en/writing/` | **200**（`/` 为站内 301） |
 | paste / tools / id | **200**（公开，无 Access） |
-| git / docker / nginxui / remote / ops | **302** Access（保持） |
+| git / docker / nginxui / ssh / remote / ops | **302** Access（保持） |
+| `nginx.alexander.xin` | **无记录**（正确主机为 `nginxui.alexander.xin`） |
+
+### OIDC redirect URI（Pocket ID，live 核对）
+
+| Client id | Redirect / callback URI | Logout |
+| --------- | ----------------------- | ------ |
+| `cloudflare-zero-trust` | `https://alexanderjcarter.cloudflareaccess.com/cdn-cgi/access/callback` | Access：应用域 `/cdn-cgi/access/logout`（匿名无会话时可能 404） |
+| `gitea` | `https://git.alexander.xin/user/oauth2/PocketID/callback` | 应用本地登出；Pocket ID `logoutCallbackURLs` 空 |
+| `portainer` | `https://docker.alexander.xin/` | **Portainer Logout URL 留空**；勿填 Pocket ID `end-session` |
+| `nginx-ui` | `https://nginxui.alexander.xin/` | 本地登出；logout callbacks 空 |
+
+Access 登录成功回跳：各应用 `redirect_url` 回到原主机路径（匿名探测可见 302→Access login）。  
+`/oauth/authorize` 与 `/oauth/token` 为**静态 discovery 存根**（`unauthorized_client` JSON），说明主站不发 OAuth 凭证——属正常，不是坏链。
+
+Portainer Logout URL: **leave empty** (app-local logout only; do not use Pocket ID `end-session`).
 
 ## Retired / removed
 
@@ -290,7 +307,7 @@ Zone `alexander.xin`：无 A/AAAA↔CNAME 冲突；隧道与公开站均为**橙
 | 边缘路径   | Tunnel → nginx-ui（`server_name blog.alexander.xin`，`root` 同 www `/var/www/alexander.xin/dist`）     |
 | apex       | `alexander.xin/writing*` → **301** → `blog.alexander.xin` 同路径（Worker `writing-redirect`）            |
 | www        | 保留全文 + canonical→blog；**禁止** www↔apex 互跳                                                     |
-| 订阅       | `blog…/writing/subscribe` + `https://blog.alexander.xin/.../rss.xml`；无访客登录；邮件订阅暂缓         |
+| 订阅       | `blog…/writing/subscribe` + RSS；别名 `/subscribe` `/blog` → 写作路径；无访客登录；邮件订阅暂缓         |
 | Access     | **不对 blog. 加 Access**（公开读者）                                                                  |
 | 写作       | Git + Markdown：`src/content/writing`                                                                 |
 

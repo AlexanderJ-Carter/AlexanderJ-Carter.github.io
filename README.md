@@ -31,7 +31,7 @@ ICP / 公安备案同样通过 `.env` 预留（`PUBLIC_ICP_NUMBER`、`PUBLIC_POL
 ## 访问入口
 
 - 主站: [alexander.xin](https://alexander.xin)
-- 博客: [blog.alexander.xin](https://blog.alexander.xin)（公开重定向到 [`/writing/`](https://alexander.xin/writing/)）
+- 博客: [blog.alexander.xin/writing/](https://blog.alexander.xin/writing/)（`blog/` → `/writing/`；apex `/writing*` 301 过来；www 镜像不互跳）
 - 维护者入口: [`/login`](https://alexander.xin/login) → [Ops Portal](https://ops.alexander.xin)（非访客注册）
 - 安全联系方式: [security.txt](https://alexander.xin/.well-known/security.txt)
 

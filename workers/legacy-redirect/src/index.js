@@ -29,13 +29,32 @@ function rawPath(pathname) {
 
 /** Apex writing → blog host (www keeps content; no www↔apex bounce). */
 function writingToBlog(path, search) {
-  const prefixes = ['/writing', '/en/writing', '/zh-TW/writing', '/fr/writing', '/ru/writing'];
+  const prefixes = [
+    '/writing',
+    '/en/writing',
+    '/zh-TW/writing',
+    '/fr/writing',
+    '/ru/writing',
+  ];
   const matches = prefixes.some(
     (p) => path === p || path === `${p}/` || path.startsWith(`${p}/`)
   );
   if (!matches) return null;
-  const normalized = path.endsWith('/') || path.includes('.') ? path : `${path}/`;
+  const normalized =
+    path.endsWith('/') || path.includes('.') ? path : `${path}/`;
   return `https://blog.alexander.xin${normalized}${search}`;
+}
+
+/** Ghost-era and short aliases → blog writing paths. */
+function legacyBlogAlias(path) {
+  if (path === '/blog' || path === '/blog/') return '/writing/';
+  if (path === '/subscribe' || path === '/subscribe/') {
+    return '/writing/subscribe/';
+  }
+  const lang = path.match(/^\/(en|zh-TW|fr|ru)\/(blog|subscribe)\/?$/);
+  if (!lang) return null;
+  const prefix = `/${lang[1]}`;
+  return lang[2] === 'blog' ? `${prefix}/writing/` : `${prefix}/writing/subscribe/`;
 }
 
 export default {
@@ -45,22 +64,29 @@ export default {
     const path = url.pathname;
 
     if (host === 'time.alexander.xin') {
-      return Response.redirect('https://alexander.xin/calendar', 301);
+      return Response.redirect('https://alexander.xin/calendar/', 301);
     }
 
     if (host === 'alexander.xin') {
       const blogTarget = writingToBlog(path, url.search);
       if (blogTarget) return Response.redirect(blogTarget, 301);
+      const alias = legacyBlogAlias(path);
+      if (alias) {
+        return Response.redirect(
+          `https://blog.alexander.xin${alias}${url.search}`,
+          301
+        );
+      }
     }
 
     const redirects = {
-      '/time.html': 'https://alexander.xin/calendar',
+      '/time.html': 'https://alexander.xin/calendar/',
       '/zh-CN/profile.html': 'https://alexander.xin/about/',
       '/en/profile.html': 'https://alexander.xin/en/about/',
-      '/zh-CN/calendar.html': 'https://alexander.xin/calendar',
-      '/en/calendar-en.html': 'https://alexander.xin/calendar',
-      '/jp/calendar-jp.html': 'https://alexander.xin/calendar',
-      '/it/calendar-it.html': 'https://alexander.xin/calendar',
+      '/zh-CN/calendar.html': 'https://alexander.xin/calendar/',
+      '/en/calendar-en.html': 'https://alexander.xin/calendar/',
+      '/jp/calendar-jp.html': 'https://alexander.xin/calendar/',
+      '/it/calendar-it.html': 'https://alexander.xin/calendar/',
     };
     if (redirects[path]) return Response.redirect(redirects[path], 301);
     if (path.startsWith('/en-GB/')) {
@@ -70,7 +96,7 @@ export default {
       );
     }
     if (path.startsWith('/en/calendar')) {
-      return Response.redirect('https://alexander.xin/calendar', 301);
+      return Response.redirect('https://alexander.xin/calendar/', 301);
     }
 
     const pathname =

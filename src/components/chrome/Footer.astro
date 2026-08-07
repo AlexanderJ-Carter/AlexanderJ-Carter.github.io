@@ -1,4 +1,5 @@
 ---
+import { BLOG_ORIGIN } from '../../config/site';
 import { getLangFromUrl } from '../../i18n/ui';
 import SiteFilings from './SiteFilings.astro';
 import ExposureMeter from '../widgets/ExposureMeter.astro';
@@ -8,6 +9,10 @@ const currentYear = new Date().getFullYear();
 
 function getLangPath(path: string) {
   return lang === 'zh-CN' ? path : `/${lang === 'en-GB' ? 'en' : lang}${path}`;
+}
+
+function blogPath(path: string): string {
+  return new URL(getLangPath(path), BLOG_ORIGIN).href;
 }
 
 function hostOf(href: string): string {
@@ -156,8 +161,8 @@ const t = i18n[lang as keyof typeof i18n] || i18n['zh-CN'];
 
 const browse = [
   { label: t.gallery, href: getLangPath('/gallery') },
-  { label: t.writing, href: getLangPath('/writing') },
-  { label: t.subscribe, href: getLangPath('/writing/subscribe') },
+  { label: t.writing, href: blogPath('/writing') },
+  { label: t.subscribe, href: blogPath('/writing/subscribe') },
   { label: t.projects, href: getLangPath('/projects') },
   { label: t.about, href: getLangPath('/about') },
   { label: t.tools, href: getLangPath('/tools') },
