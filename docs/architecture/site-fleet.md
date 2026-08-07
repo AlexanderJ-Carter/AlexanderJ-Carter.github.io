@@ -160,7 +160,7 @@ Layers **coexist**; they do not replace each other.
 | `paste.alexander.xin` | 是 | 是 | 否 | `http://127.0.0.1:80` → nginx `Paste` → `:8081` | **经 nginx**（CSP/sub_filter） | 否 | 直接打开粘贴 |
 | `tools.alexander.xin` | 是 | 是 | 否 | `http://127.0.0.1:80` → nginx `Tool` → `:8080` | **经 nginx**（统一头） | 否 | 直接打开工具箱 |
 | `id.alexander.xin` | 是 | 是 | IdP 自身 | `http://127.0.0.1:80` → nginx `PocketID` → `:1411` | **经 nginx**（关 Rocket Loader） | **否**（是 IdP） | Passkey / 管 OIDC 客户端 |
-| `git.alexander.xin` | 是 | 是 | 是 | `http://127.0.0.1:80` → nginx `Gitea` → `:3000` | **经 nginx**（`client_max_body_size 100M` + WS） | **是** | Access → Gitea（可再 Pocket ID SSO） |
+| `git.alexander.xin` | 是 | 是 | 是 | `http://127.0.0.1:80` → nginx `Gitea` → `:3000` | **经 nginx**（`client_max_body_size 512M` + WS） | **是** | Access → Gitea（可再 Pocket ID SSO） |
 | `docker.alexander.xin` | 是 | 是 | 是 | `http://127.0.0.1:80` → nginx `Portainer` → `:9100` | **经 nginx**（WS） | **是** | Access → Portainer |
 | `nginxui.alexander.xin` | 是 | 是 | 是 | `http://127.0.0.1:80` → nginx `nginx-ui` → `:9000` | **经 nginx**（WS） | **是** | Access → Nginx UI |
 | `remote.alexander.xin` | 是 | 是 | 是 | `http://127.0.0.1:80` → nginx `remote`（说明 + `/ws`） | **经 nginx**（WS） | **是** | 网页看 Key；客户端走 Tailscale |
@@ -183,6 +183,7 @@ Layers **coexist**; they do not replace each other.
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | Tunnel `mycloud` ingress         | HTTP 子域（含 **blog**）→ `http://127.0.0.1:80`；仅 `ssh` → `ssh://localhost:22`                                   |
 | nginx-ui                         | 边缘真相；`Blog` site：`server_name blog…`，`root` 同 www，`/` → `/writing/`；Web 为 www                             |
+| nginx-ui `site_check`            | **TLS 在 CF**；面板健康检查应用 **源站 HTTP**（compose `extra_hosts`→`127.0.0.1` + `site_configs` 按 `server_name`；勿跟公网 HTTPS/IPv6 hairpin） |
 | `www` Worker route               | **Removed** so Tunnel/server mirror is origin                                                                      |
 | `ops.alexander.xin`              | Worker `ops-portal` 运维首页（工具卡片 + 探针）；UI 文件在 `www…/ops/`；Access Launcher 为备选入口                 |
 | `blog.alexander.xin`             | **B2 真托管**：Tunnel → nginx；DNS CNAME → tunnel；已去掉 `redirect-profile` 路由；**无 Access**；MX/TXT 保留       |
