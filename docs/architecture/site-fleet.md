@@ -86,6 +86,8 @@ Layers **coexist**; they do not replace each other.
 | Host / Port / TLS | `smtp.resend.com` / `465` / `tls`                                        |
 | User              | `resend`（密码 = Resend sending API Key，服务器文件，不入库）            |
 | From              | `noreply@alexander.xin`（事务发信；无需收信 Routing）                    |
+| SPF（apex）       | `include:_spf.mx.cloudflare.net` + `include:amazonses.com`（2026-08-07） |
+| DKIM              | `resend._domainkey`（保留）；勿删 Email Routing 的 `cf2024-1._domainkey` |
 | 公开注册          | **关**（`allowUserSignups=disabled`）                                    |
 | 开                | 电子邮件验证；管理员发送的电子邮件登录代码；登录时的电子邮件通知         |
 | 关                | 用户自助请求的电子邮件登录代码；API 密钥过期邮件；「电子邮件默认已验证」 |
@@ -187,6 +189,42 @@ Layers **coexist**; they do not replace each other.
 | `about` / `bio` / `time` aliases | Worker redirects (`redirect-profile` / `legacy-redirect`)；apex `/writing*` 由 `writing-redirect` **301→blog**   |
 | Pocket ID ↔ Access OIDC          | **Live** (IdP `Pocket ID` + `Email OTP (break-glass)`)                                                             |
 | Access 覆盖面                    | 仅 ops / git / docker / nginxui / ssh / remote；**勿**给 paste / tools / www / id / **blog** / 公开站               |
+
+## DNS inventory (audited 2026-08-07)
+
+Zone `alexander.xin`：无 A/AAAA↔CNAME 冲突；隧道与公开站均为**橙云**；无灰云暴露源站公网 IP。邮件 MX/TXT（apex + `blog.`）**保留**，Email Routing 已启用且 `synced`。
+
+| 主机 | DNS | 目标 / 说明 | 代理 |
+| ---- | --- | ----------- | ---- |
+| `alexander.xin`（apex） | A×4 + AAAA×4 | GitHub Pages IP（橙云） | 橙 |
+| `www` `blog` `id` `git` `docker` `nginxui` `paste` `tools` `remote` `ssh` | CNAME | `…cfargotunnel.com`（`mycloud`） | 橙 |
+| `ops` `api` | AAAA `100::` | Worker 占位（`ops-portal` / `time-api`） | 橙 |
+| `cook` `lab` `linux-command` `netq` `yearly` `contact` | CNAME | `alexanderj-carter.github.io` | 橙 |
+| `about` `bio` `time` | CNAME → Pages + Worker 路由 | 兼容重定向；可改为 `100::` 但非必须 | 橙 |
+| apex / `blog.` | MX + SPF TXT | Cloudflare Email Routing | DNS only |
+| `resend._domainkey` | TXT | Resend DKIM | DNS only |
+| `cf2024-1._domainkey` / `_dmarc` | TXT | Email Routing DKIM + DMARC `p=none` | DNS only |
+
+**已改（API）：** apex SPF 增补 `include:amazonses.com`（Resend 出站），现为：
+
+`v=spf1 include:_spf.mx.cloudflare.net include:amazonses.com ~all`
+
+**未改（有意）：** `blog.` MX/TXT；无 CAA（空 CAA = 不限制签发；若加 CAA 须覆盖 Cloudflare 全部合作 CA，建议 Dashboard 一键）。
+
+**勿做：** 给 Tunnel 主机加指向 VPS 的 A/AAAA（会灰云暴露源 IP 或与 CNAME 冲突）；源站双栈收益有限。
+
+## IPv6 notes (audited 2026-08-07)
+
+| 层 | 结论 |
+| -- | ---- |
+| 访客侧（橙云） | Tunnel / Pages / Worker 由 Cloudflare 提供双栈；**不必**在源站 DNS 再挂 AAAA |
+| VPS `eth0` | 有全球 IPv6；**出站 IPv6 超时**（`curl -6` 失败），IPv4 正常 |
+| nginx-ui | 已 `listen 80` + `listen [::]:80`；容器业务口绑 `127.0.0.1`（正确） |
+| Tailscale | IPv4 `100.126.166.111` + ULA IPv6 可用 |
+| cloudflared | 建议固定 `--edge-ip-version 4` / `TUNNEL_EDGE_IP_VERSION=4`，避免坏 IPv6 上的 QUIC 噪声被当成故障。脚本：`~/fleet/cloudflared/apply-edge-ip4.sh`（需本机 sudo） |
+| Windows 本机 | 若浏览器要走 IPv6 访橙云站：网卡启用 IPv6 即可；与源站无关 |
+
+**nginx-ui 假超时（已修）：** `site_configs` 关掉退役主机、`https://www:443`（边缘 TLS）、apex Pages 探测与重复项；保留现网 HTTP `:80`。`Host=127.0.0.1`、`EnableHTTPS=false` 已就位。
 
 ## Retired / removed
 
