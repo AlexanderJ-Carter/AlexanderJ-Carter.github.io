@@ -589,7 +589,11 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             desc: 'Chercheurs',
           },
           { name: 'Contact', path: '/contact', desc: 'Écrire' },
-          { name: 'Journal', path: '/changelog', desc: 'Historique des versions' },
+          {
+            name: 'Journal',
+            path: '/changelog',
+            desc: 'Historique des versions',
+          },
           { name: 'Plan du site', path: '/sitemap', desc: 'Vous êtes ici' },
         ],
       },

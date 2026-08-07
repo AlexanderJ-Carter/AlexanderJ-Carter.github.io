@@ -68,15 +68,15 @@ Cloudflare `_headers`: long cache for hashed assets; shorter HTML revalidation. 
 
 ## Final Numbers
 
-| Metric        | Before | After |
-| ------------- | ------ | ----- |
-| Performance   | 47     | 97    |
-| LCP           | 4.8s   | 0.95s |
-| FCP           | 2.1s   | 0.8s  |
-| CLS           | 0.18   | 0.01  |
-| TBT           | 380ms  | 45ms  |
-| Total transfer| 5.1MB  | 680KB |
-| Requests      | 47     | 18    |
+| Metric         | Before | After |
+| -------------- | ------ | ----- |
+| Performance    | 47     | 97    |
+| LCP            | 4.8s   | 0.95s |
+| FCP            | 2.1s   | 0.8s  |
+| CLS            | 0.18   | 0.01  |
+| TBT            | 380ms  | 45ms  |
+| Total transfer | 5.1MB  | 680KB |
+| Requests       | 47     | 18    |
 
 ## Trade-offs
 

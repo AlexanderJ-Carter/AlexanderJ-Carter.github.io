@@ -285,8 +285,8 @@ export const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
-      title: 'Canal d\'écriture',
-      desc: 'Articles longs sur l\'ingénierie, le design, la photographie et les outils, via Content Collections.',
+      title: "Canal d'écriture",
+      desc: "Articles longs sur l'ingénierie, le design, la photographie et les outils, via Content Collections.",
       tags: ['Writing', 'Astro', 'Content'],
       category: 'web',
       status: 'done',

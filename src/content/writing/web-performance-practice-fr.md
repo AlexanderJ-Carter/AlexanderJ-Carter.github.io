@@ -52,14 +52,14 @@ Cloudflare `_headers` : cache long assets hashés ; HTML plus court. `preconnect
 
 ## Chiffres finaux
 
-| Métrique      | Avant | Après |
-| ------------- | ----- | ----- |
-| Performance   | 47    | 97    |
-| LCP           | 4,8s  | 0,95s |
-| FCP           | 2,1s  | 0,8s  |
-| CLS           | 0,18  | 0,01  |
-| TBT           | 380ms | 45ms  |
-| Transfert     | 5,1Mo | 680Ko |
+| Métrique    | Avant | Après |
+| ----------- | ----- | ----- |
+| Performance | 47    | 97    |
+| LCP         | 4,8s  | 0,95s |
+| FCP         | 2,1s  | 0,8s  |
+| CLS         | 0,18  | 0,01  |
+| TBT         | 380ms | 45ms  |
+| Transfert   | 5,1Mo | 680Ko |
 
 ## Ce que je n’ai pas fait
 

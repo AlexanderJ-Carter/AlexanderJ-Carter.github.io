@@ -11,10 +11,7 @@ const lang = resolveLang(Astro.props.lang);
 const t = changelogCopy[lang];
 const home = getLangPath(lang, '/');
 
-const raw = fs.readFileSync(
-  path.join(process.cwd(), 'CHANGELOG.md'),
-  'utf8'
-);
+const raw = fs.readFileSync(path.join(process.cwd(), 'CHANGELOG.md'), 'utf8');
 const releases = parseChangelog(raw);
 
 function sectionLabel(heading: string): string {
@@ -51,29 +48,24 @@ function versionLabel(version: string): string {
                   {versionLabel(release.version)}
                 </h2>
                 {release.date && (
-                  <time
-                    class="release-date meta-mono"
-                    datetime={release.date}
-                  >
+                  <time class="release-date meta-mono" datetime={release.date}>
                     {release.date}
                   </time>
                 )}
               </header>
 
-              {
-                release.sections.map((section) => (
-                  <div class="release-section">
-                    <h3 class="release-section-title">
-                      {sectionLabel(section.heading)}
-                    </h3>
-                    <ul class="release-list">
-                      {section.items.map((item) => (
-                        <li>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))
-              }
+              {release.sections.map((section) => (
+                <div class="release-section">
+                  <h3 class="release-section-title">
+                    {sectionLabel(section.heading)}
+                  </h3>
+                  <ul class="release-list">
+                    {section.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </article>
           ))
         }

@@ -1,7 +1,10 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-const src = fs.readFileSync('src/components/templates/GalleryTemplate.astro', 'utf8');
+const src = fs.readFileSync(
+  'src/components/templates/GalleryTemplate.astro',
+  'utf8'
+);
 const start = src.indexOf('const categoriesData');
 const end = src.indexOf('\nconst categories = categoriesData');
 const block = src.slice(start, end);

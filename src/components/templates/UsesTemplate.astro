@@ -202,11 +202,13 @@ const siteGuide = siteGuideData[lang as Lang] || siteGuideData['en-GB'];
           </h2>
           <ul class="space-y-3">
             {
-              [text.feat1, text.feat2, text.feat3, text.feat4, text.feat5].map((feat) => (
-                <li class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
-                  {feat}
-                </li>
-              ))
+              [text.feat1, text.feat2, text.feat3, text.feat4, text.feat5].map(
+                (feat) => (
+                  <li class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
+                    {feat}
+                  </li>
+                )
+              )
             }
           </ul>
         </section>

@@ -1,13 +1,15 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-const src = fs.readFileSync('src/components/templates/TimelineTemplate.astro', 'utf8');
+const src = fs.readFileSync(
+  'src/components/templates/TimelineTemplate.astro',
+  'utf8'
+);
 const start = src.indexOf('const timelineData:');
 const end = src.indexOf('const content = timelineData');
-const block = src.slice(start, end).replace(
-  /const timelineData:[\s\S]*?= \{/,
-  'var timelineData = {'
-);
+const block = src
+  .slice(start, end)
+  .replace(/const timelineData:[\s\S]*?= \{/, 'var timelineData = {');
 
 const sandbox = {};
 vm.runInNewContext(block + '; timelineData=timelineData;', sandbox);

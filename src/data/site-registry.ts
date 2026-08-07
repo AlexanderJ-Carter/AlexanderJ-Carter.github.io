@@ -207,9 +207,12 @@ export const siteRegistry: SiteEntry[] = [
       ru: 'Рецепты',
     },
     descriptions: {
-      'zh-CN': '双源菜谱聚合：老乡鸡做法库 × 程序员做饭指南，577+ 道菜，搜索、收藏、PWA。',
-      'zh-TW': '雙源食譜聚合：老鄉雞做法庫 × 程式員做飯指南，577+ 道菜，搜尋、收藏、PWA。',
-      'en-GB': 'Dual-source recipe hub: CookLikeHOC × HowToCook, 577+ dishes, search, favorites, PWA.',
+      'zh-CN':
+        '双源菜谱聚合：老乡鸡做法库 × 程序员做饭指南，577+ 道菜，搜索、收藏、PWA。',
+      'zh-TW':
+        '雙源食譜聚合：老鄉雞做法庫 × 程式員做飯指南，577+ 道菜，搜尋、收藏、PWA。',
+      'en-GB':
+        'Dual-source recipe hub: CookLikeHOC × HowToCook, 577+ dishes, search, favorites, PWA.',
       fr: 'Hub recettes dual-source : CookLikeHOC × HowToCook, 577+ plats, recherche et favoris.',
       ru: 'Агрегатор рецептов: CookLikeHOC × HowToCook, 577+ блюд, поиск и избранное.',
     },

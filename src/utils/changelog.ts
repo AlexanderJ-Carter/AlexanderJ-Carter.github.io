@@ -15,7 +15,9 @@ export function parseChangelog(markdown: string): ChangelogRelease[] {
   let currentSection: ChangelogSection | null = null;
 
   for (const line of markdown.split('\n')) {
-    const releaseMatch = line.match(/^## \[(.+?)\](?: - (\d{4}-\d{2}-\d{2}))?$/);
+    const releaseMatch = line.match(
+      /^## \[(.+?)\](?: - (\d{4}-\d{2}-\d{2}))?$/
+    );
     if (releaseMatch) {
       if (current && hasContent(current)) releases.push(current);
       current = {
