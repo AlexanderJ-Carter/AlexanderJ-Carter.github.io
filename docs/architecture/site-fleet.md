@@ -7,7 +7,7 @@ Control plane is unified; hosting stays distributed.
 | Layer      | Owns                              | Examples                                                       |
 | ---------- | --------------------------------- | -------------------------------------------------------------- |
 | GitHub     | Source + static fronts            | `alexander.xin`, cook, lab, netq, linux-command, yearly        |
-| Cloudflare | DNS, CDN, Access, Workers, Tunnel | apex CDN, `api.alexander.xin/time`, Access apps, blog redirect |
+| Cloudflare | DNS, CDN, Access, Workers, Tunnel | apex CDN, `api.alexander.xin/time`, Access apps, blog via Tunnel |
 | SSH Cloud  | Stateful services only            | Pocket ID, Gitea, Portainer, PrivateBin, it-tools, www mirror  |
 
 `www.alexander.xin` is the **server mirror** (better mainland reachability).  
@@ -47,7 +47,7 @@ Layers **coexist**; they do not replace each other.
 | Domain                  | Layer 1 | Layer 2                          | Notes                                                                         |
 | ----------------------- | ------- | -------------------------------- | ----------------------------------------------------------------------------- |
 | `alexander.xin` / `www` | —       | —                                | Public SSG; no visitor login                                                  |
-| `blog.alexander.xin`    | —       | —                                | Worker `redirect-profile` → `/writing/`（公开读者）；MX/TXT 邮件保留          |
+| `blog.alexander.xin`    | —       | —                                | 公开写作主场：Tunnel → nginx-ui，同仓 `dist`；**无 Access**；MX/TXT 邮件保留  |
 | `id.alexander.xin`      | —       | Pocket ID                        | Must stay reachable without Access                                            |
 | `ops.alexander.xin`     | Access  | —                                | 只读门户                                                                      |
 | `docker.alexander.xin`  | Access  | Portainer OIDC（可选）           | Logout URL 应留空，勿触发 IdP end-session                                     |
@@ -128,31 +128,65 @@ Layers **coexist**; they do not replace each other.
 | Service              | Role                         | Access model                                                                 |
 | -------------------- | ---------------------------- | ---------------------------------------------------------------------------- |
 | `rustdesk-hbbs/hbbr` | RustDesk ID + Relay          | 协议口仅经 UFW / Tailscale 可达；`remote.alexander.xin` HTTP 经 Access       |
-| `vlmcsd`             | Windows/Office KMS（自用）   | **仅**绑定 Tailscale `100.126.166.111:1688`；不是站群产品，不上 Ops 主推卡片 |
+| `vlmcsd`             | Windows/Office KMS（自用）   | 非 HTTP，**不能**套 Cloudflare Access；默认 bind `0.0.0.0:1688`，公网靠 UFW 挡；日常走 Tailscale。不上 Ops 主推卡片 |
 
-### RustDesk（2026-08-07 加固）
+### RustDesk（2026-08-07）
 
 - 单元：`rustdesk-hbbs.service` / `rustdesk-hbbr.service`（数据目录 `/var/lib/rustdesk-server/`）
-- 客户端：ID/Relay = Tailscale `100.126.166.111`（主机名 `cloud`）；Key = `id_ed25519.pub`（Access 页 `remote.alexander.xin` 可见；**私钥勿入库**）
-- hbbs 已 `-r 100.126.166.111 -k <pubkey>`；私钥权限 `600`
-- HTTP：`remote.alexander.xin`（Tunnel → nginx-ui site `remote`）说明页 + `/ws/id` `/ws/relay`；Access 应用 `RustDesk`（Gmail+QQ，IdP = Pocket ID + Email OTP）
-- 公网不要裸开 21115–21119；当前 UFW 默认 deny + Tailscale0 allow
+- **网页**：`remote.alexander.xin` 经 Access（Pocket ID Passkey / Email OTP）；匿名应 302
+- **客户端**：ID/Relay = Tailscale `100.126.166.111`（主机名 `cloud`）；Key = `id_ed25519.pub`（Access 登录后说明页可见；**私钥勿入库**）
+- hbbs：`-r 100.126.166.111 -k <pubkey>`；私钥权限 `600`
+- 协议口 21115–21119 监听全接口，但 UFW 默认 deny + `Anywhere on tailscale0` allow → **公网不通、Tailscale 通**
 
-### KMS / vlmcsd（暴露面收口）
+### KMS / vlmcsd（先问清用法再收口）
 
-- 单元：`/etc/systemd/system/vlmcsd.service` → `/opt/kms/vlmcsd -D -L 100.126.166.111:1688 -v`
-- 访问：同一 Tailnet 内 `100.126.166.111:1688`
-- **不要**挂 Access 子域（非 HTTP）；局域网临时公网激活：改 `-L 0.0.0.0:1688` + 临时 UFW allow，用完改回 Tailscale-only（利弊：方便激活 vs 扫描面）
+- KMS 是 TCP 1688，无网页登录，**无法**挂 Access / Passkey
+- 当前单元：`-L 0.0.0.0:1688`（与加固前一致）；**未**对公网开 UFW 1688（不扩大暴露）
+- 实测（2026-08-07）：公网 `IP:1688` 不通；Tailscale `100.126.166.111:1688` 通
+- 两种方案（互不锁死，需本人确认后再改）：
+  1. **推荐默认（既能用又相对安全）**：保持现状 — bind 全接口 + UFW 挡公网；激活地址填 `100.126.166.111:1688`（设备需在同一 Tailnet）
+  2. **更严**：bind 仅 Tailscale `100.126.166.111:1688`（机器无 Tailscale 时不可用）
+  3. **临时公网激活**（扩大暴露，用完收回）：UFW allow 1688 +（可选）云安全组放行；**默认不要开**
+
+## Edge routing decision (2026-08-07)
+
+**原则：** HTTP 边缘真相在 **nginx-ui 容器**（`127.0.0.1:80`，按 `server_name` 分流）。Tunnel 远程配置已统一；勿再给同一 hostname 配「直连端口 + nginx」双路径。主机 `nginx` 服务 **inactive**（遗留 `sites-enabled` 勿当真相；清理需 sudo）。
+
+| Hostname | 公网 | HTTP | 需登录 | 当前 Tunnel service | 应有路径 | Access | 本人怎么用 |
+| -------- | ---- | ---- | ------ | ------------------- | -------- | ------ | ---------- |
+| `www.alexander.xin` | 是 | 是 | 否 | `http://127.0.0.1:80` → nginx `Web` | **经 nginx**（静态） | 否 | 国内镜像浏览 |
+| `paste.alexander.xin` | 是 | 是 | 否 | `http://127.0.0.1:80` → nginx `Paste` → `:8081` | **经 nginx**（CSP/sub_filter） | 否 | 直接打开粘贴 |
+| `tools.alexander.xin` | 是 | 是 | 否 | `http://127.0.0.1:80` → nginx `Tool` → `:8080` | **经 nginx**（统一头） | 否 | 直接打开工具箱 |
+| `id.alexander.xin` | 是 | 是 | IdP 自身 | `http://127.0.0.1:80` → nginx `PocketID` → `:1411` | **经 nginx**（关 Rocket Loader） | **否**（是 IdP） | Passkey / 管 OIDC 客户端 |
+| `git.alexander.xin` | 是 | 是 | 是 | `http://127.0.0.1:80` → nginx `Gitea` → `:3000` | **经 nginx**（`client_max_body_size 100M` + WS） | **是** | Access → Gitea（可再 Pocket ID SSO） |
+| `docker.alexander.xin` | 是 | 是 | 是 | `http://127.0.0.1:80` → nginx `Portainer` → `:9100` | **经 nginx**（WS） | **是** | Access → Portainer |
+| `nginxui.alexander.xin` | 是 | 是 | 是 | `http://127.0.0.1:80` → nginx `nginx-ui` → `:9000` | **经 nginx**（WS） | **是** | Access → Nginx UI |
+| `remote.alexander.xin` | 是 | 是 | 是 | `http://127.0.0.1:80` → nginx `remote`（说明 + `/ws`） | **经 nginx**（WS） | **是** | 网页看 Key；客户端走 Tailscale |
+| `ssh.alexander.xin` | 是 | Access SSH | 是 | `ssh://localhost:22` | **Tunnel 直连 SSH**（不经 nginx） | **是** | 日常 `ssh cloud`；浏览器仅应急 |
+| `ops.alexander.xin` | 是 | 是 | 是 | （Worker，非 Tunnel） | Cloudflare Worker | **是** | 运维首页 |
+| `alexander.xin`（apex） | 是 | 是 | 否 | — | GitHub Pages + CDN | 否 | 全球主站 |
+| `blog.alexander.xin` | 是 | 是 | 否 | `http://127.0.0.1:80` → nginx `Blog`（同 www `dist`） | **经 nginx**（静态写作主场） | **否** | 读文章 / RSS；`/` → `/writing/` |
+| `about` / `bio` / `time` | 是 | 是 | 否 | — | Worker 重定向 | 否 | 别名入口 |
+| `api.alexander.xin/time*` | 是 | 是 | 否 | — | Worker `time-api` | 否 | `GET/HEAD …/time` 或 `/time/now` |
+| RustDesk 协议口 | 否* | 否 | N/A | **不进** HTTP Tunnel | Tailscale（UFW 挡公网） | 不适用 | ID/Relay=`100.126.166.111` |
+| KMS `1688` | 否* | 否 | 无法 Access | **不进** HTTP Tunnel | Tailscale（见上节） | 不适用 | 激活服务器填 Tailscale IP |
+
+\*进程可能 `0.0.0.0` 监听，但公网实测不通（UFW / 云安全组）。
+
+**为何不全直连容器端口：** 已统一走 nginx，便于 `server_name`、转发头、WS、`client_max_body_size`、PrivateBin CSP 修补、Pocket ID `data-cfasync`。再开 Tunnel→`:8081` 等会与现网打架。
 
 ## Edge control
 
 | Item                             | Status                                                                                                             |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Tunnel `mycloud` ingress         | HTTP 子域（含 **blog**）→ `http://127.0.0.1:80`；仅 `ssh` → `ssh://localhost:22`                                   |
+| nginx-ui                         | 边缘真相；`Blog` site：`server_name blog…`，`root` 同 www，`/` → `/writing/`；Web 为 www                             |
 | `www` Worker route               | **Removed** so Tunnel/server mirror is origin                                                                      |
 | `ops.alexander.xin`              | Worker `ops-portal` 运维首页（工具卡片 + 探针）；UI 文件在 `www…/ops/`；Access Launcher 为备选入口                 |
-| `blog.alexander.xin`             | Worker `redirect-profile` 公开 302 → `alexander.xin/writing/`（MX/TXT 保留）                                       |
-| `about` / `bio` / `time` aliases | Still Worker redirects (`redirect-profile` / `legacy-redirect`); Redirect Rules API not available on current token |
+| `blog.alexander.xin`             | **B2 真托管**：Tunnel → nginx；DNS CNAME → tunnel；已去掉 `redirect-profile` 路由；**无 Access**；MX/TXT 保留       |
+| `about` / `bio` / `time` aliases | Worker redirects (`redirect-profile` / `legacy-redirect`)；apex `/writing*` 由 `legacy-redirect` **301→blog**     |
 | Pocket ID ↔ Access OIDC          | **Live** (IdP `Pocket ID` + `Email OTP (break-glass)`)                                                             |
+| Access 覆盖面                    | 仅 ops / git / docker / nginxui / ssh / remote；**勿**给 paste / tools / www / id / **blog** / 公开站               |
 
 ## Retired / removed
 
@@ -167,18 +201,19 @@ Layers **coexist**; they do not replace each other.
 | Access app `*.newyear-eki.pages.dev`          | Deleted                                                                                                 |
 | AdGuard Home                                  | Fully removed (compose + data + stack dir)                                                              |
 
-## Blog
+## Blog（B2：同仓产物真托管）
 
-**博客 = Astro `/writing`（同仓完备阅读体验）。** 不恢复 Ghost；不上 Listmonk / Directus（内存不足时不做）。Canonical 仍为 `alexander.xin`（本回合未切 blog. 真托管）。
+**博客 = Astro `/writing`，主场 `blog.alexander.xin`。** 不恢复 Ghost；不上 Listmonk / Directus（内存不足时不做）。
 
-| Item     | Detail                                                                                          |
-| -------- | ----------------------------------------------------------------------------------------------- |
-| 正式阅读 | `https://alexander.xin/writing/`（及各语言前缀）                                                |
-| 入口别名 | `https://blog.alexander.xin` → Worker 302 → `/writing/`（公开；**不是**另一套独立站）           |
-| 订阅     | `/writing/subscribe` + 各语言 `/rss.xml`；无访客登录；邮件订阅暂缓                              |
-| 归档     | `/writing/archive`、`/writing/tags`、`/writing/categories`                                      |
-| 写作     | Git + Markdown：`src/content/writing`                                                           |
-| 个人主页登录 | 不加                                                                                         |
+| Item       | Detail                                                                                                |
+| ---------- | ----------------------------------------------------------------------------------------------------- |
+| 正式阅读   | `https://blog.alexander.xin/writing/`（及各语言前缀）；canonical / RSS `site` → blog 主机               |
+| 边缘路径   | Tunnel → nginx-ui（`server_name blog.alexander.xin`，`root` 同 www `/var/www/alexander.xin/dist`）     |
+| apex       | `alexander.xin/writing*` → **301** → `blog.alexander.xin` 同路径（`legacy-redirect` Worker）           |
+| www        | 保留全文 + canonical→blog；**禁止** www↔apex 互跳                                                     |
+| 订阅       | `blog…/writing/subscribe` + `https://blog.alexander.xin/.../rss.xml`；无访客登录；邮件订阅暂缓         |
+| Access     | **不对 blog. 加 Access**（公开读者）                                                                  |
+| 写作       | Git + Markdown：`src/content/writing`                                                                 |
 
 ## Planned (memory-gated)
 

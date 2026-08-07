@@ -15,7 +15,7 @@ This site does **not** require agent registration and does **not** issue OAuth a
 Supported identity type: **anonymous**.
 
 - Public HTML/Markdown pages: no credential.
-- Time API (`https://api.alexander.xin/time/now`): no credential.
+- Time API (`https://api.alexander.xin/time` or `/time/now`): no credential.
 - MCP (`https://alexander.xin/mcp`): no credential.
 
 There is no `register_uri` that creates accounts. Do not invent signup forms or scrape `/verify` Turnstile flows for agents — that gate is for human About/Contact pages only.

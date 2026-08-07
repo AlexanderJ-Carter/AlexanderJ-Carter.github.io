@@ -110,7 +110,7 @@
       "status": "live",
       "label": "Tool Hub",
       "access": false,
-      "note": "it-tools behind Tunnel; Bot Challenge may appear"
+      "note": "Tunnel → nginx-ui → it-tools :8080; Bot Challenge may appear"
     },
     {
       "id": "paste",
@@ -120,7 +120,8 @@
       "visibility": "public",
       "status": "live",
       "label": "PrivateBin",
-      "access": false
+      "access": false,
+      "note": "Tunnel → nginx-ui → privatebin :8081"
     },
     {
       "id": "time-api",
@@ -130,7 +131,8 @@
       "visibility": "public",
       "status": "live",
       "label": "Time API",
-      "access": false
+      "access": false,
+      "note": "Worker time-api; GET/HEAD /time and /time/now"
     },
     {
       "id": "identity",
@@ -141,7 +143,7 @@
       "status": "live",
       "label": "Pocket ID",
       "access": false,
-      "note": "Passkey OIDC IdP; no Access in front (is the IdP)"
+      "note": "Tunnel → nginx-ui → pocket-id :1411; no Access (is the IdP)"
     },
     {
       "id": "ops",
@@ -228,6 +230,40 @@
       "label": "Blog alias → Writing",
       "access": false,
       "note": "Worker 302 → alexander.xin/writing/; not a separate site; Ghost retired; author via Git"
+    },
+    {
+      "id": "about-alias",
+      "url": "https://about.alexander.xin",
+      "path": "/about",
+      "category": "alias",
+      "host": "cloudflare-worker",
+      "visibility": "alias",
+      "status": "live",
+      "label": "about → /about",
+      "access": false
+    },
+    {
+      "id": "bio-alias",
+      "url": "https://bio.alexander.xin",
+      "path": "/about",
+      "category": "alias",
+      "host": "cloudflare-worker",
+      "visibility": "alias",
+      "status": "live",
+      "label": "bio → /about",
+      "access": false
+    },
+    {
+      "id": "time-alias",
+      "url": "https://time.alexander.xin",
+      "path": "/calendar",
+      "category": "alias",
+      "host": "cloudflare-worker",
+      "visibility": "alias",
+      "status": "live",
+      "label": "time → /calendar",
+      "access": false
     }
   ]
 }
+
