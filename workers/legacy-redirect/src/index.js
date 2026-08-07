@@ -54,7 +54,9 @@ function legacyBlogAlias(path) {
   const lang = path.match(/^\/(en|zh-TW|fr|ru)\/(blog|subscribe)\/?$/);
   if (!lang) return null;
   const prefix = `/${lang[1]}`;
-  return lang[2] === 'blog' ? `${prefix}/writing/` : `${prefix}/writing/subscribe/`;
+  return lang[2] === 'blog'
+    ? `${prefix}/writing/`
+    : `${prefix}/writing/subscribe/`;
 }
 
 export default {
