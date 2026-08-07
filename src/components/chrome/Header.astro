@@ -1371,10 +1371,13 @@ const mainNavItems: NavItem[] = [
     mobileMenuToggle?.setAttribute('aria-label', mobileMenuOpenLabel);
     document.documentElement.style.overflow = '';
     clearTimeout(mobileCloseTimer);
-    mobileCloseTimer = setTimeout(() => {
-      mobileMenu?.classList.add('hidden');
-      mobileMenu?.classList.remove('menu-closing');
-    }, preferReducedMotion ? 0 : 300);
+    mobileCloseTimer = setTimeout(
+      () => {
+        mobileMenu?.classList.add('hidden');
+        mobileMenu?.classList.remove('menu-closing');
+      },
+      preferReducedMotion ? 0 : 300
+    );
   }
 
   mobileMenuToggle?.addEventListener('click', () => {

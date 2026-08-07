@@ -22,9 +22,7 @@ export function resolveLang(lang: string | undefined): Lang {
 /** Strip /en|/zh-TW|/fr|/ru|/zh-CN|/en-GB prefix from a pathname. */
 export function stripLangPrefix(pathname: string): string {
   const cleaned = pathname.replace(/\/+$/, '') || '/';
-  const match = cleaned.match(
-    /^\/(en|en-GB|zh-TW|zh-CN|fr|ru)(?=\/|$)/i
-  );
+  const match = cleaned.match(/^\/(en|en-GB|zh-TW|zh-CN|fr|ru)(?=\/|$)/i);
   if (!match) return cleaned === '' ? '/' : cleaned;
   const rest = cleaned.slice(match[0].length) || '/';
   return rest.startsWith('/') ? rest : `/${rest}`;

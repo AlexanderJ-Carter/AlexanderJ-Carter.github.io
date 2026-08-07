@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { useTranslations } from '../../i18n/ui';
-import { gallerySrcFallback, gallerySrcSet, galleryLightboxSrc } from '../../i18n/types';
+import {
+  gallerySrcFallback,
+  gallerySrcSet,
+  galleryLightboxSrc,
+} from '../../i18n/types';
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
@@ -1644,7 +1648,12 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
 
     btn.addEventListener('keydown', (e: Event) => {
       const ke = e as KeyboardEvent;
-      if (ke.key !== 'ArrowRight' && ke.key !== 'ArrowLeft' && ke.key !== 'Home' && ke.key !== 'End') {
+      if (
+        ke.key !== 'ArrowRight' &&
+        ke.key !== 'ArrowLeft' &&
+        ke.key !== 'Home' &&
+        ke.key !== 'End'
+      ) {
         return;
       }
       ke.preventDefault();
@@ -1653,7 +1662,8 @@ const sourceUi = sourceText[lang as Lang] || sourceText['en-GB'];
       if (i < 0) return;
       let next = i;
       if (ke.key === 'ArrowRight') next = (i + 1) % tabs.length;
-      else if (ke.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+      else if (ke.key === 'ArrowLeft')
+        next = (i - 1 + tabs.length) % tabs.length;
       else if (ke.key === 'Home') next = 0;
       else if (ke.key === 'End') next = tabs.length - 1;
       tabs[next]?.focus();
