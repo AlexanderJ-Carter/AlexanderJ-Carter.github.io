@@ -2,91 +2,144 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../chrome/PageHero.astro';
 import { skipVerify, turnstileSiteKey, isDev } from '../../config/site';
-import { resolveLang } from '../../i18n/types';
+import { resolveLang, getLangPath } from '../../i18n/types';
 
 const lang = resolveLang(Astro.props.lang);
+const homeHref = getLangPath(lang, '/');
 
 const copy = {
   'zh-CN': {
     title: '安全验证',
-    desc: '完成验证后即可访问受保护页面。',
-    verifying: '正在确认你是真人访客',
-    verifyDesc: '通常只需几秒。完成后会自动跳转。',
-    helpTitle: '为什么需要验证？',
+    desc: '完成一次轻量校验后即可打开受保护页面。',
+    verifying: '确认你是真人访客',
+    verifyDesc: '通常几秒内完成，通过后会自动继续。',
+    loading: '正在加载验证组件…',
+    errorTitle: '验证未能完成',
+    errorDesc: '网络不稳或组件加载失败。你可以重试，或稍后再访问。',
+    retry: '重新验证',
+    expired: '验证已过期，请再试一次。',
+    helpTitle: '为什么需要这一步？',
     helpDesc:
-      '用于降低恶意爬取与滥用风险。验证由 Cloudflare Turnstile 提供，不收集额外账号信息。',
-    footer: 'Powered by Cloudflare Turnstile',
+      '用于降低恶意爬取与滥用。校验由 Cloudflare Turnstile 提供，不创建账号，也不收集额外个人资料。',
+    footer: 'Cloudflare Turnstile',
     skipTitle: '本地开发模式',
     skipDesc: '当前已跳过人机验证。点击下方按钮继续访问。',
     skipButton: '跳过并继续',
     forceHint:
       '正式环境仍会要求验证。需要强制测试时可设 PUBLIC_FORCE_VERIFY=true。',
+    back: '返回主站',
+    statusReady: '验证组件已就绪',
+    statusSuccess: '验证通过，正在跳转…',
   },
   'zh-TW': {
     title: '安全驗證',
-    desc: '完成驗證後即可存取受保護頁面。',
-    verifying: '正在確認你是真人訪客',
-    verifyDesc: '通常只需幾秒。完成後會自動跳轉。',
-    helpTitle: '為什麼需要驗證？',
+    desc: '完成一次輕量校驗後即可打開受保護頁面。',
+    verifying: '確認你是真人訪客',
+    verifyDesc: '通常幾秒內完成，通過後會自動繼續。',
+    loading: '正在載入驗證元件…',
+    errorTitle: '驗證未能完成',
+    errorDesc: '網路不穩或元件載入失敗。你可以重試，或稍後再訪問。',
+    retry: '重新驗證',
+    expired: '驗證已過期，請再試一次。',
+    helpTitle: '為什麼需要這一步？',
     helpDesc:
-      '用於降低惡意爬取與濫用風險。驗證由 Cloudflare Turnstile 提供，不收集額外帳號資訊。',
-    footer: 'Powered by Cloudflare Turnstile',
+      '用於降低惡意爬取與濫用。校驗由 Cloudflare Turnstile 提供，不建立帳號，也不收集額外個人資料。',
+    footer: 'Cloudflare Turnstile',
     skipTitle: '本地開發模式',
     skipDesc: '目前已跳過真人驗證。點擊下方按鈕繼續訪問。',
     skipButton: '跳過並繼續',
     forceHint:
       '正式環境仍會要求驗證。需要強制測試時可設 PUBLIC_FORCE_VERIFY=true。',
+    back: '返回主站',
+    statusReady: '驗證元件已就緒',
+    statusSuccess: '驗證通過，正在跳轉…',
   },
   'en-GB': {
     title: 'Security check',
-    desc: 'Complete verification to open protected pages.',
-    verifying: 'Confirming you are a real visitor',
-    verifyDesc: 'This usually takes a few seconds, then we redirect you.',
+    desc: 'A quick check opens the protected page.',
+    verifying: 'Confirm you are a real visitor',
+    verifyDesc: 'Usually a few seconds, then we continue automatically.',
+    loading: 'Loading verification…',
+    errorTitle: 'Verification did not finish',
+    errorDesc:
+      'The network may be unstable, or the widget failed to load. Retry, or come back later.',
+    retry: 'Try again',
+    expired: 'Verification expired. Please try again.',
     helpTitle: 'Why this step?',
     helpDesc:
-      'It reduces scraping and abuse. Verification is provided by Cloudflare Turnstile and does not create an account.',
-    footer: 'Powered by Cloudflare Turnstile',
+      'It reduces scraping and abuse. Cloudflare Turnstile handles the check — no account, no extra profile data.',
+    footer: 'Cloudflare Turnstile',
     skipTitle: 'Local development',
     skipDesc:
       'Human verification is skipped here. Continue to your destination.',
     skipButton: 'Skip and continue',
     forceHint:
       'Production still requires Turnstile. Set PUBLIC_FORCE_VERIFY=true to test the gate in dev.',
+    back: 'Back home',
+    statusReady: 'Verification ready',
+    statusSuccess: 'Verified — redirecting…',
   },
   fr: {
     title: 'Vérification',
-    desc: 'Terminez la vérification pour ouvrir les pages protégées.',
-    verifying: 'Confirmation que vous êtes un visiteur réel',
-    verifyDesc: 'Cela prend généralement quelques secondes, puis redirection.',
+    desc: 'Une vérification légère ouvre les pages protégées.',
+    verifying: 'Confirmer que vous êtes un visiteur réel',
+    verifyDesc:
+      'Quelques secondes en général, puis poursuite automatique.',
+    loading: 'Chargement de la vérification…',
+    errorTitle: 'Vérification interrompue',
+    errorDesc:
+      'Réseau instable ou widget indisponible. Réessayez, ou revenez plus tard.',
+    retry: 'Réessayer',
+    expired: 'Vérification expirée. Réessayez.',
     helpTitle: 'Pourquoi cette étape ?',
     helpDesc:
-      'Elle réduit le scraping et les abus. La vérification est fournie par Cloudflare Turnstile.',
-    footer: 'Propulsé par Cloudflare Turnstile',
+      'Elle réduit le scraping et les abus. Cloudflare Turnstile gère le contrôle — pas de compte, pas de profil supplémentaire.',
+    footer: 'Cloudflare Turnstile',
     skipTitle: 'Développement local',
     skipDesc:
       'La vérification est désactivée ici. Continuez vers la destination.',
     skipButton: 'Passer et continuer',
     forceHint:
       'La production exige encore Turnstile. Définissez PUBLIC_FORCE_VERIFY=true pour tester.',
+    back: 'Accueil',
+    statusReady: 'Vérification prête',
+    statusSuccess: 'Validé — redirection…',
   },
   ru: {
     title: 'Проверка',
-    desc: 'Пройдите проверку, чтобы открыть защищённые страницы.',
-    verifying: 'Подтверждаем, что вы реальный посетитель',
-    verifyDesc: 'Обычно несколько секунд — затем перенаправление.',
+    desc: 'Лёгкая проверка открывает защищённые страницы.',
+    verifying: 'Подтвердите, что вы реальный посетитель',
+    verifyDesc: 'Обычно несколько секунд — затем продолжим автоматически.',
+    loading: 'Загрузка проверки…',
+    errorTitle: 'Проверка не завершилась',
+    errorDesc:
+      'Сеть нестабильна или виджет не загрузился. Повторите попытку позже.',
+    retry: 'Повторить',
+    expired: 'Проверка истекла. Попробуйте снова.',
     helpTitle: 'Зачем это?',
     helpDesc:
-      'Снижает скрейпинг и злоупотребления. Проверку обеспечивает Cloudflare Turnstile.',
-    footer: 'При поддержке Cloudflare Turnstile',
+      'Снижает скрейпинг и злоупотребления. Проверку обеспечивает Cloudflare Turnstile — без аккаунта и лишних данных профиля.',
+    footer: 'Cloudflare Turnstile',
     skipTitle: 'Локальная разработка',
     skipDesc: 'Проверка здесь отключена. Продолжите к целевой странице.',
     skipButton: 'Пропустить и продолжить',
     forceHint:
       'В продакшене Turnstile обязателен. PUBLIC_FORCE_VERIFY=true — чтобы тестировать в dev.',
+    back: 'На главную',
+    statusReady: 'Проверка готова',
+    statusSuccess: 'Пройдено — перенаправление…',
   },
 } as const;
 
 const content = copy[lang] || copy['en-GB'];
+const labelsJson = JSON.stringify({
+  loading: content.loading,
+  errorTitle: content.errorTitle,
+  errorDesc: content.errorDesc,
+  expired: content.expired,
+  statusReady: content.statusReady,
+  statusSuccess: content.statusSuccess,
+});
 ---
 
 <BaseLayout
@@ -100,89 +153,338 @@ const content = copy[lang] || copy['en-GB'];
     kicker="Verify"
     title={content.title}
     description={content.desc}
+    backHref={homeHref}
+    backLabel={content.back}
   />
 
   <section class="pb-24">
     <div class="page-shell">
-      <div
-        class="border border-[rgb(var(--color-border))] p-8 md:p-10 flex flex-col items-center text-center"
-      >
-        {
-          skipVerify ? (
-            <>
-              <p class="font-heading text-sm tracking-[0.18em] uppercase text-primary-600 dark:text-primary-400 mb-3">
-                {isDev ? 'DEV' : 'SKIP'}
-              </p>
-              <h2 class="font-heading text-2xl font-bold mb-3">
-                {content.skipTitle}
-              </h2>
-              <p class="text-[rgb(var(--color-text-secondary))] mb-8 max-w-md">
-                {content.skipDesc}
-              </p>
-              <button type="button" id="verify-skip-btn" class="btn-primary">
-                {content.skipButton}
-              </button>
-              <p class="mt-6 text-xs text-[rgb(var(--color-text-tertiary))] max-w-sm">
-                {content.forceHint}
-              </p>
-            </>
-          ) : (
-            <>
-              <div
-                class="w-14 h-14 mb-6 border border-[rgb(var(--color-border))] flex items-center justify-center text-primary-600 dark:text-primary-400"
-                aria-hidden="true"
-              >
-                <svg
-                  class="w-7 h-7"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+      <div class="verify-gate">
+        <div class="verify-gate__wash" aria-hidden="true"></div>
+
+        <div
+          class="verify-panel"
+          role="region"
+          aria-labelledby="verify-heading"
+          data-verify-panel
+        >
+          {
+            skipVerify ? (
+              <>
+                <p class="verify-panel__badge meta-mono">
+                  {isDev ? 'DEV' : 'SKIP'}
+                </p>
+                <h2 id="verify-heading" class="verify-panel__title">
+                  {content.skipTitle}
+                </h2>
+                <p class="verify-panel__lead">{content.skipDesc}</p>
+                <button
+                  type="button"
+                  id="verify-skip-btn"
+                  class="btn-primary"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.75"
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                  />
-                </svg>
-              </div>
-              <h2 class="font-heading text-xl font-bold mb-2">
-                {content.verifying}
-              </h2>
-              <p class="text-[rgb(var(--color-text-secondary))] mb-8 max-w-sm">
-                {content.verifyDesc}
-              </p>
-              <script
-                is:inline
-                src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-                async
-                defer
-              />
-              <div
-                class="cf-turnstile"
-                data-sitekey={turnstileSiteKey}
-                data-callback="onTurnstileSuccess"
-                data-theme="auto"
-              />
-              <p class="mt-6 text-xs text-[rgb(var(--color-text-tertiary))]">
-                {content.footer}
-              </p>
-            </>
-          )
-        }
+                  {content.skipButton}
+                </button>
+                <p class="verify-panel__hint">{content.forceHint}</p>
+              </>
+            ) : (
+              <>
+                <div class="verify-panel__icon" aria-hidden="true">
+                  <svg
+                    class="verify-panel__icon-svg"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.6"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                </div>
+                <h2 id="verify-heading" class="verify-panel__title">
+                  {content.verifying}
+                </h2>
+                <p class="verify-panel__lead">{content.verifyDesc}</p>
+
+                <p
+                  class="sr-only"
+                  data-verify-status
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  {content.loading}
+                </p>
+
+                <div
+                  class="verify-widget"
+                  data-verify-widget
+                  data-sitekey={turnstileSiteKey}
+                  data-labels={labelsJson}
+                >
+                  <div
+                    class="verify-widget__loading"
+                    data-verify-loading
+                    role="status"
+                  >
+                    <span class="verify-widget__pulse" aria-hidden="true"
+                    ></span>
+                    <span>{content.loading}</span>
+                  </div>
+
+                  <div
+                    class="verify-widget__host"
+                    data-verify-host
+                    hidden
+                  >
+                  </div>
+
+                  <div
+                    class="verify-widget__error"
+                    data-verify-error
+                    hidden
+                    role="alert"
+                  >
+                    <p class="verify-widget__error-title" data-verify-error-title>
+                      {content.errorTitle}
+                    </p>
+                    <p
+                      class="verify-widget__error-desc"
+                      data-verify-error-desc
+                    >
+                      {content.errorDesc}
+                    </p>
+                    <button
+                      type="button"
+                      class="btn-secondary"
+                      data-verify-retry
+                    >
+                      {content.retry}
+                    </button>
+                  </div>
+                </div>
+
+                <p class="verify-panel__footer">
+                  <span class="meta-mono">{content.footer}</span>
+                </p>
+              </>
+            )
+          }
+        </div>
       </div>
 
-      <aside class="mt-10 border-t border-[rgb(var(--color-border))] pt-8">
-        <h3 class="font-heading font-semibold mb-2">{content.helpTitle}</h3>
-        <p
-          class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed"
-        >
-          {content.helpDesc}
-        </p>
+      <aside class="verify-help">
+        <h3 class="verify-help__title">{content.helpTitle}</h3>
+        <p class="verify-help__desc">{content.helpDesc}</p>
       </aside>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .verify-gate {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .verify-gate__wash {
+    position: absolute;
+    inset: -1.5rem -0.75rem auto;
+    height: min(22rem, 70%);
+    background:
+      radial-gradient(
+        55% 70% at 8% 0%,
+        rgb(var(--color-accent) / 0.1),
+        transparent 70%
+      ),
+      linear-gradient(
+        180deg,
+        rgb(var(--color-bg-secondary) / 0.55),
+        transparent 85%
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .verify-panel {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem 2.25rem;
+    border: 1px solid rgb(var(--color-border));
+    border-left: 2px solid rgb(var(--color-accent) / 0.45);
+    background: rgb(var(--color-bg-primary) / 0.88);
+  }
+
+  @media (min-width: 768px) {
+    .verify-panel {
+      padding: 2.5rem 2.75rem 2.75rem;
+    }
+  }
+
+  .verify-panel__badge {
+    margin: 0 0 0.85rem;
+    color: rgb(var(--color-accent));
+  }
+
+  .verify-panel__icon {
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-bottom: 1.25rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgb(var(--color-border));
+    color: rgb(var(--color-accent));
+    background: rgb(var(--color-bg-secondary) / 0.55);
+  }
+
+  .verify-panel__icon-svg {
+    width: 1.55rem;
+    height: 1.55rem;
+  }
+
+  .verify-panel__title {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    margin: 0 0 0.65rem;
+    color: rgb(var(--color-text-primary));
+    text-wrap: balance;
+  }
+
+  .verify-panel__lead {
+    margin: 0 0 1.75rem;
+    max-width: 26rem;
+    line-height: 1.65;
+    color: rgb(var(--color-text-secondary));
+    text-wrap: pretty;
+  }
+
+  .verify-panel__hint {
+    margin: 1.35rem 0 0;
+    max-width: 24rem;
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: rgb(var(--color-text-tertiary));
+  }
+
+  .verify-panel__footer {
+    margin: 1.35rem 0 0;
+    color: rgb(var(--color-text-tertiary));
+  }
+
+  .verify-widget {
+    width: 100%;
+    max-width: 22rem;
+    min-height: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+  }
+
+  .verify-widget__loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.85rem 1.1rem;
+    font-size: 0.9rem;
+    color: rgb(var(--color-text-secondary));
+    border: 1px dashed rgb(var(--color-border));
+    background: rgb(var(--color-bg-secondary) / 0.45);
+  }
+
+  .verify-widget__pulse {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: rgb(var(--color-accent));
+    animation: verify-pulse 1.2s ease-in-out infinite;
+  }
+
+  .verify-widget__host {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 65px;
+  }
+
+  .verify-widget__host :global(iframe) {
+    max-width: 100%;
+  }
+
+  .verify-widget__error {
+    width: 100%;
+    padding: 1rem 1.1rem 1.15rem;
+    border: 1px solid rgb(var(--color-border));
+    border-left: 2px solid rgb(var(--color-accent) / 0.7);
+    background: rgb(var(--color-bg-secondary) / 0.55);
+    text-align: left;
+  }
+
+  .verify-widget__error-title {
+    margin: 0 0 0.35rem;
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: rgb(var(--color-text-primary));
+  }
+
+  .verify-widget__error-desc {
+    margin: 0 0 0.95rem;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: rgb(var(--color-text-secondary));
+  }
+
+  .verify-help {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgb(var(--color-border));
+  }
+
+  .verify-help__title {
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: rgb(var(--color-text-primary));
+  }
+
+  .verify-help__desc {
+    margin: 0;
+    max-width: 40rem;
+    font-size: 0.925rem;
+    line-height: 1.7;
+    color: rgb(var(--color-text-secondary));
+  }
+
+  @keyframes verify-pulse {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: scale(0.85);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .verify-widget__pulse {
+      animation: none;
+      opacity: 0.85;
+    }
+  }
+</style>
 
 <script is:inline>
   function completeVerification() {
@@ -194,19 +496,197 @@ const content = copy[lang] || copy['en-GB'];
     window.location.href = returnUrl;
   }
 
-  window.onTurnstileSuccess = function () {
-    completeVerification();
-  };
-
   document
     .getElementById('verify-skip-btn')
     ?.addEventListener('click', completeVerification);
 
-  // If we landed on /verify while skip is on, auto-continue after a short beat
   if (document.getElementById('verify-skip-btn')) {
     const params = new URLSearchParams(window.location.search);
     if (params.get('redirect')) {
       setTimeout(completeVerification, 400);
     }
   }
+
+  (function initTurnstileGate() {
+    const root = document.querySelector('[data-verify-widget]');
+    if (!root) return;
+
+    const sitekey = root.getAttribute('data-sitekey') || '';
+    const labels = JSON.parse(root.getAttribute('data-labels') || '{}');
+    const loadingEl = root.querySelector('[data-verify-loading]');
+    const hostEl = root.querySelector('[data-verify-host]');
+    const errorEl = root.querySelector('[data-verify-error]');
+    const errorTitleEl = root.querySelector('[data-verify-error-title]');
+    const errorDescEl = root.querySelector('[data-verify-error-desc]');
+    const retryBtn = root.querySelector('[data-verify-retry]');
+    const statusEl = document.querySelector('[data-verify-status]');
+
+    let widgetId = null;
+    let scriptRequested = false;
+
+    function setStatus(text) {
+      if (statusEl) statusEl.textContent = text;
+    }
+
+    function resolveTheme() {
+      return document.documentElement.classList.contains('dark')
+        ? 'dark'
+        : 'light';
+    }
+
+    function showLoading() {
+      if (loadingEl) loadingEl.hidden = false;
+      if (hostEl) hostEl.hidden = true;
+      if (errorEl) errorEl.hidden = true;
+      setStatus(labels.loading || '');
+    }
+
+    function showWidget() {
+      if (loadingEl) loadingEl.hidden = true;
+      if (hostEl) hostEl.hidden = false;
+      if (errorEl) errorEl.hidden = true;
+      setStatus(labels.statusReady || '');
+    }
+
+    function showError(title, desc) {
+      if (loadingEl) loadingEl.hidden = true;
+      if (hostEl) hostEl.hidden = true;
+      if (errorEl) errorEl.hidden = false;
+      if (errorTitleEl) errorTitleEl.textContent = title;
+      if (errorDescEl) errorDescEl.textContent = desc;
+      setStatus(title);
+      retryBtn?.focus();
+    }
+
+    function destroyWidget() {
+      if (
+        widgetId !== null &&
+        window.turnstile &&
+        typeof window.turnstile.remove === 'function'
+      ) {
+        window.turnstile.remove(widgetId);
+      }
+      widgetId = null;
+      if (hostEl) hostEl.innerHTML = '';
+    }
+
+    function renderWidget() {
+      if (!window.turnstile || typeof window.turnstile.render !== 'function') {
+        showError(
+          labels.errorTitle || 'Error',
+          labels.errorDesc || 'Turnstile unavailable'
+        );
+        return;
+      }
+      if (!sitekey || !hostEl) {
+        showError(
+          labels.errorTitle || 'Error',
+          labels.errorDesc || 'Missing site key'
+        );
+        return;
+      }
+
+      destroyWidget();
+      showLoading();
+
+      widgetId = window.turnstile.render(hostEl, {
+        sitekey: sitekey,
+        theme: resolveTheme(),
+        appearance: 'always',
+        size: 'normal',
+        callback: function () {
+          setStatus(labels.statusSuccess || '');
+          completeVerification();
+        },
+        'error-callback': function () {
+          showError(
+            labels.errorTitle || 'Error',
+            labels.errorDesc || 'Verification failed'
+          );
+          return true;
+        },
+        'expired-callback': function () {
+          showError(
+            labels.errorTitle || 'Error',
+            labels.expired || labels.errorDesc || 'Expired'
+          );
+        },
+        'timeout-callback': function () {
+          showError(
+            labels.errorTitle || 'Error',
+            labels.errorDesc || 'Timed out'
+          );
+        },
+      });
+
+      showWidget();
+    }
+
+    function loadScript() {
+      if (window.turnstile) {
+        renderWidget();
+        return;
+      }
+      if (scriptRequested) return;
+      scriptRequested = true;
+      showLoading();
+
+      const existing = document.querySelector(
+        'script[data-verify-turnstile-src]'
+      );
+      if (existing) {
+        existing.addEventListener('load', renderWidget, { once: true });
+        existing.addEventListener(
+          'error',
+          function () {
+            showError(
+              labels.errorTitle || 'Error',
+              labels.errorDesc || 'Script failed'
+            );
+          },
+          { once: true }
+        );
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src =
+        'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.setAttribute('data-verify-turnstile-src', '1');
+      script.addEventListener('load', renderWidget, { once: true });
+      script.addEventListener(
+        'error',
+        function () {
+          showError(
+            labels.errorTitle || 'Error',
+            labels.errorDesc || 'Script failed'
+          );
+        },
+        { once: true }
+      );
+      document.head.appendChild(script);
+    }
+
+    retryBtn?.addEventListener('click', function () {
+      scriptRequested = false;
+      loadScript();
+    });
+
+    const themeObserver = new MutationObserver(function (mutations) {
+      for (const mutation of mutations) {
+        if (mutation.attributeName === 'class' && widgetId !== null) {
+          renderWidget();
+          break;
+        }
+      }
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    loadScript();
+  })();
 </script>
