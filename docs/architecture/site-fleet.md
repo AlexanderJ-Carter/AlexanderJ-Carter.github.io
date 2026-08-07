@@ -116,14 +116,14 @@ Layers **coexist**; they do not replace each other.
 
 ## Live containers (2026-08-07)
 
-| Name         | Role            | Notes                         |
-| ------------ | --------------- | ----------------------------- |
-| `pocket-id`  | OIDC IdP        | `127.0.0.1:1411`, mem ≤128 MB |
-| `gitea`      | Private Git     | Access + Pocket ID OIDC       |
-| `portainer`  | Docker UI       | Access + optional in-app OIDC |
-| `nginx-ui`   | Nginx admin     | Access + in-app OIDC          |
-| `privatebin` | Encrypted paste | Public                        |
-| `it-tools`   | Tool hub        | Public via Tunnel             |
+| Name         | Role            | Notes                                                                 |
+| ------------ | --------------- | --------------------------------------------------------------------- |
+| `pocket-id`  | OIDC IdP        | `127.0.0.1:1411`, mem ≤128 MB，healthcheck，日志轮转                  |
+| `gitea`      | Private Git     | Access + OIDC；`DISABLE_REGISTRATION`；mem ≤256 MB；healthcheck       |
+| `portainer`  | Docker UI       | `127.0.0.1:9100`；mem ≤128 MB；Logout URL 留空                        |
+| `nginx-ui`   | Nginx admin     | host 网络；管理口 **仅** `127.0.0.1:9000`；`EnableHTTPS=false`；mem ≤256 MB |
+| `privatebin` | Encrypted paste | `127.0.0.1:8081`；mem ≤64 MB；上传关、限流 30/min、1 MiB               |
+| `it-tools`   | Tool hub        | `127.0.0.1:8080`；mem ≤64 MB；`read_only` + tmpfs                     |
 
 ## Host services (non-container)
 
@@ -225,7 +225,47 @@ Zone `alexander.xin`：无 A/AAAA↔CNAME 冲突；隧道与公开站均为**橙
 | cloudflared | 建议固定 `--edge-ip-version 4` / `TUNNEL_EDGE_IP_VERSION=4`，避免坏 IPv6 上的 QUIC 噪声被当成故障。脚本：`~/fleet/cloudflared/apply-edge-ip4.sh`（需本机 sudo） |
 | Windows 本机 | 若浏览器要走 IPv6 访橙云站：网卡启用 IPv6 即可；与源站无关 |
 
-**nginx-ui 假超时（已修）：** `site_configs` 关掉退役主机、`https://www:443`（边缘 TLS）、apex Pages 探测与重复项；保留现网 HTTP `:80`。`Host=127.0.0.1`、`EnableHTTPS=false` 已就位。
+### TLS / HTTPS（结论）
+
+- **对外 TLS 只在 Cloudflare（橙云 + Tunnel）终止**；源站 nginx **只听 :80**，`EnableHTTPS=false`。
+- **不要**在 nginx-ui 申请源站证书 / 强制 HTTPS / 源站 HSTS（会与 Tunnel→HTTP 双层打架，并制造假红灯）。
+- 安全头：边缘由 Cloudflare 管（HSTS/CSP 若要全站统一，用 Transform Rule，勿在源站重复 HSTS）。源站仅保留轻量 `nosniff` / `X-Frame-Options` / `Referrer-Policy`。
+- 仓库 `public/_headers` 是 Pages 风格基线；**GitHub Pages 源不会自动应用该文件**（apex 实测无 CSP/HSTS）——缺口留给边缘规则，不在源站硬补。
+
+### nginx-ui 站点监控假超时（已修，2026-08-07）
+
+**真站可达：** 源站 `Host:` 探测与公网 IPv4 抽查均为 200/301/Access 302。截图里的 https timeout 是**假报错**。
+
+| 根因 | 说明 |
+| ---- | ---- |
+| 服务器→CF **出站 IPv6 超时** | 站点有 AAAA 时，检查器走 v6 会挂；`curl -6` 失败、`curl -4` 正常 |
+| 旧 `site_configs` | 退役站（wiki/shlink/…）、`www:443` HTTPS、重复项、跟随 Access 重定向 |
+| 源站无 :443 | 对 localhost/源站做 HTTPS 探测必失败 |
+
+**修复：**
+
+1. 全部现网站点改为探测 `http://127.0.0.1:80` + `Host: <vhost>`（`expected_status` 含 200/301/302），`follow_redirects=0`
+2. `~/nginx-ui/normalize-sitecheck-wrap.sh` + **cron 每 2 分钟**（nginx-ui 重启会重新导入公网 host，需压回去）
+3. 管理口 `Host=127.0.0.1`；`RunMode=release`；废弃 ssl 目录已删
+
+### nginx 源站完善（已落地）
+
+- `conf.d/10-performance.conf`：gzip、默认 `client_max_body_size`、代理超时
+- 反代站统一：`Host` / `X-Forwarded-*` / `Upgrade`+`$connection_upgrade`
+- Gitea：`client_max_body_size 512M`、长超时、`proxy_request_buffering off`
+- Web/Blog：静态资源 `expires 7d`；**404 返回站点 `404.html` 且状态码 404**（非 nginx 裸错）
+- Blog：`/` → `/writing/`（B2）；与 www **互不跳转**
+
+### 公开页健康抽查（2026-08-07，服务器 `curl -4`）
+
+| 目标 | 结果 |
+| ---- | ---- |
+| apex `/` `/about` `/writing/` `/subscribe/` `/projects` `/gallery` `/tools` `/network` `/login` `/contact` `/security/policy` `/en/writing/` | **200** |
+| apex / www 故意 404 | **404**（站点页） |
+| www `/` `/writing/` `/security/policy` | **200**；与 apex **无互跳** |
+| blog `/`→写作页、`/writing/`、`/subscribe/`、`/en/writing/` | **200** |
+| paste / tools / id | **200**（公开，无 Access） |
+| git / docker / nginxui / remote / ops | **302** Access（保持） |
 
 ## Retired / removed
 
