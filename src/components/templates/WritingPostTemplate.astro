@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../chrome/AdSlot.astro';
 import CopyPermalink from '../widgets/CopyPermalink.astro';
 import { getCollection } from 'astro:content';
+import { BLOG_ORIGIN } from '../../config/site';
 import type { Lang } from '../../i18n/types';
 import { writingCopy } from '../../i18n/pages/writing';
 import { dateLocaleFor, relatedPosts, taxonomySlug } from '../../lib/writing';
@@ -77,7 +78,7 @@ const related = relatedPosts(allPosts, {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': Astro.url.href,
+      '@id': new URL(Astro.url.pathname, BLOG_ORIGIN).href,
     },
     inLanguage: resolvedLang,
   }}

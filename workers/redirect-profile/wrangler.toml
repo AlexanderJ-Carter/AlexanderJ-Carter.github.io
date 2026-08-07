@@ -10,11 +10,3 @@ zone_name = "alexander.xin"
 [[routes]]
 pattern = "bio.alexander.xin/*"
 zone_name = "alexander.xin"
-
-[[routes]]
-pattern = "blog.alexander.xin"
-zone_name = "alexander.xin"
-
-[[routes]]
-pattern = "blog.alexander.xin/*"
-zone_name = "alexander.xin"

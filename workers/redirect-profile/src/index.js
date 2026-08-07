@@ -33,20 +33,15 @@ export default {
       }
     }
 
-    let page = '/about/';
-    let status = 301;
-    if (host === 'blog.alexander.xin') {
-      status = 302;
-      const raw = url.pathname || '/';
-      if (raw === '/' || raw === '') {
-        page = '/writing/';
-      } else if (raw === '/writing' || raw.startsWith('/writing/')) {
-        page = raw.endsWith('/') ? raw : `${raw}/`;
-      } else {
-        page = `/writing${raw.endsWith('/') ? raw : `${raw}/`}`;
-      }
+    // about / bio aliases only (blog is hosted via Tunnel → nginx)
+    const page = '/about/';
+    if (host !== 'about.alexander.xin' && host !== 'bio.alexander.xin') {
+      return new Response('Not found', { status: 404 });
     }
 
-    return Response.redirect(`https://alexander.xin${langPrefix}${page}${url.search}`, status);
+    return Response.redirect(
+      `https://alexander.xin${langPrefix}${page}${url.search}`,
+      301
+    );
   },
 };

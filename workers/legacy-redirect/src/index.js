@@ -27,6 +27,17 @@ function rawPath(pathname) {
   return pathname;
 }
 
+/** Apex writing → blog host (www keeps content; no www↔apex bounce). */
+function writingToBlog(path, search) {
+  const prefixes = ['/writing', '/en/writing', '/zh-TW/writing', '/fr/writing', '/ru/writing'];
+  const matches = prefixes.some(
+    (p) => path === p || path === `${p}/` || path.startsWith(`${p}/`)
+  );
+  if (!matches) return null;
+  const normalized = path.endsWith('/') || path.includes('.') ? path : `${path}/`;
+  return `https://blog.alexander.xin${normalized}${search}`;
+}
+
 export default {
   async fetch(request) {
     const url = new URL(request.url);
@@ -35,6 +46,11 @@ export default {
 
     if (host === 'time.alexander.xin') {
       return Response.redirect('https://alexander.xin/calendar', 301);
+    }
+
+    if (host === 'alexander.xin') {
+      const blogTarget = writingToBlog(path, url.search);
+      if (blogTarget) return Response.redirect(blogTarget, 301);
     }
 
     const redirects = {

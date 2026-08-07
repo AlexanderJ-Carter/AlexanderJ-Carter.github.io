@@ -1,0 +1,25 @@
+name = "writing-redirect"
+main = "src/index.js"
+compatibility_date = "2025-07-25"
+workers_dev = false
+
+# Prefer prefix globs; trailing-slash and /* variants also live in CF routes.
+[[routes]]
+pattern = "alexander.xin/writing*"
+zone_name = "alexander.xin"
+
+[[routes]]
+pattern = "alexander.xin/en/writing*"
+zone_name = "alexander.xin"
+
+[[routes]]
+pattern = "alexander.xin/zh-TW/writing*"
+zone_name = "alexander.xin"
+
+[[routes]]
+pattern = "alexander.xin/fr/writing*"
+zone_name = "alexander.xin"
+
+[[routes]]
+pattern = "alexander.xin/ru/writing*"
+zone_name = "alexander.xin"

@@ -1,6 +1,7 @@
 const PROBES = [
   { id: 'apex', url: 'https://alexander.xin/' },
   { id: 'www', url: 'https://www.alexander.xin/' },
+  { id: 'blog', url: 'https://blog.alexander.xin/writing/' },
   { id: 'identity', url: 'https://id.alexander.xin/healthz' },
   { id: 'time-api', url: 'https://api.alexander.xin/time/now' },
   { id: 'tools-hub', url: 'https://tools.alexander.xin/' },

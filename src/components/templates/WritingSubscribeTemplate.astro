@@ -58,7 +58,9 @@ const langLabels: Record<Lang, string> = {
             writingFeedIndex.map((feed) => (
               <li>
                 <span>{langLabels[feed.lang]}</span>
-                <a href={feed.path}>{feed.path}</a>
+                <a href={writingRssAbsolute(feed.lang)}>
+                  {writingRssAbsolute(feed.lang)}
+                </a>
               </li>
             ))
           }

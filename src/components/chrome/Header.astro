@@ -1,4 +1,5 @@
 ---
+import { BLOG_ORIGIN } from '../../config/site';
 import { getLangFromUrl, useTranslations, languages } from '../../i18n/ui';
 
 const lang = getLangFromUrl(Astro.url);
@@ -12,13 +13,23 @@ function getLangPath(path: string) {
   return `/${prefix}${path}`;
 }
 
+function writingHomeHref(): string {
+  return new URL(getLangPath('/writing'), BLOG_ORIGIN).href;
+}
+
 // Check if a link is active (exact or nested path)
 function isActivePath(href: string | undefined): boolean {
   if (!href) return false;
+  let pathOnly = href;
+  try {
+    if (/^https?:\/\//i.test(href)) pathOnly = new URL(href).pathname;
+  } catch {
+    /* keep href */
+  }
   const strip = (p: string) =>
     p.replace(/^\/(zh-TW|en|fr|ru)(?=\/|$)/, '').replace(/\/$/, '') || '/';
   const current = strip(currentPath);
-  const target = strip(href);
+  const target = strip(pathOnly);
   if (target === '/') return current === '/';
   return current === target || current.startsWith(`${target}/`);
 }
@@ -214,7 +225,7 @@ const mainNavItems: NavItem[] = [
   { href: homeHref, label: t('nav.home'), mobileOnly: true },
   { href: getLangPath('/gallery'), label: t('nav.gallery') },
   {
-    href: getLangPath('/writing'),
+    href: writingHomeHref(),
     label: t('nav.blog'),
   },
   {

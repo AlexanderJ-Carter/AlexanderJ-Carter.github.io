@@ -184,7 +184,7 @@ Layers **coexist**; they do not replace each other.
 | `www` Worker route               | **Removed** so Tunnel/server mirror is origin                                                                      |
 | `ops.alexander.xin`              | Worker `ops-portal` 运维首页（工具卡片 + 探针）；UI 文件在 `www…/ops/`；Access Launcher 为备选入口                 |
 | `blog.alexander.xin`             | **B2 真托管**：Tunnel → nginx；DNS CNAME → tunnel；已去掉 `redirect-profile` 路由；**无 Access**；MX/TXT 保留       |
-| `about` / `bio` / `time` aliases | Worker redirects (`redirect-profile` / `legacy-redirect`)；apex `/writing*` 由 `legacy-redirect` **301→blog**     |
+| `about` / `bio` / `time` aliases | Worker redirects (`redirect-profile` / `legacy-redirect`)；apex `/writing*` 由 `writing-redirect` **301→blog**   |
 | Pocket ID ↔ Access OIDC          | **Live** (IdP `Pocket ID` + `Email OTP (break-glass)`)                                                             |
 | Access 覆盖面                    | 仅 ops / git / docker / nginxui / ssh / remote；**勿**给 paste / tools / www / id / **blog** / 公开站               |
 
@@ -209,7 +209,7 @@ Layers **coexist**; they do not replace each other.
 | ---------- | ----------------------------------------------------------------------------------------------------- |
 | 正式阅读   | `https://blog.alexander.xin/writing/`（及各语言前缀）；canonical / RSS `site` → blog 主机               |
 | 边缘路径   | Tunnel → nginx-ui（`server_name blog.alexander.xin`，`root` 同 www `/var/www/alexander.xin/dist`）     |
-| apex       | `alexander.xin/writing*` → **301** → `blog.alexander.xin` 同路径（`legacy-redirect` Worker）           |
+| apex       | `alexander.xin/writing*` → **301** → `blog.alexander.xin` 同路径（Worker `writing-redirect`）            |
 | www        | 保留全文 + canonical→blog；**禁止** www↔apex 互跳                                                     |
 | 订阅       | `blog…/writing/subscribe` + `https://blog.alexander.xin/.../rss.xml`；无访客登录；邮件订阅暂缓         |
 | Access     | **不对 blog. 加 Access**（公开读者）                                                                  |

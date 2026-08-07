@@ -224,12 +224,13 @@
       "url": "https://blog.alexander.xin",
       "path": "/writing",
       "category": "content",
-      "host": "cloudflare-worker",
+      "host": "server-tunnel",
       "visibility": "public",
       "status": "live",
-      "label": "Blog alias → Writing",
+      "label": "Blog (Writing)",
       "access": false,
-      "note": "Worker 302 → alexander.xin/writing/; not a separate site; Ghost retired; author via Git"
+      "repo": "AlexanderJ-Carter/AlexanderJ-Carter.github.io",
+      "note": "B2: Tunnel → nginx-ui, same dist as www; canonical writing host; no Access; Ghost retired; author via Git"
     },
     {
       "id": "about-alias",

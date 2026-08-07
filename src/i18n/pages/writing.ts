@@ -1,3 +1,4 @@
+import { BLOG_ORIGIN } from '../../config/site';
 import type { Lang } from '../types';
 import { getLangPath } from '../types';
 
@@ -63,7 +64,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     archive: '归档',
     archiveTitle: '按年归档',
     archiveDescription: '按年份浏览全部写作。',
-    archiveIntro: '按发表年份翻阅。博客正文与订阅都在本站写作区。',
+    archiveIntro: '按发表年份翻阅。正式阅读与订阅在 blog.alexander.xin。',
     yearLabel: '年',
     postsInYear: '篇',
     allTags: '全部标签',
@@ -79,7 +80,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     subscribePageTitle: '订阅写作',
     subscribePageDescription: '通过 RSS 订阅本站写作；无需注册账号。',
     subscribeLead:
-      '正式阅读在本站 /writing。blog.alexander.xin 只是入口别名，会转到写作列表。',
+      '正式阅读与 RSS 主场是 https://blog.alexander.xin/writing/；主站 /writing 会 301 过来。www 镜像保留全文，不互跳。',
     subscribeRssTitle: 'RSS 订阅',
     subscribeRssBody:
       '用任意 RSS 阅读器订阅对应语言的 feed。更新随静态站点发布，没有访客登录。',
@@ -108,7 +109,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     archive: '歸檔',
     archiveTitle: '按年歸檔',
     archiveDescription: '按年份瀏覽全部寫作。',
-    archiveIntro: '按發表年份翻閱。部落格正文與訂閱都在本站寫作區。',
+    archiveIntro: '按發表年份翻閱。正式閱讀與訂閱在 blog.alexander.xin。',
     yearLabel: '年',
     postsInYear: '篇',
     allTags: '全部標籤',
@@ -124,7 +125,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     subscribePageTitle: '訂閱寫作',
     subscribePageDescription: '透過 RSS 訂閱本站寫作；無需註冊帳號。',
     subscribeLead:
-      '正式閱讀在本站 /writing。blog.alexander.xin 只是入口別名，會轉到寫作列表。',
+      '正式閱讀與 RSS 主場是 https://blog.alexander.xin/writing/；主站 /writing 會 301 過來。www 鏡像保留全文，不互跳。',
     subscribeRssTitle: 'RSS 訂閱',
     subscribeRssBody:
       '用任意 RSS 閱讀器訂閱對應語言的 feed。更新隨靜態站點發布，沒有訪客登入。',
@@ -155,7 +156,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     archiveTitle: 'Archive by year',
     archiveDescription: 'Browse all writing by year.',
     archiveIntro:
-      'Flip by publication year. The blog lives in this writing section.',
+      'Flip by publication year. Canonical reading and feeds live on blog.alexander.xin.',
     yearLabel: '',
     postsInYear: 'posts',
     allTags: 'All tags',
@@ -172,7 +173,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     subscribePageDescription:
       'Follow this writing via RSS. No visitor accounts.',
     subscribeLead:
-      'Canonical reading is on /writing. blog.alexander.xin is only an entry alias that redirects here.',
+      'Canonical reading and RSS: https://blog.alexander.xin/writing/. Apex /writing 301s there; the www mirror keeps full text without bouncing to apex.',
     subscribeRssTitle: 'RSS feeds',
     subscribeRssBody:
       'Add the feed for your language in any RSS reader. Updates ship with the static site — no login.',
@@ -203,7 +204,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     archiveTitle: 'Archives par année',
     archiveDescription: 'Parcourir les écrits par année.',
     archiveIntro:
-      'Feuilleter par année. Le blog vit dans cette section d’écrits.',
+      'Feuilleter par année. Lecture et flux canoniques sur blog.alexander.xin.',
     yearLabel: '',
     postsInYear: 'articles',
     allTags: 'Toutes les étiquettes',
@@ -220,7 +221,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     subscribePageDescription:
       'Suivre les écrits via RSS. Pas de compte visiteur.',
     subscribeLead:
-      'La lecture canonique est sur /writing. blog.alexander.xin n’est qu’un alias d’entrée.',
+      'Lecture et RSS canoniques : https://blog.alexander.xin/writing/. L’apex /writing redirige en 301 ; www garde le texte sans rebond mutuel.',
     subscribeRssTitle: 'Flux RSS',
     subscribeRssBody:
       'Ajoutez le flux de votre langue dans un lecteur RSS. Pas de connexion.',
@@ -249,7 +250,8 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     archive: 'Архив',
     archiveTitle: 'Архив по годам',
     archiveDescription: 'Статьи по годам публикации.',
-    archiveIntro: 'Листайте по годам. Блог живёт в этом разделе.',
+    archiveIntro:
+      'Листайте по годам. Каноническое чтение и ленты — на blog.alexander.xin.',
     yearLabel: '',
     postsInYear: 'записей',
     allTags: 'Все теги',
@@ -266,7 +268,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     subscribePageDescription:
       'Читайте через RSS. Без учётных записей посетителей.',
     subscribeLead:
-      'Каноническое чтение — /writing. blog.alexander.xin лишь вход-алиас.',
+      'Каноническое чтение и RSS: https://blog.alexander.xin/writing/. Apex /writing отдаёт 301; зеркало www сохраняет текст без взаимных редиректов.',
     subscribeRssTitle: 'RSS-ленты',
     subscribeRssBody:
       'Добавьте ленту своего языка в любой RSS-читатель. Без входа.',
@@ -285,7 +287,7 @@ export function writingRssPath(lang: Lang): string {
 
 export function writingRssAbsolute(
   lang: Lang,
-  site = 'https://alexander.xin'
+  site = BLOG_ORIGIN
 ): string {
   return new URL(writingRssPath(lang), site).href;
 }

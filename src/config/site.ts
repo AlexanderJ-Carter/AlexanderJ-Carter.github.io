@@ -3,11 +3,33 @@
  * Dev server always skips human verification unless PUBLIC_FORCE_VERIFY=true.
  */
 
+import { stripLangPrefix } from '../i18n/types';
+
 const truthy = (v: string | undefined) =>
   v === '1' || v === 'true' || v === 'yes';
 
 /** Astro / Vite injects these at build time */
 const env = import.meta.env;
+
+/** Apex / portfolio origin (GitHub Pages). */
+export const SITE_ORIGIN = 'https://alexander.xin';
+
+/** Canonical writing / RSS host (Tunnel → nginx, same dist as www). */
+export const BLOG_ORIGIN = 'https://blog.alexander.xin';
+
+/** Paths whose canonical URL lives on blog.alexander.xin. */
+export function isWritingCanonicalPath(pathname: string): boolean {
+  const bare = stripLangPrefix(pathname);
+  return (
+    bare === '/writing' ||
+    bare.startsWith('/writing/') ||
+    bare === '/rss.xml'
+  );
+}
+
+export function originForPath(pathname: string): string {
+  return isWritingCanonicalPath(pathname) ? BLOG_ORIGIN : SITE_ORIGIN;
+}
 
 export const isDev = Boolean(env.DEV);
 
