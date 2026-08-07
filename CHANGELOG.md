@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Public `/changelog` page (five locales) synced from `CHANGELOG.md`.
+- Writing: Darkroom Folio design-system essay (zh-CN, zh-TW, en-GB, fr, ru).
+- `src/data/gallery.ts`: deduplicated gallery catalog (29 items × 5 locales).
+- en-GB translations for six previously zh-CN-only posts (performance, Astro upgrade, tools, design resources, minimalism, composition).
+- fr/ru translations: theme toggle, personal-site i18n, static-site CI, reading-list page.
+- fr/ru translations: security headers, site architecture, Uses page, minimal design, street photography ethics.
+- fr/ru translations: performance log, minimalist design, composition, design resources, dev tools, Astro upgrade (completes writing i18n for en-GB set).
+
+### Changed
+
+- About: clearer reserved personal dossier copy; slots remain empty.
+- Projects: main site marked completed; fr/ru writing channel entries added.
+- Changelog linked from header, footer, tools index, Now quick links and RelatedTools.
+- Uses page: site guide wired to i18n; tools link fixed; changelog noted in features.
+- Projects data consolidated into `src/i18n/pages/projects.ts` (single source).
+- Timeline: 2026 changelog milestone; data moved to `src/i18n/pages/timeline.ts`.
+- Now page copy moved to `src/i18n/pages/now.ts`.
+- Gallery template slimmed; categories, items and source UI from `src/data/gallery.ts`.
+- Site registry: changelog entry for fleet discovery.
+
 ## [3.2.1] - 2026-07-30
 
 ### Added

@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../chrome/PageHero.astro';
 import RelatedTools from '../chrome/RelatedTools.astro';
+import { siteGuideData } from '../../i18n/pages/uses';
 
 const { lang } = Astro.props;
 type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
@@ -24,6 +25,7 @@ const t: Record<
     feat2: string;
     feat3: string;
     feat4: string;
+    feat5: string;
     perf: string;
     perfDesc: string;
   }
@@ -42,6 +44,7 @@ const t: Record<
     feat2: '深色 / 浅色主题，跟随系统或手动切换',
     feat3: '无 cookie 追踪，无第三方广告脚本',
     feat4: '无障碍优化（WCAG 2.1 AA）',
+    feat5: '公开更新日志，与仓库 CHANGELOG 同步',
     perf: '性能目标',
     perfDesc: '静态生成，首屏加载轻量；图片懒加载，字体按需引入。',
     source: '源代码',
@@ -61,6 +64,7 @@ const t: Record<
     feat2: '深色 / 淺色主題，跟隨系統或手動切換',
     feat3: '無 cookie 追蹤，無第三方廣告腳本',
     feat4: '無障礙優化（WCAG 2.1 AA）',
+    feat5: '公開更新日誌，與倉庫 CHANGELOG 同步',
     perf: '效能目標',
     perfDesc: '靜態生成，首屏載入輕量；圖片懶載入，字型按需引入。',
     source: '源代碼',
@@ -82,6 +86,7 @@ const t: Record<
     feat2: 'Dark / light theme — follows system or toggled manually',
     feat3: 'No cookie tracking, no third-party ad scripts',
     feat4: 'Accessibility optimised (WCAG 2.1 AA)',
+    feat5: 'Public changelog synced from the repo CHANGELOG',
     perf: 'Performance',
     perfDesc:
       'Statically generated for a lightweight first load; lazy-loaded images and on-demand fonts.',
@@ -104,6 +109,7 @@ const t: Record<
     feat2: 'Thème clair / sombre — système ou manuel',
     feat3: 'Pas de cookies de suivi ni de scripts publicitaires',
     feat4: 'Accessibilité optimisée (WCAG 2.1 AA)',
+    feat5: 'Journal public synchronisé avec le CHANGELOG du dépôt',
     perf: 'Performance',
     perfDesc:
       'Génération statique pour un premier chargement léger ; images différées et polices à la demande.',
@@ -126,6 +132,7 @@ const t: Record<
     feat2: 'Тёмная / светлая тема — по системе или вручную',
     feat3: 'Без cookie-трекинга и рекламных скриптов',
     feat4: 'Оптимизация доступности (WCAG 2.1 AA)',
+    feat5: 'Публичный журнал изменений, синхронизированный с CHANGELOG',
     perf: 'Производительность',
     perfDesc:
       'Статическая генерация для лёгкой загрузки; ленивая загрузка изображений и шрифтов.',
@@ -144,119 +151,6 @@ function getLangPath(path: string): string {
   const prefix = (lang as string) === 'en-GB' ? 'en' : lang;
   return `/${prefix}${path}`;
 }
-
-const siteGuideData: Record<Lang, any> = {
-  'zh-CN': {
-    title: '这里放什么',
-    intro:
-      '本站不是单纯的作品集，也不是完整博客，更像一个长期维护的个人操作台。',
-    sections: [
-      {
-        title: '作品与照片',
-        desc: '画廊承担视觉记录，后续会继续补地点、拍摄意图和系列说明。',
-        href: '/gallery',
-      },
-      {
-        title: '小工具',
-        desc: '时间、单位、汇率、二维码等工具尽量轻量、本地优先、无需登录。',
-        href: '/projects',
-      },
-      {
-        title: '信任与边界',
-        desc: '隐私、条款、许可证、无障碍和安全披露用于说明站点怎样运行。',
-        href: '/privacy',
-      },
-    ],
-  },
-  'zh-TW': {
-    title: '這裡放什麼',
-    intro:
-      '本站不是單純的作品集，也不是完整部落格，更像一個長期維護的個人操作台。',
-    sections: [
-      {
-        title: '作品與照片',
-        desc: '畫廊承擔視覺記錄，後續會繼續補地點、拍攝意圖和系列說明。',
-        href: '/gallery',
-      },
-      {
-        title: '小工具',
-        desc: '時間、單位、匯率、二維碼等工具盡量輕量、本地優先、無需登入。',
-        href: '/projects',
-      },
-      {
-        title: '信任與邊界',
-        desc: '隱私、條款、許可證、無障礙和安全披露用於說明站點怎樣運行。',
-        href: '/privacy',
-      },
-    ],
-  },
-  'en-GB': {
-    title: 'What Belongs Here',
-    intro:
-      'This is not only a portfolio and not quite a full blog. It is a maintained personal workbench.',
-    sections: [
-      {
-        title: 'Works & Photos',
-        desc: 'The gallery carries visual notes; locations, intent and series notes can grow around it over time.',
-        href: '/gallery',
-      },
-      {
-        title: 'Small Tools',
-        desc: 'Time, units, currency and QR tools aim to stay lightweight, local-first and login-free.',
-        href: '/projects',
-      },
-      {
-        title: 'Trust & Boundaries',
-        desc: 'Privacy, terms, licence, accessibility and security disclosure explain how the site operates.',
-        href: '/privacy',
-      },
-    ],
-  },
-  fr: {
-    title: 'Ce qui vit ici',
-    intro:
-      'Ce n’est pas seulement un portfolio ni un blog complet : c’est un atelier personnel maintenu.',
-    sections: [
-      {
-        title: 'Œuvres et photos',
-        desc: 'La galerie porte les notes visuelles ; lieux, intentions et séries pourront s’y ajouter.',
-        href: '/gallery',
-      },
-      {
-        title: 'Petits outils',
-        desc: 'Heure, unités, devises et QR restent légers, locaux d’abord et sans connexion.',
-        href: '/projects',
-      },
-      {
-        title: 'Confiance et cadre',
-        desc: 'Confidentialité, conditions, licence, accessibilité et sécurité expliquent le fonctionnement du site.',
-        href: '/privacy',
-      },
-    ],
-  },
-  ru: {
-    title: 'Что здесь находится',
-    intro:
-      'Это не только портфолио и не полноценный блог, а поддерживаемый личный рабочий стол.',
-    sections: [
-      {
-        title: 'Работы и фото',
-        desc: 'Галерея хранит визуальные заметки; позже вокруг них могут появляться места, замыслы и серии.',
-        href: '/gallery',
-      },
-      {
-        title: 'Малые инструменты',
-        desc: 'Время, единицы, валюты и QR остаются лёгкими, локальными и без входа.',
-        href: '/projects',
-      },
-      {
-        title: 'Доверие и границы',
-        desc: 'Приватность, условия, лицензия, доступность и безопасность объясняют работу сайта.',
-        href: '/privacy',
-      },
-    ],
-  },
-};
 
 const siteGuide = siteGuideData[lang as Lang] || siteGuideData['en-GB'];
 ---
@@ -308,7 +202,7 @@ const siteGuide = siteGuideData[lang as Lang] || siteGuideData['en-GB'];
           </h2>
           <ul class="space-y-3">
             {
-              [text.feat1, text.feat2, text.feat3, text.feat4].map((feat) => (
+              [text.feat1, text.feat2, text.feat3, text.feat4, text.feat5].map((feat) => (
                 <li class="text-sm text-[rgb(var(--color-text-secondary))] leading-relaxed">
                   {feat}
                 </li>

@@ -134,7 +134,8 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     ],
     personal: personalSlots({
       sectionTitle: '个人介绍',
-      sectionLead: '以下栏位为个人档案预留，内容稍后补写。',
+      sectionLead:
+        '个人档案栏位预留中。研究线与项目见下方；此处不急于一次写满，会随时间慢慢补。',
       reservedNote: '待写入',
       portraitLabel: '肖像',
       portraitAlt: '个人肖像（预留）',
@@ -226,7 +227,8 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     ],
     personal: personalSlots({
       sectionTitle: '個人介紹',
-      sectionLead: '以下欄位為個人檔案預留，內容稍後補寫。',
+      sectionLead:
+        '個人檔案欄位預留中。研究線與專案見下方；此處不急於一次寫滿，會隨時間慢慢補。',
       reservedNote: '待寫入',
       portraitLabel: '肖像',
       portraitAlt: '個人肖像（預留）',
@@ -319,7 +321,7 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     personal: personalSlots({
       sectionTitle: 'Personal',
       sectionLead:
-        'Slots reserved for a fuller personal dossier — empty for now.',
+        'Personal dossier slots reserved. Research and projects below; these fields will fill in gradually, not all at once.',
       reservedNote: 'Reserved',
       portraitLabel: 'Portrait',
       portraitAlt: 'Portrait (reserved)',
@@ -414,7 +416,7 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     personal: personalSlots({
       sectionTitle: 'Personnel',
       sectionLead:
-        'Emplacements réservés pour un dossier personnel — vides pour l’instant.',
+        'Emplacements réservés pour le dossier personnel. Recherche et projets ci-dessous ; remplissage progressif, sans précipitation.',
       reservedNote: 'Réservé',
       portraitLabel: 'Portrait',
       portraitAlt: 'Portrait (réservé)',
@@ -508,7 +510,8 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     ],
     personal: personalSlots({
       sectionTitle: 'Личное',
-      sectionLead: 'Слоты зарезервированы под личное досье — пока пустые.',
+      sectionLead:
+        'Слоты личного досье зарезервированы. Исследования и проекты ниже; заполнение постепенное, без спешки.',
       reservedNote: 'Зарезервировано',
       portraitLabel: 'Портрет',
       portraitAlt: 'Портрет (зарезервировано)',

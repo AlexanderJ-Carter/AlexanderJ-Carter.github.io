@@ -82,7 +82,7 @@ const featuredShared: HomeFeaturedItem[] = [
 const elsewhereShared: HomeElsewhereItem[] = [
   {
     title: 'MyCook',
-    desc: '做饭菜谱',
+    desc: '双源菜谱 · 577+ 道',
     href: 'https://cook.alexander.xin',
   },
   {
@@ -232,7 +232,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     elsewhere: [
       {
         title: 'MyCook',
-        desc: '做飯菜譜',
+        desc: '雙源食譜 · 577+ 道',
         href: 'https://cook.alexander.xin',
       },
       {
@@ -331,7 +331,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     elsewhere: [
       {
         title: 'MyCook',
-        desc: 'Cooking recipes',
+        desc: 'Dual-source recipes · 577+',
         href: 'https://cook.alexander.xin',
       },
       {
@@ -431,7 +431,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     elsewhere: [
       {
         title: 'MyCook',
-        desc: 'Recettes',
+        desc: 'Recettes dual-source · 577+',
         href: 'https://cook.alexander.xin',
       },
       {
@@ -531,7 +531,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     elsewhere: [
       {
         title: 'MyCook',
-        desc: 'Рецепты',
+        desc: 'Двойной каталог · 577+',
         href: 'https://cook.alexander.xin',
       },
       {

@@ -14,11 +14,11 @@ export const siteGuideData: Record<Lang, any> = {
       {
         title: '小工具',
         desc: '时间、单位、汇率、二维码等工具尽量轻量、本地优先、无需登录。',
-        href: '/projects',
+        href: '/tools',
       },
       {
         title: '信任与边界',
-        desc: '隐私、条款、许可证、无障碍和安全披露用于说明站点怎样运行。',
+        desc: '隐私、条款、许可证、无障碍、安全披露与公开更新日志，说明站点怎样运行。',
         href: '/privacy',
       },
     ],
@@ -36,11 +36,11 @@ export const siteGuideData: Record<Lang, any> = {
       {
         title: '小工具',
         desc: '時間、單位、匯率、二維碼等工具盡量輕量、本地優先、無需登入。',
-        href: '/projects',
+        href: '/tools',
       },
       {
         title: '信任與邊界',
-        desc: '隱私、條款、許可證、無障礙和安全披露用於說明站點怎樣運行。',
+        desc: '隱私、條款、許可證、無障礙、安全披露與公開更新日誌，說明站點怎樣運行。',
         href: '/privacy',
       },
     ],
@@ -58,11 +58,11 @@ export const siteGuideData: Record<Lang, any> = {
       {
         title: 'Small Tools',
         desc: 'Time, units, currency and QR tools aim to stay lightweight, local-first and login-free.',
-        href: '/projects',
+        href: '/tools',
       },
       {
         title: 'Trust & Boundaries',
-        desc: 'Privacy, terms, licence, accessibility and security disclosure explain how the site operates.',
+        desc: 'Privacy, terms, licence, accessibility, security disclosure and a public changelog explain how the site operates.',
         href: '/privacy',
       },
     ],
@@ -80,11 +80,11 @@ export const siteGuideData: Record<Lang, any> = {
       {
         title: 'Petits outils',
         desc: 'Heure, unités, devises et QR restent légers, locaux d’abord et sans connexion.',
-        href: '/projects',
+        href: '/tools',
       },
       {
         title: 'Confiance et cadre',
-        desc: 'Confidentialité, conditions, licence, accessibilité et sécurité expliquent le fonctionnement du site.',
+        desc: 'Confidentialité, conditions, licence, accessibilité, sécurité et journal public expliquent le fonctionnement du site.',
         href: '/privacy',
       },
     ],
@@ -102,11 +102,11 @@ export const siteGuideData: Record<Lang, any> = {
       {
         title: 'Малые инструменты',
         desc: 'Время, единицы, валюты и QR остаются лёгкими, локальными и без входа.',
-        href: '/projects',
+        href: '/tools',
       },
       {
         title: 'Доверие и границы',
-        desc: 'Приватность, условия, лицензия, доступность и безопасность объясняют работу сайта.',
+        desc: 'Приватность, условия, лицензия, доступность, безопасность и публичный журнал изменений объясняют работу сайта.',
         href: '/privacy',
       },
     ],

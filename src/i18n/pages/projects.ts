@@ -87,10 +87,10 @@ export const projectsData: Record<Lang, any[]> = {
   'zh-CN': [
     {
       title: '个人主页',
-      desc: '你现在所在的网站。Astro + Tailwind CSS + TypeScript 构建的静态站点，多语言支持，部署在 GitHub Pages。',
+      desc: '你现在所在的网站。Astro + Tailwind CSS + TypeScript 构建的静态站点，多语言支持，部署在 GitHub Pages；持续迭代中。',
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
-      status: 'wip',
+      status: 'done',
       github:
         'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
@@ -114,6 +114,15 @@ export const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
+      title: '写作频道',
+      desc: '关于工程、设计、摄影与工具实践的长文，基于 Content Collections 构建。',
+      tags: ['Writing', 'Astro', 'Content'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/writing',
+    },
+    {
       title: '阅读清单页面',
       desc: '三条阅读路线、深读笔记与延伸文章：记录一本书如何改写观察与实践。',
       tags: ['Reading', 'Essay', 'Notes'],
@@ -135,10 +144,10 @@ export const projectsData: Record<Lang, any[]> = {
   'zh-TW': [
     {
       title: '個人主頁',
-      desc: '你現在所在的網站。Astro + Tailwind CSS + TypeScript 構建的靜態站點，多語言支援，部署在 GitHub Pages。',
+      desc: '你現在所在的網站。Astro + Tailwind CSS + TypeScript 構建的靜態站點，多語言支援，部署在 GitHub Pages；持續迭代中。',
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
-      status: 'wip',
+      status: 'done',
       github:
         'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
@@ -162,6 +171,15 @@ export const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
+      title: '寫作頻道',
+      desc: '關於工程、設計、攝影與工具實踐的長文，基於 Content Collections 構建。',
+      tags: ['Writing', 'Astro', 'Content'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/writing',
+    },
+    {
       title: '閱讀清單頁面',
       desc: '三條閱讀路線、深讀筆記與延伸文章：記錄一本書如何改寫觀察與實踐。',
       tags: ['Reading', 'Essay', 'Notes'],
@@ -183,10 +201,10 @@ export const projectsData: Record<Lang, any[]> = {
   'en-GB': [
     {
       title: 'Personal Website',
-      desc: "The site you're on. A static site built with Astro + Tailwind CSS + TypeScript, multilingual, deployed on GitHub Pages.",
+      desc: "The site you're on. A static site built with Astro + Tailwind CSS + TypeScript, multilingual, deployed on GitHub Pages; still evolving.",
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
-      status: 'wip',
+      status: 'done',
       github:
         'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
@@ -210,6 +228,15 @@ export const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
+      title: 'Writing Channel',
+      desc: 'Long-form articles on engineering, design, photography and tools, built with Content Collections.',
+      tags: ['Writing', 'Astro', 'Content'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/writing',
+    },
+    {
       title: 'Reading List Page',
       desc: 'Three reading routes, reflective notes and essay links — how each book rewrote how I look and work.',
       tags: ['Reading', 'Essay', 'Notes'],
@@ -231,10 +258,10 @@ export const projectsData: Record<Lang, any[]> = {
   fr: [
     {
       title: 'Site personnel',
-      desc: 'Le site sur lequel vous vous trouvez. Un site statique Astro + Tailwind CSS + TypeScript, multilingue, hébergé sur GitHub Pages.',
+      desc: 'Le site sur lequel vous vous trouvez. Site statique Astro + Tailwind CSS + TypeScript, multilingue, hébergé sur GitHub Pages ; en évolution continue.',
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
-      status: 'wip',
+      status: 'done',
       github:
         'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
@@ -258,6 +285,15 @@ export const projectsData: Record<Lang, any[]> = {
       demo: '/qr',
     },
     {
+      title: 'Canal d\'écriture',
+      desc: 'Articles longs sur l\'ingénierie, le design, la photographie et les outils, via Content Collections.',
+      tags: ['Writing', 'Astro', 'Content'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/writing',
+    },
+    {
       title: 'Convertisseur de devises',
       desc: 'Convertisseur de devises léger et sans tracking, utilisant une API de taux de change ouverte.',
       tags: ['JavaScript', 'Fetch API', 'Astro'],
@@ -270,10 +306,10 @@ export const projectsData: Record<Lang, any[]> = {
   ru: [
     {
       title: 'Личный сайт',
-      desc: 'Сайт, на котором вы сейчас находитесь. Статический сайт на Astro + Tailwind CSS + TypeScript, многоязычный, развёрнут на GitHub Pages.',
+      desc: 'Сайт, на котором вы сейчас находитесь. Статический сайт на Astro + Tailwind CSS + TypeScript, многоязычный, развёрнут на GitHub Pages; продолжает развиваться.',
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
-      status: 'wip',
+      status: 'done',
       github:
         'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
@@ -295,6 +331,15 @@ export const projectsData: Record<Lang, any[]> = {
       status: 'done',
       github: null,
       demo: '/qr',
+    },
+    {
+      title: 'Канал публикаций',
+      desc: 'Длинные статьи об инженерии, дизайне, фотографии и инструментах на Content Collections.',
+      tags: ['Writing', 'Astro', 'Content'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/writing',
     },
     {
       title: 'Конвертер валют',
@@ -463,17 +508,17 @@ export const projectPrinciplesData: Record<Lang, any> = {
       '这个列表会优先收录能被真实使用、能长期维护、能解释清楚取舍的小项目。',
     items: [
       {
-        icon: '⚡',
+        icon: '01',
         title: '轻量优先',
         desc: '能静态生成就不引入后端，能用原生能力就不堆依赖。',
       },
       {
-        icon: '🔐',
+        icon: '02',
         title: '隐私友好',
         desc: '减少第三方脚本，尽量让工具在浏览器本地完成。',
       },
       {
-        icon: '♿',
+        icon: '03',
         title: '可访问',
         desc: '按钮、表单、筛选和弹窗都保留键盘路径与可见焦点。',
       },
@@ -485,17 +530,17 @@ export const projectPrinciplesData: Record<Lang, any> = {
       '這個列表會優先收錄能被真實使用、能長期維護、能解釋清楚取捨的小專案。',
     items: [
       {
-        icon: '⚡',
+        icon: '01',
         title: '輕量優先',
         desc: '能靜態生成就不引入後端，能用原生能力就不堆依賴。',
       },
       {
-        icon: '🔐',
+        icon: '02',
         title: '隱私友好',
         desc: '減少第三方腳本，盡量讓工具在瀏覽器本地完成。',
       },
       {
-        icon: '♿',
+        icon: '03',
         title: '可訪問',
         desc: '按鈕、表單、篩選和彈窗都保留鍵盤路徑與可見焦點。',
       },
@@ -507,17 +552,17 @@ export const projectPrinciplesData: Record<Lang, any> = {
       'This list prioritises small projects that can be used for real, maintained over time and explained with clear tradeoffs.',
     items: [
       {
-        icon: '⚡',
+        icon: '01',
         title: 'Lightweight first',
         desc: 'Prefer static output over backends, and native browser APIs over extra dependencies.',
       },
       {
-        icon: '🔐',
+        icon: '02',
         title: 'Privacy-friendly',
         desc: 'Reduce third-party scripts and keep utility workflows inside the browser where possible.',
       },
       {
-        icon: '♿',
+        icon: '03',
         title: 'Accessible by default',
         desc: 'Buttons, forms, filters and dialogs keep keyboard paths and visible focus states.',
       },
@@ -529,17 +574,17 @@ export const projectPrinciplesData: Record<Lang, any> = {
       'La liste privilégie les petits projets réellement utiles, maintenables et capables d’expliquer leurs compromis.',
     items: [
       {
-        icon: '⚡',
+        icon: '01',
         title: 'Léger d’abord',
         desc: 'Préférer le statique aux backends, et les API natives aux dépendances superflues.',
       },
       {
-        icon: '🔐',
+        icon: '02',
         title: 'Respect de la vie privée',
         desc: 'Réduire les scripts tiers et garder les outils dans le navigateur quand c’est possible.',
       },
       {
-        icon: '♿',
+        icon: '03',
         title: 'Accessible par défaut',
         desc: 'Boutons, formulaires, filtres et dialogues gardent clavier et focus visible.',
       },
@@ -551,17 +596,17 @@ export const projectPrinciplesData: Record<Lang, any> = {
       'В списке важнее небольшие проекты, которыми можно пользоваться, которые можно поддерживать и понятно объяснять.',
     items: [
       {
-        icon: '⚡',
+        icon: '01',
         title: 'Сначала лёгкость',
         desc: 'Статика вместо бэкенда, нативные API браузера вместо лишних зависимостей.',
       },
       {
-        icon: '🔐',
+        icon: '02',
         title: 'Приватность',
         desc: 'Меньше сторонних скриптов, больше локальной работы в браузере.',
       },
       {
-        icon: '♿',
+        icon: '03',
         title: 'Доступность',
         desc: 'Кнопки, формы, фильтры и окна сохраняют клавиатуру и видимый фокус.',
       },
@@ -577,13 +622,13 @@ export const externalProjects = [
     tags: ['Recipes', 'Docs', 'Web'],
     desc: {
       'zh-CN':
-        '面向日常做饭的菜谱站，把“今天吃什么、步骤怎么做、材料怎么查”整理成更可执行的入口。',
+        '双源菜谱聚合站：老乡鸡做法库 × 程序员做饭指南，577+ 道菜，含图片版子站、搜索、收藏与 PWA。',
       'zh-TW':
-        '面向日常做飯的菜譜站，把「今天吃什麼、步驟怎麼做、材料怎麼查」整理成更可執行的入口。',
+        '雙源食譜聚合站：老鄉雞做法庫 × 程式員做飯指南，577+ 道菜，含圖片版子站、搜尋、收藏與 PWA。',
       'en-GB':
-        'A recipe site shaped around daily cooking: what to eat, how to follow steps, and how to find ingredients quickly.',
-      fr: 'Un site de recettes pensé pour le quotidien : choisir, suivre les étapes et retrouver les ingrédients.',
-      ru: 'Сайт рецептов для повседневной готовки: что приготовить, как пройти шаги и как найти ингредиенты.',
+        'Dual-source recipe hub merging CookLikeHOC and HowToCook — 577+ dishes, image sub-site, search, favorites, PWA.',
+      fr: 'Hub recettes dual-source CookLikeHOC × HowToCook — 577+ plats, sous-site images, recherche, favoris, PWA.',
+      ru: 'Агрегатор CookLikeHOC × HowToCook — 577+ блюд, подсайт с картинками, поиск, избранное, PWA.',
     },
   },
   {

@@ -1,0 +1,180 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../chrome/PageHero.astro';
+import { changelogCopy } from '../../i18n/pages/changelog';
+import { parseChangelog } from '../../utils/changelog';
+import { resolveLang, getLangPath } from '../../i18n/types';
+
+const lang = resolveLang(Astro.props.lang);
+const t = changelogCopy[lang];
+const home = getLangPath(lang, '/');
+
+const raw = fs.readFileSync(
+  path.join(process.cwd(), 'CHANGELOG.md'),
+  'utf8'
+);
+const releases = parseChangelog(raw);
+
+function sectionLabel(heading: string): string {
+  return t.sectionLabels[heading] ?? heading;
+}
+
+function versionLabel(version: string): string {
+  return version === 'Unreleased' ? t.unreleased : version;
+}
+---
+
+<BaseLayout title={t.title} description={t.description}>
+  <PageHero
+    folio="Release Notes"
+    kicker={t.kicker}
+    title={t.headerTitle}
+    description={t.headerDesc}
+    backHref={home}
+    backLabel={t.back}
+    narrow={false}
+  />
+
+  <section class="pb-16 md:pb-20">
+    <div class="page-shell-wide max-w-3xl">
+      <div class="releases">
+        {
+          releases.map((release) => (
+            <article class="release-block">
+              <header class="release-header">
+                <h2 class="release-version">
+                  <span class="meta-mono text-[rgb(var(--color-accent))]">
+                    v
+                  </span>
+                  {versionLabel(release.version)}
+                </h2>
+                {release.date && (
+                  <time
+                    class="release-date meta-mono"
+                    datetime={release.date}
+                  >
+                    {release.date}
+                  </time>
+                )}
+              </header>
+
+              {
+                release.sections.map((section) => (
+                  <div class="release-section">
+                    <h3 class="release-section-title">
+                      {sectionLabel(section.heading)}
+                    </h3>
+                    <ul class="release-list">
+                      {section.items.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+              }
+            </article>
+          ))
+        }
+      </div>
+
+      <footer class="changelog-footer">
+        <p class="text-sm text-[rgb(var(--color-text-secondary))]">
+          {t.repoNote}
+        </p>
+        <a
+          href={t.repoHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+        >
+          {t.repoLabel} ↗
+        </a>
+      </footer>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .releases {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .release-block {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgb(var(--color-border));
+  }
+
+  .release-block:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .release-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .release-version {
+    font-family: var(--font-heading);
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .release-date {
+    font-size: 0.8125rem;
+    color: rgb(var(--color-text-tertiary));
+  }
+
+  .release-section {
+    margin-bottom: 1.25rem;
+  }
+
+  .release-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .release-section-title {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+    margin-bottom: 0.625rem;
+  }
+
+  .release-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 1.125rem;
+    list-style: disc;
+  }
+
+  .release-list li {
+    color: rgb(var(--color-text-secondary));
+    line-height: 1.65;
+    font-size: 0.9375rem;
+  }
+
+  .release-list li::marker {
+    color: rgb(var(--color-accent) / 0.55);
+  }
+
+  .changelog-footer {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(var(--color-border));
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+</style>
