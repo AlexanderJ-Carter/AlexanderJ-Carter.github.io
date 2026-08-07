@@ -152,7 +152,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'Tool Hub',
+            name: 'IT-Tools',
             path: external.tools,
             desc: '更多工具',
             external: true,
@@ -293,7 +293,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'Tool Hub',
+            name: 'IT-Tools',
             path: external.tools,
             desc: '更多工具',
             external: true,
@@ -467,7 +467,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'Tool Hub',
+            name: 'IT-Tools',
             path: external.tools,
             desc: 'More tools',
             external: true,
@@ -620,7 +620,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'Tool Hub',
+            name: 'IT-Tools',
             path: external.tools,
             desc: 'Plus d’outils',
             external: true,
@@ -777,7 +777,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'Tool Hub',
+            name: 'IT-Tools',
             path: external.tools,
             desc: 'Ещё инструменты',
             external: true,

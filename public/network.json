@@ -102,15 +102,27 @@
       "access": false
     },
     {
+      "id": "contact-card",
+      "url": "https://contact.alexander.xin",
+      "category": "content",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "Contact card",
+      "access": false,
+      "repo": "AlexanderJ-Carter/Contact",
+      "note": "Standalone Turnstile card; overlaps apex /contact — candidate to 301-merge or rename (e.g. card.)"
+    },
+    {
       "id": "tools-hub",
       "url": "https://tools.alexander.xin",
       "category": "tools",
       "host": "server-tunnel",
       "visibility": "public",
       "status": "live",
-      "label": "Tool Hub",
+      "label": "IT-Tools",
       "access": false,
-      "note": "Tunnel → nginx-ui → it-tools :8080; Bot Challenge may appear"
+      "note": "Tunnel → nginx-ui → it-tools :8080; distinct from apex /tools index; rename to it-tools. pending confirmation"
     },
     {
       "id": "paste",
@@ -144,17 +156,6 @@
       "label": "Pocket ID",
       "access": false,
       "note": "Tunnel → nginx-ui → pocket-id :1411; no Access (is the IdP)"
-    },
-    {
-      "id": "ops",
-      "url": "https://ops.alexander.xin",
-      "category": "ops",
-      "host": "cloudflare-worker",
-      "visibility": "private",
-      "status": "live",
-      "label": "Ops Portal",
-      "access": true,
-      "note": "Read-only fleet status Worker behind Access"
     },
     {
       "id": "git",
@@ -207,6 +208,17 @@
       "label": "RustDesk",
       "access": true,
       "note": "HTTP info + optional /ws behind Access; native clients use Tailscale 100.126.166.111"
+    },
+    {
+      "id": "ops",
+      "url": "https://ops.alexander.xin",
+      "category": "ops",
+      "host": "cloudflare-worker",
+      "visibility": "private",
+      "status": "live",
+      "label": "Ops Portal",
+      "access": true,
+      "note": "Read-only fleet status Worker behind Access"
     },
     {
       "id": "cms",
@@ -267,4 +279,3 @@
     }
   ]
 }
-

@@ -6,7 +6,7 @@ Control plane is unified; hosting stays distributed.
 
 | Layer      | Owns                              | Examples                                                         |
 | ---------- | --------------------------------- | ---------------------------------------------------------------- |
-| GitHub     | Source + static fronts            | `alexander.xin`, cook, lab, netq, linux-command, yearly          |
+| GitHub     | Source + static fronts            | `alexander.xin`, cook, lab, netq, linux-command, yearly, contact |
 | Cloudflare | DNS, CDN, Access, Workers, Tunnel | apex CDN, `api.alexander.xin/time`, Access apps, blog via Tunnel |
 | SSH Cloud  | Stateful services only            | Pocket ID, Gitea, Portainer, PrivateBin, it-tools, www mirror    |
 
@@ -200,7 +200,7 @@ Zone `alexander.xin`：无 A/AAAA↔CNAME 冲突；隧道与公开站均为**橙
 | `alexander.xin`（apex）                                                   | A×4 + AAAA×4                | GitHub Pages IP（橙云）                  | 橙       |
 | `www` `blog` `id` `git` `docker` `nginxui` `paste` `tools` `remote` `ssh` | CNAME                       | `…cfargotunnel.com`（`mycloud`）         | 橙       |
 | `ops` `api`                                                               | AAAA `100::`                | Worker 占位（`ops-portal` / `time-api`） | 橙       |
-| `cook` `lab` `linux-command` `netq` `yearly` `contact`                    | CNAME                       | `alexanderj-carter.github.io`            | 橙       |
+| `cook` `lab` `linux-command` `netq` `yearly` `contact`                    | CNAME                       | `alexanderj-carter.github.io`            | 橙（`contact` 见 Hostname naming） |
 | `about` `bio` `time`                                                      | CNAME → Pages + Worker 路由 | 兼容重定向；可改为 `100::` 但非必须      | 橙       |
 | apex / `blog.`                                                            | MX + SPF TXT                | Cloudflare Email Routing                 | DNS only |
 | `resend._domainkey`                                                       | TXT                         | Resend DKIM                              | DNS only |
@@ -318,6 +318,27 @@ Server has **1.6 GiB RAM**. Available often ~800 MB+ after Shlink removal.
 - Directus (`cms.alexander.xin`) + Postgres: **do not start** until more RAM
 - Listmonk: same; compose only
 - Ops portal Worker + read-only `ops-agent`
+
+## Hostname naming (audited 2026-08-07)
+
+原则：**合理才改**；改名须旧主机 **301** 一段时间；运维域默认不动；不为中文用户强行拼音。
+
+| Hostname | 用途 | 建议 | 理由 |
+| -------- | ---- | ---- | ---- |
+| `alexander.xin` / `www` | 主站全球 / 国内镜像 | **保留** | 架构约定，互不跳转 |
+| `blog.alexander.xin` | 写作主场 | **保留** | 品牌清晰；apex `/writing*` 已 301 |
+| `cook` / `lab` / `linux-command` / `netq` | 独立内容/学习站 | **保留** | 用途直白；`lab`≠ GitLab（导航勿写 Git Lab） |
+| `yearly.alexander.xin` | 年度回忆 | **保留**（可选 `memories` 仅建议） | 已够直白；改名需强理由，且勿与 Yearly UI 大改抢同一 PR |
+| `paste.alexander.xin` | PrivateBin | **保留** | 清晰 |
+| `tools.alexander.xin` | IT-Tools（VPS） | **建议改** → `it-tools.`（待确认） | 与主站 `/tools` 索引易混；改名需 Tunnel + nginx `server_name` + DNS + 旧名 301 |
+| `contact.alexander.xin` | 独立 Contact 页（Turnstile） | **建议合并或改名**（待确认） | 与主站 `/contact` 重复；合并则 Worker 301→`/contact/`；或改 `card.` 并 301 |
+| `about` / `bio` / `time` | 别名 | **保留** | 已 Worker 301 |
+| `api` / `ops` / `id` / `git` / `docker` / `nginxui` / `ssh` / `remote` | API / 运维 | **保留** | 清晰，无误导 |
+| `cms`（planned） | Directus | **保留计划名** | 未上线 |
+
+**本轮已落地（低伤害、无 DNS 切主）：** registry 补登 `contact`；导航/文案把 `tools.*` 标成 **IT-Tools**，与 `/tools` 索引区分；Footer「Git Lab」改为「Lab」。
+
+**待你确认后再动 DNS / Tunnel / nginx：** `tools`→`it-tools`；`contact` 合并到 `/contact` 或改名为 `card`。
 
 ## Registry
 
