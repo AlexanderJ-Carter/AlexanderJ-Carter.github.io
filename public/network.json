@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-03",
+  "generated": "2026-08-07",
   "identity": "https://id.alexander.xin",
   "accessLauncher": "https://alexanderjcarter.cloudflareaccess.com",
   "sites": [
@@ -192,7 +192,19 @@
       "visibility": "private",
       "status": "live",
       "label": "SSH",
-      "access": true
+      "access": true,
+      "note": "Browser SSH is emergency-only; daily use local `ssh cloud`"
+    },
+    {
+      "id": "remote",
+      "url": "https://remote.alexander.xin",
+      "category": "ops",
+      "host": "server-tunnel",
+      "visibility": "private",
+      "status": "live",
+      "label": "RustDesk",
+      "access": true,
+      "note": "HTTP info + optional /ws behind Access; native clients use Tailscale 100.126.166.111"
     },
     {
       "id": "cms",

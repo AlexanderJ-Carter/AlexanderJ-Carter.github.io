@@ -53,6 +53,7 @@ Layers **coexist**; they do not replace each other.
 | `docker.alexander.xin`  | Access  | Portainer OIDC（可选）           | Logout URL 应留空，勿触发 IdP end-session                                     |
 | `nginxui.alexander.xin` | Access  | Nginx UI OIDC                    | 本地用户名须匹配 `preferred_username`（`huanghaoyu`）                         |
 | `ssh.alexander.xin`     | Access  | SSH 密钥/密码                    | 浏览器页只能过 Access，主机身份仍要密钥；日常用本机 `ssh cloud`，浏览器仅应急 |
+| `remote.alexander.xin`  | Access  | —（说明页 + 可选 `/ws`）         | 原生客户端走 Tailscale ID/Relay，不经此域名协议端口                           |
 | `git.alexander.xin`     | Access  | Gitea + Pocket ID OIDC           | Dual layer on purpose                                                         |
 | Future `cms.*`          | Access  | Directus admin (+ optional OIDC) | Do not start on 1.6 GiB                                                       |
 
@@ -111,7 +112,7 @@ Layers **coexist**; they do not replace each other.
 | Pocket ID SMTP / 发信开关               | Admin UI → Application Configuration；密钥在服务器 `.resend-smtp-password`（勿入库）                                          |
 | Resend 域名 / API Key                   | Resend Dashboard（`alexander.xin`）；sending key 名 `Pocket ID SMTP`                                                          |
 
-## Live containers (2026-08-03)
+## Live containers (2026-08-07)
 
 | Name         | Role            | Notes                         |
 | ------------ | --------------- | ----------------------------- |
@@ -121,6 +122,27 @@ Layers **coexist**; they do not replace each other.
 | `nginx-ui`   | Nginx admin     | Access + in-app OIDC          |
 | `privatebin` | Encrypted paste | Public                        |
 | `it-tools`   | Tool hub        | Public via Tunnel             |
+
+## Host services (non-container)
+
+| Service              | Role                         | Access model                                                                 |
+| -------------------- | ---------------------------- | ---------------------------------------------------------------------------- |
+| `rustdesk-hbbs/hbbr` | RustDesk ID + Relay          | 协议口仅经 UFW / Tailscale 可达；`remote.alexander.xin` HTTP 经 Access       |
+| `vlmcsd`             | Windows/Office KMS（自用）   | **仅**绑定 Tailscale `100.126.166.111:1688`；不是站群产品，不上 Ops 主推卡片 |
+
+### RustDesk（2026-08-07 加固）
+
+- 单元：`rustdesk-hbbs.service` / `rustdesk-hbbr.service`（数据目录 `/var/lib/rustdesk-server/`）
+- 客户端：ID/Relay = Tailscale `100.126.166.111`（主机名 `cloud`）；Key = `id_ed25519.pub`（Access 页 `remote.alexander.xin` 可见；**私钥勿入库**）
+- hbbs 已 `-r 100.126.166.111 -k <pubkey>`；私钥权限 `600`
+- HTTP：`remote.alexander.xin`（Tunnel → nginx-ui site `remote`）说明页 + `/ws/id` `/ws/relay`；Access 应用 `RustDesk`（Gmail+QQ，IdP = Pocket ID + Email OTP）
+- 公网不要裸开 21115–21119；当前 UFW 默认 deny + Tailscale0 allow
+
+### KMS / vlmcsd（暴露面收口）
+
+- 单元：`/etc/systemd/system/vlmcsd.service` → `/opt/kms/vlmcsd -D -L 100.126.166.111:1688 -v`
+- 访问：同一 Tailnet 内 `100.126.166.111:1688`
+- **不要**挂 Access 子域（非 HTTP）；局域网临时公网激活：改 `-L 0.0.0.0:1688` + 临时 UFW allow，用完改回 Tailscale-only（利弊：方便激活 vs 扫描面）
 
 ## Edge control
 
@@ -147,15 +169,16 @@ Layers **coexist**; they do not replace each other.
 
 ## Blog
 
-**博客 = Astro `/writing`。** 不恢复 Ghost；不上 Listmonk / Directus（内存不足时不做）。
+**博客 = Astro `/writing`（同仓完备阅读体验）。** 不恢复 Ghost；不上 Listmonk / Directus（内存不足时不做）。Canonical 仍为 `alexander.xin`（本回合未切 blog. 真托管）。
 
-| Item         | Detail                                                                              |
-| ------------ | ----------------------------------------------------------------------------------- |
-| 读者入口     | `https://blog.alexander.xin` → `https://alexander.xin/writing/`（Worker 302，公开） |
-| 同站路径     | `/writing/`（Pages + www 镜像）                                                     |
-| 写作         | Git + Markdown：`src/content/writing`                                               |
-| 订阅         | 暂缓（Listmonk 等）                                                                 |
-| 个人主页登录 | 不加                                                                                |
+| Item     | Detail                                                                                          |
+| -------- | ----------------------------------------------------------------------------------------------- |
+| 正式阅读 | `https://alexander.xin/writing/`（及各语言前缀）                                                |
+| 入口别名 | `https://blog.alexander.xin` → Worker 302 → `/writing/`（公开；**不是**另一套独立站）           |
+| 订阅     | `/writing/subscribe` + 各语言 `/rss.xml`；无访客登录；邮件订阅暂缓                              |
+| 归档     | `/writing/archive`、`/writing/tags`、`/writing/categories`                                      |
+| 写作     | Git + Markdown：`src/content/writing`                                                           |
+| 个人主页登录 | 不加                                                                                         |
 
 ## Planned (memory-gated)
 
