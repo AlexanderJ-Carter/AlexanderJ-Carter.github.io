@@ -8,6 +8,7 @@ const items = archiveYears(posts).map((y) => ({
   name: String(y.year),
   slug: String(y.year),
   count: y.count,
+  latest: y.latest,
 }));
 ---
 

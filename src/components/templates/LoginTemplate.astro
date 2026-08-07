@@ -126,7 +126,9 @@ const t = copy[lang];
   mainClass="!p-0"
 >
   <div class="login-shell">
+    <div class="login-shell__wash" aria-hidden="true"></div>
     <div class="login-shell__inner">
+      <p class="login-shell__folio">Folio Ops</p>
       <p class="login-shell__kicker">{t.kicker}</p>
       <h1 class="login-shell__title">{t.headline}</h1>
       <p class="login-shell__lead">{t.lead}</p>
@@ -159,12 +161,18 @@ const t = copy[lang];
 
       <section class="login-shell__ops" aria-labelledby="ops-heading">
         <h2 id="ops-heading">{t.opsLabel}</h2>
-        <ul>
+        <ul class="login-shell__ops-list">
           {
-            ops.map((site) => (
+            ops.map((site, i) => (
               <li>
-                <a href={site.url} rel="noopener noreferrer">
-                  {site.labels[lang]}
+                <a href={site.url} rel="noopener noreferrer" class="list-row">
+                  <span class="meta-mono" aria-hidden="true">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span class="login-shell__ops-name">{site.labels[lang]}</span>
+                  <span class="meta-mono" aria-hidden="true">
+                    ↗
+                  </span>
                 </a>
               </li>
             ))
@@ -183,135 +191,190 @@ const t = copy[lang];
 
 <style>
   .login-shell {
-    --ink: #e8e2d4;
-    --line: #e8c478;
-    --bg0: #0b0d12;
-    --bg1: #12161f;
+    position: relative;
     min-height: 100svh;
-    background:
-      radial-gradient(ellipse 80% 50% at 20% 0%, #1a2438 0%, transparent 55%),
-      radial-gradient(ellipse 60% 40% at 90% 80%, #1c1810 0%, transparent 50%),
-      linear-gradient(165deg, var(--bg0), var(--bg1));
-    color: var(--ink);
     display: flex;
     align-items: center;
-    padding: 4rem 1.25rem;
+    padding: 5rem 1.25rem 4rem;
+    background: rgb(var(--color-bg-primary));
+    overflow: hidden;
   }
-
+  .login-shell__wash {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        55% 45% at 12% 8%,
+        rgb(var(--color-accent) / 0.1),
+        transparent 68%
+      ),
+      linear-gradient(
+        180deg,
+        rgb(var(--color-bg-secondary) / 0.55),
+        transparent 65%
+      );
+    pointer-events: none;
+  }
   .login-shell__inner {
+    position: relative;
     max-width: 36rem;
     margin: 0 auto;
+    width: 100%;
   }
-
-  .login-shell__kicker {
-    font-family: ui-monospace, 'Cascadia Code', Menlo, monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
+  .login-shell__folio {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--line);
+    color: rgb(var(--color-text-tertiary));
+    margin: 0 0 0.85rem;
+  }
+  .login-shell__folio::before {
+    content: '— ';
+  }
+  .login-shell__kicker {
+    font-family: theme('fontFamily.heading');
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--color-accent));
     margin: 0 0 1rem;
   }
-
   .login-shell__title {
-    font-family: 'Syne', 'Noto Serif SC', serif;
+    font-family: theme('fontFamily.heading');
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
+    letter-spacing: -0.035em;
     line-height: 1.1;
     margin: 0 0 1rem;
+    color: rgb(var(--color-text-primary));
   }
-
   .login-shell__lead,
   .login-shell__note {
     margin: 0 0 0.85rem;
     line-height: 1.65;
-    opacity: 0.85;
+    color: rgb(var(--color-text-secondary));
   }
-
   .login-shell__note {
-    opacity: 0.65;
     font-size: 0.95rem;
+    color: rgb(var(--color-text-tertiary));
   }
-
   .login-shell__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem 1rem;
-    margin: 1.75rem 0 2.25rem;
+    margin: 1.75rem 0 2.5rem;
   }
-
   .login-shell__cta {
     display: inline-flex;
     align-items: center;
-    padding: 0.75rem 1.2rem;
-    background: color-mix(in oklab, var(--line) 88%, #fff);
-    color: #14110c;
+    padding: 0.75rem 1.25rem;
+    font-family: theme('fontFamily.heading');
     font-weight: 600;
     text-decoration: none;
+    color: #fff;
+    background: rgb(var(--color-accent));
     border: 1px solid transparent;
+    transition: background-color 0.18s ease;
   }
-
+  .login-shell__cta:hover {
+    background: rgb(var(--color-accent) / 0.88);
+  }
   .login-shell__cta:focus-visible {
-    outline: 2px solid var(--line);
+    outline: 2px solid rgb(var(--color-accent));
     outline-offset: 3px;
   }
-
   .login-shell__ghost {
     display: inline-flex;
     align-items: center;
-    padding: 0.75rem 1rem;
-    color: var(--ink);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    opacity: 0.85;
+    padding: 0.75rem 0.35rem;
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: rgb(var(--color-text-secondary));
+    text-decoration: none;
+    border-bottom: 1px solid rgb(var(--color-border) / 0.8);
+    transition:
+      color 0.18s ease,
+      border-color 0.18s ease;
   }
-
-  .login-shell__ghost:focus-visible,
-  .login-shell__ops a:focus-visible,
-  .login-shell__foot a:focus-visible {
-    outline: 2px solid var(--line);
+  .login-shell__ghost:hover,
+  .login-shell__ghost:focus-visible {
+    color: rgb(var(--color-accent));
+    border-color: rgb(var(--color-accent) / 0.55);
+  }
+  .login-shell__ghost:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
     outline-offset: 3px;
   }
-
   .login-shell__ops h2 {
-    font-family: ui-monospace, Menlo, monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.68rem;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    opacity: 0.55;
-    margin: 0 0 0.75rem;
+    color: rgb(var(--color-text-tertiary));
+    margin: 0 0 0.85rem;
   }
-
-  .login-shell__ops ul {
+  .login-shell__ops-list {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
+    border-top: 1px solid rgb(var(--color-border) / 0.7);
   }
-
-  .login-shell__ops a {
-    color: color-mix(in oklab, var(--ink) 80%, var(--line));
-    text-underline-offset: 3px;
+  .login-shell__ops-list li {
+    border-bottom: 1px solid rgb(var(--color-border) / 0.55);
   }
-
+  .login-shell__ops-list a {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding: 0.95rem 0.15rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  .login-shell__ops-list a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
+  .login-shell__ops-name {
+    font-family: theme('fontFamily.heading');
+    font-weight: 600;
+    transition: color 0.18s ease;
+  }
+  .login-shell__ops-list a:hover .login-shell__ops-name,
+  .login-shell__ops-list a:focus-visible .login-shell__ops-name {
+    color: rgb(var(--color-accent));
+  }
   .login-shell__foot {
     margin: 2.5rem 0 0;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem 0.75rem;
     font-size: 0.9rem;
-    opacity: 0.7;
+    color: rgb(var(--color-text-tertiary));
   }
-
   .login-shell__foot a {
     color: inherit;
     text-underline-offset: 3px;
+    transition: color 0.18s ease;
   }
-
+  .login-shell__foot a:hover,
+  .login-shell__foot a:focus-visible {
+    color: rgb(var(--color-accent));
+  }
+  .login-shell__foot a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
   @media (prefers-reduced-motion: reduce) {
-    .login-shell {
-      background: var(--bg0);
+    .login-shell__cta,
+    .login-shell__ghost,
+    .login-shell__ops-name,
+    .login-shell__foot a {
+      transition: none;
     }
   }
 </style>

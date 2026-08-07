@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../chrome/PageHero.astro';
 import RelatedTools from '../chrome/RelatedTools.astro';
 
 const { lang } = Astro.props;
@@ -423,17 +424,17 @@ const projectPrinciplesData: Record<Lang, any> = {
       '这个列表会优先收录能被真实使用、能长期维护、能解释清楚取舍的小项目。',
     items: [
       {
-        icon: '⚡',
+        icon: '01',
         title: '轻量优先',
         desc: '能静态生成就不引入后端，能用原生能力就不堆依赖。',
       },
       {
-        icon: '🔐',
+        icon: '02',
         title: '隐私友好',
         desc: '减少第三方脚本，尽量让工具在浏览器本地完成。',
       },
       {
-        icon: '♿',
+        icon: '03',
         title: '可访问',
         desc: '按钮、表单、筛选和弹窗都保留键盘路径与可见焦点。',
       },
@@ -445,17 +446,17 @@ const projectPrinciplesData: Record<Lang, any> = {
       '這個列表會優先收錄能被真實使用、能長期維護、能解釋清楚取捨的小專案。',
     items: [
       {
-        icon: '⚡',
+        icon: '01',
         title: '輕量優先',
         desc: '能靜態生成就不引入後端，能用原生能力就不堆依賴。',
       },
       {
-        icon: '🔐',
+        icon: '02',
         title: '隱私友好',
         desc: '減少第三方腳本，盡量讓工具在瀏覽器本地完成。',
       },
       {
-        icon: '♿',
+        icon: '03',
         title: '可訪問',
         desc: '按鈕、表單、篩選和彈窗都保留鍵盤路徑與可見焦點。',
       },
@@ -467,17 +468,17 @@ const projectPrinciplesData: Record<Lang, any> = {
       'This list prioritises small projects that can be used for real, maintained over time and explained with clear tradeoffs.',
     items: [
       {
-        icon: '⚡',
+        icon: '01',
         title: 'Lightweight first',
         desc: 'Prefer static output over backends, and native browser APIs over extra dependencies.',
       },
       {
-        icon: '🔐',
+        icon: '02',
         title: 'Privacy-friendly',
         desc: 'Reduce third-party scripts and keep utility workflows inside the browser where possible.',
       },
       {
-        icon: '♿',
+        icon: '03',
         title: 'Accessible by default',
         desc: 'Buttons, forms, filters and dialogs keep keyboard paths and visible focus states.',
       },
@@ -489,17 +490,17 @@ const projectPrinciplesData: Record<Lang, any> = {
       'La liste privilégie les petits projets réellement utiles, maintenables et capables d’expliquer leurs compromis.',
     items: [
       {
-        icon: '⚡',
+        icon: '01',
         title: 'Léger d’abord',
         desc: 'Préférer le statique aux backends, et les API natives aux dépendances superflues.',
       },
       {
-        icon: '🔐',
+        icon: '02',
         title: 'Respect de la vie privée',
         desc: 'Réduire les scripts tiers et garder les outils dans le navigateur quand c’est possible.',
       },
       {
-        icon: '♿',
+        icon: '03',
         title: 'Accessible par défaut',
         desc: 'Boutons, formulaires, filtres et dialogues gardent clavier et focus visible.',
       },
@@ -511,17 +512,17 @@ const projectPrinciplesData: Record<Lang, any> = {
       'В списке важнее небольшие проекты, которыми можно пользоваться, которые можно поддерживать и понятно объяснять.',
     items: [
       {
-        icon: '⚡',
+        icon: '01',
         title: 'Сначала лёгкость',
         desc: 'Статика вместо бэкенда, нативные API браузера вместо лишних зависимостей.',
       },
       {
-        icon: '🔐',
+        icon: '02',
         title: 'Приватность',
         desc: 'Меньше сторонних скриптов, больше локальной работы в браузере.',
       },
       {
-        icon: '♿',
+        icon: '03',
         title: 'Доступность',
         desc: 'Кнопки, формы, фильтры и окна сохраняют клавиатуру и видимый фокус.',
       },
@@ -596,28 +597,16 @@ function getLangPath(path: string): string {
 ---
 
 <BaseLayout title={text.title} description={text.subtitle}>
-  <section class="relative py-16 md:py-24">
-    <div class="container mx-auto px-4 lg:px-8">
-      <!-- Header -->
-      <div class="mb-14 max-w-2xl">
-        <p class="folio-mark mb-3">Folio Build</p>
-        <p
-          class="font-heading text-sm tracking-[0.2em] uppercase text-[rgb(var(--color-text-tertiary))] mb-4"
-        >
-          Projects
-        </p>
-        <h1
-          class="text-4xl md:text-5xl font-heading font-bold mb-4 tracking-tight"
-        >
-          {text.title}
-        </h1>
-        <p
-          class="text-[rgb(var(--color-text-secondary))] text-lg leading-relaxed"
-        >
-          {text.intro}
-        </p>
-      </div>
+  <PageHero
+    folio="Folio Build"
+    kicker="Projects"
+    title={text.title}
+    description={text.intro}
+    narrow={false}
+  />
 
+  <section class="pb-20 md:pb-28">
+    <div class="page-shell-wide">
       <section class="mb-12">
         <div class="max-w-2xl mb-5">
           <h2
@@ -735,16 +724,7 @@ function getLangPath(path: string): string {
             >
               {/* Status badge */}
               <div class="flex items-center justify-between">
-                <span
-                  class={`inline-flex items-center gap-1.5 px-2 py-0.5 border text-xs ${
-                    project.status === 'done'
-                      ? 'border-green-500/30 text-green-700 dark:text-green-400'
-                      : 'border-amber-500/30 text-amber-700 dark:text-amber-400'
-                  }`}
-                >
-                  <span
-                    class={`w-1.5 h-1.5 rounded-full ${project.status === 'done' ? 'bg-green-500' : 'bg-amber-500'}`}
-                  />
+                <span class="meta-mono text-[rgb(var(--color-text-tertiary))]">
                   {project.status === 'done' ? text.statusDone : text.statusWip}
                 </span>
                 <span class="text-xs text-[rgb(var(--color-text-tertiary))] uppercase tracking-wide">
@@ -849,7 +829,10 @@ function getLangPath(path: string): string {
         <div class="grid md:grid-cols-3 gap-4">
           {
             projectPrinciples.items.map((item: any) => (
-              <article class="bg-[rgb(var(--color-bg-primary))] border border-[rgb(var(--color-border))] p-4">
+              <article class="border border-[rgb(var(--color-border))] p-4">
+                <p class="meta-mono text-[rgb(var(--color-accent))] mb-2">
+                  {item.icon}
+                </p>
                 <h3 class="font-heading font-semibold text-[rgb(var(--color-text-primary))] mb-1">
                   {item.title}
                 </h3>

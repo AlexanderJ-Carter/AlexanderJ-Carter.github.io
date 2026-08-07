@@ -72,15 +72,44 @@ export function postsByYear(posts: WritingPost[], year: number): WritingPost[] {
 
 export function archiveYears(
   posts: WritingPost[]
-): Array<{ year: number; count: number }> {
-  const counts = new Map<number, number>();
+): Array<{ year: number; count: number; latest: Date }> {
+  const buckets = new Map<number, { count: number; latest: Date }>();
   for (const post of posts) {
     const year = post.data.pubDate.getFullYear();
-    counts.set(year, (counts.get(year) ?? 0) + 1);
+    const prev = buckets.get(year);
+    if (!prev) {
+      buckets.set(year, { count: 1, latest: post.data.pubDate });
+      continue;
+    }
+    prev.count += 1;
+    if (post.data.pubDate.valueOf() > prev.latest.valueOf()) {
+      prev.latest = post.data.pubDate;
+    }
   }
-  return [...counts.entries()]
-    .map(([year, count]) => ({ year, count }))
+  return [...buckets.entries()]
+    .map(([year, { count, latest }]) => ({ year, count, latest }))
     .sort((a, b) => b.year - a.year);
+}
+
+/** Group posts by calendar month (newest month first). */
+export function groupPostsByMonth(
+  posts: WritingPost[]
+): Array<{ month: number; posts: WritingPost[] }> {
+  const buckets = new Map<number, WritingPost[]>();
+  for (const post of posts) {
+    const month = post.data.pubDate.getMonth();
+    const list = buckets.get(month);
+    if (list) list.push(post);
+    else buckets.set(month, [post]);
+  }
+  return [...buckets.entries()]
+    .map(([month, monthPosts]) => ({
+      month,
+      posts: monthPosts.sort(
+        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+      ),
+    }))
+    .sort((a, b) => b.month - a.month);
 }
 
 export function relatedPosts(

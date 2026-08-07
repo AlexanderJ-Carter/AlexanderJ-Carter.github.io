@@ -2,8 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AdSlot from '../chrome/AdSlot.astro';
 import type { Lang } from '../../i18n/types';
-import { writingCopy } from '../../i18n/pages/writing';
-import { dateLocaleFor, type WritingPost } from '../../lib/writing';
+import { writingCopy, writingRssPath } from '../../i18n/pages/writing';
+import {
+  dateLocaleFor,
+  groupPostsByMonth,
+  type WritingPost,
+} from '../../lib/writing';
 
 interface Props {
   lang?: Lang;
@@ -12,9 +16,18 @@ interface Props {
   posts: WritingPost[];
   kind: 'tag' | 'category' | 'year';
   crumb?: string;
+  year?: number;
 }
 
-const { lang = 'zh-CN', title, description, posts, kind, crumb } = Astro.props;
+const {
+  lang = 'zh-CN',
+  title,
+  description,
+  posts,
+  kind,
+  crumb,
+  year,
+} = Astro.props;
 
 function lp(path: string): string {
   if (lang === 'zh-CN') return path;
@@ -24,6 +37,7 @@ function lp(path: string): string {
 
 const t = writingCopy[lang] ?? writingCopy['zh-CN'];
 const dateLocale = dateLocaleFor(lang);
+const rssHref = writingRssPath(lang);
 
 const parentHref =
   kind === 'year'
@@ -38,6 +52,13 @@ const parentLabel =
     : kind === 'tag'
       ? t.allTags
       : t.allCategories;
+
+const lead =
+  kind === 'year' && year != null
+    ? t.yearPageLead(String(year), posts.length)
+    : description;
+
+const monthGroups = kind === 'year' ? groupPostsByMonth(posts) : [];
 ---
 
 <BaseLayout title={title} description={description}>
@@ -57,15 +78,69 @@ const parentLabel =
           )
         }
       </p>
-      <p class="writing-kicker">
-        {kind === 'year' ? t.archive : kind === 'tag' ? t.tags : t.categories}
-      </p>
-      <h1 class="writing-hero__title writing-hero__title--sm">{title}</h1>
-      <p class="writing-hero__lead">{description}</p>
-      <p class="writing-hero__meta">
-        {posts.length}
-        {kind === 'year' ? ` ${t.postsInYear}` : ` ${t.countLabel}`}
-      </p>
+      <div class="writing-hero__grid">
+        <div>
+          <p class="writing-kicker">
+            {
+              kind === 'year'
+                ? t.archive
+                : kind === 'tag'
+                  ? t.tags
+                  : t.categories
+            }
+          </p>
+          <h1 class="writing-hero__title writing-hero__title--sm">{title}</h1>
+          <p class="writing-hero__lead">{lead}</p>
+          <p class="writing-hero__meta">
+            {posts.length}
+            {kind === 'year' ? ` ${t.postsInYear}` : ` ${t.countLabel}`}
+            {
+              kind === 'year' && (
+                <>
+                  {' · '}
+                  {t.byMonth}
+                </>
+              )
+            }
+          </p>
+        </div>
+        {
+          kind === 'year' && year != null && (
+            <p class="writing-hero__yearmark" aria-hidden="true">
+              {year}
+            </p>
+          )
+        }
+      </div>
+
+      <nav class="writing-tools" aria-label={t.browseBy}>
+        <a href={rssHref} class="writing-tools__rss">
+          <span aria-hidden="true">◎</span>
+          {t.rssCta}
+        </a>
+        <a href={lp('/writing/subscribe')}>{t.subscribe}</a>
+        <a
+          href={lp('/writing/archive')}
+          class:list={{ 'is-active': kind === 'year' }}
+          aria-current={kind === 'year' ? 'page' : undefined}
+        >
+          {t.archive}
+        </a>
+        <a
+          href={lp('/writing/categories')}
+          class:list={{ 'is-active': kind === 'category' }}
+          aria-current={kind === 'category' ? 'page' : undefined}
+        >
+          {t.allCategories}
+        </a>
+        <a
+          href={lp('/writing/tags')}
+          class:list={{ 'is-active': kind === 'tag' }}
+          aria-current={kind === 'tag' ? 'page' : undefined}
+        >
+          {t.allTags}
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -79,6 +154,61 @@ const parentLabel =
             <a href={lp('/writing')} class="writing-empty__link">
               ← {t.backToList}
             </a>
+          </div>
+        ) : kind === 'year' ? (
+          <div class="month-stack">
+            {monthGroups.map((group) => (
+              <section class="month-block">
+                <header class="month-block__head">
+                  <h2 class="month-block__title">
+                    {t.monthNames[group.month]}
+                  </h2>
+                  <p class="month-block__count">
+                    {group.posts.length} {t.postsInYear}
+                  </p>
+                </header>
+                <ul class="stream-list">
+                  {group.posts.map((post) => (
+                    <li>
+                      <a
+                        href={lp(`/writing/${post.id}`)}
+                        class="stream-item group"
+                      >
+                        <time
+                          class="stream-item__day"
+                          datetime={post.data.pubDate.toISOString()}
+                        >
+                          {post.data.pubDate.toLocaleDateString(dateLocale, {
+                            day: '2-digit',
+                          })}
+                        </time>
+                        <div class="stream-item__main">
+                          <p class="stream-meta">
+                            <span>{post.data.category}</span>
+                            <time datetime={post.data.pubDate.toISOString()}>
+                              {post.data.pubDate.toLocaleDateString(
+                                dateLocale,
+                                {
+                                  month: 'short',
+                                  day: 'numeric',
+                                }
+                              )}
+                            </time>
+                            {post.data.timeToRead && (
+                              <span>{post.data.timeToRead}</span>
+                            )}
+                          </p>
+                          <h3 class="stream-item__title">{post.data.title}</h3>
+                          <p class="stream-item__desc">
+                            {post.data.description}
+                          </p>
+                        </div>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
           </div>
         ) : (
           <ul class="stream-list">
@@ -165,6 +295,17 @@ const parentLabel =
     color: rgb(var(--color-accent));
     margin-bottom: 0.85rem;
   }
+  .writing-hero__grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: end;
+  }
+  @media (min-width: 900px) {
+    .writing-hero__grid {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 3rem;
+    }
+  }
   .writing-hero__title {
     font-family: theme('fontFamily.heading');
     font-weight: 700;
@@ -186,6 +327,50 @@ const parentLabel =
     text-transform: uppercase;
     color: rgb(var(--color-text-tertiary));
   }
+  .writing-hero__yearmark {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(4.5rem, 12vw, 7.5rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 0.85;
+    color: rgb(var(--color-text-primary) / 0.06);
+    user-select: none;
+  }
+  .writing-tools {
+    margin-top: 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.35rem;
+    align-items: center;
+  }
+  .writing-tools a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    font-family: theme('fontFamily.heading');
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgb(var(--color-text-secondary));
+    border-bottom: 1px solid rgb(var(--color-border) / 0.7);
+    transition:
+      color 0.18s ease,
+      border-color 0.18s ease;
+  }
+  .writing-tools a:hover,
+  .writing-tools a:focus-visible,
+  .writing-tools a.is-active {
+    color: rgb(var(--color-accent));
+    border-color: rgb(var(--color-accent) / 0.55);
+  }
+  .writing-tools a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
+  .writing-tools__rss {
+    color: rgb(var(--color-accent)) !important;
+    border-bottom-color: rgb(var(--color-accent) / 0.45) !important;
+  }
   .writing-empty {
     padding: 3rem 0;
     max-width: 28rem;
@@ -206,6 +391,37 @@ const parentLabel =
     font-weight: 600;
     color: rgb(var(--color-accent));
   }
+
+  .month-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .month-block__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.35rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid rgb(var(--color-border) / 0.65);
+  }
+  .month-block__title {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .month-block__count {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+
   .stream-meta {
     display: flex;
     flex-wrap: wrap;
@@ -229,15 +445,19 @@ const parentLabel =
     display: grid;
     grid-template-columns: 3rem minmax(0, 1fr);
     gap: 1rem 1.25rem;
-    padding: 1.6rem 0;
+    padding: 1.45rem 0;
     text-decoration: none;
     color: inherit;
-    border-top: 1px solid rgb(var(--color-border) / 0.55);
+    border-top: 1px solid rgb(var(--color-border) / 0.45);
+  }
+  .stream-list li:first-child .stream-item {
+    border-top: none;
   }
   .stream-list li:last-child .stream-item {
-    border-bottom: 1px solid rgb(var(--color-border) / 0.55);
+    border-bottom: 1px solid rgb(var(--color-border) / 0.45);
   }
-  .stream-item__no {
+  .stream-item__no,
+  .stream-item__day {
     font-family: theme('fontFamily.heading');
     font-size: 1.1rem;
     font-weight: 700;
@@ -247,8 +467,14 @@ const parentLabel =
       color 0.2s ease,
       transform 0.25s ease;
   }
+  .stream-item__day {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
   .stream-item:hover .stream-item__no,
-  .stream-item:focus-visible .stream-item__no {
+  .stream-item:focus-visible .stream-item__no,
+  .stream-item:hover .stream-item__day,
+  .stream-item:focus-visible .stream-item__day {
     color: rgb(var(--color-accent));
     transform: translateX(2px);
   }
@@ -277,7 +503,10 @@ const parentLabel =
   }
   @media (prefers-reduced-motion: reduce) {
     .stream-item__no,
-    .stream-item__title {
+    .stream-item__day,
+    .stream-item__title,
+    .writing-tools a,
+    .writing-crumbs a {
       transition: none;
     }
   }

@@ -1,12 +1,19 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import type { Lang } from '../../i18n/types';
-import { writingCopy } from '../../i18n/pages/writing';
+import { writingCopy, writingRssPath } from '../../i18n/pages/writing';
+import { dateLocaleFor } from '../../lib/writing';
 
 interface Props {
   lang?: Lang;
   kind: 'tags' | 'categories' | 'archive';
-  items: Array<{ name: string; slug: string; count: number; href?: string }>;
+  items: Array<{
+    name: string;
+    slug: string;
+    count: number;
+    href?: string;
+    latest?: Date;
+  }>;
 }
 
 const { lang = 'zh-CN', kind, items } = Astro.props;
@@ -18,6 +25,8 @@ function lp(path: string): string {
 }
 
 const t = writingCopy[lang] ?? writingCopy['zh-CN'];
+const dateLocale = dateLocaleFor(lang);
+const rssHref = writingRssPath(lang);
 
 const title =
   kind === 'archive'
@@ -34,6 +43,7 @@ const description =
       : t.allCategories;
 
 const lead = kind === 'archive' ? t.archiveIntro : t.intro;
+const totalPosts = items.reduce((sum, item) => sum + item.count, 0);
 ---
 
 <BaseLayout title={title} description={description}>
@@ -41,17 +51,61 @@ const lead = kind === 'archive' ? t.archiveIntro : t.intro;
     <div class="writing-hero__wash" aria-hidden="true"></div>
     <div class="container mx-auto px-4 lg:px-8 max-w-5xl relative">
       <a href={lp('/writing')} class="writing-back">{t.backToList}</a>
-      <p class="writing-kicker">
+      <div class="writing-hero__grid">
+        <div>
+          <p class="writing-kicker">
+            {
+              kind === 'archive'
+                ? t.archive
+                : kind === 'tags'
+                  ? t.tags
+                  : t.categories
+            }
+          </p>
+          <h1 class="writing-hero__title">{title}</h1>
+          <p class="writing-hero__lead">{lead}</p>
+        </div>
         {
-          kind === 'archive'
-            ? t.archive
-            : kind === 'tags'
-              ? t.tags
-              : t.categories
+          kind === 'archive' && items.length > 0 && (
+            <p
+              class="writing-hero__count"
+              aria-label={`${totalPosts} ${t.postsInYear}`}
+            >
+              <span>{String(items.length).padStart(2, '0')}</span>
+              <small>{t.archive}</small>
+            </p>
+          )
         }
-      </p>
-      <h1 class="writing-hero__title">{title}</h1>
-      <p class="writing-hero__lead">{lead}</p>
+      </div>
+
+      <nav class="writing-tools" aria-label={t.browseBy}>
+        <a href={rssHref} class="writing-tools__rss">
+          <span aria-hidden="true">◎</span>
+          {t.rssCta}
+        </a>
+        <a href={lp('/writing/subscribe')}>{t.subscribe}</a>
+        <a
+          href={lp('/writing/archive')}
+          class:list={{ 'is-active': kind === 'archive' }}
+          aria-current={kind === 'archive' ? 'page' : undefined}
+        >
+          {t.archive}
+        </a>
+        <a
+          href={lp('/writing/categories')}
+          class:list={{ 'is-active': kind === 'categories' }}
+          aria-current={kind === 'categories' ? 'page' : undefined}
+        >
+          {t.allCategories}
+        </a>
+        <a
+          href={lp('/writing/tags')}
+          class:list={{ 'is-active': kind === 'tags' }}
+          aria-current={kind === 'tags' ? 'page' : undefined}
+        >
+          {t.allTags}
+        </a>
+      </nav>
     </div>
   </header>
 
@@ -63,6 +117,47 @@ const lead = kind === 'archive' ? t.archiveIntro : t.intro;
             <p>{t.noPosts}</p>
             <p class="writing-empty__hint">{t.emptyHint}</p>
           </div>
+        ) : kind === 'archive' ? (
+          <ol class="year-rail">
+            {items.map((item, i) => (
+              <li>
+                <a
+                  href={item.href ?? lp(`/writing/archive/${item.slug}`)}
+                  class="year-card group"
+                >
+                  <span class="year-card__idx" aria-hidden="true">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div class="year-card__main">
+                    <span class="year-card__year">
+                      {item.name}
+                      {t.yearLabel}
+                    </span>
+                    {item.latest && (
+                      <span class="year-card__meta">
+                        {t.latestInYear}
+                        {' · '}
+                        <time datetime={item.latest.toISOString()}>
+                          {item.latest.toLocaleDateString(dateLocale, {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </time>
+                      </span>
+                    )}
+                  </div>
+                  <span class="year-card__count">
+                    <strong>{item.count}</strong>
+                    <small>{t.postsInYear}</small>
+                  </span>
+                  <span class="year-card__arrow" aria-hidden="true">
+                    →
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
         ) : (
           <ul class="tax-grid">
             {items.map((item) => (
@@ -71,20 +166,15 @@ const lead = kind === 'archive' ? t.archiveIntro : t.intro;
                   href={
                     item.href ??
                     lp(
-                      kind === 'archive'
-                        ? `/writing/archive/${item.slug}`
-                        : kind === 'tags'
-                          ? `/writing/tags/${item.slug}`
-                          : `/writing/categories/${item.slug}`
+                      kind === 'tags'
+                        ? `/writing/tags/${item.slug}`
+                        : `/writing/categories/${item.slug}`
                     )
                   }
                   class="tax-card"
                 >
                   <span class="tax-card__name">{item.name}</span>
-                  <span class="tax-card__count">
-                    {item.count}
-                    {kind === 'archive' ? ` ${t.postsInYear}` : ''}
-                  </span>
+                  <span class="tax-card__count">{item.count}</span>
                 </a>
               </li>
             ))}
@@ -104,11 +194,17 @@ const lead = kind === 'archive' ? t.archiveIntro : t.intro;
   .writing-hero__wash {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgb(var(--color-bg-secondary) / 0.4),
-      transparent 70%
-    );
+    background:
+      radial-gradient(
+        55% 45% at 88% 12%,
+        rgb(var(--color-accent) / 0.07),
+        transparent 70%
+      ),
+      linear-gradient(
+        180deg,
+        rgb(var(--color-bg-secondary) / 0.4),
+        transparent 70%
+      );
     pointer-events: none;
   }
   .writing-back {
@@ -134,6 +230,17 @@ const lead = kind === 'archive' ? t.archiveIntro : t.intro;
     color: rgb(var(--color-accent));
     margin-bottom: 0.85rem;
   }
+  .writing-hero__grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: end;
+  }
+  @media (min-width: 900px) {
+    .writing-hero__grid {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 3rem;
+    }
+  }
   .writing-hero__title {
     font-family: theme('fontFamily.heading');
     font-size: clamp(2.25rem, 6vw, 3.75rem);
@@ -148,6 +255,69 @@ const lead = kind === 'archive' ? t.archiveIntro : t.intro;
     line-height: 1.65;
     color: rgb(var(--color-text-secondary));
   }
+  .writing-hero__count {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  @media (min-width: 900px) {
+    .writing-hero__count {
+      align-items: flex-end;
+      text-align: right;
+    }
+  }
+  .writing-hero__count span {
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    color: rgb(var(--color-accent) / 0.5);
+  }
+  .writing-hero__count small {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .writing-tools {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.35rem;
+    align-items: center;
+  }
+  .writing-tools a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    font-family: theme('fontFamily.heading');
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgb(var(--color-text-secondary));
+    border-bottom: 1px solid rgb(var(--color-border) / 0.7);
+    transition:
+      color 0.18s ease,
+      border-color 0.18s ease;
+  }
+  .writing-tools a:hover,
+  .writing-tools a:focus-visible,
+  .writing-tools a.is-active {
+    color: rgb(var(--color-accent));
+    border-color: rgb(var(--color-accent) / 0.55);
+  }
+  .writing-tools a:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
+  .writing-tools__rss {
+    color: rgb(var(--color-accent)) !important;
+    border-bottom-color: rgb(var(--color-accent) / 0.45) !important;
+  }
   .writing-empty {
     padding: 3rem 0;
   }
@@ -160,6 +330,116 @@ const lead = kind === 'archive' ? t.archiveIntro : t.intro;
   .writing-empty__hint {
     color: rgb(var(--color-text-secondary));
   }
+
+  .year-rail {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgb(var(--color-border) / 0.65);
+  }
+  .year-card {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr) auto auto;
+    gap: 0.75rem 1.1rem;
+    align-items: baseline;
+    padding: 1.45rem 0.25rem;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid rgb(var(--color-border) / 0.55);
+    transition:
+      background-color 0.18s ease,
+      padding-left 0.2s ease;
+  }
+  .year-card:hover,
+  .year-card:focus-visible {
+    background: rgb(var(--color-bg-secondary) / 0.35);
+    padding-left: 0.45rem;
+  }
+  .year-card:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 3px;
+  }
+  .year-card__idx {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: rgb(var(--color-text-tertiary));
+    transition: color 0.18s ease;
+  }
+  .year-card:hover .year-card__idx,
+  .year-card:focus-visible .year-card__idx {
+    color: rgb(var(--color-accent));
+  }
+  .year-card__year {
+    display: block;
+    font-family: theme('fontFamily.heading');
+    font-size: clamp(1.65rem, 3.5vw, 2.35rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    transition: color 0.18s ease;
+  }
+  .year-card:hover .year-card__year,
+  .year-card:focus-visible .year-card__year {
+    color: rgb(var(--color-accent));
+  }
+  .year-card__meta {
+    display: block;
+    margin-top: 0.4rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .year-card__count {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.15rem;
+    min-width: 3.5rem;
+  }
+  .year-card__count strong {
+    font-family: theme('fontFamily.heading');
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: rgb(var(--color-text-primary));
+  }
+  .year-card__count small {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .year-card__arrow {
+    font-size: 1rem;
+    color: rgb(var(--color-text-tertiary));
+    opacity: 0;
+    transform: translateX(-4px);
+    transition:
+      opacity 0.18s ease,
+      transform 0.2s ease,
+      color 0.18s ease;
+  }
+  .year-card:hover .year-card__arrow,
+  .year-card:focus-visible .year-card__arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: rgb(var(--color-accent));
+  }
+  @media (max-width: 640px) {
+    .year-card {
+      grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+    }
+    .year-card__arrow {
+      display: none;
+    }
+  }
+
   .tax-grid {
     list-style: none;
     margin: 0;
@@ -207,8 +487,21 @@ const lead = kind === 'archive' ? t.archiveIntro : t.intro;
   }
   @media (prefers-reduced-motion: reduce) {
     .tax-card,
-    .writing-back {
+    .writing-back,
+    .writing-tools a,
+    .year-card,
+    .year-card__idx,
+    .year-card__year,
+    .year-card__arrow {
       transition: none;
+    }
+    .year-card:hover,
+    .year-card:focus-visible {
+      padding-left: 0.25rem;
+    }
+    .year-card__arrow {
+      opacity: 1;
+      transform: none;
     }
   }
 </style>
