@@ -29,6 +29,10 @@ public/          # 静态资源；画廊请用 gallery-optimized
 - RSS：`/rss.xml` 与各语言 `/en/rss.xml` 等
 - hreflang 按当前路径生成等价 URL
 
+## 站群与运维
+
+控制面、Access / Pocket ID / SMTP（Resend）、登录分层见 [architecture/site-fleet.md](./architecture/site-fleet.md)。公开站无访客账户；维护者日常入口为 `ops.alexander.xin`。
+
 ## 下一步可研究（未做）
 
 - 本地 Canvas/WASM 生成 QR（去掉第三方 `api.qrserver.com`）

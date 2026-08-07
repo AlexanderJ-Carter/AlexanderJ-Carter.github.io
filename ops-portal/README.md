@@ -1,6 +1,6 @@
 # Ops Portal
 
-Fleet ops home: tool cards + read-only status probes (behind Cloudflare Access).
+Fleet ops home and **primary maintainer entry** (site `/login` CTA points here). Tool cards + read-only status probes behind Cloudflare Access. Not visitor registration.
 
 ## UI
 
@@ -13,7 +13,7 @@ Fleet ops home: tool cards + read-only status probes (behind Cloudflare Access).
 
 1. Prefer Cloudflare API multipart upload of `src/worker.js` as Worker `ops-portal` (local wrangler may be broken).
 2. Access app for `ops.alexander.xin`; keep visible in App Launcher. Hide infrequently used apps (SSH) — reach them from this portal.
-3. Pocket ID OIDC as primary IdP; OTP as break-glass.
+3. Pocket ID OIDC as primary IdP; Access IdP `Email OTP (break-glass)` for emergencies.
 
 ## Endpoints
 

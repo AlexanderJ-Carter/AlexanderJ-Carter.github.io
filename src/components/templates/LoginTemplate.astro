@@ -1,6 +1,6 @@
 ---
 /**
- * Maintainer entry — no passwords collected; guides to Access App Launcher.
+ * Maintainer entry — no visitor signup; primary CTA is Ops Portal.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import {
@@ -8,9 +8,9 @@ import {
   IDENTITY_URL,
   getOpsSites,
 } from '../../data/site-registry';
+import { resolveLang, getLangPath, type Lang } from '../../i18n/types';
 
 const OPS_PORTAL_URL = 'https://ops.alexander.xin';
-import { resolveLang, getLangPath, type Lang } from '../../i18n/types';
 
 interface Props {
   lang?: string;
@@ -30,7 +30,7 @@ const copy: Record<
     lead: string;
     publicNote: string;
     cta: string;
-    opsPortal: string;
+    launcher: string;
     identity: string;
     opsLabel: string;
     back: string;
@@ -39,13 +39,14 @@ const copy: Record<
 > = {
   'zh-CN': {
     title: '维护者入口',
-    description: '公开站无需登录。维护者经 Cloudflare Access 进入运维控制面。',
+    description:
+      '公开站无需登录。维护者从 Ops Portal 进入运维控制面（Cloudflare Access）。',
     kicker: 'Ops gate',
-    headline: '这里不是访客账户',
-    lead: '主站保持匿名。登录只保护 Git、容器、Nginx、SSH 等私有工具。',
+    headline: '这里不是访客注册',
+    lead: '主站保持匿名。此页只通向运维工具：Git、容器、Nginx、SSH 等，不面向读者开户。',
     publicNote: '浏览内容、工具与实验区不需要账号。',
-    cta: '打开 Access 启动台',
-    opsPortal: '运维状态台',
+    cta: '打开 Ops Portal',
+    launcher: 'Access 启动台（备选）',
     identity: '身份源 Pocket ID',
     opsLabel: '受保护的入口',
     back: '返回主站',
@@ -53,13 +54,14 @@ const copy: Record<
   },
   'zh-TW': {
     title: '維護者入口',
-    description: '公開站無需登入。維護者經 Cloudflare Access 進入運維控制面。',
+    description:
+      '公開站無需登入。維護者從 Ops Portal 進入運維控制面（Cloudflare Access）。',
     kicker: 'Ops gate',
-    headline: '這裡不是訪客帳戶',
-    lead: '主站保持匿名。登入只保護 Git、容器、Nginx、SSH 等私有工具。',
+    headline: '這裡不是訪客註冊',
+    lead: '主站保持匿名。此頁只通向運維工具：Git、容器、Nginx、SSH 等，不面向讀者開戶。',
     publicNote: '瀏覽內容、工具與實驗區不需要帳號。',
-    cta: '打開 Access 啟動台',
-    opsPortal: '運維狀態台',
+    cta: '打開 Ops Portal',
+    launcher: 'Access 啟動台（備選）',
     identity: '身份源 Pocket ID',
     opsLabel: '受保護的入口',
     back: '返回主站',
@@ -68,13 +70,13 @@ const copy: Record<
   'en-GB': {
     title: 'Maintainer entry',
     description:
-      'Public pages need no login. Maintainers use Cloudflare Access for the ops plane.',
+      'Public pages need no login. Maintainers enter the ops plane via Ops Portal (Cloudflare Access).',
     kicker: 'Ops gate',
-    headline: 'Not a visitor account',
-    lead: 'The portfolio stays anonymous. Sign-in only protects private tools such as Git, containers, Nginx and SSH.',
+    headline: 'Not visitor registration',
+    lead: 'The portfolio stays anonymous. This page only reaches private tools—Git, containers, Nginx, SSH—not reader accounts.',
     publicNote: 'Reading content, tools and the lab needs no account.',
-    cta: 'Open Access launcher',
-    opsPortal: 'Ops portal',
+    cta: 'Open Ops Portal',
+    launcher: 'Access launcher (secondary)',
     identity: 'Identity: Pocket ID',
     opsLabel: 'Protected entries',
     back: 'Back home',
@@ -83,13 +85,13 @@ const copy: Record<
   fr: {
     title: 'Entrée mainteneur',
     description:
-      'Pas de compte visiteur. Les mainteneurs passent par Cloudflare Access.',
+      'Pas de compte visiteur. Les mainteneurs entrent via Ops Portal (Cloudflare Access).',
     kicker: 'Ops gate',
-    headline: 'Pas un compte visiteur',
-    lead: 'Le site public reste anonyme. La connexion ne protège que les outils privés (Git, conteneurs, Nginx, SSH).',
+    headline: 'Pas une inscription visiteur',
+    lead: 'Le site public reste anonyme. Cette page mène uniquement aux outils privés (Git, conteneurs, Nginx, SSH), pas à des comptes lecteurs.',
     publicNote: 'Lire le contenu, les outils et le labo ne nécessite aucun compte.',
-    cta: 'Ouvrir le lanceur Access',
-    opsPortal: 'Portail ops',
+    cta: 'Ouvrir Ops Portal',
+    launcher: 'Lanceur Access (secondaire)',
     identity: 'Identité : Pocket ID',
     opsLabel: 'Entrées protégées',
     back: 'Accueil',
@@ -98,13 +100,13 @@ const copy: Record<
   ru: {
     title: 'Вход для сопровождения',
     description:
-      'Публичному сайту вход не нужен. Сопровождение — через Cloudflare Access.',
+      'Публичному сайту вход не нужен. Сопровождение — через Ops Portal (Cloudflare Access).',
     kicker: 'Ops gate',
-    headline: 'Это не аккаунт посетителя',
-    lead: 'Публичный сайт остаётся анонимным. Вход защищает только приватные инструменты: Git, контейнеры, Nginx, SSH.',
+    headline: 'Это не регистрация посетителя',
+    lead: 'Публичный сайт остаётся анонимным. Эта страница ведёт только к приватным инструментам: Git, контейнеры, Nginx, SSH — не к аккаунтам читателей.',
     publicNote: 'Контент, инструменты и лаборатория не требуют аккаунта.',
-    cta: 'Открыть Access launcher',
-    opsPortal: 'Ops-портал',
+    cta: 'Открыть Ops Portal',
+    launcher: 'Access launcher (запасной)',
     identity: 'Идентичность: Pocket ID',
     opsLabel: 'Защищённые входы',
     back: 'На главную',
@@ -132,17 +134,17 @@ const t = copy[lang];
       <div class="login-shell__actions">
         <a
           class="login-shell__cta"
-          href={ACCESS_LAUNCHER_URL}
+          href={OPS_PORTAL_URL}
           rel="noopener noreferrer"
         >
           {t.cta}
         </a>
         <a
           class="login-shell__ghost"
-          href={OPS_PORTAL_URL}
+          href={ACCESS_LAUNCHER_URL}
           rel="noopener noreferrer"
         >
-          {t.opsPortal}
+          {t.launcher}
         </a>
         <a
           class="login-shell__ghost"
@@ -260,6 +262,13 @@ const t = copy[lang];
     text-decoration: underline;
     text-underline-offset: 3px;
     opacity: 0.85;
+  }
+
+  .login-shell__ghost:focus-visible,
+  .login-shell__ops a:focus-visible,
+  .login-shell__foot a:focus-visible {
+    outline: 2px solid var(--line);
+    outline-offset: 3px;
   }
 
   .login-shell__ops h2 {

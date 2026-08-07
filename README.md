@@ -26,12 +26,13 @@ ICP / 公安备案同样通过 `.env` 预留（`PUBLIC_ICP_NUMBER`、`PUBLIC_POL
 
 站点通知横幅/弹窗在 `src/config/notice.ts` 配置，默认 `enabled: false`。
 
-目录与约定见 [docs/architecture.md](./docs/architecture.md)。写作 RSS：`/rss.xml`。
+目录与约定见 [docs/architecture.md](./docs/architecture.md)。站群控制面与身份分层见 [docs/architecture/site-fleet.md](./docs/architecture/site-fleet.md)。写作 RSS：`/rss.xml`。
 
 ## 访问入口
 
 - 主站: [alexander.xin](https://alexander.xin)
 - 博客: [blog.alexander.xin](https://blog.alexander.xin)（公开重定向到 [`/writing/`](https://alexander.xin/writing/)）
+- 维护者入口: [`/login`](https://alexander.xin/login) → [Ops Portal](https://ops.alexander.xin)（非访客注册）
 - 安全联系方式: [security.txt](https://alexander.xin/.well-known/security.txt)
 
 ## 站点亮点
