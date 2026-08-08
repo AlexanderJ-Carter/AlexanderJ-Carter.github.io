@@ -56,7 +56,6 @@ Layers **coexist**; they do not replace each other.
 | `docker.alexander.xin`  | Access  | Portainer OIDC（可选）           | Logout URL 应留空，勿触发 IdP end-session                                     |
 | `nginxui.alexander.xin` | Access  | Nginx UI OIDC                    | 本地用户名须匹配 `preferred_username`（`huanghaoyu`）                         |
 | `ssh.alexander.xin`     | Access  | SSH 密钥/密码                    | 浏览器页只能过 Access，主机身份仍要密钥；日常用本机 `ssh cloud`，浏览器仅应急 |
-| `remote.alexander.xin`  | Access  | —（说明页 + 可选 `/ws`）         | 原生客户端走 Tailscale ID/Relay，不经此域名协议端口                           |
 | `git.alexander.xin`     | Access  | Gitea + Pocket ID OIDC           | Dual layer on purpose                                                         |
 | Future `cms.*`          | Access  | Directus admin (+ optional OIDC) | Do not start on 1.6 GiB                                                       |
 
@@ -130,18 +129,13 @@ Layers **coexist**; they do not replace each other.
 
 ## Host services (non-container)
 
-| Service              | Role                       | Access model                                                                                                        |
-| -------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `rustdesk-hbbs/hbbr` | RustDesk ID + Relay        | 协议口仅经 UFW / Tailscale 可达；`remote.alexander.xin` HTTP 经 Access                                              |
-| `vlmcsd`             | Windows/Office KMS（自用） | 非 HTTP，**不能**套 Cloudflare Access；默认 bind `0.0.0.0:1688`，公网靠 UFW 挡；日常走 Tailscale。不上 Ops 主推卡片 |
+| Service  | Role                       | Access model                                                                                                        |
+| -------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `vlmcsd` | Windows/Office KMS（自用） | 非 HTTP，**不能**套 Cloudflare Access；默认 bind `0.0.0.0:1688`，公网靠 UFW 挡；日常走 Tailscale。不上 Ops 主推卡片 |
 
-### RustDesk（2026-08-07）
+### RustDesk（已下线 2026-08-08）
 
-- 单元：`rustdesk-hbbs.service` / `rustdesk-hbbr.service`（数据目录 `/var/lib/rustdesk-server/`）
-- **网页**：`remote.alexander.xin` 经 Access（Pocket ID Passkey / Email OTP）；匿名应 302
-- **客户端**：ID/Relay = Tailscale `100.126.166.111`（主机名 `cloud`）；Key = `id_ed25519.pub`（Access 登录后说明页可见；**私钥勿入库**）
-- hbbs：`-r 100.126.166.111 -k <pubkey>`；私钥权限 `600`
-- 协议口 21115–21119 监听全接口，但 UFW 默认 deny + `Anywhere on tailscale0` allow → **公网不通、Tailscale 通**
+- 已移除自建 `hbbs/hbbr`、`remote.alexander.xin` 说明页与 Ops/站群入口。远控改用设备间 Tailscale + 系统自带 RDP/VNC/SSH 等，不再维护独立 ID/Relay。
 
 ### KMS / vlmcsd（先问清用法再收口）
 
@@ -166,14 +160,12 @@ Layers **coexist**; they do not replace each other.
 | `git.alexander.xin`       | 是   | 是         | 是          | `http://127.0.0.1:80` → nginx `Gitea` → `:3000`        | **经 nginx**（`client_max_body_size 512M` + WS） | **是**           | Access → Gitea（可再 Pocket ID SSO） |
 | `docker.alexander.xin`    | 是   | 是         | 是          | `http://127.0.0.1:80` → nginx `Portainer` → `:9100`    | **经 nginx**（WS）                               | **是**           | Access → Portainer                   |
 | `nginxui.alexander.xin`   | 是   | 是         | 是          | `http://127.0.0.1:80` → nginx `nginx-ui` → `:9000`     | **经 nginx**（WS）                               | **是**           | Access → Nginx UI                    |
-| `remote.alexander.xin`    | 是   | 是         | 是          | `http://127.0.0.1:80` → nginx `remote`（说明 + `/ws`） | **经 nginx**（WS）                               | **是**           | 网页看 Key；客户端走 Tailscale       |
 | `ssh.alexander.xin`       | 是   | Access SSH | 是          | `ssh://localhost:22`                                   | **Tunnel 直连 SSH**（不经 nginx）                | **是**           | 日常 `ssh cloud`；浏览器仅应急       |
 | `ops.alexander.xin`       | 是   | 是         | 是          | （Worker，非 Tunnel）                                  | Cloudflare Worker                                | **是**           | 运维首页                             |
 | `alexander.xin`（apex）   | 是   | 是         | 否          | —                                                      | GitHub Pages + CDN                               | 否               | 全球主站                             |
 | `blog.alexander.xin`      | 是   | 是         | 否          | `http://127.0.0.1:80` → nginx `Blog`（同 www `dist`）  | **经 nginx**（静态写作主场）                     | **否**           | 读文章 / RSS；`/` → `/writing/`      |
 | `about` / `bio` / `time`  | 是   | 是         | 否          | —                                                      | Worker 重定向                                    | 否               | 别名入口                             |
 | `api.alexander.xin/time*` | 是   | 是         | 否          | —                                                      | Worker `time-api`                                | 否               | `GET/HEAD …/time` 或 `/time/now`     |
-| RustDesk 协议口           | 否\* | 否         | N/A         | **不进** HTTP Tunnel                                   | Tailscale（UFW 挡公网）                          | 不适用           | ID/Relay=`100.126.166.111`           |
 | KMS `1688`                | 否\* | 否         | 无法 Access | **不进** HTTP Tunnel                                   | Tailscale（见上节）                              | 不适用           | 激活服务器填 Tailscale IP            |
 
 \*进程可能 `0.0.0.0` 监听，但公网实测不通（UFW / 云安全组）。

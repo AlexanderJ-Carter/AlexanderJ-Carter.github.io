@@ -225,17 +225,6 @@
       "note": "Browser SSH is emergency-only; daily use local `ssh cloud`"
     },
     {
-      "id": "remote",
-      "url": "https://remote.alexander.xin",
-      "category": "ops",
-      "host": "server-tunnel",
-      "visibility": "private",
-      "status": "live",
-      "label": "RustDesk",
-      "access": true,
-      "note": "HTTP info + optional /ws behind Access; native clients use Tailscale 100.126.166.111"
-    },
-    {
       "id": "ops",
       "url": "https://ops.alexander.xin",
       "category": "ops",

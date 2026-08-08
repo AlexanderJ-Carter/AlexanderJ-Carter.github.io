@@ -595,34 +595,6 @@ export const siteRegistry: SiteEntry[] = [
     },
   },
   {
-    id: 'remote',
-    url: 'https://remote.alexander.xin',
-    category: 'ops',
-    host: 'server-tunnel',
-    visibility: 'private',
-    status: 'live',
-    label: 'RustDesk',
-    access: true,
-    note: 'HTTP info + optional /ws behind Access; native clients use Tailscale 100.126.166.111',
-    labels: {
-      'zh-CN': '远程（RustDesk）',
-      'zh-TW': '遠端（RustDesk）',
-      'en-GB': 'Remote (RustDesk)',
-      fr: 'Distant (RustDesk)',
-      ru: 'Удалённо (RustDesk)',
-    },
-    descriptions: {
-      'zh-CN':
-        '自建 RustDesk；网页入口经 Access，客户端走 Tailscale ID/Relay。',
-      'zh-TW':
-        '自建 RustDesk；網頁入口經 Access，客戶端走 Tailscale ID/Relay。',
-      'en-GB':
-        'Self-hosted RustDesk; HTTP behind Access, clients via Tailscale ID/Relay.',
-      fr: 'RustDesk auto-hébergé ; HTTP derrière Access, clients via Tailscale.',
-      ru: 'Свой RustDesk; HTTP за Access, клиенты через Tailscale ID/Relay.',
-    },
-  },
-  {
     id: 'ops',
     url: 'https://ops.alexander.xin',
     category: 'ops',
