@@ -4,6 +4,7 @@
  */
 
 import type { Lang } from '../i18n/types';
+import { afdianUrl } from '../config/site';
 
 export type SiteCategory =
   | 'primary'
@@ -199,6 +200,7 @@ export const siteRegistry: SiteEntry[] = [
     status: 'live',
     label: 'MyCook',
     repo: 'AlexanderJ-Carter/MyCook',
+    note: 'GitHub Pages 主站；图片版与远程 MCP 见 mycook / cook-mcp',
     labels: {
       'zh-CN': '菜谱',
       'zh-TW': '食譜',
@@ -208,13 +210,69 @@ export const siteRegistry: SiteEntry[] = [
     },
     descriptions: {
       'zh-CN':
-        '双源菜谱聚合：老乡鸡做法库 × 程序员做饭指南，577+ 道菜，搜索、收藏、PWA。',
+        '双源菜谱聚合：老乡鸡做法库 × 程序员做饭指南，577+ 道菜，搜索、收藏、PWA（Pages 主站）。',
       'zh-TW':
-        '雙源食譜聚合：老鄉雞做法庫 × 程式員做飯指南，577+ 道菜，搜尋、收藏、PWA。',
+        '雙源食譜聚合：老鄉雞做法庫 × 程式員做飯指南，577+ 道菜，搜尋、收藏、PWA（Pages 主站）。',
       'en-GB':
-        'Dual-source recipe hub: CookLikeHOC × HowToCook, 577+ dishes, search, favorites, PWA.',
-      fr: 'Hub recettes dual-source : CookLikeHOC × HowToCook, 577+ plats, recherche et favoris.',
-      ru: 'Агрегатор рецептов: CookLikeHOC × HowToCook, 577+ блюд, поиск и избранное.',
+        'Dual-source recipe hub on GitHub Pages: CookLikeHOC × HowToCook, 577+ dishes, search, PWA.',
+      fr: 'Hub recettes sur GitHub Pages : CookLikeHOC × HowToCook, 577+ plats, recherche, PWA.',
+      ru: 'Агрегатор рецептов на GitHub Pages: CookLikeHOC × HowToCook, 577+ блюд.',
+    },
+  },
+  {
+    id: 'mycook',
+    url: 'https://mycook.alexander.xin',
+    category: 'content',
+    host: 'server-tunnel',
+    visibility: 'public',
+    status: 'live',
+    label: 'MyCook Full',
+    repo: 'AlexanderJ-Carter/MyCook',
+    note: 'SSH cloud 完整站（含 howtocook-images），Tunnel → nginx',
+    labels: {
+      'zh-CN': '菜谱完整站',
+      'zh-TW': '食譜完整站',
+      'en-GB': 'Recipes (full)',
+      fr: 'Recettes (complet)',
+      ru: 'Рецепты (полный)',
+    },
+    descriptions: {
+      'zh-CN':
+        'MyCook 自托管完整版：与 Pages 同内容，额外提供 HowToCook 高清图片版。',
+      'zh-TW':
+        'MyCook 自託管完整版：與 Pages 同內容，額外提供 HowToCook 高清圖片版。',
+      'en-GB':
+        'Self-hosted MyCook full build: same recipes as Pages, plus HowToCook image edition.',
+      fr: 'MyCook self-hébergé complet : mêmes recettes que Pages, plus l’édition images.',
+      ru: 'Полный self-host MyCook: те же рецепты, плюс издание с фото HowToCook.',
+    },
+  },
+  {
+    id: 'cook-mcp',
+    url: 'https://cook-mcp.alexander.xin',
+    category: 'service',
+    host: 'server-tunnel',
+    visibility: 'public',
+    status: 'live',
+    label: 'MyCook MCP',
+    repo: 'AlexanderJ-Carter/MyCook',
+    note: 'Streamable HTTP MCP；Pocket ID JWT 或 API Key',
+    labels: {
+      'zh-CN': '菜谱 MCP',
+      'zh-TW': '食譜 MCP',
+      'en-GB': 'Recipes MCP',
+      fr: 'MCP recettes',
+      ru: 'MCP рецептов',
+    },
+    descriptions: {
+      'zh-CN':
+        'MyCook 远程 MCP（工具调用）。需 Pocket ID 令牌或 API Key，文档见 cook 站 /ai-agents。',
+      'zh-TW':
+        'MyCook 遠端 MCP（工具呼叫）。需 Pocket ID 令牌或 API Key，文件見 cook 站 /ai-agents。',
+      'en-GB':
+        'Remote MyCook MCP (tool calls). Pocket ID JWT or API key; see cook /ai-agents.',
+      fr: 'MCP MyCook distant. JWT Pocket ID ou clé API ; voir cook /ai-agents.',
+      ru: 'Удалённый MCP MyCook. JWT Pocket ID или API-ключ; см. cook /ai-agents.',
     },
   },
   {
@@ -792,7 +850,7 @@ export function getSitemapElsewhereLinks(lang: Lang): Array<{
     {
       name:
         lang === 'zh-CN' ? '爱发电' : lang === 'zh-TW' ? '愛發電' : 'Afdian',
-      path: 'https://afdian.com/a/alexanderjc',
+      path: afdianUrl,
       desc:
         lang === 'en-GB'
           ? 'Support'

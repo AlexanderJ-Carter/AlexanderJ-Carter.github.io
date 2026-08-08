@@ -7,8 +7,8 @@ Control plane is unified; hosting stays distributed.
 | Layer      | Owns                              | Examples                                                         |
 | ---------- | --------------------------------- | ---------------------------------------------------------------- |
 | GitHub     | Source + static fronts            | `alexander.xin`, cook, lab, netq, linux-command, yearly, contact |
-| Cloudflare | DNS, CDN, Access, Workers, Tunnel | apex CDN, `api.alexander.xin/time`, Access apps, blog via Tunnel |
-| SSH Cloud  | Stateful services only            | Pocket ID, Gitea, Portainer, PrivateBin, it-tools, www mirror    |
+| Cloudflare | DNS, CDN, Access, Workers, Tunnel | apex CDN, `api.alexander.xin/time`, Access apps, blog/mycook via Tunnel |
+| SSH Cloud  | Stateful services + MyCook full   | Pocket ID, Gitea, Portainer, PrivateBin, it-tools, www mirror, mycook, cook-mcp |
 
 `www.alexander.xin` is the **server mirror** (better mainland reachability).  
 `alexander.xin` (apex) is **GitHub Pages**. Do not redirect one to the other.
@@ -47,6 +47,9 @@ Layers **coexist**; they do not replace each other.
 | Domain                  | Layer 1 | Layer 2                          | Notes                                                                         |
 | ----------------------- | ------- | -------------------------------- | ----------------------------------------------------------------------------- |
 | `alexander.xin` / `www` | —       | —                                | Public SSG; no visitor login                                                  |
+| `cook.alexander.xin`    | —       | —                                | MyCook **Pages 主站**（CDN）；公开 JSON / Agent 发现                          |
+| `mycook.alexander.xin`  | —       | —                                | MyCook **完整站**（Tunnel → nginx → `:8090`），含 howtocook-images            |
+| `cook-mcp.alexander.xin`| —       | Pocket ID JWT / API Key          | MyCook 远程 MCP（`:3001`）；公开 `/health`，`/mcp` 需 Bearer                  |
 | `blog.alexander.xin`    | —       | —                                | 公开写作主场：Tunnel → nginx-ui，同仓 `dist`；**无 Access**；MX/TXT 邮件保留  |
 | `id.alexander.xin`      | —       | Pocket ID                        | Must stay reachable without Access                                            |
 | `ops.alexander.xin`     | Access  | —                                | 只读门户                                                                      |

@@ -1,4 +1,5 @@
 import type { Lang } from '../types';
+import { afdianUrl } from '../../config/site';
 
 export type SitemapLink = {
   name: string;
@@ -33,11 +34,13 @@ export type SitemapCopy = {
 const external = {
   github: 'https://github.com/AlexanderJ-Carter',
   cook: 'https://cook.alexander.xin',
+  mycook: 'https://mycook.alexander.xin',
+  cookMcp: 'https://cook-mcp.alexander.xin',
   netq: 'https://netq.alexander.xin',
   tools: 'https://tools.alexander.xin',
   linux: 'https://linux-command.alexander.xin',
   lab: 'https://lab.alexander.xin',
-  afdian: 'https://afdian.com/a/alexanderjc',
+  afdian: afdianUrl,
 };
 
 export const sitemapCopy: Record<Lang, SitemapCopy> = {
@@ -143,7 +146,19 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           {
             name: 'MyCook',
             path: external.cook,
-            desc: '菜谱站',
+            desc: '菜谱 Pages 主站',
+            external: true,
+          },
+          {
+            name: 'MyCook Full',
+            path: external.mycook,
+            desc: '完整站 · 图片版',
+            external: true,
+          },
+          {
+            name: 'MyCook MCP',
+            path: external.cookMcp,
+            desc: '远程 MCP（鉴权）',
             external: true,
           },
           {
@@ -285,7 +300,19 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           {
             name: 'MyCook',
             path: external.cook,
-            desc: '菜譜站',
+            desc: '食譜 Pages 主站',
+            external: true,
+          },
+          {
+            name: 'MyCook Full',
+            path: external.mycook,
+            desc: '完整站 · 圖片版',
+            external: true,
+          },
+          {
+            name: 'MyCook MCP',
+            path: external.cookMcp,
+            desc: '遠端 MCP（鑑權）',
             external: true,
           },
           {
@@ -460,7 +487,19 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           {
             name: 'MyCook',
             path: external.cook,
-            desc: 'Recipes',
+            desc: 'Recipes (Pages)',
+            external: true,
+          },
+          {
+            name: 'MyCook Full',
+            path: external.mycook,
+            desc: 'Full host · images',
+            external: true,
+          },
+          {
+            name: 'MyCook MCP',
+            path: external.cookMcp,
+            desc: 'Remote MCP (auth)',
             external: true,
           },
           {
@@ -618,7 +657,19 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           {
             name: 'MyCook',
             path: external.cook,
-            desc: 'Recettes',
+            desc: 'Recettes (Pages)',
+            external: true,
+          },
+          {
+            name: 'MyCook Full',
+            path: external.mycook,
+            desc: 'Hôte complet · images',
+            external: true,
+          },
+          {
+            name: 'MyCook MCP',
+            path: external.cookMcp,
+            desc: 'MCP distant (auth)',
             external: true,
           },
           {
@@ -776,7 +827,19 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
           {
             name: 'MyCook',
             path: external.cook,
-            desc: 'Рецепты',
+            desc: 'Рецепты (Pages)',
+            external: true,
+          },
+          {
+            name: 'MyCook Full',
+            path: external.mycook,
+            desc: 'Полный хост · фото',
+            external: true,
+          },
+          {
+            name: 'MyCook MCP',
+            path: external.cookMcp,
+            desc: 'Удалённый MCP',
             external: true,
           },
           {

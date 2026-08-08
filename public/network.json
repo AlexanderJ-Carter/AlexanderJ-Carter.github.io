@@ -60,7 +60,32 @@
       "status": "live",
       "label": "MyCook",
       "repo": "AlexanderJ-Carter/MyCook",
-      "access": false
+      "access": false,
+      "note": "GitHub Pages 主站；图片版与远程 MCP 见 mycook / cook-mcp"
+    },
+    {
+      "id": "mycook",
+      "url": "https://mycook.alexander.xin",
+      "category": "content",
+      "host": "server-tunnel",
+      "visibility": "public",
+      "status": "live",
+      "label": "MyCook Full",
+      "repo": "AlexanderJ-Carter/MyCook",
+      "access": false,
+      "note": "SSH cloud 完整站（含 howtocook-images），Tunnel → nginx"
+    },
+    {
+      "id": "cook-mcp",
+      "url": "https://cook-mcp.alexander.xin",
+      "category": "service",
+      "host": "server-tunnel",
+      "visibility": "public",
+      "status": "live",
+      "label": "MyCook MCP",
+      "repo": "AlexanderJ-Carter/MyCook",
+      "access": false,
+      "note": "Streamable HTTP MCP；Pocket ID JWT 或 API Key"
     },
     {
       "id": "lab",

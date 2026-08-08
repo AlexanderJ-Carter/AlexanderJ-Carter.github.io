@@ -619,16 +619,16 @@ export const externalProjects = [
     title: 'MyCook',
     github: 'https://github.com/AlexanderJ-Carter/MyCook',
     demo: 'https://cook.alexander.xin',
-    tags: ['Recipes', 'Docs', 'Web'],
+    tags: ['Recipes', 'Docs', 'MCP'],
     desc: {
       'zh-CN':
-        '双源菜谱聚合站：老乡鸡做法库 × 程序员做饭指南，577+ 道菜，含图片版子站、搜索、收藏与 PWA。',
+        '双源菜谱：Pages 主站 cook · 完整站 mycook（图片版）· 远程 MCP cook-mcp（Pocket ID）。577+ 道菜，搜索 / 收藏 / PWA。',
       'zh-TW':
-        '雙源食譜聚合站：老鄉雞做法庫 × 程式員做飯指南，577+ 道菜，含圖片版子站、搜尋、收藏與 PWA。',
+        '雙源食譜：Pages 主站 cook · 完整站 mycook（圖片版）· 遠端 MCP cook-mcp（Pocket ID）。577+ 道菜，搜尋 / 收藏 / PWA。',
       'en-GB':
-        'Dual-source recipe hub merging CookLikeHOC and HowToCook — 577+ dishes, image sub-site, search, favorites, PWA.',
-      fr: 'Hub recettes dual-source CookLikeHOC × HowToCook — 577+ plats, sous-site images, recherche, favoris, PWA.',
-      ru: 'Агрегатор CookLikeHOC × HowToCook — 577+ блюд, подсайт с картинками, поиск, избранное, PWA.',
+        'Dual-source recipes: Pages at cook, full host mycook (images), remote MCP cook-mcp (Pocket ID). 577+ dishes, search, PWA.',
+      fr: 'Recettes dual-source : Pages cook, hôte complet mycook (images), MCP distant cook-mcp. 577+ plats, PWA.',
+      ru: 'Рецепты: Pages cook, полный mycook (фото), MCP cook-mcp. 577+ блюд, поиск, PWA.',
     },
   },
   {

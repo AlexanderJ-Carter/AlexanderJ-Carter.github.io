@@ -82,7 +82,7 @@ const featuredShared: HomeFeaturedItem[] = [
 const elsewhereShared: HomeElsewhereItem[] = [
   {
     title: 'MyCook',
-    desc: '双源菜谱 · 577+ 道',
+    desc: '菜谱主站 cook · 完整站 mycook',
     href: 'https://cook.alexander.xin',
   },
   {
