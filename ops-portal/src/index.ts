@@ -31,10 +31,10 @@ const PROBES: Array<{ id: string; url: string }> = [
   { id: 'cook', url: 'https://cook.alexander.xin/' },
   { id: 'lab', url: 'https://lab.alexander.xin/' },
   { id: 'network-json', url: 'https://www.alexander.xin/network.json' },
-  { id: 'fleet-changelog', url: 'https://alexander.xin/fleet-changelog.json' },
 ];
 
 const UI_URL = 'https://www.alexander.xin/ops/index.html';
+const FLEET_LOG_URL = 'https://www.alexander.xin/ops/fleet-changelog.json';
 const STATE_KEY = 'probe-ok-v1';
 
 async function probeOne(id: string, url: string): Promise<Probe> {
@@ -190,6 +190,21 @@ async function homeHtml(): Promise<Response> {
   });
 }
 
+async function fleetChangelogJson(): Promise<Response> {
+  const res = await fetch(FLEET_LOG_URL, {
+    headers: { 'User-Agent': 'ops-portal-ui/1.0' },
+  });
+  if (!res.ok) {
+    return new Response('Fleet changelog unavailable', { status: 502 });
+  }
+  return new Response(await res.text(), {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'private, max-age=60',
+    },
+  });
+}
+
 async function runCheck(env: Env): Promise<Response> {
   const probes = await runProbes();
   const diff = await diffAndAlert(env, probes);
@@ -206,6 +221,9 @@ export default {
     if (url.pathname === '/api/status') return statusJson(env);
     if (url.pathname === '/api/check' && request.method === 'POST') {
       return runCheck(env);
+    }
+    if (url.pathname === '/fleet-changelog.json') {
+      return fleetChangelogJson();
     }
     return homeHtml();
   },

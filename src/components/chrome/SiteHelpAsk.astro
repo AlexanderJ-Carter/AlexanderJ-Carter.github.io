@@ -1,0 +1,257 @@
+---
+import { resolveLang, getLangPath, type Lang } from '../../i18n/types';
+
+interface Props {
+  lang?: string;
+  /** compact = single-line strip; default = short box */
+  variant?: 'compact' | 'box';
+}
+
+const lang = resolveLang(Astro.props.lang);
+const variant = Astro.props.variant ?? 'box';
+const helpHref = getLangPath(lang, '/help');
+
+const copy: Record<
+  Lang,
+  {
+    title: string;
+    placeholder: string;
+    ask: string;
+    thinking: string;
+    more: string;
+    empty: string;
+  }
+> = {
+  'zh-CN': {
+    title: '站内小助手',
+    placeholder: '例如：cook 和 mycook 有什么不同？',
+    ask: '问',
+    thinking: '想一下…',
+    more: '完整帮助',
+    empty: '用公开资料回答站群问题。',
+  },
+  'zh-TW': {
+    title: '站內小助手',
+    placeholder: '例如：cook 和 mycook 有什麼不同？',
+    ask: '問',
+    thinking: '想一下…',
+    more: '完整幫助',
+    empty: '用公開資料回答站群問題。',
+  },
+  'en-GB': {
+    title: 'Site assistant',
+    placeholder: 'e.g. How do cook and mycook differ?',
+    ask: 'Ask',
+    thinking: 'Thinking…',
+    more: 'Full help',
+    empty: 'Answers from public site docs.',
+  },
+  fr: {
+    title: 'Assistant',
+    placeholder: 'ex. Différence cook / mycook ?',
+    ask: 'OK',
+    thinking: '…',
+    more: 'Aide complète',
+    empty: 'Docs publics uniquement.',
+  },
+  ru: {
+    title: 'Помощник',
+    placeholder: 'напр. Чем cook отличается от mycook?',
+    ask: 'Спросить',
+    thinking: '…',
+    more: 'Справка',
+    empty: 'Только публичные документы.',
+  },
+};
+
+const t = copy[lang];
+const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<section
+  class:list={[
+    'site-help-ask',
+    variant === 'compact' ? 'site-help-ask--compact' : 'site-help-ask--box',
+  ]}
+  aria-label={t.title}
+  data-help-ask
+>
+  <div class="site-help-ask__head">
+    <p class="site-help-ask__title">{t.title}</p>
+    <a href={helpHref} class="site-help-ask__more">{t.more}</a>
+  </div>
+  <form class="site-help-ask__form" id={`${uid}-form`}>
+    <label class="sr-only" for={`${uid}-q`}>{t.ask}</label>
+    <input
+      id={`${uid}-q`}
+      name="question"
+      type="text"
+      maxlength="400"
+      required
+      autocomplete="off"
+      placeholder={t.placeholder}
+      class="site-help-ask__input"
+    />
+    <button type="submit" class="site-help-ask__btn" id={`${uid}-btn`}>
+      {t.ask}
+    </button>
+  </form>
+  <div
+    class="site-help-ask__out"
+    id={`${uid}-out`}
+    aria-live="polite"
+    data-empty={t.empty}
+  >
+    {t.empty}
+  </div>
+</section>
+
+<style>
+  .site-help-ask {
+    max-width: 42rem;
+  }
+  .site-help-ask--box {
+    margin: 0 0 2.5rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid rgb(var(--color-border));
+    border-bottom: 1px solid rgb(var(--color-border));
+  }
+  .site-help-ask--compact {
+    margin: 1rem 0 0;
+  }
+  .site-help-ask__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+  }
+  .site-help-ask__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+  }
+  .site-help-ask__more {
+    font-size: 0.8rem;
+    color: rgb(var(--color-text-secondary));
+    text-underline-offset: 3px;
+  }
+  .site-help-ask__more:hover {
+    color: rgb(var(--color-text-primary));
+    text-decoration: underline;
+  }
+  .site-help-ask__form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+  .site-help-ask__input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid rgb(var(--color-border));
+    background: rgb(var(--color-bg-primary));
+    color: rgb(var(--color-text-primary));
+    padding: 0.65rem 0.85rem;
+    font-size: 0.95rem;
+  }
+  .site-help-ask__input:focus-visible {
+    outline: 2px solid rgb(var(--color-primary, 59 130 246));
+    outline-offset: 2px;
+  }
+  .site-help-ask__btn {
+    flex-shrink: 0;
+    padding: 0.65rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid rgb(var(--color-text-primary));
+    background: rgb(var(--color-text-primary));
+    color: rgb(var(--color-bg-primary));
+    cursor: pointer;
+  }
+  .site-help-ask__btn:disabled {
+    opacity: 0.55;
+    cursor: wait;
+  }
+  .site-help-ask__btn:focus-visible {
+    outline: 2px solid rgb(var(--color-primary, 59 130 246));
+    outline-offset: 2px;
+  }
+  .site-help-ask__out {
+    margin-top: 0.85rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: rgb(var(--color-text-secondary));
+    white-space: pre-wrap;
+  }
+  .site-help-ask__out a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-help-ask__btn {
+      transition: none;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ thinking: t.thinking, uid }}>
+  (function () {
+    const form = document.getElementById(uid + '-form');
+    const input = document.getElementById(uid + '-q');
+    const out = document.getElementById(uid + '-out');
+    const btn = document.getElementById(uid + '-btn');
+    if (!form || !input || !out || !btn) return;
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function formatAnswer(text) {
+      var html = escapeHtml(text);
+      html = html.replace(
+        /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
+        '<a href="$2" rel="noopener">$1</a>'
+      );
+      html = html.replace(
+        /(https?:\/\/[^\s<]+)/g,
+        '<a href="$1" rel="noopener">$1</a>'
+      );
+      html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      return html;
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var q = (input.value || '').trim();
+      if (!q) return;
+      out.textContent = thinking;
+      btn.disabled = true;
+      try {
+        var res = await fetch('/api/help', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question: q, llm: true }),
+        });
+        var data = await res.json();
+        if (!res.ok) {
+          out.textContent = data.error || 'Error ' + res.status;
+          return;
+        }
+        out.innerHTML = formatAnswer(data.answer || out.getAttribute('data-empty') || '');
+      } catch (err) {
+        out.textContent = String(err);
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  })();
+</script>

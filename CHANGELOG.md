@@ -12,8 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AdSense ownership metadata, Google CMP privacy-settings entry point, and low-density manual ad deployment variables.
 - Commercial licensing, commissioned work, brand partnership, and open-source sponsorship options on Support and Contact.
 - Registry entries for `home` / `hermes` / `gateway` / `newyear`; `contact.alexander.xin` Worker 301 → `/contact/`.
-- Fleet timeline (`src/data/fleet-changelog.ts`) on `/network#fleet-log`, machine feed `/fleet-changelog.json`, and Ops Portal panel.
-- Ops Portal cron (10m) probe diffs with optional Resend email; public `/help` + Worker `/api/help` with `help/kb.json`, rate limits, and optional OmniRoute.
+- Fleet timeline (`src/data/fleet-changelog.ts`) for maintainers only: Ops Portal `/fleet-changelog.json` (proxied from www `/ops/fleet-changelog.json`); not shown on public Network.
+- Ops Portal cron (10m) probe diffs with optional Resend email; public `/help` + Worker `/api/help` with `help/kb.json`, IP rate limits, and OmniRoute (dedicated limited key).
+- Mini site-help ask on Network, Contact, and 404 (same `/api/help`).
 - Public `/changelog` page (five locales) synced from `CHANGELOG.md`.
 - Writing: Darkroom Folio design-system essay (zh-CN, zh-TW, en-GB, fr, ru).
 - `src/data/gallery.ts`: deduplicated gallery catalog (29 items × 5 locales).

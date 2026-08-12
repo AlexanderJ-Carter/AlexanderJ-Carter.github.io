@@ -6,12 +6,11 @@ const PROBES = [
   { id: 'time-api', url: 'https://api.alexander.xin/time/now' },
   { id: 'tools-hub', url: 'https://tools.alexander.xin/' },
   { id: 'paste', url: 'https://paste.alexander.xin/' },
-  // Apex GitHub Pages may lag deploys; www mirror is the live server copy.
   { id: 'network-json', url: 'https://www.alexander.xin/network.json' },
-  { id: 'fleet-changelog', url: 'https://alexander.xin/fleet-changelog.json' },
 ];
 
 const UI_URL = 'https://www.alexander.xin/ops/index.html';
+const FLEET_LOG_URL = 'https://www.alexander.xin/ops/fleet-changelog.json';
 
 async function probeOne(id, url) {
   const started = Date.now();
@@ -68,10 +67,26 @@ async function homeHtml() {
   });
 }
 
+async function fleetChangelogJson() {
+  const res = await fetch(FLEET_LOG_URL, {
+    headers: { 'User-Agent': 'ops-portal-ui/1.0' },
+  });
+  if (!res.ok) {
+    return new Response('Fleet changelog unavailable', { status: 502 });
+  }
+  return new Response(await res.text(), {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'private, max-age=60',
+    },
+  });
+}
+
 export default {
   async fetch(request) {
     const url = new URL(request.url);
     if (url.pathname === '/api/status') return statusJson();
+    if (url.pathname === '/fleet-changelog.json') return fleetChangelogJson();
     return homeHtml();
   },
 };

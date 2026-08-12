@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHelpAsk from '../components/chrome/SiteHelpAsk.astro';
 import { getLangFromUrl } from '../i18n/ui';
 import { getLangPath, type Lang } from '../i18n/types';
 
@@ -170,7 +171,7 @@ const exits = [
 
           {
             requested && requested !== '/404' && (
-              <p class="mb-8 text-sm text-[rgb(var(--color-text-tertiary))]">
+              <p class="mb-6 text-sm text-[rgb(var(--color-text-tertiary))]">
                 <span class="meta-mono mr-2">{t.pathLabel}</span>
                 <code class="font-mono text-[rgb(var(--color-text-secondary))] break-all">
                   {requested}
@@ -178,6 +179,10 @@ const exits = [
               </p>
             )
           }
+
+          <div class="mb-8 max-w-md">
+            <SiteHelpAsk lang={lang} variant="compact" />
+          </div>
 
           <ul class="border-t border-[rgb(var(--color-border))] max-w-md">
             {

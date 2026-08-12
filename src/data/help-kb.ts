@@ -31,7 +31,22 @@ export const helpKb = {
     {
       id: 'network',
       q: ['站群', 'network', '目录', '有哪些站'],
-      a: 'https://alexander.xin/network/ 列出公开节点；机器可读 network.json 与 fleet-changelog.json。',
+      a: 'https://alexander.xin/network/ 列出公开节点；机器可读见 network.json。',
+    },
+    {
+      id: 'login-not-signup',
+      q: ['登录', '注册', 'login', 'signup', '维护者'],
+      a: '/login 与 ops.alexander.xin 是维护者入口（Cloudflare Access），不是访客注册。访客请用 /contact。',
+    },
+    {
+      id: 'paste',
+      q: ['paste', '剪贴板', 'privatebin', '粘贴'],
+      a: '临时分享文本用 https://paste.alexander.xin（PrivateBin）。',
+    },
+    {
+      id: 'rss',
+      q: ['rss', '订阅', 'feed'],
+      a: '写作 RSS 在 blog 与各语言路径的 /rss.xml；主站也有对应语言 feed。',
     },
     {
       id: 'tools',
@@ -154,7 +169,6 @@ export const helpKb = {
     'https://alexander.xin/help/kb.json',
     'https://alexander.xin/llms.txt',
     'https://alexander.xin/network.json',
-    'https://alexander.xin/fleet-changelog.json',
     'https://alexander.xin/auth.md',
   ],
 };

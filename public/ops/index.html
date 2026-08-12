@@ -276,10 +276,8 @@
       <section aria-label="站群动态">
         <h2>Fleet log</h2>
         <p class="lead" style="margin-bottom: 1rem; font-size: 0.9rem">
-          跨子站控制面变更（非主站 semver）。源：
-          <a href="https://alexander.xin/fleet-changelog.json" target="_blank" rel="noopener">fleet-changelog.json</a>
-          ·
-          <a href="https://alexander.xin/network/#fleet-log" target="_blank" rel="noopener">Network</a>
+          跨子站控制面变更（仅维护者可见；非主站 semver）。同源：
+          <a href="/fleet-changelog.json">fleet-changelog.json</a>
         </p>
         <ol id="fleet-log" style="list-style: none; padding: 0; margin: 0 0 2rem"></ol>
       </section>
@@ -312,7 +310,7 @@
 
       async function loadFleetLog() {
         const list = document.getElementById('fleet-log');
-        const res = await fetch('https://alexander.xin/fleet-changelog.json', {
+        const res = await fetch('/fleet-changelog.json', {
           cache: 'no-store',
         });
         const data = await res.json();

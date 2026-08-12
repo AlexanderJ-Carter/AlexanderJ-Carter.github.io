@@ -29,6 +29,6 @@ Fleet ops home and **primary maintainer entry** (site `/login` CTA points here).
 ## Endpoints
 
 - `/` — ops home (cards + fleet log + probes; HTML from www mirror)
-- `/api/status` — probe apex, www, blog, identity, time API, tools, paste, cook, lab, network.json, fleet-changelog.json
+- `/api/status` — probe apex, www, blog, identity, time API, tools, paste, cook, lab, network.json
 - `/api/check` — POST: run probes, diff, optional email
-- Fleet log UI fetches `https://alexander.xin/fleet-changelog.json`
+- `/fleet-changelog.json` — maintainer-only fleet timeline (proxied from www `/ops/fleet-changelog.json`; not shown on public Network)

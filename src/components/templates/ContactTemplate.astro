@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../chrome/PageHero.astro';
+import SiteHelpAsk from '../chrome/SiteHelpAsk.astro';
 import { supportCopy } from '../../i18n/pages/support';
 import { contactData } from '../../i18n/pages/contact';
+import { resolveLang } from '../../i18n/types';
 
-const { lang } = Astro.props;
+const lang = resolveLang(Astro.props.lang);
 
 type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
@@ -85,6 +87,10 @@ const collaboration = supportCopy[lang as Lang] || supportCopy['en-GB'];
           </dd>
         </div>
       </dl>
+
+      <div class="mb-12">
+        <SiteHelpAsk lang={lang} />
+      </div>
 
       <section class="border-t border-[rgb(var(--color-border))] pt-8 mb-12">
         <h2

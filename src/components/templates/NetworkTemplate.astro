@@ -4,11 +4,11 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../chrome/PageHero.astro';
+import SiteHelpAsk from '../chrome/SiteHelpAsk.astro';
 import {
   getNetworkDirectorySites,
   type SiteEntry,
 } from '../../data/site-registry';
-import { getFleetChangelog } from '../../data/fleet-changelog';
 import { resolveLang, getLangPath, type Lang } from '../../i18n/types';
 
 interface Props {
@@ -18,7 +18,6 @@ interface Props {
 const lang = resolveLang(Astro.props.lang);
 const lp = (path: string) => getLangPath(lang, path);
 const sites = getNetworkDirectorySites();
-const fleetLog = getFleetChangelog(8);
 
 const categoryOrder = [
   'experiment',
@@ -41,10 +40,7 @@ const copy: Record<
     next: string;
     shortcuts: string;
     help: string;
-    fleetLog: string;
-    fleetLogLead: string;
     siteChangelog: string;
-    kinds: Record<string, string>;
     categories: Record<string, string>;
     hosts: Record<string, string>;
   }
@@ -59,17 +55,7 @@ const copy: Record<
     next: '进入 NEXUS',
     shortcuts: '快捷入口',
     help: '站内帮助',
-    fleetLog: '站群动态',
-    fleetLogLead:
-      '跨子站的控制面变更（非主站版本号）。机器可读：/fleet-changelog.json',
     siteChangelog: '主站更新日志',
-    kinds: {
-      added: '新增',
-      changed: '变更',
-      retired: '退役',
-      ops: '运维',
-      security: '安全',
-    },
     categories: {
       experiment: '实验',
       content: '内容',
@@ -95,17 +81,7 @@ const copy: Record<
     next: '進入 NEXUS',
     shortcuts: '快捷入口',
     help: '站內幫助',
-    fleetLog: '站群動態',
-    fleetLogLead:
-      '跨子站的控制面變更（非主站版本號）。機器可讀：/fleet-changelog.json',
     siteChangelog: '主站更新日誌',
-    kinds: {
-      added: '新增',
-      changed: '變更',
-      retired: '退役',
-      ops: '運維',
-      security: '安全',
-    },
     categories: {
       experiment: '實驗',
       content: '內容',
@@ -132,17 +108,7 @@ const copy: Record<
     next: 'Enter NEXUS',
     shortcuts: 'Shortcuts',
     help: 'Site help',
-    fleetLog: 'Fleet log',
-    fleetLogLead:
-      'Control-plane changes across sites (not apex semver). Machine feed: /fleet-changelog.json',
     siteChangelog: 'Apex changelog',
-    kinds: {
-      added: 'Added',
-      changed: 'Changed',
-      retired: 'Retired',
-      ops: 'Ops',
-      security: 'Security',
-    },
     categories: {
       experiment: 'Experiments',
       content: 'Content',
@@ -169,17 +135,7 @@ const copy: Record<
     next: 'Entrer dans NEXUS',
     shortcuts: 'Raccourcis',
     help: 'Aide',
-    fleetLog: 'Journal de flotte',
-    fleetLogLead:
-      'Changements de plan de contrôle (pas le semver apex). Flux machine : /fleet-changelog.json',
     siteChangelog: 'Journal apex',
-    kinds: {
-      added: 'Ajouté',
-      changed: 'Modifié',
-      retired: 'Retiré',
-      ops: 'Ops',
-      security: 'Sécurité',
-    },
     categories: {
       experiment: 'Expériences',
       content: 'Contenu',
@@ -206,17 +162,7 @@ const copy: Record<
     next: 'В NEXUS',
     shortcuts: 'Ярлыки',
     help: 'Справка',
-    fleetLog: 'Журнал флота',
-    fleetLogLead:
-      'Изменения плоскости управления (не semver apex). Машинный поток: /fleet-changelog.json',
     siteChangelog: 'Changelog apex',
-    kinds: {
-      added: 'Добавлено',
-      changed: 'Изменено',
-      retired: 'Снято',
-      ops: 'Ops',
-      security: 'Безопасность',
-    },
     categories: {
       experiment: 'Эксперименты',
       content: 'Контент',
@@ -265,12 +211,6 @@ const grouped = categoryOrder
   <section class="pb-8" aria-label={t.shortcuts}>
     <div class="container mx-auto px-4 lg:px-8 max-w-3xl flex flex-wrap gap-4">
       <a
-        href="#fleet-log"
-        class="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
-      >
-        {t.fleetLog}
-      </a>
-      <a
         href={lp('/changelog')}
         class="text-sm font-medium text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
       >
@@ -297,60 +237,9 @@ const grouped = categoryOrder
     </div>
   </section>
 
-  <section id="fleet-log" class="pb-12" aria-labelledby="fleet-log-title">
+  <section class="pb-4" aria-label="help">
     <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
-      <h2
-        id="fleet-log-title"
-        class="font-heading text-sm tracking-[0.2em] uppercase text-[rgb(var(--color-text-tertiary))] mb-3"
-      >
-        {t.fleetLog}
-      </h2>
-      <p class="text-sm text-[rgb(var(--color-text-secondary))] mb-6 max-w-2xl">
-        {t.fleetLogLead}
-      </p>
-      <ol
-        class="space-y-5 border-y border-[rgb(var(--color-border))] divide-y divide-[rgb(var(--color-border))]"
-      >
-        {
-          fleetLog.map((entry) => (
-            <li class="py-5 first:pt-5">
-              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
-                <time
-                  class="meta-mono text-xs text-[rgb(var(--color-text-tertiary))]"
-                  datetime={entry.date}
-                >
-                  {entry.date}
-                </time>
-                <span class="text-xs tracking-wider uppercase text-[rgb(var(--color-accent))]">
-                  {t.kinds[entry.kind] || entry.kind}
-                </span>
-                <span class="text-xs text-[rgb(var(--color-text-tertiary))]">
-                  {entry.sites.join(' · ')}
-                </span>
-              </div>
-              <p class="font-heading text-lg font-semibold mb-1">
-                {entry.title[lang]}
-              </p>
-              <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
-                {entry.summary[lang]}
-              </p>
-            </li>
-          ))
-        }
-      </ol>
-      <p class="mt-4 text-xs text-[rgb(var(--color-text-tertiary))]">
-        <a
-          href="/fleet-changelog.json"
-          class="hover:text-primary-600 dark:hover:text-primary-400 underline-offset-2 hover:underline"
-          >fleet-changelog.json</a
-        >
-        {' · '}
-        <a
-          href={lp('/changelog')}
-          class="hover:text-primary-600 dark:hover:text-primary-400 underline-offset-2 hover:underline"
-          >{t.siteChangelog}</a
-        >
-      </p>
+      <SiteHelpAsk lang={lang} />
     </div>
   </section>
 

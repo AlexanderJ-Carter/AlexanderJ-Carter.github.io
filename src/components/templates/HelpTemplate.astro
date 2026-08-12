@@ -31,10 +31,10 @@ const copy: Record<
     title: '站内帮助',
     description: '基于公开站群资料的导览问答',
     kicker: 'Help',
-    lead: '问这个站：目录、子站、联系方式。答案来自公开文档，不是通用聊天机器人。',
+    lead: '问这个站：目录、子站、联系方式。小助手用公开资料回答，不是通用聊天机器人。',
     placeholder: '例如：主站和 www 有什么区别？',
     ask: '提问',
-    thinking: '检索中…',
+    thinking: '想一下…',
     empty: '试着点下面的示例，或用自己的话提问。',
     disclaimer:
       '助手只使用公开资料；不确定时请看站群目录或写信。私密运维问题不会回答。',
@@ -44,6 +44,7 @@ const copy: Record<
       '主站和 www 有什么区别？',
       '写作内容在哪里读？',
       'cook 和 mycook 有什么不同？',
+      '登录是注册吗？',
       '怎么联系你？',
     ],
   },
@@ -214,6 +215,32 @@ const home = lp('/');
   const out = document.getElementById('help-out');
   const submit = document.getElementById('help-submit');
 
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function formatAnswer(text, mode) {
+    let html = escapeHtml(text);
+    html = html.replace(
+      /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
+      '<a href="$2" rel="noopener">$1</a>'
+    );
+    html = html.replace(
+      /(https?:\/\/[^\s<]+)/g,
+      '<a href="$1" rel="noopener">$1</a>'
+    );
+    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    const badge =
+      mode === 'llm'
+        ? '<p class="mb-3 text-xs uppercase tracking-wider text-[rgb(var(--color-text-tertiary))]">assistant</p>'
+        : '<p class="mb-3 text-xs uppercase tracking-wider text-[rgb(var(--color-text-tertiary))]">retrieve</p>';
+    return badge + html;
+  }
+
   async function ask(question) {
     if (!question || !out || !submit) return;
     out.textContent = thinking;
@@ -222,14 +249,14 @@ const home = lp('/');
       const res = await fetch('/api/help', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question }),
+        body: JSON.stringify({ question, llm: true }),
       });
       const data = await res.json();
       if (!res.ok) {
         out.textContent = data.error || 'Error ' + res.status;
         return;
       }
-      out.textContent = data.answer || empty;
+      out.innerHTML = formatAnswer(data.answer || empty, data.mode);
     } catch (err) {
       out.textContent = String(err);
     } finally {
