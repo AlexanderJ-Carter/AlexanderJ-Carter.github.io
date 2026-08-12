@@ -52,6 +52,10 @@ ICP / 公安备案同样通过 `.env` 预留（`PUBLIC_ICP_NUMBER`、`PUBLIC_POL
 | 画廊   | `/gallery`                  | 摄影作品、分类与灯箱浏览 |
 | 项目   | `/projects`                 | 站内项目、工具合集与原则 |
 | 写作   | `/writing`                  | 工程、设计与摄影长文     |
+| 工具   | `/tools`                    | 站内工具与公开子站索引   |
+| 站群   | `/network`                  | 公开子站与服务统一目录   |
+| 实验   | `/next`                     | NEXUS beta 房间链        |
+| 日志   | `/changelog`                | 公开版本与重要改动       |
 | 时间线 | `/timeline`                 | 经历与进展节点           |
 | 联系   | `/contact`                  | 联系方式与留言入口       |
 | 本站   | `/uses`                     | 技术栈、站点特性与边界   |

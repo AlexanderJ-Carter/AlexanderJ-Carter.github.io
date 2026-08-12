@@ -5,6 +5,7 @@ import PoemHistory from '../widgets/PoemHistory.astro';
 import ExposureMeter from '../widgets/ExposureMeter.astro';
 import { getCollection } from 'astro:content';
 import { homeCopy } from '../../i18n/pages/home';
+import { useTranslations } from '../../i18n/ui';
 import {
   gallerySrcFallback,
   gallerySrcSet,
@@ -16,6 +17,7 @@ import { getChromeElsewhereLinks } from '../../data/site-registry';
 const { lang: langProp } = Astro.props;
 const lang = resolveLang(langProp);
 const copy = homeCopy[lang];
+const uiT = useTranslations(lang);
 const elsewhere = getChromeElsewhereLinks(lang);
 const lp = (path: string) => getLangPath(lang, path);
 
@@ -83,7 +85,7 @@ const heroSrc = gallerySrcFallback(heroImage);
         <p
           class="font-heading text-sm md:text-base tracking-[0.22em] uppercase text-white/70 mb-5 animate-fade-in"
         >
-          Photography · Writing · Making
+          {uiT('brand.eyebrow')}
         </p>
         <h1
           class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 text-balance animate-fade-in-up drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)]"

@@ -54,8 +54,10 @@ const copy = {
   <div class="signal" data-signal>
     <NextChrome lang={lang} roomId="signal" />
 
-    <canvas class="signal__canvas" data-signal-canvas aria-hidden="true"></canvas>
-    <div class="signal__static" data-signal-static hidden aria-hidden="true"></div>
+    <canvas class="signal__canvas" data-signal-canvas aria-hidden="true"
+    ></canvas>
+    <div class="signal__static" data-signal-static hidden aria-hidden="true">
+    </div>
 
     <div class="signal__copy">
       <p class="signal__id">01 · {room.id}</p>
@@ -96,8 +98,16 @@ const copy = {
 
   .signal__static {
     background:
-      radial-gradient(ellipse at 30% 20%, rgba(88, 255, 160, 0.18), transparent 45%),
-      radial-gradient(ellipse at 70% 75%, rgba(40, 180, 120, 0.12), transparent 50%),
+      radial-gradient(
+        ellipse at 30% 20%,
+        rgba(88, 255, 160, 0.18),
+        transparent 45%
+      ),
+      radial-gradient(
+        ellipse at 70% 75%,
+        rgba(40, 180, 120, 0.12),
+        transparent 50%
+      ),
       repeating-linear-gradient(
         0deg,
         transparent,
@@ -156,7 +166,8 @@ const copy = {
     padding: 0.7rem 1.1rem;
     text-decoration: none;
     color: inherit;
-    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 45%, transparent);
+    border: 1px solid
+      color-mix(in oklab, rgb(var(--next-line)) 45%, transparent);
     font-size: 0.9rem;
     background: color-mix(in oklab, #000 35%, transparent);
     transition:
@@ -186,12 +197,17 @@ const copy = {
     const canvasEl = root.querySelector('[data-signal-canvas]');
     const staticEl = root.querySelector('[data-signal-static]');
     const hint = root.querySelector('[data-signal-hint]');
-    if (!(canvasEl instanceof HTMLCanvasElement) || !(staticEl instanceof HTMLElement))
+    if (
+      !(canvasEl instanceof HTMLCanvasElement) ||
+      !(staticEl instanceof HTMLElement)
+    )
       return;
 
     const surface: HTMLCanvasElement = canvasEl;
 
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduce = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
     if (reduce) {
       surface.hidden = true;
       staticEl.hidden = false;
@@ -204,8 +220,7 @@ const copy = {
           ru: 'Статичное фосфорное поле (учтено reduced motion).',
         };
         const pageLang = document.documentElement.lang || 'zh-CN';
-        hint.textContent =
-          note[pageLang as keyof typeof note] || note['en-GB'];
+        hint.textContent = note[pageLang as keyof typeof note] || note['en-GB'];
       }
       return;
     }

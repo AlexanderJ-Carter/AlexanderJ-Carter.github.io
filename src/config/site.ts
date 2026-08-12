@@ -18,9 +18,7 @@ export const BLOG_ORIGIN = 'https://blog.alexander.xin';
 export function isWritingCanonicalPath(pathname: string): boolean {
   const bare = stripLangPrefix(pathname);
   return (
-    bare === '/writing' ||
-    bare.startsWith('/writing/') ||
-    bare === '/rss.xml'
+    bare === '/writing' || bare.startsWith('/writing/') || bare === '/rss.xml'
   );
 }
 
@@ -65,8 +63,7 @@ export type AdSlotId = keyof typeof adSlots;
  */
 export const icpFiling = {
   number: import.meta.env.PUBLIC_ICP_NUMBER?.trim() || '',
-  href:
-    import.meta.env.PUBLIC_ICP_URL?.trim() || 'https://beian.miit.gov.cn/',
+  href: import.meta.env.PUBLIC_ICP_URL?.trim() || 'https://beian.miit.gov.cn/',
 };
 
 export const policeFiling = {

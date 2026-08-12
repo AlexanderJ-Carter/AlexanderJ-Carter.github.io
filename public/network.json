@@ -151,7 +151,7 @@
       "status": "live",
       "label": "Newyear",
       "repo": "AlexanderJ-Carter/Newyear",
-      "note": "Seasonal interactive page; Access app for *.newyear-eki.pages.dev was deleted — custom domain still live",
+      "note": "Seasonal (Dec–Feb on Network page at build time); Access app for *.newyear-eki.pages.dev deleted — custom domain may stay live year-round",
       "id": "newyear"
     },
     {

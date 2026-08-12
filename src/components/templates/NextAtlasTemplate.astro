@@ -6,6 +6,7 @@ import {
   getAdjacentRooms,
   getNextRoom,
 } from '../../data/next-chain';
+import { siteRegistry } from '../../data/site-registry';
 import { getLangPath, resolveLang } from '../../i18n/types';
 
 const lang = resolveLang(Astro.props.lang);
@@ -13,12 +14,15 @@ const room = getNextRoom(lang, 'atlas')!;
 const adj = getAdjacentRooms(lang, 'atlas');
 const lp = (path: string) => getLangPath(lang, path);
 
+const nodes = atlasNodes.map((n) => {
+  if (!n.external) return { ...n, href: lp(n.href) };
+  const site = siteRegistry.find((s) => s.id === n.id);
+  return { ...n, href: site?.url ?? n.href };
+});
+
 const labels: Record<
   string,
-  Record<
-    string,
-    { title: string; blurb: string }
-  >
+  Record<string, { title: string; blurb: string }>
 > = {
   'zh-CN': {
     signal: { title: '信号场', blurb: '磷光交互 · Next 链起点' },
@@ -145,7 +149,7 @@ const edges: [string, string][] = [
 ];
 
 function nodePos(id: string) {
-  return atlasNodes.find((n) => n.id === id)!;
+  return nodes.find((n) => n.id === id)!;
 }
 ---
 
@@ -179,20 +183,14 @@ function nodePos(id: string) {
               const A = nodePos(a);
               const B = nodePos(b);
               return (
-                <line
-                  x1={A.x}
-                  y1={A.y}
-                  x2={B.x}
-                  y2={B.y}
-                  class="atlas__edge"
-                />
+                <line x1={A.x} y1={A.y} x2={B.x} y2={B.y} class="atlas__edge" />
               );
             })
           }
           {
-            atlasNodes.map((n) => (
+            nodes.map((n) => (
               <a
-                href={n.external ? n.href : lp(n.href)}
+                href={n.href}
                 class="atlas__node"
                 data-node={n.id}
                 {...(n.external
@@ -200,7 +198,12 @@ function nodePos(id: string) {
                   : {})}
               >
                 <circle cx={n.x} cy={n.y} r="2.2" class="atlas__dot" />
-                <text x={n.x} y={n.y - 3.2} text-anchor="middle" class="atlas__label">
+                <text
+                  x={n.x}
+                  y={n.y - 3.2}
+                  text-anchor="middle"
+                  class="atlas__label"
+                >
                   {L[n.id]?.title ?? n.id}
                 </text>
               </a>
@@ -213,16 +216,18 @@ function nodePos(id: string) {
         <h2 class="atlas__side-title">{ui.list}</h2>
         <ul class="atlas__list">
           {
-            atlasNodes.map((n) => (
+            nodes.map((n) => (
               <li>
                 <a
-                  href={n.external ? n.href : lp(n.href)}
+                  href={n.href}
                   data-node={n.id}
                   {...(n.external
                     ? { target: '_blank', rel: 'noopener noreferrer' }
                     : {})}
                 >
-                  <span class="atlas__list-title">{L[n.id]?.title ?? n.id}</span>
+                  <span class="atlas__list-title">
+                    {L[n.id]?.title ?? n.id}
+                  </span>
                   <span class="atlas__list-blurb">{L[n.id]?.blurb ?? ''}</span>
                 </a>
               </li>
@@ -293,7 +298,8 @@ function nodePos(id: string) {
   }
 
   .atlas__map-wrap {
-    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 30%, transparent);
+    border: 1px solid
+      color-mix(in oklab, rgb(var(--next-line)) 30%, transparent);
     background:
       linear-gradient(rgba(90, 210, 230, 0.04) 1px, transparent 1px),
       linear-gradient(90deg, rgba(90, 210, 230, 0.04) 1px, transparent 1px);
@@ -385,7 +391,8 @@ function nodePos(id: string) {
   .atlas__panel {
     min-height: 3.5rem;
     padding: 0.75rem 0.65rem;
-    border-top: 1px solid color-mix(in oklab, rgb(var(--next-line)) 25%, transparent);
+    border-top: 1px solid
+      color-mix(in oklab, rgb(var(--next-line)) 25%, transparent);
     font-size: 0.9rem;
     line-height: 1.5;
     opacity: 0.85;
@@ -395,7 +402,8 @@ function nodePos(id: string) {
   .atlas__continue {
     display: inline-block;
     padding: 0.65rem 0.9rem;
-    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 40%, transparent);
+    border: 1px solid
+      color-mix(in oklab, rgb(var(--next-line)) 40%, transparent);
     text-decoration: none;
     color: inherit;
     font-size: 0.9rem;
@@ -421,7 +429,8 @@ function nodePos(id: string) {
 
     const detail = root.querySelector('[data-atlas-detail]');
     const empty = root.querySelector('[data-atlas-empty]');
-    if (!(detail instanceof HTMLElement) || !(empty instanceof HTMLElement)) return;
+    if (!(detail instanceof HTMLElement) || !(empty instanceof HTMLElement))
+      return;
 
     const blurbs = new Map<string, string>();
     root.querySelectorAll('.atlas__list a').forEach((a) => {
@@ -433,7 +442,10 @@ function nodePos(id: string) {
 
     const setHot = (id: string | null) => {
       root.querySelectorAll('[data-node]').forEach((el) => {
-        el.classList.toggle('is-hot', id != null && el.getAttribute('data-node') === id);
+        el.classList.toggle(
+          'is-hot',
+          id != null && el.getAttribute('data-node') === id
+        );
       });
       if (!id) {
         empty.hidden = false;
@@ -447,7 +459,9 @@ function nodePos(id: string) {
     };
 
     root.querySelectorAll('[data-node]').forEach((el) => {
-      el.addEventListener('mouseenter', () => setHot(el.getAttribute('data-node')));
+      el.addEventListener('mouseenter', () =>
+        setHot(el.getAttribute('data-node'))
+      );
       el.addEventListener('focus', () => setHot(el.getAttribute('data-node')));
       el.addEventListener('mouseleave', () => setHot(null));
       el.addEventListener('blur', () => setHot(null));

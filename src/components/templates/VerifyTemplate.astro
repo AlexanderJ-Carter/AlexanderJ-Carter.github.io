@@ -83,8 +83,7 @@ const copy = {
     title: 'Vérification',
     desc: 'Une vérification légère ouvre les pages protégées.',
     verifying: 'Confirmer que vous êtes un visiteur réel',
-    verifyDesc:
-      'Quelques secondes en général, puis poursuite automatique.',
+    verifyDesc: 'Quelques secondes en général, puis poursuite automatique.',
     loading: 'Chargement de la vérification…',
     errorTitle: 'Vérification interrompue',
     errorDesc:
@@ -179,11 +178,7 @@ const labelsJson = JSON.stringify({
                   {content.skipTitle}
                 </h2>
                 <p class="verify-panel__lead">{content.skipDesc}</p>
-                <button
-                  type="button"
-                  id="verify-skip-btn"
-                  class="btn-primary"
-                >
+                <button type="button" id="verify-skip-btn" class="btn-primary">
                   {content.skipButton}
                 </button>
                 <p class="verify-panel__hint">{content.forceHint}</p>
@@ -230,8 +225,7 @@ const labelsJson = JSON.stringify({
                     data-verify-loading
                     role="status"
                   >
-                    <span class="verify-widget__pulse" aria-hidden="true"
-                    ></span>
+                    <span class="verify-widget__pulse" aria-hidden="true" />
                     <span>{content.loading}</span>
                   </div>
 
@@ -239,8 +233,7 @@ const labelsJson = JSON.stringify({
                     class="verify-widget__host"
                     data-verify-host
                     hidden
-                  >
-                  </div>
+                  ></div>
 
                   <div
                     class="verify-widget__error"
@@ -248,13 +241,13 @@ const labelsJson = JSON.stringify({
                     hidden
                     role="alert"
                   >
-                    <p class="verify-widget__error-title" data-verify-error-title>
+                    <p
+                      class="verify-widget__error-title"
+                      data-verify-error-title
+                    >
                       {content.errorTitle}
                     </p>
-                    <p
-                      class="verify-widget__error-desc"
-                      data-verify-error-desc
-                    >
+                    <p class="verify-widget__error-desc" data-verify-error-desc>
                       {content.errorDesc}
                     </p>
                     <button

@@ -25,7 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Privacy and terms copy now covers AdSense consent, third-party data use, sponsorships, affiliate disclosure, and commercial licensing in all locales.
 - Ads are limited to one home placement and one post-content placement; taxonomy, archive, legal, support, tool, gate, and experimental pages remain ad-free.
 - Login, verification, experimental, and writing taxonomy/archive pages are excluded from indexing and the generated sitemap while About and Contact retain Turnstile protection.
-- Header / Footer / Home / Now / Friends / QuickActions / Sitemap elsewhere links share `site-registry` helpers; public surfaces no longer promote Access IT-Tools.
+- Header / Footer / Home / Now / Friends / QuickActions / Sitemap elsewhere links share `site-registry` helpers; Tools / Next / Atlas use the same curated ID sets; Network hides off-season `newyear` and `cook-mcp`.
+- Public surfaces no longer promote Access IT-Tools.
 - About: clearer reserved personal dossier copy; slots remain empty.
 - Projects: main site marked completed; fr/ru writing channel entries added.
 - Changelog linked from header, footer, tools index, Now quick links and RelatedTools.

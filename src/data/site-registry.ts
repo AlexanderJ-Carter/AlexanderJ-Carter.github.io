@@ -380,7 +380,7 @@ export const siteRegistry: SiteEntry[] = [
     status: 'live',
     label: 'Newyear',
     repo: 'AlexanderJ-Carter/Newyear',
-    note: 'Seasonal interactive page; Access app for *.newyear-eki.pages.dev was deleted — custom domain still live',
+    note: 'Seasonal (Dec–Feb on Network page at build time); Access app for *.newyear-eki.pages.dev deleted — custom domain may stay live year-round',
     labels: {
       'zh-CN': '新年页',
       'zh-TW': '新年頁',
@@ -416,7 +416,8 @@ export const siteRegistry: SiteEntry[] = [
     descriptions: {
       'zh-CN': '已退役；请用主站 /contact/，勿再维护独立 Contact 站。',
       'zh-TW': '已退役；請用主站 /contact/，勿再維護獨立 Contact 站。',
-      'en-GB': 'Retired; use apex /contact/. Do not redeploy a separate Contact site.',
+      'en-GB':
+        'Retired; use apex /contact/. Do not redeploy a separate Contact site.',
       fr: 'Retiré ; utiliser /contact/. Ne pas redéployer un site Contact séparé.',
       ru: 'Снят; используйте /contact/. Не разворачивайте отдельный Contact.',
     },
@@ -439,10 +440,8 @@ export const siteRegistry: SiteEntry[] = [
       ru: 'IT-Tools',
     },
     descriptions: {
-      'zh-CN':
-        'VPS 上的 IT-Tools（Access）；与主站公开 /tools 索引不同。',
-      'zh-TW':
-        'VPS 上的 IT-Tools（Access）；與主站公開 /tools 索引不同。',
+      'zh-CN': 'VPS 上的 IT-Tools（Access）；与主站公开 /tools 索引不同。',
+      'zh-TW': 'VPS 上的 IT-Tools（Access）；與主站公開 /tools 索引不同。',
       'en-GB':
         'IT-Tools on the VPS behind Access — not the public apex /tools index.',
       fr: 'IT-Tools sur le VPS derrière Access — distinct de /tools public.',
@@ -739,7 +738,8 @@ export const siteRegistry: SiteEntry[] = [
     descriptions: {
       'zh-CN': 'Directus 仅计划；内存不足勿部署；写作用 blog。',
       'zh-TW': 'Directus 僅計劃；記憶體不足勿部署；寫作用 blog。',
-      'en-GB': 'Directus planned only; do not deploy under current RAM; writing uses blog.',
+      'en-GB':
+        'Directus planned only; do not deploy under current RAM; writing uses blog.',
       fr: 'Directus seulement prévu ; ne pas déployer sous RAM actuelle ; écrits via blog.',
       ru: 'Directus только в планах; не деплоить при текущей RAM; тексты через blog.',
     },
@@ -861,30 +861,36 @@ export function getOpsSites(): SiteEntry[] {
 }
 
 export function getExternalToolSites(): SiteEntry[] {
-  return siteRegistry.filter(
-    (s) =>
-      ['linux-command', 'netq', 'cook'].includes(s.id) &&
-      s.status === 'live' &&
-      s.visibility === 'public'
-  );
+  return liveSitesFromIds(CHROME_ELSEWHERE_IDS);
 }
 
-/** Public fleet nodes for Network page and Atlas (excludes apex/www duplicates). */
+/** Public fleet nodes for Network page (excludes apex/www duplicates and agent MCP). */
 export function getNetworkDirectorySites(): SiteEntry[] {
   return siteRegistry.filter(
     (s) =>
       s.visibility === 'public' &&
       (s.status === 'live' || s.status === 'beta') &&
-      !['apex', 'www', 'network', 'identity'].includes(s.id)
+      !['apex', 'www', 'network', 'identity', 'cook-mcp'].includes(s.id) &&
+      isSeasonallyVisible(s)
   );
 }
 
-/** Compact elsewhere list for Header / Footer / Home (visitor chrome). */
+/**
+ * Compact visitor elsewhere (Header / Footer / Home / Tools external / Now / Friends).
+ * Keep short — mycook / MCP stay on Network or cook docs, not chrome.
+ */
 export const CHROME_ELSEWHERE_IDS = [
   'cook',
   'linux-command',
   'netq',
   'lab',
+] as const;
+
+/** Next hub / Echo outer ring — chrome set plus paste + blog. */
+export const NEXT_FLEET_IDS = [
+  ...CHROME_ELSEWHERE_IDS,
+  'paste',
+  'blog',
 ] as const;
 
 /** Richer elsewhere list for Sitemap (includes blog / paste / yearly). */
@@ -905,28 +911,43 @@ export type ElsewhereLink = {
   href: string;
 };
 
-function liveElsewhereFromIds(
-  lang: Lang,
-  ids: readonly string[]
-): ElsewhereLink[] {
-  const links: ElsewhereLink[] = [];
+/** Dec–Feb (build-time month): seasonal sites stay on the Network page. */
+function isSeasonallyVisible(site: SiteEntry): boolean {
+  if (site.id !== 'newyear') return true;
+  const month = new Date().getUTCMonth();
+  return month === 11 || month === 0 || month === 1;
+}
+
+function liveSitesFromIds(ids: readonly string[]): SiteEntry[] {
+  const out: SiteEntry[] = [];
   for (const id of ids) {
     const site = siteRegistry.find((s) => s.id === id);
     if (!site || site.status !== 'live' || site.visibility !== 'public') {
       continue;
     }
-    links.push({
-      id: site.id,
-      title: site.labels[lang],
-      desc: site.descriptions[lang],
-      href: site.url,
-    });
+    out.push(site);
   }
-  return links;
+  return out;
+}
+
+function liveElsewhereFromIds(
+  lang: Lang,
+  ids: readonly string[]
+): ElsewhereLink[] {
+  return liveSitesFromIds(ids).map((site) => ({
+    id: site.id,
+    title: site.labels[lang],
+    desc: site.descriptions[lang],
+    href: site.url,
+  }));
 }
 
 export function getChromeElsewhereLinks(lang: Lang): ElsewhereLink[] {
   return liveElsewhereFromIds(lang, CHROME_ELSEWHERE_IDS);
+}
+
+export function getNextFleetSites(): SiteEntry[] {
+  return liveSitesFromIds(NEXT_FLEET_IDS);
 }
 
 export function getSitemapElsewhereLinks(lang: Lang): Array<{

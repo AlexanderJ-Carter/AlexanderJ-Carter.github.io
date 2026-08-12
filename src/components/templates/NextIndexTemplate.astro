@@ -2,20 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import NextChrome from '../next/NextChrome.astro';
 import { getNextChrome, getNextRooms } from '../../data/next-chain';
-import { getNetworkDirectorySites } from '../../data/site-registry';
+import { getNextFleetSites } from '../../data/site-registry';
 import { getLangPath, resolveLang } from '../../i18n/types';
 
 const lang = resolveLang(Astro.props.lang);
 const rooms = getNextRooms(lang);
 const chrome = getNextChrome(lang);
 const lp = (path: string) => getLangPath(lang, path);
-const fleet = getNetworkDirectorySites()
-  .filter((s) =>
-    ['cook', 'lab', 'netq', 'linux-command', 'paste', 'blog'].includes(
-      s.id
-    )
-  )
-  .slice(0, 7);
+const fleet = getNextFleetSites();
 
 const copy = {
   'zh-CN': {
@@ -48,7 +42,8 @@ const copy = {
   },
   'en-GB': {
     title: 'Next lab',
-    description: 'Beta rooms beside the main site: spectacle, essay, atlas, echo.',
+    description:
+      'Beta rooms beside the main site: spectacle, essay, atlas, echo.',
     kicker: 'NEXUS control',
     headline: 'Four doors, one signal chain',
     lead: 'Rooms share energy state; the outer ring links real fleet nodes.',
@@ -255,13 +250,13 @@ const copy = {
     padding: 1.25rem 1.15rem 1.4rem;
     text-decoration: none;
     color: inherit;
-    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 28%, transparent);
-    background:
-      linear-gradient(
-        160deg,
-        color-mix(in oklab, rgb(var(--next-line)) 10%, transparent),
-        transparent 55%
-      );
+    border: 1px solid
+      color-mix(in oklab, rgb(var(--next-line)) 28%, transparent);
+    background: linear-gradient(
+      160deg,
+      color-mix(in oklab, rgb(var(--next-line)) 10%, transparent),
+      transparent 55%
+    );
     min-height: 11rem;
     transition:
       transform 200ms ease,

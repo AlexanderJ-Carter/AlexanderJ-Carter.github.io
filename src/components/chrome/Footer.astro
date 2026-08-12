@@ -1,12 +1,13 @@
 ---
 import { BLOG_ORIGIN, adsEnabled } from '../../config/site';
-import { getLangFromUrl } from '../../i18n/ui';
+import { getLangFromUrl, useTranslations } from '../../i18n/ui';
 import { getChromeElsewhereLinks } from '../../data/site-registry';
 import SiteFilings from './SiteFilings.astro';
 import ExposureMeter from '../widgets/ExposureMeter.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const currentYear = new Date().getFullYear();
+const brandT = useTranslations(lang);
 
 function getLangPath(path: string) {
   return lang === 'zh-CN' ? path : `/${lang === 'en-GB' ? 'en' : lang}${path}`;
@@ -249,7 +250,7 @@ const legal = [
             <span
               class="meta-mono !text-[10px] !tracking-[0.14em] text-[rgb(var(--color-text-tertiary))]"
             >
-              Photography · Writing · Making
+              {brandT('brand.eyebrow')}
             </span>
           </span>
         </a>

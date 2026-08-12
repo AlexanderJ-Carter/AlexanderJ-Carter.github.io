@@ -1,8 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import NextChrome from '../next/NextChrome.astro';
-import { getAdjacentRooms, getNextRoom, getNextRooms } from '../../data/next-chain';
-import { getNetworkDirectorySites } from '../../data/site-registry';
+import {
+  getAdjacentRooms,
+  getNextRoom,
+  getNextRooms,
+} from '../../data/next-chain';
+import { getNextFleetSites } from '../../data/site-registry';
 import { getLangPath, resolveLang } from '../../i18n/types';
 
 const lang = resolveLang(Astro.props.lang);
@@ -11,18 +15,10 @@ const adj = getAdjacentRooms(lang, 'echo');
 const rooms = getNextRooms(lang);
 const lp = (path: string) => getLangPath(lang, path);
 
-const routes = Object.fromEntries(
-  rooms.map((r) => [r.id, lp(r.path)])
-);
+const routes = Object.fromEntries(rooms.map((r) => [r.id, lp(r.path)]));
 
 const fleetRoutes = Object.fromEntries(
-  getNetworkDirectorySites()
-    .filter((s) =>
-      ['lab', 'cook', 'netq', 'paste', 'blog', 'network'].includes(
-        s.id
-      )
-    )
-    .map((s) => [s.id, s.path ? lp(s.path) : s.url])
+  getNextFleetSites().map((s) => [s.id, s.path ? lp(s.path) : s.url])
 );
 fleetRoutes.network = lp('/network');
 fleetRoutes.login = lp('/login');
@@ -157,7 +153,8 @@ const messages = {
       'network / login / fun / lab — raccourcis',
       'clear — effacer',
     ],
-    where: 'Vous êtes sur /next/echo. Chaîne : signal → exposure → atlas → echo.',
+    where:
+      'Vous êtes sur /next/echo. Chaîne : signal → exposure → atlas → echo.',
     unknownRoom: 'Cible inconnue. Essayez open signal ou scan.',
     fun: 'Vers /fun…',
     lab: 'Ouverture Lab…',
@@ -287,7 +284,8 @@ const messages = {
     max-height: 40vh;
     overflow: auto;
     padding: 1rem;
-    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 35%, transparent);
+    border: 1px solid
+      color-mix(in oklab, rgb(var(--next-line)) 35%, transparent);
     background: color-mix(in oklab, #000 45%, transparent);
     font-family: ui-monospace, 'Cascadia Code', Menlo, monospace;
     font-size: 0.85rem;
@@ -333,7 +331,8 @@ const messages = {
   .echo__input {
     width: 100%;
     background: transparent;
-    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 40%, transparent);
+    border: 1px solid
+      color-mix(in oklab, rgb(var(--next-line)) 40%, transparent);
     color: inherit;
     padding: 0.65rem 0.75rem;
     font-family: ui-monospace, Menlo, monospace;
@@ -346,7 +345,8 @@ const messages = {
   }
 
   .echo__run {
-    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 50%, transparent);
+    border: 1px solid
+      color-mix(in oklab, rgb(var(--next-line)) 50%, transparent);
     background: color-mix(in oklab, rgb(var(--next-line)) 12%, transparent);
     color: inherit;
     padding: 0.65rem 0.85rem;
@@ -380,7 +380,8 @@ const messages = {
   .echo__continue {
     display: inline-block;
     padding: 0.65rem 0.9rem;
-    border: 1px solid color-mix(in oklab, rgb(var(--next-line)) 40%, transparent);
+    border: 1px solid
+      color-mix(in oklab, rgb(var(--next-line)) 40%, transparent);
     text-decoration: none;
     color: inherit;
     font-size: 0.9rem;
@@ -410,10 +411,19 @@ const messages = {
     )
       return;
 
-    const routes = JSON.parse(root.dataset.routes || '{}') as Record<string, string>;
-    const fleet = JSON.parse(root.dataset.fleet || '{}') as Record<string, string>;
+    const routes = JSON.parse(root.dataset.routes || '{}') as Record<
+      string,
+      string
+    >;
+    const fleet = JSON.parse(root.dataset.fleet || '{}') as Record<
+      string,
+      string
+    >;
     const funHref = root.dataset.fun || '/fun';
-    const rawMsgs = JSON.parse(root.dataset.msgs || '{}') as Record<string, unknown>;
+    const rawMsgs = JSON.parse(root.dataset.msgs || '{}') as Record<
+      string,
+      unknown
+    >;
 
     const help = (rawMsgs.help as string[]) || [];
     const where = String(rawMsgs.where || '');
@@ -437,7 +447,12 @@ const messages = {
     const readNexus = () => {
       try {
         const raw = localStorage.getItem('nexus-state-v1');
-        if (!raw) return { energy: 0, visited: [] as string[], fragments: [] as string[] };
+        if (!raw)
+          return {
+            energy: 0,
+            visited: [] as string[],
+            fragments: [] as string[],
+          };
         const parsed = JSON.parse(raw);
         return {
           energy: Number(parsed.energy) || 0,
@@ -445,7 +460,11 @@ const messages = {
           fragments: Array.isArray(parsed.fragments) ? parsed.fragments : [],
         };
       } catch {
-        return { energy: 0, visited: [] as string[], fragments: [] as string[] };
+        return {
+          energy: 0,
+          visited: [] as string[],
+          fragments: [] as string[],
+        };
       }
     };
 
@@ -517,9 +536,7 @@ const messages = {
       }
       if (cmd === 'open' || cmd === 'trace') {
         const target = parts[1];
-        const href = target
-          ? routes[target] || fleet[target]
-          : undefined;
+        const href = target ? routes[target] || fleet[target] : undefined;
         if (!href) {
           append(unknownRoom, 'out');
           return;

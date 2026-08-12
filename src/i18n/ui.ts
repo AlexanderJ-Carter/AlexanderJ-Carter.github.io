@@ -12,6 +12,7 @@ export const ui = {
   'zh-CN': {
     'site.title': 'Alexander James Carter',
     'site.description': '探索创意，分享生活，记录精彩瞬间',
+    'brand.eyebrow': '摄影 · 写作 · 动手',
     'nav.home': '首页',
     'nav.gallery': '画廊',
     'nav.blog': '博客',
@@ -86,6 +87,7 @@ export const ui = {
   'zh-TW': {
     'site.title': 'Alexander James Carter',
     'site.description': '探索創意，分享生活，記錄精彩瞬間',
+    'brand.eyebrow': '攝影 · 寫作 · 動手',
     'nav.home': '首頁',
     'nav.gallery': '畫廊',
     'nav.blog': '部落格',
@@ -160,6 +162,7 @@ export const ui = {
   'en-GB': {
     'site.title': 'Alexander James Carter',
     'site.description': 'Explore creativity, share life, capture moments',
+    'brand.eyebrow': 'Photography · Writing · Making',
     'nav.home': 'Home',
     'nav.gallery': 'Gallery',
     'nav.blog': 'Blog',
@@ -239,6 +242,7 @@ export const ui = {
     'site.title': 'Alexander James Carter',
     'site.description':
       'Explorer la créativité, partager la vie, capturer des moments',
+    'brand.eyebrow': 'Photo · Écriture · Fabrication',
     'nav.home': 'Accueil',
     'nav.gallery': 'Galerie',
     'nav.blog': 'Blog',
@@ -318,6 +322,7 @@ export const ui = {
     'site.title': 'Alexander James Carter',
     'site.description':
       'Исследуйте творчество, делитесь жизнью, запечатлевайте моменты',
+    'brand.eyebrow': 'Фото · Текст · Дела',
     'nav.home': 'Главная',
     'nav.gallery': 'Галерея',
     'nav.blog': 'Блог',
