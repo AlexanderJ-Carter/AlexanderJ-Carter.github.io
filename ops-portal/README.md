@@ -18,6 +18,7 @@ Fleet ops home and **primary maintainer entry** (site `/login` CTA points here).
 ## Endpoints
 
 - `/` — ops home (cards + probes table; HTML from www mirror)
-- `/api/status` — probe apex, www, identity, time API, tools, paste, network.json
+- `/api/status` — probe apex, www, identity, time API, tools, paste, network.json, fleet-changelog.json
+- Fleet log UI fetches `https://www.alexander.xin/fleet-changelog.json` (public; maintained in `src/data/fleet-changelog.ts`)
 
 No Docker socket, no secrets, no write actions in v1.

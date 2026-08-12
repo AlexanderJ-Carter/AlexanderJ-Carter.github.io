@@ -273,6 +273,17 @@
         </div>
       </section>
 
+      <section aria-label="站群动态">
+        <h2>Fleet log</h2>
+        <p class="lead" style="margin-bottom: 1rem; font-size: 0.9rem">
+          跨子站控制面变更（非主站 semver）。源：
+          <a href="https://www.alexander.xin/fleet-changelog.json" target="_blank" rel="noopener">fleet-changelog.json</a>
+          ·
+          <a href="https://www.alexander.xin/network/#fleet-log" target="_blank" rel="noopener">Network</a>
+        </p>
+        <ol id="fleet-log" style="list-style: none; padding: 0; margin: 0 0 2rem"></ol>
+      </section>
+
       <section aria-label="只读状态探针">
         <h2>Status probes</h2>
         <table>
@@ -291,6 +302,36 @@
       </section>
     </main>
     <script>
+      const kindLabel = {
+        added: '新增',
+        changed: '变更',
+        retired: '退役',
+        ops: '运维',
+        security: '安全',
+      };
+
+      async function loadFleetLog() {
+        const list = document.getElementById('fleet-log');
+        const res = await fetch('https://www.alexander.xin/fleet-changelog.json', {
+          cache: 'no-store',
+        });
+        const data = await res.json();
+        const entries = (data.entries || []).slice(0, 8);
+        list.innerHTML = entries
+          .map(
+            (e) => `<li style="padding:0.85rem 0;border-bottom:1px solid #242833">
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem 0.75rem;align-items:baseline;margin-bottom:0.35rem">
+              <time datetime="${e.date}" style="color:var(--muted);font-size:0.78rem;font-family:ui-monospace,monospace">${e.date}</time>
+              <span style="color:var(--line);font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase">${kindLabel[e.kind] || e.kind}</span>
+              <span style="color:var(--muted);font-size:0.75rem">${(e.sites || []).join(' · ')}</span>
+            </div>
+            <p style="margin:0 0 0.3rem;font-weight:600">${(e.title && (e.title['zh-CN'] || e.title['en-GB'])) || e.id}</p>
+            <p style="margin:0;color:var(--muted);font-size:0.88rem;line-height:1.45">${(e.summary && (e.summary['zh-CN'] || e.summary['en-GB'])) || ''}</p>
+          </li>`
+          )
+          .join('');
+      }
+
       async function load() {
         const res = await fetch('/api/status');
         const data = await res.json();
@@ -309,7 +350,8 @@
         document.getElementById('meta').textContent =
           'Generated ' + data.generatedAt;
       }
-      load().catch((err) => {
+
+      Promise.all([load(), loadFleetLog()]).catch((err) => {
         document.getElementById('meta').textContent = String(err);
       });
     </script>
