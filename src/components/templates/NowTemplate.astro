@@ -4,11 +4,13 @@ import PageHero from '../chrome/PageHero.astro';
 import RelatedTools from '../chrome/RelatedTools.astro';
 import WeatherWidget from '../widgets/WeatherWidget.astro';
 import { t as nowCopy } from '../../i18n/pages/now';
+import { getChromeElsewhereLinks } from '../../data/site-registry';
 
 const { lang } = Astro.props;
 type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
 const text = nowCopy[lang as Lang] || nowCopy['zh-CN'];
+const elsewhere = getChromeElsewhereLinks(lang as Lang);
 
 function getLangPath(path: string): string {
   if (lang === 'zh-CN') return path;
@@ -102,30 +104,18 @@ function getLangPath(path: string): string {
           <a href={getLangPath('/changelog')} class="quick-link">{text.q8}</a>
           <a href={getLangPath('/time')} class="quick-link">{text.q1}</a>
           <a href={getLangPath('/currency')} class="quick-link">{text.q2}</a>
-          <a
-            href="https://tools.alexander.xin"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="quick-link">{text.q3}</a
-          >
-          <a
-            href="https://cook.alexander.xin"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="quick-link">{text.q4}</a
-          >
-          <a
-            href="https://linux-command.alexander.xin"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="quick-link">{text.q5}</a
-          >
-          <a
-            href="https://netq.alexander.xin"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="quick-link">{text.q6}</a
-          >
+          {
+            elsewhere.map((link) => (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="quick-link"
+              >
+                {link.title}
+              </a>
+            ))
+          }
         </div>
       </div>
 

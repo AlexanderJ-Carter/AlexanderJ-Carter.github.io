@@ -1,11 +1,27 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
+const sitemapExcluded = (page) => {
+  const pathname = new URL(page).pathname
+    .replace(/^\/(?:zh-TW|en|fr|ru)(?=\/|$)/, '')
+    .replace(/\/+$/, '');
+
+  return (
+    ['/verify', '/login', '/next'].some(
+      (path) => pathname === path || pathname.startsWith(`${path}/`)
+    ) ||
+    ['/writing/tags', '/writing/categories', '/writing/archive'].some(
+      (path) => pathname === path || pathname.startsWith(`${path}/`)
+    )
+  );
+};
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://alexander.xin',
   integrations: [
     sitemap({
+      filter: (page) => !sitemapExcluded(page),
       i18n: {
         defaultLocale: 'zh-CN',
         locales: {

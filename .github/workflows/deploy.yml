@@ -34,6 +34,10 @@ jobs:
         run: npm ci
 
       - name: Build site
+        env:
+          PUBLIC_ADSENSE_CLIENT: ${{ vars.PUBLIC_ADSENSE_CLIENT }}
+          PUBLIC_ADSENSE_SLOT_HOME: ${{ vars.PUBLIC_ADSENSE_SLOT_HOME }}
+          PUBLIC_ADSENSE_SLOT_ARTICLE: ${{ vars.PUBLIC_ADSENSE_SLOT_ARTICLE }}
         run: npm run build
 
       - name: Upload artifact

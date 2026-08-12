@@ -11,12 +11,6 @@ export type HomePathItem = {
   href: string;
 };
 
-export type HomeElsewhereItem = {
-  title: string;
-  desc: string;
-  href: string;
-};
-
 export type HomeCopy = {
   brand: string;
   tagline: string;
@@ -46,7 +40,7 @@ export type HomeCopy = {
   elsewhereTools: string;
   elsewhereProjects: string;
   elsewhereProjectsDesc: string;
-  elsewhere: HomeElsewhereItem[];
+
   writingTitle: string;
   writingSubtitle: string;
   writingViewAll: string;
@@ -76,29 +70,6 @@ const featuredShared: HomeFeaturedItem[] = [
     title: '精致甜点',
     category: '美食',
     image: '/img/gallery-optimized/food-01-md.webp',
-  },
-];
-
-const elsewhereShared: HomeElsewhereItem[] = [
-  {
-    title: 'MyCook',
-    desc: '菜谱主站 cook · 完整站 mycook',
-    href: 'https://cook.alexander.xin',
-  },
-  {
-    title: 'Linux Command',
-    desc: '常用 Linux 指令速查',
-    href: 'https://linux-command.alexander.xin',
-  },
-  {
-    title: 'NetQ',
-    desc: '网络排查小实验室',
-    href: 'https://netq.alexander.xin',
-  },
-  {
-    title: 'Git Lab',
-    desc: 'Git 协作练习',
-    href: 'https://lab.alexander.xin',
   },
 ];
 
@@ -151,7 +122,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     elsewhereTools: '工具索引',
     elsewhereProjects: '全部项目',
     elsewhereProjectsDesc: '开源与自研一览（含演示链接）',
-    elsewhere: elsewhereShared,
+
     writingTitle: '近期写作',
     writingSubtitle: '不会很快过期的思考。',
     writingViewAll: '全部文章',
@@ -229,28 +200,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     elsewhereTools: '工具索引',
     elsewhereProjects: '全部專案',
     elsewhereProjectsDesc: '開源與自研一覽（含演示連結）',
-    elsewhere: [
-      {
-        title: 'MyCook',
-        desc: '雙源食譜 · 577+ 道',
-        href: 'https://cook.alexander.xin',
-      },
-      {
-        title: 'Linux Command',
-        desc: '常用 Linux 指令速查',
-        href: 'https://linux-command.alexander.xin',
-      },
-      {
-        title: 'NetQ',
-        desc: '網路排查小實驗室',
-        href: 'https://netq.alexander.xin',
-      },
-      {
-        title: 'Git Lab',
-        desc: 'Git 協作練習',
-        href: 'https://lab.alexander.xin',
-      },
-    ],
+
     writingTitle: '近期寫作',
     writingSubtitle: '不會很快過期的思考。',
     writingViewAll: '全部文章',
@@ -328,28 +278,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     elsewhereTools: 'Tool index',
     elsewhereProjects: 'All projects',
     elsewhereProjectsDesc: 'Open-source and personal demos in one place',
-    elsewhere: [
-      {
-        title: 'MyCook',
-        desc: 'Dual-source recipes · 577+',
-        href: 'https://cook.alexander.xin',
-      },
-      {
-        title: 'Linux Command',
-        desc: 'Quick Linux command reference',
-        href: 'https://linux-command.alexander.xin',
-      },
-      {
-        title: 'NetQ',
-        desc: 'Network troubleshooting lab',
-        href: 'https://netq.alexander.xin',
-      },
-      {
-        title: 'Git Lab',
-        desc: 'Git collaboration practice',
-        href: 'https://lab.alexander.xin',
-      },
-    ],
+
     writingTitle: 'Recent writing',
     writingSubtitle: 'Thoughts that should age slowly.',
     writingViewAll: 'All articles',
@@ -428,28 +357,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     elsewhereTools: 'Index des outils',
     elsewhereProjects: 'Tous les projets',
     elsewhereProjectsDesc: 'Open source et démos personnelles',
-    elsewhere: [
-      {
-        title: 'MyCook',
-        desc: 'Recettes dual-source · 577+',
-        href: 'https://cook.alexander.xin',
-      },
-      {
-        title: 'Linux Command',
-        desc: 'Référence des commandes Linux',
-        href: 'https://linux-command.alexander.xin',
-      },
-      {
-        title: 'NetQ',
-        desc: 'Labo réseau',
-        href: 'https://netq.alexander.xin',
-      },
-      {
-        title: 'Git Lab',
-        desc: 'Pratique Git collaborative',
-        href: 'https://lab.alexander.xin',
-      },
-    ],
+
     writingTitle: 'Écrits récents',
     writingSubtitle: 'Des idées qui vieillissent lentement.',
     writingViewAll: 'Tous les articles',
@@ -528,28 +436,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
     elsewhereTools: 'Индекс утилит',
     elsewhereProjects: 'Все проекты',
     elsewhereProjectsDesc: 'Open source и личные демо',
-    elsewhere: [
-      {
-        title: 'MyCook',
-        desc: 'Двойной каталог · 577+',
-        href: 'https://cook.alexander.xin',
-      },
-      {
-        title: 'Linux Command',
-        desc: 'Справочник команд Linux',
-        href: 'https://linux-command.alexander.xin',
-      },
-      {
-        title: 'NetQ',
-        desc: 'Сетевая лаборатория',
-        href: 'https://netq.alexander.xin',
-      },
-      {
-        title: 'Git Lab',
-        desc: 'Практика Git',
-        href: 'https://lab.alexander.xin',
-      },
-    ],
+
     writingTitle: 'Недавние статьи',
     writingSubtitle: 'Мысли, которые стареют медленно.',
     writingViewAll: 'Все статьи',

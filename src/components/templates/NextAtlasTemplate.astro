@@ -29,7 +29,7 @@ const labels: Record<
     writing: { title: '写作', blurb: '工程与观察' },
     fun: { title: '彩蛋', blurb: '小工具与惊喜' },
     tools: { title: '工具', blurb: '站内与外部工具索引' },
-    lab: { title: 'Git Lab', blurb: '外部 Git/CI 教学站' },
+    lab: { title: 'Lab', blurb: '外部 Git/CI 教学站' },
     cook: { title: '菜谱', blurb: 'cook.alexander.xin' },
     paste: { title: '加密粘贴', blurb: 'PrivateBin' },
   },
@@ -42,7 +42,7 @@ const labels: Record<
     writing: { title: '寫作', blurb: '工程與觀察' },
     fun: { title: '彩蛋', blurb: '小工具與驚喜' },
     tools: { title: '工具', blurb: '站內與外部工具索引' },
-    lab: { title: 'Git Lab', blurb: '外部 Git/CI 教學站' },
+    lab: { title: 'Lab', blurb: '外部 Git/CI 教學站' },
     cook: { title: '食譜', blurb: 'cook.alexander.xin' },
     paste: { title: '加密貼上', blurb: 'PrivateBin' },
   },
@@ -55,7 +55,7 @@ const labels: Record<
     writing: { title: 'Writing', blurb: 'Engineering and observation' },
     fun: { title: 'Play', blurb: 'Widgets and surprises' },
     tools: { title: 'Tools', blurb: 'On-site and external index' },
-    lab: { title: 'Git Lab', blurb: 'External Git/CI courses' },
+    lab: { title: 'Lab', blurb: 'External Git/CI courses' },
     cook: { title: 'Recipes', blurb: 'cook.alexander.xin' },
     paste: { title: 'Encrypted paste', blurb: 'PrivateBin' },
   },
@@ -68,7 +68,7 @@ const labels: Record<
     writing: { title: 'Écrits', blurb: 'Ingénierie et observation' },
     fun: { title: 'Surprises', blurb: 'Widgets et œufs de Pâques' },
     tools: { title: 'Outils', blurb: 'Index interne et externe' },
-    lab: { title: 'Git Lab', blurb: 'Cours Git/CI externes' },
+    lab: { title: 'Lab', blurb: 'Cours Git/CI externes' },
     cook: { title: 'Recettes', blurb: 'cook.alexander.xin' },
     paste: { title: 'Collage chiffré', blurb: 'PrivateBin' },
   },
@@ -81,7 +81,7 @@ const labels: Record<
     writing: { title: 'Статьи', blurb: 'Инженерия и наблюдения' },
     fun: { title: 'Пасхалки', blurb: 'Виджеты и сюрпризы' },
     tools: { title: 'Инструменты', blurb: 'Внутренний и внешний индекс' },
-    lab: { title: 'Git Lab', blurb: 'Внешние курсы Git/CI' },
+    lab: { title: 'Lab', blurb: 'Внешние курсы Git/CI' },
     cook: { title: 'Рецепты', blurb: 'cook.alexander.xin' },
     paste: { title: 'Шифрованный буфер', blurb: 'PrivateBin' },
   },
@@ -155,6 +155,7 @@ function nodePos(id: string) {
   showHeader={false}
   showFooter={false}
   mainClass="!p-0 next-shell next-shell--atlas"
+  robots="noindex, follow"
 >
   <div class="atlas" data-atlas>
     <NextChrome lang={lang} roomId="atlas" />

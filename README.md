@@ -20,7 +20,7 @@ npm run dev
 PUBLIC_FORCE_VERIFY=true npm run dev
 ```
 
-广告位默认关闭。复制 `.env.example` 为 `.env` 后填写 `PUBLIC_ADSENSE_CLIENT` 与对应 slot id 即可启用。
+广告位默认关闭。复制 `.env.example` 为 `.env` 后填写 `PUBLIC_ADSENSE_CLIENT` 与对应 slot id 即可启用。站点只保留首页内容区后与文章正文后的手动广告位；生产启用前需在 AdSense 后台发布 Google 三按钮 CMP，并保持 Auto ads 关闭。
 
 ICP / 公安备案同样通过 `.env` 预留（`PUBLIC_ICP_NUMBER`、`PUBLIC_POLICE_BEIAN_*`）；未填写时页脚不显示任何备案占位。
 
@@ -70,6 +70,8 @@ ICP / 公安备案同样通过 `.env` 预留（`PUBLIC_ICP_NUMBER`、`PUBLIC_POL
 
 - 安全政策页面: [security/policy](https://alexander.xin/security/policy)
 - 安全致谢页面: [security/acknowledgments](https://alexander.xin/security/acknowledgments)
+- 隐私政策: [privacy](https://alexander.xin/privacy)
+- 服务条款: [terms](https://alexander.xin/terms)
 - 仓库安全政策: [.github/SECURITY.md](.github/SECURITY.md)
 - PGP 公钥: [security/pgp-key.asc](https://alexander.xin/security/pgp-key.asc)
 

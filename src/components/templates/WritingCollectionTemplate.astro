@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import AdSlot from '../chrome/AdSlot.astro';
 import type { Lang } from '../../i18n/types';
 import { writingCopy, writingRssPath } from '../../i18n/pages/writing';
 import {
@@ -61,7 +60,11 @@ const lead =
 const monthGroups = kind === 'year' ? groupPostsByMonth(posts) : [];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  robots="noindex, follow"
+>
   <header class="writing-hero writing-hero--compact">
     <div class="writing-hero__wash" aria-hidden="true"></div>
     <div class="container mx-auto px-4 lg:px-8 max-w-5xl relative">
@@ -241,7 +244,6 @@ const monthGroups = kind === 'year' ? groupPostsByMonth(posts) : [];
           </ul>
         )
       }
-      <AdSlot slot="article" format="horizontal" />
     </div>
   </section>
 </BaseLayout>

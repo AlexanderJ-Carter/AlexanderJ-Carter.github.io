@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- AdSense ownership metadata, Google CMP privacy-settings entry point, and low-density manual ad deployment variables.
+- Commercial licensing, commissioned work, brand partnership, and open-source sponsorship options on Support and Contact.
+- Registry entries for `home` / `hermes` / `gateway` / `newyear`; `contact.alexander.xin` Worker 301 → `/contact/`.
 - Public `/changelog` page (five locales) synced from `CHANGELOG.md`.
 - Writing: Darkroom Folio design-system essay (zh-CN, zh-TW, en-GB, fr, ru).
 - `src/data/gallery.ts`: deduplicated gallery catalog (29 items × 5 locales).
@@ -19,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Privacy and terms copy now covers AdSense consent, third-party data use, sponsorships, affiliate disclosure, and commercial licensing in all locales.
+- Ads are limited to one home placement and one post-content placement; taxonomy, archive, legal, support, tool, gate, and experimental pages remain ad-free.
+- Login, verification, experimental, and writing taxonomy/archive pages are excluded from indexing and the generated sitemap while About and Contact retain Turnstile protection.
+- Header / Footer / Home / Now / Friends / QuickActions / Sitemap elsewhere links share `site-registry` helpers; public surfaces no longer promote Access IT-Tools.
 - About: clearer reserved personal dossier copy; slots remain empty.
 - Projects: main site marked completed; fr/ru writing channel entries added.
 - Changelog linked from header, footer, tools index, Now quick links and RelatedTools.

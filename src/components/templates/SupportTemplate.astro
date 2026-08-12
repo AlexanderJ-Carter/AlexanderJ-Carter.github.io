@@ -69,6 +69,29 @@ const contact = getLangPath(lang, '/contact');
 
       <article class="border-t border-[rgb(var(--color-border))] pt-8">
         <h2
+          class="font-heading text-xl md:text-2xl font-bold tracking-tight mb-3"
+        >
+          {t.collabTitle}
+        </h2>
+        <p
+          class="text-[rgb(var(--color-text-secondary))] leading-relaxed max-w-2xl mb-5"
+        >
+          {t.collabBody}
+        </p>
+        <ul class="flex flex-wrap gap-2 mb-6">
+          {
+            t.collabTypes.map((item) => (
+              <li class="border border-[rgb(var(--color-border))] px-3 py-1 text-xs text-[rgb(var(--color-text-secondary))]">
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+        <a href={contact} class="btn-secondary">{t.collabCta}</a>
+      </article>
+
+      <article class="border-t border-[rgb(var(--color-border))] pt-8">
+        <h2
           class="font-heading text-xl md:text-2xl font-bold tracking-tight mb-2"
         >
           {t.freeTitle}

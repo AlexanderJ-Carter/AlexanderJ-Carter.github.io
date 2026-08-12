@@ -34,10 +34,7 @@ export type SitemapCopy = {
 const external = {
   github: 'https://github.com/AlexanderJ-Carter',
   cook: 'https://cook.alexander.xin',
-  mycook: 'https://mycook.alexander.xin',
-  cookMcp: 'https://cook-mcp.alexander.xin',
   netq: 'https://netq.alexander.xin',
-  tools: 'https://tools.alexander.xin',
   linux: 'https://linux-command.alexander.xin',
   lab: 'https://lab.alexander.xin',
   afdian: afdianUrl,
@@ -150,27 +147,9 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'MyCook Full',
-            path: external.mycook,
-            desc: '完整站 · 图片版',
-            external: true,
-          },
-          {
-            name: 'MyCook MCP',
-            path: external.cookMcp,
-            desc: '远程 MCP（鉴权）',
-            external: true,
-          },
-          {
             name: 'NetQ',
             path: external.netq,
             desc: '网络排查',
-            external: true,
-          },
-          {
-            name: 'IT-Tools',
-            path: external.tools,
-            desc: '更多工具',
             external: true,
           },
           {
@@ -180,7 +159,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'Git Lab',
+            name: 'Lab',
             path: external.lab,
             desc: 'Git 协作练习',
             external: true,
@@ -304,27 +283,9 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'MyCook Full',
-            path: external.mycook,
-            desc: '完整站 · 圖片版',
-            external: true,
-          },
-          {
-            name: 'MyCook MCP',
-            path: external.cookMcp,
-            desc: '遠端 MCP（鑑權）',
-            external: true,
-          },
-          {
             name: 'NetQ',
             path: external.netq,
             desc: '網路排查',
-            external: true,
-          },
-          {
-            name: 'IT-Tools',
-            path: external.tools,
-            desc: '更多工具',
             external: true,
           },
           {
@@ -334,7 +295,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'Git Lab',
+            name: 'Lab',
             path: external.lab,
             desc: 'Git 協作練習',
             external: true,
@@ -491,27 +452,9 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'MyCook Full',
-            path: external.mycook,
-            desc: 'Full host · images',
-            external: true,
-          },
-          {
-            name: 'MyCook MCP',
-            path: external.cookMcp,
-            desc: 'Remote MCP (auth)',
-            external: true,
-          },
-          {
             name: 'NetQ',
             path: external.netq,
             desc: 'Network lab',
-            external: true,
-          },
-          {
-            name: 'IT-Tools',
-            path: external.tools,
-            desc: 'More tools',
             external: true,
           },
           {
@@ -521,7 +464,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'Git Lab',
+            name: 'Lab',
             path: external.lab,
             desc: 'Git practice',
             external: true,
@@ -661,27 +604,9 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'MyCook Full',
-            path: external.mycook,
-            desc: 'Hôte complet · images',
-            external: true,
-          },
-          {
-            name: 'MyCook MCP',
-            path: external.cookMcp,
-            desc: 'MCP distant (auth)',
-            external: true,
-          },
-          {
             name: 'NetQ',
             path: external.netq,
             desc: 'Réseau',
-            external: true,
-          },
-          {
-            name: 'IT-Tools',
-            path: external.tools,
-            desc: 'Plus d’outils',
             external: true,
           },
           {
@@ -691,7 +616,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'Git Lab',
+            name: 'Lab',
             path: external.lab,
             desc: 'Pratique Git',
             external: true,
@@ -831,27 +756,9 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'MyCook Full',
-            path: external.mycook,
-            desc: 'Полный хост · фото',
-            external: true,
-          },
-          {
-            name: 'MyCook MCP',
-            path: external.cookMcp,
-            desc: 'Удалённый MCP',
-            external: true,
-          },
-          {
             name: 'NetQ',
             path: external.netq,
             desc: 'Сеть',
-            external: true,
-          },
-          {
-            name: 'IT-Tools',
-            path: external.tools,
-            desc: 'Ещё инструменты',
             external: true,
           },
           {
@@ -861,7 +768,7 @@ export const sitemapCopy: Record<Lang, SitemapCopy> = {
             external: true,
           },
           {
-            name: 'Git Lab',
+            name: 'Lab',
             path: external.lab,
             desc: 'Практика Git',
             external: true,

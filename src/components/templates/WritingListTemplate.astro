@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import AdSlot from '../chrome/AdSlot.astro';
 import { getCollection } from 'astro:content';
 import type { Lang } from '../../i18n/types';
 import { writingCopy, writingRssPath } from '../../i18n/pages/writing';
@@ -190,7 +189,6 @@ const [featured, ...rest] = posts;
         )
       }
 
-      <AdSlot slot="article" format="horizontal" />
     </div>
   </section>
 </BaseLayout>

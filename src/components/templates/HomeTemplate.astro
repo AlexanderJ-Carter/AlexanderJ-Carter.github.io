@@ -11,10 +11,12 @@ import {
   getLangPath,
   resolveLang,
 } from '../../i18n/types';
+import { getChromeElsewhereLinks } from '../../data/site-registry';
 
 const { lang: langProp } = Astro.props;
 const lang = resolveLang(langProp);
 const copy = homeCopy[lang];
+const elsewhere = getChromeElsewhereLinks(lang);
 const lp = (path: string) => getLangPath(lang, path);
 
 const posts = (await getCollection('writing'))
@@ -341,7 +343,7 @@ const heroSrc = gallerySrcFallback(heroImage);
 
       <div class="folio-directory shadow-[var(--shadow-sm)]">
         {
-          copy.elsewhere.map((item, i) => {
+          elsewhere.map((item, i) => {
             const host = new URL(item.href).hostname.replace(/^www\./, '');
             return (
               <a

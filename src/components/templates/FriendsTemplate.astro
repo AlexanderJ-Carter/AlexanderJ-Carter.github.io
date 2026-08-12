@@ -2,9 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../chrome/PageHero.astro';
 import RelatedTools from '../chrome/RelatedTools.astro';
+import { getChromeElsewhereLinks } from '../../data/site-registry';
 
 const { lang } = Astro.props;
 type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
+const elsewhere = getChromeElsewhereLinks(lang as Lang);
 
 const t: Record<Lang, Record<string, string>> = {
   'zh-CN': {
@@ -164,44 +166,11 @@ const sections = [
   },
   {
     key: 'mine',
-    links: [
-      {
-        name: 'MyCook',
-        url: 'https://cook.alexander.xin',
-        desc: {
-          'zh-CN': '把做饭步骤整理成更容易检索和执行的菜谱站。',
-          'zh-TW': '把做飯步驟整理成更容易檢索和執行的菜譜站。',
-          'en-GB': 'A recipe site shaped for lookup and execution.',
-          fr: 'Site de recettes pensé pour chercher et exécuter.',
-          ru: 'Сайт рецептов для поиска и выполнения.',
-        },
-        tags: ['Food', 'Docs'],
-      },
-      {
-        name: 'Linux Command',
-        url: 'https://linux-command.alexander.xin',
-        desc: {
-          'zh-CN': '常用 Linux 指令的速查入口。',
-          'zh-TW': '常用 Linux 指令的速查入口。',
-          'en-GB': 'Quick lookup for common Linux commands.',
-          fr: 'Recherche rapide de commandes Linux.',
-          ru: 'Быстрый поиск команд Linux.',
-        },
-        tags: ['CLI'],
-      },
-      {
-        name: 'NetQ',
-        url: 'https://netq.alexander.xin',
-        desc: {
-          'zh-CN': '交互式网络排查 CLI 与命令思路整理。',
-          'zh-TW': '互動式網路排查 CLI 與命令思路整理。',
-          'en-GB': 'Interactive network troubleshooting CLI and command flow.',
-          fr: 'CLI de diagnostic réseau et logique de commandes.',
-          ru: 'CLI диагностики сети и поток команд.',
-        },
-        tags: ['Network'],
-      },
-    ],
+    links: elsewhere.map((l) => ({
+      name: l.title,
+      url: l.href,
+      desc: l.desc,
+    })),
   },
 ];
 
@@ -251,7 +220,9 @@ function getLangPath(path: string): string {
                         {link.name}
                       </span>
                       <span class="hidden sm:block text-sm text-[rgb(var(--color-text-tertiary))] truncate col-span-2 sm:col-span-1 sm:col-start-3 row-start-2 sm:row-start-auto pl-[2.5rem] sm:pl-0">
-                        {link.desc[lang as Lang] || link.desc['en-GB']}
+                        {typeof link.desc === 'string'
+                          ? link.desc
+                          : link.desc[lang as Lang] || link.desc['en-GB']}
                       </span>
                       <span
                         class="meta-mono text-[rgb(var(--color-text-tertiary))] justify-self-end opacity-0 group-hover:opacity-100 transition-opacity"

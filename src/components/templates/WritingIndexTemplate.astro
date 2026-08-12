@@ -46,7 +46,11 @@ const lead = kind === 'archive' ? t.archiveIntro : t.intro;
 const totalPosts = items.reduce((sum, item) => sum + item.count, 0);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  robots="noindex, follow"
+>
   <header class="writing-hero writing-hero--compact">
     <div class="writing-hero__wash" aria-hidden="true"></div>
     <div class="container mx-auto px-4 lg:px-8 max-w-5xl relative">

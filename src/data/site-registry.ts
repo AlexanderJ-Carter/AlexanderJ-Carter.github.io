@@ -283,6 +283,7 @@ export const siteRegistry: SiteEntry[] = [
     visibility: 'public',
     status: 'live',
     label: 'Lab',
+    repo: 'AlexanderJ-Carter/Git-Workflow-Lab',
     labels: {
       'zh-CN': 'Git / CI 实验室',
       'zh-TW': 'Git / CI 實驗室',
@@ -306,6 +307,7 @@ export const siteRegistry: SiteEntry[] = [
     visibility: 'public',
     status: 'live',
     label: 'Linux Command',
+    repo: 'AlexanderJ-Carter/linux-command',
     labels: {
       'zh-CN': 'Linux 指令',
       'zh-TW': 'Linux 指令',
@@ -329,6 +331,7 @@ export const siteRegistry: SiteEntry[] = [
     visibility: 'public',
     status: 'live',
     label: 'NetQ',
+    repo: 'AlexanderJ-Carter/netq',
     labels: {
       'zh-CN': 'NetQ',
       'zh-TW': 'NetQ',
@@ -352,6 +355,7 @@ export const siteRegistry: SiteEntry[] = [
     visibility: 'public',
     status: 'live',
     label: 'Yearly',
+    repo: 'AlexanderJ-Carter/Yearly',
     labels: {
       'zh-CN': '年度回顾',
       'zh-TW': '年度回顧',
@@ -368,31 +372,53 @@ export const siteRegistry: SiteEntry[] = [
     },
   },
   {
+    id: 'newyear',
+    url: 'https://newyear.alexander.xin',
+    category: 'experiment',
+    host: 'github-pages',
+    visibility: 'public',
+    status: 'live',
+    label: 'Newyear',
+    repo: 'AlexanderJ-Carter/Newyear',
+    note: 'Seasonal interactive page; Access app for *.newyear-eki.pages.dev was deleted — custom domain still live',
+    labels: {
+      'zh-CN': '新年页',
+      'zh-TW': '新年頁',
+      'en-GB': 'New year',
+      fr: 'Nouvel an',
+      ru: 'Новый год',
+    },
+    descriptions: {
+      'zh-CN': '季节性互动页（独立仓），非年度回顾 Yearly。',
+      'zh-TW': '季節性互動頁（獨立倉），非年度回顧 Yearly。',
+      'en-GB': 'Seasonal interactive page — distinct from Yearly review.',
+      fr: 'Page interactive saisonnière — distincte de Yearly.',
+      ru: 'Сезонная интерактивная страница — отдельно от Yearly.',
+    },
+  },
+  {
     id: 'contact-card',
     url: 'https://contact.alexander.xin',
     category: 'content',
     host: 'github-pages',
     visibility: 'public',
-    status: 'live',
+    status: 'retired',
     label: 'Contact card',
     repo: 'AlexanderJ-Carter/Contact',
-    note: 'Standalone Turnstile card; overlaps apex /contact — candidate to 301-merge or rename (e.g. card.)',
+    note: 'Retired 2026-08-12: Worker redirect-contact 301 → https://alexander.xin/contact/; DNS CNAME may remain until Pages project removed.',
     labels: {
-      'zh-CN': '联系卡片',
-      'zh-TW': '聯繫卡片',
-      'en-GB': 'Contact card',
-      fr: 'Carte contact',
-      ru: 'Карточка контакта',
+      'zh-CN': '联系卡片（已退役）',
+      'zh-TW': '聯繫卡片（已退役）',
+      'en-GB': 'Contact card (retired)',
+      fr: 'Carte contact (retirée)',
+      ru: 'Карточка контакта (снята)',
     },
     descriptions: {
-      'zh-CN':
-        '独立联系页（Turnstile）；与主站 /contact 职责重叠，待确认合并或改名。',
-      'zh-TW':
-        '獨立聯繫頁（Turnstile）；與主站 /contact 職責重疊，待確認合併或改名。',
-      'en-GB':
-        'Standalone contact card (Turnstile); overlaps /contact — merge or rename pending.',
-      fr: 'Carte contact indépendante (Turnstile) ; chevauche /contact — fusion ou renommage à confirmer.',
-      ru: 'Отдельная карточка контакта (Turnstile); пересекается с /contact — слияние или переименование.',
+      'zh-CN': '已退役；请用主站 /contact/，勿再维护独立 Contact 站。',
+      'zh-TW': '已退役；請用主站 /contact/，勿再維護獨立 Contact 站。',
+      'en-GB': 'Retired; use apex /contact/. Do not redeploy a separate Contact site.',
+      fr: 'Retiré ; utiliser /contact/. Ne pas redéployer un site Contact séparé.',
+      ru: 'Снят; используйте /contact/. Не разворачивайте отдельный Contact.',
     },
   },
   {
@@ -400,10 +426,11 @@ export const siteRegistry: SiteEntry[] = [
     url: 'https://tools.alexander.xin',
     category: 'tools',
     host: 'server-tunnel',
-    visibility: 'public',
+    visibility: 'private',
     status: 'live',
     label: 'IT-Tools',
-    note: 'Tunnel → nginx-ui → it-tools :8080; distinct from apex /tools index; rename to it-tools. pending confirmation',
+    access: true,
+    note: 'Tunnel → nginx-ui → it-tools :8080; Cloudflare Access; distinct from public apex /tools index',
     labels: {
       'zh-CN': 'IT-Tools',
       'zh-TW': 'IT-Tools',
@@ -413,13 +440,13 @@ export const siteRegistry: SiteEntry[] = [
     },
     descriptions: {
       'zh-CN':
-        'VPS 上的 IT-Tools；与主站 /tools 索引不同。候选子域 it-tools.。',
+        'VPS 上的 IT-Tools（Access）；与主站公开 /tools 索引不同。',
       'zh-TW':
-        'VPS 上的 IT-Tools；與主站 /tools 索引不同。候選子域 it-tools.。',
+        'VPS 上的 IT-Tools（Access）；與主站公開 /tools 索引不同。',
       'en-GB':
-        'IT-Tools on the VPS — not the apex /tools index. Candidate host: it-tools.',
-      fr: 'IT-Tools sur le VPS — distinct de /tools. Hôte candidat : it-tools.',
-      ru: 'IT-Tools на VPS — не индекс /tools. Кандидат: it-tools.',
+        'IT-Tools on the VPS behind Access — not the public apex /tools index.',
+      fr: 'IT-Tools sur le VPS derrière Access — distinct de /tools public.',
+      ru: 'IT-Tools на VPS за Access — не публичный индекс /tools.',
     },
   },
   {
@@ -620,6 +647,79 @@ export const siteRegistry: SiteEntry[] = [
     },
   },
   {
+    id: 'home',
+    url: 'https://home.alexander.xin',
+    category: 'ops',
+    host: 'server-tunnel',
+    visibility: 'private',
+    status: 'live',
+    label: 'Home (Glance)',
+    access: true,
+    note: 'Cloudflare Access → cloud nginx → tencent Glance :3002; personal dashboard (not public apex)',
+    labels: {
+      'zh-CN': 'Home（Glance）',
+      'zh-TW': 'Home（Glance）',
+      'en-GB': 'Home (Glance)',
+      fr: 'Home (Glance)',
+      ru: 'Home (Glance)',
+    },
+    descriptions: {
+      'zh-CN': '个人门户（Glance），经 Access；与公开主站不同。',
+      'zh-TW': '個人門戶（Glance），經 Access；與公開主站不同。',
+      'en-GB': 'Personal Glance dashboard behind Access — not the public apex.',
+      fr: 'Tableau Glance personnel derrière Access — pas le site public.',
+      ru: 'Личный Glance за Access — не публичный apex.',
+    },
+  },
+  {
+    id: 'hermes',
+    url: 'https://hermes.alexander.xin',
+    category: 'ops',
+    host: 'server-tunnel',
+    visibility: 'private',
+    status: 'live',
+    label: 'Hermes Agent',
+    note: 'Cloud nginx → tencent :9119; app OIDC via Pocket ID',
+    labels: {
+      'zh-CN': 'Hermes',
+      'zh-TW': 'Hermes',
+      'en-GB': 'Hermes',
+      fr: 'Hermes',
+      ru: 'Hermes',
+    },
+    descriptions: {
+      'zh-CN': '自托管 Agent（tencent）；应用侧 Pocket ID 登录。',
+      'zh-TW': '自託管 Agent（tencent）；應用側 Pocket ID 登入。',
+      'en-GB': 'Self-hosted agent on tencent; Pocket ID app login.',
+      fr: 'Agent auto-hébergé sur tencent ; login Pocket ID.',
+      ru: 'Self-host агент на tencent; вход Pocket ID.',
+    },
+  },
+  {
+    id: 'gateway',
+    url: 'https://gateway.alexander.xin',
+    category: 'ops',
+    host: 'server-tunnel',
+    visibility: 'private',
+    status: 'live',
+    label: 'OmniRoute',
+    note: 'Cloud nginx → tencent OmniRoute :8180; LLM gateway for Hermes',
+    labels: {
+      'zh-CN': 'OmniRoute',
+      'zh-TW': 'OmniRoute',
+      'en-GB': 'OmniRoute',
+      fr: 'OmniRoute',
+      ru: 'OmniRoute',
+    },
+    descriptions: {
+      'zh-CN': '模型路由网关（tencent）；供 Hermes 等调用。',
+      'zh-TW': '模型路由網關（tencent）；供 Hermes 等呼叫。',
+      'en-GB': 'LLM route gateway on tencent for Hermes and related tools.',
+      fr: 'Passerelle LLM sur tencent pour Hermes et outils liés.',
+      ru: 'Шлюз маршрутизации LLM на tencent для Hermes.',
+    },
+  },
+  {
     id: 'cms',
     url: 'https://cms.alexander.xin',
     category: 'ops',
@@ -628,7 +728,7 @@ export const siteRegistry: SiteEntry[] = [
     status: 'planned',
     label: 'Directus',
     access: true,
-    note: 'Replaces Ghost; deploy when memory allows',
+    note: 'Do not start on 1.6GiB; writing stays Git+blog.alexander.xin',
     labels: {
       'zh-CN': '内容后台（计划）',
       'zh-TW': '內容後台（計劃）',
@@ -637,11 +737,11 @@ export const siteRegistry: SiteEntry[] = [
       ru: 'CMS (план)',
     },
     descriptions: {
-      'zh-CN': 'Directus 将替代 Ghost；暂未部署。',
-      'zh-TW': 'Directus 將替代 Ghost；暫未部署。',
-      'en-GB': 'Directus will replace Ghost; not deployed yet.',
-      fr: 'Directus remplacera Ghost ; pas encore déployé.',
-      ru: 'Directus заменит Ghost; пока не развёрнут.',
+      'zh-CN': 'Directus 仅计划；内存不足勿部署；写作用 blog。',
+      'zh-TW': 'Directus 僅計劃；記憶體不足勿部署；寫作用 blog。',
+      'en-GB': 'Directus planned only; do not deploy under current RAM; writing uses blog.',
+      fr: 'Directus seulement prévu ; ne pas déployer sous RAM actuelle ; écrits via blog.',
+      ru: 'Directus только в планах; не деплоить при текущей RAM; тексты через blog.',
     },
   },
   {
@@ -763,8 +863,9 @@ export function getOpsSites(): SiteEntry[] {
 export function getExternalToolSites(): SiteEntry[] {
   return siteRegistry.filter(
     (s) =>
-      ['tools-hub', 'linux-command', 'netq', 'cook'].includes(s.id) &&
-      s.status === 'live'
+      ['linux-command', 'netq', 'cook'].includes(s.id) &&
+      s.status === 'live' &&
+      s.visibility === 'public'
   );
 }
 
@@ -778,39 +879,73 @@ export function getNetworkDirectorySites(): SiteEntry[] {
   );
 }
 
+/** Compact elsewhere list for Header / Footer / Home (visitor chrome). */
+export const CHROME_ELSEWHERE_IDS = [
+  'cook',
+  'linux-command',
+  'netq',
+  'lab',
+] as const;
+
+/** Richer elsewhere list for Sitemap (includes blog / paste / yearly). */
+export const SITEMAP_ELSEWHERE_IDS = [
+  'cook',
+  'blog',
+  'netq',
+  'linux-command',
+  'lab',
+  'paste',
+  'yearly',
+] as const;
+
+export type ElsewhereLink = {
+  id: string;
+  title: string;
+  desc: string;
+  href: string;
+};
+
+function liveElsewhereFromIds(
+  lang: Lang,
+  ids: readonly string[]
+): ElsewhereLink[] {
+  const links: ElsewhereLink[] = [];
+  for (const id of ids) {
+    const site = siteRegistry.find((s) => s.id === id);
+    if (!site || site.status !== 'live' || site.visibility !== 'public') {
+      continue;
+    }
+    links.push({
+      id: site.id,
+      title: site.labels[lang],
+      desc: site.descriptions[lang],
+      href: site.url,
+    });
+  }
+  return links;
+}
+
+export function getChromeElsewhereLinks(lang: Lang): ElsewhereLink[] {
+  return liveElsewhereFromIds(lang, CHROME_ELSEWHERE_IDS);
+}
+
 export function getSitemapElsewhereLinks(lang: Lang): Array<{
   name: string;
   path: string;
   desc: string;
   external?: boolean;
 }> {
-  const fleetIds = [
-    'cook',
-    'netq',
-    'tools-hub',
-    'linux-command',
-    'lab',
-    'paste',
-    'link',
-    'yearly',
-  ] as const;
   const links: Array<{
     name: string;
     path: string;
     desc: string;
     external?: boolean;
-  }> = [];
-
-  for (const id of fleetIds) {
-    const site = siteRegistry.find((s) => s.id === id);
-    if (!site || site.status !== 'live') continue;
-    links.push({
-      name: site.labels[lang],
-      path: site.url,
-      desc: site.descriptions[lang],
-      external: true,
-    });
-  }
+  }> = liveElsewhereFromIds(lang, SITEMAP_ELSEWHERE_IDS).map((l) => ({
+    name: l.title,
+    path: l.href,
+    desc: l.desc,
+    external: true,
+  }));
 
   links.push(
     {

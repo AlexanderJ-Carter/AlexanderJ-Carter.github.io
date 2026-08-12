@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl } from '../../i18n/ui';
+import { getChromeElsewhereLinks } from '../../data/site-registry';
 
 const lang = getLangFromUrl(Astro.url);
 
@@ -32,6 +33,19 @@ const translations = {
 };
 
 const t = translations[lang] || translations['zh-CN'];
+
+const elsewhereKeywords: Record<string, string> = {
+  cook: 'cook,recipe,菜谱,做饭,howtocook,food',
+  'linux-command': 'linux,command,bash,shell,终端,命令,команды',
+  netq: 'netq,network,dns,ping,traceroute,tcp,http,排查',
+  lab: 'lab,git,ci,workflow,实验室,labo,лаборатория',
+};
+
+const elsewhereSearch = getChromeElsewhereLinks(lang).map((l) => ({
+  title: l.title,
+  url: l.href,
+  keywords: elsewhereKeywords[l.id] ?? l.id,
+}));
 ---
 
 <div id="quick-actions" class="fixed z-40 flex flex-col gap-3">
@@ -151,7 +165,7 @@ const t = translations[lang] || translations['zh-CN'];
   </div>
 </div>
 
-<script define:vars={{ lang }} is:inline>
+<script define:vars={{ lang, elsewhereSearch }} is:inline>
   const quickSearchBtn = document.getElementById('quick-search-btn');
   const searchModal = document.getElementById('search-modal');
   const searchInput = document.getElementById('search-input');
@@ -399,59 +413,18 @@ const t = translations[lang] || translations['zh-CN'];
     {
       title:
         lang === 'zh-CN'
-          ? 'IT-Tools'
+          ? '工具索引'
           : lang === 'zh-TW'
-            ? 'IT-Tools'
+            ? '工具索引'
             : lang === 'fr'
-              ? 'IT-Tools'
+              ? 'Index outils'
               : lang === 'ru'
-                ? 'IT-Tools'
-                : 'IT-Tools',
-      url: 'https://tools.alexander.xin',
-      keywords: 'tools,tool hub,it-tools,工具,实用工具,outils,инструменты',
+                ? 'Индекс инструментов'
+                : 'Tools index',
+      url: p('/tools'),
+      keywords: 'tools,tool hub,it-tools,工具,实用工具,outils,инструменты,/tools',
     },
-    {
-      title:
-        lang === 'zh-CN'
-          ? 'Linux 指令查询'
-          : lang === 'zh-TW'
-            ? 'Linux 指令查詢'
-            : lang === 'fr'
-              ? 'Commandes Linux'
-              : lang === 'ru'
-                ? 'Linux команды'
-                : 'Linux Commands',
-      url: 'https://linux-command.alexander.xin',
-      keywords: 'linux,command,bash,shell,终端,命令,команды',
-    },
-    {
-      title:
-        lang === 'zh-CN'
-          ? '做饭菜谱'
-          : lang === 'zh-TW'
-            ? '做飯菜譜'
-            : lang === 'fr'
-              ? 'Recettes'
-              : lang === 'ru'
-                ? 'Рецепты'
-                : 'Cooking Recipes',
-      url: 'https://cook.alexander.xin',
-      keywords: 'cook,recipe,菜谱,做饭,howtocook,food',
-    },
-    {
-      title:
-        lang === 'zh-CN'
-          ? 'NetQ 网络排查'
-          : lang === 'zh-TW'
-            ? 'NetQ 網路排查'
-            : lang === 'fr'
-              ? 'NetQ CLI'
-              : lang === 'ru'
-                ? 'NetQ CLI'
-                : 'NetQ CLI',
-      url: 'https://netq.alexander.xin',
-      keywords: 'netq,network,dns,ping,traceroute,tcp,http,排查',
-    },
+    ...elsewhereSearch,
   ];
 
   function openSearchModal() {

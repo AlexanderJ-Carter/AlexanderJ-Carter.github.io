@@ -18,11 +18,11 @@ const routes = Object.fromEntries(
 const fleetRoutes = Object.fromEntries(
   getNetworkDirectorySites()
     .filter((s) =>
-      ['lab', 'cook', 'tools-hub', 'netq', 'paste', 'link', 'network'].includes(
+      ['lab', 'cook', 'netq', 'paste', 'blog', 'network'].includes(
         s.id
       )
     )
-    .map((s) => [s.id === 'tools-hub' ? 'tools' : s.id, s.path ? lp(s.path) : s.url])
+    .map((s) => [s.id, s.path ? lp(s.path) : s.url])
 );
 fleetRoutes.network = lp('/network');
 fleetRoutes.login = lp('/login');
@@ -103,7 +103,7 @@ const messages = {
     where: '你在 /next/echo。信号链：signal → exposure → atlas → echo。',
     unknownRoom: '未知目标。试试 open signal 或 scan。',
     fun: '前往彩蛋…',
-    lab: '打开 Git Lab…',
+    lab: '打开 Lab…',
     network: '打开站群目录…',
     login: '打开维护者入口…',
     cleared: '屏幕已清空。',
@@ -122,7 +122,7 @@ const messages = {
     where: '你在 /next/echo。信號鏈：signal → exposure → atlas → echo。',
     unknownRoom: '未知目標。試試 open signal 或 scan。',
     fun: '前往彩蛋…',
-    lab: '打開 Git Lab…',
+    lab: '打開 Lab…',
     network: '打開站群目錄…',
     login: '打開維護者入口…',
     cleared: '螢幕已清空。',
@@ -141,7 +141,7 @@ const messages = {
     where: 'You are at /next/echo. Chain: signal → exposure → atlas → echo.',
     unknownRoom: 'Unknown target. Try open signal or scan.',
     fun: 'Heading to /fun…',
-    lab: 'Opening Git Lab…',
+    lab: 'Opening Lab…',
     network: 'Opening network directory…',
     login: 'Opening maintainer entry…',
     cleared: 'Screen cleared.',
@@ -160,7 +160,7 @@ const messages = {
     where: 'Vous êtes sur /next/echo. Chaîne : signal → exposure → atlas → echo.',
     unknownRoom: 'Cible inconnue. Essayez open signal ou scan.',
     fun: 'Vers /fun…',
-    lab: 'Ouverture Git Lab…',
+    lab: 'Ouverture Lab…',
     network: 'Ouverture annuaire…',
     login: 'Ouverture entrée mainteneur…',
     cleared: 'Écran effacé.',
@@ -179,7 +179,7 @@ const messages = {
     where: 'Вы на /next/echo. Цепь: signal → exposure → atlas → echo.',
     unknownRoom: 'Неизвестная цель. Попробуйте open signal или scan.',
     fun: 'К /fun…',
-    lab: 'Открываю Git Lab…',
+    lab: 'Открываю Lab…',
     network: 'Открываю каталог сети…',
     login: 'Открываю вход сопровождения…',
     cleared: 'Экран очищен.',
@@ -195,6 +195,7 @@ const messages = {
   showHeader={false}
   showFooter={false}
   mainClass="!p-0 next-shell next-shell--echo"
+  robots="noindex, follow"
 >
   <div
     class="echo"

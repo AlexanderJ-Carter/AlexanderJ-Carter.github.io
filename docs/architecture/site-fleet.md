@@ -6,9 +6,10 @@ Control plane is unified; hosting stays distributed.
 
 | Layer      | Owns                              | Examples                                                         |
 | ---------- | --------------------------------- | ---------------------------------------------------------------- |
-| GitHub     | Source + static fronts            | `alexander.xin`, cook, lab, netq, linux-command, yearly, contact |
+| GitHub     | Source + static fronts            | `alexander.xin`, cook, lab, netq, linux-command, yearly（contact 子域已退役，用 `/contact`） |
 | Cloudflare | DNS, CDN, Access, Workers, Tunnel | apex CDN, `api.alexander.xin/time`, Access apps, blog/mycook via Tunnel |
-| SSH Cloud  | Stateful services + MyCook full   | Pocket ID, Gitea, Portainer, PrivateBin, it-tools, www mirror, mycook, cook-mcp |
+| SSH Cloud  | Stateful services + MyCook full + edge reverse-proxy | Pocket ID, Gitea, Portainer, PrivateBin, it-tools (Access), www/blog mirror, mycook, cook-mcp |
+| Tencent    | Compute / agents / personal dashboard                | Hermes, OmniRoute, Glance (`home.alexander.xin`) |
 
 `www.alexander.xin` is the **server mirror** (better mainland reachability).  
 `alexander.xin` (apex) is **GitHub Pages**. Do not redirect one to the other.
@@ -52,7 +53,11 @@ Layers **coexist**; they do not replace each other.
 | `cook-mcp.alexander.xin`| —       | Pocket ID JWT / API Key          | MyCook 远程 MCP（`:3001`）；公开 `/health`，`/mcp` 需 Bearer                  |
 | `blog.alexander.xin`    | —       | —                                | 公开写作主场：Tunnel → nginx-ui，同仓 `dist`；**无 Access**；MX/TXT 邮件保留  |
 | `id.alexander.xin`      | —       | Pocket ID                        | Must stay reachable without Access                                            |
-| `ops.alexander.xin`     | Access  | —                                | 只读门户                                                                      |
+| `ops.alexander.xin`     | Access  | —                                | 只读门户（舰队探针）                                                          |
+| `home.alexander.xin`    | Access  | —                                | 个人 Glance 门户；nginx → tencent `:3002`                                     |
+| `hermes.alexander.xin`  | —       | Pocket ID OIDC（应用）           | Agent；nginx → tencent `:9119`                                                |
+| `gateway.alexander.xin` | —       | 应用登录 / OIDC                  | OmniRoute；nginx → tencent `:8180`                                            |
+| `tools.alexander.xin`   | Access  | —                                | IT-Tools；与公开 apex `/tools` 索引不同                                       |
 | `docker.alexander.xin`  | Access  | Portainer OIDC（可选）           | Logout URL 应留空，勿触发 IdP end-session                                     |
 | `nginxui.alexander.xin` | Access  | Nginx UI OIDC                    | 本地用户名须匹配 `preferred_username`（`huanghaoyu`）                         |
 | `ssh.alexander.xin`     | Access  | SSH 密钥/密码                    | 浏览器页只能过 Access，主机身份仍要密钥；日常用本机 `ssh cloud`，浏览器仅应急 |
@@ -116,16 +121,30 @@ Layers **coexist**; they do not replace each other.
 | Pocket ID SMTP / 发信开关               | Admin UI → Application Configuration；密钥在服务器 `.resend-smtp-password`（勿入库）                                          |
 | Resend 域名 / API Key                   | Resend Dashboard（`alexander.xin`）；sending key 名 `Pocket ID SMTP`                                                          |
 
-## Live containers (2026-08-07)
+## Live containers (2026-08-12)
 
-| Name         | Role            | Notes                                                                       |
-| ------------ | --------------- | --------------------------------------------------------------------------- |
-| `pocket-id`  | OIDC IdP        | `127.0.0.1:1411`, mem ≤128 MB，healthcheck，日志轮转                        |
-| `gitea`      | Private Git     | Access + OIDC；`DISABLE_REGISTRATION`；mem ≤256 MB；healthcheck             |
-| `portainer`  | Docker UI       | `127.0.0.1:9100`；mem ≤128 MB；Logout URL 留空                              |
-| `nginx-ui`   | Nginx admin     | host 网络；管理口 **仅** `127.0.0.1:9000`；`EnableHTTPS=false`；mem ≤256 MB |
-| `privatebin` | Encrypted paste | `127.0.0.1:8081`；mem ≤64 MB；上传关、限流 30/min、1 MiB                    |
-| `it-tools`   | Tool hub        | `127.0.0.1:8080`；mem ≤64 MB；`read_only` + tmpfs                           |
+| Name                   | Role              | Notes                                                                 |
+| ---------------------- | ----------------- | --------------------------------------------------------------------- |
+| `pocket-id`            | OIDC IdP          | `127.0.0.1:1411`, mem ≤128 MB                                         |
+| `gitea`                | Private Git       | Access + OIDC；`DISABLE_REGISTRATION`                                 |
+| `portainer`            | Docker UI         | `127.0.0.1:9100`；Logout URL 留空                                     |
+| `nginx-ui`             | Nginx admin       | host 网络；管理口 **仅** `127.0.0.1:9000`                             |
+| `privatebin`           | Encrypted paste   | `127.0.0.1:8081`                                                      |
+| `it-tools`             | Tool hub          | `127.0.0.1:8080`；**Cloudflare Access**                               |
+| `mycook`               | Recipes full      | `:8090`；公开                                                         |
+| `mycook-mcp`           | Recipes MCP       | `:3001`；`/health` 公开，`/mcp` Bearer                                |
+| `glance-agent`         | Cloud sysinfo     | Tailscale-only `:27973` for Glance on tencent                         |
+| `docker-socket-proxy`  | Read-only Docker  | Tailscale-only `:2375` for Glance Cloud 容器 widget                   |
+
+**勿启动：** `~/fleet/cms`（Directus）、`~/fleet/listmonk`。Homepage 已由 Glance 替换，勿再部署。
+
+### Tencent compute (2026-08-12)
+
+| Name           | Role            | Notes                                      |
+| -------------- | --------------- | ------------------------------------------ |
+| `glance`       | Personal home   | Tailscale `:3002`；`home.alexander.xin`    |
+| `hermes-agent` | Agent gateway   | host / `:9119`；profiles default/mum/dad   |
+| `omniroute`    | LLM gateway     | `:8180`；`gateway.alexander.xin`           |
 
 ## Host services (non-container)
 
@@ -155,7 +174,10 @@ Layers **coexist**; they do not replace each other.
 | ------------------------- | ---- | ---------- | ----------- | ------------------------------------------------------ | ------------------------------------------------ | ---------------- | ------------------------------------ |
 | `www.alexander.xin`       | 是   | 是         | 否          | `http://127.0.0.1:80` → nginx `Web`                    | **经 nginx**（静态）                             | 否               | 国内镜像浏览                         |
 | `paste.alexander.xin`     | 是   | 是         | 否          | `http://127.0.0.1:80` → nginx `Paste` → `:8081`        | **经 nginx**（CSP/sub_filter）                   | 否               | 直接打开粘贴                         |
-| `tools.alexander.xin`     | 是   | 是         | 否          | `http://127.0.0.1:80` → nginx `Tool` → `:8080`         | **经 nginx**（统一头）                           | 否               | 直接打开工具箱                       |
+| `tools.alexander.xin`     | 是   | 是         | 是（Access）| `http://127.0.0.1:80` → nginx `Tool` → `:8080`         | **经 nginx**（统一头）                           | **是**           | IT-Tools；与公开 `/tools` 不同       |
+| `home.alexander.xin`      | 是   | 是         | 是（Access）| `http://127.0.0.1:80` → nginx `Home` → tencent `:3002` | **经 nginx**                                     | **是**           | 个人 Glance                          |
+| `hermes.alexander.xin`    | 是   | 是         | 应用 OIDC  | `http://127.0.0.1:80` → nginx `Hermes` → tencent `:9119` | **经 nginx**                                   | **否**（应用登录） | Hermes Agent                       |
+| `gateway.alexander.xin`   | 是   | 是         | 应用登录   | `http://127.0.0.1:80` → nginx `OmniRoute` → tencent `:8180` | **经 nginx**                                | **否**（应用登录） | OmniRoute                          |
 | `id.alexander.xin`        | 是   | 是         | IdP 自身    | `http://127.0.0.1:80` → nginx `PocketID` → `:1411`     | **经 nginx**（关 Rocket Loader）                 | **否**（是 IdP） | Passkey / 管 OIDC 客户端             |
 | `git.alexander.xin`       | 是   | 是         | 是          | `http://127.0.0.1:80` → nginx `Gitea` → `:3000`        | **经 nginx**（`client_max_body_size 512M` + WS） | **是**           | Access → Gitea（可再 Pocket ID SSO） |
 | `docker.alexander.xin`    | 是   | 是         | 是          | `http://127.0.0.1:80` → nginx `Portainer` → `:9100`    | **经 nginx**（WS）                               | **是**           | Access → Portainer                   |
@@ -184,7 +206,7 @@ Layers **coexist**; they do not replace each other.
 | `blog.alexander.xin`             | **B2 真托管**：Tunnel → nginx；DNS CNAME → tunnel；已去掉 `redirect-profile` 路由；**无 Access**；MX/TXT 保留                                     |
 | `about` / `bio` / `time` aliases | Worker redirects (`redirect-profile` / `legacy-redirect`)；apex `/writing*` 由 `writing-redirect` **301→blog**                                    |
 | Pocket ID ↔ Access OIDC          | **Live** (IdP `Pocket ID` + `Email OTP (break-glass)`)                                                                                            |
-| Access 覆盖面                    | 仅 ops / git / docker / nginxui / ssh / remote；**勿**给 paste / tools / www / id / **blog** / 公开站                                             |
+| Access 覆盖面                    | ops / git / docker / nginxui / ssh / **home** / **tools**；**勿**给 paste / www / id / **blog** / cook / mycook / 公开站 |
 
 ## DNS inventory (audited 2026-08-07)
 
@@ -193,9 +215,10 @@ Zone `alexander.xin`：无 A/AAAA↔CNAME 冲突；隧道与公开站均为**橙
 | 主机                                                                      | DNS                         | 目标 / 说明                              | 代理                               |
 | ------------------------------------------------------------------------- | --------------------------- | ---------------------------------------- | ---------------------------------- |
 | `alexander.xin`（apex）                                                   | A×4 + AAAA×4                | GitHub Pages IP（橙云）                  | 橙                                 |
-| `www` `blog` `id` `git` `docker` `nginxui` `paste` `tools` `remote` `ssh` | CNAME                       | `…cfargotunnel.com`（`mycloud`）         | 橙                                 |
+| `www` `blog` `id` `git` `docker` `nginxui` `paste` `tools` `home` `hermes` `gateway` `mycook` `cook-mcp` `ssh` | CNAME | `…cfargotunnel.com`（`mycloud`） | 橙 |
 | `ops` `api`                                                               | AAAA `100::`                | Worker 占位（`ops-portal` / `time-api`） | 橙                                 |
-| `cook` `lab` `linux-command` `netq` `yearly` `contact`                    | CNAME                       | `alexanderj-carter.github.io`            | 橙（`contact` 见 Hostname naming） |
+| `cook` `lab` `linux-command` `netq` `yearly`                              | CNAME                       | `alexanderj-carter.github.io`            | 橙                                 |
+| `contact`（退役）                                                         | CNAME（可删）               | 原 Pages；现 404 → 应用 Worker 301→`/contact/` | 橙（待收敛）                 |
 | `about` `bio` `time`                                                      | CNAME → Pages + Worker 路由 | 兼容重定向；可改为 `100::` 但非必须      | 橙                                 |
 | apex / `blog.`                                                            | MX + SPF TXT                | Cloudflare Email Routing                 | DNS only                           |
 | `resend._domainkey`                                                       | TXT                         | Resend DKIM                              | DNS only                           |
@@ -261,8 +284,9 @@ Zone `alexander.xin`：无 A/AAAA↔CNAME 冲突；隧道与公开站均为**橙
 | apex / www 故意 404                                                                                         | **404**（站点页）                                                       |
 | www `/` `/writing/` `/security/policy/`                                                                     | **200**；与 apex **无互跳**；www `/subscribe` `/blog` 站内 301→写作路径 |
 | blog `/` → `/writing/`；`/writing/` `/writing/subscribe/` `/en/writing/`                                    | **200**（`/` 为站内 301）                                               |
-| paste / tools / id                                                                                          | **200**（公开，无 Access）                                              |
-| git / docker / nginxui / ssh / remote / ops                                                                 | **302** Access（保持）                                                  |
+| paste / id / cook / mycook / blog                                                                         | **200**（公开）                                                             |
+| tools / home / git / docker / nginxui / ssh / ops                                                         | **302** Access                                                              |
+| hermes / gateway                                                                                          | **302/307** 应用登录                                                        |
 | `nginx.alexander.xin`                                                                                       | **无记录**（正确主机为 `nginxui.alexander.xin`）                        |
 
 ### OIDC redirect URI（Pocket ID，live 核对）
@@ -324,16 +348,17 @@ Server has **1.6 GiB RAM**. Available often ~800 MB+ after Shlink removal.
 | `blog.alexander.xin`                                                   | 写作主场                     | **保留**                           | 品牌清晰；apex `/writing*` 已 301                                              |
 | `cook` / `lab` / `linux-command` / `netq`                              | 独立内容/学习站              | **保留**                           | 用途直白；`lab`≠ GitLab（导航勿写 Git Lab）                                    |
 | `yearly.alexander.xin`                                                 | 年度回忆                     | **保留**（可选 `memories` 仅建议） | 已够直白；改名需强理由，且勿与 Yearly UI 大改抢同一 PR                         |
+| `newyear.alexander.xin`                                                | 季节性互动页（Newyear 仓）   | **保留或季节下线**                 | 与 Yearly 不同；现网 200，已入 registry `newyear`                              |
 | `paste.alexander.xin`                                                  | PrivateBin                   | **保留**                           | 清晰                                                                           |
-| `tools.alexander.xin`                                                  | IT-Tools（VPS）              | **建议改** → `it-tools.`（待确认） | 与主站 `/tools` 索引易混；改名需 Tunnel + nginx `server_name` + DNS + 旧名 301 |
-| `contact.alexander.xin`                                                | 独立 Contact 页（Turnstile） | **建议合并或改名**（待确认）       | 与主站 `/contact` 重复；合并则 Worker 301→`/contact/`；或改 `card.` 并 301     |
+| `tools.alexander.xin`                                                  | IT-Tools（VPS，Access）      | **保留主机名**（可选改 `it-tools.`） | 与主站 `/tools` 索引已用 Access/文案区分；改名需 301                             |
+| `contact.alexander.xin`                                                | 独立 Contact 页（已 404）    | **已 301 → `/contact/`**           | Worker `redirect-contact`；CNAME 可暂留，Pages 项目可后删                       |
 | `about` / `bio` / `time`                                               | 别名                         | **保留**                           | 已 Worker 301                                                                  |
-| `api` / `ops` / `id` / `git` / `docker` / `nginxui` / `ssh` / `remote` | API / 运维                   | **保留**                           | 清晰，无误导                                                                   |
-| `cms`（planned）                                                       | Directus                     | **保留计划名**                     | 未上线                                                                         |
+| `api` / `ops` / `home` / `id` / `git` / `docker` / `nginxui` / `ssh` / `hermes` / `gateway` | API / 运维 / Agent | **保留** | 清晰；`home`≠公开主站；`ops`=探针，`home`=Glance |
+| `cms`（planned）                                                       | Directus                     | **保留计划名，勿部署**             | 内存不足；写作用 blog                                                              |
 
-**本轮已落地（低伤害、无 DNS 切主）：** registry 补登 `contact`；导航/文案把 `tools.*` 标成 **IT-Tools**，与 `/tools` 索引区分；Footer「Git Lab」改为「Lab」。
+**本轮已落地（2026-08-12）：** registry 退役 `contact-card`；`tools` 标 Access/private；补登 `home`/`hermes`/`gateway`/`newyear`；公开 Now/QuickActions 不再链 Access IT-Tools；sitemap 死文案清掉；Glance 合并菜谱双链、文案 Lab；docs/network.json 对齐现网。
 
-**待你确认后再动 DNS / Tunnel / nginx：** `tools`→`it-tools`；`contact` 合并到 `/contact` 或改名为 `card`。
+**待你确认后再动 DNS / Tunnel / nginx：** `tools`→`it-tools`（可选改名）；本地 `Pro` 仓与 `Git-Workflow-Lab` 重复，建议归档或 README 标明非部署源。
 
 ## Registry
 

@@ -11,7 +11,7 @@ const chrome = getNextChrome(lang);
 const lp = (path: string) => getLangPath(lang, path);
 const fleet = getNetworkDirectorySites()
   .filter((s) =>
-    ['cook', 'lab', 'tools-hub', 'netq', 'linux-command', 'paste', 'link'].includes(
+    ['cook', 'lab', 'netq', 'linux-command', 'paste', 'blog'].includes(
       s.id
     )
   )
@@ -24,8 +24,8 @@ const copy = {
     kicker: 'NEXUS control',
     headline: '四扇门，一条信号链',
     lead: '房间之间共享能量状态；外圈连着真实站群节点。',
-    gitLab: '另一间实验室：Git / CI 教学',
-    gitLabHref: 'https://lab.alexander.xin',
+    lab: '另一间实验室：Git / CI 教学',
+    labHref: 'https://lab.alexander.xin',
     fun: '或去彩蛋页玩小工具',
     chain: '推荐顺序',
     fleet: '站群节点',
@@ -38,8 +38,8 @@ const copy = {
     kicker: 'NEXUS control',
     headline: '四扇門，一條信號鏈',
     lead: '房間之間共享能量狀態；外圈連著真實站群節點。',
-    gitLab: '另一間實驗室：Git / CI 教學',
-    gitLabHref: 'https://lab.alexander.xin',
+    lab: '另一間實驗室：Git / CI 教學',
+    labHref: 'https://lab.alexander.xin',
     fun: '或去彩蛋頁玩小工具',
     chain: '推薦順序',
     fleet: '站群節點',
@@ -52,8 +52,8 @@ const copy = {
     kicker: 'NEXUS control',
     headline: 'Four doors, one signal chain',
     lead: 'Rooms share energy state; the outer ring links real fleet nodes.',
-    gitLab: 'Another lab: Git / CI courses',
-    gitLabHref: 'https://lab.alexander.xin',
+    lab: 'Another lab: Git / CI courses',
+    labHref: 'https://lab.alexander.xin',
     fun: 'Or play with easter-egg tools',
     chain: 'Suggested order',
     fleet: 'Fleet nodes',
@@ -66,8 +66,8 @@ const copy = {
     kicker: 'NEXUS control',
     headline: 'Quatre portes, une chaîne',
     lead: 'Les salles partagent l’énergie ; l’anneau externe relie la flotte réelle.',
-    gitLab: 'Autre labo : cours Git / CI',
-    gitLabHref: 'https://lab.alexander.xin',
+    lab: 'Autre labo : cours Git / CI',
+    labHref: 'https://lab.alexander.xin',
     fun: 'Ou les surprises /fun',
     chain: 'Ordre suggéré',
     fleet: 'Nœuds de flotte',
@@ -80,8 +80,8 @@ const copy = {
     kicker: 'NEXUS control',
     headline: 'Четыре двери, одна цепь',
     lead: 'Комнаты делят энергию; внешнее кольцо — реальные узлы сети.',
-    gitLab: 'Другая лаборатория: курсы Git / CI',
-    gitLabHref: 'https://lab.alexander.xin',
+    lab: 'Другая лаборатория: курсы Git / CI',
+    labHref: 'https://lab.alexander.xin',
     fun: 'Или пасхалки /fun',
     chain: 'Рекомендуемый порядок',
     fleet: 'Узлы флота',
@@ -97,6 +97,7 @@ const copy = {
   showHeader={false}
   showFooter={true}
   mainClass="!p-0 next-shell next-shell--hub"
+  robots="noindex, follow"
 >
   <div class="next-hub">
     <NextChrome lang={lang} hideContinue />
@@ -152,11 +153,11 @@ const copy = {
     <aside class="next-hub__aside">
       <a
         class="next-hub__ext"
-        href={copy.gitLabHref}
+        href={copy.labHref}
         target="_blank"
         rel="noopener noreferrer"
       >
-        {copy.gitLab}
+        {copy.lab}
       </a>
       <a class="next-hub__ext" href={lp('/fun')}>{copy.fun}</a>
       <a class="next-hub__ext" href={lp('/network')}>{copy.network}</a>

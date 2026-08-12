@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-07",
+  "generated": "2026-08-12",
   "identity": "https://id.alexander.xin",
   "accessLauncher": "https://alexanderjcarter.cloudflareaccess.com",
   "sites": [
@@ -52,6 +52,17 @@
       "access": false
     },
     {
+      "access": false,
+      "url": "https://alexander.xin/changelog",
+      "path": "/changelog",
+      "category": "content",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "Changelog",
+      "id": "changelog"
+    },
+    {
       "id": "cook",
       "url": "https://cook.alexander.xin",
       "category": "content",
@@ -95,7 +106,8 @@
       "visibility": "public",
       "status": "live",
       "label": "Lab",
-      "access": false
+      "access": false,
+      "repo": "AlexanderJ-Carter/Git-Workflow-Lab"
     },
     {
       "id": "linux-command",
@@ -105,7 +117,8 @@
       "visibility": "public",
       "status": "live",
       "label": "Linux Command",
-      "access": false
+      "access": false,
+      "repo": "AlexanderJ-Carter/linux-command"
     },
     {
       "id": "netq",
@@ -115,7 +128,8 @@
       "visibility": "public",
       "status": "live",
       "label": "NetQ",
-      "access": false
+      "access": false,
+      "repo": "AlexanderJ-Carter/netq"
     },
     {
       "id": "yearly",
@@ -125,7 +139,20 @@
       "visibility": "public",
       "status": "live",
       "label": "Yearly",
-      "access": false
+      "access": false,
+      "repo": "AlexanderJ-Carter/Yearly"
+    },
+    {
+      "access": false,
+      "url": "https://newyear.alexander.xin",
+      "category": "experiment",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "Newyear",
+      "repo": "AlexanderJ-Carter/Newyear",
+      "note": "Seasonal interactive page; Access app for *.newyear-eki.pages.dev was deleted — custom domain still live",
+      "id": "newyear"
     },
     {
       "id": "contact-card",
@@ -133,22 +160,22 @@
       "category": "content",
       "host": "github-pages",
       "visibility": "public",
-      "status": "live",
+      "status": "retired",
       "label": "Contact card",
       "access": false,
       "repo": "AlexanderJ-Carter/Contact",
-      "note": "Standalone Turnstile card; overlaps apex /contact — candidate to 301-merge or rename (e.g. card.)"
+      "note": "Retired 2026-08-12: Worker redirect-contact 301 → https://alexander.xin/contact/; DNS CNAME may remain until Pages project removed."
     },
     {
       "id": "tools-hub",
       "url": "https://tools.alexander.xin",
       "category": "tools",
       "host": "server-tunnel",
-      "visibility": "public",
+      "visibility": "private",
       "status": "live",
       "label": "IT-Tools",
-      "access": false,
-      "note": "Tunnel → nginx-ui → it-tools :8080; distinct from apex /tools index; rename to it-tools. pending confirmation"
+      "access": true,
+      "note": "Tunnel → nginx-ui → it-tools :8080; Cloudflare Access; distinct from public apex /tools index"
     },
     {
       "id": "paste",
@@ -236,6 +263,39 @@
       "note": "Read-only fleet status Worker behind Access"
     },
     {
+      "id": "home",
+      "url": "https://home.alexander.xin",
+      "category": "ops",
+      "host": "server-tunnel",
+      "visibility": "private",
+      "status": "live",
+      "label": "Home (Glance)",
+      "access": true,
+      "note": "Cloudflare Access → cloud nginx → tencent Glance :3002; personal dashboard (not public apex)"
+    },
+    {
+      "id": "hermes",
+      "url": "https://hermes.alexander.xin",
+      "category": "ops",
+      "host": "server-tunnel",
+      "visibility": "private",
+      "status": "live",
+      "label": "Hermes Agent",
+      "access": false,
+      "note": "Cloud nginx → tencent :9119; app OIDC via Pocket ID"
+    },
+    {
+      "id": "gateway",
+      "url": "https://gateway.alexander.xin",
+      "category": "ops",
+      "host": "server-tunnel",
+      "visibility": "private",
+      "status": "live",
+      "label": "OmniRoute",
+      "access": false,
+      "note": "Cloud nginx → tencent OmniRoute :8180; LLM gateway for Hermes"
+    },
+    {
       "id": "cms",
       "url": "https://cms.alexander.xin",
       "category": "ops",
@@ -244,7 +304,7 @@
       "status": "planned",
       "label": "Directus",
       "access": true,
-      "note": "Replaces Ghost; deploy when memory allows"
+      "note": "Do not start on 1.6GiB; writing stays Git+blog.alexander.xin"
     },
     {
       "id": "blog",

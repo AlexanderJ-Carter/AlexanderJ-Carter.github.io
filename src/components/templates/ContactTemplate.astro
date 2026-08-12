@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../chrome/PageHero.astro';
+import { supportCopy } from '../../i18n/pages/support';
 
 const { lang } = Astro.props;
 
@@ -136,6 +137,7 @@ function getLangPath(path: string) {
 }
 
 const content = contactData[lang as Lang] || contactData['en-GB'];
+const collaboration = supportCopy[lang as Lang] || supportCopy['en-GB'];
 ---
 
 <BaseLayout
@@ -205,6 +207,24 @@ const content = contactData[lang as Lang] || contactData['en-GB'];
           </dd>
         </div>
       </dl>
+
+      <section class="border-t border-[rgb(var(--color-border))] pt-8 mb-12">
+        <h2 class="font-heading text-xl md:text-2xl font-bold tracking-tight mb-3">
+          {collaboration.collabTitle}
+        </h2>
+        <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed mb-5">
+          {collaboration.collabBody}
+        </p>
+        <ul class="flex flex-wrap gap-2">
+          {
+            collaboration.collabTypes.map((item) => (
+              <li class="border border-[rgb(var(--color-border))] px-3 py-1 text-xs text-[rgb(var(--color-text-secondary))]">
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
 
       <!-- Contact Form -->
       <div class="border border-[rgb(var(--color-border))] p-6 md:p-8 mb-12">

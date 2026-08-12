@@ -1,10 +1,12 @@
 ---
 import { BLOG_ORIGIN } from '../../config/site';
 import { getLangFromUrl, useTranslations, languages } from '../../i18n/ui';
+import { getChromeElsewhereLinks } from '../../data/site-registry';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const currentPath = new URL(Astro.url).pathname;
+const chromeElsewhere = getChromeElsewhereLinks(lang);
 
 // Helper: 与 Footer 一致，en-GB 使用 /en/ 前缀
 function getLangPath(path: string) {
@@ -152,30 +154,12 @@ const moreSubmenu: SubMenuItem[] = [
     heading: true,
     label: l('站外', '站外', 'Ailleurs', 'Снаружи', 'Elsewhere'),
   },
-  {
-    href: 'https://cook.alexander.xin',
-    label: 'MyCook',
-    desc: l('做饭菜谱', '做飯菜譜', 'Recettes', 'Рецепты', 'Recipes'),
-    external: true,
-  },
-  {
-    href: 'https://linux-command.alexander.xin',
-    label: 'Linux Command',
-    desc: l(
-      '指令速查',
-      '指令速查',
-      'Commandes Linux',
-      'Команды Linux',
-      'Linux command reference'
-    ),
-    external: true,
-  },
-  {
-    href: 'https://netq.alexander.xin',
-    label: 'NetQ',
-    desc: l('网络排查', '網路排查', 'Réseau', 'Сеть', 'Network lab'),
-    external: true,
-  },
+  ...chromeElsewhere.map((item) => ({
+    href: item.href,
+    label: item.title,
+    desc: item.desc,
+    external: true as const,
+  })),
   {
     heading: true,
     label: l('说明', '說明', 'Notes', 'Сведения', 'Notes'),

@@ -13,6 +13,10 @@ export type SupportCopy = {
   paidLead: string;
   paidNote: string;
   paidCta: string;
+  collabTitle: string;
+  collabBody: string;
+  collabTypes: string[];
+  collabCta: string;
   freeTitle: string;
   freeLead: string;
   freeStar: string;
@@ -37,6 +41,11 @@ export const supportCopy: Record<Lang, SupportCopy> = {
     paidLead: '微信 / 支付宝都可以。最低档大约一杯咖啡，完全自愿，随时可停。',
     paidNote: '跳转到爱发电完成发电；本站不收集支付信息。',
     paidCta: '去爱发电支持',
+    collabTitle: '商业合作与授权',
+    collabBody:
+      '接受与站点方向一致、可明确披露的合作，不出售编辑结论，也不接受要求隐藏商业关系的推广。',
+    collabTypes: ['摄影商业授权', '写作约稿', '品牌合作', '开源项目赞助'],
+    collabCta: '联系并说明合作需求',
     freeTitle: '不用花钱也可以',
     freeLead: '这些同样很有帮助。',
     freeStar: '给仓库点个 Star',
@@ -59,6 +68,11 @@ export const supportCopy: Record<Lang, SupportCopy> = {
     paidLead: '微信 / 支付寶都可以。最低檔大約一杯咖啡，完全自願，隨時可停。',
     paidNote: '跳轉到愛發電完成發電；本站不收集支付資訊。',
     paidCta: '去愛發電支持',
+    collabTitle: '商業合作與授權',
+    collabBody:
+      '接受與站點方向一致、可明確揭露的合作，不出售編輯結論，也不接受要求隱藏商業關係的推廣。',
+    collabTypes: ['攝影商業授權', '寫作約稿', '品牌合作', '開源專案贊助'],
+    collabCta: '聯絡並說明合作需求',
     freeTitle: '不用花錢也可以',
     freeLead: '這些同樣很有幫助。',
     freeStar: '給倉庫點個 Star',
@@ -83,6 +97,16 @@ export const supportCopy: Record<Lang, SupportCopy> = {
     paidNote:
       'You will leave this site to pay on Afdian; we never collect card details here.',
     paidCta: 'Support on Afdian',
+    collabTitle: 'Commercial work and licensing',
+    collabBody:
+      'I consider clearly disclosed work that fits the site. Editorial conclusions are not for sale, and undisclosed promotion is not accepted.',
+    collabTypes: [
+      'Photography licensing',
+      'Commissioned writing',
+      'Brand partnerships',
+      'Open-source sponsorship',
+    ],
+    collabCta: 'Describe a collaboration',
     freeTitle: 'Free ways to help',
     freeLead: 'These matter just as much.',
     freeStar: 'Star the repository',
@@ -109,6 +133,16 @@ export const supportCopy: Record<Lang, SupportCopy> = {
     paidNote:
       'Le paiement se fait sur Afdian ; ce site ne collecte aucune donnée de paiement.',
     paidCta: 'Soutenir sur Afdian',
+    collabTitle: 'Collaborations et licences',
+    collabBody:
+      'J’étudie les collaborations cohérentes avec le site et clairement déclarées. Les conclusions éditoriales ne sont pas à vendre et la promotion cachée est refusée.',
+    collabTypes: [
+      'Licence photographique',
+      'Commande éditoriale',
+      'Partenariat de marque',
+      'Soutien open source',
+    ],
+    collabCta: 'Proposer une collaboration',
     freeTitle: 'Sans payer',
     freeLead: 'Ces gestes aident aussi.',
     freeStar: 'Mettre une étoile au dépôt',
@@ -133,6 +167,16 @@ export const supportCopy: Record<Lang, SupportCopy> = {
       'Удобны WeChat и Alipay. Нижний уровень — примерно чашка кофе; добровольно, можно отменить.',
     paidNote: 'Оплата на Afdian; этот сайт не собирает платёжные данные.',
     paidCta: 'Поддержать на Afdian',
+    collabTitle: 'Коммерческие проекты и лицензии',
+    collabBody:
+      'Я рассматриваю открыто обозначенные проекты, соответствующие тематике сайта. Редакционные выводы не продаются, скрытая реклама не принимается.',
+    collabTypes: [
+      'Лицензирование фотографий',
+      'Заказные тексты',
+      'Партнёрства с брендами',
+      'Поддержка open source',
+    ],
+    collabCta: 'Обсудить сотрудничество',
     freeTitle: 'Бесплатно',
     freeLead: 'Это тоже помогает.',
     freeStar: 'Поставить звезду репозиторию',

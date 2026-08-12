@@ -139,7 +139,7 @@ const tocTitle =
             </h2>
             <nav class="space-y-1.5">
               {
-                content.sections.map((section: any, i: number) => (
+                content.sections.map((section, i) => (
                   <a
                     href={`#section-${i + 1}`}
                     data-target={`section-${i + 1}`}
@@ -156,7 +156,7 @@ const tocTitle =
         <!-- Content -->
         <div class="lg:w-3/4 glass-card p-8 md:p-12 space-y-8">
           {
-            content.sections.map((section: any, i: number) => (
+            content.sections.map((section, i) => (
               <section id={`section-${i + 1}`} class="scroll-mt-28 space-y-4">
                 <h2 class="text-2xl font-bold text-[rgb(var(--color-text-primary))]">
                   {section.title}
@@ -166,11 +166,22 @@ const tocTitle =
                 </p>
                 {section.list && (
                   <ul class="list-disc list-inside space-y-2 ml-4">
-                    {section.list.map((item: any) => (
+                    {section.list.map((item) => (
                       <li class="text-[rgb(var(--color-text-secondary))]">
-                        <strong class="text-[rgb(var(--color-text-primary))]">
-                          {item.title}
-                        </strong>
+                        {item.href ? (
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="font-semibold text-primary-600 dark:text-primary-400 link-underline"
+                          >
+                            {item.title}
+                          </a>
+                        ) : (
+                          <strong class="text-[rgb(var(--color-text-primary))]">
+                            {item.title}
+                          </strong>
+                        )}
                         : {item.desc}
                       </li>
                     ))}

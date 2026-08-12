@@ -1,6 +1,7 @@
 ---
-import { BLOG_ORIGIN } from '../../config/site';
+import { BLOG_ORIGIN, adsEnabled } from '../../config/site';
 import { getLangFromUrl } from '../../i18n/ui';
+import { getChromeElsewhereLinks } from '../../data/site-registry';
 import SiteFilings from './SiteFilings.astro';
 import ExposureMeter from '../widgets/ExposureMeter.astro';
 
@@ -45,8 +46,9 @@ const i18n = {
     changelog: '更新日志',
     sitemap: '地图',
     blog: '博客',
+    privacySettings: '隐私与 Cookie 设置',
     tagline: 'Static folio · Asia/Shanghai',
-    colophon: '冲印于静态站点 · 不追踪访客',
+    colophon: '静态优先 · 广告与数据使用见隐私政策',
   },
   'zh-TW': {
     desc: '攝影、寫作與開源工程的長期角落。',
@@ -73,8 +75,9 @@ const i18n = {
     changelog: '更新日誌',
     sitemap: '地圖',
     blog: '部落格',
+    privacySettings: '隱私與 Cookie 設定',
     tagline: 'Static folio · Asia/Shanghai',
-    colophon: '沖印於靜態站點 · 不追蹤訪客',
+    colophon: '靜態優先 · 廣告與資料使用見隱私權政策',
   },
   'en-GB': {
     desc: 'A long-running corner for photography, writing and open-source making.',
@@ -101,8 +104,9 @@ const i18n = {
     changelog: 'Changelog',
     sitemap: 'Sitemap',
     blog: 'Blog',
+    privacySettings: 'Privacy & cookie settings',
     tagline: 'Static folio · Asia/Shanghai',
-    colophon: 'Printed as static pages · no visitor tracking',
+    colophon: 'Static first · see Privacy for advertising and data use',
   },
   fr: {
     desc: 'Un coin durable pour la photo, l’écriture et l’open source.',
@@ -129,8 +133,9 @@ const i18n = {
     changelog: 'Journal',
     sitemap: 'Plan',
     blog: 'Blog',
+    privacySettings: 'Confidentialité et cookies',
     tagline: 'Static folio · Asia/Shanghai',
-    colophon: 'Tiré en pages statiques · sans suivi des visiteurs',
+    colophon: 'Statique d’abord · publicité et données dans la politique',
   },
   ru: {
     desc: 'Долгоживущий угол для фото, текст и open source.',
@@ -157,8 +162,9 @@ const i18n = {
     changelog: 'Изменения',
     sitemap: 'Карта',
     blog: 'Блог',
+    privacySettings: 'Настройки конфиденциальности и cookie',
     tagline: 'Static folio · Asia/Shanghai',
-    colophon: 'Напечатано статикой · без трекинга посетителей',
+    colophon: 'Статика прежде всего · реклама и данные описаны в политике',
   },
 };
 
@@ -177,10 +183,10 @@ const browse = [
 ];
 
 const elsewhere = [
-  { label: 'MyCook', href: 'https://cook.alexander.xin' },
-  { label: 'Linux Command', href: 'https://linux-command.alexander.xin' },
-  { label: 'NetQ', href: 'https://netq.alexander.xin' },
-  { label: 'Lab', href: 'https://lab.alexander.xin' },
+  ...getChromeElsewhereLinks(lang).map((l) => ({
+    label: l.title,
+    href: l.href,
+  })),
   { label: 'GitHub', href: 'https://github.com/AlexanderJ-Carter' },
 ];
 
@@ -394,6 +400,17 @@ const legal = [
           <a href={getLangPath('/accessibility')} class="footer-chip">
             {t.accessibility}
           </a>
+          {
+            adsEnabled && (
+              <button
+                id="google-privacy-settings"
+                type="button"
+                class="footer-chip hidden"
+              >
+                {t.privacySettings}
+              </button>
+            )
+          }
         </div>
         <p
           class="meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))]"
@@ -410,6 +427,26 @@ const legal = [
     </div>
   </div>
 </footer>
+
+<script is:inline data-astro-rerun>
+  (() => {
+    const button = document.getElementById('google-privacy-settings');
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+    window.googlefc.callbackQueue.push({
+      CONSENT_API_READY: () => {
+        button.classList.remove('hidden');
+        button.addEventListener(
+          'click',
+          () => window.googlefc?.showRevocationMessage?.(),
+          { once: false }
+        );
+      },
+    });
+  })();
+</script>
 
 <style>
   .footer-chip {

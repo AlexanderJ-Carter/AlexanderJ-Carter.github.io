@@ -1,11 +1,25 @@
 import type { Lang } from '../types';
 
-export const termsData: Record<Lang, any> = {
+interface TermsSection {
+  title: string;
+  content: string;
+  list?: string[];
+}
+
+interface TermsPageData {
+  title: string;
+  back: string;
+  headerTitle: string;
+  lastUpdated: string;
+  sections: TermsSection[];
+}
+
+export const termsData: Record<Lang, TermsPageData> = {
   'zh-CN': {
     title: '服务条款',
     back: '返回首页',
     headerTitle: '服务条款',
-    lastUpdated: '最后更新：2026年2月4日',
+    lastUpdated: '最后更新：2026年8月8日',
     sections: [
       {
         title: '1. 条款接受',
@@ -55,13 +69,18 @@ export const termsData: Record<Lang, any> = {
         content:
           '在法律允许的最大范围内，作者对因访问、使用或无法使用本网站而产生的任何直接、间接、附带、后果性或惩罚性损害不承担责任，包括但不限于数据丢失、业务中断或利润损失。',
       },
+      {
+        title: '9. 广告、赞助与商业关系',
+        content:
+          '本站可能通过 Google AdSense、自愿赞助、商业授权或明确标注的联盟链接获得收入。广告与赞助不影响编辑判断，不得以点击广告换取内容或权益。联盟链接会在相关内容附近标注；摄影、文字或源码的商业授权须另行书面约定。外部支付、广告和联盟平台适用其各自条款与隐私政策。',
+      },
     ],
   },
   'zh-TW': {
     title: '服務條款',
     back: '返回首頁',
     headerTitle: '服務條款',
-    lastUpdated: '最後更新：2026年2月4日',
+    lastUpdated: '最後更新：2026年8月8日',
     sections: [
       {
         title: '1. 條款接受',
@@ -111,13 +130,18 @@ export const termsData: Record<Lang, any> = {
         content:
           '在法律允許的最大範圍內，作者對因存取、使用或無法使用本網站而產生的任何直接、間接、附帶、後果性或懲罰性損害不承擔責任，包括但不限於資料遺失、業務中斷或利潤損失。',
       },
+      {
+        title: '9. 廣告、贊助與商業關係',
+        content:
+          '本站可能透過 Google AdSense、自願贊助、商業授權或明確標示的聯盟連結獲得收入。廣告與贊助不影響編輯判斷，不得以點擊廣告換取內容或權益。聯盟連結會在相關內容附近標示；攝影、文字或原始碼的商業授權須另行書面約定。外部付款、廣告與聯盟平台適用其各自條款及隱私權政策。',
+      },
     ],
   },
   'en-GB': {
     title: 'Terms of Service',
     back: 'Back to Home',
     headerTitle: 'Terms of Service',
-    lastUpdated: 'Last Updated: 4 February 2026',
+    lastUpdated: 'Last updated: 8 August 2026',
     sections: [
       {
         title: '1. Acceptance of Terms',
@@ -167,13 +191,18 @@ export const termsData: Record<Lang, any> = {
         content:
           'To the maximum extent permitted by law, the author shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from access to, use of, or inability to use this website, including but not limited to loss of data, business interruption, or loss of profits.',
       },
+      {
+        title: '9. Advertising, Support and Commercial Relationships',
+        content:
+          'The site may earn through Google AdSense, voluntary support, commercial licensing or clearly labelled affiliate links. Advertising and support do not determine editorial conclusions, and no content or benefit is offered in exchange for clicking an ad. Affiliate links are disclosed near the relevant content. Commercial licensing of photographs, writing or source code requires a separate written agreement. External payment, advertising and affiliate platforms apply their own terms and privacy policies.',
+      },
     ],
   },
   fr: {
     title: "Conditions d'utilisation",
     back: "Retour à l'accueil",
     headerTitle: "Conditions d'utilisation",
-    lastUpdated: 'Dernière mise à jour : 4 février 2026',
+    lastUpdated: 'Dernière mise à jour : 8 août 2026',
     sections: [
       {
         title: '1. Acceptation des conditions',
@@ -224,13 +253,18 @@ export const termsData: Record<Lang, any> = {
         content:
           "Dans la mesure maximale permise par la loi, l'auteur ne pourra être tenu responsable des dommages directs, indirects, accessoires, consécutifs ou punitifs résultant de l'accès, de l'utilisation ou de l'impossibilité d'utiliser ce site, y compris la perte de données, l'interruption d'activité ou la perte de profits.",
       },
+      {
+        title: '9. Publicité, soutien et relations commerciales',
+        content:
+          'Le site peut être financé par Google AdSense, des soutiens volontaires, des licences commerciales ou des liens affiliés clairement signalés. La publicité et le soutien ne déterminent pas les conclusions éditoriales, et aucun contenu ni avantage n’est accordé en échange d’un clic publicitaire. Les liens affiliés sont signalés près du contenu concerné. Toute licence commerciale de photos, textes ou code exige un accord écrit distinct. Les plateformes externes appliquent leurs propres conditions et politiques.',
+      },
     ],
   },
   ru: {
     title: 'Условия использования',
     back: 'На главную',
     headerTitle: 'Условия использования',
-    lastUpdated: 'Последнее обновление: 4 февраля 2026 г.',
+    lastUpdated: 'Последнее обновление: 8 августа 2026 г.',
     sections: [
       {
         title: '1. Принятие условий',
@@ -280,6 +314,11 @@ export const termsData: Record<Lang, any> = {
         title: '8. Ограничение ответственности',
         content:
           'В максимальной степени, разрешенной законом, автор не несет ответственности за любые прямые, косвенные, случайные, последующие или штрафные убытки, возникающие в результате доступа, использования или невозможности использования этого веб-сайта, включая потерю данных, перерыв в работе или потерю прибыли.',
+      },
+      {
+        title: '9. Реклама, поддержка и коммерческие отношения',
+        content:
+          'Сайт может получать доход от Google AdSense, добровольной поддержки, коммерческих лицензий или явно отмеченных партнёрских ссылок. Реклама и поддержка не определяют редакционные выводы; контент или преимущества не предоставляются в обмен на клики по рекламе. Партнёрские ссылки отмечаются рядом с соответствующим материалом. Коммерческое лицензирование фотографий, текстов или кода требует отдельного письменного соглашения. Внешние платформы применяют собственные условия и политики конфиденциальности.',
       },
     ],
   },
