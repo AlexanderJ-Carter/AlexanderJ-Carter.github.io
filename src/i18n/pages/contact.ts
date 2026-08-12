@@ -1,13 +1,13 @@
 import type { Lang } from '../types';
 
-export const contactData: Record<Lang, any> = {
+export const contactData: Record<Lang, Record<string, string>> = {
   'zh-CN': {
     title: '联系我',
-    description: '让我们建立联系和合作',
+    description: '取得联系',
     back: '返回',
-    headerTitle: '让我们联系',
+    headerTitle: '写信过来',
     headerDesc:
-      '无论是合作洽谈、建议反馈还是简单问候，我都很乐意听到你的想法。让我们一起创造美好的数字体验，分享创意与灵感。',
+      '合作、反馈或随便打个招呼都可以。优先用邮件；本页表单只用于回复沟通，不构成保密或合同关系。',
     email: '电子邮件',
     location: '位置',
     locationValue: '北京，中国',
@@ -24,14 +24,16 @@ export const contactData: Record<Lang, any> = {
     quickLinks: '或者通过以下方式快速联系我：',
     contactNotice:
       '通过本页发送的消息仅用于回复与沟通，不构成保密或合同关系。我们不会将您的信息用于营销或转交第三方，具体见隐私政策与服务条款。',
+    helpHint: '站群或页面相关问题，可先问',
+    helpLink: '站内帮助',
   },
   'zh-TW': {
     title: '聯繫我',
-    description: '讓我們建立聯繫和合作',
+    description: '取得聯繫',
     back: '返回',
-    headerTitle: '讓我們聯繫',
+    headerTitle: '寫信過來',
     headerDesc:
-      '無論是合作洽談、建議反饋還是簡單問候，我都很樂意聽到你的想法。讓我們一起創造美好的數字體驗，分享創意與靈感。',
+      '合作、回饋或隨便打個招呼都可以。優先用郵件；本頁表單只用於回覆溝通，不構成保密或契約關係。',
     email: '電子郵件',
     location: '位置',
     locationValue: '北京，中國',
@@ -48,14 +50,16 @@ export const contactData: Record<Lang, any> = {
     quickLinks: '或者通過以下方式快速聯繫我：',
     contactNotice:
       '透過本頁發送的訊息僅用於回覆與溝通，不構成保密或契約關係。我們不會將您的資訊用於行銷或轉交第三方，具體見隱私權政策與服務條款。',
+    helpHint: '站群或頁面相關問題，可先問',
+    helpLink: '站內幫助',
   },
   'en-GB': {
-    title: 'Contact Me',
-    description: "Let's get in touch and collaborate",
+    title: 'Contact',
+    description: 'Get in touch',
     back: 'Back',
-    headerTitle: 'Get In Touch',
+    headerTitle: 'Write to me',
     headerDesc:
-      "Whether it's collaboration opportunities, feedback, or just a friendly hello, I'd love to hear from you. Let's create amazing digital experiences together and share creativity and inspiration.",
+      'Collaboration, feedback, or a simple hello — email is preferred. The form on this page is only for replies; it does not create a confidential or contractual relationship.',
     email: 'Email',
     location: 'Location',
     locationValue: 'Beijing, China',
@@ -72,14 +76,16 @@ export const contactData: Record<Lang, any> = {
     quickLinks: 'Or reach out to me quickly through:',
     contactNotice:
       'Messages sent through this page are used only for reply and communication and do not create a confidential or contractual relationship. We do not use your information for marketing or share it with third parties; see our Privacy Policy and Terms of Service.',
+    helpHint: 'For site or fleet questions, try',
+    helpLink: 'Site help',
   },
   fr: {
-    title: 'Contactez-moi',
-    description: 'Entrons en contact et collaborons',
+    title: 'Contact',
+    description: 'Me contacter',
     back: 'Retour',
-    headerTitle: 'Entrer en Contact',
+    headerTitle: 'Écrivez-moi',
     headerDesc:
-      "Que ce soit pour des opportunités de collaboration, des commentaires ou simplement un bonjour amical, j'aimerais avoir de vos nouvelles. Créons ensemble des expériences numériques incroyables et partageons créativité et inspiration.",
+      'Collaboration, retour ou simple bonjour — l’e-mail est préféré. Le formulaire ne sert qu’aux réponses ; il ne crée pas de relation confidentielle ou contractuelle.',
     email: 'E-mail',
     location: 'Emplacement',
     locationValue: 'Pékin, Chine',
@@ -96,29 +102,33 @@ export const contactData: Record<Lang, any> = {
     quickLinks: 'Ou contactez-moi rapidement via :',
     contactNotice:
       "Les messages envoyés via cette page sont utilisés uniquement pour la réponse et la communication et ne créent pas de relation confidentielle ou contractuelle. Nous n'utilisons pas vos informations à des fins marketing ni ne les partageons avec des tiers ; voir notre Politique de confidentialité et Conditions d'utilisation.",
+    helpHint: 'Pour le site ou la flotte, essayez',
+    helpLink: 'Aide du site',
   },
   ru: {
-    title: 'Свяжитесь со мной',
-    description: 'Давайте свяжемся и будем сотрудничать',
+    title: 'Контакты',
+    description: 'Связаться со мной',
     back: 'Назад',
-    headerTitle: 'Связаться',
+    headerTitle: 'Напишите мне',
     headerDesc:
-      'Будь то возможности сотрудничества, отзывы или просто дружеское приветствие, я буду рад услышать вас. Давайте создавать удивительные цифровые впечатления вместе и делиться творчеством и вдохновением.',
+      'Сотрудничество, отзыв или просто привет — лучше по почте. Форма на этой странице только для ответов; она не создаёт конфиденциальных или договорных отношений.',
     email: 'Электронная почта',
     location: 'Местоположение',
     locationValue: 'Пекин, Китай',
-    formTitle: 'Отправить Сообщение',
-    nameLabel: 'Ваше Имя',
+    formTitle: 'Отправить сообщение',
+    nameLabel: 'Ваше имя',
     namePlaceholder: 'Иван Иванов',
-    emailLabel: 'Ваш Email',
+    emailLabel: 'Ваш email',
     subjectLabel: 'Тема',
     subjectPlaceholder: 'Тема запроса...',
     messageLabel: 'Сообщение',
     messagePlaceholder: 'Напишите ваше сообщение...',
-    submit: 'Отправить Сообщение',
+    submit: 'Отправить',
     success: '✓ Сообщение отправлено! Спасибо за обращение.',
-    quickLinks: 'Или свяжитесь со мной быстро через:',
+    quickLinks: 'Или быстро через:',
     contactNotice:
       'Сообщения, отправленные через эту страницу, используются только для ответа и общения и не создают конфиденциальных или договорных отношений. Мы не используем вашу информацию в маркетинговых целях и не передаём её третьим лицам; см. нашу Политику конфиденциальности и Условия использования.',
+    helpHint: 'По вопросам сайта сначала',
+    helpLink: 'Справка сайта',
   },
 };

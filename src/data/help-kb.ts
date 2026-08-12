@@ -1,0 +1,160 @@
+/**
+ * Site help knowledge base — public visitor facts only.
+ * Build copies this to public/help/kb.json via scripts/generate-help-kb.mjs.
+ */
+
+export const helpKb = {
+  version: 1,
+  site: 'https://alexander.xin',
+  updated: '2026-08-12',
+  guidelines: [
+    'Answer only from this KB and linked public docs.',
+    'Never invent private ops, Access bypasses, or secrets.',
+    'If unsure, point to /network or /contact.',
+  ],
+  faq: [
+    {
+      id: 'apex-www',
+      q: ['主站和 www 有什么区别', 'apex www', 'mirror', '国内镜像'],
+      a: 'alexander.xin 是 GitHub Pages 全球源；www.alexander.xin 是同一套静态站的国内镜像（Cloudflare Tunnel），互不自动跳转。',
+    },
+    {
+      id: 'writing-home',
+      q: ['写作', 'blog', 'writing', '文章在哪'],
+      a: '公开写作主场是 blog.alexander.xin；apex 的 /writing 会 301 过去。RSS 在各语言 /rss.xml。',
+    },
+    {
+      id: 'contact',
+      q: ['联系', 'contact', '邮件', 'email'],
+      a: '用 https://alexander.xin/contact/ 或邮件 contact-us@alexander.xin。独立 contact 子域已 301 到主站联系页。',
+    },
+    {
+      id: 'network',
+      q: ['站群', 'network', '目录', '有哪些站'],
+      a: 'https://alexander.xin/network/ 列出公开节点；机器可读 network.json 与 fleet-changelog.json。',
+    },
+    {
+      id: 'tools',
+      q: ['tools', 'IT-Tools', '工具'],
+      a: '主站 /tools 是公开工具索引；tools.alexander.xin 是 VPS 上的 IT-Tools，需 Cloudflare Access，不对访客开放。',
+    },
+    {
+      id: 'cook',
+      q: ['cook', 'mycook', '菜谱', 'cook-mcp'],
+      a: 'cook = Pages 菜谱主站；mycook = 完整自托管站；cook-mcp = 鉴权 MCP。三者互补，访客请先看 cook / mycook。',
+    },
+    {
+      id: 'time-api',
+      q: ['时间 API', 'time api', '/time'],
+      a: '公开时间接口：GET https://api.alexander.xin/time/now ；OpenAPI 见站点 /api/openapi-time.json。',
+    },
+    {
+      id: 'privacy',
+      q: ['隐私', 'cookie', 'analytics', '分析'],
+      a: '见 /privacy。分析偏隐私友好；不把联系表单当营销列表。',
+    },
+    {
+      id: 'security',
+      q: ['安全', '漏洞', 'security'],
+      a: '安全政策 /security/policy；PGP 与 security.txt 在 .well-known。勿在公开帮助里讨论未披露漏洞细节。',
+    },
+    {
+      id: 'languages',
+      q: ['语言', 'i18n', '多语言', 'english'],
+      a: '默认 zh-CN 在 /；另有 /zh-TW/、/en/、/fr/、/ru/。',
+    },
+    {
+      id: 'ops',
+      q: ['ops', '运维门户', '登录'],
+      a: 'ops.alexander.xin 是维护者入口（Cloudflare Access），不是访客注册。访客请用 /contact。',
+    },
+    {
+      id: 'help',
+      q: ['帮助', 'help', '问答'],
+      a: '站内帮助页 /help；API POST /api/help。答案来自公开知识库，不是通用聊天机器人。',
+    },
+  ],
+  pages: [
+    { path: '/', title: '首页', summary: '个人作品与入口总览。' },
+    { path: '/about', title: '关于', summary: '简介与研究相关说明。' },
+    { path: '/gallery', title: '画廊', summary: '摄影作品。' },
+    {
+      path: '/writing',
+      title: '写作',
+      summary: '跳转到 blog.alexander.xin 写作主场。',
+    },
+    { path: '/projects', title: '项目', summary: '精选项目列表。' },
+    {
+      path: '/tools',
+      title: '工具',
+      summary: '公开工具索引（非 Access IT-Tools）。',
+    },
+    { path: '/network', title: '站群', summary: '公开站点与服务目录。' },
+    { path: '/help', title: '站内帮助', summary: '基于公开资料的导览问答。' },
+    { path: '/contact', title: '联系', summary: '邮件与留言表单。' },
+    { path: '/uses', title: '在用', summary: '日常工具与设备自述。' },
+    { path: '/now', title: '现在', summary: '近期状态。' },
+    { path: '/changelog', title: '更新日志', summary: '站点重要变更。' },
+    { path: '/sitemap', title: '网站地图', summary: '全站结构索引。' },
+    { path: '/privacy', title: '隐私', summary: '隐私与 Cookie。' },
+    { path: '/terms', title: '条款', summary: '使用条款。' },
+    { path: '/accessibility', title: '无障碍', summary: '无障碍声明。' },
+    {
+      path: '/security/policy',
+      title: '安全政策',
+      summary: '漏洞披露与联系方式。',
+    },
+    { path: '/next', title: 'NEXT', summary: '实验入口；含 Atlas / Echo 等。' },
+    { path: '/fun', title: '玩乐', summary: '轻松小页面集合。' },
+    { path: '/support', title: '支持', summary: '赞助与支持方式。' },
+  ],
+  fleet: [
+    {
+      id: 'blog',
+      url: 'https://blog.alexander.xin',
+      note: '公开写作主场',
+    },
+    {
+      id: 'cook',
+      url: 'https://cook.alexander.xin',
+      note: '菜谱 Pages',
+    },
+    {
+      id: 'mycook',
+      url: 'https://mycook.alexander.xin',
+      note: '完整菜谱站',
+    },
+    {
+      id: 'lab',
+      url: 'https://lab.alexander.xin',
+      note: 'Git 协作练习',
+    },
+    {
+      id: 'netq',
+      url: 'https://netq.alexander.xin',
+      note: '网络排查',
+    },
+    {
+      id: 'linux-command',
+      url: 'https://linux-command.alexander.xin',
+      note: 'Linux 指令速查',
+    },
+    {
+      id: 'paste',
+      url: 'https://paste.alexander.xin',
+      note: 'PrivateBin',
+    },
+    {
+      id: 'time-api',
+      url: 'https://api.alexander.xin/time/now',
+      note: '公开时间 API',
+    },
+  ],
+  sources: [
+    'https://alexander.xin/help/kb.json',
+    'https://alexander.xin/llms.txt',
+    'https://alexander.xin/network.json',
+    'https://alexander.xin/fleet-changelog.json',
+    'https://alexander.xin/auth.md',
+  ],
+};

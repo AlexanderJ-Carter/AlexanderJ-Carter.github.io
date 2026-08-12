@@ -20,6 +20,7 @@ const copy: Record<
     writing: string;
     sitemap: string;
     support: string;
+    help: string;
   }
 > = {
   'zh-CN': {
@@ -33,6 +34,7 @@ const copy: Record<
     writing: '写作',
     sitemap: '目录',
     support: '支持本站',
+    help: '站内帮助',
   },
   'zh-TW': {
     title: '這格是空的',
@@ -45,6 +47,7 @@ const copy: Record<
     writing: '寫作',
     sitemap: '目錄',
     support: '支持本站',
+    help: '站內幫助',
   },
   'en-GB': {
     title: 'Blank frame',
@@ -58,6 +61,7 @@ const copy: Record<
     writing: 'Writing',
     sitemap: 'Contents',
     support: 'Support',
+    help: 'Site help',
   },
   fr: {
     title: 'Cadre vide',
@@ -71,6 +75,7 @@ const copy: Record<
     writing: 'Écrits',
     sitemap: 'Sommaire',
     support: 'Soutenir',
+    help: 'Aide',
   },
   ru: {
     title: 'Пустой кадр',
@@ -84,6 +89,7 @@ const copy: Record<
     writing: 'Статьи',
     sitemap: 'Оглавление',
     support: 'Поддержать',
+    help: 'Справка',
   },
 };
 
@@ -94,7 +100,8 @@ const exits = [
   { href: getLangPath(lang, '/gallery'), label: t.gallery, n: '02' },
   { href: getLangPath(lang, '/writing'), label: t.writing, n: '03' },
   { href: getLangPath(lang, '/sitemap'), label: t.sitemap, n: '04' },
-  { href: getLangPath(lang, '/support'), label: t.support, n: '05' },
+  { href: getLangPath(lang, '/help'), label: t.help, n: '05' },
+  { href: getLangPath(lang, '/support'), label: t.support, n: '06' },
 ];
 ---
 

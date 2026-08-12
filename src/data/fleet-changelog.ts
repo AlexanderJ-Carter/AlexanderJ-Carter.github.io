@@ -37,13 +37,13 @@ export const fleetChangelog: FleetChangeEntry[] = [
     },
     summary: {
       'zh-CN':
-        'Ops 每 10 分钟探针差分，变化时 Resend 邮件；/help + /api/help 提供公开资料导览问答。',
+        'Ops 每 10 分钟探针差分，变化时 Resend 邮件；/help + /api/help 使用公开 KB（限流），可选 OmniRoute。',
       'zh-TW':
-        'Ops 每 10 分鐘探針差分，變化時 Resend 郵件；/help + /api/help 提供公開資料導覽問答。',
+        'Ops 每 10 分鐘探針差分，變化時 Resend 郵件；/help + /api/help 使用公開 KB（限流），可選 OmniRoute。',
       'en-GB':
-        'Ops probes every 10 minutes and emails on change via Resend; /help + /api/help for public-doc Q&A.',
-      fr: 'Sondes ops toutes les 10 min + e-mail Resend si changement ; /help + /api/help pour la Q&R.',
-      ru: 'Ops-зонды каждые 10 мин и письмо Resend при изменении; /help + /api/help для Q&A.',
+        'Ops probes every 10 minutes and emails on change via Resend; /help + /api/help use a public KB with rate limits (optional OmniRoute).',
+      fr: 'Sondes ops toutes les 10 min + e-mail Resend si changement ; /help + /api/help avec KB public et quotas (OmniRoute optionnel).',
+      ru: 'Ops-зонды каждые 10 мин и письмо Resend при изменении; /help + /api/help с публичной KB и лимитами (опц. OmniRoute).',
     },
   },
   {

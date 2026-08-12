@@ -5,12 +5,16 @@
 ## Quick links
 
 - [Home](https://alexander.xin/)
+- [Site help](https://alexander.xin/help) — visitor Q&A from public fleet docs (`POST /api/help`)
+- [Help knowledge base](https://alexander.xin/help/kb.json)
 - [Auth for agents](https://alexander.xin/auth.md)
 - [API catalog](https://alexander.xin/.well-known/api-catalog)
 - [MCP server card](https://alexander.xin/.well-known/mcp/server-card.json)
 - [Agent skills index](https://alexander.xin/.well-known/agent-skills/index.json)
 - [Security contact](https://alexander.xin/.well-known/security.txt)
 - [Sitemap](https://alexander.xin/sitemap-index.xml)
+- [Network directory](https://alexander.xin/network.json)
+- [Fleet changelog](https://alexander.xin/fleet-changelog.json)
 
 ## Public API
 
