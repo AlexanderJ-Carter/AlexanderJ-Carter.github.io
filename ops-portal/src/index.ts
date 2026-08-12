@@ -1,7 +1,14 @@
 /**
- * Ops portal Worker — fleet ops home + read-only status behind Access.
- * UI HTML is fetched from the www mirror so cards/icons can update without redeploy.
+ * Ops portal Worker — fleet home, probes, cron alerts.
+ * UI HTML from www mirror; state in OPS_STATE KV; email via Resend when configured.
  */
+
+type Env = {
+  OPS_STATE?: KVNamespace;
+  RESEND_API_KEY?: string;
+  ALERT_FROM?: string;
+  ALERT_TO?: string;
+};
 
 type Probe = {
   id: string;
@@ -11,6 +18,8 @@ type Probe = {
   ms: number;
 };
 
+type ProbeSnapshot = Record<string, boolean>;
+
 const PROBES: Array<{ id: string; url: string }> = [
   { id: 'apex', url: 'https://alexander.xin/' },
   { id: 'www', url: 'https://www.alexander.xin/' },
@@ -19,12 +28,14 @@ const PROBES: Array<{ id: string; url: string }> = [
   { id: 'time-api', url: 'https://api.alexander.xin/time/now' },
   { id: 'tools-hub', url: 'https://tools.alexander.xin/' },
   { id: 'paste', url: 'https://paste.alexander.xin/' },
-  // Apex GitHub Pages may lag deploys; www mirror is the live server copy.
+  { id: 'cook', url: 'https://cook.alexander.xin/' },
+  { id: 'lab', url: 'https://lab.alexander.xin/' },
   { id: 'network-json', url: 'https://www.alexander.xin/network.json' },
   { id: 'fleet-changelog', url: 'https://alexander.xin/fleet-changelog.json' },
 ];
 
 const UI_URL = 'https://www.alexander.xin/ops/index.html';
+const STATE_KEY = 'probe-ok-v1';
 
 async function probeOne(id: string, url: string): Promise<Probe> {
   const started = Date.now();
@@ -42,8 +53,8 @@ async function probeOne(id: string, url: string): Promise<Probe> {
   };
 }
 
-async function statusJson(): Promise<Response> {
-  const results = await Promise.all(
+async function runProbes(): Promise<Probe[]> {
+  return Promise.all(
     PROBES.map((p) =>
       probeOne(p.id, p.url).catch(
         (): Probe => ({
@@ -56,13 +67,108 @@ async function statusJson(): Promise<Response> {
       )
     )
   );
+}
 
+function snapshotOf(probes: Probe[]): ProbeSnapshot {
+  const snap: ProbeSnapshot = {};
+  for (const p of probes) snap[p.id] = p.ok;
+  return snap;
+}
+
+async function sendAlertEmail(
+  env: Env,
+  subject: string,
+  text: string
+): Promise<{ sent: boolean; reason?: string }> {
+  const key = env.RESEND_API_KEY?.trim();
+  const to = (env.ALERT_TO || '2253940186@qq.com')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const from = env.ALERT_FROM?.trim() || 'Ops Portal <noreply@alexander.xin>';
+  if (!key) return { sent: false, reason: 'RESEND_API_KEY missing' };
+  if (!to.length) return { sent: false, reason: 'ALERT_TO empty' };
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${key}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ from, to, subject, text }),
+  });
+  if (!res.ok) {
+    const body = await res.text();
+    return {
+      sent: false,
+      reason: `Resend ${res.status}: ${body.slice(0, 200)}`,
+    };
+  }
+  return { sent: true };
+}
+
+async function diffAndAlert(
+  env: Env,
+  probes: Probe[]
+): Promise<{
+  changes: Array<{ id: string; from: boolean | null; to: boolean }>;
+  notify?: { sent: boolean; reason?: string };
+}> {
+  const next = snapshotOf(probes);
+  const prevRaw = env.OPS_STATE
+    ? await env.OPS_STATE.get(STATE_KEY, 'json')
+    : null;
+  const prev = (prevRaw || null) as ProbeSnapshot | null;
+
+  const changes: Array<{ id: string; from: boolean | null; to: boolean }> = [];
+  for (const id of Object.keys(next)) {
+    const before = prev ? Boolean(prev[id]) : null;
+    const after = next[id];
+    if (before === null) continue;
+    if (before !== after) changes.push({ id, from: before, to: after });
+  }
+
+  if (env.OPS_STATE) {
+    await env.OPS_STATE.put(STATE_KEY, JSON.stringify(next), {
+      metadata: { updatedAt: new Date().toISOString() },
+    });
+  }
+
+  if (!changes.length) return { changes };
+
+  const lines = [
+    `Fleet probe changes @ ${new Date().toISOString()}`,
+    '',
+    ...changes.map((c) => {
+      const probe = probes.find((p) => p.id === c.id);
+      const arrow = c.to ? 'RECOVERED' : 'DOWN';
+      return `- ${c.id}: ${arrow} (was ${c.from ? 'ok' : 'down'}) ${probe?.status ?? ''} ${probe?.url ?? ''}`;
+    }),
+    '',
+    'Ops: https://ops.alexander.xin',
+    'Network: https://alexander.xin/network/',
+  ];
+  const down = changes.filter((c) => !c.to).length;
+  const subject =
+    down > 0
+      ? `[ops] ${down} probe(s) DOWN — alexander.xin fleet`
+      : `[ops] probes recovered — alexander.xin fleet`;
+  const notify = await sendAlertEmail(env, subject, lines.join('\n'));
+  return { changes, notify };
+}
+
+async function statusJson(env: Env): Promise<Response> {
+  const results = await runProbes();
   return Response.json(
     {
       generatedAt: new Date().toISOString(),
       probes: results,
       launcher: 'https://alexanderjcarter.cloudflareaccess.com',
       identity: 'https://id.alexander.xin',
+      alerting: {
+        kv: Boolean(env.OPS_STATE),
+        resend: Boolean(env.RESEND_API_KEY?.trim()),
+      },
     },
     { headers: { 'Cache-Control': 'private, max-age=30' } }
   );
@@ -84,10 +190,36 @@ async function homeHtml(): Promise<Response> {
   });
 }
 
+async function runCheck(env: Env): Promise<Response> {
+  const probes = await runProbes();
+  const diff = await diffAndAlert(env, probes);
+  return Response.json({
+    generatedAt: new Date().toISOString(),
+    probes,
+    ...diff,
+  });
+}
+
 export default {
-  async fetch(request: Request): Promise<Response> {
+  async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
-    if (url.pathname === '/api/status') return statusJson();
+    if (url.pathname === '/api/status') return statusJson(env);
+    if (url.pathname === '/api/check' && request.method === 'POST') {
+      return runCheck(env);
+    }
     return homeHtml();
+  },
+
+  async scheduled(
+    _controller: ScheduledController,
+    env: Env,
+    ctx: ExecutionContext
+  ): Promise<void> {
+    ctx.waitUntil(
+      (async () => {
+        const probes = await runProbes();
+        await diffAndAlert(env, probes);
+      })()
+    );
   },
 };

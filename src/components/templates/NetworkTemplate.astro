@@ -40,6 +40,7 @@ const copy: Record<
     login: string;
     next: string;
     shortcuts: string;
+    help: string;
     fleetLog: string;
     fleetLogLead: string;
     siteChangelog: string;
@@ -57,6 +58,7 @@ const copy: Record<
     login: '维护者入口',
     next: '进入 NEXUS',
     shortcuts: '快捷入口',
+    help: '站内帮助',
     fleetLog: '站群动态',
     fleetLogLead:
       '跨子站的控制面变更（非主站版本号）。机器可读：/fleet-changelog.json',
@@ -92,6 +94,7 @@ const copy: Record<
     login: '維護者入口',
     next: '進入 NEXUS',
     shortcuts: '快捷入口',
+    help: '站內幫助',
     fleetLog: '站群動態',
     fleetLogLead:
       '跨子站的控制面變更（非主站版本號）。機器可讀：/fleet-changelog.json',
@@ -128,6 +131,7 @@ const copy: Record<
     login: 'Maintainer entry',
     next: 'Enter NEXUS',
     shortcuts: 'Shortcuts',
+    help: 'Site help',
     fleetLog: 'Fleet log',
     fleetLogLead:
       'Control-plane changes across sites (not apex semver). Machine feed: /fleet-changelog.json',
@@ -164,6 +168,7 @@ const copy: Record<
     login: 'Entrée mainteneur',
     next: 'Entrer dans NEXUS',
     shortcuts: 'Raccourcis',
+    help: 'Aide',
     fleetLog: 'Journal de flotte',
     fleetLogLead:
       'Changements de plan de contrôle (pas le semver apex). Flux machine : /fleet-changelog.json',
@@ -200,6 +205,7 @@ const copy: Record<
     login: 'Вход для сопровождения',
     next: 'В NEXUS',
     shortcuts: 'Ярлыки',
+    help: 'Справка',
     fleetLog: 'Журнал флота',
     fleetLogLead:
       'Изменения плоскости управления (не semver apex). Машинный поток: /fleet-changelog.json',
@@ -269,6 +275,12 @@ const grouped = categoryOrder
         class="text-sm font-medium text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
       >
         {t.siteChangelog}
+      </a>
+      <a
+        href={lp('/help')}
+        class="text-sm font-medium text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+      >
+        {t.help}
       </a>
       <a
         href={lp('/next')}

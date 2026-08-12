@@ -1,0 +1,252 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../chrome/PageHero.astro';
+import { resolveLang, getLangPath, type Lang } from '../../i18n/types';
+
+interface Props {
+  lang?: string;
+}
+
+const lang = resolveLang(Astro.props.lang);
+const lp = (path: string) => getLangPath(lang, path);
+
+const copy: Record<
+  Lang,
+  {
+    title: string;
+    description: string;
+    kicker: string;
+    lead: string;
+    placeholder: string;
+    ask: string;
+    thinking: string;
+    empty: string;
+    disclaimer: string;
+    network: string;
+    contact: string;
+    examples: string[];
+  }
+> = {
+  'zh-CN': {
+    title: '站内帮助',
+    description: '基于公开站群资料的导览问答',
+    kicker: 'Help',
+    lead: '问这个站：目录、子站、联系方式。答案来自公开文档，不是通用聊天机器人。',
+    placeholder: '例如：主站和 www 有什么区别？',
+    ask: '提问',
+    thinking: '检索中…',
+    empty: '试着点下面的示例，或用自己的话提问。',
+    disclaimer:
+      '助手只使用公开资料；不确定时请看站群目录或写信。私密运维问题不会回答。',
+    network: '站群目录',
+    contact: '联系',
+    examples: [
+      '主站和 www 有什么区别？',
+      '写作内容在哪里读？',
+      'cook 和 mycook 有什么不同？',
+      '怎么联系你？',
+    ],
+  },
+  'zh-TW': {
+    title: '站內幫助',
+    description: '基於公開站群資料的導覽問答',
+    kicker: 'Help',
+    lead: '問這個站：目錄、子站、聯繫方式。答案來自公開文件，不是通用聊天機器人。',
+    placeholder: '例如：主站和 www 有什麼區別？',
+    ask: '提問',
+    thinking: '檢索中…',
+    empty: '試著點下面的示例，或用自己的話提問。',
+    disclaimer:
+      '助手只使用公開資料；不確定時請看站群目錄或寫信。私密運維問題不會回答。',
+    network: '站群目錄',
+    contact: '聯繫',
+    examples: [
+      '主站和 www 有什麼區別？',
+      '寫作內容在哪裡讀？',
+      'cook 和 mycook 有什麼不同？',
+      '怎麼聯繫你？',
+    ],
+  },
+  'en-GB': {
+    title: 'Site help',
+    description: 'Guided Q&A from public fleet docs',
+    kicker: 'Help',
+    lead: 'Ask about this site — directories, sister sites, contact. Answers come from public docs, not a general chatbot.',
+    placeholder: 'e.g. What is the difference between apex and www?',
+    ask: 'Ask',
+    thinking: 'Searching…',
+    empty: 'Try an example below, or type your own question.',
+    disclaimer:
+      'Uses public docs only. If unsure, open the network directory or write. Private ops questions are refused.',
+    network: 'Network',
+    contact: 'Contact',
+    examples: [
+      'What is the difference between apex and www?',
+      'Where do I read the writing?',
+      'How do cook and mycook differ?',
+      'How can I contact you?',
+    ],
+  },
+  fr: {
+    title: 'Aide du site',
+    description: 'Q&R guidée à partir des docs publics',
+    kicker: 'Help',
+    lead: 'Posez des questions sur ce site — annuaire, sites sœurs, contact. Réponses issues des docs publics.',
+    placeholder: 'ex. Quelle différence entre apex et www ?',
+    ask: 'Demander',
+    thinking: 'Recherche…',
+    empty: 'Essayez un exemple ou posez votre question.',
+    disclaimer:
+      'Docs publics uniquement. En cas de doute : Network ou Contact. Pas d’ops privé.',
+    network: 'Réseau',
+    contact: 'Contact',
+    examples: [
+      'Quelle différence entre apex et www ?',
+      'Où lire les textes ?',
+      'Différence cook / mycook ?',
+      'Comment vous contacter ?',
+    ],
+  },
+  ru: {
+    title: 'Справка сайта',
+    description: 'Вопросы по публичным документам флота',
+    kicker: 'Help',
+    lead: 'Спросите о сайте — каталог, соседние сайты, контакты. Ответы из публичных документов.',
+    placeholder: 'напр. Чем отличаются apex и www?',
+    ask: 'Спросить',
+    thinking: 'Поиск…',
+    empty: 'Выберите пример или задайте свой вопрос.',
+    disclaimer:
+      'Только публичные документы. При сомнении — Network или Contact. Без приватных ops.',
+    network: 'Сеть',
+    contact: 'Контакты',
+    examples: [
+      'Чем отличаются apex и www?',
+      'Где читать статьи?',
+      'Чем cook отличается от mycook?',
+      'Как с вами связаться?',
+    ],
+  },
+};
+
+const t = copy[lang];
+const home = lp('/');
+---
+
+<BaseLayout title={t.title} description={t.description}>
+  <PageHero
+    folio="Folio Help"
+    kicker={t.kicker}
+    title={t.title}
+    description={t.lead}
+    backHref={home}
+  />
+
+  <section class="pb-20">
+    <div class="container mx-auto px-4 lg:px-8 max-w-2xl">
+      <form id="help-form" class="space-y-4" data-help-lang={lang}>
+        <label class="block">
+          <span class="sr-only">{t.ask}</span>
+          <textarea
+            id="help-q"
+            name="question"
+            rows="3"
+            maxlength="500"
+            required
+            placeholder={t.placeholder}
+            class="w-full border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] px-4 py-3 text-[rgb(var(--color-text-primary))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
+          ></textarea>
+        </label>
+        <div class="flex flex-wrap items-center gap-3">
+          <button
+            type="submit"
+            id="help-submit"
+            class="btn-primary px-5 py-2.5 text-sm font-semibold"
+          >
+            {t.ask}
+          </button>
+          <a
+            href={lp('/network')}
+            class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 underline-offset-4 hover:underline"
+            >{t.network}</a
+          >
+          <a
+            href={lp('/contact')}
+            class="text-sm text-[rgb(var(--color-text-secondary))] hover:text-primary-600 dark:hover:text-primary-400 underline-offset-4 hover:underline"
+            >{t.contact}</a
+          >
+        </div>
+      </form>
+
+      <ul class="mt-6 flex flex-wrap gap-2" aria-label="examples">
+        {
+          t.examples.map((ex) => (
+            <li>
+              <button
+                type="button"
+                class="help-example text-left text-sm border border-[rgb(var(--color-border))] px-3 py-1.5 text-[rgb(var(--color-text-secondary))] hover:border-[rgb(var(--color-text-tertiary))] hover:text-[rgb(var(--color-text-primary))] transition-colors"
+                data-q={ex}
+              >
+                {ex}
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div
+        id="help-out"
+        class="mt-8 min-h-[4rem] border border-[rgb(var(--color-border))] p-5 text-[rgb(var(--color-text-secondary))] leading-relaxed whitespace-pre-wrap"
+        aria-live="polite"
+      >
+        {t.empty}
+      </div>
+      <p class="mt-4 text-xs text-[rgb(var(--color-text-tertiary))]">
+        {t.disclaimer}
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline define:vars={{ thinking: t.thinking, empty: t.empty }}>
+  const form = document.getElementById('help-form');
+  const input = document.getElementById('help-q');
+  const out = document.getElementById('help-out');
+  const submit = document.getElementById('help-submit');
+
+  async function ask(question) {
+    if (!question || !out || !submit) return;
+    out.textContent = thinking;
+    submit.disabled = true;
+    try {
+      const res = await fetch('/api/help', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        out.textContent = data.error || 'Error ' + res.status;
+        return;
+      }
+      out.textContent = data.answer || empty;
+    } catch (err) {
+      out.textContent = String(err);
+    } finally {
+      submit.disabled = false;
+    }
+  }
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    ask(input?.value?.trim());
+  });
+
+  document.querySelectorAll('.help-example').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const q = btn.getAttribute('data-q') || '';
+      if (input) input.value = q;
+      ask(q);
+    });
+  });
+</script>

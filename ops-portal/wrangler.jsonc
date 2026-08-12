@@ -1,5 +1,14 @@
 {
   "name": "ops-portal",
   "compatibility_date": "2026-08-01",
-  "main": "src/index.ts"
+  "main": "src/index.ts",
+  "triggers": {
+    "crons": ["*/10 * * * *"]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "OPS_STATE",
+      "id": "bcf41fb0cfc4474988c90ae2bf31de23"
+    }
+  ]
 }

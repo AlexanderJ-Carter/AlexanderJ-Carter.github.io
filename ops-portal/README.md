@@ -9,16 +9,26 @@ Fleet ops home and **primary maintainer entry** (site `/login` CTA points here).
 - Icons: `public/icons/` + repo `public/img/ops/*.svg`. Regenerate with `node scripts/gen-icons.mjs`.
 - After HTML/icon edits: upload to server `dist/ops/` and `dist/img/ops/` (scp), then refresh Ops.
 
+## Alerting (cron)
+
+- Cron: every 10 minutes (`wrangler.jsonc` triggers).
+- KV `OPS_STATE` stores last ok/down map; email only on **state change**.
+- Secrets (dashboard or `wrangler secret put`):
+  - `RESEND_API_KEY` — required to send
+  - `ALERT_FROM` — default `Ops Portal <noreply@alexander.xin>`
+  - `ALERT_TO` — comma-separated; default `2253940186@qq.com`
+- Manual run: `POST https://ops.alexander.xin/api/check` (behind Access)
+- `/api/status` reports `alerting.kv` / `alerting.resend`
+
 ## Deploy
 
-1. Prefer Cloudflare API multipart upload of `src/worker.js` as Worker `ops-portal` (local wrangler may be broken).
-2. Access app for `ops.alexander.xin`; keep visible in App Launcher. Hide infrequently used apps (SSH) — reach them from this portal.
+1. Prefer Cloudflare API multipart upload of the Worker (local wrangler may lack token).
+2. Access app for `ops.alexander.xin`; keep visible in App Launcher.
 3. Pocket ID OIDC as primary IdP; Access IdP `Email OTP (break-glass)` for emergencies.
 
 ## Endpoints
 
-- `/` — ops home (cards + probes table; HTML from www mirror)
-- `/api/status` — probe apex, www, identity, time API, tools, paste, network.json, fleet-changelog.json
-- Fleet log UI fetches `https://www.alexander.xin/fleet-changelog.json` (public; maintained in `src/data/fleet-changelog.ts`)
-
-No Docker socket, no secrets, no write actions in v1.
+- `/` — ops home (cards + fleet log + probes; HTML from www mirror)
+- `/api/status` — probe apex, www, blog, identity, time API, tools, paste, cook, lab, network.json, fleet-changelog.json
+- `/api/check` — POST: run probes, diff, optional email
+- Fleet log UI fetches `https://alexander.xin/fleet-changelog.json`

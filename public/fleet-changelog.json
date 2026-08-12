@@ -4,10 +4,39 @@
   "note": "Fleet-wide timeline; apex release notes remain in CHANGELOG.md / /changelog",
   "entries": [
     {
+      "id": "2026-08-12-ops-help",
+      "date": "2026-08-12",
+      "kind": "added",
+      "sites": [
+        "ops",
+        "help"
+      ],
+      "title": {
+        "zh-CN": "运维 Cron 告警与站内帮助",
+        "zh-TW": "運維 Cron 告警與站內幫助",
+        "en-GB": "Ops cron alerts and site help",
+        "fr": "Alertes cron ops et aide du site",
+        "ru": "Cron-алерты ops и справка сайта"
+      },
+      "summary": {
+        "zh-CN": "Ops 每 10 分钟探针差分，变化时 Resend 邮件；/help + /api/help 提供公开资料导览问答。",
+        "zh-TW": "Ops 每 10 分鐘探針差分，變化時 Resend 郵件；/help + /api/help 提供公開資料導覽問答。",
+        "en-GB": "Ops probes every 10 minutes and emails on change via Resend; /help + /api/help for public-doc Q&A.",
+        "fr": "Sondes ops toutes les 10 min + e-mail Resend si changement ; /help + /api/help pour la Q&R.",
+        "ru": "Ops-зонды каждые 10 мин и письмо Resend при изменении; /help + /api/help для Q&A."
+      }
+    },
+    {
       "id": "2026-08-12-fleet-curation",
       "date": "2026-08-12",
       "kind": "changed",
-      "sites": ["network", "tools-hub", "newyear", "cook-mcp", "lab"],
+      "sites": [
+        "network",
+        "tools-hub",
+        "newyear",
+        "cook-mcp",
+        "lab"
+      ],
       "title": {
         "zh-CN": "访客策展与 Network 密度",
         "zh-TW": "訪客策展與 Network 密度",
@@ -27,7 +56,9 @@
       "id": "2026-08-12-contact-301",
       "date": "2026-08-12",
       "kind": "retired",
-      "sites": ["contact-card"],
+      "sites": [
+        "contact-card"
+      ],
       "title": {
         "zh-CN": "contact 子域退役",
         "zh-TW": "contact 子域退役",
@@ -47,7 +78,11 @@
       "id": "2026-08-12-home-hermes-gateway",
       "date": "2026-08-12",
       "kind": "added",
-      "sites": ["home", "hermes", "gateway"],
+      "sites": [
+        "home",
+        "hermes",
+        "gateway"
+      ],
       "title": {
         "zh-CN": "登记 Glance / Hermes / OmniRoute",
         "zh-TW": "登記 Glance / Hermes / OmniRoute",
@@ -67,7 +102,11 @@
       "id": "2026-08-07-mycook-split",
       "date": "2026-08-07",
       "kind": "changed",
-      "sites": ["cook", "mycook", "cook-mcp"],
+      "sites": [
+        "cook",
+        "mycook",
+        "cook-mcp"
+      ],
       "title": {
         "zh-CN": "MyCook 双轨与远程 MCP",
         "zh-TW": "MyCook 雙軌與遠端 MCP",
@@ -87,7 +126,13 @@
       "id": "2026-08-03-identity-layers",
       "date": "2026-08-03",
       "kind": "ops",
-      "sites": ["identity", "ops", "git", "docker", "nginxui"],
+      "sites": [
+        "identity",
+        "ops",
+        "git",
+        "docker",
+        "nginxui"
+      ],
       "title": {
         "zh-CN": "Access + Pocket ID 分层",
         "zh-TW": "Access + Pocket ID 分層",

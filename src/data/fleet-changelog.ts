@@ -24,6 +24,29 @@ export type FleetChangeEntry = {
 
 export const fleetChangelog: FleetChangeEntry[] = [
   {
+    id: '2026-08-12-ops-help',
+    date: '2026-08-12',
+    kind: 'added',
+    sites: ['ops', 'help'],
+    title: {
+      'zh-CN': '运维 Cron 告警与站内帮助',
+      'zh-TW': '運維 Cron 告警與站內幫助',
+      'en-GB': 'Ops cron alerts and site help',
+      fr: 'Alertes cron ops et aide du site',
+      ru: 'Cron-алерты ops и справка сайта',
+    },
+    summary: {
+      'zh-CN':
+        'Ops 每 10 分钟探针差分，变化时 Resend 邮件；/help + /api/help 提供公开资料导览问答。',
+      'zh-TW':
+        'Ops 每 10 分鐘探針差分，變化時 Resend 郵件；/help + /api/help 提供公開資料導覽問答。',
+      'en-GB':
+        'Ops probes every 10 minutes and emails on change via Resend; /help + /api/help for public-doc Q&A.',
+      fr: 'Sondes ops toutes les 10 min + e-mail Resend si changement ; /help + /api/help pour la Q&R.',
+      ru: 'Ops-зонды каждые 10 мин и письмо Resend при изменении; /help + /api/help для Q&A.',
+    },
+  },
+  {
     id: '2026-08-12-fleet-curation',
     date: '2026-08-12',
     kind: 'changed',

@@ -1,0 +1,10 @@
+const fs = require('fs');
+const path = require('path');
+const root = path.join(__dirname, '..', 'dist');
+const code = fs.readFileSync(path.join(root, 'mcp-help-only.txt'), 'utf8');
+const m = code.match(/atob\("([^"]+)"\)/);
+if (!m) throw new Error('no b64');
+const b64 = m[1];
+const ok = /^[A-Za-z0-9+/=\r\n]+$/.test(b64) && b64.length % 4 === 0;
+fs.writeFileSync(path.join(root, 'mcp-help-payload.json'), JSON.stringify({ code }));
+console.log(JSON.stringify({ len: code.length, b64Len: b64.length, ok }));

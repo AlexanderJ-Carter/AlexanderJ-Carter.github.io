@@ -52,6 +52,18 @@
       "access": false
     },
     {
+      "id": "help",
+      "url": "https://alexander.xin/help",
+      "path": "/help",
+      "category": "tools",
+      "host": "github-pages",
+      "visibility": "public",
+      "status": "live",
+      "label": "Site help",
+      "access": false,
+      "note": "Visitor help UI; API at /api/help (Worker site-help, optional OmniRoute)"
+    },
+    {
       "access": false,
       "url": "https://alexander.xin/changelog",
       "path": "/changelog",
