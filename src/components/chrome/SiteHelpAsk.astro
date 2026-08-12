@@ -246,7 +246,9 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
           out.textContent = data.error || 'Error ' + res.status;
           return;
         }
-        out.innerHTML = formatAnswer(data.answer || out.getAttribute('data-empty') || '');
+        out.innerHTML = formatAnswer(
+          data.answer || out.getAttribute('data-empty') || ''
+        );
       } catch (err) {
         out.textContent = String(err);
       } finally {

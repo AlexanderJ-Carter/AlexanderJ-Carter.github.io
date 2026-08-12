@@ -23,5 +23,8 @@ for (const outFile of outs) {
 }
 if (fs.existsSync(legacyPublic)) {
   fs.unlinkSync(legacyPublic);
-  console.log('[generate-fleet-changelog] removed', path.relative(root, legacyPublic));
+  console.log(
+    '[generate-fleet-changelog] removed',
+    path.relative(root, legacyPublic)
+  );
 }
