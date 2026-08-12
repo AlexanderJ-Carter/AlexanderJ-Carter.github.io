@@ -10,117 +10,62 @@
   "faq": [
     {
       "id": "apex-www",
-      "q": [
-        "主站和 www 有什么区别",
-        "apex www",
-        "mirror",
-        "国内镜像"
-      ],
+      "q": ["主站和 www 有什么区别", "apex www", "mirror", "国内镜像"],
       "a": "alexander.xin 是 GitHub Pages 全球源；www.alexander.xin 是同一套静态站的国内镜像（Cloudflare Tunnel），互不自动跳转。"
     },
     {
       "id": "writing-home",
-      "q": [
-        "写作",
-        "blog",
-        "writing",
-        "文章在哪"
-      ],
+      "q": ["写作", "blog", "writing", "文章在哪"],
       "a": "公开写作主场是 blog.alexander.xin；apex 的 /writing 会 301 过去。RSS 在各语言 /rss.xml。"
     },
     {
       "id": "contact",
-      "q": [
-        "联系",
-        "contact",
-        "邮件",
-        "email"
-      ],
+      "q": ["联系", "contact", "邮件", "email"],
       "a": "用 https://alexander.xin/contact/ 或邮件 contact-us@alexander.xin。独立 contact 子域已 301 到主站联系页。"
     },
     {
       "id": "network",
-      "q": [
-        "站群",
-        "network",
-        "目录",
-        "有哪些站"
-      ],
+      "q": ["站群", "network", "目录", "有哪些站"],
       "a": "https://alexander.xin/network/ 列出公开节点；机器可读 network.json 与 fleet-changelog.json。"
     },
     {
       "id": "tools",
-      "q": [
-        "tools",
-        "IT-Tools",
-        "工具"
-      ],
+      "q": ["tools", "IT-Tools", "工具"],
       "a": "主站 /tools 是公开工具索引；tools.alexander.xin 是 VPS 上的 IT-Tools，需 Cloudflare Access，不对访客开放。"
     },
     {
       "id": "cook",
-      "q": [
-        "cook",
-        "mycook",
-        "菜谱",
-        "cook-mcp"
-      ],
+      "q": ["cook", "mycook", "菜谱", "cook-mcp"],
       "a": "cook = Pages 菜谱主站；mycook = 完整自托管站；cook-mcp = 鉴权 MCP。三者互补，访客请先看 cook / mycook。"
     },
     {
       "id": "time-api",
-      "q": [
-        "时间 API",
-        "time api",
-        "/time"
-      ],
+      "q": ["时间 API", "time api", "/time"],
       "a": "公开时间接口：GET https://api.alexander.xin/time/now ；OpenAPI 见站点 /api/openapi-time.json。"
     },
     {
       "id": "privacy",
-      "q": [
-        "隐私",
-        "cookie",
-        "analytics",
-        "分析"
-      ],
+      "q": ["隐私", "cookie", "analytics", "分析"],
       "a": "见 /privacy。分析偏隐私友好；不把联系表单当营销列表。"
     },
     {
       "id": "security",
-      "q": [
-        "安全",
-        "漏洞",
-        "security"
-      ],
+      "q": ["安全", "漏洞", "security"],
       "a": "安全政策 /security/policy；PGP 与 security.txt 在 .well-known。勿在公开帮助里讨论未披露漏洞细节。"
     },
     {
       "id": "languages",
-      "q": [
-        "语言",
-        "i18n",
-        "多语言",
-        "english"
-      ],
+      "q": ["语言", "i18n", "多语言", "english"],
       "a": "默认 zh-CN 在 /；另有 /zh-TW/、/en/、/fr/、/ru/。"
     },
     {
       "id": "ops",
-      "q": [
-        "ops",
-        "运维门户",
-        "登录"
-      ],
+      "q": ["ops", "运维门户", "登录"],
       "a": "ops.alexander.xin 是维护者入口（Cloudflare Access），不是访客注册。访客请用 /contact。"
     },
     {
       "id": "help",
-      "q": [
-        "帮助",
-        "help",
-        "问答"
-      ],
+      "q": ["帮助", "help", "问答"],
       "a": "站内帮助页 /help；API POST /api/help。答案来自公开知识库，不是通用聊天机器人。"
     }
   ],
