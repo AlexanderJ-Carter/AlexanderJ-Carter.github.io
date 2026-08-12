@@ -21,7 +21,7 @@ const PROBES: Array<{ id: string; url: string }> = [
   { id: 'paste', url: 'https://paste.alexander.xin/' },
   // Apex GitHub Pages may lag deploys; www mirror is the live server copy.
   { id: 'network-json', url: 'https://www.alexander.xin/network.json' },
-  { id: 'fleet-changelog', url: 'https://www.alexander.xin/fleet-changelog.json' },
+  { id: 'fleet-changelog', url: 'https://alexander.xin/fleet-changelog.json' },
 ];
 
 const UI_URL = 'https://www.alexander.xin/ops/index.html';
