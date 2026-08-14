@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Alexander Carter">
+  <g fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Viewfinder corner brackets -->
+    <path d="M9 20V9H20" />
+    <path d="M44 9H55V20" />
+    <path d="M9 44V55H20" />
+    <path d="M44 55H55V44" />
+    <!-- A monogram: legs + crossbar -->
+    <path d="M18 50 L32 14 L46 50" />
+    <path d="M23 39 H41" />
+  </g>
+  <!-- Aperture iris centered on the crossbar (filled circle, hexagonal iris opening) -->
+  <path fill-rule="evenodd" fill="currentColor" d="M32 39 m-5 0 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 Z M32 36 L34.6 37.5 L34.6 40.5 L32 42 L29.4 40.5 L29.4 37.5 Z" />
+</svg>

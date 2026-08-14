@@ -53,9 +53,50 @@ const pushScript = '(window.adsbygoogle=window.adsbygoogle||[]).push({})';
 </aside>
 
 <style>
+  /* Reserves vertical space to prevent CLS before the ad fills. */
   .ad-slot {
     margin-block: 2rem;
     width: 100%;
-    min-height: 1px;
+    min-height: 120px;
+    border: 1px solid rgb(var(--color-border) / 0.6);
+    border-radius: 0.25rem;
+    background: rgb(var(--color-bg-secondary) / 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Soft folio-mark watermark as the pre-fill placeholder. */
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0,
+      transparent 18px,
+      rgb(var(--color-border) / 0.18) 18px,
+      rgb(var(--color-border) / 0.18) 19px
+    );
+    transition:
+      border-color 0.25s ease,
+      background-color 0.25s ease;
+  }
+
+  .ad-slot--rectangle {
+    min-height: 250px;
+  }
+
+  /* Once AdSense marks the unit filled/unfilled, drop the placeholder chrome. */
+  .ad-slot:has(ins[data-ad-status='filled']),
+  .ad-slot:has(ins[data-ad-status='unfilled']) {
+    border-color: transparent;
+    background: transparent;
+    background-image: none;
+  }
+
+  .ad-slot .adsbygoogle {
+    width: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ad-slot {
+      transition: none;
+    }
   }
 </style>

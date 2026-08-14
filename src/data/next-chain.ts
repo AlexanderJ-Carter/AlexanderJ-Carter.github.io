@@ -264,7 +264,25 @@ export const atlasNodes: AtlasNode[] = [
   { id: 'writing', x: 48, y: 48, href: '/writing' },
   { id: 'fun', x: 72, y: 56, href: '/fun' },
   { id: 'tools', x: 36, y: 74, href: '/tools' },
-  { id: 'lab', x: 58, y: 78, href: 'https://lab.alexander.xin', external: true },
-  { id: 'cook', x: 80, y: 72, href: 'https://cook.alexander.xin', external: true },
-  { id: 'paste', x: 14, y: 82, href: 'https://paste.alexander.xin', external: true },
+  {
+    id: 'lab',
+    x: 58,
+    y: 78,
+    href: 'https://lab.alexander.xin',
+    external: true,
+  },
+  {
+    id: 'cook',
+    x: 80,
+    y: 72,
+    href: 'https://cook.alexander.xin',
+    external: true,
+  },
+  {
+    id: 'paste',
+    x: 14,
+    y: 82,
+    href: 'https://paste.alexander.xin',
+    external: true,
+  },
 ];

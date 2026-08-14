@@ -39,7 +39,8 @@ const adj = roomId ? getAdjacentRooms(lang, roomId) : undefined;
           {current.title}
           {adj && (
             <span class="next-chrome__progress" aria-hidden="true">
-              {String(adj.index + 1).padStart(2, '0')}/{String(adj.total).padStart(2, '0')}
+              {String(adj.index + 1).padStart(2, '0')}/
+              {String(adj.total).padStart(2, '0')}
             </span>
           )}
         </p>
@@ -58,10 +59,7 @@ const adj = roomId ? getAdjacentRooms(lang, roomId) : undefined;
         rooms.map((room) => (
           <a
             href={lp(room.path)}
-            class:list={[
-              'next-chrome__dot',
-              roomId === room.id && 'is-active',
-            ]}
+            class:list={['next-chrome__dot', roomId === room.id && 'is-active']}
             data-nexus-room={room.id}
             title={room.title}
             aria-current={roomId === room.id ? 'page' : undefined}
@@ -113,11 +111,14 @@ const adj = roomId ? getAdjacentRooms(lang, roomId) : undefined;
     if (label) label.textContent = String(state.energy ?? 0);
     document.querySelectorAll('[data-nexus-room]').forEach((el) => {
       const id = el.getAttribute('data-nexus-room');
-      el.classList.toggle('is-visited', Boolean(id && state.visited?.includes(id)));
+      el.classList.toggle(
+        'is-visited',
+        Boolean(id && state.visited?.includes(id))
+      );
     });
   }
 
-  let state = read();
+  const state = read();
   if (roomId) {
     if (!state.visited.includes(roomId)) {
       state.visited = [...state.visited, roomId];
@@ -153,8 +154,13 @@ const adj = roomId ? getAdjacentRooms(lang, roomId) : undefined;
 <style>
   .next-chrome {
     backdrop-filter: blur(10px);
-    background: color-mix(in oklab, rgb(var(--next-ink, 6 8 10)) 72%, transparent);
-    border-bottom: 1px solid color-mix(in oklab, rgb(var(--next-line, 120 200 160)) 28%, transparent);
+    background: color-mix(
+      in oklab,
+      rgb(var(--next-ink, 6 8 10)) 72%,
+      transparent
+    );
+    border-bottom: 1px solid
+      color-mix(in oklab, rgb(var(--next-line, 120 200 160)) 28%, transparent);
   }
 
   .next-chrome__bar {
@@ -271,7 +277,8 @@ const adj = roomId ? getAdjacentRooms(lang, roomId) : undefined;
     padding: 0.9rem 1rem;
     text-decoration: none;
     color: inherit;
-    border: 1px solid color-mix(in oklab, rgb(var(--next-line, 120 200 160)) 35%, transparent);
+    border: 1px solid
+      color-mix(in oklab, rgb(var(--next-line, 120 200 160)) 35%, transparent);
     transition:
       border-color 160ms ease,
       background 160ms ease,
@@ -287,8 +294,16 @@ const adj = roomId ? getAdjacentRooms(lang, roomId) : undefined;
   .next-continue__prev:focus-visible,
   .next-continue__next:focus-visible {
     outline: none;
-    border-color: color-mix(in oklab, rgb(var(--next-line, 120 200 160)) 75%, transparent);
-    background: color-mix(in oklab, rgb(var(--next-line, 120 200 160)) 8%, transparent);
+    border-color: color-mix(
+      in oklab,
+      rgb(var(--next-line, 120 200 160)) 75%,
+      transparent
+    );
+    background: color-mix(
+      in oklab,
+      rgb(var(--next-line, 120 200 160)) 8%,
+      transparent
+    );
     transform: translateY(-1px);
   }
 

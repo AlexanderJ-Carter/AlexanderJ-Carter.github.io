@@ -50,6 +50,14 @@ export default {
         ],
         display: ['Syne', 'system-ui', 'sans-serif'],
         heading: ['Syne', 'system-ui', 'sans-serif'],
+        mono: [
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          'monospace',
+        ],
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out',

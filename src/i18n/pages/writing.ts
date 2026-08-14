@@ -35,6 +35,7 @@ export type WritingCopy = {
   related: string;
   publishedOn: string;
   updatedOn: string;
+  fallbackNotice: string;
   shareText: string;
   subscribePageTitle: string;
   subscribePageDescription: string;
@@ -98,6 +99,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     related: '相关文章',
     publishedOn: '发布于',
     updatedOn: '更新于',
+    fallbackNotice: '本文暂无繁体中文译本，目前显示简体中文原版。',
     shareText: '分享',
     subscribePageTitle: '订阅写作',
     subscribePageDescription: '通过 RSS 订阅本站写作；无需注册账号。',
@@ -161,6 +163,7 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     related: '相關文章',
     publishedOn: '發布於',
     updatedOn: '更新於',
+    fallbackNotice: '本文暫無繁體中文譯本，目前顯示簡體中文原版。',
     shareText: '分享',
     subscribePageTitle: '訂閱寫作',
     subscribePageDescription: '透過 RSS 訂閱本站寫作；無需註冊帳號。',
@@ -226,6 +229,8 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     related: 'Related',
     publishedOn: 'Published',
     updatedOn: 'Updated',
+    fallbackNotice:
+      'No translation is available for this essay yet; showing the original Simplified Chinese version.',
     shareText: 'Share',
     subscribePageTitle: 'Subscribe',
     subscribePageDescription:
@@ -292,6 +297,8 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     related: 'À lire aussi',
     publishedOn: 'Publié',
     updatedOn: 'Mis à jour',
+    fallbackNotice:
+      'Aucune traduction disponible pour cet article ; la version originale en chinois simplifié est affichée.',
     shareText: 'Partager',
     subscribePageTitle: 'S’abonner',
     subscribePageDescription:
@@ -357,6 +364,8 @@ export const writingCopy: Record<Lang, WritingCopy> = {
     related: 'Похожие',
     publishedOn: 'Опубликовано',
     updatedOn: 'Обновлено',
+    fallbackNotice:
+      'Перевод этой статьи пока недоступен; показывается оригинал на упрощённом китайском.',
     shareText: 'Поделиться',
     subscribePageTitle: 'Подписка',
     subscribePageDescription:

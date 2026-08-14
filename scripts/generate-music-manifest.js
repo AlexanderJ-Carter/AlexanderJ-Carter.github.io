@@ -15,6 +15,7 @@ const AUDIO_EXT = new Set([
   '.mp3',
   '.ogg',
   '.flac',
+  '.opus', // preferred: ~5-10x smaller than FLAC at transparent quality
   '.m4a',
   '.wav',
   '.webm',

@@ -10,9 +10,7 @@ const t = sitemapCopy[lang];
 const home = getLangPath(lang, '/');
 const elsewhereLinks = getSitemapElsewhereLinks(lang);
 const sections = t.sections.map((section) =>
-  section.id === 'elsewhere'
-    ? { ...section, links: elsewhereLinks }
-    : section
+  section.id === 'elsewhere' ? { ...section, links: elsewhereLinks } : section
 );
 
 function resolveHref(path: string, external?: boolean) {

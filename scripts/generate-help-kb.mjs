@@ -21,7 +21,6 @@ async function loadKb() {
     const raw = fs.readFileSync(tsPath, 'utf8');
     const match = raw.match(/export const helpKb = (\{[\s\S]*\});\s*$/);
     if (!match) throw new Error('Cannot parse help-kb.ts');
-    // eslint-disable-next-line no-new-func
     return Function(`"use strict"; return (${match[1]})`)();
   }
 }

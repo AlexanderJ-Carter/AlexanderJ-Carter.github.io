@@ -19,6 +19,22 @@ type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 const categories = getGalleryCategories(lang as Lang);
 const galleryItems = getGalleryItems(lang as Lang);
 const sourceUi = getGallerySourceUi(lang as Lang);
+
+// Category distribution for the contact-sheet proportion bar.
+const distSegments = categories
+  .filter((c) => c.id !== 'all')
+  .map((c) => {
+    const count = galleryItems.filter((i) => i.category === c.id).length;
+    return {
+      id: c.id,
+      label: c.label,
+      count,
+      pct: galleryItems.length
+        ? Math.round((count / galleryItems.length) * 100)
+        : 0,
+    };
+  })
+  .filter((s) => s.count > 0);
 ---
 
 <BaseLayout title={t('gallery.title')}>
@@ -99,11 +115,41 @@ const sourceUi = getGallerySourceUi(lang as Lang);
         </span>
       </div>
 
+      <!-- Contact-sheet proportion bar: each segment sized by category share -->
+      <div
+        class="gallery-dist"
+        role="img"
+        aria-label={lang === 'zh-CN'
+          ? `共 ${galleryItems.length} 帧，按分类分布`
+          : lang === 'zh-TW'
+            ? `共 ${galleryItems.length} 幀，依分類分布`
+            : lang === 'fr'
+              ? `${galleryItems.length} frames, répartition par catégorie`
+              : lang === 'ru'
+                ? `${galleryItems.length} кадров, распределение по категориям`
+                : `${galleryItems.length} frames, distribution by category`}
+      >
+        {
+          distSegments.map((seg) => (
+            <span
+              class="gallery-dist__seg"
+              data-cat={seg.id}
+              style={`flex-grow: ${seg.count}`}
+              title={`${seg.label} · ${seg.count} (${seg.pct}%)`}
+            >
+              <span class="gallery-dist__label">
+                {seg.label} {seg.count}
+              </span>
+            </span>
+          ))
+        }
+      </div>
+
       <div
         class="gallery-filters"
         id="filter-tabs"
         role="tablist"
-        aria-label={lang === 'zh-CN' ? '按分类筛选' : 'Filter by category'}
+        aria-label={t('gallery.filterByCategory')}
       >
         {
           categories.map((cat) => (
@@ -215,7 +261,7 @@ const sourceUi = getGallerySourceUi(lang as Lang);
       type="button"
       id="lightbox-close"
       class="gallery-lightbox__ctrl gallery-lightbox__close"
-      aria-label={lang === 'zh-CN' ? '关闭' : 'Close'}
+      aria-label={t('gallery.close')}
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
         ><path
@@ -229,7 +275,7 @@ const sourceUi = getGallerySourceUi(lang as Lang);
       type="button"
       id="lightbox-prev"
       class="gallery-lightbox__ctrl gallery-lightbox__nav gallery-lightbox__prev"
-      aria-label={lang === 'zh-CN' ? '上一张' : 'Previous'}
+      aria-label={t('gallery.prev')}
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
         ><path
@@ -243,7 +289,7 @@ const sourceUi = getGallerySourceUi(lang as Lang);
       type="button"
       id="lightbox-next"
       class="gallery-lightbox__ctrl gallery-lightbox__nav gallery-lightbox__next"
-      aria-label={lang === 'zh-CN' ? '下一张' : 'Next'}
+      aria-label={t('gallery.next')}
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
         ><path
@@ -521,6 +567,60 @@ const sourceUi = getGallerySourceUi(lang as Lang);
     font-weight: 700;
     color: rgb(var(--color-text-primary));
     margin-right: 0.25rem;
+  }
+
+  /* Contact-sheet proportion bar — each segment is a frame on the proof strip */
+  .gallery-dist {
+    display: flex;
+    height: 1.5rem;
+    border: 1px solid rgb(var(--color-border));
+    border-radius: 0.125rem;
+    overflow: hidden;
+    background: rgb(var(--color-bg-secondary));
+    grid-column: 1 / -1;
+  }
+  .gallery-dist__seg {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    border-right: 1px solid rgb(var(--color-bg-primary) / 0.6);
+    background: rgb(var(--color-accent) / 0.18);
+    transition:
+      background-color 0.2s ease,
+      flex-grow 0.3s ease;
+  }
+  .gallery-dist__seg:last-child {
+    border-right: 0;
+  }
+  .gallery-dist__seg:hover,
+  .gallery-dist__seg:focus-visible {
+    background: rgb(var(--color-accent) / 0.42);
+    outline: none;
+  }
+  .gallery-dist__label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+    color: rgb(var(--color-text-secondary));
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  .gallery-dist__seg:hover .gallery-dist__label,
+  .gallery-dist__seg:focus-within .gallery-dist__label {
+    opacity: 1;
+  }
+  @media (min-width: 640px) {
+    .gallery-dist__label {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-dist__seg {
+      transition: none;
+    }
   }
   .gallery-filters {
     display: flex;

@@ -87,6 +87,7 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
         type="color"
         id="color-input"
         value="#0ea5e9"
+        aria-label={t.pick}
         class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
       />
       <div class="absolute inset-0 flex items-center justify-center">
@@ -101,7 +102,7 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
     <div class="space-y-3">
       <!-- HEX -->
       <div class="flex items-center gap-2">
-        <span class="text-sm font-medium w-16">{t.hex}</span>
+        <label for="hex-value" class="text-sm font-medium w-16">{t.hex}</label>
         <input
           type="text"
           id="hex-value"
@@ -111,13 +112,14 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
         />
         <button
           class="copy-btn px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded text-sm"
-          data-target="hex-value">{t.copy}</button
+          data-target="hex-value"
+          data-copied={t.copied}>{t.copy}</button
         >
       </div>
 
       <!-- RGB -->
       <div class="flex items-center gap-2">
-        <span class="text-sm font-medium w-16">{t.rgb}</span>
+        <label for="rgb-value" class="text-sm font-medium w-16">{t.rgb}</label>
         <input
           type="text"
           id="rgb-value"
@@ -127,13 +129,14 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
         />
         <button
           class="copy-btn px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded text-sm"
-          data-target="rgb-value">{t.copy}</button
+          data-target="rgb-value"
+          data-copied={t.copied}>{t.copy}</button
         >
       </div>
 
       <!-- HSL -->
       <div class="flex items-center gap-2">
-        <span class="text-sm font-medium w-16">{t.hsl}</span>
+        <label for="hsl-value" class="text-sm font-medium w-16">{t.hsl}</label>
         <input
           type="text"
           id="hsl-value"
@@ -143,7 +146,8 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
         />
         <button
           class="copy-btn px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded text-sm"
-          data-target="hsl-value">{t.copy}</button
+          data-target="hsl-value"
+          data-copied={t.copied}>{t.copy}</button
         >
       </div>
     </div>
@@ -182,7 +186,12 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
   }
 
   .palette-color {
-    @apply aspect-square rounded-lg cursor-pointer transition-transform hover:scale-110 relative;
+    @apply aspect-square rounded-lg cursor-pointer transition-transform hover:scale-110 relative border-0 p-0 m-0 block;
+  }
+
+  .palette-color:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
   }
 
   .palette-color::after {
@@ -266,10 +275,13 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
       const sat = Math.floor(Math.random() * 40) + 60;
       const light = Math.floor(Math.random() * 30) + 35;
 
-      const color = document.createElement('div');
+      const color = document.createElement('button');
+      color.type = 'button';
       color.className = 'palette-color';
       color.style.background = `hsl(${hue}, ${sat}%, ${light}%)`;
-      color.title = `HSL(${hue}, ${sat}%, ${light}%)`;
+      const hslLabel = `HSL(${hue}, ${sat}%, ${light}%)`;
+      color.title = hslLabel;
+      color.setAttribute('aria-label', hslLabel);
 
       // 点击复制颜色
       color.addEventListener('click', () => {
@@ -294,14 +306,14 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
   // 复制按钮
   document.querySelectorAll('.copy-btn').forEach((btn) => {
     btn.addEventListener('click', async (e) => {
-      const target = e.target;
+      const target = e.currentTarget;
       const targetId = target.dataset.target;
       const input = document.getElementById(targetId);
 
       try {
         await navigator.clipboard.writeText(input.value);
         const originalText = target.textContent;
-        target.textContent = '已复制';
+        target.textContent = target.dataset.copied || 'Copied';
         target.classList.add('bg-green-500');
 
         setTimeout(() => {
@@ -309,7 +321,7 @@ const t = colorText[lang as keyof typeof colorText] || colorText['zh-CN'];
           target.classList.remove('bg-green-500');
         }, 1000);
       } catch (err) {
-        console.error('复制失败:', err);
+        console.error('Copy failed:', err);
       }
     });
   });

@@ -17,7 +17,22 @@ export async function getStaticPaths() {
     for (const post of langPosts) {
       paths.push({
         params: { lang: urlLang, slug: post.id },
-        props: { post, lang: dataLang },
+        props: { post, lang: dataLang, fallback: false },
+      });
+    }
+
+    // Fallback: for essays missing this locale, serve the zh-CN original under
+    // the locale URL with a "translation unavailable" notice. Prevents hard 404s.
+    const zhCnPosts = posts.filter((post) => post.data.lang === 'zh-CN');
+    const nativeBaseIds = new Set(
+      langPosts.map((p) => p.id.replace(/-(zh-tw|en-gb|fr|ru)$/i, ''))
+    );
+    for (const cnPost of zhCnPosts) {
+      // Skip if a native translation already exists for this base slug.
+      if (nativeBaseIds.has(cnPost.id)) continue;
+      paths.push({
+        params: { lang: urlLang, slug: cnPost.id },
+        props: { post: cnPost, lang: 'zh-CN', fallback: true },
       });
     }
   }
@@ -25,7 +40,7 @@ export async function getStaticPaths() {
   return paths;
 }
 
-const { post, lang } = Astro.props;
+const { post, lang, fallback } = Astro.props;
 const { Content } = await render(post);
 ---
 
@@ -39,6 +54,7 @@ const { Content } = await render(post);
   category={post.data.category}
   tags={post.data.tags}
   timeToRead={post.data.timeToRead}
+  fallback={fallback}
 >
   <Content />
 </WritingPostTemplate>

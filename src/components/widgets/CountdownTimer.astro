@@ -185,6 +185,7 @@ const t =
         min="0"
         max="365"
         placeholder="0"
+        aria-label={t.days}
         class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded text-center"
       />
       <input
@@ -193,6 +194,7 @@ const t =
         min="0"
         max="23"
         placeholder="0"
+        aria-label={t.hours}
         class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded text-center"
       />
       <input
@@ -201,6 +203,7 @@ const t =
         min="0"
         max="59"
         placeholder="0"
+        aria-label={t.minutes}
         class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded text-center"
       />
       <input
@@ -209,6 +212,7 @@ const t =
         min="0"
         max="59"
         placeholder="0"
+        aria-label={t.seconds}
         class="flex-1 px-3 py-2 bg-[rgb(var(--color-bg-secondary))] border border-[rgb(var(--color-border))] rounded text-center"
       />
     </div>
@@ -365,7 +369,7 @@ const t =
     if (Notification.permission === 'granted') {
       new Notification('倒计时结束！', {
         body: '时间到！',
-        icon: '/img/branding/logo.png',
+        icon: '/img/branding/icon-192.png',
       });
     }
   }

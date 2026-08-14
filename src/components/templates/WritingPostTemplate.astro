@@ -18,6 +18,8 @@ interface Props {
   category: string;
   tags: string[];
   timeToRead?: string;
+  /** When true, the essay is shown in a fallback language (no translation yet). */
+  fallback?: boolean;
 }
 
 const {
@@ -30,6 +32,7 @@ const {
   category,
   tags,
   timeToRead,
+  fallback = false,
 } = Astro.props;
 
 const resolvedLang = lang as Lang;
@@ -125,6 +128,13 @@ const related = relatedPosts(allPosts, {
     <div class="essay-rule" aria-hidden="true"></div>
 
     <div class="container mx-auto px-4 lg:px-8 max-w-3xl">
+      {
+        fallback && (
+          <p class="essay-fallback" role="note" aria-live="polite">
+            {t.fallbackNotice}
+          </p>
+        )
+      }
       <div class="essay-prose" id="article-content">
         <slot />
       </div>
@@ -282,6 +292,17 @@ const related = relatedPosts(allPosts, {
       rgb(var(--color-border)),
       transparent
     );
+  }
+
+  .essay-fallback {
+    max-width: 48rem;
+    margin: 0 auto 1.75rem;
+    padding: 0.75rem 1rem;
+    border-left: 2px solid rgb(var(--color-warning));
+    background: rgb(var(--color-warning) / 0.08);
+    color: rgb(var(--color-text-secondary));
+    font-size: 0.9rem;
+    border-radius: var(--radius-sharp);
   }
 
   .essay-prose {

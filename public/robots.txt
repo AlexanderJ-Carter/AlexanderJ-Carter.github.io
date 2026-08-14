@@ -1,6 +1,6 @@
 # https://alexander.xin/robots.txt
 # Allow all crawlers; disallow protected/utility paths.
-# Last updated: 2026-02-04
+# Last updated: 2026-08-14
 
 User-agent: *
 Allow: /
@@ -13,8 +13,21 @@ Disallow: /en-GB/verify
 Disallow: /en/verify
 Disallow: /fr/verify
 Disallow: /ru/verify
+Disallow: /login
+Disallow: /zh-CN/login
+Disallow: /zh-TW/login
+Disallow: /en-GB/login
+Disallow: /en/login
+Disallow: /fr/login
+Disallow: /ru/login
+Disallow: /next
+Disallow: /zh-CN/next
+Disallow: /zh-TW/next
+Disallow: /en-GB/next
+Disallow: /en/next
+Disallow: /fr/next
+Disallow: /ru/next
 Disallow: /404.html
 
-# Sitemaps
+# Sitemap (index references all locale sitemaps)
 Sitemap: https://alexander.xin/sitemap-index.xml
-Sitemap: https://alexander.xin/sitemap-0.xml

@@ -12,14 +12,30 @@ const person = {
   name: 'Alexander James Carter',
   url: 'https://alexander.xin',
   image: 'https://alexander.xin/img/profile/about-me.jpg',
-  sameAs: ['https://github.com/AlexanderJ-Carter'],
+  sameAs: [
+    'https://github.com/AlexanderJ-Carter',
+    'https://alexander.xin',
+    'https://blog.alexander.xin',
+  ],
   description,
   jobTitle: 'Developer & Designer',
 };
 
+// WebSite node declares the site identity and publisher. A SearchAction is
+// intentionally omitted until /help reads the ?q= query param server-side.
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Alexander Carter',
+  url: 'https://alexander.xin',
+  description,
+  inLanguage: ['zh-CN', 'zh-TW', 'en-GB', 'fr', 'ru'],
+  publisher: { '@type': 'Person', name: 'Alexander James Carter' },
+};
+
 const graph = extra
-  ? [person, ...(Array.isArray(extra) ? extra : [extra])]
-  : [person];
+  ? [website, person, ...(Array.isArray(extra) ? extra : [extra])]
+  : [website, person];
 
 const structuredData = JSON.stringify(
   graph.length === 1

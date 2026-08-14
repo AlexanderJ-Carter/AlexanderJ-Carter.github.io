@@ -227,9 +227,22 @@ const t = calcText[lang as keyof typeof calcText] || calcText['zh-CN'];
     });
   });
 
-  // 键盘支持
-  document.addEventListener('keydown', (e) => {
+  // 键盘支持：仅当计算器获得焦点时响应；阻止冒泡避免与全局快捷键（/ 搜索、c 联系等）双触发
+  const calcEl = document.getElementById('calculator');
+  calcEl?.addEventListener('keydown', (e) => {
     const key = e.key;
+    const handled =
+      /[0-9]/.test(key) ||
+      key === '.' ||
+      ['+', '-', '*', '/'].includes(key) ||
+      key === 'Enter' ||
+      key === '=' ||
+      key === 'Escape' ||
+      key === 'c' ||
+      key === 'C' ||
+      key === 'Backspace';
+    if (!handled) return;
+    e.stopPropagation();
     if (/[0-9]/.test(key)) {
       document.querySelector(`.calc-btn[data-value="${key}"]`)?.click();
     } else if (key === '.') {

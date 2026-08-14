@@ -505,17 +505,9 @@ const elsewhereSearch = getChromeElsewhereLinks(lang).map((l) => ({
 </script>
 
 <style>
-  /* Studio dock: search sits above music FAB on the right rail */
+  /* Studio dock: search sits one slot above the music FAB (order 1). */
   #quick-actions {
-    right: 1rem;
+    --dock-order: 1;
     left: auto;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 4.75rem);
-  }
-
-  @media (min-width: 768px) {
-    #quick-actions {
-      right: 1.5rem;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 5rem);
-    }
   }
 </style>

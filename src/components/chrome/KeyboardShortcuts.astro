@@ -263,22 +263,8 @@ function getLangPath(path: string): string {
 </script>
 
 <style>
+  /* Studio dock: three slots above the music FAB (order 3). */
   .shortcuts-hint {
-    right: 1rem;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 13rem);
-  }
-
-  @media (min-width: 768px) {
-    .shortcuts-hint {
-      right: 1.5rem;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 13.4rem);
-    }
-  }
-
-  @media (max-width: 640px) {
-    .shortcuts-hint {
-      right: 0.6rem;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 12rem);
-    }
+    --dock-order: 3;
   }
 </style>

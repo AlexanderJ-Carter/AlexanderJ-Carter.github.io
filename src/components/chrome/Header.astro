@@ -256,22 +256,27 @@ const mainNavItems: NavItem[] = [
         aria-label="Alexander Carter"
       >
         <span class="nav-brand__mark" aria-hidden="true">
-          <img
-            src="/img/branding/logo-96.webp"
-            alt=""
-            width="36"
-            height="36"
-            class="w-full h-full object-cover dark:hidden"
-            decoding="async"
-          />
-          <img
-            src="/img/branding/logo-dark-96.webp"
-            alt=""
-            width="36"
-            height="36"
-            class="w-full h-full object-cover hidden dark:block"
-            decoding="async"
-          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 64 64"
+            class="nav-brand__svg"
+          >
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><path d="M9 20V9H20"></path><path d="M44 9H55V20"></path><path
+                d="M9 44V55H20"></path><path d="M44 55H55V44"></path><path
+                d="M18 50 L32 14 L46 50"></path><path d="M23 39 H41"></path></g
+            >
+            <path
+              fill-rule="evenodd"
+              fill="currentColor"
+              d="M32 39 m-5 0 a5 5 0 1 0 10 0 a5 5 0 1 0 -10 0 Z M32 36 L34.6 37.5 L34.6 40.5 L32 42 L29.4 40.5 L29.4 37.5 Z"
+            ></path>
+          </svg>
         </span>
         <span class="min-w-0 hidden sm:block">
           <span class="nav-brand__title">Alexander Carter</span>
@@ -358,23 +363,24 @@ const mainNavItems: NavItem[] = [
                   </div>
                 </div>
               ) : (
-                <a
-                  href={item.href}
-                  role="listitem"
-                  class:list={[
-                    'nav-item',
-                    isActivePath(item.href) && 'is-active',
-                  ]}
-                  target={item.external ? '_blank' : undefined}
-                  rel={item.external ? 'noopener noreferrer' : undefined}
-                  aria-current={isActivePath(item.href) ? 'page' : undefined}
-                >
-                  <span class="nav-item__idx" aria-hidden="true">
-                    {idx}
-                  </span>
-                  <span class="nav-item__label">{item.label}</span>
-                  <span class="nav-item__ink" aria-hidden="true" />
-                </a>
+                <div role="listitem">
+                  <a
+                    href={item.href}
+                    class:list={[
+                      'nav-item',
+                      isActivePath(item.href) && 'is-active',
+                    ]}
+                    target={item.external ? '_blank' : undefined}
+                    rel={item.external ? 'noopener noreferrer' : undefined}
+                    aria-current={isActivePath(item.href) ? 'page' : undefined}
+                  >
+                    <span class="nav-item__idx" aria-hidden="true">
+                      {idx}
+                    </span>
+                    <span class="nav-item__label">{item.label}</span>
+                    <span class="nav-item__ink" aria-hidden="true" />
+                  </a>
+                </div>
               );
             })
         }
@@ -656,9 +662,16 @@ const mainNavItems: NavItem[] = [
     overflow: hidden;
     border-radius: 0.125rem;
     box-shadow: inset 0 0 0 1px rgb(var(--color-border));
+    color: rgb(var(--color-accent));
     transition:
       box-shadow 0.25s ease,
       transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .nav-brand__svg {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
   .nav-brand:hover .nav-brand__mark,
   .nav-brand:focus-visible .nav-brand__mark {

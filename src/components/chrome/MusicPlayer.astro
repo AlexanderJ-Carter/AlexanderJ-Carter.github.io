@@ -64,6 +64,68 @@ const ui = {
     'Выбрать станцию'
   ),
   volume: ml('音量', '音量', 'Volume', 'Volume', 'Громкость'),
+  // Panel chrome strings (previously hardcoded in markup/script).
+  heading: ml('音乐', '音樂', 'Audio', 'Audio', 'Аудио'),
+  modeLocal: ml('我的音乐', '我的音樂', 'My music', 'Ma musique', 'Моя музыка'),
+  modeRadio: ml(
+    '在线电台',
+    '線上電台',
+    'Online radio',
+    'Radio en ligne',
+    'Онлайн-радио'
+  ),
+  radioApply: ml('收听', '收聽', 'Tune in', 'Écouter', 'Слушать'),
+  radioHint: ml(
+    '选好电台后，点下方播放即可。',
+    '選好電台後，點下方播放即可。',
+    'Pick a station, then press play below.',
+    'Choisissez une station, puis appuyez sur lecture.',
+    'Выберите станцию и нажмите воспроизведение.'
+  ),
+  playlist: ml(
+    '播放列表',
+    '播放列表',
+    'Playlist',
+    'Liste de lecture',
+    'Плейлист'
+  ),
+  loading: ml('加载中…', '載入中…', 'Loading…', 'Chargement…', 'Загрузка…'),
+  live: ml('正在直播', '正在直播', 'Live now', 'En direct', 'В эфире'),
+  emptyTitle: ml(
+    '暂无可播放曲目',
+    '暫無可播放曲目',
+    'No tracks available',
+    'Aucune piste disponible',
+    'Нет доступных треков'
+  ),
+  emptyArtist: ml(
+    '稍后再来看看',
+    '稍後再來看看',
+    'Check back later',
+    'Revenez plus tard',
+    'Зайдите позже'
+  ),
+  emptyList: ml(
+    '暂时没有可播放的曲目',
+    '暫時沒有可播放的曲目',
+    'No tracks to play yet',
+    'Aucune piste pour le moment',
+    'Пока нет треков'
+  ),
+  loadError: ml(
+    '加载失败',
+    '載入失敗',
+    'Failed to load',
+    'Échec du chargement',
+    'Ошибка загрузки'
+  ),
+  startHint: ml(
+    '点一首开始听',
+    '點一首開始聽',
+    'Press play to start',
+    'Appuyez sur lecture',
+    'Нажмите воспроизвести'
+  ),
 };
 ---
 
@@ -112,7 +174,7 @@ const ui = {
         id="music-mini-title"
         class="text-sm font-medium truncate text-[rgb(var(--color-text-primary))]"
       >
-        点一首开始听
+        {ui.startHint}
       </div>
       <div
         id="music-mini-time"
@@ -137,7 +199,7 @@ const ui = {
       <button
         type="button"
         id="music-mini-play"
-        class="music-btn p-2 rounded-sm text-white transition-transform hover:scale-105"
+        class="music-btn p-2 rounded-sm text-white dark:text-[rgb(var(--color-bg-primary))] transition-transform hover:scale-105"
         style="background: rgb(var(--color-accent));"
         aria-label={ui.playPause}
       >
@@ -213,7 +275,7 @@ const ui = {
       >
       <span
         class="font-heading font-semibold text-[rgb(var(--color-text-primary))]"
-        >音乐</span
+        >{ui.heading}</span
       >
     </div>
     <div class="flex items-center gap-1">
@@ -268,11 +330,12 @@ const ui = {
         id="music-title"
         class="font-semibold text-[rgb(var(--color-text-primary))] truncate px-2"
       >
-        点一首开始听
+        {ui.startHint}
       </h4>
       <p
         id="music-artist"
         class="text-sm text-[rgb(var(--color-text-secondary))] mt-0.5"
+        aria-live="polite"
       >
         -
       </p>
@@ -282,10 +345,10 @@ const ui = {
         <button
           type="button"
           id="music-mode-local"
-          class="music-mode-btn active">我的音乐</button
+          class="music-mode-btn active">{ui.modeLocal}</button
         >
         <button type="button" id="music-mode-radio" class="music-mode-btn"
-          >在线电台</button
+          >{ui.modeRadio}</button
         >
       </div>
     </div>
@@ -319,11 +382,11 @@ const ui = {
         <button
           type="button"
           id="music-radio-apply"
-          class="music-mode-btn !px-3">收听</button
+          class="music-mode-btn !px-3">{ui.radioApply}</button
         >
       </div>
       <p class="text-xs text-[rgb(var(--color-text-tertiary))]">
-        选好电台后，点下方播放即可。
+        {ui.radioHint}
       </p>
     </div>
 
@@ -382,7 +445,7 @@ const ui = {
       <button
         type="button"
         id="music-play"
-        class="music-btn p-4 rounded-sm text-white shadow-md transition-transform hover:scale-105 active:scale-95"
+        class="music-btn p-4 rounded-sm text-white dark:text-[rgb(var(--color-bg-primary))] shadow-md transition-transform hover:scale-105 active:scale-95"
         style="background: rgb(var(--color-accent));"
         aria-label={ui.playPause}
       >
@@ -417,36 +480,99 @@ const ui = {
       <h5
         class="text-xs font-semibold text-[rgb(var(--color-text-tertiary))] uppercase tracking-wider mb-2"
       >
-        播放列表
+        {ui.playlist}
       </h5>
       <div id="music-playlist-container" class="space-y-1">
         <p
           id="music-playlist-placeholder"
           class="text-sm text-[rgb(var(--color-text-tertiary))] py-4 text-center"
         >
-          加载中…
+          {ui.loading}
         </p>
       </div>
     </div>
   </div>
 
-  <audio id="music-audio" preload="metadata"></audio>
+  <audio id="music-audio" preload="metadata" aria-label={ui.heading}></audio>
+
+  <!-- Runtime i18n strings surfaced to the typed, bundled script below. -->
+  <template
+    id="music-i18n"
+    set:html={JSON.stringify({
+      live: ui.live,
+      emptyTitle: ui.emptyTitle,
+      emptyArtist: ui.emptyArtist,
+      emptyList: ui.emptyList,
+      loadError: ui.loadError,
+      startHint: ui.startHint,
+    })}
+  />
 
   <script>
-    // @ts-nocheck
+    interface Track {
+      title: string;
+      artist: string;
+      file: string;
+    }
+
+    interface Pos {
+      x: number;
+      y: number;
+    }
+
+    interface SavedState {
+      miniPos?: Pos;
+      panelPos?: Pos;
+      volume?: number;
+    }
+
+    type DragTarget = 'mini' | 'panel' | null;
+
     const STORAGE_KEY = 'music-player';
     const MANIFEST_URL = '/music/manifest.json';
-    const defaultMiniPos = { x: 24, y: 24 };
 
-    const audio = document.getElementById('music-audio');
+    // Read runtime i18n strings injected from the frontmatter.
+    const i18nEl = document.getElementById('music-i18n');
+    const i18n = (() => {
+      try {
+        return JSON.parse(i18nEl?.textContent || '{}') as Partial<{
+          live: string;
+          emptyTitle: string;
+          emptyArtist: string;
+          emptyList: string;
+          loadError: string;
+          startHint: string;
+        }>;
+      } catch {
+        return {};
+      }
+    })();
+    const str = {
+      live: i18n.live || 'Live now',
+      emptyTitle: i18n.emptyTitle || 'No tracks available',
+      emptyArtist: i18n.emptyArtist || 'Check back later',
+      emptyList: i18n.emptyList || 'No tracks to play yet',
+      loadError: i18n.loadError || 'Failed to load',
+      startHint: i18n.startHint || 'Press play to start',
+    };
+
+    const audio = document.getElementById(
+      'music-audio'
+    ) as HTMLAudioElement | null;
     const fab = document.getElementById('music-fab');
     const mini = document.getElementById('music-mini');
     const panel = document.getElementById('music-panel');
     const miniDrag = document.getElementById('music-mini-drag');
     const panelDrag = document.getElementById('music-panel-drag');
-    const progress = document.getElementById('music-progress');
-    const miniProgress = document.getElementById('music-mini-progress');
-    const volume = document.getElementById('music-volume');
+    const progress = document.getElementById(
+      'music-progress'
+    ) as HTMLInputElement | null;
+    const miniProgress = document.getElementById(
+      'music-mini-progress'
+    ) as HTMLInputElement | null;
+    const volume = document.getElementById(
+      'music-volume'
+    ) as HTMLInputElement | null;
     const playlistContainer = document.getElementById(
       'music-playlist-container'
     );
@@ -455,27 +581,30 @@ const ui = {
     );
     const radioWrap = document.getElementById('music-radio-wrap');
     const playlistWrap = document.getElementById('music-playlist-wrap');
-    const radioStation = document.getElementById('music-radio-station');
+    const radioStation = document.getElementById(
+      'music-radio-station'
+    ) as HTMLSelectElement | null;
     const radioApply = document.getElementById('music-radio-apply');
     const modeLocal = document.getElementById('music-mode-local');
     const modeRadio = document.getElementById('music-mode-radio');
 
-    let musicData = [];
-    let playbackMode = 'local';
+    let musicData: Track[] = [];
+    let playbackMode: 'local' | 'radio' = 'local';
     let currentTrack = 0;
     let isPlaying = false;
-    let panelPos = { x: 24, y: 80 };
-    let miniPos = { x: defaultMiniPos.x, y: defaultMiniPos.y };
-    let dragTarget = null;
-    let dragOffset = { x: 0, y: 0 };
+    let panelPos: Pos = { x: 24, y: 80 };
+    let miniPos: Pos = { x: 24, y: 24 };
+    let dragTarget: DragTarget = null;
+    let dragOffset: Pos = { x: 0, y: 0 };
+    let playlistReady: Promise<void> | null = null;
 
-    function getSelectedStationName() {
+    function getSelectedStationName(): string {
       if (!radioStation) return 'Ambient Radio';
       const opt = radioStation.options[radioStation.selectedIndex];
       return opt?.textContent || 'Ambient Radio';
     }
 
-    function setMode(mode) {
+    function setMode(mode: 'local' | 'radio'): void {
       playbackMode = mode === 'radio' ? 'radio' : 'local';
       const isRadio = playbackMode === 'radio';
       radioWrap?.classList.toggle('hidden', !isRadio);
@@ -489,9 +618,9 @@ const ui = {
         const coverEl = document.getElementById('music-cover');
         const miniCover = document.getElementById('music-mini-cover');
         const name = getSelectedStationName();
-        if (titleEl) titleEl.textContent = name;
-        if (miniTitle) miniTitle.textContent = name;
-        if (artistEl) artistEl.textContent = '正在直播';
+        if (titleEl) titleEl.textContent = '📻 ' + name;
+        if (miniTitle) miniTitle.textContent = '📻 ' + name;
+        if (artistEl) artistEl.textContent = str.live;
         applyCyanotypeSleeve(coverEl, radioStation?.value || name);
         applyCyanotypeSleeve(miniCover, radioStation?.value || name);
       } else if (musicData.length > 0) {
@@ -499,79 +628,78 @@ const ui = {
       }
     }
 
-    function saveState() {
+    function saveState(): void {
       try {
-        sessionStorage.setItem(
-          STORAGE_KEY,
-          JSON.stringify({
-            miniPos,
-            panelPos,
-            volume: volume?.value ?? 50,
-          })
-        );
-      } catch (_) {}
+        const state: SavedState = {
+          miniPos,
+          panelPos,
+          volume: volume ? parseFloat(volume.value) : 50,
+        };
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch {
+        /* sessionStorage may be unavailable */
+      }
     }
 
-    function loadState() {
+    function loadState(): void {
       try {
         const raw = sessionStorage.getItem(STORAGE_KEY);
         if (raw) {
-          const s = JSON.parse(raw);
+          const s = JSON.parse(raw) as SavedState;
           if (s.miniPos) miniPos = s.miniPos;
           if (s.panelPos) panelPos = s.panelPos;
           if (s.volume != null && volume) volume.value = String(s.volume);
         }
-      } catch (_) {}
-    }
-
-    function applyMiniPos() {
-      if (mini) {
-        mini.style.left = miniPos.x + 'px';
-        mini.style.top = miniPos.y + 'px';
+      } catch {
+        /* ignore */
       }
     }
 
-    function applyPanelPos() {
-      if (panel) {
-        panel.style.left = panelPos.x + 'px';
-        panel.style.top = panelPos.y + 'px';
+    function applyPos(el: HTMLElement | null, pos: Pos): void {
+      if (el) {
+        el.style.left = pos.x + 'px';
+        el.style.top = pos.y + 'px';
       }
     }
 
-    function showFab() {
+    function showFab(): void {
       fab?.classList.remove('hidden');
       mini?.classList.add('hidden');
       panel?.classList.add('hidden');
     }
 
-    function showMini() {
+    function showMini(): void {
       fab?.classList.add('hidden');
       panel?.classList.add('hidden');
       mini?.classList.remove('hidden');
-      applyMiniPos();
+      applyPos(mini, miniPos);
     }
 
-    function showPanel() {
+    function showPanel(): void {
+      void ensurePlaylist();
       fab?.classList.add('hidden');
       mini?.classList.add('hidden');
       panel?.classList.remove('hidden');
-      applyPanelPos();
+      applyPos(panel, panelPos);
     }
 
-    function formatTime(sec) {
+    function formatTime(sec: number): string {
       if (!Number.isFinite(sec) || sec < 0) return '0:00';
       const m = Math.floor(sec / 60);
       const s = Math.floor(sec % 60);
       return m + ':' + String(s).padStart(2, '0');
     }
 
-    function setProgressStyle(el, percent) {
+    function setProgressStyle(
+      el: HTMLInputElement | null,
+      percent: number
+    ): void {
       if (!el) return;
       const p = Math.min(100, Math.max(0, percent));
       el.style.setProperty('--progress', p + '%');
     }
 
-    function hashSeed(input) {
+    function hashSeed(input: unknown): number {
       let h = 2166136261;
       const s = String(input || 'folio');
       for (let i = 0; i < s.length; i++) {
@@ -581,58 +709,67 @@ const ui = {
       return h >>> 0;
     }
 
-    function applyCyanotypeSleeve(el, seedKey) {
-      if (!el) return;
+    function cyanotypeVars(seedKey: unknown): string {
       const h = hashSeed(seedKey);
       const cx = 18 + (h % 64);
       const cy = 16 + ((h >>> 8) % 60);
       const angle = 90 + ((h >>> 16) % 90);
+      return `--cx:${cx}%;--cy:${cy}%;--angle:${angle}deg`;
+    }
+
+    function applyCyanotypeSleeve(el: Element | null, seedKey: unknown): void {
+      if (!el) return;
       el.textContent = '';
       el.classList.add('cyanotype-sleeve');
-      el.style.setProperty('--cx', cx + '%');
-      el.style.setProperty('--cy', cy + '%');
-      el.style.setProperty('--angle', angle + 'deg');
+      const vars = cyanotypeVars(seedKey).split(';');
+      vars.forEach((v) => {
+        const [k, val] = v.split(':');
+        if (k && val)
+          (el as HTMLElement).style.setProperty(k.trim(), val.trim());
+      });
     }
 
-    function sleeveMarkup(seedKey) {
-      const h = hashSeed(seedKey);
-      const cx = 18 + (h % 64);
-      const cy = 16 + ((h >>> 8) % 60);
-      const angle = 90 + ((h >>> 16) % 90);
-      return `<span class="cyanotype-sleeve w-8 h-8 flex-shrink-0" style="--cx:${cx}%;--cy:${cy}%;--angle:${angle}deg" aria-hidden="true"></span>`;
+    function sleeveMarkup(seedKey: unknown): string {
+      return `<span class="cyanotype-sleeve w-8 h-8 flex-shrink-0" style="${cyanotypeVars(
+        seedKey
+      )}" aria-hidden="true"></span>`;
     }
 
-    function setEmptyState() {
+    function escapeHtml(s: string): string {
+      const div = document.createElement('div');
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    function setEmptyState(): void {
       const titleEl = document.getElementById('music-title');
       const artistEl = document.getElementById('music-artist');
       const coverEl = document.getElementById('music-cover');
       const miniTitle = document.getElementById('music-mini-title');
       const miniCover = document.getElementById('music-mini-cover');
-      if (titleEl) titleEl.textContent = '暂无可播放曲目';
+      if (titleEl) titleEl.textContent = str.emptyTitle;
       if (artistEl) {
-        artistEl.textContent = '稍后再来看看';
+        artistEl.textContent = str.emptyArtist;
         artistEl.classList.remove('text-red-500');
       }
       applyCyanotypeSleeve(coverEl, 'empty');
-      if (miniTitle) miniTitle.textContent = '暂无可播放曲目';
+      if (miniTitle) miniTitle.textContent = str.emptyTitle;
       applyCyanotypeSleeve(miniCover, 'empty');
       if (playlistPlaceholder) {
-        playlistPlaceholder.textContent = '暂时没有可播放的曲目';
+        playlistPlaceholder.textContent = str.emptyList;
         playlistPlaceholder.classList.remove('hidden');
       }
-      if (playlistContainer) {
-        const list = playlistContainer.querySelector('.music-playlist-list');
-        if (list) list.remove();
-      }
+      const list = playlistContainer?.querySelector('.music-playlist-list');
+      if (list) list.remove();
     }
 
-    function renderPlaylist() {
+    function renderPlaylist(): void {
       if (!playlistContainer || !playlistPlaceholder) return;
       playlistPlaceholder.classList.add('hidden');
       const list = playlistContainer.querySelector('.music-playlist-list');
       if (list) list.remove();
       if (musicData.length === 0) {
-        playlistPlaceholder.textContent = '暂时没有可播放的曲目';
+        playlistPlaceholder.textContent = str.emptyList;
         playlistPlaceholder.classList.remove('hidden');
         return;
       }
@@ -645,26 +782,26 @@ const ui = {
           'music-track w-full text-left px-3 py-2.5 rounded-sm flex items-center gap-3 transition-colors hover:bg-[rgb(var(--color-bg-accent))] border border-transparent';
         btn.dataset.index = String(index);
         const seed = track.file || track.title || String(index);
-        btn.innerHTML = `${sleeveMarkup(seed)}<div class="flex-1 min-w-0"><div class="text-sm font-medium truncate text-[rgb(var(--color-text-primary))]">${escapeHtml(track.title)}</div><div class="text-xs text-[rgb(var(--color-text-tertiary))] truncate">${escapeHtml(track.artist)}</div></div>`;
+        btn.innerHTML = `${sleeveMarkup(seed)}<div class="flex-1 min-w-0"><div class="text-sm font-medium truncate text-[rgb(var(--color-text-primary))]">${escapeHtml(
+          track.title
+        )}</div><div class="text-xs text-[rgb(var(--color-text-tertiary))] truncate">${escapeHtml(
+          track.artist
+        )}</div></div>`;
         btn.addEventListener('click', async () => {
           loadTrack(index);
           try {
-            await audio.play();
-          } catch (_) {}
+            await audio?.play();
+          } catch {
+            /* user gesture required */
+          }
         });
         wrap.appendChild(btn);
       });
       playlistContainer.appendChild(wrap);
     }
 
-    function escapeHtml(s) {
-      const div = document.createElement('div');
-      div.textContent = s;
-      return div.innerHTML;
-    }
-
-    function loadTrack(index) {
-      if (playbackMode === 'radio') return;
+    function loadTrack(index: number): void {
+      if (playbackMode === 'radio' || !audio) return;
       if (index < 0 || index >= musicData.length) return;
       const t = musicData[index];
       currentTrack = index;
@@ -691,7 +828,8 @@ const ui = {
       });
     }
 
-    function updateTimeDisplay() {
+    function updateTimeDisplay(): void {
+      if (!audio) return;
       const cur = formatTime(audio.currentTime);
       const dur = formatTime(audio.duration);
       const curEl = document.getElementById('music-current');
@@ -702,13 +840,14 @@ const ui = {
       if (miniTime) miniTime.textContent = cur + ' / ' + dur;
     }
 
-    function updatePlayPause() {
+    function updatePlayPause(): void {
       const playIcons = document.querySelectorAll('.play-icon');
       const pauseIcons = document.querySelectorAll('.pause-icon');
       playIcons.forEach((el) => el.classList.toggle('hidden', isPlaying));
       pauseIcons.forEach((el) => el.classList.toggle('hidden', !isPlaying));
     }
 
+    // ── State transitions ────────────────────────────────────────────────
     fab?.addEventListener('click', () => showPanel());
     document
       .getElementById('music-panel-close')
@@ -726,104 +865,161 @@ const ui = {
         saveState();
       });
 
-    miniDrag?.addEventListener('mousedown', (e) => {
-      if (e.button !== 0) return;
-      dragTarget = 'mini';
-      dragOffset = { x: e.clientX - miniPos.x, y: e.clientY - miniPos.y };
-    });
-    panelDrag?.addEventListener('mousedown', (e) => {
-      if (e.button !== 0) return;
-      dragTarget = 'panel';
-      dragOffset = { x: e.clientX - panelPos.x, y: e.clientY - panelPos.y };
-    });
+    // ── Unified drag (pointer events cover mouse + touch) ────────────────
+    function startDrag(
+      target: 'mini' | 'panel',
+      clientX: number,
+      clientY: number
+    ): void {
+      const origin = target === 'mini' ? miniPos : panelPos;
+      dragTarget = target;
+      dragOffset = { x: clientX - origin.x, y: clientY - origin.y };
+    }
 
-    document.addEventListener('mousemove', (e) => {
+    function moveDrag(clientX: number, clientY: number): void {
+      if (!dragTarget) return;
       const w = window.innerWidth;
       const h = window.innerHeight;
       if (dragTarget === 'mini') {
         const minW = 280;
-        miniPos.x = Math.max(0, Math.min(w - minW, e.clientX - dragOffset.x));
-        miniPos.y = Math.max(0, Math.min(h - 80, e.clientY - dragOffset.y));
-        applyMiniPos();
-      } else if (dragTarget === 'panel') {
+        miniPos.x = Math.max(0, Math.min(w - minW, clientX - dragOffset.x));
+        miniPos.y = Math.max(0, Math.min(h - 80, clientY - dragOffset.y));
+        applyPos(mini, miniPos);
+      } else {
         const pw = 320;
-        panelPos.x = Math.max(0, Math.min(w - pw, e.clientX - dragOffset.x));
-        panelPos.y = Math.max(0, Math.min(h - 200, e.clientY - dragOffset.y));
-        applyPanelPos();
+        panelPos.x = Math.max(0, Math.min(w - pw, clientX - dragOffset.x));
+        panelPos.y = Math.max(0, Math.min(h - 200, clientY - dragOffset.y));
+        applyPos(panel, panelPos);
       }
-    });
-    document.addEventListener('mouseup', () => {
+    }
+
+    function endDrag(): void {
       if (dragTarget) {
         saveState();
         dragTarget = null;
       }
-    });
-
-    function playBtnClick(handler) {
-      document.getElementById('music-play')?.addEventListener('click', handler);
-      document
-        .getElementById('music-mini-play')
-        ?.addEventListener('click', handler);
     }
-    playBtnClick(async () => {
-      try {
-        if (isPlaying) {
-          audio.pause();
-        } else {
-          if (playbackMode === 'radio') {
-            if (!radioStation) return;
-            if (audio.src !== radioStation.value) {
-              audio.src = radioStation.value;
-              audio.load();
-            }
-            const titleEl = document.getElementById('music-title');
-            const miniTitle = document.getElementById('music-mini-title');
-            const artistEl = document.getElementById('music-artist');
-            const name = getSelectedStationName();
-            if (titleEl) titleEl.textContent = '📻 ' + name;
-            if (miniTitle) miniTitle.textContent = '📻 ' + name;
-            if (artistEl) artistEl.textContent = '正在直播';
-          } else {
-            if (musicData.length === 0) return;
-            if (!audio.src || audio.src === window.location.href) loadTrack(0);
-          }
-          await audio.play();
-        }
-      } catch (err) {
-        if (err?.name === 'NotAllowedError') {
-          console.warn('请先与页面交互后再播放');
-        }
-      }
+
+    [miniDrag, panelDrag].forEach((dragEl) => {
+      if (!dragEl) return;
+      const target = dragEl === miniDrag ? 'mini' : 'panel';
+      // Mouse
+      dragEl.addEventListener('mousedown', (e: MouseEvent) => {
+        if (e.button !== 0) return;
+        startDrag(target, e.clientX, e.clientY);
+      });
+      // Touch (passive — we don't preventDefault, so scrolling stays possible)
+      dragEl.addEventListener(
+        'touchstart',
+        (e: TouchEvent) => {
+          if (e.touches.length !== 1) return;
+          startDrag(target, e.touches[0].clientX, e.touches[0].clientY);
+        },
+        { passive: true }
+      );
     });
 
-    audio.addEventListener('play', () => {
+    document.addEventListener('mousemove', (e: MouseEvent) =>
+      moveDrag(e.clientX, e.clientY)
+    );
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener(
+      'touchmove',
+      (e: TouchEvent) => {
+        if (dragTarget && e.touches.length === 1) {
+          moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      },
+      { passive: true }
+    );
+    document.addEventListener('touchend', endDrag);
+
+    // ── Playback ──────────────────────────────────────────────────────────
+    function bindPlay(id: string): void {
+      document.getElementById(id)?.addEventListener('click', async () => {
+        if (!audio) return;
+        try {
+          if (isPlaying) {
+            audio.pause();
+          } else {
+            if (playbackMode === 'radio') {
+              if (!radioStation) return;
+              if (audio.src !== radioStation.value) {
+                audio.src = radioStation.value;
+                audio.load();
+              }
+              const titleEl = document.getElementById('music-title');
+              const miniTitle = document.getElementById('music-mini-title');
+              const artistEl = document.getElementById('music-artist');
+              const name = getSelectedStationName();
+              if (titleEl) titleEl.textContent = '📻 ' + name;
+              if (miniTitle) miniTitle.textContent = '📻 ' + name;
+              if (artistEl) artistEl.textContent = str.live;
+            } else {
+              if (musicData.length === 0) return;
+              if (!audio.src || audio.src === window.location.href)
+                loadTrack(0);
+            }
+            await audio.play();
+          }
+        } catch (err) {
+          if ((err as DOMException)?.name === 'NotAllowedError') {
+            console.warn('Audio playback requires a user gesture first.');
+          }
+        }
+      });
+    }
+    bindPlay('music-play');
+    bindPlay('music-mini-play');
+
+    audio?.addEventListener('play', () => {
       isPlaying = true;
       updatePlayPause();
     });
-    audio.addEventListener('pause', () => {
+    audio?.addEventListener('pause', () => {
       isPlaying = false;
       updatePlayPause();
     });
-
-    audio.addEventListener('timeupdate', () => {
-      if (audio.duration) {
-        const p = (audio.currentTime / audio.duration) * 100;
-        if (progress) {
-          progress.value = p;
-          setProgressStyle(progress, p);
-        }
-        if (miniProgress) {
-          miniProgress.value = p;
-          setProgressStyle(miniProgress, p);
-        }
-        updateTimeDisplay();
+    audio?.addEventListener('timeupdate', () => {
+      if (!audio || !audio.duration) return;
+      const p = (audio.currentTime / audio.duration) * 100;
+      if (progress) {
+        progress.value = String(p);
+        setProgressStyle(progress, p);
+      }
+      if (miniProgress) {
+        miniProgress.value = String(p);
+        setProgressStyle(miniProgress, p);
+      }
+      updateTimeDisplay();
+    });
+    audio?.addEventListener('loadedmetadata', () => {
+      updateTimeDisplay();
+      setProgressStyle(progress, 0);
+      setProgressStyle(miniProgress, 0);
+    });
+    audio?.addEventListener('ended', async () => {
+      if (playbackMode === 'radio' || !audio || musicData.length === 0) return;
+      currentTrack = (currentTrack + 1) % musicData.length;
+      loadTrack(currentTrack);
+      try {
+        await audio.play();
+      } catch {
+        /* ignore */
+      }
+    });
+    audio?.addEventListener('error', () => {
+      const artistEl = document.getElementById('music-artist');
+      if (artistEl) {
+        artistEl.textContent = str.loadError;
+        artistEl.classList.add('text-red-500');
       }
     });
 
-    function seekBar(inputEl) {
+    function seekBar(inputEl: HTMLInputElement | null): void {
       if (!inputEl) return;
       inputEl.addEventListener('input', () => {
-        if (audio.duration) {
+        if (audio && audio.duration) {
           const t = (parseFloat(inputEl.value) / 100) * audio.duration;
           audio.currentTime = t;
           setProgressStyle(inputEl, parseFloat(inputEl.value));
@@ -833,38 +1029,13 @@ const ui = {
     seekBar(progress);
     seekBar(miniProgress);
 
-    if (volume) {
-      volume.addEventListener('input', () => {
-        audio.volume = parseFloat(volume.value) / 100;
-        saveState();
-      });
-    }
-
-    audio.addEventListener('loadedmetadata', () => {
-      updateTimeDisplay();
-      if (progress) setProgressStyle(progress, 0);
-      if (miniProgress) setProgressStyle(miniProgress, 0);
-    });
-    audio.addEventListener('ended', async () => {
-      if (playbackMode === 'radio') return;
-      if (musicData.length === 0) return;
-      currentTrack = (currentTrack + 1) % musicData.length;
-      loadTrack(currentTrack);
-      try {
-        await audio.play();
-      } catch (_) {}
-    });
-    audio.addEventListener('error', () => {
-      const artistEl = document.getElementById('music-artist');
-      if (artistEl) {
-        artistEl.textContent = '加载失败';
-        artistEl.classList.add('text-red-500');
-      }
+    volume?.addEventListener('input', () => {
+      if (audio) audio.volume = parseFloat(volume.value) / 100;
+      saveState();
     });
 
-    function prevNext(delta) {
-      if (playbackMode === 'radio') return;
-      if (musicData.length === 0) return;
+    function prevNext(delta: number): void {
+      if (playbackMode === 'radio' || musicData.length === 0 || !audio) return;
       currentTrack =
         (currentTrack + delta + musicData.length) % musicData.length;
       loadTrack(currentTrack);
@@ -882,32 +1053,37 @@ const ui = {
     document
       .getElementById('music-mini-next')
       ?.addEventListener('click', () => prevNext(1));
+
     modeLocal?.addEventListener('click', () => setMode('local'));
     modeRadio?.addEventListener('click', () => setMode('radio'));
     radioApply?.addEventListener('click', async () => {
-      if (!radioStation) return;
+      if (!audio || !radioStation) return;
       audio.src = radioStation.value;
       audio.load();
       if (isPlaying) {
         try {
           await audio.play();
-        } catch (_) {}
+        } catch {
+          /* ignore */
+        }
       }
       if (playbackMode === 'radio') setMode('radio');
     });
 
+    // ── Init ──────────────────────────────────────────────────────────────
     loadState();
-    applyMiniPos();
-    applyPanelPos();
-    if (audio) audio.volume = volume ? parseFloat(volume.value) / 100 : 0.5;
+    applyPos(mini, miniPos);
+    applyPos(panel, panelPos);
+    if (audio && volume) audio.volume = parseFloat(volume.value) / 100;
 
-    let playlistReady = null;
-    function ensurePlaylist() {
+    function ensurePlaylist(): Promise<void> {
       if (!playlistReady) {
         playlistReady = fetch(MANIFEST_URL)
           .then((r) => (r.ok ? r.json() : Promise.reject(new Error('Not ok'))))
-          .then((data) => (data && data.tracks ? data.tracks : []))
-          .then((tracks) => {
+          .then((data: { tracks?: Track[] }) =>
+            data && data.tracks ? data.tracks : []
+          )
+          .then((tracks: Track[]) => {
             musicData = Array.isArray(tracks) ? tracks : [];
             renderPlaylist();
             if (musicData.length > 0) loadTrack(0);
@@ -921,65 +1097,6 @@ const ui = {
       }
       return playlistReady;
     }
-
-    const openPanel = showPanel;
-    showPanel = async function () {
-      await ensurePlaylist();
-      openPanel();
-    };
-
-    // 触摸拖拽支持（与鼠标共用同一套位置逻辑）
-    function getClientPos(e) {
-      if (e.touches && e.touches.length)
-        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      return { x: e.clientX, y: e.clientY };
-    }
-    function addTouchDrag(dragEl, targetName) {
-      if (!dragEl) return;
-      dragEl.addEventListener(
-        'touchstart',
-        (e) => {
-          if (e.touches.length !== 1) return;
-          const pos = getClientPos(e);
-          dragTarget = targetName;
-          dragOffset = {
-            x: pos.x - (targetName === 'mini' ? miniPos.x : panelPos.x),
-            y: pos.y - (targetName === 'mini' ? miniPos.y : panelPos.y),
-          };
-        },
-        { passive: true }
-      );
-    }
-    document.addEventListener(
-      'touchmove',
-      (e) => {
-        if (dragTarget && e.touches.length === 1) {
-          const pos = getClientPos(e);
-          const w = window.innerWidth;
-          const h = window.innerHeight;
-          if (dragTarget === 'mini') {
-            const minW = 280;
-            miniPos.x = Math.max(0, Math.min(w - minW, pos.x - dragOffset.x));
-            miniPos.y = Math.max(0, Math.min(h - 80, pos.y - dragOffset.y));
-            applyMiniPos();
-          } else if (dragTarget === 'panel') {
-            const pw = 320;
-            panelPos.x = Math.max(0, Math.min(w - pw, pos.x - dragOffset.x));
-            panelPos.y = Math.max(0, Math.min(h - 200, pos.y - dragOffset.y));
-            applyPanelPos();
-          }
-        }
-      },
-      { passive: true }
-    );
-    document.addEventListener('touchend', () => {
-      if (dragTarget) {
-        saveState();
-        dragTarget = null;
-      }
-    });
-    addTouchDrag(miniDrag, 'mini');
-    addTouchDrag(panelDrag, 'panel');
   </script>
 
   <style>
@@ -995,7 +1112,7 @@ const ui = {
       -webkit-appearance: none;
       appearance: none;
       height: 8px;
-      border-radius: 9999px;
+      border-radius: var(--radius-pill);
       background: rgb(var(--color-border));
       --progress: 0%;
       background: linear-gradient(
@@ -1033,7 +1150,7 @@ const ui = {
     .music-mode-btn {
       border: 1px solid rgb(var(--color-border));
       background: rgb(var(--color-bg-primary));
-      border-radius: 0.125rem;
+      border-radius: var(--radius-sharp);
       padding: 0.45rem 0.6rem;
       font-size: 0.78rem;
       color: rgb(var(--color-text-secondary));
@@ -1059,16 +1176,9 @@ const ui = {
       top: 24px;
     }
 
-    /* Studio dock stack (right rail): music at base */
+    /* Studio dock: music FAB is the base of the rail (order 0). */
     .music-fab {
-      right: 1rem;
-      bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
-    }
-    @media (min-width: 768px) {
-      .music-fab {
-        right: 1.5rem;
-        bottom: calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
-      }
+      --dock-order: 0;
     }
     @media (max-width: 640px) {
       .music-panel {

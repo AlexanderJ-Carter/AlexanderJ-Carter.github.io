@@ -38,6 +38,59 @@ const nodeGlobals = {
   process: 'readonly',
 };
 
+// Node runtime globals for build scripts. Node 18+ exposes Web APIs (fetch,
+// URL, Headers, Response, TextEncoder, atob, crypto) globally alongside
+// Node-specific process/Buffer.
+const nodeScriptGlobals = {
+  ...nodeGlobals,
+  URL: 'readonly',
+  URLSearchParams: 'readonly',
+  Buffer: 'readonly',
+  fetch: 'readonly',
+  Headers: 'readonly',
+  Request: 'readonly',
+  Response: 'readonly',
+  TextEncoder: 'readonly',
+  TextDecoder: 'readonly',
+  atob: 'readonly',
+  btoa: 'readonly',
+  crypto: 'readonly',
+};
+
+// CommonJS scripts additionally expose require/module/exports/__dirname.
+const cjsGlobals = {
+  ...nodeScriptGlobals,
+  require: 'readonly',
+  module: 'readonly',
+  exports: 'readonly',
+  __dirname: 'readonly',
+  __filename: 'readonly',
+};
+
+// Cloudflare Workers service-worker global scope (Request/Response/fetch/etc.).
+const workerGlobals = {
+  console: 'readonly',
+  fetch: 'readonly',
+  Request: 'readonly',
+  Response: 'readonly',
+  Headers: 'readonly',
+  URL: 'readonly',
+  URLSearchParams: 'readonly',
+  FormData: 'readonly',
+  Blob: 'readonly',
+  File: 'readonly',
+  TextEncoder: 'readonly',
+  TextDecoder: 'readonly',
+  atob: 'readonly',
+  btoa: 'readonly',
+  crypto: 'readonly',
+  caches: 'readonly',
+  AbortController: 'readonly',
+  ReadableStream: 'readonly',
+  WritableStream: 'readonly',
+  TransformStream: 'readonly',
+};
+
 export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -77,9 +130,28 @@ export default [
     },
   },
   {
-    files: ['scripts/**/*.js'],
+    files: ['scripts/**/*.{js,mjs}', 'ops-portal/scripts/**/*.{js,mjs}'],
     languageOptions: {
-      globals: nodeGlobals,
+      globals: nodeScriptGlobals,
+    },
+    rules: {
+      'no-console': 'off',
+    },
+  },
+  {
+    files: ['scripts/**/*.cjs', 'ops-portal/scripts/**/*.cjs'],
+    languageOptions: {
+      globals: cjsGlobals,
+    },
+    rules: {
+      'no-console': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
+    files: ['workers/**/src/*.js', 'ops-portal/src/*.js'],
+    languageOptions: {
+      globals: workerGlobals,
     },
     rules: {
       'no-console': 'off',

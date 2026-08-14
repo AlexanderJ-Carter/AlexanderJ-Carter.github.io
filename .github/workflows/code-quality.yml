@@ -58,5 +58,8 @@ jobs:
         if: steps.changed-files.outputs.any_changed != 'true'
         run: echo "No files requiring Prettier check in this run."
 
+      - name: Lint
+        run: npm run lint
+
       - name: Check build
         run: npm run build

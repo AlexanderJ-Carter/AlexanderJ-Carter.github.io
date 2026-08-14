@@ -9,6 +9,12 @@
   "orientation": "portrait-primary",
   "icons": [
     {
+      "src": "/img/branding/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
       "src": "/img/branding/favicon.ico",
       "sizes": "48x48",
       "type": "image/x-icon"
@@ -17,7 +23,7 @@
       "src": "/img/branding/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     }
   ],
   "categories": ["portfolio", "photography", "blog"],

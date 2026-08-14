@@ -44,6 +44,10 @@ export const ui = {
     'gallery.landscape': '风景',
     'gallery.portrait': '人像',
     'gallery.food': '美食',
+    'gallery.filterByCategory': '按分类筛选',
+    'gallery.close': '关闭',
+    'gallery.prev': '上一张',
+    'gallery.next': '下一张',
     'about.title': '关于我',
     'about.bio': '个人简介',
     'about.skills': '技能',
@@ -119,6 +123,10 @@ export const ui = {
     'gallery.landscape': '風景',
     'gallery.portrait': '人像',
     'gallery.food': '美食',
+    'gallery.filterByCategory': '依分類篩選',
+    'gallery.close': '關閉',
+    'gallery.prev': '上一張',
+    'gallery.next': '下一張',
     'about.title': '關於我',
     'about.bio': '個人簡介',
     'about.skills': '技能',
@@ -195,6 +203,10 @@ export const ui = {
     'gallery.landscape': 'Landscape',
     'gallery.portrait': 'Portrait',
     'gallery.food': 'Food',
+    'gallery.filterByCategory': 'Filter by category',
+    'gallery.close': 'Close',
+    'gallery.prev': 'Previous',
+    'gallery.next': 'Next',
     'about.title': 'About',
     'about.bio': 'Biography',
     'about.skills': 'Skills',
@@ -275,6 +287,10 @@ export const ui = {
     'gallery.landscape': 'Paysage',
     'gallery.portrait': 'Portrait',
     'gallery.food': 'Nourriture',
+    'gallery.filterByCategory': 'Filtrer par catégorie',
+    'gallery.close': 'Fermer',
+    'gallery.prev': 'Précédent',
+    'gallery.next': 'Suivant',
     'about.title': 'À propos',
     'about.bio': 'Biographie',
     'about.skills': 'Compétences',
@@ -355,6 +371,10 @@ export const ui = {
     'gallery.landscape': 'Пейзаж',
     'gallery.portrait': 'Портрет',
     'gallery.food': 'Еда',
+    'gallery.filterByCategory': 'Фильтровать по категории',
+    'gallery.close': 'Закрыть',
+    'gallery.prev': 'Предыдущая',
+    'gallery.next': 'Следующая',
     'about.title': 'О нас',
     'about.bio': 'Биография',
     'about.skills': 'Навыки',
@@ -408,8 +428,20 @@ export function getLangFromUrl(url: URL) {
   return defaultLang;
 }
 
+// Type guard: every locale must define the same keys as the default (zh-CN).
+// A missing key in any locale is flagged at compile time via `satisfies`.
+type UiKey = keyof (typeof ui)[typeof defaultLang];
+type UiDictionary = Record<keyof typeof ui, Record<UiKey, string>>;
+void (ui satisfies UiDictionary);
+
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof (typeof ui)[typeof defaultLang]) {
-    return ui[lang][key] || ui[defaultLang][key];
+  return function t(key: UiKey): string {
+    const value = ui[lang][key];
+    if (!value && import.meta.env.DEV) {
+      console.warn(
+        `[i18n] missing key "${key}" for locale "${lang}" — falling back to ${defaultLang}`
+      );
+    }
+    return value || ui[defaultLang][key];
   };
 }
