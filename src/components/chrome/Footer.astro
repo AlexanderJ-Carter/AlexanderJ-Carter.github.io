@@ -208,17 +208,13 @@ const legal = [
 ];
 ---
 
-<footer class="mt-24 border-t border-[rgb(var(--color-border))] relative">
-  <div
-    class="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary-500/40 to-transparent"
-    aria-hidden="true"
-  >
-  </div>
+<footer class="footer-plate mt-20 md:mt-24">
+  <div class="footer-plate__rule" aria-hidden="true"></div>
 
-  <div class="container mx-auto px-4 lg:px-8 py-14 md:py-16 space-y-12">
-    <!-- Brand band -->
+  <div class="container mx-auto px-4 lg:px-8 py-14 md:py-20">
+    <!-- Top: brand + contact, as one band (no internal divider) -->
     <div
-      class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 pb-10 border-b border-[rgb(var(--color-border))]"
+      class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-12"
     >
       <div class="max-w-xl">
         <a
@@ -272,24 +268,19 @@ const legal = [
         <ExposureMeter />
       </div>
 
-      <a
-        href="mailto:contact-us@alexander.xin"
-        class="inline-flex items-center gap-3 border border-[rgb(var(--color-border))] px-5 py-3 hover:border-[rgb(var(--color-accent)_/_0.55)] hover:bg-[rgb(var(--color-bg-secondary))] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
-      >
+      <a href="mailto:contact-us@alexander.xin" class="footer-contact">
         <span
           class="meta-mono !text-[10px] text-[rgb(var(--color-text-tertiary))]"
           >{t.contact}</span
         >
-        <span
-          class="font-heading text-sm font-semibold text-primary-600 dark:text-primary-400"
-        >
-          contact-us@alexander.xin
-        </span>
+        <span class="footer-contact__email"> contact-us@alexander.xin </span>
       </a>
     </div>
 
-    <!-- Browse + Notes -->
-    <div class="grid gap-10 lg:grid-cols-2">
+    <!-- Middle: browse + legal, side by side, sharing one rhythm -->
+    <div
+      class="footer-grid grid gap-x-12 gap-y-8 lg:grid-cols-2 mt-12 md:mt-14"
+    >
       <nav aria-label={t.browse}>
         <p class="folio-mark mb-4">{t.browse}</p>
         <ul class="flex flex-wrap gap-x-1 gap-y-2">
@@ -343,8 +334,8 @@ const legal = [
       </nav>
     </div>
 
-    <!-- Elsewhere directory -->
-    <section aria-labelledby="footer-elsewhere-title">
+    <!-- Elsewhere directory — same weight as browse/legal, not a loud block -->
+    <section aria-labelledby="footer-elsewhere-title" class="mt-12 md:mt-14">
       <div
         class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5"
       >
@@ -352,7 +343,7 @@ const legal = [
           <p class="folio-mark mb-2">Plate · Out</p>
           <h2
             id="footer-elsewhere-title"
-            class="font-heading text-xl md:text-2xl font-bold tracking-tight"
+            class="font-heading text-lg md:text-xl font-semibold tracking-tight text-[rgb(var(--color-text-primary))]"
           >
             {t.elsewhere}
           </h2>
@@ -388,10 +379,8 @@ const legal = [
       </div>
     </section>
 
-    <!-- Copyright bar -->
-    <div
-      class="pt-6 border-t border-[rgb(var(--color-border))] flex flex-col gap-4"
-    >
+    <!-- Bottom: copyright + meta — a quiet baseline, separated by a hairline -->
+    <div class="footer-baseline mt-12 md:mt-14">
       <div
         class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
       >
@@ -430,7 +419,7 @@ const legal = [
         </p>
       </div>
       <p
-        class="text-[0.7rem] tracking-wide text-[rgb(var(--color-text-tertiary))]"
+        class="text-[0.7rem] tracking-wide text-[rgb(var(--color-text-tertiary))] mt-4"
       >
         {t.colophon}
       </p>
@@ -460,10 +449,60 @@ const legal = [
 </script>
 
 <style>
+  /* The footer reads as one folio plate, not stacked blocks. A soft top rule
+     replaces the hard border-t; a faint tint settles it below the page. */
+  .footer-plate {
+    position: relative;
+    background: rgb(var(--color-bg-secondary) / 0.4);
+  }
+  .footer-plate__rule {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--color-border)),
+      transparent
+    );
+  }
+  /* Sections breathe with a single rhythm; dividers are hairlines on tint,
+     not hard borders that chop the plate into blocks. */
+  .footer-baseline {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(var(--color-border) / 0.5);
+  }
+
+  /* Contact button — quiet, same plate language as the rest. */
+  .footer-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid rgb(var(--color-border));
+    border-radius: var(--radius-sharp);
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .footer-contact:hover,
+  .footer-contact:focus-visible {
+    border-color: rgb(var(--color-accent) / 0.55);
+    background: rgb(var(--color-bg-secondary) / 0.6);
+    outline: none;
+  }
+  .footer-contact:focus-visible {
+    box-shadow: 0 0 0 2px rgb(var(--color-accent) / 0.4);
+  }
+  .footer-contact__email {
+    font-family: theme('fontFamily.heading');
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgb(var(--color-text-primary));
+  }
+
   .footer-chip {
     width: fit-content;
     border: 1px solid rgb(var(--color-border));
-    border-radius: 0.125rem;
+    border-radius: var(--radius-sharp);
     background: transparent;
     color: rgb(var(--color-text-tertiary));
     padding: 0.25rem 0.5rem;
@@ -477,5 +516,12 @@ const legal = [
   .footer-chip:hover {
     color: rgb(var(--color-text-secondary));
     border-color: rgb(var(--color-accent) / 0.4);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer-contact,
+    .footer-chip {
+      transition: none;
+    }
   }
 </style>
