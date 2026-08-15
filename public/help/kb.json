@@ -1,7 +1,7 @@
 {
   "version": 1,
   "site": "https://alexander.xin",
-  "updated": "2026-08-12",
+  "updated": "2026-08-15",
   "guidelines": [
     "Answer only from this KB and linked public docs.",
     "Never invent private ops, Access bypasses, or secrets.",
@@ -10,78 +10,293 @@
   "faq": [
     {
       "id": "apex-www",
-      "q": ["主站和 www 有什么区别", "apex www", "mirror", "国内镜像"],
+      "q": [
+        "主站和 www 有什么区别",
+        "apex www",
+        "mirror",
+        "国内镜像"
+      ],
       "a": "alexander.xin 是 GitHub Pages 全球源；www.alexander.xin 是同一套静态站的国内镜像（Cloudflare Tunnel），互不自动跳转。"
     },
     {
       "id": "writing-home",
-      "q": ["写作", "blog", "writing", "文章在哪"],
+      "q": [
+        "写作",
+        "blog",
+        "writing",
+        "文章在哪"
+      ],
       "a": "公开写作主场是 blog.alexander.xin；apex 的 /writing 会 301 过去。RSS 在各语言 /rss.xml。"
     },
     {
       "id": "contact",
-      "q": ["联系", "contact", "邮件", "email"],
+      "q": [
+        "联系",
+        "contact",
+        "邮件",
+        "email"
+      ],
       "a": "用 https://alexander.xin/contact/ 或邮件 contact-us@alexander.xin。独立 contact 子域已 301 到主站联系页。"
     },
     {
       "id": "network",
-      "q": ["站群", "network", "目录", "有哪些站"],
+      "q": [
+        "站群",
+        "network",
+        "目录",
+        "有哪些站"
+      ],
       "a": "https://alexander.xin/network/ 列出公开节点；机器可读见 network.json。"
     },
     {
       "id": "login-not-signup",
-      "q": ["登录", "注册", "login", "signup", "维护者"],
+      "q": [
+        "登录",
+        "注册",
+        "login",
+        "signup",
+        "维护者"
+      ],
       "a": "/login 与 ops.alexander.xin 是维护者入口（Cloudflare Access），不是访客注册。访客请用 /contact。"
     },
     {
       "id": "paste",
-      "q": ["paste", "剪贴板", "privatebin", "粘贴"],
+      "q": [
+        "paste",
+        "剪贴板",
+        "privatebin",
+        "粘贴"
+      ],
       "a": "临时分享文本用 https://paste.alexander.xin（PrivateBin）。"
     },
     {
       "id": "rss",
-      "q": ["rss", "订阅", "feed"],
+      "q": [
+        "rss",
+        "订阅",
+        "feed"
+      ],
       "a": "写作 RSS 在 blog 与各语言路径的 /rss.xml；主站也有对应语言 feed。"
     },
     {
       "id": "tools",
-      "q": ["tools", "IT-Tools", "工具"],
+      "q": [
+        "tools",
+        "IT-Tools",
+        "工具"
+      ],
       "a": "主站 /tools 是公开工具索引；tools.alexander.xin 是 VPS 上的 IT-Tools，需 Cloudflare Access，不对访客开放。"
     },
     {
       "id": "cook",
-      "q": ["cook", "mycook", "菜谱", "cook-mcp"],
+      "q": [
+        "cook",
+        "mycook",
+        "菜谱",
+        "cook-mcp"
+      ],
       "a": "cook = Pages 菜谱主站；mycook = 完整自托管站；cook-mcp = 鉴权 MCP。三者互补，访客请先看 cook / mycook。"
     },
     {
       "id": "time-api",
-      "q": ["时间 API", "time api", "/time"],
+      "q": [
+        "时间 API",
+        "time api",
+        "/time"
+      ],
       "a": "公开时间接口：GET https://api.alexander.xin/time/now ；OpenAPI 见站点 /api/openapi-time.json。"
     },
     {
       "id": "privacy",
-      "q": ["隐私", "cookie", "analytics", "分析"],
+      "q": [
+        "隐私",
+        "cookie",
+        "analytics",
+        "分析"
+      ],
       "a": "见 /privacy。分析偏隐私友好；不把联系表单当营销列表。"
     },
     {
       "id": "security",
-      "q": ["安全", "漏洞", "security"],
+      "q": [
+        "安全",
+        "漏洞",
+        "security"
+      ],
       "a": "安全政策 /security/policy；PGP 与 security.txt 在 .well-known。勿在公开帮助里讨论未披露漏洞细节。"
     },
     {
       "id": "languages",
-      "q": ["语言", "i18n", "多语言", "english"],
+      "q": [
+        "语言",
+        "i18n",
+        "多语言",
+        "english"
+      ],
       "a": "默认 zh-CN 在 /；另有 /zh-TW/、/en/、/fr/、/ru/。"
     },
     {
       "id": "ops",
-      "q": ["ops", "运维门户", "登录"],
+      "q": [
+        "ops",
+        "运维门户",
+        "登录"
+      ],
       "a": "ops.alexander.xin 是维护者入口（Cloudflare Access），不是访客注册。访客请用 /contact。"
     },
     {
       "id": "help",
-      "q": ["帮助", "help", "问答"],
+      "q": [
+        "帮助",
+        "help",
+        "问答"
+      ],
       "a": "站内帮助页 /help；API POST /api/help。答案来自公开知识库，不是通用聊天机器人。"
+    },
+    {
+      "id": "gallery",
+      "q": [
+        "照片",
+        "摄影",
+        "gallery",
+        "相册",
+        "photography",
+        "作品"
+      ],
+      "a": "摄影作品在 /gallery，按风景/自然/美食/建筑/街拍分类，点相框可放大观片。"
+    },
+    {
+      "id": "about",
+      "q": [
+        "关于",
+        "about",
+        "作者是谁",
+        "who",
+        "bio",
+        "简介"
+      ],
+      "a": "/about 是作者简介与研究相关说明；个人档案区为预留空槽，逐步填写。"
+    },
+    {
+      "id": "projects",
+      "q": [
+        "项目",
+        "projects",
+        "portfolio",
+        "作品集"
+      ],
+      "a": "/projects 列出精选项目与开源工程，含状态与角色。"
+    },
+    {
+      "id": "next",
+      "q": [
+        "实验",
+        "next",
+        "atlas",
+        "echo",
+        "lab"
+      ],
+      "a": "/next 是实验区（Atlas 图谱 / Echo 等），标记为 beta，不进索引。"
+    },
+    {
+      "id": "dark-mode",
+      "q": [
+        "深色",
+        "暗色",
+        "dark mode",
+        "主题",
+        "夜间",
+        "theme"
+      ],
+      "a": "右上角主题按钮切换深浅色，无闪烁；也跟随系统的 prefers-color-scheme。"
+    },
+    {
+      "id": "music",
+      "q": [
+        "音乐",
+        "播放器",
+        "music",
+        "电台",
+        "radio"
+      ],
+      "a": "右下角音乐播放器：本地曲目 + SomaFM 在线电台；可拖拽、最小化、调音量。"
+    },
+    {
+      "id": "ads",
+      "q": [
+        "广告",
+        "ads",
+        "adsense",
+        "赞助"
+      ],
+      "a": "启用 Google AdSense 时，仅首页与文章页各放一处；其余页无广告。见 /privacy。"
+    },
+    {
+      "id": "support",
+      "q": [
+        "支持",
+        "赞助",
+        "support",
+        "donate",
+        "捐"
+      ],
+      "a": "/support 列出赞助、商业授权与开源赞助方式；非必须。"
+    },
+    {
+      "id": "friends",
+      "q": [
+        "友链",
+        "friends",
+        "参考",
+        "links"
+      ],
+      "a": "/friends 是工具与资料参考链接集合。"
+    },
+    {
+      "id": "reading-list",
+      "q": [
+        "书单",
+        "reading list",
+        "读读看看",
+        "书"
+      ],
+      "a": "/reading-list 是值得反复翻阅的书与文章，按状态分类。"
+    },
+    {
+      "id": "tools-utility",
+      "q": [
+        "汇率",
+        "单位",
+        "时间",
+        "二维码",
+        "currency",
+        "units",
+        "qr",
+        "calendar"
+      ],
+      "a": "/tools 汇集站内小工具：时间、单位换算、汇率、二维码、日历等，本地优先无需登录。"
+    },
+    {
+      "id": "language-switch",
+      "q": [
+        "切换语言",
+        "语言切换",
+        "english version",
+        "繁体"
+      ],
+      "a": "页脚或导航的语言切换可跳转各语言版本；默认简体中文在根路径 /。"
+    },
+    {
+      "id": "not-found",
+      "q": [
+        "404",
+        "找不到",
+        "打不开",
+        "not found",
+        "lost",
+        "页面没了"
+      ],
+      "a": "页面可能移动或改名。回首页 / 或看 /sitemap 全站结构，也可在 /network 找子站。"
     }
   ],
   "pages": [

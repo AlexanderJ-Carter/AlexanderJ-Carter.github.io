@@ -6,7 +6,7 @@
 export const helpKb = {
   version: 1,
   site: 'https://alexander.xin',
-  updated: '2026-08-12',
+  updated: '2026-08-15',
   guidelines: [
     'Answer only from this KB and linked public docs.',
     'Never invent private ops, Access bypasses, or secrets.',
@@ -87,6 +87,80 @@ export const helpKb = {
       id: 'help',
       q: ['帮助', 'help', '问答'],
       a: '站内帮助页 /help；API POST /api/help。答案来自公开知识库，不是通用聊天机器人。',
+    },
+    {
+      id: 'gallery',
+      q: ['照片', '摄影', 'gallery', '相册', 'photography', '作品'],
+      a: '摄影作品在 /gallery，按风景/自然/美食/建筑/街拍分类，点相框可放大观片。',
+    },
+    {
+      id: 'about',
+      q: ['关于', 'about', '作者是谁', 'who', 'bio', '简介'],
+      a: '/about 是作者简介与研究相关说明；个人档案区为预留空槽，逐步填写。',
+    },
+    {
+      id: 'projects',
+      q: ['项目', 'projects', 'portfolio', '作品集'],
+      a: '/projects 列出精选项目与开源工程，含状态与角色。',
+    },
+    {
+      id: 'next',
+      q: ['实验', 'next', 'atlas', 'echo', 'lab'],
+      a: '/next 是实验区（Atlas 图谱 / Echo 等），标记为 beta，不进索引。',
+    },
+    {
+      id: 'dark-mode',
+      q: ['深色', '暗色', 'dark mode', '主题', '夜间', 'theme'],
+      a: '右上角主题按钮切换深浅色，无闪烁；也跟随系统的 prefers-color-scheme。',
+    },
+    {
+      id: 'music',
+      q: ['音乐', '播放器', 'music', '电台', 'radio'],
+      a: '右下角音乐播放器：本地曲目 + SomaFM 在线电台；可拖拽、最小化、调音量。',
+    },
+    {
+      id: 'ads',
+      q: ['广告', 'ads', 'adsense', '赞助'],
+      a: '启用 Google AdSense 时，仅首页与文章页各放一处；其余页无广告。见 /privacy。',
+    },
+    {
+      id: 'support',
+      q: ['支持', '赞助', 'support', 'donate', '捐'],
+      a: '/support 列出赞助、商业授权与开源赞助方式；非必须。',
+    },
+    {
+      id: 'friends',
+      q: ['友链', 'friends', '参考', 'links'],
+      a: '/friends 是工具与资料参考链接集合。',
+    },
+    {
+      id: 'reading-list',
+      q: ['书单', 'reading list', '读读看看', '书'],
+      a: '/reading-list 是值得反复翻阅的书与文章，按状态分类。',
+    },
+    {
+      id: 'tools-utility',
+      q: [
+        '汇率',
+        '单位',
+        '时间',
+        '二维码',
+        'currency',
+        'units',
+        'qr',
+        'calendar',
+      ],
+      a: '/tools 汇集站内小工具：时间、单位换算、汇率、二维码、日历等，本地优先无需登录。',
+    },
+    {
+      id: 'language-switch',
+      q: ['切换语言', '语言切换', 'english version', '繁体'],
+      a: '页脚或导航的语言切换可跳转各语言版本；默认简体中文在根路径 /。',
+    },
+    {
+      id: 'not-found',
+      q: ['404', '找不到', '打不开', 'not found', 'lost', '页面没了'],
+      a: '页面可能移动或改名。回首页 / 或看 /sitemap 全站结构，也可在 /network 找子站。',
     },
   ],
   pages: [
