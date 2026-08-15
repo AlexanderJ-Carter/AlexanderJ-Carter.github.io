@@ -5,10 +5,13 @@ interface Props {
   lang?: string;
   /** compact = single-line strip; default = short box */
   variant?: 'compact' | 'box';
+  /** Page context drives the suggested-question set (localized). */
+  context?: 'contact' | 'network' | '404' | 'default';
 }
 
 const lang = resolveLang(Astro.props.lang);
 const variant = Astro.props.variant ?? 'box';
+const context = Astro.props.context ?? 'default';
 const helpHref = getLangPath(lang, '/help');
 
 const copy: Record<
@@ -20,66 +23,163 @@ const copy: Record<
     thinking: string;
     more: string;
     empty: string;
+    suggestions: string;
+    answerMark: string;
   }
 > = {
   'zh-CN': {
     title: '站内小助手',
     placeholder: '例如：cook 和 mycook 有什么不同？',
     ask: '问',
-    thinking: '想一下…',
+    thinking: '显影中…',
     more: '完整帮助',
-    empty: '用公开资料回答站群问题。',
+    empty: '用公开资料回答站群问题——问问看，或点下面的建议。',
+    suggestions: '试试这些',
+    answerMark: '答',
   },
   'zh-TW': {
     title: '站內小助手',
     placeholder: '例如：cook 和 mycook 有什麼不同？',
     ask: '問',
-    thinking: '想一下…',
+    thinking: '顯影中…',
     more: '完整幫助',
-    empty: '用公開資料回答站群問題。',
+    empty: '用公開資料回答站群問題——問問看，或點下面的建議。',
+    suggestions: '試試這些',
+    answerMark: '答',
   },
   'en-GB': {
     title: 'Site assistant',
     placeholder: 'e.g. How do cook and mycook differ?',
     ask: 'Ask',
-    thinking: 'Thinking…',
+    thinking: 'Developing…',
     more: 'Full help',
-    empty: 'Answers from public site docs.',
+    empty:
+      'Answers from public site docs — ask away, or try a suggestion below.',
+    suggestions: 'Try these',
+    answerMark: 'A',
   },
   fr: {
     title: 'Assistant',
     placeholder: 'ex. Différence cook / mycook ?',
     ask: 'OK',
-    thinking: '…',
+    thinking: 'Révélation…',
     more: 'Aide complète',
-    empty: 'Docs publics uniquement.',
+    empty:
+      'Réponses tirées des docs publics — posez votre question ou essayez une suggestion.',
+    suggestions: 'Essayez',
+    answerMark: 'R',
   },
   ru: {
     title: 'Помощник',
     placeholder: 'напр. Чем cook отличается от mycook?',
     ask: 'Спросить',
-    thinking: '…',
+    thinking: 'Проявка…',
     more: 'Справка',
-    empty: 'Только публичные документы.',
+    empty: 'Ответы из публичных документов — спросите или выберите подсказку.',
+    suggestions: 'Попробуйте',
+    answerMark: 'О',
   },
 };
 
 const t = copy[lang];
+
+// Contextual suggested questions, localized. The /api/help worker matches on
+// keywords so a question phrased in any locale still resolves to the right KB
+// entry — but the chip label should read in the visitor's language.
+const suggestionsByContext: Record<string, Record<Lang, string[]>> = {
+  default: {
+    'zh-CN': ['主站和 www 有什么区别', 'paste 是什么', '写作在哪', '怎么联系'],
+    'zh-TW': ['主站和 www 有什麼區別', 'paste 是什麼', '寫作在哪', '怎麼聯繫'],
+    'en-GB': [
+      'apex vs www',
+      'what is paste',
+      'where is the writing',
+      'how to contact',
+    ],
+    fr: [
+      'apex vs www',
+      "c'est quoi paste",
+      'où sont les écrits',
+      'comment contacter',
+    ],
+    ru: ['apex или www', 'что такое paste', 'где статьи', 'как связаться'],
+  },
+  contact: {
+    'zh-CN': ['怎么联系', '回复快吗', '有微信吗', '能合作吗'],
+    'zh-TW': ['怎麼聯繫', '回覆快嗎', '有微信嗎', '能合作嗎'],
+    'en-GB': [
+      'how to contact',
+      'how fast is the reply',
+      'is there wechat',
+      'open to collaboration',
+    ],
+    fr: [
+      'comment contacter',
+      'délai de réponse',
+      'wechat ?',
+      'collaboration ?',
+    ],
+    ru: ['как связаться', 'как быстро ответ', 'есть wechat', 'сотрудничество'],
+  },
+  network: {
+    'zh-CN': [
+      '主站和 www 有什么区别',
+      'paste 是什么',
+      'cook 和 mycook 有什么不同',
+      '站群有哪些',
+    ],
+    'zh-TW': [
+      '主站和 www 有什麼區別',
+      'paste 是什麼',
+      'cook 和 mycook 有什麼不同',
+      '站群有哪些',
+    ],
+    'en-GB': [
+      'apex vs www',
+      'what is paste',
+      'cook vs mycook',
+      'which sites exist',
+    ],
+    fr: ['apex vs www', "c'est quoi paste", 'cook vs mycook', 'quels sites'],
+    ru: ['apex или www', 'что такое paste', 'cook vs mycook', 'какие сайты'],
+  },
+  '404': {
+    'zh-CN': ['主站和 www 有什么区别', '写作在哪', '怎么联系', '站群有哪些'],
+    'zh-TW': ['主站和 www 有什麼區別', '寫作在哪', '怎麼聯繫', '站群有哪些'],
+    'en-GB': [
+      'apex vs www',
+      'where is the writing',
+      'how to contact',
+      'which sites exist',
+    ],
+    fr: [
+      'apex vs www',
+      'où sont les écrits',
+      'comment contacter',
+      'quels sites',
+    ],
+    ru: ['apex или www', 'где статьи', 'как связаться', 'какие сайты'],
+  },
+};
+const suggestions = (
+  suggestionsByContext[context]?.[lang] ?? suggestionsByContext.default[lang]
+).slice(0, 4);
 const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
 <section
-  class:list={[
-    'site-help-ask',
-    variant === 'compact' ? 'site-help-ask--compact' : 'site-help-ask--box',
-  ]}
+  class:list={['site-help-ask', `site-help-ask--${variant}`]}
   aria-label={t.title}
   data-help-ask
 >
   <div class="site-help-ask__head">
-    <p class="site-help-ask__title">{t.title}</p>
+    <p class="site-help-ask__title">
+      <span class="site-help-ask__mark" aria-hidden="true">?</span>
+      {t.title}
+    </p>
     <a href={helpHref} class="site-help-ask__more">{t.more}</a>
   </div>
+
   <form class="site-help-ask__form" id={`${uid}-form`}>
     <label class="sr-only" for={`${uid}-q`}>{t.ask}</label>
     <input
@@ -96,44 +196,79 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
       {t.ask}
     </button>
   </form>
+
+  {
+    suggestions.length > 0 && (
+      <div class="site-help-ask__chips" role="group" aria-label={t.suggestions}>
+        <span class="site-help-ask__chips-label">{t.suggestions}</span>
+        {suggestions.map((q) => (
+          <button type="button" class="site-help-ask__chip" data-suggest={q}>
+            {q}
+          </button>
+        ))}
+      </div>
+    )
+  }
+
   <div
     class="site-help-ask__out"
     id={`${uid}-out`}
     aria-live="polite"
     data-empty={t.empty}
+    data-answer-mark={t.answerMark}
   >
-    {t.empty}
+    <span class="site-help-ask__out-body">{t.empty}</span>
   </div>
 </section>
 
 <style>
+  /* Flows into the page: no boxed borders. A folio-mark header + accent rule
+     ties it to the surrounding sections instead of floating as a block. */
   .site-help-ask {
     max-width: 42rem;
   }
   .site-help-ask--box {
     margin: 0 0 2.5rem;
-    padding: 1.25rem 0;
-    border-top: 1px solid rgb(var(--color-border));
-    border-bottom: 1px solid rgb(var(--color-border));
+    padding: 1.5rem 0 0;
   }
   .site-help-ask--compact {
     margin: 1rem 0 0;
   }
+
   .site-help-ask__head {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
     gap: 0.5rem 1rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgb(var(--color-accent) / 0.25);
   }
   .site-help-ask__title {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
     margin: 0;
-    font-family: var(--font-heading);
-    font-size: 0.8rem;
-    letter-spacing: 0.16em;
+    font-family: theme('fontFamily.heading');
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgb(var(--color-text-tertiary));
+    color: rgb(var(--color-text-primary));
+  }
+  .site-help-ask__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.1rem;
+    height: 1.1rem;
+    border: 1px solid rgb(var(--color-accent) / 0.5);
+    border-radius: var(--radius-sharp);
+    color: rgb(var(--color-accent));
+    font-family: theme('fontFamily.mono');
+    font-size: 0.68rem;
+    font-weight: 700;
+    transform: translateY(2px);
   }
   .site-help-ask__more {
     font-size: 0.8rem;
@@ -144,6 +279,7 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
     color: rgb(var(--color-text-primary));
     text-decoration: underline;
   }
+
   .site-help-ask__form {
     display: flex;
     gap: 0.5rem;
@@ -153,47 +289,138 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
     flex: 1;
     min-width: 0;
     border: 1px solid rgb(var(--color-border));
+    border-radius: var(--radius-sharp);
     background: rgb(var(--color-bg-primary));
     color: rgb(var(--color-text-primary));
     padding: 0.65rem 0.85rem;
     font-size: 0.95rem;
   }
   .site-help-ask__input:focus-visible {
-    outline: 2px solid rgb(var(--color-primary, 59 130 246));
+    outline: 2px solid rgb(var(--color-accent));
     outline-offset: 2px;
+    border-color: rgb(var(--color-accent) / 0.5);
   }
   .site-help-ask__btn {
     flex-shrink: 0;
     padding: 0.65rem 1rem;
     font-size: 0.875rem;
     font-weight: 600;
-    border: 1px solid rgb(var(--color-text-primary));
-    background: rgb(var(--color-text-primary));
+    border: 1px solid rgb(var(--color-accent));
+    border-radius: var(--radius-sharp);
+    background: rgb(var(--color-accent));
     color: rgb(var(--color-bg-primary));
     cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .site-help-ask__btn:hover {
+    background: rgb(var(--color-accent) / 0.85);
   }
   .site-help-ask__btn:disabled {
     opacity: 0.55;
     cursor: wait;
   }
   .site-help-ask__btn:focus-visible {
-    outline: 2px solid rgb(var(--color-primary, 59 130 246));
+    outline: 2px solid rgb(var(--color-accent));
     outline-offset: 2px;
   }
-  .site-help-ask__out {
+
+  /* Suggestion chips — invite discovery */
+  .site-help-ask__chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
     margin-top: 0.85rem;
-    font-size: 0.9rem;
-    line-height: 1.55;
+  }
+  .site-help-ask__chips-label {
+    font-family: theme('fontFamily.mono');
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-tertiary));
+    margin-right: 0.15rem;
+  }
+  .site-help-ask__chip {
+    border: 1px solid rgb(var(--color-border));
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: rgb(var(--color-text-secondary));
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+  .site-help-ask__chip:hover,
+  .site-help-ask__chip:focus-visible {
+    border-color: rgb(var(--color-accent) / 0.55);
+    color: rgb(var(--color-accent));
+    background: rgb(var(--color-accent) / 0.08);
+  }
+  .site-help-ask__chip:focus-visible {
+    outline: 2px solid rgb(var(--color-accent));
+    outline-offset: 2px;
+  }
+
+  /* Answer plate — folio-mark index + cyanotype accent rule + developing reveal */
+  .site-help-ask__out {
+    display: none;
+    margin-top: 1rem;
+    padding: 0.85rem 1rem 0.85rem 1.1rem;
+    border-left: 2px solid rgb(var(--color-accent) / 0.5);
+    background: rgb(var(--color-accent) / 0.05);
+    border-radius: 0 var(--radius-sharp) var(--radius-sharp) 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
     color: rgb(var(--color-text-secondary));
     white-space: pre-wrap;
   }
+  .site-help-ask__out.is-shown {
+    display: block;
+  }
+  /* Developing reveal: fade + blur-to-sharp, like a print emerging */
+  .site-help-ask__out.is-developed {
+    animation: help-develop 0.5s ease-out;
+  }
+  @keyframes help-develop {
+    from {
+      opacity: 0;
+      filter: blur(3px);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+  .site-help-ask__out-mark {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: rgb(var(--color-accent));
+    vertical-align: baseline;
+  }
   .site-help-ask__out a {
-    color: inherit;
+    color: rgb(var(--color-accent));
     text-decoration: underline;
     text-underline-offset: 2px;
   }
+  .site-help-ask__out.is-thinking {
+    color: rgb(var(--color-text-tertiary));
+    font-style: italic;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .site-help-ask__btn {
+    .site-help-ask__out.is-developed {
+      animation: none;
+    }
+    .site-help-ask__btn,
+    .site-help-ask__chip {
       transition: none;
     }
   }
@@ -205,6 +432,7 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
     const input = document.getElementById(uid + '-q');
     const out = document.getElementById(uid + '-out');
     const btn = document.getElementById(uid + '-btn');
+    const chips = document.querySelectorAll('[data-suggest]');
     if (!form || !input || !out || !btn) return;
 
     function escapeHtml(s) {
@@ -229,11 +457,35 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
       return html;
     }
 
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      var q = (input.value || '').trim();
+    function renderAnswer(text) {
+      var mark = out.getAttribute('data-answer-mark') || 'A';
+      out.classList.remove('is-thinking');
+      out.classList.add('is-shown');
+      out.classList.remove('is-developed');
+      // Force reflow so the animation re-triggers on each new answer.
+      void out.offsetWidth;
+      out.classList.add('is-developed');
+      out.innerHTML =
+        '<span class="site-help-ask__out-mark">' +
+        escapeHtml(mark) +
+        ' ·</span><span class="site-help-ask__out-body">' +
+        formatAnswer(text) +
+        '</span>';
+    }
+
+    function showThinking() {
+      out.classList.add('is-shown', 'is-thinking');
+      out.classList.remove('is-developed');
+      out.innerHTML =
+        '<span class="site-help-ask__out-body">' +
+        escapeHtml(thinking) +
+        '</span>';
+    }
+
+    async function ask(q) {
       if (!q) return;
-      out.textContent = thinking;
+      input.value = q;
+      showThinking();
       btn.disabled = true;
       try {
         var res = await fetch('/api/help', {
@@ -243,17 +495,27 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
         });
         var data = await res.json();
         if (!res.ok) {
-          out.textContent = data.error || 'Error ' + res.status;
+          renderAnswer(data.error || 'Error ' + res.status);
           return;
         }
-        out.innerHTML = formatAnswer(
-          data.answer || out.getAttribute('data-empty') || ''
-        );
+        var empty = out.getAttribute('data-empty') || '';
+        renderAnswer(data.answer || empty);
       } catch (err) {
-        out.textContent = String(err);
+        renderAnswer(String(err));
       } finally {
         btn.disabled = false;
       }
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      ask((input.value || '').trim());
+    });
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        ask(chip.getAttribute('data-suggest') || '');
+      });
     });
   })();
 </script>

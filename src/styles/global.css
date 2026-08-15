@@ -1216,6 +1216,62 @@ select:valid:not(:placeholder-shown) {
   opacity: 0.12;
 }
 
+/* Section seam — a full-bleed gradient rule that softens the hard border-y
+   chop. Use `section-seam` instead of `border-y border-[rgb(...)]` so sections
+   read as a continuous folio rather than stacked blocks. */
+.section-seam {
+  position: relative;
+}
+.section-seam::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--color-border)),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Section tint — a bg-secondary band whose top/bottom fade into the page
+   instead of cutting a hard rectangle. Pair with a `bg-secondary` section. */
+.section-tint {
+  position: relative;
+}
+.section-tint::before,
+.section-tint::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  pointer-events: none;
+}
+.section-tint::before {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--color-bg-primary)),
+    rgb(var(--color-bg-secondary))
+  );
+}
+.section-tint::after {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgb(var(--color-bg-primary)),
+    rgb(var(--color-bg-secondary))
+  );
+}
+.section-tint > * {
+  position: relative;
+}
+
 /* EXIF exposure meter — live Asia/Shanghai chrome */
 .exif-meter {
   display: inline-flex;
