@@ -457,8 +457,11 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
       return html;
     }
 
-    function renderAnswer(text) {
-      var mark = out.getAttribute('data-answer-mark') || 'A';
+    function renderAnswer(text, mode) {
+      // Mark varies by source so the visitor sees whether this is a KB
+      // retrieval or an AI-generated answer (transparency over the LLM path).
+      var mark =
+        mode === 'llm' ? 'AI' : mode === 'retrieve' ? 'KB' : mode === 'none' ? '?' : '·';
       out.classList.remove('is-thinking');
       out.classList.add('is-shown');
       out.classList.remove('is-developed');
@@ -466,7 +469,9 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
       void out.offsetWidth;
       out.classList.add('is-developed');
       out.innerHTML =
-        '<span class="site-help-ask__out-mark">' +
+        '<span class="site-help-ask__out-mark" data-mode="' +
+        escapeHtml(mode || '') +
+        '">' +
         escapeHtml(mark) +
         ' ·</span><span class="site-help-ask__out-body">' +
         formatAnswer(text) +
@@ -499,7 +504,7 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
           return;
         }
         var empty = out.getAttribute('data-empty') || '';
-        renderAnswer(data.answer || empty);
+        renderAnswer(data.answer || empty, data.mode);
       } catch (err) {
         renderAnswer(String(err));
       } finally {

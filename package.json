@@ -23,6 +23,7 @@
     "build": "node scripts/generate-music-manifest.js && node scripts/generate-help-kb.mjs && node scripts/generate-fleet-changelog.mjs && astro check && astro build && node scripts/ensure-well-known.mjs",
     "preview": "astro preview",
     "astro": "astro",
+    "encode:help": "node ops-portal/scripts/encode-site-help.cjs",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{astro,ts,css,js}\" \"public/sw.js\" \"*.{mjs,md,json}\"",
     "format:check": "prettier --check \"src/**/*.{astro,ts,css,js}\" \"public/sw.js\" \"*.{mjs,md,json}\""

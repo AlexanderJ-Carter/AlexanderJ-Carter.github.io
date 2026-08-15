@@ -5,6 +5,10 @@ node_modules/
 dist/
 .astro/
 
+# Generated worker artifacts (encoded from ops-portal/src/site-help.js)
+ops-portal/help.b64
+ops-portal/ops.b64
+
 # Local environment variables
 .env
 .env.local

@@ -86,6 +86,7 @@ const workerGlobals = {
   crypto: 'readonly',
   caches: 'readonly',
   AbortController: 'readonly',
+  AbortSignal: 'readonly',
   ReadableStream: 'readonly',
   WritableStream: 'readonly',
   TransformStream: 'readonly',
