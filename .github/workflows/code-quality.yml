@@ -61,5 +61,10 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Verify site-help worker payload
+        # Encodes src/site-help.js and asserts the result is valid + matches the
+        # source (catches a stale help.b64 shipping an old worker to production).
+        run: npm run check:help
+
       - name: Check build
         run: npm run build
