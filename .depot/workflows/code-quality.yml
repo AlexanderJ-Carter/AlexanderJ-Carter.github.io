@@ -1,0 +1,65 @@
+# Depot CI Migration
+# Source: .github\workflows\code-quality.yml
+#
+# Changes made:
+# - Changed GitHub runs-on labels to their Depot equivalents
+
+name: Code Quality
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: code-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  quality:
+    runs-on: depot-ubuntu-latest # was: ubuntu-latest. Mapped standard GitHub runner to Depot equivalent.
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Detect changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v47
+        with:
+          files: |
+            **/*.astro
+            **/*.css
+            **/*.js
+            **/*.mjs
+            **/*.ts
+            **/*.json
+            **/*.md
+            **/*.yml
+            **/*.yaml
+      - name: Check formatting
+        if: steps.changed-files.outputs.any_changed == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          files="${{ steps.changed-files.outputs.all_changed_files }}"
+          echo "Checking files with Prettier:"
+          printf '%s\n' $files
+          npx prettier --check $files
+      - name: Skip formatting when no relevant changes
+        if: steps.changed-files.outputs.any_changed != 'true'
+        run: echo "No files requiring Prettier check in this run."
+      - name: Lint
+        run: npm run lint
+      - name: Verify site-help worker payload
+        # Encodes src/site-help.js and asserts the result is valid + matches the
+
+        # source (catches a stale help.b64 shipping an old worker to production).
+        run: npm run check:help
+      - name: Check build
+        run: npm run build
