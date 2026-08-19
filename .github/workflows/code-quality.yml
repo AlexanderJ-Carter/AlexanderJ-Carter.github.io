@@ -18,10 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: '24'
           cache: 'npm'
@@ -29,37 +29,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Detect changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v47
-        with:
-          files: |
-            **/*.astro
-            **/*.css
-            **/*.js
-            **/*.mjs
-            **/*.ts
-            **/*.json
-            **/*.md
-            **/*.yml
-            **/*.yaml
-
       - name: Check formatting
-        if: steps.changed-files.outputs.any_changed == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          files="${{ steps.changed-files.outputs.all_changed_files }}"
-          echo "Checking files with Prettier:"
-          printf '%s\n' $files
-          npx prettier --check $files
-
-      - name: Skip formatting when no relevant changes
-        if: steps.changed-files.outputs.any_changed != 'true'
-        run: echo "No files requiring Prettier check in this run."
+        run: npm run format:check
 
       - name: Lint
         run: npm run lint
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
 
       - name: Verify site-help worker payload
         # Encodes src/site-help.js and asserts the result is valid + matches the

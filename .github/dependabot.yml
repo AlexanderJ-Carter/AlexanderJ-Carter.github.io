@@ -44,3 +44,7 @@ updates:
     open-pull-requests-limit: 5
     reviewers:
       - 'AlexanderJ-Carter'
+    groups:
+      github-actions:
+        patterns:
+          - '*'

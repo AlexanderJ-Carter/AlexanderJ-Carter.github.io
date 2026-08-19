@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- Apex `legacy-redirect` Worker now attaches page security headers (CSP, COOP, nosniff, frame deny) on HTML; discovery/MCP responses get a slimmer API header set.
+- Removed deprecated `X-XSS-Protection`; CSP allowlists `sdk.jinrishici.com` / `v2.jinrishici.com`.
+- Replaced `tj-actions/changed-files` (CVE-2025-30066 class) with full-repo `npm run format:check`; `npm audit --audit-level=high` now fails CI.
+- Third-party GitHub Actions pinned to commit SHAs (`action-gh-release`, `lighthouse-ci-action`).
+- Poem/weather/search/toast/holiday/calendar DOM output no longer interpolates untrusted text into `innerHTML`.
+
+### Changed
+
+- Astro 7.1.3 → 7.2.3; GitHub Actions majors (`checkout`/`setup-node` v7, Pages deploy v5/v6).
+- Explicit `session: false` for this static site; Node engine documented as `>=22.12.0`.
+
 ### Added
 
 - AdSense ownership metadata, Google CMP privacy-settings entry point, and low-density manual ad deployment variables.

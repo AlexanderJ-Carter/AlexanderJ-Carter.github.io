@@ -6,11 +6,7 @@
 import type { Lang } from '../i18n/types';
 
 export type FleetChangeKind =
-  | 'added'
-  | 'changed'
-  | 'retired'
-  | 'ops'
-  | 'security';
+  'added' | 'changed' | 'retired' | 'ops' | 'security';
 
 export type FleetChangeEntry = {
   id: string;

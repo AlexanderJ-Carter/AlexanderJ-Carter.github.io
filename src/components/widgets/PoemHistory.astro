@@ -270,8 +270,9 @@ const intlQuotesJson = JSON.stringify(
           const info = document.querySelector('#poem_info');
 
           if (sentence && info && result && result.data) {
-            sentence.innerHTML = result.data.content;
-            info.innerHTML = `【${result.data.origin.dynasty}】${result.data.origin.author}《${result.data.origin.title}》`;
+            const origin = result.data.origin || {};
+            sentence.textContent = result.data.content || '';
+            info.textContent = `【${origin.dynasty || ''}】${origin.author || ''}《${origin.title || ''}》`;
 
             sentence.style.opacity = '0';
             info.style.opacity = '0';

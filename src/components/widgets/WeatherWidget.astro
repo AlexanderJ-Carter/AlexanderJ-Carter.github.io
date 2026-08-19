@@ -262,6 +262,11 @@ const rootClass =
       const loc =
         sourceLabel ||
         (data.timezone ? String(data.timezone).split('/').pop() : '—');
+      const escapeHtml = (s) =>
+        String(s)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
 
       root.querySelector('[data-weather-temp]').textContent =
         Math.round(current.temperature_2m) + '°';
@@ -287,7 +292,7 @@ const rootClass =
         el.className = 'forecast-day';
         el.innerHTML =
           '<span class="day">' +
-          weekday(daily.time[i], lang) +
+          escapeHtml(weekday(daily.time[i], lang)) +
           '</span>' +
           '<span class="hi tabular-nums">' +
           Math.round(daily.temperature_2m_max[i]) +
@@ -296,7 +301,7 @@ const rootClass =
           Math.round(daily.temperature_2m_min[i]) +
           '°</span>' +
           '<span class="sr-only">' +
-          dayInfo.label +
+          escapeHtml(dayInfo.label) +
           '</span>';
         forecast.appendChild(el);
       }

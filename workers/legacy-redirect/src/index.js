@@ -1,3 +1,9 @@
+import {
+  applyApiSecurityHeaders,
+  applyPageSecurityHeaders,
+  isHtmlContentType,
+} from './security-headers.js';
+
 const LINK =
   '</.well-known/api-catalog>; rel="api-catalog", </.well-known/mcp/server-card.json>; rel="service-desc", </.well-known/agent-skills/index.json>; rel="describedby", </llms.txt>; rel="describedby", </auth.md>; rel="describedby"';
 
@@ -115,12 +121,14 @@ export default {
         });
       }
       const body = request.method === 'HEAD' ? null : await upstream.text();
+      const discoveryHeaders = new Headers({
+        'Content-Type': contentType,
+        'Cache-Control': 'public, max-age=300',
+      });
+      applyApiSecurityHeaders(discoveryHeaders);
       return new Response(body, {
         status: 200,
-        headers: {
-          'Content-Type': contentType,
-          'Cache-Control': 'public, max-age=300',
-        },
+        headers: discoveryHeaders,
       });
     }
 
@@ -151,19 +159,26 @@ export default {
         .trim();
       const md =
         '# ' + title.trim() + '\n\nSource: ' + url.href + '\n\n' + text;
+      const mdHeaders = new Headers({
+        'Content-Type': 'text/markdown; charset=utf-8',
+        'x-markdown-tokens': String(Math.ceil(md.length / 4)),
+        Vary: 'Accept',
+        Link: LINK,
+      });
+      applyApiSecurityHeaders(mdHeaders);
       return new Response(md, {
         status: 200,
-        headers: {
-          'Content-Type': 'text/markdown; charset=utf-8',
-          'x-markdown-tokens': String(Math.ceil(md.length / 4)),
-          Vary: 'Accept',
-          Link: LINK,
-        },
+        headers: mdHeaders,
       });
     }
 
     const headers = new Headers(origin.headers);
     if (pathname === '/') headers.set('Link', LINK);
+    if (isHtmlContentType(headers.get('Content-Type'))) {
+      applyPageSecurityHeaders(headers);
+    } else {
+      applyApiSecurityHeaders(headers);
+    }
     return new Response(origin.body, {
       status: origin.status,
       statusText: origin.statusText,

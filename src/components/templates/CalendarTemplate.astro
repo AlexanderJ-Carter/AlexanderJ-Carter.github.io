@@ -344,6 +344,11 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
 
     // Days
     const today = new Date();
+    const escapeHtml = (s) =>
+      String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
     for (let i = 1; i <= daysInMonth; i++) {
       const dayElement = document.createElement('div');
       const isToday =
@@ -359,7 +364,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
 
       let holidayHtml = '';
       if (holidayName) {
-        holidayHtml = `<span class="text-xs text-red-500 font-bold truncate w-full">${holidayName}</span>`;
+        holidayHtml = `<span class="text-xs text-red-500 font-bold truncate w-full">${escapeHtml(holidayName)}</span>`;
       }
 
       dayElement.innerHTML = `
@@ -378,7 +383,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
       todayInfo.innerHTML = `
             <div class="text-4xl font-bold text-primary-500 mb-2">${today.getDate()}</div>
             <div class="text-lg mb-2">${today.toLocaleDateString(undefined, { weekday: 'long', month: 'long', year: 'numeric' })}</div>
-            ${todayHoliday ? `<div class="text-red-500 font-bold">🎉 ${todayHoliday}</div>` : ''}
+            ${todayHoliday ? `<div class="text-red-500 font-bold">🎉 ${escapeHtml(todayHoliday)}</div>` : ''}
         `;
     }
   }

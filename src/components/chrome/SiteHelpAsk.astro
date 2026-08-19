@@ -461,7 +461,13 @@ const uid = `help-ask-${Math.random().toString(36).slice(2, 9)}`;
       // Mark varies by source so the visitor sees whether this is a KB
       // retrieval or an AI-generated answer (transparency over the LLM path).
       var mark =
-        mode === 'llm' ? 'AI' : mode === 'retrieve' ? 'KB' : mode === 'none' ? '?' : '·';
+        mode === 'llm'
+          ? 'AI'
+          : mode === 'retrieve'
+            ? 'KB'
+            : mode === 'none'
+              ? '?'
+              : '·';
       out.classList.remove('is-thinking');
       out.classList.add('is-shown');
       out.classList.remove('is-developed');

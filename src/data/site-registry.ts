@@ -17,10 +17,7 @@ export type SiteCategory =
   | 'experiment';
 
 export type SiteHost =
-  | 'github-pages'
-  | 'cloudflare-worker'
-  | 'server-tunnel'
-  | 'external';
+  'github-pages' | 'cloudflare-worker' | 'server-tunnel' | 'external';
 
 export type SiteVisibility = 'public' | 'private' | 'alias';
 

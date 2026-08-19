@@ -37,6 +37,15 @@ const UI_URL = 'https://www.alexander.xin/ops/index.html';
 const FLEET_LOG_URL = 'https://www.alexander.xin/ops/fleet-changelog.json';
 const STATE_KEY = 'probe-ok-v1';
 
+function securityHeaders(extra: HeadersInit = {}): Headers {
+  const headers = new Headers(extra);
+  headers.set('X-Content-Type-Options', 'nosniff');
+  headers.set('X-Frame-Options', 'DENY');
+  headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  headers.set('Cross-Origin-Opener-Policy', 'same-origin');
+  return headers;
+}
+
 async function probeOne(id: string, url: string): Promise<Probe> {
   const started = Date.now();
   const res = await fetch(url, {
@@ -170,7 +179,7 @@ async function statusJson(env: Env): Promise<Response> {
         resend: Boolean(env.RESEND_API_KEY?.trim()),
       },
     },
-    { headers: { 'Cache-Control': 'private, max-age=30' } }
+    { headers: securityHeaders({ 'Cache-Control': 'private, max-age=30' }) }
   );
 }
 
@@ -179,14 +188,17 @@ async function homeHtml(): Promise<Response> {
     headers: { 'User-Agent': 'ops-portal-ui/1.0' },
   });
   if (!res.ok) {
-    return new Response('Ops UI unavailable', { status: 502 });
+    return new Response('Ops UI unavailable', {
+      status: 502,
+      headers: securityHeaders(),
+    });
   }
   const html = await res.text();
   return new Response(html, {
-    headers: {
+    headers: securityHeaders({
       'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': 'private, max-age=60',
-    },
+    }),
   });
 }
 
@@ -195,24 +207,30 @@ async function fleetChangelogJson(): Promise<Response> {
     headers: { 'User-Agent': 'ops-portal-ui/1.0' },
   });
   if (!res.ok) {
-    return new Response('Fleet changelog unavailable', { status: 502 });
+    return new Response('Fleet changelog unavailable', {
+      status: 502,
+      headers: securityHeaders(),
+    });
   }
   return new Response(await res.text(), {
-    headers: {
+    headers: securityHeaders({
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'private, max-age=60',
-    },
+    }),
   });
 }
 
 async function runCheck(env: Env): Promise<Response> {
   const probes = await runProbes();
   const diff = await diffAndAlert(env, probes);
-  return Response.json({
-    generatedAt: new Date().toISOString(),
-    probes,
-    ...diff,
-  });
+  return Response.json(
+    {
+      generatedAt: new Date().toISOString(),
+      probes,
+      ...diff,
+    },
+    { headers: securityHeaders() }
+  );
 }
 
 export default {

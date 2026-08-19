@@ -1,38 +1,46 @@
 # 安全审查概要（静态个人站点）
 
 > 本文是对当前站点安全面的简要审查总结，主要针对架构、信任边界与常见风险点，便于后续迭代时参考。
+>
+> **最后更新**: 2026-08-19
 
 ## 1. 架构与信任边界
 
-- **站点类型**：静态个人网站 + 若干前端工具页；
+- **站点类型**：静态个人网站 + 若干前端工具页 + 边缘 Worker（重定向、时间 API、Ops Portal、site-help）。
 - **部署路径**：
   - 代码托管在 GitHub 仓库 `AlexanderJ-Carter.github.io`；
   - 构建产物由 GitHub Actions 部署到 GitHub Pages；
   - 域名 `alexander.xin` 通常经由 Cloudflare 代理（含基础 WAF / TLS 终止）。
 - **后端 / 数据存储**：
-  - 仓库内未包含自建后端服务或数据库；
+  - 仓库内未包含自建用户数据库；
   - 页面工具（时间 / 汇率 / 单位换算 / QR 生成等）为前端逻辑或外部 API 调用；
   - 不设计为长期存储用户输入数据。
+- **源站 vs 边缘头**：`public/_headers` 是 Pages 风格基线；**GitHub Pages 源不会自动应用该文件**。apex 由 `workers/legacy-redirect` 在 HTML 响应上补齐 CSP / COOP / nosniff / `X-Frame-Options`。全站 HSTS 仍应由 Cloudflare 边缘规则管理，避免源站重复。
 
-**结论**：整体攻击面相对有限，主要安全关注点集中在 **前端输入处理 / 依赖安全 / 部署配置** 三个方面。
+**结论**：整体攻击面相对有限，主要安全关注点集中在 **前端输入处理 / 依赖安全 / 部署与 Worker 配置** 三个方面。
 
 ---
 
 ## 2. 已有安全措施盘点
 
 1. **安全联络与政策暴露**
-   - `public/.well-known/security.txt` 暴露安全联络方式和政策（符合 RFC 9116 建议）；
+   - `public/.well-known/security.txt` 暴露安全联络方式和政策（符合 RFC 9116 建议，当前 `Expires: 2027-03-19`）；
    - 站内 `/security/policy` 与 `/security/acknowledgments` 页面提供更友好的说明与致谢通道；
    - `public/security/pgp-key.asc` 提供 PGP 公钥，用于安全报告加密。
 
 2. **前端结构与权限**
-   - 站点无登录 / 管理后台功能；
+   - 站点无公开登录 / 管理后台；Ops Portal 走 Cloudflare Access；
    - 仅通过 `sessionStorage` 做轻量的「verify」页面访问控制（更多偏向 UX 阶段、非强安全边界）。
 
 3. **前端最佳实践**
-   - 使用 Astro 生成静态 HTML，默认模板无直传用户输入到 `innerHTML` 的高危用法；
-   - 使用 Tailwind 与本地脚本，避免大量第三方不透明脚本；
-   - `BaseLayout` 中已集成 SEO / Open Graph / structured data，未发现明显安全问题。
+   - 使用 Astro 生成静态 HTML；帮助问答对模型输出先 `escapeHtml` 再有限 markdown；
+   - 今日诗词等第三方 JSON 使用 `textContent`，不把远端字符串写入 `innerHTML`；
+   - `BaseLayout` 中已集成 SEO / Open Graph / structured data。
+
+4. **依赖与 CI**
+   - Dependabot（npm 每周、GitHub Actions 每周）；
+   - Code Quality 运行 `npm audit --audit-level=high`、Prettier、ESLint、`astro check`（经 `npm run build`）；
+   - 第三方 Action 以 commit SHA 钉死，避免 tag 被改写。
 
 ---
 
@@ -40,39 +48,26 @@
 
 ### 3.1 XSS（跨站脚本）
 
-当前站点大部分内容为作者自写文案与图片，动态内容较少，理论 XSS 风险主要来源于：
+当前站点大部分内容为作者自写文案与图片，动态内容来自：
 
-- 未来若增加「留言板 / 评论 / 表单」等功能，若未做输出编码与过滤，可能产生存储型或反射型 XSS；
-- 如引入第三方 Widget（统计工具、评论系统）且未审查脚本或未配置 CSP；
-- 手动操作 DOM 时（`script is:inline`）若拼接了来自 `location.search` / `hash` / `localStorage` 等不可信数据。
+- `/api/help` 的 LLM / KB 回答（已转义后再做链接/`**` 替换）；
+- 今日诗词（jinrishici）、Open-Meteo、汇率 API；
+- 未来若增加「留言板 / 评论 / 表单」等功能，若未做输出编码与过滤，可能产生存储型或反射型 XSS。
 
-**当前结论**：在不新增输入型功能的前提下，XSS 风险较低；如后续引入交互表单，需要同时：
-
-- 严格避免直接将用户输入传给 `innerHTML` / `dangerouslySetInnerHTML`；
-- 在必要时开启合适的 Content-Security-Policy（可在 `_headers` / 反向代理层配置）。
+**当前结论**：第三方脚本仍依赖 `'unsafe-inline'`（Turnstile / AdSense / 大量 `is:inline`）。后续若启用 Astro `security.csp` 哈希策略，需单独验证广告、人机验证与主题脚本。
 
 ### 3.2 依赖与供应链
 
-- 构建依赖主要通过 `package.json` 与 `package-lock.json` 管理；
-- 使用 Astro 官方生态（`@astrojs/tailwind`，`@astrojs/sitemap` 等）以及 Tailwind；
-- 若不定期更新依赖，可能存在低风险的已知漏洞，但在「纯静态站点」场景下，利用难度较大。
+- 构建依赖通过 `package.json` 与 `package-lock.json` 锁定；
+- `overrides` 钉住 lodash / vite / yaml / nanoid 等传递依赖的已披露版本下限；
+- GitHub Actions 使用官方 action 大版本 + 第三方 SHA。
 
-**建议**：
-
-- 在本地或 CI 中定期运行：
-  - `npm audit` 或 GitHub Dependabot；
-  - 如提示高危依赖，评估是否会实际影响静态产物，再决定升级。
+**建议**：高危 `npm audit` 失败即修；不要为了「过 CI」把 audit 改回 `continue-on-error`。
 
 ### 3.3 部署与配置
 
-- GitHub Pages + Cloudflare 的常见风险：
-  - 误配置 DNS 或 Cloudflare 规则导致缓存 / 跳转异常；
-  - 若开启过多开发调试功能（例如开放 Source Map、调试页面），可能无意暴露内部信息。
-
-**建议**：
-
-- 保持 Cloudflare 中仅开启必要规则（如基础 WAF、防 DDoS）；
-- 不在生产环境暴露未用到的调试页面、`/dev/*` 路由等。
+- GitHub Pages + Cloudflare 的常见风险：DNS / 缓存规则误配、调试页暴露。
+- `_headers` 与 Worker 策略应保持 CSP 白名单一致（含 jinrishici SDK）。
 
 ---
 
@@ -81,59 +76,35 @@
 ### 4.1 当前状态
 
 - 页面主要为内容展示与轻量工具，不收集账户、密码、支付信息等敏感数据；
-- 联系方式以 `mailto:` 邮件链接为主；如未来使用第三方表单，需要单独评估隐私影响；
-- 如接入统计工具，应在 `/privacy` 中明确说明收集内容与用途，并尊重用户的 Do Not Track / Cookie 选择。
+- 联系方式以 `mailto:` 邮件链接为主；
+- AdSense / CMP 需与 `/privacy` 文案同步；未启用广告时不要加载广告脚本。
 
 ### 4.2 未来扩展的注意事项
 
-若新增：
-
-- **评论 / 留言**：建议使用第三方托管（如 GitHub Issues、Giscus、独立评论服务），并在隐私页说明：
-  - 谁在处理数据（第三方服务商）；
-  - 存储位置与保留时长；
-  - 用户如何请求删除数据。
-- **表单后端**：优先采用：
-  - Cloudflare Workers / Pages Functions；
-  - 其他 serverless 平台（Supabase、Vercel 等）。  
-    所有密钥通过平台环境变量配置，不写入仓库。
+若新增评论或表单后端：密钥只放平台环境变量；对用户输入禁止 `innerHTML`。
 
 ---
 
-## 5. 建议的后续安全改进方向
+## 5. 刻意未做的升级
 
-以下为「可选优化」，并非当前必须项：
+以下为评估后**暂缓**的项，不是疏漏：
 
-1. **统一安全文档入口**
-   - 在 `README.md` 中链接：`AGENT.md`、`.github/SECURITY.md`、本文件；
-   - 确保安全研究人员与 AI 助手都能快速找到安全相关信息。
-
-2. **轻量 CSP 与 Headers（依赖托管平台能力）**
-   - 如托管平台支持自定义响应头，可考虑：
-     - 设置 `Content-Security-Policy` 限定脚本来源为 `self` 与极少数受信任域；
-     - 配置 `X-Content-Type-Options: nosniff`、`Referrer-Policy` 等基础安全头；
-   - 在调整前需测试音乐播放器、动画脚本等是否受影响。
-
-3. **自动化依赖检查**
-
-> 若未来 CI 配置复杂度可接受：
-
-- 在 GitHub Actions 中增加简单的 `npm audit --production` 或 `npx astro check` 步骤；
-- 对于仅影响开发环境的漏洞，可分级处理，避免阻塞正常部署。
-
-4. **安全变更日志（可选）**
-
-- 如未来安全相关改动增多，可在此文件中维护「安全相关变更时间线」；
-- 包括：依赖重大更新、安全头策略变更、外部服务接入与迁移等。
+| 项目 | 原因 |
+| --- | --- |
+| Tailwind CSS v4 | 设计 token / 插件 / `@apply` 迁移面大，与安全无关 |
+| TypeScript 6/7、ESLint 10 | 生态与 `astro check` 尚未作为本仓库基线 |
+| Astro 内置 `security.csp: true` | 会改成 meta CSP + 哈希；需先盘点全部 `is:inline` 与第三方脚本 |
+| 时间 API 收紧 CORS | 公开 JSON 接口，MCP / 外部工具依赖 `Access-Control-Allow-Origin: *` |
 
 ---
 
 ## 6. 总体结论
 
-在当前形态下，本项目安全面相对简单，主要风险集中在「未来新增动态功能时的设计与实现」。  
-只要遵循：
+在当前形态下，本项目安全面相对简单。只要遵循：
 
 - 不在前端包含任何机密信息；
 - 谨慎接入第三方脚本 / 服务；
-- 对用户输入类功能进行必要过滤与编码；
+- 对用户输入与第三方 JSON 做输出编码；
+- 让 CI 的 audit / lockfile / Action SHA 真正挡住回归；
 
-则总体安全风险将维持在可控范围内。该文档可在后续大版本迭代时持续更新。
+则总体安全风险将维持在可控范围内。该文档应随大版本与安全头策略变更同步更新。

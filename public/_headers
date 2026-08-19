@@ -3,13 +3,10 @@
 
 /*
   # Content Security Policy - 允许内联脚本和样式，限制外部资源
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://partner.googleadservices.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://ice2.somafm.com https://live.amperwave.net https://wrti-live.streamguys1.com blob:; connect-src 'self' https://api.open-meteo.com https://open.er-api.com https://api.github.com https://api.qrserver.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://ice2.somafm.com https://live.amperwave.net https://wrti-live.streamguys1.com; frame-src https://challenges.cloudflare.com https://googleads.g.doubleclick.net https://td.doubleclick.net; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://partner.googleadservices.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://sdk.jinrishici.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://ice2.somafm.com https://live.amperwave.net https://wrti-live.streamguys1.com blob:; connect-src 'self' https://api.open-meteo.com https://open.er-api.com https://api.github.com https://api.qrserver.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://ice2.somafm.com https://live.amperwave.net https://wrti-live.streamguys1.com https://v2.jinrishici.com https://sdk.jinrishici.com; frame-src https://challenges.cloudflare.com https://googleads.g.doubleclick.net https://td.doubleclick.net; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none'
   
   # 防止MIME类型嗅探
   X-Content-Type-Options: nosniff
-  
-  # XSS保护
-  X-XSS-Protection: 1; mode=block
   
   # 点击劫持保护
   X-Frame-Options: DENY
@@ -19,6 +16,9 @@
   
   # 权限策略
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(self), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  
+  # 跨源隔离浏览上下文（不启用 COEP，以免打断广告/Turnstile）
+  Cross-Origin-Opener-Policy: same-origin
   
   # HSTS (如果使用HTTPS)
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload

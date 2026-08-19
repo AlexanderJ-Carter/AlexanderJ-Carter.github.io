@@ -42,6 +42,7 @@ export default defineConfig({
     },
   },
   output: 'static',
+  session: false,
   // Prefer previous HTML whitespace behavior after Astro 6+/7 compressHTML changes.
   compressHTML: true,
   build: {

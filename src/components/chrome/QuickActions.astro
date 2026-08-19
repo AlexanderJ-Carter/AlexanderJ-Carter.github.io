@@ -465,16 +465,23 @@ const elsewhereSearch = getChromeElsewhereLinks(lang).map((l) => ({
               ? 'Ничего не найдено'
               : 'No results found';
 
+    const escapeHtml = (s) =>
+      String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+
     if (results.length === 0) {
-      searchResults.innerHTML = `<p class="text-center text-[rgb(var(--color-text-secondary))] py-8 text-sm">${noResultsMsg}</p>`;
+      searchResults.innerHTML = `<p class="text-center text-[rgb(var(--color-text-secondary))] py-8 text-sm">${escapeHtml(noResultsMsg)}</p>`;
       return;
     }
 
     searchResults.innerHTML = results
       .map(
         (page) => `
-      <a href="${page.url}" onclick="closeSearchModal()" class="flex items-center justify-between gap-3 p-3.5 rounded-sm border border-transparent bg-[rgb(var(--color-bg-secondary))] hover:border-primary-500/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors group">
-        <div class="font-medium text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 text-sm leading-tight">${page.title}</div>
+      <a href="${escapeHtml(page.url)}" onclick="closeSearchModal()" class="flex items-center justify-between gap-3 p-3.5 rounded-sm border border-transparent bg-[rgb(var(--color-bg-secondary))] hover:border-primary-500/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors group">
+        <div class="font-medium text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 text-sm leading-tight">${escapeHtml(page.title)}</div>
         <svg class="w-4 h-4 text-[rgb(var(--color-text-tertiary))] group-hover:text-primary-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </a>
     `
