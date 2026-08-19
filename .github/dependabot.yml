@@ -27,8 +27,8 @@ updates:
     allow:
       - dependency-type: 'all'
     commit-message:
-      prefix: 'chore: '
-      prefix-scope: 'deps'
+      prefix: 'chore'
+      include: 'scope'
     pull-request-branch-name:
       separator: '/'
 
