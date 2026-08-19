@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- Accidental Depot.dev CI copies under `.depot/workflows` and two one-off MCP helper scripts that landed on `main` with them.
+
 ### Security
 
 - Apex `legacy-redirect` Worker now attaches page security headers (CSP, COOP, nosniff, frame deny) on HTML; discovery/MCP responses get a slimmer API header set.

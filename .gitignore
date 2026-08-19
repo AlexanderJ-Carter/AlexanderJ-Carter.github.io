@@ -42,3 +42,6 @@ lerna-debug.log*
 *.bak
 .*.swp
 .claude/settings.local.json
+
+# Accidental Depot.dev CI copies (real workflows live in .github/workflows)
+.depot/
