@@ -67,7 +67,7 @@
 ### 3.3 部署与配置
 
 - GitHub Pages + Cloudflare 的常见风险：DNS / 缓存规则误配、调试页暴露。
-- `_headers` 与 Worker 策略应保持 CSP 白名单一致（含 jinrishici SDK）。
+- `_headers` 与 Worker 策略应保持 CSP 白名单一致（含 jinrishici SDK）。www / blog 通过 `scripts/provision-agent-discovery.mjs` 写入 **hostname 限定** 的 Transform Rule（不要对整个 zone 套站点 CSP）。
 
 ---
 

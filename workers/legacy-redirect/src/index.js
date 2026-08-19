@@ -188,32 +188,90 @@ export default {
 };
 
 async function handleMcp(request) {
+  const cors = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers':
+      'Content-Type, Accept, MCP-Protocol-Version',
+  };
+
+  const mcpHeaders = () => {
+    const headers = new Headers(cors);
+    applyApiSecurityHeaders(headers);
+    return headers;
+  };
+
+  const mcpJson = (body, status = 200) => {
+    const headers = mcpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    return new Response(JSON.stringify(body), { status, headers });
+  };
+
   if (request.method === 'GET') {
-    return Response.json({
+    return mcpJson({
       protocolVersion: '2025-03-26',
       serverInfo: { name: 'alexander.xin', version: '1.0.0' },
       capabilities: { tools: {} },
     });
   }
   if (request.method === 'OPTIONS') {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers':
-          'Content-Type, Accept, MCP-Protocol-Version',
-      },
-    });
+    return new Response(null, { status: 204, headers: mcpHeaders() });
   }
   if (request.method !== 'POST') {
-    return Response.json({ error: 'method_not_allowed' }, { status: 405 });
+    return mcpJson({ error: 'method_not_allowed' }, 405);
   }
 
-  const msg = await request.json();
-  const id = msg.id ?? null;
+  const declared = Number(request.headers.get('content-length') || '0');
+  if (declared > 32 * 1024) {
+    return mcpJson(
+      {
+        jsonrpc: '2.0',
+        error: { code: -32700, message: 'Parse error' },
+        id: null,
+      },
+      413
+    );
+  }
+  const raw = await request.text();
+  if (raw.length > 32 * 1024) {
+    return mcpJson(
+      {
+        jsonrpc: '2.0',
+        error: { code: -32700, message: 'Parse error' },
+        id: null,
+      },
+      413
+    );
+  }
+
+  let msg;
+  try {
+    msg = JSON.parse(raw);
+  } catch {
+    return mcpJson(
+      {
+        jsonrpc: '2.0',
+        error: { code: -32700, message: 'Parse error' },
+        id: null,
+      },
+      400
+    );
+  }
+
+  const id = msg && typeof msg === 'object' ? (msg.id ?? null) : null;
+  if (!msg || typeof msg !== 'object' || typeof msg.method !== 'string') {
+    return mcpJson(
+      {
+        jsonrpc: '2.0',
+        id,
+        error: { code: -32600, message: 'Invalid Request' },
+      },
+      400
+    );
+  }
+
   if (msg.method === 'initialize') {
-    return Response.json({
+    return mcpJson({
       jsonrpc: '2.0',
       id,
       result: {
@@ -224,10 +282,10 @@ async function handleMcp(request) {
     });
   }
   if (msg.method === 'notifications/initialized' || msg.method === 'ping') {
-    return Response.json({ jsonrpc: '2.0', id, result: {} });
+    return mcpJson({ jsonrpc: '2.0', id, result: {} });
   }
   if (msg.method === 'tools/list') {
-    return Response.json({
+    return mcpJson({
       jsonrpc: '2.0',
       id,
       result: {
@@ -249,14 +307,14 @@ async function handleMcp(request) {
   if (msg.method === 'tools/call' && msg.params?.name === 'get_time_now') {
     const r = await fetch('https://api.alexander.xin/time/now');
     const t = await r.text();
-    return Response.json({
+    return mcpJson({
       jsonrpc: '2.0',
       id,
       result: { content: [{ type: 'text', text: t }], isError: !r.ok },
     });
   }
   if (msg.method === 'tools/call' && msg.params?.name === 'get_site_info') {
-    return Response.json({
+    return mcpJson({
       jsonrpc: '2.0',
       id,
       result: {
@@ -280,7 +338,7 @@ async function handleMcp(request) {
       },
     });
   }
-  return Response.json({
+  return mcpJson({
     jsonrpc: '2.0',
     id,
     error: { code: -32601, message: 'Method not found' },

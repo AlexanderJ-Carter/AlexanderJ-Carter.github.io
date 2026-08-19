@@ -65,15 +65,13 @@ async function probeOne(id: string, url: string): Promise<Probe> {
 async function runProbes(): Promise<Probe[]> {
   return Promise.all(
     PROBES.map((p) =>
-      probeOne(p.id, p.url).catch(
-        (): Probe => ({
-          id: p.id,
-          url: p.url,
-          ok: false,
-          status: 0,
-          ms: 0,
-        })
-      )
+      probeOne(p.id, p.url).catch((): Probe => ({
+        id: p.id,
+        url: p.url,
+        ok: false,
+        status: 0,
+        ms: 0,
+      }))
     )
   );
 }

@@ -14,7 +14,7 @@ export const CONTENT_SECURITY_POLICY = [
   "frame-ancestors 'none'",
 ].join('; ');
 
-const PAGE_HEADERS = {
+export const PAGE_SECURITY_HEADERS = {
   'Content-Security-Policy': CONTENT_SECURITY_POLICY,
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
@@ -31,7 +31,7 @@ const API_HEADERS = {
 };
 
 export function applyPageSecurityHeaders(headers) {
-  for (const [name, value] of Object.entries(PAGE_HEADERS)) {
+  for (const [name, value] of Object.entries(PAGE_SECURITY_HEADERS)) {
     headers.set(name, value);
   }
 }

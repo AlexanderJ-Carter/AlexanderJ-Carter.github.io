@@ -876,10 +876,14 @@ const galleryPath =
         btn.setAttribute('data-emoji', emoji);
         btn.setAttribute('data-index', idx);
         btn.setAttribute('aria-label', 'Card ' + (idx + 1));
-        btn.innerHTML =
-          '<span class="mem-card-back">?</span><span class="mem-card-front">' +
-          emoji +
-          '</span>';
+        btn.replaceChildren();
+        const back = document.createElement('span');
+        back.className = 'mem-card-back';
+        back.textContent = '?';
+        const front = document.createElement('span');
+        front.className = 'mem-card-front';
+        front.textContent = emoji;
+        btn.append(back, front);
         btn.addEventListener('click', function () {
           flipCard(btn);
         });
@@ -887,7 +891,7 @@ const galleryPath =
       }
 
       function init() {
-        board.innerHTML = '';
+        board.replaceChildren();
         cards = [];
         flipped = [];
         matched = 0;

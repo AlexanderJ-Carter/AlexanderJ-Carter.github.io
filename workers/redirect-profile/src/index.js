@@ -3,7 +3,9 @@ export default {
     const url = new URL(request.url);
     const host = url.hostname.toLowerCase();
     const al = request.headers.get('Accept-Language') || '';
-    const langs = al.split(',').map((item) => item.trim().split(';')[0].toLowerCase());
+    const langs = al
+      .split(',')
+      .map((item) => item.trim().split(';')[0].toLowerCase());
 
     let langPrefix = '';
     for (const l of langs) {
@@ -36,7 +38,10 @@ export default {
     // about / bio aliases only (blog is hosted via Tunnel → nginx)
     const page = '/about/';
     if (host !== 'about.alexander.xin' && host !== 'bio.alexander.xin') {
-      return new Response('Not found', { status: 404 });
+      return new Response('Not found', {
+        status: 404,
+        headers: { 'X-Content-Type-Options': 'nosniff' },
+      });
     }
 
     return Response.redirect(

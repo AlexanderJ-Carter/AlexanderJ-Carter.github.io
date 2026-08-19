@@ -679,7 +679,16 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
       refreshText.textContent = content.refreshing;
     }
 
-    ratesGrid.innerHTML = `<div class="col-span-full text-center py-8 text-[rgb(var(--color-text-secondary))]"><svg class="animate-spin h-8 w-8 mx-auto mb-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>${content.loading}</div>`;
+    ratesGrid.replaceChildren();
+    const loading = document.createElement('div');
+    loading.className =
+      'col-span-full text-center py-8 text-[rgb(var(--color-text-secondary))]';
+    loading.innerHTML =
+      '<svg class="animate-spin h-8 w-8 mx-auto mb-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+    const loadingLabel = document.createElement('span');
+    loadingLabel.textContent = content.loading;
+    loading.appendChild(loadingLabel);
+    ratesGrid.appendChild(loading);
 
     try {
       const response = await fetch('https://open.er-api.com/v6/latest/CNY');
@@ -688,7 +697,7 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
       if (data.result === 'success' && data.rates) {
         lastUpdateTime = new Date(data.time_last_update_unix * 1000);
 
-        ratesGrid.innerHTML = '';
+        ratesGrid.replaceChildren();
         updateTimeDisplay();
 
         majorCurrencies.forEach((currency) => {
@@ -700,18 +709,28 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
             const card = document.createElement('div');
             card.className =
               'border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-primary))] p-6 rounded-sm hover:bg-[rgb(var(--color-bg-secondary))] transition-colors cursor-pointer group';
-            card.innerHTML = `
-                            <div class="flex justify-between items-start mb-3">
-                                <div>
-                                    <span class="text-2xl font-bold text-[rgb(var(--color-text-primary))]">${currency}</span>
-                                    <p class="text-xs text-[rgb(var(--color-text-tertiary))] mt-1">1 ${currency}</p>
-                                </div>
-                                <span class="text-3xl opacity-50 group-hover:opacity-100 transition-opacity">${symbol}</span>
-                            </div>
-                            <div class="text-3xl font-bold text-[rgb(var(--color-text-primary))]">
-                                ¥${inverseRate}
-                            </div>
-                        `;
+            const head = document.createElement('div');
+            head.className = 'flex justify-between items-start mb-3';
+            const left = document.createElement('div');
+            const code = document.createElement('span');
+            code.className =
+              'text-2xl font-bold text-[rgb(var(--color-text-primary))]';
+            code.textContent = currency;
+            const unit = document.createElement('p');
+            unit.className =
+              'text-xs text-[rgb(var(--color-text-tertiary))] mt-1';
+            unit.textContent = '1 ' + currency;
+            left.append(code, unit);
+            const glyph = document.createElement('span');
+            glyph.className =
+              'text-3xl opacity-50 group-hover:opacity-100 transition-opacity';
+            glyph.textContent = symbol;
+            head.append(left, glyph);
+            const amount = document.createElement('div');
+            amount.className =
+              'text-3xl font-bold text-[rgb(var(--color-text-primary))]';
+            amount.textContent = '¥' + inverseRate;
+            card.append(head, amount);
             ratesGrid.appendChild(card);
           }
         });
@@ -720,7 +739,10 @@ const content = currencyData[lang as Lang] || currencyData['en-GB'];
       }
     } catch (error) {
       console.error('Error fetching rates:', error);
-      ratesGrid.innerHTML = `<div class="col-span-full text-center py-8 text-red-500">${content.errorLoading}</div>`;
+      const err = document.createElement('div');
+      err.className = 'col-span-full text-center py-8 text-red-500';
+      err.textContent = content.errorLoading;
+      ratesGrid.replaceChildren(err);
     } finally {
       // Reset button state
       if (refreshBtn && refreshIcon && refreshText) {

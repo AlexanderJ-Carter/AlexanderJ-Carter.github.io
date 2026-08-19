@@ -327,7 +327,7 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
     );
 
     // Clear grid
-    calendarGrid.innerHTML = '';
+    calendarGrid.replaceChildren();
 
     // First day of the month
     const firstDay = new Date(year, month, 1).getDay();
@@ -344,11 +344,6 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
 
     // Days
     const today = new Date();
-    const escapeHtml = (s) =>
-      String(s)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
     for (let i = 1; i <= daysInMonth; i++) {
       const dayElement = document.createElement('div');
       const isToday =
@@ -356,35 +351,45 @@ const content = calendarData[lang as Lang] || calendarData['en-GB'];
         month === today.getMonth() &&
         year === today.getFullYear();
 
-      // Check for holiday
       const holidayKey = `${month}-${i}`;
       const holidayName = holidays[holidayKey];
 
       dayElement.className = `h-24 p-2 rounded-sm border border-[rgb(var(--color-border))] hover:border-primary-500 transition-colors relative flex flex-col justify-between ${isToday ? 'bg-primary-500/10 border-primary-500' : 'bg-[rgb(var(--color-bg-secondary))]'}`;
 
-      let holidayHtml = '';
+      const num = document.createElement('span');
+      num.className = `font-bold ${isToday ? 'text-primary-500' : 'text-[rgb(var(--color-text-primary))]'}`;
+      num.textContent = String(i);
+      dayElement.appendChild(num);
       if (holidayName) {
-        holidayHtml = `<span class="text-xs text-red-500 font-bold truncate w-full">${escapeHtml(holidayName)}</span>`;
+        const hol = document.createElement('span');
+        hol.className = 'text-xs text-red-500 font-bold truncate w-full';
+        hol.textContent = holidayName;
+        dayElement.appendChild(hol);
       }
-
-      dayElement.innerHTML = `
-        <span class="font-bold ${isToday ? 'text-primary-500' : 'text-[rgb(var(--color-text-primary))]'}">${i}</span>
-        ${holidayHtml}
-      `;
 
       calendarGrid.appendChild(dayElement);
     }
 
-    // Update Today Info
     if (todayInfo) {
-      const todayKey = `${today.getMonth()}-${today.getDate()}`;
-      const todayHoliday = holidays[todayKey];
-
-      todayInfo.innerHTML = `
-            <div class="text-4xl font-bold text-primary-500 mb-2">${today.getDate()}</div>
-            <div class="text-lg mb-2">${today.toLocaleDateString(undefined, { weekday: 'long', month: 'long', year: 'numeric' })}</div>
-            ${todayHoliday ? `<div class="text-red-500 font-bold">🎉 ${escapeHtml(todayHoliday)}</div>` : ''}
-        `;
+      todayInfo.replaceChildren();
+      const dateNum = document.createElement('div');
+      dateNum.className = 'text-4xl font-bold text-primary-500 mb-2';
+      dateNum.textContent = String(today.getDate());
+      const dateLabel = document.createElement('div');
+      dateLabel.className = 'text-lg mb-2';
+      dateLabel.textContent = today.toLocaleDateString(undefined, {
+        weekday: 'long',
+        month: 'long',
+        year: 'numeric',
+      });
+      todayInfo.append(dateNum, dateLabel);
+      const todayHoliday = holidays[`${today.getMonth()}-${today.getDate()}`];
+      if (todayHoliday) {
+        const hol = document.createElement('div');
+        hol.className = 'text-red-500 font-bold';
+        hol.textContent = '🎉 ' + todayHoliday;
+        todayInfo.appendChild(hol);
+      }
     }
   }
 

@@ -248,7 +248,7 @@ Zone `alexander.xin`：无 A/AAAA↔CNAME 冲突；隧道与公开站均为**橙
 - **对外 TLS 只在 Cloudflare（橙云 + Tunnel）终止**；源站 nginx **只听 :80**，`EnableHTTPS=false`。
 - **不要**在 nginx-ui 申请源站证书 / 强制 HTTPS / 源站 HSTS（会与 Tunnel→HTTP 双层打架，并制造假红灯）。
 - 安全头：边缘由 Cloudflare 管 HSTS。apex HTML 由 `workers/legacy-redirect` 补齐 CSP / COOP / nosniff / `X-Frame-Options`（与 `public/_headers` 基线对齐）。源站 nginx 只保留轻量 `nosniff`，勿重复 HSTS。
-- 仓库 `public/_headers` 是 Pages 风格基线；**GitHub Pages 源不会自动应用该文件**。www / blog 若也要同等 CSP，用 hostname 限定的 Transform Rule，不要对整个 zone 套站点 CSP（会伤到 paste / tools 等子域）。
+- 仓库 `public/_headers` 是 Pages 风格基线；**GitHub Pages 源不会自动应用该文件**。www / blog / apex 的 CSP 可由 `scripts/provision-agent-discovery.mjs` 写入 hostname 限定的 Transform Rule（不要对整个 zone 套站点 CSP，会伤到 paste / tools 等子域）。
 
 ### nginx-ui 站点监控假超时（已修，2026-08-07）
 

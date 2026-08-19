@@ -262,11 +262,6 @@ const rootClass =
       const loc =
         sourceLabel ||
         (data.timezone ? String(data.timezone).split('/').pop() : '—');
-      const escapeHtml = (s) =>
-        String(s)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;');
 
       root.querySelector('[data-weather-temp]').textContent =
         Math.round(current.temperature_2m) + '°';
@@ -284,25 +279,25 @@ const rootClass =
         : copy.local;
 
       const forecast = root.querySelector('[data-weather-forecast]');
-      forecast.innerHTML = '';
+      forecast.replaceChildren();
       const days = Math.min(7, daily.time.length);
       for (let i = 0; i < days; i++) {
         const dayInfo = descFor(daily.weather_code[i], lang);
         const el = document.createElement('div');
         el.className = 'forecast-day';
-        el.innerHTML =
-          '<span class="day">' +
-          escapeHtml(weekday(daily.time[i], lang)) +
-          '</span>' +
-          '<span class="hi tabular-nums">' +
-          Math.round(daily.temperature_2m_max[i]) +
-          '°</span>' +
-          '<span class="lo tabular-nums">' +
-          Math.round(daily.temperature_2m_min[i]) +
-          '°</span>' +
-          '<span class="sr-only">' +
-          escapeHtml(dayInfo.label) +
-          '</span>';
+        const dayEl = document.createElement('span');
+        dayEl.className = 'day';
+        dayEl.textContent = weekday(daily.time[i], lang);
+        const hi = document.createElement('span');
+        hi.className = 'hi tabular-nums';
+        hi.textContent = Math.round(daily.temperature_2m_max[i]) + '°';
+        const lo = document.createElement('span');
+        lo.className = 'lo tabular-nums';
+        lo.textContent = Math.round(daily.temperature_2m_min[i]) + '°';
+        const sr = document.createElement('span');
+        sr.className = 'sr-only';
+        sr.textContent = dayInfo.label;
+        el.append(dayEl, hi, lo, sr);
         forecast.appendChild(el);
       }
 

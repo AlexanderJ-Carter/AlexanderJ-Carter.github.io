@@ -26,8 +26,8 @@
     "encode:help": "node ops-portal/scripts/encode-site-help.cjs",
     "check:help": "node ops-portal/scripts/encode-site-help.cjs && node ops-portal/scripts/check-help-payload.cjs",
     "lint": "eslint .",
-    "format": "prettier --write \"src/**/*.{astro,ts,css,js}\" \"public/sw.js\" \"*.{mjs,md,json}\"",
-    "format:check": "prettier --check \"src/**/*.{astro,ts,css,js}\" \"public/sw.js\" \"*.{mjs,md,json}\""
+    "format": "prettier --write \"src/**/*.{astro,ts,css,js}\" \"public/sw.js\" \"workers/**/*.js\" \"ops-portal/src/**/*.{ts,js}\" \"scripts/**/*.{js,mjs}\" \"*.{mjs,md,json}\"",
+    "format:check": "prettier --check \"src/**/*.{astro,ts,css,js}\" \"public/sw.js\" \"workers/**/*.js\" \"ops-portal/src/**/*.{ts,js}\" \"scripts/**/*.{js,mjs}\" \"*.{mjs,md,json}\""
   },
   "engines": {
     "node": ">=22.12.0"

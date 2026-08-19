@@ -10,10 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 - Apex `legacy-redirect` Worker now attaches page security headers (CSP, COOP, nosniff, frame deny) on HTML; discovery/MCP responses get a slimmer API header set.
+- MCP `/mcp` validates JSON-RPC bodies (32 KiB cap) and returns CORS + nosniff on every method, including parse errors.
+- `scripts/provision-agent-discovery.mjs` can apply the same page security headers on apex / www / blog via hostname-scoped Transform Rules.
 - Removed deprecated `X-XSS-Protection`; CSP allowlists `sdk.jinrishici.com` / `v2.jinrishici.com`.
 - Replaced `tj-actions/changed-files` (CVE-2025-30066 class) with full-repo `npm run format:check`; `npm audit --audit-level=high` now fails CI.
-- Third-party GitHub Actions pinned to commit SHAs (`action-gh-release`, `lighthouse-ci-action`).
-- Poem/weather/search/toast/holiday/calendar DOM output no longer interpolates untrusted text into `innerHTML`.
+- GitHub Actions (official and third-party) pinned to commit SHAs.
+- Poem/weather/search/toast/holiday/calendar/currency/fun DOM output uses `textContent` / element construction instead of interpolating into `innerHTML`.
 
 ### Changed
 

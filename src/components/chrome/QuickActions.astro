@@ -438,13 +438,13 @@ const elsewhereSearch = getChromeElsewhereLinks(lang).map((l) => ({
     if (searchModal) {
       searchModal.classList.add('hidden');
       if (searchInput) searchInput.value = '';
-      if (searchResults) searchResults.innerHTML = '';
+      if (searchResults) searchResults.replaceChildren();
     }
   }
 
   function performSearch(query) {
     if (!searchResults || !query.trim()) {
-      if (searchResults) searchResults.innerHTML = '';
+      if (searchResults) searchResults.replaceChildren();
       return;
     }
 
@@ -465,28 +465,49 @@ const elsewhereSearch = getChromeElsewhereLinks(lang).map((l) => ({
               ? 'Ничего не найдено'
               : 'No results found';
 
-    const escapeHtml = (s) =>
-      String(s)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
-
+    searchResults.replaceChildren();
     if (results.length === 0) {
-      searchResults.innerHTML = `<p class="text-center text-[rgb(var(--color-text-secondary))] py-8 text-sm">${escapeHtml(noResultsMsg)}</p>`;
+      const empty = document.createElement('p');
+      empty.className =
+        'text-center text-[rgb(var(--color-text-secondary))] py-8 text-sm';
+      empty.textContent = noResultsMsg;
+      searchResults.appendChild(empty);
       return;
     }
 
-    searchResults.innerHTML = results
-      .map(
-        (page) => `
-      <a href="${escapeHtml(page.url)}" onclick="closeSearchModal()" class="flex items-center justify-between gap-3 p-3.5 rounded-sm border border-transparent bg-[rgb(var(--color-bg-secondary))] hover:border-primary-500/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors group">
-        <div class="font-medium text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 text-sm leading-tight">${escapeHtml(page.title)}</div>
-        <svg class="w-4 h-4 text-[rgb(var(--color-text-tertiary))] group-hover:text-primary-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-      </a>
-    `
-      )
-      .join('');
+    for (const page of results) {
+      const link = document.createElement('a');
+      link.href = page.url;
+      link.className =
+        'flex items-center justify-between gap-3 p-3.5 rounded-sm border border-transparent bg-[rgb(var(--color-bg-secondary))] hover:border-primary-500/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors group';
+      link.addEventListener('click', closeSearchModal);
+      const title = document.createElement('div');
+      title.className =
+        'font-medium text-[rgb(var(--color-text-primary))] group-hover:text-primary-500 text-sm leading-tight';
+      title.textContent = page.title;
+      const icon = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'svg'
+      );
+      icon.setAttribute(
+        'class',
+        'w-4 h-4 text-[rgb(var(--color-text-tertiary))] group-hover:text-primary-500 flex-shrink-0'
+      );
+      icon.setAttribute('fill', 'none');
+      icon.setAttribute('stroke', 'currentColor');
+      icon.setAttribute('viewBox', '0 0 24 24');
+      const path = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path'
+      );
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('stroke-linejoin', 'round');
+      path.setAttribute('stroke-width', '2');
+      path.setAttribute('d', 'M9 5l7 7-7 7');
+      icon.appendChild(path);
+      link.append(title, icon);
+      searchResults.appendChild(link);
+    }
   }
 
   // Event listeners

@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 /**
- * Provision Cloudflare edge pieces for agent discovery.
+ * Provision Cloudflare edge pieces for agent discovery and site security headers.
  * Requires CLOUDFLARE_API_TOKEN with Zone DNS Edit, Zone Settings Edit,
  * and Account Workers Edit as needed.
  *
  * Usage:
  *   node scripts/provision-agent-discovery.mjs
  */
+
+import { PAGE_SECURITY_HEADERS } from '../workers/legacy-redirect/src/security-headers.js';
 
 const ZONE_NAME = 'alexander.xin';
 const TOKEN = process.env.CLOUDFLARE_API_TOKEN;
@@ -107,27 +109,46 @@ async function main() {
     },
   };
 
+  const securityHeaders = {};
+  for (const [name, value] of Object.entries(PAGE_SECURITY_HEADERS)) {
+    securityHeaders[name] = { operation: 'set', value };
+  }
+  const securityRule = {
+    expression:
+      '(http.host eq "alexander.xin") or (http.host eq "www.alexander.xin") or (http.host eq "blog.alexander.xin")',
+    description: 'Site security headers on apex/www/blog',
+    action: 'rewrite',
+    action_parameters: { headers: securityHeaders },
+  };
+  const managedDescriptions = new Set([
+    rule.description,
+    securityRule.description,
+  ]);
+  const desiredRules = [rule, securityRule];
+
   if (!entry) {
     entry = await api('POST', `/zones/${zoneId}/rulesets`, {
       name: 'Agent discovery response headers',
       kind: 'zone',
       phase,
-      rules: [rule],
+      rules: desiredRules,
     });
     console.log('created ruleset', entry.id);
   } else {
     const detailed = await api('GET', `/zones/${zoneId}/rulesets/${entry.id}`);
     const rules = (detailed.rules || []).filter(
-      (r) => r.description !== rule.description
+      (r) => !managedDescriptions.has(r.description)
     );
-    rules.push(rule);
+    rules.push(...desiredRules);
     const updated = await api('PUT', `/zones/${zoneId}/rulesets/${entry.id}`, {
       rules,
     });
     console.log('updated ruleset', updated.id);
   }
 
-  console.log('Done. Deploy workers/agent-gateway with: npx wrangler deploy');
+  console.log(
+    'Done. Deploy apex headers with: npx wrangler deploy --config workers/legacy-redirect/wrangler.jsonc'
+  );
 }
 
 main().catch((err) => {
