@@ -299,22 +299,20 @@
     if (message) message.textContent = holiday.message;
 
     if (wishesContainer) {
-      const escapeHtml = (s) =>
-        String(s)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;');
-      wishesContainer.innerHTML = holiday.wishes
-        .map(
-          (wish, i) => `
-        <div class="flex items-center gap-3 p-3 rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-secondary))]">
-          <span class="folio-mark !mb-0">${String(i + 1).padStart(2, '0')}</span>
-          <span class="font-medium">${escapeHtml(wish.text)}</span>
-        </div>
-      `
-        )
-        .join('');
+      wishesContainer.replaceChildren();
+      holiday.wishes.forEach((wish, i) => {
+        const row = document.createElement('div');
+        row.className =
+          'flex items-center gap-3 p-3 rounded-sm border border-[rgb(var(--color-border))] bg-[rgb(var(--color-bg-secondary))]';
+        const mark = document.createElement('span');
+        mark.className = 'folio-mark !mb-0';
+        mark.textContent = String(i + 1).padStart(2, '0');
+        const text = document.createElement('span');
+        text.className = 'font-medium';
+        text.textContent = wish.text;
+        row.append(mark, text);
+        wishesContainer.appendChild(row);
+      });
     }
 
     // Show modal

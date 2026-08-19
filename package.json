@@ -20,7 +20,7 @@
     "start": "astro dev",
     "generate-music": "node scripts/generate-music-manifest.js",
     "optimize-images": "node scripts/optimize-images.js",
-    "build": "node scripts/generate-music-manifest.js && node scripts/generate-help-kb.mjs && node scripts/generate-fleet-changelog.mjs && astro check && astro build && node scripts/ensure-well-known.mjs",
+    "build": "node scripts/generate-music-manifest.js && node --experimental-strip-types scripts/generate-help-kb.mjs && node --experimental-strip-types scripts/generate-fleet-changelog.mjs && astro check && astro build && node scripts/ensure-well-known.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "encode:help": "node ops-portal/scripts/encode-site-help.cjs",

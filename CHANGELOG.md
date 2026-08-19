@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Astro 7.1.3 → 7.2.3; GitHub Actions majors (`checkout`/`setup-node` v7, Pages deploy v5/v6).
 - Explicit `session: false` for this static site; Node engine documented as `>=22.12.0`.
+- Build scripts import TypeScript data with `node --experimental-strip-types` so Node 22.12+ matches CI.
 
 ### Added
 
