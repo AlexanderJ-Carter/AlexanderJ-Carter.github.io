@@ -116,9 +116,18 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
       sectionTitle: '学习与兴趣',
       sectionLead: '一些基本信息，点到为止。',
       educationLabel: '教育',
-      education: ['清华大学电子工程系 · 电子信息科学与技术 · 2023–2027（在读）'],
+      education: [
+        '清华大学电子工程系 · 电子信息科学与技术 · 2023–2027（在读）',
+      ],
       interestsLabel: '兴趣与关注',
-      interests: ['LLM Agent', '多智能体系统', 'AI for Social Science', '摄影', '音乐', '游泳'],
+      interests: [
+        'LLM Agent',
+        '多智能体系统',
+        'AI for Social Science',
+        '摄影',
+        '音乐',
+        '游泳',
+      ],
     },
     researchTitle: '研究',
     researchLead: 'LLM 驱动的社会智能体 · 可执行社会科学',
@@ -137,7 +146,10 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     pubAbs: urls.pubAbs,
     pubPdf: urls.pubPdf,
     nowTitle: '最近在做',
-    nowItems: ['AgentSociety2', '北京三快在线科技有限公司（美团）实习 · 2026.06 – 至今'],
+    nowItems: [
+      'AgentSociety2',
+      '北京三快在线科技有限公司（美团）实习 · 2026.06 – 至今',
+    ],
     workTitle: '代表工作',
     workIntro: '目前主要参与的研究与实习。',
     projects: [
@@ -154,7 +166,8 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
       },
     ],
     connectTitle: '联系',
-    connectIntro: '如果想交流研究、项目或开源协作，欢迎通过邮件或 GitHub 联系。',
+    connectIntro:
+      '如果想交流研究、项目或开源协作，欢迎通过邮件或 GitHub 联系。',
     links: [
       {
         label: 'GitHub',
@@ -213,9 +226,19 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
       },
       {
         bio: '黃皓宇，英文名 Alexander James Carter。在北京讀書與做研究，也拍照、維護這個站點。',
-        background: '清華電子工程系在讀；研究側主要在 LLM Agent 與可執行社會科學。',
-        education: ['清華大學電子工程系 · 電子信息科學與技術 · 2023–2027（在讀）'],
-        interests: ['LLM Agent', '多智能體系統', 'AI for Social Science', '攝影', '音樂', '游泳'],
+        background:
+          '清華電子工程系在讀；研究側主要在 LLM Agent 與可執行社會科學。',
+        education: [
+          '清華大學電子工程系 · 電子信息科學與技術 · 2023–2027（在讀）',
+        ],
+        interests: [
+          'LLM Agent',
+          '多智能體系統',
+          'AI for Social Science',
+          '攝影',
+          '音樂',
+          '游泳',
+        ],
         timeline: [
           { when: '現在', what: '清華在讀；協作 AgentSociety2' },
           { when: '2023', what: '進入清華大學電子工程系' },
@@ -239,7 +262,10 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     pubAbs: urls.pubAbs,
     pubPdf: urls.pubPdf,
     nowTitle: '最近在做',
-    nowItems: ['AgentSociety2', '北京三快在線科技有限公司（美團）實習 · 2026.06 – 至今'],
+    nowItems: [
+      'AgentSociety2',
+      '北京三快在線科技有限公司（美團）實習 · 2026.06 – 至今',
+    ],
     workTitle: '代表工作',
     workIntro: '目前主要參與的研究與實習。',
     projects: [
@@ -256,7 +282,8 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
       },
     ],
     connectTitle: '聯繫',
-    connectIntro: '如果想交流研究、專案或開源協作，歡迎透過郵件或 GitHub 聯繫。',
+    connectIntro:
+      '如果想交流研究、專案或開源協作，歡迎透過郵件或 GitHub 聯繫。',
     links: [
       {
         label: 'GitHub',
@@ -316,11 +343,19 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
       },
       {
         bio: 'Haoyu Huang (黄皓宇); English name Alexander James Carter. Studying and researching in Beijing; photography and this site on the side.',
-        background: 'Undergraduate in Electronic Engineering at Tsinghua; research focus on LLM agents and executable social science.',
+        background:
+          'Undergraduate in Electronic Engineering at Tsinghua; research focus on LLM agents and executable social science.',
         education: [
           'Tsinghua University · Department of Electronic Engineering · 2023–2027 (in progress)',
         ],
-        interests: ['LLM agents', 'Multi-agent systems', 'AI for Social Science', 'Photography', 'Music', 'Swimming'],
+        interests: [
+          'LLM agents',
+          'Multi-agent systems',
+          'AI for Social Science',
+          'Photography',
+          'Music',
+          'Swimming',
+        ],
         timeline: [
           { when: 'Now', what: 'At Tsinghua; collaborating on AgentSociety2' },
           { when: '2023', what: 'Joined Tsinghua EE' },
@@ -425,13 +460,24 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
       },
       {
         bio: 'Haoyu Huang (黄皓宇) ; nom anglais Alexander James Carter. Études et recherche à Pékin ; photo et ce site en parallèle.',
-        background: 'Licence en génie électronique à Tsinghua ; agents LLM et sciences sociales exécutables.',
+        background:
+          'Licence en génie électronique à Tsinghua ; agents LLM et sciences sociales exécutables.',
         education: [
           'Université Tsinghua · Génie électronique · Science et tech. de l’information électronique (2023–2027, en cours)',
         ],
-        interests: ['Agents LLM', 'Systèmes multi-agents', 'Sciences sociales computationnelles', 'Photo', 'Musique', 'Natation'],
+        interests: [
+          'Agents LLM',
+          'Systèmes multi-agents',
+          'Sciences sociales computationnelles',
+          'Photo',
+          'Musique',
+          'Natation',
+        ],
         timeline: [
-          { when: 'Maintenant', what: 'À Tsinghua ; collaboration AgentSociety2' },
+          {
+            when: 'Maintenant',
+            what: 'À Tsinghua ; collaboration AgentSociety2',
+          },
           { when: '2023', what: 'Entrée à Tsinghua EE' },
         ],
       }
@@ -534,11 +580,19 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
       },
       {
         bio: 'Haoyu Huang (黄皓宇); английское имя Alexander James Carter. Учёба и исследования в Пекине; фото и этот сайт — рядом.',
-        background: 'Бакалавриат по электронике в Цинхуа; фокус — LLM-агенты и исполнимая социальная наука.',
+        background:
+          'Бакалавриат по электронике в Цинхуа; фокус — LLM-агенты и исполнимая социальная наука.',
         education: [
           'Университет Цинхуа · кафедра электроники · электронная информатика (2023–2027, учёба)',
         ],
-        interests: ['LLM-агенты', 'Мультиагентные системы', 'Вычислительная социология', 'Фото', 'Музыка', 'Плавание'],
+        interests: [
+          'LLM-агенты',
+          'Мультиагентные системы',
+          'Вычислительная социология',
+          'Фото',
+          'Музыка',
+          'Плавание',
+        ],
         timeline: [
           { when: 'Сейчас', what: 'В Цинхуа; сотрудничество по AgentSociety2' },
           { when: '2023', what: 'Поступление на EE в Цинхуа' },

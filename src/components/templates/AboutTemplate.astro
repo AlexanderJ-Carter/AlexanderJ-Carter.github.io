@@ -56,7 +56,6 @@ const researchAreaNotes: Record<typeof lang, string[]> = {
     'Исполняемые симуляции и эксперименты для социальных наук.',
   ],
 };
-
 ---
 
 <BaseLayout title={t.title} description={t.subtitle} protectedPage={true}>
@@ -228,7 +227,9 @@ const researchAreaNotes: Record<typeof lang, string[]> = {
                   {project.role}
                 </span>
               </div>
-              <h3 class={`font-heading text-xl font-semibold${project.desc ? ' mb-3' : ''}`}>
+              <h3
+                class={`font-heading text-xl font-semibold${project.desc ? ' mb-3' : ''}`}
+              >
                 {project.href ? (
                   <a
                     href={project.href}
@@ -325,25 +326,29 @@ const researchAreaNotes: Record<typeof lang, string[]> = {
         <div>
           <p class="folio-mark mb-3">{p.educationLabel}</p>
           <ul class="space-y-2">
-            {p.education.map((item) => (
-              <li class="text-[rgb(var(--color-text-secondary))] leading-relaxed pl-3 border-l-2 border-[rgb(var(--color-accent)_/_0.35)]">
-                {item}
-              </li>
-            ))}
+            {
+              p.education.map((item) => (
+                <li class="text-[rgb(var(--color-text-secondary))] leading-relaxed pl-3 border-l-2 border-[rgb(var(--color-accent)_/_0.35)]">
+                  {item}
+                </li>
+              ))
+            }
           </ul>
         </div>
         <div>
           <p class="folio-mark mb-3">{p.interestsLabel}</p>
           <ul class="flex flex-wrap gap-2">
             {
-              p.interests.slice(3).map((item) => (
-                <li class="interest-chip">{item}</li>
-              ))
+              p.interests
+                .slice(3)
+                .map((item) => <li class="interest-chip">{item}</li>)
             }
           </ul>
         </div>
       </div>
-      <div class="mt-12 pt-8 border-t border-[rgb(var(--color-border))] max-w-4xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+      <div
+        class="mt-12 pt-8 border-t border-[rgb(var(--color-border))] max-w-4xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5"
+      >
         <p class="text-[rgb(var(--color-text-secondary))] leading-relaxed">
           {t.connectIntro}
         </p>
