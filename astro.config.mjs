@@ -63,11 +63,6 @@ export default defineConfig({
         output: {
           assetFileNames: 'assets/[hash][extname]',
           chunkFileNames: 'chunks/[hash].js',
-          manualChunks: (id) => {
-            if (id.includes('tailwindcss')) {
-              return 'vendor-tailwind';
-            }
-          },
         },
       },
     },

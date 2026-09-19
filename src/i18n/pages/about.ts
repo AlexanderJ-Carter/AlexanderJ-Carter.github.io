@@ -10,42 +10,23 @@ export type AboutLink = {
 export type AboutProject = {
   name: string;
   role: string;
-  desc: string;
+  desc?: string;
   href: string;
 };
 
-export type AboutTimelineItem = {
-  when: string;
-  what: string;
-};
-
-/**
- * Personal dossier fields. Leave strings/arrays empty to show reserved blanks.
- * Fill later in each locale — template renders content only when non-empty.
- */
 export type AboutPersonal = {
   sectionTitle: string;
   sectionLead: string;
-  reservedNote: string;
-  portraitLabel: string;
-  /** Public image path; empty = reserved frame */
-  portraitSrc: string;
-  portraitAlt: string;
-  bioLabel: string;
-  bio: string;
-  backgroundLabel: string;
-  background: string;
   educationLabel: string;
   education: string[];
   interestsLabel: string;
   interests: string[];
-  timelineLabel: string;
-  timeline: AboutTimelineItem[];
 };
 
 export type AboutCopy = {
   kicker: string;
   title: string;
+  displayName: string;
   motto: string;
   subtitle: string;
   meta: string[];
@@ -92,32 +73,29 @@ const urls = {
   github: 'https://github.com/AlexanderJ-Carter',
   profile: 'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter',
   orcid: 'https://orcid.org/0009-0007-0343-4129',
+  scholar: 'https://scholar.google.com/citations?user=DJ43CTcAAAAJ&hl=zh-CN',
   email: 'mailto:contact-us@alexander.xin',
 };
 
 const pubName =
   'AgentSociety 2: An Integrated Research Environment for Executable Social Science';
 
-/** Shared empty personal dossier — fill per locale later. */
 function personalSlots(
-  labels: Omit<
+  labels: Pick<
     AboutPersonal,
-    | 'portraitSrc'
-    | 'bio'
-    | 'background'
-    | 'education'
-    | 'interests'
-    | 'timeline'
-  >
+    'sectionTitle' | 'sectionLead' | 'educationLabel' | 'interestsLabel'
+  > &
+    Record<string, unknown>,
+  content: Pick<AboutPersonal, 'education' | 'interests'> &
+    Record<string, unknown>
 ): AboutPersonal {
   return {
-    ...labels,
-    portraitSrc: '',
-    bio: '',
-    background: '',
-    education: [],
-    interests: [],
-    timeline: [],
+    sectionTitle: labels.sectionTitle,
+    sectionLead: labels.sectionLead,
+    educationLabel: labels.educationLabel,
+    education: content.education,
+    interestsLabel: labels.interestsLabel,
+    interests: content.interests,
   };
 }
 
@@ -125,33 +103,30 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
   'zh-CN': {
     kicker: 'About',
     title: '关于',
+    displayName: '黄皓宇',
     motto: '日子不必很耀眼，但要很喜欢。',
-    subtitle: '学生开发者 · LLM Agent 与可执行社会科学',
-    meta: ['北京', 'AgentSociety'],
-    introTitle: '主线',
+    subtitle: '清华大学电子工程系本科生，关注 LLM Agent 与可执行社会科学。',
+    meta: ['Haoyu Huang', '北京'],
+    introTitle: '你好',
     paragraphs: [
-      'Alexander James Carter。北京。主线协作清华 FIB Lab 的 AgentSociety / AgentSociety 2：把 LLM 驱动的社会智能体与可执行社会科学做成可运行、可审计的研究工作流。',
+      '我是黄皓宇，目前就读于清华大学电子工程系。学习和研究之外，我喜欢摄影、音乐和游泳，也在持续维护这个个人网站。',
+      '我的研究兴趣主要是 LLM Agent、多智能体系统，以及 AI 如何用于社会科学研究。',
     ],
-    personal: personalSlots({
-      sectionTitle: '个人介绍',
-      sectionLead:
-        '个人档案栏位预留中。研究线与项目见下方；此处不急于一次写满，会随时间慢慢补。',
-      reservedNote: '待写入',
-      portraitLabel: '肖像',
-      portraitAlt: '个人肖像（预留）',
-      bioLabel: '简介',
-      backgroundLabel: '背景',
+    personal: {
+      sectionTitle: '学习与兴趣',
+      sectionLead: '一些基本信息，点到为止。',
       educationLabel: '教育',
-      interestsLabel: '关注',
-      timelineLabel: '经历',
-    }),
+      education: ['清华大学电子工程系 · 电子信息科学与技术 · 2023–2027（在读）'],
+      interestsLabel: '兴趣与关注',
+      interests: ['LLM Agent', '多智能体系统', 'AI for Social Science', '摄影', '音乐', '游泳'],
+    },
     researchTitle: '研究',
     researchLead: 'LLM 驱动的社会智能体 · 可执行社会科学',
     researchBody:
-      '协作内容包括扩展与配置、CI / 安全、文档、Windows 兼容，以及面向「社会人」仿真的技能——让假设进入可复查的仿真与研究流程。',
+      '参与多智能体社会模拟相关系统的设计与实现，希望把社会科学问题转化为可运行、可复查的研究流程。',
     collabLabel: 'AgentSociety 仓库',
     collabHref: urls.agentsociety,
-    platformLabel: 'AgentSociety 2 平台',
+    platformLabel: 'AgentSociety2 平台',
     platformHref: urls.platform,
     relatedPaperLabel: '相关平台论文 (arXiv:2502.08691)',
     relatedPaperHref: urls.relatedPaper,
@@ -161,29 +136,25 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     pubVenue: 'arXiv preprint',
     pubAbs: urls.pubAbs,
     pubPdf: urls.pubPdf,
-    nowTitle: '此刻',
-    nowItems: [
-      'AgentSociety 2 工程与社会人仿真技能',
-      '把假设变成可审计仿真与研究工作流',
-    ],
-    workTitle: 'AgentSociety 相关',
-    workIntro: '与 GitHub 主页 Featured 一致，只列 AgentSociety 主线。',
+    nowTitle: '最近在做',
+    nowItems: ['AgentSociety2', '北京三快在线科技有限公司（美团）实习 · 2026.06 – 至今'],
+    workTitle: '代表工作',
+    workIntro: '目前主要参与的研究与实习。',
     projects: [
       {
-        name: 'AgentSociety',
-        role: '贡献者 / 合作作者',
+        name: 'AgentSociety2',
+        role: '项目成员 / 论文共同作者 · 2025.10 – 至今',
         desc: '面向可执行社会科学的 LLM 原生集成研究环境。',
         href: urls.agentsociety,
       },
       {
-        name: 'AgentSociety2-Agent-Skills',
-        role: '作者',
-        desc: '社会人仿真技能库：节律、关系、规范与经济约束。',
-        href: urls.skills,
+        name: '北京三快在线科技有限公司（美团）',
+        role: '实习 · 2026.06 – 至今',
+        href: '',
       },
     ],
     connectTitle: '联系',
-    connectIntro: '研究与协作相关，优先邮件或 GitHub。',
+    connectIntro: '如果想交流研究、项目或开源协作，欢迎通过邮件或 GitHub 联系。',
     links: [
       {
         label: 'GitHub',
@@ -192,15 +163,15 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
         external: true,
       },
       {
-        label: 'Profile README',
-        href: urls.profile,
-        note: 'github.com/…/AlexanderJ-Carter',
-        external: true,
-      },
-      {
         label: 'ORCID',
         href: urls.orcid,
         note: '0009-0007-0343-4129',
+        external: true,
+      },
+      {
+        label: 'Google Scholar',
+        href: urls.scholar,
+        note: '黄皓宇 · Haoyu Huang',
         external: true,
       },
       {
@@ -218,33 +189,46 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
   'zh-TW': {
     kicker: 'About',
     title: '關於',
+    displayName: '黃皓宇',
     motto: '日子不必很耀眼，但要很喜歡。',
-    subtitle: '學生開發者 · LLM Agent 與可執行社會科學',
-    meta: ['北京', 'AgentSociety'],
-    introTitle: '主線',
+    subtitle: '清華大學電子工程系本科生，關注 LLM Agent 與可執行社會科學。',
+    meta: ['Haoyu Huang', '北京'],
+    introTitle: '你好',
     paragraphs: [
-      'Alexander James Carter。北京。主線協作清華 FIB Lab 的 AgentSociety / AgentSociety 2：把 LLM 驅動的社會智能體與可執行社會科學做成可運行、可稽核的研究工作流。',
+      '我是黃皓宇，目前就讀於清華大學電子工程系。學習和研究之外，我喜歡攝影、音樂和游泳，也在持續維護這個個人網站。',
+      '我的研究興趣主要是 LLM Agent、多智能體系統，以及 AI 如何用於社會科學研究。',
     ],
-    personal: personalSlots({
-      sectionTitle: '個人介紹',
-      sectionLead:
-        '個人檔案欄位預留中。研究線與專案見下方；此處不急於一次寫滿，會隨時間慢慢補。',
-      reservedNote: '待寫入',
-      portraitLabel: '肖像',
-      portraitAlt: '個人肖像（預留）',
-      bioLabel: '簡介',
-      backgroundLabel: '背景',
-      educationLabel: '教育',
-      interestsLabel: '關注',
-      timelineLabel: '經歷',
-    }),
+    personal: personalSlots(
+      {
+        sectionTitle: '學習與興趣',
+        sectionLead: '一些基本資訊，點到為止。',
+        reservedNote: '待補',
+        portraitLabel: '肖像',
+        portraitAlt: '個人肖像（預留）',
+        bioLabel: '簡介',
+        backgroundLabel: '背景',
+        educationLabel: '教育',
+        interestsLabel: '興趣與關注',
+        timelineLabel: '經歷',
+      },
+      {
+        bio: '黃皓宇，英文名 Alexander James Carter。在北京讀書與做研究，也拍照、維護這個站點。',
+        background: '清華電子工程系在讀；研究側主要在 LLM Agent 與可執行社會科學。',
+        education: ['清華大學電子工程系 · 電子信息科學與技術 · 2023–2027（在讀）'],
+        interests: ['LLM Agent', '多智能體系統', 'AI for Social Science', '攝影', '音樂', '游泳'],
+        timeline: [
+          { when: '現在', what: '清華在讀；協作 AgentSociety2' },
+          { when: '2023', what: '進入清華大學電子工程系' },
+        ],
+      }
+    ),
     researchTitle: '研究',
     researchLead: 'LLM 驅動的社會智能體 · 可執行社會科學',
     researchBody:
-      '協作內容包括擴展與配置、CI / 安全、文件、Windows 相容，以及面向「社會人」仿真的技能——讓假設進入可複查的仿真與研究流程。',
+      '參與多智能體社會模擬相關系統的設計與實現，希望把社會科學問題轉化為可運行、可複查的研究流程。',
     collabLabel: 'AgentSociety 倉庫',
     collabHref: urls.agentsociety,
-    platformLabel: 'AgentSociety 2 平台',
+    platformLabel: 'AgentSociety2 平台',
     platformHref: urls.platform,
     relatedPaperLabel: '相關平台論文 (arXiv:2502.08691)',
     relatedPaperHref: urls.relatedPaper,
@@ -254,29 +238,25 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     pubVenue: 'arXiv preprint',
     pubAbs: urls.pubAbs,
     pubPdf: urls.pubPdf,
-    nowTitle: '此刻',
-    nowItems: [
-      'AgentSociety 2 工程與社會人仿真技能',
-      '把假設變成可稽核仿真與研究工作流',
-    ],
-    workTitle: 'AgentSociety 相關',
-    workIntro: '與 GitHub 主頁 Featured 一致，只列 AgentSociety 主線。',
+    nowTitle: '最近在做',
+    nowItems: ['AgentSociety2', '北京三快在線科技有限公司（美團）實習 · 2026.06 – 至今'],
+    workTitle: '代表工作',
+    workIntro: '目前主要參與的研究與實習。',
     projects: [
       {
-        name: 'AgentSociety',
-        role: '貢獻者 / 合作作者',
+        name: 'AgentSociety2',
+        role: '專案成員 / 論文共同作者 · 2025.10 – 至今',
         desc: '面向可執行社會科學的 LLM 原生整合研究環境。',
         href: urls.agentsociety,
       },
       {
-        name: 'AgentSociety2-Agent-Skills',
-        role: '作者',
-        desc: '社會人仿真技能庫：節律、關係、規範與經濟約束。',
-        href: urls.skills,
+        name: '北京三快在線科技有限公司（美團）',
+        role: '實習 · 2026.06 – 至今',
+        href: '',
       },
     ],
     connectTitle: '聯繫',
-    connectIntro: '研究與協作相關，優先郵件或 GitHub。',
+    connectIntro: '如果想交流研究、專案或開源協作，歡迎透過郵件或 GitHub 聯繫。',
     links: [
       {
         label: 'GitHub',
@@ -285,15 +265,15 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
         external: true,
       },
       {
-        label: 'Profile README',
-        href: urls.profile,
-        note: 'github.com/…/AlexanderJ-Carter',
-        external: true,
-      },
-      {
         label: 'ORCID',
         href: urls.orcid,
         note: '0009-0007-0343-4129',
+        external: true,
+      },
+      {
+        label: 'Google Scholar',
+        href: urls.scholar,
+        note: '黄皓宇 · Haoyu Huang',
         external: true,
       },
       {
@@ -311,33 +291,49 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
   'en-GB': {
     kicker: 'About',
     title: 'About',
+    displayName: 'Haoyu Huang',
     motto: 'Warm, not perfect.',
-    subtitle: 'Student developer · LLM agents & executable social science',
-    meta: ['Beijing', 'AgentSociety'],
-    introTitle: 'Line of work',
+    subtitle:
+      'Electronic Engineering undergraduate at Tsinghua, interested in LLM agents and executable social science.',
+    meta: ['黄皓宇', 'Beijing'],
+    introTitle: 'Hello',
     paragraphs: [
-      'Alexander James Carter. Beijing. Primary collaboration: Tsinghua FIB Lab’s AgentSociety / AgentSociety 2 — LLM-driven social agents and executable social science as runnable, auditable research workflows.',
+      'I’m Haoyu Huang, an undergraduate in Electronic Engineering at Tsinghua University. Outside study and research, I enjoy photography, music and swimming, and I maintain this personal site.',
+      'My research interests centre on LLM agents, multi-agent systems and AI for social science.',
     ],
-    personal: personalSlots({
-      sectionTitle: 'Personal',
-      sectionLead:
-        'Personal dossier slots reserved. Research and projects below; these fields will fill in gradually, not all at once.',
-      reservedNote: 'Reserved',
-      portraitLabel: 'Portrait',
-      portraitAlt: 'Portrait (reserved)',
-      bioLabel: 'Bio',
-      backgroundLabel: 'Background',
-      educationLabel: 'Education',
-      interestsLabel: 'Interests',
-      timelineLabel: 'Timeline',
-    }),
+    personal: personalSlots(
+      {
+        sectionTitle: 'Study & interests',
+        sectionLead: 'A few details, kept brief.',
+        reservedNote: 'TBD',
+        portraitLabel: 'Portrait',
+        portraitAlt: 'Portrait (reserved)',
+        bioLabel: 'Bio',
+        backgroundLabel: 'Background',
+        educationLabel: 'Education',
+        interestsLabel: 'Interests & focus',
+        timelineLabel: 'Timeline',
+      },
+      {
+        bio: 'Haoyu Huang (黄皓宇); English name Alexander James Carter. Studying and researching in Beijing; photography and this site on the side.',
+        background: 'Undergraduate in Electronic Engineering at Tsinghua; research focus on LLM agents and executable social science.',
+        education: [
+          'Tsinghua University · Department of Electronic Engineering · 2023–2027 (in progress)',
+        ],
+        interests: ['LLM agents', 'Multi-agent systems', 'AI for Social Science', 'Photography', 'Music', 'Swimming'],
+        timeline: [
+          { when: 'Now', what: 'At Tsinghua; collaborating on AgentSociety2' },
+          { when: '2023', what: 'Joined Tsinghua EE' },
+        ],
+      }
+    ),
     researchTitle: 'Research',
     researchLead: 'LLM-driven social agents · executable social science',
     researchBody:
-      'Work covers extensions and config, CI / security, docs, Windows compatibility, and skills for socially grounded agents — turning hypotheses into auditable simulations and research workflows.',
+      'I work on systems for multi-agent social simulation — turning social-science questions into runnable, reviewable research workflows.',
     collabLabel: 'AgentSociety repo',
     collabHref: urls.agentsociety,
-    platformLabel: 'AgentSociety 2 platform',
+    platformLabel: 'AgentSociety2 platform',
     platformHref: urls.platform,
     relatedPaperLabel: 'Related platform paper (arXiv:2502.08691)',
     relatedPaperHref: urls.relatedPaper,
@@ -347,30 +343,29 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     pubVenue: 'arXiv preprint',
     pubAbs: urls.pubAbs,
     pubPdf: urls.pubPdf,
-    nowTitle: 'Now',
+    nowTitle: 'Currently',
     nowItems: [
-      'AgentSociety 2 engineering and social-agent skills',
-      'Hypotheses → auditable simulations and research workflows',
+      'AgentSociety2',
+      'Beijing Sankuai Online Technology Co., Ltd. (Meituan) internship · Jun 2026 – present',
     ],
-    workTitle: 'AgentSociety',
-    workIntro:
-      'Matches the Featured section on the GitHub profile — AgentSociety only.',
+    workTitle: 'Selected work',
+    workIntro: 'Research and internship work I am currently involved in.',
     projects: [
       {
-        name: 'AgentSociety',
-        role: 'Contributor & co-author',
+        name: 'AgentSociety2',
+        role: 'Project member & co-author · Oct 2025 – present',
         desc: 'LLM-native integrated research environment for executable social science.',
         href: urls.agentsociety,
       },
       {
-        name: 'AgentSociety2-Agent-Skills',
-        role: 'Author',
-        desc: 'Theory-grounded skills for socially grounded agents.',
-        href: urls.skills,
+        name: 'Beijing Sankuai Online Technology Co., Ltd. (Meituan)',
+        role: 'Internship · Jun 2026 – present',
+        href: '',
       },
     ],
     connectTitle: 'Contact',
-    connectIntro: 'For research and collaboration — email or GitHub first.',
+    connectIntro:
+      'For research, projects or open-source collaboration, email and GitHub are the best ways to reach me.',
     links: [
       {
         label: 'GitHub',
@@ -379,15 +374,15 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
         external: true,
       },
       {
-        label: 'Profile README',
-        href: urls.profile,
-        note: 'github.com/…/AlexanderJ-Carter',
-        external: true,
-      },
-      {
         label: 'ORCID',
         href: urls.orcid,
         note: '0009-0007-0343-4129',
+        external: true,
+      },
+      {
+        label: 'Google Scholar',
+        href: urls.scholar,
+        note: 'Haoyu Huang',
         external: true,
       },
       {
@@ -405,35 +400,50 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
   fr: {
     kicker: 'About',
     title: 'À propos',
+    displayName: 'Haoyu Huang',
     motto: 'Chaleureux, pas parfait.',
     subtitle:
-      'Étudiant développeur · agents LLM & sciences sociales exécutables',
-    meta: ['Pékin', 'AgentSociety'],
-    introTitle: 'Ligne de travail',
+      'Étudiant en génie électronique à Tsinghua, intéressé par les agents LLM et les sciences sociales exécutables.',
+    meta: ['黄皓宇', 'Pékin'],
+    introTitle: 'Bonjour',
     paragraphs: [
-      'Alexander James Carter. Pékin. Collaboration principale : AgentSociety / AgentSociety 2 (FIB Lab, Tsinghua) — agents sociaux LLM et sciences sociales exécutables en workflows auditables.',
+      'Je suis Haoyu Huang, étudiant en génie électronique à l’université Tsinghua. En dehors des études et de la recherche, j’aime la photographie, la musique et la natation, et je maintiens ce site personnel.',
+      'Mes recherches portent sur les agents LLM, les systèmes multi-agents et l’IA pour les sciences sociales.',
     ],
-    personal: personalSlots({
-      sectionTitle: 'Personnel',
-      sectionLead:
-        'Emplacements réservés pour le dossier personnel. Recherche et projets ci-dessous ; remplissage progressif, sans précipitation.',
-      reservedNote: 'Réservé',
-      portraitLabel: 'Portrait',
-      portraitAlt: 'Portrait (réservé)',
-      bioLabel: 'Bio',
-      backgroundLabel: 'Parcours',
-      educationLabel: 'Formation',
-      interestsLabel: 'Intérêts',
-      timelineLabel: 'Chronologie',
-    }),
+    personal: personalSlots(
+      {
+        sectionTitle: 'Études et intérêts',
+        sectionLead: 'Quelques informations, simplement.',
+        reservedNote: 'À venir',
+        portraitLabel: 'Portrait',
+        portraitAlt: 'Portrait (réservé)',
+        bioLabel: 'Bio',
+        backgroundLabel: 'Parcours',
+        educationLabel: 'Formation',
+        interestsLabel: 'Intérêts et sujets',
+        timelineLabel: 'Chronologie',
+      },
+      {
+        bio: 'Haoyu Huang (黄皓宇) ; nom anglais Alexander James Carter. Études et recherche à Pékin ; photo et ce site en parallèle.',
+        background: 'Licence en génie électronique à Tsinghua ; agents LLM et sciences sociales exécutables.',
+        education: [
+          'Université Tsinghua · Génie électronique · Science et tech. de l’information électronique (2023–2027, en cours)',
+        ],
+        interests: ['Agents LLM', 'Systèmes multi-agents', 'Sciences sociales computationnelles', 'Photo', 'Musique', 'Natation'],
+        timeline: [
+          { when: 'Maintenant', what: 'À Tsinghua ; collaboration AgentSociety2' },
+          { when: '2023', what: 'Entrée à Tsinghua EE' },
+        ],
+      }
+    ),
     researchTitle: 'Recherche',
     researchLead:
       'Agents sociaux pilotés par LLM · sciences sociales exécutables',
     researchBody:
-      'Extensions et config, CI / sécurité, docs, Windows, et compétences pour agents socialement ancrés — des hypothèses aux simulations auditables.',
+      'Je contribue à des systèmes de simulation sociale multi-agents — transformer des questions de sciences sociales en flux de recherche exécutables et vérifiables.',
     collabLabel: 'Dépôt AgentSociety',
     collabHref: urls.agentsociety,
-    platformLabel: 'Plateforme AgentSociety 2',
+    platformLabel: 'Plateforme AgentSociety2',
     platformHref: urls.platform,
     relatedPaperLabel: 'Article plateforme (arXiv:2502.08691)',
     relatedPaperHref: urls.relatedPaper,
@@ -443,26 +453,24 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     pubVenue: 'arXiv preprint',
     pubAbs: urls.pubAbs,
     pubPdf: urls.pubPdf,
-    nowTitle: 'Maintenant',
+    nowTitle: 'En ce moment',
     nowItems: [
-      'Ingénierie AgentSociety 2 et compétences d’agents sociaux',
-      'Hypothèses → simulations auditables et workflows de recherche',
+      'AgentSociety2',
+      'Beijing Sankuai Online Technology Co., Ltd. (Meituan) · stage · juin 2026 – présent',
     ],
-    workTitle: 'AgentSociety',
-    workIntro:
-      'Aligné sur Featured du profil GitHub — AgentSociety uniquement.',
+    workTitle: 'Travaux sélectionnés',
+    workIntro: 'Recherche et stage en cours.',
     projects: [
       {
-        name: 'AgentSociety',
-        role: 'Contributeur & co-auteur',
+        name: 'AgentSociety2',
+        role: 'Contributeur & co-auteur · oct. 2025 – présent',
         desc: 'Environnement de recherche intégré natif LLM.',
         href: urls.agentsociety,
       },
       {
-        name: 'AgentSociety2-Agent-Skills',
-        role: 'Auteur',
-        desc: 'Compétences pour agents socialement ancrés.',
-        href: urls.skills,
+        name: 'Beijing Sankuai Online Technology Co., Ltd. (Meituan)',
+        role: 'Stage · juin 2026 – présent',
+        href: '',
       },
     ],
     connectTitle: 'Contact',
@@ -475,15 +483,15 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
         external: true,
       },
       {
-        label: 'Profile README',
-        href: urls.profile,
-        note: 'github.com/…/AlexanderJ-Carter',
-        external: true,
-      },
-      {
         label: 'ORCID',
         href: urls.orcid,
         note: '0009-0007-0343-4129',
+        external: true,
+      },
+      {
+        label: 'Google Scholar',
+        href: urls.scholar,
+        note: 'Haoyu Huang',
         external: true,
       },
       {
@@ -501,33 +509,49 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
   ru: {
     kicker: 'About',
     title: 'Обо мне',
+    displayName: 'Haoyu Huang',
     motto: 'Тёпло, не идеально.',
-    subtitle: 'Студент-разработчик · LLM-агенты и исполнимая социальная наука',
-    meta: ['Пекин', 'AgentSociety'],
-    introTitle: 'Основная линия',
+    subtitle:
+      'Студент кафедры электроники Цинхуа; LLM-агенты и исполнимая социальная наука.',
+    meta: ['黄皓宇', 'Пекин'],
+    introTitle: 'Привет',
     paragraphs: [
-      'Alexander James Carter. Пекин. Основное сотрудничество: AgentSociety / AgentSociety 2 (FIB Lab, Tsinghua) — LLM-агенты и исполнимая социальная наука как исполняемые, проверяемые рабочие процессы.',
+      'Я Haoyu Huang, студент кафедры электроники Университета Цинхуа. Помимо учёбы и исследований, я занимаюсь фотографией, слушаю музыку, плаваю и поддерживаю этот сайт.',
+      'Мои исследовательские интересы — LLM-агенты, мультиагентные системы и ИИ для социальных наук.',
     ],
-    personal: personalSlots({
-      sectionTitle: 'Личное',
-      sectionLead:
-        'Слоты личного досье зарезервированы. Исследования и проекты ниже; заполнение постепенное, без спешки.',
-      reservedNote: 'Зарезервировано',
-      portraitLabel: 'Портрет',
-      portraitAlt: 'Портрет (зарезервировано)',
-      bioLabel: 'Био',
-      backgroundLabel: 'Фон',
-      educationLabel: 'Образование',
-      interestsLabel: 'Интересы',
-      timelineLabel: 'Хронология',
-    }),
+    personal: personalSlots(
+      {
+        sectionTitle: 'Учёба и интересы',
+        sectionLead: 'Коротко о главном.',
+        reservedNote: 'Позже',
+        portraitLabel: 'Портрет',
+        portraitAlt: 'Портрет (зарезервировано)',
+        bioLabel: 'Био',
+        backgroundLabel: 'Фон',
+        educationLabel: 'Образование',
+        interestsLabel: 'Интересы',
+        timelineLabel: 'Хронология',
+      },
+      {
+        bio: 'Haoyu Huang (黄皓宇); английское имя Alexander James Carter. Учёба и исследования в Пекине; фото и этот сайт — рядом.',
+        background: 'Бакалавриат по электронике в Цинхуа; фокус — LLM-агенты и исполнимая социальная наука.',
+        education: [
+          'Университет Цинхуа · кафедра электроники · электронная информатика (2023–2027, учёба)',
+        ],
+        interests: ['LLM-агенты', 'Мультиагентные системы', 'Вычислительная социология', 'Фото', 'Музыка', 'Плавание'],
+        timeline: [
+          { when: 'Сейчас', what: 'В Цинхуа; сотрудничество по AgentSociety2' },
+          { when: '2023', what: 'Поступление на EE в Цинхуа' },
+        ],
+      }
+    ),
     researchTitle: 'Исследования',
     researchLead: 'Социальные агенты на LLM · исполнимая социальная наука',
     researchBody:
-      'Расширения и config, CI / безопасность, документация, Windows и навыки для социально укоренённых агентов — от гипотез к аудируемым симуляциям.',
+      'Участвую в системах мультиагентной социальной симуляции — перевожу вопросы социальных наук в исполняемые и проверяемые исследовательские процессы.',
     collabLabel: 'Репозиторий AgentSociety',
     collabHref: urls.agentsociety,
-    platformLabel: 'Платформа AgentSociety 2',
+    platformLabel: 'Платформа AgentSociety2',
     platformHref: urls.platform,
     relatedPaperLabel: 'Статья о платформе (arXiv:2502.08691)',
     relatedPaperHref: urls.relatedPaper,
@@ -539,23 +563,22 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
     pubPdf: urls.pubPdf,
     nowTitle: 'Сейчас',
     nowItems: [
-      'Инженерия AgentSociety 2 и навыки социальных агентов',
-      'Гипотезы → аудируемые симуляции и исследовательские workflow',
+      'AgentSociety2',
+      'Beijing Sankuai Online Technology Co., Ltd. (Meituan) · стажировка · июнь 2026 – н.в.',
     ],
-    workTitle: 'AgentSociety',
-    workIntro: 'Как Featured в GitHub-профиле — только AgentSociety.',
+    workTitle: 'Избранные проекты',
+    workIntro: 'Текущие исследования и стажировка.',
     projects: [
       {
-        name: 'AgentSociety',
-        role: 'Участник и соавтор',
+        name: 'AgentSociety2',
+        role: 'Участник и соавтор · окт. 2025 – н.в.',
         desc: 'LLM-нативная среда для исполнимой социальной науки.',
         href: urls.agentsociety,
       },
       {
-        name: 'AgentSociety2-Agent-Skills',
-        role: 'Автор',
-        desc: 'Навыки для социально укоренённых агентов.',
-        href: urls.skills,
+        name: 'Beijing Sankuai Online Technology Co., Ltd. (Meituan)',
+        role: 'Стажировка · июнь 2026 – н.в.',
+        href: '',
       },
     ],
     connectTitle: 'Связь',
@@ -568,15 +591,15 @@ export const aboutCopy: Record<Lang, AboutCopy> = {
         external: true,
       },
       {
-        label: 'Profile README',
-        href: urls.profile,
-        note: 'github.com/…/AlexanderJ-Carter',
-        external: true,
-      },
-      {
         label: 'ORCID',
         href: urls.orcid,
         note: '0009-0007-0343-4129',
+        external: true,
+      },
+      {
+        label: 'Google Scholar',
+        href: urls.scholar,
+        note: 'Haoyu Huang',
         external: true,
       },
       {

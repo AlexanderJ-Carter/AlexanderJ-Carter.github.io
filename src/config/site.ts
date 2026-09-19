@@ -28,7 +28,10 @@ export function originForPath(pathname: string): string {
 
 export const isDev = Boolean(import.meta.env.DEV);
 
-/** Skip Turnstile gate on protected pages (About / Contact). */
+/** Skip Turnstile gate on protected pages (About / Contact).
+ *  Dev skips unless PUBLIC_FORCE_VERIFY. Local preview also skips at runtime
+ *  for localhost / private LAN hosts (BaseLayout), even when this is false.
+ */
 export const skipVerify =
   truthy(import.meta.env.PUBLIC_SKIP_VERIFY) ||
   (isDev && !truthy(import.meta.env.PUBLIC_FORCE_VERIFY));

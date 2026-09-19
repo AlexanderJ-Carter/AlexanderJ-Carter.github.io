@@ -76,7 +76,7 @@ const featuredShared: HomeFeaturedItem[] = [
 export const homeCopy: Record<Lang, HomeCopy> = {
   'zh-CN': {
     brand: 'Alexander Carter',
-    tagline: '用镜头记录光线，用文字整理思绪。',
+    tagline: '摄影与写作之外，也在做 LLM Agent 研究。',
     ctaGallery: '进入画廊',
     ctaWriting: '阅读写作',
     scrollHint: '向下浏览',
@@ -138,7 +138,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
   },
   'zh-TW': {
     brand: 'Alexander Carter',
-    tagline: '用鏡頭記錄光線，用文字整理思緒。',
+    tagline: '攝影與寫作之外，也在做 LLM Agent 研究。',
     ctaGallery: '進入畫廊',
     ctaWriting: '閱讀寫作',
     scrollHint: '向下瀏覽',
@@ -216,7 +216,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
   },
   'en-GB': {
     brand: 'Alexander Carter',
-    tagline: 'Light through a lens. Thought through words.',
+    tagline: 'Photography and writing — plus LLM agent research.',
     ctaGallery: 'Enter gallery',
     ctaWriting: 'Read writing',
     scrollHint: 'Scroll',
@@ -295,7 +295,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
   },
   fr: {
     brand: 'Alexander Carter',
-    tagline: 'La lumière par l’objectif. La pensée par les mots.',
+    tagline: 'Photo et écriture — et aussi la recherche sur les agents LLM.',
     ctaGallery: 'Voir la galerie',
     ctaWriting: 'Lire les écrits',
     scrollHint: 'Défiler',
@@ -374,7 +374,7 @@ export const homeCopy: Record<Lang, HomeCopy> = {
   },
   ru: {
     brand: 'Alexander Carter',
-    tagline: 'Свет через объектив. Мысль через слова.',
+    tagline: 'Фото и тексты — плюс исследования LLM-агентов.',
     ctaGallery: 'В галерею',
     ctaWriting: 'К статьям',
     scrollHint: 'Дальше',

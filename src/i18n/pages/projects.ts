@@ -6,7 +6,7 @@ export const t: Record<Lang, Record<string, string>> = {
     subtitle: '生活向的小项目与站点页面',
     badge: 'Projects',
     intro:
-      '这里是偏生活化、好用导向的小项目：记录、工具、页面体验，持续慢慢打磨。',
+      '生活向小项目与研究协作都在这里：工具与页面慢慢打磨；AgentSociety 等见上方外部仓库。',
     filterAll: '全部',
     filterWeb: 'Web',
     filterHardware: '生活',
@@ -38,7 +38,7 @@ export const t: Record<Lang, Record<string, string>> = {
     subtitle: 'Lifestyle pages and small projects',
     badge: 'Projects',
     intro:
-      'A collection of practical, lifestyle-focused pages and small projects, built for daily use and better UX.',
+      'Lifestyle tools and pages, plus research collaborations such as AgentSociety in the external list above.',
     filterAll: 'All',
     filterWeb: 'Web',
     filterHardware: 'Lifestyle',
@@ -90,7 +90,7 @@ export const projectsData: Record<Lang, any[]> = {
       desc: '你现在所在的网站。Astro + Tailwind CSS + TypeScript 构建的静态站点，多语言支持，部署在 GitHub Pages；持续迭代中。',
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
-      status: 'done',
+      status: 'wip',
       github:
         'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
@@ -147,7 +147,7 @@ export const projectsData: Record<Lang, any[]> = {
       desc: '你現在所在的網站。Astro + Tailwind CSS + TypeScript 構建的靜態站點，多語言支援，部署在 GitHub Pages；持續迭代中。',
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
-      status: 'done',
+      status: 'wip',
       github:
         'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
@@ -204,7 +204,7 @@ export const projectsData: Record<Lang, any[]> = {
       desc: "The site you're on. A static site built with Astro + Tailwind CSS + TypeScript, multilingual, deployed on GitHub Pages; still evolving.",
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
-      status: 'done',
+      status: 'wip',
       github:
         'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
@@ -261,7 +261,7 @@ export const projectsData: Record<Lang, any[]> = {
       desc: 'Le site sur lequel vous vous trouvez. Site statique Astro + Tailwind CSS + TypeScript, multilingue, hébergé sur GitHub Pages ; en évolution continue.',
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
-      status: 'done',
+      status: 'wip',
       github:
         'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
@@ -294,6 +294,15 @@ export const projectsData: Record<Lang, any[]> = {
       demo: '/writing',
     },
     {
+      title: 'Liste de lecture',
+      desc: 'Trois parcours de lecture, notes approfondies et essais — comment chaque livre change le regard et la pratique.',
+      tags: ['Reading', 'Essay', 'Notes'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/reading-list',
+    },
+    {
       title: 'Convertisseur de devises',
       desc: 'Convertisseur de devises léger et sans tracking, utilisant une API de taux de change ouverte.',
       tags: ['JavaScript', 'Fetch API', 'Astro'],
@@ -309,7 +318,7 @@ export const projectsData: Record<Lang, any[]> = {
       desc: 'Сайт, на котором вы сейчас находитесь. Статический сайт на Astro + Tailwind CSS + TypeScript, многоязычный, развёрнут на GitHub Pages; продолжает развиваться.',
       tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
       category: 'web',
-      status: 'done',
+      status: 'wip',
       github:
         'https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io',
       demo: 'https://alexander.xin',
@@ -340,6 +349,15 @@ export const projectsData: Record<Lang, any[]> = {
       status: 'done',
       github: null,
       demo: '/writing',
+    },
+    {
+      title: 'Список чтения',
+      desc: 'Три маршрута чтения, подробные заметки и эссе — как книги меняют взгляд и практику.',
+      tags: ['Reading', 'Essay', 'Notes'],
+      category: 'web',
+      status: 'done',
+      github: null,
+      demo: '/reading-list',
     },
     {
       title: 'Конвертер валют',
@@ -616,19 +634,35 @@ export const projectPrinciplesData: Record<Lang, any> = {
 
 export const externalProjects = [
   {
+    title: 'AgentSociety',
+    github: 'https://github.com/tsinghua-fib-lab/AgentSociety',
+    demo: 'https://agentsociety2.fiblab.net/',
+    tags: ['Research', 'LLM', 'Agents'],
+    desc: {
+      'zh-CN':
+        '清华 FIB Lab：面向可执行社会科学的 LLM 原生研究环境；另有 AgentSociety 2 平台与社会人仿真技能库。',
+      'zh-TW':
+        '清華 FIB Lab：面向可執行社會科學的 LLM 原生研究環境；另有 AgentSociety 2 平台與社會人仿真技能庫。',
+      'en-GB':
+        'Tsinghua FIB Lab: an LLM-native research environment for executable social science, plus AgentSociety 2 and social-agent skills.',
+      fr: 'FIB Lab (Tsinghua) : environnement de recherche LLM pour les sciences sociales exécutables, plus AgentSociety 2 et skills.',
+      ru: 'FIB Lab (Цинхуа): LLM-среда для исполняемой социальной науки, плюс AgentSociety 2 и навыки агентов.',
+    },
+  },
+  {
     title: 'MyCook',
     github: 'https://github.com/AlexanderJ-Carter/MyCook',
     demo: 'https://cook.alexander.xin',
     tags: ['Recipes', 'Docs', 'MCP'],
     desc: {
       'zh-CN':
-        '双源菜谱：Pages 主站 cook · 完整站 mycook（图片版）· 远程 MCP cook-mcp（Pocket ID）。577+ 道菜，搜索 / 收藏 / PWA。',
+        '双源菜谱：Pages 主站 cook · 完整站 mycook（图片版）· 远程 MCP cook-mcp（Pocket ID）。数百道菜，搜索 / 收藏 / PWA。',
       'zh-TW':
-        '雙源食譜：Pages 主站 cook · 完整站 mycook（圖片版）· 遠端 MCP cook-mcp（Pocket ID）。577+ 道菜，搜尋 / 收藏 / PWA。',
+        '雙源食譜：Pages 主站 cook · 完整站 mycook（圖片版）· 遠端 MCP cook-mcp（Pocket ID）。数百道菜，搜尋 / 收藏 / PWA。',
       'en-GB':
-        'Dual-source recipes: Pages at cook, full host mycook (images), remote MCP cook-mcp (Pocket ID). 577+ dishes, search, PWA.',
-      fr: 'Recettes dual-source : Pages cook, hôte complet mycook (images), MCP distant cook-mcp. 577+ plats, PWA.',
-      ru: 'Рецепты: Pages cook, полный mycook (фото), MCP cook-mcp. 577+ блюд, поиск, PWA.',
+        'Dual-source recipes: Pages at cook, full host mycook (images), remote MCP cook-mcp (Pocket ID). hundreds of dishes, search, PWA.',
+      fr: 'Recettes dual-source : Pages cook, hôte complet mycook (images), MCP distant cook-mcp. des centaines de plats, PWA.',
+      ru: 'Рецепты: Pages cook, полный mycook (фото), MCP cook-mcp. сотни блюд, поиск, PWA.',
     },
   },
   {

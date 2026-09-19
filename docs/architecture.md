@@ -33,9 +33,12 @@ public/          # 静态资源；画廊请用 gallery-optimized
 
 控制面、Access / Pocket ID / SMTP（Resend）、登录分层见 [architecture/site-fleet.md](./architecture/site-fleet.md)。公开站无访客账户；维护者日常入口为 `ops.alexander.xin`。
 
+## 已落地的结构整理
+
+- Gallery 图集：`src/data/gallery.ts`（文案与资源分离，`GalleryTemplate` 已引用）
+
 ## 下一步可研究（未做）
 
 - 本地 Canvas/WASM 生成 QR（去掉第三方 `api.qrserver.com`）
-- Gallery 图集抽到 `src/data/gallery.ts`，文案与资源分离
-- 逐步把模板内嵌文案迁入 `src/i18n/pages/*`
+- 逐步把仍内嵌在模板里的文案迁入 `src/i18n/pages/*`（部分 pages 文件已预建、尚未接线）
 - 原片 `public/img/gallery/` 可移到本地 `assets/gallery-source/`（已 gitignore），仓库只保留 optimized

@@ -32,12 +32,21 @@ export const timelineData: Record<Lang, TimelineCopy> = {
     events: [
       {
         year: '现在',
-        title: '持续学习与探索',
+        title: '研究、站点与摄影',
         description:
-          '在电子信息专业继续深造，维护个人网站，在摄影和开发之间寻找平衡。',
+          '清华电子系在读；协作 AgentSociety / AgentSociety 2，维护本站与摄影。',
         icon: '🚀',
         color: 'from-primary-600 to-primary-400',
-        tags: ['在读', '开发', '摄影'],
+        tags: ['AgentSociety', '站点', '摄影'],
+      },
+      {
+        year: 2026,
+        title: 'AgentSociety 研究协作',
+        description:
+          '与清华 FIB Lab 协作：LLM 社会智能体、可执行社会科学，以及 AgentSociety 2 平台与技能库。',
+        icon: '',
+        color: '',
+        tags: ['研究', 'LLM', '开源'],
       },
       {
         year: 2026,
@@ -106,12 +115,21 @@ export const timelineData: Record<Lang, TimelineCopy> = {
     events: [
       {
         year: '現在',
-        title: '持續學習與探索',
+        title: '研究、站點與攝影',
         description:
-          '在電子資訊專業繼續深造，維護個人網站，在攝影和開發之間尋找平衡。',
+          '清華電子系在讀；協作 AgentSociety / AgentSociety 2，維護本站與攝影。',
         icon: '🚀',
         color: 'from-primary-600 to-primary-400',
-        tags: ['在讀', '開發', '攝影'],
+        tags: ['AgentSociety', '站點', '攝影'],
+      },
+      {
+        year: 2026,
+        title: 'AgentSociety 研究協作',
+        description:
+          '與清華 FIB Lab 協作：LLM 社會智能體、可執行社會科學，以及 AgentSociety 2 平台與技能庫。',
+        icon: '',
+        color: '',
+        tags: ['研究', 'LLM', '開源'],
       },
       {
         year: 2026,
@@ -180,12 +198,21 @@ export const timelineData: Record<Lang, TimelineCopy> = {
     events: [
       {
         year: 'Now',
-        title: 'Continuous learning & exploration',
+        title: 'Research, site & photography',
         description:
-          'Studying electronics at university, maintaining this site, finding balance between photography and development.',
+          'Undergraduate in Tsinghua EE; collaborating on AgentSociety / AgentSociety 2; site and photography on the side.',
         icon: '🚀',
         color: 'from-primary-600 to-primary-400',
-        tags: ['Studying', 'Dev', 'Photography'],
+        tags: ['AgentSociety', 'Site', 'Photography'],
+      },
+      {
+        year: 2026,
+        title: 'AgentSociety research collaboration',
+        description:
+          'With Tsinghua FIB Lab: LLM social agents, executable social science, and the AgentSociety 2 platform & skills.',
+        icon: '',
+        color: '',
+        tags: ['Research', 'LLM', 'Open source'],
       },
       {
         year: 2026,
@@ -254,12 +281,21 @@ export const timelineData: Record<Lang, TimelineCopy> = {
     events: [
       {
         year: 'Maintenant',
-        title: 'Apprentissage continu',
+        title: 'Recherche, site & photo',
         description:
-          'Études en électronique, maintenance du site, équilibre entre photographie et développement.',
+          'Licence EE à Tsinghua ; collaboration AgentSociety / AgentSociety 2 ; site et photo en parallèle.',
         icon: '🚀',
         color: 'from-primary-600 to-primary-400',
-        tags: ['Études', 'Dev', 'Photo'],
+        tags: ['AgentSociety', 'Site', 'Photo'],
+      },
+      {
+        year: 2026,
+        title: 'Collaboration AgentSociety',
+        description:
+          'Avec le FIB Lab de Tsinghua : agents sociaux LLM, sciences sociales exécutables, plateforme AgentSociety 2 et skills.',
+        icon: '',
+        color: '',
+        tags: ['Recherche', 'LLM', 'Open source'],
       },
       {
         year: 2026,
@@ -328,12 +364,21 @@ export const timelineData: Record<Lang, TimelineCopy> = {
     events: [
       {
         year: 'Сейчас',
-        title: 'Непрерывное обучение',
+        title: 'Исследования, сайт и фото',
         description:
-          'Учёба по направлению электроники, поддержка сайта, баланс между фотографией и разработкой.',
+          'Бакалавриат EE в Цинхуа; сотрудничество по AgentSociety / AgentSociety 2; сайт и фото рядом.',
         icon: '🚀',
         color: 'from-primary-600 to-primary-400',
-        tags: ['Учёба', 'Разработка', 'Фото'],
+        tags: ['AgentSociety', 'Сайт', 'Фото'],
+      },
+      {
+        year: 2026,
+        title: 'Сотрудничество AgentSociety',
+        description:
+          'С FIB Lab Цинхуа: LLM-агенты, исполнимая социальная наука, платформа AgentSociety 2 и навыки.',
+        icon: '',
+        color: '',
+        tags: ['Research', 'LLM', 'Open source'],
       },
       {
         year: 2026,

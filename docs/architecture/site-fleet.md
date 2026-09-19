@@ -364,7 +364,7 @@ Server has **1.6 GiB RAM**. Available often ~800 MB+ after Shlink removal.
 
 Canonical list: `src/data/site-registry.ts`  
 Machine export: `public/network.json`  
-Fleet timeline: `src/data/fleet-changelog.ts` → `/network#fleet-log` + `public/fleet-changelog.json`（Ops Portal 也会拉取）
+Fleet timeline: `src/data/fleet-changelog.ts` → `public/ops/fleet-changelog.json`（及 `ops-portal/public/` 镜像；Ops Portal 拉取）
 
 ## Pocket ID bootstrap
 
