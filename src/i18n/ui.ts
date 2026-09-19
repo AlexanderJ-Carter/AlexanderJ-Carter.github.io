@@ -11,8 +11,7 @@ export const defaultLang = 'zh-CN';
 export const ui = {
   'zh-CN': {
     'site.title': 'Alexander James Carter',
-    'site.description':
-      '摄影、写作与 LLM Agent 研究；北京的个人站点。',
+    'site.description': '摄影、写作与 LLM Agent 研究；北京的个人站点。',
     'brand.eyebrow': '摄影 · 写作 · Agent',
     'nav.home': '首页',
     'nav.gallery': '画廊',
@@ -92,8 +91,7 @@ export const ui = {
   },
   'zh-TW': {
     'site.title': 'Alexander James Carter',
-    'site.description':
-      '攝影、寫作與 LLM Agent 研究；北京的個人站點。',
+    'site.description': '攝影、寫作與 LLM Agent 研究；北京的個人站點。',
     'brand.eyebrow': '攝影 · 寫作 · Agent',
     'nav.home': '首頁',
     'nav.gallery': '畫廊',
