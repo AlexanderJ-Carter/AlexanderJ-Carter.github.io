@@ -13,9 +13,9 @@ export default function Page() {
       <PageClient />
       <div className="container max-w-2xl">
         <p className="folio-mark mb-3">写作</p>
-        <h1 className="mb-4 text-4xl font-semibold tracking-tight">写作暂未开放</h1>
+        <h1 className="mb-4 text-4xl font-semibold tracking-tight">写作先歇一歇</h1>
         <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-          站内文章区先收起来了。长文仍在博客；也可以先逛画廊、研究与小工具。
+          站内文章先收起来了（含一批 Astro / Pages 时期的旧文）。想看长文可以去博客；画廊和研究还在。
         </p>
         <div className="flex flex-wrap gap-4 text-sm">
           <a
