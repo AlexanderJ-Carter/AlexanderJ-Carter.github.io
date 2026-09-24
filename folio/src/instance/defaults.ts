@@ -26,6 +26,10 @@ export const defaultInstance: FolioInstance = {
     domains: ['example.com', '*.example.com'],
     contactEmail: 'security@example.com',
   },
+  contact: {
+    email: 'hello@example.com',
+    location: 'Your city',
+  },
   oidcDisplayHost: 'id.example.com',
   seedEmailHint: 'admin@example.com',
 }

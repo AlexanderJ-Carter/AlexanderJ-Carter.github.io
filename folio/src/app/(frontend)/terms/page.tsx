@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import { PageChrome } from '@/components/PageChrome'
 import { getInstance } from '@/instance'
 
 export const metadata: Metadata = {
@@ -13,18 +14,21 @@ export default function TermsPage() {
   const host = siteUrl.replace(/^https?:\/\//, '')
 
   return (
-    <article className="pt-28 pb-24">
-      <div className="container max-w-3xl">
-        <p className="folio-mark mb-3">Legal</p>
-        <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-4">服务条款</h1>
-        <p className="text-muted-foreground leading-relaxed mb-10">
+    <PageChrome
+      mark="Legal"
+      title="服务条款"
+      narrow
+      description={
+        <>
           适用于本 Folio 实例。另见
-          <Link className="underline underline-offset-4 mx-1" href="/privacy">
+          <Link className="mx-1 underline underline-offset-4" href="/privacy">
             隐私政策
           </Link>
           。
-        </p>
-
+        </>
+      }
+    >
+      <div className="container max-w-3xl">
         <div className="prose prose-neutral dark:prose-invert max-w-none space-y-8">
           <section>
             <h2>1. 接受条款</h2>
@@ -60,11 +64,11 @@ export default function TermsPage() {
         </div>
 
         <p className="mt-12">
-          <Link href="/" className="underline underline-offset-4 text-sm text-muted-foreground">
+          <Link href="/" className="text-sm text-muted-foreground underline underline-offset-4">
             ← 返回首页
           </Link>
         </p>
       </div>
-    </article>
+    </PageChrome>
   )
 }

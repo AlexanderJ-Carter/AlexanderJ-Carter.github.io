@@ -58,3 +58,4 @@ folio/.env.production
 folio/ADMIN.txt
 folio/seed-data/
 folio/instance/config.json
+*.tsbuildinfo

@@ -6,6 +6,7 @@ import { Source_Serif_4, Syne } from 'next/font/google'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
+import { AnnouncementBanner } from '@/Announcement/Component'
 import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
 import { Providers } from '@/providers'
@@ -56,6 +57,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
 
           <Header />
+          <AnnouncementBanner />
           {children}
           <Footer />
         </Providers>

@@ -14,6 +14,7 @@
 ## 2. 代码改动硬规则
 
 - 站点功能优先改 `folio/src/`（页面、组件、导航、样式）。
+- 根目录 Astro（`src/`）为遗留迁移源，勿再当主站改版入口；CI 以 Folio typecheck 为准。
 - 勿删除 Folio 安全资产:
   - `folio/public/.well-known/security.txt`
   - `folio/public/security/pgp-key.asc`

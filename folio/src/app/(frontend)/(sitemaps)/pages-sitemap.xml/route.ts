@@ -37,19 +37,35 @@ const getPagesSitemap = unstable_cache(
         lastmod: dateFallback,
       },
       {
-        loc: `${SITE_URL}/posts`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/research`,
-        lastmod: dateFallback,
-      },
-      {
         loc: `${SITE_URL}/gallery`,
         lastmod: dateFallback,
       },
       {
         loc: `${SITE_URL}/fun`,
+        lastmod: dateFallback,
+      },
+      {
+        loc: `${SITE_URL}/tools`,
+        lastmod: dateFallback,
+      },
+      {
+        loc: `${SITE_URL}/time`,
+        lastmod: dateFallback,
+      },
+      {
+        loc: `${SITE_URL}/units`,
+        lastmod: dateFallback,
+      },
+      {
+        loc: `${SITE_URL}/currency`,
+        lastmod: dateFallback,
+      },
+      {
+        loc: `${SITE_URL}/qr`,
+        lastmod: dateFallback,
+      },
+      {
+        loc: `${SITE_URL}/research`,
         lastmod: dateFallback,
       },
     ]

@@ -28,4 +28,6 @@
 - 构建时：`next.config.ts` / Docker build args 注入 `NEXT_PUBLIC_SITE_NAME` 等（供客户端组件）
 - 部署：`folio-deploy.yml` **不会**用仓库覆盖服务器上的 `instance/config.json` 与 `.env.production`
 
-个人简介等敏感正文请只写在 CMS（门禁页），不要写回开源默认 seed。
+个人简介等敏感正文请只写在 CMS（门禁页）或服务器 `instance/config.json` 的 `contact` / 后续 `profile` 字段，不要写回开源默认 seed。
+
+前台临时公告走 Payload 全局 **站点公告**（`announcement`），不必改仓库。

@@ -1,56 +1,33 @@
 import type { Metadata } from 'next/types'
-
-import { CollectionArchive } from '@/components/CollectionArchive'
-import { PageRange } from '@/components/PageRange'
-import { Pagination } from '@/components/Pagination'
-import configPromise from '@payload-config'
-import { getPayload } from 'payload'
+import Link from 'next/link'
 import React from 'react'
+
 import PageClient from './page.client'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
 
-export default async function Page() {
-  const payload = await getPayload({ config: configPromise })
-
-  const posts = await payload.find({
-    collection: 'posts',
-    depth: 1,
-    limit: 12,
-    overrideAccess: false,
-    select: {
-      title: true,
-      slug: true,
-      categories: true,
-      meta: true,
-    },
-  })
-
+export default function Page() {
   return (
     <div className="pt-24 pb-24">
       <PageClient />
-      <div className="container mb-16">
-        <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+      <div className="container max-w-2xl">
+        <p className="folio-mark mb-3">Writing</p>
+        <h1 className="mb-4 text-4xl font-semibold tracking-tight">写作暂未开放</h1>
+        <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
+          文章区先收起来了。眼下请先逛画廊、玩乐和小工具。
+        </p>
+        <div className="flex flex-wrap gap-4 text-sm">
+          <Link href="/gallery" className="underline underline-offset-4">
+            画廊 →
+          </Link>
+          <Link href="/fun" className="underline underline-offset-4">
+            玩乐 →
+          </Link>
+          <Link href="/tools" className="underline underline-offset-4">
+            工具 →
+          </Link>
         </div>
-      </div>
-
-      <div className="container mb-8">
-        <PageRange
-          collection="posts"
-          currentPage={posts.page}
-          limit={12}
-          totalDocs={posts.totalDocs}
-        />
-      </div>
-
-      <CollectionArchive posts={posts.docs} />
-
-      <div className="container">
-        {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
-        )}
       </div>
     </div>
   )
@@ -58,6 +35,6 @@ export default async function Page() {
 
 export function generateMetadata(): Metadata {
   return {
-    title: `文章`,
+    title: '写作暂未开放',
   }
 }

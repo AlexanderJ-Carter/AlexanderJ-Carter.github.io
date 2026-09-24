@@ -9,12 +9,12 @@ import Link from 'next/link'
 import { SearchIcon } from 'lucide-react'
 import { cn } from '@/utilities/ui'
 
-/** CMS 为空时的回退导航（与 migrate-site.mjs 对齐） */
+/** CMS 为空时的回退导航（与 configure-nav.mjs 对齐） */
 const FALLBACK_NAV = [
-  { label: '写作', url: '/posts' },
   { label: '画廊', url: '/gallery' },
-  { label: '研究', url: '/research' },
   { label: '玩乐', url: '/fun' },
+  { label: '工具', url: '/tools' },
+  { label: '研究', url: '/research' },
   { label: '关于', url: '/about' },
   { label: '联系', url: '/contact' },
 ] as const

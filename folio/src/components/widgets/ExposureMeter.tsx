@@ -24,7 +24,7 @@ function formatMeter(now: Date) {
 
 export function ExposureMeter({
   variant = 'ink',
-  href = '/fun',
+  href = '/time',
   className = '',
 }: {
   variant?: Variant
@@ -45,7 +45,7 @@ export function ExposureMeter({
     <Link
       href={href}
       className={`exif-meter exif-meter--${variant} ${className}`.trim()}
-      aria-label="北京时间曝光表，打开玩乐页"
+      aria-label="北京时间，打开世界时间"
     >
       <span className="exif-meter__rec" aria-hidden />
       <span className="exif-meter__time">{time}</span>

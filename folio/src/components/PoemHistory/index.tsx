@@ -1,15 +1,30 @@
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { onThisDayEvents, pickOnThisDay } from '@/data/on-this-day'
 
-const quotes = [
-  { text: '用镜头记录世界，用代码创造未来。', author: 'Folio' },
-  { text: '曝光、对焦、冲印——页面也一样。', author: '暗房三法则' },
-  { text: '光是摄影的原料，也是阅读的节奏。', author: 'Folio' },
-  { text: '少即是多：一页一件事。', author: 'Focus' },
-]
+type Poem = {
+  content: string
+  author: string
+  title: string
+  dynasty: string
+}
+
+async function fetchPoem(): Promise<Poem | null> {
+  const res = await fetch('/api/poem', { cache: 'no-store' })
+  if (!res.ok) return null
+  const json = await res.json()
+  const data = json?.data
+  if (!data?.content) return null
+  const origin = data.origin || {}
+  return {
+    content: String(data.content).trim(),
+    author: String(origin.author || '').trim(),
+    title: String(origin.title || '').trim(),
+    dynasty: String(origin.dynasty || '').trim(),
+  }
+}
 
 export function PoemHistory() {
   const now = useMemo(() => new Date(), [])
@@ -24,18 +39,43 @@ export function PoemHistory() {
   }, [month, day])
 
   const [historyIdx, setHistoryIdx] = useState(0)
-  const [quoteIdx, setQuoteIdx] = useState(0)
+  const [poem, setPoem] = useState<Poem | null>(null)
+  const [poemLoading, setPoemLoading] = useState(true)
+  const [poemError, setPoemError] = useState(false)
 
-  useEffect(() => {
-    setQuoteIdx(Math.floor(Math.random() * quotes.length))
+  const loadPoem = useCallback(async () => {
+    setPoemLoading(true)
+    setPoemError(false)
+    try {
+      const next = await fetchPoem()
+      if (!next) {
+        setPoemError(true)
+        setPoem(null)
+        return
+      }
+      setPoem(next)
+    } catch {
+      setPoemError(true)
+      setPoem(null)
+    } finally {
+      setPoemLoading(false)
+    }
   }, [])
 
-  const history = dayPool[historyIdx % Math.max(dayPool.length, 1)]
-  const quote = quotes[quoteIdx % quotes.length]!
+  useEffect(() => {
+    void loadPoem()
+  }, [loadPoem])
 
+  const history = dayPool[historyIdx % Math.max(dayPool.length, 1)]
   const dateLabel = history?.year
     ? `${history.year}年 · ${month}月${day}日`
     : `${month}月${day}日`
+
+  const poemCite = poem
+    ? [poem.dynasty && `【${poem.dynasty}】`, poem.author, poem.title && `《${poem.title}》`]
+        .filter(Boolean)
+        .join('')
+    : ''
 
   return (
     <section className="container py-2" aria-labelledby="daily-inspire-heading">
@@ -50,14 +90,22 @@ export function PoemHistory() {
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         <article className="glass-card p-5 md:p-6">
-          <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground mb-3">今日语录</p>
-          <blockquote className="text-lg leading-relaxed mb-4">「{quote.text}」</blockquote>
-          <div className="flex items-center justify-between gap-3">
-            <cite className="not-italic text-sm text-muted-foreground">— {quote.author}</cite>
+          <p className="text-xs uppercase tracking-[0.16em] text-muted-foreground mb-3">今日诗词</p>
+          {poemLoading ? (
+            <p className="text-muted-foreground leading-relaxed mb-4">载入诗词中…</p>
+          ) : poemError || !poem ? (
+            <p className="text-muted-foreground leading-relaxed mb-4">暂时读不到诗词，请稍后再试。</p>
+          ) : (
+            <>
+              <blockquote className="text-lg leading-relaxed mb-4">「{poem.content}」</blockquote>
+              <p className="text-sm text-muted-foreground mb-4">{poemCite}</p>
+            </>
+          )}
+          <div className="flex items-center justify-end">
             <button
               type="button"
               className="text-xs uppercase tracking-wider underline underline-offset-4"
-              onClick={() => setQuoteIdx((i) => i + 1)}
+              onClick={() => void loadPoem()}
             >
               换一句
             </button>
@@ -68,9 +116,7 @@ export function PoemHistory() {
             历史上的今天
           </p>
           <p className="font-mono text-xs text-muted-foreground mb-2">{dateLabel}</p>
-          <p className="leading-relaxed mb-4">
-            {history?.zh ?? '今天暂无收录事件'}
-          </p>
+          <p className="leading-relaxed mb-4">{history?.zh ?? '今天暂无收录事件'}</p>
           {dayPool.length > 1 && (
             <button
               type="button"

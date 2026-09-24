@@ -8,11 +8,16 @@ import Link from 'next/link'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
 
+/** 写作暂不前台展示；改回 true 即恢复首页文章块。 */
+const WRITING_PUBLIC = false
+
 export const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
     id?: string
   }
 > = async (props) => {
+  if (!WRITING_PUBLIC) return null
+
   const { id, categories, introContent, limit: limitFromProps, populateBy, selectedDocs } = props
 
   const limit = limitFromProps || 3

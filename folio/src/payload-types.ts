@@ -106,10 +106,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    announcement: Announcement;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    announcement: AnnouncementSelect<false> | AnnouncementSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1684,6 +1686,38 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcement".
+ */
+export interface Announcement {
+  id: number;
+  enabled?: boolean | null;
+  noticeId: string;
+  title: string;
+  body: string;
+  href?: string | null;
+  ctaLabel?: string | null;
+  dismissible?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcement_select".
+ */
+export interface AnnouncementSelect<T extends boolean = true> {
+  enabled?: T;
+  noticeId?: T;
+  title?: T;
+  body?: T;
+  href?: T;
+  ctaLabel?: T;
+  dismissible?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

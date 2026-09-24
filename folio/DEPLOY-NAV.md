@@ -1,13 +1,11 @@
-# Folio 导航 / 功能恢复备注（一次性）
+# Folio 导航 / 功能恢复备注
 
-部署代码后，在服务器上更新 Header 全局导航（写作 / 画廊 / 玩乐 / 关于 / 联系）：
+部署代码后，在服务器上更新 Header / Footer 全局导航（画廊 / 玩乐 / 工具 / 研究 / 关于 / 联系；暂不挂写作）：
 
 ```bash
 cd /path/to/folio
-# 若 DATABASE 已有内容，可只跑 migrate 的导航段，或整站 migrate:site
 docker compose -f compose.prod.yaml exec folio \
-  node --import tsx migrate-site.mjs
-# 或本机对生产库：pnpm run migrate:site
+  node --import tsx scripts/configure-nav.mjs
 ```
 
 `HeaderNav` 在 CMS `navItems` 为空时会回退到上述链接。

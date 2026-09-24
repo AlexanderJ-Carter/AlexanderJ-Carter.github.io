@@ -1,10 +1,13 @@
 # GitHub Pages 网关
 
-本目录由 [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) 发布到
-`https://alexanderj-carter.github.io`。
+发布至 `https://alexanderj-carter.github.io`（[deploy.yml](../.github/workflows/deploy.yml)）。
 
-- `index.html` — 跳转到 `https://www.alexander.xin`
-- `404.html` — 任意深层路径也尽量带回主站（并保留 path）
-- `.well-known/security.txt`、`security/pgp-key.asc` — 与 Folio 镜像，满足 Pages 域名上的披露入口
+## 作用
 
-主站代码与 CMS 在 `../folio/`，部署见 `../docs/FOLIO-CUTOVER.md`。
+| 能力 | 说明 |
+|------|------|
+| 名片首页 | 主站 / 画廊等快捷链、Elsewhere、不以 0 秒强制跳转 |
+| 安全镜像 | `.well-known/security.txt`、`security/pgp-key.asc` |
+| 深链回主站 | `404.html` 把未知路径带到 `www` 并保留 path |
+
+主站在 `../folio/`。DNS 与域名分工见 [FOLIO-CUTOVER.md](../docs/FOLIO-CUTOVER.md#dns)。

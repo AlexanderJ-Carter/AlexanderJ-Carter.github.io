@@ -17,3 +17,4 @@ seed-data
 ADMIN.txt
 .env.production
 instance/config.json
+*.tsbuildinfo

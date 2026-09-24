@@ -46,7 +46,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
         <div className="max-w-3xl">
           <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
             <p className="folio-mark mb-0 text-white/70">Photography · Writing · Research</p>
-            <ExposureMeter variant="on-dark" href="/fun" />
+            <ExposureMeter variant="on-dark" href="/time" />
           </div>
           {richText && (
             <RichText

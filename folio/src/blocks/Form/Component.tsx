@@ -7,6 +7,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
+import { cn } from '@/utilities/ui'
 
 import { fields } from './fields'
 import { getClientSideURL } from '@/utilities/getURL'
@@ -22,6 +23,9 @@ export type FormBlockType = {
 export const FormBlock: React.FC<
   {
     id?: string
+    className?: string
+    /** 外层已有容器时去掉默认 container */
+    bare?: boolean
   } & FormBlockType
 > = (props) => {
   const {
@@ -29,6 +33,8 @@ export const FormBlock: React.FC<
     form: formFromProps,
     form: { id: formID, confirmationMessage, confirmationType, redirect, submitButtonLabel } = {},
     introContent,
+    className,
+    bare = false,
   } = props
 
   const formMethods = useForm({
@@ -57,7 +63,6 @@ export const FormBlock: React.FC<
           value,
         }))
 
-        // delay loading indicator by 1s
         loadingTimerID = setTimeout(() => {
           setIsLoading(true)
         }, 1000)
@@ -82,7 +87,7 @@ export const FormBlock: React.FC<
             setIsLoading(false)
 
             setError({
-              message: res.errors?.[0]?.message || 'Internal Server Error',
+              message: res.errors?.[0]?.message || '提交失败，请稍后再试',
               status: res.status,
             })
 
@@ -94,16 +99,14 @@ export const FormBlock: React.FC<
 
           if (confirmationType === 'redirect' && redirect) {
             const { url } = redirect
-
             const redirectUrl = url
-
             if (redirectUrl) router.push(redirectUrl)
           }
         } catch (err) {
           console.warn(err)
           setIsLoading(false)
           setError({
-            message: 'Something went wrong.',
+            message: '网络异常，请稍后再试。',
           })
         }
       }
@@ -114,17 +117,27 @@ export const FormBlock: React.FC<
   )
 
   return (
-    <div className="container lg:max-w-[48rem]">
+    <div className={cn(!bare && 'container lg:max-w-[48rem]', className)}>
       {enableIntro && introContent && !hasSubmitted && (
-        <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
+        <RichText className="mb-8 lg:mb-10" data={introContent} enableGutter={false} />
       )}
-      <div className="p-4 lg:p-6 border border-border rounded-[0.8rem]">
+      <div className="border border-border p-5 md:p-7">
         <FormProvider {...formMethods}>
           {!isLoading && hasSubmitted && confirmationType === 'message' && (
-            <RichText data={confirmationMessage} />
+            <div className="space-y-2">
+              <p className="folio-mark">Sent</p>
+              <RichText data={confirmationMessage} />
+            </div>
           )}
-          {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-          {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
+          {isLoading && !hasSubmitted && (
+            <p className="text-sm text-muted-foreground">正在提交，请稍候…</p>
+          )}
+          {error && (
+            <p className="mb-4 border border-border px-3 py-2 text-sm text-muted-foreground" role="alert">
+              {error.status ? `${error.status} · ` : ''}
+              {error.message || '出错了'}
+            </p>
+          )}
           {!hasSubmitted && (
             <form id={formID} onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4 last:mb-0">
@@ -151,8 +164,13 @@ export const FormBlock: React.FC<
                   })}
               </div>
 
-              <Button form={formID} type="submit" variant="default">
-                {submitButtonLabel}
+              <Button
+                form={formID}
+                type="submit"
+                variant="default"
+                className="rounded-none px-6 tracking-wide"
+              >
+                {submitButtonLabel || '发送'}
               </Button>
             </form>
           )}

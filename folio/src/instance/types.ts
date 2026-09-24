@@ -50,6 +50,11 @@ export type FolioInstance = {
     domains: string[]
     contactEmail: string
   }
+  /** 联系页展示（可选） */
+  contact?: {
+    email?: string
+    location?: string
+  }
   /** OIDC 登录页展示用主机名（非密钥） */
   oidcDisplayHost?: string
   /** 默认管理员种子邮箱（仅本地脚本提示） */

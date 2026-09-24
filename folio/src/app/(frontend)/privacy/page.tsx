@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import { PageChrome } from '@/components/PageChrome'
 import { getInstance } from '@/instance'
 
 export const metadata: Metadata = {
@@ -13,22 +14,25 @@ export default function PrivacyPage() {
   const host = siteUrl.replace(/^https?:\/\//, '')
 
   return (
-    <article className="pt-28 pb-24">
-      <div className="container max-w-3xl">
-        <p className="folio-mark mb-3">Legal</p>
-        <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-4">隐私政策</h1>
-        <p className="text-muted-foreground leading-relaxed mb-10">
+    <PageChrome
+      mark="Legal"
+      title="隐私政策"
+      narrow
+      description={
+        <>
           适用于 <code>{host}</code> 上的 Folio 实例。相关页面：
-          <Link className="underline underline-offset-4 mx-1" href="/terms">
+          <Link className="mx-1 underline underline-offset-4" href="/terms">
             服务条款
           </Link>
           ·
-          <Link className="underline underline-offset-4 mx-1" href="/security/policy">
+          <Link className="mx-1 underline underline-offset-4" href="/security/policy">
             安全政策
           </Link>
           。
-        </p>
-
+        </>
+      }
+    >
+      <div className="container max-w-3xl">
         <div className="prose prose-neutral dark:prose-invert max-w-none space-y-8">
           <section>
             <h2>1. 我们处理的信息</h2>
@@ -75,11 +79,11 @@ export default function PrivacyPage() {
         </div>
 
         <p className="mt-12">
-          <Link href="/" className="underline underline-offset-4 text-sm text-muted-foreground">
+          <Link href="/" className="text-sm text-muted-foreground underline underline-offset-4">
             ← 返回首页
           </Link>
         </p>
       </div>
-    </article>
+    </PageChrome>
   )
 }
