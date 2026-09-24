@@ -7,6 +7,7 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
+import { ExposureMeter } from '@/components/widgets/ExposureMeter'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
   const { setHeaderTheme } = useHeaderTheme()
@@ -43,7 +44,10 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
       <div className="container relative z-10 pb-20 pt-28 md:pb-28 md:pt-32">
         <div className="max-w-3xl">
-          <p className="folio-mark mb-5 text-white/70">Photography · Writing · Research</p>
+          <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <p className="folio-mark mb-0 text-white/70">Photography · Writing · Research</p>
+            <ExposureMeter variant="on-dark" href="/fun" />
+          </div>
           {richText && (
             <RichText
               className="mb-8 [&_h1]:text-5xl [&_h1]:md:text-7xl [&_h1]:font-bold [&_h1]:tracking-tight [&_h1]:[font-family:var(--font-display),Syne,system-ui,sans-serif] [&_p]:text-lg [&_p]:md:text-xl [&_p]:text-white/85"

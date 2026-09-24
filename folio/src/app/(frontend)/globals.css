@@ -504,3 +504,100 @@ h3 {
 .site-header[data-over-hero='true'] .site-nav-link:focus-visible {
   outline-color: white;
 }
+
+/* Paper panel — keep .glass-card name for widget call sites */
+.glass-card {
+  border: 1px solid var(--border);
+  background: color-mix(in oklch, var(--card) 88%, transparent);
+  border-radius: 0.125rem;
+}
+
+/* EXIF exposure meter — Asia/Shanghai chrome */
+.exif-meter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 0.125rem;
+  background: color-mix(in oklch, var(--card) 72%, transparent);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.exif-meter:hover,
+.exif-meter:focus-visible {
+  color: var(--foreground);
+  border-color: color-mix(in oklch, var(--primary) 45%, var(--border));
+}
+
+.exif-meter--on-dark {
+  border-color: rgb(255 255 255 / 0.28);
+  background: rgb(0 0 0 / 0.28);
+  color: rgb(255 255 255 / 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.exif-meter--on-dark:hover,
+.exif-meter--on-dark:focus-visible {
+  color: white;
+  border-color: rgb(255 255 255 / 0.55);
+  background: rgb(0 0 0 / 0.4);
+}
+
+.exif-meter__rec {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--primary);
+  animation: exif-rec-pulse 2.2s ease-out infinite;
+}
+
+.exif-meter--on-dark .exif-meter__rec {
+  background: rgb(248 113 113);
+}
+
+.exif-meter__sep {
+  opacity: 0.45;
+}
+
+.exif-meter__time {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes exif-rec-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--primary) 40%, transparent);
+    opacity: 1;
+  }
+  70% {
+    box-shadow: 0 0 0 6px transparent;
+    opacity: 0.85;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exif-meter__rec {
+    animation: none;
+  }
+}
+
+.meta-mono {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

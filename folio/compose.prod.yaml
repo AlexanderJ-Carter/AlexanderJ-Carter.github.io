@@ -7,6 +7,7 @@ services:
       args:
         NEXT_PUBLIC_SERVER_URL: https://www.alexander.xin
         NEXT_PUBLIC_OIDC_LOGIN_URL: /api/oidc/login
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: 0x4AAAAAABdh_m4Oroh5Egsy
     image: folio:local
     container_name: folio
     restart: unless-stopped

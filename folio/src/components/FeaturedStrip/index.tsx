@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const frames = [
@@ -28,10 +29,15 @@ export function FeaturedStrip() {
             精选作品
           </h2>
           <p className="mt-2 text-muted-foreground text-sm md:text-base max-w-xl">
-            几张值得先看的影像。完整画廊仍在整理中。
+            几张值得先看的影像。完整联系单见画廊。
           </p>
         </div>
-        <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">3 frames</p>
+        <Link
+          href="/gallery"
+          className="text-xs uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground"
+        >
+          全部画廊 →
+        </Link>
       </div>
       <ul className="contact-sheet grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
         {frames.map((frame, i) => (

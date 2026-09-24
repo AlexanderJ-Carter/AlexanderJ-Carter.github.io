@@ -11,6 +11,7 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
 import { MethodStrip } from '@/components/MethodStrip'
+import { PoemHistory } from '@/components/PoemHistory'
 import { ResearchStrip } from '@/components/ResearchStrip'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
@@ -85,6 +86,9 @@ export default async function Page({ params: paramsPromise }: Args) {
           </div>
           <div className="my-10 md:my-14">
             <MethodStrip />
+          </div>
+          <div className="my-10 md:my-14">
+            <PoemHistory />
           </div>
           <div className="my-10 md:my-14">
             <ResearchStrip />

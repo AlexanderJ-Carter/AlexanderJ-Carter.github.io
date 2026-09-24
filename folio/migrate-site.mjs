@@ -654,6 +654,20 @@ async function main() {
         },
         {
           link: {
+            type: 'custom',
+            label: '画廊',
+            url: '/gallery',
+          },
+        },
+        {
+          link: {
+            type: 'custom',
+            label: '玩乐',
+            url: '/fun',
+          },
+        },
+        {
+          link: {
             type: 'reference',
             label: '关于',
             reference: {
@@ -687,6 +701,20 @@ async function main() {
             type: 'custom',
             label: '写作',
             url: '/posts',
+          },
+        },
+        {
+          link: {
+            type: 'custom',
+            label: '画廊',
+            url: '/gallery',
+          },
+        },
+        {
+          link: {
+            type: 'custom',
+            label: '玩乐',
+            url: '/fun',
           },
         },
         {

@@ -21,6 +21,8 @@ ARG NEXT_PUBLIC_SERVER_URL=https://www.alexander.xin
 ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
 ARG NEXT_PUBLIC_OIDC_LOGIN_URL=/api/oidc/login
 ENV NEXT_PUBLIC_OIDC_LOGIN_URL=$NEXT_PUBLIC_OIDC_LOGIN_URL
+ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAABdh_m4Oroh5Egsy
+ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=$NEXT_PUBLIC_TURNSTILE_SITE_KEY
 RUN mkdir -p /app/data /app/public/media \
   && if [ -f /app/seed-data/folio.db ]; then cp /app/seed-data/folio.db /app/data/folio.db; fi \
   && corepack enable \

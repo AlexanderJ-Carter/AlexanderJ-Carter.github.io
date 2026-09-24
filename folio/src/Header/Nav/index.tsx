@@ -9,39 +9,46 @@ import Link from 'next/link'
 import { SearchIcon } from 'lucide-react'
 import { cn } from '@/utilities/ui'
 
+/** CMS 为空时的回退导航（与 migrate-site.mjs 对齐） */
+const FALLBACK_NAV = [
+  { label: '写作', url: '/posts' },
+  { label: '画廊', url: '/gallery' },
+  { label: '玩乐', url: '/fun' },
+  { label: '关于', url: '/about' },
+  { label: '联系', url: '/contact' },
+] as const
+
 export const HeaderNav: React.FC<{ data: HeaderType; overHero?: boolean }> = ({
   data,
   overHero,
 }) => {
   const navItems = data?.navItems || []
+  const linkClass = cn(
+    'site-nav-link px-2 py-1',
+    overHero ? 'text-white/80 hover:text-white' : 'text-foreground/70 hover:text-foreground',
+  )
+  const dividerClass = cn(
+    'mx-2 hidden h-3 w-px md:inline-block',
+    overHero ? 'bg-white/35' : 'bg-border',
+  )
 
   return (
     <nav className="flex items-center gap-1 md:gap-0" aria-label="主导航">
-      {navItems.map(({ link }, i) => {
-        return (
-          <React.Fragment key={i}>
-            {i > 0 && (
-              <span
-                aria-hidden
-                className={cn(
-                  'mx-2 hidden h-3 w-px md:inline-block',
-                  overHero ? 'bg-white/35' : 'bg-border',
-                )}
-              />
-            )}
-            <CMSLink
-              {...link}
-              appearance="link"
-              className={cn(
-                'site-nav-link px-2 py-1',
-                overHero
-                  ? 'text-white/80 hover:text-white'
-                  : 'text-foreground/70 hover:text-foreground',
-              )}
-            />
-          </React.Fragment>
-        )
-      })}
+      {navItems.length > 0
+        ? navItems.map(({ link }, i) => (
+            <React.Fragment key={i}>
+              {i > 0 && <span aria-hidden className={dividerClass} />}
+              <CMSLink {...link} appearance="link" className={linkClass} />
+            </React.Fragment>
+          ))
+        : FALLBACK_NAV.map((item, i) => (
+            <React.Fragment key={item.url}>
+              {i > 0 && <span aria-hidden className={dividerClass} />}
+              <Link href={item.url} className={linkClass}>
+                {item.label}
+              </Link>
+            </React.Fragment>
+          ))}
       <span
         aria-hidden
         className={cn('mx-2 hidden h-3 w-px sm:inline-block', overHero ? 'bg-white/35' : 'bg-border')}
