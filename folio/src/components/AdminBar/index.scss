@@ -1,7 +1,157 @@
-@import '@payloadcms/ui/scss';
+/* CMS 预览条：固定在最上，站点顶栏整体下移，避免叠在一起 */
 
 .admin-bar {
-  @include small-break {
-    display: none;
+  display: none;
+}
+
+.admin-bar--visible {
+  display: block;
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 60;
+  height: var(--admin-bar-h, 2.5rem);
+  border-bottom: 1px solid rgba(244, 240, 232, 0.12);
+  background: rgba(14, 17, 22, 0.92);
+  color: #f4f0e8;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.admin-bar--hidden {
+  display: none;
+}
+
+.admin-bar__inner {
+  height: 100%;
+  max-width: 86rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 48rem) {
+  .admin-bar__inner {
+    padding-inline: 2rem;
+  }
+}
+
+.admin-bar__payload {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 100%;
+  min-width: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: inherit;
+}
+
+.admin-bar__logo {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.admin-bar__brand {
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.admin-bar__user {
+  display: none;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(244, 240, 232, 0.55);
+  text-decoration: none;
+}
+
+@media (min-width: 64rem) {
+  .admin-bar__user {
+    display: block;
+    max-width: 14rem;
+  }
+}
+
+.admin-bar__controls {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.15rem 0.85rem;
+  min-width: 0;
+}
+
+.admin-bar__link {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(244, 240, 232, 0.78);
+  font: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 160ms ease;
+}
+
+.admin-bar__link:hover,
+.admin-bar__link:focus-visible {
+  color: #f4f0e8;
+}
+
+.admin-bar__link:focus-visible {
+  outline: 1px solid rgba(142, 201, 216, 0.7);
+  outline-offset: 3px;
+}
+
+/* 内置文案是英文，用伪元素换成中文 */
+.admin-bar__edit span,
+.admin-bar__create span,
+.admin-bar__logout span,
+.admin-bar__preview {
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+
+.admin-bar__edit span::after,
+.admin-bar__create span::after,
+.admin-bar__logout span::after,
+.admin-bar__preview::after {
+  font-size: 0.72rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.admin-bar__edit span::after {
+  content: '编辑';
+}
+
+.admin-bar__create span::after {
+  content: '新建';
+}
+
+.admin-bar__preview::after {
+  content: '退出预览';
+}
+
+.admin-bar__logout span::after {
+  content: '退出';
+}
+
+html[data-admin-bar='true'] .site-header {
+  top: var(--admin-bar-h, 2.5rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-bar__link {
+    transition: none;
   }
 }

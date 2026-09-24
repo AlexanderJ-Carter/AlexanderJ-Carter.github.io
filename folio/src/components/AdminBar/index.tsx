@@ -3,33 +3,18 @@
 import type { PayloadAdminBarProps, PayloadMeUser } from '@payloadcms/admin-bar'
 
 import { cn } from '@/utilities/ui'
-import { useSelectedLayoutSegments } from 'next/navigation'
+import { useSelectedLayoutSegments, useRouter } from 'next/navigation'
 import { PayloadAdminBar } from '@payloadcms/admin-bar'
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import './index.scss'
-
 import { getClientSideURL } from '@/utilities/getURL'
 
-const baseClass = 'admin-bar'
-
 const collectionLabels = {
-  pages: {
-    plural: 'Pages',
-    singular: 'Page',
-  },
-  posts: {
-    plural: 'Posts',
-    singular: 'Post',
-  },
-  projects: {
-    plural: 'Projects',
-    singular: 'Project',
-  },
-}
-
-const Title: React.FC = () => <span>Dashboard</span>
+  pages: { plural: '页面', singular: '页面' },
+  posts: { plural: '文章', singular: '文章' },
+  projects: { plural: '项目', singular: '项目' },
+} as const
 
 export const AdminBar: React.FC<{
   adminBarProps?: PayloadAdminBarProps
@@ -42,45 +27,60 @@ export const AdminBar: React.FC<{
   ) as keyof typeof collectionLabels
   const router = useRouter()
 
-  const onAuthChange = React.useCallback((user: PayloadMeUser) => {
+  const onAuthChange = useCallback((user: PayloadMeUser) => {
     setShow(Boolean(user?.id))
   }, [])
 
+  useEffect(() => {
+    const root = document.documentElement
+    if (show) {
+      root.dataset.adminBar = 'true'
+      root.style.setProperty('--admin-bar-h', '2.5rem')
+    } else {
+      delete root.dataset.adminBar
+      root.style.removeProperty('--admin-bar-h')
+    }
+    return () => {
+      delete root.dataset.adminBar
+      root.style.removeProperty('--admin-bar-h')
+    }
+  }, [show])
+
   return (
     <div
-      className={cn(baseClass, 'py-2 bg-black text-white', {
-        block: show,
-        hidden: !show,
+      className={cn('admin-bar', {
+        'admin-bar--visible': show,
+        'admin-bar--hidden': !show,
       })}
+      aria-hidden={!show}
     >
-      <div className="container">
+      <div className="admin-bar__inner">
         <PayloadAdminBar
           {...adminBarProps}
-          className="py-2 text-white"
+          unstyled
+          className="admin-bar__payload"
           classNames={{
-            controls: 'font-medium text-white',
-            logo: 'text-white',
-            user: 'text-white',
+            controls: 'admin-bar__controls',
+            create: 'admin-bar__link admin-bar__create',
+            edit: 'admin-bar__link admin-bar__edit',
+            logo: 'admin-bar__logo',
+            logout: 'admin-bar__link admin-bar__logout',
+            preview: 'admin-bar__link admin-bar__preview',
+            user: 'admin-bar__user',
           }}
           cmsURL={getClientSideURL()}
           collectionSlug={collection}
           collectionLabels={{
-            plural: collectionLabels[collection]?.plural || 'Pages',
-            singular: collectionLabels[collection]?.singular || 'Page',
+            plural: collectionLabels[collection]?.plural || '页面',
+            singular: collectionLabels[collection]?.singular || '页面',
           }}
-          logo={<Title />}
+          logo={<span className="admin-bar__brand">Folio</span>}
           onAuthChange={onAuthChange}
           onPreviewExit={() => {
             fetch('/next/exit-preview').then(() => {
               router.push('/')
               router.refresh()
             })
-          }}
-          style={{
-            backgroundColor: 'transparent',
-            padding: 0,
-            position: 'relative',
-            zIndex: 'unset',
           }}
         />
       </div>
