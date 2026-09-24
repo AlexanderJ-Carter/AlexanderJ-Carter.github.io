@@ -1,4 +1,6 @@
-/* Folio admin login — Pocket ID only */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700&display=swap');
+
+/* Folio admin login — darkroom gate, Pocket ID only */
 
 .login__form {
   display: none !important;
@@ -6,61 +8,141 @@
 
 .template-default.login,
 .login {
+  --folio-ink: #ebe6dc;
+  --folio-muted: rgba(235, 230, 220, 0.58);
+  --folio-faint: rgba(235, 230, 220, 0.38);
+  --folio-line: rgba(235, 230, 220, 0.14);
+  --folio-cyan: #7eb8c9;
+  --folio-cyan-dim: rgba(126, 184, 201, 0.18);
+  --folio-panel: rgba(18, 22, 28, 0.72);
+  --folio-bg-0: #0e1116;
+  --folio-bg-1: #161b22;
+
   position: relative;
+  isolation: isolate;
   min-height: 100vh;
+  overflow: hidden;
+  color: var(--folio-ink);
   background:
-    radial-gradient(ellipse 80% 55% at 50% -10%, rgba(180, 140, 90, 0.14), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(90, 110, 130, 0.1), transparent 50%),
-    var(--theme-bg);
+    radial-gradient(ellipse 90% 70% at 18% -5%, rgba(126, 184, 201, 0.16), transparent 52%),
+    radial-gradient(ellipse 70% 55% at 92% 108%, rgba(180, 140, 90, 0.1), transparent 48%),
+    linear-gradient(165deg, var(--folio-bg-1) 0%, var(--folio-bg-0) 55%, #0a0c10 100%);
+}
+
+.login::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.login::after {
+  content: '';
+  position: absolute;
+  inset: 1.25rem;
+  z-index: 0;
+  pointer-events: none;
+  border: 1px solid var(--folio-line);
+}
+
+@media (min-width: 768px) {
+  .login::after {
+    inset: 1.75rem;
+  }
+}
+
+.login > * {
+  position: relative;
+  z-index: 1;
 }
 
 .login__brand {
-  margin-bottom: 2rem !important;
+  margin-bottom: 2.25rem !important;
+}
+
+.folio-admin-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  text-align: center;
+  animation: folio-login-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.folio-admin-logo__mark {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.1rem;
+  height: 3.1rem;
+  margin-bottom: 0.55rem;
+}
+
+.folio-admin-logo__aperture {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid color-mix(in srgb, var(--folio-cyan) 55%, var(--folio-ink));
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 5px transparent;
+  background:
+    linear-gradient(135deg, var(--folio-cyan-dim), transparent 60%),
+    rgba(255, 255, 255, 0.02);
+}
+
+.folio-admin-logo__letters {
+  position: relative;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--folio-ink);
+}
+
+.folio-admin-logo__name {
+  font-family: Syne, var(--font-display), system-ui, sans-serif;
+  font-size: clamp(1.85rem, 4vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--folio-ink);
+}
+
+.folio-admin-logo__sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--folio-faint);
 }
 
 .folio-login {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 0;
-  max-width: 22rem;
+  width: min(100%, 22.5rem);
   margin: 0 auto;
   text-align: center;
-}
-
-.folio-login__eyebrow {
-  margin: 0 0 0.75rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--theme-elevation-500);
-}
-
-.folio-login__title {
-  margin: 0 0 0.65rem;
-  font-size: 1.65rem;
-  font-weight: 650;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
-  color: var(--theme-text);
+  animation: folio-login-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) 90ms both;
 }
 
 .folio-login__lead {
-  margin: 0 0 1.5rem;
-  font-size: 0.92rem;
-  line-height: 1.55;
-  color: var(--theme-elevation-600);
+  margin: 0 0 1.65rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--folio-muted);
 }
 
 .folio-login__error {
-  margin: 0 0 1rem;
-  padding: 0.75rem 0.9rem;
-  border: 1px solid color-mix(in srgb, var(--theme-error-500) 35%, transparent);
+  margin: 0 0 1.1rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid rgba(220, 110, 90, 0.35);
   border-radius: 2px;
-  background: color-mix(in srgb, var(--theme-error-500) 10%, var(--theme-elevation-50));
-  color: var(--theme-error-750, var(--theme-error-500));
+  background: rgba(220, 110, 90, 0.1);
+  color: #f0b4a6;
   font-size: 0.88rem;
   line-height: 1.45;
   text-align: left;
@@ -69,97 +151,129 @@
 .folio-login__cta {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   width: 100%;
-  min-height: 2.85rem;
-  padding: 0.75rem 1.1rem;
+  min-height: 3.05rem;
+  padding: 0.85rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--folio-cyan) 40%, transparent);
   border-radius: 2px;
-  background: var(--theme-elevation-900);
-  color: var(--theme-elevation-0);
-  font-size: 0.95rem;
+  background: linear-gradient(180deg, rgba(126, 184, 201, 0.16), rgba(126, 184, 201, 0.06));
+  color: var(--folio-ink);
+  font-size: 0.98rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   text-decoration: none;
-  transition: background 160ms ease, transform 160ms ease;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .folio-login__cta:hover {
-  background: var(--theme-elevation-800);
-  color: var(--theme-elevation-0);
+  background: linear-gradient(180deg, rgba(126, 184, 201, 0.26), rgba(126, 184, 201, 0.1));
+  border-color: color-mix(in srgb, var(--folio-cyan) 70%, transparent);
+  color: var(--folio-ink);
+  transform: translateY(-1px);
 }
 
 .folio-login__cta:focus-visible {
-  outline: 2px solid var(--theme-success-500, #3d8b6e);
+  outline: 2px solid var(--folio-cyan);
   outline-offset: 3px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .folio-login__cta {
-    transition: none;
-  }
+.folio-login__cta:active {
+  transform: translateY(0);
 }
 
-.folio-login__hint {
-  margin: 1rem 0 0;
-  font-size: 0.78rem;
-  line-height: 1.45;
-  color: var(--theme-elevation-500);
-}
-
-.folio-login__hint span {
+.folio-login__cta-arrow {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.74rem;
+  font-size: 1rem;
+  color: var(--folio-cyan);
+  transition: transform 180ms ease;
+}
+
+.folio-login__cta:hover .folio-login__cta-arrow {
+  transform: translateX(3px);
+}
+
+.folio-login__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.45rem;
+  margin-top: 1.15rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--folio-faint);
+}
+
+.folio-login__meta-key {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.folio-login__meta-val {
+  color: var(--folio-muted);
+}
+
+.folio-login__meta-sep {
+  opacity: 0.5;
 }
 
 .folio-login__home {
-  margin-top: 1.75rem;
-  font-size: 0.82rem;
-  color: var(--theme-elevation-500);
+  margin-top: 2rem;
+  font-size: 0.84rem;
+  color: var(--folio-faint);
   text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 160ms ease;
 }
 
 .folio-login__home:hover {
-  color: var(--theme-text);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color: var(--folio-ink);
 }
 
-.folio-admin-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.45rem;
-  text-align: center;
+.folio-login__home::before {
+  content: '← ';
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-.folio-admin-logo__mark {
+@keyframes folio-login-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folio-admin-logo,
+  .folio-login,
+  .folio-login__cta,
+  .folio-login__cta-arrow {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* 侧栏小图标保持简洁 */
+.folio-admin-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-bottom: 0.35rem;
-  border: 1.5px solid var(--theme-elevation-800);
-  border-radius: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1.5px solid currentColor;
+  border-radius: 0.15rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.7rem;
+  font-size: 0.55rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--theme-text);
-}
-
-.folio-admin-logo__name {
-  font-family: var(--font-display), Syne, system-ui, sans-serif;
-  font-size: 1.55rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: var(--theme-text);
-}
-
-.folio-admin-logo__sub {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--theme-elevation-500);
+  letter-spacing: 0.04em;
 }

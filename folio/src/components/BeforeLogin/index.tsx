@@ -25,10 +25,8 @@ const BeforeLogin: React.FC<BeforeLoginProps> = ({ searchParams }) => {
 
   return (
     <div className="folio-login">
-      <p className="folio-login__eyebrow">Folio Admin</p>
-      <h1 className="folio-login__title">进入工作台</h1>
       <p className="folio-login__lead">
-        用 Pocket ID 继续。这是后台唯一登录方式，不再使用邮箱密码。
+        用 Pocket ID 进入后台。改页面、文章与图片，都从这里开始。
       </p>
 
       {message ? (
@@ -38,15 +36,23 @@ const BeforeLogin: React.FC<BeforeLoginProps> = ({ searchParams }) => {
       ) : null}
 
       <a className="folio-login__cta" href={loginUrl}>
-        使用 Pocket ID 登录
+        <span className="folio-login__cta-label">使用 Pocket ID 登录</span>
+        <span className="folio-login__cta-arrow" aria-hidden>
+          →
+        </span>
       </a>
 
-      <p className="folio-login__hint">
-        将跳转到 <span>id.alexander.xin</span>，完成后回到本站后台。
-      </p>
+      <div className="folio-login__meta">
+        <span className="folio-login__meta-key">跳转</span>
+        <span className="folio-login__meta-val">id.alexander.xin</span>
+        <span className="folio-login__meta-sep" aria-hidden>
+          ·
+        </span>
+        <span className="folio-login__meta-val">完成后回到本站</span>
+      </div>
 
       <a className="folio-login__home" href="/">
-        ← 返回网站
+        返回网站
       </a>
     </div>
   )
