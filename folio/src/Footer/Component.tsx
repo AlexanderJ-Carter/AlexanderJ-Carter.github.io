@@ -103,8 +103,25 @@ export async function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs tracking-wide text-white/40 sm:flex-row sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs tracking-wide text-white/40 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Alexander Carter</p>
+          <nav className="flex flex-wrap gap-x-4 gap-y-1" aria-label="法律与安全">
+            <Link className="hover:text-white/70 transition-colors" href="/privacy">
+              隐私
+            </Link>
+            <Link className="hover:text-white/70 transition-colors" href="/terms">
+              条款
+            </Link>
+            <Link className="hover:text-white/70 transition-colors" href="/security/policy">
+              安全
+            </Link>
+            <a
+              className="hover:text-white/70 transition-colors"
+              href="/.well-known/security.txt"
+            >
+              security.txt
+            </a>
+          </nav>
           <p className="font-mono uppercase tracking-[0.16em]">Darkroom Folio</p>
         </div>
       </div>
