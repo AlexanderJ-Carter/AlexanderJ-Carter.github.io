@@ -1,10 +1,33 @@
-name: Code Quality
+name: Code Quality (legacy Astro)
 
 on:
   push:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - 'ops-portal/**'
+      - 'workers/**'
+      - 'astro.config.mjs'
+      - 'eslint.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/code-quality.yml'
   pull_request:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - 'ops-portal/**'
+      - 'workers/**'
+      - 'astro.config.mjs'
+      - 'eslint.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/code-quality.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -39,9 +62,7 @@ jobs:
         run: npm audit --audit-level=high
 
       - name: Verify site-help worker payload
-        # Encodes src/site-help.js and asserts the result is valid + matches the
-        # source (catches a stale help.b64 shipping an old worker to production).
         run: npm run check:help
 
-      - name: Check build
-        run: npm run build
+      - name: Check legacy Astro build
+        run: npm run legacy:build
