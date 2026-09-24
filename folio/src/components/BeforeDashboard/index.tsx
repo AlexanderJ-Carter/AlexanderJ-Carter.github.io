@@ -14,8 +14,8 @@ const BeforeDashboard: React.FC = () => {
       </Banner>
       <ul className={`${baseClass}__instructions`}>
         <li>
-          优先在 folio/ 执行{' '}
-          <code>npm run migrate:site</code>
+          优先在仓库根执行{' '}
+          <code>npm run folio:migrate</code>
           {'，把静态站页面与写作迁入，然后 '}
           <a href="/" target="_blank">
             打开前台
