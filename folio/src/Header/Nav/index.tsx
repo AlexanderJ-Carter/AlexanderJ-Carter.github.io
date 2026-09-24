@@ -18,6 +18,7 @@ const FALLBACK_NAV = [
   { label: '项目', url: '/projects' },
   { label: '关于', url: '/about' },
   { label: '联系', url: '/contact' },
+  { label: '订阅', url: '/subscribe' },
 ] as const
 
 export const HeaderNav: React.FC<{ data: HeaderType; overHero?: boolean }> = ({

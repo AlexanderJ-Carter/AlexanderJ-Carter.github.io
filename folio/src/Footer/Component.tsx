@@ -13,6 +13,7 @@ const SITE_LINKS = [
   { label: '玩乐', href: '/fun' },
   { label: '关于', href: '/about' },
   { label: '联系', href: '/contact' },
+  { label: '订阅', href: '/subscribe' },
 ] as const
 
 export async function Footer() {
@@ -82,6 +83,9 @@ export async function Footer() {
               </Link>
               <Link className="hover:text-white/70 transition-colors" href="/security/policy">
                 安全
+              </Link>
+              <Link className="hover:text-white/70 transition-colors" href="/admin">
+                管理
               </Link>
               <a className="hover:text-white/70 transition-colors" href="/.well-known/security.txt">
                 security.txt

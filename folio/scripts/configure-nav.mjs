@@ -54,6 +54,7 @@ async function main() {
             reference: { relationTo: 'pages', value: contactId },
           },
         },
+        { link: { type: 'custom', label: '订阅', url: '/subscribe' } },
       ],
     },
   })
@@ -75,6 +76,7 @@ async function main() {
             reference: { relationTo: 'pages', value: aboutId },
           },
         },
+        { link: { type: 'custom', label: '订阅', url: '/subscribe' } },
         { link: { type: 'custom', label: '后台', url: '/admin' } },
         {
           link: {
@@ -88,7 +90,7 @@ async function main() {
     },
   })
 
-  console.log('✓ 页头 / 页脚导航已更新（画廊·玩乐·工具·研究·项目·关于·联系）')
+  console.log('✓ 页头 / 页脚导航已更新')
   process.exit(0)
 }
 
