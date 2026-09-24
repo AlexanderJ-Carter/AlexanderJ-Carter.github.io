@@ -60,9 +60,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           />
 
           <Header />
-          <AnnouncementBanner />
           {children}
           <Footer />
+          <AnnouncementBanner />
         </Providers>
       </body>
     </html>

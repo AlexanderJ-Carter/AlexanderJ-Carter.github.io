@@ -17,13 +17,19 @@ function storageKey(id: string) {
   return `site-notice-dismissed:${id}`
 }
 
+function collapsedKey(id: string) {
+  return `site-notice-collapsed:${id}`
+}
+
 export function SiteAnnouncement({ data }: { data: AnnouncementData | null | undefined }) {
   const enabled = Boolean(data?.enabled && data?.noticeId && data?.title && data?.body)
   const id = data?.noticeId || ''
   const dismissible = data?.dismissible !== false
   const href = data?.href?.trim() || ''
   const cta = data?.ctaLabel?.trim() || '了解更多'
-  const [visible, setVisible] = useState(enabled)
+
+  const [visible, setVisible] = useState(false)
+  const [expanded, setExpanded] = useState(true)
 
   useEffect(() => {
     if (!enabled || !id) {
@@ -35,11 +41,35 @@ export function SiteAnnouncement({ data }: { data: AnnouncementData | null | und
         setVisible(false)
         return
       }
+      if (window.localStorage.getItem(collapsedKey(id)) === '1') {
+        setExpanded(false)
+      }
     } catch {
       // ignore
     }
     setVisible(true)
   }, [enabled, id, dismissible])
+
+  useEffect(() => {
+    if (!visible || !expanded || !id) return
+
+    const reduce =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (reduce) return
+
+    const timer = window.setTimeout(() => {
+      setExpanded(false)
+      try {
+        window.localStorage.setItem(collapsedKey(id), '1')
+      } catch {
+        // ignore
+      }
+    }, 9000)
+
+    return () => window.clearTimeout(timer)
+  }, [visible, expanded, id])
 
   if (!enabled || !visible || !data) return null
 
@@ -54,28 +84,57 @@ export function SiteAnnouncement({ data }: { data: AnnouncementData | null | und
     setVisible(false)
   }
 
+  const collapse = () => {
+    setExpanded(false)
+    if (id) {
+      try {
+        window.localStorage.setItem(collapsedKey(id), '1')
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  const expand = () => {
+    setExpanded(true)
+    if (id) {
+      try {
+        window.localStorage.removeItem(collapsedKey(id))
+      } catch {
+        // ignore
+      }
+    }
+  }
+
   const isInternal = href.startsWith('/') && !href.startsWith('//')
-  const summary = [data.title, data.body].filter(Boolean).join(' · ')
+
+  if (!expanded) {
+    return (
+      <div className="site-toast" role="region" aria-label="站点公告">
+        <button type="button" className="site-toast__chip" onClick={expand}>
+          <span className="site-toast__dot" aria-hidden />
+          告示
+        </button>
+      </div>
+    )
+  }
 
   return (
-    <div className="site-notice" role="region" aria-label="站点公告">
-      <div className="site-notice__rail container">
-        <p className="site-notice__text">
-          <span className="site-notice__mark" aria-hidden>
-            告示
-          </span>
-          <span className="site-notice__copy">{summary}</span>
-        </p>
-        <div className="site-notice__actions">
+    <div className="site-toast site-toast--open" role="region" aria-label="站点公告">
+      <div className="site-toast__card">
+        <p className="site-toast__mark">告示</p>
+        <p className="site-toast__title">{data.title}</p>
+        <p className="site-toast__body">{data.body}</p>
+        <div className="site-toast__actions">
           {href ? (
             isInternal ? (
-              <Link href={href} className="site-notice__cta">
+              <Link href={href} className="site-toast__cta">
                 {cta}
               </Link>
             ) : (
               <a
                 href={href}
-                className="site-notice__cta"
+                className="site-toast__cta"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -83,9 +142,12 @@ export function SiteAnnouncement({ data }: { data: AnnouncementData | null | und
               </a>
             )
           ) : null}
+          <button type="button" className="site-toast__quiet" onClick={collapse}>
+            收起
+          </button>
           {dismissible ? (
-            <button type="button" className="site-notice__dismiss" onClick={dismiss} aria-label="关闭公告">
-              关闭
+            <button type="button" className="site-toast__quiet" onClick={dismiss}>
+              不再显示
             </button>
           ) : null}
         </div>
