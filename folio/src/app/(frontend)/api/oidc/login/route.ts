@@ -1,10 +1,21 @@
 import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
+import { getServerSideURL } from '@/utilities/getURL'
 
 function requireEnv(name: string): string {
   const value = process.env[name]
   if (!value) throw new Error(`缺少环境变量 ${name}`)
   return value
+}
+
+function publicOrigin(): string {
+  const fromEnv = (process.env.NEXT_PUBLIC_SERVER_URL || getServerSideURL() || '').replace(
+    /\/$/,
+    '',
+  )
+  if (fromEnv && !/0\.0\.0\.0|127\.0\.0\.1|localhost/i.test(fromEnv)) {
+    return fromEnv
+  }
+  return 'https://www.alexander.xin'
 }
 
 function b64url(buf: ArrayBuffer | Uint8Array): string {
@@ -20,46 +31,60 @@ async function pkce() {
   return { verifier, challenge: b64url(digest) }
 }
 
-export async function GET() {
-  const issuer = requireEnv('OIDC_ISSUER').replace(/\/$/, '')
-  const clientId = requireEnv('OIDC_CLIENT_ID')
-  const redirectUri = requireEnv('OIDC_REDIRECT_URI')
+function cookieSecure(request: Request) {
+  const proto = request.headers.get('x-forwarded-proto')?.split(',')[0]?.trim()
+  if (proto) return proto === 'https'
+  if (publicOrigin().startsWith('https://')) return true
+  return process.env.NODE_ENV === 'production'
+}
 
-  const discoveryRes = await fetch(`${issuer}/.well-known/openid-configuration`, {
-    next: { revalidate: 3600 },
-  })
-  if (!discoveryRes.ok) {
-    return NextResponse.json({ error: 'oidc_discovery_failed' }, { status: 502 })
+export async function GET(request: Request) {
+  try {
+    const issuer = requireEnv('OIDC_ISSUER').replace(/\/$/, '')
+    const clientId = requireEnv('OIDC_CLIENT_ID')
+    const redirectUri = requireEnv('OIDC_REDIRECT_URI')
+
+    const discoveryRes = await fetch(`${issuer}/.well-known/openid-configuration`, {
+      next: { revalidate: 3600 },
+    })
+    if (!discoveryRes.ok) {
+      console.error('[oidc/login] discovery', discoveryRes.status)
+      return NextResponse.redirect(`${publicOrigin()}/admin/login?oidc=error`)
+    }
+    const meta = (await discoveryRes.json()) as { authorization_endpoint: string }
+
+    const state = b64url(crypto.getRandomValues(new Uint8Array(16)))
+    const { verifier, challenge } = await pkce()
+    const secure = cookieSecure(request)
+
+    const auth = new URL(meta.authorization_endpoint)
+    auth.searchParams.set('client_id', clientId)
+    auth.searchParams.set('redirect_uri', redirectUri)
+    auth.searchParams.set('response_type', 'code')
+    auth.searchParams.set('scope', 'openid profile email')
+    auth.searchParams.set('state', state)
+    auth.searchParams.set('code_challenge', challenge)
+    auth.searchParams.set('code_challenge_method', 'S256')
+
+    const response = NextResponse.redirect(auth.toString())
+    response.cookies.set('folio_oidc_state', state, {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure,
+      path: '/',
+      maxAge: 600,
+    })
+    response.cookies.set('folio_oidc_verifier', verifier, {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure,
+      path: '/',
+      maxAge: 600,
+    })
+    response.headers.set('Cache-Control', 'private, no-store')
+    return response
+  } catch (err) {
+    console.error('[oidc/login]', err instanceof Error ? err.message : err)
+    return NextResponse.redirect(`${publicOrigin()}/admin/login?oidc=error`)
   }
-  const meta = (await discoveryRes.json()) as { authorization_endpoint: string }
-
-  const state = b64url(crypto.getRandomValues(new Uint8Array(16)))
-  const { verifier, challenge } = await pkce()
-
-  const jar = await cookies()
-  jar.set('folio_oidc_state', state, {
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
-    path: '/',
-    maxAge: 600,
-  })
-  jar.set('folio_oidc_verifier', verifier, {
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
-    path: '/',
-    maxAge: 600,
-  })
-
-  const auth = new URL(meta.authorization_endpoint)
-  auth.searchParams.set('client_id', clientId)
-  auth.searchParams.set('redirect_uri', redirectUri)
-  auth.searchParams.set('response_type', 'code')
-  auth.searchParams.set('scope', 'openid profile email')
-  auth.searchParams.set('state', state)
-  auth.searchParams.set('code_challenge', challenge)
-  auth.searchParams.set('code_challenge_method', 'S256')
-
-  return NextResponse.redirect(auth.toString())
 }

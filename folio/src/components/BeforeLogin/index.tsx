@@ -1,12 +1,14 @@
 import React from 'react'
 
 const OIDC_ERRORS: Record<string, string> = {
-  state: '登录状态校验失败，请重试。',
-  token: '无法换取登录令牌，请重试。',
-  userinfo: '无法读取身份信息，请重试。',
-  email: 'Pocket ID 未返回邮箱，无法登录。',
+  state: '登录状态已过期或校验失败，请再点一次登录（不要回退浏览器历史）。',
+  token: '无法换取登录令牌。若刚登录成功过，可能是授权码已用过，请重新登录。',
+  userinfo: '无法读取 Pocket ID 身份信息，请重试。',
+  email: 'Pocket ID 未返回有效邮箱。请在 IdP 中为账号绑定邮箱后再试。',
   nouser: '该账号尚未开通后台权限，请联系管理员。',
-  error: '登录失败，请重试。',
+  forbidden: '该邮箱不在后台白名单中。',
+  denied: '已在 Pocket ID 取消授权或 IdP 拒绝登录。',
+  error: '登录失败，请重试。若反复出现，请查看服务器 folio 日志中的 [oidc/callback]。',
 }
 
 type BeforeLoginProps = {
