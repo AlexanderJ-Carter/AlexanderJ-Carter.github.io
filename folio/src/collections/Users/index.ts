@@ -21,7 +21,14 @@ export const Users: CollectionConfig = {
     singular: '用户',
     plural: '用户',
   },
-  auth: true,
+  auth: {
+    /** OIDC 自签 JWT 也走 session；cookies 按 HTTPS 公网站配置 */
+    cookies: {
+      sameSite: 'Lax',
+      secure: true,
+    },
+    tokenExpiration: 60 * 60 * 24 * 7,
+  },
   hooks: {
     beforeOperation: [
       ({ operation }) => {

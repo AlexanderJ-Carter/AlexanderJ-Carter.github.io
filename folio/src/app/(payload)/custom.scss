@@ -1,4 +1,165 @@
-/* 后台一律 Pocket ID：隐藏邮箱密码表单与忘记密码入口 */
+/* Folio admin login — Pocket ID only */
+
 .login__form {
   display: none !important;
+}
+
+.template-default.login,
+.login {
+  position: relative;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% -10%, rgba(180, 140, 90, 0.14), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(90, 110, 130, 0.1), transparent 50%),
+    var(--theme-bg);
+}
+
+.login__brand {
+  margin-bottom: 2rem !important;
+}
+
+.folio-login {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  max-width: 22rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.folio-login__eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-500);
+}
+
+.folio-login__title {
+  margin: 0 0 0.65rem;
+  font-size: 1.65rem;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--theme-text);
+}
+
+.folio-login__lead {
+  margin: 0 0 1.5rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--theme-elevation-600);
+}
+
+.folio-login__error {
+  margin: 0 0 1rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--theme-error-500) 35%, transparent);
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--theme-error-500) 10%, var(--theme-elevation-50));
+  color: var(--theme-error-750, var(--theme-error-500));
+  font-size: 0.88rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.folio-login__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.85rem;
+  padding: 0.75rem 1.1rem;
+  border-radius: 2px;
+  background: var(--theme-elevation-900);
+  color: var(--theme-elevation-0);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.folio-login__cta:hover {
+  background: var(--theme-elevation-800);
+  color: var(--theme-elevation-0);
+}
+
+.folio-login__cta:focus-visible {
+  outline: 2px solid var(--theme-success-500, #3d8b6e);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folio-login__cta {
+    transition: none;
+  }
+}
+
+.folio-login__hint {
+  margin: 1rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--theme-elevation-500);
+}
+
+.folio-login__hint span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.74rem;
+}
+
+.folio-login__home {
+  margin-top: 1.75rem;
+  font-size: 0.82rem;
+  color: var(--theme-elevation-500);
+  text-decoration: none;
+}
+
+.folio-login__home:hover {
+  color: var(--theme-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.folio-admin-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  text-align: center;
+}
+
+.folio-admin-logo__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: 0.35rem;
+  border: 1.5px solid var(--theme-elevation-800);
+  border-radius: 2px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--theme-text);
+}
+
+.folio-admin-logo__name {
+  font-family: var(--font-display), Syne, system-ui, sans-serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--theme-text);
+}
+
+.folio-admin-logo__sub {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-500);
 }

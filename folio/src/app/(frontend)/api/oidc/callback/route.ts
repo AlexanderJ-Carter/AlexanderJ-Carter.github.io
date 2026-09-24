@@ -1,6 +1,13 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
-import { getPayload, generatePayloadCookie, getFieldsToSign, jwtSign } from 'payload'
+import {
+  createLocalReq,
+  generatePayloadCookie,
+  getFieldsToSign,
+  getPayload,
+  jwtSign,
+} from 'payload'
+import { addSessionToUser } from 'payload/shared'
 import config from '@payload-config'
 import { getServerSideURL } from '@/utilities/getURL'
 
@@ -100,11 +107,13 @@ export async function GET(request: Request) {
     }
 
     const payload = await getPayload({ config })
+    const req = await createLocalReq({}, payload)
     const found = await payload.find({
       collection: 'users',
       where: { email: { equals: email } },
       limit: 1,
       overrideAccess: true,
+      req,
     })
 
     let user = found.docs[0]
@@ -121,13 +130,22 @@ export async function GET(request: Request) {
           password,
         },
         overrideAccess: true,
+        req,
       })
     }
 
     const collectionConfig = payload.collections.users.config
+    const { sid } = await addSessionToUser({
+      collectionConfig,
+      payload,
+      req,
+      user: user as never,
+    })
+
     const fieldsToSign = getFieldsToSign({
       collectionConfig,
       email: user.email,
+      sid,
       user: user as never,
     })
 

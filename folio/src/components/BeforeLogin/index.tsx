@@ -1,5 +1,4 @@
 import React from 'react'
-import { redirect } from 'next/navigation'
 
 const OIDC_ERRORS: Record<string, string> = {
   state: '登录状态校验失败，请重试。',
@@ -22,48 +21,32 @@ function firstParam(value: string | string[] | undefined): string | undefined {
 const BeforeLogin: React.FC<BeforeLoginProps> = ({ searchParams }) => {
   const loginUrl = process.env.NEXT_PUBLIC_OIDC_LOGIN_URL || '/api/oidc/login'
   const oidcError = firstParam(searchParams?.oidc)
-
-  if (!oidcError) {
-    redirect(loginUrl)
-  }
-
-  const message = OIDC_ERRORS[oidcError] || OIDC_ERRORS.error
+  const message = oidcError ? OIDC_ERRORS[oidcError] || OIDC_ERRORS.error : null
 
   return (
-    <div style={{ marginBottom: '1.25rem' }}>
-      <p style={{ margin: '0 0 0.75rem', lineHeight: 1.5 }}>
-        <b>Alexander Carter · Folio</b>
-        <br />
-        后台仅支持 Pocket ID 登录。
+    <div className="folio-login">
+      <p className="folio-login__eyebrow">Folio Admin</p>
+      <h1 className="folio-login__title">进入工作台</h1>
+      <p className="folio-login__lead">
+        用 Pocket ID 继续。这是后台唯一登录方式，不再使用邮箱密码。
       </p>
-      <p
-        style={{
-          margin: '0 0 1rem',
-          padding: '0.75rem 1rem',
-          borderRadius: '3px',
-          background: 'var(--theme-error-100)',
-          color: 'var(--theme-error-750)',
-          lineHeight: 1.5,
-        }}
-      >
-        {message}
+
+      {message ? (
+        <p className="folio-login__error" role="alert">
+          {message}
+        </p>
+      ) : null}
+
+      <a className="folio-login__cta" href={loginUrl}>
+        使用 Pocket ID 登录
+      </a>
+
+      <p className="folio-login__hint">
+        将跳转到 <span>id.alexander.xin</span>，完成后回到本站后台。
       </p>
-      <a
-        href={loginUrl}
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100%',
-          padding: '0.7rem 1rem',
-          borderRadius: '3px',
-          background: 'var(--theme-elevation-800)',
-          color: 'var(--theme-elevation-0)',
-          textDecoration: 'none',
-          fontWeight: 600,
-        }}
-      >
-        使用 Pocket ID 重试
+
+      <a className="folio-login__home" href="/">
+        ← 返回网站
       </a>
     </div>
   )
