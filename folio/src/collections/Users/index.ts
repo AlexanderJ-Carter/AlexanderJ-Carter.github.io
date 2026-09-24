@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { APIError } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 
@@ -21,6 +22,15 @@ export const Users: CollectionConfig = {
     plural: '用户',
   },
   auth: true,
+  hooks: {
+    beforeOperation: [
+      ({ operation }) => {
+        if (operation === 'login') {
+          throw new APIError('请使用 Pocket ID 登录', 403)
+        }
+      },
+    ],
+  },
   fields: [
     {
       name: 'name',
