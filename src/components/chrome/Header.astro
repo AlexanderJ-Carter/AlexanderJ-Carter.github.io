@@ -36,6 +36,9 @@ function isActivePath(href: string | undefined): boolean {
   return current === target || current.startsWith(`${target}/`);
 }
 
+const langLabel =
+  lang === 'en-GB' || lang === 'fr' || lang === 'ru' ? 'English' : '中文';
+
 function l(zh: string, tw: string, fr: string, ru: string, en: string): string {
   if (lang === 'zh-CN') return zh;
   if (lang === 'zh-TW') return tw;
@@ -222,6 +225,10 @@ const mainNavItems: NavItem[] = [
   {
     href: writingHomeHref(),
     label: t('nav.blog'),
+  },
+  {
+    href: getLangPath('/studio'),
+    label: l('工作台', '工作台', 'Atelier', 'Стол', 'Studio'),
   },
   {
     href: getLangPath('/projects'),
@@ -455,7 +462,7 @@ const mainNavItems: NavItem[] = [
               ></path>
             </svg>
             <span class="text-xs font-heading font-semibold hidden sm:block">
-              {languages[lang]}
+              {langLabel}
             </span>
           </button>
           <div id="lang-menu" role="menu" class="lang-panel">

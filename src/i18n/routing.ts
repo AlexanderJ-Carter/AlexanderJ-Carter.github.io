@@ -1,10 +1,10 @@
 import type { Lang } from './types';
 import { resolveLang } from './types';
 
-/** URL segment under `/[lang]/…` (never zh-CN — that lives at `/`). */
-export type LangRouteParam = 'zh-TW' | 'en' | 'fr' | 'ru';
+/** URL segment under `/[lang]/…`. zh-CN lives at `/`. Retired locales redirect. */
+export type LangRouteParam = 'en';
 
-const ROUTE_PARAMS: LangRouteParam[] = ['zh-TW', 'en', 'fr', 'ru'];
+const ROUTE_PARAMS: LangRouteParam[] = ['en'];
 
 /**
  * Static paths for `src/pages/[lang]/**`.

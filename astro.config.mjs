@@ -26,17 +26,22 @@ export default defineConfig({
         defaultLocale: 'zh-CN',
         locales: {
           'zh-CN': 'zh-CN',
-          'zh-TW': 'zh-TW',
           'en-GB': 'en',
-          fr: 'fr',
-          ru: 'ru',
         },
       },
     }),
   ],
+  redirects: {
+    '/zh-TW': '/',
+    '/fr': '/',
+    '/ru': '/',
+    '/zh-TW/[...slug]': '/[...slug]',
+    '/fr/[...slug]': '/en/[...slug]',
+    '/ru/[...slug]': '/en/[...slug]',
+  },
   i18n: {
     defaultLocale: 'zh-CN',
-    locales: ['zh-CN', 'zh-TW', 'en-GB', 'fr', 'ru'],
+    locales: ['zh-CN', 'en-GB'],
     routing: {
       prefixDefaultLocale: false,
     },

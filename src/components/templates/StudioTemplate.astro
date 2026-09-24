@@ -1,0 +1,239 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../chrome/PageHero.astro';
+import DailyFrame from '../widgets/DailyFrame.astro';
+import ExposureTriangle from '../widgets/ExposureTriangle.astro';
+import PoemHistory from '../widgets/PoemHistory.astro';
+import WeatherWidget from '../widgets/WeatherWidget.astro';
+import PomodoroTimer from '../widgets/PomodoroTimer.astro';
+import Calculator from '../widgets/Calculator.astro';
+import ColorPicker from '../widgets/ColorPicker.astro';
+import CountdownTimer from '../widgets/CountdownTimer.astro';
+import PasswordGenerator from '../widgets/PasswordGenerator.astro';
+import AmbientRadio from '../widgets/AmbientRadio.astro';
+import { getLangPath, resolveLang } from '../../i18n/types';
+
+interface Props {
+  lang?: string;
+}
+
+const lang = resolveLang(Astro.props.lang);
+const en = lang === 'en-GB';
+const lp = (path: string) => getLangPath(lang, path);
+
+const copy = en
+  ? {
+      kicker: 'Studio',
+      title: 'One desk',
+      description:
+        'Photography tools, a short timer, and the converters that used to live on separate pages.',
+      field: 'Field',
+      fieldBody: 'Frame, exposure, and a line to sit with.',
+      desk: 'Desk',
+      deskBody: 'Things that finish in the browser. Nothing is uploaded.',
+      reference: 'Reference',
+      referenceBody: 'The older single-purpose pages, kept and grouped here.',
+      notes: 'Notes',
+      notesBody: 'Saved on the server, not in this browser.',
+      notesPlaceholder: 'Write something to keep',
+      notesSave: 'Save',
+      notesEmpty: 'Nothing saved yet.',
+      notesFail: 'The desk API is not reachable.',
+    }
+  : {
+      kicker: 'Studio',
+      title: '一张工作台',
+      description: '摄影小工具、计时，以及原来散落各处的换算，收在同一页。',
+      field: '外拍',
+      fieldBody: '一帧、曝光，和一句可以停一下的话。',
+      desk: '案头',
+      deskBody: '这些都在浏览器里算完，不上传。',
+      reference: '对照',
+      referenceBody: '原来的单页工具还在，从这里进去。',
+      notes: '记下',
+      notesBody: '写在服务器上，不留在这台浏览器里。',
+      notesPlaceholder: '写一句想留下的',
+      notesSave: '保存',
+      notesEmpty: '还没有记录。',
+      notesFail: '工作台接口连不上。',
+    };
+
+const references = en
+  ? [
+      { href: '/time', title: 'World time', desc: 'Zones side by side' },
+      { href: '/calendar', title: 'Calendar', desc: 'Month at a glance' },
+      { href: '/currency', title: 'Currency', desc: 'A rate to compare' },
+      { href: '/units', title: 'Units', desc: 'Temperature, length, weight' },
+      { href: '/qr', title: 'QR', desc: 'A link as a code' },
+      { href: '/fun', title: 'Play', desc: 'The older toy drawer' },
+    ]
+  : [
+      { href: '/time', title: '世界时间', desc: '几个时区放在一起' },
+      { href: '/calendar', title: '日历', desc: '看一个月' },
+      { href: '/currency', title: '汇率', desc: '对照一个数' },
+      { href: '/units', title: '单位', desc: '温度、长度、重量' },
+      { href: '/qr', title: '二维码', desc: '把链接变成码' },
+      { href: '/fun', title: '彩蛋', desc: '原来的玩具抽屉' },
+    ];
+---
+
+<BaseLayout
+  title={copy.title}
+  description={copy.description}
+>
+  <PageHero kicker={copy.kicker} title={copy.title} description={copy.description} />
+
+  <div class="container mx-auto px-4 lg:px-8 pb-24 space-y-16">
+    <section aria-labelledby="studio-notes">
+      <h2 id="studio-notes" class="font-heading text-2xl font-semibold mb-2">
+        {copy.notes}
+      </h2>
+      <p class="text-stone-600 dark:text-stone-400 mb-6 max-w-2xl">
+        {copy.notesBody}
+      </p>
+      <form id="desk-form" class="max-w-2xl space-y-3">
+        <label class="block" for="desk-text">
+          <span class="sr-only">{copy.notes}</span>
+          <textarea
+            id="desk-text"
+            name="text"
+            required
+            maxlength="2000"
+            rows="3"
+            placeholder={copy.notesPlaceholder}
+            class="w-full border border-stone-200 dark:border-stone-800 bg-transparent px-3 py-2"
+          ></textarea>
+        </label>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-stone-900 text-white dark:bg-white dark:text-stone-900 font-heading font-semibold"
+        >
+          {copy.notesSave}
+        </button>
+        <p id="desk-status" class="text-sm text-stone-500" role="status"></p>
+      </form>
+      <ul id="desk-list" class="mt-6 max-w-2xl space-y-3"></ul>
+    </section>
+
+    <section aria-labelledby="studio-field">
+      <h2 id="studio-field" class="font-heading text-2xl font-semibold mb-2">
+        {copy.field}
+      </h2>
+      <p class="text-stone-600 dark:text-stone-400 mb-6 max-w-2xl">
+        {copy.fieldBody}
+      </p>
+      <div class="grid gap-6 lg:grid-cols-2">
+        <DailyFrame lang={lang} />
+        <ExposureTriangle lang={lang} />
+        <div class="lg:col-span-2">
+          <PoemHistory lang={lang} />
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="studio-desk">
+      <h2 id="studio-desk" class="font-heading text-2xl font-semibold mb-2">
+        {copy.desk}
+      </h2>
+      <p class="text-stone-600 dark:text-stone-400 mb-6 max-w-2xl">
+        {copy.deskBody}
+      </p>
+      <div class="grid gap-6 md:grid-cols-2">
+        <WeatherWidget lang={lang} />
+        <PomodoroTimer lang={lang} />
+        <Calculator lang={lang} />
+        <CountdownTimer lang={lang} />
+        <ColorPicker lang={lang} />
+        <PasswordGenerator lang={lang} />
+        <div class="md:col-span-2">
+          <AmbientRadio lang={lang} />
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="studio-reference">
+      <h2 id="studio-reference" class="font-heading text-2xl font-semibold mb-2">
+        {copy.reference}
+      </h2>
+      <p class="text-stone-600 dark:text-stone-400 mb-6 max-w-2xl">
+        {copy.referenceBody}
+      </p>
+      <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          references.map((item) => (
+            <li>
+              <a
+                href={lp(item.href)}
+                class="block h-full border border-stone-200 dark:border-stone-800 px-4 py-4 hover:border-stone-400 dark:hover:border-stone-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900 dark:focus-visible:outline-white"
+              >
+                <span class="block font-heading font-semibold">{item.title}</span>
+                <span class="block text-sm text-stone-600 dark:text-stone-400 mt-1">
+                  {item.desc}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ empty: copy.notesEmpty, fail: copy.notesFail }}>
+  const api = import.meta.env.PUBLIC_DESK_API || '/api/desk';
+  const list = document.getElementById('desk-list');
+  const form = document.getElementById('desk-form');
+  const status = document.getElementById('desk-status');
+  const text = document.getElementById('desk-text');
+
+  function render(notes) {
+    list.replaceChildren();
+    if (!notes.length) {
+      const item = document.createElement('li');
+      item.className = 'text-sm text-stone-500';
+      item.textContent = empty;
+      list.append(item);
+      return;
+    }
+    for (const note of notes) {
+      const item = document.createElement('li');
+      item.className = 'border border-stone-200 dark:border-stone-800 px-4 py-3';
+      const body = document.createElement('p');
+      body.textContent = note.text;
+      const time = document.createElement('time');
+      time.className = 'block mt-2 text-xs text-stone-500';
+      time.dateTime = note.createdAt;
+      time.textContent = note.createdAt;
+      item.append(body, time);
+      list.append(item);
+    }
+  }
+
+  async function load() {
+    const response = await fetch(api);
+    if (!response.ok) {
+      status.textContent = fail;
+      return;
+    }
+    const payload = await response.json();
+    render(payload.notes);
+  }
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    status.textContent = '';
+    const response = await fetch(api, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ text: text.value }),
+    });
+    if (!response.ok) {
+      status.textContent = fail;
+      return;
+    }
+    text.value = '';
+    await load();
+  });
+
+  load();
+</script>

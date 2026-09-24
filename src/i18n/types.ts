@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 export type Lang = 'zh-CN' | 'zh-TW' | 'en-GB' | 'fr' | 'ru';
 
-export const SUPPORTED_LANGS: Lang[] = ['zh-CN', 'zh-TW', 'en-GB', 'fr', 'ru'];
+export const SUPPORTED_LANGS: Lang[] = ['zh-CN', 'en-GB'];
 export const DEFAULT_LANG: Lang = 'zh-CN';
 
 export function getLangPath(lang: Lang, path: string): string {
@@ -15,7 +15,10 @@ export function getLangPath(lang: Lang, path: string): string {
 }
 
 export function resolveLang(lang: string | undefined): Lang {
-  if (!lang) return DEFAULT_LANG;
+  if (!lang || lang === 'zh-TW') return DEFAULT_LANG;
+  if (lang === 'en' || lang === 'en-GB' || lang === 'fr' || lang === 'ru') {
+    return 'en-GB';
+  }
   return SUPPORTED_LANGS.includes(lang as Lang) ? (lang as Lang) : DEFAULT_LANG;
 }
 

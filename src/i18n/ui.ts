@@ -1,9 +1,6 @@
 export const languages = {
-  'zh-CN': '中文 (简体)',
-  'zh-TW': '中文 (繁體)',
+  'zh-CN': '中文',
   'en-GB': 'English',
-  fr: 'Français',
-  ru: 'Русский',
 };
 
 export const defaultLang = 'zh-CN';

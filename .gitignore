@@ -45,3 +45,15 @@ lerna-debug.log*
 
 # Accidental Depot.dev CI copies (real workflows live in .github/workflows)
 .depot/
+.tools/
+# Experimental scratch dirs only — folio/ is the next-gen site and is tracked
+try-*/
+folio-scratch/
+folio-*/
+# Local Payload DB / media stay out of git (see folio/.gitignore too)
+folio/*.db
+folio/*.db-*
+folio/public/media/
+folio/.env.production
+folio/ADMIN.txt
+folio/seed-data/
