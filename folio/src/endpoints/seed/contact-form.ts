@@ -1,5 +1,29 @@
 import { RequiredDataFromCollectionSlug } from 'payload'
 
+import { contactNotifyAddress, emailFromHeader } from '@/utilities/mail'
+
+function lexicalParagraph(text: string) {
+  return {
+    type: 'paragraph' as const,
+    children: [
+      {
+        type: 'text' as const,
+        detail: 0,
+        format: 0,
+        mode: 'normal' as const,
+        style: '',
+        text,
+        version: 1,
+      },
+    ],
+    direction: 'ltr' as const,
+    format: '' as const,
+    indent: 0,
+    textFormat: 0,
+    version: 1,
+  }
+}
+
 export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
   confirmationMessage: {
     root: {
@@ -14,7 +38,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
               format: 0,
               mode: 'normal',
               style: '',
-              text: 'The contact form has been submitted successfully.',
+              text: '已收到，谢谢留言。',
               version: 1,
             },
           ],
@@ -35,31 +59,19 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
   createdAt: '2023-01-12T21:47:41.374Z',
   emails: [
     {
-      emailFrom: '"Payload" \u003Cdemo@payloadcms.com\u003E',
-      emailTo: '{{email}}',
+      emailFrom: emailFromHeader(),
+      emailTo: contactNotifyAddress(),
+      replyTo: '{{email}}',
+      subject: '站点联系表单：{{full-name}}',
       message: {
         root: {
           type: 'root',
           children: [
-            {
-              type: 'paragraph',
-              children: [
-                {
-                  type: 'text',
-                  detail: 0,
-                  format: 0,
-                  mode: 'normal',
-                  style: '',
-                  text: 'Your contact form submission was successfully received.',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              textFormat: 0,
-              version: 1,
-            },
+            lexicalParagraph('姓名：{{full-name}}'),
+            lexicalParagraph('邮箱：{{email}}'),
+            lexicalParagraph('电话：{{phone}}'),
+            lexicalParagraph('留言：'),
+            lexicalParagraph('{{message}}'),
           ],
           direction: 'ltr',
           format: '',
@@ -67,7 +79,6 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
           version: 1,
         },
       },
-      subject: "You've received a new message.",
     },
   ],
   fields: [
@@ -75,7 +86,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
       name: 'full-name',
       blockName: 'full-name',
       blockType: 'text',
-      label: 'Full Name',
+      label: '姓名',
       required: true,
       width: 100,
     },
@@ -83,7 +94,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
       name: 'email',
       blockName: 'email',
       blockType: 'email',
-      label: 'Email',
+      label: '邮箱',
       required: true,
       width: 100,
     },
@@ -91,7 +102,7 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
       name: 'phone',
       blockName: 'phone',
       blockType: 'number',
-      label: 'Phone',
+      label: '电话（可选）',
       required: false,
       width: 100,
     },
@@ -99,13 +110,13 @@ export const contactForm: RequiredDataFromCollectionSlug<'forms'> = {
       name: 'message',
       blockName: 'message',
       blockType: 'textarea',
-      label: 'Message',
+      label: '留言',
       required: true,
       width: 100,
     },
   ],
   redirect: undefined,
-  submitButtonLabel: 'Submit',
+  submitButtonLabel: '发送',
   title: 'Contact Form',
   updatedAt: '2023-01-12T21:47:41.374Z',
 }

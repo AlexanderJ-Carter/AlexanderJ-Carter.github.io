@@ -3,7 +3,7 @@ node_modules/
 
 # Build output
 dist/
-.astro/
+folio/.next/
 
 # Generated worker artifacts (encoded from ops-portal/src/site-help.js)
 ops-portal/help.b64
@@ -13,10 +13,6 @@ ops-portal/ops.b64
 .env
 .env.local
 .env.*.local
-
-# Gallery source JPGs (optimize locally; deploy only gallery-optimized)
-public/img/gallery/
-assets/gallery-source/
 
 # OS files
 .DS_Store
@@ -46,7 +42,7 @@ lerna-debug.log*
 # Accidental Depot.dev CI copies (real workflows live in .github/workflows)
 .depot/
 .tools/
-# Experimental scratch dirs only — folio/ is the next-gen site and is tracked
+# Experimental scratch dirs only — folio/ is the site and is tracked
 try-*/
 folio-scratch/
 folio-*/

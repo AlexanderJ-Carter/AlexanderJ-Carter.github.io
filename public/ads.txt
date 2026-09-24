@@ -1,6 +1,0 @@
-# ads.txt for alexander.xin
-# https://iabtechlab.com/ads-txt/
-# Keep this file in sync with PUBLIC_ADSENSE_CLIENT.
-# Last updated: 2026-07-25
-
-google.com, pub-2583424294154083, DIRECT, f08c47fec0942fa0

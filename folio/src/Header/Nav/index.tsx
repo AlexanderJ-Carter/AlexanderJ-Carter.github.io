@@ -15,6 +15,7 @@ const FALLBACK_NAV = [
   { label: '玩乐', url: '/fun' },
   { label: '工具', url: '/tools' },
   { label: '研究', url: '/research' },
+  { label: '项目', url: '/projects' },
   { label: '关于', url: '/about' },
   { label: '联系', url: '/contact' },
 ] as const

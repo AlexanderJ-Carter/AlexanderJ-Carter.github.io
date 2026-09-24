@@ -20,13 +20,16 @@ const BeforeDashboard: React.FC = () => {
           <h5>日常改稿</h5>
           <ul>
             <li>
-              <a href="/admin/collections/pages">页面</a> — 首页 / 关于 / 联系；侧栏可改自定义地址
+              <a href="/admin/collections/pages">页面</a> — 首页 / 关于 / 联系
             </li>
             <li>
-              <a href="/admin/collections/posts">文章</a> — 写作区，支持预览与访问量
+              <a href="/admin/collections/posts">文章</a> — 写作（暂缓公开时可只存草稿）
             </li>
             <li>
-              <a href="/admin/collections/media">媒体</a> — 上传图片后挂到页面或文章
+              <a href="/admin/collections/media">媒体</a> — 图库与封面
+            </li>
+            <li>
+              <a href="/admin/globals/announcement">站点公告</a> — 顶栏横幅
             </li>
           </ul>
         </section>
@@ -34,35 +37,49 @@ const BeforeDashboard: React.FC = () => {
           <h5>站点结构</h5>
           <ul>
             <li>
-              <a href="/admin/globals/header">页头</a> — 顶栏导航
+              <a href="/admin/globals/header">页头</a> — 顶栏导航（含项目等）
             </li>
             <li>
               <a href="/admin/globals/footer">页脚</a> — 页脚链接
             </li>
             <li>
-              <a href="/admin/collections/redirects">重定向</a> — 旧 URL → 新自定义地址
+              <a href="/admin/collections/redirects">重定向</a> — 路径级旧链 → 新址
+            </li>
+            <li>
+              代码页：
+              <a href="/projects" target="_blank" rel="noreferrer">
+                /projects
+              </a>
+              ·
+              <a href="/subscribe" target="_blank" rel="noreferrer">
+                /subscribe
+              </a>
+              ·
+              <a href="/gallery" target="_blank" rel="noreferrer">
+                /gallery
+              </a>
+              ·
+              <a href="/tools" target="_blank" rel="noreferrer">
+                /tools
+              </a>
             </li>
           </ul>
         </section>
         <section>
-          <h5>运营</h5>
+          <h5>运营与邮件</h5>
           <ul>
             <li>
-              <a href="/admin/collections/forms">表单</a> — 联系表单字段
+              <a href="/admin/collections/forms">表单</a> — Contact Form 字段与通知邮件
             </li>
             <li>
-              <a href="/admin/collections/form-submissions">表单提交</a> — 访客留言
+              <a href="/admin/collections/form-submissions">表单提交</a> — 访客留言入库
             </li>
             <li>
-              画廊 / 玩乐是代码页（
-              <a href="/gallery" target="_blank" rel="noreferrer">
-                /gallery
-              </a>
-              、
-              <a href="/fun" target="_blank" rel="noreferrer">
-                /fun
-              </a>
-              ）
+              Resend：实例 <code>.env.production</code> 配好后，宿主机跑{' '}
+              <code>pnpm configure:contact-form</code>
+            </li>
+            <li>
+              订阅名单：前台 <code>/subscribe</code> → Resend Contacts（Segment）
             </li>
           </ul>
         </section>

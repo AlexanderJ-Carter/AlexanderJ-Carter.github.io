@@ -39,6 +39,7 @@ async function main() {
         { link: { type: 'custom', label: '玩乐', url: '/fun' } },
         { link: { type: 'custom', label: '工具', url: '/tools' } },
         { link: { type: 'custom', label: '研究', url: '/research' } },
+        { link: { type: 'custom', label: '项目', url: '/projects' } },
         {
           link: {
             type: 'reference',
@@ -66,6 +67,7 @@ async function main() {
         { link: { type: 'custom', label: '玩乐', url: '/fun' } },
         { link: { type: 'custom', label: '工具', url: '/tools' } },
         { link: { type: 'custom', label: '研究', url: '/research' } },
+        { link: { type: 'custom', label: '项目', url: '/projects' } },
         {
           link: {
             type: 'reference',
@@ -86,7 +88,7 @@ async function main() {
     },
   })
 
-  console.log('✓ 页头 / 页脚导航已更新（画廊·玩乐·工具·研究·关于·联系）')
+  console.log('✓ 页头 / 页脚导航已更新（画廊·玩乐·工具·研究·项目·关于·联系）')
   process.exit(0)
 }
 

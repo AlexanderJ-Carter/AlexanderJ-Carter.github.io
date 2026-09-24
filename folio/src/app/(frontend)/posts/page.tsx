@@ -27,6 +27,9 @@ export default function Page() {
           <Link href="/tools" className="underline underline-offset-4">
             工具 →
           </Link>
+          <Link href="/subscribe" className="underline underline-offset-4">
+            订阅 →
+          </Link>
         </div>
       </div>
     </div>

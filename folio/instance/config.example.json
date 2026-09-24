@@ -36,6 +36,21 @@
       "hrefLabel": "org/project ↗"
     }
   },
+  "projects": {
+    "intro": "Lifestyle tools and personal builds. Research stays on /research.",
+    "items": [
+      {
+        "title": "This site",
+        "description": "Payload + Next personal site (Folio).",
+        "status": "wip",
+        "tags": ["Next.js", "Payload"],
+        "href": "https://github.com/you/site",
+        "hrefLabel": "Source →",
+        "demoHref": "/",
+        "demoLabel": "Home →"
+      }
+    ]
+  },
   "security": {
     "domains": ["example.com", "*.example.com"],
     "contactEmail": "security@example.com"

@@ -4,10 +4,11 @@
 node_modules/
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 
 # Build output
 dist/
-.astro/
+folio/.next/
 
 # Environment
 .env
@@ -25,9 +26,5 @@ dist/
 .git/
 .gitignore
 
-# Documentation generated files
+# Workflows
 .github/workflows/
-
-# Files with dynamic scripts (prettier-plugin-astro limitation)
-src/layouts/BaseLayout.astro
-src/components/StructuredData.astro

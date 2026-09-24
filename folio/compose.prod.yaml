@@ -15,7 +15,8 @@ services:
     container_name: folio
     restart: unless-stopped
     ports:
-      # 例: FOLIO_PUBLISH=100.x.x.x:3040 或 127.0.0.1:3040
+      # 须 docker compose --env-file .env.production …，否则默认只绑 127.0.0.1
+      # 例: FOLIO_PUBLISH=100.x.x.x:3040（Tailscale，供 cloud Nginx 反代）
       - "${FOLIO_PUBLISH:-127.0.0.1:3040}:3000"
     env_file:
       - .env.production
@@ -47,6 +48,23 @@ services:
       timeout: 10s
       retries: 5
       start_period: 90s
+
+  # 宿主机运维：配置导航 / 联系表单（读同一 SQLite 卷）
+  #   docker compose -f compose.prod.yaml --profile ops run --rm folio-ops scripts/configure-nav.mjs
+  #   docker compose -f compose.prod.yaml --profile ops run --rm folio-ops scripts/configure-contact-form.mjs
+  folio-ops:
+    profiles: ['ops']
+    image: node:22.17.0-bookworm-slim
+    working_dir: /app
+    env_file:
+      - .env.production
+    environment:
+      DATABASE_URL: file:/app/data/folio.db
+    volumes:
+      - .:/app
+      - folio-data:/app/data
+      - folio-media:/app/public/media
+    entrypoint: ['node', '--import', 'tsx']
 
 volumes:
   folio-data:

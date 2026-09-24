@@ -1,4 +1,5 @@
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { resendAdapter } from '@payloadcms/email-resend'
 import { en } from '@payloadcms/translations/languages/en'
 import { zh } from '@payloadcms/translations/languages/zh'
 import sharp from 'sharp'
@@ -17,6 +18,7 @@ import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
+import { emailFromAddress, emailFromName } from './utilities/mail'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -68,9 +70,16 @@ export default buildConfig({
   },
   editor: defaultLexical,
   db: sqliteAdapter({
+    // 单实例 SQLite：启动时对齐 globals（如 announcement）表结构，无独立 migrations 目录。
+    push: true,
     client: {
       url: process.env.DATABASE_URL || '',
     },
+  }),
+  email: resendAdapter({
+    defaultFromAddress: emailFromAddress(),
+    defaultFromName: emailFromName(),
+    apiKey: process.env.RESEND_API_KEY || '',
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),

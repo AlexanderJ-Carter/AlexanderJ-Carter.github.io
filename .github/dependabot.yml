@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: 'npm'
-    directory: '/'
+    directory: '/folio'
     schedule:
       interval: 'weekly'
       day: 'monday'
@@ -13,17 +13,15 @@ updates:
     reviewers:
       - 'AlexanderJ-Carter'
     groups:
-      astro-stack:
+      payload:
         patterns:
-          - 'astro'
-          - '@astrojs/*'
-      frontend-tooling:
+          - 'payload'
+          - '@payloadcms/*'
+      next:
         patterns:
-          - 'tailwindcss'
-          - 'postcss'
-          - 'autoprefixer'
-          - 'typescript'
-          - 'prettier'
+          - 'next'
+          - 'react'
+          - 'react-dom'
     allow:
       - dependency-type: 'all'
     commit-message:

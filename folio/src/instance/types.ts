@@ -24,6 +24,18 @@ export type InstanceProject = {
   hrefLabel: string
 }
 
+export type InstanceLifestyleProject = {
+  title: string
+  description: string
+  /** 状态文案，如「进行中」「已完成」 */
+  status: string
+  tags?: string[]
+  href?: string
+  hrefLabel?: string
+  demoHref?: string
+  demoLabel?: string
+}
+
 /** 开源模板可覆盖的实例配置（不含密钥）。密钥只放服务器 .env。 */
 export type FolioInstance = {
   /** 站点显示名 */
@@ -44,6 +56,11 @@ export type FolioInstance = {
     profiles: InstanceLink[]
     publications: InstancePublication[]
     project?: InstanceProject
+  }
+  /** 生活/个人项目（/projects） */
+  projects?: {
+    intro?: string
+    items: InstanceLifestyleProject[]
   }
   /** 安全披露 */
   security: {

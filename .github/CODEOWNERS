@@ -1,14 +1,10 @@
-# CODEOWNERS for this repository
+# CODEOWNERS
 # https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 * @AlexanderJ-Carter
 
-# Security and policy files
 /.github/SECURITY.md @AlexanderJ-Carter
 /.github/workflows/ @AlexanderJ-Carter
-/public/.well-known/ @AlexanderJ-Carter
-
-# Configuration files
-/astro.config.mjs @AlexanderJ-Carter
-/tailwind.config.mjs @AlexanderJ-Carter
-/tsconfig.json @AlexanderJ-Carter
+/folio/ @AlexanderJ-Carter
+/folio/public/.well-known/ @AlexanderJ-Carter
+/gateway/ @AlexanderJ-Carter

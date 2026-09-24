@@ -8,6 +8,7 @@ import { getInstance } from '@/instance'
 const SITE_LINKS = [
   { label: '画廊', href: '/gallery' },
   { label: '研究', href: '/research' },
+  { label: '项目', href: '/projects' },
   { label: '工具', href: '/tools' },
   { label: '玩乐', href: '/fun' },
   { label: '关于', href: '/about' },

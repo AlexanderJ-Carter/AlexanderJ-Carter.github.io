@@ -1,6 +1,6 @@
 # CLAUDE / Agent
 
-主站 `folio/` → www；Pages `gateway/`；`src/` 仅迁移源。
+主站 `folio/` → www；Pages `gateway/`。
 
 - 改站：`folio/src/`。勿删 Folio 安全资产与 `.github/SECURITY.md`。勿提交密钥。
 - 说明：[docs/FOLIO-CUTOVER.md](./docs/FOLIO-CUTOVER.md) · [docs/FOLIO-INSTANCE.md](./docs/FOLIO-INSTANCE.md) · [docs/FOLIO-IA.md](./docs/FOLIO-IA.md)

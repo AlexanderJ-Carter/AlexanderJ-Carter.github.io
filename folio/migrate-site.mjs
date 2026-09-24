@@ -1,10 +1,10 @@
 /**
- * 把静态站内容迁入 Payload：首页 / 关于 / 联系 + zh-CN 写作。
+ * 把内容迁入 Payload：首页 / 关于 / 联系；写作目录可选。
  * 用法（在 folio/ 目录）:
  *   npm run migrate:site
  *   或 PATH=../.tools/node/bin:$PATH node --import tsx migrate-site.mjs
  *
- * WRITING_DIR 指向父仓库 Astro 内容：../src/content/writing（相对 folio/）
+ * 可选 WRITING_DIR：环境变量，或 folio 旁的 archive/writing；缺省则跳过文章导入。
  */
 import 'dotenv/config'
 import fs from 'node:fs'
@@ -15,8 +15,9 @@ import config from './src/payload.config.ts'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
-const WRITING_DIR = path.join(ROOT, 'src/content/writing')
-const HERO_PATH = path.join(ROOT, 'public/img/gallery-optimized/landscape-01-xl.webp')
+const WRITING_DIR =
+  process.env.WRITING_DIR?.trim() || path.join(ROOT, 'archive', 'writing')
+const HERO_PATH = path.join(__dirname, 'public/img/featured/landscape-01.webp')
 
 const LOCALE_SUFFIX = /-(en-GB|zh-TW|fr|ru)\.md$/
 
@@ -334,10 +335,16 @@ async function main() {
 
   console.log('— 分类 …')
   const categoryTitles = new Set()
-  const zhFiles = fs
-    .readdirSync(WRITING_DIR)
-    .filter((f) => f.endsWith('.md') && !LOCALE_SUFFIX.test(f))
-    .sort()
+  const zhFiles = fs.existsSync(WRITING_DIR)
+    ? fs
+        .readdirSync(WRITING_DIR)
+        .filter((f) => f.endsWith('.md') && !LOCALE_SUFFIX.test(f))
+        .sort()
+    : []
+
+  if (!fs.existsSync(WRITING_DIR)) {
+    console.log(`— 跳过写作（无目录 ${WRITING_DIR}）`)
+  }
 
   for (const f of zhFiles) {
     const raw = fs.readFileSync(path.join(WRITING_DIR, f), 'utf8')

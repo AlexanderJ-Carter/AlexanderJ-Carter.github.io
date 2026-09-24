@@ -21,9 +21,8 @@ Fixes #(issue number)
 <!-- Please describe the tests you ran to verify your changes -->
 
 - [ ] Local testing completed
-- [ ] Build passes (`npm run build`)
-- [ ] Type checking passes (`npx astro check`)
-- [ ] Linting passes (`npx prettier --check .`)
+- [ ] Folio build passes (`npm run folio:build` / `pnpm --dir folio build`)
+- [ ] Folio typecheck passes (`pnpm --dir folio exec tsc --noEmit`)
 
 ## Screenshots or Demo
 

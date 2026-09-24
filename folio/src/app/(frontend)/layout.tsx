@@ -18,6 +18,9 @@ import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import { getInstance } from '@/instance'
 
+/** 布局依赖 CMS Globals；构建镜像时库可能未迁全表，禁止静态预渲染整站壳。 */
+export const dynamic = 'force-dynamic'
+
 const display = Syne({
   subsets: ['latin'],
   variable: '--font-display',

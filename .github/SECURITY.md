@@ -8,7 +8,7 @@
 - 优先通过以下任一渠道报告：
   - 参见站点根目录 `/.well-known/security.txt` 中列出的联系方式；
   - 访问 `https://alexander.xin/security/policy`，按照说明使用推荐方式联系；
-  - 如需加密，请使用站点 `public/security/pgp-key.asc` 中的 PGP 公钥。
+  - 如需加密，请使用站点 `folio/public/security/pgp-key.asc` 中的 PGP 公钥。
 
 在报告中请尽量提供：
 

@@ -22,6 +22,10 @@ export const defaultInstance: FolioInstance = {
     publications: [],
     project: undefined,
   },
+  projects: {
+    intro: 'Small tools and personal builds. Research collaborations live on /research.',
+    items: [],
+  },
   security: {
     domains: ['example.com', '*.example.com'],
     contactEmail: 'security@example.com',

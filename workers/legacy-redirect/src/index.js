@@ -2,38 +2,14 @@ import {
   applyApiSecurityHeaders,
   applyPageSecurityHeaders,
   isHtmlContentType,
-} from './security-headers.js';
+} from './security-headers.js'
 
-const LINK =
-  '</.well-known/api-catalog>; rel="api-catalog", </.well-known/mcp/server-card.json>; rel="service-desc", </.well-known/agent-skills/index.json>; rel="describedby", </llms.txt>; rel="describedby", </auth.md>; rel="describedby"';
+/**
+ * Folio 时代：apex 已走 Tunnel→Nginx→Folio。
+ * 本 Worker 只保留旧路径跳转；其余透传到源站。
+ */
 
-const RAW =
-  'https://raw.githubusercontent.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/main/public';
-
-const DISCOVERY_TYPES = {
-  '/.well-known/api-catalog': 'application/linkset+json; charset=utf-8',
-  '/.well-known/oauth-authorization-server': 'application/json; charset=utf-8',
-  '/.well-known/openid-configuration': 'application/json; charset=utf-8',
-  '/.well-known/oauth-protected-resource': 'application/json; charset=utf-8',
-  '/.well-known/jwks.json': 'application/json; charset=utf-8',
-  '/.well-known/mcp/server-card.json': 'application/json; charset=utf-8',
-  '/.well-known/agent-skills/index.json': 'application/json; charset=utf-8',
-  '/.well-known/agent-skills/site-overview/SKILL.md':
-    'text/markdown; charset=utf-8',
-  '/.well-known/security.txt': 'text/plain; charset=utf-8',
-  '/oauth/authorize': 'application/json; charset=utf-8',
-  '/oauth/token': 'application/json; charset=utf-8',
-};
-
-/** Map request path to raw.githubusercontent path under public/. */
-function rawPath(pathname) {
-  if (pathname === '/.well-known/openid-configuration') {
-    return '/.well-known/oauth-authorization-server';
-  }
-  return pathname;
-}
-
-/** Apex writing → blog host (www keeps content; no www↔apex bounce). */
+/** Apex /writing → blog 主机 */
 function writingToBlog(path, search) {
   const prefixes = [
     '/writing',
@@ -41,306 +17,77 @@ function writingToBlog(path, search) {
     '/zh-TW/writing',
     '/fr/writing',
     '/ru/writing',
-  ];
+  ]
   const matches = prefixes.some(
-    (p) => path === p || path === `${p}/` || path.startsWith(`${p}/`)
-  );
-  if (!matches) return null;
+    (p) => path === p || path === `${p}/` || path.startsWith(`${p}/`),
+  )
+  if (!matches) return null
   const normalized =
-    path.endsWith('/') || path.includes('.') ? path : `${path}/`;
-  return `https://blog.alexander.xin${normalized}${search}`;
+    path.endsWith('/') || path.includes('.') ? path : `${path}/`
+  return `https://blog.alexander.xin${normalized}${search}`
 }
 
-/** Ghost-era and short aliases → blog writing paths. */
 function legacyBlogAlias(path) {
-  if (path === '/blog' || path === '/blog/') return '/writing/';
-  if (path === '/subscribe' || path === '/subscribe/') {
-    return '/writing/subscribe/';
-  }
-  const lang = path.match(/^\/(en|zh-TW|fr|ru)\/(blog|subscribe)\/?$/);
-  if (!lang) return null;
-  const prefix = `/${lang[1]}`;
-  return lang[2] === 'blog'
-    ? `${prefix}/writing/`
-    : `${prefix}/writing/subscribe/`;
+  if (path === '/blog' || path === '/blog/') return '/writing/'
+  const lang = path.match(/^\/(en|zh-TW|fr|ru)\/blog\/?$/)
+  if (!lang) return null
+  return `/${lang[1]}/writing/`
 }
 
 export default {
   async fetch(request) {
-    const url = new URL(request.url);
-    const host = url.hostname.toLowerCase();
-    const path = url.pathname;
+    const url = new URL(request.url)
+    const host = url.hostname.toLowerCase()
+    const path = url.pathname
 
     if (host === 'time.alexander.xin') {
-      return Response.redirect('https://alexander.xin/calendar/', 301);
+      return Response.redirect('https://alexander.xin/time', 301)
     }
 
-    if (host === 'alexander.xin') {
-      const blogTarget = writingToBlog(path, url.search);
-      if (blogTarget) return Response.redirect(blogTarget, 301);
-      const alias = legacyBlogAlias(path);
+    if (host === 'alexander.xin' || host === 'www.alexander.xin') {
+      const blogTarget = writingToBlog(path, url.search)
+      if (blogTarget) return Response.redirect(blogTarget, 301)
+      const alias = legacyBlogAlias(path)
       if (alias) {
         return Response.redirect(
           `https://blog.alexander.xin${alias}${url.search}`,
-          301
-        );
+          301,
+        )
       }
     }
 
     const redirects = {
-      '/time.html': 'https://alexander.xin/calendar/',
-      '/zh-CN/profile.html': 'https://alexander.xin/about/',
-      '/en/profile.html': 'https://alexander.xin/en/about/',
-      '/zh-CN/calendar.html': 'https://alexander.xin/calendar/',
-      '/en/calendar-en.html': 'https://alexander.xin/calendar/',
-      '/jp/calendar-jp.html': 'https://alexander.xin/calendar/',
-      '/it/calendar-it.html': 'https://alexander.xin/calendar/',
-    };
-    if (redirects[path]) return Response.redirect(redirects[path], 301);
+      '/time.html': 'https://alexander.xin/time',
+      '/zh-CN/profile.html': 'https://alexander.xin/about',
+      '/en/profile.html': 'https://alexander.xin/about',
+      '/zh-CN/calendar.html': 'https://alexander.xin/time',
+      '/en/calendar-en.html': 'https://alexander.xin/time',
+      '/jp/calendar-jp.html': 'https://alexander.xin/time',
+      '/it/calendar-it.html': 'https://alexander.xin/time',
+    }
+    if (redirects[path]) return Response.redirect(redirects[path], 301)
     if (path.startsWith('/en-GB/')) {
       return Response.redirect(
-        'https://alexander.xin/en' + path.slice(6) + url.search,
-        301
-      );
+        'https://alexander.xin' + path.slice(6) + url.search,
+        301,
+      )
     }
     if (path.startsWith('/en/calendar')) {
-      return Response.redirect('https://alexander.xin/calendar/', 301);
+      return Response.redirect('https://alexander.xin/time', 301)
     }
 
-    const pathname =
-      path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
-    const contentType = DISCOVERY_TYPES[pathname];
-    if (
-      contentType &&
-      (request.method === 'GET' || request.method === 'HEAD')
-    ) {
-      const upstream = await fetch(RAW + rawPath(pathname));
-      if (!upstream.ok) {
-        return new Response('discovery document missing upstream', {
-          status: 502,
-        });
-      }
-      const body = request.method === 'HEAD' ? null : await upstream.text();
-      const discoveryHeaders = new Headers({
-        'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=300',
-      });
-      applyApiSecurityHeaders(discoveryHeaders);
-      return new Response(body, {
-        status: 200,
-        headers: discoveryHeaders,
-      });
-    }
-
-    if (path === '/mcp' || path === '/mcp/') {
-      return handleMcp(request);
-    }
-
-    const accept = request.headers.get('Accept') || '';
-    const wantsMd =
-      accept.includes('text/markdown') && request.method === 'GET';
-    const origin = await fetch(request);
-
-    if (
-      wantsMd &&
-      origin.ok &&
-      (origin.headers.get('Content-Type') || '').includes('text/html')
-    ) {
-      const html = await origin.text();
-      const title =
-        (html.match(/<title[^>]*>([^<]*)<\/title>/i) || [])[1] || url.href;
-      const main =
-        (html.match(/<main[^>]*>([\s\S]*?)<\/main>/i) || [])[1] || html;
-      const text = main
-        .replace(/<script[\s\S]*?<\/script>/gi, '')
-        .replace(/<style[\s\S]*?<\/style>/gi, '')
-        .replace(/<[^>]+>/g, '')
-        .replace(/\n{3,}/g, '\n\n')
-        .trim();
-      const md =
-        '# ' + title.trim() + '\n\nSource: ' + url.href + '\n\n' + text;
-      const mdHeaders = new Headers({
-        'Content-Type': 'text/markdown; charset=utf-8',
-        'x-markdown-tokens': String(Math.ceil(md.length / 4)),
-        Vary: 'Accept',
-        Link: LINK,
-      });
-      applyApiSecurityHeaders(mdHeaders);
-      return new Response(md, {
-        status: 200,
-        headers: mdHeaders,
-      });
-    }
-
-    const headers = new Headers(origin.headers);
-    if (pathname === '/') headers.set('Link', LINK);
+    // 其余：透传 Folio / 其它源站
+    const origin = await fetch(request)
+    const headers = new Headers(origin.headers)
     if (isHtmlContentType(headers.get('Content-Type'))) {
-      applyPageSecurityHeaders(headers);
+      applyPageSecurityHeaders(headers)
     } else {
-      applyApiSecurityHeaders(headers);
+      applyApiSecurityHeaders(headers)
     }
     return new Response(origin.body, {
       status: origin.status,
       statusText: origin.statusText,
       headers,
-    });
+    })
   },
-};
-
-async function handleMcp(request) {
-  const cors = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers':
-      'Content-Type, Accept, MCP-Protocol-Version',
-  };
-
-  const mcpHeaders = () => {
-    const headers = new Headers(cors);
-    applyApiSecurityHeaders(headers);
-    return headers;
-  };
-
-  const mcpJson = (body, status = 200) => {
-    const headers = mcpHeaders();
-    headers.set('Content-Type', 'application/json; charset=utf-8');
-    return new Response(JSON.stringify(body), { status, headers });
-  };
-
-  if (request.method === 'GET') {
-    return mcpJson({
-      protocolVersion: '2025-03-26',
-      serverInfo: { name: 'alexander.xin', version: '1.0.0' },
-      capabilities: { tools: {} },
-    });
-  }
-  if (request.method === 'OPTIONS') {
-    return new Response(null, { status: 204, headers: mcpHeaders() });
-  }
-  if (request.method !== 'POST') {
-    return mcpJson({ error: 'method_not_allowed' }, 405);
-  }
-
-  const declared = Number(request.headers.get('content-length') || '0');
-  if (declared > 32 * 1024) {
-    return mcpJson(
-      {
-        jsonrpc: '2.0',
-        error: { code: -32700, message: 'Parse error' },
-        id: null,
-      },
-      413
-    );
-  }
-  const raw = await request.text();
-  if (raw.length > 32 * 1024) {
-    return mcpJson(
-      {
-        jsonrpc: '2.0',
-        error: { code: -32700, message: 'Parse error' },
-        id: null,
-      },
-      413
-    );
-  }
-
-  let msg;
-  try {
-    msg = JSON.parse(raw);
-  } catch {
-    return mcpJson(
-      {
-        jsonrpc: '2.0',
-        error: { code: -32700, message: 'Parse error' },
-        id: null,
-      },
-      400
-    );
-  }
-
-  const id = msg && typeof msg === 'object' ? (msg.id ?? null) : null;
-  if (!msg || typeof msg !== 'object' || typeof msg.method !== 'string') {
-    return mcpJson(
-      {
-        jsonrpc: '2.0',
-        id,
-        error: { code: -32600, message: 'Invalid Request' },
-      },
-      400
-    );
-  }
-
-  if (msg.method === 'initialize') {
-    return mcpJson({
-      jsonrpc: '2.0',
-      id,
-      result: {
-        protocolVersion: '2025-03-26',
-        capabilities: { tools: {} },
-        serverInfo: { name: 'alexander.xin', version: '1.0.0' },
-      },
-    });
-  }
-  if (msg.method === 'notifications/initialized' || msg.method === 'ping') {
-    return mcpJson({ jsonrpc: '2.0', id, result: {} });
-  }
-  if (msg.method === 'tools/list') {
-    return mcpJson({
-      jsonrpc: '2.0',
-      id,
-      result: {
-        tools: [
-          {
-            name: 'get_site_info',
-            description: 'Site discovery metadata',
-            inputSchema: { type: 'object', properties: {} },
-          },
-          {
-            name: 'get_time_now',
-            description: 'Asia/Shanghai time',
-            inputSchema: { type: 'object', properties: {} },
-          },
-        ],
-      },
-    });
-  }
-  if (msg.method === 'tools/call' && msg.params?.name === 'get_time_now') {
-    const r = await fetch('https://api.alexander.xin/time/now');
-    const t = await r.text();
-    return mcpJson({
-      jsonrpc: '2.0',
-      id,
-      result: { content: [{ type: 'text', text: t }], isError: !r.ok },
-    });
-  }
-  if (msg.method === 'tools/call' && msg.params?.name === 'get_site_info') {
-    return mcpJson({
-      jsonrpc: '2.0',
-      id,
-      result: {
-        content: [
-          {
-            type: 'text',
-            text: JSON.stringify(
-              {
-                site: 'https://alexander.xin',
-                llmsTxt: 'https://alexander.xin/llms.txt',
-                authMd: 'https://alexander.xin/auth.md',
-                apiCatalog: 'https://alexander.xin/.well-known/api-catalog',
-                mcpServerCard:
-                  'https://alexander.xin/.well-known/mcp/server-card.json',
-              },
-              null,
-              2
-            ),
-          },
-        ],
-      },
-    });
-  }
-  return mcpJson({
-    jsonrpc: '2.0',
-    id,
-    error: { code: -32601, message: 'Method not found' },
-  });
 }
