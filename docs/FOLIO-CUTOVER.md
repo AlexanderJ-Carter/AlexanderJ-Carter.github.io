@@ -22,15 +22,16 @@
 在 Cloudflare 对 zone `alexander.xin` 完成：
 
 1. **`www` / `@`**：均 CNAME → 同一 Tunnel，Proxied  
-2. **Redirect Rule**：`www.alexander.xin` → `https://alexander.xin${path}`（301）  
-3. **Tunnel ingress**：含 `alexander.xin` 与 `www.alexander.xin` → 源站 HTTP（Nginx）  
-4. **Workers**：仅保留 `legacy-redirect`（`alexander.xin/*`）：旧路径跳转（含 `/writing*`→blog），其余透传 Folio 并补安全头  
-5. **NginxUI（cloud）** 站点 **Web**：`server_name alexander.xin www.alexander.xin`，`proxy_pass http://tencent-cloud:3040`。勿让 **Blog** 成为隐式 default（否则裸域名会 301 `/writing/`）  
-6. 实例 `.env.production`：`NEXT_PUBLIC_SERVER_URL=https://alexander.xin`、`FOLIO_PUBLISH=<tailscale>:3040`，再 `compose --env-file .env.production …`  
-
+2. **Redirect Rules**（`scripts/provision-folio-apex.mjs`）：  
+   - `www` → `https://alexander.xin${path}`（保留 query）  
+   - `about` / `bio` → `/about`；`contact` → `/contact`；`time` → `/time`  
+3. **别名 DNS**：`about` / `bio` / `contact` / `time` 用 **AAAA `100::`**（橙云，仅边缘跳转，不经 Tunnel）  
+4. **Tunnel ingress**：含 `alexander.xin` 与 `www.alexander.xin` → 源站 HTTP（Nginx）  
+5. **Workers**：仅 `legacy-redirect` 挂 `alexander.xin/*`（`/writing*`→blog、旧 HTML 路径、透传 + 安全头）  
+6. **NginxUI（cloud）** 站点 **Web**：`server_name alexander.xin www.alexander.xin`，`proxy_pass http://tencent-cloud:3040`  
+7. 实例 `.env.production`：`NEXT_PUBLIC_SERVER_URL=https://alexander.xin`、`FOLIO_PUBLISH=<tailscale>:3040`，再 `compose --env-file .env.production …`  
 
 脚本：`scripts/provision-folio-apex.mjs`（DNS+Redirect）、`scripts/upload-legacy-redirect.mjs`（Worker）。  
-未改 DNS 前可用 `www` 验收。
 
 ## 改哪里（仓库）
 

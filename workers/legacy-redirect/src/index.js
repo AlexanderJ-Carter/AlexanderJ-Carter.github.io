@@ -6,10 +6,10 @@ import {
 
 /**
  * Folio 时代：apex 已走 Tunnel→Nginx→Folio。
- * 本 Worker 只保留旧路径跳转；其余透传到源站。
+ * 本 Worker 只保留旧路径跳转；其余透传到源站并补安全头。
+ * 主机别名（about/bio/contact/time/www）由 Cloudflare Redirect Rules 处理。
  */
 
-/** Apex /writing → blog 主机 */
 function writingToBlog(path, search) {
   const prefixes = [
     '/writing',
@@ -37,23 +37,17 @@ function legacyBlogAlias(path) {
 export default {
   async fetch(request) {
     const url = new URL(request.url)
-    const host = url.hostname.toLowerCase()
     const path = url.pathname
 
-    if (host === 'time.alexander.xin') {
-      return Response.redirect('https://alexander.xin/time', 301)
-    }
+    const blogTarget = writingToBlog(path, url.search)
+    if (blogTarget) return Response.redirect(blogTarget, 301)
 
-    if (host === 'alexander.xin' || host === 'www.alexander.xin') {
-      const blogTarget = writingToBlog(path, url.search)
-      if (blogTarget) return Response.redirect(blogTarget, 301)
-      const alias = legacyBlogAlias(path)
-      if (alias) {
-        return Response.redirect(
-          `https://blog.alexander.xin${alias}${url.search}`,
-          301,
-        )
-      }
+    const alias = legacyBlogAlias(path)
+    if (alias) {
+      return Response.redirect(
+        `https://blog.alexander.xin${alias}${url.search}`,
+        301,
+      )
     }
 
     const redirects = {
@@ -76,7 +70,6 @@ export default {
       return Response.redirect('https://alexander.xin/time', 301)
     }
 
-    // 其余：透传 Folio / 其它源站
     const origin = await fetch(request)
     const headers = new Headers(origin.headers)
     if (isHtmlContentType(headers.get('Content-Type'))) {

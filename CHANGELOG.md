@@ -18,6 +18,7 @@
 - 主站以 Folio（`folio/`）为准；正典域名设计为 apex，www 同源后 301
 - CI 以 Folio typecheck 为门禁；文档为 CUTOVER / INSTANCE / IA
 - 页脚与曝光表跳转（世界时间）调整
+- 边缘：`about`/`bio`/`contact`/`time` 改 Redirect Rules + AAAA `100::`；去掉 `writing-redirect` / `redirect-profile` / `redirect-contact`
 
 ### Removed
 
