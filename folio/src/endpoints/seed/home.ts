@@ -131,7 +131,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: 'AgentSociety2，以及美团实习。站外还有 MyCook、Gitea 与 IT-Tools，本站只做入口。',
+                        text: '写作与摄影之外，也在做 LLM Agent 相关公开研究。站外还有 MyCook、Gitea 与 IT-Tools，本站只做入口。',
                         version: 1,
                       },
                     ],

@@ -36,7 +36,8 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong>访客验证 Cookie</strong>：通过 Gate 后写入 <code>folio_verify</code>（约 7
-                天，HttpOnly），仅用于放行 <code>/about</code>、<code>/contact</code>。
+                天，HttpOnly），用于放行个人简介 <code>/about</code> 与 <code>/contact</code>
+                ；这两页不对搜索引擎编入索引。公开研究见 <code>/research</code>。
               </li>
               <li>
                 <strong>主题偏好</strong>：深浅色等保存在浏览器本地存储。

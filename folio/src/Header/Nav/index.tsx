@@ -13,6 +13,7 @@ import { cn } from '@/utilities/ui'
 const FALLBACK_NAV = [
   { label: '写作', url: '/posts' },
   { label: '画廊', url: '/gallery' },
+  { label: '研究', url: '/research' },
   { label: '玩乐', url: '/fun' },
   { label: '关于', url: '/about' },
   { label: '联系', url: '/contact' },

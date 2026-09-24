@@ -40,11 +40,25 @@ const getPagesSitemap = unstable_cache(
         loc: `${SITE_URL}/posts`,
         lastmod: dateFallback,
       },
+      {
+        loc: `${SITE_URL}/research`,
+        lastmod: dateFallback,
+      },
+      {
+        loc: `${SITE_URL}/gallery`,
+        lastmod: dateFallback,
+      },
+      {
+        loc: `${SITE_URL}/fun`,
+        lastmod: dateFallback,
+      },
     ]
+
+    const gated = new Set(['about', 'contact'])
 
     const sitemap = results.docs
       ? results.docs
-          .filter((page) => Boolean(page?.slug))
+          .filter((page) => Boolean(page?.slug) && !gated.has(String(page.slug)))
           .map((page) => {
             return {
               loc: page?.slug === 'home' ? `${SITE_URL}/` : `${SITE_URL}/${page?.slug}`,

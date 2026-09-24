@@ -9,17 +9,17 @@ export function ResearchStrip() {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <h2 id="research-heading" className="text-2xl md:text-3xl tracking-tight font-semibold">
-              AgentSociety
+              论文与研究
             </h2>
             <p className="mt-2 text-muted-foreground text-sm md:text-base leading-relaxed">
-              清华 FIB Lab 协作：LLM 社会智能体与可执行社会科学。扩展、文档与社会人仿真技能。
+              公开列出 arXiv / 会议论文与项目入口；个人履历不在首页展开。
             </p>
           </div>
           <Link
-            href="/about"
+            href="/research"
             className="text-sm shrink-0 text-foreground/85 hover:text-primary transition-colors"
           >
-            研究档案 →
+            查看论文 →
           </Link>
         </div>
       </div>

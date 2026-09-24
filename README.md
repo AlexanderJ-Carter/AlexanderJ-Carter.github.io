@@ -50,9 +50,10 @@ npm run legacy:build
 |------|------|------|
 | 首页 | `/` | 暗房英雄与导览 |
 | 写作 | `/posts` | CMS 文章（旧 `/writing` 301 至此） |
+| 研究 | `/research` | 公开论文列表（对齐 GitHub 主页）；个人履历不在此 |
 | 画廊 | `/gallery` | 摄影 contact sheet |
 | 玩乐 | `/fun` | 小工具 |
-| 关于 / 联系 | `/about` `/contact` | CMS 页；经 Turnstile Gate |
+| 关于 / 联系 | `/about` `/contact` | CMS 履历与留言；Turnstile Gate + noindex |
 | 隐私 / 条款 | `/privacy` `/terms` | 静态法律页 |
 | 安全 | `/security/policy` | 披露政策；另有 security.txt |
 | 后台 | `/admin` | Pocket ID 登录 |

@@ -12,6 +12,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
 import { MethodStrip } from '@/components/MethodStrip'
 import { PoemHistory } from '@/components/PoemHistory'
+import { Publications } from '@/components/Publications'
 import { ResearchStrip } from '@/components/ResearchStrip'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
@@ -98,6 +99,11 @@ export default async function Page({ params: paramsPromise }: Args) {
         </>
       )}
       <RenderBlocks blocks={layout} />
+      {decodedSlug === 'about' && (
+        <div className="container max-w-4xl">
+          <Publications compact />
+        </div>
+      )}
     </article>
   )
 }

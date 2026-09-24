@@ -601,3 +601,27 @@ h3 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+.pub-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+  border-radius: 2px;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  color: var(--foreground);
+  background: color-mix(in oklab, var(--card) 70%, transparent);
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.pub-chip:hover {
+  border-color: color-mix(in oklab, var(--primary) 45%, var(--border));
+  color: var(--primary);
+}
+
+.pub-chip:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}

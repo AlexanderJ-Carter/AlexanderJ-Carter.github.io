@@ -16,8 +16,9 @@ export function middleware(request: NextRequest) {
   const verified = request.cookies.get(VERIFY_COOKIE)?.value === '1'
   if (verified) {
     const res = NextResponse.next()
-    // 受门禁页面按访客 cookie 分流，禁止 CDN 把 307/200 缓存串台
+    // 受门禁页面按访客 cookie 分流，禁止 CDN 把 307/200 缓存串台；履历页不对搜索引擎公开
     res.headers.set('Cache-Control', 'private, no-store')
+    res.headers.set('X-Robots-Tag', 'noindex, nofollow')
     return res
   }
 
@@ -27,6 +28,7 @@ export function middleware(request: NextRequest) {
   url.searchParams.set('next', pathname + request.nextUrl.search)
   const res = NextResponse.redirect(url)
   res.headers.set('Cache-Control', 'private, no-store')
+  res.headers.set('X-Robots-Tag', 'noindex, nofollow')
   return res
 }
 

@@ -37,6 +37,7 @@ async function main() {
       navItems: [
         { link: { type: 'custom', label: '写作', url: '/posts' } },
         { link: { type: 'custom', label: '画廊', url: '/gallery' } },
+        { link: { type: 'custom', label: '研究', url: '/research' } },
         { link: { type: 'custom', label: '玩乐', url: '/fun' } },
         {
           link: {
@@ -63,6 +64,7 @@ async function main() {
       navItems: [
         { link: { type: 'custom', label: '写作', url: '/posts' } },
         { link: { type: 'custom', label: '画廊', url: '/gallery' } },
+        { link: { type: 'custom', label: '研究', url: '/research' } },
         { link: { type: 'custom', label: '玩乐', url: '/fun' } },
         {
           link: {
