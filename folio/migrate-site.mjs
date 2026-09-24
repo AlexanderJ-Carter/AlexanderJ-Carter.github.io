@@ -576,28 +576,21 @@ async function main() {
       hero: {
         type: 'lowImpact',
         richText: richRoot([
-          heading('h1', '黄皓宇'),
-          paragraph([text('清华大学电子工程系本科生，关注 LLM Agent 与可执行社会科学。')]),
+          heading('h1', 'About'),
+          paragraph([text('Replace this page in CMS with your own bio (keep it behind the visitor gate).')]),
         ]),
       },
       layout: [
-        contentBlock('你好', [
-          '我是黄皓宇，目前就读于清华大学电子工程系。学习和研究之外，我喜欢摄影、音乐和游泳，也在持续维护这个个人网站。',
-          '我的研究兴趣主要是 LLM Agent、多智能体系统，以及 AI 如何用于社会科学研究。',
+        contentBlock('Hello', [
+          'This is placeholder about content from migrate-site. Edit in Admin after import.',
         ]),
-        contentBlock('学习与兴趣', [
-          '教育：清华大学电子工程系 · 电子信息科学与技术 · 2023–2027（在读）',
-          '兴趣：LLM Agent、多智能体系统、AI for Social Science、摄影、音乐、游泳。',
-        ]),
-        contentBlock('研究', [
-          '参与多智能体社会模拟相关系统的设计与实现，希望把社会科学问题转化为可运行、可复查的研究流程。',
-          '代表工作见本页下方论文列表，或公开页 /research（与 GitHub 主页对齐）。',
-          '更细的教育与经历仅在本门禁页展示，请勿对外转发完整截图。',
+        contentBlock('Research', [
+          'Public papers belong in instance/config.json → research.publications, not in this CMS blurb.',
         ]),
       ],
       meta: {
-        title: '关于',
-        description: '清华大学电子工程系本科生，关注 LLM Agent 与可执行社会科学。',
+        title: 'About',
+        description: 'Personal bio (gated).',
         image: heroImage.id,
       },
     },
