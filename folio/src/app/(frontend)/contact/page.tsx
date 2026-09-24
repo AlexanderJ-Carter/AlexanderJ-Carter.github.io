@@ -32,14 +32,14 @@ export default async function ContactPage() {
 
   return (
     <PageChrome
-      mark="Folio Contact"
-      kicker="Contact"
+      mark="联系"
+      kicker="留言"
       title="联系"
       description="合作、反馈或打个招呼都可以。"
     >
       <div className="container grid gap-12 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
-          <p className="folio-mark mb-4">Details</p>
+          <p className="folio-mark mb-4">方式</p>
           <dl className="divide-y divide-border border-y border-border">
             <div className="grid gap-1 py-5 sm:grid-cols-[6.5rem_1fr] sm:gap-4">
               <dt className="text-sm font-medium">邮箱</dt>
@@ -83,7 +83,7 @@ export default async function ContactPage() {
         </div>
 
         <div className="lg:col-span-7">
-          <p className="folio-mark mb-4">Message</p>
+          <p className="folio-mark mb-4">留言</p>
           <h2 className="mb-6 text-xl font-semibold tracking-tight">发一封短讯</h2>
           {formDoc ? (
             <FormBlock

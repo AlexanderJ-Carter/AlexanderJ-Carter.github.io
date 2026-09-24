@@ -65,7 +65,7 @@ export function SiteAnnouncement({ data }: { data: AnnouncementData | null | und
     >
       <div className="container flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
         <div className="min-w-0">
-          <p className="folio-mark mb-1">Notice</p>
+          <p className="folio-mark mb-1">公告</p>
           <p className="text-sm font-medium tracking-tight">{data.title}</p>
           <p className="mt-0.5 text-sm text-muted-foreground leading-relaxed">{data.body}</p>
         </div>

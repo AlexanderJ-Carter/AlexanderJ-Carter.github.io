@@ -14,7 +14,7 @@ const frames = [
   },
   {
     src: '/img/featured/food-01.webp',
-    title: '精致甜点',
+    title: '桌上的光',
     category: '美食',
   },
 ]
