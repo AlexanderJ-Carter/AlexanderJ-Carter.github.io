@@ -12,7 +12,9 @@ async function main() {
   const payload = await getPayload({ config })
   const found = await payload.find({
     collection: 'forms',
-    where: { title: { equals: 'Contact Form' } },
+    where: {
+      or: [{ title: { equals: 'Contact Form' } }, { title: { equals: '联系表单' } }],
+    },
     limit: 1,
     overrideAccess: true,
   })

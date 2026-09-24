@@ -24,9 +24,11 @@ export default async function ContactPage() {
   const payload = await getPayload({ config: configPromise })
   const forms = await payload.find({
     collection: 'forms',
-    where: { title: { equals: 'Contact Form' } },
+    where: {
+      or: [{ title: { equals: 'Contact Form' } }, { title: { equals: '联系表单' } }],
+    },
     limit: 1,
-    depth: 0,
+    depth: 2,
   })
   const formDoc = forms.docs[0]
 
@@ -86,15 +88,19 @@ export default async function ContactPage() {
           <p className="folio-mark mb-4">留言</p>
           <h2 className="mb-6 text-xl font-semibold tracking-tight">发一封短讯</h2>
           {formDoc ? (
-            <FormBlock
-              bare
-              enableIntro={false}
-              form={formDoc as unknown as FormType}
-            />
+            <FormBlock bare enableIntro={false} form={formDoc as unknown as FormType} />
           ) : (
-            <p className="border border-border px-4 py-6 text-sm text-muted-foreground">
-              联系表单尚未配置。请在后台创建表单「Contact Form」，或运行 seed / migrate。
-            </p>
+            <div className="rounded-sm border border-border/80 bg-muted/30 px-5 py-8">
+              <p className="text-sm leading-relaxed text-foreground/85">
+                表单暂时歇着。直接写信也行：
+              </p>
+              <a
+                className="mt-4 inline-flex text-sm font-medium underline underline-offset-4 hover:text-primary"
+                href={`mailto:${email}`}
+              >
+                {email}
+              </a>
+            </div>
           )}
         </div>
       </div>
