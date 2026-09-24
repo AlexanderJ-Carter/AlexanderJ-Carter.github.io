@@ -22,12 +22,17 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
-    meta: {
-      titleSuffix: ' · Folio',
-    },
     components: {
       beforeLogin: ['@/components/BeforeLogin'],
       beforeDashboard: ['@/components/BeforeDashboard'],
+      graphics: {
+        Logo: '@/components/AdminLogo',
+        Icon: '@/components/AdminIcon',
+      },
+    },
+    meta: {
+      titleSuffix: ' · Folio',
+      description: 'Alexander Carter Folio 工作台',
     },
     importMap: {
       baseDir: path.resolve(dirname),

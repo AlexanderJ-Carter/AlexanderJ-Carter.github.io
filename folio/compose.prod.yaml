@@ -4,6 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SERVER_URL: https://www.alexander.xin
+        NEXT_PUBLIC_OIDC_LOGIN_URL: /api/oidc/login
     image: folio:local
     container_name: folio
     restart: unless-stopped

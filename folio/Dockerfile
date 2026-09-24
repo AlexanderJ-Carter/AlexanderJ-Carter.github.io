@@ -16,7 +16,11 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 ENV PAYLOAD_SECRET=build-time-placeholder-change-me
 ENV DATABASE_URL=file:/app/data/folio.db
-ENV NEXT_PUBLIC_SERVER_URL=https://www.alexander.xin
+# NEXT_PUBLIC_* must be present at build time for the admin client bundle.
+ARG NEXT_PUBLIC_SERVER_URL=https://www.alexander.xin
+ENV NEXT_PUBLIC_SERVER_URL=$NEXT_PUBLIC_SERVER_URL
+ARG NEXT_PUBLIC_OIDC_LOGIN_URL=/api/oidc/login
+ENV NEXT_PUBLIC_OIDC_LOGIN_URL=$NEXT_PUBLIC_OIDC_LOGIN_URL
 RUN mkdir -p /app/data /app/public/media \
   && if [ -f /app/seed-data/folio.db ]; then cp /app/seed-data/folio.db /app/data/folio.db; fi \
   && corepack enable \
