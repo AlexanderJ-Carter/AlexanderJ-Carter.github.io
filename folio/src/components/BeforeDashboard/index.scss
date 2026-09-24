@@ -6,19 +6,75 @@
   &__banner {
     & h4 {
       margin: 0;
+      letter-spacing: -0.02em;
     }
   }
 
-  &__instructions {
-    list-style: decimal;
-    margin-bottom: base(0.5);
+  &__grid {
+    display: grid;
+    gap: base(1);
+    grid-template-columns: 1fr;
 
-    & li {
-      width: 100%;
+    @include mid-break {
+      grid-template-columns: 1fr 1fr;
     }
   }
 
-  & a:hover {
-    opacity: 0.85;
+  section {
+    padding: base(0.85) base(1);
+    border: 1px solid var(--theme-elevation-150);
+    border-radius: 3px;
+    background: var(--theme-elevation-50);
+    transition: border-color 160ms ease, background-color 160ms ease;
+
+    &:hover {
+      border-color: var(--theme-elevation-250);
+      background: var(--theme-elevation-100);
+    }
+  }
+
+  h5 {
+    margin: 0 0 base(0.5);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--theme-elevation-600);
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    margin: 0 0 base(0.35);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: var(--theme-elevation-800);
+  }
+
+  a {
+    color: var(--theme-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 160ms ease, opacity 160ms ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--theme-success-500);
+      outline-offset: 2px;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard .before-dashboard section,
+  .dashboard .before-dashboard a {
+    transition: none;
   }
 }

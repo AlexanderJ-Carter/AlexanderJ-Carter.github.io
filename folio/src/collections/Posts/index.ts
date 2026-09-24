@@ -84,6 +84,7 @@ export const Posts: CollectionConfig<'posts'> = {
             {
               name: 'heroImage',
               type: 'upload',
+              label: '封面图',
               relationTo: 'media',
             },
             {
@@ -101,17 +102,18 @@ export const Posts: CollectionConfig<'posts'> = {
                   ]
                 },
               }),
-              label: false,
+              label: '正文',
               required: true,
             },
           ],
-          label: 'Content',
+          label: '正文',
         },
         {
           fields: [
             {
               name: 'relatedPosts',
               type: 'relationship',
+              label: '相关文章',
               admin: {
                 position: 'sidebar',
               },
@@ -128,6 +130,7 @@ export const Posts: CollectionConfig<'posts'> = {
             {
               name: 'categories',
               type: 'relationship',
+              label: '分类',
               admin: {
                 position: 'sidebar',
               },
@@ -135,7 +138,7 @@ export const Posts: CollectionConfig<'posts'> = {
               relationTo: 'categories',
             },
           ],
-          label: 'Meta',
+          label: '元数据',
         },
         {
           name: 'meta',

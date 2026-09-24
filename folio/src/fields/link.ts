@@ -6,11 +6,11 @@ export type LinkAppearances = 'default' | 'outline'
 
 export const appearanceOptions: Record<LinkAppearances, { label: string; value: string }> = {
   default: {
-    label: 'Default',
+    label: '实心',
     value: 'default',
   },
   outline: {
-    label: 'Outline',
+    label: '描边',
     value: 'outline',
   },
 }
@@ -25,6 +25,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
   const linkResult: GroupField = {
     name: 'link',
     type: 'group',
+    label: '链接',
     admin: {
       hideGutter: true,
     },
@@ -35,6 +36,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
           {
             name: 'type',
             type: 'radio',
+            label: '类型',
             admin: {
               layout: 'horizontal',
               width: '50%',
@@ -42,11 +44,11 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
             defaultValue: 'reference',
             options: [
               {
-                label: 'Internal link',
+                label: '站内文档',
                 value: 'reference',
               },
               {
-                label: 'Custom URL',
+                label: '自定义 URL',
                 value: 'custom',
               },
             ],
@@ -60,7 +62,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
               },
               width: '50%',
             },
-            label: 'Open in new tab',
+            label: '新标签打开',
           },
         ],
       },
@@ -74,7 +76,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       admin: {
         condition: (_, siblingData) => siblingData?.type === 'reference',
       },
-      label: 'Document to link to',
+      label: '关联文档',
       relationTo: ['pages', 'posts'],
       required: true,
     },
@@ -84,7 +86,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       admin: {
         condition: (_, siblingData) => siblingData?.type === 'custom',
       },
-      label: 'Custom URL',
+      label: 'URL',
       required: true,
     },
   ]
@@ -108,7 +110,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
           admin: {
             width: '50%',
           },
-          label: 'Label',
+          label: '显示文案',
           required: true,
         },
       ],
@@ -127,8 +129,9 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
     linkResult.fields.push({
       name: 'appearance',
       type: 'select',
+      label: '样式',
       admin: {
-        description: 'Choose how the link should be rendered.',
+        description: '按钮在前台的呈现方式。',
       },
       defaultValue: 'default',
       options: appearanceOptionsToUse,

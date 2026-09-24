@@ -70,13 +70,14 @@ export const Pages: CollectionConfig<'pages'> = {
       tabs: [
         {
           fields: [hero],
-          label: 'Hero',
+          label: '首屏',
         },
         {
           fields: [
             {
               name: 'layout',
               type: 'blocks',
+              label: '版面区块',
               blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
               required: true,
               admin: {
@@ -84,7 +85,7 @@ export const Pages: CollectionConfig<'pages'> = {
               },
             },
           ],
-          label: 'Content',
+          label: '正文',
         },
         {
           name: 'meta',
@@ -118,6 +119,7 @@ export const Pages: CollectionConfig<'pages'> = {
     {
       name: 'publishedAt',
       type: 'date',
+      label: '发布时间',
       admin: {
         position: 'sidebar',
       },

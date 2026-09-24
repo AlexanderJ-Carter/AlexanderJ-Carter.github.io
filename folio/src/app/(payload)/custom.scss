@@ -299,3 +299,31 @@ html:has(.folio-login) .wrap {
   font-weight: 700;
   letter-spacing: 0.04em;
 }
+
+/* 后台壳：侧栏与列表的轻交互动效（兼容深浅色变量） */
+.nav-group__toggle,
+.nav .nav__link {
+  transition: color 160ms ease, background-color 160ms ease, opacity 160ms ease;
+}
+
+.nav .nav__link:hover {
+  opacity: 0.88;
+}
+
+.nav .nav__link:focus-visible {
+  outline: 2px solid var(--theme-success-500, #3d8b6e);
+  outline-offset: 2px;
+}
+
+.table tbody tr {
+  transition: background-color 140ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-group__toggle,
+  .nav .nav__link,
+  .table tbody tr {
+    transition: none !important;
+  }
+}
+

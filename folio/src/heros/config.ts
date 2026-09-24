@@ -17,22 +17,22 @@ export const hero: Field = {
       name: 'type',
       type: 'select',
       defaultValue: 'lowImpact',
-      label: 'Type',
+      label: '首屏样式',
       options: [
         {
-          label: 'None',
+          label: '无',
           value: 'none',
         },
         {
-          label: 'High Impact',
+          label: '高冲击（全屏图）',
           value: 'highImpact',
         },
         {
-          label: 'Medium Impact',
+          label: '中冲击',
           value: 'mediumImpact',
         },
         {
-          label: 'Low Impact',
+          label: '低冲击',
           value: 'lowImpact',
         },
       ],
@@ -51,16 +51,18 @@ export const hero: Field = {
           ]
         },
       }),
-      label: false,
+      label: '首屏文案',
     },
     linkGroup({
       overrides: {
         maxRows: 2,
+        label: '按钮',
       },
     }),
     {
       name: 'media',
       type: 'upload',
+      label: '主图',
       admin: {
         condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
       },
@@ -68,5 +70,5 @@ export const hero: Field = {
       required: true,
     },
   ],
-  label: false,
+  label: '首屏',
 }

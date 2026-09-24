@@ -14,13 +14,17 @@ export const FormBlock: Block = {
     {
       name: 'form',
       type: 'relationship',
+      label: '表单',
       relationTo: 'forms',
       required: true,
+      admin: {
+        description: '选择「运营 → 表单」里建好的表单（如联系表单）。',
+      },
     },
     {
       name: 'enableIntro',
       type: 'checkbox',
-      label: 'Enable Intro Content',
+      label: '显示引言',
     },
     {
       name: 'introContent',
@@ -38,14 +42,14 @@ export const FormBlock: Block = {
           ]
         },
       }),
-      label: 'Intro Content',
+      label: '引言内容',
     },
   ],
   graphQL: {
     singularName: 'FormBlock',
   },
   labels: {
-    plural: 'Form Blocks',
-    singular: 'Form Block',
+    plural: '表单区块',
+    singular: '表单区块',
   },
 }
