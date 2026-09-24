@@ -8,6 +8,7 @@ import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
 import { SearchIcon } from 'lucide-react'
 import { cn } from '@/utilities/ui'
+import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 /** CMS 为空时的回退导航（与 configure-nav.mjs 对齐） */
 const FALLBACK_NAV = [
@@ -66,6 +67,11 @@ export const HeaderNav: React.FC<{ data: HeaderType; overHero?: boolean }> = ({
         <SearchIcon className="size-3.5 opacity-80" aria-hidden />
         <span className="sr-only md:not-sr-only">搜索</span>
       </Link>
+      <span
+        aria-hidden
+        className={cn('mx-1.5 hidden h-3 w-px sm:inline-block', overHero ? 'bg-white/35' : 'bg-border')}
+      />
+      <ThemeSelector overHero={overHero} />
     </nav>
   )
 }

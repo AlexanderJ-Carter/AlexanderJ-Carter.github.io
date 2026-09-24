@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { getInstance } from '@/instance'
 
 /** 页脚本站链接：与主导航对齐，不读 CMS，避免重复/过时项 */
@@ -76,7 +75,7 @@ export async function Footer() {
             <p>
               © {new Date().getFullYear()} {instance.siteName}
             </p>
-            <nav className="flex flex-wrap items-center gap-x-4 gap-y-2" aria-label="法律与外观">
+            <nav className="flex flex-wrap items-center gap-x-4 gap-y-2" aria-label="法律">
               <Link className="transition-colors hover:text-foreground" href="/privacy">
                 隐私
               </Link>
@@ -89,10 +88,6 @@ export async function Footer() {
               <Link className="transition-colors hover:text-foreground" href="/admin">
                 管理
               </Link>
-              <span className="hidden h-3 w-px bg-border sm:inline-block" aria-hidden />
-              <span className="[&_button]:h-auto [&_button]:border-0 [&_button]:bg-transparent [&_button]:px-0 [&_button]:text-xs [&_button]:text-muted-foreground [&_button]:shadow-none [&_button]:hover:text-foreground [&_span]:text-muted-foreground">
-                <ThemeSelector />
-              </span>
             </nav>
           </div>
         </div>
