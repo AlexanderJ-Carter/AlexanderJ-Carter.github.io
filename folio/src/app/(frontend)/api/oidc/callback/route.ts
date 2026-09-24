@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { getPayload, generatePayloadCookie, getFieldsToSign, jwtSign } from 'payload'
 import config from '@payload-config'
+import { getServerSideURL } from '@/utilities/getURL'
 
 type TokenSet = {
   access_token: string
@@ -18,6 +19,22 @@ function requireEnv(name: string): string {
   const value = process.env[name]
   if (!value) throw new Error(`缺少环境变量 ${name}`)
   return value
+}
+
+/** 公网站点根，禁止用 request.url（容器里会变成 http://0.0.0.0:3000） */
+function publicOrigin(): string {
+  const fromEnv = (process.env.NEXT_PUBLIC_SERVER_URL || getServerSideURL() || '').replace(
+    /\/$/,
+    '',
+  )
+  if (fromEnv && !/0\.0\.0\.0|127\.0\.0\.1|localhost/i.test(fromEnv)) {
+    return fromEnv
+  }
+  return 'https://www.alexander.xin'
+}
+
+function siteRedirect(path: string) {
+  return NextResponse.redirect(new URL(path, `${publicOrigin()}/`))
 }
 
 async function discovery() {
@@ -43,7 +60,7 @@ export async function GET(request: Request) {
     const codeVerifier = jar.get('folio_oidc_verifier')?.value
 
     if (!code || !state || !expectedState || state !== expectedState || !codeVerifier) {
-      return NextResponse.redirect(new URL('/admin/login?oidc=state', request.url))
+      return siteRedirect('/admin/login?oidc=state')
     }
 
     const clientId = requireEnv('OIDC_CLIENT_ID')
@@ -66,7 +83,7 @@ export async function GET(request: Request) {
       body,
     })
     if (!tokenRes.ok) {
-      return NextResponse.redirect(new URL('/admin/login?oidc=token', request.url))
+      return siteRedirect('/admin/login?oidc=token')
     }
     const tokens = (await tokenRes.json()) as TokenSet
 
@@ -74,12 +91,12 @@ export async function GET(request: Request) {
       headers: { Authorization: `Bearer ${tokens.access_token}` },
     })
     if (!infoRes.ok) {
-      return NextResponse.redirect(new URL('/admin/login?oidc=userinfo', request.url))
+      return siteRedirect('/admin/login?oidc=userinfo')
     }
     const info = (await infoRes.json()) as UserInfo
     const email = (info.email || info.preferred_username || '').trim().toLowerCase()
     if (!email) {
-      return NextResponse.redirect(new URL('/admin/login?oidc=email', request.url))
+      return siteRedirect('/admin/login?oidc=email')
     }
 
     const payload = await getPayload({ config })
@@ -93,7 +110,7 @@ export async function GET(request: Request) {
     let user = found.docs[0]
     if (!user) {
       if (process.env.OIDC_CREATE_USER !== 'true') {
-        return NextResponse.redirect(new URL('/admin/login?oidc=nouser', request.url))
+        return siteRedirect('/admin/login?oidc=nouser')
       }
       const password = `oidc-${crypto.randomUUID()}-${crypto.randomUUID()}`
       user = await payload.create({
@@ -128,13 +145,14 @@ export async function GET(request: Request) {
       returnCookieAsObject: true,
     })
 
-    const response = NextResponse.redirect(new URL('/admin', request.url))
+    const response = siteRedirect('/admin')
+    const secure = publicOrigin().startsWith('https://')
     if (cookie?.name && cookie.value) {
       response.cookies.set(cookie.name, cookie.value, {
         httpOnly: cookie.httpOnly ?? true,
         path: cookie.path || '/',
         sameSite: (cookie.sameSite?.toLowerCase() as 'lax' | 'strict' | 'none') || 'lax',
-        secure: Boolean(cookie.secure),
+        secure: secure || Boolean(cookie.secure),
         expires: cookie.expires ? new Date(cookie.expires) : undefined,
       })
     }
@@ -142,6 +160,6 @@ export async function GET(request: Request) {
     response.cookies.set('folio_oidc_verifier', '', { path: '/', maxAge: 0 })
     return response
   } catch {
-    return NextResponse.redirect(new URL('/admin/login?oidc=error', request.url))
+    return siteRedirect('/admin/login?oidc=error')
   }
 }
