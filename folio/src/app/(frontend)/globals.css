@@ -87,43 +87,45 @@
 }
 
 :root {
-  /* Darkroom folio — cool stone + cyanotype ink */
-  --background: oklch(95.5% 0.005 160deg);
-  --foreground: oklch(22% 0.015 220deg);
-  --card: oklch(98% 0.003 160deg);
-  --card-foreground: oklch(22% 0.015 220deg);
-  --popover: oklch(98% 0.003 160deg);
-  --popover-foreground: oklch(22% 0.015 220deg);
-  --primary: oklch(38% 0.055 220deg);
-  --primary-foreground: oklch(98% 0.005 160deg);
-  --secondary: oklch(92% 0.008 160deg);
-  --secondary-foreground: oklch(28% 0.02 220deg);
-  --muted: oklch(92% 0.008 160deg);
-  --muted-foreground: oklch(48% 0.02 220deg);
-  --accent: oklch(90% 0.02 210deg);
+  /* Paper + ink — cooler stone paper, cyanotype accent (editorial, not SaaS) */
+  --background: oklch(96.5% 0.006 95deg);
+  --foreground: oklch(18% 0.02 240deg);
+  --card: oklch(98.5% 0.004 95deg);
+  --card-foreground: oklch(18% 0.02 240deg);
+  --popover: oklch(98.5% 0.004 95deg);
+  --popover-foreground: oklch(18% 0.02 240deg);
+  --primary: oklch(42% 0.06 215deg);
+  --primary-foreground: oklch(98% 0.005 95deg);
+  --secondary: oklch(93% 0.008 95deg);
+  --secondary-foreground: oklch(26% 0.02 240deg);
+  --muted: oklch(93% 0.008 95deg);
+  --muted-foreground: oklch(45% 0.02 230deg);
+  --accent: oklch(92% 0.018 210deg);
   --accent-foreground: oklch(28% 0.04 220deg);
   --destructive: oklch(52% 0.18 25deg);
-  --destructive-foreground: oklch(98% 0.005 160deg);
-  --border: oklch(86% 0.01 160deg);
-  --input: oklch(86% 0.01 160deg);
-  --ring: oklch(48% 0.06 210deg);
-  --chart-1: oklch(48% 0.06 210deg);
+  --destructive-foreground: oklch(98% 0.005 95deg);
+  --border: oklch(84% 0.012 95deg);
+  --input: oklch(84% 0.012 95deg);
+  --ring: oklch(48% 0.06 215deg);
+  --chart-1: oklch(48% 0.06 215deg);
   --chart-2: oklch(55% 0.05 180deg);
   --chart-3: oklch(40% 0.04 230deg);
   --chart-4: oklch(70% 0.04 160deg);
   --chart-5: oklch(60% 0.05 200deg);
   --radius: 0.125rem;
-  --sidebar: oklch(94% 0.006 160deg);
-  --sidebar-foreground: oklch(22% 0.015 220deg);
-  --sidebar-primary: oklch(38% 0.055 220deg);
-  --sidebar-primary-foreground: oklch(98% 0.005 160deg);
-  --sidebar-accent: oklch(90% 0.02 210deg);
+  --sidebar: oklch(94.5% 0.006 95deg);
+  --sidebar-foreground: oklch(18% 0.02 240deg);
+  --sidebar-primary: oklch(42% 0.06 215deg);
+  --sidebar-primary-foreground: oklch(98% 0.005 95deg);
+  --sidebar-accent: oklch(92% 0.018 210deg);
   --sidebar-accent-foreground: oklch(28% 0.04 220deg);
-  --sidebar-border: oklch(86% 0.01 160deg);
-  --sidebar-ring: oklch(48% 0.06 210deg);
+  --sidebar-border: oklch(84% 0.012 95deg);
+  --sidebar-ring: oklch(48% 0.06 215deg);
   --success: oklch(55% 0.08 160deg);
   --warning: oklch(70% 0.1 75deg);
   --error: oklch(55% 0.15 25deg);
+  --footer-bg: oklch(16% 0.015 240deg);
+  --footer-accent: oklch(78% 0.05 210deg);
 }
 
 [data-theme='dark'] {
@@ -162,6 +164,8 @@
   --success: oklch(45% 0.08 160deg);
   --warning: oklch(55% 0.1 75deg);
   --error: oklch(50% 0.14 25deg);
+  --footer-bg: oklch(12% 0.012 240deg);
+  --footer-accent: oklch(78% 0.05 210deg);
 }
 
 @theme inline {
@@ -453,4 +457,50 @@ h3 {
 .folio-directory a:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
+}
+
+.site-nav-link {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+.site-footer {
+  background: var(--footer-bg);
+  color: oklch(96% 0.008 90deg);
+}
+
+.site-footer__mark {
+  color: color-mix(in oklch, var(--footer-accent) 85%, white);
+}
+
+.site-footer__label {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.42);
+}
+
+.site-footer__link {
+  font-size: 0.9rem;
+  color: rgb(255 255 255 / 0.72);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-footer__link:hover {
+  color: var(--footer-accent);
+}
+
+.site-header[data-over-hero='true'] .site-nav-link:focus-visible {
+  outline-color: white;
 }

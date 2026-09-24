@@ -4,7 +4,6 @@ import React from 'react'
 
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/components/Link'
-import { Logo } from '@/components/Logo/Logo'
 
 const elsewhere = [
   {
@@ -38,56 +37,63 @@ export async function Footer() {
   const navItems = footerData?.navItems || []
 
   return (
-    <footer className="mt-auto border-t border-border bg-card/40">
-      <div className="container py-12 md:py-16 space-y-10">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4 space-y-3">
-            <Link className="inline-flex text-foreground no-underline" href="/">
-              <Logo />
+    <footer className="site-footer mt-auto">
+      <div className="container py-14 md:py-20">
+        <div className="mb-12 md:mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-xl space-y-4">
+            <p className="folio-mark site-footer__mark">Folio · Alexander Carter</p>
+            <Link href="/" className="inline-block no-underline text-inherit hover:opacity-80">
+              <span className="text-3xl md:text-5xl font-semibold tracking-[-0.04em] leading-[1.05] [font-family:var(--font-display),Syne,system-ui,sans-serif]">
+                Alexander Carter
+              </span>
             </Link>
-            <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
-              摄影与写作之外，也在做 LLM Agent 研究。文章在这里改完就能读。
+            <p className="text-sm md:text-base leading-relaxed text-white/65 max-w-md">
+              摄影与写作之外，也在做 LLM Agent 研究。改完就能读。
             </p>
-            <div className="pt-2">
-              <ThemeSelector />
-            </div>
           </div>
+          <div className="shrink-0 [&_button]:text-white/70 [&_span]:text-white/70">
+            <ThemeSelector />
+          </div>
+        </div>
 
-          <div className="lg:col-span-3">
-            <p className="folio-mark mb-4">On this site</p>
-            <nav className="flex flex-col gap-2.5">
-              {navItems.map(({ link }, i) => {
-                return (
-                  <CMSLink
-                    className="text-foreground/85 hover:text-primary text-sm"
-                    key={i}
-                    {...link}
-                  />
-                )
-              })}
+        <div className="grid gap-10 md:grid-cols-12 md:gap-8 border-t border-white/12 pt-10">
+          <div className="md:col-span-3">
+            <p className="site-footer__label">本站</p>
+            <nav className="mt-4 flex flex-col gap-2.5">
+              {navItems.map(({ link }, i) => (
+                <CMSLink
+                  className="site-footer__link"
+                  key={i}
+                  {...link}
+                />
+              ))}
+              <Link className="site-footer__link" href="/posts">
+                写作
+              </Link>
+              <Link className="site-footer__link" href="/contact">
+                联系
+              </Link>
             </nav>
           </div>
 
-          <div className="lg:col-span-5">
-            <p className="folio-mark mb-4">Plate 03 · Elsewhere</p>
-            <ul className="folio-directory divide-y divide-border/70 border-y border-border/70">
+          <div className="md:col-span-9">
+            <p className="site-footer__label">Elsewhere</p>
+            <ul className="mt-4 divide-y divide-white/10 border-y border-white/10">
               {elsewhere.map((item) => (
                 <li key={item.href}>
                   <a
-                    className="group flex items-baseline justify-between gap-4 py-3 no-underline"
+                    className="group flex flex-col gap-1 py-3.5 no-underline sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
                     href={item.href}
                     rel="noopener noreferrer"
                     target="_blank"
                   >
                     <span>
-                      <span className="block text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                      <span className="block text-[0.95rem] font-medium text-white group-hover:text-[color:var(--footer-accent)] transition-colors">
                         {item.name}
                       </span>
-                      <span className="block text-xs text-muted-foreground mt-0.5">
-                        {item.desc}
-                      </span>
+                      <span className="block text-sm text-white/50 mt-0.5">{item.desc}</span>
                     </span>
-                    <span className="shrink-0 text-xs text-muted-foreground/80 font-mono tracking-tight">
+                    <span className="shrink-0 font-mono text-[0.7rem] tracking-wide text-white/40 group-hover:text-white/70 transition-colors">
                       {item.host} ↗
                     </span>
                   </a>
@@ -95,6 +101,11 @@ export async function Footer() {
               ))}
             </ul>
           </div>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs tracking-wide text-white/40 sm:flex-row sm:justify-between">
+          <p>© {new Date().getFullYear()} Alexander Carter</p>
+          <p className="font-mono uppercase tracking-[0.16em]">Darkroom Folio</p>
         </div>
       </div>
     </footer>

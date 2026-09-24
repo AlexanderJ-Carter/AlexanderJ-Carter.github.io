@@ -17,7 +17,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-end md:items-center text-white min-h-[100svh] overflow-hidden"
+      className="relative flex items-end md:items-center text-white min-h-[100svh] overflow-hidden"
       data-theme="dark"
     >
       <div className="absolute inset-0 select-none" aria-hidden>
