@@ -42,7 +42,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   return (
     <header
       className={cn(
-        'site-header fixed inset-x-0 top-[var(--admin-bar-h,0px)] z-50 transition-[top,background-color,border-color,backdrop-filter,color] duration-300',
+        'site-header fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter,color] duration-300',
         overHero
           ? 'border-b border-transparent bg-transparent text-white'
           : 'border-b border-border/50 bg-background/90 text-foreground backdrop-blur-md supports-[backdrop-filter]:bg-background/75',

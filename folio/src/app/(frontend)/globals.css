@@ -254,6 +254,105 @@ h3 {
   opacity: 0.55;
 }
 
+/* 站点公告：顶栏下方一条细带，避免整块白条 */
+.site-notice {
+  position: relative;
+  z-index: 40;
+  margin-top: 3.5rem;
+  border-bottom: 1px solid color-mix(in oklab, var(--border) 85%, transparent);
+  background: color-mix(in oklab, var(--muted) 55%, var(--background));
+}
+
+@media (min-width: 48rem) {
+  .site-notice {
+    margin-top: 4rem;
+  }
+}
+
+.site-notice__rail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-block: 0.7rem;
+}
+
+@media (min-width: 40rem) {
+  .site-notice__rail {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding-block: 0.55rem;
+  }
+}
+
+.site-notice__text {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 0.65rem;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--foreground);
+}
+
+.site-notice__mark {
+  flex-shrink: 0;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.site-notice__mark::before {
+  content: '· ';
+  opacity: 0.55;
+}
+
+.site-notice__copy {
+  min-width: 0;
+  color: color-mix(in oklab, var(--foreground) 82%, transparent);
+}
+
+.site-notice__actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.site-notice__cta,
+.site-notice__dismiss {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.site-notice__cta {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.site-notice__dismiss {
+  color: var(--muted-foreground);
+}
+
+.site-notice__cta:hover,
+.site-notice__dismiss:hover {
+  color: var(--primary);
+}
+
 .film-edge {
   position: relative;
   border-block: 1px solid var(--border);

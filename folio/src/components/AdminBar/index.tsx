@@ -5,7 +5,7 @@ import type { PayloadAdminBarProps, PayloadMeUser } from '@payloadcms/admin-bar'
 import { cn } from '@/utilities/ui'
 import { useSelectedLayoutSegments, useRouter } from 'next/navigation'
 import { PayloadAdminBar } from '@payloadcms/admin-bar'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import './index.scss'
 import { getClientSideURL } from '@/utilities/getURL'
@@ -31,42 +31,27 @@ export const AdminBar: React.FC<{
     setShow(Boolean(user?.id))
   }, [])
 
-  useEffect(() => {
-    const root = document.documentElement
-    if (show) {
-      root.dataset.adminBar = 'true'
-      root.style.setProperty('--admin-bar-h', '2.5rem')
-    } else {
-      delete root.dataset.adminBar
-      root.style.removeProperty('--admin-bar-h')
-    }
-    return () => {
-      delete root.dataset.adminBar
-      root.style.removeProperty('--admin-bar-h')
-    }
-  }, [show])
-
   return (
     <div
-      className={cn('admin-bar', {
-        'admin-bar--visible': show,
-        'admin-bar--hidden': !show,
+      className={cn('admin-dock', {
+        'admin-dock--visible': show,
+        'admin-dock--hidden': !show,
       })}
       aria-hidden={!show}
     >
-      <div className="admin-bar__inner">
+      <div className="admin-dock__inner">
         <PayloadAdminBar
           {...adminBarProps}
           unstyled
-          className="admin-bar__payload"
+          className="admin-dock__payload"
           classNames={{
-            controls: 'admin-bar__controls',
-            create: 'admin-bar__link admin-bar__create',
-            edit: 'admin-bar__link admin-bar__edit',
-            logo: 'admin-bar__logo',
-            logout: 'admin-bar__link admin-bar__logout',
-            preview: 'admin-bar__link admin-bar__preview',
-            user: 'admin-bar__user',
+            controls: 'admin-dock__controls',
+            create: 'admin-dock__link admin-dock__create',
+            edit: 'admin-dock__link admin-dock__edit',
+            logo: 'admin-dock__logo',
+            logout: 'admin-dock__link admin-dock__logout',
+            preview: 'admin-dock__link admin-dock__preview',
+            user: 'admin-dock__user',
           }}
           cmsURL={getClientSideURL()}
           collectionSlug={collection}
@@ -74,7 +59,7 @@ export const AdminBar: React.FC<{
             plural: collectionLabels[collection]?.plural || '页面',
             singular: collectionLabels[collection]?.singular || '页面',
           }}
-          logo={<span className="admin-bar__brand">Folio</span>}
+          logo={<span className="admin-dock__brand">管理</span>}
           onAuthChange={onAuthChange}
           onPreviewExit={() => {
             fetch('/next/exit-preview').then(() => {

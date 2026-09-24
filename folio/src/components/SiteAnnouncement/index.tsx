@@ -56,32 +56,27 @@ export function SiteAnnouncement({ data }: { data: AnnouncementData | null | und
   }
 
   const isInternal = href.startsWith('/') && !href.startsWith('//')
+  const summary = [data.title, data.body].filter(Boolean).join(' · ')
 
   return (
-    <div
-      className="site-announcement border-b border-border bg-muted/40 text-foreground"
-      role="region"
-      aria-label="站点公告"
-    >
-      <div className="container flex flex-col gap-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-        <div className="min-w-0">
-          <p className="folio-mark mb-1">公告</p>
-          <p className="text-sm font-medium tracking-tight">{data.title}</p>
-          <p className="mt-0.5 text-sm text-muted-foreground leading-relaxed">{data.body}</p>
-        </div>
-        <div className="flex shrink-0 items-center gap-3">
+    <div className="site-notice" role="region" aria-label="站点公告">
+      <div className="site-notice__rail container">
+        <p className="site-notice__text">
+          <span className="site-notice__mark" aria-hidden>
+            告示
+          </span>
+          <span className="site-notice__copy">{summary}</span>
+        </p>
+        <div className="site-notice__actions">
           {href ? (
             isInternal ? (
-              <Link
-                href={href}
-                className="text-xs uppercase tracking-[0.14em] underline underline-offset-4"
-              >
+              <Link href={href} className="site-notice__cta">
                 {cta}
               </Link>
             ) : (
               <a
                 href={href}
-                className="text-xs uppercase tracking-[0.14em] underline underline-offset-4"
+                className="site-notice__cta"
                 rel="noopener noreferrer"
                 target="_blank"
               >
@@ -90,11 +85,7 @@ export function SiteAnnouncement({ data }: { data: AnnouncementData | null | und
             )
           ) : null}
           {dismissible ? (
-            <button
-              type="button"
-              className="text-xs uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground"
-              onClick={dismiss}
-            >
+            <button type="button" className="site-notice__dismiss" onClick={dismiss} aria-label="关闭公告">
               关闭
             </button>
           ) : null}
