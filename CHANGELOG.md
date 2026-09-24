@@ -19,6 +19,7 @@
 - CI 以 Folio typecheck 为门禁；文档为 CUTOVER / INSTANCE / IA
 - 页脚与曝光表跳转（世界时间）调整
 - 边缘：`about`/`bio`/`contact`/`time` 改 Redirect Rules + AAAA `100::`；去掉 `writing-redirect` / `redirect-profile` / `redirect-contact`
+- 正典域名统一为 apex：gateway / security.txt / lighthouse / ops-portal / Pocket ID Folio 回调
 
 ### Removed
 

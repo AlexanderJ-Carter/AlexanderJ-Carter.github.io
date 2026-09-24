@@ -25,7 +25,7 @@
 const KB_URL = 'https://alexander.xin/help/kb.json';
 const ALLOWED_ORIGINS = new Set([
   'https://alexander.xin',
-  'https://www.alexander.xin',
+  'https://alexander.xin',
   'https://blog.alexander.xin',
 ]);
 

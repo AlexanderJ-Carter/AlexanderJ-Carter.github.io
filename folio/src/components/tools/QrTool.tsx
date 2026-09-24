@@ -3,9 +3,9 @@
 import React, { useMemo, useState } from 'react'
 
 export function QrTool() {
-  const [text, setText] = useState('https://www.alexander.xin')
+  const [text, setText] = useState('https://alexander.xin')
   const src = useMemo(() => {
-    const q = encodeURIComponent(text.trim() || 'https://www.alexander.xin')
+    const q = encodeURIComponent(text.trim() || 'https://alexander.xin')
     return `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${q}`
   }, [text])
 

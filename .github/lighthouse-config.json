@@ -3,10 +3,10 @@
     "collect": {
       "numberOfRuns": 1,
       "url": [
-        "https://www.alexander.xin/",
-        "https://www.alexander.xin/gallery",
-        "https://www.alexander.xin/posts",
-        "https://www.alexander.xin/fun"
+        "https://alexander.xin/",
+        "https://alexander.xin/gallery",
+        "https://alexander.xin/posts",
+        "https://alexander.xin/fun"
       ]
     },
     "assert": {

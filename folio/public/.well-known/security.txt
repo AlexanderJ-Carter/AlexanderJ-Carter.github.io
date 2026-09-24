@@ -1,11 +1,11 @@
-# Security Policy for alexander.xin / www.alexander.xin
-# https://www.alexander.xin/.well-known/security.txt
+# Security Policy for alexander.xin
+# https://alexander.xin/.well-known/security.txt
 # Last updated: 2026-09-24
 
 Contact: mailto:contact-us@alexander.xin
 Preferred-Languages: zh-CN, en
-Policy: https://www.alexander.xin/security/policy
-Acknowledgments: https://www.alexander.xin/security/acknowledgments
-Encryption: https://www.alexander.xin/security/pgp-key.asc
-Canonical: https://www.alexander.xin/.well-known/security.txt
+Policy: https://alexander.xin/security/policy
+Acknowledgments: https://alexander.xin/security/acknowledgments
+Encryption: https://alexander.xin/security/pgp-key.asc
+Canonical: https://alexander.xin/.well-known/security.txt
 Expires: 2027-03-19T00:00:00.000Z

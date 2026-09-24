@@ -1,9 +1,10 @@
 /**
  * Ops portal Worker — fleet home, probes, cron alerts.
- * UI HTML from www mirror; state in OPS_STATE KV; email via Resend when configured.
+ * UI from Worker ASSETS (ops-portal/public); state in OPS_STATE KV; email via Resend when configured.
  */
 
 type Env = {
+  ASSETS: Fetcher;
   OPS_STATE?: KVNamespace;
   RESEND_API_KEY?: string;
   ALERT_FROM?: string;
@@ -30,11 +31,8 @@ const PROBES: Array<{ id: string; url: string }> = [
   { id: 'paste', url: 'https://paste.alexander.xin/' },
   { id: 'cook', url: 'https://cook.alexander.xin/' },
   { id: 'lab', url: 'https://lab.alexander.xin/' },
-  { id: 'network-json', url: 'https://www.alexander.xin/network.json' },
 ];
 
-const UI_URL = 'https://www.alexander.xin/ops/index.html';
-const FLEET_LOG_URL = 'https://www.alexander.xin/ops/fleet-changelog.json';
 const STATE_KEY = 'probe-ok-v1';
 
 function securityHeaders(extra: HeadersInit = {}): Headers {
@@ -153,7 +151,7 @@ async function diffAndAlert(
     }),
     '',
     'Ops: https://ops.alexander.xin',
-    'Network: https://alexander.xin/network/',
+    'Site: https://alexander.xin',
   ];
   const down = changes.filter((c) => !c.to).length;
   const subject =
@@ -181,38 +179,17 @@ async function statusJson(env: Env): Promise<Response> {
   );
 }
 
-async function homeHtml(): Promise<Response> {
-  const res = await fetch(UI_URL, {
-    headers: { 'User-Agent': 'ops-portal-ui/1.0' },
-  });
+async function fromAssets(env: Env, path: string, contentType: string): Promise<Response> {
+  const res = await env.ASSETS.fetch(new Request(`https://assets.local${path}`));
   if (!res.ok) {
-    return new Response('Ops UI unavailable', {
+    return new Response(`Asset unavailable: ${path}`, {
       status: 502,
       headers: securityHeaders(),
     });
   }
-  const html = await res.text();
-  return new Response(html, {
+  return new Response(await res.body, {
     headers: securityHeaders({
-      'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'private, max-age=60',
-    }),
-  });
-}
-
-async function fleetChangelogJson(): Promise<Response> {
-  const res = await fetch(FLEET_LOG_URL, {
-    headers: { 'User-Agent': 'ops-portal-ui/1.0' },
-  });
-  if (!res.ok) {
-    return new Response('Fleet changelog unavailable', {
-      status: 502,
-      headers: securityHeaders(),
-    });
-  }
-  return new Response(await res.text(), {
-    headers: securityHeaders({
-      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Type': contentType,
       'Cache-Control': 'private, max-age=60',
     }),
   });
@@ -239,9 +216,18 @@ export default {
       return runCheck(env);
     }
     if (url.pathname === '/fleet-changelog.json') {
-      return fleetChangelogJson();
+      return fromAssets(env, '/fleet-changelog.json', 'application/json; charset=utf-8');
     }
-    return homeHtml();
+    if (url.pathname === '/' || url.pathname === '/index.html') {
+      return fromAssets(env, '/index.html', 'text/html; charset=utf-8');
+    }
+    // icons / other public files
+    const asset = await env.ASSETS.fetch(request);
+    if (asset.status !== 404) {
+      const headers = securityHeaders(asset.headers);
+      return new Response(asset.body, { status: asset.status, headers });
+    }
+    return fromAssets(env, '/index.html', 'text/html; charset=utf-8');
   },
 
   async scheduled(

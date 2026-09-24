@@ -1,16 +1,16 @@
 const PROBES = [
   { id: 'apex', url: 'https://alexander.xin/' },
-  { id: 'www', url: 'https://www.alexander.xin/' },
+  { id: 'www', url: 'https://alexander.xin/' },
   { id: 'blog', url: 'https://blog.alexander.xin/writing/' },
   { id: 'identity', url: 'https://id.alexander.xin/healthz' },
   { id: 'time-api', url: 'https://api.alexander.xin/time/now' },
   { id: 'tools-hub', url: 'https://tools.alexander.xin/' },
   { id: 'paste', url: 'https://paste.alexander.xin/' },
-  { id: 'network-json', url: 'https://www.alexander.xin/network.json' },
+  { id: 'network-json', url: 'https://alexander.xin/network.json' },
 ];
 
-const UI_URL = 'https://www.alexander.xin/ops/index.html';
-const FLEET_LOG_URL = 'https://www.alexander.xin/ops/fleet-changelog.json';
+const UI_URL = 'https://alexander.xin/ops/index.html';
+const FLEET_LOG_URL = 'https://alexander.xin/ops/fleet-changelog.json';
 
 async function probeOne(id, url) {
   const started = Date.now();

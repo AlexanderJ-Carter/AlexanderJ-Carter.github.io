@@ -5,7 +5,7 @@ Fleet ops home and **primary maintainer entry** (site `/login` CTA points here).
 ## UI
 
 - Source: `public/index.html` (also mirrored to repo `public/ops/index.html`).
-- Live UI file on www: `https://www.alexander.xin/ops/index.html` (Worker fetches it for `/`).
+- Live UI file on www: `https://alexander.xin/ops/index.html` (Worker fetches it for `/`).
 - Icons: `public/icons/` + repo `public/img/ops/*.svg`. Regenerate with `node scripts/gen-icons.mjs`.
 - After HTML/icon edits: upload to server `dist/ops/` and `dist/img/ops/` (scp), then refresh Ops.
 

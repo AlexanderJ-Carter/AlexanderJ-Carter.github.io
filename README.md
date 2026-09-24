@@ -1,6 +1,6 @@
 # Alexander Carter
 
-[alexander.xin](https://alexander.xin) · [www](https://www.alexander.xin) · [Pages](https://alexanderj-carter.github.io)
+[alexander.xin](https://alexander.xin) · [www](https://alexander.xin) · [Pages](https://alexanderj-carter.github.io)
 
 [![Pages](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/actions/workflows/deploy.yml)
 [![Folio](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/actions/workflows/folio-deploy.yml/badge.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/actions/workflows/folio-deploy.yml)
