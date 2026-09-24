@@ -28,7 +28,7 @@ export function SiteAnnouncement({ data }: { data: AnnouncementData | null | und
   const href = data?.href?.trim() || ''
   const cta = data?.ctaLabel?.trim() || '了解更多'
 
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(enabled)
   const [expanded, setExpanded] = useState(true)
 
   useEffect(() => {
