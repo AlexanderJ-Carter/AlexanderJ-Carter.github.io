@@ -24,6 +24,7 @@
 ### Removed
 
 - 根目录 Astro（`src/`、`public/`）、legacy 脚本 / CI、`writing-redirect` Worker（并入 `legacy-redirect`）
+- 占位 `ops-agent/`、重复 `AGENT.md`、过时根 `.env.example` / `.npmrc`
 
 
 ## [3.2.1] - 2026-09
