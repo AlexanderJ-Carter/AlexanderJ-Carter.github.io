@@ -327,3 +327,36 @@ html:has(.folio-login) .wrap {
   }
 }
 
+.folio-path-preview {
+  margin-top: 0.35rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 3px;
+  background: var(--theme-elevation-50);
+}
+
+.folio-path-preview__label {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-600);
+}
+
+.folio-path-preview__link {
+  display: inline-block;
+  word-break: break-all;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--theme-text);
+}
+
+.folio-path-preview__hint {
+  margin: 0.45rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--theme-elevation-550);
+}
+
+

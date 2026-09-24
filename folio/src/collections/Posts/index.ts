@@ -25,7 +25,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import { slugField } from 'payload'
+import { folioSlugField, pathPreviewField, viewCountField } from '@/fields/folioSlug'
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -52,7 +52,7 @@ export const Posts: CollectionConfig<'posts'> = {
     plural: '文章',
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'viewCount', 'updatedAt'],
     useAsTitle: 'title',
     group: '内容',
     livePreview: {
@@ -222,7 +222,9 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
-    slugField(),
+    folioSlugField('posts'),
+    pathPreviewField('posts'),
+    viewCountField(),
   ],
   hooks: {
     afterChange: [revalidatePost],

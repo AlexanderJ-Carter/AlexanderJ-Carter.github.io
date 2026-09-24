@@ -16,6 +16,7 @@ import { ResearchStrip } from '@/components/ResearchStrip'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { ViewTracker } from '@/components/ViewTracker'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -73,6 +74,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   return (
     <article className={decodedSlug === 'home' ? 'pb-24' : 'pt-20 md:pt-24 pb-24'}>
       <PageClient />
+      {page.id != null && <ViewTracker collection="pages" id={page.id} enabled={!draft} />}
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 

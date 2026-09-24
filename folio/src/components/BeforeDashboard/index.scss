@@ -78,3 +78,101 @@
     transition: none;
   }
 }
+
+.folio-insights {
+  margin: 0 0 base(1.25);
+  padding: base(0.85) base(1);
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 3px;
+  background: var(--theme-elevation-0);
+}
+
+.folio-insights h5,
+.folio-insights__sub {
+  margin: 0 0 base(0.55);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--theme-elevation-600);
+}
+
+.folio-insights__sub {
+  margin-top: base(0.9);
+}
+
+.folio-insights__stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: base(0.5);
+
+  @include mid-break {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: base(0.55) base(0.65);
+    border: 1px solid var(--theme-elevation-150);
+    border-radius: 3px;
+    background: var(--theme-elevation-50);
+    text-decoration: none !important;
+    color: inherit;
+    transition: border-color 160ms ease, background-color 160ms ease;
+
+    &:hover {
+      border-color: var(--theme-elevation-250);
+      background: var(--theme-elevation-100);
+      opacity: 1;
+    }
+
+    strong {
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    span {
+      font-size: 0.78rem;
+      color: var(--theme-elevation-600);
+    }
+  }
+}
+
+.folio-insights__empty {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--theme-elevation-600);
+}
+
+.folio-insights__top {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 0.65rem;
+    align-items: center;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--theme-elevation-100);
+    font-size: 0.9rem;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}
+
+.folio-insights__views {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  color: var(--theme-elevation-700);
+}
+
+.folio-insights__live {
+  font-size: 0.78rem;
+}
+

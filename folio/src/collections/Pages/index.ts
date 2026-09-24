@@ -8,7 +8,7 @@ import { Content } from '../../blocks/Content/config'
 import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { hero } from '@/heros/config'
-import { slugField } from 'payload'
+import { folioSlugField, pathPreviewField, viewCountField } from '@/fields/folioSlug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
@@ -41,7 +41,7 @@ export const Pages: CollectionConfig<'pages'> = {
     plural: '页面',
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'viewCount', 'updatedAt'],
     useAsTitle: 'title',
     group: '内容',
     livePreview: {
@@ -124,7 +124,9 @@ export const Pages: CollectionConfig<'pages'> = {
         position: 'sidebar',
       },
     },
-    slugField(),
+    folioSlugField('pages'),
+    pathPreviewField('pages'),
+    viewCountField(),
   ],
   hooks: {
     afterChange: [revalidatePage],
