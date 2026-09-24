@@ -210,6 +210,10 @@ export interface Page {
    */
   generateSlug?: boolean | null;
   slug: string;
+  /**
+   * 前台累计浏览（近似，不含预览/后台）。
+   */
+  viewCount?: number | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -260,6 +264,10 @@ export interface Post {
    */
   generateSlug?: boolean | null;
   slug: string;
+  /**
+   * 前台累计浏览（近似，不含预览/后台）。
+   */
+  viewCount?: number | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1055,6 +1063,7 @@ export interface PagesSelect<T extends boolean = true> {
   publishedAt?: T;
   generateSlug?: T;
   slug?: T;
+  viewCount?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1170,6 +1179,7 @@ export interface PostsSelect<T extends boolean = true> {
       };
   generateSlug?: T;
   slug?: T;
+  viewCount?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

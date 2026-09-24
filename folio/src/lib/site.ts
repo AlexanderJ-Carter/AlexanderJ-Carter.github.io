@@ -31,3 +31,14 @@ export function isProtectedPath(pathname: string): boolean {
   const bare = pathname.replace(/\/$/, '') || '/'
   return PROTECTED_PATHS.some((p) => bare === p || bare.startsWith(`${p}/`))
 }
+
+/** 校验验证后回跳地址，拒绝开放重定向与 /verify 自环。 */
+export function safeVerifyNextPath(raw: string | null | undefined): string {
+  const fallback = '/about'
+  if (!raw) return fallback
+  const path = raw.trim()
+  if (!path.startsWith('/') || path.startsWith('//') || path.includes('\\')) return fallback
+  const bare = (path.split('?')[0] || '/').replace(/\/$/, '') || '/'
+  if (bare === '/verify') return fallback
+  return path
+}

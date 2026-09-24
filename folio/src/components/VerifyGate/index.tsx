@@ -1,9 +1,9 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 
-import { turnstileSiteKey, VERIFY_COOKIE, VERIFY_COOKIE_MAX_AGE } from '@/lib/site'
+import { safeVerifyNextPath, turnstileSiteKey, VERIFY_COOKIE, VERIFY_COOKIE_MAX_AGE } from '@/lib/site'
 
 declare global {
   interface Window {
@@ -24,38 +24,45 @@ declare global {
   }
 }
 
-function setVerifyCookie() {
-  document.cookie = `${VERIFY_COOKIE}=1; path=/; max-age=${VERIFY_COOKIE_MAX_AGE}; SameSite=Lax`
+function setClientVerifyCookie() {
+  const secure = typeof window !== 'undefined' && window.location.protocol === 'https:' ? '; Secure' : ''
+  document.cookie = `${VERIFY_COOKIE}=1; path=/; max-age=${VERIFY_COOKIE_MAX_AGE}; SameSite=Lax${secure}`
 }
 
 export function VerifyGate() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const hostRef = useRef<HTMLDivElement>(null)
   const widgetId = useRef<string | null>(null)
+  const finishing = useRef(false)
   const [status, setStatus] = useState('加载验证组件…')
   const [error, setError] = useState<string | null>(null)
 
-  const nextPath = searchParams.get('next') || searchParams.get('redirect') || '/about'
+  const nextPath = safeVerifyNextPath(searchParams.get('next') || searchParams.get('redirect'))
 
   const finish = useCallback(
     async (token?: string) => {
+      if (finishing.current) return
+      finishing.current = true
+      setStatus('验证通过，正在跳转…')
+      // 先写可读 cookie，再让 API 升级为 HttpOnly；最后硬跳转，避免 App Router 软导航丢 cookie。
+      setClientVerifyCookie()
+
       if (token) {
         try {
           await fetch('/api/turnstile/verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
             body: JSON.stringify({ token }),
           })
         } catch {
-          // Soft-fail: cookie still set so gate UX matches Astro client-only path.
+          // 客户端 cookie 已写入，继续跳转
         }
       }
-      setVerifyCookie()
-      setStatus('验证通过，正在跳转…')
-      router.replace(nextPath.startsWith('/') ? nextPath : '/about')
+
+      window.location.assign(nextPath)
     },
-    [nextPath, router],
+    [nextPath],
   )
 
   const renderWidget = useCallback(() => {
@@ -69,6 +76,7 @@ export function VerifyGate() {
       widgetId.current = null
       host.innerHTML = ''
     }
+    finishing.current = false
     setError(null)
     setStatus('请完成人机验证')
     const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'

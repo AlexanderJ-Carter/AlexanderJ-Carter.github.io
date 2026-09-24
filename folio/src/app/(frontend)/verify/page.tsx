@@ -4,6 +4,8 @@ import { Suspense } from 'react'
 import { VerifyGate } from '@/components/VerifyGate'
 import { skipVerify } from '@/lib/site'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: '访客验证',
   description: '完成人机验证后继续访问。',

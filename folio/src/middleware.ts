@@ -15,13 +15,19 @@ export function middleware(request: NextRequest) {
 
   const verified = request.cookies.get(VERIFY_COOKIE)?.value === '1'
   if (verified) {
-    return NextResponse.next()
+    const res = NextResponse.next()
+    // 受门禁页面按访客 cookie 分流，禁止 CDN 把 307/200 缓存串台
+    res.headers.set('Cache-Control', 'private, no-store')
+    return res
   }
 
   const url = request.nextUrl.clone()
   url.pathname = '/verify'
+  url.search = ''
   url.searchParams.set('next', pathname + request.nextUrl.search)
-  return NextResponse.redirect(url)
+  const res = NextResponse.redirect(url)
+  res.headers.set('Cache-Control', 'private, no-store')
+  return res
 }
 
 export const config = {
