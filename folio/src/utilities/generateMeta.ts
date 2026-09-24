@@ -4,6 +4,7 @@ import type { Media, Page, Post, Config } from '../payload-types'
 
 import { mergeOpenGraph } from './mergeOpenGraph'
 import { getServerSideURL } from './getURL'
+import { getInstance } from '@/instance'
 
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   const serverUrl = getServerSideURL()
@@ -23,15 +24,17 @@ export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<Post> | null
 }): Promise<Metadata> => {
   const { doc } = args
+  const instance = getInstance()
 
   const ogImage = getImageURL(doc?.meta?.image)
 
-  const title = doc?.meta?.title || 'Alexander Carter'
+  const title = doc?.meta?.title || instance.siteName
+  const description = doc?.meta?.description || instance.tagline
 
   return {
-    description: doc?.meta?.description || '摄影与写作。文章在这里改完就能读。',
+    description,
     openGraph: mergeOpenGraph({
-      description: doc?.meta?.description || '摄影与写作。文章在这里改完就能读。',
+      description,
       images: ogImage
         ? [
             {

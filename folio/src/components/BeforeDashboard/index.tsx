@@ -10,7 +10,7 @@ const BeforeDashboard: React.FC = () => {
   return (
     <div className={baseClass}>
       <Banner className={`${baseClass}__banner`} type="success">
-        <h4>Alexander Carter · Folio 工作台</h4>
+        <h4>{process.env.NEXT_PUBLIC_SITE_NAME || 'Folio'} · 工作台</h4>
       </Banner>
 
       <DashboardInsights />

@@ -32,7 +32,7 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: ' · Folio',
-      description: 'Alexander Carter Folio 工作台',
+      description: 'Folio 工作台',
     },
     importMap: {
       baseDir: path.resolve(dirname),

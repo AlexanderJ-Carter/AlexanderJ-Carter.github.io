@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import { getInstance } from '@/instance'
+
 export const metadata: Metadata = {
   title: '安全致谢',
   description: '感谢为网站安全做出贡献的安全研究者',
@@ -29,9 +31,11 @@ export default function SecurityAcknowledgmentsPage() {
             <h2>发现安全问题？</h2>
             <p>
               请发送至{' '}
-              <a href="mailto:contact-us@alexander.xin">contact-us@alexander.xin</a>
+              <a href={`mailto:${getInstance().security.contactEmail}`}>
+                {getInstance().security.contactEmail}
+              </a>
               。敏感内容请使用{' '}
-              <Link href="/security/pgp-key.asc">PGP 公钥</Link> 加密。我们承诺 24 小时内回复。
+              <Link href="/security/pgp-key.asc">PGP 公钥</Link> 加密。
             </p>
           </div>
         </section>

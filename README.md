@@ -16,7 +16,8 @@ GitHub Pages 仅发布 `gateway/` 轻量跳转页，与主站有机配合（见�
 | Apex `alexander.xin` | （DNS/Pages） | 与网关策略一致，见 [docs/FOLIO-CUTOVER.md](docs/FOLIO-CUTOVER.md) | 勿再当 Astro 整站构建入口 |
 | 根目录 `src/`、`public/` | Astro 遗留 | **不自动部署** | 迁移源与参考；新功能改 `folio/` |
 
-详细切换、Secrets、删除清单：[docs/FOLIO-CUTOVER.md](docs/FOLIO-CUTOVER.md)。Agent 约束：[CLAUDE.md](CLAUDE.md) / [AGENT.md](AGENT.md)。
+详细切换、Secrets、删除清单：[docs/FOLIO-CUTOVER.md](docs/FOLIO-CUTOVER.md)。  
+开源模板与个人实例边界：[docs/FOLIO-INSTANCE.md](docs/FOLIO-INSTANCE.md)。Agent 约束：[CLAUDE.md](CLAUDE.md) / [AGENT.md](AGENT.md)。
 
 ## 本地开发（Folio）
 

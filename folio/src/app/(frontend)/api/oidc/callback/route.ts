@@ -9,7 +9,7 @@ import {
 } from 'payload'
 import { addSessionToUser } from 'payload/shared'
 import config from '@payload-config'
-import { getServerSideURL } from '@/utilities/getURL'
+import { publicOriginFromInstance } from '@/instance'
 
 type TokenSet = {
   access_token?: string
@@ -34,14 +34,7 @@ function requireEnv(name: string): string {
 
 /** 公网站点根，禁止用 request.url（容器里会变成 http://0.0.0.0:3000） */
 function publicOrigin(): string {
-  const fromEnv = (process.env.NEXT_PUBLIC_SERVER_URL || getServerSideURL() || '').replace(
-    /\/$/,
-    '',
-  )
-  if (fromEnv && !/0\.0\.0\.0|127\.0\.0\.1|localhost/i.test(fromEnv)) {
-    return fromEnv
-  }
-  return 'https://www.alexander.xin'
+  return publicOriginFromInstance()
 }
 
 function siteRedirect(path: string) {

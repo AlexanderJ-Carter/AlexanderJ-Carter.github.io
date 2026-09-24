@@ -9,6 +9,7 @@
 - **GitHub Pages**: `gateway/` — 轻量跳转到 www，并镜像 security.txt / PGP
 - **遗留**: 根目录 Astro（`src/`、`public/`）仅作迁移源与参考，勿再当主站改版入口
 - 切换说明: [docs/FOLIO-CUTOVER.md](./docs/FOLIO-CUTOVER.md)
+- **模板 vs 实例**: [docs/FOLIO-INSTANCE.md](./docs/FOLIO-INSTANCE.md)（开源仓库不含个人域名/论文/密钥）
 
 ## 2. 代码改动硬规则
 

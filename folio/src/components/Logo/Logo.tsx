@@ -9,11 +9,13 @@ interface Props {
   variant?: 'masthead' | 'mark'
 }
 
+const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Folio'
+
 export const Logo = (props: Props) => {
   const { className, variant = 'masthead' } = props
 
   if (variant === 'mark') {
-    return <span className={clsx('brand-mark', className)}>Alexander Carter</span>
+    return <span className={clsx('brand-mark', className)}>{siteName}</span>
   }
 
   return (
@@ -23,7 +25,7 @@ export const Logo = (props: Props) => {
         className,
       )}
     >
-      Alexander Carter
+      {siteName}
     </span>
   )
 }

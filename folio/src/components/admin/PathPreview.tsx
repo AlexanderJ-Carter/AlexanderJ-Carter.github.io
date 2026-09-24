@@ -11,7 +11,7 @@ type Props = {
 
 export const PathPreview: React.FC<Props> = ({ kind = 'pages' }) => {
   const slug = useFormFields(([fields]) => fields.slug?.value as string | undefined)
-  const site = (process.env.NEXT_PUBLIC_SERVER_URL || 'https://www.alexander.xin').replace(/\/$/, '')
+  const site = (process.env.NEXT_PUBLIC_SERVER_URL || 'http://127.0.0.1:3000').replace(/\/$/, '')
 
   let path = '/'
   if (kind === 'posts') {

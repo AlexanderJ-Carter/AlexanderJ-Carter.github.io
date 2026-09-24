@@ -4,51 +4,27 @@ import React from 'react'
 
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/components/Link'
-
-const elsewhere = [
-  {
-    name: 'MyCook',
-    host: 'cook.alexander.xin',
-    href: 'https://cook.alexander.xin',
-    desc: '菜谱与厨房笔记',
-  },
-  {
-    name: 'Gitea',
-    host: 'git.alexander.xin',
-    href: 'https://git.alexander.xin',
-    desc: '自建代码仓库',
-  },
-  {
-    name: 'IT-Tools',
-    host: 'tools.alexander.xin',
-    href: 'https://tools.alexander.xin',
-    desc: '常用小工具箱',
-  },
-  {
-    name: 'GitHub',
-    host: 'github.com/AlexanderJ-Carter',
-    href: 'https://github.com/AlexanderJ-Carter',
-    desc: '公开仓库与实验',
-  },
-]
+import { getInstance } from '@/instance'
 
 export async function Footer() {
+  const instance = getInstance()
   const footerData = await getCachedGlobal('footer', 1)()
   const navItems = footerData?.navItems || []
+  const elsewhere = instance.elsewhere
 
   return (
     <footer className="site-footer mt-auto">
       <div className="container py-14 md:py-20">
         <div className="mb-12 md:mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl space-y-4">
-            <p className="folio-mark site-footer__mark">Folio · Alexander Carter</p>
+            <p className="folio-mark site-footer__mark">Folio · {instance.siteName}</p>
             <Link href="/" className="inline-block no-underline text-inherit hover:opacity-80">
               <span className="text-3xl md:text-5xl font-semibold tracking-[-0.04em] leading-[1.05] [font-family:var(--font-display),Syne,system-ui,sans-serif]">
-                Alexander Carter
+                {instance.siteName}
               </span>
             </Link>
             <p className="text-sm md:text-base leading-relaxed text-white/65 max-w-md">
-              摄影与写作之外，也在做 LLM Agent 研究。改完就能读。
+              {instance.tagline}
             </p>
           </div>
           <div className="shrink-0 [&_button]:text-white/70 [&_span]:text-white/70">
@@ -61,11 +37,7 @@ export async function Footer() {
             <p className="site-footer__label">本站</p>
             <nav className="mt-4 flex flex-col gap-2.5">
               {navItems.map(({ link }, i) => (
-                <CMSLink
-                  className="site-footer__link"
-                  key={i}
-                  {...link}
-                />
+                <CMSLink className="site-footer__link" key={i} {...link} />
               ))}
               <Link className="site-footer__link" href="/posts">
                 写作
@@ -104,7 +76,9 @@ export async function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs tracking-wide text-white/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Alexander Carter</p>
+          <p>
+            © {new Date().getFullYear()} {instance.siteName}
+          </p>
           <nav className="flex flex-wrap gap-x-4 gap-y-1" aria-label="法律与安全">
             <Link className="hover:text-white/70 transition-colors" href="/privacy">
               隐私
@@ -115,10 +89,7 @@ export async function Footer() {
             <Link className="hover:text-white/70 transition-colors" href="/security/policy">
               安全
             </Link>
-            <a
-              className="hover:text-white/70 transition-colors"
-              href="/.well-known/security.txt"
-            >
+            <a className="hover:text-white/70 transition-colors" href="/.well-known/security.txt">
               security.txt
             </a>
           </nav>

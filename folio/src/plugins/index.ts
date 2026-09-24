@@ -12,9 +12,11 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { getInstance } from '@/instance'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} · Alexander Carter` : 'Alexander Carter'
+  const name = getInstance().siteName
+  return doc?.title ? `${doc.title} · ${name}` : name
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {

@@ -5,7 +5,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { onThisDayEvents, pickOnThisDay } from '@/data/on-this-day'
 
 const quotes = [
-  { text: '用镜头记录世界，用代码创造未来。', author: 'Alexander' },
+  { text: '用镜头记录世界，用代码创造未来。', author: 'Folio' },
   { text: '曝光、对焦、冲印——页面也一样。', author: '暗房三法则' },
   { text: '光是摄影的原料，也是阅读的节奏。', author: 'Folio' },
   { text: '少即是多：一页一件事。', author: 'Focus' },

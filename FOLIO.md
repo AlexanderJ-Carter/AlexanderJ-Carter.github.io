@@ -1,11 +1,13 @@
 # Folio — 下一代个人主页（Payload + Next.js）
 
-目录：`folio/`。公网主站为 `https://www.alexander.xin`。  
-GitHub Pages 只发 `gateway/` 跳转；根目录 Astro 为迁移源。总览见 [docs/FOLIO-CUTOVER.md](docs/FOLIO-CUTOVER.md)。
+目录：`folio/`。公网主站由你的 **实例配置** 决定。  
+开源仓库只含模板；姓名/论文/密钥见 [docs/FOLIO-INSTANCE.md](docs/FOLIO-INSTANCE.md)。  
+GitHub Pages 的 `gateway/` 亦属实例跳转页。总览见 [docs/FOLIO-CUTOVER.md](docs/FOLIO-CUTOVER.md)。
 
 ## 本地
 
 ```bash
+cp folio/instance/config.example.json folio/instance/config.json  # 填你的实例
 export PATH="$PWD/.tools/node/bin:$PATH"
 npm run folio
 ```

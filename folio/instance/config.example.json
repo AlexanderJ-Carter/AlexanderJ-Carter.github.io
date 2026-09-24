@@ -1,0 +1,45 @@
+{
+  "siteName": "Your Name",
+  "siteMark": "YN",
+  "siteUrl": "https://www.example.com",
+  "tagline": "Photography, writing, and research.",
+  "twitterCreator": "@yourhandle",
+  "elsewhere": [
+    {
+      "name": "GitHub",
+      "host": "github.com/you",
+      "href": "https://github.com/you",
+      "desc": "Public repos"
+    }
+  ],
+  "research": {
+    "intro": "Public papers only. Keep CV behind /about gate.",
+    "profiles": [
+      { "label": "Google Scholar", "href": "https://scholar.google.com" },
+      { "label": "ORCID", "href": "https://orcid.org" }
+    ],
+    "publications": [
+      {
+        "title": "Example Paper Title",
+        "year": "2026",
+        "venue": "arXiv",
+        "links": [
+          { "label": "arXiv", "href": "https://arxiv.org/" },
+          { "label": "PDF", "href": "https://arxiv.org/" }
+        ]
+      }
+    ],
+    "project": {
+      "title": "Example Lab Project",
+      "description": "Short public blurb without personal CV.",
+      "href": "https://github.com/org/project",
+      "hrefLabel": "org/project ↗"
+    }
+  },
+  "security": {
+    "domains": ["example.com", "*.example.com"],
+    "contactEmail": "security@example.com"
+  },
+  "oidcDisplayHost": "id.example.com",
+  "seedEmailHint": "admin@example.com"
+}

@@ -1,18 +1,22 @@
-# Folio on tencent (Tailscale bind). Proxied from cloud nginx → www.alexander.xin
+# Folio production compose — values come from .env.production（实例文件，不入库）
 services:
   folio:
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_SERVER_URL: https://www.alexander.xin
-        NEXT_PUBLIC_OIDC_LOGIN_URL: /api/oidc/login
-        NEXT_PUBLIC_TURNSTILE_SITE_KEY: 0x4AAAAAABdh_m4Oroh5Egsy
+        NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL:-http://127.0.0.1:3000}
+        NEXT_PUBLIC_SITE_NAME: ${NEXT_PUBLIC_SITE_NAME:-Folio}
+        NEXT_PUBLIC_SITE_MARK: ${NEXT_PUBLIC_SITE_MARK:-FO}
+        NEXT_PUBLIC_OIDC_LOGIN_URL: ${NEXT_PUBLIC_OIDC_LOGIN_URL:-/api/oidc/login}
+        NEXT_PUBLIC_OIDC_DISPLAY_HOST: ${NEXT_PUBLIC_OIDC_DISPLAY_HOST:-}
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-}
     image: folio:local
     container_name: folio
     restart: unless-stopped
     ports:
-      - "100.111.222.66:3040:3000"
+      # 例: FOLIO_PUBLISH=100.x.x.x:3040 或 127.0.0.1:3040
+      - "${FOLIO_PUBLISH:-127.0.0.1:3040}:3000"
     env_file:
       - .env.production
     volumes:

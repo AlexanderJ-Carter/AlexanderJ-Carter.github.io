@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getServerSideURL } from '@/utilities/getURL'
+import { publicOriginFromInstance } from '@/instance'
 
 function requireEnv(name: string): string {
   const value = process.env[name]
@@ -8,14 +8,7 @@ function requireEnv(name: string): string {
 }
 
 function publicOrigin(): string {
-  const fromEnv = (process.env.NEXT_PUBLIC_SERVER_URL || getServerSideURL() || '').replace(
-    /\/$/,
-    '',
-  )
-  if (fromEnv && !/0\.0\.0\.0|127\.0\.0\.1|localhost/i.test(fromEnv)) {
-    return fromEnv
-  }
-  return 'https://www.alexander.xin'
+  return publicOriginFromInstance()
 }
 
 function b64url(buf: ArrayBuffer | Uint8Array): string {

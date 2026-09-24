@@ -46,7 +46,9 @@ const BeforeLogin: React.FC<BeforeLoginProps> = ({ searchParams }) => {
 
       <div className="folio-login__meta">
         <span className="folio-login__meta-key">跳转</span>
-        <span className="folio-login__meta-val">id.alexander.xin</span>
+        <span className="folio-login__meta-val">
+          {process.env.NEXT_PUBLIC_OIDC_DISPLAY_HOST || 'IdP'}
+        </span>
         <span className="folio-login__meta-sep" aria-hidden>
           ·
         </span>

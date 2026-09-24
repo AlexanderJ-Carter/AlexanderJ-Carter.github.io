@@ -15,6 +15,7 @@ import { draftMode } from 'next/headers'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+import { getInstance } from '@/instance'
 
 const display = Syne({
   subsets: ['latin'],
@@ -63,16 +64,19 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   )
 }
 
-export const metadata: Metadata = {
-  metadataBase: new URL(getServerSideURL()),
-  title: {
-    default: 'Alexander Carter',
-    template: '%s · Alexander Carter',
-  },
-  description: '摄影与写作。文章在这里改完就能读。',
-  openGraph: mergeOpenGraph(),
-  twitter: {
-    card: 'summary_large_image',
-    creator: '@AlexanderCarter',
-  },
-}
+export const metadata: Metadata = (() => {
+  const instance = getInstance()
+  return {
+    metadataBase: new URL(getServerSideURL()),
+    title: {
+      default: instance.siteName,
+      template: `%s · ${instance.siteName}`,
+    },
+    description: instance.tagline,
+    openGraph: mergeOpenGraph(),
+    twitter: {
+      card: 'summary_large_image',
+      ...(instance.twitterCreator ? { creator: instance.twitterCreator } : {}),
+    },
+  }
+})()

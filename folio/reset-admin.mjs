@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { getPayload } from 'payload'
 import config from './src/payload.config.ts'
 
-const email = process.env.SEED_EMAIL || 'admin@alexander.xin'
+const email = process.env.SEED_EMAIL || process.env.NEXT_PUBLIC_SEED_EMAIL || 'admin@example.com'
 const password = process.env.SEED_PASSWORD || 'Folio-ChangeMe-2026!'
 const name = process.env.SEED_NAME || 'Alexander'
 

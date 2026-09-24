@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import React from 'react'
 
-import { publications, researchProfiles, type Publication } from '@/data/publications'
+import { getPublications, getResearchProfiles, type Publication } from '@/data/publications'
+import { getInstance } from '@/instance'
 
 type Props = {
-  /** 紧凑用于关于页门禁内；完整用于公开 /research */
   compact?: boolean
   showProfiles?: boolean
 }
@@ -41,6 +41,26 @@ function PubRow({ item, index }: { item: Publication; index: number }) {
 }
 
 export function Publications({ compact = false, showProfiles = true }: Props) {
+  const publications = getPublications()
+  const profiles = getResearchProfiles()
+
+  if (publications.length === 0 && !compact) {
+    return (
+      <section className="container max-w-4xl" aria-labelledby="publications-heading">
+        <p className="folio-mark mb-3">Publications</p>
+        <h2 id="publications-heading" className="text-2xl font-semibold tracking-tight mb-3">
+          论文
+        </h2>
+        <p className="text-muted-foreground text-sm">
+          尚未配置公开论文。复制 <code>instance/config.example.json</code> 为{' '}
+          <code>instance/config.json</code> 并填写 <code>research.publications</code>。
+        </p>
+      </section>
+    )
+  }
+
+  if (publications.length === 0) return null
+
   return (
     <section className={compact ? 'mt-12 md:mt-16' : ''} aria-labelledby="publications-heading">
       <div className={compact ? '' : 'container max-w-4xl'}>
@@ -54,8 +74,7 @@ export function Publications({ compact = false, showProfiles = true }: Props) {
           </h2>
           {!compact && (
             <p className="mt-3 text-muted-foreground text-sm md:text-base leading-relaxed">
-              结构与 GitHub 主页一致：题名、年份与 venue，外链到 arXiv / PDF /
-              OpenReview。个人履历不在此页展开。
+              {getInstance().research.intro}
             </p>
           )}
         </div>
@@ -66,12 +85,12 @@ export function Publications({ compact = false, showProfiles = true }: Props) {
           ))}
         </div>
 
-        {showProfiles && (
+        {showProfiles && profiles.length > 0 && (
           <nav
             className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground"
             aria-label="学术档案外链"
           >
-            {researchProfiles.map((p) => (
+            {profiles.map((p) => (
               <a
                 key={p.href}
                 href={p.href}

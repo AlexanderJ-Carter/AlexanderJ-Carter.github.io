@@ -43,6 +43,9 @@ jobs:
             --exclude public/media \
             --exclude .env \
             --exclude .env.production \
+            --exclude ADMIN.txt \
+            --exclude instance/config.json \
+            --exclude seed-data \
             -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=accept-new" \
             ./folio/ "${USER}@${HOST}:${REMOTE}/"
 
