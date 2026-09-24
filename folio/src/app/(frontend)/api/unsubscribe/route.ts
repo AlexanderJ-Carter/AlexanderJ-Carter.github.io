@@ -1,11 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import {
-  EMAIL_RE,
-  addSubscriber,
-  normalizeEmail,
-  sendSubscribeAck,
-} from '@/utilities/subscribe'
+import { EMAIL_RE, normalizeEmail, removeSubscriber } from '@/utilities/subscribe'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,7 +11,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, message: '请填写有效邮箱' }, { status: 400 })
   }
 
-  const result = await addSubscriber(email)
+  const result = await removeSubscriber(email)
   if (!result.ok) {
     return NextResponse.json(
       { ok: false, message: result.message },
@@ -24,13 +19,5 @@ export async function POST(req: Request) {
     )
   }
 
-  void sendSubscribeAck(email)
-
-  return NextResponse.json({
-    ok: true,
-    message: result.created
-      ? '已记下。邮箱里会有一封短确认，可随时退订。'
-      : '你已在名单中，订阅已重新打开。',
-    id: 'id' in result ? result.id : undefined,
-  })
+  return NextResponse.json({ ok: true, message: result.message })
 }

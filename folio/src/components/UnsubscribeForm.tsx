@@ -1,21 +1,27 @@
 'use client'
 
-import Link from 'next/link'
-import React, { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import React, { Suspense, useEffect, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 
-export function SubscribeForm() {
+function UnsubscribeFormInner() {
+  const search = useSearchParams()
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
   const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    const q = search.get('email')?.trim()
+    if (q) setEmail(q)
+  }, [search])
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault()
     setStatus('loading')
     setMessage('')
 
-    const res = await fetch('/api/subscribe', {
+    const res = await fetch('/api/unsubscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),
@@ -24,22 +30,21 @@ export function SubscribeForm() {
 
     if (!res.ok || !data.ok) {
       setStatus('error')
-      setMessage(data.message || '订阅失败，请稍后再试')
+      setMessage(data.message || '退订失败，请稍后再试')
       return
     }
 
     setStatus('ok')
-    setMessage(data.message || '已加入名单')
-    setEmail('')
+    setMessage(data.message || '已退订')
   }
 
   return (
     <form className="space-y-4" onSubmit={onSubmit}>
-      <label className="block text-sm font-medium" htmlFor="subscribe-email">
+      <label className="block text-sm font-medium" htmlFor="unsubscribe-email">
         邮箱
       </label>
       <input
-        id="subscribe-email"
+        id="unsubscribe-email"
         type="email"
         required
         autoComplete="email"
@@ -49,8 +54,8 @@ export function SubscribeForm() {
         placeholder="you@example.com"
         disabled={status === 'loading'}
       />
-      <Button type="submit" disabled={status === 'loading' || !email.trim()}>
-        {status === 'loading' ? '提交中…' : '订阅'}
+      <Button type="submit" variant="outline" disabled={status === 'loading' || !email.trim()}>
+        {status === 'loading' ? '处理中…' : '确认退订'}
       </Button>
       {message ? (
         <p
@@ -62,13 +67,14 @@ export function SubscribeForm() {
           {message}
         </p>
       ) : null}
-      <p className="text-xs leading-relaxed text-muted-foreground">
-        提交即加入通讯名单。不定期、非营销。随时可{' '}
-        <Link className="underline underline-offset-4" href="/unsubscribe">
-          退订
-        </Link>
-        。
-      </p>
     </form>
+  )
+}
+
+export function UnsubscribeForm() {
+  return (
+    <Suspense fallback={<p className="text-sm text-muted-foreground">载入中…</p>}>
+      <UnsubscribeFormInner />
+    </Suspense>
   )
 }

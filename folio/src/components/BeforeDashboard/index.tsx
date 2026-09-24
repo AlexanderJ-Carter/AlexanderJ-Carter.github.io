@@ -79,7 +79,11 @@ const BeforeDashboard: React.FC = () => {
               <code>pnpm configure:contact-form</code>
             </li>
             <li>
-              订阅名单：前台 <code>/subscribe</code> → Resend Contacts（Segment）
+              订阅名单：前台 <code>/subscribe</code> → Resend Contacts；退订{' '}
+              <code>/unsubscribe</code>。看名单请打开{' '}
+              <a href="https://resend.com/contacts" target="_blank" rel="noreferrer">
+                Resend Contacts
+              </a>
             </li>
           </ul>
         </section>

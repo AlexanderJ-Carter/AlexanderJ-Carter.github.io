@@ -6,22 +6,22 @@ import { SubscribeForm } from '@/components/SubscribeForm'
 
 export const metadata: Metadata = {
   title: '订阅',
-  description: 'RSS 与邮件订阅。',
+  description: 'RSS 与不定期邮件通讯。',
 }
 
 export default function SubscribePage() {
   return (
     <PageChrome
-      mark="Subscribe"
+      mark="订阅"
       title="订阅"
-      description="写作暂缓时，RSS 仍会随发布更新；邮件用于以后偶发通讯，不是营销轰炸。"
+      description="写作先歇着时，邮件也不会常发；有像样更新时才会写一封。不是促销名单。"
     >
       <div className="container grid max-w-4xl gap-14 lg:grid-cols-2">
         <section>
           <p className="folio-mark mb-3">RSS</p>
-          <h2 className="mb-3 text-xl font-semibold tracking-tight">阅读器订阅</h2>
+          <h2 className="mb-3 text-xl font-semibold tracking-tight">阅读器</h2>
           <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-            把 feed 加进任意 RSS 阅读器。文章区恢复后会从这里推送。
+            适合自己拉文章。站内写作恢复后会从这里更新。
           </p>
           <p>
             <a className="underline underline-offset-4" href="/feed.xml">
@@ -38,10 +38,14 @@ export default function SubscribePage() {
         </section>
 
         <section>
-          <p className="folio-mark mb-3">Email</p>
-          <h2 className="mb-3 text-xl font-semibold tracking-tight">邮件订阅</h2>
+          <p className="folio-mark mb-3">邮件</p>
+          <h2 className="mb-3 text-xl font-semibold tracking-tight">通讯名单</h2>
           <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-            加入通讯名单。可随时退订；地址只用于本站相关通知。
+            提交后会收到一封短确认。名单在 Resend；你可随时在{' '}
+            <Link className="underline underline-offset-4" href="/unsubscribe">
+              退订页
+            </Link>{' '}
+            退出。
           </p>
           <SubscribeForm />
         </section>
