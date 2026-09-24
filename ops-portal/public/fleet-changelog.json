@@ -1,8 +1,30 @@
 {
-  "generated": "2026-09-19",
+  "generated": "2026-09-24",
   "source": "src/data/fleet-changelog.ts",
   "note": "Fleet-wide timeline; apex release notes remain in CHANGELOG.md / /changelog",
   "entries": [
+    {
+      "id": "2026-09-24-hermes-retired",
+      "date": "2026-09-24",
+      "kind": "removed",
+      "sites": [
+        "hermes"
+      ],
+      "title": {
+        "zh-CN": "下线 Hermes Agent",
+        "zh-TW": "下線 Hermes Agent",
+        "en-GB": "Retired Hermes Agent",
+        "fr": "Hermes Agent retiré",
+        "ru": "Hermes Agent снят"
+      },
+      "summary": {
+        "zh-CN": "tencent 实例与镜像已删；Nginx/Pocket ID/CF DNS+Tunnel ingress 同步移除 hermes.alexander.xin。",
+        "zh-TW": "tencent 實例與鏡像已刪；Nginx/Pocket ID/CF DNS+Tunnel ingress 同步移除 hermes.alexander.xin。",
+        "en-GB": "Removed tencent instance/image; cleared Nginx, Pocket ID client, CF DNS and tunnel ingress for hermes.alexander.xin.",
+        "fr": "Instance/image tencent supprimées ; Nginx, client Pocket ID, DNS CF et ingress tunnel nettoyés pour hermes.alexander.xin.",
+        "ru": "Удалены инстанс/образ на tencent; очищены Nginx, клиент Pocket ID, DNS CF и ingress туннеля для hermes.alexander.xin."
+      }
+    },
     {
       "id": "2026-08-12-ops-help",
       "date": "2026-08-12",
