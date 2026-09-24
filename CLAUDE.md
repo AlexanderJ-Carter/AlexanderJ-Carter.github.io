@@ -32,9 +32,11 @@
 Folio 改动:
 
 1. `pnpm --dir folio build`（或在服务器 compose build）
-2. 关键路由手动点验（/, /gallery, /fun, /admin/login, /security/policy）
+2. 关键路由手动点验（/, /gallery, /fun, /admin/login, /security/policy, /privacy）
 
-文档或切换策略变更时同步 `docs/FOLIO-CUTOVER.md` 与必要时 `README.md`。
+文档或切换策略变更时同步 `docs/FOLIO-CUTOVER.md` 与 `README.md`。
+
+根目录 `npm run build` / `npm run dev` 已指向 Folio；遗留 Astro 用 `legacy:*`。
 
 ## 5. 建议工作流
 

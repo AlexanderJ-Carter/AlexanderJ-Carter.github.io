@@ -1,10 +1,15 @@
 # GitHub Copilot Instructions
 
+> **2026-09:** Primary site is **Folio** (`folio/` → `www.alexander.xin`).  
+> GitHub Pages only publishes `gateway/`. Root Astro (`src/`) is legacy migration source.  
+> Prefer editing `folio/src/**`. See `CLAUDE.md` and `docs/FOLIO-CUTOVER.md`. Do not `git push` unless asked.
+
 ## Project Context
 
-This is a personal portfolio website built with **Astro v7**, **Tailwind CSS**, and **TypeScript**. It uses a static site generation (SSG) approach and is deployed via GitHub Pages.
+**Current:** Payload 3 + Next.js in `folio/`, Docker on Tencent, Cloudflare in front.  
+**Legacy (below):** Astro v7 + Tailwind static site patterns still describe `src/` if you touch migration sources.
 
-## Architecture & Patterns
+## Architecture & Patterns (legacy Astro)
 
 ### 1. Template Pattern for i18n
 

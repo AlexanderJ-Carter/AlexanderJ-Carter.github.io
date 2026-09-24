@@ -1,44 +1,51 @@
-# 架构速览
+# 架构速览（2026-09）
 
-## 目录
+> **主站已是 Folio。** 下文「Astro 目录」仅描述遗留树，便于迁内容；改版请改 `folio/`。  
+> 部署与职责：[FOLIO-CUTOVER.md](./FOLIO-CUTOVER.md)。站群控制面：[architecture/site-fleet.md](./architecture/site-fleet.md)。
+
+## 运行时拓扑
+
+```
+浏览器
+  ├─ www.alexander.xin  → Cloudflare → nginx(cloud) → Tailscale → folio:3040 (tencent)
+  └─ *.github.io        → GitHub Pages ← gateway/
+```
+
+| 路径 | 角色 |
+|------|------|
+| `folio/` | Payload CMS + Next 前台（主站） |
+| `gateway/` | Pages 跳转 + security 镜像 |
+| `src/` + `public/` | Astro 遗留（迁移源） |
+| `ops-portal/` / `workers/` | 运维/边缘实验（非主站） |
+
+## Folio 目录（主开发面）
+
+```
+folio/src/
+  app/(frontend)/   # 页面与 API（含 Gate、OIDC、views）
+  app/(payload)/    # 后台
+  collections/      # Pages / Posts / Media …
+  components/       # 前台与后台组件
+  data/             # 画廊等结构化数据
+```
+
+## Astro 遗留目录（参考）
 
 ```
 src/
-  components/
-    chrome/      # 页头页脚、主题、通知、音乐等全站壳
-    widgets/     # 工具小部件（天气、番茄钟、曝光三角…）
-    templates/   # 页面主体（被 pages 薄包装）
-  pages/         # 路由；zh-CN 在根，其他语言在 [lang]/
-  i18n/          # ui.ts + pages/* 文案；routing.ts 管多语言路径
-  config/        # 站点开关（广告、备案、通知）
-  data/          # 结构化数据（历史上的今天等）
-  content/       # Astro Content（写作）
-scripts/         # 构建辅助（音乐清单、图片优化）
-public/          # 静态资源；画廊请用 gallery-optimized
+  components/   # chrome / widgets / templates
+  pages/        # 旧路由
+  content/      # 写作 Markdown（migrate-site 可读）
+  i18n/         # 多语文案
+public/         # 旧静态资源；画廊原图勿提交
 ```
 
-## 路由约定
+## 路由约定（遗留）
 
-- 默认语言 `zh-CN` → `/about`
-- 其他语言 → `/en/about`、`/zh-TW/about`…（**不要**生成 `/zh-CN/*` 或 `/en-GB/*`）
-- 路径助手：`src/i18n/routing.ts` 的 `getLangStaticPaths` / `resolveRouteLang`
+- 默认语言曾为 `zh-CN` → `/about`；其他语言 `/en/about` 等  
+- Folio 侧以中文为主；语言前缀请求由 `folio/redirects.ts` 收束
 
-## 已落地的体验增强
+## 体验底线（Folio 与遗留共用原则）
 
-- View Transitions（`ClientRouter`）
-- RSS：`/rss.xml` 与各语言 `/en/rss.xml` 等
-- hreflang 按当前路径生成等价 URL
-
-## 站群与运维
-
-控制面、Access / Pocket ID / SMTP（Resend）、登录分层见 [architecture/site-fleet.md](./architecture/site-fleet.md)。公开站无访客账户；维护者日常入口为 `ops.alexander.xin`。
-
-## 已落地的结构整理
-
-- Gallery 图集：`src/data/gallery.ts`（文案与资源分离，`GalleryTemplate` 已引用）
-
-## 下一步可研究（未做）
-
-- 本地 Canvas/WASM 生成 QR（去掉第三方 `api.qrserver.com`）
-- 逐步把仍内嵌在模板里的文案迁入 `src/i18n/pages/*`（部分 pages 文件已预建、尚未接线）
-- 原片 `public/img/gallery/` 可移到本地 `assets/gallery-source/`（已 gitignore），仓库只保留 optimized
+- `prefers-reduced-motion`、可见焦点、键盘可达  
+- 机密不进仓库；安全资产见 CLAUDE.md

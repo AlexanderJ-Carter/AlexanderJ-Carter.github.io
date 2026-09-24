@@ -1,20 +1,25 @@
 # AGENT 指南（面向 AI 助手与自动化工具）
 
+> **2026-09 起主站为 Folio（`folio/` → www.alexander.xin）。**  
+> GitHub Pages 只发 `gateway/`。根目录 Astro 为迁移源。  
+> 冲突时以更新的 [CLAUDE.md](./CLAUDE.md) 与 [docs/FOLIO-CUTOVER.md](./docs/FOLIO-CUTOVER.md) 为准。  
+> 未经许可不要 `git push`。
+
 > 本文件面向 GitHub Copilot、Cursor、Claude Code 等智能开发助手，用于约束自动修改行为并提供项目上下文。
 >
-> **版本**: 3.1.0 | **最后更新**: 2026-03-19
+> **版本**: 3.2.0 | **最后更新**: 2026-09-24
 
 ## AI 配置文件关系
 
-- `AGENT.md`: 面向通用 AI 助手的完整规则与项目上下文（主文档）。
+- `AGENT.md`: 面向通用 AI 助手的完整规则与项目上下文（主文档；下文部分仍描述 Astro 遗留结构）。
 - `.github/copilot-instructions.md`: GitHub Copilot 的高优先级实现约束。
-- `CLAUDE.md`: Claude / Claude Code 的精简执行规则。
+- `CLAUDE.md`: Claude / Claude Code 的精简执行规则（**Folio 优先**）。
 
 当三者存在冲突时，优先级建议为：
 
-1. `.github/copilot-instructions.md`
-2. `AGENT.md`
-3. `CLAUDE.md`
+1. `.github/copilot-instructions.md` / `CLAUDE.md`（取更新、更具体者）
+2. `docs/FOLIO-CUTOVER.md`
+3. 本文其余章节（Astro 遗留说明）
 
 ---
 
@@ -22,15 +27,17 @@
 
 ### 1.1 基本信息
 
-| 项目属性   | 值                                       |
-| ---------- | ---------------------------------------- |
-| **类型**   | 个人作品集与工具站点                     |
-| **主题**   | 摄影 / 代码 / 设计 / 生活记录            |
-| **技术栈** | Astro v7 + TypeScript + Tailwind CSS     |
-| **部署**   | GitHub Pages（静态资源）+ Cloudflare CDN |
-| **域名**   | https://alexander.xin                    |
+| 项目属性   | 值                                                          |
+| ---------- | ----------------------------------------------------------- |
+| **类型**   | 个人作品集与写作站点                                        |
+| **主题**   | 摄影 / 代码 / 设计 / 生活记录                               |
+| **主技术栈** | Payload 3 + Next.js（`folio/`）                           |
+| **主部署** | 腾讯云 Docker + Cloudflare；CI：`folio-deploy.yml`          |
+| **Pages**  | `gateway/` 轻量跳转（`deploy.yml`）                         |
+| **遗留**   | 根目录 Astro（参考 / 迁移源，默认不发布）                   |
+| **主域名** | https://www.alexander.xin                                   |
 
-### 1.2 多语言支持
+### 1.2 多语言支持（遗留 Astro）
 
 | 语言代码 | 语言名称 | 路由前缀           |
 | -------- | -------- | ------------------ |
@@ -40,6 +47,8 @@
 | `fr`     | Français | `/fr/`             |
 | `ru`     | Русский  | `/ru/`             |
 
+Folio 前台当前以简体中文为主；旧语言前缀由 `folio/redirects.ts` 收束。
+
 ### 1.3 安全页面
 
 - **站内**: `/security/policy`、`/security/acknowledgments`
@@ -48,12 +57,8 @@
 
 ### 1.4 架构特点
 
-项目整体是 **纯静态站点**，采用 Astro Islands 架构：
-
-- 默认零客户端 JS，按需水合交互组件
-- 无自托管数据库或后端
-- 如需动态能力，优先使用第三方 API 或边缘函数（Cloudflare Workers 等）
-- 前端不存储任何机密信息
+**主站 Folio** 为 SSR/SSG 混合 + SQLite（Payload），后台 OIDC（Pocket ID）。  
+**遗留 Astro** 曾为纯静态 Islands 架构，下文目录说明仍以该树为准，便于迁移对照。
 
 ---
 

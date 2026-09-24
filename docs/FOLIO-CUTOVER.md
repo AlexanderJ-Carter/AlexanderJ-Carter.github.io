@@ -1,51 +1,98 @@
-# Folio 切换与清理说明
+# Folio 切换与部署说明
 
 ## 现状（2026-09）
 
 | 入口 | 实际服务 |
 |------|----------|
-| `https://www.alexander.xin` | **Folio**（腾讯云 Docker，经 Cloudflare + 云端 nginx → Tailscale） |
-| `https://alexanderj-carter.github.io` | GitHub Pages **网关页**（跳转到 www，并镜像 security.txt） |
-| 仓库根目录 Astro (`src/`、`public/`) | **遗留参考**，内容迁移源；不再是主站 |
+| `https://www.alexander.xin` | **Folio**（腾讯云 Docker，Cloudflare → 云端 nginx → Tailscale `:3040`） |
+| `https://alexanderj-carter.github.io` | GitHub Pages **网关**（`gateway/`：跳转 www + 镜像 security.txt / PGP） |
+| 仓库根 Astro（`src/`、`public/`） | **遗留参考 / 迁移源**，不再参与主站发布 |
 
-## CI
+## 职责分工（有机配合）
 
-1. `.github/workflows/folio-deploy.yml` — 推送 `folio/**` 到 `main` 时，SSH 同步并在腾讯云 `docker compose build && up -d`，再清 Cloudflare 缓存。
-2. `.github/workflows/deploy.yml` — 仅构建/发布 `gateway/` 到 GitHub Pages（轻量跳转，不再整站编译 Astro）。
+```
+开发者 push
+    │
+    ├─ 改 folio/** ──► folio-deploy.yml ──► SSH rsync ──► tencent docker compose
+    │                                                         │
+    │                                                         └─► www.alexander.xin
+    │
+    └─ 改 gateway/** ─► deploy.yml ──► GitHub Pages
+                                          │
+                                          └─► *.github.io → 刷新到 www
+```
 
-### 需要配置的 Secrets
+- **内容与交互**：只改 `folio/src`（页面、组件、Payload 集合、样式）。
+- **公网跳转与仓库 Pages 名片**：只改 `gateway/`。
+- **Astro**：可读、可 `legacy:*` 本地构建；不要把新功能写回 `src/pages`。
 
-- `FOLIO_SSH_PRIVATE_KEY` — 部署用私钥
-- `FOLIO_SSH_HOST` — 如 `100.111.222.66`（或可解析主机名）
-- `FOLIO_SSH_USER` — 如 `ubuntu`
-- `FOLIO_REMOTE_PATH` — 默认 `/home/ubuntu/folio`
-- `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ZONE_ID` — 可选，用于 purge
+## CI Workflows
 
-## 删除清单（分阶段，勿一次清空）
+| 文件 | 触发 | 作用 |
+|------|------|------|
+| `.github/workflows/folio-deploy.yml` | `folio/**` → `main`，或手动 | 同步并重建腾讯云 Folio |
+| `.github/workflows/deploy.yml` | `gateway/**` → `main`，或手动 | 发布 GitHub Pages 网关 |
+| `.github/workflows/code-quality.yml` | 遗留 Astro 路径变更 | format / lint / `legacy:build`（不拦 Folio 专用 PR） |
+| `.github/workflows/lighthouse.yml` | 周更 / 手动 | 对 **线上 www** 跑 Lighthouse（不再本地编 Astro） |
 
-### 可删（确认 Folio 已覆盖后）
+### Folio 部署所需 Secrets
 
-- 纯 Astro 页面中已迁到 Folio 的路由实现（`src/pages/gallery.astro`、`fun.astro`、`about`/`contact` 模板等）
-- 旧 Pages 专用脚本/workers（若不再使用）
-- 重复的优化图：以 `folio/public/img/gallery-optimized` 为准
+- `FOLIO_SSH_PRIVATE_KEY`
+- `FOLIO_SSH_HOST`（如 Tailscale IP `100.111.222.66`）
+- `FOLIO_SSH_USER`（默认 `ubuntu`）
+- `FOLIO_REMOTE_PATH`（默认 `/home/ubuntu/folio`）
+- `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ZONE_ID`（可选，purge）
+
+未配置 SSH Secrets 时，Folio job 会 skip 并打印提示；可手动部署：
+
+```bash
+ssh tencent
+cd /home/ubuntu/folio
+docker compose -f compose.prod.yaml build && docker compose -f compose.prod.yaml up -d
+```
+
+注意：容器端口绑在 Tailscale 地址上。机器重启后若 `:3040` 无监听，先确认 `tailscale0` 再起，必要时 `compose up -d --force-recreate`。
+
+## 已迁 / 未迁对照（组件与路由）
+
+### Folio 已承接
+
+- 首页、写作 `/posts`、画廊、玩乐、关于/联系（CMS + Gate）、安全政策与致谢、隐私/条款、搜索、访客验证、OIDC 后台登录、访问量与自定义地址预览
+
+### 仍留在 Astro（可按需迁或弃用）
+
+- 多语言整站壳、`/tools` `/help` `/network` `/projects` `/timeline` `/uses` `/now`、NEXUS `/next/*`、各类单位换算小页等
+- 写作正文源：`src/content/writing/**`（`folio/migrate-site.mjs` 仍可读）
+
+旧 URL 已在 `folio/redirects.ts` 做一批 301/302（如 `/writing` → `/posts`、语言前缀收束）。细粒度别名继续用 Payload「重定向」集合。
+
+## 删除清单（分阶段）
+
+### 可删（确认 Folio 稳定后）
+
+- 已迁路由的 Astro 页面实现、重复优化图（以 `folio/public/img/gallery-optimized` 为准）
+- 仅服务旧 Pages 整站的脚本/workers（确认无引用后）
 
 ### 暂留
 
-- `src/content/writing/**` — `folio/migrate-site.mjs` 仍可读
-- `public/.well-known/security.txt`、`public/security/pgp-key.asc` — 已复制到 Folio；根目录可在切换稳定后删除
-- `src/pages/security/*` — 已迁到 Folio `/security/*`；稳定后可删 Astro 版
+- `src/content/writing/**`
+- 根目录 `public/.well-known/security.txt` 等（Folio / gateway 已有副本；稳定后再删根目录）
 
-### 永不删（规则）
+### 永不删
 
-- 仓库级安全文档：`.github/SECURITY.md`
-- Folio 内：`folio/public/.well-known/security.txt`、`folio/public/security/pgp-key.asc`、`folio/src/app/(frontend)/security/**`
+- `.github/SECURITY.md`
+- Folio：`folio/public/.well-known/security.txt`、`folio/public/security/pgp-key.asc`、`folio/src/app/(frontend)/security/**`
 
-## 本地开发
+## 本地
 
 ```bash
-# Folio
-pnpm --dir folio dev
-
-# 内容再导入 CMS（可选）
-pnpm folio:migrate
+pnpm --dir folio dev   # 或 npm run folio
+pnpm --dir folio build
+npm run folio:migrate  # 可选
 ```
+
+## 相关文档
+
+- 根 [README.md](../README.md) — 仓库入口
+- [FOLIO.md](../FOLIO.md) — Folio 本地与生产备忘
+- [CLAUDE.md](../CLAUDE.md) — Agent 硬规则
