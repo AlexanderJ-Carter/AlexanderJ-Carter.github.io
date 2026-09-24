@@ -3,48 +3,77 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Alexander Carter</title>
+    <title>Alexander Carter · Gateway</title>
     <meta
       name="description"
-      content="作品集已迁至 www.alexander.xin（Folio）。"
+      content="个人站点已迁至 Folio：https://www.alexander.xin"
     />
     <link rel="canonical" href="https://www.alexander.xin/" />
+    <link rel="authorization" href="/.well-known/security.txt" />
     <meta http-equiv="refresh" content="0;url=https://www.alexander.xin/" />
     <style>
       :root {
         color-scheme: dark;
+        --bg: #0e1116;
+        --fg: #f4f0e8;
+        --muted: rgba(244, 240, 232, 0.55);
+        --accent: #8ec9d8;
+      }
+      * {
+        box-sizing: border-box;
       }
       body {
         margin: 0;
         min-height: 100vh;
         display: grid;
         place-items: center;
+        padding: 1.5rem;
         font-family: ui-sans-serif, system-ui, sans-serif;
-        background: #0e1116;
-        color: #f4f0e8;
+        background:
+          radial-gradient(ellipse at 30% 20%, rgba(142, 201, 216, 0.08), transparent 50%),
+          var(--bg);
+        color: var(--fg);
+      }
+      main {
+        max-width: 28rem;
+        text-align: center;
       }
       a {
-        color: #8ec9d8;
+        color: var(--accent);
       }
       p {
-        margin: 0.4rem 0;
-        line-height: 1.5;
-        text-align: center;
+        margin: 0.45rem 0;
+        line-height: 1.55;
       }
       .mark {
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 0.75rem;
+        font-size: 0.72rem;
         letter-spacing: 0.18em;
         text-transform: uppercase;
-        color: rgba(244, 240, 232, 0.5);
+        color: var(--muted);
+      }
+      .links {
+        margin-top: 1.25rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .links a {
+        margin: 0 0.35rem;
       }
     </style>
   </head>
   <body>
     <main>
-      <p class="mark">Alexander Carter</p>
-      <p>站点已迁至 Folio。</p>
+      <p class="mark">GitHub Pages · Gateway</p>
+      <p>作品集与写作已迁至 Folio。</p>
       <p><a href="https://www.alexander.xin/">前往 www.alexander.xin</a></p>
+      <p class="links">
+        <a href="https://www.alexander.xin/security/policy">安全政策</a>
+        ·
+        <a href="/.well-known/security.txt">security.txt</a>
+        ·
+        <a href="/security/pgp-key.asc">PGP</a>
+      </p>
     </main>
   </body>
 </html>
