@@ -472,7 +472,7 @@ async function main() {
             link: {
               type: 'custom',
               appearance: 'default',
-              label: '阅读文章',
+              label: '阅读写作',
               url: '/posts',
             },
           },
@@ -480,7 +480,7 @@ async function main() {
             link: {
               type: 'custom',
               appearance: 'outline',
-              label: '关于',
+              label: '关于我',
               url: '/about',
             },
           },
@@ -488,30 +488,59 @@ async function main() {
       },
       layout: [
         {
+          blockType: 'content',
+          columns: [
+            {
+              size: 'twoThirds',
+              richText: richRoot([
+                heading('h2', '这是一间慢慢长出来的工作室'),
+                paragraph([
+                  text(
+                    '摄影记录光线的温度，写作整理实践里的取舍。页面改完就能读，尽量让键盘与屏幕阅读器也能顺利走完路径。',
+                  ),
+                ]),
+              ]),
+              enableLink: true,
+              link: {
+                type: 'custom',
+                appearance: 'default',
+                label: '关于我 →',
+                url: '/about',
+              },
+            },
+            {
+              size: 'oneThird',
+              richText: richRoot([
+                heading('h3', '正在打磨'),
+                paragraph([text('影像整理')]),
+                paragraph([text('写作与深读')]),
+                paragraph([text('小工具索引')]),
+              ]),
+            },
+          ],
+        },
+        {
           blockType: 'archive',
           populateBy: 'collection',
           relationTo: 'posts',
-          limit: 3,
+          limit: 5,
           introContent: richRoot([
             heading('h2', '近期写作'),
-            paragraph([text('从暗房到站点架构，按时间往回翻。')]),
+            paragraph([text('不会很快过期的思考，按时间往回翻。')]),
           ]),
         },
-        contentBlock('最近在做', [
-          'AgentSociety2，以及美团实习。站外还有 MyCook、Gitea 与 IT-Tools，本站只做入口。',
-        ]),
         {
           blockType: 'cta',
           richText: richRoot([
-            heading('h2', '写信过来'),
-            paragraph([text('合作、反馈或打个招呼都可以。')]),
+            heading('h2', '想聊聊？'),
+            paragraph([text('技术讨论、项目合作或随便打个招呼，都欢迎。')]),
           ]),
           links: [
             {
               link: {
                 type: 'custom',
                 appearance: 'default',
-                label: '联系',
+                label: '联系我',
                 url: '/contact',
               },
             },

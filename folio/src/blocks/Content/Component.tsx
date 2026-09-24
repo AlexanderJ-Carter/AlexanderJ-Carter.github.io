@@ -17,8 +17,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   }
 
   return (
-    <div className="container my-16">
-      <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
+    <div className="container">
+      <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-10 lg:gap-x-16">
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
@@ -28,12 +28,19 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
               <div
                 className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
                   'md:col-span-2': size !== 'full',
+                  'lg:border-l lg:border-border/70 lg:pl-8': size === 'oneThird' || size === 'half',
                 })}
                 key={index}
               >
-                {richText && <RichText data={richText} enableGutter={false} />}
+                {richText && (
+                  <RichText
+                    className="[&_h2]:text-2xl [&_h2]:md:text-3xl [&_h2]:tracking-tight [&_p]:text-muted-foreground [&_p]:leading-relaxed"
+                    data={richText}
+                    enableGutter={false}
+                  />
+                )}
 
-                {enableLink && <CMSLink {...link} />}
+                {enableLink && <CMSLink className="mt-4 inline-flex" {...link} />}
               </div>
             )
           })}

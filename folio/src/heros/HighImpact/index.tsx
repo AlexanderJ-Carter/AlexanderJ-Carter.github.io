@@ -64,6 +64,13 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
           )}
         </div>
       </div>
+
+      <a
+        href="#featured"
+        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-[0.7rem] uppercase tracking-[0.22em] text-white/55 hover:text-white/90 transition-colors"
+      >
+        向下浏览
+      </a>
     </div>
   )
 }

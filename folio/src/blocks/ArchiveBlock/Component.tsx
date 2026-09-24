@@ -4,6 +4,7 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
 import RichText from '@/components/RichText'
+import Link from 'next/link'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
 
@@ -30,6 +31,7 @@ export const ArchiveBlock: React.FC<
       collection: 'posts',
       depth: 1,
       limit,
+      sort: '-publishedAt',
       ...(flattenedCategories && flattenedCategories.length > 0
         ? {
             where: {
@@ -53,13 +55,23 @@ export const ArchiveBlock: React.FC<
   }
 
   return (
-    <div className="my-16" id={`block-${id}`}>
+    <section className="py-4" id={`block-${id}`}>
       {introContent && (
-        <div className="container mb-16">
-          <RichText className="ms-0 max-w-[48rem]" data={introContent} enableGutter={false} />
+        <div className="container mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <RichText
+            className="ms-0 max-w-[40rem] [&_h2]:text-2xl [&_h2]:md:text-3xl [&_h2]:tracking-tight"
+            data={introContent}
+            enableGutter={false}
+          />
+          <Link
+            href="/posts"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors shrink-0"
+          >
+            全部文章 →
+          </Link>
         </div>
       )}
       <CollectionArchive posts={posts} />
-    </div>
+    </section>
   )
 }

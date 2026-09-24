@@ -384,3 +384,73 @@ h3 {
     animation: none;
   }
 }
+
+.folio-section-tint {
+  background:
+    radial-gradient(ellipse 70% 60% at 10% 0%, color-mix(in oklch, var(--primary) 12%, transparent), transparent 55%),
+    color-mix(in oklch, var(--muted) 55%, transparent);
+}
+
+.contact-sheet__frame {
+  background: var(--card);
+  border: 1px solid color-mix(in oklch, var(--border) 80%, transparent);
+  isolation: isolate;
+}
+
+.contact-sheet__no {
+  position: absolute;
+  top: 0.65rem;
+  left: 0.75rem;
+  z-index: 2;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  color: rgb(255 255 255 / 0.85);
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.45);
+}
+
+.contact-sheet__meta {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 2.5rem 0.85rem 0.85rem;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.72), transparent);
+}
+
+.principle-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (width >= 48rem) {
+  .principle-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.principle-item {
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.15rem 1.25rem;
+  background: color-mix(in oklch, var(--card) 70%, transparent);
+}
+
+.principle-item__title {
+  font-family: var(--font-display), Syne, system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.45rem;
+}
+
+.principle-item__body {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--muted-foreground);
+}
+
+.folio-directory a:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
