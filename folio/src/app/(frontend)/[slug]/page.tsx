@@ -7,10 +7,11 @@ import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
 import { homeStatic } from '@/endpoints/seed/home-static'
 
-import { RenderBlocks } from '@/blocks/RenderBlocks'
+import { blockPanels, RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { AboutTimeline } from '@/components/AboutTimeline'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
+import { HomeSnap } from '@/components/HomeSnap'
 import { MethodStrip } from '@/components/MethodStrip'
 import { PoemHistory } from '@/components/PoemHistory'
 import { Publications } from '@/components/Publications'
@@ -72,9 +73,28 @@ export default async function Page({ params: paramsPromise }: Args) {
   }
 
   const { hero, layout } = page
+  const isHome = decodedSlug === 'home'
+  const cmsBlocks = isHome ? blockPanels(layout) : []
+
+  const homePanels = isHome
+    ? [
+        <RenderHero key="hero" {...hero} />,
+        <div key="studio" className="home-snap-stack">
+          <FeaturedStrip />
+          <MethodStrip />
+        </div>,
+        <div key="notes" className="home-snap-stack home-snap-stack--dense">
+          <PoemHistory />
+          <ResearchStrip />
+          {cmsBlocks.length > 0 ? <div className="home-snap-cms">{cmsBlocks}</div> : null}
+        </div>,
+      ]
+    : []
+
+  const homeLabels = isHome ? ['开场', '影像与法则', '今日与研究'] : []
 
   return (
-    <article className={decodedSlug === 'home' ? 'pb-24' : 'pt-20 md:pt-24 pb-24'}>
+    <article className={isHome ? 'pb-0' : 'pt-20 md:pt-24 pb-24'}>
       <PageClient />
       {page.id != null && (
         <ViewTracker
@@ -83,9 +103,7 @@ export default async function Page({ params: paramsPromise }: Args) {
           initial={typeof page.viewCount === 'number' ? page.viewCount : 0}
           enabled={!draft}
           className={
-            decodedSlug === 'home'
-              ? 'sr-only'
-              : 'container mb-2 text-xs text-muted-foreground meta-mono'
+            isHome ? 'sr-only' : 'container mb-2 text-xs text-muted-foreground meta-mono'
           }
         />
       )}
@@ -94,29 +112,19 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      <RenderHero {...hero} />
-      {decodedSlug === 'home' && (
+      {isHome ? (
+        <HomeSnap panels={homePanels} labels={homeLabels} />
+      ) : (
         <>
-          <div className="mt-10 md:mt-14">
-            <FeaturedStrip />
-          </div>
-          <div className="my-10 md:my-14">
-            <MethodStrip />
-          </div>
-          <div className="my-10 md:my-14">
-            <PoemHistory />
-          </div>
-          <div className="my-10 md:my-14">
-            <ResearchStrip />
-          </div>
+          <RenderHero {...hero} />
+          <RenderBlocks blocks={layout} />
+          {decodedSlug === 'about' && (
+            <div className="container max-w-4xl">
+              <AboutTimeline />
+              <Publications compact />
+            </div>
+          )}
         </>
-      )}
-      <RenderBlocks blocks={layout} />
-      {decodedSlug === 'about' && (
-        <div className="container max-w-4xl">
-          <AboutTimeline />
-          <Publications compact />
-        </div>
       )}
     </article>
   )

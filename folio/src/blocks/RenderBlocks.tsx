@@ -16,35 +16,38 @@ const blockComponents = {
   mediaBlock: MediaBlock,
 }
 
+function renderOne(block: Page['layout'][0], index: number, bare: boolean) {
+  const { blockType } = block
+  if (!blockType || !(blockType in blockComponents)) return null
+  const Block = blockComponents[blockType]
+  if (!Block) return null
+  const inner = (
+    // @ts-expect-error block prop shapes vary by type
+    <Block {...block} disableInnerContainer />
+  )
+  if (bare) return <React.Fragment key={index}>{inner}</React.Fragment>
+  return (
+    <div className="my-10 md:my-14" key={index}>
+      {inner}
+    </div>
+  )
+}
+
+export function blockPanels(blocks: Page['layout'][0][] | null | undefined): React.ReactNode[] {
+  if (!blocks?.length) return []
+  return blocks
+    .map((block, index) => renderOne(block, index, true))
+    .filter(Boolean) as React.ReactNode[]
+}
+
 export const RenderBlocks: React.FC<{
   blocks: Page['layout'][0][]
 }> = (props) => {
   const { blocks } = props
-
   const hasBlocks = blocks && Array.isArray(blocks) && blocks.length > 0
 
   if (hasBlocks) {
-    return (
-      <Fragment>
-        {blocks.map((block, index) => {
-          const { blockType } = block
-
-          if (blockType && blockType in blockComponents) {
-            const Block = blockComponents[blockType]
-
-            if (Block) {
-              return (
-                <div className="my-10 md:my-14" key={index}>
-                  {/* @ts-expect-error there may be some mismatch between the expected types here */}
-                  <Block {...block} disableInnerContainer />
-                </div>
-              )
-            }
-          }
-          return null
-        })}
-      </Fragment>
-    )
+    return <Fragment>{blocks.map((block, index) => renderOne(block, index, false))}</Fragment>
   }
 
   return null

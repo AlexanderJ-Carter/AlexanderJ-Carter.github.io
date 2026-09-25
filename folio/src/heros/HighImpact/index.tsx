@@ -20,6 +20,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
     <div
       className="relative flex items-end md:items-center text-white min-h-[100svh] overflow-hidden"
       data-theme="dark"
+      data-site-hero
     >
       <div className="absolute inset-0 select-none" aria-hidden>
         {media && typeof media === 'object' && (

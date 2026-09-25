@@ -1,14 +1,18 @@
 'use client'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
+import { usePathname } from 'next/navigation'
 import React, { useEffect } from 'react'
 
 const PageClient: React.FC = () => {
-  /* Force the header to be dark mode while we have an image behind it */
   const { setHeaderTheme } = useHeaderTheme()
+  const pathname = usePathname()
 
   useEffect(() => {
+    // Homepage hero owns header contrast via [data-site-hero] observer.
+    if (pathname === '/') return
     setHeaderTheme('light')
-  }, [setHeaderTheme])
+  }, [pathname, setHeaderTheme])
+
   return <React.Fragment />
 }
 
