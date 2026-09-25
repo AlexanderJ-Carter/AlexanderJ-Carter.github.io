@@ -1,37 +1,115 @@
 /**
- * 写入节日短窗公告示例（元旦）。按需改日期后执行。
+ * 按日期写入当前或即将到来的节日短窗公告。
  *
- *   node --import tsx scripts/configure-seasonal-notice.mjs
+ *   pnpm configure:seasonal
+ *
+ * 覆盖：中秋、国庆、元旦。一次只挂一条；过完再跑即可切下一条。
  */
 import 'dotenv/config'
 import { getPayload } from 'payload'
 import config from '../src/payload.config.ts'
 
-const year = new Date().getFullYear()
-const nextNewYear = `${year + 1}-01-01T00:00:00.000Z`
-const end = `${year + 1}-01-03T23:59:59.000Z`
+/**
+ * @typedef {{
+ *   noticeId: string
+ *   title: string
+ *   body: string
+ *   href: string
+ *   ctaLabel: string
+ *   startsAt: string
+ *   endsAt: string
+ * }} FestivalNotice
+ */
 
-const NOTICE = {
-  enabled: true,
-  noticeId: `notice-ny-${year + 1}`,
-  title: '元旦好',
-  body: '新的一年，慢慢看片、慢慢写。画廊与研究都在；想跟站务可订阅。',
-  href: '/gallery',
-  ctaLabel: '去画廊 →',
-  dismissible: true,
-  startsAt: nextNewYear,
-  endsAt: end,
+/**
+ * @param {number} year
+ * @returns {FestivalNotice[]}
+ */
+function festivalsFor(year) {
+  // 农历中秋需按年核对；2025=10-06，2026=09-25，2027=09-15
+  const midAutumnDay = {
+    2025: '10-06',
+    2026: '09-25',
+    2027: '09-15',
+  }[year]
+
+  /** @type {FestivalNotice[]} */
+  const list = []
+
+  if (midAutumnDay) {
+    const day = `${year}-${midAutumnDay}`
+    // 短窗到国庆前夜，避免两节之间空窗
+    const endDay =
+      year === 2026 ? `${year}-09-30` : year === 2025 ? `${year}-10-08` : `${year}-09-17`
+    list.push({
+      noticeId: `notice-mid-autumn-${year}`,
+      title: '中秋好',
+      body: '月圆人安。慢慢看片、慢慢写；画廊与站群地图都在，想跟站务可订阅。',
+      href: '/gallery',
+      ctaLabel: '去画廊 →',
+      startsAt: `${day}T00:00:00+08:00`,
+      endsAt: `${endDay}T23:59:59+08:00`,
+    })
+  }
+
+  list.push({
+    noticeId: `notice-national-${year}`,
+    title: '国庆好',
+    body: '假期慢慢逛站：画廊、写作、研究都开放；有事右下角问站就行。',
+    href: '/network',
+    ctaLabel: '站群地图 →',
+    startsAt: `${year}-10-01T00:00:00+08:00`,
+    endsAt: `${year}-10-07T23:59:59+08:00`,
+  })
+
+  list.push({
+    noticeId: `notice-ny-${year + 1}`,
+    title: '元旦好',
+    body: '新的一年，慢慢看片、慢慢写。画廊与研究都在；想跟站务可订阅。',
+    href: '/gallery',
+    ctaLabel: '去画廊 →',
+    startsAt: `${year + 1}-01-01T00:00:00+08:00`,
+    endsAt: `${year + 1}-01-03T23:59:59+08:00`,
+  })
+
+  return list
+}
+
+/**
+ * @param {FestivalNotice[]} festivals
+ * @param {number} now
+ */
+function pickFestival(festivals, now) {
+  const active = festivals.find((f) => {
+    const a = Date.parse(f.startsAt)
+    const b = Date.parse(f.endsAt)
+    return now >= a && now <= b
+  })
+  if (active) return active
+
+  const upcoming = festivals
+    .filter((f) => Date.parse(f.startsAt) > now)
+    .sort((x, y) => Date.parse(x.startsAt) - Date.parse(y.startsAt))
+  return upcoming[0] || festivals[festivals.length - 1]
 }
 
 async function main() {
+  const year = new Date().getFullYear()
+  const now = Date.now()
+  const notice = pickFestival([...festivalsFor(year), ...festivalsFor(year + 1)], now)
+
   const payload = await getPayload({ config })
   await payload.updateGlobal({
     slug: 'announcement',
     overrideAccess: true,
-    data: NOTICE,
+    data: {
+      enabled: true,
+      dismissible: true,
+      ...notice,
+    },
   })
   payload.logger.info(
-    `seasonal → ${NOTICE.noticeId} ${NOTICE.startsAt} … ${NOTICE.endsAt}`,
+    `seasonal → ${notice.noticeId} · ${notice.title} · ${notice.startsAt} … ${notice.endsAt}`,
   )
   process.exit(0)
 }

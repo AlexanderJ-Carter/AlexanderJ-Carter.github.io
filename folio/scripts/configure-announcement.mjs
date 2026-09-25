@@ -1,13 +1,13 @@
 /**
- * 更新站点公告。
- * 用法：在 folio/ 目录
+ * 更新站点公告（非节日常驻文案；默认关闭）。
+ * 节日请用：pnpm configure:seasonal
+ *
  *   node --import tsx scripts/configure-announcement.mjs
  */
 import 'dotenv/config'
 import { getPayload } from 'payload'
 import config from '../src/payload.config.ts'
 
-/** 常驻迁站话术关掉；需要节日时改 noticeId + 日期窗 + enabled */
 const NOTICE = {
   enabled: false,
   noticeId: 'notice-idle',
