@@ -3,6 +3,8 @@ import type { NextConfig } from 'next'
 /** 语言前缀、IE；旧 /writing /blog 收束到站内写作。 */
 export const redirects: NextConfig['redirects'] = async () => {
   const legacy = [
+    { source: '/help', destination: '/', permanent: true },
+    { source: '/help/:path*', destination: '/', permanent: true },
     { source: '/writing', destination: '/posts', permanent: true },
     { source: '/writing/:path*', destination: '/posts', permanent: true },
     { source: '/blog', destination: '/posts', permanent: true },

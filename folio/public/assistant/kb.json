@@ -8,6 +8,7 @@
     { "path": "/posts", "title": "写作", "note": "站内精选短文与实践笔记" },
     { "path": "/research", "title": "研究", "note": "公开论文与研究项目入口" },
     { "path": "/projects", "title": "项目", "note": "生活向小项目与站外入口" },
+    { "path": "/network", "title": "站群地图", "note": "本站栏目与站外入口一览" },
     { "path": "/tools", "title": "实用工具", "note": "世界时间、换算、汇率、QR 等本地工具索引" },
     { "path": "/fun", "title": "玩乐", "note": "番茄钟、曝光三角、电台、今日一帧等" },
     { "path": "/about", "title": "关于", "note": "需 Turnstile 门禁；履历时间线与精选论文" },
@@ -19,9 +20,9 @@
     { "path": "/security/policy", "title": "安全政策", "note": "负责任披露" }
   ],
   "notes": [
-    "右下角「问站」是本站导览助手，只谈公开信息，不谈后台、密钥或未公开漏洞。",
+    "右下角「问站」是本站导览助手（对话），只谈公开信息，不谈后台、密钥或未公开漏洞。没有单独的 /help 页。",
     "Cookie：首次可选仅必要或接受统计；之后在 /privacy#cookies 可再改。",
-    "站外常见入口：MyCook、Gitea、IT-Tools、GitHub，见页脚 Elsewhere 或 /projects。",
+    "站外常见入口见 /network 与页脚 Elsewhere。",
     "写作以站内 /posts 为准；blog.alexander.xin 会跳到同一页。"
   ]
 }

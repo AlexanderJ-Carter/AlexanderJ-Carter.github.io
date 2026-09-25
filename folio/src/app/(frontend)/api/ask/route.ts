@@ -65,7 +65,7 @@ function takeRateSlot(ip: string): boolean {
 }
 
 async function loadKb(): Promise<Kb> {
-  const file = path.join(process.cwd(), 'public', 'help', 'kb.json')
+  const file = path.join(process.cwd(), 'public', 'assistant', 'kb.json')
   const { mtimeMs } = await stat(file)
   if (kbCache && kbCache.mtimeMs === mtimeMs) return kbCache.data
   const raw = await readFile(file, 'utf8')

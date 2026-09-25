@@ -29,26 +29,13 @@ Fleet ops home and **primary maintainer entry** (site `/login` CTA points here).
 ## Endpoints
 
 - `/` — ops home (cards + fleet log + probes; HTML from www mirror)
-- `/api/status` — probe apex, www, blog, identity, time API, tools, paste, cook, lab, network.json
+- `/api/status` — probe apex, www, posts, network, identity, time API, tools, paste, network.json
 - `/api/check` — POST: run probes, diff, optional email
-- `/fleet-changelog.json` — maintainer-only fleet timeline (proxied from www `/ops/fleet-changelog.json`; not shown on public Network)
+- `/fleet-changelog.json` — maintainer-only fleet timeline (proxied from www `/ops/fleet-changelog.json`)
 
-## site-help Worker (`/api/help`)
+## 问站（已取代 site-help）
 
-Visitor Q&A for alexander.xin — **KB-first, LLM-fallback**. Source: `src/site-help.js` (ES module worker, bound to KV `HELP_RATE`).
+访客问答走 Folio 站内「问站」→ `POST /api/ask`（KB 在 `folio/public/assistant/kb.json`）。
 
-- **Flow**: keyword-match the question against the public KB (`alexander.xin/help/kb.json`, regenerated from `src/data/help-kb.ts`). On a confident hit, return the KB answer (`mode: retrieve`). If `llm:true` and no hit, call OmniRoute (LLM gateway) grounded in the KB facts (`mode: llm`). Else a graceful "no public info" reply (`mode: none`).
-- **Guardrails**: fixed system prompt (question never enters the system layer); low temperature + capped tokens; `scrub()` strips leaked prompt/secret patterns; origin allow-list; per-IP rate limit (LLM 20/h, KB 60/h) via `HELP_RATE` KV.
-- **Secrets** (set via `wrangler secret put` or dashboard on the `site-help` worker):
-  - `OMNI_URL` — OmniRoute base URL (e.g. `https://omni.alexander.xin`); empty = KB-only (AI off).
-  - `OMNI_KEY` — bearer token for OmniRoute (never echoed in responses).
-  - `OMNI_MODEL` — model id (default `gpt-4o-mini`).
-- **Assumes OmniRoute is OpenAI-compatible** (`/v1/chat/completions`). Confirm against the gateway; adjust `callOmni()` if the shape differs.
-
-### Build + deploy
-
-1. Edit `src/site-help.js`.
-2. `npm run encode:help` — encodes the source to `dist/help.b64` (+ `help.b64`) for the existing upload pipeline.
-3. Deploy with the existing `node ops-portal/scripts/gen-mcp-deploy.cjs` (reads `dist/help.b64`, uploads the `site-help` worker, binds `HELP_RATE` KV).
-4. Set `OMNI_URL` / `OMNI_KEY` / `OMNI_MODEL` as worker secrets to enable the LLM path; leave `OMNI_URL` empty to keep KB-only.
+`src/site-help.js` 仅保留为边缘占位：旧路由 `/api/help` 返回 410，提示改用问站。部署仍可用 `encode:help` + `gen-mcp-deploy.cjs` 更新该占位脚本。
 

@@ -130,7 +130,7 @@ export function SiteAssistant() {
     setMessages((prev) => [...prev, { role: 'user', text: q }])
 
     try {
-      const res = await fetch('/api/help', {
+      const res = await fetch('/api/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: q, llm: true }),
