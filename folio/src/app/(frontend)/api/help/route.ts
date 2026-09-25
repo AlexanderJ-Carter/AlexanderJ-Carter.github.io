@@ -1,4 +1,4 @@
-import { readFile } from 'node:fs/promises'
+import { readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 
 import { NextResponse } from 'next/server'
@@ -21,6 +21,13 @@ const ALLOWED_ORIGINS = new Set([
   'http://localhost:3000',
 ])
 
+/** Per-IP sliding window for Omni calls (process-local). */
+const RATE_LIMIT_MAX = 20
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+const rateBuckets = new Map<string, number[]>()
+
+let kbCache: { mtimeMs: number; data: Kb } | null = null
+
 function corsHeaders(origin: string | null): HeadersInit {
   const allow = origin && ALLOWED_ORIGINS.has(origin) ? origin : 'https://alexander.xin'
   return {
@@ -36,10 +43,35 @@ function sanitizeQuestion(raw: unknown): string {
   return raw.replace(/\s+/g, ' ').trim().slice(0, 400)
 }
 
+function clientIp(request: Request): string {
+  const cf = request.headers.get('cf-connecting-ip')?.trim()
+  if (cf) return cf
+  const xff = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+  if (xff) return xff
+  return 'unknown'
+}
+
+function takeRateSlot(ip: string): boolean {
+  const now = Date.now()
+  const prev = rateBuckets.get(ip) || []
+  const recent = prev.filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
+  if (recent.length >= RATE_LIMIT_MAX) {
+    rateBuckets.set(ip, recent)
+    return false
+  }
+  recent.push(now)
+  rateBuckets.set(ip, recent)
+  return true
+}
+
 async function loadKb(): Promise<Kb> {
   const file = path.join(process.cwd(), 'public', 'help', 'kb.json')
+  const { mtimeMs } = await stat(file)
+  if (kbCache && kbCache.mtimeMs === mtimeMs) return kbCache.data
   const raw = await readFile(file, 'utf8')
-  return JSON.parse(raw) as Kb
+  const data = JSON.parse(raw) as Kb
+  kbCache = { mtimeMs, data }
+  return data
 }
 
 /** Turn site priors into RAG context for the model — never short-circuit replies. */
@@ -60,7 +92,6 @@ function buildContext(kb: Kb): string {
     parts.push('Notes:\n' + kb.notes.map((n) => `- ${n}`).join('\n'))
   }
 
-  // Backward-compatible FAQ blobs if an old kb is still deployed
   if (kb.faq?.length) {
     parts.push('Extra facts:\n' + kb.faq.map((e) => `- ${e.a}`).join('\n'))
   }
@@ -142,10 +173,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Question is required' }, { status: 400, headers })
   }
 
+  if (!takeRateSlot(clientIp(request))) {
+    return NextResponse.json(
+      { error: 'Too many questions. Try again later.', answer: undefined },
+      { status: 429, headers },
+    )
+  }
+
   const kb = await loadKb()
   const hasCjk = /[\u4e00-\u9fff]/.test(question)
 
-  // Always LLM + RAG. KB is context only — never keyword short-circuit.
   const answer = await callOmni(kb, question)
   if (answer) {
     return NextResponse.json({ answer, mode: 'llm' }, { headers })
