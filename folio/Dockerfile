@@ -33,8 +33,10 @@ RUN mkdir -p /app/data /app/public/media \
   && if [ -f /app/seed-data/folio.db ]; then cp /app/seed-data/folio.db /app/data/folio.db; fi \
   && corepack enable \
   && corepack prepare pnpm@10.15.0 --activate \
-  && pnpm run build \
-  && node <<'NODE'
+  && pnpm run build
+
+# Separate layer: pnpm-hoisted native SQLite drivers for the standalone runner.
+RUN node <<'NODE'
 const fs = require('fs')
 const path = require('path')
 

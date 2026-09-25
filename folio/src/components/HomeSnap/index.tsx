@@ -18,6 +18,8 @@ export function HomeSnap({ panels, labels = [] }: HomeSnapProps) {
   const count = panels.length
 
   useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return
     const root = document.documentElement
     root.classList.add('home-snap-root')
     return () => {
@@ -26,6 +28,9 @@ export function HomeSnap({ panels, labels = [] }: HomeSnapProps) {
   }, [])
 
   useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return
+
     const nodes = panelRefs.current.filter(Boolean) as HTMLElement[]
     if (nodes.length === 0) return
 
@@ -46,7 +51,13 @@ export function HomeSnap({ panels, labels = [] }: HomeSnapProps) {
   }, [count])
 
   const jump = (index: number) => {
-    panelRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    panelRefs.current[index]?.scrollIntoView({
+      behavior: reduced ? 'auto' : 'smooth',
+      block: 'start',
+    })
   }
 
   return (

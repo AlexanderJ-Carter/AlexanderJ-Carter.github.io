@@ -1157,7 +1157,25 @@ html.home-snap-root .sponsor-slot {
 
 @media (max-width: 640px) {
   .home-snap-dots {
-    display: none;
+    inset-block-start: auto;
+    inset-block-end: 4.75rem;
+    inset-inline: 0;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.55rem;
+    pointer-events: none;
+  }
+
+  .home-snap-dots__btn {
+    pointer-events: auto;
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  .home-snap-dots__btn.is-active {
+    width: 1.15rem;
+    height: 0.5rem;
   }
 
   .home-snap-stack {
