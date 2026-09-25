@@ -19,6 +19,15 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  serverExternalPackages: ['libsql', '@libsql/client'],
+  outputFileTracingIncludes: {
+    '/*': [
+      './node_modules/libsql/**/*',
+      './node_modules/@libsql/**/*',
+      './node_modules/.pnpm/libsql@*/**/*',
+      './node_modules/.pnpm/@libsql+*/**/*',
+    ],
+  },
   env: {
     NEXT_PUBLIC_SITE_NAME: process.env.NEXT_PUBLIC_SITE_NAME || instance.siteName,
     NEXT_PUBLIC_SITE_MARK: process.env.NEXT_PUBLIC_SITE_MARK || instance.siteMark,

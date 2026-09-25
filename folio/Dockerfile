@@ -33,7 +33,56 @@ RUN mkdir -p /app/data /app/public/media \
   && if [ -f /app/seed-data/folio.db ]; then cp /app/seed-data/folio.db /app/data/folio.db; fi \
   && corepack enable \
   && corepack prepare pnpm@10.15.0 --activate \
-  && pnpm run build
+  && pnpm run build \
+  && node <<'NODE'
+const fs = require('fs')
+const path = require('path')
+
+const out = '/app/native-mods'
+fs.mkdirSync(out, { recursive: true })
+
+function findPnpmPkg(pkgName) {
+  const pnpm = path.join(process.cwd(), 'node_modules/.pnpm')
+  const key = pkgName.startsWith('@') ? pkgName.replace('/', '+') : pkgName
+  const dirs = fs.readdirSync(pnpm).filter((d) => d.startsWith(`${key}@`))
+  if (!dirs.length) throw new Error(`no .pnpm entry for ${pkgName}`)
+  dirs.sort()
+  const dir = dirs[dirs.length - 1]
+  const pkgPath = path.join(pnpm, dir, 'node_modules', ...pkgName.split('/'))
+  if (!fs.existsSync(pkgPath)) throw new Error(`missing package dir ${pkgPath}`)
+  return pkgPath
+}
+
+function copyPkg(pkgName) {
+  const src = findPnpmPkg(pkgName)
+  const dest = path.join(out, ...pkgName.split('/'))
+  fs.mkdirSync(path.dirname(dest), { recursive: true })
+  fs.cpSync(src, dest, { recursive: true, dereference: true })
+  console.log('native', pkgName, '←', src)
+}
+
+const required = ['libsql', '@neon-rs/load', 'detect-libc', 'js-base64', 'promise-limit']
+const optional = [
+  '@libsql/client',
+  '@libsql/core',
+  '@libsql/hrana-client',
+  '@libsql/isomorphic-fetch',
+  '@libsql/isomorphic-ws',
+  '@libsql/linux-x64-musl',
+  '@libsql/linux-x64-gnu',
+  '@libsql/linux-arm64-musl',
+  '@libsql/linux-arm64-gnu',
+]
+
+for (const name of required) copyPkg(name)
+for (const name of optional) {
+  try {
+    copyPkg(name)
+  } catch (e) {
+    console.warn('optional skip', name, e.message)
+  }
+}
+NODE
 
 FROM base AS runner
 ENV NODE_ENV=production
@@ -49,7 +98,7 @@ RUN apk add --no-cache su-exec \
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-# 实例配置（姓名/论文/外链）仅服务器持有，构建时注入；运行时亦可覆盖挂载
+COPY --from=builder --chown=nextjs:nodejs /app/native-mods/ ./node_modules/
 COPY --from=builder --chown=nextjs:nodejs /app/instance ./instance
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
