@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "site": "alexander.xin",
+  "overview": "Alexander Carter 的个人站（Folio）：摄影、精选写作、公开研究与轻量工具。暗房编辑室气质；关于/联系有访客门禁，研究与画廊等公开页无需门禁。",
+  "pages": [
+    { "path": "/", "title": "首页", "note": "全幅影像开场；精选作品、暗房法则、今日诗史、研究条" },
+    { "path": "/gallery", "title": "画廊", "note": "联系单观片，点开放大" },
+    { "path": "/posts", "title": "写作", "note": "站内精选短文与实践笔记" },
+    { "path": "/research", "title": "研究", "note": "公开论文与研究项目入口" },
+    { "path": "/projects", "title": "项目", "note": "生活向小项目与站外入口" },
+    { "path": "/tools", "title": "实用工具", "note": "世界时间、换算、汇率、QR 等本地工具索引" },
+    { "path": "/fun", "title": "玩乐", "note": "番茄钟、曝光三角、电台、今日一帧等" },
+    { "path": "/about", "title": "关于", "note": "需 Turnstile 门禁；履历时间线与精选论文" },
+    { "path": "/contact", "title": "联系", "note": "需门禁的留言表单" },
+    { "path": "/subscribe", "title": "订阅", "note": "邮件通讯，频率很低，可退订" },
+    { "path": "/updates", "title": "更新日志", "note": "公开站务变更" },
+    { "path": "/privacy", "title": "隐私政策", "note": "Cookie 与可选统计说明" },
+    { "path": "/terms", "title": "服务条款", "note": "" },
+    { "path": "/security/policy", "title": "安全政策", "note": "负责任披露" }
+  ],
+  "notes": [
+    "右下角「问站」是本站导览助手，只谈公开信息，不谈后台、密钥或未公开漏洞。",
+    "Cookie：首次可选仅必要或接受统计；之后在 /privacy#cookies 可再改。",
+    "站外常见入口：MyCook、Gitea、IT-Tools、GitHub，见页脚 Elsewhere 或 /projects。",
+    "写作以站内 /posts 为准；blog.alexander.xin 会跳到同一页。"
+  ]
+}

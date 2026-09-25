@@ -11,6 +11,7 @@ import { AnnouncementBanner } from '@/Announcement/Component'
 import { CookieConsent } from '@/components/CookieConsent'
 import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
+import { SiteAssistant } from '@/components/SiteAssistant'
 import { SponsorSlot } from '@/components/SponsorSlot'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
@@ -73,6 +74,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Footer />
           <AnnouncementBanner />
           <CookieConsent />
+          <SiteAssistant />
           <AnalyticsBeacon />
         </Providers>
       </body>

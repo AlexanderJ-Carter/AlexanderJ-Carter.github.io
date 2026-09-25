@@ -1,11 +1,13 @@
 import Link from 'next/link'
 import React from 'react'
 
+import { AssistantReopenLink } from '@/components/SiteAssistant/ReopenLink'
 import { getInstance } from '@/instance'
 
 /** 页脚本站链接：与主导航对齐，不读 CMS，避免重复/过时项 */
 const SITE_LINKS = [
   { label: '画廊', href: '/gallery' },
+  { label: '写作', href: '/posts' },
   { label: '研究', href: '/research' },
   { label: '项目', href: '/projects' },
   { label: '工具', href: '/tools' },
@@ -87,6 +89,7 @@ export async function Footer() {
               <Link className="transition-colors hover:text-foreground" href="/security/policy">
                 安全政策
               </Link>
+              <AssistantReopenLink className="transition-colors hover:text-foreground" />
               <Link className="transition-colors hover:text-foreground" href="/admin">
                 管理
               </Link>
