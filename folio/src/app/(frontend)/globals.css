@@ -846,6 +846,107 @@ h3 {
   }
 }
 
+/* 站群地图 */
+.network-map {
+  margin-bottom: 3rem;
+}
+
+.network-map--away {
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in oklch, var(--border) 80%, transparent);
+}
+
+.network-map__heading {
+  margin-bottom: 1.25rem;
+  font-family: var(--font-display), Syne, system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.network-map__grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .network-map__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .network-map__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.network-map__node {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 6.5rem;
+  padding: 1.1rem 1.15rem;
+  border: 1px solid var(--border);
+  background: color-mix(in oklch, var(--card) 70%, transparent);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.18s ease,
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.network-map__node:hover,
+.network-map__node:focus-visible {
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
+  background: color-mix(in oklch, var(--card) 92%, transparent);
+  transform: translateY(-1px);
+}
+
+.network-map__node:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.network-map__label {
+  font-family: var(--font-display), Syne, system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.network-map__note {
+  flex: 1;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+
+.network-map__path {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: color-mix(in oklch, var(--muted-foreground) 85%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .network-map__node {
+    transition: none;
+  }
+
+  .network-map__node:hover,
+  .network-map__node:focus-visible {
+    transform: none;
+  }
+}
+
 .site-header[data-over-hero='true'] .site-nav-link:focus-visible {
   outline-color: white;
 }

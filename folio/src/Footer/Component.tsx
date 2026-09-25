@@ -16,6 +16,7 @@ const SITE_LINKS = [
   { label: '联系', href: '/contact' },
   { label: '订阅', href: '/subscribe' },
   { label: '更新', href: '/updates' },
+  { label: '地图', href: '/network' },
 ] as const
 
 export async function Footer() {

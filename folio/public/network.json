@@ -1,0 +1,24 @@
+{
+  "site": "alexander.xin",
+  "updated": "static",
+  "here": [
+    { "path": "/", "title": "首页" },
+    { "path": "/gallery", "title": "画廊" },
+    { "path": "/posts", "title": "写作" },
+    { "path": "/research", "title": "研究" },
+    { "path": "/projects", "title": "项目" },
+    { "path": "/network", "title": "站群地图" },
+    { "path": "/tools", "title": "工具" },
+    { "path": "/fun", "title": "玩乐" },
+    { "path": "/about", "title": "关于" },
+    { "path": "/contact", "title": "联系" },
+    { "path": "/subscribe", "title": "订阅" },
+    { "path": "/updates", "title": "更新" }
+  ],
+  "elsewhere": [
+    { "name": "MyCook", "host": "cook.alexander.xin", "href": "https://cook.alexander.xin" },
+    { "name": "Gitea", "host": "git.alexander.xin", "href": "https://git.alexander.xin" },
+    { "name": "IT-Tools", "host": "tools.alexander.xin", "href": "https://tools.alexander.xin" },
+    { "name": "GitHub", "host": "github.com/AlexanderJ-Carter", "href": "https://github.com/AlexanderJ-Carter" }
+  ]
+}

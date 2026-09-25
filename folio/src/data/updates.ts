@@ -13,6 +13,13 @@ export type SiteUpdate = {
 export const siteUpdates: SiteUpdate[] = [
   {
     date: '2026-09-25',
+    title: '问站与站群地图',
+    body: '取消独立帮助页；右下角对话导览。新增 /network 看本站栏目与站外入口。',
+    href: '/network',
+    hrefLabel: '站群地图 →',
+  },
+  {
+    date: '2026-09-25',
     title: '写作与访客体验',
     body: '站内写作恢复精选列表；Cookie 选择后不再常驻提示；右下角可问站内栏目。',
     href: '/posts',
