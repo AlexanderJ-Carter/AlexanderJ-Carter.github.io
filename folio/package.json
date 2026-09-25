@@ -19,6 +19,7 @@
     "configure:contact-form": "cross-env NODE_OPTIONS=--no-deprecation node --import tsx scripts/configure-contact-form.mjs",
     "configure:announcement": "cross-env NODE_OPTIONS=--no-deprecation node --import tsx scripts/configure-announcement.mjs",
     "configure:seasonal": "cross-env NODE_OPTIONS=--no-deprecation node --import tsx scripts/configure-seasonal-notice.mjs",
+    "soften:about": "cross-env NODE_OPTIONS=--no-deprecation node --import tsx scripts/soften-about-copy.mjs",
     "curate:posts": "cross-env NODE_OPTIONS=--no-deprecation node --import tsx scripts/curate-posts.mjs",
     "email:broadcast-sample": "cross-env NODE_OPTIONS=--no-deprecation node --import tsx scripts/print-broadcast-email.mjs",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",

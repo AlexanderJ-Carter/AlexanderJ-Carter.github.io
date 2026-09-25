@@ -47,7 +47,8 @@ export function CountdownTimer() {
   const progress = total === 0 ? 0 : ((total - remaining) / total) * 100
 
   return (
-    <div className="glass-card p-6">
+    <div className="glass-card fun-toy p-6">
+      <p className="folio-mark mb-2">Timer</p>
       <h3 className="text-lg font-semibold mb-4">倒计时</h3>
       <div className="grid grid-cols-4 gap-2 mb-6 text-center">
         {[

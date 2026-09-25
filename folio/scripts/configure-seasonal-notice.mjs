@@ -43,10 +43,10 @@ function festivalsFor(year) {
       year === 2026 ? `${year}-09-30` : year === 2025 ? `${year}-10-08` : `${year}-09-17`
     list.push({
       noticeId: `notice-mid-autumn-${year}`,
-      title: '中秋好',
-      body: '月圆人安。慢慢看片、慢慢写；画廊与站群地图都在，想跟站务可订阅。',
+      title: '中秋快乐',
+      body: '愿月圆人安，灯火温软。今晚不妨慢慢翻几张片——画廊还亮着，想跟站务也可以订阅一声。',
       href: '/gallery',
-      ctaLabel: '去画廊 →',
+      ctaLabel: '去看月色 →',
       startsAt: `${day}T00:00:00+08:00`,
       endsAt: `${endDay}T23:59:59+08:00`,
     })
@@ -54,20 +54,20 @@ function festivalsFor(year) {
 
   list.push({
     noticeId: `notice-national-${year}`,
-    title: '国庆好',
-    body: '假期慢慢逛站：画廊、写作、研究都开放；有事右下角问站就行。',
+    title: '国庆快乐',
+    body: '长假好时辰，愿你旅途顺意、归家团圆。站里画廊、写作与研究都开着，慢慢逛。',
     href: '/network',
-    ctaLabel: '站群地图 →',
+    ctaLabel: '逛站群 →',
     startsAt: `${year}-10-01T00:00:00+08:00`,
     endsAt: `${year}-10-07T23:59:59+08:00`,
   })
 
   list.push({
     noticeId: `notice-ny-${year + 1}`,
-    title: '元旦好',
-    body: '新的一年，慢慢看片、慢慢写。画廊与研究都在；想跟站务可订阅。',
+    title: '元旦快乐',
+    body: '新年伊始，愿你诸事顺遂、眼里有光。画廊与研究都在；想跟站务，订阅一声就好。',
     href: '/gallery',
-    ctaLabel: '去画廊 →',
+    ctaLabel: '开年逛逛 →',
     startsAt: `${year + 1}-01-01T00:00:00+08:00`,
     endsAt: `${year + 1}-01-03T23:59:59+08:00`,
   })

@@ -7,7 +7,7 @@ import { skipVerify } from '@/lib/site'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: '访客验证',
+  title: { absolute: '访客验证' },
   description: '完成人机验证后继续访问。',
   robots: { index: false, follow: false },
 }

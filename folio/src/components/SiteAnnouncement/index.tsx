@@ -15,6 +15,22 @@ export type AnnouncementData = {
   endsAt?: string | null
 }
 
+type FestivalTone = 'mid-autumn' | 'national' | 'new-year' | null
+
+function festivalTone(noticeId: string): FestivalTone {
+  if (/mid-autumn|zhongqiu|中秋/i.test(noticeId)) return 'mid-autumn'
+  if (/national|guoqing|国庆/i.test(noticeId)) return 'national'
+  if (/(^|-)ny(-|$)|new-year|yuan|元旦/i.test(noticeId)) return 'new-year'
+  return null
+}
+
+function festivalMark(tone: FestivalTone): string {
+  if (tone === 'mid-autumn') return '中秋'
+  if (tone === 'national') return '国庆'
+  if (tone === 'new-year') return '元旦'
+  return '告示'
+}
+
 function storageKey(id: string) {
   return `site-notice-dismissed:${id}`
 }
@@ -42,6 +58,8 @@ export function SiteAnnouncement({ data }: { data: AnnouncementData | null | und
     data?.enabled && data?.noticeId && data?.title && data?.body && windowOk,
   )
   const id = data?.noticeId || ''
+  const tone = festivalTone(id)
+  const mark = festivalMark(tone)
   const dismissible = data?.dismissible !== false
   const href = data?.href?.trim() || ''
   const cta = data?.ctaLabel?.trim() || '了解更多'
@@ -84,7 +102,7 @@ export function SiteAnnouncement({ data }: { data: AnnouncementData | null | und
       } catch {
         // ignore
       }
-    }, 9000)
+    }, 11000)
 
     return () => window.clearTimeout(timer)
   }, [visible, expanded, id])
@@ -125,22 +143,30 @@ export function SiteAnnouncement({ data }: { data: AnnouncementData | null | und
   }
 
   const isInternal = href.startsWith('/') && !href.startsWith('//')
+  const rootClass = [
+    'site-toast',
+    expanded ? 'site-toast--open' : '',
+    tone ? `site-toast--festive site-toast--${tone}` : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   if (!expanded) {
     return (
-      <div className="site-toast" role="region" aria-label="站点公告">
+      <div className={rootClass} role="region" aria-label="站点公告">
         <button type="button" className="site-toast__chip" onClick={expand}>
           <span className="site-toast__dot" aria-hidden />
-          告示
+          {mark}
         </button>
       </div>
     )
   }
 
   return (
-    <div className="site-toast site-toast--open" role="region" aria-label="站点公告">
+    <div className={rootClass} role="region" aria-label="站点公告">
       <div className="site-toast__card">
-        <p className="site-toast__mark">告示</p>
+        <span className="site-toast__ornament" aria-hidden />
+        <p className="site-toast__mark">{mark}</p>
         <p className="site-toast__title">{data.title}</p>
         <p className="site-toast__body">{data.body}</p>
         <div className="site-toast__actions">

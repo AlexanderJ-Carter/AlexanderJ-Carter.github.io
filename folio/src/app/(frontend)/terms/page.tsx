@@ -74,6 +74,45 @@ export default function TermsPage() {
             <p>条款可能随功能调整更新；重大变更会尽量在隐私政策中注明日期。</p>
           </section>
 
+          <section id="license">
+            <h2>6. 版权与许可</h2>
+            <ul>
+              <li>
+                <strong>源代码</strong>（本仓库程序与配置）：
+                <a
+                  href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/LICENSE"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  BSD 3-Clause
+                </a>
+                。
+              </li>
+              <li>
+                <strong>站点内容</strong>（文案、摄影与其它原创媒体，另有标注除外）：
+                <a
+                  href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  CC BY-NC-ND 4.0
+                </a>
+                — 可署名非商业分享，不可改编或商用；超出范围需事先书面许可。详见仓库{' '}
+                <a
+                  href="https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/blob/main/NOTICE"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  NOTICE
+                </a>
+                。
+              </li>
+              <li>
+                第三方资源与商标归各自权利人；提及仅供识别，不代表背书。
+              </li>
+            </ul>
+          </section>
+
           <p className="text-sm text-muted-foreground">最近更新：2026-09-25</p>
         </div>
 

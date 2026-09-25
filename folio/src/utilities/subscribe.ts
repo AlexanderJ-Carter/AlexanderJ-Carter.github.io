@@ -60,6 +60,30 @@ export async function addSubscriber(email: string) {
   return { ok: true as const, created: false as const }
 }
 
+export async function getSubscriberStatus(email: string) {
+  const resend = getResendClient()
+  if (!resend) {
+    return { ok: false as const, status: 503, message: '邮件服务未配置' }
+  }
+
+  const { data, error } = await resend.contacts.get({ email })
+  if (error) {
+    const msg = error.message || '查询失败'
+    if (/not found|does not exist/i.test(msg)) {
+      return { ok: true as const, subscribed: false as const, message: '名单里还没有这个邮箱' }
+    }
+    return { ok: false as const, status: 502, message: msg }
+  }
+
+  const unsubscribed = Boolean(data?.unsubscribed)
+  return {
+    ok: true as const,
+    subscribed: !unsubscribed,
+    message: unsubscribed ? '该邮箱已退订，不会再收到通讯' : '该邮箱在订阅名单中',
+  }
+}
+
+/** 标记退订；不从名单删除。 */
 export async function removeSubscriber(email: string) {
   const resend = getResendClient()
   if (!resend) {
@@ -74,7 +98,7 @@ export async function removeSubscriber(email: string) {
   if (error) {
     const msg = error.message || '退订失败'
     if (/not found|does not exist/i.test(msg)) {
-      return { ok: true as const, message: '该邮箱不在名单中，无需退订' }
+      return { ok: true as const, message: '名单里本来就没有这个邮箱' }
     }
     return { ok: false as const, status: 502, message: msg }
   }

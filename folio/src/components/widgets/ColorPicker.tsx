@@ -52,7 +52,8 @@ export function ColorPicker() {
   }
 
   return (
-    <div className="glass-card p-6">
+    <div className="glass-card fun-toy p-6">
+      <p className="folio-mark mb-2">Swatch</p>
       <h3 className="text-lg font-semibold mb-4">颜色选择器</h3>
       <div className="relative mb-4 h-28 overflow-hidden rounded-sm border border-border" style={{ background: hex }}>
         <input

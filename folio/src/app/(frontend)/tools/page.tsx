@@ -13,7 +13,7 @@ const ON_SITE = [
   { href: '/units', title: '单位换算', desc: '温度、长度、重量', mark: 'Units' },
   { href: '/currency', title: '汇率', desc: '主要货币换算参考', mark: 'FX' },
   { href: '/qr', title: 'QR 生成', desc: '链接转二维码', mark: 'QR' },
-  { href: '/fun', title: '玩乐', desc: '番茄钟、曝光三角、电台与今日一帧', mark: 'Play' },
+  { href: '/fun', title: '玩乐', desc: '暗房玩具柜：一帧、曝光、电台与计时', mark: 'Play' },
   { href: '/gallery', title: '画廊', desc: '联系单观片', mark: 'Film' },
 ]
 

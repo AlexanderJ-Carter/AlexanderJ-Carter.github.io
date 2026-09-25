@@ -23,7 +23,6 @@ const DELETE_SLUGS = new Set([
 
 /** 个人经验向：发布 */
 const PUBLISH_SLUGS = new Set([
-  'darkroom-folio-site-language',
   'light-composition-moment',
   'street-photography-distance',
   'natural-light-photography',
@@ -38,6 +37,9 @@ const PUBLISH_SLUGS = new Set([
   'static-site-security-headers',
   'static-site-ci-pipeline',
 ])
+
+/** 过时 / 以「暗房三法则」为核的叙事：保持草稿 */
+const DRAFT_SLUGS = new Set(['darkroom-folio-site-language'])
 
 async function main() {
   const payload = await getPayload({ config })
@@ -64,6 +66,21 @@ async function main() {
       })
       payload.logger.info(`delete ${slug}`)
       deleted += 1
+      continue
+    }
+
+    if (DRAFT_SLUGS.has(slug)) {
+      if (doc._status !== 'draft') {
+        await payload.update({
+          collection: 'posts',
+          id: doc.id,
+          overrideAccess: true,
+          data: { _status: 'draft' },
+        })
+        payload.logger.info(`draft ${slug}`)
+      } else {
+        left += 1
+      }
       continue
     }
 

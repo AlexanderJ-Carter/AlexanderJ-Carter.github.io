@@ -5,19 +5,28 @@ import React, { useEffect, useId, useRef, useState } from 'react'
 
 const HIDDEN_KEY = 'folio-assistant-hidden'
 
-/** Seed prompts — shown before the first reply and as follow-ups. */
-const PROMPTS = [
-  { label: '画廊在哪？', question: '画廊在哪个页面？怎么看图？' },
-  { label: '如何订阅？', question: '怎么订阅本站更新？会不会经常发信？' },
-  { label: '研究入口', question: '公开研究论文在哪里看？' },
-  { label: '有什么好玩的？', question: '站内有哪些好玩的小工具？' },
-  { label: '写作在哪？', question: '站内文章在哪里读？' },
-  { label: '怎么联系？', question: '想留言联系的话走哪一页？有没有门禁？' },
-  { label: '这个站是干什么的？', question: '用两三句话介绍这个站适合逛什么。' },
-  { label: 'Cookie / 统计', question: 'Cookie 和统计偏好怎么选、怎么再改？' },
-] as const
+type Suggestion = { label: string; question: string }
 
-type Msg = { role: 'user' | 'assistant'; text: string }
+type AskAction =
+  | { type: 'navigate'; path: string; label: string }
+  | { type: 'subscribe'; label: string }
+  | { type: 'unsubscribe'; label: string }
+  | { type: 'subscribe_status'; label: string }
+
+type Msg = {
+  role: 'user' | 'assistant'
+  text: string
+  actions?: AskAction[]
+}
+
+type EmailIntent = 'subscribe' | 'unsubscribe' | 'subscribe_status'
+
+const SEED_SUGGESTIONS: Suggestion[] = [
+  { label: '画廊', question: '画廊在哪个页面？怎么看图？' },
+  { label: '天气', question: '北京现在天气怎么样？' },
+  { label: '订阅', question: '怎么订阅本站更新？会不会经常发信？' },
+  { label: '工具', question: '站内有哪些实用工具？' },
+]
 
 function linkify(text: string): React.ReactNode[] {
   const parts = text.split(/(\/[a-z0-9][\w/-]*)/gi)
@@ -31,22 +40,6 @@ function linkify(text: string): React.ReactNode[] {
     }
     return <React.Fragment key={i}>{part}</React.Fragment>
   })
-}
-
-function pickPrompts(seed: number, count: number, exclude: string[] = []) {
-  const pool = PROMPTS.filter((p) => !exclude.includes(p.question))
-  if (pool.length === 0) return []
-  // Fisher–Yates：LCG 再 `% pool.length` 在长度为 2^k 时会卡在子循环，SSR 会拖死事件循环。
-  let n = seed >>> 0
-  const shuffled = [...pool]
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    n = (Math.imul(n, 1103515245) + 12345) >>> 0
-    const j = n % (i + 1)
-    const tmp = shuffled[i]!
-    shuffled[i] = shuffled[j]!
-    shuffled[j] = tmp
-  }
-  return shuffled.slice(0, Math.min(count, shuffled.length))
 }
 
 function ThinkingRow() {
@@ -65,21 +58,22 @@ function ThinkingRow() {
 export function SiteAssistant() {
   const titleId = useId()
   const inputRef = useRef<HTMLInputElement>(null)
+  const emailRef = useRef<HTMLInputElement>(null)
   const listRef = useRef<HTMLUListElement>(null)
   const [hidden, setHidden] = useState(false)
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
   const [busy, setBusy] = useState(false)
-  const [asked, setAsked] = useState<string[]>([])
-  const [promptSeed, setPromptSeed] = useState(1)
+  const [emailBusy, setEmailBusy] = useState(false)
+  const [suggestions, setSuggestions] = useState<Suggestion[]>(SEED_SUGGESTIONS)
+  const [emailIntent, setEmailIntent] = useState<EmailIntent | null>(null)
+  const [email, setEmail] = useState('')
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: 'assistant',
-      text: '有事直接问，或点下面的预测问题。我按本站公开栏目来答。',
+      text: '有事直接问，或点下面的预测问题。站点栏目、订阅、天气/汇率/诗词我都能简答；订阅相关会让你在面板里确认邮箱。',
     },
   ])
-
-  const chips = pickPrompts(promptSeed, 4, asked)
 
   useEffect(() => {
     try {
@@ -106,10 +100,14 @@ export function SiteAssistant() {
   }, [open])
 
   useEffect(() => {
+    if (emailIntent) emailRef.current?.focus()
+  }, [emailIntent])
+
+  useEffect(() => {
     const el = listRef.current
     if (!el) return
     el.scrollTop = el.scrollHeight
-  }, [messages, busy, open])
+  }, [messages, busy, open, emailIntent])
 
   const hide = () => {
     setOpen(false)
@@ -121,40 +119,107 @@ export function SiteAssistant() {
     }
   }
 
+  const pushAssistant = (text: string, actions?: AskAction[]) => {
+    setMessages((prev) => [...prev, { role: 'assistant', text, actions }])
+  }
+
+  const runAction = (action: AskAction) => {
+    if (action.type === 'navigate') return
+    setEmailIntent(action.type)
+    setEmail('')
+  }
+
+  const submitEmail = async () => {
+    if (!emailIntent || emailBusy) return
+    const value = email.trim().toLowerCase()
+    if (!value) return
+
+    setEmailBusy(true)
+    const endpoints: Record<EmailIntent, string> = {
+      subscribe: '/api/subscribe',
+      unsubscribe: '/api/unsubscribe',
+      subscribe_status: '/api/subscribe/status',
+    }
+
+    try {
+      const res = await fetch(endpoints[emailIntent], {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: value }),
+      })
+      const data = (await res.json()) as { ok?: boolean; message?: string; subscribed?: boolean }
+      const text =
+        data.message ||
+        (res.ok
+          ? emailIntent === 'subscribe_status'
+            ? data.subscribed
+              ? '该邮箱在订阅名单中。'
+              : '名单里还没有这个邮箱。'
+            : '已处理。'
+          : '暂时没法完成，稍后再试，或打开 /subscribe。')
+      pushAssistant(text)
+      setEmailIntent(null)
+      setEmail('')
+    } catch {
+      pushAssistant('网络不顺，邮箱操作没完成。可直接打开 /subscribe。')
+    } finally {
+      setEmailBusy(false)
+    }
+  }
+
   const ask = async (question: string) => {
     const q = question.trim()
     if (!q || busy) return
     setBusy(true)
     setInput('')
-    setAsked((prev) => [...prev, q])
+    setEmailIntent(null)
     setMessages((prev) => [...prev, { role: 'user', text: q }])
+
+    const history = [...messages, { role: 'user' as const, text: q }]
+      .filter((m) => m.role === 'user' || m.role === 'assistant')
+      .slice(-6)
+      .map((m) => ({ role: m.role, text: m.text }))
 
     try {
       const res = await fetch('/api/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: q, llm: true }),
+        body: JSON.stringify({ question: q, llm: true, messages: history }),
       })
-      const data = (await res.json()) as { answer?: string; error?: string }
+      const data = (await res.json()) as {
+        answer?: string
+        error?: string
+        suggestions?: Suggestion[]
+        actions?: AskAction[]
+      }
       const text =
         data.answer ||
         data.error ||
         (res.status === 429
           ? '问得有点勤，稍后再试，或直接逛 /gallery 与 /research。'
           : '暂时没法回答，可以到 /contact 留言。')
-      setMessages((prev) => [...prev, { role: 'assistant', text }])
-      setPromptSeed((s) => s + 7)
+      const actions = Array.isArray(data.actions) ? data.actions : []
+      pushAssistant(text, actions.length > 0 ? actions : undefined)
+      if (Array.isArray(data.suggestions) && data.suggestions.length > 0) {
+        setSuggestions(data.suggestions.slice(0, 4))
+      }
     } catch {
-      setMessages((prev) => [
-        ...prev,
-        { role: 'assistant', text: '网络不顺。可以先看 /tools 或到 /contact。' },
-      ])
+      pushAssistant('网络不顺。可以先看 /tools 或到 /contact。')
     } finally {
       setBusy(false)
     }
   }
 
   if (hidden) return null
+
+  const emailLabel =
+    emailIntent === 'subscribe'
+      ? '订阅'
+      : emailIntent === 'unsubscribe'
+        ? '退订'
+        : emailIntent === 'subscribe_status'
+          ? '查询'
+          : ''
 
   return (
     <div className={`site-assist${open ? ' is-open' : ''}${busy ? ' is-busy' : ''}`}>
@@ -187,19 +252,90 @@ export function SiteAssistant() {
                   m.role === 'user' ? 'site-assist__msg site-assist__msg--user' : 'site-assist__msg'
                 }
               >
-                {m.role === 'assistant' ? linkify(m.text) : m.text}
+                {m.role === 'assistant' ? (
+                  <>
+                    <div>{linkify(m.text)}</div>
+                    {m.actions && m.actions.length > 0 ? (
+                      <div className="site-assist__actions" aria-label="可用动作">
+                        {m.actions.map((action, j) =>
+                          action.type === 'navigate' ? (
+                            <Link
+                              key={`${action.type}-${j}`}
+                              href={action.path}
+                              className="site-assist__action"
+                            >
+                              {action.label}
+                            </Link>
+                          ) : (
+                            <button
+                              key={`${action.type}-${j}`}
+                              type="button"
+                              className="site-assist__action"
+                              disabled={busy || emailBusy}
+                              onClick={() => runAction(action)}
+                            >
+                              {action.label}
+                            </button>
+                          ),
+                        )}
+                      </div>
+                    ) : null}
+                  </>
+                ) : (
+                  m.text
+                )}
               </li>
             ))}
             {busy ? <ThinkingRow /> : null}
           </ul>
 
-          {chips.length > 0 ? (
+          {emailIntent ? (
+            <form
+              className="site-assist__email"
+              onSubmit={(e) => {
+                e.preventDefault()
+                void submitEmail()
+              }}
+            >
+              <p className="site-assist__suggestions-label">{emailLabel}确认</p>
+              <div className="site-assist__email-row">
+                <input
+                  ref={emailRef}
+                  className="site-assist__input"
+                  type="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="你的邮箱"
+                  disabled={emailBusy}
+                  aria-label="邮箱"
+                />
+                <button
+                  type="submit"
+                  className="site-assist__send"
+                  disabled={emailBusy || !email.trim()}
+                >
+                  确认
+                </button>
+                <button
+                  type="button"
+                  className="site-assist__quiet"
+                  disabled={emailBusy}
+                  onClick={() => setEmailIntent(null)}
+                >
+                  取消
+                </button>
+              </div>
+            </form>
+          ) : null}
+
+          {suggestions.length > 0 ? (
             <div className="site-assist__suggestions" aria-label="预测问题">
               <p className="site-assist__suggestions-label">也许想问</p>
               <div className="site-assist__suggestions-row">
-                {chips.map((s) => (
+                {suggestions.map((s) => (
                   <button
-                    key={s.label}
+                    key={`${s.label}-${s.question}`}
                     type="button"
                     className="site-assist__chip"
                     disabled={busy}

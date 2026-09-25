@@ -102,9 +102,10 @@ export function WeatherWidget() {
     new Date(iso + 'T12:00:00').toLocaleDateString('zh-CN', { weekday: 'short' })
 
   return (
-    <div className="glass-card p-6 md:col-span-2">
+    <div className="glass-card fun-toy p-6">
       <div className="mb-5 flex items-start justify-between gap-4">
         <div>
+          <p className="folio-mark mb-2">Outside</p>
           <h3 className="text-lg font-semibold">天气</h3>
           <p className="text-sm text-muted-foreground">
             {loading ? '读取中…' : error ? '暂时读不到天气' : data?.source}

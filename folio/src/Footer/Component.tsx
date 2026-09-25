@@ -55,6 +55,12 @@ export async function Footer() {
           <div className="flex flex-col gap-4 pt-2 text-xs tracking-wide text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <p>
               © {new Date().getFullYear()} {instance.siteName}
+              <span aria-hidden className="mx-2 opacity-40">
+                ·
+              </span>
+              <Link className="transition-colors hover:text-foreground" href="/terms#license">
+                许可
+              </Link>
             </p>
             <nav className="flex flex-wrap items-center gap-x-4 gap-y-2" aria-label="法律">
               <Link className="transition-colors hover:text-foreground" href="/privacy">

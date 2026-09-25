@@ -1,11 +1,13 @@
 # Security Policy for alexander.xin
 # https://alexander.xin/.well-known/security.txt
-# Last updated: 2026-09-24
+# Last updated: 2026-09-25
+#
+# 安全披露请用 security@。一般事务用 hello@（见站点 /contact），勿往 admin@ 发。
 
-Contact: mailto:contact-us@alexander.xin
+Contact: mailto:security@alexander.xin
 Preferred-Languages: zh-CN, en
 Policy: https://alexander.xin/security/policy
 Acknowledgments: https://alexander.xin/security/acknowledgments
 Encryption: https://alexander.xin/security/pgp-key.asc
 Canonical: https://alexander.xin/.well-known/security.txt
-Expires: 2027-03-19T00:00:00.000Z
+Expires: 2027-09-25T00:00:00.000Z

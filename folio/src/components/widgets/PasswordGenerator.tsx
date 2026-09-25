@@ -42,7 +42,8 @@ export function PasswordGenerator() {
   const kinds = [upper, lower, numbers, symbols].filter(Boolean).length
 
   return (
-    <div className="glass-card p-6">
+    <div className="glass-card fun-toy p-6">
+      <p className="folio-mark mb-2">Key</p>
       <h3 className="text-lg font-semibold mb-4">密码生成器</h3>
       <div className="mb-4 rounded-sm border border-border bg-muted/40 px-3 py-3 font-mono text-sm break-all min-h-[2.75rem]">
         {password || '点击生成'}

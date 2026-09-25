@@ -171,10 +171,12 @@ export default function PrivacyPage() {
               {mail ? (
                 <>
                   {' '}
-                  或 <a href={`mailto:${mail}`}>{mail}</a>
+                  或一般邮箱 <a href={`mailto:${mail}`}>{mail}</a>
                 </>
               ) : null}
-              ，亦可参考 security.txt。
+              ；安全披露请用{' '}
+              <a href={`mailto:${security.contactEmail}`}>{security.contactEmail}</a>，并参阅{' '}
+              <a href="/.well-known/security.txt">security.txt</a>。
             </p>
           </section>
 

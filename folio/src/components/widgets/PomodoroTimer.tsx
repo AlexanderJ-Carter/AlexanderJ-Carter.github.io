@@ -47,8 +47,10 @@ export function PomodoroTimer() {
   const progress = total === 0 ? 0 : ((total - remaining) / total) * 553
 
   return (
-    <div className="glass-card p-6">
-      <h3 className="text-lg font-semibold mb-4">番茄钟</h3>
+    <div className="glass-card fun-toy p-6">
+      <p className="folio-mark mb-2">Focus</p>
+      <h3 className="text-lg font-semibold mb-1">番茄钟</h3>
+      <p className="text-sm text-muted-foreground mb-5">二十五分钟一格，像胶卷倒数。</p>
       <div className="flex gap-2 mb-6">
         <button
           type="button"

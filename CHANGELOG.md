@@ -4,22 +4,22 @@
 
 ## [Unreleased]
 
+## [4.0.3] - 2026-09-25
+
 ### Added
 
-- `/updates` 公开更新日志；订阅确认 / 群发邮件模板（`src/emails`）
-- 关于页履历时间线（`about.timeline`）；Cookie 同意与可选 CF Web Analytics
-- 精选/画廊正方形画幅；管理条仅登录可见
+- 问站白名单工具协同：天气（Open-Meteo）、汇率（Frankfurter）、诗词、上海时间；订阅查询面板与 `/api/subscribe/status`
+- `/network` 分区站群地图（NetworkAtlas）
+- `/updates` 发展史：静态页 → Astro → Folio 三栈叙事、提交密度、世代筛选（策展自 tags / CHANGELOG）
 
 ### Changed
 
-- 文档收束为 `docs/FOLIO.md`（模板与实例分离）
-- 管理员会话 24h；首页研究条展示真实论文钩子
+- 问站截断恢复与上下文建议；节日公告、玩乐分区、关于时间线与邮箱/版权口径收束
+- 页脚与条款补版权说明；`security.txt` 统一公开邮箱
 
 ### Removed
 
-- 冗长 CUTOVER / IA 分册文档
-
-
+- 首页「三法则 / MethodStrip」区块
 
 ## [3.2.1] - 2026-09
 

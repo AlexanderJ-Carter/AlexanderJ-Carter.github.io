@@ -38,7 +38,7 @@ export function ExposureTriangle() {
   const field = 'mt-1 w-full border border-border bg-transparent px-3 py-2 text-sm'
 
   return (
-    <div className="glass-card p-6">
+    <div className="glass-card fun-toy p-6">
       <p className="folio-mark mb-2">Plate EV</p>
       <h3 className="text-lg font-semibold mb-1">曝光三角</h3>
       <p className="text-sm text-muted-foreground mb-5">调光圈、快门、ISO，看等效曝光怎么变。</p>

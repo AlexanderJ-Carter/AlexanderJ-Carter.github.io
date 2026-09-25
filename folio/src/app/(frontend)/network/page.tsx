@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import { ElsewhereList } from '@/components/ElsewhereList'
+import { NetworkAtlas, type AtlasZone } from '@/components/NetworkAtlas'
 import { PageChrome } from '@/components/PageChrome'
 import { getInstance } from '@/instance'
 
@@ -10,57 +10,81 @@ export const metadata: Metadata = {
   description: '本站栏目与站外入口一览。',
 }
 
-const HERE = [
-  { href: '/gallery', label: '画廊', note: '影像联系单' },
-  { href: '/posts', label: '写作', note: '精选短文' },
-  { href: '/research', label: '研究', note: '公开论文' },
-  { href: '/projects', label: '项目', note: '生活向构建' },
-  { href: '/tools', label: '工具', note: '时间 · 换算 · QR' },
-  { href: '/fun', label: '玩乐', note: '暗房小玩具' },
-  { href: '/about', label: '关于', note: '门禁履历' },
-  { href: '/contact', label: '联系', note: '门禁留言' },
-  { href: '/subscribe', label: '订阅', note: '低频通讯' },
-  { href: '/updates', label: '更新', note: '站务日志' },
-] as const
+const ZONES: AtlasZone[] = [
+  {
+    id: 'see',
+    title: '看',
+    mark: 'N·01',
+    blurb: '影像与文字',
+    nodes: [
+      { href: '/gallery', label: '画廊', note: '影像联系单' },
+      { href: '/posts', label: '写作', note: '精选短文' },
+      { href: '/research', label: '研究', note: '公开论文' },
+    ],
+  },
+  {
+    id: 'use',
+    title: '用',
+    mark: 'N·02',
+    blurb: '工具与玩乐',
+    nodes: [
+      { href: '/tools', label: '工具', note: '时间 · 换算 · QR' },
+      { href: '/fun', label: '玩乐', note: '天气 · 诗词 · 暗房玩具' },
+      { href: '/projects', label: '项目', note: '生活向构建' },
+    ],
+  },
+  {
+    id: 'know',
+    title: '识',
+    mark: 'N·03',
+    blurb: '身份与往来',
+    nodes: [
+      { href: '/about', label: '关于', note: '门禁履历' },
+      { href: '/contact', label: '联系', note: '门禁留言' },
+      { href: '/subscribe', label: '订阅', note: '低频通讯' },
+      { href: '/updates', label: '更新', note: '近况与沿革' },
+    ],
+  },
+]
 
 export default function NetworkPage() {
   const instance = getInstance()
   const elsewhere = instance.elsewhere
+  const hub =
+    instance.siteUrl?.replace(/^https?:\/\//, '').replace(/\/$/, '') || 'alexander.xin'
+
+  const away: AtlasZone | null =
+    elsewhere.length > 0
+      ? {
+          id: 'away',
+          title: '站外',
+          mark: 'E·01',
+          blurb: '仍在开着的别的门口',
+          nodes: elsewhere.map((item) => ({
+            href: item.href,
+            label: item.name,
+            note: item.desc || item.host,
+            external: true,
+          })),
+        }
+      : null
 
   return (
     <PageChrome
       mark="Network"
       title="站群地图"
-      description="一张图看清本站栏目，以及站外还开着的入口。有问题直接右下角问站。"
+      description="分区总图：本站看 / 用 / 识，以及站外入口。有问题直接右下角问站——天气、汇率也可以问。"
     >
-      <div className="container max-w-3xl">
-        <section className="network-map" aria-labelledby="network-here">
-          <h2 id="network-here" className="network-map__heading">
-            本站
-          </h2>
-          <ul className="network-map__list">
-            {HERE.map((item) => (
-              <li key={item.href}>
-                <Link className="network-map__row" href={item.href}>
-                  <span className="network-map__row-main">
-                    <span className="network-map__label">{item.label}</span>
-                    <span className="network-map__note">{item.note}</span>
-                  </span>
-                  <span className="network-map__path">{item.href}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
+      <div className="container max-w-5xl">
+        <NetworkAtlas hubLabel={hub} zones={ZONES} away={away} />
 
-        {elsewhere.length > 0 ? (
-          <section className="network-map network-map--away" aria-labelledby="network-away">
-            <h2 id="network-away" className="network-map__heading">
-              站外
-            </h2>
-            <ElsewhereList items={elsewhere} />
-          </section>
-        ) : null}
+        <p className="network-atlas__foot">
+          站点怎么长到现在的：见{' '}
+          <Link className="underline underline-offset-4" href="/updates#chronicle">
+            更新 · 发展史
+          </Link>
+          。
+        </p>
       </div>
     </PageChrome>
   )

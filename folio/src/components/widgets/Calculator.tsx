@@ -91,7 +91,8 @@ export function Calculator() {
     'py-3 text-sm border border-border hover:bg-muted/50 transition-colors active:scale-[0.98]'
 
   return (
-    <div className="glass-card p-6" tabIndex={0} aria-label="计算器">
+    <div className="glass-card fun-toy p-6" tabIndex={0} aria-label="计算器">
+      <p className="folio-mark mb-2">Calc</p>
       <h3 className="text-lg font-semibold mb-4">计算器</h3>
       <div className="mb-4 rounded-sm border border-border bg-muted/40 px-3 py-3 text-right">
         <p className="text-xs text-muted-foreground font-mono min-h-[1rem]">{expression || '\u00a0'}</p>

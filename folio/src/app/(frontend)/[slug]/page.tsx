@@ -7,12 +7,12 @@ import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
 import { homeStatic } from '@/endpoints/seed/home-static'
 
-import { blockPanels, RenderBlocks } from '@/blocks/RenderBlocks'
+import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { AboutTimeline } from '@/components/AboutTimeline'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
+import { HomeInvite } from '@/components/HomeInvite'
 import { HomeSnap } from '@/components/HomeSnap'
-import { MethodStrip } from '@/components/MethodStrip'
 import { PoemHistory } from '@/components/PoemHistory'
 import { Publications } from '@/components/Publications'
 import { ResearchStrip } from '@/components/ResearchStrip'
@@ -74,24 +74,22 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   const { hero, layout } = page
   const isHome = decodedSlug === 'home'
-  const cmsBlocks = isHome ? blockPanels(layout) : []
 
   const homePanels = isHome
     ? [
         <RenderHero key="hero" {...hero} />,
         <div key="studio" className="home-snap-stack">
           <FeaturedStrip />
-          <MethodStrip />
         </div>,
         <div key="notes" className="home-snap-stack home-snap-stack--dense">
           <PoemHistory />
           <ResearchStrip />
-          {cmsBlocks.length > 0 ? <div className="home-snap-cms">{cmsBlocks}</div> : null}
+          <HomeInvite />
         </div>,
       ]
     : []
 
-  const homeLabels = isHome ? ['开场', '影像与法则', '今日与研究'] : []
+  const homeLabels = isHome ? ['开场', '精选影像', '今日与研究'] : []
 
   return (
     <article className={isHome ? 'pb-0' : 'pt-20 md:pt-24 pb-24'}>

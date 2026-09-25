@@ -14,7 +14,7 @@ export const siteUpdates: SiteUpdate[] = [
   {
     date: '2026-09-25',
     title: '问站与站群地图',
-    body: '取消独立帮助页；右下角对话导览。新增 /network 看本站栏目与站外入口。',
+    body: '取消独立帮助页；右下角对话导览，可简答天气/汇率等。新增 /network 分区总览；/updates 按静态→Astro→Folio 讲述发展史。',
     href: '/network',
     hrefLabel: '站群地图 →',
   },
