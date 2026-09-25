@@ -15,6 +15,9 @@ export const defaultInstance: FolioInstance = {
       desc: 'Source and experiments',
     },
   ],
+  about: {
+    timeline: [],
+  },
   research: {
     intro:
       'List public papers and research links here. Personal CV stays behind the visitor gate.',

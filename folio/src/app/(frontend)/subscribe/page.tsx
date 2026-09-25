@@ -14,7 +14,7 @@ export default function SubscribePage() {
     <PageChrome
       mark="订阅"
       title="订阅"
-      description="写作先歇着时，邮件也不会常发；有像样更新时才会写一封。不是促销名单。"
+      description="不常发。有像样更新时才写一封——不是促销名单。"
     >
       <div className="container grid max-w-4xl gap-14 lg:grid-cols-2">
         <section>

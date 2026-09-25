@@ -130,10 +130,18 @@ export function VerifyGate() {
 
   return (
     <div className="verify-gate relative mx-auto max-w-lg px-4 py-16 md:py-24">
-      <p className="folio-mark mb-3">Gate</p>
+      <p className="folio-mark mb-3">访客门禁</p>
       <h1 className="text-3xl md:text-4xl font-semibold tracking-tight mb-3">确认你是真人访客</h1>
-      <p className="text-muted-foreground mb-8 leading-relaxed">
-        通常几秒内完成，通过后会自动继续。验证状态保存在 Cookie（7 天）。
+      <p className="text-muted-foreground mb-4 leading-relaxed">
+        关于页与联系页需完成验证，以减少爬虫与滥用。通常几秒内完成，通过后自动继续。
+      </p>
+      <p className="text-muted-foreground mb-8 text-sm leading-relaxed">
+        验证状态保存在必要 Cookie <code className="text-xs">folio_verify</code>（约 7
+        天）。公开论文仍可直接访问{' '}
+        <a className="underline underline-offset-4" href="/research">
+          /research
+        </a>
+        。
       </p>
       <p className="meta-mono text-xs text-muted-foreground mb-4" aria-live="polite">
         {status}

@@ -9,6 +9,7 @@ import { homeStatic } from '@/endpoints/seed/home-static'
 
 import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
+import { AboutTimeline } from '@/components/AboutTimeline'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
 import { MethodStrip } from '@/components/MethodStrip'
 import { PoemHistory } from '@/components/PoemHistory'
@@ -75,7 +76,19 @@ export default async function Page({ params: paramsPromise }: Args) {
   return (
     <article className={decodedSlug === 'home' ? 'pb-24' : 'pt-20 md:pt-24 pb-24'}>
       <PageClient />
-      {page.id != null && <ViewTracker collection="pages" id={page.id} enabled={!draft} />}
+      {page.id != null && (
+        <ViewTracker
+          collection="pages"
+          id={page.id}
+          initial={typeof page.viewCount === 'number' ? page.viewCount : 0}
+          enabled={!draft}
+          className={
+            decodedSlug === 'home'
+              ? 'sr-only'
+              : 'container mb-2 text-xs text-muted-foreground meta-mono'
+          }
+        />
+      )}
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
@@ -101,6 +114,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       <RenderBlocks blocks={layout} />
       {decodedSlug === 'about' && (
         <div className="container max-w-4xl">
+          <AboutTimeline />
           <Publications compact />
         </div>
       )}
@@ -116,7 +130,14 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
     slug: decodedSlug,
   })
 
-  return generateMeta({ doc: page })
+  const meta = await generateMeta({ doc: page })
+  if (decodedSlug === 'about') {
+    return {
+      ...meta,
+      robots: { index: false, follow: false },
+    }
+  }
+  return meta
 }
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {

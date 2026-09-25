@@ -85,4 +85,4 @@ jobs:
       - name: Missing secrets
         run: |
           echo "FOLIO_SSH_PRIVATE_KEY / FOLIO_SSH_HOST not configured — deploy skipped."
-          echo "See docs/FOLIO-CUTOVER.md"
+          echo "See docs/FOLIO.md"

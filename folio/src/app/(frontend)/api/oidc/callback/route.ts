@@ -230,7 +230,10 @@ export async function GET(request: Request) {
         path: cookie.path || '/',
         sameSite: (cookie.sameSite?.toLowerCase() as 'lax' | 'strict' | 'none') || 'lax',
         secure: secure || Boolean(cookie.secure),
-        expires: cookie.expires ? new Date(cookie.expires) : undefined,
+        maxAge: tokenExpiration,
+        expires: cookie.expires
+          ? new Date(cookie.expires)
+          : new Date(Date.now() + tokenExpiration * 1000),
       })
     }
     response.cookies.set('folio_oidc_state', '', { path: '/', maxAge: 0, secure })

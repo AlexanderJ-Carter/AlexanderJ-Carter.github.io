@@ -18,3 +18,6 @@ ADMIN.txt
 .env.production
 instance/config.json
 *.tsbuildinfo
+
+public/sitemap.xml
+public/robots.txt

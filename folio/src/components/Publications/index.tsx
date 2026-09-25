@@ -6,6 +6,8 @@ import { getInstance } from '@/instance'
 
 type Props = {
   compact?: boolean
+  /** compact 时最多展示几条；默认 2 */
+  limit?: number
   showProfiles?: boolean
 }
 
@@ -40,14 +42,14 @@ function PubRow({ item, index }: { item: Publication; index: number }) {
   )
 }
 
-export function Publications({ compact = false, showProfiles = true }: Props) {
-  const publications = getPublications()
+export function Publications({ compact = false, limit, showProfiles = true }: Props) {
+  const publications = getPublications(compact ? { limit: limit ?? 2 } : undefined)
   const profiles = getResearchProfiles()
 
   if (publications.length === 0 && !compact) {
     return (
       <section className="container max-w-4xl" aria-labelledby="publications-heading">
-        <p className="folio-mark mb-3">Publications</p>
+        <p className="folio-mark mb-3">论文</p>
         <h2 id="publications-heading" className="text-2xl font-semibold tracking-tight mb-3">
           论文
         </h2>
@@ -61,20 +63,28 @@ export function Publications({ compact = false, showProfiles = true }: Props) {
 
   if (publications.length === 0) return null
 
+  const total = getPublications().length
+  const truncated = compact && total > publications.length
+
   return (
     <section className={compact ? 'mt-12 md:mt-16' : ''} aria-labelledby="publications-heading">
       <div className={compact ? '' : 'container max-w-4xl'}>
         <div className="max-w-2xl mb-6 md:mb-8">
-          <p className="folio-mark mb-3">Publications</p>
+          <p className="folio-mark mb-3">论文</p>
           <h2
             id="publications-heading"
             className="text-2xl md:text-3xl font-semibold tracking-tight"
           >
-            论文
+            {compact ? '精选论文' : '论文'}
           </h2>
           {!compact && (
             <p className="mt-3 text-muted-foreground text-sm md:text-base leading-relaxed">
               {getInstance().research.intro}
+            </p>
+          )}
+          {compact && (
+            <p className="mt-2 text-muted-foreground text-sm leading-relaxed">
+              完整列表与外链见公开研究页。
             </p>
           )}
         </div>
@@ -85,28 +95,29 @@ export function Publications({ compact = false, showProfiles = true }: Props) {
           ))}
         </div>
 
-        {showProfiles && profiles.length > 0 && (
+        {(showProfiles || truncated) && (
           <nav
             className="mt-8 flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground"
             aria-label="学术档案外链"
           >
-            {profiles.map((p) => (
-              <a
-                key={p.href}
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline-offset-4 hover:text-foreground hover:underline"
-              >
-                {p.label}
-              </a>
-            ))}
+            {showProfiles &&
+              profiles.map((p) => (
+                <a
+                  key={p.href}
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline-offset-4 hover:text-foreground hover:underline"
+                >
+                  {p.label}
+                </a>
+              ))}
             {compact && (
               <Link
                 href="/research"
                 className="underline-offset-4 hover:text-foreground hover:underline"
               >
-                公开研究页 →
+                {truncated ? `全部 ${total} 篇论文 →` : '公开研究页 →'}
               </Link>
             )}
           </nav>

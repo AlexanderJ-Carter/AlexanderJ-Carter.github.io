@@ -36,6 +36,17 @@ export type InstanceLifestyleProject = {
   demoLabel?: string
 }
 
+/** 门禁关于页履历条目（教育 / 研究 / 工作等） */
+export type InstanceTimelineItem = {
+  /** 时段，如 `2022 — 今` */
+  period: string
+  /** 标题，如 `清华大学 · 电子工程` */
+  title: string
+  /** 一句说明，可选 */
+  detail?: string
+  kind?: 'education' | 'research' | 'work' | 'other'
+}
+
 /** 开源模板可覆盖的实例配置（不含密钥）。密钥只放服务器 .env。 */
 export type FolioInstance = {
   /** 站点显示名 */
@@ -50,6 +61,10 @@ export type FolioInstance = {
   twitterCreator?: string
   /** 页脚 Elsewhere */
   elsewhere: InstanceElsewhere[]
+  /** 门禁关于页：履历时间线（完整论文仍在 research） */
+  about?: {
+    timeline?: InstanceTimelineItem[]
+  }
   /** 公开研究页 */
   research: {
     intro: string

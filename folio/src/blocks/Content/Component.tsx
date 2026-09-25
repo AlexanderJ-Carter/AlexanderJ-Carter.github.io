@@ -18,23 +18,29 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
   return (
     <div className="container">
-      <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-10 lg:gap-x-16">
+      <div className="grid grid-cols-4 gap-y-8 gap-x-10 border-t border-border pt-10 lg:grid-cols-12 lg:gap-x-16 md:pt-12">
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
             const { enableLink, link, richText, size } = col
+            const aside = size === 'oneThird'
 
             return (
               <div
                 className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
                   'md:col-span-2': size !== 'full',
                   'lg:border-l lg:border-border/70 lg:pl-8': size === 'oneThird' || size === 'half',
+                  'studio-aside': aside,
                 })}
                 key={index}
               >
                 {richText && (
                   <RichText
-                    className="[&_h2]:text-2xl [&_h2]:md:text-3xl [&_h2]:tracking-tight [&_p]:text-muted-foreground [&_p]:leading-relaxed"
+                    className={
+                      aside
+                        ? '[&_h2]:text-base [&_h2]:font-semibold [&_h2]:tracking-tight [&_h3]:text-base [&_h3]:font-semibold [&_h3]:tracking-tight [&_p]:text-sm [&_p]:leading-relaxed [&_p]:text-muted-foreground [&_p+p]:mt-1.5'
+                        : '[&_h2]:text-2xl [&_h2]:md:text-3xl [&_h2]:tracking-tight [&_p]:text-muted-foreground [&_p]:leading-relaxed'
+                    }
                     data={richText}
                     enableGutter={false}
                   />

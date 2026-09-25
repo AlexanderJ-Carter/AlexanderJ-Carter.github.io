@@ -50,8 +50,8 @@ export function FeaturedStrip() {
               src={frame.src}
               alt=""
               width={800}
-              height={1000}
-              className="h-full w-full object-cover aspect-[4/5] transition-transform duration-700 group-hover:scale-[1.03]"
+              height={800}
+              className="aspect-square h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               loading={i === 0 ? 'eager' : 'lazy'}
               decoding="async"
             />

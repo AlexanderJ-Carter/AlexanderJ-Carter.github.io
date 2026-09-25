@@ -1,4 +1,4 @@
-/* 登录后：右下角浮层，不顶开页面 */
+/* 登录后：右下角浮层（略抬高，避开 Cookie 按钮），不顶开页面 */
 
 .admin-dock {
   display: none;
@@ -9,7 +9,7 @@
   position: fixed;
   z-index: 60;
   inset-inline-end: 1rem;
-  inset-block-end: 1rem;
+  inset-block-end: 3.25rem;
 }
 
 .admin-dock--hidden {

@@ -12,8 +12,24 @@
       "desc": "Public repos"
     }
   ],
+  "about": {
+    "timeline": [
+      {
+        "period": "2024 — 今",
+        "title": "LLM Agent 与多智能体",
+        "detail": "公开论文与原型放在 /research；履历细节只在门禁关于页。",
+        "kind": "research"
+      },
+      {
+        "period": "2022 — 2026",
+        "title": "示例大学 · 电子工程",
+        "detail": "本科。把真实学校与方向写进服务器 instance/config.json。",
+        "kind": "education"
+      }
+    ]
+  },
   "research": {
-    "intro": "Public papers only. Keep CV behind /about gate.",
+    "intro": "公开论文与研究链接。个人履历在 /about（需访客验证）。",
     "profiles": [
       { "label": "Google Scholar", "href": "https://scholar.google.com" },
       { "label": "ORCID", "href": "https://orcid.org" }

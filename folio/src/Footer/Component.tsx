@@ -13,6 +13,7 @@ const SITE_LINKS = [
   { label: '关于', href: '/about' },
   { label: '联系', href: '/contact' },
   { label: '订阅', href: '/subscribe' },
+  { label: '更新', href: '/updates' },
 ] as const
 
 export async function Footer() {
@@ -21,63 +22,64 @@ export async function Footer() {
 
   return (
     <footer className="site-footer mt-auto">
-      <div className="container py-12 md:py-16">
-        <div className="border-t border-border pt-10">
-          <div className="mb-10 max-w-xl">
-            <p className="folio-mark site-footer__mark mb-2">{instance.siteName}</p>
-            <p className="text-sm leading-relaxed text-muted-foreground">{instance.tagline}</p>
-          </div>
+      <div className="container py-14 md:py-20">
+        <div className="mb-12 max-w-xl md:mb-14">
+          <p className="folio-mark site-footer__mark mb-2">{instance.siteName}</p>
+          <p className="text-sm leading-relaxed text-muted-foreground">{instance.tagline}</p>
+        </div>
 
-          <nav className="mb-12" aria-label="本站">
-            <p className="site-footer__label mb-4">本站</p>
-            <ul className="flex flex-wrap gap-x-5 gap-y-2">
-              {SITE_LINKS.map((item) => (
+        <nav className="mb-12 md:mb-14" aria-label="本站">
+          <p className="site-footer__label mb-4">本站</p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-2.5">
+            {SITE_LINKS.map((item) => (
+              <li key={item.href}>
+                <Link className="site-footer__link" href={item.href}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {elsewhere.length > 0 ? (
+          <div className="mb-12 md:mb-14">
+            <p className="site-footer__label mb-5">站外</p>
+            <ul className="elsewhere-grid">
+              {elsewhere.map((item) => (
                 <li key={item.href}>
-                  <Link className="site-footer__link" href={item.href}>
-                    {item.label}
-                  </Link>
+                  <a
+                    className="elsewhere-tile"
+                    href={item.href}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <span className="elsewhere-tile__copy">
+                      <span className="elsewhere-tile__name">{item.name}</span>
+                      <span className="elsewhere-tile__desc">{item.desc}</span>
+                    </span>
+                    <span className="elsewhere-tile__host">
+                      {item.host}
+                      <span className="elsewhere-tile__arrow" aria-hidden>
+                        ↗
+                      </span>
+                    </span>
+                  </a>
                 </li>
               ))}
             </ul>
-          </nav>
+          </div>
+        ) : null}
 
-          {elsewhere.length > 0 ? (
-            <div className="mb-12">
-              <p className="site-footer__label mb-4">Elsewhere</p>
-              <ul className="grid gap-0 border-t border-border sm:grid-cols-2">
-                {elsewhere.map((item) => (
-                  <li key={item.href} className="border-b border-border">
-                    <a
-                      className="group flex items-baseline justify-between gap-4 py-4 pr-2 no-underline"
-                      href={item.href}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      <span className="min-w-0">
-                        <span className="block text-[0.95rem] font-medium text-foreground transition-colors group-hover:text-primary">
-                          {item.name}
-                        </span>
-                        <span className="mt-0.5 block text-sm text-muted-foreground">
-                          {item.desc}
-                        </span>
-                      </span>
-                      <span className="shrink-0 font-mono text-[0.65rem] tracking-wide text-muted-foreground transition-colors group-hover:text-foreground">
-                        {item.host} ↗
-                      </span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-
-          <div className="flex flex-col gap-4 border-t border-border pt-6 text-xs tracking-wide text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 pt-2 text-xs tracking-wide text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <p>
               © {new Date().getFullYear()} {instance.siteName}
             </p>
             <nav className="flex flex-wrap items-center gap-x-4 gap-y-2" aria-label="法律">
               <Link className="transition-colors hover:text-foreground" href="/privacy">
                 隐私
+              </Link>
+              <Link className="transition-colors hover:text-foreground" href="/privacy#cookies">
+                Cookie
               </Link>
               <Link className="transition-colors hover:text-foreground" href="/terms">
                 条款
@@ -90,7 +92,6 @@ export async function Footer() {
               </Link>
             </nav>
           </div>
-        </div>
       </div>
     </footer>
   )

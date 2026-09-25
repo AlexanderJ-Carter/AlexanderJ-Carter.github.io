@@ -27,7 +27,8 @@ export const Users: CollectionConfig = {
       sameSite: 'Lax',
       secure: true,
     },
-    tokenExpiration: 60 * 60 * 24 * 7,
+    /** 前台管理条与后台会话：24 小时，过期需重新 OIDC 登录 */
+    tokenExpiration: 60 * 60 * 24,
   },
   hooks: {
     beforeOperation: [

@@ -42,12 +42,12 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   return (
     <header
       className={cn(
-        'site-header fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter,color] duration-300',
+        'site-header fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter,box-shadow,color] duration-300',
         overHero
-          ? 'border-b border-transparent bg-transparent text-white'
-          : 'border-b border-border/50 bg-background/90 text-foreground backdrop-blur-md supports-[backdrop-filter]:bg-background/75',
+          ? 'border-b border-transparent bg-transparent text-white shadow-none'
+          : 'border-b border-transparent bg-background/92 text-foreground shadow-[0_1px_0_color-mix(in_oklch,var(--foreground)_6%,transparent)] backdrop-blur-md supports-[backdrop-filter]:bg-background/80',
       )}
-      {...(theme ? { 'data-theme': theme } : {})}
+      {...(overHero ? { 'data-theme': 'dark' as const } : {})}
       data-over-hero={overHero ? 'true' : 'false'}
     >
       <div className="container flex h-14 md:h-16 items-center justify-between gap-6">

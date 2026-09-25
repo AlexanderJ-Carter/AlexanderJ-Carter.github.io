@@ -73,9 +73,9 @@ export function GalleryGrid() {
               <img
                 src={item.src}
                 alt=""
-                width={640}
+                width={800}
                 height={800}
-                className="aspect-[4/5] h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                className="aspect-square h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading={i < 4 ? 'eager' : 'lazy'}
                 decoding="async"
               />

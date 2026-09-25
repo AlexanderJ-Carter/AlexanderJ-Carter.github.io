@@ -6,13 +6,16 @@ import { Source_Serif_4, Syne } from 'next/font/google'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
+import { AnalyticsBeacon } from '@/components/AnalyticsBeacon'
 import { AnnouncementBanner } from '@/Announcement/Component'
+import { CookieConsent } from '@/components/CookieConsent'
 import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
+import { SponsorSlot } from '@/components/SponsorSlot'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
-import { draftMode } from 'next/headers'
+import { draftMode, cookies } from 'next/headers'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
@@ -35,6 +38,9 @@ const body = Source_Serif_4({
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
+  const jar = await cookies()
+  /** 无会话 Cookie 时不挂载管理条，避免访客看到空壳/误显 */
+  const hasAdminSession = Boolean(jar.get('payload-token')?.value)
 
   return (
     <html
@@ -53,16 +59,21 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body className="font-sans antialiased">
         <Providers>
-          <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          />
+          {hasAdminSession ? (
+            <AdminBar
+              adminBarProps={{
+                preview: isEnabled,
+              }}
+            />
+          ) : null}
 
           <Header />
           {children}
+          <SponsorSlot />
           <Footer />
           <AnnouncementBanner />
+          <CookieConsent />
+          <AnalyticsBeacon />
         </Providers>
       </body>
     </html>

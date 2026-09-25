@@ -85,6 +85,21 @@ const BeforeDashboard: React.FC = () => {
                 Resend Contacts
               </a>
             </li>
+            <li>
+              群发：Resend{' '}
+              <a href="https://resend.com/broadcasts" target="_blank" rel="noreferrer">
+                Broadcasts
+              </a>
+              。模板：宿主机{' '}
+              <code>node --import tsx scripts/print-broadcast-email.mjs</code>，粘贴 HTML/文本。
+            </li>
+            <li>
+              公开更新日志：
+              <a href="/updates" target="_blank" rel="noreferrer">
+                /updates
+              </a>
+              （改 <code>src/data/updates.ts</code>）
+            </li>
           </ul>
         </section>
         <section>

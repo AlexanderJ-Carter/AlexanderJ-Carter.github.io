@@ -1,5 +1,7 @@
 import { Resend } from 'resend'
 
+import { subscribeAckMail } from '@/emails/templates'
+import { getInstance } from '@/instance'
 import { getServerSideURL } from '@/utilities/getURL'
 import { emailFromHeader } from '@/utilities/mail'
 
@@ -87,22 +89,22 @@ export async function sendSubscribeAck(email: string) {
 
   const site = getServerSideURL().replace(/\/$/, '')
   const unsub = `${site}/unsubscribe?email=${encodeURIComponent(email)}`
+  const mail = subscribeAckMail({
+    siteName: getInstance().siteName,
+    siteUrl: site,
+    unsubUrl: unsub,
+  })
 
   await resend.emails
     .send({
       from: emailFromHeader(),
       to: email,
-      subject: '已记下你的邮箱',
-      text: [
-        '你好，',
-        '',
-        '已把你的邮箱加入本站通讯名单。平时很少发信，有更新时会写给你。',
-        '',
-        `若不想再收到：${unsub}`,
-        '',
-        '— Alexander Carter',
-        site,
-      ].join('\n'),
+      subject: mail.subject,
+      text: mail.text,
+      html: mail.html,
+      headers: {
+        'List-Unsubscribe': `<${unsub}>`,
+      },
     })
     .catch(() => null)
 }

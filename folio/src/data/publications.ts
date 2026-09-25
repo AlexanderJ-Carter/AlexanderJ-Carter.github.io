@@ -8,6 +8,8 @@ export function getResearchProfiles() {
   return getInstance().research.profiles
 }
 
-export function getPublications(): Publication[] {
-  return getInstance().research.publications
+export function getPublications(opts?: { limit?: number }): Publication[] {
+  const all = getInstance().research.publications
+  if (opts?.limit != null) return all.slice(0, opts.limit)
+  return all
 }

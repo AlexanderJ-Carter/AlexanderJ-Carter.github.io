@@ -55,7 +55,15 @@ export default async function Post({ params: paramsPromise }: Args) {
   return (
     <article className="pt-16 pb-16">
       <PageClient />
-      {post.id != null && <ViewTracker collection="posts" id={post.id} enabled={!draft} />}
+      {post.id != null && (
+        <ViewTracker
+          collection="posts"
+          id={post.id}
+          initial={post.viewCount}
+          enabled={!draft}
+          className="sr-only"
+        />
+      )}
 
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />

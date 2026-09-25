@@ -518,10 +518,10 @@ async function main() {
             {
               size: 'oneThird',
               richText: richRoot([
-                heading('h3', '正在打磨'),
-                paragraph([text('影像整理')]),
-                paragraph([text('写作与深读')]),
-                paragraph([text('小工具索引')]),
+                heading('h3', '近况'),
+                paragraph([text('影像在整理联系单')]),
+                paragraph([text('写作偏深读与长文')]),
+                paragraph([text('小工具只做入口索引')]),
               ]),
             },
           ],

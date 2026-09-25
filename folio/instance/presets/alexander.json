@@ -1,0 +1,152 @@
+{
+  "siteName": "Alexander Carter",
+  "siteMark": "AC",
+  "siteUrl": "https://alexander.xin",
+  "tagline": "摄影、写作，偶尔做一点 LLM Agent 研究。",
+  "elsewhere": [
+    {
+      "name": "MyCook",
+      "host": "cook.alexander.xin",
+      "href": "https://cook.alexander.xin",
+      "desc": "菜谱与厨房笔记"
+    },
+    {
+      "name": "Gitea",
+      "host": "git.alexander.xin",
+      "href": "https://git.alexander.xin",
+      "desc": "自建代码仓库"
+    },
+    {
+      "name": "IT-Tools",
+      "host": "tools.alexander.xin",
+      "href": "https://tools.alexander.xin",
+      "desc": "常用小工具箱"
+    },
+    {
+      "name": "GitHub",
+      "host": "github.com/AlexanderJ-Carter",
+      "href": "https://github.com/AlexanderJ-Carter",
+      "desc": "公开仓库与实验"
+    }
+  ],
+  "about": {
+    "timeline": [
+      {
+        "period": "2026.06 — 今",
+        "title": "美团 · 北京三快在线科技",
+        "detail": "实习。细节不放公开页。",
+        "kind": "work"
+      },
+      {
+        "period": "2024 — 今",
+        "title": "LLM Agent · 多智能体 · 计算社会科学",
+        "detail": "公开论文见 /research；实验室协作见 AgentSociety。",
+        "kind": "research"
+      },
+      {
+        "period": "2023.08 — 今",
+        "title": "清华大学 · 电子工程系",
+        "detail": "电子信息科学与技术，本科在读。",
+        "kind": "education"
+      }
+    ]
+  },
+  "research": {
+    "intro": "做 LLM Agent、多智能体和一点计算社会科学。公开论文与项目如下。",
+    "profiles": [
+      {
+        "label": "Google Scholar",
+        "href": "https://scholar.google.com/citations?user=DJ43CTcAAAAJ"
+      },
+      {
+        "label": "ORCID",
+        "href": "https://orcid.org/0009-0007-0343-4129"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/AlexanderJ-Carter"
+      }
+    ],
+    "publications": [
+      {
+        "title": "AgentSociety 2: An Integrated Research Environment for Executable Social Science",
+        "year": "2026",
+        "venue": "arXiv",
+        "links": [
+          { "label": "arXiv", "href": "https://arxiv.org/abs/2607.11895" },
+          { "label": "PDF", "href": "https://arxiv.org/pdf/2607.11895" }
+        ]
+      },
+      {
+        "title": "Grounding LLM Agent Intent in Multi-Module Environments with Executable Action Programs",
+        "year": "2026",
+        "venue": "EMNLP",
+        "links": [
+          {
+            "label": "Scholar",
+            "href": "https://scholar.google.com/citations?user=DJ43CTcAAAAJ"
+          }
+        ]
+      }
+    ],
+    "project": {
+      "title": "AgentSociety",
+      "description": "面向可执行社会科学的多智能体研究环境（清华 FIB Lab）。",
+      "href": "https://github.com/tsinghua-fib-lab/AgentSociety",
+      "hrefLabel": "tsinghua-fib-lab/AgentSociety ↗"
+    }
+  },
+  "projects": {
+    "intro": "生活向工具与个人实验。研究协作见 /research。",
+    "items": [
+      {
+        "title": "MyCook",
+        "description": "合并整理菜谱项目的静态站，按烹饪方式与食材浏览。",
+        "status": "进行中",
+        "tags": ["VitePress", "菜谱"],
+        "href": "https://github.com/AlexanderJ-Carter/MyCook",
+        "hrefLabel": "源码 →",
+        "demoHref": "https://cook.alexander.xin",
+        "demoLabel": "打开 →"
+      },
+      {
+        "title": "netq",
+        "description": "面向开发者与运维的轻量交互式网络排查 CLI。",
+        "status": "进行中",
+        "tags": ["CLI", "网络"],
+        "href": "https://github.com/AlexanderJ-Carter/netq",
+        "hrefLabel": "源码 →",
+        "demoHref": "https://netq.alexander.xin",
+        "demoLabel": "站点 →"
+      },
+      {
+        "title": "Git-Workflow-Lab",
+        "description": "Git 学习与协作实践的边看边做教学仓库。",
+        "status": "进行中",
+        "tags": ["Git", "教学"],
+        "href": "https://github.com/AlexanderJ-Carter/Git-Workflow-Lab",
+        "hrefLabel": "源码 →",
+        "demoHref": "https://lab.alexander.xin",
+        "demoLabel": "打开 →"
+      },
+      {
+        "title": "MIPS-Pipeline-Verilog",
+        "description": "Verilog 实现的 MIPS 五级流水线 CPU，含转发与冒险检测。",
+        "status": "已完成",
+        "tags": ["Verilog", "FPGA"],
+        "href": "https://github.com/AlexanderJ-Carter/MIPS-Pipeline-Verilog",
+        "hrefLabel": "源码 →"
+      }
+    ]
+  },
+  "security": {
+    "domains": ["alexander.xin", "*.alexander.xin"],
+    "contactEmail": "security@alexander.xin"
+  },
+  "contact": {
+    "email": "hello@alexander.xin",
+    "location": "北京"
+  },
+  "oidcDisplayHost": "id.alexander.xin",
+  "seedEmailHint": "admin@alexander.xin"
+}

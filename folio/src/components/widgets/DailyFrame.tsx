@@ -28,8 +28,8 @@ export function DailyFrame() {
           src={frame.src}
           alt={frame.title}
           width={800}
-          height={600}
-          className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          height={800}
+          className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
         />
         <div className="contact-sheet__meta">
           <p className="text-[0.65rem] uppercase tracking-[0.16em] text-white/70">{frame.category}</p>

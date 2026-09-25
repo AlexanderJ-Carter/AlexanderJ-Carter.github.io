@@ -26,7 +26,7 @@ export const Announcement: GlobalConfig = {
       required: true,
       defaultValue: 'notice-default',
       admin: {
-        description: '换一批公告时改这个字符串（例如 2026-ny）。',
+        description: '换一批公告时改这个字符串（例如 notice-2026-home）。',
       },
     },
     {
@@ -34,14 +34,14 @@ export const Announcement: GlobalConfig = {
       type: 'text',
       label: '标题',
       required: true,
-      defaultValue: '公告',
+      defaultValue: '站搬过来了',
     },
     {
       name: 'body',
       type: 'textarea',
       label: '正文',
       required: true,
-      defaultValue: '这里写一句临时说明或祝福。',
+      defaultValue: '新址 alexander.xin。写作暂缓，长文还在博客；想跟后续更新，可以订阅。',
     },
     {
       name: 'href',
@@ -50,12 +50,13 @@ export const Announcement: GlobalConfig = {
       admin: {
         description: '站内路径或完整 URL。',
       },
+      defaultValue: '/subscribe',
     },
     {
       name: 'ctaLabel',
       type: 'text',
       label: '按钮文案',
-      defaultValue: '了解更多',
+      defaultValue: '订阅 →',
       admin: {
         condition: (_, siblingData) => Boolean(siblingData?.href),
       },

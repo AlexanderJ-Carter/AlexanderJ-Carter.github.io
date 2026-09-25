@@ -1,27 +1,23 @@
-# Alexander Carter
+# Folio
 
-[alexander.xin](https://alexander.xin) · [www](https://alexander.xin) · [Pages](https://alexanderj-carter.github.io)
-
-[![Pages](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/actions/workflows/deploy.yml)
-[![Folio](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/actions/workflows/folio-deploy.yml/badge.svg)](https://github.com/AlexanderJ-Carter/AlexanderJ-Carter.github.io/actions/workflows/folio-deploy.yml)
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue?style=flat-square)](LICENSE)
+Payload + Next 个人站模板。本仓库可开源复用；**你的域名、姓名、密钥、CMS 数据只放实例侧**。
 
 | 目录 | 职责 |
 |------|------|
-| `folio/` | 主站（Payload + Next） |
-| `gateway/` | GitHub Pages 名片 |
-| `docs/` | 切换 · 实例 · 内容地图 |
-
-文档：[切换](docs/FOLIO-CUTOVER.md) · [实例](docs/FOLIO-INSTANCE.md) · [内容地图](docs/FOLIO-IA.md) · [变更](CHANGELOG.md)
+| `folio/` | 主站应用 |
+| `gateway/` | GitHub Pages 名片（可选） |
+| `docs/FOLIO.md` | 实例化说明 |
 
 ```bash
-npm run folio    # :3000 · /admin
+npm run folio    # folio/ · :3000 · /admin
 ```
 
-推送 `folio/**` 或 `gateway/**` 即部署对应端。DNS / 密钥只在服务器与 Cloudflare 实例侧修改。
+推送 `folio/**` 触发镜像部署工作流（若已配置 Secrets）。DNS / 密钥只在服务器与 Cloudflare 修改。
+
+案例预设：`folio/instance/presets/alexander.json`（可复制为服务器 `config.json`）。
 
 ## 许可
 
 - 代码：[LICENSE](LICENSE)（BSD 3-Clause）
 - 内容：[NOTICE](NOTICE)（CC BY-NC-ND 4.0）
-- 安全披露：[.github/SECURITY.md](.github/SECURITY.md)
+- 安全：[.github/SECURITY.md](.github/SECURITY.md)

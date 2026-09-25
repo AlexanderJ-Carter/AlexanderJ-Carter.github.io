@@ -76,6 +76,10 @@ const getPagesSitemap = unstable_cache(
         loc: `${SITE_URL}/subscribe`,
         lastmod: dateFallback,
       },
+      {
+        loc: `${SITE_URL}/updates`,
+        lastmod: dateFallback,
+      },
     ]
 
     const gated = new Set(['about', 'contact'])

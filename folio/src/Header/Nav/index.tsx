@@ -31,47 +31,29 @@ export const HeaderNav: React.FC<{ data: HeaderType; overHero?: boolean }> = ({
     'site-nav-link px-2 py-1',
     overHero ? 'text-white/80 hover:text-white' : 'text-foreground/70 hover:text-foreground',
   )
-  const dividerClass = cn(
-    'mx-2 hidden h-3 w-px md:inline-block',
-    overHero ? 'bg-white/35' : 'bg-border',
-  )
 
   return (
-    <nav className="flex items-center gap-1 md:gap-0" aria-label="主导航">
+    <nav className="flex items-center gap-0.5 md:gap-1" aria-label="主导航">
       {navItems.length > 0
         ? navItems.map(({ link }, i) => (
-            <React.Fragment key={i}>
-              {i > 0 && <span aria-hidden className={dividerClass} />}
-              <CMSLink {...link} appearance="link" className={linkClass} />
-            </React.Fragment>
+            <CMSLink key={i} {...link} appearance="link" className={linkClass} />
           ))
-        : FALLBACK_NAV.map((item, i) => (
-            <React.Fragment key={item.url}>
-              {i > 0 && <span aria-hidden className={dividerClass} />}
-              <Link href={item.url} className={linkClass}>
-                {item.label}
-              </Link>
-            </React.Fragment>
+        : FALLBACK_NAV.map((item) => (
+            <Link key={item.url} href={item.url} className={linkClass}>
+              {item.label}
+            </Link>
           ))}
-      <span
-        aria-hidden
-        className={cn('mx-2 hidden h-3 w-px sm:inline-block', overHero ? 'bg-white/35' : 'bg-border')}
-      />
       <Link
         href="/search"
         className={cn(
-          'site-nav-link inline-flex items-center gap-1.5 px-2 py-1',
+          'site-nav-link ml-1 inline-flex items-center gap-1.5 px-2 py-1',
           overHero ? 'text-white/80 hover:text-white' : 'text-foreground/70 hover:text-foreground',
         )}
       >
         <SearchIcon className="size-3.5 opacity-80" aria-hidden />
         <span className="sr-only md:not-sr-only">搜索</span>
       </Link>
-      <span
-        aria-hidden
-        className={cn('mx-1.5 hidden h-3 w-px sm:inline-block', overHero ? 'bg-white/35' : 'bg-border')}
-      />
-      <ThemeSelector overHero={overHero} />
+      <ThemeSelector overHero={overHero} className="ml-0.5" />
     </nav>
   )
 }

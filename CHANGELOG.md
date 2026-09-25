@@ -6,25 +6,19 @@
 
 ### Added
 
-- Resend：联系表单邮件通知、`/subscribe` 邮件名单、`/feed.xml` RSS
-- `/projects`（`instance.projects`）
-- 站点公告（Payload Global）与联系页专用版式
-- `/tools` 及时间 / 单位 / 汇率 / QR；玩乐小工具补全
-- GitHub Pages `gateway/` 名片页（导航 + security 镜像）
-- 今日诗词（jinrishici）经 `/api/poem`
+- `/updates` 公开更新日志；订阅确认 / 群发邮件模板（`src/emails`）
+- 关于页履历时间线（`about.timeline`）；Cookie 同意与可选 CF Web Analytics
+- 精选/画廊正方形画幅；管理条仅登录可见
 
 ### Changed
 
-- 主站以 Folio（`folio/`）为准；正典域名设计为 apex，www 同源后 301
-- CI 以 Folio typecheck 为门禁；文档为 CUTOVER / INSTANCE / IA
-- 页脚与曝光表跳转（世界时间）调整
-- 边缘：`about`/`bio`/`contact`/`time` 改 Redirect Rules + AAAA `100::`；去掉 `writing-redirect` / `redirect-profile` / `redirect-contact`
-- 正典域名统一为 apex：gateway / security.txt / lighthouse / ops-portal / Pocket ID Folio 回调
+- 文档收束为 `docs/FOLIO.md`（模板与实例分离）
+- 管理员会话 24h；首页研究条展示真实论文钩子
 
 ### Removed
 
-- 根目录 Astro（`src/`、`public/`）、legacy 脚本 / CI、`writing-redirect` Worker（并入 `legacy-redirect`）
-- 占位 `ops-agent/`、重复 `AGENT.md`、过时根 `.env.example` / `.npmrc`
+- 冗长 CUTOVER / IA 分册文档
+
 
 
 ## [3.2.1] - 2026-09
