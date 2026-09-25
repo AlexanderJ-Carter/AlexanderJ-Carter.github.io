@@ -711,239 +711,182 @@ h3 {
   color: var(--primary);
 }
 
-/* 站外：软浮起瓷砖，不用网格线 */
-.elsewhere-grid {
-  display: grid;
-  gap: 0.75rem;
+/* 站外：编辑列表行，不用浮起瓷砖 */
+.elsewhere-list {
   margin: 0;
   padding: 0;
   list-style: none;
+  border-top: 1px solid color-mix(in oklch, var(--border) 90%, transparent);
 }
 
-@media (min-width: 640px) {
-  .elsewhere-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.85rem;
-  }
-}
-
-.elsewhere-tile {
+.elsewhere-row {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   justify-content: space-between;
-  gap: 1rem;
-  min-height: 100%;
-  padding: 1rem 1.1rem;
-  border-radius: 0.65rem;
+  gap: 1.25rem 1.75rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid color-mix(in oklch, var(--border) 90%, transparent);
   text-decoration: none;
   color: inherit;
-  background: color-mix(in oklch, var(--card) 88%, var(--background));
-  box-shadow:
-    0 1px 0 color-mix(in oklch, var(--foreground) 4%, transparent),
-    0 8px 20px -14px color-mix(in oklch, var(--foreground) 28%, transparent),
-    inset 0 1px 0 color-mix(in oklch, white 55%, transparent);
-  transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.28s ease,
-    background-color 0.28s ease;
+  transition: color 0.18s ease;
 }
 
-.elsewhere-tile:hover,
-.elsewhere-tile:focus-visible {
-  transform: translateY(-3px);
-  background: color-mix(in oklch, var(--card) 96%, var(--accent));
-  box-shadow:
-    0 1px 0 color-mix(in oklch, var(--foreground) 5%, transparent),
-    0 16px 28px -16px color-mix(in oklch, var(--foreground) 32%, transparent),
-    inset 0 1px 0 color-mix(in oklch, white 70%, transparent);
+.elsewhere-row:hover,
+.elsewhere-row:focus-visible {
   outline: none;
 }
 
-.elsewhere-tile:focus-visible {
-  box-shadow:
-    0 0 0 2px var(--background),
-    0 0 0 4px var(--ring),
-    0 16px 28px -16px color-mix(in oklch, var(--foreground) 32%, transparent);
+.elsewhere-row:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--ring);
 }
 
-.elsewhere-tile__copy {
+.elsewhere-row__main {
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
 
-.elsewhere-tile__name {
-  font-size: 0.95rem;
+.elsewhere-row__name {
+  font-family: var(--font-display), Syne, system-ui, sans-serif;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--foreground);
+  transition: color 0.18s ease;
 }
 
-.elsewhere-tile__desc {
-  font-size: 0.82rem;
+.elsewhere-row:hover .elsewhere-row__name,
+.elsewhere-row:focus-visible .elsewhere-row__name {
+  color: var(--primary);
+}
+
+.elsewhere-row__desc {
+  font-size: 0.875rem;
   line-height: 1.45;
   color: var(--muted-foreground);
 }
 
-.elsewhere-tile__host {
+.elsewhere-row__host {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  margin-top: 0.15rem;
+  gap: 0.3rem;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.62rem;
+  font-size: 0.68rem;
   letter-spacing: 0.04em;
   color: var(--muted-foreground);
-  transition: color 0.2s ease;
+  transition: color 0.18s ease;
 }
 
-.elsewhere-tile:hover .elsewhere-tile__host,
-.elsewhere-tile:focus-visible .elsewhere-tile__host {
-  color: var(--primary);
+.elsewhere-row:hover .elsewhere-row__host,
+.elsewhere-row:focus-visible .elsewhere-row__host {
+  color: var(--foreground);
 }
 
-.elsewhere-tile__arrow {
+.elsewhere-row__arrow {
   display: inline-block;
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.2s ease;
 }
 
-.elsewhere-tile:hover .elsewhere-tile__arrow,
-.elsewhere-tile:focus-visible .elsewhere-tile__arrow {
+.elsewhere-row:hover .elsewhere-row__arrow,
+.elsewhere-row:focus-visible .elsewhere-row__arrow {
   transform: translate(2px, -2px);
 }
 
-[data-theme='dark'] .elsewhere-tile {
-  background: color-mix(in oklch, var(--card) 80%, transparent);
-  box-shadow:
-    0 1px 0 color-mix(in oklch, var(--foreground) 6%, transparent),
-    inset 0 1px 0 color-mix(in oklch, var(--foreground) 5%, transparent);
-}
-
-[data-theme='dark'] .elsewhere-tile:hover,
-[data-theme='dark'] .elsewhere-tile:focus-visible {
-  background: color-mix(in oklch, var(--card) 95%, var(--accent));
-  box-shadow:
-    0 12px 24px -18px color-mix(in oklch, black 70%, transparent),
-    inset 0 1px 0 color-mix(in oklch, var(--foreground) 8%, transparent);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .elsewhere-tile,
-  .elsewhere-tile__arrow {
+  .elsewhere-row,
+  .elsewhere-row__name,
+  .elsewhere-row__host,
+  .elsewhere-row__arrow {
     transition: none;
   }
 
-  .elsewhere-tile:hover,
-  .elsewhere-tile:focus-visible {
-    transform: none;
-  }
-
-  .elsewhere-tile:hover .elsewhere-tile__arrow,
-  .elsewhere-tile:focus-visible .elsewhere-tile__arrow {
+  .elsewhere-row:hover .elsewhere-row__arrow,
+  .elsewhere-row:focus-visible .elsewhere-row__arrow {
     transform: none;
   }
 }
 
-/* 站群地图 */
+/* 站群地图：本站也用列表行 */
 .network-map {
   margin-bottom: 3rem;
 }
 
 .network-map--away {
-  padding-top: 1.5rem;
-  border-top: 1px solid color-mix(in oklch, var(--border) 80%, transparent);
+  padding-top: 0.25rem;
 }
 
 .network-map__heading {
-  margin-bottom: 1.25rem;
-  font-family: var(--font-display), Syne, system-ui, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  margin-bottom: 0.85rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted-foreground);
 }
 
-.network-map__grid {
-  display: grid;
-  gap: 0.75rem;
-  grid-template-columns: 1fr;
-  list-style: none;
+.network-map__list {
   margin: 0;
   padding: 0;
+  list-style: none;
+  border-top: 1px solid color-mix(in oklch, var(--border) 90%, transparent);
 }
 
-@media (min-width: 640px) {
-  .network-map__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 900px) {
-  .network-map__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-.network-map__node {
+.network-map__row {
   display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  min-height: 6.5rem;
-  padding: 1.1rem 1.15rem;
-  border: 1px solid var(--border);
-  background: color-mix(in oklch, var(--card) 70%, transparent);
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.25rem 1.75rem;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid color-mix(in oklch, var(--border) 90%, transparent);
   text-decoration: none;
   color: inherit;
-  transition:
-    border-color 0.18s ease,
-    background-color 0.18s ease,
-    transform 0.18s ease;
 }
 
-.network-map__node:hover,
-.network-map__node:focus-visible {
-  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
-  background: color-mix(in oklch, var(--card) 92%, transparent);
-  transform: translateY(-1px);
+.network-map__row:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--ring);
 }
 
-.network-map__node:focus-visible {
-  outline: 2px solid var(--ring);
-  outline-offset: 2px;
+.network-map__row-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
 .network-map__label {
   font-family: var(--font-display), Syne, system-ui, sans-serif;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: -0.02em;
+  transition: color 0.18s ease;
+}
+
+.network-map__row:hover .network-map__label,
+.network-map__row:focus-visible .network-map__label {
+  color: var(--primary);
 }
 
 .network-map__note {
-  flex: 1;
   font-size: 0.875rem;
   line-height: 1.45;
   color: var(--muted-foreground);
 }
 
 .network-map__path {
+  flex-shrink: 0;
   font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   letter-spacing: 0.04em;
-  color: color-mix(in oklch, var(--muted-foreground) 85%, transparent);
+  color: var(--muted-foreground);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .network-map__node {
+  .network-map__label {
     transition: none;
-  }
-
-  .network-map__node:hover,
-  .network-map__node:focus-visible {
-    transform: none;
   }
 }
 

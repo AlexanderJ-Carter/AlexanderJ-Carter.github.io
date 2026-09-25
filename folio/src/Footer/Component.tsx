@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { AssistantReopenLink } from '@/components/SiteAssistant/ReopenLink'
+import { ElsewhereList } from '@/components/ElsewhereList'
 import { getInstance } from '@/instance'
 
 /** 页脚本站链接：与主导航对齐，不读 CMS，避免重复/过时项 */
@@ -47,29 +48,7 @@ export async function Footer() {
         {elsewhere.length > 0 ? (
           <div className="mb-12 md:mb-14">
             <p className="site-footer__label mb-5">站外</p>
-            <ul className="elsewhere-grid">
-              {elsewhere.map((item) => (
-                <li key={item.href}>
-                  <a
-                    className="elsewhere-tile"
-                    href={item.href}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <span className="elsewhere-tile__copy">
-                      <span className="elsewhere-tile__name">{item.name}</span>
-                      <span className="elsewhere-tile__desc">{item.desc}</span>
-                    </span>
-                    <span className="elsewhere-tile__host">
-                      {item.host}
-                      <span className="elsewhere-tile__arrow" aria-hidden>
-                        ↗
-                      </span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <ElsewhereList items={elsewhere} />
           </div>
         ) : null}
 

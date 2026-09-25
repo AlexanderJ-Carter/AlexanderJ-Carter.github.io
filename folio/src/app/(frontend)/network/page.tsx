@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
+import { ElsewhereList } from '@/components/ElsewhereList'
 import { PageChrome } from '@/components/PageChrome'
 import { getInstance } from '@/instance'
 
@@ -32,17 +33,19 @@ export default function NetworkPage() {
       title="站群地图"
       description="一张图看清本站栏目，以及站外还开着的入口。有问题直接右下角问站。"
     >
-      <div className="container max-w-4xl">
+      <div className="container max-w-3xl">
         <section className="network-map" aria-labelledby="network-here">
           <h2 id="network-here" className="network-map__heading">
             本站
           </h2>
-          <ul className="network-map__grid">
+          <ul className="network-map__list">
             {HERE.map((item) => (
               <li key={item.href}>
-                <Link className="network-map__node" href={item.href}>
-                  <span className="network-map__label">{item.label}</span>
-                  <span className="network-map__note">{item.note}</span>
+                <Link className="network-map__row" href={item.href}>
+                  <span className="network-map__row-main">
+                    <span className="network-map__label">{item.label}</span>
+                    <span className="network-map__note">{item.note}</span>
+                  </span>
                   <span className="network-map__path">{item.href}</span>
                 </Link>
               </li>
@@ -55,25 +58,7 @@ export default function NetworkPage() {
             <h2 id="network-away" className="network-map__heading">
               站外
             </h2>
-            <ul className="network-map__grid">
-              {elsewhere.map((item) => (
-                <li key={item.href}>
-                  <a
-                    className="network-map__node network-map__node--ext"
-                    href={item.href}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <span className="network-map__label">{item.name}</span>
-                    <span className="network-map__note">{item.desc}</span>
-                    <span className="network-map__path">
-                      {item.host}
-                      <span aria-hidden> ↗</span>
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <ElsewhereList items={elsewhere} />
           </section>
         ) : null}
       </div>
