@@ -6,32 +6,32 @@ import {
 
 /**
  * Folio 时代：apex 已走 Tunnel→Nginx→Folio。
- * 本 Worker 只保留旧路径跳转；其余透传到源站并补安全头。
- * 主机别名（about/bio/contact/time/www）由 Cloudflare Redirect Rules 处理。
+ * 本 Worker：旧写作路径收束到 /posts；其余透传并补安全头。
+ * blog.alexander.xin 由独立 Worker `blog-alias` 整域跳到 /posts。
  */
 
-function writingToBlog(path, search) {
+const POSTS = 'https://alexander.xin/posts'
+
+function toPosts(search) {
+  return `${POSTS}${search || ''}`
+}
+
+function isWritingPath(path) {
   const prefixes = [
     '/writing',
+    '/blog',
     '/en/writing',
     '/zh-TW/writing',
     '/fr/writing',
     '/ru/writing',
+    '/en/blog',
+    '/zh-TW/blog',
+    '/fr/blog',
+    '/ru/blog',
   ]
-  const matches = prefixes.some(
+  return prefixes.some(
     (p) => path === p || path === `${p}/` || path.startsWith(`${p}/`),
   )
-  if (!matches) return null
-  const normalized =
-    path.endsWith('/') || path.includes('.') ? path : `${path}/`
-  return `https://blog.alexander.xin${normalized}${search}`
-}
-
-function legacyBlogAlias(path) {
-  if (path === '/blog' || path === '/blog/') return '/writing/'
-  const lang = path.match(/^\/(en|zh-TW|fr|ru)\/blog\/?$/)
-  if (!lang) return null
-  return `/${lang[1]}/writing/`
 }
 
 export default {
@@ -39,15 +39,8 @@ export default {
     const url = new URL(request.url)
     const path = url.pathname
 
-    const blogTarget = writingToBlog(path, url.search)
-    if (blogTarget) return Response.redirect(blogTarget, 301)
-
-    const alias = legacyBlogAlias(path)
-    if (alias) {
-      return Response.redirect(
-        `https://blog.alexander.xin${alias}${url.search}`,
-        301,
-      )
+    if (isWritingPath(path)) {
+      return Response.redirect(toPosts(url.search), 301)
     }
 
     const redirects = {

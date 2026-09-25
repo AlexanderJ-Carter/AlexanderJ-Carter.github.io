@@ -1,8 +1,16 @@
 import type { NextConfig } from 'next'
 
-/** 语言前缀与 IE；/writing* /blog* 由边缘 Worker `legacy-redirect` 管。 */
+/** 语言前缀、IE；旧 /writing /blog 收束到站内写作。 */
 export const redirects: NextConfig['redirects'] = async () => {
   const legacy = [
+    { source: '/writing', destination: '/posts', permanent: true },
+    { source: '/writing/:path*', destination: '/posts', permanent: true },
+    { source: '/blog', destination: '/posts', permanent: true },
+    { source: '/blog/:path*', destination: '/posts', permanent: true },
+    { source: '/en/writing', destination: '/posts', permanent: true },
+    { source: '/en/writing/:path*', destination: '/posts', permanent: true },
+    { source: '/en/blog', destination: '/posts', permanent: true },
+    { source: '/en/blog/:path*', destination: '/posts', permanent: true },
     { source: '/en', destination: '/', permanent: false },
     { source: '/en/:path*', destination: '/:path*', permanent: false },
     { source: '/zh-TW', destination: '/', permanent: false },

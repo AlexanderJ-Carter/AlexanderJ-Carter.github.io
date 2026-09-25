@@ -24,7 +24,7 @@ type ProbeSnapshot = Record<string, boolean>;
 const PROBES: Array<{ id: string; url: string }> = [
   { id: 'apex', url: 'https://alexander.xin/' },
   { id: 'www', url: 'https://www.alexander.xin/' },
-  { id: 'blog', url: 'https://blog.alexander.xin/writing/' },
+  { id: 'posts', url: 'https://alexander.xin/posts' },
   { id: 'identity', url: 'https://id.alexander.xin/healthz' },
   { id: 'time-api', url: 'https://api.alexander.xin/time/now' },
   { id: 'tools-hub', url: 'https://tools.alexander.xin/' },

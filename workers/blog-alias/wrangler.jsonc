@@ -1,0 +1,9 @@
+{
+  "name": "blog-alias",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "blog.alexander.xin", "custom_domain": true }
+  ]
+}
