@@ -7,9 +7,11 @@ import { readConsent, writeConsent } from '@/utilities/consent'
 
 export function CookieConsent() {
   const [open, setOpen] = useState(false)
+  const [ready, setReady] = useState(false)
 
   useEffect(() => {
     setOpen(!readConsent())
+    setReady(true)
 
     const onOpen = () => setOpen(true)
     const onConsent = () => setOpen(false)
@@ -21,18 +23,7 @@ export function CookieConsent() {
     }
   }, [])
 
-  if (!open) {
-    return (
-      <button
-        type="button"
-        className="cookie-prefs-chip"
-        onClick={() => setOpen(true)}
-        aria-label="打开 Cookie 与统计偏好"
-      >
-        Cookie
-      </button>
-    )
-  }
+  if (!ready || !open) return null
 
   return (
     <div className="cookie-consent" role="dialog" aria-labelledby="cookie-consent-title">
@@ -42,7 +33,7 @@ export function CookieConsent() {
         </p>
         <p className="cookie-consent__body">
           必要项用于主题偏好与访客门禁（关于 / 联系）。可选统计含本站浏览量，以及 Cloudflare
-          Web Analytics（若已配置），不做广告画像。详情见{' '}
+          Web Analytics（若已配置），不做广告画像。详情与再次修改见{' '}
           <Link className="underline underline-offset-4" href="/privacy#cookies">
             隐私政策
           </Link>
@@ -66,5 +57,18 @@ export function CookieConsent() {
         </div>
       </div>
     </div>
+  )
+}
+
+/** 隐私页等处：重新打开同意条 */
+export function CookiePrefsButton({ className = '' }: { className?: string }) {
+  return (
+    <button
+      type="button"
+      className={className}
+      onClick={() => window.dispatchEvent(new Event('folio:open-consent'))}
+    >
+      管理 Cookie 偏好
+    </button>
   )
 }

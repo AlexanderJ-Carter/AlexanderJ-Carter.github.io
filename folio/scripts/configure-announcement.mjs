@@ -1,22 +1,23 @@
 /**
- * 更新站点公告（迁站说明）。
+ * 更新站点公告。
  * 用法：在 folio/ 目录
  *   node --import tsx scripts/configure-announcement.mjs
- * 容器内：
- *   docker compose -f compose.prod.yaml exec folio node --import tsx scripts/configure-announcement.mjs
  */
 import 'dotenv/config'
 import { getPayload } from 'payload'
 import config from '../src/payload.config.ts'
 
+/** 常驻迁站话术关掉；需要节日时改 noticeId + 日期窗 + enabled */
 const NOTICE = {
-  enabled: true,
-  noticeId: 'notice-2026-home',
+  enabled: false,
+  noticeId: 'notice-idle',
   title: '站有更新',
-  body: '新址就绪。写作暂缓；长文仍在博客。想跟后续更新可以订阅。',
-  href: '/subscribe',
-  ctaLabel: '订阅 →',
+  body: '公开变更见更新日志；想跟后续可以订阅。',
+  href: '/updates',
+  ctaLabel: '更新日志 →',
   dismissible: true,
+  startsAt: null,
+  endsAt: null,
 }
 
 async function main() {
@@ -26,7 +27,7 @@ async function main() {
     overrideAccess: true,
     data: NOTICE,
   })
-  payload.logger.info(`announcement → ${NOTICE.noticeId}: ${NOTICE.title}`)
+  payload.logger.info(`announcement → ${NOTICE.noticeId}: enabled=${NOTICE.enabled}`)
   process.exit(0)
 }
 

@@ -1,48 +1,63 @@
 import type { Metadata } from 'next/types'
-import Link from 'next/link'
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
 import React from 'react'
+
+import { CollectionArchive } from '@/components/CollectionArchive'
+import { PageChrome } from '@/components/PageChrome'
+import type { CardPostData } from '@/components/Card'
 
 import PageClient from './page.client'
 
 export const dynamic = 'force-static'
 export const revalidate = 600
 
-export default function Page() {
+export default async function Page() {
+  const payload = await getPayload({ config: configPromise })
+
+  const posts = await payload.find({
+    collection: 'posts',
+    depth: 1,
+    limit: 24,
+    overrideAccess: false,
+    select: {
+      title: true,
+      slug: true,
+      categories: true,
+      meta: true,
+      publishedAt: true,
+    },
+    where: {
+      _status: {
+        equals: 'published',
+      },
+    },
+    sort: '-publishedAt',
+  })
+
   return (
-    <div className="pt-24 pb-24">
+    <>
       <PageClient />
-      <div className="container max-w-2xl">
-        <p className="folio-mark mb-3">写作</p>
-        <h1 className="mb-4 text-4xl font-semibold tracking-tight">写作暂缓</h1>
-        <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-          站内文章先收着。长文还在博客；有像样更新时会发信，也可以先订阅。
-        </p>
-        <div className="flex flex-wrap gap-4 text-sm">
-          <a
-            href="https://blog.alexander.xin/writing/"
-            className="underline underline-offset-4"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            前往博客 →
-          </a>
-          <Link href="/gallery" className="underline underline-offset-4">
-            画廊 →
-          </Link>
-          <Link href="/research" className="underline underline-offset-4">
-            研究 →
-          </Link>
-          <Link href="/subscribe" className="underline underline-offset-4">
-            订阅 →
-          </Link>
-        </div>
-      </div>
-    </div>
+      <PageChrome
+        mark="Writing"
+        title="写作"
+        description="精选短文与实践笔记。宁可少而清楚，不堆合集。"
+      >
+        {posts.docs.length === 0 ? (
+          <div className="container max-w-2xl">
+            <p className="text-muted-foreground">暂无已发布文章。</p>
+          </div>
+        ) : (
+          <CollectionArchive posts={posts.docs as CardPostData[]} />
+        )}
+      </PageChrome>
+    </>
   )
 }
 
 export function generateMetadata(): Metadata {
   return {
-    title: '写作暂缓',
+    title: '写作',
+    description: '精选短文与实践笔记。',
   }
 }

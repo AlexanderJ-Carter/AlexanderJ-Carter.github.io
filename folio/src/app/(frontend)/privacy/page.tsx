@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { PageChrome } from '@/components/PageChrome'
+import { CookiePrefsButton } from '@/components/CookieConsent'
 import { getInstance } from '@/instance'
 
 export const metadata: Metadata = {
@@ -66,7 +67,13 @@ export default function PrivacyPage() {
 
           <section id="cookies">
             <h2>2. Cookie 与本地存储</h2>
-            <p>首次访问可选择「仅必要」或「接受统计」。之后可在页脚旁 Cookie 按钮再次修改。</p>
+            <p>
+              首次访问可选择「仅必要」或「接受统计」。做出选择后不再显示角落提示；若要更改，使用下方按钮或页脚
+              Cookie 链接回到此处。
+            </p>
+            <p className="not-prose my-4">
+              <CookiePrefsButton className="inline-flex min-h-9 items-center rounded-sm border border-border px-3 text-sm transition-colors hover:border-foreground" />
+            </p>
             <div className="not-prose overflow-x-auto rounded-sm border border-border">
               <table className="w-full text-left text-sm">
                 <thead className="bg-muted/50 text-muted-foreground">

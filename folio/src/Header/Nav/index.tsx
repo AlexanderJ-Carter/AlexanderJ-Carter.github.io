@@ -13,6 +13,7 @@ import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 /** CMS 为空时的回退导航（与 configure-nav.mjs 对齐） */
 const FALLBACK_NAV = [
   { label: '画廊', url: '/gallery' },
+  { label: '写作', url: '/posts' },
   { label: '玩乐', url: '/fun' },
   { label: '工具', url: '/tools' },
   { label: '研究', url: '/research' },

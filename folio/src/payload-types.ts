@@ -1703,6 +1703,8 @@ export interface Announcement {
   href?: string | null;
   ctaLabel?: string | null;
   dismissible?: boolean | null;
+  startsAt?: string | null;
+  endsAt?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1718,6 +1720,8 @@ export interface AnnouncementSelect<T extends boolean = true> {
   href?: T;
   ctaLabel?: T;
   dismissible?: T;
+  startsAt?: T;
+  endsAt?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -13,10 +13,10 @@ export type SiteUpdate = {
 export const siteUpdates: SiteUpdate[] = [
   {
     date: '2026-09-25',
-    title: '迁站与访客体验',
-    body: '主站迁至 Folio；关于/联系门禁、Cookie 偏好、可选 Web Analytics；写作暂缓，长文仍在博客。',
-    href: '/subscribe',
-    hrefLabel: '订阅更新 →',
+    title: '写作与访客体验',
+    body: '站内写作恢复精选列表；Cookie 选择后不再常驻提示；右下角可问站内栏目。',
+    href: '/posts',
+    hrefLabel: '写作 →',
   },
   {
     date: '2026-09',

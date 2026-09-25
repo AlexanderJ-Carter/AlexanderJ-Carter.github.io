@@ -11,6 +11,8 @@ export type AnnouncementData = {
   href?: string | null
   ctaLabel?: string | null
   dismissible?: boolean | null
+  startsAt?: string | null
+  endsAt?: string | null
 }
 
 function storageKey(id: string) {
@@ -21,8 +23,24 @@ function collapsedKey(id: string) {
   return `site-notice-collapsed:${id}`
 }
 
+function inDateWindow(startsAt?: string | null, endsAt?: string | null): boolean {
+  const now = Date.now()
+  if (startsAt) {
+    const t = Date.parse(startsAt)
+    if (!Number.isNaN(t) && now < t) return false
+  }
+  if (endsAt) {
+    const t = Date.parse(endsAt)
+    if (!Number.isNaN(t) && now > t) return false
+  }
+  return true
+}
+
 export function SiteAnnouncement({ data }: { data: AnnouncementData | null | undefined }) {
-  const enabled = Boolean(data?.enabled && data?.noticeId && data?.title && data?.body)
+  const windowOk = inDateWindow(data?.startsAt, data?.endsAt)
+  const enabled = Boolean(
+    data?.enabled && data?.noticeId && data?.title && data?.body && windowOk,
+  )
   const id = data?.noticeId || ''
   const dismissible = data?.dismissible !== false
   const href = data?.href?.trim() || ''

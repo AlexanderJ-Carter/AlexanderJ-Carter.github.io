@@ -34,14 +34,14 @@ export const Announcement: GlobalConfig = {
       type: 'text',
       label: '标题',
       required: true,
-      defaultValue: '站搬过来了',
+      defaultValue: '站有更新',
     },
     {
       name: 'body',
       type: 'textarea',
       label: '正文',
       required: true,
-      defaultValue: '新址 alexander.xin。写作暂缓，长文还在博客；想跟后续更新，可以订阅。',
+      defaultValue: '公开变更见更新日志；想跟后续可以订阅。',
     },
     {
       name: 'href',
@@ -50,15 +50,33 @@ export const Announcement: GlobalConfig = {
       admin: {
         description: '站内路径或完整 URL。',
       },
-      defaultValue: '/subscribe',
+      defaultValue: '/updates',
     },
     {
       name: 'ctaLabel',
       type: 'text',
       label: '按钮文案',
-      defaultValue: '订阅 →',
+      defaultValue: '更新日志 →',
       admin: {
         condition: (_, siblingData) => Boolean(siblingData?.href),
+      },
+    },
+    {
+      name: 'startsAt',
+      type: 'date',
+      label: '开始（可选）',
+      admin: {
+        description: '留空表示立即生效。节日提示可写例如 2027-01-01。',
+        date: { pickerAppearance: 'dayAndTime' },
+      },
+    },
+    {
+      name: 'endsAt',
+      type: 'date',
+      label: '结束（可选）',
+      admin: {
+        description: '留空表示不自动过期。过节小提示用短窗口即可。',
+        date: { pickerAppearance: 'dayAndTime' },
       },
     },
     {

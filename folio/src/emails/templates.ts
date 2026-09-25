@@ -45,7 +45,7 @@ export function subscribeAckMail(opts: {
   const text = [
     '你好，',
     '',
-    '已把你的邮箱加入本站通讯名单。平时很少发信，有像样更新时会写给你。',
+    '已把你的邮箱加入本站通讯名单。有站务或写作更新时会写信，频率很低。',
     '',
     `更新日志：${siteUrl}/updates`,
     `若不想再收到：${unsubUrl}`,
@@ -56,7 +56,7 @@ export function subscribeAckMail(opts: {
 
   const bodyHtml = `
     <p style="margin:0 0 12px;">你好，</p>
-    <p style="margin:0 0 12px;">已把你的邮箱加入本站通讯名单。平时很少发信，有像样更新时会写给你。</p>
+    <p style="margin:0 0 12px;">已把你的邮箱加入本站通讯名单。有站务或写作更新时会写信，频率很低。</p>
     <p style="margin:0 0 12px;"><a href="${escapeHtml(`${siteUrl}/updates`)}" style="color:#2a5f6a;">查看更新日志 →</a></p>
     <p style="margin:0;font-size:13px;color:#8a847c;">不想再收到？<a href="${escapeHtml(unsubUrl)}" style="color:#8a847c;">退订</a></p>
   `
@@ -121,8 +121,7 @@ export function exampleMoveBroadcast(opts: {
     headline: '站搬过来了',
     paragraphs: [
       `新址在 ${opts.siteUrl.replace(/^https?:\/\//, '')}。`,
-      '写作暂缓，长文还在博客；站内以影像、研究与工具为主。',
-      '有像样更新时才会再写信——不是促销名单。',
+      '站内有影像、研究、精选写作与小工具；通讯很少发，不是促销名单。',
     ],
     ctaLabel: '打开主站 →',
     ctaUrl: opts.siteUrl,
