@@ -49,6 +49,7 @@ const EXTRA_ALLOWED_PATHS = new Set([
   '/qr',
   '/fun',
   '/tools',
+  '/awareness',
 ])
 
 const RATE_LIMIT_MAX = 20
@@ -181,6 +182,7 @@ function inferNavigate(text: string, allow: Set<string>): AskAction | null {
     [/写作|文章|posts|blog/i, '/posts', '去写作'],
     [/研究|论文|research/i, '/research', '去研究'],
     [/玩乐|番茄|电台|好玩/i, '/fun', '去玩乐'],
+    [/awareness|phishdrill/i, '/awareness', '打开该页'],
     [/工具(?!箱)|tools/i, '/tools', '去工具'],
     [/订阅页|\/subscribe/i, '/subscribe', '打开订阅页'],
     [/联系|留言|contact/i, '/contact', '去联系'],

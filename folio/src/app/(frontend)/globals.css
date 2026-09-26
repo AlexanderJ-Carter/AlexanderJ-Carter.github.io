@@ -2788,3 +2788,459 @@ html.home-snap-root .sponsor-slot {
   }
 }
 
+
+/* /awareness 仿网银核验钓饵（提交前无演练标注） */
+.awareness {
+  position: relative;
+}
+
+.phish-bank {
+  margin: 0 -1rem;
+  background: #f5f5f5;
+  color: #1f1f1f;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Segoe UI', sans-serif;
+}
+
+@media (min-width: 640px) {
+  .phish-bank {
+    margin: 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+}
+
+.phish-bank__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(90deg, #0958d9, #1677ff 55%, #4096ff);
+  color: #fff;
+}
+
+.phish-bank__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.phish-bank__logo {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.phish-bank__name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.phish-bank__sub,
+.phish-bank__code {
+  margin: 0;
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
+.phish-bank__banner {
+  margin: 0;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #ffccc7;
+  background: #fff2f0;
+  color: #cf1322;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.phish-bank__card {
+  background: #fff;
+}
+
+.phish-bank__head {
+  padding: 1.15rem 1.1rem 0.85rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.phish-bank__head h1 {
+  margin: 0 0 0.45rem;
+  font-size: 1.15rem;
+  font-weight: 650;
+}
+
+.phish-bank__head p {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #595959;
+}
+
+.phish-bank__timer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.85rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #ffd591;
+  border-radius: 0.35rem;
+  background: #fff7e6;
+  font-size: 0.8rem;
+  color: #d46b08;
+}
+
+.phish-bank__countdown {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #cf1322;
+}
+
+.phish-bank__form {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.phish-bank__label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: #595959;
+}
+
+.phish-bank__label input,
+.phish-bank__label select,
+.phish-bank__otp {
+  width: 100%;
+  min-height: 2.65rem;
+  padding: 0 0.7rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 0.35rem;
+  background: #fafafa;
+  color: #1f1f1f;
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.phish-bank__label select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #8c8c8c 50%),
+    linear-gradient(135deg, #8c8c8c 50%, transparent 50%);
+  background-position:
+    calc(100% - 1rem) calc(50% - 0.15rem),
+    calc(100% - 0.7rem) calc(50% - 0.15rem);
+  background-size: 0.35rem 0.35rem;
+  background-repeat: no-repeat;
+}
+
+.phish-bank__otp {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-right: 0.45rem;
+}
+
+.phish-bank__otp input {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 0.65rem 0;
+  border: 0;
+  background: transparent;
+}
+
+.phish-bank__label input:focus-visible,
+.phish-bank__label select:focus-visible,
+.phish-bank__otp:focus-within {
+  outline: none;
+  border-color: #1677ff;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.12);
+}
+
+.phish-bank__otp-btn {
+  border: 0;
+  background: transparent;
+  color: #1677ff;
+  font: inherit;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.phish-bank__otp-btn:disabled {
+  color: #8c8c8c;
+  cursor: default;
+}
+
+.phish-bank__submit {
+  margin-top: 0.15rem;
+  padding: 0.78rem 1rem;
+  border: 0;
+  border-radius: 0.35rem;
+  background: #1677ff;
+  color: #fff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.phish-bank__submit:hover,
+.phish-bank__submit:focus-visible {
+  background: #0f5ed7;
+}
+
+.phish-bank__submit:focus-visible {
+  outline: 2px solid #1677ff;
+  outline-offset: 2px;
+}
+
+.phish-bank__help {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0.35rem 1.1rem 1rem;
+  color: #1677ff;
+  font: inherit;
+  font-size: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.phish-bank__tips {
+  margin: 0;
+  padding: 0 1.1rem 1.1rem 1.85rem;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: #8c8c8c;
+}
+
+.phish-help {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+@media (min-width: 480px) {
+  .phish-help {
+    align-items: center;
+    padding: 1rem;
+  }
+}
+
+.phish-help__sheet {
+  width: 100%;
+  max-width: 26.5rem;
+  max-height: 85vh;
+  overflow: auto;
+  padding: 1rem 1.1rem 1.25rem;
+  border-radius: 0.75rem 0.75rem 0 0;
+  background: #fff;
+  color: #1f1f1f;
+}
+
+@media (min-width: 480px) {
+  .phish-help__sheet {
+    border-radius: 0.5rem;
+  }
+}
+
+.phish-help__sheet h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+}
+
+.phish-help__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.phish-help__list button {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #f0f0f0;
+  background: transparent;
+  padding: 0.85rem 0;
+  color: #1f1f1f;
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.phish-help__list li:last-child button {
+  border-bottom: 0;
+}
+
+.phish-help__back {
+  border: 0;
+  background: transparent;
+  margin-bottom: 0.75rem;
+  padding: 0;
+  color: #1677ff;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.phish-help__body {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #434343;
+}
+
+.phish-help__body p {
+  margin: 0 0 0.75rem;
+}
+
+.phish-help__close {
+  width: 100%;
+  margin-top: 1rem;
+  border: 0;
+  border-radius: 0.35rem;
+  background: #f5f5f5;
+  padding: 0.7rem;
+  color: #1f1f1f;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.awareness-reveal:focus-visible {
+  outline: none;
+}
+
+.awareness-reveal__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display), Syne, system-ui, sans-serif;
+  font-size: clamp(1.7rem, 3.8vw, 2.4rem);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.awareness-reveal__lede {
+  margin: 0 0 1.5rem;
+  max-width: 38rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+.awareness-leak {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0 0 1.75rem;
+  padding: 1rem 0;
+  border-top: 1px solid color-mix(in oklch, var(--border) 90%, transparent);
+  border-bottom: 1px solid color-mix(in oklch, var(--border) 90%, transparent);
+}
+
+@media (min-width: 640px) {
+  .awareness-leak {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem 1.5rem;
+  }
+}
+
+.awareness-leak dt {
+  margin: 0;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.awareness-leak dd {
+  margin: 0.25rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+}
+
+.awareness-leak__meta {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.awareness-lessons {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  display: grid;
+  gap: 1.15rem;
+}
+
+.awareness-lessons h2 {
+  margin: 0 0 0.3rem;
+  font-family: var(--font-display), Syne, system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.awareness-lessons p {
+  margin: 0;
+  max-width: 38rem;
+  font-size: 0.925rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+.awareness-reveal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.awareness-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--foreground);
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.awareness-btn--ghost {
+  background: transparent;
+  color: var(--foreground);
+}
+
+.awareness-btn:hover,
+.awareness-btn:focus-visible {
+  opacity: 0.92;
+}
+
+.awareness-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .awareness-lure__orb {
+    display: none;
+  }
+}
