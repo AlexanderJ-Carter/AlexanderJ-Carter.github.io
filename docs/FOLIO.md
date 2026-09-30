@@ -16,6 +16,13 @@ pnpm dev   # :3000 · /admin
 生产：`.env.production` + `docker compose -f compose.prod.yaml up -d --build`。  
 CI **不会**覆盖服务器上的 `instance/config.json` 与 `.env.production`。
 
+### 小机运维注意（腾讯源站）
+
+- 宿主机约 **3.6G RAM**；常驻容器建议合计硬顶 ≤ ~2G（Folio `640m`、OmniRoute `≤768m–1g`、Glance `128m`）。
+- **不要在盘满时 `compose build`**：BuildKit 缓存曾占满磁盘导致整机无响应。构建后执行：
+  `docker builder prune -af && docker image prune -af`
+- Folio 可用环境变量覆盖：`FOLIO_MEM_LIMIT` / `FOLIO_MEMSWAP_LIMIT` / `FOLIO_CPUS` / `FOLIO_NODE_OPTIONS`。
+
 ## 配置放哪
 
 | 模板（可提交） | 实例（勿提交） |

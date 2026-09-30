@@ -27,8 +27,14 @@ services:
       NODE_ENV: production
       PORT: "3000"
       HOSTNAME: "0.0.0.0"
-    mem_limit: 768m
-    memswap_limit: 1024m
+      # 限制 Node 堆，避免偶发尖峰把宿主机打满（容器还有 mem_limit）
+      NODE_OPTIONS: ${FOLIO_NODE_OPTIONS:---max-old-space-size=512}
+    mem_limit: ${FOLIO_MEM_LIMIT:-640m}
+    mem_reservation: 192m
+    memswap_limit: ${FOLIO_MEMSWAP_LIMIT:-896m}
+    cpus: ${FOLIO_CPUS:-1.0}
+    pids_limit: 256
+    stop_grace_period: 30s
     security_opt:
       - no-new-privileges:true
     logging:
