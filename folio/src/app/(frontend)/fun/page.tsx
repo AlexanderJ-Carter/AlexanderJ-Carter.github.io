@@ -12,6 +12,7 @@ import { ExposureTriangle } from '@/components/widgets/ExposureTriangle'
 import { PasswordGenerator } from '@/components/widgets/PasswordGenerator'
 import { PomodoroTimer } from '@/components/widgets/PomodoroTimer'
 import { WeatherWidget } from '@/components/widgets/WeatherWidget'
+import { getFeatures } from '@/instance'
 
 export const metadata: Metadata = {
   title: '玩乐',
@@ -25,10 +26,17 @@ const JUMPS = [
 ] as const
 
 export default function FunPage() {
+  const features = getFeatures()
+
   return (
     <PageChrome
       mark="Darkroom toys"
       title="玩乐"
+      related={[
+        { href: '/tools', label: '实用工具 →' },
+        { href: '/time', label: '世界时间 →' },
+        ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
+      ]}
       description={
         <>
           <p className="mb-5">

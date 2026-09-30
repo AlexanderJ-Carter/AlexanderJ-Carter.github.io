@@ -3,26 +3,16 @@ import React from 'react'
 
 import { AssistantReopenLink } from '@/components/SiteAssistant/ReopenLink'
 import { ElsewhereList } from '@/components/ElsewhereList'
-import { getInstance } from '@/instance'
-
-/** 页脚本站链接：与主导航对齐，不读 CMS，避免重复/过时项 */
-const SITE_LINKS = [
-  { label: '画廊', href: '/gallery' },
-  { label: '写作', href: '/posts' },
-  { label: '研究', href: '/research' },
-  { label: '项目', href: '/projects' },
-  { label: '工具', href: '/tools' },
-  { label: '玩乐', href: '/fun' },
-  { label: '关于', href: '/about' },
-  { label: '联系', href: '/contact' },
-  { label: '订阅', href: '/subscribe' },
-  { label: '更新', href: '/updates' },
-  { label: '地图', href: '/network' },
-] as const
+import { getFeatures, getInstance, getSiteNav } from '@/instance'
 
 export async function Footer() {
   const instance = getInstance()
   const elsewhere = instance.elsewhere
+  const nav = getSiteNav()
+  const features = getFeatures()
+  const compliance = instance.compliance
+  const icp = compliance?.icp?.trim()
+  const gongan = compliance?.gongan?.trim()
 
   return (
     <footer className="site-footer mt-auto">
@@ -35,7 +25,7 @@ export async function Footer() {
         <nav className="mb-12 md:mb-14" aria-label="本站">
           <p className="site-footer__label mb-4">本站</p>
           <ul className="flex flex-wrap gap-x-5 gap-y-2.5">
-            {SITE_LINKS.map((item) => (
+            {nav.map((item) => (
               <li key={item.href}>
                 <Link className="site-footer__link" href={item.href}>
                   {item.label}
@@ -52,35 +42,73 @@ export async function Footer() {
           </div>
         ) : null}
 
-          <div className="flex flex-col gap-4 pt-2 text-xs tracking-wide text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-            <p>
+        <div className="flex flex-col gap-4 pt-2 text-xs tracking-wide text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span>
               © {new Date().getFullYear()} {instance.siteName}
-              <span aria-hidden className="mx-2 opacity-40">
-                ·
-              </span>
-              <Link className="transition-colors hover:text-foreground" href="/terms#license">
-                许可
-              </Link>
-            </p>
-            <nav className="flex flex-wrap items-center gap-x-4 gap-y-2" aria-label="法律">
-              <Link className="transition-colors hover:text-foreground" href="/privacy">
-                隐私
-              </Link>
-              <Link className="transition-colors hover:text-foreground" href="/privacy#cookies">
-                Cookie
-              </Link>
-              <Link className="transition-colors hover:text-foreground" href="/terms">
-                条款
-              </Link>
-              <Link className="transition-colors hover:text-foreground" href="/security/policy">
-                安全政策
-              </Link>
+            </span>
+            <span aria-hidden className="opacity-40">
+              ·
+            </span>
+            <Link className="transition-colors hover:text-foreground" href="/terms#license">
+              许可
+            </Link>
+            {icp ? (
+              <>
+                <span aria-hidden className="opacity-40">
+                  ·
+                </span>
+                <a
+                  className="transition-colors hover:text-foreground"
+                  href={compliance?.icpUrl || 'https://beian.miit.gov.cn/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {icp}
+                </a>
+              </>
+            ) : null}
+            {gongan ? (
+              <>
+                <span aria-hidden className="opacity-40">
+                  ·
+                </span>
+                {compliance?.gonganUrl ? (
+                  <a
+                    className="transition-colors hover:text-foreground"
+                    href={compliance.gonganUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {gongan}
+                  </a>
+                ) : (
+                  <span>{gongan}</span>
+                )}
+              </>
+            ) : null}
+          </p>
+          <nav className="flex flex-wrap items-center gap-x-4 gap-y-2" aria-label="法律">
+            <Link className="transition-colors hover:text-foreground" href="/privacy">
+              隐私
+            </Link>
+            <Link className="transition-colors hover:text-foreground" href="/privacy#cookies">
+              Cookie
+            </Link>
+            <Link className="transition-colors hover:text-foreground" href="/terms">
+              条款
+            </Link>
+            <Link className="transition-colors hover:text-foreground" href="/security/policy">
+              安全政策
+            </Link>
+            {features.assistant ? (
               <AssistantReopenLink className="transition-colors hover:text-foreground" />
-              <Link className="transition-colors hover:text-foreground" href="/admin">
-                管理
-              </Link>
-            </nav>
-          </div>
+            ) : null}
+            <Link className="transition-colors hover:text-foreground" href="/admin">
+              管理
+            </Link>
+          </nav>
+        </div>
       </div>
     </footer>
   )

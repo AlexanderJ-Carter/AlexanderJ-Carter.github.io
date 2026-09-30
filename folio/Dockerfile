@@ -1,16 +1,22 @@
-# Folio production image. Build on the x86_64 server.
-FROM node:22.17.0-alpine AS base
+# Folio production image. Build on the x86_64 server (Alpine / musl).
+# syntax=docker/dockerfile:1.7
+
+ARG NODE_VERSION=22.20.0
+
+FROM node:${NODE_VERSION}-alpine AS base
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 FROM base AS deps
 COPY package.json pnpm-lock.yaml ./
 RUN corepack enable \
-  && corepack prepare pnpm@10.15.0 --activate \
-  && pnpm i --frozen-lockfile
+  && corepack prepare pnpm@10.15.0 --activate
+RUN --mount=type=cache,id=folio-pnpm-store,target=/root/.local/share/pnpm/store \
+  pnpm i --frozen-lockfile
 
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/package.json /app/pnpm-lock.yaml ./
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
@@ -35,12 +41,17 @@ RUN mkdir -p /app/data /app/public/media \
   && corepack prepare pnpm@10.15.0 --activate \
   && pnpm run build
 
-# Separate layer: pnpm-hoisted native SQLite drivers for the standalone runner.
+# Alpine runner only needs the matching musl native binding (not gnu / other arches).
+ARG TARGETARCH
+ENV TARGETARCH=$TARGETARCH
 RUN node <<'NODE'
 const fs = require('fs')
 const path = require('path')
 
 const out = '/app/native-mods'
+const arch = process.env.TARGETARCH || process.arch
+const muslArch =
+  arch === 'arm64' || arch === 'aarch64' ? 'linux-arm64-musl' : 'linux-x64-musl'
 fs.mkdirSync(out, { recursive: true })
 
 function findPnpmPkg(pkgName) {
@@ -55,12 +66,20 @@ function findPnpmPkg(pkgName) {
   return pkgPath
 }
 
-function copyPkg(pkgName) {
-  const src = findPnpmPkg(pkgName)
-  const dest = path.join(out, ...pkgName.split('/'))
-  fs.mkdirSync(path.dirname(dest), { recursive: true })
-  fs.cpSync(src, dest, { recursive: true, dereference: true })
-  console.log('native', pkgName, '←', src)
+function copyPkg(pkgName, { optional = false } = {}) {
+  try {
+    const src = findPnpmPkg(pkgName)
+    const dest = path.join(out, ...pkgName.split('/'))
+    fs.mkdirSync(path.dirname(dest), { recursive: true })
+    fs.cpSync(src, dest, { recursive: true, dereference: true })
+    console.log('native', pkgName, '←', src)
+  } catch (e) {
+    if (optional) {
+      console.warn('optional skip', pkgName, e.message)
+      return
+    }
+    throw e
+  }
 }
 
 const required = ['libsql', '@neon-rs/load', 'detect-libc', 'js-base64', 'promise-limit']
@@ -70,20 +89,11 @@ const optional = [
   '@libsql/hrana-client',
   '@libsql/isomorphic-fetch',
   '@libsql/isomorphic-ws',
-  '@libsql/linux-x64-musl',
-  '@libsql/linux-x64-gnu',
-  '@libsql/linux-arm64-musl',
-  '@libsql/linux-arm64-gnu',
+  `@libsql/${muslArch}`,
 ]
 
 for (const name of required) copyPkg(name)
-for (const name of optional) {
-  try {
-    copyPkg(name)
-  } catch (e) {
-    console.warn('optional skip', name, e.message)
-  }
-}
+for (const name of optional) copyPkg(name, { optional: true })
 NODE
 
 FROM base AS runner

@@ -41,6 +41,11 @@ export default async function Page() {
       <PageChrome
         mark="Writing"
         title="写作"
+        related={[
+          { href: '/research', label: '研究论文 →' },
+          { href: '/updates', label: '更新 →' },
+          { href: '/subscribe', label: '订阅 →' },
+        ]}
         description="精选短文与实践笔记。宁可少而清楚，不堆合集。"
       >
         {posts.docs.length === 0 ? (

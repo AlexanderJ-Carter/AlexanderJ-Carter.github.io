@@ -15,6 +15,11 @@ export default function TimePage() {
       mark="Folio Time"
       kicker="世界时区 · 标准时间"
       title="世界时间"
+      related={[
+        { href: '/tools', label: '全部工具 →' },
+        { href: '/units', label: '单位换算 →' },
+        { href: '/currency', label: '汇率 →' },
+      ]}
       description="一目了然的本地时间与常用时区，支持一键复制。"
     >
       <div className="container">

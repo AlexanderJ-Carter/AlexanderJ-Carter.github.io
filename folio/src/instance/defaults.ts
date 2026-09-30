@@ -1,4 +1,4 @@
-import type { FolioInstance } from './types'
+import type { FolioInstance, InstanceNavItem } from './types'
 
 /** 开源模板默认值：无个人身份、无真实域名。 */
 export const defaultInstance: FolioInstance = {
@@ -39,4 +39,31 @@ export const defaultInstance: FolioInstance = {
   },
   oidcDisplayHost: 'id.example.com',
   seedEmailHint: 'admin@example.com',
+  compliance: {
+    icp: '',
+    icpUrl: 'https://beian.miit.gov.cn/',
+    gongan: '',
+    gonganUrl: '',
+  },
+  features: {
+    fun: true,
+    network: true,
+    subscribe: true,
+    assistant: true,
+  },
 }
+
+/** 模板默认站内链接（页脚 / 地图共用；实例 `nav` 可整表覆盖） */
+export const defaultSiteNav: InstanceNavItem[] = [
+  { label: '画廊', href: '/gallery' },
+  { label: '写作', href: '/posts' },
+  { label: '研究', href: '/research' },
+  { label: '项目', href: '/projects' },
+  { label: '工具', href: '/tools' },
+  { label: '玩乐', href: '/fun' },
+  { label: '关于', href: '/about' },
+  { label: '联系', href: '/contact' },
+  { label: '订阅', href: '/subscribe' },
+  { label: '更新', href: '/updates' },
+  { label: '地图', href: '/network' },
+]

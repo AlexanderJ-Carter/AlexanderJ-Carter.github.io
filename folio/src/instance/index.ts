@@ -1,8 +1,8 @@
 import { existsSync, readFileSync } from 'fs'
 import path from 'path'
 
-import { defaultInstance } from './defaults'
-import type { FolioInstance } from './types'
+import { defaultInstance, defaultSiteNav } from './defaults'
+import type { FolioInstance, InstanceFeatures, InstanceNavItem } from './types'
 
 function deepMerge<T extends Record<string, unknown>>(base: T, overlay: Partial<T>): T {
   const out: Record<string, unknown> = { ...base }
@@ -57,7 +57,6 @@ export function getInstance(): FolioInstance {
     overlay as unknown as Record<string, unknown>,
   ) as unknown as FolioInstance
 
-  // 环境变量可覆盖关键公网项（CI / 容器）
   const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL?.replace(/\/$/, '')
   if (siteUrl) merged.siteUrl = siteUrl
   if (process.env.NEXT_PUBLIC_SITE_NAME?.trim()) {
@@ -73,3 +72,28 @@ export function publicOriginFromInstance(): string {
   if (url && !/0\.0\.0\.0|127\.0\.0\.1|localhost/i.test(url)) return url
   return defaultInstance.siteUrl
 }
+
+export function getFeatures(): Required<InstanceFeatures> {
+  const f = getInstance().features || {}
+  return {
+    fun: f.fun !== false,
+    network: f.network !== false,
+    subscribe: f.subscribe !== false,
+    assistant: f.assistant !== false,
+  }
+}
+
+/** 页脚与地图用的站内导航（尊重功能开关） */
+export function getSiteNav(): InstanceNavItem[] {
+  const instance = getInstance()
+  const features = getFeatures()
+  const base = instance.nav?.length ? instance.nav : defaultSiteNav
+  return base.filter((item) => {
+    if (item.href === '/fun' && !features.fun) return false
+    if (item.href === '/network' && !features.network) return false
+    if (item.href === '/subscribe' && !features.subscribe) return false
+    return true
+  })
+}
+
+export type { FolioInstance, InstanceNavItem, InstanceCompliance, InstanceFeatures } from './types'

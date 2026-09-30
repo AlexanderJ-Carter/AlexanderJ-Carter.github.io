@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { PageChrome } from '@/components/PageChrome'
 import { SiteChronicle } from '@/components/SiteChronicle'
 import { siteUpdates } from '@/data/updates'
+import { getFeatures } from '@/instance'
 
 export const metadata: Metadata = {
   title: '更新',
@@ -11,21 +12,38 @@ export const metadata: Metadata = {
 }
 
 export default function UpdatesPage() {
+  const features = getFeatures()
+
   return (
     <PageChrome
       mark="Updates"
       title="更新"
+      related={[
+        ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
+        ...(features.subscribe ? [{ href: '/subscribe', label: '订阅 →' }] : []),
+        { href: '/posts', label: '写作 →' },
+      ]}
       description={
         <>
-          近况变更，以及从纯静态到 Astro、再到 Folio 的完整发展史。邮件通知见{' '}
-          <Link className="underline underline-offset-4" href="/subscribe">
-            订阅
-          </Link>
-          ；站群总览见{' '}
-          <Link className="underline underline-offset-4" href="/network">
-            地图
-          </Link>
-          。
+          近况变更，以及从纯静态到 Astro、再到 Folio 的完整发展史。
+          {features.subscribe ? (
+            <>
+              邮件通知见{' '}
+              <Link className="underline underline-offset-4" href="/subscribe">
+                订阅
+              </Link>
+              ；
+            </>
+          ) : null}
+          {features.network ? (
+            <>
+              站群总览见{' '}
+              <Link className="underline underline-offset-4" href="/network">
+                地图
+              </Link>
+              。
+            </>
+          ) : null}
         </>
       }
     >

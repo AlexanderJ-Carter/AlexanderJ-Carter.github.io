@@ -47,6 +47,39 @@ export type InstanceTimelineItem = {
   kind?: 'education' | 'research' | 'work' | 'other'
 }
 
+/** 页脚/地图用的站内栏目（模板默认；实例可覆盖） */
+export type InstanceNavItem = {
+  label: string
+  href: string
+}
+
+/**
+ * 合规展示（实例填写；空则页脚不渲染）。
+ * 备案号等为中国大陆合规预留，未备案保持空字符串即可。
+ */
+export type InstanceCompliance = {
+  /** ICP 备案号，如 `京ICP备xxxxxxxx号` */
+  icp?: string
+  /** 备案查询页，默认工信部 */
+  icpUrl?: string
+  /** 公安备案号文案 */
+  gongan?: string
+  /** 公安备案公示链接 */
+  gonganUrl?: string
+}
+
+/** 功能开关：关掉则相关入口从导航/地图弱化（页仍可直达） */
+export type InstanceFeatures = {
+  /** 玩乐页与相关入口，默认 true */
+  fun?: boolean
+  /** 站群地图，默认 true */
+  network?: boolean
+  /** 订阅，默认 true */
+  subscribe?: boolean
+  /** 问站助手，默认 true */
+  assistant?: boolean
+}
+
 /** 开源模板可覆盖的实例配置（不含密钥）。密钥只放服务器 .env。 */
 export type FolioInstance = {
   /** 站点显示名 */
@@ -91,4 +124,10 @@ export type FolioInstance = {
   oidcDisplayHost?: string
   /** 默认管理员种子邮箱（仅本地脚本提示） */
   seedEmailHint?: string
+  /** 合规文案（备案等）；未办则留空 */
+  compliance?: InstanceCompliance
+  /** 功能开关 */
+  features?: InstanceFeatures
+  /** 覆盖默认站内导航 */
+  nav?: InstanceNavItem[]
 }

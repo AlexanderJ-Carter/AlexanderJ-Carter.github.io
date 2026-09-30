@@ -76,5 +76,17 @@
     "location": "Your city"
   },
   "oidcDisplayHost": "id.example.com",
-  "seedEmailHint": "admin@example.com"
+  "seedEmailHint": "admin@example.com",
+  "compliance": {
+    "icp": "",
+    "icpUrl": "https://beian.miit.gov.cn/",
+    "gongan": "",
+    "gonganUrl": ""
+  },
+  "features": {
+    "fun": true,
+    "network": true,
+    "subscribe": true,
+    "assistant": true
+  }
 }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { PageChrome } from '@/components/PageChrome'
-import { getInstance } from '@/instance'
+import { getFeatures, getInstance } from '@/instance'
 
 export const metadata: Metadata = {
   title: '项目',
@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   const instance = getInstance()
+  const features = getFeatures()
   const intro =
     instance.projects?.intro ||
     '生活向小项目与站点工具。研究协作见研究页。'
@@ -18,7 +19,16 @@ export default function ProjectsPage() {
   const research = instance.research.project
 
   return (
-    <PageChrome mark="Projects" title="项目" description={intro}>
+    <PageChrome
+      mark="Projects"
+      title="项目"
+      description={intro}
+      related={[
+        { href: '/research', label: '研究论文 →' },
+        { href: '/tools', label: '实用工具 →' },
+        ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
+      ]}
+    >
       <div className="container max-w-3xl">
         {research ? (
           <div className="film-edge folio-section-tint mb-12 rounded-sm px-5 py-6 md:px-7">

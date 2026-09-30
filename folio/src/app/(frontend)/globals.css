@@ -44,7 +44,7 @@
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 86rem;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --font-sans: var(--font-body), "Source Serif 4", "Noto Serif SC", Georgia, serif;
+  --font-sans: var(--font-body), var(--font-noto-serif-sc), "Source Serif 4", "Noto Serif SC", Georgia, serif;
 }
 
 @layer utilities {
@@ -2794,21 +2794,31 @@ html.home-snap-root .sponsor-slot {
   position: relative;
 }
 
+.awareness--immersive {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: #e8ecf2;
+}
+
+/* 钓饵全屏时压住 Cookie / 问站浮层，避免穿帮 */
+body:has(.awareness--immersive) .cookie-consent,
+body:has(.awareness--immersive) .site-assist {
+  display: none !important;
+}
+
+.awareness--reveal {
+  padding: 2rem 0 3rem;
+}
+
 .phish-bank {
-  margin: 0 -1rem;
-  background: #f5f5f5;
+  min-height: 100%;
   color: #1f1f1f;
   font-family:
     -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
     'Segoe UI', sans-serif;
-}
-
-@media (min-width: 640px) {
-  .phish-bank {
-    margin: 0;
-    border-radius: 0.5rem;
-    overflow: hidden;
-  }
 }
 
 .phish-bank__top {
@@ -2816,70 +2826,256 @@ html.home-snap-root .sponsor-slot {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.85rem 1rem;
-  background: linear-gradient(90deg, #0958d9, #1677ff 55%, #4096ff);
+  padding: 0.75rem 1rem;
+  background: linear-gradient(105deg, #003a8c 0%, #0958d9 42%, #1677ff 78%, #4096ff 100%);
   color: #fff;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
 }
 
 .phish-bank__brand {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.6rem;
+  min-width: 0;
 }
 
 .phish-bank__logo {
   display: grid;
   place-items: center;
-  width: 1.7rem;
-  height: 1.7rem;
-  border-radius: 0.35rem;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.2);
-  font-size: 0.7rem;
-  font-weight: 700;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.95);
+  color: #1677ff;
 }
 
 .phish-bank__name {
   margin: 0;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 650;
+  letter-spacing: 0.01em;
 }
 
 .phish-bank__sub,
 .phish-bank__code {
   margin: 0;
+  font-size: 0.65rem;
+  opacity: 0.88;
+  letter-spacing: 0.02em;
+}
+
+.phish-bank__top-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+
+.phish-bank__secure {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.12rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 0.62rem;
+  white-space: nowrap;
+}
+
+.phish-bank__crumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.45rem 1rem;
+  background: #f0f3f8;
+  border-bottom: 1px solid #dce3ee;
   font-size: 0.7rem;
-  opacity: 0.85;
+  color: #8c8c8c;
+}
+
+.phish-bank__crumb span:last-child {
+  color: #434343;
+  font-weight: 500;
 }
 
 .phish-bank__banner {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
   margin: 0;
-  padding: 0.65rem 1rem;
+  padding: 0.7rem 1rem;
   border-bottom: 1px solid #ffccc7;
-  background: #fff2f0;
+  background: linear-gradient(180deg, #fff2f0, #fff7f6);
+  color: #a8071a;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.phish-bank__banner.is-urgent {
+  background: linear-gradient(180deg, #fff1f0, #ffccc7);
+  animation: phish-banner-pulse 1.6s ease-in-out infinite;
+}
+
+.phish-bank__banner-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.1rem;
+  border-radius: 999px;
+  background: #cf1322;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.phish-bank__body {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0.85rem 0.75rem 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 720px) {
+  .phish-bank__body {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+    align-items: start;
+    padding: 1rem 1rem 2rem;
+    gap: 1rem;
+  }
+}
+
+.phish-bank__order {
+  background: #fff;
+  border: 1px solid #e6ebf2;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 35, 80, 0.04);
+}
+
+.phish-bank__order-head {
+  padding: 0.9rem 1rem 0.75rem;
+  background: linear-gradient(135deg, #fff7e6, #fff);
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.phish-bank__order-tag {
+  margin: 0 0 0.35rem;
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.2rem;
+  background: #fff1f0;
   color: #cf1322;
-  font-size: 0.82rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.phish-bank__order-amt {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #141414;
+  font-variant-numeric: tabular-nums;
+}
+
+.phish-bank__order-grid {
+  margin: 0;
+  padding: 0.65rem 1rem 0.85rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.phish-bank__order-grid div {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.5rem;
+  font-size: 0.78rem;
   line-height: 1.45;
+}
+
+.phish-bank__order-grid dt {
+  margin: 0;
+  color: #8c8c8c;
+}
+
+.phish-bank__order-grid dd {
+  margin: 0;
+  color: #262626;
+  word-break: break-all;
 }
 
 .phish-bank__card {
   background: #fff;
+  border: 1px solid #e6ebf2;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 35, 80, 0.04), 0 10px 28px rgba(15, 35, 80, 0.05);
+}
+
+.phish-bank__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0.7rem 0.85rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.25rem;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafbfc;
+}
+
+.phish-bank__steps li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  font-size: 0.68rem;
+  color: #8c8c8c;
+}
+
+.phish-bank__steps li span {
+  display: grid;
+  place-items: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 999px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  font-size: 0.62rem;
+  font-weight: 600;
+}
+
+.phish-bank__steps li.is-active {
+  color: #0958d9;
+  font-weight: 600;
+}
+
+.phish-bank__steps li.is-active span {
+  border-color: #1677ff;
+  background: #1677ff;
+  color: #fff;
 }
 
 .phish-bank__head {
-  padding: 1.15rem 1.1rem 0.85rem;
+  padding: 1rem 1.05rem 0.85rem;
   border-bottom: 1px solid #f0f0f0;
 }
 
 .phish-bank__head h1 {
-  margin: 0 0 0.45rem;
-  font-size: 1.15rem;
+  margin: 0 0 0.4rem;
+  font-size: 1.12rem;
   font-weight: 650;
+  letter-spacing: -0.01em;
 }
 
 .phish-bank__head p {
   margin: 0;
-  font-size: 0.84rem;
+  font-size: 0.8rem;
   line-height: 1.55;
   color: #595959;
 }
@@ -2888,46 +3084,61 @@ html.home-snap-root .sponsor-slot {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
   margin-top: 0.85rem;
   padding: 0.55rem 0.7rem;
   border: 1px solid #ffd591;
   border-radius: 0.35rem;
   background: #fff7e6;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: #d46b08;
 }
 
+.phish-bank__timer.is-urgent {
+  border-color: #ffa39e;
+  background: #fff1f0;
+  color: #cf1322;
+}
+
 .phish-bank__countdown {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #cf1322;
+  letter-spacing: 0.04em;
+}
+
+.phish-bank__timer.is-urgent .phish-bank__countdown {
+  animation: phish-tick-blink 1s steps(1) infinite;
 }
 
 .phish-bank__form {
   display: grid;
-  gap: 0.85rem;
-  padding: 1rem 1.1rem 1.15rem;
+  gap: 0.8rem;
+  padding: 1rem 1.05rem 0.35rem;
 }
 
 .phish-bank__label {
   display: grid;
-  gap: 0.3rem;
-  font-size: 0.78rem;
+  gap: 0.28rem;
+  font-size: 0.75rem;
   color: #595959;
 }
 
 .phish-bank__label input,
-.phish-bank__label select,
-.phish-bank__otp {
+.phish-bank__label select {
   width: 100%;
-  min-height: 2.65rem;
-  padding: 0 0.7rem;
+  min-height: 2.7rem;
+  padding: 0 0.75rem;
   border: 1px solid #d9d9d9;
   border-radius: 0.35rem;
   background: #fafafa;
   color: #1f1f1f;
   font: inherit;
   font-size: 0.95rem;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .phish-bank__label select {
@@ -2941,62 +3152,32 @@ html.home-snap-root .sponsor-slot {
   background-repeat: no-repeat;
 }
 
-.phish-bank__otp {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding-right: 0.45rem;
-}
-
-.phish-bank__otp input {
-  flex: 1;
-  min-width: 0;
-  min-height: 0;
-  padding: 0.65rem 0;
-  border: 0;
-  background: transparent;
-}
-
 .phish-bank__label input:focus-visible,
-.phish-bank__label select:focus-visible,
-.phish-bank__otp:focus-within {
+.phish-bank__label select:focus-visible {
   outline: none;
   border-color: #1677ff;
   background: #fff;
-  box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.12);
-}
-
-.phish-bank__otp-btn {
-  border: 0;
-  background: transparent;
-  color: #1677ff;
-  font: inherit;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.phish-bank__otp-btn:disabled {
-  color: #8c8c8c;
-  cursor: default;
+  box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.14);
 }
 
 .phish-bank__submit {
-  margin-top: 0.15rem;
-  padding: 0.78rem 1rem;
+  margin-top: 0.2rem;
+  padding: 0.82rem 1rem;
   border: 0;
-  border-radius: 0.35rem;
-  background: #1677ff;
+  border-radius: 0.4rem;
+  background: linear-gradient(180deg, #3c8cff, #1677ff 45%, #0f5ed7);
   color: #fff;
   font: inherit;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 650;
+  letter-spacing: 0.02em;
   cursor: pointer;
+  box-shadow: 0 6px 16px rgba(22, 119, 255, 0.28);
 }
 
 .phish-bank__submit:hover,
 .phish-bank__submit:focus-visible {
-  background: #0f5ed7;
+  filter: brightness(1.04);
 }
 
 .phish-bank__submit:focus-visible {
@@ -3004,12 +3185,24 @@ html.home-snap-root .sponsor-slot {
   outline-offset: 2px;
 }
 
+.phish-bank__submit:active {
+  transform: translateY(1px);
+}
+
+.phish-bank__legal {
+  margin: 0;
+  font-size: 0.68rem;
+  line-height: 1.5;
+  color: #bfbfbf;
+  text-align: center;
+}
+
 .phish-bank__help {
   display: block;
   width: 100%;
   border: 0;
   background: transparent;
-  padding: 0.35rem 1.1rem 1rem;
+  padding: 0.55rem 1.05rem 0.85rem;
   color: #1677ff;
   font: inherit;
   font-size: 0.8rem;
@@ -3017,18 +3210,95 @@ html.home-snap-root .sponsor-slot {
   cursor: pointer;
 }
 
+.phish-bank__help:hover,
+.phish-bank__help:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .phish-bank__tips {
   margin: 0;
-  padding: 0 1.1rem 1.1rem 1.85rem;
-  font-size: 0.72rem;
+  padding: 0 1.05rem 1.05rem 1.85rem;
+  font-size: 0.7rem;
   line-height: 1.55;
   color: #8c8c8c;
+}
+
+.phish-bank__foot {
+  padding: 0.35rem 1rem 1.4rem;
+  text-align: center;
+  font-size: 0.66rem;
+  line-height: 1.55;
+  color: #a6a6a6;
+}
+
+.phish-verify {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(15, 30, 60, 0.48);
+  backdrop-filter: blur(2px);
+}
+
+.phish-verify__card {
+  width: min(100%, 18.5rem);
+  padding: 1.35rem 1.2rem 1.15rem;
+  border-radius: 0.6rem;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.phish-verify__spin {
+  width: 2.2rem;
+  height: 2.2rem;
+  margin: 0 auto 0.85rem;
+  border-radius: 999px;
+  border: 2.5px solid #e6f4ff;
+  border-top-color: #1677ff;
+  animation: phish-spin 0.75s linear infinite;
+}
+
+.phish-verify__title {
+  margin: 0 0 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.phish-verify__sub {
+  margin: 0 0 0.95rem;
+  font-size: 0.72rem;
+  color: #8c8c8c;
+}
+
+.phish-verify__bar {
+  height: 0.35rem;
+  border-radius: 999px;
+  background: #f0f0f0;
+  overflow: hidden;
+}
+
+.phish-verify__bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #69b1ff, #1677ff);
+  transition: width 0.15s linear;
+}
+
+.phish-verify__pct {
+  margin: 0.45rem 0 0;
+  font-size: 0.72rem;
+  color: #595959;
 }
 
 .phish-help {
   position: fixed;
   inset: 0;
-  z-index: 60;
+  z-index: 95;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -3051,12 +3321,19 @@ html.home-snap-root .sponsor-slot {
   border-radius: 0.75rem 0.75rem 0 0;
   background: #fff;
   color: #1f1f1f;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
 }
 
 @media (min-width: 480px) {
   .phish-help__sheet {
-    border-radius: 0.5rem;
+    border-radius: 0.55rem;
   }
+}
+
+.phish-help__ticket {
+  margin: 0 0 0.35rem;
+  font-size: 0.68rem;
+  color: #8c8c8c;
 }
 
 .phish-help__sheet h2 {
@@ -3071,17 +3348,25 @@ html.home-snap-root .sponsor-slot {
 }
 
 .phish-help__list button {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   width: 100%;
   border: 0;
   border-bottom: 1px solid #f0f0f0;
   background: transparent;
-  padding: 0.85rem 0;
+  padding: 0.9rem 0;
   color: #1f1f1f;
   font: inherit;
   font-size: 0.9rem;
   text-align: left;
   cursor: pointer;
+}
+
+.phish-help__list button span {
+  color: #bfbfbf;
+  font-size: 1.1rem;
 }
 
 .phish-help__list li:last-child button {
@@ -3122,8 +3407,25 @@ html.home-snap-root .sponsor-slot {
   cursor: pointer;
 }
 
+.awareness-reveal {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
 .awareness-reveal:focus-visible {
   outline: none;
+}
+
+.awareness-reveal__badge {
+  margin: 0 0 0.75rem;
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid color-mix(in oklch, var(--border) 90%, transparent);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--muted-foreground);
 }
 
 .awareness-reveal__title {
@@ -3175,11 +3477,6 @@ html.home-snap-root .sponsor-slot {
   align-items: baseline;
   gap: 0.5rem 0.75rem;
   font-size: 0.95rem;
-}
-
-.awareness-leak__meta {
-  font-size: 0.75rem;
-  color: var(--muted-foreground);
 }
 
 .awareness-lessons {
@@ -3239,8 +3536,32 @@ html.home-snap-root .sponsor-slot {
   box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
 }
 
+@keyframes phish-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes phish-tick-blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes phish-banner-pulse {
+  50% {
+    filter: saturate(1.15);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .awareness-lure__orb {
-    display: none;
+  .phish-bank__banner.is-urgent,
+  .phish-bank__timer.is-urgent .phish-bank__countdown,
+  .phish-verify__spin {
+    animation: none;
+  }
+
+  .phish-bank__submit:active {
+    transform: none;
   }
 }

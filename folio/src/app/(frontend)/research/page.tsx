@@ -18,6 +18,11 @@ export default function ResearchPage() {
     <PageChrome
       mark="Research"
       title="研究与论文"
+      related={[
+        { href: '/projects', label: '生活向项目 →' },
+        { href: '/about', label: '关于（门禁） →' },
+        { href: '/posts', label: '写作 →' },
+      ]}
       description={
         <>
           {instance.research.intro}{' '}

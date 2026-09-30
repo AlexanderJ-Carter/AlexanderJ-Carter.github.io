@@ -38,6 +38,11 @@ export default async function ContactPage() {
       mark="联系"
       kicker="留言"
       title="联系"
+      related={[
+        { href: '/about', label: '关于 →' },
+        { href: '/subscribe', label: '订阅 →' },
+        { href: '/security/policy', label: '安全政策 →' },
+      ]}
       description="合作、反馈或打个招呼都可以。公开邮箱见左侧；安全问题请单独写信。"
     >
       <div className="container grid gap-12 lg:grid-cols-12 lg:gap-10">

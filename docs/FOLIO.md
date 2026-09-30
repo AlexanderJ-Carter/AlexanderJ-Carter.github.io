@@ -26,9 +26,32 @@ CI **不会**覆盖服务器上的 `instance/config.json` 与 `.env.production`�
 
 关键字段：`research.publications`、`about.timeline`、`projects`、`elsewhere`。
 
+### 合规与功能（可选）
+
+```json
+"compliance": {
+  "icp": "",
+  "icpUrl": "https://beian.miit.gov.cn/",
+  "gongan": "",
+  "gonganUrl": ""
+},
+"features": {
+  "fun": true,
+  "network": true,
+  "subscribe": true,
+  "assistant": true
+}
+```
+
+- `compliance.icp` / `gongan`：有备案号再填，页脚才会显示；空字符串不渲染。
+- `features.*`：关掉后页脚导航与站群地图会隐藏对应入口（URL 仍可直达）。
+- `nav`：可选整表覆盖默认站内链接。
+
 ## 前台结构（摘要）
 
-`/` 影像与导览 · `/gallery` · `/research` · `/projects` · `/tools` · `/fun` · `/updates` · `/subscribe` · 门禁 `/about` `/contact`
+`/` 影像与导览 · `/gallery` · `/research` · `/projects` · `/tools` · `/fun` · `/network` · `/updates` · `/subscribe` · 门禁 `/about` `/contact`
+
+栏目叙事：**看**（画廊/写作/研究）· **用**（工具/玩乐/项目）· **识**（关于/联系/订阅/更新）。互链由 `PageChrome.related` 与 `/network` 地图串联。
 
 ## 邮件
 
@@ -43,3 +66,9 @@ node --import tsx scripts/print-broadcast-email.mjs
 ## 门禁
 
 `/about` `/contact` 默认 Turnstile。生产勿设 `NEXT_PUBLIC_SKIP_VERIFY`。
+
+## 性能备忘
+
+- Layout 使用 `revalidate = 60`，管理条改为客户端探测会话，避免整站 `force-dynamic`。
+- 中文字体经 `next/font`（Noto Serif SC）自托管，去掉 render-blocking 的 Google Fonts `<link>`。
+- `/_next/static` 长缓存；镜像构建见 `folio/Dockerfile`（BuildKit pnpm cache、仅拷 musl 原生包）。

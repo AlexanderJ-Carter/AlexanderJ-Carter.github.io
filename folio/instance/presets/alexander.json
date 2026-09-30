@@ -148,5 +148,17 @@
     "location": "北京"
   },
   "oidcDisplayHost": "id.alexander.xin",
-  "seedEmailHint": "admin@alexander.xin"
+  "seedEmailHint": "admin@alexander.xin",
+  "compliance": {
+    "icp": "",
+    "icpUrl": "https://beian.miit.gov.cn/",
+    "gongan": "",
+    "gonganUrl": ""
+  },
+  "features": {
+    "fun": true,
+    "network": true,
+    "subscribe": true,
+    "assistant": true
+  }
 }

@@ -11,7 +11,16 @@ export const metadata: Metadata = {
 
 export default function CurrencyPage() {
   return (
-    <PageChrome mark="Folio FX" title="汇率" description="实时参考汇率 · 本地换算">
+    <PageChrome
+      mark="Folio FX"
+      title="汇率"
+      related={[
+        { href: '/tools', label: '全部工具 →' },
+        { href: '/units', label: '单位换算 →' },
+        { href: '/time', label: '世界时间 →' },
+      ]}
+      description="实时参考汇率 · 本地换算"
+    >
       <div className="container">
         <CurrencyTool />
         <p className="mt-8">

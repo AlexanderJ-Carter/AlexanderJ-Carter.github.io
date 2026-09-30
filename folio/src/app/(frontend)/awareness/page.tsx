@@ -9,9 +9,5 @@ export const metadata: Metadata = {
 }
 
 export default function AwarenessPage() {
-  return (
-    <div className="pt-16 pb-0 md:pt-16">
-      <PhishDrill />
-    </div>
-  )
+  return <PhishDrill />
 }

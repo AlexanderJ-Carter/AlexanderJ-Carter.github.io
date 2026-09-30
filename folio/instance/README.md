@@ -12,4 +12,5 @@ cp instance/config.example.json instance/config.json
 ```
 
 `research.publications` → `/research`；`about.timeline` → 门禁 `/about`。  
+可选：`compliance`（备案）、`features`（玩乐/地图/订阅/助手开关）、`nav`（整表覆盖页脚链接）。  
 密钥只放 `.env` / `.env.production`。详见 [docs/FOLIO.md](../../docs/FOLIO.md)。
