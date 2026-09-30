@@ -62,7 +62,7 @@
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "react-hook-form": "7.71.1",
-    "resend": "^6.28.1",
+    "resend": "^6.30.0",
     "sharp": "0.35.4",
     "tailwind-merge": "^3.4.0"
   },
