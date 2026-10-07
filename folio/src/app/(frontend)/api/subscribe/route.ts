@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 
 import {
-  EMAIL_RE,
   addSubscriber,
+  isValidEmail,
   normalizeEmail,
   sendSubscribeAck,
 } from '@/utilities/subscribe'
@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic'
 export async function POST(req: Request) {
   const body = (await req.json()) as { email?: string }
   const email = normalizeEmail(body.email)
-  if (!email || !EMAIL_RE.test(email)) {
+  if (!email || !isValidEmail(email)) {
     return NextResponse.json({ ok: false, message: '请填写有效邮箱' }, { status: 400 })
   }
 

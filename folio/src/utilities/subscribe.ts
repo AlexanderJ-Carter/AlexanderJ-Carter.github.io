@@ -5,7 +5,21 @@ import { getInstance } from '@/instance'
 import { getServerSideURL } from '@/utilities/getURL'
 import { emailFromHeader } from '@/utilities/mail'
 
-export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+/** Linear email shape check (avoids nested quantifiers / ReDoS). */
+export function isValidEmail(email: string): boolean {
+  if (email.length < 3 || email.length > 254) return false
+  const at = email.indexOf('@')
+  if (at <= 0 || at !== email.lastIndexOf('@')) return false
+  const local = email.slice(0, at)
+  const domain = email.slice(at + 1)
+  if (!local || !domain || local.length > 64) return false
+  if (domain.startsWith('.') || domain.endsWith('.') || !domain.includes('.')) return false
+  for (let i = 0; i < email.length; i++) {
+    const c = email.charCodeAt(i)
+    if (c <= 32 || c === 127) return false
+  }
+  return true
+}
 
 export function getResendClient() {
   const apiKey = process.env.RESEND_API_KEY?.trim()
