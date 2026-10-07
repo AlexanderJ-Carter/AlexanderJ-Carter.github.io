@@ -99,6 +99,13 @@
       "sharp",
       "esbuild",
       "unrs-resolver"
-    ]
+    ],
+    "overrides": {
+      "undici": ">=7.29.1",
+      "source-map-js": ">=1.2.2",
+      "dompurify": ">=3.4.16",
+      "postcss-selector-parser": ">=7.1.6",
+      "esbuild": ">=0.25.0"
+    }
   }
 }
