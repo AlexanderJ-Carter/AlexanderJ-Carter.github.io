@@ -14,27 +14,16 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-    if: ${{ secrets.FOLIO_SSH_PRIVATE_KEY != '' && secrets.FOLIO_SSH_HOST != '' }}
+    # Self-hosted on the Tencent origin (Tailscale-only SSH; public runners cannot reach it).
+    runs-on: [self-hosted, linux, folio-tencent]
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Setup SSH
-        run: |
-          install -m 700 -d ~/.ssh
-          echo "${{ secrets.FOLIO_SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H "${{ secrets.FOLIO_SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
-
-      - name: Rsync Folio to server
+      - name: Sync Folio into instance directory
         env:
-          HOST: ${{ secrets.FOLIO_SSH_HOST }}
-          USER: ${{ secrets.FOLIO_SSH_USER }}
-          REMOTE: ${{ secrets.FOLIO_REMOTE_PATH }}
+          REMOTE: ${{ vars.FOLIO_REMOTE_PATH || '/home/ubuntu/folio' }}
         run: |
-          USER="${USER:-ubuntu}"
-          REMOTE="${REMOTE:-/home/ubuntu/folio}"
           rsync -az --delete \
             --exclude node_modules \
             --exclude .next \
@@ -46,20 +35,41 @@ jobs:
             --exclude ADMIN.txt \
             --exclude instance/config.json \
             --exclude seed-data \
-            -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=accept-new" \
-            ./folio/ "${USER}@${HOST}:${REMOTE}/"
+            ./folio/ "${REMOTE}/"
+
+      - name: Refresh seed DB for prerender
+        env:
+          REMOTE: ${{ vars.FOLIO_REMOTE_PATH || '/home/ubuntu/folio' }}
+        run: |
+          mkdir -p "${REMOTE}/seed-data"
+          if docker ps --format '{{.Names}}' | grep -qx folio; then
+            docker cp folio:/app/data/folio.db "${REMOTE}/seed-data/folio.db"
+          fi
 
       - name: Build and restart containers
         env:
-          HOST: ${{ secrets.FOLIO_SSH_HOST }}
-          USER: ${{ secrets.FOLIO_SSH_USER }}
-          REMOTE: ${{ secrets.FOLIO_REMOTE_PATH }}
+          REMOTE: ${{ vars.FOLIO_REMOTE_PATH || '/home/ubuntu/folio' }}
         run: |
-          USER="${USER:-ubuntu}"
-          REMOTE="${REMOTE:-/home/ubuntu/folio}"
-          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=accept-new \
-            "${USER}@${HOST}" \
-            "cd '${REMOTE}' && docker compose -f compose.prod.yaml build && docker compose -f compose.prod.yaml up -d"
+          cd "${REMOTE}"
+          # Prefer host network during build so next/font can fetch if needed.
+          DOCKER_BUILDKIT=1 docker compose -f compose.prod.yaml --env-file .env.production build
+          docker compose -f compose.prod.yaml --env-file .env.production up -d
+          docker builder prune -af >/dev/null 2>&1 || true
+
+      - name: Health check
+        env:
+          REMOTE: ${{ vars.FOLIO_REMOTE_PATH || '/home/ubuntu/folio' }}
+        run: |
+          PUB=$(grep -E '^FOLIO_PUBLISH=' "${REMOTE}/.env.production" | head -1 | cut -d= -f2-)
+          # Bind is often Tailscale-only (e.g. 100.x.x.x:3040), not 127.0.0.1.
+          PUB="${PUB:-100.111.222.66:3040}"
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 5 "http://${PUB}/api/health" || echo 000)
+            echo "attempt $i -> $code"
+            [ "$code" = "200" ] && exit 0
+            sleep 3
+          done
+          exit 1
 
       - name: Purge Cloudflare cache
         env:
@@ -77,12 +87,3 @@ jobs:
             --data '{"purge_everything":true}')
           echo "$response"
           echo "$response" | grep -q 'HTTP_CODE:200' || exit 1
-
-  skip-notice:
-    runs-on: ubuntu-latest
-    if: ${{ secrets.FOLIO_SSH_PRIVATE_KEY == '' || secrets.FOLIO_SSH_HOST == '' }}
-    steps:
-      - name: Missing secrets
-        run: |
-          echo "FOLIO_SSH_PRIVATE_KEY / FOLIO_SSH_HOST not configured — deploy skipped."
-          echo "See docs/FOLIO.md"

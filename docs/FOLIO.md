@@ -22,6 +22,9 @@ CI **不会**覆盖服务器上的 `instance/config.json` 与 `.env.production`�
 - **不要在盘满时 `compose build`**：BuildKit 缓存曾占满磁盘导致整机无响应。构建后执行：
   `docker builder prune -af && docker image prune -af`
 - Folio 可用环境变量覆盖：`FOLIO_MEM_LIMIT` / `FOLIO_MEMSWAP_LIMIT` / `FOLIO_CPUS` / `FOLIO_NODE_OPTIONS`。
+- 公网入站靠 UFW 默认 deny；业务口（Folio `:3040`、Omni `:8180`、Glance `:3002`）只绑 Tailscale IP。SSH 监听 `0.0.0.0:22` 但 UFW 仅放行 `tailscale0`。
+- 部署：仓库 Actions runner `tencent-folio`（`self-hosted,linux,folio-tencent`）跑 [folio-deploy.yml](../.github/workflows/folio-deploy.yml)，在本机同步 `/home/ubuntu/folio` 后 compose 构建。公网 runner 够不着这台机，勿再配 `FOLIO_SSH_*`。
+- 公网流量路径：访客 → Cloudflare → Cloud 上 `cloudflared` → nginx（`www.alexander.xin` → `http://100.111.222.66:3040`）。
 
 ## 配置放哪
 
