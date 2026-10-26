@@ -3256,8 +3256,8 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  graphql-http@1.23.0:
-    resolution: {integrity: sha512-nQbRzoaqyNBVFG6X6r0mXC6S4X9eZOmmGz6t3l9H3MVKc2em3KeQAx+KhZKKFzj56ePDEncMOXeLu/hjO/4LQg==}
+  graphql-http@1.23.1:
+    resolution: {integrity: sha512-h6AcykL7+xp22QvOnK0fu1eHk9AZG1ngF71rk0ZGuGupnjm1yqXRFrZ/eMv4Q1FTCWILJ5o6hVAxzt3S8/wPHQ==}
     engines: {node: '>=12'}
     peerDependencies:
       graphql: '>=0.11 <=17'
@@ -6190,7 +6190,7 @@ snapshots:
       dequal: 2.0.3
       file-type: 21.3.4
       graphql: 16.14.2
-      graphql-http: 1.23.0(graphql@16.14.2)
+      graphql-http: 1.23.1(graphql@16.14.2)
       graphql-playground-html: 1.6.30
       http-status: 2.1.0
       next: 16.4.2(@babel/core@7.29.7)(@playwright/test@1.63.0)(@types/node@26.6.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.77.4)
@@ -8086,7 +8086,7 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  graphql-http@1.23.0(graphql@16.14.2):
+  graphql-http@1.23.1(graphql@16.14.2):
     dependencies:
       graphql: 16.14.2
 
