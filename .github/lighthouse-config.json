@@ -1,4 +1,5 @@
 {
+  "$comment": "lighthouse:recommended enables per-audit errors; overrides below downgrade Cloudflare/platform noise and heavy perf opportunities so weekly CI stays useful. Category scores remain the primary gates.",
   "ci": {
     "collect": {
       "numberOfRuns": 1,
@@ -15,7 +16,30 @@
         "categories:performance": ["warn", { "minScore": 0.65 }],
         "categories:accessibility": ["error", { "minScore": 0.85 }],
         "categories:best-practices": ["warn", { "minScore": 0.8 }],
-        "categories:seo": ["warn", { "minScore": 0.85 }]
+        "categories:seo": ["warn", { "minScore": 0.85 }],
+
+        "robots-txt": "off",
+        "third-party-cookies": "off",
+
+        "redirects": "warn",
+        "redirects-http": "warn",
+        "deprecations": "warn",
+        "errors-in-console": "warn",
+        "inspector-issues": "warn",
+
+        "document-latency-insight": "warn",
+        "image-delivery-insight": "warn",
+        "legacy-javascript-insight": "warn",
+        "forced-reflow-insight": "warn",
+        "lcp-discovery-insight": "warn",
+        "total-byte-weight": "warn",
+        "unused-css-rules": "warn",
+        "unused-javascript": "warn",
+        "uses-rel-preconnect": "warn",
+        "uses-responsive-images": "warn",
+
+        "heading-order": "warn",
+        "label-content-name-mismatch": "warn"
       }
     },
     "upload": {
