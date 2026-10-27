@@ -5,8 +5,7 @@ node_modules/
 dist/
 folio/.next/
 
-# Generated worker artifacts (encoded from ops-portal/src/site-help.js)
-ops-portal/help.b64
+# Generated ops-portal Worker upload artifacts (base64 bundles)
 ops-portal/ops.b64
 
 # Local environment variables

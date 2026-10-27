@@ -1,8 +1,30 @@
 {
-  "generated": "2026-09-24",
+  "generated": "2026-10-27",
   "source": "src/data/fleet-changelog.ts",
   "note": "Fleet-wide timeline; apex release notes remain in CHANGELOG.md / /changelog",
   "entries": [
+    {
+      "id": "2026-10-27-site-help-retired",
+      "date": "2026-10-27",
+      "kind": "removed",
+      "sites": [
+        "help"
+      ],
+      "title": {
+        "zh-CN": "下线 site-help Worker",
+        "zh-TW": "下線 site-help Worker",
+        "en-GB": "Retired site-help Worker",
+        "fr": "Worker site-help retiré",
+        "ru": "Снят Worker site-help"
+      },
+      "summary": {
+        "zh-CN": "Cloudflare 已删除 site-help 与 HELP_RATE KV；访客问答仅保留 Folio「问站」POST /api/ask。",
+        "zh-TW": "Cloudflare 已刪除 site-help 與 HELP_RATE KV；訪客問答僅保留 Folio「問站」POST /api/ask。",
+        "en-GB": "Removed Cloudflare site-help and HELP_RATE KV; visitor Q&A is Folio「问站」only via POST /api/ask.",
+        "fr": "Suppression de site-help et du KV HELP_RATE ; Q&R visiteurs via Folio「问站」POST /api/ask uniquement.",
+        "ru": "Удалены site-help и KV HELP_RATE; вопросы посетителей — только Folio「问站」POST /api/ask."
+      }
+    },
     {
       "id": "2026-09-24-hermes-retired",
       "date": "2026-09-24",
@@ -30,22 +52,21 @@
       "date": "2026-08-12",
       "kind": "added",
       "sites": [
-        "ops",
-        "help"
+        "ops"
       ],
       "title": {
-        "zh-CN": "运维 Cron 告警与站内帮助",
-        "zh-TW": "運維 Cron 告警與站內幫助",
-        "en-GB": "Ops cron alerts and site help",
-        "fr": "Alertes cron ops et aide du site",
-        "ru": "Cron-алерты ops и справка сайта"
+        "zh-CN": "运维 Cron 告警",
+        "zh-TW": "運維 Cron 告警",
+        "en-GB": "Ops cron alerts",
+        "fr": "Alertes cron ops",
+        "ru": "Cron-алерты ops"
       },
       "summary": {
-        "zh-CN": "Ops 每 10 分钟探针差分，变化时 Resend 邮件；/help + /api/help 使用公开 KB（限流），可选 OmniRoute。",
-        "zh-TW": "Ops 每 10 分鐘探針差分，變化時 Resend 郵件；/help + /api/help 使用公開 KB（限流），可選 OmniRoute。",
-        "en-GB": "Ops probes every 10 minutes and emails on change via Resend; /help + /api/help use a public KB with rate limits (optional OmniRoute).",
-        "fr": "Sondes ops toutes les 10 min + e-mail Resend si changement ; /help + /api/help avec KB public et quotas (OmniRoute optionnel).",
-        "ru": "Ops-зонды каждые 10 мин и письмо Resend при изменении; /help + /api/help с публичной KB и лимитами (опц. OmniRoute)."
+        "zh-CN": "Ops 每 10 分钟探针差分，状态变化时经 Resend 发邮件。",
+        "zh-TW": "Ops 每 10 分鐘探針差分，狀態變化時經 Resend 發郵件。",
+        "en-GB": "Ops probes every 10 minutes and emails on state change via Resend.",
+        "fr": "Sondes ops toutes les 10 min ; e-mail Resend en cas de changement d'état.",
+        "ru": "Ops-зонды каждые 10 мин; письмо Resend при смене состояния."
       }
     },
     {

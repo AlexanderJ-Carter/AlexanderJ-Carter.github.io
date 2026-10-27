@@ -33,9 +33,7 @@ Fleet ops home and **primary maintainer entry** (site `/login` CTA points here).
 - `/api/check` — POST: run probes, diff, optional email
 - `/fleet-changelog.json` — maintainer-only fleet timeline (proxied from www `/ops/fleet-changelog.json`)
 
-## 问站（已取代 site-help）
+## 问站
 
-访客问答走 Folio 站内「问站」→ `POST /api/ask`（KB 在 `folio/public/assistant/kb.json`）。
-
-`src/site-help.js` 仅保留为边缘占位：旧路由 `/api/help` 返回 410，提示改用问站。部署仍可用 `encode:help` + `gen-mcp-deploy.cjs` 更新该占位脚本。
+访客问答在 Folio 站内「问站」→ `POST /api/ask`（KB：`folio/public/assistant/kb.json`）。旧边缘 Worker `site-help` 与 `/api/help` 已从 Cloudflare 账号移除。
 
