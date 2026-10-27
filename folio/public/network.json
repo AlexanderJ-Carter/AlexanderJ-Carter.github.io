@@ -1,6 +1,6 @@
 {
   "site": "alexander.xin",
-  "updated": "static",
+  "updated": "2026-10-27",
   "here": [
     { "path": "/", "title": "首页" },
     { "path": "/gallery", "title": "画廊" },
@@ -16,9 +16,15 @@
     { "path": "/updates", "title": "更新" }
   ],
   "elsewhere": [
-    { "name": "MyCook", "host": "cook.alexander.xin", "href": "https://cook.alexander.xin" },
-    { "name": "Gitea", "host": "git.alexander.xin", "href": "https://git.alexander.xin" },
-    { "name": "IT-Tools", "host": "tools.alexander.xin", "href": "https://tools.alexander.xin" },
-    { "name": "GitHub", "host": "github.com/AlexanderJ-Carter", "href": "https://github.com/AlexanderJ-Carter" }
+    { "name": "Yearly", "host": "yearly.alexander.xin", "href": "https://yearly.alexander.xin", "kind": "personal" },
+    { "name": "New Year", "host": "newyear.alexander.xin", "href": "https://newyear.alexander.xin", "kind": "personal", "visibleMonths": [12, 1, 2] },
+    { "name": "MyCook", "host": "cook.alexander.xin", "href": "https://cook.alexander.xin", "kind": "product" },
+    { "name": "Flight Log", "host": "flightlog.alexander.xin", "href": "https://flightlog.alexander.xin", "kind": "product" },
+    { "name": "netq", "host": "netq.alexander.xin", "href": "https://netq.alexander.xin", "kind": "tool" },
+    { "name": "Lab", "host": "lab.alexander.xin", "href": "https://lab.alexander.xin", "kind": "tool" },
+    { "name": "Linux Command", "host": "lab.alexander.xin", "href": "https://lab.alexander.xin/linux-command", "kind": "tool" },
+    { "name": "Gitea", "host": "git.alexander.xin", "href": "https://git.alexander.xin", "kind": "infra" },
+    { "name": "IT-Tools", "host": "tools.alexander.xin", "href": "https://tools.alexander.xin", "kind": "infra" },
+    { "name": "GitHub", "host": "github.com/AlexanderJ-Carter", "href": "https://github.com/AlexanderJ-Carter", "kind": "infra" }
   ]
 }

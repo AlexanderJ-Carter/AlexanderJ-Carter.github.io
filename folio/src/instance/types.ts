@@ -10,11 +10,17 @@ export type InstancePublication = {
   links: InstanceLink[]
 }
 
+/** 站外入口叙事分区（首页分组 / 地图脚注） */
+export type ElsewhereKind = 'personal' | 'product' | 'tool' | 'infra'
+
 export type InstanceElsewhere = {
   name: string
   host: string
   href: string
   desc: string
+  kind?: ElsewhereKind
+  /** 东八区日历月（1–12）；未设则全年展示 */
+  visibleMonths?: number[]
 }
 
 export type InstanceProject = {

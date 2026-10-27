@@ -20,7 +20,7 @@ export function HomeInvite() {
           下一格胶片
         </h2>
         <p className="home-invite__lead">
-          影像、短文、研究与玩具柜都在站内。关于与联系需访客验证后打开。
+          影像、短文、研究与玩具柜都在站内；子域产品站见上方站群入口。关于与联系需访客验证后打开。
         </p>
         <ul className="home-invite__stops">
           {stops.map((s) => (
