@@ -2,7 +2,8 @@
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { onThisDayEvents, pickOnThisDay } from '@/data/on-this-day'
+import { eventsOnThisCalendarDay } from '@/data/on-this-day'
+import { shanghaiCalendarParts } from '@/utilities/shanghaiCalendar'
 
 type Poem = {
   content: string
@@ -27,16 +28,9 @@ async function fetchPoem(): Promise<Poem | null> {
 }
 
 export function PoemHistory() {
-  const now = useMemo(() => new Date(), [])
-  const month = now.getMonth() + 1
-  const day = now.getDate()
+  const { month, day } = useMemo(() => shanghaiCalendarParts(), [])
 
-  const dayPool = useMemo(() => {
-    const exact = onThisDayEvents.filter((e) => e.month === month && e.day === day)
-    if (exact.length > 0) return exact
-    const fallback = pickOnThisDay(month, day)
-    return fallback ? [fallback] : []
-  }, [month, day])
+  const dayPool = useMemo(() => eventsOnThisCalendarDay(month, day), [month, day])
 
   const [historyIdx, setHistoryIdx] = useState(0)
   const [poem, setPoem] = useState<Poem | null>(null)
@@ -117,6 +111,11 @@ export function PoemHistory() {
           </p>
           <p className="font-mono text-xs text-muted-foreground mb-2">{dateLabel}</p>
           <p className="leading-relaxed mb-4">{history?.zh ?? '今天暂无收录事件'}</p>
+          {history?.en ? (
+            <p className="text-sm leading-relaxed text-muted-foreground mb-4 -mt-2" lang="en">
+              {history.en}
+            </p>
+          ) : null}
           {dayPool.length > 1 && (
             <button
               type="button"

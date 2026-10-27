@@ -1,13 +1,9 @@
+import { shanghaiCalendarMonth } from '../utilities/shanghaiCalendar'
+
 import { getInstance } from './index'
 import type { ElsewhereKind, InstanceElsewhere } from './types'
 
-const SHANGHAI_TZ = 'Asia/Shanghai'
-
-export function shanghaiCalendarMonth(now = new Date()): number {
-  return Number(
-    new Intl.DateTimeFormat('en-US', { timeZone: SHANGHAI_TZ, month: 'numeric' }).format(now),
-  )
-}
+export { shanghaiCalendarMonth, shanghaiCalendarParts } from '../utilities/shanghaiCalendar'
 
 export function getVisibleElsewhere(now = new Date()): InstanceElsewhere[] {
   const month = shanghaiCalendarMonth(now)
