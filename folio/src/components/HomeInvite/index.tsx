@@ -16,7 +16,7 @@ export function HomeInvite() {
     <section className="container home-invite" aria-labelledby="home-invite-heading">
       <div className="home-invite__frame">
         <p className="folio-mark mb-3">Next plate</p>
-        <h2 id="home-invite-heading" className="home-invite__title">
+        <h2 id="home-invite-heading" className="home-invite__title text-[1.75rem] md:text-[2.1rem]">
           下一格胶片
         </h2>
         <p className="home-invite__lead">
