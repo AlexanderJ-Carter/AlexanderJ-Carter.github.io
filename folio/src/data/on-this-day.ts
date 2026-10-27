@@ -1,14 +1,14 @@
 /**
  * Curated “on this day” notes — used when network APIs are unavailable.
- * Prefer exact month/day match; otherwise any event in the same month.
+ * Only exact calendar month/day matches are shown (no same-month fallback).
  */
 export type OnThisDayEvent = {
-  month: number;
-  day: number;
-  year: string;
-  zh: string;
-  en: string;
-};
+  month: number
+  day: number
+  year: string
+  zh: string
+  en: string
+}
 
 export const onThisDayEvents: OnThisDayEvent[] = [
   {
@@ -124,6 +124,13 @@ export const onThisDayEvents: OnThisDayEvent[] = [
     en: 'The United Nations Charter comes into force.',
   },
   {
+    month: 10,
+    day: 27,
+    year: '1937',
+    zh: '淞沪会战期间，中国军队在四行仓库坚守抗击日军（「八百壮士」）。',
+    en: 'Defenders hold Sihang Warehouse during the Battle of Shanghai.',
+  },
+  {
     month: 11,
     day: 9,
     year: '1989',
@@ -144,22 +151,8 @@ export const onThisDayEvents: OnThisDayEvent[] = [
     zh: '苏联国旗降下，苏联正式解体。',
     en: 'The Soviet Union is dissolved.',
   },
-];
+]
 
-export function pickOnThisDay(
-  month: number,
-  day: number
-): OnThisDayEvent | null {
-  const exact = onThisDayEvents.filter(
-    (e) => e.month === month && e.day === day
-  );
-  if (exact.length > 0) {
-    return exact[Math.floor(Math.random() * exact.length)]!;
-  }
-  const sameMonth = onThisDayEvents.filter((e) => e.month === month);
-  if (sameMonth.length > 0) {
-    return sameMonth[Math.floor(Math.random() * sameMonth.length)]!;
-  }
-  if (onThisDayEvents.length === 0) return null;
-  return onThisDayEvents[Math.floor(Math.random() * onThisDayEvents.length)]!;
+export function eventsOnThisCalendarDay(month: number, day: number): OnThisDayEvent[] {
+  return onThisDayEvents.filter((e) => e.month === month && e.day === day)
 }

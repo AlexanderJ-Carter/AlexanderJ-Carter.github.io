@@ -30,8 +30,14 @@ export const generateMeta = async (args: {
 
   const title = doc?.meta?.title || instance.siteName
   const description = doc?.meta?.description || instance.tagline
+  const slug = doc?.slug
+  const canonicalPath =
+    !slug || slug === 'home' ? '/' : `/${Array.isArray(slug) ? slug.join('/') : slug}`
 
   return {
+    alternates: {
+      canonical: canonicalPath,
+    },
     description,
     openGraph: mergeOpenGraph({
       description,
@@ -43,8 +49,14 @@ export const generateMeta = async (args: {
           ]
         : undefined,
       title,
-      url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
+      url: canonicalPath,
     }),
     title,
+    twitter: {
+      card: 'summary_large_image',
+      description,
+      title,
+      ...(instance.twitterCreator ? { creator: instance.twitterCreator } : {}),
+    },
   }
 }

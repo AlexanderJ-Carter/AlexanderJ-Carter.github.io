@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import React from 'react'
 
+const CONTACT_SHEET_SIZES =
+  '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 320px'
+
 const frames = [
   { src: '/img/gallery-optimized/landscape-01-md.webp', title: '山间晨雾', category: '风景' },
   { src: '/img/gallery-optimized/landscape-03-md.webp', title: '远岸', category: '风景' },
@@ -46,11 +49,13 @@ export function FeaturedStrip() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={frame.src}
-                alt={frame.title}
+                alt={`${frame.title}，${frame.category}摄影`}
                 width={640}
                 height={640}
+                sizes={CONTACT_SHEET_SIZES}
                 className="aspect-square h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading={i < 3 ? 'eager' : 'lazy'}
+                fetchPriority={i === 0 ? 'high' : undefined}
                 decoding="async"
               />
               <div className="contact-sheet__meta">
