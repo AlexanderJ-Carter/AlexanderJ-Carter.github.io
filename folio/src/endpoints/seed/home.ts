@@ -131,7 +131,7 @@ export const home: (args: HomeArgs) => RequiredDataFromCollectionSlug<'pages'> =
                         format: 0,
                         mode: 'normal',
                         style: '',
-                        text: '写作与摄影之外，也在做 LLM Agent 相关公开研究。站外还有 MyCook、Gitea 与 IT-Tools，本站只做入口。',
+                        text: '写作与摄影之外，也在做 LLM Agent 相关公开研究。站群还有 MyCook、Flight Log、netq、Lab 与生活向小站 Yearly 等——Folio 做总入口，详见首页站群区块与 /network。',
                         version: 1,
                       },
                     ],

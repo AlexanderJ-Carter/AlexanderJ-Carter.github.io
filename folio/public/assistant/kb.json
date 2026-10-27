@@ -3,7 +3,7 @@
   "site": "alexander.xin",
   "overview": "Alexander Carter 的个人站（Folio）：摄影、精选写作、公开研究与轻量工具。暗房编辑室气质；关于/联系有访客门禁，研究与画廊等公开页无需门禁。",
   "pages": [
-    { "path": "/", "title": "首页", "note": "全幅影像开场；精选作品、今日诗史、研究条" },
+    { "path": "/", "title": "首页", "note": "全幅影像开场；精选作品、今日诗史、研究条与站群入口（生活向/产品/硬核工具）" },
     { "path": "/gallery", "title": "画廊", "note": "联系单观片，点开放大" },
     { "path": "/posts", "title": "写作", "note": "站内精选短文与实践笔记" },
     { "path": "/research", "title": "研究", "note": "公开论文与研究项目入口" },
@@ -27,7 +27,7 @@
     "问站还可简答白名单实时信息：天气（Open-Meteo）、汇率（Frankfurter）、今日诗词、上海时间；复杂交互引导去 /fun、/currency、/time。",
     "公开邮箱：hello@（一般）与 security@（漏洞）。admin@ 等未公开本地部分请勿试探。",
     "Cookie：首次可选仅必要或接受统计；之后在 /privacy#cookies 可再改。",
-    "站外常见入口见 /network 与页脚 Elsewhere。",
+    "站外入口按生活向（Yearly、春节 newyear）、产品（MyCook、Flight Log）、硬核工具（netq、Lab、Linux Command）与基建（Gitea、IT-Tools、GitHub）分组；完整列表见 /network 与页脚 Elsewhere。newyear 仅在农历前后季节展示。",
     "写作以站内 /posts 为准；blog.alexander.xin 会跳到同一页。"
   ]
 }

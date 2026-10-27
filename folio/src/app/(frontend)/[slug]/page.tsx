@@ -11,6 +11,7 @@ import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { RenderHero } from '@/heros/RenderHero'
 import { AboutTimeline } from '@/components/AboutTimeline'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
+import { HomeElsewhere } from '@/components/HomeElsewhere'
 import { HomeInvite } from '@/components/HomeInvite'
 import { HomeSnap } from '@/components/HomeSnap'
 import { PoemHistory } from '@/components/PoemHistory'
@@ -84,12 +85,13 @@ export default async function Page({ params: paramsPromise }: Args) {
         <div key="notes" className="home-snap-stack home-snap-stack--dense">
           <PoemHistory />
           <ResearchStrip />
+          <HomeElsewhere />
           <HomeInvite />
         </div>,
       ]
     : []
 
-  const homeLabels = isHome ? ['开场', '精选影像', '今日与研究'] : []
+  const homeLabels = isHome ? ['开场', '精选影像', '今日、研究与站群'] : []
 
   return (
     <article className={isHome ? 'pb-0' : 'pt-20 md:pt-24 pb-24'}>

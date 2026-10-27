@@ -96,4 +96,17 @@ export function getSiteNav(): InstanceNavItem[] {
   })
 }
 
-export type { FolioInstance, InstanceNavItem, InstanceCompliance, InstanceFeatures } from './types'
+export type {
+  FolioInstance,
+  InstanceNavItem,
+  InstanceCompliance,
+  InstanceFeatures,
+  ElsewhereKind,
+  InstanceElsewhere,
+} from './types'
+export {
+  getVisibleElsewhere,
+  groupElsewhereByKind,
+  elsewhereKindMeta,
+  shanghaiCalendarMonth,
+} from './elsewhere'

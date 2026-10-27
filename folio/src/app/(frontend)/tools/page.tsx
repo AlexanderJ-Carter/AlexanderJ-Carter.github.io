@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { PageChrome } from '@/components/PageChrome'
-import { getFeatures, getInstance } from '@/instance'
+import { getFeatures, getVisibleElsewhere } from '@/instance'
 
 export const metadata: Metadata = {
   title: '实用工具',
@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 }
 
 export default function ToolsPage() {
-  const instance = getInstance()
   const features = getFeatures()
   const onSite = [
     { href: '/time', title: '世界时间', desc: '多时区对照与复制', mark: 'Time' },
@@ -29,8 +28,8 @@ export default function ToolsPage() {
       : []),
     { href: '/gallery', title: '画廊', desc: '联系单观片', mark: 'Film' },
   ]
-  const external = instance.elsewhere.filter(
-    (e) => /tools|github|git\./i.test(`${e.name} ${e.host} ${e.href}`),
+  const external = getVisibleElsewhere().filter(
+    (e) => e.kind === 'tool' || (e.kind === 'infra' && /tools/i.test(e.name)),
   )
 
   return (

@@ -3,11 +3,11 @@ import React from 'react'
 
 import { AssistantReopenLink } from '@/components/SiteAssistant/ReopenLink'
 import { ElsewhereList } from '@/components/ElsewhereList'
-import { getFeatures, getInstance, getSiteNav } from '@/instance'
+import { getFeatures, getInstance, getSiteNav, getVisibleElsewhere } from '@/instance'
 
 export async function Footer() {
   const instance = getInstance()
-  const elsewhere = instance.elsewhere
+  const elsewhere = getVisibleElsewhere()
   const nav = getSiteNav()
   const features = getFeatures()
   const compliance = instance.compliance

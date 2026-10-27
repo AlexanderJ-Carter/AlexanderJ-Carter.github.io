@@ -5,28 +5,75 @@
   "tagline": "摄影、写作，偶尔做一点 LLM Agent 研究。",
   "elsewhere": [
     {
+      "name": "Yearly",
+      "host": "yearly.alexander.xin",
+      "href": "https://yearly.alexander.xin",
+      "desc": "一年一记 · 温暖回顾",
+      "kind": "personal"
+    },
+    {
+      "name": "New Year",
+      "host": "newyear.alexander.xin",
+      "href": "https://newyear.alexander.xin",
+      "desc": "农历新年贺页",
+      "kind": "personal",
+      "visibleMonths": [12, 1, 2]
+    },
+    {
       "name": "MyCook",
       "host": "cook.alexander.xin",
       "href": "https://cook.alexander.xin",
-      "desc": "菜谱与厨房笔记"
+      "desc": "菜谱与厨房笔记",
+      "kind": "product"
+    },
+    {
+      "name": "Flight Log",
+      "host": "flightlog.alexander.xin",
+      "href": "https://flightlog.alexander.xin",
+      "desc": "飞行记录与航程笔记",
+      "kind": "product"
+    },
+    {
+      "name": "netq",
+      "host": "netq.alexander.xin",
+      "href": "https://netq.alexander.xin",
+      "desc": "交互式网络排查 CLI",
+      "kind": "tool"
+    },
+    {
+      "name": "Lab",
+      "host": "lab.alexander.xin",
+      "href": "https://lab.alexander.xin",
+      "desc": "Git 协作与实验教学",
+      "kind": "tool"
+    },
+    {
+      "name": "Linux Command",
+      "host": "lab.alexander.xin",
+      "href": "https://lab.alexander.xin/linux-command",
+      "desc": "命令速查与练习",
+      "kind": "tool"
     },
     {
       "name": "Gitea",
       "host": "git.alexander.xin",
       "href": "https://git.alexander.xin",
-      "desc": "自建代码仓库"
+      "desc": "自建代码仓库",
+      "kind": "infra"
     },
     {
       "name": "IT-Tools",
       "host": "tools.alexander.xin",
       "href": "https://tools.alexander.xin",
-      "desc": "常用小工具箱"
+      "desc": "常用小工具箱",
+      "kind": "infra"
     },
     {
       "name": "GitHub",
       "host": "github.com/AlexanderJ-Carter",
       "href": "https://github.com/AlexanderJ-Carter",
-      "desc": "公开仓库与实验"
+      "desc": "公开仓库与实验",
+      "kind": "infra"
     }
   ],
   "about": {
@@ -107,6 +154,14 @@
         "href": "https://github.com/AlexanderJ-Carter/MyCook",
         "hrefLabel": "源码 →",
         "demoHref": "https://cook.alexander.xin",
+        "demoLabel": "打开 →"
+      },
+      {
+        "title": "Flight Log",
+        "description": "个人飞行记录站：航程、机型与笔记，与主站同一套登录与 Cookie 约定。",
+        "status": "进行中",
+        "tags": ["航程", "产品"],
+        "demoHref": "https://flightlog.alexander.xin",
         "demoLabel": "打开 →"
       },
       {

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { NetworkAtlas, type AtlasZone } from '@/components/NetworkAtlas'
 import { PageChrome } from '@/components/PageChrome'
 import { getAtlasZones } from '@/data/site-atlas'
-import { getFeatures, getInstance } from '@/instance'
+import { getFeatures, getInstance, getVisibleElsewhere } from '@/instance'
 
 export const metadata: Metadata = {
   title: '站群地图',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function NetworkPage() {
   const instance = getInstance()
   const features = getFeatures()
-  const elsewhere = instance.elsewhere
+  const elsewhere = getVisibleElsewhere()
   const hub =
     instance.siteUrl?.replace(/^https?:\/\//, '').replace(/\/$/, '') || 'alexander.xin'
 
