@@ -3,7 +3,6 @@ const path = require('path');
 
 const root = path.join(__dirname, '..', 'dist');
 const ops = fs.readFileSync(path.join(root, 'ops.b64'), 'utf8');
-const help = fs.readFileSync(path.join(root, 'help.b64'), 'utf8');
 
 function make(name, b64, bindings) {
   return `async () => {
@@ -50,14 +49,4 @@ fs.writeFileSync(
     },
   ])
 );
-fs.writeFileSync(
-  path.join(root, 'mcp-help-only.txt'),
-  make('site-help', help, [
-    {
-      type: 'kv_namespace',
-      name: 'HELP_RATE',
-      namespace_id: '751919123ae14c818d74100a6f385931',
-    },
-  ])
-);
-console.log('wrote split deploy scripts');
+console.log('wrote mcp-ops-only.txt');
