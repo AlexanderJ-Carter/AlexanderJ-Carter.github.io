@@ -37,9 +37,10 @@ export function DailyFrame() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={frame.src}
-          alt={frame.title}
+          alt={`${frame.title}，${frame.category}摄影`}
           width={800}
           height={800}
+          sizes="(max-width: 640px) 100vw, 400px"
           className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] sm:aspect-square"
           decoding="async"
         />

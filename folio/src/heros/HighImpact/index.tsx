@@ -29,6 +29,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
             imgClassName="-z-10 object-cover scale-[1.04] saturate-[1.05] contrast-[1.04]"
             priority
             resource={media}
+            size="100vw"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-[oklch(18%_0.04_45_/_0.88)] via-[oklch(22%_0.03_50_/_0.42)] to-[oklch(28%_0.02_55_/_0.28)]" />
