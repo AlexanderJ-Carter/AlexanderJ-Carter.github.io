@@ -53,8 +53,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         'site-header fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter,box-shadow,color] duration-300',
         pathname === '/awareness' && 'hidden',
         overHero
-          ? 'border-b border-white/10 bg-black/50 text-white shadow-none backdrop-blur-md'
-          : 'border-b border-transparent bg-background/92 text-foreground shadow-[0_1px_0_color-mix(in_oklch,var(--foreground)_6%,transparent)] backdrop-blur-md supports-[backdrop-filter]:bg-background/80',
+          ? 'border-b border-white/12 bg-[oklch(18%_0.03_50_/_0.55)] text-white shadow-none backdrop-blur-md'
+          : 'border-b border-border/60 bg-background/90 text-foreground shadow-[0_1px_0_color-mix(in_oklch,var(--border)_80%,transparent)] backdrop-blur-md supports-[backdrop-filter]:bg-background/78',
       )}
       data-over-hero={overHero ? 'true' : 'false'}
     >

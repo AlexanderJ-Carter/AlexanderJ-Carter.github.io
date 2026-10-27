@@ -15,25 +15,28 @@ const frames = [
 
 export function FeaturedStrip() {
   return (
-    <section className="container py-4" id="featured" aria-labelledby="featured-heading">
-      <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+    <section className="container py-6 md:py-8" id="featured" aria-labelledby="featured-heading">
+      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="folio-mark mb-2">Plate 01 · Contact sheet</p>
-          <h2 id="featured-heading" className="text-2xl md:text-3xl tracking-tight font-semibold">
+          <h2
+            id="featured-heading"
+            className="text-[1.65rem] font-semibold tracking-tight md:text-[2rem]"
+          >
             精选作品
           </h2>
-          <p className="mt-2 max-w-xl text-sm text-muted-foreground md:text-base">
+          <p className="mt-2.5 max-w-md text-[0.95rem] leading-relaxed text-muted-foreground">
             先看这几张。完整联系单在画廊。
           </p>
         </div>
         <Link
           href="/gallery"
-          className="text-xs uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground"
+          className="inline-flex min-h-10 items-center text-sm font-medium text-primary underline decoration-primary/35 underline-offset-[0.22em] hover:decoration-primary"
         >
           全部画廊 →
         </Link>
       </div>
-      <ul className="contact-sheet grid grid-cols-2 gap-2 sm:grid-cols-3 md:gap-3">
+      <ul className="contact-sheet grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:gap-3.5">
         {frames.map((frame, i) => (
           <li key={frame.src} className="contact-sheet__frame group relative overflow-hidden">
             <Link href="/gallery" className="block focus-visible:outline-none">

@@ -31,7 +31,7 @@ export default function ProjectsPage() {
     >
       <div className="container max-w-3xl">
         {research ? (
-          <div className="film-edge folio-section-tint mb-12 rounded-sm px-5 py-6 md:px-7">
+          <div className="film-edge folio-section-tint mb-14 px-6 py-7 md:px-8 md:py-8">
             <p className="folio-mark mb-2">Research</p>
             <h2 className="mb-2 text-xl font-semibold tracking-tight">{research.title}</h2>
             <p className="mb-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
@@ -58,27 +58,27 @@ export default function ProjectsPage() {
             暂无条目。在 <code>instance/config.json</code> 填写 <code>projects.items</code>。
           </p>
         ) : (
-          <ul className="divide-y divide-border border-y border-border">
+          <ul className="m-0 grid list-none gap-4 p-0 sm:grid-cols-2">
             {items.map((item) => (
-              <li key={item.title} className="py-8">
+              <li key={item.title} className="project-card">
                 <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <h2 className="text-lg font-semibold tracking-tight">{item.title}</h2>
-                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-muted-foreground">
+                  <span className="rounded-full bg-accent/80 px-2 py-0.5 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-muted-foreground">
                     {item.status}
                   </span>
                 </div>
-                <p className="mb-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+                <p className="mb-3 text-[0.925rem] leading-[1.65] text-muted-foreground">
                   {item.description}
                 </p>
                 {item.tags && item.tags.length > 0 ? (
-                  <p className="mb-4 font-mono text-[0.7rem] tracking-wide text-muted-foreground/80">
+                  <p className="mb-4 font-mono text-[0.68rem] tracking-wide text-muted-foreground/85">
                     {item.tags.join(' · ')}
                   </p>
                 ) : null}
                 <div className="flex flex-wrap gap-4 text-sm">
                   {item.href ? (
                     <a
-                      className="underline underline-offset-4"
+                      className="font-medium text-primary underline decoration-primary/30 underline-offset-[0.2em] hover:decoration-primary"
                       href={item.href}
                       rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       target={item.href.startsWith('http') ? '_blank' : undefined}
@@ -87,7 +87,10 @@ export default function ProjectsPage() {
                     </a>
                   ) : null}
                   {item.demoHref ? (
-                    <Link className="underline underline-offset-4" href={item.demoHref}>
+                    <Link
+                      className="font-medium text-primary underline decoration-primary/30 underline-offset-[0.2em] hover:decoration-primary"
+                      href={item.demoHref}
+                    >
                       {item.demoLabel || '打开 →'}
                     </Link>
                   ) : null}
