@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import React, { useMemo, useState } from 'react'
 
 import {
@@ -69,14 +70,16 @@ export function GalleryGrid() {
               <span className="contact-sheet__no" aria-hidden>
                 {String(i + 1).padStart(2, '0')}
               </span>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={item.src}
-                alt=""
+                alt={item.title}
                 width={800}
                 height={800}
                 className="aspect-square h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                loading={i < 4 ? 'eager' : 'lazy'}
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                quality={75}
+                priority={i < 2}
+                loading={i < 2 ? undefined : i < 4 ? 'eager' : 'lazy'}
                 decoding="async"
               />
               <div className="contact-sheet__meta">
@@ -113,6 +116,8 @@ export function GalleryGrid() {
             src={active.src.replace('-md.webp', '-lg.webp')}
             alt={active.title}
             className="max-h-[90vh] max-w-full object-contain"
+            decoding="async"
+            fetchPriority="high"
             onClick={(e) => e.stopPropagation()}
           />
         </div>

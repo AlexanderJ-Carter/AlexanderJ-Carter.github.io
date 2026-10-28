@@ -1,6 +1,6 @@
 # Security Policy for alexander.xin
 # https://alexander.xin/.well-known/security.txt
-# Last updated: 2026-09-25
+# Last updated: 2026-10-28
 #
 # 安全披露请用 security@。一般事务用 hello@（见站点 /contact），勿往 admin@ 发。
 

@@ -227,6 +227,38 @@
   }
 }
 
+/* Keyboard skip link — visible only on focus */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  z-index: 10000;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--foreground) 12%, transparent);
+  transform: translateY(-160%);
+  transition: transform 120ms ease;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}
+
 html {
   opacity: 0;
 }
@@ -874,7 +906,21 @@ h3 {
   outline-offset: 3px;
 }
 
+/* 首屏外区块推迟绘制，减轻主线程样式/布局压力 */
+.folio-defer-paint {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folio-defer-paint {
+    content-visibility: visible;
+  }
+}
+
 .site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 420px;
   background:
     linear-gradient(
       180deg,

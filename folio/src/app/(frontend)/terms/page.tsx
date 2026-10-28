@@ -113,7 +113,7 @@ export default function TermsPage() {
             </ul>
           </section>
 
-          <p className="text-sm text-muted-foreground">最近更新：2026-09-25</p>
+          <p className="text-sm text-muted-foreground">最近更新：2026-10-28</p>
         </div>
 
         <p className="mt-12">

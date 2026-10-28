@@ -51,7 +51,7 @@ export async function Footer() {
               ·
             </span>
             <Link className="transition-colors hover:text-foreground" href="/terms#license">
-              许可
+              BSD · CC BY-NC-ND
             </Link>
             {icp ? (
               <>
@@ -101,6 +101,9 @@ export async function Footer() {
             <Link className="transition-colors hover:text-foreground" href="/security/policy">
               安全政策
             </Link>
+            <a className="transition-colors hover:text-foreground" href="/humans.txt">
+              humans.txt
+            </a>
             {features.assistant ? (
               <AssistantReopenLink className="transition-colors hover:text-foreground" />
             ) : null}

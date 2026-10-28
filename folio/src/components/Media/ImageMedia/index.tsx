@@ -77,12 +77,12 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
 
-  // NOTE: this is used by the browser to determine which image to download at different screen sizes
-  const sizes = sizeFromProps
-    ? sizeFromProps
-    : Object.entries(breakpoints)
-        .map(([, value]) => `(max-width: ${value}px) ${value * 2}w`)
-        .join(', ')
+  // fill 全幅默认 100vw；其它给合理上限，避免旧公式把 srcset 撑到 2× 断点宽度
+  const sizes =
+    sizeFromProps ||
+    (fill
+      ? '100vw'
+      : `(max-width: ${breakpoints.sm}px) 100vw, (max-width: ${breakpoints.lg}px) 90vw, 1200px`)
 
   return (
     <picture className={cn(pictureClassName)}>
@@ -94,11 +94,13 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
         placeholder="blur"
         blurDataURL={placeholderBlur}
         priority={priority}
-        quality={100}
+        fetchPriority={priority ? 'high' : 'auto'}
+        quality={priority ? 85 : 75}
         loading={loading}
         sizes={sizes}
         src={src}
         width={!fill ? width : undefined}
+        decoding="async"
       />
     </picture>
   )

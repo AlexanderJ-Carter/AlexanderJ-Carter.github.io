@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -18,7 +19,11 @@ const frames = [
 
 export function FeaturedStrip() {
   return (
-    <section className="container py-6 md:py-8" id="featured" aria-labelledby="featured-heading">
+    <section
+      className="container folio-defer-paint py-6 md:py-8"
+      id="featured"
+      aria-labelledby="featured-heading"
+    >
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="folio-mark mb-2">Plate 01 · Contact sheet</p>
@@ -34,6 +39,7 @@ export function FeaturedStrip() {
         </div>
         <Link
           href="/gallery"
+          prefetch
           className="inline-flex min-h-10 items-center text-sm font-medium text-primary underline decoration-primary/35 underline-offset-[0.22em] hover:decoration-primary"
         >
           全部画廊 →
@@ -42,20 +48,21 @@ export function FeaturedStrip() {
       <ul className="contact-sheet grid grid-cols-2 gap-2.5 sm:grid-cols-3 md:gap-3.5">
         {frames.map((frame, i) => (
           <li key={frame.src} className="contact-sheet__frame group relative overflow-hidden">
-            <Link href="/gallery" className="block focus-visible:outline-none">
+            <Link href="/gallery" prefetch={i < 3} className="block focus-visible:outline-none">
               <span className="contact-sheet__no" aria-hidden>
                 {String(i + 1).padStart(2, '0')}
               </span>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={frame.src}
                 alt={`${frame.title}，${frame.category}摄影`}
                 width={640}
                 height={640}
                 sizes={CONTACT_SHEET_SIZES}
+                quality={75}
+                priority={i === 0}
                 className="aspect-square h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                loading={i < 3 ? 'eager' : 'lazy'}
-                fetchPriority={i === 0 ? 'high' : undefined}
+                loading={i === 0 ? undefined : i < 3 ? 'eager' : 'lazy'}
+                fetchPriority={i === 0 ? 'high' : i < 3 ? 'low' : 'auto'}
                 decoding="async"
               />
               <div className="contact-sheet__meta">
