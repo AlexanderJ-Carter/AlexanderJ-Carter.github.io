@@ -1,9 +1,8 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
-/** 问站不参与首屏 SSR 体积；空闲后再挂客户端包。 */
-export const SiteAssistantLazy = dynamic(
-  () => import('./index').then((m) => m.SiteAssistant),
-  { ssr: false, loading: () => null },
-)
+/**
+ * 问站与 layout 同包加载。
+ * 勿用 next/dynamic({ ssr:false })：独立 async chunk 若未随 standalone 完整同步会 404，FAB 永久不挂载，
+ * 页脚「问站」只派发事件却无人监听。
+ */
+export { SiteAssistant as SiteAssistantLazy } from './index'

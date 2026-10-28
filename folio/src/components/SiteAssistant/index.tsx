@@ -223,7 +223,30 @@ export function SiteAssistant() {
     }
   }
 
-  if (hidden) return null
+  if (hidden) {
+    return (
+      <div className="site-assist">
+        <button
+          type="button"
+          className="site-assist__fab"
+          aria-expanded={false}
+          aria-label="重新打开站点助手"
+          onClick={() => {
+            try {
+              window.localStorage.removeItem(HIDDEN_KEY)
+            } catch {
+              // ignore
+            }
+            setHidden(false)
+            setOpen(true)
+          }}
+        >
+          <span className="site-assist__fab-dot" aria-hidden />
+          <span className="site-assist__fab-label">问站</span>
+        </button>
+      </div>
+    )
+  }
 
   const emailLabel =
     emailIntent === 'subscribe'

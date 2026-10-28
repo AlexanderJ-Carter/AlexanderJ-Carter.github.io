@@ -2299,10 +2299,10 @@ html.home-snap-root .sponsor-slot {
   }
 }
 
-/* 站点助手：低调 FAB */
+/* 站点助手：低调 FAB；压过 Cookie(56) / toast(55)，低于全屏钓饵(80) 与导航 sheet(60) 打开态即可 */
 .site-assist {
   position: fixed;
-  z-index: 52;
+  z-index: 58;
   inset-inline-end: 1rem;
   inset-block-end: 1rem;
   display: flex;
