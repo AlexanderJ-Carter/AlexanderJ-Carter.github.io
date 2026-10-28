@@ -37,6 +37,18 @@ jobs:
             --exclude seed-data \
             ./folio/ "${REMOTE}/"
 
+      - name: Verify critical sources after sync
+        env:
+          REMOTE: ${{ vars.FOLIO_REMOTE_PATH || '/home/ubuntu/folio' }}
+        run: |
+          # Guard against half-synced trees (e.g. PoemHistory import without export).
+          ot="${REMOTE}/src/data/on-this-day.ts"
+          ph="${REMOTE}/src/components/PoemHistory/index.tsx"
+          test -f "$ot" && test -f "$ph"
+          grep -q 'export function eventsOnThisCalendarDay' "$ot"
+          grep -q 'eventsOnThisCalendarDay' "$ph"
+          echo "on-this-day sync check ok"
+
       - name: Refresh seed DB for prerender
         env:
           REMOTE: ${{ vars.FOLIO_REMOTE_PATH || '/home/ubuntu/folio' }}
