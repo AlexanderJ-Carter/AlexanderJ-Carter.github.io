@@ -21,6 +21,11 @@ export const redirects: NextConfig['redirects'] = async () => {
     { source: '/fr/:path*', destination: '/:path*', permanent: false },
     { source: '/ru', destination: '/', permanent: false },
     { source: '/ru/:path*', destination: '/:path*', permanent: false },
+    // 实用工具收进 /tools（query 触发锚点滚动；hash 不宜放 next.config redirects）
+    { source: '/time', destination: '/tools?t=time', permanent: true },
+    { source: '/units', destination: '/tools?t=units', permanent: true },
+    { source: '/currency', destination: '/tools?t=currency', permanent: true },
+    { source: '/qr', destination: '/tools?t=qr', permanent: true },
   ]
 
   const internetExplorerRedirect = {

@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'fs'
 import path from 'path'
 
-import { defaultInstance, defaultSiteNav } from './defaults'
+import { defaultHeaderNav, defaultInstance, defaultSiteNav } from './defaults'
 import type { FolioInstance, InstanceFeatures, InstanceNavItem } from './types'
 
 function deepMerge<T extends Record<string, unknown>>(base: T, overlay: Partial<T>): T {
@@ -83,17 +83,26 @@ export function getFeatures(): Required<InstanceFeatures> {
   }
 }
 
-/** 页脚与地图用的站内导航（尊重功能开关） */
-export function getSiteNav(): InstanceNavItem[] {
-  const instance = getInstance()
+function filterByFeatures(items: InstanceNavItem[]): InstanceNavItem[] {
   const features = getFeatures()
-  const base = instance.nav?.length ? instance.nav : defaultSiteNav
-  return base.filter((item) => {
+  return items.filter((item) => {
     if (item.href === '/fun' && !features.fun) return false
     if (item.href === '/network' && !features.network) return false
     if (item.href === '/subscribe' && !features.subscribe) return false
     return true
   })
+}
+
+/** 页脚与地图用的站内导航（尊重功能开关） */
+export function getSiteNav(): InstanceNavItem[] {
+  const instance = getInstance()
+  const base = instance.nav?.length ? instance.nav : defaultSiteNav
+  return filterByFeatures(base)
+}
+
+/** 顶栏回退导航（CMS header 为空时；尊重功能开关） */
+export function getHeaderNav(): InstanceNavItem[] {
+  return filterByFeatures(defaultHeaderNav)
 }
 
 export type {

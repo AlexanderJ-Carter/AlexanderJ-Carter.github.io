@@ -4,7 +4,17 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
 /** 首屏空闲后再预取高频栏目，减少抢 LCP 带宽。 */
-const ROUTES = ['/gallery', '/posts', '/research', '/about', '/tools', '/fun'] as const
+const ROUTES = [
+  '/gallery',
+  '/posts',
+  '/research',
+  '/about',
+  '/tools',
+  '/fun',
+  '/network',
+  '/agents',
+  '/status',
+] as const
 
 export function NavIdlePrefetch() {
   const router = useRouter()

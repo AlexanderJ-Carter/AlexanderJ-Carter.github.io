@@ -1,22 +1,22 @@
 {
-  "version": 2,
+  "version": 3,
   "site": "alexander.xin",
   "overview": "Alexander Carter 的个人站（Folio）：摄影、精选写作、公开研究与轻量工具。暗房编辑室气质；关于/联系有访客门禁，研究与画廊等公开页无需门禁。",
   "pages": [
-    { "path": "/", "title": "首页", "note": "全幅影像开场；精选作品、今日诗史、研究条与站群入口（生活向/产品/硬核工具）" },
+    { "path": "/", "title": "首页", "note": "全幅影像开场；精选作品、今日诗史、研究条与站群摘要" },
     { "path": "/gallery", "title": "画廊", "note": "联系单观片，点开放大" },
     { "path": "/posts", "title": "写作", "note": "站内精选短文与实践笔记" },
     { "path": "/research", "title": "研究", "note": "公开论文与研究项目入口" },
     { "path": "/projects", "title": "项目", "note": "生活向小项目与站外入口" },
-    { "path": "/network", "title": "站群地图", "note": "分区总览：本站看/用/识与站外入口" },
-    { "path": "/tools", "title": "实用工具", "note": "世界时间、换算、汇率、QR 等本地工具索引" },
-    { "path": "/fun", "title": "玩乐", "note": "暗房玩具柜：今日一帧、曝光三角、氛围电台；番茄/倒计时与天气；抽屉里有取色、密码、计算器" },
+    { "path": "/network", "title": "站群地图", "note": "分区总览：本站看/用/识与站外入口（站群 canonical）" },
+    { "path": "/tools", "title": "实用工具", "note": "时间、换算、汇率、QR、抽屉小工具与暗房助手（旧 /time 等已并入）" },
+    { "path": "/fun", "title": "玩乐", "note": "暗房玩具柜：今日一帧、曝光三角、氛围电台；番茄/倒计时与天气" },
+    { "path": "/agents", "title": "Agent 入口", "note": "问站、暗房助手、MyCook MCP/Skills、Flight 本地 MCP 说明" },
+    { "path": "/status", "title": "服务状态", "note": "公开 URL 轻量探活；非运维内网看板" },
     { "path": "/about", "title": "关于", "note": "需 Turnstile 门禁后的履历；时间线会标出并行重叠段；不把法定姓名放在公开首屏" },
     { "path": "/contact", "title": "联系", "note": "需门禁；一般 hello@alexander.xin，安全披露 security@alexander.xin（security.txt）" },
     { "path": "/subscribe", "title": "订阅", "note": "邮件通讯，频率很低，可退订；也可在问站面板内输入邮箱完成订阅/退订/查询" },
     { "path": "/updates", "title": "更新日志", "note": "近况 + 静态→Astro→Folio 发展史（可按世代筛选）" },
-    { "path": "/currency", "title": "汇率", "note": "Frankfurter 参考汇率换算" },
-    { "path": "/time", "title": "时间", "note": "世界时钟工具" },
     { "path": "/privacy", "title": "隐私政策", "note": "Cookie 与可选统计说明" },
     { "path": "/terms", "title": "服务条款", "note": "含版权：源码 BSD、内容 CC BY-NC-ND 4.0，见 /terms#license" },
     { "path": "/security/policy", "title": "安全政策", "note": "负责任披露；联系 security@" }
@@ -24,10 +24,13 @@
   "notes": [
     "右下角「问站」是本站导览助手（对话），只谈公开信息，不谈后台、密钥或未公开漏洞。没有单独的 /help 页。",
     "问站可给出站内跳转按钮，以及订阅/退订/查询订阅状态；后三类必须访客在面板内输入邮箱并确认，助手不会代填或静默执行。",
-    "问站还可简答白名单实时信息：天气（Open-Meteo）、汇率（Frankfurter）、今日诗词、上海时间；复杂交互引导去 /fun、/currency、/time。",
+    "问站还可简答白名单实时信息：天气（Open-Meteo）、汇率（Frankfurter）、今日诗词、上海时间；复杂交互引导去 /fun 或 /tools。站群产品名（MyCook、Flight Log、netq 等）会直接给外链并指向 /network。",
+    "暗房助手在 /tools#ai（或 /tools?t=ai）：曝光建议与作品说明，经 OmniRoute，有 Turnstile 与限流。",
+    "Agent / MCP 发现页：/agents 与 /agents.json。MyCook 另有厨助手与 cook-mcp；Flight Log MCP 仅本地。",
     "公开邮箱：hello@（一般）与 security@（漏洞）。admin@ 等未公开本地部分请勿试探。",
     "Cookie：首次可选仅必要或接受统计；之后在 /privacy#cookies 可再改。",
-    "站外入口按生活向（Yearly、春节 newyear）、产品（MyCook、Flight Log）、硬核工具（netq、Lab、Linux Command）与基建（Gitea、IT-Tools、GitHub）分组；完整列表见 /network 与页脚 Elsewhere。newyear 仅在农历前后季节展示。",
+    "站外入口按生活向（Yearly、春节 newyear）、产品（MyCook、Flight Log）、硬核工具（netq、Lab、Linux Command）与基建（Gitea、IT-Tools、GitHub）分组；完整列表见 /network。newyear 仅在农历前后季节展示。",
+    "仓库 gateway/ 是 GitHub Pages 名片，不是 LLM 网关。站群联邦登录是 Pocket ID（id 子域）；OmniRoute 只在内网供 Folio/MyCook 代理模型。",
     "写作以站内 /posts 为准；blog.alexander.xin 会跳到同一页。"
   ]
 }

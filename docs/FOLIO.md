@@ -61,9 +61,26 @@ CI **不会**覆盖服务器上的 `instance/config.json` 与 `.env.production`�
 
 ## 前台结构（摘要）
 
-`/` 影像与导览 · `/gallery` · `/research` · `/projects` · `/tools` · `/fun` · `/network` · `/updates` · `/subscribe` · 门禁 `/about` `/contact`
+`/` 影像与导览 · `/gallery` · `/research` · `/projects` · `/tools`（含暗房助手）· `/fun` · `/agents` · `/status` · `/network` · `/updates` · `/subscribe` · 门禁 `/about` `/contact`
 
-栏目叙事：**看**（画廊/写作/研究）· **用**（工具/玩乐/项目）· **识**（关于/联系/订阅/更新）。互链由 `PageChrome.related` 与 `/network` 地图串联。
+栏目叙事：**看**（画廊/写作/研究）· **用**（工具/玩乐/Agent/项目）· **识**（关于/联系/订阅/更新/状态）。互链由 `PageChrome.related` 与 `/network` 地图串联。
+
+- 旧 `/time` `/units` `/currency` `/qr` **301** 到 `/tools?t=…`。
+- **`gateway/`**（本仓 GitHub Pages）是名片与安全镜像，**不是** LLM 网关。
+- **OmniRoute**（`OMNI_URL`，Tailscale `:8180`）供问站 `/api/ask`、暗房助手 `/api/studio-assist`（及 MyCook `/ask`）代理；勿公网裸开。
+- **Pocket ID 联邦认证**（`OIDC_*` / `id.*`）：Folio 后台、暗房助手提权、MyCook MCP、Flight Log（可选）共用同一 IdP。登录可带 `?next=` 回跳（见 `safeOidcNextPath`）。
+- FlightLog 智能配置可将 `FLIGHTLOG_LLM_BASE` 指向同一 Omni（实例 env，非公网聊天）。
+- 公开探活：`/status` 与 `GET /api/status`（约 60s 缓存）；不问内网 Glance。
+- 生产顶栏若仍缺「写作/地图」，在 folio 容器内跑一次 `node --import tsx scripts/configure-nav.mjs`。
+
+### 本轮 IA 上线检查
+
+1. `pnpm --dir folio build`（服务器库 schema 需已 migrate）。
+2. 点验 `/tools?t=ai` `/agents` `/status` `/network` `/fun`；旧 `/time` 应 301（`redirects.ts`）。
+3. 容器内 `configure-nav.mjs` 刷新 CMS header。
+4. Pocket ID：`/api/oidc/login?next=/tools?t=ai` 登录后助手应跳过 Turnstile。
+5. 确认 `OMNI_*` 可用；无 Omni 时助手走离线备忘。
+6. Pages `gateway/` 随仓库 Deploy 更新名片链。
 
 ## 邮件
 

@@ -205,6 +205,15 @@ export const siteMilestones: SiteMilestone[] = [
     href: '/updates#chronicle',
     hrefLabel: '发展史 →',
   },
+  {
+    date: '2026-10-28',
+    era: 'folio',
+    kind: 'feature',
+    title: '工具整合 · Agent · 公开状态',
+    body: '/tools 收拢实用工具与暗房助手；/fun 专注暗房；/agents 与 /status 对外开放；Pocket ID 联邦登录提权助手；问站经 OmniRoute 代理。',
+    href: '/tools',
+    hrefLabel: '实用工具 →',
+  },
 ]
 
 export const KIND_LABEL: Record<SiteMilestoneKind, string> = {

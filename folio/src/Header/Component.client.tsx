@@ -12,9 +12,10 @@ import { cn } from '@/utilities/ui'
 
 interface HeaderClientProps {
   data: Header
+  fallbackNav: { label: string; url: string }[]
 }
 
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
+export const HeaderClient: React.FC<HeaderClientProps> = ({ data, fallbackNav }) => {
   const [overHero, setOverHero] = useState(false)
   const { setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
@@ -68,7 +69,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         >
           <Logo loading="eager" priority="high" />
         </Link>
-        <HeaderNav data={data} overHero={overHero} />
+        <HeaderNav data={data} fallbackNav={fallbackNav} overHero={overHero} />
       </div>
     </header>
   )

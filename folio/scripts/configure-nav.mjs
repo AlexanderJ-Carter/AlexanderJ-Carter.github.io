@@ -36,10 +36,12 @@ async function main() {
     data: {
       navItems: [
         { link: { type: 'custom', label: '画廊', url: '/gallery' } },
-        { link: { type: 'custom', label: '玩乐', url: '/fun' } },
+        { link: { type: 'custom', label: '写作', url: '/posts' } },
         { link: { type: 'custom', label: '工具', url: '/tools' } },
+        { link: { type: 'custom', label: '玩乐', url: '/fun' } },
         { link: { type: 'custom', label: '研究', url: '/research' } },
         { link: { type: 'custom', label: '项目', url: '/projects' } },
+        { link: { type: 'custom', label: '地图', url: '/network' } },
         {
           link: {
             type: 'reference',
@@ -59,24 +61,16 @@ async function main() {
     },
   })
 
+  // Payload footer Global 前台未渲染；保留最小写入以免后台空白，真源是 instance nav / Footer Component。
   await payload.updateGlobal({
     slug: 'footer',
     overrideAccess: true,
     data: {
       navItems: [
-        { link: { type: 'custom', label: '画廊', url: '/gallery' } },
-        { link: { type: 'custom', label: '玩乐', url: '/fun' } },
         { link: { type: 'custom', label: '工具', url: '/tools' } },
-        { link: { type: 'custom', label: '研究', url: '/research' } },
-        { link: { type: 'custom', label: '项目', url: '/projects' } },
-        {
-          link: {
-            type: 'reference',
-            label: '关于',
-            reference: { relationTo: 'pages', value: aboutId },
-          },
-        },
-        { link: { type: 'custom', label: '订阅', url: '/subscribe' } },
+        { link: { type: 'custom', label: 'Agent', url: '/agents' } },
+        { link: { type: 'custom', label: '地图', url: '/network' } },
+        { link: { type: 'custom', label: '状态', url: '/status' } },
         { link: { type: 'custom', label: '后台', url: '/admin' } },
         {
           link: {

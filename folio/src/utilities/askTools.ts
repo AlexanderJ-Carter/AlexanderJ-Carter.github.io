@@ -213,8 +213,8 @@ async function fetchFx(text: string): Promise<AskToolResult> {
   return {
     id: 'fx',
     facts,
-    answer: `参考价（Frankfurter）：1 ${from} ≈ ${one} ${to}。${amount === 1 ? '' : `${amount} ${from} ≈ ${converted} ${to}。`}精细换算去 /currency。`,
-    navigate: { type: 'navigate', path: '/currency', label: '打开汇率工具' },
+    answer: `参考价（Frankfurter）：1 ${from} ≈ ${one} ${to}。${amount === 1 ? '' : `${amount} ${from} ≈ ${converted} ${to}。`}精细换算去 /tools。`,
+    navigate: { type: 'navigate', path: '/tools', label: '打开汇率工具' },
     suggestions: [
       { label: '欧元兑人民币', question: '1 欧元大约兑多少人民币？' },
       { label: '北京天气', question: '北京现在天气怎么样？' },
@@ -241,8 +241,8 @@ async function fetchPoem(): Promise<AskToolResult> {
   return {
     id: 'poem',
     facts,
-    answer: meta ? `「${content}」——${meta}。更多在 /fun。` : `「${content}」。更多在 /fun。`,
-    navigate: { type: 'navigate', path: '/fun', label: '打开玩乐' },
+    answer: meta ? `「${content}」——${meta}。首页有今日诗史。` : `「${content}」。首页有今日诗史。`,
+    navigate: { type: 'navigate', path: '/', label: '回首页' },
     suggestions: [
       { label: '再来一句', question: '再给我一句诗词。' },
       { label: '上海天气', question: '上海现在天气怎么样？' },
@@ -266,8 +266,8 @@ function fetchClock(): AskToolResult {
   return {
     id: 'clock',
     facts: `Asia/Shanghai 当前：${stamp}`,
-    answer: `上海时区现在是 ${stamp}。世界时钟在 /time。`,
-    navigate: { type: 'navigate', path: '/time', label: '打开时间工具' },
+    answer: `上海时区现在是 ${stamp}。世界时钟在 /tools。`,
+    navigate: { type: 'navigate', path: '/tools', label: '打开时间工具' },
     suggestions: [
       { label: '北京天气', question: '北京现在天气怎么样？' },
       { label: '美元汇率', question: '1 美元大约兑多少人民币？' },
@@ -288,15 +288,15 @@ export async function runAskTool(question: string): Promise<AskToolResult | null
   } catch {
     const fallbackNav: Record<ToolKind, AskToolAction> = {
       weather: { type: 'navigate', path: '/fun', label: '打开玩乐天气' },
-      fx: { type: 'navigate', path: '/currency', label: '打开汇率工具' },
-      poem: { type: 'navigate', path: '/fun', label: '打开玩乐' },
-      clock: { type: 'navigate', path: '/time', label: '打开时间工具' },
+      fx: { type: 'navigate', path: '/tools', label: '打开汇率工具' },
+      poem: { type: 'navigate', path: '/', label: '回首页' },
+      clock: { type: 'navigate', path: '/tools', label: '打开时间工具' },
     }
     const soft: Record<ToolKind, string> = {
       weather: '这会儿天气接口没跟上。可以到 /fun 看玩乐页的天气卡片。',
-      fx: '这会儿汇率接口没跟上。可以到 /currency 手动换算。',
-      poem: '这会儿诗词接口没跟上。可以到 /fun 再试今日诗词。',
-      clock: '时间工具在 /time，也可以看设备本地时钟。',
+      fx: '这会儿汇率接口没跟上。可以到 /tools 手动换算。',
+      poem: '这会儿诗词接口没跟上。可以到首页再看今日诗。',
+      clock: '时间工具在 /tools，也可以看设备本地时钟。',
     }
     return {
       id: kind,

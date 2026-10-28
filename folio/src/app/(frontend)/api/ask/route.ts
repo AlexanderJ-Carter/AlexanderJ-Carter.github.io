@@ -3,7 +3,10 @@ import path from 'node:path'
 
 import { NextResponse } from 'next/server'
 
+import { inferFleetHint } from '@/utilities/askFleet'
 import { runAskTool, type AskToolResult } from '@/utilities/askTools'
+import { omniChat } from '@/utilities/omniChat'
+import { getRequestUser } from '@/utilities/requestUser'
 
 export const runtime = 'nodejs'
 
@@ -43,16 +46,17 @@ const EXTRA_ALLOWED_PATHS = new Set([
   '/security/policy',
   '/terms',
   '/privacy',
-  '/currency',
-  '/time',
-  '/units',
-  '/qr',
   '/fun',
   '/tools',
+  '/agents',
+  '/status',
   '/awareness',
+  '/network',
+  '/updates',
 ])
 
-const RATE_LIMIT_MAX = 20
+const RATE_ANON = 20
+const RATE_AUTH = 80
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
 const rateBuckets = new Map<string, number[]>()
 
@@ -97,16 +101,16 @@ function clientIp(request: Request): string {
   return 'unknown'
 }
 
-function takeRateSlot(ip: string): boolean {
+function takeRateSlot(key: string, max: number): boolean {
   const now = Date.now()
-  const prev = rateBuckets.get(ip) || []
+  const prev = rateBuckets.get(key) || []
   const recent = prev.filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
-  if (recent.length >= RATE_LIMIT_MAX) {
-    rateBuckets.set(ip, recent)
+  if (recent.length >= max) {
+    rateBuckets.set(key, recent)
     return false
   }
   recent.push(now)
-  rateBuckets.set(ip, recent)
+  rateBuckets.set(key, recent)
   return true
 }
 
@@ -181,11 +185,18 @@ function inferNavigate(text: string, allow: Set<string>): AskAction | null {
     [/画廊|看图|照片|gallery/i, '/gallery', '去画廊'],
     [/写作|文章|posts|blog/i, '/posts', '去写作'],
     [/研究|论文|research/i, '/research', '去研究'],
+    [/项目|projects/i, '/projects', '去项目'],
     [/玩乐|番茄|电台|好玩/i, '/fun', '去玩乐'],
+    [/暗房助手|曝光建议|studio/i, '/tools', '去暗房助手'],
+    [/agent|mcp|skills/i, '/agents', '去 Agent'],
+    [/状态|探活|uptime|health/i, '/status', '看状态'],
+    [/站群|地图|network|elsewhere/i, '/network', '去站群地图'],
+    [/更新|changelog|发展史/i, '/updates', '看更新'],
     [/awareness|phishdrill/i, '/awareness', '打开该页'],
-    [/工具(?!箱)|tools/i, '/tools', '去工具'],
+    [/工具(?!箱)|换算|汇率|二维码|世界时间|tools/i, '/tools', '去工具'],
     [/订阅页|\/subscribe/i, '/subscribe', '打开订阅页'],
     [/联系|留言|contact/i, '/contact', '去联系'],
+    [/关于|履历|about/i, '/about', '去关于'],
     [/隐私|cookie/i, '/privacy', '看隐私'],
   ]
   for (const [re, path, label] of pairs) {
@@ -255,6 +266,18 @@ function fallbackSuggestions(kb: Kb, question: string, answer = ''): Suggestion[
   }
   if (/几点|时间|clock/i.test(hay)) {
     out.push({ label: '时间工具', question: '世界时钟工具在哪？' })
+  }
+  if (/站群|地图|mycook|flight|netq|yearly|cook/i.test(hay)) {
+    out.push(
+      { label: '站群地图', question: '站群地图怎么分区？' },
+      { label: '服务状态', question: '现在各站通不通？' },
+    )
+  }
+  if (/agent|mcp|暗房助手|问站/i.test(hay)) {
+    out.push(
+      { label: 'Agent 入口', question: 'Agent 入口页有什么？' },
+      { label: '暗房助手', question: '暗房助手怎么用？' },
+    )
   }
 
   if (out.length >= 4) return out.slice(0, 4)
@@ -452,11 +475,6 @@ async function callOmni(
   history: ChatMsg[],
   tool: AskToolResult | null,
 ): Promise<OmniPayload | null> {
-  const base = process.env.OMNI_URL?.replace(/\/$/, '')
-  const key = process.env.OMNI_KEY
-  const model = process.env.OMNI_MODEL
-  if (!base || !key || !model) return null
-
   const context = buildContext(kb)
   const pathList = [...allowedPaths(kb)].sort().join(', ')
 
@@ -465,11 +483,11 @@ async function callOmni(
     '输出要求（很重要）：',
     '1) 只输出一个 JSON 对象，不要 markdown 围栏或其它文字。',
     '2) 字段顺序固定：先 answer，再 suggestions，再 actions——answer 必须完整写完。',
-    '3) answer：与用户同语言，2～4 句，完整收尾；可含站内路径如 /subscribe、/fun。',
-    '4) 若有工具实况：必须据此作答（天气/汇率/诗词/时间），并提示可去对应玩具页细看；不可发明气温或汇率。',
+    '3) answer：与用户同语言，2～4 句，完整收尾；可含站内路径如 /subscribe、/fun、/agents。',
+    '4) 若有工具实况：必须据此作答（天气/汇率/诗词/时间），并提示可去对应页细看；不可发明气温或汇率。',
     '5) suggestions：最多 2 条，必须贴合本轮话题（禁止随机栏目）；label≤8字；question 一句短问。',
-    '6) actions：订阅类用 subscribe|unsubscribe|subscribe_status；跳转用 navigate 且 path 在允许列表。工具问答请给对应 navigate（/fun /currency /time 等）。',
-    '7) 不谈后台、密钥、/admin、未公开漏洞。answer 写完再用短 suggestions，宁缺勿截。',
+    '6) actions：订阅类用 subscribe|unsubscribe|subscribe_status；跳转用 navigate 且 path 在允许列表。工具→/tools，玩乐天气→/fun，Agent→/agents，状态→/status，站群→/network。',
+    '7) 不谈后台、密钥、/admin、未公开漏洞、Omni 内网地址。answer 写完再用短 suggestions，宁缺勿截。',
     '',
     'JSON 形状：',
     '{"answer":"…","suggestions":[{"label":"…","question":"…"}],"actions":[{"type":"…","path":"/仅navigate","label":"…"}]}',
@@ -494,32 +512,14 @@ async function callOmni(
   }
   messages.push({ role: 'user', content: question })
 
-  try {
-    const res = await fetch(`${base}/v1/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${key}`,
-      },
-      body: JSON.stringify({
-        model,
-        temperature: 0.3,
-        max_tokens: 1600,
-        messages,
-      }),
-      signal: AbortSignal.timeout(25000),
-    })
-
-    if (!res.ok) return null
-    const data = (await res.json()) as {
-      choices?: { message?: { content?: string }; finish_reason?: string }[]
-    }
-    const content = data.choices?.[0]?.message?.content?.trim()
-    if (!content) return null
-    return parseOmniContent(content, kb, question, tool)
-  } catch {
-    return null
-  }
+  const out = await omniChat({
+    messages,
+    temperature: 0.3,
+    maxTokens: 1600,
+    timeoutMs: 25000,
+  })
+  if (!out) return null
+  return parseOmniContent(out.content, kb, question, tool)
 }
 
 export async function OPTIONS(request: Request) {
@@ -551,7 +551,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Question is required' }, { status: 400, headers })
   }
 
-  if (!takeRateSlot(clientIp(request))) {
+  const user = await getRequestUser(request)
+  const rateKey = user ? `user:${user.email}` : `ip:${clientIp(request)}`
+  if (!takeRateSlot(rateKey, user ? RATE_AUTH : RATE_ANON)) {
     return NextResponse.json(
       { error: 'Too many questions. Try again later.', answer: undefined },
       { status: 429, headers },
@@ -573,6 +575,22 @@ export async function POST(request: Request) {
         actions: isSafePath(tool.navigate.path, allow) ? [tool.navigate] : [],
         mode: 'tool',
         tool: tool.id,
+      },
+      { headers },
+    )
+  }
+
+  // 站群 / Agent / 状态等确定性导流，不烧 Omni
+  const fleet = inferFleetHint(question)
+  if (fleet) {
+    const actions: AskAction[] =
+      fleet.navigate && isSafePath(fleet.navigate.path, allow) ? [fleet.navigate] : []
+    return NextResponse.json(
+      {
+        answer: fleet.answer,
+        suggestions: fleet.suggestions,
+        actions,
+        mode: 'fleet',
       },
       { headers },
     )

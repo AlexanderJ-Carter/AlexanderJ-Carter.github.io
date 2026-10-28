@@ -1,6 +1,6 @@
 {
   "site": "alexander.xin",
-  "updated": "2026-10-27",
+  "updated": "2026-10-28",
   "here": [
     { "path": "/", "title": "首页" },
     { "path": "/gallery", "title": "画廊" },
@@ -10,6 +10,8 @@
     { "path": "/network", "title": "站群地图" },
     { "path": "/tools", "title": "工具" },
     { "path": "/fun", "title": "玩乐" },
+    { "path": "/agents", "title": "Agent" },
+    { "path": "/status", "title": "状态" },
     { "path": "/about", "title": "关于" },
     { "path": "/contact", "title": "联系" },
     { "path": "/subscribe", "title": "订阅" },

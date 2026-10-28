@@ -5,10 +5,11 @@ import { getFeatures } from '@/instance'
 export function getAtlasZones(): AtlasZone[] {
   const features = getFeatures()
   const useNodes = [
-    { href: '/tools', label: '工具', note: '时间 · 换算 · QR' },
+    { href: '/tools', label: '工具', note: '时间 · 换算 · QR · 助手' },
     ...(features.fun
-      ? [{ href: '/fun', label: '玩乐', note: '天气 · 诗词 · 暗房玩具' }]
+      ? [{ href: '/fun', label: '玩乐', note: '一帧 · 曝光 · 电台 · 节奏' }]
       : []),
+    { href: '/agents', label: 'Agent', note: '问站 · MCP · Skills' },
     { href: '/projects', label: '项目', note: '生活向构建' },
   ]
   const knowNodes = [
@@ -18,6 +19,7 @@ export function getAtlasZones(): AtlasZone[] {
       ? [{ href: '/subscribe', label: '订阅', note: '低频通讯' }]
       : []),
     { href: '/updates', label: '更新', note: '近况与沿革' },
+    { href: '/status', label: '状态', note: '公开探活' },
   ]
 
   return [

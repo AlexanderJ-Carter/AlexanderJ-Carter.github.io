@@ -53,7 +53,7 @@ export const defaultInstance: FolioInstance = {
   },
 }
 
-/** 模板默认站内链接（页脚 / 地图共用；实例 `nav` 可整表覆盖） */
+/** 模板默认站内链接（页脚共用；实例 `nav` 可整表覆盖） */
 export const defaultSiteNav: InstanceNavItem[] = [
   { label: '画廊', href: '/gallery' },
   { label: '写作', href: '/posts' },
@@ -61,9 +61,25 @@ export const defaultSiteNav: InstanceNavItem[] = [
   { label: '项目', href: '/projects' },
   { label: '工具', href: '/tools' },
   { label: '玩乐', href: '/fun' },
+  { label: 'Agent', href: '/agents' },
   { label: '关于', href: '/about' },
   { label: '联系', href: '/contact' },
   { label: '订阅', href: '/subscribe' },
   { label: '更新', href: '/updates' },
   { label: '地图', href: '/network' },
+  { label: '状态', href: '/status' },
+]
+
+/** 顶栏回退导航（比页脚更短；CMS header 为空时使用） */
+export const defaultHeaderNav: InstanceNavItem[] = [
+  { label: '画廊', href: '/gallery' },
+  { label: '写作', href: '/posts' },
+  { label: '工具', href: '/tools' },
+  { label: '玩乐', href: '/fun' },
+  { label: '研究', href: '/research' },
+  { label: '项目', href: '/projects' },
+  { label: '地图', href: '/network' },
+  { label: '关于', href: '/about' },
+  { label: '联系', href: '/contact' },
+  { label: '订阅', href: '/subscribe' },
 ]

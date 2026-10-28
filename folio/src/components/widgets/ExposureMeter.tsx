@@ -24,7 +24,7 @@ function formatMeter(now: Date) {
 
 export function ExposureMeter({
   variant = 'ink',
-  href = '/time',
+  href = '/tools?t=time',
   className = '',
 }: {
   variant?: Variant

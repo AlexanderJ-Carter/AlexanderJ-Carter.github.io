@@ -12,6 +12,13 @@ export type SiteUpdate = {
  */
 export const siteUpdates: SiteUpdate[] = [
   {
+    date: '2026-10-28',
+    title: '工具整合与 Agent 面',
+    body: '/time 等并入 /tools；玩乐只留暗房；新增暗房助手、/agents 与 /status；Pocket ID 联邦登录可提权助手；问站经 OmniRoute 代理并导流站群。',
+    href: '/tools',
+    hrefLabel: '实用工具 →',
+  },
+  {
     date: '2026-09-25',
     title: '问站与站群地图',
     body: '取消独立帮助页；右下角对话导览，可简答天气/汇率等。新增 /network 分区总览；/updates 按静态→Astro→Folio 讲述发展史。',

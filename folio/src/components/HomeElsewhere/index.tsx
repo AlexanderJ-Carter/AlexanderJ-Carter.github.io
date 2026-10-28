@@ -8,9 +8,11 @@ import {
   groupElsewhereByKind,
 } from '@/instance/elsewhere'
 
+/** 首页站群摘要：每种最多 2 条，完整列表去 /network */
 export function HomeElsewhere() {
   const features = getFeatures()
   const groups = groupElsewhereByKind(getVisibleElsewhere())
+  const total = groups.reduce((n, g) => n + g.items.length, 0)
 
   if (groups.length === 0) return null
 
@@ -25,20 +27,28 @@ export function HomeElsewhere() {
           站群入口
         </h2>
         <p className="home-invite__lead">
-          Folio 是主站；菜谱、飞行记录、网络排查与实验台在子域。完整分区见
+          共 {total} 个站外入口。完整分区（看 / 用 / 识）见
           {features.network ? (
-            <Link href="/network" className="underline underline-offset-4 hover:text-foreground">
-              站群地图
-            </Link>
+            <>
+              {' '}
+              <Link href="/network" className="underline underline-offset-4 hover:text-foreground">
+                站群地图
+              </Link>
+            </>
           ) : (
-            '站群地图'
+            ' 站群地图'
           )}
+          ；公开探活见{' '}
+          <Link href="/status" className="underline underline-offset-4 hover:text-foreground">
+            /status
+          </Link>
           。
         </p>
 
         <div className="home-elsewhere__groups">
           {groups.map(({ kind, items }) => {
             const meta = elsewhereKindMeta[kind]
+            const preview = items.slice(0, 2)
             return (
               <div key={kind} className="home-elsewhere__group">
                 <header className="home-elsewhere__group-head">
@@ -49,7 +59,7 @@ export function HomeElsewhere() {
                   </div>
                 </header>
                 <ul className="home-invite__stops">
-                  {items.map((item) => (
+                  {preview.map((item) => (
                     <li key={item.href}>
                       <a
                         href={item.href}
@@ -66,6 +76,14 @@ export function HomeElsewhere() {
                     </li>
                   ))}
                 </ul>
+                {items.length > 2 && features.network ? (
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    另有 {items.length - 2} 个 →{' '}
+                    <Link href="/network" className="underline underline-offset-4">
+                      /network
+                    </Link>
+                  </p>
+                ) : null}
               </div>
             )
           })}

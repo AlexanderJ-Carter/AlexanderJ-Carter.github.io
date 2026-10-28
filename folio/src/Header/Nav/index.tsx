@@ -10,22 +10,9 @@ import { Menu, SearchIcon, X } from 'lucide-react'
 import { cn } from '@/utilities/ui'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
-/** CMS 为空时的回退导航（与 configure-nav.mjs 对齐） */
-const FALLBACK_NAV = [
-  { label: '画廊', url: '/gallery' },
-  { label: '写作', url: '/posts' },
-  { label: '玩乐', url: '/fun' },
-  { label: '工具', url: '/tools' },
-  { label: '研究', url: '/research' },
-  { label: '项目', url: '/projects' },
-  { label: '关于', url: '/about' },
-  { label: '联系', url: '/contact' },
-  { label: '订阅', url: '/subscribe' },
-] as const
-
 type NavItem = { label: string; url: string }
 
-function resolveNavItems(data: HeaderType): NavItem[] {
+function resolveNavItems(data: HeaderType, fallbackNav: NavItem[]): NavItem[] {
   const navItems = data?.navItems || []
   if (navItems.length > 0) {
     return navItems
@@ -45,16 +32,17 @@ function resolveNavItems(data: HeaderType): NavItem[] {
       })
       .filter((item): item is NavItem => item !== null)
   }
-  return FALLBACK_NAV.map((item) => ({ label: item.label, url: item.url }))
+  return fallbackNav
 }
 
-export const HeaderNav: React.FC<{ data: HeaderType; overHero?: boolean }> = ({
-  data,
-  overHero,
-}) => {
+export const HeaderNav: React.FC<{
+  data: HeaderType
+  fallbackNav: NavItem[]
+  overHero?: boolean
+}> = ({ data, fallbackNav, overHero }) => {
   const sheetId = useId()
   const [menuOpen, setMenuOpen] = useState(false)
-  const items = resolveNavItems(data)
+  const items = resolveNavItems(data, fallbackNav)
 
   const linkClass = cn(
     'site-nav-link px-2.5 py-1.5 md:px-2 md:py-1',
@@ -88,7 +76,7 @@ export const HeaderNav: React.FC<{ data: HeaderType; overHero?: boolean }> = ({
           ? data.navItems.map(({ link }, i) => (
               <CMSLink key={i} {...link} appearance="link" className={linkClass} />
             ))
-          : FALLBACK_NAV.map((item) => (
+          : fallbackNav.map((item) => (
               <Link key={item.url} href={item.url} className={linkClass}>
                 {item.label}
               </Link>

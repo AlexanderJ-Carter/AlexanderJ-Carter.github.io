@@ -22,16 +22,29 @@ type Msg = {
 type EmailIntent = 'subscribe' | 'unsubscribe' | 'subscribe_status'
 
 const SEED_SUGGESTIONS: Suggestion[] = [
-  { label: '画廊', question: '画廊在哪个页面？怎么看图？' },
+  { label: '工具', question: '实用工具页里有什么？' },
+  { label: '站群', question: '站群地图怎么分区？' },
   { label: '天气', question: '北京现在天气怎么样？' },
-  { label: '订阅', question: '怎么订阅本站更新？会不会经常发信？' },
-  { label: '工具', question: '站内有哪些实用工具？' },
+  { label: '状态', question: '现在各站通不通？' },
 ]
 
 function linkify(text: string): React.ReactNode[] {
-  const parts = text.split(/(\/[a-z0-9][\w/-]*)/gi)
+  const parts = text.split(/(https:\/\/[^\s，。；、）)\]]+|\/[a-z0-9][\w/?#&=%-]*)/gi)
   return parts.map((part, i) => {
-    if (/^\/[a-z0-9][\w/-]*$/i.test(part)) {
+    if (/^https:\/\/[^\s]+$/i.test(part)) {
+      return (
+        <a
+          key={i}
+          href={part}
+          className="site-assist__link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {part.replace(/^https:\/\//, '')}
+        </a>
+      )
+    }
+    if (/^\/[a-z0-9][\w/?#&=%-]*$/i.test(part)) {
       return (
         <Link key={i} href={part} className="site-assist__link">
           {part}
@@ -71,7 +84,7 @@ export function SiteAssistant() {
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: 'assistant',
-      text: '有事直接问，或点下面的预测问题。站点栏目、订阅、天气/汇率/诗词我都能简答；订阅相关会让你在面板里确认邮箱。',
+      text: '有事直接问。栏目导览、站群入口、天气/汇率/诗词、订阅都能简答；暗房助手与 Agent 说明见 /tools、/agents。',
     },
   ])
 

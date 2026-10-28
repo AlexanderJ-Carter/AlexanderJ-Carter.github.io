@@ -16,7 +16,6 @@ export default function ProjectsPage() {
     instance.projects?.intro ||
     '生活向小项目与站点工具。研究协作见研究页。'
   const items = instance.projects?.items || []
-  const research = instance.research.project
 
   return (
     <PageChrome
@@ -25,33 +24,19 @@ export default function ProjectsPage() {
       description={intro}
       related={[
         { href: '/research', label: '研究论文 →' },
+        { href: '/agents', label: 'Agent 入口 →' },
         { href: '/tools', label: '实用工具 →' },
         ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
       ]}
     >
       <div className="container max-w-3xl">
-        {research ? (
-          <div className="film-edge folio-section-tint mb-14 px-6 py-7 md:px-8 md:py-8">
-            <p className="folio-mark mb-2">Research</p>
-            <h2 className="mb-2 text-xl font-semibold tracking-tight">{research.title}</h2>
-            <p className="mb-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              {research.description}
-            </p>
-            <div className="flex flex-wrap gap-4 text-sm">
-              <a
-                className="underline underline-offset-4"
-                href={research.href}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {research.hrefLabel}
-              </a>
-              <Link className="underline underline-offset-4" href="/research">
-                全部研究 →
-              </Link>
-            </div>
-          </div>
-        ) : null}
+        <p className="mb-10 text-sm text-muted-foreground">
+          公开论文与研究协作见{' '}
+          <Link href="/research" className="underline underline-offset-4">
+            /research
+          </Link>
+          。
+        </p>
 
         {items.length === 0 ? (
           <p className="text-sm text-muted-foreground">

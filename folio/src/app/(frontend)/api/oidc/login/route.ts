@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
+
 import { publicOriginFromInstance } from '@/instance'
+import { safeOidcNextPath } from '@/lib/site'
 
 function requireEnv(name: string): string {
   const value = process.env[name]
@@ -36,6 +38,7 @@ export async function GET(request: Request) {
     const issuer = requireEnv('OIDC_ISSUER').replace(/\/$/, '')
     const clientId = requireEnv('OIDC_CLIENT_ID')
     const redirectUri = requireEnv('OIDC_REDIRECT_URI')
+    const nextPath = safeOidcNextPath(new URL(request.url).searchParams.get('next'))
 
     const discoveryRes = await fetch(`${issuer}/.well-known/openid-configuration`, {
       next: { revalidate: 3600 },
@@ -68,6 +71,13 @@ export async function GET(request: Request) {
       maxAge: 600,
     })
     response.cookies.set('folio_oidc_verifier', verifier, {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure,
+      path: '/',
+      maxAge: 600,
+    })
+    response.cookies.set('folio_oidc_next', nextPath, {
       httpOnly: true,
       sameSite: 'lax',
       secure,

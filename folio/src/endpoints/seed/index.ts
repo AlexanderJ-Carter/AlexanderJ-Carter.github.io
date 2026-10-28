@@ -232,34 +232,14 @@ export const seed = async ({
       slug: 'header',
       data: {
         navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: '画廊',
-              url: '/gallery',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: '玩乐',
-              url: '/fun',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: '工具',
-              url: '/tools',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: '关于',
-              url: '/about',
-            },
-          },
+          { link: { type: 'custom', label: '画廊', url: '/gallery' } },
+          { link: { type: 'custom', label: '写作', url: '/posts' } },
+          { link: { type: 'custom', label: '工具', url: '/tools' } },
+          { link: { type: 'custom', label: '玩乐', url: '/fun' } },
+          { link: { type: 'custom', label: '研究', url: '/research' } },
+          { link: { type: 'custom', label: '项目', url: '/projects' } },
+          { link: { type: 'custom', label: '地图', url: '/network' } },
+          { link: { type: 'custom', label: '关于', url: '/about' } },
           {
             link: {
               type: 'reference',
@@ -270,6 +250,7 @@ export const seed = async ({
               },
             },
           },
+          { link: { type: 'custom', label: '订阅', url: '/subscribe' } },
         ],
       },
     }),
@@ -277,34 +258,11 @@ export const seed = async ({
       slug: 'footer',
       data: {
         navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: '画廊',
-              url: '/gallery',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: '玩乐',
-              url: '/fun',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: '工具',
-              url: '/tools',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: '后台',
-              url: '/admin',
-            },
-          },
+          { link: { type: 'custom', label: '工具', url: '/tools' } },
+          { link: { type: 'custom', label: 'Agent', url: '/agents' } },
+          { link: { type: 'custom', label: '地图', url: '/network' } },
+          { link: { type: 'custom', label: '状态', url: '/status' } },
+          { link: { type: 'custom', label: '后台', url: '/admin' } },
           {
             link: {
               type: 'custom',

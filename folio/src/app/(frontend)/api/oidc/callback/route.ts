@@ -10,6 +10,7 @@ import {
 import { addSessionToUser } from 'payload/shared'
 import config from '@payload-config'
 import { publicOriginFromInstance } from '@/instance'
+import { safeOidcNextPath } from '@/lib/site'
 
 type TokenSet = {
   access_token?: string
@@ -222,7 +223,8 @@ export async function GET(request: Request) {
       returnCookieAsObject: true,
     })
 
-    const response = siteRedirect('/admin')
+    const nextPath = safeOidcNextPath(jar.get('folio_oidc_next')?.value)
+    const response = siteRedirect(nextPath)
     const secure = publicOrigin().startsWith('https://')
     if (cookie?.name && cookie.value) {
       response.cookies.set(cookie.name, cookie.value, {
@@ -238,6 +240,7 @@ export async function GET(request: Request) {
     }
     response.cookies.set('folio_oidc_state', '', { path: '/', maxAge: 0, secure })
     response.cookies.set('folio_oidc_verifier', '', { path: '/', maxAge: 0, secure })
+    response.cookies.set('folio_oidc_next', '', { path: '/', maxAge: 0, secure })
     return response
   } catch (err) {
     logOidc('exception', err)

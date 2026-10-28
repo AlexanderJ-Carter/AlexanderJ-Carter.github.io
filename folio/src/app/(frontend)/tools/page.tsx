@@ -1,33 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 import { PageChrome } from '@/components/PageChrome'
+import { ToolsHub } from '@/components/tools/ToolsHub'
 import { getFeatures, getVisibleElsewhere } from '@/instance'
 
 export const metadata: Metadata = {
   title: '实用工具',
-  description: '轻量、本地优先、无需登录。把常用能力收在这里。',
+  description: '时间、换算、汇率、QR、抽屉小工具与暗房助手——轻量、本地优先。',
 }
 
 export default function ToolsPage() {
   const features = getFeatures()
-  const onSite = [
-    { href: '/time', title: '世界时间', desc: '多时区对照与复制', mark: 'Time' },
-    { href: '/units', title: '单位换算', desc: '温度、长度、重量', mark: 'Units' },
-    { href: '/currency', title: '汇率', desc: '主要货币换算参考', mark: 'FX' },
-    { href: '/qr', title: 'QR 生成', desc: '链接转二维码', mark: 'QR' },
-    ...(features.fun
-      ? [
-          {
-            href: '/fun',
-            title: '玩乐',
-            desc: '暗房玩具柜：一帧、曝光、电台与计时',
-            mark: 'Play',
-          },
-        ]
-      : []),
-    { href: '/gallery', title: '画廊', desc: '联系单观片', mark: 'Film' },
-  ]
   const external = getVisibleElsewhere().filter(
     (e) => e.kind === 'tool' || (e.kind === 'infra' && /tools/i.test(e.name)),
   )
@@ -36,33 +21,32 @@ export default function ToolsPage() {
     <PageChrome
       mark="Tools"
       title="实用工具"
-      description="轻量、本地优先、无需登录。把常用能力收在这里。"
+      description="时间、换算、汇率、QR、抽屉小工具，以及暗房助手。"
       related={[
         ...(features.fun ? [{ href: '/fun', label: '玩乐柜 →' }] : []),
+        { href: '/agents', label: 'Agent 入口 →' },
         ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
-        { href: '/projects', label: '项目 →' },
       ]}
     >
       <section className="container mb-16">
-        <h2 className="folio-mark mb-5">站内</h2>
-        <ul className="tools-mosaic">
-          {onSite.map((item) => (
-            <li key={item.href}>
-              <Link href={item.href} className="tools-tile">
-                <span className="tools-tile__mark">{item.mark}</span>
-                <span className="tools-tile__title">{item.title}</span>
-                <span className="tools-tile__desc">{item.desc}</span>
-                <span className="tools-tile__path" aria-hidden>
-                  {item.href}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <Suspense fallback={<p className="text-sm text-muted-foreground">加载工具…</p>}>
+          <ToolsHub />
+        </Suspense>
+      </section>
+
+      <section className="container mb-16">
+        <h2 className="folio-mark mb-5">给 AI / Agent</h2>
+        <p className="mb-4 max-w-2xl text-sm text-muted-foreground">
+          问站与暗房助手经本站代理 OmniRoute；菜谱站另有 MCP / Skills。说明见{' '}
+          <Link href="/agents" className="underline underline-offset-4">
+            /agents
+          </Link>
+          。
+        </p>
       </section>
 
       {external.length > 0 ? (
-        <section className="container">
+        <section className="container" id="away">
           <h2 className="folio-mark mb-5">站外</h2>
           <ul className="tools-external">
             {external.map((item) => (
@@ -84,9 +68,6 @@ export default function ToolsPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-xs text-muted-foreground">
-            站内工具尽量在浏览器本地完成计算；外部站点来自实例 elsewhere，打开新标签访问。
-          </p>
         </section>
       ) : null}
     </PageChrome>

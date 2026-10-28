@@ -5,25 +5,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import { safeVerifyNextPath, turnstileSiteKey, VERIFY_COOKIE, VERIFY_COOKIE_MAX_AGE } from '@/lib/site'
 
-declare global {
-  interface Window {
-    turnstile?: {
-      render: (
-        el: HTMLElement,
-        opts: {
-          sitekey: string
-          theme?: string
-          callback?: (token: string) => void
-          'error-callback'?: () => boolean | void
-          'expired-callback'?: () => void
-        },
-      ) => string
-      remove: (id: string) => void
-    }
-    onTurnstileLoad?: () => void
-  }
-}
-
 function setClientVerifyCookie() {
   const secure = typeof window !== 'undefined' && window.location.protocol === 'https:' ? '; Secure' : ''
   document.cookie = `${VERIFY_COOKIE}=1; path=/; max-age=${VERIFY_COOKIE_MAX_AGE}; SameSite=Lax${secure}`

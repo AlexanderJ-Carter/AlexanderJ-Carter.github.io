@@ -42,3 +42,31 @@ export function safeVerifyNextPath(raw: string | null | undefined): string {
   if (bare === '/verify') return fallback
   return path
 }
+
+const OIDC_NEXT_ALLOW = [
+  '/admin',
+  '/tools',
+  '/agents',
+  '/status',
+  '/network',
+  '/gallery',
+  '/posts',
+  '/research',
+  '/projects',
+  '/updates',
+  '/fun',
+] as const
+
+/** Pocket ID 登录后回跳；仅站内公开面与后台。 */
+export function safeOidcNextPath(raw: string | null | undefined): string {
+  const fallback = '/admin'
+  if (!raw) return fallback
+  const path = raw.trim()
+  if (!path.startsWith('/') || path.startsWith('//') || path.includes('\\')) return fallback
+  if (path.includes('://')) return fallback
+  const bare = (path.split('?')[0] || '/').replace(/\/$/, '') || '/'
+  if (bare === '/api' || bare.startsWith('/api/')) return fallback
+  if (bare === '/verify' || bare.startsWith('/admin/login')) return fallback
+  if (OIDC_NEXT_ALLOW.some((p) => bare === p || bare.startsWith(`${p}/`))) return path
+  return fallback
+}

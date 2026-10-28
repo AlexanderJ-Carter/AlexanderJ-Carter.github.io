@@ -32,54 +32,17 @@ const getPagesSitemap = unstable_cache(
     const dateFallback = new Date().toISOString()
 
     const defaultSitemap = [
-      {
-        loc: `${SITE_URL}/search`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/gallery`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/fun`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/tools`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/time`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/units`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/currency`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/qr`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/research`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/projects`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/subscribe`,
-        lastmod: dateFallback,
-      },
-      {
-        loc: `${SITE_URL}/updates`,
-        lastmod: dateFallback,
-      },
+      { loc: `${SITE_URL}/search`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/gallery`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/fun`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/tools`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/agents`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/status`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/network`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/research`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/projects`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/subscribe`, lastmod: dateFallback },
+      { loc: `${SITE_URL}/updates`, lastmod: dateFallback },
     ]
 
     const gated = new Set(['about', 'contact'])
