@@ -25,11 +25,16 @@ export function NavIdlePrefetch() {
     let timeoutId: ReturnType<typeof setTimeout> | undefined
 
     const run = () => {
-      if (cancelled) return
+      if (cancelled || document.visibilityState !== 'visible') return
       for (const href of ROUTES) {
         router.prefetch(href)
       }
     }
+
+    const onVisibility = () => {
+      if (document.visibilityState === 'hidden') cancelled = true
+    }
+    document.addEventListener('visibilitychange', onVisibility)
 
     const ric = window.requestIdleCallback
     if (typeof ric === 'function') {
@@ -39,6 +44,7 @@ export function NavIdlePrefetch() {
     }
 
     return () => {
+      document.removeEventListener('visibilitychange', onVisibility)
       cancelled = true
       if (idleId != null && typeof window.cancelIdleCallback === 'function') {
         window.cancelIdleCallback(idleId)
