@@ -22,9 +22,9 @@ export default function AgentsPage() {
       title="Agent 与身份"
       description="站群用 Pocket ID 做联邦登录；模型流量仍经各站代理 OmniRoute，不公网裸开。"
       related={[
-        { href: '/tools?t=ai', label: '暗房助手 →' },
-        { href: '/status', label: '服务状态 →' },
-        ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
+        { href: '/tools?t=ai', label: '暗房助手' },
+        { href: '/status', label: '服务状态' },
+        ...(features.network ? [{ href: '/network', label: '站群地图' }] : []),
       ]}
     >
       <div className="container max-w-3xl space-y-12">
@@ -65,19 +65,19 @@ export default function AgentsPage() {
             </li>
             <li>
               <strong className="text-foreground">暗房助手</strong>：
-              <Link href="/tools?t=ai" className="underline underline-offset-4">
-                /tools#ai
+              <Link href="/tools?t=ai" className="region-link mx-1">
+                打开暗房助手
               </Link>
               ；匿名需 Turnstile（约 10/h），登录后约 60/h。
             </li>
             <li>
               机器可读：
-              <Link href="/agents.json" className="mx-1 underline underline-offset-4">
-                /agents.json
+              <Link href="/agents.json" className="region-link mx-1">
+                Agent 清单
               </Link>
               ·
-              <Link href="/api/status" className="mx-1 underline underline-offset-4">
-                /api/status
+              <Link href="/api/status" className="region-link mx-1">
+                状态 JSON
               </Link>
             </li>
           </ul>
@@ -128,7 +128,7 @@ export default function AgentsPage() {
                   rel="noopener noreferrer"
                   className="underline underline-offset-4"
                 >
-                  {p.name} →
+                  {p.name}
                 </a>
               </p>
             ))}

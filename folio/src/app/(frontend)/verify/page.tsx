@@ -22,7 +22,7 @@ export default function VerifyPage() {
           正式环境仍会要求 Turnstile。需要强制测试时可设 NEXT_PUBLIC_FORCE_VERIFY=true。
         </p>
         <a href="/about" className="underline underline-offset-4">
-          继续前往关于页 →
+          继续前往关于页
         </a>
       </div>
     )

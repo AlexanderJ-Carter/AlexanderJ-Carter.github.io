@@ -23,10 +23,10 @@ export default function ProjectsPage() {
       title="项目"
       description={intro}
       related={[
-        { href: '/research', label: '研究论文 →' },
-        { href: '/agents', label: 'Agent 入口 →' },
-        { href: '/tools', label: '实用工具 →' },
-        ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
+        { href: '/research', label: '研究论文' },
+        { href: '/agents', label: 'Agent 入口' },
+        { href: '/tools', label: '实用工具' },
+        ...(features.network ? [{ href: '/network', label: '站群地图' }] : []),
       ]}
     >
       <div className="container max-w-3xl">
@@ -68,7 +68,7 @@ export default function ProjectsPage() {
                       rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                       target={item.href.startsWith('http') ? '_blank' : undefined}
                     >
-                      {item.hrefLabel || '源码 →'}
+                      {(item.hrefLabel || '源码').replace(/\s*→\s*$/u, '')}
                     </a>
                   ) : null}
                   {item.demoHref ? (
@@ -76,7 +76,7 @@ export default function ProjectsPage() {
                       className="font-medium text-primary underline decoration-primary/30 underline-offset-[0.2em] hover:decoration-primary"
                       href={item.demoHref}
                     >
-                      {item.demoLabel || '打开 →'}
+                      {(item.demoLabel || '打开').replace(/\s*→\s*$/u, '')}
                     </Link>
                   ) : null}
                 </div>

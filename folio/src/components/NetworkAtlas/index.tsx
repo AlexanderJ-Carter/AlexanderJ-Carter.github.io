@@ -127,18 +127,11 @@ function NodeLink({
     <>
       <span className="network-atlas__pin" aria-hidden />
       <span className="network-atlas__node-main">
-        <span className="network-atlas__node-label">
-          {node.label}
-          {node.external ? (
-            <span className="network-atlas__ext" aria-hidden>
-              ↗
-            </span>
-          ) : null}
-        </span>
+        <span className="network-atlas__node-label">{node.label}</span>
         <span className="network-atlas__node-note">{node.note}</span>
       </span>
-      <span className="network-atlas__node-path">
-        {node.external ? hostOf(node.href) : node.href}
+      <span className="network-atlas__node-meta" aria-hidden>
+        {node.external ? hostOf(node.href) : '本站'}
       </span>
     </>
   )

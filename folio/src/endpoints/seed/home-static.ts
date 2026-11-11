@@ -1,10 +1,14 @@
 import type { RequiredDataFromCollectionSlug } from 'payload'
 
+/**
+ * Unseeded fallback homepage — high-impact composition without CMS media.
+ * HighImpactHero falls back to a public gallery still when `media` is empty.
+ */
 export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
   slug: 'home',
   _status: 'published',
   hero: {
-    type: 'lowImpact',
+    type: 'highImpact',
     richText: {
       root: {
         type: 'root',
@@ -32,35 +36,12 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
             type: 'paragraph',
             children: [
               {
-                type: 'link',
-                children: [
-                  {
-                    type: 'text',
-                    detail: 0,
-                    format: 0,
-                    mode: 'normal',
-                    style: '',
-                    text: '进入管理后台',
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                fields: {
-                  linkType: 'custom',
-                  newTab: false,
-                  url: '/admin',
-                },
-                format: '',
-                indent: 0,
-                version: 2,
-              },
-              {
                 type: 'text',
                 detail: 0,
                 format: 0,
                 mode: 'normal',
                 style: '',
-                text: ' 创建账号，再灌入示例。摄影与写作，改完就能读。',
+                text: '用镜头记录光线，用文字整理思绪。',
                 version: 1,
               },
             ],
@@ -77,9 +58,27 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
         version: 1,
       },
     },
+    links: [
+      {
+        link: {
+          type: 'custom',
+          appearance: 'default',
+          label: '进入画廊',
+          url: '/gallery',
+        },
+      },
+      {
+        link: {
+          type: 'custom',
+          appearance: 'outline',
+          label: '阅读写作',
+          url: '/posts',
+        },
+      },
+    ],
   },
   meta: {
-    description: '摄影与写作。文章在这里改完就能读。',
+    description: '摄影与写作。影像、研究与工具都在这里。',
     title: 'Alexander Carter',
   },
   title: '首页',

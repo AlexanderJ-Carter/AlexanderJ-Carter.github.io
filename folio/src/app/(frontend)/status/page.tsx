@@ -29,9 +29,9 @@ export default async function StatusPage() {
       title="服务状态"
       description="对公开 URL 做短超时探测。私用看板（Glance / Portainer）不在此页。"
       related={[
-        ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
-        { href: '/agents', label: 'Agent 入口 →' },
-        { href: '/updates', label: '更新 →' },
+        ...(features.network ? [{ href: '/network', label: '站群地图' }] : []),
+        { href: '/agents', label: 'Agent 入口' },
+        { href: '/updates', label: '更新' },
       ]}
     >
       <div className="container max-w-3xl">
@@ -76,13 +76,15 @@ export default async function StatusPage() {
           ))}
         </ul>
         <p className="mt-8 text-xs text-muted-foreground">
-          JSON：{' '}
-          <Link href="/api/status" className="underline underline-offset-4">
-            /api/status
+          机器可读：{' '}
+          <Link href="/api/status" className="region-link">
+            状态 JSON
           </Link>
-          ·{' '}
-          <Link href="/agents.json" className="underline underline-offset-4">
-            /agents.json
+          <span aria-hidden className="mx-2 opacity-40">
+            ·
+          </span>
+          <Link href="/agents.json" className="region-link">
+            Agent 清单
           </Link>
         </p>
       </div>

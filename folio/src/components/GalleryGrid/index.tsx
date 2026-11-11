@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import {
   galleryCategories,
@@ -27,29 +27,39 @@ export function GalleryGrid() {
     return c
   }, [])
 
+  useEffect(() => {
+    if (!active) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActive(null)
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [active])
+
   return (
     <>
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div className="flex flex-wrap gap-3 text-xs uppercase tracking-[0.14em] text-muted-foreground font-mono">
+      <div className="gallery-toolbar">
+        <div className="gallery-stats" aria-label="画廊统计">
           <span>
-            <strong className="text-foreground">{galleryItems.length}</strong> 帧
+            <strong>{galleryItems.length}</strong> 帧
           </span>
           <span>L {counts.landscape}</span>
           <span>N {counts.nature}</span>
           <span>F {counts.food}</span>
+          {filter !== 'all' ? <span>筛选 {items.length}</span> : null}
         </div>
-        <div className="flex flex-wrap gap-2" role="tablist" aria-label="画廊分类">
+        <div className="gallery-tabs" role="tablist" aria-label="画廊分类">
           {galleryCategories.map((cat) => (
             <button
               key={cat.id}
               type="button"
               role="tab"
               aria-selected={filter === cat.id}
-              className={`px-3 py-1.5 text-xs tracking-[0.12em] uppercase border transition-colors ${
-                filter === cat.id
-                  ? 'border-foreground bg-foreground text-background'
-                  : 'border-border text-muted-foreground hover:text-foreground'
-              }`}
+              className="gallery-tab"
               onClick={() => setFilter(cat.id)}
             >
               {cat.label}
@@ -58,7 +68,7 @@ export function GalleryGrid() {
         </div>
       </div>
 
-      <ul className="contact-sheet grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 list-none p-0 m-0">
+      <ul className="gallery-masonry">
         {items.map((item, i) => (
           <li key={item.id}>
             <button
@@ -74,54 +84,57 @@ export function GalleryGrid() {
                 src={item.src}
                 alt={item.title}
                 width={800}
-                height={800}
-                className="aspect-square h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                quality={75}
+                height={1000}
+                className="h-auto w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                sizes="(max-width: 768px) 50vw, (max-width: 1100px) 33vw, 25vw"
+                quality={78}
                 priority={i < 2}
-                loading={i < 2 ? undefined : i < 4 ? 'eager' : 'lazy'}
+                loading={i < 2 ? undefined : i < 6 ? 'eager' : 'lazy'}
                 decoding="async"
               />
               <div className="contact-sheet__meta">
                 <p className="text-[0.65rem] uppercase tracking-[0.16em] text-white/70">
-                  {item.category}
+                  {galleryCategories.find((c) => c.id === item.category)?.label || item.category}
                 </p>
-                <p className="text-sm font-medium text-white">{item.title}</p>
+                <p className="text-sm font-medium text-white md:text-[0.95rem]">{item.title}</p>
               </div>
             </button>
           </li>
         ))}
       </ul>
 
-      {active && (
+      {active ? (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4"
+          className="gallery-lightbox"
           role="dialog"
           aria-modal="true"
           aria-label={active.title}
           onClick={() => setActive(null)}
-          onKeyDown={(e) => {
-            if (e.key === 'Escape') setActive(null)
-          }}
         >
           <button
             type="button"
-            className="absolute top-4 right-4 text-white/80 hover:text-white text-sm tracking-widest uppercase"
+            className="gallery-lightbox__close"
             onClick={() => setActive(null)}
           >
             关闭
           </button>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={active.src.replace('-md.webp', '-lg.webp')}
-            alt={active.title}
-            className="max-h-[90vh] max-w-full object-contain"
-            decoding="async"
-            fetchPriority="high"
-            onClick={(e) => e.stopPropagation()}
-          />
+          <div className="gallery-lightbox__frame" onClick={(e) => e.stopPropagation()}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={active.src.replace('-md.webp', '-lg.webp')}
+              alt={active.title}
+              decoding="async"
+              fetchPriority="high"
+            />
+          </div>
+          <div className="gallery-lightbox__meta">
+            <p>
+              {galleryCategories.find((c) => c.id === active.category)?.label || active.category}
+            </p>
+            <p>{active.title}</p>
+          </div>
         </div>
-      )}
+      ) : null}
     </>
   )
 }

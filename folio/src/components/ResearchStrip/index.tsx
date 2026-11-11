@@ -10,21 +10,16 @@ export function ResearchStrip() {
 
   return (
     <section className="container py-2" aria-labelledby="research-heading">
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div className="max-w-2xl">
+      <div className="region-head region-head--row">
+        <div>
           <p className="folio-mark mb-2">研究</p>
-          <h2 id="research-heading" className="text-2xl md:text-3xl tracking-tight font-semibold">
+          <h2 id="research-heading" className="region-title">
             论文与研究
           </h2>
-          <p className="mt-2 text-muted-foreground text-sm md:text-base leading-relaxed">
-            {research.intro}
-          </p>
+          <p className="region-lead mt-2">{research.intro}</p>
         </div>
-        <Link
-          href="/research"
-          className="text-sm shrink-0 text-foreground/85 hover:text-primary transition-colors"
-        >
-          查看全部 →
+        <Link href="/research" className="region-link shrink-0">
+          查看全部
         </Link>
       </div>
 
@@ -42,7 +37,7 @@ export function ResearchStrip() {
               </span>
               <Link
                 href="/research"
-                className="text-base md:text-lg font-semibold leading-snug tracking-tight hover:text-primary transition-colors [font-family:var(--font-display),Syne,system-ui,sans-serif]"
+                className="text-base md:text-lg font-semibold leading-snug tracking-tight hover:text-primary transition-colors [font-family:var(--font-display),Outfit,system-ui,sans-serif]"
               >
                 {item.title}
               </Link>

@@ -21,9 +21,10 @@ export const Logo = (props: Props) => {
   return (
     <span
       className={clsx(
-        'text-[1.05rem] md:text-[1.15rem] font-semibold tracking-[-0.03em] leading-none [font-family:var(--font-display),Syne,system-ui,sans-serif]',
+        'site-logo text-[1.15rem] font-semibold leading-none tracking-[-0.04em] md:text-[1.25rem]',
         className,
       )}
+      style={{ fontFamily: 'var(--font-display), Outfit, system-ui, sans-serif' }}
     >
       {siteName}
     </span>

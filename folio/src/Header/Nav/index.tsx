@@ -1,16 +1,19 @@
 'use client'
 
-import React, { useCallback, useEffect, useId, useState } from 'react'
+import React, { useCallback, useEffect, useId, useMemo, useState } from 'react'
 
 import type { Header as HeaderType } from '@/payload-types'
 
-import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
 import { Menu, SearchIcon, X } from 'lucide-react'
 import { cn } from '@/utilities/ui'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 type NavItem = { label: string; url: string }
+
+const PRIMARY_ORDER = ['/gallery', '/posts', '/research', '/tools', '/projects', '/about'] as const
+
+const displayFont = { fontFamily: 'var(--font-display), Outfit, system-ui, sans-serif' } as const
 
 function resolveNavItems(data: HeaderType, fallbackNav: NavItem[]): NavItem[] {
   const navItems = data?.navItems || []
@@ -44,9 +47,24 @@ export const HeaderNav: React.FC<{
   const [menuOpen, setMenuOpen] = useState(false)
   const items = resolveNavItems(data, fallbackNav)
 
+  const primary = useMemo(() => {
+    const matched = PRIMARY_ORDER.map((href) => items.find((item) => item.url === href)).filter(
+      (item): item is NavItem => Boolean(item),
+    )
+    if (matched.length > 0) return matched
+    return items.slice(0, 5)
+  }, [items])
+
   const linkClass = cn(
-    'site-nav-link px-2.5 py-1.5 md:px-2 md:py-1',
+    'inline-flex h-9 shrink-0 items-center px-2 text-[0.9rem] font-medium tracking-[-0.01em] no-underline transition-colors',
     overHero ? 'text-white/85 hover:text-white' : 'text-foreground/75 hover:text-foreground',
+  )
+
+  const toolBtn = cn(
+    'inline-flex size-9 shrink-0 items-center justify-center rounded-md transition-colors',
+    overHero
+      ? 'text-white/85 hover:bg-white/12 hover:text-white'
+      : 'text-foreground/70 hover:bg-muted hover:text-foreground',
   )
 
   const closeMenu = useCallback(() => setMenuOpen(false), [])
@@ -64,105 +82,95 @@ export const HeaderNav: React.FC<{
     }
   }, [menuOpen, closeMenu])
 
-  const sheetLinkClass = 'site-nav-sheet__link'
-
   return (
-    <>
+    <div className="flex min-w-0 flex-1 items-center justify-end gap-1">
       <nav
-        className="hidden items-center gap-0.5 md:flex md:gap-1"
+        className="mr-1 flex min-w-0 max-w-full items-center gap-0.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         aria-label="主导航"
+        style={displayFont}
       >
-        {data?.navItems && data.navItems.length > 0
-          ? data.navItems.map(({ link }, i) => (
-              <CMSLink key={i} {...link} appearance="link" className={linkClass} />
-            ))
-          : fallbackNav.map((item) => (
-              <Link key={item.url} href={item.url} className={linkClass}>
-                {item.label}
-              </Link>
-            ))}
-        <Link
-          href="/search"
-          className={cn(
-            'site-nav-link ml-1 inline-flex items-center gap-1.5 px-2.5 py-1.5 md:px-2 md:py-1',
-            overHero ? 'text-white/85 hover:text-white' : 'text-foreground/75 hover:text-foreground',
-          )}
-        >
-          <SearchIcon className="size-3.5 opacity-80" aria-hidden />
-          <span className="sr-only md:not-sr-only">搜索</span>
-        </Link>
-        <ThemeSelector overHero={overHero} className="ml-0.5" />
+        {primary.map((item) => (
+          <Link key={item.url} href={item.url} className={linkClass}>
+            {item.label}
+          </Link>
+        ))}
       </nav>
 
-      <div className="flex items-center gap-1 md:hidden">
-        <Link
-          href="/search"
-          className={cn(
-            'inline-flex size-10 items-center justify-center rounded-full transition-colors',
-            overHero
-              ? 'text-white/85 hover:bg-white/10 hover:text-white'
-              : 'text-foreground/75 hover:bg-muted hover:text-foreground',
-          )}
-          aria-label="搜索"
-        >
-          <SearchIcon className="size-4" aria-hidden />
-        </Link>
-        <ThemeSelector overHero={overHero} />
-        <button
-          type="button"
-          className={cn(
-            'inline-flex size-10 items-center justify-center rounded-full transition-colors',
-            overHero
-              ? 'text-white/85 hover:bg-white/10 hover:text-white'
-              : 'text-foreground/75 hover:bg-muted hover:text-foreground',
-          )}
-          aria-expanded={menuOpen}
-          aria-controls={sheetId}
-          aria-label={menuOpen ? '关闭菜单' : '打开菜单'}
-          onClick={() => setMenuOpen((o) => !o)}
-        >
-          {menuOpen ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
-        </button>
-      </div>
-
-      <div
-        id={sheetId}
-        className={cn('site-nav-sheet md:hidden', menuOpen && 'is-open')}
-        aria-hidden={!menuOpen}
-        role="dialog"
-        aria-modal="true"
-        aria-label="站点导航"
+      <Link href="/search" className={toolBtn} aria-label="搜索">
+        <SearchIcon className="size-4" aria-hidden />
+      </Link>
+      <ThemeSelector overHero={overHero} className="!size-9 !rounded-md" />
+      <button
+        type="button"
+        className={cn(
+          'inline-flex h-9 shrink-0 items-center gap-1.5 rounded-md border px-2.5 text-[0.86rem] font-medium transition-colors',
+          overHero
+            ? 'border-white/30 bg-white/12 text-white hover:bg-white/18'
+            : 'border-border bg-muted/70 text-foreground hover:bg-muted',
+        )}
+        style={displayFont}
+        aria-expanded={menuOpen}
+        aria-controls={sheetId}
+        aria-label={menuOpen ? '关闭菜单' : '打开完整目录'}
+        onClick={() => setMenuOpen((o) => !o)}
       >
-        <button
-          type="button"
-          className="site-nav-sheet__backdrop"
-          aria-label="关闭菜单"
-          tabIndex={menuOpen ? 0 : -1}
-          onClick={closeMenu}
-        />
-        <div className="site-nav-sheet__panel">
-          <div className="mb-4 flex items-center justify-between gap-2 border-b border-border pb-3">
-            <p className="folio-mark mb-0">Menu</p>
-            <button
-              type="button"
-              className="inline-flex size-9 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
-              aria-label="关闭菜单"
-              onClick={closeMenu}
-            >
-              <X className="size-5" aria-hidden />
-            </button>
+        {menuOpen ? <X className="size-4" aria-hidden /> : <Menu className="size-4" aria-hidden />}
+        <span>更多</span>
+      </button>
+
+      {menuOpen ? (
+        <div
+          id={sheetId}
+          className="fixed inset-0 z-[60] flex justify-end"
+          role="dialog"
+          aria-modal="true"
+          aria-label="站点导航"
+        >
+          <button
+            type="button"
+            className="absolute inset-0 bg-foreground/40"
+            aria-label="关闭菜单"
+            onClick={closeMenu}
+          />
+          <div
+            className="relative h-full w-[min(18.5rem,88vw)] overflow-y-auto border-l border-border bg-card px-4 py-5 shadow-[-12px_0_40px_rgb(0_0_0_/_0.14)]"
+            style={displayFont}
+          >
+            <div className="mb-5 flex items-center justify-between gap-2 border-b border-border pb-4">
+              <div>
+                <p className="mb-1 text-xs tracking-[0.14em] text-muted-foreground uppercase">目录</p>
+                <p className="text-xl font-semibold tracking-[-0.03em]">本站导航</p>
+              </div>
+              <button
+                type="button"
+                className="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground"
+                aria-label="关闭菜单"
+                onClick={closeMenu}
+              >
+                <X className="size-5" aria-hidden />
+              </button>
+            </div>
+            <ul className="m-0 flex list-none flex-col p-0">
+              {items.map((item, index) => (
+                <li key={item.url}>
+                  <Link
+                    href={item.url}
+                    className="flex min-h-11 items-center gap-3 rounded-md px-2 py-2 no-underline transition-colors hover:bg-muted"
+                    onClick={closeMenu}
+                  >
+                    <span className="w-7 font-mono text-[0.68rem] tracking-wider text-muted-foreground">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-base font-medium tracking-[-0.01em] text-foreground">
+                      {item.label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="m-0 flex list-none flex-col gap-0.5 p-0">
-            {items.map((item) => (
-              <li key={item.url}>
-                <Link href={item.url} className={sheetLinkClass} onClick={closeMenu}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
-      </div>
-    </>
+      ) : null}
+    </div>
   )
 }

@@ -23,9 +23,9 @@ export default function ToolsPage() {
       title="实用工具"
       description="时间、换算、汇率、QR、抽屉小工具，以及暗房助手。"
       related={[
-        ...(features.fun ? [{ href: '/fun', label: '玩乐柜 →' }] : []),
-        { href: '/agents', label: 'Agent 入口 →' },
-        ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
+        ...(features.fun ? [{ href: '/fun', label: '玩乐柜' }] : []),
+        { href: '/agents', label: 'Agent 入口' },
+        ...(features.network ? [{ href: '/network', label: '站群地图' }] : []),
       ]}
     >
       <section className="container mb-16">

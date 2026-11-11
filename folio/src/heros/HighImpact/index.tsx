@@ -1,5 +1,6 @@
 'use client'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
+import Image from 'next/image'
 import React, { useEffect } from 'react'
 
 import type { Page } from '@/payload-types'
@@ -9,8 +10,16 @@ import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 import { ExposureMeter } from '@/components/widgets/ExposureMeter'
 
+const HERO_FALLBACK = '/img/gallery-optimized/landscape-01-lg.webp'
+
+function hasUsableMedia(media: Page['hero']['media']): boolean {
+  if (!media || typeof media !== 'object') return false
+  return Boolean(media.url)
+}
+
 export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
   const { setHeaderTheme } = useHeaderTheme()
+  const useCmsMedia = hasUsableMedia(media)
 
   useEffect(() => {
     setHeaderTheme('dark')
@@ -18,26 +27,46 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
   return (
     <div
-      className="relative flex items-end md:items-center text-white min-h-[100svh] overflow-hidden"
+      className="site-hero relative isolate flex min-h-[100svh] items-end overflow-hidden bg-[#0b1218] text-white md:items-center"
       data-theme="dark"
       data-site-hero
     >
-      <div className="absolute inset-0 select-none" aria-hidden>
-        {media && typeof media === 'object' && (
+      <div className="site-hero__media absolute inset-0 z-0" aria-hidden>
+        {useCmsMedia ? (
           <Media
             fill
-            imgClassName="-z-10 object-cover scale-[1.04] saturate-[1.05] contrast-[1.04]"
+            className="absolute inset-0"
+            pictureClassName="absolute inset-0 block size-full"
+            imgClassName="object-cover"
             priority
             size="100vw"
             resource={media}
           />
+        ) : (
+          <Image
+            src={HERO_FALLBACK}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            quality={85}
+            className="object-cover"
+          />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[oklch(18%_0.04_45_/_0.88)] via-[oklch(22%_0.03_50_/_0.42)] to-[oklch(28%_0.02_55_/_0.28)]" />
-        <div className="hero-grain" />
-        <div className="hero-sweep" />
       </div>
 
-      <div className="viewfinder-corners" aria-hidden>
+      <div
+        className="site-hero__shade pointer-events-none absolute inset-0"
+        style={{
+          zIndex: 1,
+          background:
+            'linear-gradient(180deg, rgb(6 12 18 / 0.42) 0%, rgb(6 12 18 / 0.18) 38%, rgb(6 12 18 / 0.28) 62%, rgb(6 12 18 / 0.72) 100%), linear-gradient(90deg, rgb(6 12 18 / 0.45) 0%, transparent 42%, transparent 100%)',
+        }}
+        aria-hidden
+      />
+      <div className="hero-grain" style={{ zIndex: 2 }} aria-hidden />
+
+      <div className="viewfinder-corners" style={{ zIndex: 2 }} aria-hidden>
         <span className="tl" />
         <span className="tr" />
         <span className="bl" />
@@ -46,26 +75,28 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
       <div className="container relative z-10 pb-20 pt-28 md:pb-28 md:pt-32">
         <div className="max-w-3xl">
-          <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-            <p className="folio-mark mb-0 text-white/70">摄影 · 写作 · 研究</p>
+          <div className="mb-6 flex flex-wrap items-center gap-3 sm:gap-4">
+            <p className="folio-mark mb-0 text-white/75">摄影 · 写作 · 研究</p>
             <ExposureMeter variant="on-dark" href="/tools?t=time" />
           </div>
           {richText && (
             <RichText
-              className="mb-8 [&_h1]:text-5xl [&_h1]:md:text-7xl [&_h1]:font-bold [&_h1]:tracking-tight [&_h1]:[font-family:var(--font-display),Syne,system-ui,sans-serif] [&_p]:text-lg [&_p]:md:text-xl [&_p]:text-white/85"
+              className="mb-9 [&_h1]:text-5xl [&_h1]:font-bold [&_h1]:tracking-[-0.045em] [&_h1]:drop-shadow-[0_2px_28px_rgba(0,0,0,0.35)] [&_h1]:[font-family:var(--font-display),Outfit,system-ui,sans-serif] sm:[&_h1]:text-6xl md:[&_h1]:text-7xl lg:[&_h1]:text-[5.6rem] [&_p]:max-w-xl [&_p]:text-lg [&_p]:leading-relaxed [&_p]:text-white/90 md:[&_p]:text-[1.35rem]"
               data={richText}
               enableGutter={false}
             />
           )}
           {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              {links.map(({ link }, i) => {
-                return (
-                  <li key={i}>
-                    <CMSLink {...link} />
-                  </li>
-                )
-              })}
+            <ul className="hero-cta flex flex-col gap-3 sm:flex-row sm:gap-4">
+              {links.map(({ link }, i) => (
+                <li key={i}>
+                  <CMSLink
+                    {...link}
+                    appearance={i === 0 ? 'default' : 'outline'}
+                    className={i === 0 ? 'hero-cta__primary' : 'hero-cta__secondary'}
+                  />
+                </li>
+              ))}
             </ul>
           )}
         </div>
@@ -73,9 +104,10 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
       <a
         href="#featured"
-        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-[0.7rem] uppercase tracking-[0.22em] text-white/55 hover:text-white/90 transition-colors"
+        className="absolute bottom-6 left-1/2 z-10 inline-flex -translate-x-1/2 flex-col items-center gap-2 text-[0.68rem] uppercase tracking-[0.22em] text-white/60 transition-colors hover:text-white/95"
       >
-        向下浏览
+        <span>向下浏览</span>
+        <span className="block h-6 w-px bg-gradient-to-b from-white/60 to-transparent" aria-hidden />
       </a>
     </div>
   )

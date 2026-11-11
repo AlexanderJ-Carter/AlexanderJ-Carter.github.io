@@ -21,7 +21,7 @@ function PubRow({ item, index }: { item: Publication; index: number }) {
         <p className="meta-mono text-muted-foreground mb-2">
           {item.year} · {item.venue}
         </p>
-        <h3 className="text-lg md:text-xl font-semibold leading-snug tracking-tight [font-family:var(--font-display),Syne,system-ui,sans-serif]">
+        <h3 className="text-lg md:text-xl font-semibold leading-snug tracking-tight [font-family:var(--font-display),Outfit,system-ui,sans-serif]">
           {item.title}
         </h3>
       </div>
@@ -117,7 +117,7 @@ export function Publications({ compact = false, limit, showProfiles = true }: Pr
                 href="/research"
                 className="underline-offset-4 hover:text-foreground hover:underline"
               >
-                {truncated ? `全部 ${total} 篇论文 →` : '公开研究页 →'}
+                {truncated ? `全部 ${total} 篇论文` : '公开研究页'}
               </Link>
             )}
           </nav>

@@ -29,26 +29,23 @@ export default function FunPage() {
       mark="Darkroom toys"
       title="玩乐"
       related={[
-        { href: '/tools', label: '实用工具 →' },
-        { href: '/tools?t=drawer', label: '抽屉三件 →' },
-        ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
+        { href: '/tools', label: '实用工具' },
+        { href: '/tools?t=drawer', label: '抽屉三件' },
+        ...(features.network ? [{ href: '/network', label: '站群地图' }] : []),
       ]}
       description={
         <>
           <p className="mb-5">
             暗房里的玩具柜——先看一片光，再调曝光，放点背景音；计时与天气搁在工作台。取色、密码与计算器已迁到{' '}
-            <Link href="/tools?t=drawer" className="underline underline-offset-4">
-              /tools#drawer
+            <Link href="/tools?t=drawer" className="region-link">
+              工具 · 抽屉
             </Link>
             。
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <ExposureMeter variant="ink" href="/tools?t=time" />
-            <Link
-              href="/tools"
-              className="text-sm underline underline-offset-4 text-muted-foreground hover:text-foreground"
-            >
-              更多实用工具 →
+            <Link href="/tools" className="region-link">
+              更多实用工具
             </Link>
           </div>
           <nav className="fun-jumps mt-6" aria-label="玩乐分区">

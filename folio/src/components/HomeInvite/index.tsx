@@ -3,8 +3,10 @@ import React from 'react'
 
 import { getFeatures } from '@/instance'
 
+const displayFont = { fontFamily: 'var(--font-display), Outfit, system-ui, sans-serif' } as const
+
 /**
- * 首页收束条：取代 CMS 双栏「工作室 / 正在打磨」空话块。
+ * 首页收束条：站内下一站，不把路径当文案。
  */
 export function HomeInvite() {
   const features = getFeatures()
@@ -18,49 +20,75 @@ export function HomeInvite() {
   ]
 
   return (
-    <section className="container home-invite" aria-labelledby="home-invite-heading">
-      <div className="home-invite__frame">
+    <section className="container py-2" aria-labelledby="home-invite-heading">
+      <div
+        className="max-w-xl border-t py-6"
+        style={{ borderColor: 'color-mix(in oklch, var(--border) 85%, transparent)' }}
+      >
         <p className="folio-mark mb-3">Next plate</p>
-        <h2 id="home-invite-heading" className="home-invite__title text-[1.75rem] md:text-[2.1rem]">
+        <h2
+          id="home-invite-heading"
+          className="m-0 text-[clamp(1.85rem,2.8vw,2.45rem)] font-semibold leading-[1.12] tracking-[-0.035em] text-foreground"
+          style={displayFont}
+        >
           下一格胶片
         </h2>
-        <p className="home-invite__lead">
-          影像、短文、研究与工具都在站内；子域产品见站群入口。关于与联系需访客验证。
+        <p className="mt-2.5 text-[1.05rem] leading-relaxed text-muted-foreground">
+          影像、短文、研究与工具都在站内；子域产品见上方站群入口。关于与联系需访客验证。
         </p>
-        <ul className="home-invite__stops">
+        <ul
+          className="mt-6 list-none gap-x-5 p-0"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(11rem, 1fr))',
+          }}
+        >
           {stops.map((s) => (
-            <li key={s.href}>
-              <Link href={s.href} className="home-invite__stop">
-                <span className="home-invite__stop-label">{s.label}</span>
-                <span className="home-invite__stop-note">{s.note}</span>
-                <span className="home-invite__stop-path" aria-hidden>
-                  {s.href}
+            <li
+              key={s.href}
+              className="border-t"
+              style={{ borderColor: 'color-mix(in oklch, var(--border) 85%, transparent)' }}
+            >
+              <Link
+                href={s.href}
+                className="group block py-3.5 no-underline transition-colors hover:bg-muted/50"
+              >
+                <span
+                  className="block text-[0.98rem] font-semibold tracking-[-0.02em] text-foreground transition-colors group-hover:text-primary"
+                  style={displayFont}
+                >
+                  {s.label}
                 </span>
+                <span className="mt-0.5 block text-[0.8rem] text-muted-foreground">{s.note}</span>
               </Link>
             </li>
           ))}
         </ul>
-        <p className="home-invite__foot">
-          <Link href="/about" className="underline underline-offset-4 hover:text-foreground">
-            关于（需验证）
+        <nav className="mt-5 flex flex-wrap gap-x-5 gap-y-2" aria-label="延伸阅读">
+          <Link
+            href="/about"
+            className="text-[0.9rem] font-medium text-foreground/80 no-underline transition-colors hover:text-primary"
+            style={displayFont}
+          >
+            关于
           </Link>
-          <span aria-hidden className="mx-2 opacity-40">
-            ·
-          </span>
           {features.network ? (
-            <Link href="/network" className="underline underline-offset-4 hover:text-foreground">
+            <Link
+              href="/network"
+              className="text-[0.9rem] font-medium text-foreground/80 no-underline transition-colors hover:text-primary"
+              style={displayFont}
+            >
               站群地图
             </Link>
-          ) : (
-            <span>站群地图</span>
-          )}
-          <span aria-hidden className="mx-2 opacity-40">
-            ·
-          </span>
-          <Link href="/status" className="underline underline-offset-4 hover:text-foreground">
-            状态
+          ) : null}
+          <Link
+            href="/status"
+            className="text-[0.9rem] font-medium text-foreground/80 no-underline transition-colors hover:text-primary"
+            style={displayFont}
+          >
+            服务状态
           </Link>
-        </p>
+        </nav>
       </div>
     </section>
   )

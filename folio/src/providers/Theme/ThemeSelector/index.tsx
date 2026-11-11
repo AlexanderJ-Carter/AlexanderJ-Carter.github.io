@@ -54,10 +54,10 @@ export const ThemeSelector: React.FC<{ className?: string; overHero?: boolean }>
       type="button"
       onClick={cycle}
       className={cn(
-        'theme-toggle inline-flex size-8 items-center justify-center rounded-full transition-colors',
+        'theme-toggle inline-flex size-9 items-center justify-center rounded-md transition-colors',
         overHero
-          ? 'text-white/80 hover:bg-white/10 hover:text-white'
-          : 'text-foreground/65 hover:bg-muted hover:text-foreground',
+          ? 'text-white/85 hover:bg-white/12 hover:text-white'
+          : 'text-foreground/70 hover:bg-muted hover:text-foreground',
         className,
       )}
       aria-label={`外观：${label}。${next}`}

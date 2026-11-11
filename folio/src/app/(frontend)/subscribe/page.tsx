@@ -15,9 +15,9 @@ export default function SubscribePage() {
       mark="订阅"
       title="订阅"
       related={[
-        { href: '/updates', label: '更新日志 →' },
-        { href: '/posts', label: '写作 →' },
-        { href: '/feed.xml', label: 'RSS →' },
+        { href: '/updates', label: '更新日志' },
+        { href: '/posts', label: '写作' },
+        { href: '/feed.xml', label: 'RSS' },
       ]}
       description="不常发。有像样更新时才写一封——不是促销名单。"
     >
@@ -30,7 +30,7 @@ export default function SubscribePage() {
           </p>
           <p>
             <a className="underline underline-offset-4" href="/feed.xml">
-              /feed.xml →
+              RSS 订阅
             </a>
           </p>
           <p className="mt-8 text-sm text-muted-foreground">

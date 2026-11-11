@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { GeistMono } from 'geist/font/mono'
-import { Noto_Serif_SC, Source_Serif_4, Syne } from 'next/font/google'
+import { Noto_Serif_SC, Outfit, Source_Serif_4 } from 'next/font/google'
 import React from 'react'
 
 import { AdminBarGate } from '@/components/AdminBarGate'
@@ -31,10 +31,10 @@ const SponsorSlot = dynamic(() =>
 /** Header/Globals 短缓存；layout 不再读 cookies/draftMode，避免整站动态。 */
 export const revalidate = 60
 
-const display = Syne({
+const display = Outfit({
   subsets: ['latin'],
   variable: '--font-display',
-  weight: ['600', '700'],
+  weight: ['500', '600', '700'],
   display: 'swap',
   adjustFontFallback: true,
   preload: true,
@@ -43,7 +43,7 @@ const display = Syne({
 const body = Source_Serif_4({
   subsets: ['latin'],
   variable: '--font-body',
-  weight: ['400', '600'],
+  weight: ['400', '500', '600'],
   display: 'swap',
   adjustFontFallback: true,
   preload: true,
@@ -51,7 +51,7 @@ const body = Source_Serif_4({
 
 const notoSerifSc = Noto_Serif_SC({
   subsets: ['latin'],
-  weight: ['400', '600'],
+  weight: ['400', '500', '600'],
   variable: '--font-noto-serif-sc',
   display: 'swap',
   adjustFontFallback: true,

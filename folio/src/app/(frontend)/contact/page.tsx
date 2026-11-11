@@ -39,9 +39,9 @@ export default async function ContactPage() {
       kicker="留言"
       title="联系"
       related={[
-        { href: '/about', label: '关于 →' },
-        { href: '/subscribe', label: '订阅 →' },
-        { href: '/security/policy', label: '安全政策 →' },
+        { href: '/about', label: '关于' },
+        { href: '/subscribe', label: '订阅' },
+        { href: '/security/policy', label: '安全政策' },
       ]}
       description="合作、反馈或打个招呼都可以。公开邮箱见左侧；安全问题请单独写信。"
     >
@@ -99,7 +99,7 @@ export default async function ContactPage() {
               <dt className="text-sm font-medium">研究</dt>
               <dd>
                 <Link className="underline underline-offset-4" href="/research">
-                  公开论文与项目 →
+                  公开论文与项目
                 </Link>
               </dd>
             </div>

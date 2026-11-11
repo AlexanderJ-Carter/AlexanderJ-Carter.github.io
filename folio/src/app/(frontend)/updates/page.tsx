@@ -19,9 +19,9 @@ export default function UpdatesPage() {
       mark="Updates"
       title="更新"
       related={[
-        ...(features.network ? [{ href: '/network', label: '站群地图 →' }] : []),
-        ...(features.subscribe ? [{ href: '/subscribe', label: '订阅 →' }] : []),
-        { href: '/posts', label: '写作 →' },
+        ...(features.network ? [{ href: '/network', label: '站群地图' }] : []),
+        ...(features.subscribe ? [{ href: '/subscribe', label: '订阅' }] : []),
+        { href: '/posts', label: '写作' },
       ]}
       description={
         <>
@@ -73,7 +73,7 @@ export default function UpdatesPage() {
                 {item.href ? (
                   <p className="mt-3">
                     <Link className="text-sm underline underline-offset-4" href={item.href}>
-                      {item.hrefLabel || '了解更多 →'}
+                      {(item.hrefLabel || '了解更多').replace(/\s*→\s*$/u, '')}
                     </Link>
                   </p>
                 ) : null}

@@ -17,6 +17,7 @@ interface HeaderClientProps {
 
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data, fallbackNav }) => {
   const [overHero, setOverHero] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const { setHeaderTheme } = useHeaderTheme()
   const pathname = usePathname()
 
@@ -25,7 +26,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, fallbackNav })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
-  // Observe the homepage hero — don't rely on theme race with PageClient.
   useEffect(() => {
     const hero = document.querySelector('[data-site-hero]')
     if (!hero) {
@@ -35,8 +35,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, fallbackNav })
 
     const update = () => {
       const rect = hero.getBoundingClientRect()
-      // Still "over hero" while the hero covers most of the upper viewport.
-      setOverHero(rect.bottom > 96 && rect.top < 120)
+      setOverHero(rect.bottom > 96 && rect.top < 64)
     }
 
     update()
@@ -48,24 +47,38 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data, fallbackNav })
     }
   }, [pathname])
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
     <header
       className={cn(
-        'site-header fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter,box-shadow,color] duration-300',
+        'fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter,box-shadow,color] duration-300',
         pathname === '/awareness' && 'hidden',
         overHero
-          ? 'border-b border-white/12 bg-[oklch(18%_0.03_50_/_0.55)] text-white shadow-none backdrop-blur-md'
-          : 'border-b border-border/60 bg-background/90 text-foreground shadow-[0_1px_0_color-mix(in_oklch,var(--border)_80%,transparent)] backdrop-blur-md supports-[backdrop-filter]:bg-background/78',
+          ? cn(
+              'border-white/15 text-white',
+              scrolled ? 'bg-black/40 backdrop-blur-md' : 'bg-black/25 backdrop-blur-sm',
+            )
+          : cn(
+              'border-border/60 text-foreground',
+              scrolled ? 'bg-background/96 shadow-sm backdrop-blur-md' : 'bg-background/92 backdrop-blur-sm',
+            ),
       )}
       data-over-hero={overHero ? 'true' : 'false'}
     >
-      <div className="container flex h-14 md:h-16 items-center justify-between gap-6">
+      <div className="container flex h-14 items-center gap-3 md:h-16 md:gap-5">
         <Link
           href="/"
           className={cn(
-            'no-underline transition-opacity hover:opacity-80',
+            'shrink-0 text-[1.15rem] font-semibold tracking-[-0.04em] no-underline transition-opacity hover:opacity-80 md:text-[1.25rem]',
             overHero ? 'text-white' : 'text-foreground',
           )}
+          style={{ fontFamily: 'var(--font-display), Outfit, system-ui, sans-serif' }}
         >
           <Logo loading="eager" priority="high" />
         </Link>

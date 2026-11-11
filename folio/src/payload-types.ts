@@ -188,7 +188,7 @@ export interface Page {
             url?: string | null;
             label: string;
             /**
-             * Choose how the link should be rendered.
+             * 按钮在前台的呈现方式。
              */
             appearance?: ('default' | 'outline') | null;
           };
@@ -211,6 +211,9 @@ export interface Page {
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
+  /**
+   * 对应前台 /你的地址；home 为首页 /。可用「重定向」保留旧链接。
+   */
   slug: string;
   /**
    * 前台累计浏览（近似，不含预览/后台）。
@@ -265,6 +268,9 @@ export interface Post {
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
   generateSlug?: boolean | null;
+  /**
+   * 对应前台 /posts/你的地址。保存后稳定，勿随意改线上已分享链接。
+   */
   slug: string;
   /**
    * 前台累计浏览（近似，不含预览/后台）。
@@ -454,7 +460,7 @@ export interface CallToActionBlock {
           url?: string | null;
           label: string;
           /**
-           * Choose how the link should be rendered.
+           * 按钮在前台的呈现方式。
            */
           appearance?: ('default' | 'outline') | null;
         };
@@ -504,7 +510,7 @@ export interface ContentBlock {
           url?: string | null;
           label: string;
           /**
-           * Choose how the link should be rendered.
+           * 按钮在前台的呈现方式。
            */
           appearance?: ('default' | 'outline') | null;
         };
@@ -564,6 +570,9 @@ export interface ArchiveBlock {
  * via the `definition` "FormBlock".
  */
 export interface FormBlock {
+  /**
+   * 选择「运营 → 表单」里建好的表单（如联系表单）。
+   */
   form: number | Form;
   enableIntro?: boolean | null;
   introContent?: {
@@ -586,6 +595,8 @@ export interface FormBlock {
   blockType: 'formBlock';
 }
 /**
+ * 联系页等前台表单。在「页面」布局里用「表单」区块挂上即可。
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "forms".
  */
@@ -751,13 +762,15 @@ export interface Form {
   createdAt: string;
 }
 /**
+ * 旧路径跳到新地址。改完后前台路由会按此表重定向。
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
   id: number;
   /**
-   * You will need to rebuild the website when changing this field.
+   * 例如 /old-path。修改后通常无需整站重建。
    */
   from: string;
   to?: {
@@ -777,6 +790,8 @@ export interface Redirect {
   createdAt: string;
 }
 /**
+ * 访客提交的表单记录。
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "form-submissions".
  */
@@ -794,7 +809,7 @@ export interface FormSubmission {
   createdAt: string;
 }
 /**
- * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
+ * 文章搜索索引，一般随文章发布自动同步。
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "search".
@@ -1587,6 +1602,8 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * 前台顶部导航。与「页面 / 自定义链接」联动，改完即时生效。
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header".
  */
@@ -1616,6 +1633,8 @@ export interface Header {
   createdAt?: string | null;
 }
 /**
+ * 前台页脚链接。可放写作、画廊、关于、GitHub 等。
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer".
  */
@@ -1641,6 +1660,38 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * 前台顶部横幅。关掉 enabled 即全站不显示；换文案时请改 noticeId，已关闭的访客会再看到。
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "announcement".
+ */
+export interface Announcement {
+  id: number;
+  enabled?: boolean | null;
+  /**
+   * 换一批公告时改这个字符串（例如 notice-2026-home）。
+   */
+  noticeId: string;
+  title: string;
+  body: string;
+  /**
+   * 站内路径或完整 URL。
+   */
+  href?: string | null;
+  ctaLabel?: string | null;
+  /**
+   * 留空表示立即生效。节日提示可写例如 2027-01-01。
+   */
+  startsAt?: string | null;
+  /**
+   * 留空表示不自动过期。过节小提示用短窗口即可。
+   */
+  endsAt?: string | null;
+  dismissible?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1692,24 +1743,6 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "announcement".
- */
-export interface Announcement {
-  id: number;
-  enabled?: boolean | null;
-  noticeId: string;
-  title: string;
-  body: string;
-  href?: string | null;
-  ctaLabel?: string | null;
-  dismissible?: boolean | null;
-  startsAt?: string | null;
-  endsAt?: string | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "announcement_select".
  */
 export interface AnnouncementSelect<T extends boolean = true> {
@@ -1719,9 +1752,9 @@ export interface AnnouncementSelect<T extends boolean = true> {
   body?: T;
   href?: T;
   ctaLabel?: T;
-  dismissible?: T;
   startsAt?: T;
   endsAt?: T;
+  dismissible?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
