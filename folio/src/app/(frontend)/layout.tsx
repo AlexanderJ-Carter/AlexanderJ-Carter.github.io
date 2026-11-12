@@ -6,6 +6,7 @@ import React from 'react'
 
 import { AdminBarGate } from '@/components/AdminBarGate'
 import { AnalyticsBeacon } from '@/components/AnalyticsBeacon'
+import { GoogleAnalytics } from '@/components/GoogleAnalytics'
 import { AnnouncementBanner } from '@/Announcement/Component'
 import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
@@ -91,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CookieConsent />
           {features.assistant ? <SiteAssistantLazy /> : null}
           <AnalyticsBeacon />
+          <GoogleAnalytics />
           <NavIdlePrefetch />
         </Providers>
       </body>

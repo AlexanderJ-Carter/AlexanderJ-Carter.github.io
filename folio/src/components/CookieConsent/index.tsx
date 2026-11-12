@@ -32,8 +32,8 @@ export function CookieConsent() {
           Cookie 与统计
         </p>
         <p className="cookie-consent__body">
-          必要项用于主题偏好与访客门禁（关于 / 联系）。可选统计含本站浏览量，以及 Cloudflare
-          Web Analytics（若已配置），不做广告画像。详情与再次修改见{' '}
+          必要项用于主题偏好与访客门禁（关于 / 联系）。可选统计含本站浏览量，以及已配置时的
+          Cloudflare Web Analytics / Google Analytics（Consent Mode，不做广告画像）。详情与再次修改见{' '}
           <Link className="underline underline-offset-4" href="/privacy#cookies">
             隐私政策
           </Link>

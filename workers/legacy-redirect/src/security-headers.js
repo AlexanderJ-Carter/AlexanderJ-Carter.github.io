@@ -7,7 +7,7 @@ export const CONTENT_SECURITY_POLICY = [
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: https:",
   "media-src 'self' https://ice2.somafm.com https://live.amperwave.net https://wrti-live.streamguys1.com blob:",
-  "connect-src 'self' https://api.open-meteo.com https://open.er-api.com https://api.github.com https://api.qrserver.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://static.cloudflareinsights.com https://ice2.somafm.com https://live.amperwave.net https://wrti-live.streamguys1.com https://v2.jinrishici.com https://sdk.jinrishici.com",
+  "connect-src 'self' https://api.open-meteo.com https://open.er-api.com https://api.github.com https://api.qrserver.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://static.cloudflareinsights.com https://ice2.somafm.com https://live.amperwave.net https://wrti-live.streamguys1.com https://v2.jinrishici.com https://sdk.jinrishici.com",
   'frame-src https://challenges.cloudflare.com https://googleads.g.doubleclick.net https://td.doubleclick.net',
   "base-uri 'self'",
   "form-action 'self' mailto:",

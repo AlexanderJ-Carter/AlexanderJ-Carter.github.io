@@ -57,7 +57,7 @@ export default function PrivacyPage() {
               </li>
               <li>
                 <strong>可选浏览统计</strong>：仅在你同意「统计」后，本站会累计页面/文章浏览次数，并可能加载
-                Cloudflare Web Analytics 信标（隐私友好、不做广告画像）。
+                Cloudflare Web Analytics 与 Google Analytics（Consent Mode；默认拒绝存储，同意后才授权，不做广告画像）。
               </li>
               <li>
                 <strong>可选赞助位</strong>：若启用 EthicalAds，仅展示面向开发者的文字赞助；未配置时不出现任何广告位。
@@ -121,6 +121,14 @@ export default function PrivacyPage() {
                     <td className="px-3 py-2">人机验证与边缘安全（由 Cloudflare 处理）</td>
                     <td className="px-3 py-2">按其政策</td>
                   </tr>
+                  <tr className="border-t border-border">
+                    <td className="px-3 py-2">
+                      <code>_ga</code> / <code>_ga_*</code>
+                    </td>
+                    <td className="px-3 py-2">可选统计</td>
+                    <td className="px-3 py-2">仅在同意「统计」且配置了 GA4 后由 Google 写入</td>
+                    <td className="px-3 py-2">按其政策</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -140,6 +148,10 @@ export default function PrivacyPage() {
             <ul>
               <li>
                 <strong>Cloudflare</strong>：CDN、Turnstile；可选 Web Analytics（同意统计后）。
+              </li>
+              <li>
+                <strong>Google Analytics</strong>（可选）：若配置了衡量 ID，页面会加载 gtag；默认
+                Consent Mode 拒绝分析存储，仅在同意「统计」后发送 page_view。
               </li>
               <li>
                 <strong>Resend</strong>：事务邮件与订阅联系人（若已启用）。

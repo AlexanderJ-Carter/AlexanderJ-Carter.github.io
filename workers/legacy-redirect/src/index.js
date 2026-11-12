@@ -51,8 +51,32 @@ export default {
       '/en/calendar-en.html': 'https://alexander.xin/time',
       '/jp/calendar-jp.html': 'https://alexander.xin/time',
       '/it/calendar-it.html': 'https://alexander.xin/time',
+      '/support': 'https://alexander.xin/contact',
+      '/support/': 'https://alexander.xin/contact',
+      '/uses': 'https://alexander.xin/posts/uses-page-as-self-description',
+      '/uses/': 'https://alexander.xin/posts/uses-page-as-self-description',
+      '/reading-list': 'https://alexander.xin/posts/reading-list-as-site-page',
+      '/reading-list/': 'https://alexander.xin/posts/reading-list-as-site-page',
+      '/login': 'https://alexander.xin/admin/login',
+      '/login/': 'https://alexander.xin/admin/login',
+      '/next': 'https://alexander.xin/projects',
+      '/next/': 'https://alexander.xin/projects',
     }
     if (redirects[path]) return Response.redirect(redirects[path], 301)
+
+    // 旧 Astro /next/* 作品集；保留 Payload preview/seed/exit-preview
+    if (path.startsWith('/next/')) {
+      const rest = path.slice('/next/'.length)
+      if (
+        rest &&
+        !rest.startsWith('preview') &&
+        !rest.startsWith('seed') &&
+        !rest.startsWith('exit-preview')
+      ) {
+        return Response.redirect('https://alexander.xin/projects', 301)
+      }
+    }
+
     if (path.startsWith('/en-GB/')) {
       return Response.redirect(
         'https://alexander.xin' + path.slice(6) + url.search,
