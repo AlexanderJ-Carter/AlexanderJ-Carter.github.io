@@ -32,6 +32,8 @@ export const redirects: NextConfig['redirects'] = async () => {
     // 旧 i18n 前缀永久收束，便于 GSC 合并 URL
     { source: '/en', destination: '/', permanent: true },
     { source: '/en/:path*', destination: '/:path*', permanent: true },
+    { source: '/zh-CN', destination: '/', permanent: true },
+    { source: '/zh-CN/:path*', destination: '/:path*', permanent: true },
     { source: '/zh-TW', destination: '/', permanent: true },
     { source: '/zh-TW/:path*', destination: '/:path*', permanent: true },
     { source: '/fr', destination: '/', permanent: true },

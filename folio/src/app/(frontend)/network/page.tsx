@@ -5,6 +5,7 @@ import { NetworkAtlas, type AtlasZone } from '@/components/NetworkAtlas'
 import { PageChrome } from '@/components/PageChrome'
 import { getAtlasZones } from '@/data/site-atlas'
 import { getFeatures, getInstance, getVisibleElsewhere } from '@/instance'
+import { elsewhereKindMeta, groupElsewhereByKind } from '@/instance/elsewhere'
 import { getCachedProbes } from '@/utilities/probeStatus'
 
 export const metadata: Metadata = {
@@ -25,21 +26,21 @@ export default async function NetworkPage() {
       ? instance.siteName || 'alexander.xin'
       : rawHub
 
-  const away: AtlasZone | null =
-    elsewhere.length > 0
-      ? {
-        id: 'away',
-        title: '站外',
-        mark: 'E·01',
-        blurb: '仍在开着的别的门口',
-        nodes: elsewhere.map((item) => ({
-          href: item.href,
-          label: item.name,
-          note: item.desc || item.host,
-          external: true,
-        })),
-      }
-      : null
+  const awayZones: AtlasZone[] = groupElsewhereByKind(elsewhere).map((group, index) => {
+    const meta = elsewhereKindMeta[group.kind]
+    return {
+      id: `away-${group.kind}`,
+      title: meta.title,
+      mark: `E·${String(index + 1).padStart(2, '0')}`,
+      blurb: meta.blurb,
+      nodes: group.items.map((item) => ({
+        href: item.href,
+        label: item.name,
+        note: item.desc || item.host,
+        external: true,
+      })),
+    }
+  })
 
   const probes = await getCachedProbes()
   const up = probes.results.filter((r) => r.ok && !r.skipped).length
@@ -49,11 +50,13 @@ export default async function NetworkPage() {
     <PageChrome
       mark="Network"
       title="站群地图"
-      description="分区总图：本站看 / 用 / 识，以及站外入口。有问题直接右下角问站——天气、汇率也可以问。"
+      description="分区总图：本站看 / 用 / 识，站外按生活、产品、工具与基建展开。点任一地点即可跳转；探活摘要见下方。"
       related={[
         { href: '/status', label: '服务状态' },
+        { href: '/projects', label: '项目' },
         { href: '/agents', label: 'Agent' },
         { href: '/tools', label: '工具' },
+        { href: '/research', label: '研究' },
         { href: '/updates#chronicle', label: '发展史' },
       ]}
     >
@@ -65,27 +68,31 @@ export default async function NetworkPage() {
           </Link>
         </p>
 
-        <NetworkAtlas hubLabel={hub} zones={getAtlasZones()} away={away} />
+        <NetworkAtlas hubLabel={hub} zones={getAtlasZones()} away={awayZones} />
 
         <p className="network-atlas__foot">
           站点怎么长到现在的，见{' '}
           <Link className="region-link" href="/updates#chronicle">
             更新 · 发展史
           </Link>
-          。想动手玩本地工具，去{' '}
+          。公开项目与源码入口在{' '}
+          <Link className="region-link" href="/projects">
+            项目
+          </Link>
+          ；本地工具见{' '}
           <Link className="region-link" href="/tools">
             实用工具
           </Link>
           {features.fun ? (
             <>
               {' '}
-              或{' '}
+              与{' '}
               <Link className="region-link" href="/fun">
                 玩乐
               </Link>
             </>
           ) : null}
-          。Agent 入口见{' '}
+          ；联邦登录与 MCP 见{' '}
           <Link className="region-link" href="/agents">
             Agent
           </Link>

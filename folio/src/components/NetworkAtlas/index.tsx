@@ -22,14 +22,22 @@ export type AtlasZone = {
 type NetworkAtlasProps = {
   hubLabel: string
   zones: AtlasZone[]
-  away: AtlasZone | null
+  /** 站外分区；可多块（按生活/产品/工具/基建） */
+  away?: AtlasZone | AtlasZone[] | null
 }
 
-export function NetworkAtlas({ hubLabel, zones, away }: NetworkAtlasProps) {
+function normalizeAway(away: NetworkAtlasProps['away']): AtlasZone[] {
+  if (!away) return []
+  const list = Array.isArray(away) ? away : [away]
+  return list.filter((zone) => zone.nodes.length > 0)
+}
+
+export function NetworkAtlas({ hubLabel, zones, away = null }: NetworkAtlasProps) {
   const [active, setActive] = useState<string | null>(null)
   const svgId = useId().replace(/:/g, '')
 
-  const allZones = away && away.nodes.length > 0 ? [...zones, away] : zones
+  const awayZones = normalizeAway(away)
+  const allZones = awayZones.length > 0 ? [...zones, ...awayZones] : zones
 
   return (
     <div className="network-atlas" data-active={active || undefined}>
@@ -74,7 +82,7 @@ export function NetworkAtlas({ hubLabel, zones, away }: NetworkAtlasProps) {
           {allZones.map((zone) => (
             <section
               key={zone.id}
-              className={`network-atlas__zone${zone.id === 'away' ? ' network-atlas__zone--away' : ''}`}
+              className={`network-atlas__zone${zone.id.startsWith('away') ? ' network-atlas__zone--away' : ''}`}
               aria-labelledby={`atlas-zone-${zone.id}`}
               onMouseLeave={() => setActive(null)}
             >

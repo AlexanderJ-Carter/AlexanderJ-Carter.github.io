@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useCallback, useEffect, useId, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 import type { Header as HeaderType } from '@/payload-types'
 
@@ -45,7 +46,12 @@ export const HeaderNav: React.FC<{
 }> = ({ data, fallbackNav, overHero }) => {
   const sheetId = useId()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [portalReady, setPortalReady] = useState(false)
   const items = resolveNavItems(data, fallbackNav)
+
+  useEffect(() => {
+    setPortalReady(true)
+  }, [])
 
   const primary = useMemo(() => {
     const matched = PRIMARY_ORDER.map((href) => items.find((item) => item.url === href)).filter(
@@ -118,59 +124,66 @@ export const HeaderNav: React.FC<{
         <span>更多</span>
       </button>
 
-      {menuOpen ? (
-        <div
-          id={sheetId}
-          className="fixed inset-0 z-[60] flex justify-end"
-          role="dialog"
-          aria-modal="true"
-          aria-label="站点导航"
-        >
-          <button
-            type="button"
-            className="absolute inset-0 bg-foreground/40"
-            aria-label="关闭菜单"
-            onClick={closeMenu}
-          />
-          <div
-            className="relative h-full w-[min(18.5rem,88vw)] overflow-y-auto border-l border-border bg-card px-4 py-5 shadow-[-12px_0_40px_rgb(0_0_0_/_0.14)]"
-            style={displayFont}
-          >
-            <div className="mb-5 flex items-center justify-between gap-2 border-b border-border pb-4">
-              <div>
-                <p className="mb-1 text-xs tracking-[0.14em] text-muted-foreground uppercase">目录</p>
-                <p className="text-xl font-semibold tracking-[-0.03em]">本站导航</p>
-              </div>
+      {menuOpen && portalReady
+        ? createPortal(
+            <div
+              id={sheetId}
+              className="fixed inset-0 z-[80] flex justify-end text-card-foreground"
+              role="dialog"
+              aria-modal="true"
+              aria-label="站点导航"
+            >
               <button
                 type="button"
-                className="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground"
+                className="absolute inset-0 bg-black/45"
                 aria-label="关闭菜单"
                 onClick={closeMenu}
+              />
+              <div
+                className="relative h-full w-[min(18.5rem,88vw)] overflow-y-auto border-l border-border bg-card px-4 py-5 text-card-foreground shadow-[-12px_0_40px_rgb(0_0_0_/_0.28)]"
+                style={displayFont}
               >
-                <X className="size-5" aria-hidden />
-              </button>
-            </div>
-            <ul className="m-0 flex list-none flex-col p-0">
-              {items.map((item, index) => (
-                <li key={item.url}>
-                  <Link
-                    href={item.url}
-                    className="flex min-h-11 items-center gap-3 rounded-md px-2 py-2 no-underline transition-colors hover:bg-muted"
+                <div className="mb-5 flex items-center justify-between gap-2 border-b border-border pb-4">
+                  <div>
+                    <p className="mb-1 text-xs tracking-[0.14em] text-muted-foreground uppercase">
+                      目录
+                    </p>
+                    <p className="text-xl font-semibold tracking-[-0.03em] text-card-foreground">
+                      本站导航
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="inline-flex size-9 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground"
+                    aria-label="关闭菜单"
                     onClick={closeMenu}
                   >
-                    <span className="w-7 font-mono text-[0.68rem] tracking-wider text-muted-foreground">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <span className="text-base font-medium tracking-[-0.01em] text-foreground">
-                      {item.label}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      ) : null}
+                    <X className="size-5" aria-hidden />
+                  </button>
+                </div>
+                <ul className="m-0 flex list-none flex-col p-0">
+                  {items.map((item, index) => (
+                    <li key={item.url}>
+                      <Link
+                        href={item.url}
+                        className="flex min-h-11 items-center gap-3 rounded-md px-2 py-2 text-card-foreground no-underline transition-colors hover:bg-muted"
+                        onClick={closeMenu}
+                      >
+                        <span className="w-7 font-mono text-[0.68rem] tracking-wider text-muted-foreground">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <span className="text-base font-medium tracking-[-0.01em]">
+                          {item.label}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
     </div>
   )
 }

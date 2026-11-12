@@ -38,7 +38,7 @@ export function getAtlasZones(): AtlasZone[] {
       id: 'use',
       title: '用',
       mark: 'N·02',
-      blurb: '工具与玩乐',
+      blurb: '工具 · 助手 · 玩乐',
       nodes: useNodes,
     },
     {
