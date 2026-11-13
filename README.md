@@ -1,23 +1,29 @@
 # Folio
 
-Payload + Next 个人站模板。本仓库可开源复用；**你的域名、姓名、密钥、CMS 数据只放实例侧**。
+Payload CMS + Next.js 个人站模板。把域名、内容与密钥留在实例侧，模板可直接复用。
 
-| 目录 | 职责 |
-|------|------|
-| `folio/` | 主站应用 |
-| `gateway/` | GitHub Pages 名片（可选） |
-| `docs/FOLIO.md` | 实例化说明 |
+[演示](https://www.alexander.xin) · [配置说明](./docs/) · [安全披露](.github/SECURITY.md)
+
+## 快速开始
 
 ```bash
-npm run folio    # folio/ · :3000 · /admin
+cd folio
+cp instance/config.example.json instance/config.json
+cp .env.example .env
+pnpm install && pnpm dev
 ```
 
-推送 `folio/**`（或手动 `workflow_dispatch`）由腾讯机上的 self-hosted runner（标签 `folio-tencent`）本机 rsync + `compose.prod.yaml` 构建重启；不再依赖公网 SSH。可选 Secrets：`CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ZONE_ID`（清缓存）。DNS / 密钥只在服务器与 Cloudflare 修改。
+浏览器打开 `http://127.0.0.1:3000`，后台 `/admin`。  
+也可在仓库根执行：`npm run folio`。
 
-案例预设：`folio/instance/presets/alexander.json`（可复制为服务器 `config.json`）。
+## 结构
+
+```
+folio/      主站（Payload + Next）
+gateway/    可选 GitHub Pages 名片
+docs/       配置与部署
+```
 
 ## 许可
 
-- 代码：[LICENSE](LICENSE)（BSD 3-Clause）
-- 内容：[NOTICE](NOTICE)（CC BY-NC-ND 4.0）
-- 安全：[.github/SECURITY.md](.github/SECURITY.md)
+代码 [BSD 3-Clause](LICENSE) · 内容 [CC BY-NC-ND 4.0](NOTICE)

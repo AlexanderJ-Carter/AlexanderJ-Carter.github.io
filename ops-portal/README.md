@@ -1,39 +1,8 @@
 # Ops Portal
 
-Fleet ops home and **primary maintainer entry** (site `/login` CTA points here). Tool cards + read-only status probes behind Cloudflare Access. Not visitor registration.
+维护者入口（站内 `/login` CTA 指向此处）。Cloudflare Access 后的工具卡片与只读探活，不是访客注册。
 
-## UI
-
-- Source: `public/index.html` (also mirrored to repo `public/ops/index.html`).
-- Live UI file on www: `https://alexander.xin/ops/index.html` (Worker fetches it for `/`).
-- Icons: `public/icons/` + repo `public/img/ops/*.svg`. Regenerate with `node scripts/gen-icons.mjs`.
-- After HTML/icon edits: upload to server `dist/ops/` and `dist/img/ops/` (scp), then refresh Ops.
-
-## Alerting (cron)
-
-- Cron: every 10 minutes (`wrangler.jsonc` triggers).
-- KV `OPS_STATE` stores last ok/down map; email only on **state change**.
-- Secrets (dashboard or `wrangler secret put`):
-  - `RESEND_API_KEY` — required to send
-  - `ALERT_FROM` — default `Ops Portal <noreply@alexander.xin>`
-  - `ALERT_TO` — comma-separated; default `2253940186@qq.com`
-- Manual run: `POST https://ops.alexander.xin/api/check` (behind Access)
-- `/api/status` reports `alerting.kv` / `alerting.resend`
-
-## Deploy
-
-1. Prefer Cloudflare API multipart upload of the Worker (local wrangler may lack token).
-2. Access app for `ops.alexander.xin`; keep visible in App Launcher.
-3. Pocket ID OIDC as primary IdP; Access IdP `Email OTP (break-glass)` for emergencies.
-
-## Endpoints
-
-- `/` — ops home (cards + fleet log + probes; HTML from www mirror)
-- `/api/status` — probe apex, www, posts, network, identity, time API, tools, paste, network.json
-- `/api/check` — POST: run probes, diff, optional email
-- `/fleet-changelog.json` — maintainer-only fleet timeline (proxied from www `/ops/fleet-changelog.json`)
-
-## 问站
-
-访客问答在 Folio 站内「问站」→ `POST /api/ask`（KB：`folio/public/assistant/kb.json`）。旧边缘 Worker `site-help` 与 `/api/help` 已从 Cloudflare 账号移除。
-
+- UI：`public/index.html`（镜像到站上 `/ops/`）
+- 探活：`GET /api/status` · 手动检查：`POST /api/check`
+- 告警：cron + KV 状态差分；密钥用 `wrangler secret put`（`RESEND_API_KEY` 等）
+- 访客「问站」在 Folio：`POST /api/ask`（KB：`folio/public/assistant/kb.json`）

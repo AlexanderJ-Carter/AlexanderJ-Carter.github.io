@@ -1,16 +1,13 @@
-# 实例配置（不入库）
+# instance
 
-| 文件 | 提交 | 用途 |
+| 文件 | 入库 | 说明 |
 |------|------|------|
-| `config.example.json` | 是 | 接口样例 |
-| `presets/*.json` | 是 | 可选案例（复制后改） |
-| `config.json` | **否** | 真实实例 |
+| `config.example.json` | 是 | 样例 |
+| `presets/*.json` | 是 | 案例，复制后改 |
+| `config.json` | 否 | 真实实例 |
 
 ```bash
-cp instance/config.example.json instance/config.json
-# 或：cp instance/presets/alexander.json instance/config.json
+cp config.example.json config.json
 ```
 
-`research.publications` → `/research`；`about.timeline` → 门禁 `/about`。  
-可选：`compliance`（备案）、`features`（玩乐/地图/订阅/助手开关）、`nav`（整表覆盖页脚链接）。  
-密钥只放 `.env` / `.env.production`。详见 [docs/FOLIO.md](../../docs/FOLIO.md)。
+详见 [docs/](../../docs/)。

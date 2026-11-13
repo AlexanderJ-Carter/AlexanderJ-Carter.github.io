@@ -1,42 +1,12 @@
-## Description
+## Summary
 
-<!-- Please include a summary of the changes and related context -->
+<!-- 改了什么、为什么 -->
 
-## Type of Change
+## Test
 
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to change)
-- [ ] Documentation update
-- [ ] Security improvement
-- [ ] Performance improvement
-- [ ] Dependencies update
+- [ ] `pnpm --dir folio build`
+- [ ] 相关路由手动点验（如 `/` `/gallery` `/admin`）
 
-## Related Issues
+## Notes
 
-Fixes #(issue number)
-
-## How Has This Been Tested?
-
-<!-- Please describe the tests you ran to verify your changes -->
-
-- [ ] Local testing completed
-- [ ] Folio build passes (`npm run folio:build` / `pnpm --dir folio build`)
-- [ ] Folio typecheck passes (`pnpm --dir folio exec tsc --noEmit`)
-
-## Screenshots or Demo
-
-<!-- If applicable, add screenshots or links demonstrating the changes -->
-
-## Checklist
-
-- [ ] My code follows the project's style guidelines
-- [ ] I have performed a self-review of my own code
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have made corresponding changes to the documentation
-- [ ] My changes generate no new warnings or errors
-- [ ] I have updated the CHANGELOG if applicable
-
-## Additional Notes
-
-<!-- Add any other context about the PR here -->
+<!-- 可选：截图、关联 issue -->
