@@ -1,5 +1,5 @@
 {
-  "$comment": "lighthouse:recommended enables per-audit errors; overrides below downgrade Cloudflare/platform noise and heavy perf opportunities so weekly CI stays useful. Category scores remain the primary gates.",
+  "$comment": "lighthouse:recommended enables per-audit errors; overrides below downgrade Cloudflare/platform noise and heavy perf opportunities so weekly CI stays useful. Category scores remain the primary gates. bf-cache warn: Chrome flags NetworkRequestRedirected on in-flight Next/Cloudflare speculation prefetch during the audit (Lighthouse failureType Not actionable), not a document no-store or unload handler issue.",
   "ci": {
     "collect": {
       "numberOfRuns": 1,
@@ -23,6 +23,7 @@
 
         "redirects": "warn",
         "redirects-http": "warn",
+        "bf-cache": "warn",
         "deprecations": "warn",
         "errors-in-console": "warn",
         "inspector-issues": "warn",
