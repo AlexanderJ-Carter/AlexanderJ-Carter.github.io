@@ -1,6 +1,6 @@
 /**
  * Chromium Speculation Rules：对高频栏目做温和预取（不抢首屏）。
- * Cloudflare 也可能注入类似规则；重复预取会被浏览器去重。
+ * Cloudflare 也可能注入类似规则；重复预取会被浏览器去重。conservative 降低离页时仍进行中的预取，利于 bf-cache。
  */
 export function SpeculationHints() {
   const rules = {
@@ -24,7 +24,7 @@ export function SpeculationHints() {
             { selector_matches: 'a[href^="/"]' },
           ],
         },
-        eagerness: 'moderate',
+        eagerness: 'conservative',
       },
     ],
   }
